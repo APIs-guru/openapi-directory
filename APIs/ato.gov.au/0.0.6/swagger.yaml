@@ -144,7 +144,8 @@ parameters:
     required: true
     type: string
   dateOfBirth:
-    description: The individual's date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).
+    description: The individual's date of birth, for example, `1979-01-13` (in [ISO
+      8601](https://en.wikipedia.org/wiki/ISO_8601) format).
     in: query
     name: dateOfBirth
     required: false
@@ -208,13 +209,15 @@ responses:
       $ref: "#/definitions/unauthenticated"
 tags:
   - description: >
-      An individual is a person about whom the registry wishes to maintain information.
+      An individual is a person about whom the registry wishes to
+      maintain information.
 
         For example, the individual's date and place of birth (for the purposes of identification) and the individual's
         residential address (which is used for administrative purposes).
     name: Individuals
   - description: >
-      A role defines the characteristics of a relationship between parties.
+      A role defines the characteristics of a relationship between
+      parties.
 
       An Individual can participate in a relationship with other individuals and organisations.
 
@@ -250,21 +253,24 @@ tags:
       values used by the Registry.
     name: Individuals Roles
   - description: >
-      The registry maintains information about an individual's contact details for administrative purposes.
+      The registry maintains information about an individual's contact
+      details for administrative purposes.
 
         Including:
         - an address for the service of documents
         - a principal place of business address
     name: Individuals Addresses
   - description: >
-      The registry maintains information about an individual's contact details for administrative purposes.
+      The registry maintains information about an individual's contact
+      details for administrative purposes.
 
         Including:
         - an email address
         - a mobile number
     name: Individuals Electronic Addresses
   - description: >
-      A business name is a name or title under which a person conducts a business.
+      A business name is a name or title under which a person conducts a
+      business.
     name: Individuals Business Names
   - description: >
       If you carry on a business you may need to hold a licence.
@@ -273,7 +279,8 @@ tags:
         Services (AFS) licence.
     name: Individuals Licenses
   - description: >
-      An organisation usually consists of a number of individuals or groups bound by a common purpose about whom the
+      An organisation usually consists of a number of individuals or
+      groups bound by a common purpose about whom the
 
       registry wishes to maintain information.
 
@@ -281,7 +288,8 @@ tags:
         Partnership or Joint Venture).
     name: Organisations
   - description: >
-      A role defines the characteristics of a relationship between parties.
+      A role defines the characteristics of a relationship between
+      parties.
 
       An Organisation can participate in a relationship with other organisations and indiviuals.
 
@@ -307,21 +315,24 @@ tags:
       values used by the Registry.
     name: Organisations Roles
   - description: >
-      The registry maintains information about an organisation's contact details for administrative purposes.
+      The registry maintains information about an organisation's contact
+      details for administrative purposes.
 
         Including:
         - an address for the service of documents
         - a principal place of business address
     name: Organisations Addresses
   - description: >
-      The registry maintains information about an organisation's contact details for administrative purposes.
+      The registry maintains information about an organisation's contact
+      details for administrative purposes.
 
         Including:
         - an email address
         - a mobile number
     name: Organisations Electronic Addresses
   - description: >
-      A business name is a name or title under which an organisation conducts a business.
+      A business name is a name or title under which an organisation
+      conducts a business.
     name: Organisations Business Names
   - description: >
       If you carry on a business you may need to hold a licence.
@@ -330,7 +341,8 @@ tags:
         Services (AFS) licence.
     name: Organisations Licenses
   - description: >
-      A business name is a name or title under which a person or organisation conducts a business.
+      A business name is a name or title under which a person or
+      organisation conducts a business.
     name: Business Names
   - description: >
       If you carry on a business you may need to hold a licence.
@@ -338,46 +350,47 @@ tags:
         For example, if you provide financial services, you are required to hold an Australian Financial
         Services (AFS) licence.
     name: Licenses
-  - description: >
+  - description: |
       A classification scheme for business names.
     name: Business Name Lifecycle States
-  - description: >
+  - description: |
       A classification scheme for names.
     name: Name Directions
-  - description: >
+  - description: |
       A classification scheme for names.
     name: Name Prefixes
-  - description: >
+  - description: |
       A classification scheme for names.
     name: Name Types
-  - description: >
+  - description: |
       A classification scheme for addresses.
     name: Address Types
-  - description: >
+  - description: |
       A classification scheme for electronic addresses.
     name: Electronic Address Types
-  - description: >
+  - description: |
       A classification scheme for the representation of human sexes.
     name: Genders
-  - description: >
+  - description: |
       A classification scheme for parties (individuals and organisations).
     name: Legal Entity Types
-  - description: >
+  - description: |
       A classification scheme for licenses.
     name: License Lifecycle States
-  - description: >
+  - description: |
       A classification scheme for licenses.
     name: License Types
-  - description: >
+  - description: |
       A classification scheme for registered identifiers.
     name: Registered Identifier Types
   - description: >
-      A classification scheme for the characteristics of relationships between parties (individuals and organisations).
+      A classification scheme for the characteristics of relationships
+      between parties (individuals and organisations).
     name: Roles
 paths:
   /business-names:
     get:
-      description: >
+      description: |
         Retrieve a list of business names
       parameters:
         - $ref: "#/parameters/apiKey"
@@ -387,7 +400,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -415,7 +429,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -426,7 +441,8 @@ paths:
               type: string
           schema:
             example:
-              - description: The address at which an individual or organisation receives letters or packages.
+              - description: The address at which an individual or organisation receives letters
+                  or packages.
                 id: 123e4567-e89b-12d3-a456-426655440001
                 name: Mailing
               - description: The main location where work is conducted.
@@ -452,7 +468,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -498,7 +515,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -535,7 +553,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -574,7 +593,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -585,19 +605,27 @@ paths:
               type: string
           schema:
             example:
-              - description: If you operate as a sole trader, you're responsible for all aspects of the business, including any debts the business incurs.
+              - description: If you operate as a sole trader, you're responsible for all aspects
+                  of the business, including any debts the business incurs.
                 id: 123e4567-e89b-12d3-a456-426655440001
                 name: Sole Trader
-              - description: A partnership is two or more individuals or organisations who do business as partners or receive income jointly.
+              - description: A partnership is two or more individuals or organisations who do
+                  business as partners or receive income jointly.
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: Partnership
-              - description: A joint venture is two or more people or entities who join to do business together for a particular purpose, usually a single project, rather than as an ongoing business.
+              - description: A joint venture is two or more people or entities who join to do
+                  business together for a particular purpose, usually a single
+                  project, rather than as an ongoing business.
                 id: 123e4567-e89b-12d3-a456-426655440003
                 name: Joint Venture
-              - description: A company is a separate legal entity. This means it has the same rights as a natural person and can incur debt, sue and be sued.
+              - description: A company is a separate legal entity. This means it has the same
+                  rights as a natural person and can incur debt, sue and be
+                  sued.
                 id: 123e4567-e89b-12d3-a456-426655440004
                 name: Company
-              - description: A trust is an obligation imposed on a person – the trustee – to hold property or assets (e.g. business assets) for the benefit of others (known as beneficiaries).
+              - description: A trust is an obligation imposed on a person – the trustee – to
+                  hold property or assets (e.g. business assets) for the benefit
+                  of others (known as beneficiaries).
                 id: 123e4567-e89b-12d3-a456-426655440005
                 name: Trust
             items:
@@ -620,7 +648,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -666,7 +695,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -677,10 +707,12 @@ paths:
               type: string
           schema:
             example:
-              - description: To conduct a financial services business in Australia, you must have an Australian Financial Services (AFS) licence.
+              - description: To conduct a financial services business in Australia, you must
+                  have an Australian Financial Services (AFS) licence.
                 id: 123e4567-e89b-12d3-a456-426655440001
                 name: Australian Financial Services License
-              - description: To conduct a <insert-name-here> business you must have a 2B licence.
+              - description: To conduct a <insert-name-here> business you must have a 2B
+                  licence.
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: 2B License
             items:
@@ -703,7 +735,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -740,7 +773,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -751,10 +785,12 @@ paths:
               type: string
           schema:
             example:
-              - description: A title used before a family name or formal salutation to address a man.
+              - description: A title used before a family name or formal salutation to address a
+                  man.
                 id: 123e4567-e89b-12d3-a456-426655440001
                 name: Mr
-              - description: A title used before a family name or formal salutation to address a woman.
+              - description: A title used before a family name or formal salutation to address a
+                  woman.
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: Ms
             items:
@@ -777,7 +813,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -814,7 +851,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -825,10 +863,13 @@ paths:
               type: string
           schema:
             example:
-              - description: An Australian Business Number (ABN) is a unique eleven-character number issued by the Australian Business Register (ABR).
+              - description: An Australian Business Number (ABN) is a unique eleven-character
+                  number issued by the Australian Business Register (ABR).
                 id: 123e4567-e89b-12d3-a456-426655440001
                 name: ABN
-              - description: An Australian Company Number (ACN) is a unique nine-character number issued by the Australian Securities and Investments Commission (ASIC).
+              - description: An Australian Company Number (ACN) is a unique nine-character
+                  number issued by the Australian Securities and Investments
+                  Commission (ASIC).
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: ACN
             items:
@@ -851,7 +892,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -867,7 +909,8 @@ paths:
                 reciprocalRoleDescription: An incorporated legal entity.
                 relationship: Directorship
                 role: Director
-                roleDescription: An individual responsible for managing a company's business activities.
+                roleDescription: An individual responsible for managing a company's business
+                  activities.
               - id: 123e4567-e89b-12d3-a456-426655440002
                 reciprocalRole: Employer
                 reciprocalRoleDescription: An individual or organisation that employs people.
@@ -888,7 +931,7 @@ paths:
       - $ref: "#/parameters/apiKey"
   /individuals:
     get:
-      description: >
+      description: |
         Retrieve a list of individuals
       parameters:
         - $ref: "#/parameters/apiKey"
@@ -900,7 +943,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -921,7 +965,7 @@ paths:
       tags:
         - Individuals
     post:
-      description: >
+      description: |
         Create an individual
       parameters:
         - $ref: "#/parameters/apiKey"
@@ -937,7 +981,9 @@ paths:
           headers:
             Location:
               description: >
-                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+                A
+                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
+                header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/individual"
@@ -950,7 +996,7 @@ paths:
         - Individuals
   "/individuals/{partyId}":
     delete:
-      description: >
+      description: |
         Delete an individual with the specified identifier
       responses:
         "204":
@@ -966,7 +1012,7 @@ paths:
       tags:
         - Individuals
     get:
-      description: >
+      description: |
         Retrieve an individual with the specified identifier
       responses:
         "200":
@@ -984,7 +1030,7 @@ paths:
       - $ref: "#/parameters/apiKey"
       - $ref: "#/parameters/partyId"
     put:
-      description: >
+      description: |
         Update an individual
       parameters:
         - description: Individual resource
@@ -1015,7 +1061,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -1039,7 +1086,7 @@ paths:
       - $ref: "#/parameters/apiKey"
       - $ref: "#/parameters/partyId"
     post:
-      description: >
+      description: |
         Create an address
       parameters:
         - description: Address resource
@@ -1054,7 +1101,9 @@ paths:
           headers:
             Location:
               description: >
-                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+                A
+                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
+                header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/address"
@@ -1067,7 +1116,7 @@ paths:
         - Individuals Addresses
   "/individuals/{partyId}/addresses/{addressId}":
     delete:
-      description: >
+      description: |
         Delete an address
       responses:
         "204":
@@ -1080,7 +1129,7 @@ paths:
       tags:
         - Individuals Addresses
     get:
-      description: >
+      description: |
         Retrieve an address
       responses:
         "200":
@@ -1099,7 +1148,7 @@ paths:
       - $ref: "#/parameters/partyId"
       - $ref: "#/parameters/addressId"
     put:
-      description: >
+      description: |
         Update an address
       parameters:
         - description: Address resource
@@ -1130,7 +1179,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -1154,7 +1204,7 @@ paths:
       - $ref: "#/parameters/apiKey"
       - $ref: "#/parameters/partyId"
     post:
-      description: >
+      description: |
         Create a business name
       parameters:
         - description: Business Name resource
@@ -1169,7 +1219,9 @@ paths:
           headers:
             Location:
               description: >
-                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+                A
+                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
+                header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/business-name"
@@ -1182,7 +1234,7 @@ paths:
         - Individuals Business Names
   "/individuals/{partyId}/business-names/{productId}":
     delete:
-      description: >
+      description: |
         Delete a business name
       responses:
         "204":
@@ -1195,7 +1247,7 @@ paths:
       tags:
         - Individuals Business Names
     get:
-      description: >
+      description: |
         Retrieve a business name
       responses:
         "200":
@@ -1214,7 +1266,7 @@ paths:
       - $ref: "#/parameters/partyId"
       - $ref: "#/parameters/productId"
     put:
-      description: >
+      description: |
         Update a business name
       parameters:
         - description: Business Name resource
@@ -1245,7 +1297,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -1269,7 +1322,7 @@ paths:
       - $ref: "#/parameters/apiKey"
       - $ref: "#/parameters/partyId"
     post:
-      description: >
+      description: |
         Create an electronic address
       parameters:
         - description: Electronic Address resource
@@ -1284,7 +1337,9 @@ paths:
           headers:
             Location:
               description: >
-                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+                A
+                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
+                header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/electronic-address"
@@ -1297,7 +1352,7 @@ paths:
         - Individuals Electronic Addresses
   "/individuals/{partyId}/electronic-addresses/{addressId}":
     delete:
-      description: >
+      description: |
         Delete an electronic address
       responses:
         "204":
@@ -1310,7 +1365,7 @@ paths:
       tags:
         - Individuals Electronic Addresses
     get:
-      description: >
+      description: |
         Retrieve an electronic address
       responses:
         "200":
@@ -1329,7 +1384,7 @@ paths:
       - $ref: "#/parameters/partyId"
       - $ref: "#/parameters/addressId"
     put:
-      description: >
+      description: |
         Update an electronic address
       parameters:
         - description: Electronic Address resource
@@ -1360,7 +1415,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -1384,7 +1440,7 @@ paths:
       - $ref: "#/parameters/apiKey"
       - $ref: "#/parameters/partyId"
     post:
-      description: >
+      description: |
         Create a license
       parameters:
         - description: License resource
@@ -1399,7 +1455,9 @@ paths:
           headers:
             Location:
               description: >
-                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+                A
+                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
+                header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/license"
@@ -1412,7 +1470,7 @@ paths:
         - Individuals Licenses
   "/individuals/{partyId}/licenses/{productId}":
     delete:
-      description: >
+      description: |
         Delete a license
       responses:
         "204":
@@ -1425,7 +1483,7 @@ paths:
       tags:
         - Individuals Licenses
     get:
-      description: >
+      description: |
         Retrieve a license
       responses:
         "200":
@@ -1444,7 +1502,7 @@ paths:
       - $ref: "#/parameters/partyId"
       - $ref: "#/parameters/productId"
     put:
-      description: >
+      description: |
         Update a license
       parameters:
         - description: License resource
@@ -1475,7 +1533,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -1499,7 +1558,7 @@ paths:
       - $ref: "#/parameters/apiKey"
       - $ref: "#/parameters/partyId"
     post:
-      description: >
+      description: |
         Create a role
       parameters:
         - description: Role resource
@@ -1514,7 +1573,9 @@ paths:
           headers:
             Location:
               description: >
-                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+                A
+                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
+                header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/party-role"
@@ -1527,7 +1588,7 @@ paths:
         - Individuals Roles
   "/individuals/{partyId}/roles/{roleId}":
     delete:
-      description: >
+      description: |
         Delete a role
       responses:
         "204":
@@ -1540,7 +1601,7 @@ paths:
       tags:
         - Individuals Roles
     get:
-      description: >
+      description: |
         Retrieve a role
       responses:
         "200":
@@ -1559,7 +1620,7 @@ paths:
       - $ref: "#/parameters/partyId"
       - $ref: "#/parameters/roleId"
     put:
-      description: >
+      description: |
         Update a role
       parameters:
         - description: Role resource
@@ -1584,7 +1645,7 @@ paths:
         - Individuals Roles
   /licenses:
     get:
-      description: >
+      description: |
         Retrieve a list of licenses
       parameters:
         - $ref: "#/parameters/apiKey"
@@ -1594,7 +1655,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -1616,7 +1678,7 @@ paths:
         - Licenses
   /organisations:
     get:
-      description: >
+      description: |
         Retrieve a list of organisations
       parameters:
         - $ref: "#/parameters/apiKey"
@@ -1628,7 +1690,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -1649,7 +1712,7 @@ paths:
       tags:
         - Organisations
     post:
-      description: >
+      description: |
         Create an organisation
       parameters:
         - $ref: "#/parameters/apiKey"
@@ -1665,7 +1728,9 @@ paths:
           headers:
             Location:
               description: >
-                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+                A
+                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
+                header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/organisation"
@@ -1678,7 +1743,7 @@ paths:
         - Organisations
   "/organisations/{partyId}":
     delete:
-      description: >
+      description: |
         Delete an organisation with the specified identifier
       responses:
         "204":
@@ -1694,7 +1759,7 @@ paths:
       tags:
         - Organisations
     get:
-      description: >
+      description: |
         Retrieve an organisation with the specified identifier
       responses:
         "200":
@@ -1712,7 +1777,7 @@ paths:
       - $ref: "#/parameters/apiKey"
       - $ref: "#/parameters/partyId"
     put:
-      description: >
+      description: |
         Update an organisation
       parameters:
         - description: Organisation resource
@@ -1743,7 +1808,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -1767,7 +1833,7 @@ paths:
       - $ref: "#/parameters/apiKey"
       - $ref: "#/parameters/partyId"
     post:
-      description: >
+      description: |
         Create an address
       parameters:
         - description: Address resource
@@ -1782,7 +1848,9 @@ paths:
           headers:
             Location:
               description: >
-                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+                A
+                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
+                header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/address"
@@ -1795,7 +1863,7 @@ paths:
         - Organisations Addresses
   "/organisations/{partyId}/addresses/{addressId}":
     delete:
-      description: >
+      description: |
         Delete an address
       responses:
         "204":
@@ -1808,7 +1876,7 @@ paths:
       tags:
         - Organisations Addresses
     get:
-      description: >
+      description: |
         Retrieve an address
       responses:
         "200":
@@ -1827,7 +1895,7 @@ paths:
       - $ref: "#/parameters/partyId"
       - $ref: "#/parameters/addressId"
     put:
-      description: >
+      description: |
         Update an address
       parameters:
         - description: Address resource
@@ -1858,7 +1926,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -1882,7 +1951,7 @@ paths:
       - $ref: "#/parameters/apiKey"
       - $ref: "#/parameters/partyId"
     post:
-      description: >
+      description: |
         Create a business name
       parameters:
         - description: Business Name resource
@@ -1897,7 +1966,9 @@ paths:
           headers:
             Location:
               description: >
-                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+                A
+                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
+                header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/business-name"
@@ -1910,7 +1981,7 @@ paths:
         - Organisations Business Names
   "/organisations/{partyId}/business-names/{productId}":
     delete:
-      description: >
+      description: |
         Delete a business name
       responses:
         "204":
@@ -1923,7 +1994,7 @@ paths:
       tags:
         - Organisations Business Names
     get:
-      description: >
+      description: |
         Retrieve a business name
       responses:
         "200":
@@ -1942,7 +2013,7 @@ paths:
       - $ref: "#/parameters/partyId"
       - $ref: "#/parameters/productId"
     put:
-      description: >
+      description: |
         Update a business name
       parameters:
         - description: Business Name resource
@@ -1973,7 +2044,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -1997,7 +2069,7 @@ paths:
       - $ref: "#/parameters/apiKey"
       - $ref: "#/parameters/partyId"
     post:
-      description: >
+      description: |
         Create an electronic address
       parameters:
         - description: Electronic Address resource
@@ -2012,7 +2084,9 @@ paths:
           headers:
             Location:
               description: >
-                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+                A
+                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
+                header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/electronic-address"
@@ -2025,7 +2099,7 @@ paths:
         - Organisations Electronic Addresses
   "/organisations/{partyId}/electronic-addresses/{addressId}":
     delete:
-      description: >
+      description: |
         Delete an electronic address
       responses:
         "204":
@@ -2038,7 +2112,7 @@ paths:
       tags:
         - Organisations Electronic Addresses
     get:
-      description: >
+      description: |
         Retrieve an electronic address
       responses:
         "200":
@@ -2057,7 +2131,7 @@ paths:
       - $ref: "#/parameters/partyId"
       - $ref: "#/parameters/addressId"
     put:
-      description: >
+      description: |
         Update an electronic address
       parameters:
         - description: Electronic Address resource
@@ -2088,7 +2162,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -2112,7 +2187,7 @@ paths:
       - $ref: "#/parameters/apiKey"
       - $ref: "#/parameters/partyId"
     post:
-      description: >
+      description: |
         Create a license
       parameters:
         - description: License resource
@@ -2127,7 +2202,9 @@ paths:
           headers:
             Location:
               description: >
-                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+                A
+                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
+                header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/license"
@@ -2140,7 +2217,7 @@ paths:
         - Organisations Licenses
   "/organisations/{partyId}/licenses/{productId}":
     delete:
-      description: >
+      description: |
         Delete a license
       responses:
         "204":
@@ -2153,7 +2230,7 @@ paths:
       tags:
         - Organisations Licenses
     get:
-      description: >
+      description: |
         Retrieve a license
       responses:
         "200":
@@ -2172,7 +2249,7 @@ paths:
       - $ref: "#/parameters/partyId"
       - $ref: "#/parameters/productId"
     put:
-      description: >
+      description: |
         Update a license
       parameters:
         - description: License resource
@@ -2203,7 +2280,8 @@ paths:
           headers:
             Link:
               description: >
-                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                Information about pagination is provided in the
+                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
                 For example:
 
@@ -2227,7 +2305,7 @@ paths:
       - $ref: "#/parameters/apiKey"
       - $ref: "#/parameters/partyId"
     post:
-      description: >
+      description: |
         Create a role
       parameters:
         - description: Role resource
@@ -2242,7 +2320,9 @@ paths:
           headers:
             Location:
               description: >
-                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+                A
+                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
+                header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/party-role"
@@ -2255,7 +2335,7 @@ paths:
         - Organisations Roles
   "/organisations/{partyId}/roles/{roleId}":
     delete:
-      description: >
+      description: |
         Delete a role
       responses:
         "204":
@@ -2268,7 +2348,7 @@ paths:
       tags:
         - Organisations Roles
     get:
-      description: >
+      description: |
         Retrieve a role
       responses:
         "200":
@@ -2287,7 +2367,7 @@ paths:
       - $ref: "#/parameters/partyId"
       - $ref: "#/parameters/roleId"
     put:
-      description: >
+      description: |
         Update a role
       parameters:
         - description: Role resource
@@ -2323,7 +2403,8 @@ definitions:
         example: Australia
         type: string
       fromDate:
-        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined
+          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2358,7 +2439,8 @@ definitions:
         example: Civic
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format
+          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2376,7 +2458,8 @@ definitions:
     description: The Business Name resource.
     properties:
       fromDate:
-        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined
+          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2401,7 +2484,8 @@ definitions:
         example: XYZ Technology Ventures
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format
+          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2441,7 +2525,8 @@ definitions:
         example: ""
         type: string
       fromDate:
-        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined
+          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2456,7 +2541,8 @@ definitions:
         example: "62164453"
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format
+          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2524,7 +2610,8 @@ definitions:
           $ref: "#/definitions/individual-address"
         type: array
       dateOfBirth:
-        description: The individual's date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).
+        description: The individual's date of birth, for example, `1979-01-13` (in [ISO
+          8601](https://en.wikipedia.org/wiki/ISO_8601) format).
         example: 1979-01-13
         format: date
         type: string
@@ -2533,7 +2620,8 @@ definitions:
           $ref: "#/definitions/electronic-address"
         type: array
       fromDate:
-        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined
+          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2561,7 +2649,8 @@ definitions:
         example: Tamworth
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format
+          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2583,13 +2672,15 @@ definitions:
               - Principal Place of Residence
             type: string
           fromDate:
-            description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+            description: The date and time the resource became active in the format defined
+              by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
             example: 1979-01-13T09:05:06+10:00
             format: date-time
             readOnly: true
             type: string
           toDate:
-            description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+            description: The date and time the resource became inactive in the format
+              defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
             example: ""
             format: date-time
             readOnly: true
@@ -2614,7 +2705,8 @@ definitions:
         example: Mr Robert Ferguson
         type: string
       fromDate:
-        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined
+          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2655,7 +2747,8 @@ definitions:
           - Principal Name
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format
+          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2688,7 +2781,8 @@ definitions:
     description: The License resource.
     properties:
       fromDate:
-        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined
+          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2716,7 +2810,8 @@ definitions:
           - Suspended
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format
+          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2773,12 +2868,14 @@ definitions:
           $ref: "#/definitions/electronic-address"
         type: array
       establishmentDate:
-        description: The organisation's establishment date, for example, `1928-03-03` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).
+        description: The organisation's establishment date, for example, `1928-03-03`
+          (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).
         example: 1928-03-03
         format: date
         type: string
       fromDate:
-        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined
+          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2806,7 +2903,8 @@ definitions:
           $ref: "#/definitions/registered-identifier"
         type: array
       toDate:
-        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format
+          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2827,13 +2925,15 @@ definitions:
               - Principal Place of Business
             type: string
           fromDate:
-            description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+            description: The date and time the resource became active in the format defined
+              by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
             example: 1979-01-13T09:05:06+10:00
             format: date-time
             readOnly: true
             type: string
           toDate:
-            description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+            description: The date and time the resource became inactive in the format
+              defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
             example: ""
             format: date-time
             readOnly: true
@@ -2843,7 +2943,8 @@ definitions:
     description: The Organisation Name resource.
     properties:
       fromDate:
-        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined
+          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1928-03-03T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2858,7 +2959,8 @@ definitions:
         example: 321 Technology Ventures
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format
+          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2868,7 +2970,8 @@ definitions:
     description: The Party Role resource.
     properties:
       fromDate:
-        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined
+          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 2016-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2914,7 +3017,8 @@ definitions:
           - Trusteeship
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format
+          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2950,7 +3054,8 @@ definitions:
     description: The Registered Identifier resource.
     properties:
       fromDate:
-        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined
+          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2972,7 +3077,8 @@ definitions:
           - ABN
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format
+          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true

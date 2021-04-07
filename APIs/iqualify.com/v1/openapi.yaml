@@ -25,6 +25,7 @@ info:
     api.iqualify.com. For instance: you can find your current offerings by
 
     accessing the following URL:
+
         https://api.iqualify.com/v1/offerings/current
 
   title: iQualify Management API
@@ -615,7 +616,8 @@ paths:
         - Offerings
   /offerings/future:
     get:
-      description: Responds with scheduled offerings for your organisation. Scheduled offerings have a start date after today's date (inclusive).
+      description: Responds with scheduled offerings for your organisation. Scheduled
+        offerings have a start date after today's date (inclusive).
       responses:
         "200":
           content:
@@ -832,7 +834,8 @@ paths:
         - Assessment management
   "/offerings/{offeringId}/analytics/activities/responses":
     get:
-      description: Responds with all learner activity attempts for open response activities in an offering matching the offeringId.
+      description: Responds with all learner activity attempts for open response
+        activities in an offering matching the offeringId.
       parameters:
         - $ref: "#/components/parameters/offeringId"
       responses:
@@ -856,7 +859,8 @@ paths:
         - Assessment data
   "/offerings/{offeringId}/analytics/channels/{channelId}/comments":
     get:
-      description: Responds with a list of comments made in any posts in a specified channel, within an offering.
+      description: Responds with a list of comments made in any posts in a specified
+        channel, within an offering.
       parameters:
         - $ref: "#/components/parameters/offeringId"
         - $ref: "#/components/parameters/channelId"
@@ -881,7 +885,8 @@ paths:
         - Channels
   "/offerings/{offeringId}/analytics/channels/{channelId}/posts":
     get:
-      description: Responds with a list of posts made in a specified channel, within an offering.
+      description: Responds with a list of posts made in a specified channel, within
+        an offering.
       parameters:
         - $ref: "#/components/parameters/offeringId"
         - $ref: "#/components/parameters/channelId"
@@ -906,7 +911,8 @@ paths:
         - Channels
   "/offerings/{offeringId}/analytics/channels/{channelId}/replies":
     get:
-      description: Responds with a list of replies to comments in any posts in a specified channel, within an offering.
+      description: Responds with a list of replies to comments in any posts in a
+        specified channel, within an offering.
       parameters:
         - $ref: "#/components/parameters/offeringId"
         - $ref: "#/components/parameters/channelId"
@@ -955,7 +961,8 @@ paths:
         - Learner activity
   "/offerings/{offeringId}/analytics/marks/assignments":
     get:
-      description: Responds with all learner assessment marks in an offering matching the offeringId.
+      description: Responds with all learner assessment marks in an offering matching
+        the offeringId.
       parameters:
         - $ref: "#/components/parameters/offeringId"
       responses:
@@ -979,7 +986,8 @@ paths:
         - Assessment data
   "/offerings/{offeringId}/analytics/marks/quizzes":
     get:
-      description: Responds with all learner quiz marks in an offering matching the offeringId.
+      description: Responds with all learner quiz marks in an offering matching the
+        offeringId.
       parameters:
         - $ref: "#/components/parameters/offeringId"
       responses:
@@ -1003,7 +1011,8 @@ paths:
         - Assessment data
   "/offerings/{offeringId}/analytics/pulses":
     get:
-      description: Responds with the IDs of all pulses that learners have responded to in a specified offering.
+      description: Responds with the IDs of all pulses that learners have responded to
+        in a specified offering.
       parameters:
         - $ref: "#/components/parameters/offeringId"
       responses:
@@ -1041,7 +1050,10 @@ paths:
               - spatial_linear
             type: string
         - allowReserved: true
-          description: Filter pulse responses by responseTime. Lower then (`lt`), lower then or equal (`lte`), greater then (`gt`) and greater then or equal (`gte`) operators are available. Example of filtering by time range __gte__2017-03-14T07:30:00Z__
+          description: Filter pulse responses by responseTime. Lower then (`lt`), lower
+            then or equal (`lte`), greater then (`gt`) and greater then or equal
+            (`gte`) operators are available. Example of filtering by time range
+            __gte__2017-03-14T07:30:00Z__
           in: query
           name: responseTime
           schema:
@@ -1072,7 +1084,8 @@ paths:
         - Pulses
   "/offerings/{offeringId}/analytics/pulses/{pulseId}/responses":
     get:
-      description: Responds with pulse's responses, matching the pulseId, in an offering matching the offeringId.
+      description: Responds with pulse's responses, matching the pulseId, in an
+        offering matching the offeringId.
       parameters:
         - $ref: "#/components/parameters/offeringId"
         - description: pulse's base id
@@ -1126,7 +1139,8 @@ paths:
         - Learner activity
   "/offerings/{offeringId}/analytics/submissions/assignments":
     get:
-      description: Responds with all learner assessment submissions and marks, if any, in an offering matching the offeringId.
+      description: Responds with all learner assessment submissions and marks, if any,
+        in an offering matching the offeringId.
       parameters:
         - $ref: "#/components/parameters/offeringId"
       responses:
@@ -1150,7 +1164,8 @@ paths:
         - Assessment data
   "/offerings/{offeringId}/analytics/submissions/open-response/{assessmentId}":
     get:
-      description: Responds with all learner assessment submissions and marks, if any, in a specified open response assessment.
+      description: Responds with all learner assessment submissions and marks, if any,
+        in a specified open response assessment.
       parameters:
         - $ref: "#/components/parameters/offeringId"
         - $ref: "#/components/parameters/assessmentId"
@@ -1170,12 +1185,14 @@ paths:
           $ref: "#/components/responses/AccessDeniedError"
         "404":
           $ref: "#/components/responses/ObjectNotFoundError"
-      summary: Find submissions to a specified open response assessment, including marks if any
+      summary: Find submissions to a specified open response assessment, including
+        marks if any
       tags:
         - Assessment data
   "/offerings/{offeringId}/analytics/submissions/{userEmail}/assignments/{assessmentId}":
     get:
-      description: Responds with the learner's assessment submission and any marks for the submission.
+      description: Responds with the learner's assessment submission and any marks for
+        the submission.
       parameters:
         - $ref: "#/components/parameters/offeringId"
         - $ref: "#/components/parameters/userEmail"
@@ -1189,14 +1206,16 @@ paths:
                   $ref: "#/components/schemas/SubmissionMarkResponse"
                 title: SubmissionMarkResponse
                 type: array
-          description: Responds with the learner's assessment submission and any marks for the submission.
+          description: Responds with the learner's assessment submission and any marks for
+            the submission.
         "401":
           $ref: "#/components/responses/NotAuthorizedError"
         "403":
           $ref: "#/components/responses/AccessDeniedError"
         "404":
           $ref: "#/components/responses/ObjectNotFoundError"
-      summary: Find a learner's submission to a specified assessment, including marks if any
+      summary: Find a learner's submission to a specified assessment, including marks
+        if any
       tags:
         - Assessment data
   "/offerings/{offeringId}/analytics/unit-reactions":
@@ -1294,7 +1313,8 @@ paths:
   "/offerings/{offeringId}/assessments/{assessmentId}/documents": {}
   "/offerings/{offeringId}/assessments/{assessmentId}/documents/{documentId}":
     delete:
-      description: Removes the assessment document file for a specified assessment in an offering.
+      description: Removes the assessment document file for a specified assessment in
+        an offering.
       parameters:
         - $ref: "#/components/parameters/offeringId"
         - description: assessment's id
@@ -1323,7 +1343,8 @@ paths:
         - Assessment management
   "/offerings/{offeringId}/assessments/{assessmentId}/{userEmail}":
     patch:
-      description: Updates the due dates for a learner's quiz attempt specified by the assessmentId.
+      description: Updates the due dates for a learner's quiz attempt specified by the
+        assessmentId.
       parameters:
         - $ref: "#/components/parameters/offeringId"
         - description: assessment's id
@@ -1782,7 +1803,9 @@ paths:
         - Assessment groups
   "/offerings/{offeringId}/learners/pending-submission":
     get:
-      description: Responds with learners who have one or more assessments due x days before the due date, with each assessment that is due, where x = the number of days specified in the request. The default is 3 days.
+      description: Responds with learners who have one or more assessments due x days
+        before the due date, with each assessment that is due, where x = the
+        number of days specified in the request. The default is 3 days.
       parameters:
         - $ref: "#/components/parameters/offeringId"
         - description: days to assessment due date. Default is 3 days
@@ -1816,7 +1839,8 @@ paths:
           $ref: "#/components/responses/AccessDeniedError"
         "404":
           $ref: "#/components/responses/ObjectNotFoundError"
-      summary: Find learners with assessments pending x days before due date within the specified offeringId
+      summary: Find learners with assessments pending x days before due date within
+        the specified offeringId
       tags:
         - Assessment management
   "/offerings/{offeringId}/metadata/category":
@@ -1984,7 +2008,8 @@ paths:
   "/offerings/{offeringId}/study-plan": {}
   "/offerings/{offeringId}/users":
     get:
-      description: Responds with a list of users in the offering (facilitators, learners and markers.).
+      description: Responds with a list of users in the offering (facilitators,
+        learners and markers.).
       parameters:
         - $ref: "#/components/parameters/offeringId"
         - description: If true, facilitators are included in the results.
@@ -2322,7 +2347,8 @@ paths:
         - Badges
   "/offerings/{offeringId}/users/{userEmail}/submissions/open-response":
     get:
-      description: Responds with open response assessment submissions by a learner in an offering.
+      description: Responds with open response assessment submissions by a learner in
+        an offering.
       parameters:
         - $ref: "#/components/parameters/offeringId"
         - $ref: "#/components/parameters/userEmail"
@@ -2877,19 +2903,24 @@ components:
         details: The user alex.doe@test.te has not submitted assessment as1.
         name: AssessmentNotSubmittedError
     ContentDoNotMatchError:
-      summary: The specified content needs to be the same in order to perform the requested operation.
+      summary: The specified content needs to be the same in order to perform the
+        requested operation.
       value:
-        details: contentId needs to be the same in order to perform the requested operation.
+        details: contentId needs to be the same in order to perform the requested
+          operation.
         name: ContentDoNotMatchError
     IncompatibleParametersError:
-      summary: Two properties in the request contains incompatible values with each other
+      summary: Two properties in the request contains incompatible values with each
+        other
       value:
         details: A cannot be B when C is D
         name: IncompatibleParametersError
     InvalidChannelPropertiesError:
-      summary: "A channel can only have one of these properties set as true: groupDiscussion, isBroadcastOnly or privateSupport"
+      summary: "A channel can only have one of these properties set as true:
+        groupDiscussion, isBroadcastOnly or privateSupport"
       value:
-        details: "A channel can only have one of these properties set as true: groupDiscussion, isBroadcastOnly or privateSupport"
+        details: "A channel can only have one of these properties set as true:
+          groupDiscussion, isBroadcastOnly or privateSupport"
         name: InvalidChannelPropertiesError
     InvalidContentError:
       summary: You need to specify content_id or rootContentId.
@@ -2909,7 +2940,8 @@ components:
     InvalidParameterError:
       summary: the specified source object already exists in the target object
       value:
-        details: The specified parameter file.mimetype (image mimetype) has an invalid value \'text/plain\'.
+        details: The specified parameter file.mimetype (image mimetype) has an invalid
+          value \'text/plain\'.
         name: InvalidParameterError
     InvalidSourceAndTargetError:
       summary: Source and target offerings cannot be the same.
@@ -2922,7 +2954,8 @@ components:
         details: The field 'Offering Badge' is missing or invalid.
         name: MissingInfoError
     MultipleObjectsError:
-      summary: The specified object has multiple properties of which should have only one
+      summary: The specified object has multiple properties of which should have only
+        one
       value:
         details: There are multiple permission with value true (isBuilder | isReviewer).
         name: ObjectIsNotError
@@ -2952,9 +2985,11 @@ components:
         details: The content badcontentId was not found.
         name: ObjectNotFoundError
     OfferingIncompatibleDatesError:
-      summary: The specified offering has relative dates enabled. Absolute task dates can not be set.
+      summary: The specified offering has relative dates enabled. Absolute task dates
+        can not be set.
       value:
-        details: The specified offering has relative dates enabled. Absolute task dates can not be set.
+        details: The specified offering has relative dates enabled. Absolute task dates
+          can not be set.
         name: OfferingIncompatibleDatesError
     SchemaAdditionalPropertiesError:
       summary: The request body should not have extra properties
@@ -2964,7 +2999,8 @@ components:
     SchemaAllowedValuesError:
       summary: should be equal to one of the allowed values
       value:
-        details: "[PARAMETER_NAME] PARAMETER_VALUE should be equal to one of the allowed values a, b"
+        details: "[PARAMETER_NAME] PARAMETER_VALUE should be equal to one of the allowed
+          values a, b"
         name: SchemaValidationError
     SchemaEmailError:
       summary: Parameter should be a valid e-mail
@@ -2984,7 +3020,8 @@ components:
     SchemaMinLengthError:
       summary: should be longer than the minimum required
       value:
-        details: "[PARAMETER_NAME] PARAMETER_VALUE should NOT be shorter than 3 characters"
+        details: "[PARAMETER_NAME] PARAMETER_VALUE should NOT be shorter than 3
+          characters"
         name: SchemaValidationError
     SchemaQueryError:
       summary: Unknown query parameter
@@ -3014,12 +3051,14 @@ components:
     UserNotInChannelError:
       summary: Specified user is not in the channel.
       value:
-        details: The user john.doe@test.te is not a learner in the channel -MEF8kFyURUr6_CZ4IXD.
+        details: The user john.doe@test.te is not a learner in the channel
+          -MEF8kFyURUr6_CZ4IXD.
         name: UserNotInChannelError
     UserNotInOfferingError:
       summary: Specified user is not in the offering.
       value:
-        details: The user john.doe@test.te is not a learner in the offering -MEF8kFyURUr6_CZ4IXD.
+        details: The user john.doe@test.te is not a learner in the offering
+          -MEF8kFyURUr6_CZ4IXD.
         name: UserNotInOfferingError
     UserSuspendedError:
       summary: The user has been suspended.
@@ -3029,17 +3068,20 @@ components:
     ValidationAllowTasksError:
       summary: The specified parameter offeringId does not have tasks enabled
       value:
-        details: The specified parameter offeringId has an invalid value 'The specified parameter offeringId does not have tasks enabled'.
+        details: The specified parameter offeringId has an invalid value 'The specified
+          parameter offeringId does not have tasks enabled'.
         name: ValidationError
     ValidationError:
       summary: The specified parameter dueDate has an invalid value
       value:
-        details: The specified parameter dueDate has an invalid value "Thu Apr 16 2020 19:15:00 GMT-0300 is before the openDate".
+        details: The specified parameter dueDate has an invalid value "Thu Apr 16 2020
+          19:15:00 GMT-0300 is before the openDate".
         name: ValidationError
     ValidationTaskNotInOfferingError:
       summary: The specified parameter taskId is not in the offering
       value:
-        details: The specified parameter taskId has an invalid value 'The specified parameter taskId is not in the offering'.
+        details: The specified parameter taskId has an invalid value 'The specified
+          parameter taskId is not in the offering'.
         name: ValidationError
   parameters:
     assessmentId:
@@ -3210,7 +3252,8 @@ components:
         info:
           type: string
         learnersCount:
-          description: number of learners in the offering, excluding facilitators and coaches
+          description: number of learners in the offering, excluding facilitators and
+            coaches
           type: string
         metadata:
           properties:
@@ -3655,6 +3698,12 @@ components:
           description: if sendInvite in request is false
           type: string
       type: object
+    LearnerOfferingDates:
+      properties:
+        start:
+          format: date-time
+          type: string
+      type: object
     LearnerProgressResponse:
       properties:
         completion:
@@ -3806,7 +3855,9 @@ components:
         overview:
           type: string
         rootContentId:
-          description: Every time a course is republished it is assigned a new contentId. rootContentId is the first original contentId associated with a course.
+          description: Every time a course is republished it is assigned a new contentId.
+            rootContentId is the first original contentId associated with a
+            course.
           type: string
         start:
           format: date-time
@@ -3815,7 +3866,6 @@ components:
           minLength: 1
           type: string
         useRelativeDates:
-          default: false
           type: boolean
       type: object
     OfferingActivitiesResponse:
@@ -3958,7 +4008,9 @@ components:
           minLength: 1
           type: string
         rootContentId:
-          description: Every time a course is republished it's assigned a new contentId. rootContentId is the first original contentId associated with a course.
+          description: Every time a course is republished it's assigned a new contentId.
+            rootContentId is the first original contentId associated with a
+            course.
           type: string
         start:
           format: date-time
@@ -4184,7 +4236,8 @@ components:
         info:
           type: string
         learnersCount:
-          description: number of learners in the offering, excluding facilitators and coaches
+          description: number of learners in the offering, excluding facilitators and
+            coaches
           type: number
         metadata:
           properties:

@@ -7,7 +7,9 @@ info:
   contact:
     name: Work Data Initiative
     url: http://www.dataatwork.org
-  description: A complete and standard data store for canonical and emerging skills, knowledge, abilities, tools, technolgies, and how they relate to jobs.
+  description: A complete and standard data store for canonical and emerging
+    skills, knowledge, abilities, tools, technolgies, and how they relate to
+    jobs.
   title: Open Skills API
   version: "1.0"
   x-apisguru-categories:
@@ -32,7 +34,8 @@ paths:
           in: query
           name: offset
           type: integer
-        - description: Maximum number of items per page. Default is 20 and cannot exceed 500.
+        - description: Maximum number of items per page. Default is 20 and cannot exceed
+            500.
           in: query
           name: limit
           type: integer
@@ -48,7 +51,8 @@ paths:
       summary: Job Titles and Descriptions
   /jobs/autocomplete:
     get:
-      description: Retrieves the names, descriptions, and UUIDs of all job titles matching a given search criteria.
+      description: Retrieves the names, descriptions, and UUIDs of all job titles
+        matching a given search criteria.
       parameters:
         - description: Find job titles beginning with the given text fragment
           in: query
@@ -79,12 +83,14 @@ paths:
     get:
       description: Retrieves the canonical job title for a synonymous job title
       parameters:
-        - description: Find the canonical job title(s) for jobs matching the given text fragment
+        - description: Find the canonical job title(s) for jobs matching the given text
+            fragment
           in: query
           name: job_title
           required: true
           type: string
-        - description: Maximumn number of job title synonyms to return. Default is 1 and cannot exceed 10.
+        - description: Maximumn number of job title synonyms to return. Default is 1 and
+            cannot exceed 10.
           in: query
           name: limit
           required: false
@@ -97,7 +103,8 @@ paths:
       summary: Job Title Normalization
   /jobs/unusual_titles:
     get:
-      description: Retrieves a list of unusual job titles and the UUIDs of their canonical jobs.
+      description: Retrieves a list of unusual job titles and the UUIDs of their
+        canonical jobs.
       responses:
         "200":
           description: A collection of normalized jobs
@@ -106,14 +113,16 @@ paths:
       summary: Unusual Job Titles
   "/jobs/{id}":
     get:
-      description: Retrieves the name, description, and UUID of a job by specifying its O*NET SOC Code or UUID.
+      description: Retrieves the name, description, and UUID of a job by specifying
+        its O*NET SOC Code or UUID.
       parameters:
         - description: The O*NET SOC Code or UUID of the job title to retrieve
           in: path
           name: id
           required: true
           type: string
-        - description: The FIPS Code of a Core-Based Statistical Area. Only return the job if present in this area
+        - description: The FIPS Code of a Core-Based Statistical Area. Only return the job
+            if present in this area
           in: query
           name: fips
           type: string
@@ -173,7 +182,8 @@ paths:
           in: query
           name: offset
           type: integer
-        - description: Maximum number of items per page. Default is 20 and cannot exceed 500.
+        - description: Maximum number of items per page. Default is 20 and cannot exceed
+            500.
           in: query
           name: limit
           type: integer
@@ -189,7 +199,8 @@ paths:
       summary: Skill Names and Descriptions
   /skills/autocomplete:
     get:
-      description: Retrieves the names, descriptions, and UUIDs of all skills matching a given search criteria.
+      description: Retrieves the names, descriptions, and UUIDs of all skills matching
+        a given search criteria.
       parameters:
         - description: Find skill names beginning with the given text fragment
           in: query
@@ -220,7 +231,8 @@ paths:
     get:
       description: Retrieves the canonical skill name for a synonymous skill name
       parameters:
-        - description: Find the canonical skill name(s) for skills matching the given text fragment
+        - description: Find the canonical skill name(s) for skills matching the given text
+            fragment
           in: query
           name: skill_name
           required: true
@@ -233,7 +245,8 @@ paths:
       summary: Skill Name Normalization
   "/skills/{id}":
     get:
-      description: Retrieves the name, description, and UUID of a job by specifying its UUID.
+      description: Retrieves the name, description, and UUID of a job by specifying
+        its UUID.
       parameters:
         - description: The UUID of the skill name to retrieve
           in: path

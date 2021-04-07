@@ -208,7 +208,8 @@ paths:
               schema:
                 type: integer
             X-Type:
-              description: Detected foreground type (How specific this classification is depends on the type_level parameter sent in the request)
+              description: Detected foreground type (How specific this classification is
+                depends on the type_level parameter sent in the request)
               schema:
                 enum:
                   - person
@@ -233,7 +234,8 @@ paths:
                   value:
                     errors:
                       - code: failed_bg_download
-                        title: "Failed to download background image from given image_url: https://unsplash.com/"
+                        title: "Failed to download background image from given image_url:
+                          https://unsplash.com/"
                 failed_image_download:
                   value:
                     errors:
@@ -321,23 +323,27 @@ paths:
                   value:
                     errors:
                       - code: missing_source
-                        detail: Please provide the source image in the image_url, image_file or image_file_b64 parameter.
+                        detail: Please provide the source image in the image_url, image_file or
+                          image_file_b64 parameter.
                         title: No image given
                 multiple_bg_sources:
                   value:
                     errors:
                       - code: multiple_bg_sources
-                        title: "Multiple background sources given: Please provide either the bg_color, the bg_image_url or the bg_image_file parameter."
+                        title: "Multiple background sources given: Please provide either the bg_color,
+                          the bg_image_url or the bg_image_file parameter."
                 multiple_sources:
                   value:
                     errors:
                       - code: multiple_sources
-                        title: "Multiple image sources given: Please provide either the image_url, image_file or image_file_b64 parameter."
+                        title: "Multiple image sources given: Please provide either the image_url,
+                          image_file or image_file_b64 parameter."
                 resolution_too_high:
                   value:
                     errors:
                       - code: resolution_too_high
-                        detail: Input image has 60 megapixels, maximum supported input resolution is 50 megapixels
+                        detail: Input image has 60 megapixels, maximum supported input resolution is 50
+                          megapixels
                         title: Image resolution too high
                 roi_exceeds_bounds:
                   value:
@@ -355,7 +361,8 @@ paths:
                   value:
                     errors:
                       - code: unknown_foreground
-                        title: Could not identify foreground in image. For details and recommendations see https://www.remove.bg/supported-images.
+                        title: Could not identify foreground in image. For details and recommendations
+                          see https://www.remove.bg/supported-images.
               schema:
                 properties:
                   errors:
@@ -376,7 +383,8 @@ paths:
                       type: object
                     type: array
                 type: object
-          description: "Error: Invalid parameters or input file unprocessable (no credits charged)"
+          description: "Error: Invalid parameters or input file unprocessable (no credits
+            charged)"
         "402":
           content:
             "*/*":
@@ -425,15 +433,18 @@ components:
     ImprovementProgramJson:
       properties:
         image_file_b64:
-          description: Source image file (base64-encoded string). (If this parameter is present, the other image source parameters must be empty.)
+          description: Source image file (base64-encoded string). (If this parameter is
+            present, the other image source parameters must be empty.)
           example: ""
           type: string
         image_filename:
-          description: Filename of the image, if not provided it will be autodetected form the submitted data.
+          description: Filename of the image, if not provided it will be autodetected form
+            the submitted data.
           example: car.jpg
           type: string
         image_url:
-          description: Source image URL. (If this parameter is present, the other image source parameters must be empty.)
+          description: Source image URL. (If this parameter is present, the other image
+            source parameters must be empty.)
           example: https://www.remove.bg/example-hd.jpg
           type: string
         tag:
@@ -451,18 +462,22 @@ components:
     ImprovementProgramMultipart:
       properties:
         image_file:
-          description: Source image file (binary). (If this parameter is present, the other image source parameters must be empty.)
+          description: Source image file (binary). (If this parameter is present, the
+            other image source parameters must be empty.)
           format: binary
           type: string
         image_file_b64:
-          description: Source image file (base64-encoded string). (If this parameter is present, the other image source parameters must be empty.)
+          description: Source image file (base64-encoded string). (If this parameter is
+            present, the other image source parameters must be empty.)
           example: ""
           type: string
         image_filename:
-          description: Filename of the image, if not provided it will be autodetected form the submitted data.
+          description: Filename of the image, if not provided it will be autodetected form
+            the submitted data.
           type: string
         image_url:
-          description: Source image URL. (If this parameter is present, the other image source parameters must be empty.)
+          description: Source image URL. (If this parameter is present, the other image
+            source parameters must be empty.)
           example: https://www.remove.bg/example-hd.jpg
           type: string
         tag:
@@ -486,21 +501,34 @@ components:
         add_shadow:
           default: "false"
           description: >
-            Whether to add an artificial shadow to the result (default: false). NOTE: Adding shadows is currently only supported for car photos. Other subjects are returned without shadow, even if set to true (this might change in the future).
+            Whether to add an artificial shadow to the result (default: false).
+            NOTE: Adding shadows is currently only supported for car photos.
+            Other subjects are returned without shadow, even if set to true
+            (this might change in the future).
           type: boolean
         bg_color:
           description: >
-            Adds a solid color background. Can be a hex color code (e.g. 81d4fa, fff) or a color name (e.g. green). For semi-transparency, 4-/8-digit hex codes are also supported (e.g. 81d4fa77). (If this parameter is present, the other bg_ parameters must be empty.)
+            Adds a solid color background. Can be a hex color code (e.g.
+            81d4fa, fff) or a color name (e.g. green). For semi-transparency,
+            4-/8-digit hex codes are also supported (e.g. 81d4fa77). (If this
+            parameter is present, the other bg_ parameters must be empty.)
           example: ""
           type: string
         bg_image_url:
-          description: Adds a background image from a URL. The image is centered and resized to fill the canvas while preserving the aspect ratio, unless it already has the exact same dimensions as the foreground image. (If this parameter is present, the other bg_ parameters must be empty.)
+          description: Adds a background image from a URL. The image is centered and
+            resized to fill the canvas while preserving the aspect ratio, unless
+            it already has the exact same dimensions as the foreground image.
+            (If this parameter is present, the other bg_ parameters must be
+            empty.)
           example: ""
           type: string
         channels:
           default: rgba
           description: >
-            Request either the finalized image ("rgba", default) or an alpha mask ("alpha"). Note: Since remove.bg also applies RGB color corrections on edges, using only the alpha mask often leads to a lower final image quality. Therefore "rgba" is recommended.
+            Request either the finalized image ("rgba", default) or an alpha
+            mask ("alpha"). Note: Since remove.bg also applies RGB color
+            corrections on edges, using only the alpha mask often leads to a
+            lower final image quality. Therefore "rgba" is recommended.
           enum:
             - rgba
             - alpha
@@ -508,12 +536,19 @@ components:
         crop:
           default: "false"
           description: >
-            Whether to crop off all empty regions (default: false). Note that cropping has no effect on the amount of charged credits.
+            Whether to crop off all empty regions (default: false). Note that
+            cropping has no effect on the amount of charged credits.
           type: boolean
         crop_margin:
           default: "0"
           description: >
-            Adds a margin around the cropped subject (default: 0). Can be an absolute value (e.g. "30px") or relative to the subject size (e.g. "10%"). Can be a single value (all sides), two values (top/bottom and left/right) or four values (top, right, bottom, left). This parameter only has an effect when "crop=true". The maximum margin that can be added on each side is 50% of the subject dimensions or 500 pixels.
+            Adds a margin around the cropped subject (default: 0). Can be an
+            absolute value (e.g. "30px") or relative to the subject size (e.g.
+            "10%"). Can be a single value (all sides), two values (top/bottom
+            and left/right) or four values (top, right, bottom, left). This
+            parameter only has an effect when "crop=true". The maximum margin
+            that can be added on each side is 50% of the subject dimensions or
+            500 pixels.
           type: string
         format:
           default: auto
@@ -534,37 +569,56 @@ components:
             - zip
           type: string
         image_file_b64:
-          description: Source image file (base64-encoded string). (If this parameter is present, the other image source parameters must be empty.)
+          description: Source image file (base64-encoded string). (If this parameter is
+            present, the other image source parameters must be empty.)
           example: ""
           type: string
         image_url:
-          description: Source image URL. (If this parameter is present, the other image source parameters must be empty.)
+          description: Source image URL. (If this parameter is present, the other image
+            source parameters must be empty.)
           example: https://www.remove.bg/example-hd.jpg
           type: string
         position:
           default: original
           description: >
-            Positions the subject within the image canvas. Can be "original" (default unless "scale" is given), "center" (default when "scale" is given) or a value from "0%" to "100%" (both horizontal and vertical) or two values (horizontal, vertical).
+            Positions the subject within the image canvas. Can be "original"
+            (default unless "scale" is given), "center" (default when "scale" is
+            given) or a value from "0%" to "100%" (both horizontal and vertical)
+            or two values (horizontal, vertical).
           type: string
         roi:
           default: 0% 0% 100% 100%
           description: >
-            Region of interest: Only contents of this rectangular region can be detected as foreground. Everything outside is considered background and will be removed. The rectangle is defined as two x/y coordinates in the format "x1 y1 x2 y2". The coordinates can be in absolute pixels (suffix 'px') or relative to the width/height of the image (suffix '%'). By default, the whole image is the region of interest ("0% 0% 100% 100%").
+            Region of interest: Only contents of this rectangular region can be
+            detected as foreground. Everything outside is considered background
+            and will be removed. The rectangle is defined as two x/y coordinates
+            in the format "x1 y1 x2 y2". The coordinates can be in absolute
+            pixels (suffix 'px') or relative to the width/height of the image
+            (suffix '%'). By default, the whole image is the region of interest
+            ("0% 0% 100% 100%").
           type: string
         scale:
           default: original
           description: >
-            Scales the subject relative to the total image size. Can be any value from "10%" to "100%", or "original" (default). Scaling the subject implies "position=center" (unless specified otherwise).
+            Scales the subject relative to the total image size. Can be any
+            value from "10%" to "100%", or "original" (default). Scaling the
+            subject implies "position=center" (unless specified otherwise).
           type: string
         semitransparency:
           default: "true"
           description: >
-            Whether to have semi-transparent regions in the result (default: true). NOTE: Semitransparency is currently only supported for car windows (this might change in the future). Other objects are returned without semitransparency, even if set to true.
+            Whether to have semi-transparent regions in the result (default:
+            true). NOTE: Semitransparency is currently only supported for car
+            windows (this might change in the future). Other objects are
+            returned without semitransparency, even if set to true.
           type: boolean
         shadow_method:
           default: latest
           description: >
-            Controls whether car shadows are generated through the `latest` approach  with realistic results (default), or the outdated `legacy` approach (DEPRECATED). Only affects requests with `add_shadow` enabled.
+            Controls whether car shadows are generated through the `latest`
+            approach  with realistic results (default), or the outdated `legacy`
+            approach (DEPRECATED). Only affects requests with `add_shadow`
+            enabled.
           enum:
             - legacy
             - latest
@@ -589,15 +643,11 @@ components:
           type: string
         type:
           default: auto
-          description: >
+          description: |
             Foreground type:
-
             "auto" = Automatically detect kind of foreground,
-
             "person" = Use person(s) as foreground,
-
             "product" = Use product(s) as foreground.
-
             "car" = Use car as foreground,
           enum:
             - auto
@@ -639,25 +689,42 @@ components:
         add_shadow:
           default: "false"
           description: >
-            Whether to add an artificial shadow to the result (default: false). NOTE: Adding shadows is currently only supported for car photos. Other subjects are returned without shadow, even if set to true (this might change in the future).
+            Whether to add an artificial shadow to the result (default: false).
+            NOTE: Adding shadows is currently only supported for car photos.
+            Other subjects are returned without shadow, even if set to true
+            (this might change in the future).
           type: boolean
         bg_color:
           description: >
-            Adds a solid color background. Can be a hex color code (e.g. 81d4fa, fff) or a color name (e.g. green). For semi-transparency, 4-/8-digit hex codes are also supported (e.g. 81d4fa77). (If this parameter is present, the other bg_ parameters must be empty.)
+            Adds a solid color background. Can be a hex color code (e.g.
+            81d4fa, fff) or a color name (e.g. green). For semi-transparency,
+            4-/8-digit hex codes are also supported (e.g. 81d4fa77). (If this
+            parameter is present, the other bg_ parameters must be empty.)
           example: ""
           type: string
         bg_image_file:
-          description: Adds a background image from a file (binary). The image is centered and resized to fill the canvas while preserving the aspect ratio, unless it already has the exact same dimensions as the foreground image. (If this parameter is present, the other bg_ parameters must be empty.)
+          description: Adds a background image from a file (binary). The image is centered
+            and resized to fill the canvas while preserving the aspect ratio,
+            unless it already has the exact same dimensions as the foreground
+            image. (If this parameter is present, the other bg_ parameters must
+            be empty.)
           format: binary
           type: string
         bg_image_url:
-          description: Adds a background image from a URL. The image is centered and resized to fill the canvas while preserving the aspect ratio, unless it already has the exact same dimensions as the foreground image. (If this parameter is present, the other bg_ parameters must be empty.)
+          description: Adds a background image from a URL. The image is centered and
+            resized to fill the canvas while preserving the aspect ratio, unless
+            it already has the exact same dimensions as the foreground image.
+            (If this parameter is present, the other bg_ parameters must be
+            empty.)
           example: ""
           type: string
         channels:
           default: rgba
           description: >
-            Request either the finalized image ("rgba", default) or an alpha mask ("alpha"). Note: Since remove.bg also applies RGB color corrections on edges, using only the alpha mask often leads to a lower final image quality. Therefore "rgba" is recommended.
+            Request either the finalized image ("rgba", default) or an alpha
+            mask ("alpha"). Note: Since remove.bg also applies RGB color
+            corrections on edges, using only the alpha mask often leads to a
+            lower final image quality. Therefore "rgba" is recommended.
           enum:
             - rgba
             - alpha
@@ -665,12 +732,19 @@ components:
         crop:
           default: "false"
           description: >
-            Whether to crop off all empty regions (default: false). Note that cropping has no effect on the amount of charged credits.
+            Whether to crop off all empty regions (default: false). Note that
+            cropping has no effect on the amount of charged credits.
           type: boolean
         crop_margin:
           default: "0"
           description: >
-            Adds a margin around the cropped subject (default: 0). Can be an absolute value (e.g. "30px") or relative to the subject size (e.g. "10%"). Can be a single value (all sides), two values (top/bottom and left/right) or four values (top, right, bottom, left). This parameter only has an effect when "crop=true". The maximum margin that can be added on each side is 50% of the subject dimensions or 500 pixels.
+            Adds a margin around the cropped subject (default: 0). Can be an
+            absolute value (e.g. "30px") or relative to the subject size (e.g.
+            "10%"). Can be a single value (all sides), two values (top/bottom
+            and left/right) or four values (top, right, bottom, left). This
+            parameter only has an effect when "crop=true". The maximum margin
+            that can be added on each side is 50% of the subject dimensions or
+            500 pixels.
           type: string
         format:
           default: auto
@@ -691,41 +765,61 @@ components:
             - zip
           type: string
         image_file:
-          description: Source image file (binary). (If this parameter is present, the other image source parameters must be empty.)
+          description: Source image file (binary). (If this parameter is present, the
+            other image source parameters must be empty.)
           format: binary
           type: string
         image_file_b64:
-          description: Source image file (base64-encoded string). (If this parameter is present, the other image source parameters must be empty.)
+          description: Source image file (base64-encoded string). (If this parameter is
+            present, the other image source parameters must be empty.)
           example: ""
           type: string
         image_url:
-          description: Source image URL. (If this parameter is present, the other image source parameters must be empty.)
+          description: Source image URL. (If this parameter is present, the other image
+            source parameters must be empty.)
           example: https://www.remove.bg/example-hd.jpg
           type: string
         position:
           default: original
           description: >
-            Positions the subject within the image canvas. Can be "original" (default unless "scale" is given), "center" (default when "scale" is given) or a value from "0%" to "100%" (both horizontal and vertical) or two values (horizontal, vertical).
+            Positions the subject within the image canvas. Can be "original"
+            (default unless "scale" is given), "center" (default when "scale" is
+            given) or a value from "0%" to "100%" (both horizontal and vertical)
+            or two values (horizontal, vertical).
           type: string
         roi:
           default: 0% 0% 100% 100%
           description: >
-            Region of interest: Only contents of this rectangular region can be detected as foreground. Everything outside is considered background and will be removed. The rectangle is defined as two x/y coordinates in the format "x1 y1 x2 y2". The coordinates can be in absolute pixels (suffix 'px') or relative to the width/height of the image (suffix '%'). By default, the whole image is the region of interest ("0% 0% 100% 100%").
+            Region of interest: Only contents of this rectangular region can be
+            detected as foreground. Everything outside is considered background
+            and will be removed. The rectangle is defined as two x/y coordinates
+            in the format "x1 y1 x2 y2". The coordinates can be in absolute
+            pixels (suffix 'px') or relative to the width/height of the image
+            (suffix '%'). By default, the whole image is the region of interest
+            ("0% 0% 100% 100%").
           type: string
         scale:
           default: original
           description: >
-            Scales the subject relative to the total image size. Can be any value from "10%" to "100%", or "original" (default). Scaling the subject implies "position=center" (unless specified otherwise).
+            Scales the subject relative to the total image size. Can be any
+            value from "10%" to "100%", or "original" (default). Scaling the
+            subject implies "position=center" (unless specified otherwise).
           type: string
         semitransparency:
           default: "true"
           description: >
-            Whether to have semi-transparent regions in the result (default: true). NOTE: Semitransparency is currently only supported for car windows (this might change in the future). Other objects are returned without semitransparency, even if set to true.
+            Whether to have semi-transparent regions in the result (default:
+            true). NOTE: Semitransparency is currently only supported for car
+            windows (this might change in the future). Other objects are
+            returned without semitransparency, even if set to true.
           type: boolean
         shadow_method:
           default: latest
           description: >
-            Controls whether car shadows are generated through the `latest` approach  with realistic results (default), or the outdated `legacy` approach (DEPRECATED). Only affects requests with `add_shadow` enabled.
+            Controls whether car shadows are generated through the `latest`
+            approach  with realistic results (default), or the outdated `legacy`
+            approach (DEPRECATED). Only affects requests with `add_shadow`
+            enabled.
           enum:
             - legacy
             - latest
@@ -750,15 +844,11 @@ components:
           type: string
         type:
           default: auto
-          description: >
+          description: |
             Foreground type:
-
             "auto" = Automatically detect kind of foreground,
-
             "person" = Use person(s) as foreground,
-
             "product" = Use product(s) as foreground.
-
             "car" = Use car as foreground,
           enum:
             - auto

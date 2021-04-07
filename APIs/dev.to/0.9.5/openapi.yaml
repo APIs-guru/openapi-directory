@@ -67,7 +67,7 @@ tags:
 paths:
   /admin/config:
     get:
-      description: >
+      description: |
         This endpoint returns the "site config" as set by admin.
       operationId: getConfig
       responses:
@@ -86,11 +86,12 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -H "api-key: API_KEY" https://dev.to/api/admin/config
     put:
       description: >
-        This endpoint allows admins to declare values or update values for "site config".
+        This endpoint allows admins to declare values or update values for
+        "site config".
       operationId: upsertConfig
       requestBody:
         content:
@@ -145,35 +146,26 @@ paths:
         - admin-configuration
   /articles:
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a list of articles.
 
-
         "Articles" are all the posts that users create on DEV that typically
-
         show up in the feed. They can be a blog post, a discussion question,
-
         a help thread etc. but is referred to as article within the code.
 
-
         By default it will return featured, published articles ordered
-
         by descending popularity.
-
 
         It supports pagination, each page will contain `30` articles by default.
       operationId: getArticles
       parameters:
         - $ref: "#/components/parameters/pageParam"
         - $ref: "#/components/parameters/perPageParam30to1000"
-        - description: >
+        - description: |
             Using this parameter will retrieve articles that contain the
-
             requested tag.
 
-
             Articles will be ordered by descending popularity.
-
 
             This parameter can be used in conjuction with `top`.
           example: discuss
@@ -182,7 +174,8 @@ paths:
           schema:
             type: string
         - description: >
-            Using this parameter will retrieve articles with any of the comma-separated tags.
+            Using this parameter will retrieve articles with any of the
+            comma-separated tags.
 
 
             Articles will be ordered by descending popularity.
@@ -192,7 +185,8 @@ paths:
           schema:
             type: string
         - description: >
-            Using this parameter will retrieve articles that do _not_ contain _any_ of comma-separated tags.
+            Using this parameter will retrieve articles that do _not_ contain
+            _any_ of comma-separated tags.
 
 
             Articles will be ordered by descending popularity.
@@ -217,7 +211,8 @@ paths:
           schema:
             type: string
         - description: >
-            Using this parameter will allow the client to check which articles are fresh or rising.
+            Using this parameter will allow the client to check which articles
+            are fresh or rising.
 
 
             If `state=fresh` the server will return fresh articles.
@@ -236,7 +231,8 @@ paths:
               - all
             type: string
         - description: >
-            Using this parameter will allow the client to return the most popular articles
+            Using this parameter will allow the client to return the most
+            popular articles
 
             in the last `N` days.
 
@@ -254,11 +250,9 @@ paths:
             format: int32
             minimum: 1
             type: integer
-        - description: >
+        - description: |
             Adding this will allow the client to return the list of articles
-
             belonging to the requested collection, ordered by ascending
-
             publication date.
           example: 99
           in: query
@@ -284,11 +278,11 @@ paths:
       x-code-samples:
         - label: curl (all articles)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/articles
         - label: curl (user's articles)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/articles?username=ben
     post:
       description: >
@@ -417,26 +411,45 @@ paths:
             -d '{"article":{"body_markdown":"---\ntitle:A sample article about...\npublished:false\n---\n..."}}' \
 
             https://dev.to/api/articles
+  /articles/latest:
+    get:
+      description: |
+        This endpoint allows the client to retrieve a list of articles.
+        ordered by descending publish date.
+
+        It supports pagination, each page will contain `30` articles by default.
+      operationId: getLatestArticles
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                articles-success:
+                  $ref: "#/components/examples/ArticlesIndex"
+              schema:
+                items:
+                  $ref: "#/components/schemas/ArticleIndex"
+                type: array
+          description: A list of articles sorted by descending publish date
+      summary: Published articles sorted by publish date
+      tags:
+        - articles
   /articles/me:
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a list of published articles
-
         on behalf of an authenticated user.
 
-
         "Articles" are all the posts that users create on DEV that typically
-
         show up in the feed. They can be a blog post, a discussion question,
-
         a help thread etc. but is referred to as article within the code.
-
 
         Published articles will be in reverse chronological publication order.
 
-
         It will return published articles with pagination.
-
         By default a page will contain `30` articles.
       operationId: getUserArticles
       parameters:
@@ -470,12 +483,13 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -H "api-key: API_KEY" https://dev.to/api/articles/me
   /articles/me/all:
     get:
       description: >
-        This endpoint allows the client to retrieve a list of all articles on
+        This endpoint allows the client to retrieve a list of all articles
+        on
 
         behalf of an authenticated user.
 
@@ -528,28 +542,21 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -H "api-key: API_KEY" https://dev.to/api/articles/me/all
   /articles/me/published:
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a list of published articles
-
         on behalf of an authenticated user.
 
-
         "Articles" are all the posts that users create on DEV that typically
-
         show up in the feed. They can be a blog post, a discussion question,
-
         a help thread etc. but is referred to as article within the code.
-
 
         Published articles will be in reverse chronological publication order.
 
-
         It will return published articles with pagination.
-
         By default a page will contain `30` articles.
       operationId: getUserPublishedArticles
       parameters:
@@ -583,12 +590,13 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -H "api-key: API_KEY" https://dev.to/api/articles/me/published
   /articles/me/unpublished:
     get:
       description: >
-        This endpoint allows the client to retrieve a list of unpublished articles
+        This endpoint allows the client to retrieve a list of unpublished
+        articles
 
         on behalf of an authenticated user.
 
@@ -642,9 +650,8 @@ paths:
             curl -H "api-key: API_KEY" https://dev.to/api/articles/me/unpublished
   "/articles/{id}":
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a single
-
         published article given its `id`.
       operationId: getArticleById
       responses:
@@ -672,7 +679,7 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/articles/150589
     parameters:
       - description: Id of the article
@@ -800,16 +807,15 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -X PUT -H "Content-Type: application/json" \
               -H "api-key: API_KEY" \
               -d '{"article":{"title":"Title"}}' \
               https://dev.to/api/articles/{id}
   "/articles/{username}/{slug}":
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a single
-
         published article given its `path`.
       operationId: getArticleByPath
       responses:
@@ -838,7 +844,8 @@ paths:
         - label: curl
           lang: Shell
           source: >
-            curl https://dev.to/api/articles/bytesized/byte-sized-episode-2-the-creation-of-graph-theory-34g1
+            curl
+            https://dev.to/api/articles/bytesized/byte-sized-episode-2-the-creation-of-graph-theory-34g1
     parameters:
       - description: User or organization username.
         example: devteam
@@ -856,14 +863,11 @@ paths:
           type: string
   /comments:
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve all comments belonging to an
-
         article or podcast episode as threaded conversations.
 
-
         It will return the all top level comments with their nested comments as
-
         threads. See the format specification for further details.
       operationId: getCommentsByArticleId
       parameters:
@@ -914,24 +918,20 @@ paths:
       x-code-samples:
         - label: curl (all comments of an article)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/comments?a_id=270180
         - label: curl (all comments of a podcast episode)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/comments?p_id=124
   "/comments/{id}":
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a comment as well as his
-
         descendants comments.
 
-
         It will return the required comment (the root) with its nested
-
         descendants as a thread.
-
 
         See the format specification for further details.
       operationId: getCommentById
@@ -972,7 +972,7 @@ paths:
       x-code-samples:
         - label: curl (a comment and its descendants)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/comments/m51e
   /followers/users:
     get:
@@ -1019,13 +1019,12 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -H "api-key: API_KEY" https://dev.to/api/followers/users
   /follows/tags:
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a list of the tags
-
         they follow.
       operationId: getFollowedTags
       responses:
@@ -1058,7 +1057,7 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -H "api-key: API_KEY" https://dev.to/api/follows/tags
   /listings:
     get:
@@ -1102,7 +1101,7 @@ paths:
       x-code-samples:
         - label: curl (all listings)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/listings
     post:
       description: >
@@ -1217,7 +1216,8 @@ paths:
   "/listings/category/{category}":
     get:
       description: >
-        This endpoint allows the client to retrieve a list of listings belonging
+        This endpoint allows the client to retrieve a list of listings
+        belonging
 
         to the specified category.
 
@@ -1263,18 +1263,15 @@ paths:
       x-code-samples:
         - label: curl (call for papers listings)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/listings/category/cfp
   "/listings/{id}":
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve
-
         a single listing given its `id`.
 
-
         An unpublished listing is only accessible if authentication is supplied
-
         and it belongs to the authenticated user.
       operationId: getListingById
       responses:
@@ -1305,11 +1302,11 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/listings/1184
         - label: curl (with authentication)
           lang: Shell
-          source: >
+          source: |
             curl -H "api-key: API_KEY" https://dev.to/api/listings/1185
     parameters:
       - description: Id of the listing
@@ -1322,7 +1319,7 @@ paths:
           minimum: 1
           type: integer
     put:
-      description: >
+      description: |
         This endpoint allows the client to update an existing listing.
       operationId: updateListing
       requestBody:
@@ -1407,14 +1404,14 @@ paths:
       x-code-samples:
         - label: curl (bump)
           lang: Shell
-          source: >
+          source: |
             curl -X PUT -H "Content-Type: application/json" \
               -H "api-key: API_KEY" \
               -d '{"listing":{"action":"bump"}' \
               https://dev.to/api/listings/{id}
         - label: curl (update)
           lang: Shell
-          source: >
+          source: |
             curl -X PUT -H "Content-Type: application/json" \
               -H "api-key: API_KEY" \
               -d '{"listing":{"title":"Title"}' \
@@ -1422,10 +1419,11 @@ paths:
   "/organizations/{username}":
     get:
       description: >
-        This endpoint allows the client to retrieve a single organization by their username
+        This endpoint allows the client to retrieve a single organization
+        by their username
       operationId: getOrganization
       parameters:
-        - description: >
+        - description: |
             Username of the organization
           example: ecorp
           in: path
@@ -1458,18 +1456,19 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/organizations/ecorp
   "/organizations/{username}/articles":
     get:
       description: >
-        This endpoint allows the client to retrieve a list of Articles belonging to the organization
+        This endpoint allows the client to retrieve a list of Articles
+        belonging to the organization
 
 
         It supports pagination, each page will contain `30` listing by default.
       operationId: getOrgArticles
       parameters:
-        - description: >
+        - description: |
             Username of the organization
           example: ecorp
           in: path
@@ -1506,18 +1505,19 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/organizations/ecorp/listings
   "/organizations/{username}/listings":
     get:
       description: >
-        This endpoint allows the client to retrieve a list of listings belonging to the organization
+        This endpoint allows the client to retrieve a list of listings
+        belonging to the organization
 
 
         It supports pagination, each page will contain `30` listing by default.
       operationId: getOrgListings
       parameters:
-        - description: >
+        - description: |
             Username of the organization
           example: ecorp
           in: path
@@ -1558,18 +1558,19 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/organizations/ecorp/listings
   "/organizations/{username}/users":
     get:
       description: >
-        This endpoint allows the client to retrieve a list of users belonging to the organization
+        This endpoint allows the client to retrieve a list of users
+        belonging to the organization
 
 
         It supports pagination, each page will contain `30` users by default.
       operationId: getOrgUsers
       parameters:
-        - description: >
+        - description: |
             Username of the organization
           example: ecorp
           in: path
@@ -1606,32 +1607,26 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/organizations/ecorp/users
   /podcast_episodes:
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a list of podcast episodes.
-
 
         "Podcast episodes" are episodes belonging to podcasts.
 
-
         It will only return active podcast episodes that belong to published
-
         podcasts available on the platform,
-
         ordered by descending publication date.
-
 
         It supports pagination, each page will contain `30` articles by default.
       operationId: getPodcastEpisodes
       parameters:
         - $ref: "#/components/parameters/pageParam"
         - $ref: "#/components/parameters/perPageParam30to1000"
-        - description: >
+        - description: |
             Using this parameter will retrieve episodes belonging
-
             to a specific podcast.
           example: codenewbie
           in: query
@@ -1665,17 +1660,16 @@ paths:
       x-code-samples:
         - label: curl (all podcast episodes)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/podcast_episodes
         - label: curl (all episodes belonging to a podcast)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/podcast_episodes?username=codenewbie
   "/profile_images/{username}":
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a user or organization
-
         profile image information by its corresponding username
       operationId: getProfileImage
       parameters:
@@ -1711,12 +1705,13 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/profile_images/diogoosorio
   /readinglist:
     get:
       description: >
-        This endpoint allows the client to retrieve a list of readinglist reactions along with the related article for the authenticated user.
+        This endpoint allows the client to retrieve a list of readinglist
+        reactions along with the related article for the authenticated user.
 
 
         Reading list will be in reverse chronological order base
@@ -1758,18 +1753,15 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -H "api-key: API_KEY" https://dev.to/api/readinglist
   /tags:
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a list of tags
-
         that can be used to tag articles.
 
-
         It will return tags ordered by popularity.
-
 
         It supports pagination, each page will contain `10` tags by default.
       operationId: getTags
@@ -1794,13 +1786,12 @@ paths:
       x-code-samples:
         - label: curl (all tags)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/tags
   /users/me:
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve information
-
         about the authenticated user
       operationId: getUserMe
       responses:
@@ -1831,13 +1822,12 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -H "api-key: API_KEY" https://dev.to/api/users/me
   "/users/{id}":
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a single user, either by
-
         id or by the user's username
       operationId: getUser
       parameters:
@@ -1886,24 +1876,20 @@ paths:
       x-code-samples:
         - label: curl (by id)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/users/1
         - label: curl (by username)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/users/by_username?url=ben
   /videos:
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a list of articles
-
         that are uploaded with a video.
 
-
         It will only return published video articles
-
         ordered by descending popularity.
-
 
         It supports pagination, each page will contain `24` articles by default.
       operationId: getArticlesWithVideo
@@ -1929,12 +1915,13 @@ paths:
       x-code-samples:
         - label: curl (all video articles)
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/videos
   /webhooks:
     get:
       description: >
-        This endpoint allows the client to retrieve a list of webhooks they have
+        This endpoint allows the client to retrieve a list of webhooks they
+        have
 
         previously registered.
 
@@ -1984,7 +1971,7 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -H "api-key: API_KEY" https://dev.to/api/webhooks
     post:
       description: >
@@ -2057,9 +2044,8 @@ paths:
               https://dev.to/api/webhooks
   "/webhooks/{id}":
     delete:
-      description: >
+      description: |
         This endpoint allows the client to delete a single
-
         webhook given its `id`.
       operationId: deleteWebhook
       responses:
@@ -2092,14 +2078,13 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -X DELETE \
               -H "api-key: API_KEY" \
               https://dev.to/api/webhooks/1
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a single
-
         webhook given its `id`.
       operationId: getWebhookById
       responses:
@@ -2139,7 +2124,7 @@ paths:
       x-code-samples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl https://dev.to/api/webhooks/123
     parameters:
       - description: Id of the webhook
@@ -2156,21 +2141,14 @@ components:
     ArticleCreateFrontMatter:
       value:
         article:
-          body_markdown: >
+          body_markdown: |
             ---
-
             title: Hello, World!
-
             published: true
-
             tags: discuss, help
-
             date: 20190701T10:00Z
-
             series: Hello series
-
             ---
-
 
             Hello DEV, this is my first post
     ArticleCreateOrganization:
@@ -2197,7 +2175,9 @@ components:
     ArticleShow:
       value:
         body_html: >
-          <p>Today's episode of Byte Sized is about Leonhard Euler and the creation of <a href="https://en.wikipedia.org/wiki/Graph_theory">Graph Theory</a>.</p>
+          <p>Today's episode of Byte Sized is about Leonhard Euler and the
+          creation of <a href="https://en.wikipedia.org/wiki/Graph_theory">Graph
+          Theory</a>.</p>
 
 
           <p>For more about how Graph Theory works, check out this video from BaseCS!</p>...
@@ -2207,11 +2187,14 @@ components:
 
           published: true\r
 
-          description: The full story of Leonhard Euler and the creation of this fundamental computer science principle, delivered in a few minutes.\r
+          description: The full story of Leonhard Euler and the
+          creation of this fundamental computer science principle, delivered in
+          a few minutes.\r
 
           tags: computerscience, graphtheory, bytesized, history\r
 
-          cover_image: https://thepracticaldev.s3.amazonaws.com/i/88e62fzblbluz1dm7xjf.png\r
+          cover_image:
+          https://thepracticaldev.s3.amazonaws.com/i/88e62fzblbluz1dm7xjf.png\r
 
           series: Byte Sized Season 1\r
 
@@ -2219,11 +2202,14 @@ components:
 
           \r
 
-          Today's episode of Byte Sized is about Leonhard Euler and the creation of [Graph Theory](https://en.wikipedia.org/wiki/Graph_theory).\r
+          Today's episode of Byte Sized is about Leonhard Euler and
+          the creation of [Graph
+          Theory](https://en.wikipedia.org/wiki/Graph_theory).\r
 
           \r
 
-          For more about how Graph Theory works, check out this video from BaseCS!..."
+          For more about how Graph Theory works, check out this video
+          from BaseCS!..."
         canonical_url: https://dev.to/bytesized/byte-sized-episode-2-the-creation-of-graph-theory-34g1
         collection_id: 1693
         comments_count: 21
@@ -2231,7 +2217,8 @@ components:
         created_at: 2019-07-31T11:15:06Z
         crossposted_at:
           $ref: "#/components/examples/User/value/website_url"
-        description: The full story of Leonhard Euler and the creation of this fundamental computer science principle, delivered in a few minutes.
+        description: The full story of Leonhard Euler and the creation of this
+          fundamental computer science principle, delivered in a few minutes.
         edited_at:
           $ref: "#/components/examples/User/value/website_url"
         id: 150589
@@ -2313,7 +2300,8 @@ components:
             - css
             - ux
           tags: meta, changelog, css, ux
-          title: There's a new DEV theme in town for all you 10x hackers out there (plus one actually useful new feature)
+          title: There's a new DEV theme in town for all you 10x hackers out there (plus
+            one actually useful new feature)
           type_of: article
           url: https://dev.to/devteam/there-s-a-new-dev-theme-in-town-for-all-you-10x-hackers-out-there-plus-one-actually-useful-new-feature-2kgk
           user:
@@ -2327,7 +2315,8 @@ components:
     Comment:
       value:
         body_html: >
-          <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+          <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+          "http://www.w3.org/TR/REC-html40/loose.dtd">
 
           <html><body>
 
@@ -2340,7 +2329,8 @@ components:
           </body></html>
         children:
           - body_html: >
-              <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+              <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+              "http://www.w3.org/TR/REC-html40/loose.dtd">
 
               <html><body>
 
@@ -2383,7 +2373,8 @@ components:
         body_html: <p>[deleted]</p>
         children:
           - body_html: >
-              <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+              <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+              "http://www.w3.org/TR/REC-html40/loose.dtd">
 
               <html><body>
 
@@ -2414,7 +2405,8 @@ components:
         body_html: <p>[hidden by post author]</p>
         children:
           - body_html: >
-              <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+              <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+              "http://www.w3.org/TR/REC-html40/loose.dtd">
 
               <html><body>
 
@@ -2443,7 +2435,8 @@ components:
     Comments:
       value:
         - body_html: >
-            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+            "http://www.w3.org/TR/REC-html40/loose.dtd">
 
             <html><body>
 
@@ -2467,7 +2460,8 @@ components:
             website_url:
               $ref: "#/components/examples/User/value/website_url"
         - body_html: >
-            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+            "http://www.w3.org/TR/REC-html40/loose.dtd">
 
             <html><body>
 
@@ -2480,7 +2474,8 @@ components:
             </body></html>
           children:
             - body_html: >
-                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
 
                 <html><body>
 
@@ -2523,7 +2518,8 @@ components:
         - body_html: <p>[deleted]</p>
           children:
             - body_html: >
-                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
 
                 <html><body>
 
@@ -2554,7 +2550,8 @@ components:
         - body_html: <p>[hidden by post author]</p>
           children:
             - body_html: >
-                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
 
                 <html><body>
 
@@ -2625,14 +2622,21 @@ components:
     Listing:
       value:
         body_markdown: >-
-          Do you want to learn about automation? Maybe you're interested in AI-driven testing? Security testing? We have a selection of talks, workshops and training courses to help you in a wide variety of areas in software testing. Join us for our very first trip to Detroit MI! 
+          Do you want to learn about automation? Maybe you're interested in
+          AI-driven testing? Security testing? We have a selection of talks,
+          workshops and training courses to help you in a wide variety of areas
+          in software testing. Join us for our very first trip to Detroit MI! 
 
 
           https://bit.ly/TBDetroit
         category: cfp
         id: 1157
         processed_html: >
-          <p>Do you want to learn about automation? Maybe you're interested in AI-driven testing? Security testing? We have a selection of talks, workshops and training courses to help you in a wide variety of areas in software testing. Join us for our very first trip to Detroit MI! </p>
+          <p>Do you want to learn about automation? Maybe you're
+          interested in AI-driven testing? Security testing? We have a selection
+          of talks, workshops and training courses to help you in a wide variety
+          of areas in software testing. Join us for our very first trip to
+          Detroit MI! </p>
 
 
           <p><a href="https://bit.ly/TBDetroit">https://bit.ly/TBDetroit</a></p>
@@ -2690,14 +2694,22 @@ components:
     Listings:
       value:
         - body_markdown: >-
-            Do you want to learn about automation? Maybe you're interested in AI-driven testing? Security testing? We have a selection of talks, workshops and training courses to help you in a wide variety of areas in software testing. Join us for our very first trip to Detroit MI! 
+            Do you want to learn about automation? Maybe you're interested in
+            AI-driven testing? Security testing? We have a selection of talks,
+            workshops and training courses to help you in a wide variety of
+            areas in software testing. Join us for our very first trip to
+            Detroit MI! 
 
 
             https://bit.ly/TBDetroit
           category: cfp
           id: 1157
           processed_html: >
-            <p>Do you want to learn about automation? Maybe you're interested in AI-driven testing? Security testing? We have a selection of talks, workshops and training courses to help you in a wide variety of areas in software testing. Join us for our very first trip to Detroit MI! </p>
+            <p>Do you want to learn about automation? Maybe you're
+            interested in AI-driven testing? Security testing? We have a
+            selection of talks, workshops and training courses to help you in a
+            wide variety of areas in software testing. Join us for our very
+            first trip to Detroit MI! </p>
 
 
             <p><a href="https://bit.ly/TBDetroit">https://bit.ly/TBDetroit</a></p>
@@ -2721,7 +2733,11 @@ components:
     ListingsByOrganization:
       value:
         - body_markdown: >-
-            Do you want to learn about automation? Maybe you're interested in AI-driven testing? Security testing? We have a selection of talks, workshops and training courses to help you in a wide variety of areas in software testing. Join us for our very first trip to Detroit MI! 
+            Do you want to learn about automation? Maybe you're interested in
+            AI-driven testing? Security testing? We have a selection of talks,
+            workshops and training courses to help you in a wide variety of
+            areas in software testing. Join us for our very first trip to
+            Detroit MI! 
 
 
             https://bit.ly/TBDetroit
@@ -2734,7 +2750,11 @@ components:
             slug: ecorp
             username: ecorp
           processed_html: >
-            <p>Do you want to learn about automation? Maybe you're interested in AI-driven testing? Security testing? We have a selection of talks, workshops and training courses to help you in a wide variety of areas in software testing. Join us for our very first trip to Detroit MI! </p>
+            <p>Do you want to learn about automation? Maybe you're
+            interested in AI-driven testing? Security testing? We have a
+            selection of talks, workshops and training courses to help you in a
+            wide variety of areas in software testing. Join us for our very
+            first trip to Detroit MI! </p>
 
 
             <p><a href="https://bit.ly/TBDetroit">https://bit.ly/TBDetroit</a></p>
@@ -2790,7 +2810,8 @@ components:
             image_url: https://dev-to-uploads.s3.amazonaws.com/uploads/podcast/image/2/9f50a462-9152-429a-b15e-d024baaa8e01.png
             slug: codenewbie
             title: CodeNewbie
-          title: S11:E6 - What are the pros and cons of working in civic tech (Aidan Feldman)
+          title: S11:E6 - What are the pros and cons of working in civic tech (Aidan
+            Feldman)
           type_of: podcast_episodes
     ProfileImage:
       value:
@@ -2871,9 +2892,8 @@ components:
             $ref: "#/components/examples/User/value/website_url"
   parameters:
     listingCategoryParam:
-      description: >
+      description: |
         Using this parameter will return listings belonging to the
-
         requested category.
       example: cfp
       in: query
@@ -3017,12 +3037,14 @@ components:
               type: string
             organization_id:
               description: >
-                Only users belonging to an organization can assign the article to it
+                Only users belonging to an organization can assign the article to
+                it
               format: int32
               type: integer
             published:
               description: >
-                True to create a published article, false otherwise. Defaults to false
+                True to create a published article, false otherwise. Defaults to
+                false
               type: boolean
             series:
               description: >
@@ -3396,12 +3418,14 @@ components:
               type: string
             organization_id:
               description: >
-                Only users belonging to an organization can assign the article to it
+                Only users belonging to an organization can assign the article to
+                it
               format: int32
               type: integer
             published:
               description: >
-                True to create a published article, false otherwise. Defaults to false
+                True to create a published article, false otherwise. Defaults to
+                false
               type: boolean
             series:
               description: >
@@ -3448,12 +3472,10 @@ components:
           format: int32
           type: integer
         video_duration_in_minutes:
-          description: >
+          description: |
             The duration of the video.
 
-
             If the video duration is below 1 hour, the format will be `mm:ss`,
-
             if it's 1 hour or above the format will be `h:mm:ss`.
           type: string
         video_source_url:
@@ -3609,11 +3631,9 @@ components:
             category:
               $ref: "#/components/schemas/ListingCategory"
             contact_via_connect:
-              description: >
+              description: |
                 True if users are allowed to contact the listing's owner
-
                 via DEV connect, false otherwise.
-
 
                 Defaults to false.
               type: boolean
@@ -3633,9 +3653,8 @@ components:
               format: int64
               type: integer
             tag_list:
-              description: >
+              description: |
                 Comma separated list of tags.
-
 
                 A maximum of 8 tags are allowed.
               type: string
@@ -3661,16 +3680,13 @@ components:
         listing:
           properties:
             action:
-              description: >
+              description: |
                 This param can be provided by itself to invoke some actions:
-
 
                 - `bump` bumps the listing and charge either the
                   organization or the user
                 - `publish` publishes a draft listing
-
                 - `unpublish` unpublishes a published listing
-
 
                 It will take priority on any other param in the payload.
               enum:
@@ -3684,11 +3700,9 @@ components:
             category:
               $ref: "#/components/schemas/ListingCategory"
             contact_via_connect:
-              description: >
+              description: |
                 True if users are allowed to contact the listing's owner
-
                 via DEV connect, false otherwise.
-
 
                 Defaults to false.
               type: boolean
@@ -3700,9 +3714,8 @@ components:
               description: Geographical area or city for the listing.
               type: string
             tag_list:
-              description: >
+              description: |
                 Comma separated list of tags.
-
 
                 A maximum of 8 tags are allowed.
               type: string
@@ -3797,7 +3810,8 @@ components:
       description: Profile image
       properties:
         image_of:
-          description: Discriminates what is the type of the profile image owner (user or organization)
+          description: Discriminates what is the type of the profile image owner (user or
+            organization)
           enum:
             - user
             - organization
@@ -4050,9 +4064,8 @@ components:
       name: api-key
       type: apiKey
     oauth2:
-      description: >
+      description: |
         OAuth2 authentication.
-
 
         OAuth2 authentication is still in private alpha.
       flows:

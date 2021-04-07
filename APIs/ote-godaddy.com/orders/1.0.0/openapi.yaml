@@ -18,10 +18,13 @@ tags:
 paths:
   /v1/orders:
     get:
-      description: <strong>API Resellers</strong><ul><li>This endpoint does not support subaccounts and therefore API Resellers should not supply an X-Shopper-Id header</li></ul>
+      description: <strong>API Resellers</strong><ul><li>This endpoint does not
+        support subaccounts and therefore API Resellers should not supply an
+        X-Shopper-Id header</li></ul>
       operationId: list
       parameters:
-        - description: Start of range indicating what time-frame should be returned. Inclusive
+        - description: Start of range indicating what time-frame should be returned.
+            Inclusive
           in: query
           name: periodStart
           required: false
@@ -73,7 +76,8 @@ paths:
             maximum: 10000
             minimum: 1
             type: integer
-        - description: Property name that will be used to sort results. '-' indicates descending
+        - description: Property name that will be used to sort results. '-' indicates
+            descending
           in: query
           name: sort
           required: false
@@ -87,7 +91,8 @@ paths:
               - pricing.total
               - -pricing.total
             type: string
-        - description: Shopper ID to be operated on, if different from JWT<br/><b>Reseller subaccounts are not supported</b>
+        - description: Shopper ID to be operated on, if different from JWT<br/><b>Reseller
+            subaccounts are not supported</b>
           in: header
           name: X-Shopper-Id
           required: false
@@ -227,12 +232,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: Gateway timeout
-      summary: Retrieve a list of orders for the authenticated shopper. Only one filter may be used at a time
+      summary: Retrieve a list of orders for the authenticated shopper. Only one
+        filter may be used at a time
       tags:
         - v1
   "/v1/orders/{orderId}":
     get:
-      description: <strong>API Resellers</strong><ul><li>This endpoint does not support subaccounts and therefore API Resellers should not supply an X-Shopper-Id header</li></ul>
+      description: <strong>API Resellers</strong><ul><li>This endpoint does not
+        support subaccounts and therefore API Resellers should not supply an
+        X-Shopper-Id header</li></ul>
       operationId: get
       parameters:
         - description: Order id whose details are to be retrieved
@@ -241,7 +249,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: Shopper ID to be operated on, if different from JWT<br/><b>Reseller subaccounts are not supported</b>
+        - description: Shopper ID to be operated on, if different from JWT<br/><b>Reseller
+            subaccounts are not supported</b>
           in: header
           name: X-Shopper-Id
           required: false
@@ -418,7 +427,8 @@ components:
         country:
           default: US
           description: >-
-            Two-letter ISO country code to be used as a hint for target region<br/><br/>
+            Two-letter ISO country code to be used as a hint for target
+            region<br/><br/>
 
             NOTE: These are sample values, there are many
 
@@ -728,7 +738,8 @@ components:
     Error:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the specific error within client code
+          description: Short identifier for the error, suitable for indicating the
+            specific error within client code
           format: constant
           type: string
         fields:
@@ -744,11 +755,13 @@ components:
     ErrorField:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the specific error within client code
+          description: Short identifier for the error, suitable for indicating the
+            specific error within client code
           format: constant
           type: string
         message:
-          description: Human-readable, English description of the problem with the contents of the field
+          description: Human-readable, English description of the problem with the
+            contents of the field
           type: string
         path:
           description: >-
@@ -764,7 +777,8 @@ components:
           format: json-path
           type: string
         pathRelated:
-          description: JSONPath referring to a field containing an error, which is referenced by `path`
+          description: JSONPath referring to a field containing an error, which is
+            referenced by `path`
           format: json-path
           type: string
       required:
@@ -773,7 +787,8 @@ components:
     ErrorLimit:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the specific error within client code
+          description: Short identifier for the error, suitable for indicating the
+            specific error within client code
           format: constant
           type: string
         fields:
@@ -794,7 +809,8 @@ components:
     LineItem:
       properties:
         domains:
-          description: A collection of domain names purchased if the current product is domain
+          description: A collection of domain names purchased if the current product is
+            domain
           items:
             type: string
           type: array
@@ -833,7 +849,8 @@ components:
     LineItemPricing:
       properties:
         discount:
-          description: Discount off of sale price for given `quantity` and `period` <pre>`discount` = `sale` - `subtotal`</pre>
+          description: Discount off of sale price for given `quantity` and `period`
+            <pre>`discount` = `sale` - `subtotal`</pre>
           format: currency-micro-unit
           type: integer
         fees:
@@ -847,11 +864,13 @@ components:
           format: currency-micro-unit
           type: integer
         savings:
-          description: Savings off of list price for given `quantity` and `period` <pre>`savings` = `list` - `subtotal`</pre>
+          description: Savings off of list price for given `quantity` and `period`
+            <pre>`savings` = `list` - `subtotal`</pre>
           format: currency-micro-unit
           type: integer
         subtotal:
-          description: Price with any discounts and without taxes or fees for given `quantity` and `period`
+          description: Price with any discounts and without taxes or fees for given
+            `quantity` and `period`
           format: currency-micro-unit
           type: integer
         taxes:
@@ -948,7 +967,8 @@ components:
           type: string
         parentOrderId:
           description: >-
-            Unique identifier of the parent order. All refund/chargeback orders are tied to the original order.
+            Unique identifier of the parent order. All refund/chargeback orders
+            are tied to the original order.
 
             The orginal order's `orderId` is the `parentOrderId` of refund/chargeback orders
           type: string
@@ -1023,7 +1043,8 @@ components:
           format: currency-micro-unit
           type: integer
         total:
-          description: Price the customer pays <pre>`total` = `subtotal` + `taxes` + `fees.total`</pre>
+          description: Price the customer pays <pre>`total` = `subtotal` + `taxes` +
+            `fees.total`</pre>
           format: currency-micro-unit
           type: integer
       required:
@@ -1054,7 +1075,8 @@ components:
           type: integer
         parentOrderId:
           description: >-
-            Unique identifier of the parent order. All refund/chargeback orders are tied to the original order.
+            Unique identifier of the parent order. All refund/chargeback orders
+            are tied to the original order.
 
             The orginal order's `orderId` is the `parentOrderId` of refund/chargeback orders
           type: string
@@ -1069,7 +1091,8 @@ components:
     OrderSummaryPricing:
       properties:
         total:
-          description: Total amount charged for the current order. Negative for Refund and Chargeback
+          description: Total amount charged for the current order. Negative for Refund and
+            Chargeback
           format: currency-micro-unit
           type: string
       required:
@@ -1098,9 +1121,8 @@ components:
           format: currency-micro-unit
           type: integer
         category:
-          description: >-
+          description: |-
             The category of payment method used at the time of purchase.
-
             Most common values are listed in the enum.
           enum:
             - CREDIT_CARD

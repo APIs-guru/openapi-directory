@@ -74,11 +74,9 @@ security:
 paths:
   /chrome/html:
     post:
-      description: >-
+      description: |-
         Convert HTML to a PDF using Headless Chrome on AWS Lambda.
-
         ### Authorize via Header of Request
-
         **Authorization: YOUR-API-KEY**
       operationId: chromeFromHtmlPost
       requestBody:
@@ -87,7 +85,9 @@ paths:
             schema:
               $ref: "#/components/schemas/ChromeHtmlToPdfRequest"
         description: >-
-          A JSON object as a payload is required within the body of the request. The following attributes of the JSON object are detailed below:
+          A JSON object as a payload is required within the body of the
+          request. The following attributes of the JSON object are detailed
+          below:
 
           - `html` *(string, required)* - raw HTML to convert to PDF
 
@@ -115,7 +115,9 @@ paths:
   /chrome/url:
     get:
       description: >-
-        Convert a URL or Web Page to PDF using Headless Chrome on AWS Lambda. This GET request is for convenience and does not support advanced options. Use the POST request for more flexibility.
+        Convert a URL or Web Page to PDF using Headless Chrome on AWS
+        Lambda. This GET request is for convenience and does not support
+        advanced options. Use the POST request for more flexibility.
 
         ### Authorize via Query String Parameter
 
@@ -126,7 +128,8 @@ paths:
         ``` https://v2018.api2pdf.com/chrome/url?url={UrlToConvert}&apikey={YourApiKey} ``` 
       operationId: chromeFromUrlGET
       parameters:
-        - description: Url of the page to convert to PDF. Must start with http:// or https://.
+        - description: Url of the page to convert to PDF. Must start with http:// or
+            https://.
           in: query
           name: url
           required: true
@@ -160,11 +163,9 @@ paths:
       tags:
         - Headless Chrome
     post:
-      description: >-
+      description: |-
         Convert a URL or Web Page to PDF using Headless Chrome on AWS Lambda..
-
         ### Authorize via Header of Request
-
         **Authorization: YOUR-API-KEY**
       operationId: chromeFromUrlPost
       requestBody:
@@ -173,7 +174,9 @@ paths:
             schema:
               $ref: "#/components/schemas/ChromeUrlToPdfRequest"
         description: >-
-          A JSON object as a payload is required within the body of the request. The following attributes of the JSON object are detailed below:
+          A JSON object as a payload is required within the body of the
+          request. The following attributes of the JSON object are detailed
+          below:
 
           - `url` *(string, required)* - Url to the web page to convert to PDF
 
@@ -201,7 +204,8 @@ paths:
   /libreoffice/convert:
     post:
       description: >-
-        Convert an office document (Word, Excel, Powerpoint) or an image (jpg, gif, png) to a PDF using LibreOffice on AWS Lambda.
+        Convert an office document (Word, Excel, Powerpoint) or an image
+        (jpg, gif, png) to a PDF using LibreOffice on AWS Lambda.
 
         ### Authorize via Header of Request
 
@@ -213,7 +217,9 @@ paths:
             schema:
               $ref: "#/components/schemas/LibreOfficeConvertRequest"
         description: >-
-          A JSON object as a payload is required within the body of the request. The following attributes of the JSON object are detailed below:
+          A JSON object as a payload is required within the body of the
+          request. The following attributes of the JSON object are detailed
+          below:
 
           - `url` *(string, required)* - A direct URL to the file. Api2Pdf will consume the file at that URL and then convert it.
 
@@ -238,11 +244,9 @@ paths:
         - LibreOffice
   /merge:
     post:
-      description: >-
+      description: |-
         Merge two or more PDFs together on AWS Lambda.
-
         ### Authorize via Header of Request
-
         **Authorization: YOUR-API-KEY**
       operationId: mergePost
       requestBody:
@@ -251,7 +255,9 @@ paths:
             schema:
               $ref: "#/components/schemas/MergeRequest"
         description: >-
-          A JSON object as a payload is required within the body of the request. The following attributes of the JSON object are detailed below:
+          A JSON object as a payload is required within the body of the
+          request. The following attributes of the JSON object are detailed
+          below:
 
           - `urls` *(array of urls, required)* - A JSON array of direct URLs to PDFs. Api2Pdf will consume the PDF files in the list and then merge them all together..
 
@@ -276,11 +282,9 @@ paths:
         - Merge / Combine Pdfs
   /wkhtmltopdf/html:
     post:
-      description: >-
+      description: |-
         Convert HTML to a PDF using WkHtmlToPdf on AWS Lambda.
-
         ### Authorize via Header of Request
-
         **Authorization: YOUR-API-KEY**
       operationId: wkhtmltopdfFromHtmlPost
       requestBody:
@@ -289,7 +293,9 @@ paths:
             schema:
               $ref: "#/components/schemas/WkHtmlToPdfHtmlToPdfRequest"
         description: >-
-          A JSON object as a payload is required within the body of the request. The following attributes of the JSON object are detailed below:
+          A JSON object as a payload is required within the body of the
+          request. The following attributes of the JSON object are detailed
+          below:
 
           - `html` *(string, required)* - raw HTML to convert to PDF
 
@@ -317,7 +323,9 @@ paths:
   /wkhtmltopdf/url:
     get:
       description: >-
-        Convert a URL or Web Page to PDF using WkHtmlToPdf on AWS Lambda. This GET request is for convenience and does not support advanced options. Use the POST request for more flexibility.
+        Convert a URL or Web Page to PDF using WkHtmlToPdf on AWS Lambda.
+        This GET request is for convenience and does not support advanced
+        options. Use the POST request for more flexibility.
 
         ### Authorize via Query String Parameter
 
@@ -328,7 +336,8 @@ paths:
         ``` https://v2018.api2pdf.com/wkhtmltopdf/url?url={UrlToConvert}&apikey={YourApiKey} ``` 
       operationId: wkhtmltopdfFromUrlGET
       parameters:
-        - description: Url of the page to convert to PDF. Must start with http:// or https://.
+        - description: Url of the page to convert to PDF. Must start with http:// or
+            https://.
           in: query
           name: url
           required: true
@@ -362,11 +371,9 @@ paths:
       tags:
         - wkhtmltopdf
     post:
-      description: >-
+      description: |-
         Convert a URL or Web Page to PDF using WkHtmlToPdf on AWS Lambda..
-
         ### Authorize via Header of Request
-
         **Authorization: YOUR-API-KEY**
       operationId: wkhtmltopdfFromUrlPost
       requestBody:
@@ -375,7 +382,9 @@ paths:
             schema:
               $ref: "#/components/schemas/WkHtmlToPdfUrlToPdfRequest"
         description: >-
-          A JSON object as a payload is required within the body of the request. The following attributes of the JSON object are detailed below:
+          A JSON object as a payload is required within the body of the
+          request. The following attributes of the JSON object are detailed
+          below:
 
           - `url` *(string, required)* - Url to the web page to convert to PDF
 
@@ -403,7 +412,8 @@ paths:
   /zebra:
     get:
       description: >-
-        See full list of options and documentation [here](https://www.api2pdf.com/documentation/advanced-options-zxing-zebra-crossing-barcodes/)
+        See full list of options and documentation
+        [here](https://www.api2pdf.com/documentation/advanced-options-zxing-zebra-crossing-barcodes/)
 
         ### Authorize via Query String Parameter
 

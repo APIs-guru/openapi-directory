@@ -7,7 +7,9 @@ info:
   contact:
     name: partnerapis@walmartlabs.com
     x-twitter: Walmart
-  description: Please make sure you use the correct version of the APIs for your use case. To find out the appropriate version, go to the API Docs  drop down on the menu.
+  description: Please make sure you use the correct version of the APIs for your
+    use case. To find out the appropriate version, go to the API Docs  drop down
+    on the menu.
   title: Orders API
   version: 3.0.1
   x-apisguru-categories:
@@ -28,7 +30,8 @@ paths:
       consumes:
         - application/xml
         - application/json
-      description: You can display a list of all orders with the query parameter filter criteria.
+      description: You can display a list of all orders with the query parameter
+        filter criteria.
       operationId: getAllOrders
       parameters:
         - description: Ship Node
@@ -46,7 +49,8 @@ paths:
           name: customerOrderId
           required: false
           type: string
-        - description: The purchase order ID associated with the order to retrieve. One customer order can have multiple purchase orders associated with it.
+        - description: The purchase order ID associated with the order to retrieve. One
+            customer order can have multiple purchase orders associated with it.
           in: query
           name: purchaseOrderId
           required: false
@@ -66,27 +70,29 @@ paths:
           name: createdEndDate
           required: false
           type: string
-        - description: Limit orders to those that have order lines with an expected ship date after this date.
+        - description: Limit orders to those that have order lines with an expected ship
+            date after this date.
           in: query
           name: fromExpectedShipDate
           required: false
           type: string
-        - description: "Limit orders to those that have order lines with an expected ship date before this date. "
+        - description: "Limit orders to those that have order lines with an expected ship
+            date before this date. "
           in: query
           name: toExpectedShipDate
           required: false
           type: string
         - default: 10
-          description: The number of orders to be returned. Do not set this parameter to over 200 orders.
+          description: The number of orders to be returned. Do not set this parameter to
+            over 200 orders.
           format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -96,9 +102,8 @@ paths:
           required: true
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -158,7 +163,8 @@ paths:
       consumes:
         - application/xml
         - application/json
-      description: You can display all released orders that have been created and are ready for fulfilment.
+      description: You can display all released orders that have been created and are
+        ready for fulfilment.
       operationId: getReleasedOrders
       parameters:
         - description: Ship Node
@@ -171,16 +177,16 @@ paths:
           name: createdStartDate
           required: true
           type: string
-        - description: The number of orders to be returned. Do not set this parameter to over 200 orders.
+        - description: The number of orders to be returned. Do not set this parameter to
+            over 200 orders.
           format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -190,9 +196,8 @@ paths:
           required: true
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -252,18 +257,21 @@ paths:
       consumes:
         - application/xml
         - application/json
-      description: You can display all released orders that have been created and are ready for fulfilment with nextCursor path parameter.
+      description: You can display all released orders that have been created and are
+        ready for fulfilment with nextCursor path parameter.
       operationId: getNextCursorReleasedOrders
       parameters:
-        - description: Used for pagination when there are more than 200 orders to retrieve. The nextCursor value of the returned response includes a link to another GET call to retrieve the next page. Copy the link and paste it in the next call.
+        - description: Used for pagination when there are more than 200 orders to
+            retrieve. The nextCursor value of the returned response includes a
+            link to another GET call to retrieve the next page. Copy the link
+            and paste it in the next call.
           in: path
           name: nextCursor
           required: true
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -273,9 +281,8 @@ paths:
           required: true
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -349,9 +356,8 @@ paths:
           required: false
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -361,9 +367,8 @@ paths:
           required: true
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -423,7 +428,10 @@ paths:
       consumes:
         - application/xml
         - application/json
-      description: You can acknowledge an entire order, including all of its order lines. Walmart business rules require to acknowledge orders within four hour of receipt of the order, except in extenuating circumstances.
+      description: You can acknowledge an entire order, including all of its order
+        lines. Walmart business rules require to acknowledge orders
+        within four hour of receipt of the order, except in extenuating
+        circumstances.
       operationId: acknowledgeOrders
       parameters:
         - description: Purchase Order ID
@@ -437,9 +445,8 @@ paths:
           required: false
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -449,9 +456,8 @@ paths:
           required: true
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -511,7 +517,10 @@ paths:
       consumes:
         - application/xml
         - application/json
-      description: You can cancel one or more order lines. You must include a purchaseOrderLineNumber when cancelling an order. After cancelling your order, update the inventory for the cancelled order and send it in the next inventory feed.
+      description: You can cancel one or more order lines. You must include a
+        purchaseOrderLineNumber when cancelling an order. After cancelling your
+        order, update the inventory for the cancelled order and send it in the
+        next inventory feed.
       operationId: cancelOrder
       parameters:
         - description: Purchase Order ID
@@ -525,9 +534,8 @@ paths:
           required: false
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -537,9 +545,8 @@ paths:
           required: true
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -605,7 +612,9 @@ paths:
       consumes:
         - application/xml
         - application/json
-      description: You can refund one or more order lines that have been shipped. The response to a successful call contains the order with the refunded line item.
+      description: You can refund one or more order lines that have been shipped. The
+        response to a successful call contains the order with the refunded line
+        item.
       operationId: refundOrder
       parameters:
         - description: Purchase Order ID
@@ -619,9 +628,8 @@ paths:
           required: false
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -631,9 +639,8 @@ paths:
           required: true
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -699,7 +706,10 @@ paths:
       consumes:
         - application/xml
         - application/json
-      description: You can change the status of order lines to "Shipped" and trigger the charge to a customer. You must acknowledge your orders before sending a shipping update to avoid underselling. An order line, once marked as shipped, cannot be updated.
+      description: You can change the status of order lines to "Shipped" and trigger
+        the charge to a customer. You must acknowledge your orders before
+        sending a shipping update to avoid underselling. An order line, once
+        marked as shipped, cannot be updated.
       operationId: shippingOrder
       parameters:
         - description: Purchase Order ID
@@ -713,9 +723,8 @@ paths:
           required: false
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -725,9 +734,8 @@ paths:
           required: true
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -793,18 +801,21 @@ paths:
       consumes:
         - application/xml
         - application/json
-      description: You can display a list of all orders with nextCursor path parameter pagination criteria.
+      description: You can display a list of all orders with nextCursor path parameter
+        pagination criteria.
       operationId: getAllOrdersNext
       parameters:
-        - description: Used for pagination when there are more than 200 orders to retrieve. The nextCursor value of the returned response includes a link to another GET call to retrieve the next page. Copy the link and paste it in the next call.
+        - description: Used for pagination when there are more than 200 orders to
+            retrieve. The nextCursor value of the returned response includes a
+            link to another GET call to retrieve the next page. Copy the link
+            and paste it in the next call.
           in: path
           name: nextCursor
           required: true
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml
@@ -814,9 +825,8 @@ paths:
           required: true
           type: string
         - default: application/xml
-          description: >-
+          description: |-
             application/xml,
-
             application/json
           enum:
             - application/xml

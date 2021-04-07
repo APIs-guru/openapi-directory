@@ -4,7 +4,10 @@ schemes:
 host: api.taxamo.com
 basePath: /
 info:
-  description: Taxamo’s elegant suite of APIs and comprehensive reporting dashboard enables digital merchants to easily comply with EU regulatory requirements on tax calculation, evidence collection, tax return creation and data storage.
+  description: Taxamo’s elegant suite of APIs and comprehensive reporting
+    dashboard enables digital merchants to easily comply with EU regulatory
+    requirements on tax calculation, evidence collection, tax return creation
+    and data storage.
   title: Taxamo
   version: "1"
   x-apisguru-categories:
@@ -140,17 +143,20 @@ paths:
     get:
       operationId: getDomesticSummaryReport
       parameters:
-        - description: Output format. 'xml' and 'csv' values are accepted. Default format - json
+        - description: Output format. 'xml' and 'csv' values are accepted. Default format
+            - json
           in: query
           name: format
           required: false
           type: string
-        - description: ISO 2-letter country code which will be used for determining which country is domestic.
+        - description: ISO 2-letter country code which will be used for determining which
+            country is domestic.
           in: query
           name: country_code
           required: true
           type: string
-        - description: ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one assigned to MOSS calculations for a given country code.
+        - description: ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one
+            assigned to MOSS calculations for a given country code.
           in: query
           name: currency_code
           required: false
@@ -186,22 +192,26 @@ paths:
     get:
       operationId: getEuViesReport
       parameters:
-        - description: Length of report period. 'month', 'quarter' and 'year' values are accepted. Required only if Large Filer Format is requested.
+        - description: Length of report period. 'month', 'quarter' and 'year' values are
+            accepted. Required only if Large Filer Format is requested.
           in: query
           name: period_length
           required: false
           type: string
-        - description: Sequence number used to generate report in Large Filer Format. If not specified then '0000000001' will be used.
+        - description: Sequence number used to generate report in Large Filer Format. If
+            not specified then '0000000001' will be used.
           in: query
           name: lff_sequence_number
           required: false
           type: string
-        - description: Which transformation should be applied. Please note that transformation will be applied only for xml and csv formats.
+        - description: Which transformation should be applied. Please note that
+            transformation will be applied only for xml and csv formats.
           in: query
           name: transformation
           required: false
           type: string
-        - description: ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one assigned to MOSS calculations for a given country code.
+        - description: ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one
+            assigned to MOSS calculations for a given country code.
           in: query
           name: currency_code
           required: false
@@ -211,7 +221,8 @@ paths:
           name: end_month
           required: true
           type: string
-        - description: MOSS-assigned tax ID - if not provided, merchant's national tax number will be used.
+        - description: MOSS-assigned tax ID - if not provided, merchant's national tax
+            number will be used.
           in: query
           name: tax_id
           required: false
@@ -221,7 +232,8 @@ paths:
           name: start_month
           required: true
           type: string
-        - description: ISO 2-letter country code which will be used for determining which country is domestic.
+        - description: ISO 2-letter country code which will be used for determining which
+            country is domestic.
           in: query
           name: eu_country_code
           required: true
@@ -231,7 +243,8 @@ paths:
           name: fx_date_type
           required: false
           type: string
-        - description: Output format. 'xml', 'csv' and 'lff' (only for Ireland) values are accepted as well
+        - description: Output format. 'xml', 'csv' and 'lff' (only for Ireland) values are
+            accepted as well
           in: query
           name: format
           required: false
@@ -303,7 +316,8 @@ paths:
           name: format
           required: false
           type: string
-        - description: MOSS country code, used to determine currency. If ommited, merchant default setting is used.
+        - description: MOSS country code, used to determine currency. If ommited, merchant
+            default setting is used.
           in: query
           name: moss_country_code
           required: false
@@ -334,7 +348,8 @@ paths:
     get:
       operationId: getSettlementSummary
       parameters:
-        - description: MOSS country code, used to determine currency. If ommited, merchant default setting is used.
+        - description: MOSS country code, used to determine currency. If ommited, merchant
+            default setting is used.
           in: query
           name: moss_country_code
           required: false
@@ -344,17 +359,20 @@ paths:
           name: tax_region
           required: false
           type: string
-        - description: Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
+        - description: Period start month in yyyy-MM format. Either quarter or start-month
+            and end-month have to be provided.
           in: query
           name: start_month
           required: false
           type: string
-        - description: Period end month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
+        - description: Period end month in yyyy-MM format. Either quarter or start-month
+            and end-month have to be provided.
           in: query
           name: end_month
           required: false
           type: string
-        - description: Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to 'range'.
+        - description: Quarter in yyyy-MM format. If start-date and end-date are provided,
+            quarter is ignored and should be set to 'range'.
           in: path
           name: quarter
           required: true
@@ -375,37 +393,48 @@ paths:
     get:
       operationId: getSettlement
       parameters:
-        - description: MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id.
+        - description: MOSS-assigned tax ID - if not provided, merchant's national tax
+            number will be used. Deprecated, please use tax-id.
           in: query
           name: moss_tax_id
           required: false
           type: string
-        - description: ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region's currency code.
+        - description: ISO 3-letter currency code, e.g. EUR or USD. If provided, all
+            amounts will be coerced for this currency. Defaults to region's
+            currency code.
           in: query
           name: currency_code
           required: false
           type: string
-        - description: Period end month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
+        - description: Period end month in yyyy-MM format. Either quarter or start-month
+            and end-month have to be provided.
           in: query
           name: end_month
           required: false
           type: string
-        - description: MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id.
+        - description: MOSS-assigned tax ID - if not provided, merchant's national tax
+            number will be used. Deprecated, please use tax-id.
           in: query
           name: tax_id
           required: false
           type: string
-        - description: Set to 'order_date' to show only refunds for the transactions in the selected reporting period. Set to 'refund_timestamp' to show refunds that were created in the selected reporting period. Do not set to use the default region's setting.
+        - description: Set to 'order_date' to show only refunds for the transactions in
+            the selected reporting period. Set to 'refund_timestamp' to show
+            refunds that were created in the selected reporting period. Do not
+            set to use the default region's setting.
           in: query
           name: refund_date_kind_override
           required: false
           type: string
-        - description: Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
+        - description: Period start month in yyyy-MM format. Either quarter or start-month
+            and end-month have to be provided.
           in: query
           name: start_month
           required: false
           type: string
-        - description: "MOSS country code, used to determine currency/region. If ommited, merchant default setting is used. Deprecated: please use tax-country-code."
+        - description: "MOSS country code, used to determine currency/region. If ommited,
+            merchant default setting is used. Deprecated: please use
+            tax-country-code."
           in: query
           name: moss_country_code
           required: false
@@ -420,7 +449,8 @@ paths:
           name: tax_country_code
           required: false
           type: string
-        - description: Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to 'range'.
+        - description: Quarter in yyyy-MM format. If start-date and end-date are provided,
+            quarter is ignored and should be set to 'range'.
           in: path
           name: quarter
           required: true
@@ -555,7 +585,9 @@ paths:
     get:
       operationId: getTransactionsStatsByCountry
       parameters:
-        - description: Global currency code to use for conversion - in addition to country's currency if rate is available. Conversion is indicative and based on most-recent rate from ECB.
+        - description: Global currency code to use for conversion - in addition to
+            country's currency if rate is available. Conversion is indicative
+            and based on most-recent rate from ECB.
           in: query
           name: global_currency_code
           required: false
@@ -621,22 +653,32 @@ paths:
           name: quantity
           required: false
           type: number
-        - description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        - description: " Buyer's tax number - EU VAT number for example. If using EU VAT
+            number, it is possible to provide country code in it (e.g.
+            IE1234567X) or simply use billing_country_code field for that. In
+            the first case, if billing_country_code value was provided, it will
+            be overwritten with country code value extracted from VAT number -
+            but only if the VAT has been verified properly."
           in: query
           name: buyer_tax_number
           required: false
           type: string
-        - description: Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation.
+        - description: Two-letter ISO country code, e.g. FR. Use it to force country code
+            for tax calculation.
           in: query
           name: force_country_code
           required: false
           type: string
-        - description: Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.
+        - description: Order date in yyyy-MM-dd format, in merchant's timezone. If
+            provided by the API caller, no timezone conversion is performed.
+            Default value is current date and time. When using public token, the
+            default value is used.
           in: query
           name: order_date
           required: false
           type: string
-        - description: Amount. Required if total amount or both unit price and quantity are not provided.
+        - description: Amount. Required if total amount or both unit price and quantity
+            are not provided.
           in: query
           name: amount
           required: false
@@ -651,12 +693,15 @@ paths:
           name: invoice_address_postal_code
           required: false
           type: string
-        - description: Total amount. Required if amount or both unit price and quantity are not provided.
+        - description: Total amount. Required if amount or both unit price and quantity
+            are not provided.
           in: query
           name: total_amount
           required: false
           type: number
-        - description: If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.
+        - description: If the transaction is in a country supported by Taxamo, but the tax
+            is not calculated due to merchant settings or EU B2B transaction for
+            example.
           in: query
           name: tax_deducted
           required: false
@@ -800,7 +845,8 @@ paths:
           name: tax_country_codes
           required: false
           type: string
-        - description: Comma separated list of of transaction statuses. 'N' - unconfirmed transaction, 'C' - confirmed transaction.
+        - description: Comma separated list of of transaction statuses. 'N' - unconfirmed
+            transaction, 'C' - confirmed transaction.
           in: query
           name: statuses
           required: false
@@ -815,7 +861,9 @@ paths:
           name: order_date_from
           required: false
           type: string
-        - description: Return only transactions with total amount greater than given number. Transactions with total amount equal to a given number (e.g. 0) are not returned.
+        - description: Return only transactions with total amount greater than given
+            number. Transactions with total amount equal to a given number (e.g.
+            0) are not returned.
           in: query
           name: total_amount_greater_than
           required: false
@@ -825,7 +873,9 @@ paths:
           name: format
           required: false
           type: string
-        - description: Return only transactions with total amount less than a given number. Transactions with total amount equal to a given number (e.g. 1) are not returned.
+        - description: Return only transactions with total amount less than a given
+            number. Transactions with total amount equal to a given number (e.g.
+            1) are not returned.
           in: query
           name: total_amount_less_than
           required: false
@@ -1320,7 +1370,8 @@ definitions:
   calculateSimpleTaxIn:
     properties:
       amount:
-        description: Amount. Required if total amount or both unit price and quantity are not provided.
+        description: Amount. Required if total amount or both unit price and quantity
+          are not provided.
         type: number
       billing_country_code:
         description: Billing two letter ISO country code.
@@ -1329,13 +1380,19 @@ definitions:
         description: First 6 digits of buyer's credit card prefix.
         type: string
       buyer_tax_number:
-        description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        description: " Buyer's tax number - EU VAT number for example. If using EU VAT
+          number, it is possible to provide country code in it (e.g. IE1234567X)
+          or simply use billing_country_code field for that. In the first case,
+          if billing_country_code value was provided, it will be overwritten
+          with country code value extracted from VAT number - but only if the
+          VAT has been verified properly."
         type: string
       currency_code:
         description: Currency code for transaction - e.g. EUR.
         type: string
       force_country_code:
-        description: Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation.
+        description: Two-letter ISO country code, e.g. FR. Use it to force country code
+          for tax calculation.
         type: string
       invoice_address_city:
         description: Invoice address/postal_code
@@ -1347,7 +1404,10 @@ definitions:
         description: Invoice address/region
         type: string
       order_date:
-        description: Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.
+        description: Order date in yyyy-MM-dd format, in merchant's timezone. If
+          provided by the API caller, no timezone conversion is performed.
+          Default value is current date and time. When using public token, the
+          default value is used.
         type: string
       product_type:
         description: "Product type, according to dictionary /dictionaries/product_types. "
@@ -1356,10 +1416,13 @@ definitions:
         description: Quantity Defaults to 1.
         type: number
       tax_deducted:
-        description: If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.
+        description: If the transaction is in a country supported by Taxamo, but the tax
+          is not calculated due to merchant settings or EU B2B transaction for
+          example.
         type: boolean
       total_amount:
-        description: Total amount. Required if amount or both unit price and quantity are not provided.
+        description: Total amount. Required if amount or both unit price and quantity
+          are not provided.
         type: number
       unit_price:
         description: Unit price.
@@ -1370,12 +1433,14 @@ definitions:
   calculateSimpleTaxOut:
     properties:
       storage_required_fields:
-        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
+        description: Fields required for transaction storage (can be added later - it's
+          up to merchant software). Depends on the region/transaction type.
         items:
           $ref: "#/definitions/storage_required_fields"
         type: array
       tax_required_fields:
-        description: Fields required for tax calculation. Depends on the region/transaction type.
+        description: Fields required for tax calculation. Depends on the
+          region/transaction type.
         items:
           $ref: "#/definitions/tax_required_fields"
         type: array
@@ -1413,15 +1478,20 @@ definitions:
         type: string
       countries:
         $ref: "#/definitions/countries"
-        description: Map of countries calculated from evidence provided. This value is not stored and is available only upon tax calculation.
+        description: Map of countries calculated from evidence provided. This value is
+          not stored and is available only upon tax calculation.
       evidence:
         $ref: "#/definitions/evidence"
         description: Tax country of residence evidence.
       tax_country_code:
-        description: Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode.
+        description: Two-letter ISO country code, e.g. FR. This code applies to
+          detected/set country for transaction, but can be set using manual
+          mode.
         type: string
       tax_deducted:
-        description: If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.
+        description: If the transaction is in a country supported by Taxamo, but the tax
+          is not calculated due to merchant settings or EU B2B transaction for
+          example.
         type: boolean
       tax_supported:
         description: Is tax calculation supported for a detected tax location?
@@ -1430,12 +1500,14 @@ definitions:
   calculateTaxOut:
     properties:
       storage_required_fields:
-        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
+        description: Fields required for transaction storage (can be added later - it's
+          up to merchant software). Depends on the region/transaction type.
         items:
           $ref: "#/definitions/storage_required_fields"
         type: array
       tax_required_fields:
-        description: Fields required for tax calculation. Depends on the region/transaction type.
+        description: Fields required for tax calculation. Depends on the
+          region/transaction type.
         items:
           $ref: "#/definitions/tax_required_fields"
         type: array
@@ -1464,12 +1536,14 @@ definitions:
   confirmTransactionOut:
     properties:
       storage_required_fields:
-        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
+        description: Fields required for transaction storage (can be added later - it's
+          up to merchant software). Depends on the region/transaction type.
         items:
           $ref: "#/definitions/storage_required_fields"
         type: array
       tax_required_fields:
-        description: Fields required for tax calculation. Depends on the region/transaction type.
+        description: Fields required for tax calculation. Depends on the
+          region/transaction type.
         items:
           $ref: "#/definitions/tax_required_fields"
         type: array
@@ -1608,7 +1682,8 @@ definitions:
         description: Additional payment information.
         type: string
       payment_timestamp:
-        description: When the payment was received in yyyy-MM-dd'T'HH:mm:ss(.SSS)'Z' format (24 hour, UTC timezone). Defaults to current date and time.
+        description: When the payment was received in yyyy-MM-dd'T'HH:mm:ss(.SSS)'Z'
+          format (24 hour, UTC timezone). Defaults to current date and time.
         type: string
     required:
       - amount
@@ -1622,19 +1697,25 @@ definitions:
   createRefundIn:
     properties:
       amount:
-        description: Amount (without tax) to be refunded. Either amount or total amount is required. In case of line key and custom id missing, only total_amount can be used.
+        description: Amount (without tax) to be refunded. Either amount or total amount
+          is required. In case of line key and custom id missing, only
+          total_amount can be used.
         type: number
       custom_id:
-        description: Line custom identifier. If neither line key or custom id is provided, the refund amount will be assigned to lines in order.
+        description: Line custom identifier. If neither line key or custom id is
+          provided, the refund amount will be assigned to lines in order.
         type: string
       line_key:
-        description: Line identifier. If neither line key or custom id is provided, the refund amount will be assigned to lines in order.
+        description: Line identifier. If neither line key or custom id is provided, the
+          refund amount will be assigned to lines in order.
         type: string
       refund_reason:
         description: Refund reason, displayed on the credit note.
         type: string
       total_amount:
-        description: Total amount, including tax, to be refunded. Either amount or total amount is required. In case of line key and custom id missing, only total_amount can be used.
+        description: Total amount, including tax, to be refunded. Either amount or total
+          amount is required. In case of line key and custom id missing, only
+          total_amount can be used.
         type: number
     type: object
   createRefundOut:
@@ -1667,13 +1748,17 @@ definitions:
   createSMSTokenOut:
     properties:
       success:
-        description: Always set to true. Success means that the message has been queued for delivery. In some cases message may be undelivered at the end, e.g. mobile number is blacklisted. API errors are signalled with appropriate error codes.
+        description: Always set to true. Success means that the message has been queued
+          for delivery. In some cases message may be undelivered at the end,
+          e.g. mobile number is blacklisted. API errors are signalled with
+          appropriate error codes.
         type: boolean
     type: object
   createTransactionIn:
     properties:
       manual_mode:
-        description: Use manual mode, bypassing country detection. Only allowed with private token. This flag allows to use original_transaction_key field
+        description: Use manual mode, bypassing country detection. Only allowed with
+          private token. This flag allows to use original_transaction_key field
         type: boolean
       transaction:
         $ref: "#/definitions/input_transaction"
@@ -1684,12 +1769,14 @@ definitions:
   createTransactionOut:
     properties:
       storage_required_fields:
-        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
+        description: Fields required for transaction storage (can be added later - it's
+          up to merchant software). Depends on the region/transaction type.
         items:
           $ref: "#/definitions/storage_required_fields"
         type: array
       tax_required_fields:
-        description: Fields required for tax calculation. Depends on the region/transaction type.
+        description: Fields required for tax calculation. Depends on the
+          region/transaction type.
         items:
           $ref: "#/definitions/tax_required_fields"
         type: array
@@ -1727,7 +1814,8 @@ definitions:
   emailInvoiceIn:
     properties:
       buyer_email:
-        description: Email to send the invoice. If not provided, transaction.buyer_email will be used.
+        description: Email to send the invoice. If not provided, transaction.buyer_email
+          will be used.
         type: string
     type: object
   emailInvoiceOut:
@@ -1739,7 +1827,8 @@ definitions:
   emailRefundIn:
     properties:
       buyer_email:
-        description: Email to send the credit note/refund note. If not provided, transaction.buyer_email will be used.
+        description: Email to send the credit note/refund note. If not provided,
+          transaction.buyer_email will be used.
         type: string
     type: object
   emailRefundOut:
@@ -1779,10 +1868,12 @@ definitions:
         description: Country guessed from IP due to lack of other evidence
       other_commercially_relevant_info:
         $ref: "#/definitions/evidence_schema"
-        description: Additional evidence held by the merchant. Can be used only with a private token.
+        description: Additional evidence held by the merchant. Can be used only with a
+          private token.
       self_declaration:
         $ref: "#/definitions/evidence_schema"
-        description: Self declared country as evidence. Requires merchant setting to be active.
+        description: Self declared country as evidence. Requires merchant setting to be
+          active.
     type: object
   evidence_schema:
     properties:
@@ -1877,16 +1968,19 @@ definitions:
   getDomesticSummaryReportIn:
     properties:
       country_code:
-        description: ISO 2-letter country code which will be used for determining which country is domestic.
+        description: ISO 2-letter country code which will be used for determining which
+          country is domestic.
         type: string
       currency_code:
-        description: ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one assigned to MOSS calculations for a given country code.
+        description: ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one
+          assigned to MOSS calculations for a given country code.
         type: string
       end_month:
         description: Period end month in yyyy-MM format.
         type: string
       format:
-        description: Output format. 'xml' and 'csv' values are accepted. Default format - json
+        description: Output format. 'xml' and 'csv' values are accepted. Default format
+          - json
         type: string
       fx_date_type:
         description: Which date should be used for FX.
@@ -1926,10 +2020,12 @@ definitions:
         description: EU deducted tax sales.
         type: number
       global_refunds_amount:
-        description: Global sales refunds amount. This includes refunds from domestic country too.
+        description: Global sales refunds amount. This includes refunds from domestic
+          country too.
         type: number
       global_refunds_tax_amount:
-        description: Global sales refunds amount. This includes refunds from domestic country too.
+        description: Global sales refunds amount. This includes refunds from domestic
+          country too.
         type: number
       global_sales_amount:
         description: Global sales amount. This includes sales from domestic country too.
@@ -1944,34 +2040,41 @@ definitions:
   getEuViesReportIn:
     properties:
       currency_code:
-        description: ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one assigned to MOSS calculations for a given country code.
+        description: ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one
+          assigned to MOSS calculations for a given country code.
         type: string
       end_month:
         description: Period end month in yyyy-MM format.
         type: string
       eu_country_code:
-        description: ISO 2-letter country code which will be used for determining which country is domestic.
+        description: ISO 2-letter country code which will be used for determining which
+          country is domestic.
         type: string
       format:
-        description: Output format. 'xml', 'csv' and 'lff' (only for Ireland) values are accepted as well
+        description: Output format. 'xml', 'csv' and 'lff' (only for Ireland) values are
+          accepted as well
         type: string
       fx_date_type:
         description: Which date should be used for FX.
         type: string
       lff_sequence_number:
-        description: Sequence number used to generate report in Large Filer Format. If not specified then '0000000001' will be used.
+        description: Sequence number used to generate report in Large Filer Format. If
+          not specified then '0000000001' will be used.
         type: string
       period_length:
-        description: Length of report period. 'month', 'quarter' and 'year' values are accepted. Required only if Large Filer Format is requested.
+        description: Length of report period. 'month', 'quarter' and 'year' values are
+          accepted. Required only if Large Filer Format is requested.
         type: string
       start_month:
         description: Period start month in yyyy-MM format.
         type: string
       tax_id:
-        description: MOSS-assigned tax ID - if not provided, merchant's national tax number will be used.
+        description: MOSS-assigned tax ID - if not provided, merchant's national tax
+          number will be used.
         type: string
       transformation:
-        description: Which transformation should be applied. Please note that transformation will be applied only for xml and csv formats.
+        description: Which transformation should be applied. Please note that
+          transformation will be applied only for xml and csv formats.
         type: string
     required:
       - end_month
@@ -2012,7 +2115,8 @@ definitions:
         description: Output format. 'csv' value is accepted as well
         type: string
       moss_country_code:
-        description: MOSS country code, used to determine currency. If ommited, merchant default setting is used.
+        description: MOSS country code, used to determine currency. If ommited, merchant
+          default setting is used.
         type: string
       tax_region:
         description: Tax region key, defaults to EU for backwards compatibility.
@@ -2031,31 +2135,42 @@ definitions:
   getSettlementIn:
     properties:
       currency_code:
-        description: ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region's currency code.
+        description: ISO 3-letter currency code, e.g. EUR or USD. If provided, all
+          amounts will be coerced for this currency. Defaults to region's
+          currency code.
         type: string
       end_month:
-        description: Period end month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
+        description: Period end month in yyyy-MM format. Either quarter or start-month
+          and end-month have to be provided.
         type: string
       format:
         description: Output format. 'csv' value is accepted as well
         type: string
       moss_country_code:
-        description: "MOSS country code, used to determine currency/region. If ommited, merchant default setting is used. Deprecated: please use tax-country-code."
+        description: "MOSS country code, used to determine currency/region. If ommited,
+          merchant default setting is used. Deprecated: please use
+          tax-country-code."
         type: string
       moss_tax_id:
-        description: MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id.
+        description: MOSS-assigned tax ID - if not provided, merchant's national tax
+          number will be used. Deprecated, please use tax-id.
         type: string
       refund_date_kind_override:
-        description: Set to 'order_date' to show only refunds for the transactions in the selected reporting period. Set to 'refund_timestamp' to show refunds that were created in the selected reporting period. Do not set to use the default region's setting.
+        description: Set to 'order_date' to show only refunds for the transactions in
+          the selected reporting period. Set to 'refund_timestamp' to show
+          refunds that were created in the selected reporting period. Do not set
+          to use the default region's setting.
         type: string
       start_month:
-        description: Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
+        description: Period start month in yyyy-MM format. Either quarter or start-month
+          and end-month have to be provided.
         type: string
       tax_country_code:
         description: "Tax entity country code, used to determine currency/region. "
         type: string
       tax_id:
-        description: MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id.
+        description: MOSS-assigned tax ID - if not provided, merchant's national tax
+          number will be used. Deprecated, please use tax-id.
         type: string
     type: object
   getSettlementOut:
@@ -2064,10 +2179,12 @@ definitions:
         description: Period end date in yyyy-MM-dd'T'hh:mm:ss'Z' format.
         type: string
       fx_rate_date:
-        description: "Date of ECB FX rate used for conversions in yyyy-MM-dd'T'hh:mm:ss'Z' format. Applies to tax regions where "
+        description: "Date of ECB FX rate used for conversions in
+          yyyy-MM-dd'T'hh:mm:ss'Z' format. Applies to tax regions where "
         type: string
       indicative:
-        description: If the quarter isn't closed yet, tax amount is indicative, as we cannot determine FX rate or all transactions yet.
+        description: If the quarter isn't closed yet, tax amount is indicative, as we
+          cannot determine FX rate or all transactions yet.
         type: boolean
       report:
         description: Settlement report.
@@ -2119,13 +2236,16 @@ definitions:
   getSettlementSummaryIn:
     properties:
       end_month:
-        description: Period end month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
+        description: Period end month in yyyy-MM format. Either quarter or start-month
+          and end-month have to be provided.
         type: string
       moss_country_code:
-        description: MOSS country code, used to determine currency. If ommited, merchant default setting is used.
+        description: MOSS country code, used to determine currency. If ommited, merchant
+          default setting is used.
         type: string
       start_month:
-        description: Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
+        description: Period start month in yyyy-MM format. Either quarter or start-month
+          and end-month have to be provided.
         type: string
       tax_region:
         description: Tax region key
@@ -2140,12 +2260,14 @@ definitions:
   getTransactionOut:
     properties:
       storage_required_fields:
-        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
+        description: Fields required for transaction storage (can be added later - it's
+          up to merchant software). Depends on the region/transaction type.
         items:
           $ref: "#/definitions/storage_required_fields"
         type: array
       tax_required_fields:
-        description: Fields required for tax calculation. Depends on the region/transaction type.
+        description: Fields required for tax calculation. Depends on the
+          region/transaction type.
         items:
           $ref: "#/definitions/tax_required_fields"
         type: array
@@ -2162,7 +2284,9 @@ definitions:
         description: Date to in yyyy-MM format.
         type: string
       global_currency_code:
-        description: Global currency code to use for conversion - in addition to country's currency if rate is available. Conversion is indicative and based on most-recent rate from ECB.
+        description: Global currency code to use for conversion - in addition to
+          country's currency if rate is available. Conversion is indicative and
+          based on most-recent rate from ECB.
         type: string
     required:
       - date_from
@@ -2201,7 +2325,8 @@ definitions:
     properties:
       additional_currencies:
         $ref: "#/definitions/additional_currencies"
-        description: Additional currency information - can be used to receive additional information about invoice in another currency.
+        description: Additional currency information - can be used to receive additional
+          information about invoice in another currency.
       billing_country_code:
         description: Billing two letter ISO country code.
         type: string
@@ -2218,10 +2343,16 @@ definitions:
         description: Buyer's name - first name and last name or company name.
         type: string
       buyer_tax_number:
-        description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        description: " Buyer's tax number - EU VAT number for example. If using EU VAT
+          number, it is possible to provide country code in it (e.g. IE1234567X)
+          or simply use billing_country_code field for that. In the first case,
+          if billing_country_code value was provided, it will be overwritten
+          with country code value extracted from VAT number - but only if the
+          VAT has been verified properly."
         type: string
       comments:
-        description: Additional information about the transaction - for example if the evidence has been amended.
+        description: Additional information about the transaction - for example if the
+          evidence has been amended.
         type: string
       currency_code:
         description: Currency code for transaction - e.g. EUR.
@@ -2230,7 +2361,8 @@ definitions:
         description: Custom data related to transaction.
         type: string
       custom_fields:
-        description: Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers.
+        description: Custom fields, stored as key-value pairs. This property is not
+          processed and used mostly with Taxamo-built helpers.
         items:
           $ref: "#/definitions/custom_fields"
         type: array
@@ -2247,7 +2379,8 @@ definitions:
         $ref: "#/definitions/evidence"
         description: Tax country of residence evidence.
       force_country_code:
-        description: Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation.
+        description: Two-letter ISO country code, e.g. FR. Use it to force country code
+          for tax calculation.
         type: string
       invoice_address:
         $ref: "#/definitions/invoice_address"
@@ -2262,16 +2395,26 @@ definitions:
         description: Invoice place of issue.
         type: string
       note:
-        description: Additional note related to transaction state - for example if the transaction was created in a 'catch-all' mode or the VAT number re-check for subscriptions has failed.
+        description: Additional note related to transaction state - for example if the
+          transaction was created in a 'catch-all' mode or the VAT number
+          re-check for subscriptions has failed.
         type: string
       order_date:
-        description: Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.
+        description: Order date in yyyy-MM-dd format, in merchant's timezone. If
+          provided by the API caller, no timezone conversion is performed.
+          Default value is current date and time. When using public token, the
+          default value is used.
         type: string
       original_transaction_key:
-        description: Use data and evidence from original transaction. Tax will be re-calculated, but evidence won't be re-checked. This parameter is taken into account only when 'manual' flag is raised.
+        description: Use data and evidence from original transaction. Tax will be
+          re-calculated, but evidence won't be re-checked. This parameter is
+          taken into account only when 'manual' flag is raised.
         type: string
       status:
-        description: "Transaction status: 'N' - new, 'C' - confirmed. Can use 'C' in store-transaction! with private-token to create confirmed transaction, otherwise 'N' is default status. Not applicable for update-transaction!."
+        description: "Transaction status: 'N' - new, 'C' - confirmed. Can use 'C' in
+          store-transaction! with private-token to create confirmed transaction,
+          otherwise 'N' is default status. Not applicable for
+          update-transaction!."
         type: string
       sub_account_id:
         description: Sub account identifier.
@@ -2280,13 +2423,18 @@ definitions:
         description: Supply date in yyyy-MM-dd format.
         type: string
       tax_country_code:
-        description: Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode.
+        description: Two-letter ISO country code, e.g. FR. This code applies to
+          detected/set country for transaction, but can be set using manual
+          mode.
         type: string
       tax_data:
         $ref: "#/definitions/tax_data_schema"
-        description: Tax additional information - e.g. US sales tax exemption certificate data.
+        description: Tax additional information - e.g. US sales tax exemption
+          certificate data.
       tax_deducted:
-        description: True if the transaction is deducted from tax and no tax is applied (it is untaxed). Either set automatically when VAT number validates with VIES correctly, but can also be provided in manual mode.
+        description: True if the transaction is deducted from tax and no tax is applied
+          (it is untaxed). Either set automatically when VAT number validates
+          with VIES correctly, but can also be provided in manual mode.
         type: boolean
       transaction_lines:
         description: Transaction lines.
@@ -2303,10 +2451,12 @@ definitions:
   input_transaction_line:
     properties:
       amount:
-        description: Amount. Required if total amount or both unit price and quantity are not provided.
+        description: Amount. Required if total amount or both unit price and quantity
+          are not provided.
         type: number
       custom_fields:
-        description: Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers.
+        description: Custom fields, stored as key-value pairs. This property is not
+          processed and used mostly with Taxamo-built helpers.
         items:
           $ref: "#/definitions/custom_fields"
         type: array
@@ -2320,7 +2470,9 @@ definitions:
         description: Line contents description.
         type: string
       informative:
-        description: If the line is provided for informative purposes. Such line must have :tax-rate and optionally :tax-name - if not, API validation will fail for this line.
+        description: If the line is provided for informative purposes. Such line must
+          have :tax-rate and optionally :tax-name - if not, API validation will
+          fail for this line.
         type: boolean
       line_key:
         description: Generated line key.
@@ -2341,13 +2493,16 @@ definitions:
         description: Date of supply in yyyy-MM-dd format.
         type: string
       tax_name:
-        description: Tax name, calculated by taxamo.  Can be overwritten when informative field is true.
+        description: Tax name, calculated by taxamo.  Can be overwritten when
+          informative field is true.
         type: string
       tax_rate:
-        description: Tax rate, calculated by taxamo. Must be provided when informative field is true.
+        description: Tax rate, calculated by taxamo. Must be provided when informative
+          field is true.
         type: number
       total_amount:
-        description: Total amount. Required if amount or both unit price and quantity are not provided.
+        description: Total amount. Required if amount or both unit price and quantity
+          are not provided.
         type: number
       unit_of_measure:
         description: Unit of measure.
@@ -2362,7 +2517,8 @@ definitions:
     properties:
       additional_currencies:
         $ref: "#/definitions/additional_currencies"
-        description: Additional currency information - can be used to receive additional information about invoice in another currency.
+        description: Additional currency information - can be used to receive additional
+          information about invoice in another currency.
       billing_country_code:
         description: Billing two letter ISO country code.
         type: string
@@ -2379,10 +2535,16 @@ definitions:
         description: Buyer's name - first name and last name or company name.
         type: string
       buyer_tax_number:
-        description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        description: " Buyer's tax number - EU VAT number for example. If using EU VAT
+          number, it is possible to provide country code in it (e.g. IE1234567X)
+          or simply use billing_country_code field for that. In the first case,
+          if billing_country_code value was provided, it will be overwritten
+          with country code value extracted from VAT number - but only if the
+          VAT has been verified properly."
         type: string
       comments:
-        description: Additional information about the transaction - for example if the evidence has been amended.
+        description: Additional information about the transaction - for example if the
+          evidence has been amended.
         type: string
       currency_code:
         description: Currency code for transaction - e.g. EUR.
@@ -2391,7 +2553,8 @@ definitions:
         description: Custom data related to transaction.
         type: string
       custom_fields:
-        description: Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers.
+        description: Custom fields, stored as key-value pairs. This property is not
+          processed and used mostly with Taxamo-built helpers.
         items:
           $ref: "#/definitions/custom_fields"
         type: array
@@ -2408,7 +2571,8 @@ definitions:
         $ref: "#/definitions/evidence"
         description: Tax country of residence evidence.
       force_country_code:
-        description: Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation.
+        description: Two-letter ISO country code, e.g. FR. Use it to force country code
+          for tax calculation.
         type: string
       invoice_address:
         $ref: "#/definitions/invoice_address"
@@ -2423,16 +2587,26 @@ definitions:
         description: Invoice place of issue.
         type: string
       note:
-        description: Additional note related to transaction state - for example if the transaction was created in a 'catch-all' mode or the VAT number re-check for subscriptions has failed.
+        description: Additional note related to transaction state - for example if the
+          transaction was created in a 'catch-all' mode or the VAT number
+          re-check for subscriptions has failed.
         type: string
       order_date:
-        description: Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.
+        description: Order date in yyyy-MM-dd format, in merchant's timezone. If
+          provided by the API caller, no timezone conversion is performed.
+          Default value is current date and time. When using public token, the
+          default value is used.
         type: string
       original_transaction_key:
-        description: Use data and evidence from original transaction. Tax will be re-calculated, but evidence won't be re-checked. This parameter is taken into account only when 'manual' flag is raised.
+        description: Use data and evidence from original transaction. Tax will be
+          re-calculated, but evidence won't be re-checked. This parameter is
+          taken into account only when 'manual' flag is raised.
         type: string
       status:
-        description: "Transaction status: 'N' - new, 'C' - confirmed. Can use 'C' in store-transaction! with private-token to create confirmed transaction, otherwise 'N' is default status. Not applicable for update-transaction!."
+        description: "Transaction status: 'N' - new, 'C' - confirmed. Can use 'C' in
+          store-transaction! with private-token to create confirmed transaction,
+          otherwise 'N' is default status. Not applicable for
+          update-transaction!."
         type: string
       sub_account_id:
         description: Sub account identifier.
@@ -2441,13 +2615,18 @@ definitions:
         description: Supply date in yyyy-MM-dd format.
         type: string
       tax_country_code:
-        description: Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode.
+        description: Two-letter ISO country code, e.g. FR. This code applies to
+          detected/set country for transaction, but can be set using manual
+          mode.
         type: string
       tax_data:
         $ref: "#/definitions/tax_data_schema"
-        description: Tax additional information - e.g. US sales tax exemption certificate data.
+        description: Tax additional information - e.g. US sales tax exemption
+          certificate data.
       tax_deducted:
-        description: True if the transaction is deducted from tax and no tax is applied (it is untaxed). Either set automatically when VAT number validates with VIES correctly, but can also be provided in manual mode.
+        description: True if the transaction is deducted from tax and no tax is applied
+          (it is untaxed). Either set automatically when VAT number validates
+          with VIES correctly, but can also be provided in manual mode.
         type: boolean
       transaction_lines:
         description: Transaction lines.
@@ -2473,7 +2652,8 @@ definitions:
         description: 2-letter ISO country code.
         type: string
       freeform_address:
-        description: Freeform address. Use when structured data is not available. Will be used in SAF-MOSS file if other fields are not provided.
+        description: Freeform address. Use when structured data is not available. Will
+          be used in SAF-MOSS file if other fields are not provided.
         type: string
       postal_code:
         description: Postal code.
@@ -2549,7 +2729,8 @@ definitions:
         description: If true, results are sorted in descending order.
         type: boolean
       statuses:
-        description: Comma separated list of of transaction statuses. 'N' - unconfirmed transaction, 'C' - confirmed transaction.
+        description: Comma separated list of of transaction statuses. 'N' - unconfirmed
+          transaction, 'C' - confirmed transaction.
         type: string
       tax_country_code:
         description: Two letter ISO tax country code.
@@ -2558,10 +2739,14 @@ definitions:
         description: Comma separated list of two letter ISO tax country codes.
         type: string
       total_amount_greater_than:
-        description: Return only transactions with total amount greater than given number. Transactions with total amount equal to a given number (e.g. 0) are not returned.
+        description: Return only transactions with total amount greater than given
+          number. Transactions with total amount equal to a given number (e.g.
+          0) are not returned.
         type: string
       total_amount_less_than:
-        description: Return only transactions with total amount less than a given number. Transactions with total amount equal to a given number (e.g. 1) are not returned.
+        description: Return only transactions with total amount less than a given
+          number. Transactions with total amount equal to a given number (e.g.
+          1) are not returned.
         type: string
     type: object
   listTransactionsOut:
@@ -2605,7 +2790,8 @@ definitions:
         description: Additional payment information.
         type: string
       payment_timestamp:
-        description: When the payment was received in yyyy-MM-dd HH:mm:ss (24 hour format, UTC+0 timezone).
+        description: When the payment was received in yyyy-MM-dd HH:mm:ss (24 hour
+          format, UTC+0 timezone).
         type: string
     type: object
   product_type_schema:
@@ -2623,7 +2809,8 @@ definitions:
         description: Was this refund applied to an informative line?
         type: boolean
       line_key:
-        description: Line identifier. If neither line key or custom id is provided, the refund amount will be assigned to lines in order.
+        description: Line identifier. If neither line key or custom id is provided, the
+          refund amount will be assigned to lines in order.
         type: string
       refund_note_number:
         description: Sequential refund note number.
@@ -2665,7 +2852,9 @@ definitions:
         description: Three-letter ISO currency code.
         type: string
       skip_moss:
-        description: If true, this line should not be entered into MOSS and is provided for informative purposes only. For example because the country is the same as MOSS registration country and merchant country.
+        description: If true, this line should not be entered into MOSS and is provided
+          for informative purposes only. For example because the country is the
+          same as MOSS registration country and merchant country.
         type: boolean
       tax_amount:
         description: Tax amount
@@ -2722,10 +2911,12 @@ definitions:
         description: Period end date in yyyy-MM-dd'T'hh:mm:ss'Z' format.
         type: string
       fx_rate_date:
-        description: Date of ECB FX rate used for conversions in yyyy-MM-dd'T'hh:mm:ss'Z' format.
+        description: Date of ECB FX rate used for conversions in
+          yyyy-MM-dd'T'hh:mm:ss'Z' format.
         type: string
       indicative:
-        description: If the quarter isn't closed yet, tax amount is indicative, as we cannot determine FX rate or all transactions yet.
+        description: If the quarter isn't closed yet, tax amount is indicative, as we
+          cannot determine FX rate or all transactions yet.
         type: boolean
       quarter:
         description: Quarter that this summary applies to.
@@ -2756,7 +2947,8 @@ definitions:
     properties:
       additional_currencies:
         $ref: "#/definitions/additional_currencies"
-        description: Additional currency information - can be used to receive additional information about invoice in another currency.
+        description: Additional currency information - can be used to receive additional
+          information about invoice in another currency.
       amount:
         description: Amount of transaction without tax.
         type: number
@@ -2776,20 +2968,30 @@ definitions:
         description: Buyer's name - first name and last name or company name.
         type: string
       buyer_tax_number:
-        description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        description: " Buyer's tax number - EU VAT number for example. If using EU VAT
+          number, it is possible to provide country code in it (e.g. IE1234567X)
+          or simply use billing_country_code field for that. In the first case,
+          if billing_country_code value was provided, it will be overwritten
+          with country code value extracted from VAT number - but only if the
+          VAT has been verified properly."
         type: string
       buyer_tax_number_valid:
-        description: If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant's country), tax number doesn't get validated in that case.
+        description: If the buyer tax number has been provided and was validated
+          successfully. Always true for domestic transactions (billing country
+          same as merchant's country), tax number doesn't get validated in that
+          case.
         type: boolean
       comments:
-        description: Additional information about the transaction - for example if the evidence has been amended.
+        description: Additional information about the transaction - for example if the
+          evidence has been amended.
         type: string
       confirm_timestamp:
         description: Date and time of transaction confirmation.
         type: string
       countries:
         $ref: "#/definitions/countries"
-        description: Map of countries calculated from evidence provided. This value is not stored and is available only upon tax calculation.
+        description: Map of countries calculated from evidence provided. This value is
+          not stored and is available only upon tax calculation.
       create_timestamp:
         description: Date and time of transaction creation.
         type: string
@@ -2800,7 +3002,8 @@ definitions:
         description: Custom data related to transaction.
         type: string
       custom_fields:
-        description: Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers.
+        description: Custom fields, stored as key-value pairs. This property is not
+          processed and used mostly with Taxamo-built helpers.
         items:
           $ref: "#/definitions/custom_fields"
         type: array
@@ -2823,7 +3026,8 @@ definitions:
         description: Transaction external key
         type: string
       force_country_code:
-        description: Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation.
+        description: Two-letter ISO country code, e.g. FR. Use it to force country code
+          for tax calculation.
         type: string
       fully_informative:
         description: Set to true if transaction has only informative lines.
@@ -2850,16 +3054,28 @@ definitions:
         description: "Transaction kind: eu-b2c, eu-b2b, domestic, untaxed"
         type: string
       manual:
-        description: Is the transaction created manually - using private token. In manual mode, it is the merchant who calculates tax country and validates evidence. If you need API to do that when accessing the API with private token, just skip the 'manual' flag or use false value there and provide customer's ip address through buyer_ip field. Manual mode is also used when using original_transaction_key field.
+        description: Is the transaction created manually - using private token. In
+          manual mode, it is the merchant who calculates tax country and
+          validates evidence. If you need API to do that when accessing the API
+          with private token, just skip the 'manual' flag or use false value
+          there and provide customer's ip address through buyer_ip field. Manual
+          mode is also used when using original_transaction_key field.
         type: boolean
       note:
-        description: Additional note related to transaction state - for example if the transaction was created in a 'catch-all' mode or the VAT number re-check for subscriptions has failed.
+        description: Additional note related to transaction state - for example if the
+          transaction was created in a 'catch-all' mode or the VAT number
+          re-check for subscriptions has failed.
         type: string
       order_date:
-        description: Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.
+        description: Order date in yyyy-MM-dd format, in merchant's timezone. If
+          provided by the API caller, no timezone conversion is performed.
+          Default value is current date and time. When using public token, the
+          default value is used.
         type: string
       original_transaction_key:
-        description: Use data and evidence from original transaction. Tax will be re-calculated, but evidence won't be re-checked. This parameter is taken into account only when 'manual' flag is raised.
+        description: Use data and evidence from original transaction. Tax will be
+          re-calculated, but evidence won't be re-checked. This parameter is
+          taken into account only when 'manual' flag is raised.
         type: string
       refunded_tax_amount:
         description: Refunded tax amount.
@@ -2871,7 +3087,10 @@ definitions:
         description: Transaction source software - e.g. plugin
         type: string
       status:
-        description: "Transaction status: 'N' - new, 'C' - confirmed. Can use 'C' in store-transaction! with private-token to create confirmed transaction, otherwise 'N' is default status. Not applicable for update-transaction!."
+        description: "Transaction status: 'N' - new, 'C' - confirmed. Can use 'C' in
+          store-transaction! with private-token to create confirmed transaction,
+          otherwise 'N' is default status. Not applicable for
+          update-transaction!."
         type: string
       sub_account_id:
         description: Sub account identifier.
@@ -2883,19 +3102,25 @@ definitions:
         description: Tax amount of transaction.
         type: number
       tax_country_code:
-        description: Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode.
+        description: Two-letter ISO country code, e.g. FR. This code applies to
+          detected/set country for transaction, but can be set using manual
+          mode.
         type: string
       tax_data:
         $ref: "#/definitions/tax_data_schema"
-        description: Tax additional information - e.g. US sales tax exemption certificate data.
+        description: Tax additional information - e.g. US sales tax exemption
+          certificate data.
       tax_deducted:
-        description: If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.
+        description: If the transaction is in a country supported by Taxamo, but the tax
+          is not calculated due to merchant settings or EU B2B transaction for
+          example.
         type: boolean
       tax_entity_name:
         description: To which entity is the tax due.
         type: string
       tax_number_service:
-        description: Tax number service identifier - if available for a given region and the region is enabled.
+        description: Tax number service identifier - if available for a given region and
+          the region is enabled.
         type: string
       tax_supported:
         description: Is tax calculation supported for a detected tax location?
@@ -2925,12 +3150,15 @@ definitions:
     properties:
       additional_currencies:
         $ref: "#/definitions/additional_currencies"
-        description: Additional currency information - can be used to receive additional information about invoice in another currency.
+        description: Additional currency information - can be used to receive additional
+          information about invoice in another currency.
       amount:
-        description: Amount. Required if total amount or both unit price and quantity are not provided.
+        description: Amount. Required if total amount or both unit price and quantity
+          are not provided.
         type: number
       custom_fields:
-        description: Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers.
+        description: Custom fields, stored as key-value pairs. This property is not
+          processed and used mostly with Taxamo-built helpers.
         items:
           $ref: "#/definitions/custom_fields"
         type: array
@@ -2950,7 +3178,9 @@ definitions:
         description: Generated id.
         type: number
       informative:
-        description: If the line is provided for informative purposes. Such line must have :tax-rate and optionally :tax-name - if not, API validation will fail for this line.
+        description: If the line is provided for informative purposes. Such line must
+          have :tax-rate and optionally :tax-name - if not, API validation will
+          fail for this line.
         type: boolean
       line_key:
         description: Generated line key.
@@ -2980,13 +3210,16 @@ definitions:
         description: Tax amount, calculated by taxamo.
         type: number
       tax_name:
-        description: Tax name, calculated by taxamo.  Can be overwritten when informative field is true.
+        description: Tax name, calculated by taxamo.  Can be overwritten when
+          informative field is true.
         type: string
       tax_rate:
-        description: Tax rate, calculated by taxamo. Must be provided when informative field is true.
+        description: Tax rate, calculated by taxamo. Must be provided when informative
+          field is true.
         type: number
       total_amount:
-        description: Total amount. Required if amount or both unit price and quantity are not provided.
+        description: Total amount. Required if amount or both unit price and quantity
+          are not provided.
         type: number
       unit_of_measure:
         description: Unit of measure.
@@ -3001,7 +3234,8 @@ definitions:
     properties:
       additional_currencies:
         $ref: "#/definitions/additional_currencies"
-        description: Additional currency information - can be used to receive additional information about invoice in another currency.
+        description: Additional currency information - can be used to receive additional
+          information about invoice in another currency.
       amount:
         description: Amount of transaction without tax.
         type: number
@@ -3021,20 +3255,30 @@ definitions:
         description: Buyer's name - first name and last name or company name.
         type: string
       buyer_tax_number:
-        description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        description: " Buyer's tax number - EU VAT number for example. If using EU VAT
+          number, it is possible to provide country code in it (e.g. IE1234567X)
+          or simply use billing_country_code field for that. In the first case,
+          if billing_country_code value was provided, it will be overwritten
+          with country code value extracted from VAT number - but only if the
+          VAT has been verified properly."
         type: string
       buyer_tax_number_valid:
-        description: If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant's country), tax number doesn't get validated in that case.
+        description: If the buyer tax number has been provided and was validated
+          successfully. Always true for domestic transactions (billing country
+          same as merchant's country), tax number doesn't get validated in that
+          case.
         type: boolean
       comments:
-        description: Additional information about the transaction - for example if the evidence has been amended.
+        description: Additional information about the transaction - for example if the
+          evidence has been amended.
         type: string
       confirm_timestamp:
         description: Date and time of transaction confirmation.
         type: string
       countries:
         $ref: "#/definitions/countries"
-        description: Map of countries calculated from evidence provided. This value is not stored and is available only upon tax calculation.
+        description: Map of countries calculated from evidence provided. This value is
+          not stored and is available only upon tax calculation.
       create_timestamp:
         description: Date and time of transaction creation.
         type: string
@@ -3045,7 +3289,8 @@ definitions:
         description: Custom data related to transaction.
         type: string
       custom_fields:
-        description: Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers.
+        description: Custom fields, stored as key-value pairs. This property is not
+          processed and used mostly with Taxamo-built helpers.
         items:
           $ref: "#/definitions/custom_fields"
         type: array
@@ -3068,7 +3313,8 @@ definitions:
         description: Transaction external key
         type: string
       force_country_code:
-        description: Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation.
+        description: Two-letter ISO country code, e.g. FR. Use it to force country code
+          for tax calculation.
         type: string
       fully_informative:
         description: Set to true if transaction has only informative lines.
@@ -3095,16 +3341,28 @@ definitions:
         description: "Transaction kind: eu-b2c, eu-b2b, domestic, untaxed"
         type: string
       manual:
-        description: Is the transaction created manually - using private token. In manual mode, it is the merchant who calculates tax country and validates evidence. If you need API to do that when accessing the API with private token, just skip the 'manual' flag or use false value there and provide customer's ip address through buyer_ip field. Manual mode is also used when using original_transaction_key field.
+        description: Is the transaction created manually - using private token. In
+          manual mode, it is the merchant who calculates tax country and
+          validates evidence. If you need API to do that when accessing the API
+          with private token, just skip the 'manual' flag or use false value
+          there and provide customer's ip address through buyer_ip field. Manual
+          mode is also used when using original_transaction_key field.
         type: boolean
       note:
-        description: Additional note related to transaction state - for example if the transaction was created in a 'catch-all' mode or the VAT number re-check for subscriptions has failed.
+        description: Additional note related to transaction state - for example if the
+          transaction was created in a 'catch-all' mode or the VAT number
+          re-check for subscriptions has failed.
         type: string
       order_date:
-        description: Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.
+        description: Order date in yyyy-MM-dd format, in merchant's timezone. If
+          provided by the API caller, no timezone conversion is performed.
+          Default value is current date and time. When using public token, the
+          default value is used.
         type: string
       original_transaction_key:
-        description: Use data and evidence from original transaction. Tax will be re-calculated, but evidence won't be re-checked. This parameter is taken into account only when 'manual' flag is raised.
+        description: Use data and evidence from original transaction. Tax will be
+          re-calculated, but evidence won't be re-checked. This parameter is
+          taken into account only when 'manual' flag is raised.
         type: string
       refunded_tax_amount:
         description: Refunded tax amount.
@@ -3116,7 +3374,10 @@ definitions:
         description: Transaction source software - e.g. plugin
         type: string
       status:
-        description: "Transaction status: 'N' - new, 'C' - confirmed. Can use 'C' in store-transaction! with private-token to create confirmed transaction, otherwise 'N' is default status. Not applicable for update-transaction!."
+        description: "Transaction status: 'N' - new, 'C' - confirmed. Can use 'C' in
+          store-transaction! with private-token to create confirmed transaction,
+          otherwise 'N' is default status. Not applicable for
+          update-transaction!."
         type: string
       sub_account_id:
         description: Sub account identifier.
@@ -3128,19 +3389,25 @@ definitions:
         description: Tax amount of transaction.
         type: number
       tax_country_code:
-        description: Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode.
+        description: Two-letter ISO country code, e.g. FR. This code applies to
+          detected/set country for transaction, but can be set using manual
+          mode.
         type: string
       tax_data:
         $ref: "#/definitions/tax_data_schema"
-        description: Tax additional information - e.g. US sales tax exemption certificate data.
+        description: Tax additional information - e.g. US sales tax exemption
+          certificate data.
       tax_deducted:
-        description: If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.
+        description: If the transaction is in a country supported by Taxamo, but the tax
+          is not calculated due to merchant settings or EU B2B transaction for
+          example.
         type: boolean
       tax_entity_name:
         description: To which entity is the tax due.
         type: string
       tax_number_service:
-        description: Tax number service identifier - if available for a given region and the region is enabled.
+        description: Tax number service identifier - if available for a given region and
+          the region is enabled.
         type: string
       tax_supported:
         description: Is tax calculation supported for a detected tax location?
@@ -3175,12 +3442,14 @@ definitions:
   unconfirmTransactionOut:
     properties:
       storage_required_fields:
-        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
+        description: Fields required for transaction storage (can be added later - it's
+          up to merchant software). Depends on the region/transaction type.
         items:
           $ref: "#/definitions/storage_required_fields"
         type: array
       tax_required_fields:
-        description: Fields required for tax calculation. Depends on the region/transaction type.
+        description: Fields required for tax calculation. Depends on the
+          region/transaction type.
         items:
           $ref: "#/definitions/tax_required_fields"
         type: array
@@ -3197,12 +3466,14 @@ definitions:
   updateTransactionOut:
     properties:
       storage_required_fields:
-        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
+        description: Fields required for transaction storage (can be added later - it's
+          up to merchant software). Depends on the region/transaction type.
         items:
           $ref: "#/definitions/storage_required_fields"
         type: array
       tax_required_fields:
-        description: Fields required for tax calculation. Depends on the region/transaction type.
+        description: Fields required for tax calculation. Depends on the
+          region/transaction type.
         items:
           $ref: "#/definitions/tax_required_fields"
         type: array
@@ -3324,13 +3595,23 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_tax_number:
-        description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        description: " Buyer's tax number - EU VAT number for example. If using EU VAT
+          number, it is possible to provide country code in it (e.g. IE1234567X)
+          or simply use billing_country_code field for that. In the first case,
+          if billing_country_code value was provided, it will be overwritten
+          with country code value extracted from VAT number - but only if the
+          VAT has been verified properly."
         type: string
       buyer_tax_number_valid:
-        description: If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant's country), tax number doesn't get validated in that case.
+        description: If the buyer tax number has been provided and was validated
+          successfully. Always true for domestic transactions (billing country
+          same as merchant's country), tax number doesn't get validated in that
+          case.
         type: boolean
       tax_deducted:
-        description: If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.
+        description: If the transaction is in a country supported by Taxamo, but the tax
+          is not calculated due to merchant settings or EU B2B transaction for
+          example.
         type: boolean
     type: object
   verifySMSTokenOut:

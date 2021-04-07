@@ -254,19 +254,19 @@ info:
 security:
   - JSONWebTokenAuth: []
 tags:
-  - description: >
+  - description: |
       <SchemaDefinition schemaRef="#/components/schemas/Template" />
     name: template_model
     x-displayName: Template
-  - description: >
+  - description: |
       <SchemaDefinition schemaRef="#/components/schemas/TemplateDefinition" />
     name: template_definition
     x-displayName: Template Definition
-  - description: >
+  - description: |
       <SchemaDefinition schemaRef="#/components/schemas/Component" />
     name: component_model
     x-displayName: Component
-  - description: >
+  - description: |
       <SchemaDefinition schemaRef="#/components/schemas/Workspace" />
     name: workspace_model
     x-displayName: Workspace
@@ -293,17 +293,15 @@ paths:
         - Templates
       x-code-samples:
         - lang: Shell + Curl
-          source: >-
+          source: |-
             curl --request GET \
               --url https://us1.pdfgeneratorapi.com/api/v3/templates \
               --header 'authorization: Bearer REPLACE_BEARER_TOKEN'
         - lang: Php + Curl
-          source: >-
+          source: |-
             <?php
 
-
             $curl = curl_init();
-
 
             curl_setopt_array($curl, array(
               CURLOPT_URL => "https://us1.pdfgeneratorapi.com/api/v3/templates",
@@ -318,14 +316,10 @@ paths:
               ),
             ));
 
-
             $response = curl_exec($curl);
-
             $err = curl_error($curl);
 
-
             curl_close($curl);
-
 
             if ($err) {
               echo "cURL Error #:" . $err;
@@ -334,7 +328,8 @@ paths:
             }
         - lang: Csharp + Restsharp
           source: >-
-            var client = new RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates");
+            var client = new
+            RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates");
 
             var request = new RestRequest(Method.GET);
 
@@ -343,13 +338,13 @@ paths:
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
           source: >-
-            HttpResponse<String> response = Unirest.get("https://us1.pdfgeneratorapi.com/api/v3/templates")
+            HttpResponse<String> response =
+            Unirest.get("https://us1.pdfgeneratorapi.com/api/v3/templates")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
               .asString();
         - lang: Node + Native
-          source: >-
+          source: |-
             var http = require("https");
-
 
             var options = {
               "method": "GET",
@@ -360,7 +355,6 @@ paths:
                 "authorization": "Bearer REPLACE_BEARER_TOKEN"
               }
             };
-
 
             var req = http.request(options, function (res) {
               var chunks = [];
@@ -375,57 +369,43 @@ paths:
               });
             });
 
-
             req.end();
         - lang: Python + Python3
-          source: >-
+          source: |-
             import http.client
-
 
             conn = http.client.HTTPSConnection("us1.pdfgeneratorapi.com")
 
-
             headers = { 'authorization': "Bearer REPLACE_BEARER_TOKEN" }
-
 
             conn.request("GET", "/api/v3/templates", headers=headers)
 
-
             res = conn.getresponse()
-
             data = res.read()
-
 
             print(data.decode("utf-8"))
         - lang: Ruby + Native
-          source: >-
+          source: |-
             require 'uri'
-
             require 'net/http'
-
             require 'openssl'
-
 
             url = URI("https://us1.pdfgeneratorapi.com/api/v3/templates")
 
-
             http = Net::HTTP.new(url.host, url.port)
-
             http.use_ssl = true
-
             http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-
             request = Net::HTTP::Get.new(url)
-
             request["authorization"] = 'Bearer REPLACE_BEARER_TOKEN'
 
-
             response = http.request(request)
-
             puts response.read_body
     post:
-      description: Creates a new template. If template configuration is not specified in the request body then an empty template is created. Template is placed to the workspace specified in authentication params. Template configuration must be sent in the request body.
+      description: Creates a new template. If template configuration is not specified
+        in the request body then an empty template is created. Template is
+        placed to the workspace specified in authentication params. Template
+        configuration must be sent in the request body.
       operationId: createTemplate
       requestBody:
         content:
@@ -497,7 +477,8 @@ paths:
             }
         - lang: Csharp + Restsharp
           source: >-
-            var client = new RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates");
+            var client = new
+            RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates");
 
             var request = new RestRequest(Method.POST);
 
@@ -510,15 +491,15 @@ paths:
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
           source: >-
-            HttpResponse<String> response = Unirest.post("https://us1.pdfgeneratorapi.com/api/v3/templates")
+            HttpResponse<String> response =
+            Unirest.post("https://us1.pdfgeneratorapi.com/api/v3/templates")
               .header("content-type", "application/json")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
               .body("{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"rotaion\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}")
               .asString();
         - lang: Node + Native
-          source: >-
+          source: |-
             var http = require("https");
-
 
             var options = {
               "method": "POST",
@@ -530,7 +511,6 @@ paths:
                 "authorization": "Bearer REPLACE_BEARER_TOKEN"
               }
             };
-
 
             var req = http.request(options, function (res) {
               var chunks = [];
@@ -544,7 +524,6 @@ paths:
                 console.log(body.toString());
               });
             });
-
 
             req.write(JSON.stringify({
               name: 'Invoice template',
@@ -582,7 +561,6 @@ paths:
                 }
               ]
             }));
-
             req.end();
         - lang: Python + Python3
           source: >-
@@ -642,7 +620,8 @@ paths:
             puts response.read_body
   /templates/output:
     post:
-      description: Allows to merge multiples template with data and returns base64 encoded document or public url to a document.
+      description: Allows to merge multiples template with data and returns base64
+        encoded document or public url to a document.
       operationId: mergeTemplates
       parameters:
         - $ref: "#/components/parameters/doc_name"
@@ -653,7 +632,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchData"
-        description: Data used to specify templates and data objects which are used to merge the template
+        description: Data used to specify templates and data objects which are used to
+          merge the template
         required: true
       responses:
         "200":
@@ -718,7 +698,8 @@ paths:
             }
         - lang: Csharp + Restsharp
           source: >-
-            var client = new RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/output?name=My%20document&format=pdf&output=base64");
+            var client = new
+            RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/output?name=My%20document&format=pdf&output=base64");
 
             var request = new RestRequest(Method.POST);
 
@@ -731,7 +712,8 @@ paths:
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
           source: >-
-            HttpResponse<String> response = Unirest.post("https://us1.pdfgeneratorapi.com/api/v3/templates/output?name=My%20document&format=pdf&output=base64")
+            HttpResponse<String> response =
+            Unirest.post("https://us1.pdfgeneratorapi.com/api/v3/templates/output?name=My%20document&format=pdf&output=base64")
               .header("content-type", "application/json")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
               .body("[{\"template\":52272,\"data\":{\"key\":\"value\"}},{\"template\":52273,\"data\":{\"key2\":\"value2\"}}]")
@@ -894,7 +876,8 @@ paths:
             }
         - lang: Csharp + Restsharp
           source: >-
-            var client = new RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D");
+            var client = new
+            RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D");
 
             var request = new RestRequest(Method.DELETE);
 
@@ -903,13 +886,13 @@ paths:
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
           source: >-
-            HttpResponse<String> response = Unirest.delete("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D")
+            HttpResponse<String> response =
+            Unirest.delete("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
               .asString();
         - lang: Node + Native
-          source: >-
+          source: |-
             var http = require("https");
-
 
             var options = {
               "method": "DELETE",
@@ -920,7 +903,6 @@ paths:
                 "authorization": "Bearer REPLACE_BEARER_TOKEN"
               }
             };
-
 
             var req = http.request(options, function (res) {
               var chunks = [];
@@ -934,7 +916,6 @@ paths:
                 console.log(body.toString());
               });
             });
-
 
             req.end();
         - lang: Python + Python3
@@ -1048,7 +1029,8 @@ paths:
             }
         - lang: Csharp + Restsharp
           source: >-
-            var client = new RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D");
+            var client = new
+            RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D");
 
             var request = new RestRequest(Method.GET);
 
@@ -1057,13 +1039,13 @@ paths:
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
           source: >-
-            HttpResponse<String> response = Unirest.get("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D")
+            HttpResponse<String> response =
+            Unirest.get("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
               .asString();
         - lang: Node + Native
-          source: >-
+          source: |-
             var http = require("https");
-
 
             var options = {
               "method": "GET",
@@ -1074,7 +1056,6 @@ paths:
                 "authorization": "Bearer REPLACE_BEARER_TOKEN"
               }
             };
-
 
             var req = http.request(options, function (res) {
               var chunks = [];
@@ -1088,7 +1069,6 @@ paths:
                 console.log(body.toString());
               });
             });
-
 
             req.end();
         - lang: Python + Python3
@@ -1139,7 +1119,9 @@ paths:
 
             puts response.read_body
     put:
-      description: Updates template configuration. The template configuration for pages and layout must be complete as the entire configuration is replaced and not merged.
+      description: Updates template configuration. The template configuration for
+        pages and layout must be complete as the entire configuration is
+        replaced and not merged.
       operationId: updateTemplate
       parameters:
         - $ref: "#/components/parameters/templateId"
@@ -1213,7 +1195,8 @@ paths:
             }
         - lang: Csharp + Restsharp
           source: >-
-            var client = new RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D");
+            var client = new
+            RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D");
 
             var request = new RestRequest(Method.PUT);
 
@@ -1226,15 +1209,15 @@ paths:
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
           source: >-
-            HttpResponse<String> response = Unirest.put("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D")
+            HttpResponse<String> response =
+            Unirest.put("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D")
               .header("content-type", "application/json")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
               .body("{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"rotaion\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}")
               .asString();
         - lang: Node + Native
-          source: >-
+          source: |-
             var http = require("https");
-
 
             var options = {
               "method": "PUT",
@@ -1246,7 +1229,6 @@ paths:
                 "authorization": "Bearer REPLACE_BEARER_TOKEN"
               }
             };
-
 
             var req = http.request(options, function (res) {
               var chunks = [];
@@ -1260,7 +1242,6 @@ paths:
                 console.log(body.toString());
               });
             });
-
 
             req.write(JSON.stringify({
               name: 'Invoice template',
@@ -1298,7 +1279,6 @@ paths:
                 }
               ]
             }));
-
             req.end();
         - lang: Python + Python3
           source: >-
@@ -1358,11 +1338,13 @@ paths:
             puts response.read_body
   "/templates/{templateId}/copy":
     post:
-      description: Creates a copy of a template to the workspace specified in authentication parameters.
+      description: Creates a copy of a template to the workspace specified in
+        authentication parameters.
       operationId: copyTemplate
       parameters:
         - $ref: "#/components/parameters/templateId"
-        - description: Name for the copied template. If name is not specified then the original name is used.
+        - description: Name for the copied template. If name is not specified then the
+            original name is used.
           example: My copied template
           in: query
           name: name
@@ -1428,7 +1410,8 @@ paths:
             }
         - lang: Csharp + Restsharp
           source: >-
-            var client = new RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D/copy?name=SOME_STRING_VALUE");
+            var client = new
+            RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D/copy?name=SOME_STRING_VALUE");
 
             var request = new RestRequest(Method.POST);
 
@@ -1437,7 +1420,8 @@ paths:
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
           source: >-
-            HttpResponse<String> response = Unirest.post("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D/copy?name=SOME_STRING_VALUE")
+            HttpResponse<String> response =
+            Unirest.post("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D/copy?name=SOME_STRING_VALUE")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
               .asString();
         - lang: Node + Native
@@ -1521,11 +1505,14 @@ paths:
   "/templates/{templateId}/editor":
     post:
       description: >
-        Returns an unique URL which you can use to redirect your user to the editor form your application or use the generated URL as iframe source to show the editor within your application.
+        Returns an unique URL which you can use to redirect your user to
+        the editor form your application or use the generated URL as iframe
+        source to show the editor within your application.
       operationId: getEditorUrl
       parameters:
         - $ref: "#/components/parameters/templateId"
-        - description: Specify the editor UI language. Defaults to organization editor language.
+        - description: Specify the editor UI language. Defaults to organization editor
+            language.
           example: en
           in: query
           name: language
@@ -1546,7 +1533,8 @@ paths:
                 id: 12312
                 name: Sample Data
               type: object
-        description: Data used to generate the PDF. This can be JSON encoded string or a public URL to your JSON file.
+        description: Data used to generate the PDF. This can be JSON encoded string or a
+          public URL to your JSON file.
         required: true
       responses:
         "200":
@@ -1611,7 +1599,8 @@ paths:
             }
         - lang: Csharp + Restsharp
           source: >-
-            var client = new RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D/editor?language=SOME_STRING_VALUE");
+            var client = new
+            RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D/editor?language=SOME_STRING_VALUE");
 
             var request = new RestRequest(Method.POST);
 
@@ -1624,7 +1613,8 @@ paths:
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
           source: >-
-            HttpResponse<String> response = Unirest.post("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D/editor?language=SOME_STRING_VALUE")
+            HttpResponse<String> response =
+            Unirest.post("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D/editor?language=SOME_STRING_VALUE")
               .header("content-type", "application/json")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
               .body("{\"id\":12312,\"name\":\"Sample Data\"}")
@@ -1721,7 +1711,9 @@ paths:
             puts response.read_body
   "/templates/{templateId}/output":
     post:
-      description: Merges template with data and returns base64 encoded document or a public URL to a document. You can send json encoded data in request body or a public URL to your json file as the data parameter.
+      description: Merges template with data and returns base64 encoded document or a
+        public URL to a document. You can send json encoded data in request body
+        or a public URL to your json file as the data parameter.
       operationId: mergeTemplate
       parameters:
         - $ref: "#/components/parameters/templateId"
@@ -1733,7 +1725,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Data"
-        description: Data used to generate the PDF. This can be JSON encoded string or a public URL to your JSON file.
+        description: Data used to generate the PDF. This can be JSON encoded string or a
+          public URL to your JSON file.
         required: true
       responses:
         "200":
@@ -1798,7 +1791,8 @@ paths:
             }
         - lang: Csharp + Restsharp
           source: >-
-            var client = new RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D/output?name=My%20document&format=pdf&output=base64");
+            var client = new
+            RestClient("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D/output?name=My%20document&format=pdf&output=base64");
 
             var request = new RestRequest(Method.POST);
 
@@ -1811,7 +1805,8 @@ paths:
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
           source: >-
-            HttpResponse<String> response = Unirest.post("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D/output?name=My%20document&format=pdf&output=base64")
+            HttpResponse<String> response =
+            Unirest.post("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D/output?name=My%20document&format=pdf&output=base64")
               .header("content-type", "application/json")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
               .body("{\"id\":12312,\"name\":\"Sample Data\"}")
@@ -1971,7 +1966,8 @@ paths:
             }
         - lang: Csharp + Restsharp
           source: >-
-            var client = new RestClient("https://us1.pdfgeneratorapi.com/api/v3/workspaces/%7BworkspaceId%7D");
+            var client = new
+            RestClient("https://us1.pdfgeneratorapi.com/api/v3/workspaces/%7BworkspaceId%7D");
 
             var request = new RestRequest(Method.DELETE);
 
@@ -1980,13 +1976,13 @@ paths:
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
           source: >-
-            HttpResponse<String> response = Unirest.delete("https://us1.pdfgeneratorapi.com/api/v3/workspaces/%7BworkspaceId%7D")
+            HttpResponse<String> response =
+            Unirest.delete("https://us1.pdfgeneratorapi.com/api/v3/workspaces/%7BworkspaceId%7D")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
               .asString();
         - lang: Node + Native
-          source: >-
+          source: |-
             var http = require("https");
-
 
             var options = {
               "method": "DELETE",
@@ -1997,7 +1993,6 @@ paths:
                 "authorization": "Bearer REPLACE_BEARER_TOKEN"
               }
             };
-
 
             var req = http.request(options, function (res) {
               var chunks = [];
@@ -2011,7 +2006,6 @@ paths:
                 console.log(body.toString());
               });
             });
-
 
             req.end();
         - lang: Python + Python3
@@ -2125,7 +2119,8 @@ paths:
             }
         - lang: Csharp + Restsharp
           source: >-
-            var client = new RestClient("https://us1.pdfgeneratorapi.com/api/v3/workspaces/%7BworkspaceId%7D");
+            var client = new
+            RestClient("https://us1.pdfgeneratorapi.com/api/v3/workspaces/%7BworkspaceId%7D");
 
             var request = new RestRequest(Method.GET);
 
@@ -2134,13 +2129,13 @@ paths:
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
           source: >-
-            HttpResponse<String> response = Unirest.get("https://us1.pdfgeneratorapi.com/api/v3/workspaces/%7BworkspaceId%7D")
+            HttpResponse<String> response =
+            Unirest.get("https://us1.pdfgeneratorapi.com/api/v3/workspaces/%7BworkspaceId%7D")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
               .asString();
         - lang: Node + Native
-          source: >-
+          source: |-
             var http = require("https");
-
 
             var options = {
               "method": "GET",
@@ -2151,7 +2146,6 @@ paths:
                 "authorization": "Bearer REPLACE_BEARER_TOKEN"
               }
             };
-
 
             var req = http.request(options, function (res) {
               var chunks = [];
@@ -2165,7 +2159,6 @@ paths:
                 console.log(body.toString());
               });
             });
-
 
             req.end();
         - lang: Python + Python3
@@ -2286,12 +2279,14 @@ components:
                     example: base64
                     type: string
                   name:
-                    description: Document name. This value is automatically generated if name attribute is not defined in request.
+                    description: Document name. This value is automatically generated if name
+                      attribute is not defined in request.
                     example: a2bd25b8921f3dc7a440fd7f427f90a4.pdf
                     type: string
                 type: object
               response:
-                description: Base64 encoded document if the output=base64 is used or URL to the document when the output=url is used.
+                description: Base64 encoded document if the output=base64 is used or URL to the
+                  document when the output=url is used.
                 example: JVBERi0xLjcKJeLjz9MKNyAwIG9iago8PCAvVHlwZSA...
                 type: string
             type: object
@@ -2305,7 +2300,8 @@ components:
                 example: https://us1.pdfgeneratorapi.com/editor/open/2ff98760d39456c4b2cf974fef005ecf
                 type: string
             type: object
-      description: Returns an URL which you can use to redirect your user to the editor or use as iframe source
+      description: Returns an URL which you can use to redirect your user to the
+        editor or use as iframe source
     error401:
       content:
         application/json:
@@ -2474,7 +2470,8 @@ components:
           example: labelComponent
           type: string
         dataIndex:
-          description: Defines data field for Table and Container components which are used to iterate over list of items
+          description: Defines data field for Table and Container components which are
+            used to iterate over list of items
           example: line_items
           type: string
         height:
@@ -2502,7 +2499,8 @@ components:
           example: 3.5
           type: number
         zindex:
-          description: Defines the rendering order on page. Components with smaller zindex are rendered before
+          description: Defines the rendering order on page. Components with smaller zindex
+            are rendered before
           example: 102
           type: integer
       type: object
@@ -2615,7 +2613,8 @@ components:
               example: portrait
               type: string
             repeatLayout:
-              description: Defines page size if layout is repeated on the page e.g sheet labels
+              description: Defines page size if layout is repeated on the page e.g sheet
+                labels
               nullable: true
               properties:
                 format:
@@ -2748,7 +2747,8 @@ components:
               example: portrait
               type: string
             repeatLayout:
-              description: Defines page size if layout is repeated on the page e.g sheet labels
+              description: Defines page size if layout is repeated on the page e.g sheet
+                labels
               nullable: true
               properties:
                 format:
@@ -2855,7 +2855,13 @@ components:
     JSONWebTokenAuth:
       bearerFormat: JWT
       description: >
-        JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. JWTs can be signed using a secret (with the HMAC algorithm) or a public/private key pair using RSA or ECDSA. For more information about JSON Web Tokens check [jwt.io](https://jwt.io).
+        JSON Web Token (JWT) is an open standard (RFC 7519) that defines a
+        compact and self-contained way for securely transmitting information
+        between parties as a JSON object. This information can be verified and
+        trusted because it is digitally signed. JWTs can be signed using a
+        secret (with the HMAC algorithm) or a public/private key pair using RSA
+        or ECDSA. For more information about JSON Web Tokens check
+        [jwt.io](https://jwt.io).
       scheme: bearer
       type: http
 x-tagGroups:

@@ -36,7 +36,9 @@ paths:
       description: ""
       operationId: getFlightOffers
       parameters:
-        - description: city/airport [IATA code](http://www.iata.org/publications/Pages/code-search.aspx) from which the traveler will depart, e.g. BOS for Boston
+        - description: city/airport [IATA
+            code](http://www.iata.org/publications/Pages/code-search.aspx) from
+            which the traveler will depart, e.g. BOS for Boston
           example: SYD
           in: query
           name: originLocationCode
@@ -44,7 +46,9 @@ paths:
           schema:
             pattern: "[A-Z]{3}"
             type: string
-        - description: city/airport [IATA code](http://www.iata.org/publications/Pages/code-search.aspx) to which the traveler is going, e.g. PAR for Paris
+        - description: city/airport [IATA
+            code](http://www.iata.org/publications/Pages/code-search.aspx) to
+            which the traveler is going, e.g. PAR for Paris
           example: BKK
           in: query
           name: destinationLocationCode
@@ -52,7 +56,10 @@ paths:
           schema:
             pattern: "[A-Z]{3}"
             type: string
-        - description: the date on which the traveler will depart from the origin to go to the destination. Dates are specified in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) YYYY-MM-DD format, e.g. 2017-12-25
+        - description: the date on which the traveler will depart from the origin to go to
+            the destination. Dates are specified in the [ISO
+            8601](https://en.wikipedia.org/wiki/ISO_8601) YYYY-MM-DD format,
+            e.g. 2017-12-25
           example: 2021-02-01
           in: query
           name: departureDate
@@ -60,7 +67,12 @@ paths:
           schema:
             format: date
             type: string
-        - description: the date on which the traveler will depart from the destination to return to the origin. If this parameter is not specified, only one-way itineraries are found. If this parameter is specified, only round-trip itineraries are found. Dates are specified in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) YYYY-MM-DD format, e.g. 2018-02-28
+        - description: the date on which the traveler will depart from the destination to
+            return to the origin. If this parameter is not specified, only
+            one-way itineraries are found. If this parameter is specified, only
+            round-trip itineraries are found. Dates are specified in the [ISO
+            8601](https://en.wikipedia.org/wiki/ISO_8601) YYYY-MM-DD format,
+            e.g. 2018-02-28
           in: query
           name: returnDate
           required: false
@@ -76,7 +88,9 @@ paths:
             maximum: 9
             minimum: 1
             type: integer
-        - description: the number of child travelers (older than age 2 and younger than age 12 on date of departure) who will each have their own separate seat. If specified, this number should be greater than or equal to 0
+        - description: the number of child travelers (older than age 2 and younger than
+            age 12 on date of departure) who will each have their own separate
+            seat. If specified, this number should be greater than or equal to 0
           in: query
           name: children
           required: false
@@ -84,7 +98,10 @@ paths:
             maximum: 9
             minimum: 0
             type: integer
-        - description: the number of infant travelers (whose age is less or equal to 2 on date of departure). Infants travel on the lap of an adult traveler, and thus the number of infants must not exceed the number of adults. If specified, this number should be greater than or equal to 0
+        - description: the number of infant travelers (whose age is less or equal to 2 on
+            date of departure). Infants travel on the lap of an adult traveler,
+            and thus the number of infants must not exceed the number of adults.
+            If specified, this number should be greater than or equal to 0
           in: query
           name: infants
           required: false
@@ -92,7 +109,10 @@ paths:
             maximum: 9
             minimum: 0
             type: integer
-        - description: most of the flight time should be spent in a cabin of this quality or higher. The accepted travel class is economy, premium economy, business or first class. If no travel class is specified, the search considers any travel class
+        - description: most of the flight time should be spent in a cabin of this quality
+            or higher. The accepted travel class is economy, premium economy,
+            business or first class. If no travel class is specified, the search
+            considers any travel class
           in: query
           name: travelClass
           required: false
@@ -104,7 +124,9 @@ paths:
               - FIRST
             type: string
         - description: >
-            This option ensures that the system will only consider these airlines. This can not be cumulated with parameter excludedAirlineCodes.
+            This option ensures that the system will only consider these
+            airlines. This can not be cumulated with parameter
+            excludedAirlineCodes.
 
 
             Airlines are specified as [IATA airline codes](http://www.iata.org/publications/Pages/code-search.aspx) and are comma-separated, e.g. 6X,7X,8X
@@ -117,7 +139,8 @@ paths:
             type: string
           style: form
         - description: >
-            This option ensures that the system will ignore these airlines. This can not be cumulated with parameter includedAirlineCodes.
+            This option ensures that the system will ignore these airlines.
+            This can not be cumulated with parameter includedAirlineCodes.
 
 
             Airlines are specified as [IATA airline codes](http://www.iata.org/publications/Pages/code-search.aspx) and are comma-separated, e.g. 6X,7X,8X
@@ -129,28 +152,33 @@ paths:
             pattern: "[0-9A-Z]{2}"
             type: string
           style: form
-        - description: if set to true, the search will find only flights going from the origin to the destination with no stop in between
+        - description: if set to true, the search will find only flights going from the
+            origin to the destination with no stop in between
           in: query
           name: nonStop
           required: false
           schema:
             default: false
             type: boolean
-        - description: the preferred currency for the flight offers. Currency is specified in the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format, e.g. EUR for Euro
+        - description: the preferred currency for the flight offers. Currency is specified
+            in the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format,
+            e.g. EUR for Euro
           in: query
           name: currencyCode
           required: false
           schema:
             pattern: "[A-Z]{3}"
             type: string
-        - description: maximum price per traveler. By default, no limit is applied. If specified, the value should be a positive number with no decimals
+        - description: maximum price per traveler. By default, no limit is applied. If
+            specified, the value should be a positive number with no decimals
           in: query
           name: maxPrice
           required: false
           schema:
             minimum: 1
             type: integer
-        - description: maximum number of flight offers to return. If specified, the value should be greater than or equal to 1
+        - description: maximum number of flight offers to return. If specified, the value
+            should be greater than or equal to 1
           in: query
           name: max
           required: false
@@ -212,21 +240,14 @@ components:
         application/vnd.amadeus+json:
           schema:
             $ref: "#/components/schemas/Error_400"
-      description: >
+      description: |
         code    | title                                 
-
         ------- | ------------------------------------- 
-
         425     | INVALID DATE
-
         477     | INVALID FORMAT
-
         2668    | PARAMETER COMBINATION INVALID/RESTRICTED
-
         4926    | INVALID DATA RECEIVED
-
         10661   | MAXIMUM NUMBER OF OCCURRENCES EXCEEDED 
-
         32171   | MANDATORY DATA MISSING
     GETAirOffersReply:
       content:
@@ -1088,7 +1109,8 @@ components:
       properties:
         code:
           description: >
-            IATA aircraft code (http://www.flugzeuginfo.net/table_accodes_iata_en.php)
+            IATA aircraft code
+            (http://www.flugzeuginfo.net/table_accodes_iata_en.php)
           example: "318"
           pattern: "[a-zA-Z0-9]{3}"
           type: string
@@ -1182,7 +1204,8 @@ components:
           title: CollectionLinks
       title: Collection_Meta
     Coverage:
-      description: part of the trip covered by the travel class restriction (ALL_SEGMENTS if ommited)
+      description: part of the trip covered by the travel class restriction
+        (ALL_SEGMENTS if ommited)
       enum:
         - MOST_SEGMENTS
         - AT_LEAST_ONE_SEGMENT
@@ -1202,13 +1225,18 @@ components:
     DateTimeRange:
       properties:
         date:
-          description: Dates are specified in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) YYYY-MM-DD format, e.g. 2018-12-25
+          description: Dates are specified in the [ISO
+            8601](https://en.wikipedia.org/wiki/ISO_8601) YYYY-MM-DD format,
+            e.g. 2018-12-25
           example: 2018-09-22
           format: date
           type: string
         dateWindow:
           description: >
-            Either 1, 2 or 3 extra days around the local date (IxD for +/- x days - Ex: I3D), Either 1 to 3 days after the local date (PxD for +x days - Ex: P3D), or 1 to 3 days before the local date (MxD for -x days - Ex: M3D)
+            Either 1, 2 or 3 extra days around the local date (IxD for +/- x
+            days - Ex: I3D), Either 1 to 3 days after the local date (PxD for +x
+            days - Ex: P3D), or 1 to 3 days before the local date (MxD for -x
+            days - Ex: M3D)
 
 
             Can not be combined with "originRadius" or "destinationRadius".
@@ -1221,7 +1249,10 @@ components:
           type: string
         timeWindow:
           description: >
-            1 to 12 hours around (both +and -) the local time. Possibly limited by the number of extra days when specified, i.e.  in some situations, it may not be used to exceed the maximum date range. [1-12]H format, e.g. 6H
+            1 to 12 hours around (both +and -) the local time. Possibly limited
+            by the number of extra days when specified, i.e.  in some
+            situations, it may not be used to exceed the maximum date range.
+            [1-12]H format, e.g. 6H
 
 
             Can not be combined with "originRadius" or "destinationRadius".
@@ -1298,15 +1329,19 @@ components:
               title: AdditionalServices
               type: array
             billingCurrency:
-              description: Currency of the payment. It may be different than the requested currency
+              description: Currency of the payment. It may be different than the requested
+                currency
               example: EUR
               type: string
             grandTotal:
-              description: Total amount paid by the user (including fees and selected additional services).
+              description: Total amount paid by the user (including fees and selected
+                additional services).
               example: "987.00"
               type: string
             margin:
-              description: BOOK step ONLY - The price margin percentage (plus or minus) that the booking can tolerate. When set to 0, then no price magin is tolerated.
+              description: BOOK step ONLY - The price margin percentage (plus or minus) that
+                the booking can tolerate. When set to 0, then no price magin is
+                tolerated.
               example: "1.00"
               type: string
           type: object
@@ -1335,7 +1370,9 @@ components:
         - $ref: "#/components/schemas/OriginalFlightEndPoint"
         - properties:
             at:
-              description: local date and time in [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) YYYY-MM-ddThh:mm:ss format, e.g. 2017-02-10T20:40:00
+              description: local date and time in
+                [ISO8601](https://en.wikipedia.org/wiki/ISO_8601)
+                YYYY-MM-ddThh:mm:ss format, e.g. 2017-02-10T20:40:00
               example: 2017-10-23T20:00:00
               format: date-time
               type: string
@@ -1345,7 +1382,8 @@ components:
     FlightOffer:
       properties:
         disablePricing:
-          description: BOOK step ONLY - If true, allows to book a PNR without pricing. Only for the source "GDS"
+          description: BOOK step ONLY - If true, allows to book a PNR without pricing.
+            Only for the source "GDS"
           example: false
           type: boolean
         id:
@@ -1360,7 +1398,8 @@ components:
           items:
             properties:
               duration:
-                description: duration in [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) PnYnMnDTnHnMnS format, e.g. PT2H10M for a duration of 2h10m
+                description: duration in [ISO8601](https://en.wikipedia.org/wiki/ISO_8601)
+                  PnYnMnDTnHnMnS format, e.g. PT2H10M for a duration of 2h10m
                 example: PT2H10M
                 type: string
               segments:
@@ -1378,21 +1417,30 @@ components:
           minItems: 1
           type: array
         lastTicketingDate:
-          description: If booked on the same day as the search (with respect to timezone), this flight offer is guaranteed to be thereafter valid for ticketing until this date (included). Unspecified when it does not make sense for this flight offer (e.g. no control over ticketing once booked). YYYY-MM-DD format, e.g. 2019-06-07
+          description: If booked on the same day as the search (with respect to timezone),
+            this flight offer is guaranteed to be thereafter valid for ticketing
+            until this date (included). Unspecified when it does not make sense
+            for this flight offer (e.g. no control over ticketing once booked).
+            YYYY-MM-DD format, e.g. 2019-06-07
           example: 2018-06-19T00:00:00.000Z
           type: string
         nonHomogeneous:
-          description: If true, upon completion of the booking, this pricing solution is expected to yield multiple records (a record contains booking information confirmed and stored, typically a Passenger Name Record (PNR), in the provider GDS or system)
+          description: If true, upon completion of the booking, this pricing solution is
+            expected to yield multiple records (a record contains booking
+            information confirmed and stored, typically a Passenger Name Record
+            (PNR), in the provider GDS or system)
           example: false
           type: boolean
         numberOfBookableSeats:
-          description: Number of seats bookable in a single request. Can not be higher than 9.
+          description: Number of seats bookable in a single request. Can not be higher
+            than 9.
           example: 9
           maximum: 9
           minimum: 1
           type: number
         oneWay:
-          description: If true, the flight offer fulfills only one originDestination and has to be combined with other oneWays to complete the whole journey.
+          description: If true, the flight offer fulfills only one originDestination and
+            has to be combined with other oneWays to complete the whole journey.
           example: false
           type: boolean
         paymentCardRequired:
@@ -1430,7 +1478,8 @@ components:
           items:
             properties:
               associatedAdultId:
-                description: if type="HELD_INFANT", corresponds to the adult traveler's id who will share the seat
+                description: if type="HELD_INFANT", corresponds to the adult traveler's id who
+                  will share the seat
                 type: string
               fareDetailsBySegment:
                 items:
@@ -1463,18 +1512,26 @@ components:
                       title: AllotmentDetails
                       type: object
                     brandedFare:
-                      description: The name of the Fare Family corresponding to the fares. Only for the GDS provider and if the airline has fare families filled
+                      description: The name of the Fare Family corresponding to the fares. Only for
+                        the GDS provider and if the airline has fare families
+                        filled
                       example: LIGHTONE
                       type: string
                     cabin:
                       $ref: "#/components/schemas/TravelClass"
                     class:
-                      description: The code of the booking class, a.k.a. class of service or Reservations/Booking Designator (RBD)
+                      description: The code of the booking class, a.k.a. class of service or
+                        Reservations/Booking Designator (RBD)
                       example: A
                       pattern: "[A-Z]{1}"
                       type: string
                     fareBasis:
-                      description: Fare basis specifying the rules of a fare. Usually, though not always, is composed of the booking class code followed by a set of letters and digits representing other characteristics of the ticket, such as refundability, minimum stay requirements, discounts or special promotional elements.
+                      description: Fare basis specifying the rules of a fare. Usually, though not
+                        always, is composed of the booking class code followed
+                        by a set of letters and digits representing other
+                        characteristics of the ticket, such as refundability,
+                        minimum stay requirements, discounts or special
+                        promotional elements.
                       example: ANNNNF4K
                       pattern: "[[A-Z0-9]{1,18}"
                       type: string
@@ -1521,7 +1578,8 @@ components:
           example: flight-offer
           type: string
         validatingAirlineCodes:
-          description: This option ensures that the system will only consider these airlines.
+          description: This option ensures that the system will only consider these
+            airlines.
           example:
             - AF
           items:
@@ -1541,7 +1599,8 @@ components:
       example: GDS
       type: string
     FlightSegment:
-      description: defining a flight segment; including both operating and marketing details when applicable
+      description: defining a flight segment; including both operating and marketing
+        details when applicable
       properties:
         aircraft:
           $ref: "#/components/schemas/AircraftEquipment"
@@ -1556,7 +1615,8 @@ components:
         departure:
           $ref: "#/components/schemas/FlightEndPoint"
         duration:
-          description: stop duration in [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) PnYnMnDTnHnMnS format, e.g. PT2H10M
+          description: stop duration in [ISO8601](https://en.wikipedia.org/wiki/ISO_8601)
+            PnYnMnDTnHnMnS format, e.g. PT2H10M
           example: PT2H10M
           type: string
         number:
@@ -1568,7 +1628,8 @@ components:
         operating:
           $ref: "#/components/schemas/OperatingFlight"
         stops:
-          description: information regarding the different stops composing the flight segment. E.g. technical stop, change of gauge...
+          description: information regarding the different stops composing the flight
+            segment. E.g. technical stop, change of gauge...
           items:
             $ref: "#/components/schemas/FlightStop"
           type: array
@@ -1578,12 +1639,16 @@ components:
         - $ref: "#/components/schemas/OriginalFlightStop"
         - properties:
             arrivalAt:
-              description: arrival at the stop in [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) YYYY-MM-ddThh:mm:ss format, e.g. 2017-02-10T20:40:00
+              description: arrival at the stop in
+                [ISO8601](https://en.wikipedia.org/wiki/ISO_8601)
+                YYYY-MM-ddThh:mm:ss format, e.g. 2017-02-10T20:40:00
               example: 2017-10-23T20:00:00
               format: date-time
               type: string
             departureAt:
-              description: departure from the stop in [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) YYYY-MM-ddThh:mm:ss format, e.g. 2017-02-10T20:40:00
+              description: departure from the stop in
+                [ISO8601](https://en.wikipedia.org/wiki/ISO_8601)
+                YYYY-MM-ddThh:mm:ss format, e.g. 2017-02-10T20:40:00
               example: 2017-10-23T20:00:00
               format: date-time
               type: string
@@ -1628,11 +1693,18 @@ components:
             travelerType: CHILD
       properties:
         currencyCode:
-          description: The currency code, as defined in [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217), to reflect the currency in which this amount is expressed.
+          description: The currency code, as defined in [ISO
+            4217](https://en.wikipedia.org/wiki/ISO_4217), to reflect the
+            currency in which this amount is expressed.
           example: EUR
           type: string
         originDestinations:
-          description: Origins and Destinations must be properly ordered in time (chronological order in accordance with the timezone of each location) to describe the journey consistently. Dates and times must not be past nor more than 365 days in the future, according to provider settings.Number of Origins and Destinations must not exceed the limit defined in provider settings.
+          description: Origins and Destinations must be properly ordered in time
+            (chronological order in accordance with the timezone of each
+            location) to describe the journey consistently. Dates and times must
+            not be past nor more than 365 days in the future, according to
+            provider settings.Number of Origins and Destinations must not exceed
+            the limit defined in provider settings.
           items:
             $ref: "#/components/schemas/OriginDestination"
           maxItems: 6
@@ -1642,7 +1714,8 @@ components:
         searchCriteria:
           $ref: "#/components/schemas/SearchCriteria"
         sources:
-          description: Allows enable one or more sources. If present in the list, these sources will be called by the system.
+          description: Allows enable one or more sources. If present in the list, these
+            sources will be called by the system.
           items:
             $ref: "#/components/schemas/FlightOfferSource"
           minItems: 1
@@ -1680,7 +1753,8 @@ components:
               description: a string indicating which URI query parameter caused the issue
               type: string
             pointer:
-              description: a JSON Pointer [RFC6901] to the associated entity in the request document
+              description: a JSON Pointer [RFC6901] to the associated entity in the request
+                document
               type: string
           title: Issue_Source
           type: object
@@ -1721,7 +1795,10 @@ components:
     OriginDestination:
       properties:
         alternativeDestinationsCodes:
-          description: Set of alternative destination location, such as a city or an airport. Currently, only the locations defined in [IATA](http://www.iata.org/publications/Pages/code-search.aspx) are supported.
+          description: Set of alternative destination location, such as a city or an
+            airport. Currently, only the locations defined in
+            [IATA](http://www.iata.org/publications/Pages/code-search.aspx) are
+            supported.
           items:
             title: code
             type: string
@@ -1729,7 +1806,10 @@ components:
           minItems: 1
           type: array
         alternativeOriginsCodes:
-          description: Set of alternative origin location, such as a city or an airport. Currently, only the locations defined in [IATA](http://www.iata.org/publications/Pages/code-search.aspx) are supported.
+          description: Set of alternative origin location, such as a city or an airport.
+            Currently, only the locations defined in
+            [IATA](http://www.iata.org/publications/Pages/code-search.aspx) are
+            supported.
           example:
             - LON
             - MUC
@@ -1744,19 +1824,26 @@ components:
         departureDateTimeRange:
           $ref: "#/components/schemas/DateTimeRange"
         destinationLocationCode:
-          description: Destination location, such as a city or an airport. Currently, only the locations defined in [IATA](http://www.iata.org/publications/Pages/code-search.aspx) are supported.
+          description: Destination location, such as a city or an airport. Currently, only
+            the locations defined in
+            [IATA](http://www.iata.org/publications/Pages/code-search.aspx) are
+            supported.
           example: NYC
           type: string
         destinationRadius:
           description: >
-            Include other possible locations around the point, located less than this distance in kilometers away. Max:300
+            Include other possible locations around the point, located less
+            than this distance in kilometers away. Max:300
 
 
             Can not be combined with "dateWindow" or "timeWindow".
           example: 200
           type: number
         excludedConnectionPoints:
-          description: List of excluded connections points. Any FlightOffer with these connections points will be present in response. Currently, only the locations defined in IATA are supported. Used only by the AMADEUS provider
+          description: List of excluded connections points. Any FlightOffer with these
+            connections points will be present in response. Currently, only the
+            locations defined in IATA are supported. Used only by the AMADEUS
+            provider
           example:
             - MRS
           items:
@@ -1769,7 +1856,10 @@ components:
           example: 1
           type: string
         includedConnectionPoints:
-          description: List of included connections points. When an includedViaPoints option is specified, all FlightOffer returned must at least go via this Connecting Point. Currently, only the locations defined in IATA are supported. Used only by the AMADEUS provider
+          description: List of included connections points. When an includedViaPoints
+            option is specified, all FlightOffer returned must at least go via
+            this Connecting Point. Currently, only the locations defined in IATA
+            are supported. Used only by the AMADEUS provider
           example:
             - MRS
           items:
@@ -1779,12 +1869,16 @@ components:
           minItems: 1
           type: array
         originLocationCode:
-          description: Origin location, such as a city or an airport. Currently, only the locations defined in [IATA](http://www.iata.org/publications/Pages/code-search.aspx) are supported.
+          description: Origin location, such as a city or an airport. Currently, only the
+            locations defined in
+            [IATA](http://www.iata.org/publications/Pages/code-search.aspx) are
+            supported.
           example: PAR
           type: string
         originRadius:
           description: >
-            Include other possible locations around the point, located less than this distance in kilometers away. Max:300
+            Include other possible locations around the point, located less
+            than this distance in kilometers away. Max:300
 
 
             Can not be combined with "dateWindow" or "timeWindow".
@@ -1795,7 +1889,8 @@ components:
       description: departure or arrival information
       properties:
         iataCode:
-          description: "[IATA airline codes](http://www.iata.org/publications/Pages/code-search.aspx)"
+          description: "[IATA airline
+            codes](http://www.iata.org/publications/Pages/code-search.aspx)"
           example: JFK
           type: string
         terminal:
@@ -1807,11 +1902,13 @@ components:
       description: details of stops for direct or change of gauge flights
       properties:
         duration:
-          description: stop duration in [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) PnYnMnDTnHnMnS format, e.g. PT2H10M
+          description: stop duration in [ISO8601](https://en.wikipedia.org/wiki/ISO_8601)
+            PnYnMnDTnHnMnS format, e.g. PT2H10M
           example: PT2H10M
           type: string
         iataCode:
-          description: "[IATA airline codes](http://www.iata.org/publications/Pages/code-search.aspx)"
+          description: "[IATA airline
+            codes](http://www.iata.org/publications/Pages/code-search.aspx)"
           example: JFK
           type: string
       type: object
@@ -1861,21 +1958,25 @@ components:
         additionalInformation:
           properties:
             brandedFares:
-              description: If true, returns the fare family name for each flight-offer which supports fare family
+              description: If true, returns the fare family name for each flight-offer which
+                supports fare family
               example: true
               type: boolean
             chargeableCheckedBags:
-              description: If true, returns the price of the first additional bag when the airline is an "Amadeus Ancillary Services" member.
+              description: If true, returns the price of the first additional bag when the
+                airline is an "Amadeus Ancillary Services" member.
               example: true
               type: boolean
           title: AdditionalInformation
           type: object
         allowAlternativeFareOptions:
-          description: This option allows to default to a standard fareOption if no offers are found for the selected fareOption.
+          description: This option allows to default to a standard fareOption if no offers
+            are found for the selected fareOption.
           example: true
           type: boolean
         excludeAllotments:
-          description: This option allows to exclude the isAllotment flag associated to a booking class in the search response when it exist.
+          description: This option allows to exclude the isAllotment flag associated to a
+            booking class in the search response when it exist.
           example: false
           type: boolean
         flightFilters:
@@ -1893,7 +1994,8 @@ components:
                   coverage:
                     $ref: "#/components/schemas/Coverage"
                   originDestinationIds:
-                    description: The list of originDestination identifiers for which the cabinRestriction applies
+                    description: The list of originDestination identifiers for which the
+                      cabinRestriction applies
                     example:
                       - 1
                       - 2
@@ -1911,17 +2013,24 @@ components:
               description: Restriction towards carriers.
               properties:
                 blacklistedInEUAllowed:
-                  description: This flag enable/disable filtering of blacklisted airline by EU. The list of the banned airlines is published in the Official Journal of the European Union, where they are included as annexes A and B to the Commission Regulation. The blacklist of an airline can concern all its flights or some specific aircraft types pertaining to the airline
+                  description: This flag enable/disable filtering of blacklisted airline by EU.
+                    The list of the banned airlines is published in the Official
+                    Journal of the European Union, where they are included as
+                    annexes A and B to the Commission Regulation. The blacklist
+                    of an airline can concern all its flights or some specific
+                    aircraft types pertaining to the airline
                   type: boolean
                 excludedCarrierCodes:
-                  description: This option ensures that the system will only consider these airlines.
+                  description: This option ensures that the system will only consider these
+                    airlines.
                   items:
                     type: string
                   maxItems: 99
                   minItems: 1
                   type: array
                 includedCarrierCodes:
-                  description: This option ensures that the system will only consider these airlines.
+                  description: This option ensures that the system will only consider these
+                    airlines.
                   items:
                     type: string
                   maxItems: 99
@@ -1937,33 +2046,40 @@ components:
                   example: false
                   type: boolean
                 maxNumberOfConnections:
-                  description: The maximal number of connections for each itinerary. Value can be 0, 1 or 2.
+                  description: The maximal number of connections for each itinerary. Value can be
+                    0, 1 or 2.
                   example: 2
                   type: number
                 technicalStopsAllowed:
-                  description: This option allows the single segment to have one or more intermediate stops (technical stops).
+                  description: This option allows the single segment to have one or more
+                    intermediate stops (technical stops).
                   example: true
                   type: boolean
               title: ConnectionRestriction
               type: object
             crossBorderAllowed:
-              description: Allows to search a location outside the borders when a radius around a location is specified. Default is false.
+              description: Allows to search a location outside the borders when a radius
+                around a location is specified. Default is false.
               example: false
               type: boolean
             maxFlightTime:
-              description: This option allows to modify the value for the Elapsed Flying Time (EFT) masterPricer option
+              description: This option allows to modify the value for the Elapsed Flying Time
+                (EFT) masterPricer option
               example: 200
               type: number
             moreOvernightsAllowed:
-              description: This flag enables/disables the possibility to have more overnight flights in Low Fare Search
+              description: This flag enables/disables the possibility to have more overnight
+                flights in Low Fare Search
               example: false
               type: boolean
             railSegmentAllowed:
-              description: This flag enable/disable filtering of rail segment (TGV AIR, RAIL ...)
+              description: This flag enable/disable filtering of rail segment (TGV AIR, RAIL
+                ...)
               example: true
               type: boolean
             returnToDepartureAirport:
-              description: This option force to retrieve flight-offer with a departure and a return in the same airport
+              description: This option force to retrieve flight-offer with a departure and a
+                return in the same airport
               example: false
               type: boolean
           title: FlightFilters
@@ -1974,11 +2090,13 @@ components:
           example: 250
           type: number
         maxPrice:
-          description: maximum price per traveler. By default, no limit is applied. If specified, the value should be a positive number with no decimals
+          description: maximum price per traveler. By default, no limit is applied. If
+            specified, the value should be a positive number with no decimals
           example: 100
           type: integer
         oneFlightOfferPerDay:
-          description: Requests the system to find at least one flight-offer per day, if possible, when a range of dates is specified. Default is false.
+          description: Requests the system to find at least one flight-offer per day, if
+            possible, when a range of dates is specified. Default is false.
           example: true
           type: boolean
         pricingOptions:
@@ -1989,7 +2107,8 @@ components:
         - properties:
             blacklistedInEU:
               description: >
-                When the flight has a marketing or/and operating airline that is identified as blacklisted by the European Commission. 
+                When the flight has a marketing or/and operating airline that is
+                identified as blacklisted by the European Commission. 
 
 
                 To improve travel safety, the European Commission regularly updates the list of the banned carriers from operating in Europe. It allows any Travel Agency located in the European Union to easily identify and hide any travel recommendation based on some unsafe airlines. 
@@ -2021,7 +2140,8 @@ components:
       example: PRIORITY_BOARDING
       type: string
     SliceDiceIndicator:
-      description: slice and Dice indicator, such as Local Availability, Sub OnD(Origin and Destination) 1 Availability and Sub OnD 2 Availability
+      description: slice and Dice indicator, such as Local Availability, Sub
+        OnD(Origin and Destination) 1 Availability and Sub OnD 2 Availability
       enum:
         - LOCAL_AVAILABILITY
         - SUB_OD_AVAILABILITY_1
@@ -2038,7 +2158,8 @@ components:
           type: string
       type: object
     TravelClass:
-      description: quality of service offered in the cabin where the seat is located in this flight. Economy, premium economy, business or first class
+      description: quality of service offered in the cabin where the seat is located
+        in this flight. Economy, premium economy, business or first class
       enum:
         - ECONOMY
         - PREMIUM_ECONOMY
@@ -2049,7 +2170,8 @@ components:
     Traveler:
       properties:
         associatedAdultId:
-          description: if type="HELD_INFANT", corresponds to the adult travelers's id who will share the seat
+          description: if type="HELD_INFANT", corresponds to the adult travelers's id who
+            will share the seat
           type: string
         id:
           example: 1
@@ -2062,7 +2184,8 @@ components:
       type: object
     TravelerPricingFareOption:
       description: >
-        option specifying a group of fares, which may be valid under certain conditons
+        option specifying a group of fares, which may be valid under
+        certain conditons
 
         Can be used to specify special fare discount for a passenger
       enum:

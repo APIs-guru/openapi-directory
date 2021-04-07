@@ -34,7 +34,8 @@ paths:
     get:
       operationId: country_code_check
       parameters:
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+        - description: The default response type is application/json if you would like to
+            receive an XML response then set this to XML
           in: header
           name: Response-Type
           type: string
@@ -55,7 +56,8 @@ paths:
     get:
       operationId: currency_conversion
       parameters:
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+        - description: The default response type is application/json if you would like to
+            receive an XML response then set this to XML
           in: header
           name: Response-Type
           type: string
@@ -69,7 +71,8 @@ paths:
           name: currency_to
           required: true
           type: string
-        - description: Optional, an amount you are wanting to convert. Leave blank to just get the current rate
+        - description: Optional, an amount you are wanting to convert. Leave blank to just
+            get the current rate
           in: query
           name: amount
           required: false
@@ -86,7 +89,8 @@ paths:
     post:
       operationId: create_invoice
       parameters:
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+        - description: The default response type is application/json if you would like to
+            receive an XML response then set this to XML
           in: header
           name: Response-Type
           type: string
@@ -108,7 +112,8 @@ paths:
     delete:
       operationId: invoice_delete
       parameters:
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+        - description: The default response type is application/json if you would like to
+            receive an XML response then set this to XML
           in: header
           name: Response-Type
           type: string
@@ -126,7 +131,8 @@ paths:
     get:
       operationId: get_invoice
       parameters:
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+        - description: The default response type is application/json if you would like to
+            receive an XML response then set this to XML
           in: header
           name: Response-Type
           type: string
@@ -146,7 +152,8 @@ paths:
     put:
       operationId: invoice_update
       parameters:
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+        - description: The default response type is application/json if you would like to
+            receive an XML response then set this to XML
           in: header
           name: Response-Type
           type: string
@@ -173,7 +180,8 @@ paths:
     get:
       operationId: ip_check
       parameters:
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+        - description: The default response type is application/json if you would like to
+            receive an XML response then set this to XML
           in: header
           name: Response-Type
           type: string
@@ -194,7 +202,8 @@ paths:
     get:
       operationId: api_usage
       parameters:
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+        - description: The default response type is application/json if you would like to
+            receive an XML response then set this to XML
           in: header
           name: Response-Type
           type: string
@@ -208,10 +217,16 @@ paths:
         - api
   /vat-number-check:
     get:
-      description: <p>We highly recommend if you are able, to check a VAT number on your end first to save wasted API lookups. It maybe that your customer has simply entered the wrong format. <a href='http://www.braemoor.co.uk/software/vat.shtml' target='_blank'>Heres a client side way to check the format using Javascript</a></p>
+      description: <p>We highly recommend if you are able, to check a VAT number on
+        your end first to save wasted API lookups. It maybe that your customer
+        has simply entered the wrong format. <a
+        href='http://www.braemoor.co.uk/software/vat.shtml'
+        target='_blank'>Heres a client side way to check the format using
+        Javascript</a></p>
       operationId: vat_number_validate
       parameters:
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+        - description: The default response type is application/json if you would like to
+            receive an XML response then set this to XML
           in: header
           name: Response-Type
           type: string
@@ -230,7 +245,8 @@ paths:
     get:
       operationId: convert_price
       parameters:
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+        - description: The default response type is application/json if you would like to
+            receive an XML response then set this to XML
           in: header
           name: Response-Type
           type: string
@@ -249,7 +265,8 @@ paths:
           name: price
           required: true
           type: integer
-        - description: Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'
+        - description: Optional, if the price is including VAT set the type to 'incl'.
+            Otherwise the default is assumed as excluding VAT already, 'excl'
           in: query
           name: type
           required: false
@@ -266,7 +283,8 @@ paths:
     get:
       operationId: vat_rates
       parameters:
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+        - description: The default response type is application/json if you would like to
+            receive an XML response then set this to XML
           in: header
           name: Response-Type
           type: string
@@ -456,7 +474,8 @@ definitions:
         description: 3 character currency code for invoice
         type: string
       currency_code_conversion:
-        description: 3 character currency code to be converted from original transaction currency
+        description: 3 character currency code to be converted from original transaction
+          currency
         type: string
       customer_address:
         description: Your customers address
@@ -488,7 +507,8 @@ definitions:
           $ref: "#/definitions/Invoice_Items"
         type: array
       logo_url:
-        description: A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended
+        description: A URL to your logo image. Must be SSL hosted.
+          https://sslimagehost.com is recommended
         type: string
       notes:
         description: Any notes attached to the invoice
@@ -541,7 +561,8 @@ definitions:
         description: 3 character currency code for invoice
         type: string
       currency_code_conversion:
-        description: 3 character currency code to be converted from original transaction currency
+        description: 3 character currency code to be converted from original transaction
+          currency
         type: string
       customer_address:
         description: Your customers address
@@ -567,7 +588,8 @@ definitions:
         description: Add a note to the invoice.
         type: string
       price_type:
-        description: Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'
+        description: Optional, if the price is including VAT set the type to 'incl'.
+          Otherwise the default is assumed as excluding VAT already, 'excl'
         type: string
       tax_point:
         description: (or 'time of supply') if this is different from the invoice date
@@ -633,7 +655,8 @@ definitions:
         description: 3 character currency code for invoice
         type: string
       currency_code_conversion:
-        description: 3 character currency code to be converted from original transaction currency
+        description: 3 character currency code to be converted from original transaction
+          currency
         type: string
       customer_address:
         description: Your customers address
@@ -665,13 +688,15 @@ definitions:
           $ref: "#/definitions/Invoice_Items"
         type: array
       logo_url:
-        description: A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended
+        description: A URL to your logo image. Must be SSL hosted.
+          https://sslimagehost.com is recommended
         type: string
       notes:
         description: Any notes attached to the invoice
         type: string
       price_type:
-        description: Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'
+        description: Optional, if the price is including VAT set the type to 'incl'.
+          Otherwise the default is assumed as excluding VAT already, 'excl'
         type: string
       subtotal:
         description: Total amount excluding VAT
@@ -735,7 +760,8 @@ definitions:
         description: 3 character currency code for invoice
         type: string
       currency_code_conversion:
-        description: 3 character currency code to be converted from original transaction currency
+        description: 3 character currency code to be converted from original transaction
+          currency
         type: string
       customer_address:
         description: Your customers address
@@ -758,7 +784,8 @@ definitions:
           $ref: "#/definitions/Invoice_Items"
         type: array
       logo_url:
-        description: A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended
+        description: A URL to your logo image. Must be SSL hosted.
+          https://sslimagehost.com is recommended
         type: string
       notes:
         description: Add a note to the invoice.

@@ -3,7 +3,8 @@ servers:
   - url: https://phantauth.net
 info:
   description: >-
-    Random User Generator + OpenID Connect Provider. Like Lorem Ipsum, but for user accounts and authentication.
+    Random User Generator + OpenID Connect Provider. Like Lorem Ipsum,
+    but for user accounts and authentication.
 
 
     The PhantAuth API documentation is available on the following API documentation sites:
@@ -790,7 +791,11 @@ info:
   x-providerName: phantauth.net
 tags:
   - description: >-
-      The *user* resource contains the [Standard Claims](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims) defined in the [OpenID Connect Core](https://openid.net/specs/openid-connect-core-1_0.html) specifications. It also includes some PhantAuth-specific property.
+      The *user* resource contains the [Standard
+      Claims](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)
+      defined in the [OpenID Connect
+      Core](https://openid.net/specs/openid-connect-core-1_0.html)
+      specifications. It also includes some PhantAuth-specific property.
 
 
       To use PhantAuth as an OpenID Connect provider, you don't need to carry out the user-related operations described here.
@@ -801,14 +806,27 @@ tags:
 
       The only exception is selfie token generation, when the provided user data are used to create a so-called selfie token, which can later be used as a login name.
     name: User
-  - description: The client object contains standard OAuth2/OpenID Connect client properties. To use an OpenID Connect flow, you need a client_id. Certain flows also require a client_secret. The client object contains the client_id and client_secret values, as well as some properties to be displayed to the user (e.g. logo, client name, version).
+  - description: The client object contains standard OAuth2/OpenID Connect client
+      properties. To use an OpenID Connect flow, you need a client_id. Certain
+      flows also require a client_secret. The client object contains the
+      client_id and client_secret values, as well as some properties to be
+      displayed to the user (e.g. logo, client name, version).
     name: Client
-  - description: Team is a group of users under a given name. For the purposes of identification and visualisation, the team object has its own properties (e.g. logo), the most important of which is the `members`, which contains the user objects of the team.
+  - description: Team is a group of users under a given name. For the purposes of
+      identification and visualisation, the team object has its own properties
+      (e.g. logo), the most important of which is the `members`, which contains
+      the user objects of the team.
     name: Team
-  - description: Fleet is a group of clients under a given a name. For the purposes of identification and visualisation, the Fleet object has its own properties (e.g. logo), the most important of which is the `members`, which contains the user objects of the fleet.
+  - description: Fleet is a group of clients under a given a name. For the purposes
+      of identification and visualisation, the Fleet object has its own
+      properties (e.g. logo), the most important of which is the `members`,
+      which contains the user objects of the fleet.
     name: Fleet
   - description: >-
-      To customize the application, you need to use one or more so-called tenants. A tenant can be consiered as an independent PhantAuth service. A tenant has its own random user generator endpoints and OpenID Connect endpoints.
+      To customize the application, you need to use one or more so-called
+      tenants. A tenant can be consiered as an independent PhantAuth service. A
+      tenant has its own random user generator endpoints and OpenID Connect
+      endpoints.
 
 
       The tenants can be organised into so-called domains. Practically, a domain is a DNS zone, which contains the settings of the given tenant(s). The tenants as well as the domain can be configured by the use of DNS TXT records.
@@ -822,7 +840,9 @@ tags:
       The resource URL is relative to the URL of the tenant issuer URL, that is, the endpoint address of the random user generator for the tenant named `faker` is: [https://phantauth.net/_faker/user](https://phantauth.net/_faker/user).
     name: Tenant
   - description: >-
-      A domain object contains several tenants; it can be considered a group of tenants. The PhantAuth official tenants are collected in a domain identified by `phantauth.net`.
+      A domain object contains several tenants; it can be considered a
+      group of tenants. The PhantAuth official tenants are collected in a domain
+      identified by `phantauth.net`.
 
       In the `phantauth.cf` domain, you can share and register your own tenants as well.
 
@@ -835,7 +855,9 @@ paths:
   /client:
     post:
       description: >-
-        To create a selfie token from the client data, you need an opaqe string token, which contains the encoded client properties sent in the request.
+        To create a selfie token from the client data, you need an opaqe
+        string token, which contains the encoded client properties sent in the
+        request.
 
         Later, the selfie token can be used as a client ID. In this case, the client data is included in the selfie token, that is, the client properties are taken from the token.
 
@@ -862,7 +884,8 @@ paths:
                   description: OAuth 2.0 client identifier string.
                   type: string
                 client_name:
-                  description: Human-readable string name of the client to be presented to the end-user during authorization.
+                  description: Human-readable string name of the client to be presented to the
+                    end-user during authorization.
                   type: string
                 client_secret:
                   description: "OAuth 2.0 client secret string. "
@@ -871,19 +894,24 @@ paths:
                   description: URL string of a web page providing information about the client.
                   type: string
                 contacts:
-                  description: Array of strings representing ways to contact people responsible for this client, typically email addresses.
+                  description: Array of strings representing ways to contact people responsible
+                    for this client, typically email addresses.
                   items: {}
                   type: array
                 grant_types:
-                  description: Array of OAuth 2.0 grant type strings that the client can use at the token endpoint.
+                  description: Array of OAuth 2.0 grant type strings that the client can use at
+                    the token endpoint.
                   items: {}
                   type: array
                 jwks:
-                  description: Client's JSON Web Key Set [RFC7517] document value, which contains the client's public keys.  The value of this field MUST be a JSON object containing a valid JWK Set.
+                  description: Client's JSON Web Key Set [RFC7517] document value, which contains
+                    the client's public keys.  The value of this field MUST be a
+                    JSON object containing a valid JWK Set.
                   items: {}
                   type: array
                 jwks_uri:
-                  description: URL string referencing the client's JSON Web Key (JWK) Set [RFC7517] document, which contains the client's public keys.
+                  description: URL string referencing the client's JSON Web Key (JWK) Set
+                    [RFC7517] document, which contains the client's public keys.
                   type: string
                 logo_email:
                   description: An email address used to generate a gravatar.com logo_uri.
@@ -892,30 +920,44 @@ paths:
                   description: URL string that references a logo for the client.
                   type: string
                 policy_uri:
-                  description: URL string that points to a human-readable privacy policy document that describes how the deployment organization collects, uses, retains, and discloses personal data.
+                  description: URL string that points to a human-readable privacy policy document
+                    that describes how the deployment organization collects,
+                    uses, retains, and discloses personal data.
                   type: string
                 redirect_uris:
-                  description: Array of redirection URI strings for use in redirect-based flows such as the authorization code and implicit flows.
+                  description: Array of redirection URI strings for use in redirect-based flows
+                    such as the authorization code and implicit flows.
                   items: {}
                   type: array
                 response_types:
-                  description: Array of the OAuth 2.0 response type strings that the client can use at the authorization endpoint.
+                  description: Array of the OAuth 2.0 response type strings that the client can
+                    use at the authorization endpoint.
                   items: {}
                   type: array
                 scope:
-                  description: String containing a space-separated list of scope values (as described in Section 3.3 of OAuth 2.0 [RFC6749]) that the client can use when requesting access tokens.
+                  description: String containing a space-separated list of scope values (as
+                    described in Section 3.3 of OAuth 2.0 [RFC6749]) that the
+                    client can use when requesting access tokens.
                   type: string
                 software_id:
-                  description: A unique identifier string (e.g., a Universally Unique Identifier (UUID)) assigned by the client developer or software publisher used by registration endpoints to identify the client software to be dynamically registered.
+                  description: A unique identifier string (e.g., a Universally Unique Identifier
+                    (UUID)) assigned by the client developer or software
+                    publisher used by registration endpoints to identify the
+                    client software to be dynamically registered.
                   type: string
                 software_version:
-                  description: A version identifier string for the client software identified by software_id.
+                  description: A version identifier string for the client software identified by
+                    software_id.
                   type: string
                 token_endpoint_auth_method:
-                  description: String indicator of the requested authentication method for the token endpoint.
+                  description: String indicator of the requested authentication method for the
+                    token endpoint.
                   type: string
                 tos_uri:
-                  description: URL string that points to a human-readable terms of service document for the client that describes a contractual relationship between the end-user and the client that the end-user accepts when authorizing the client.
+                  description: URL string that points to a human-readable terms of service
+                    document for the client that describes a contractual
+                    relationship between the end-user and the client that the
+                    end-user accepts when authorizing the client.
                   type: string
               required:
                 - client_id
@@ -936,7 +978,9 @@ paths:
   "/client/{client_id}":
     get:
       description: >-
-        Use this endpoint to generate a random client. The client is generated in a deterministic way, on the bases of the client ID given as a path parameter.
+        Use this endpoint to generate a random client. The client is
+        generated in a deterministic way, on the bases of the client ID given as
+        a path parameter.
 
         In the case of identical client IDs, the endpoint will generate the same client object. The properties of the generated client object are randomly generated on the basis of the client ID.
 
@@ -986,7 +1030,8 @@ paths:
                     description: OAuth 2.0 client identifier string.
                     type: string
                   client_name:
-                    description: Human-readable string name of the client to be presented to the end-user during authorization.
+                    description: Human-readable string name of the client to be presented to the
+                      end-user during authorization.
                     type: string
                   client_secret:
                     description: "OAuth 2.0 client secret string. "
@@ -995,19 +1040,25 @@ paths:
                     description: URL string of a web page providing information about the client.
                     type: string
                   contacts:
-                    description: Array of strings representing ways to contact people responsible for this client, typically email addresses.
+                    description: Array of strings representing ways to contact people responsible
+                      for this client, typically email addresses.
                     items: {}
                     type: array
                   grant_types:
-                    description: Array of OAuth 2.0 grant type strings that the client can use at the token endpoint.
+                    description: Array of OAuth 2.0 grant type strings that the client can use at
+                      the token endpoint.
                     items: {}
                     type: array
                   jwks:
-                    description: Client's JSON Web Key Set [RFC7517] document value, which contains the client's public keys.  The value of this field MUST be a JSON object containing a valid JWK Set.
+                    description: Client's JSON Web Key Set [RFC7517] document value, which contains
+                      the client's public keys.  The value of this field MUST be
+                      a JSON object containing a valid JWK Set.
                     items: {}
                     type: array
                   jwks_uri:
-                    description: URL string referencing the client's JSON Web Key (JWK) Set [RFC7517] document, which contains the client's public keys.
+                    description: URL string referencing the client's JSON Web Key (JWK) Set
+                      [RFC7517] document, which contains the client's public
+                      keys.
                     type: string
                   logo_email:
                     description: An email address used to generate a gravatar.com logo_uri.
@@ -1016,30 +1067,44 @@ paths:
                     description: URL string that references a logo for the client.
                     type: string
                   policy_uri:
-                    description: URL string that points to a human-readable privacy policy document that describes how the deployment organization collects, uses, retains, and discloses personal data.
+                    description: URL string that points to a human-readable privacy policy document
+                      that describes how the deployment organization collects,
+                      uses, retains, and discloses personal data.
                     type: string
                   redirect_uris:
-                    description: Array of redirection URI strings for use in redirect-based flows such as the authorization code and implicit flows.
+                    description: Array of redirection URI strings for use in redirect-based flows
+                      such as the authorization code and implicit flows.
                     items: {}
                     type: array
                   response_types:
-                    description: Array of the OAuth 2.0 response type strings that the client can use at the authorization endpoint.
+                    description: Array of the OAuth 2.0 response type strings that the client can
+                      use at the authorization endpoint.
                     items: {}
                     type: array
                   scope:
-                    description: String containing a space-separated list of scope values (as described in Section 3.3 of OAuth 2.0 [RFC6749]) that the client can use when requesting access tokens.
+                    description: String containing a space-separated list of scope values (as
+                      described in Section 3.3 of OAuth 2.0 [RFC6749]) that the
+                      client can use when requesting access tokens.
                     type: string
                   software_id:
-                    description: A unique identifier string (e.g., a Universally Unique Identifier (UUID)) assigned by the client developer or software publisher used by registration endpoints to identify the client software to be dynamically registered.
+                    description: A unique identifier string (e.g., a Universally Unique Identifier
+                      (UUID)) assigned by the client developer or software
+                      publisher used by registration endpoints to identify the
+                      client software to be dynamically registered.
                     type: string
                   software_version:
-                    description: A version identifier string for the client software identified by software_id.
+                    description: A version identifier string for the client software identified by
+                      software_id.
                     type: string
                   token_endpoint_auth_method:
-                    description: String indicator of the requested authentication method for the token endpoint.
+                    description: String indicator of the requested authentication method for the
+                      token endpoint.
                     type: string
                   tos_uri:
-                    description: URL string that points to a human-readable terms of service document for the client that describes a contractual relationship between the end-user and the client that the end-user accepts when authorizing the client.
+                    description: URL string that points to a human-readable terms of service
+                      document for the client that describes a contractual
+                      relationship between the end-user and the client that the
+                      end-user accepts when authorizing the client.
                     type: string
                 required:
                   - client_id
@@ -1052,7 +1117,8 @@ paths:
   "/client/{client_id}/token/{kind}":
     get:
       description: >-
-        It is used to generate a OpenID Connect token as a path parameter to a client of a given client ID.
+        It is used to generate a OpenID Connect token as a path parameter
+        to a client of a given client ID.
 
 
         It is primarily used for testing purposes, when, for example, the token from the standard authentication flow is not available to the test code.
@@ -1089,7 +1155,8 @@ paths:
   "/domain/{domainname}":
     get:
       description: >-
-        This endpoint allows you to get the data of a given PhantAuth domain. To use the PhantAuth services, you don't need this endpoint.
+        This endpoint allows you to get the data of a given PhantAuth
+        domain. To use the PhantAuth services, you don't need this endpoint.
 
         It is, therefore, mainly used for debug/diagnostic purposes in tenant customization.
 
@@ -1123,7 +1190,9 @@ paths:
                         template: https://default.phantauth.net{/resource}
                         website: https://phantauth.net
                       - "@id": https://phantauth.net/_gods/tenant/gods
-                        attribution: God pictures come from  [Theoi Project](https://www.theoi.com/), a site exploring Greek mythology and the gods in classical literature and art.
+                        attribution: God pictures come from  [Theoi Project](https://www.theoi.com/), a
+                          site exploring Greek mythology and the gods in
+                          classical literature and art.
                         depot: https://docs.google.com/spreadsheets/d/1Xa4mRcLWroJr2vUDhrJXGBcobYmpS8fNZxFpXw-M9DY/gviz/tq?tqx=out:csv
                         depots:
                           - user
@@ -1212,7 +1281,8 @@ paths:
                         theme: https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/sketchy/bootstrap.min.css
                         website: https://phantauth.net/_sketch
                       - "@id": https://phantauth.net/_randomuser/tenant/randomuser
-                        attribution: User data generated using [RANDOM USER GENERATOR](https://randomuser.me/).
+                        attribution: User data generated using [RANDOM USER
+                          GENERATOR](https://randomuser.me/).
                         domain: false
                         favicon: https://default.phantauth.net/logo/phantauth-favicon.png
                         flags: small
@@ -1226,7 +1296,8 @@ paths:
                         theme: https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/sandstone/bootstrap.min.css
                         website: https://phantauth.net/_randomuser
                       - "@id": https://phantauth.net/_mockaroo/tenant/mockaroo
-                        attribution: User data generated using [Mockaroo's Mock APIs](https://mockaroo.com/mock_apis).
+                        attribution: User data generated using [Mockaroo's Mock
+                          APIs](https://mockaroo.com/mock_apis).
                         domain: false
                         favicon: https://default.phantauth.net/logo/phantauth-favicon.png
                         flags: small
@@ -1259,7 +1330,8 @@ paths:
                     description: The URL of the domain's JSON representation.
                     type: string
                   logo:
-                    description: The URL of the domain logo. The image from this address is displayed on the webpage of the domain.
+                    description: The URL of the domain logo. The image from this address is
+                      displayed on the webpage of the domain.
                     type: string
                   members:
                     description: The tenants included in a domain.
@@ -1283,7 +1355,9 @@ paths:
   "/fleet/{fleetname}":
     get:
       description: >-
-        Use this endpoint to generate a random group of clients. The feleet is generated in a deterministic way, on the basis of a fleet name given as a path parameter.
+        Use this endpoint to generate a random group of clients. The feleet
+        is generated in a deterministic way, on the basis of a fleet name given
+        as a path parameter.
 
         In the case of identical fleet names, the endpoint will generate the same fleet object. The properties of the generated fleet object are randomly generated on the basis of the fleet name.
 
@@ -1372,10 +1446,14 @@ paths:
                     description: URL of the Fleet's JSON representation.
                     type: string
                   logo:
-                    description: The URL of the fleet logo, which can be customized by the gravatar associated with the email address in the `logo_email` property.
+                    description: The URL of the fleet logo, which can be customized by the gravatar
+                      associated with the email address in the `logo_email`
+                      property.
                     type: string
                   logo_email:
-                    description: The email address of the fleet, either generated or provided in the `sub` property. The fleet logo can be customized by the use of the gravater associated with this email address.
+                    description: The email address of the fleet, either generated or provided in the
+                      `sub` property. The fleet logo can be customized by the
+                      use of the gravater associated with this email address.
                     type: string
                   members:
                     description: The client objects included in a fleet.
@@ -1388,7 +1466,10 @@ paths:
                     description: The URL of the Fleet profile.
                     type: string
                   sub:
-                    description: The name or email address of a given fleet. The fleet properties and fleet members are generated from this name. If provide an email address, you can customize the fleet logo by the use of the gravatar associated with the email address.
+                    description: The name or email address of a given fleet. The fleet properties
+                      and fleet members are generated from this name. If provide
+                      an email address, you can customize the fleet logo by the
+                      use of the gravatar associated with the email address.
                     type: string
                 required:
                   - sub
@@ -1401,7 +1482,9 @@ paths:
   "/team/{teamname}":
     get:
       description: >-
-        Use this endpoint to generate a random group of users. The team is generated in a deterministic way, on the basis of the team name given as the path parameter.
+        Use this endpoint to generate a random group of users. The team is
+        generated in a deterministic way, on the basis of the team name given as
+        the path parameter.
 
         In the case of identical team names, the endpoint will generate the same team object. The properties of the generated team object are randomly generated on the basis of the team name.
 
@@ -1429,9 +1512,8 @@ paths:
                       - "@id": https://phantauth.net/user/ariana.riley.hudson
                         address:
                           country: USA
-                          formatted: >-
+                          formatted: |-
                             62 Highland Place APT 63
-
                             Miami 30927
                           locality: Miami
                           postal_code: "30927"
@@ -1462,9 +1544,8 @@ paths:
                       - "@id": https://phantauth.net/user/madeline.randall
                         address:
                           country: UnitedKingdom
-                          formatted: >-
+                          formatted: |-
                             140 Atkins Avenue APT 126
-
                             San Francisco 48571
                           locality: San Francisco
                           postal_code: "48571"
@@ -1494,9 +1575,8 @@ paths:
                       - "@id": https://phantauth.net/user/alexa.brooklyn.rollins
                         address:
                           country: Canada
-                          formatted: >-
+                          formatted: |-
                             104 Herzi Street APT 39
-
                             Washington 22412
                           locality: Washington
                           postal_code: "22412"
@@ -1527,9 +1607,8 @@ paths:
                       - "@id": https://phantauth.net/user/cameron.barnes
                         address:
                           country: Australia
-                          formatted: >-
+                          formatted: |-
                             139 Aster Court
-
                             New York 20333
                           locality: New York
                           postal_code: "20333"
@@ -1559,9 +1638,8 @@ paths:
                       - "@id": https://phantauth.net/user/kayden.abbott
                         address:
                           country: Canada
-                          formatted: >-
+                          formatted: |-
                             110 Aster Court APT 299
-
                             Miami 16321
                           locality: Miami
                           postal_code: "16321"
@@ -1597,10 +1675,14 @@ paths:
                     description: URL of the Teams's JSON representation.
                     type: string
                   logo:
-                    description: The URL of the team logo, which can be customized by the gravatar associated with the email address in the `logo_email` property.
+                    description: The URL of the team logo, which can be customized by the gravatar
+                      associated with the email address in the `logo_email`
+                      property.
                     type: string
                   logo_email:
-                    description: The email address of the team, either generated or provided in the `sub` property. The team logo can be customized by the use of the gravater associated with this email address.
+                    description: The email address of the team, either generated or provided in the
+                      `sub` property. The team logo can be customized by the use
+                      of the gravater associated with this email address.
                     type: string
                   members:
                     description: The user objects that generate a team member.
@@ -1613,7 +1695,10 @@ paths:
                     description: The URL of the Team profile.
                     type: string
                   sub:
-                    description: The name or email address of a given team. The team properties and team members are generated from this name. If you provide an email address, you can customize the team logo by the use of the gravatar associated with the email address.
+                    description: The name or email address of a given team. The team properties and
+                      team members are generated from this name. If you provide
+                      an email address, you can customize the team logo by the
+                      use of the gravatar associated with the email address.
                     type: string
                 required:
                   - sub
@@ -1626,7 +1711,8 @@ paths:
   "/tenant/{tenantname}":
     get:
       description: >-
-        This endpoint allows you to get the data of a given PhantAuth tenant. To use the PhantAuth services, you don't need this endpoint.
+        This endpoint allows you to get the data of a given PhantAuth
+        tenant. To use the PhantAuth services, you don't need this endpoint.
 
         It is, therefore, mainly used for debug/diagnostic purposes in tenant customization.
 
@@ -1669,14 +1755,21 @@ paths:
                     description: The URL of the tenant's JSON representation.
                     type: string
                   about:
-                    description: A detailed description of the tenant. If it takes the value of an URL, the description is downloaded from the given URL, otherwise the value it takes is the description itself. Markdown formatting can be used in the description.
+                    description: A detailed description of the tenant. If it takes the value of an
+                      URL, the description is downloaded from the given URL,
+                      otherwise the value it takes is the description itself.
+                      Markdown formatting can be used in the description.
                     type: string
                   attribution:
-                    description: The attribution of the external data source or random user generator. Its value can have markdown formatting, that is, the external source can contain highlights and links.
+                    description: The attribution of the external data source or random user
+                      generator. Its value can have markdown formatting, that
+                      is, the external source can contain highlights and links.
                     type: string
                   depot:
                     description: >-
-                      It defines the place of the CSV file containing the resource data in [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) format.
+                      It defines the place of the CSV file containing the resource data
+                      in [RFC 6570 - URI
+                      temaplate](https://tools.ietf.org/html/rfc6570) format.
 
                       The URI template receives the type of the object to be generated (user, team) in the `kind` parameter.
 
@@ -1686,58 +1779,84 @@ paths:
                       In the case of nested properties, a '.' character separates the elements of the property name (e.g. address.formatted).
                     type: string
                   depots:
-                    description: A list of resource types supported by the external CSV set in `depot`.
+                    description: A list of resource types supported by the external CSV set in
+                      `depot`.
                     items: {}
                     type: array
                   domain:
-                    description: True in the case of a domain tenant collecting several tenants, otherwise false.
+                    description: True in the case of a domain tenant collecting several tenants,
+                      otherwise false.
                     type: boolean
                   factories:
-                    description: A list of resource types supported by the external generator set in `factory`.
+                    description: A list of resource types supported by the external generator set in
+                      `factory`.
                     items: {}
                     type: array
                   factory:
                     description: >-
-                      The address of the custom random resource generator (user, team) in [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) format.
+                      The address of the custom random resource generator (user, team) in
+                      [RFC 6570 - URI
+                      temaplate](https://tools.ietf.org/html/rfc6570) format.
 
                       The URI template receives the type of the object to be generated (user, team) in the `kind` parameter, and the identifier of the object to be generated in the `name` parameter.
                     type: string
                   favicon:
-                    description: The URL of the tenant favicon. The image from this address appears as a shortcut icon in the browser when a user visits the tenant's webpages.
+                    description: The URL of the tenant favicon. The image from this address appears
+                      as a shortcut icon in the browser when a user visits the
+                      tenant's webpages.
                     type: string
                   issuer:
                     description: >-
-                      The URL of the tenant OpenID Connect issuer. This value allows you to get, for example, the [OpenID Provider Metadata](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata).
+                      The URL of the tenant OpenID Connect issuer. This value allows you
+                      to get, for example, the [OpenID Provider
+                      Metadata](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata).
 
                       As a webpage, it contains information on the use if the given tenant.
                     type: string
                   logo:
-                    description: The URL of the tenant logo. The image from this address appears in the address bar of the tenant's webpages and the pages that contain the list of available tenants.
+                    description: The URL of the tenant logo. The image from this address appears in
+                      the address bar of the tenant's webpages and the pages
+                      that contain the list of available tenants.
                     type: string
                   name:
-                    description: The displayed tenant name. In lack of such name, the DNS name of the tenant is displayed in the address bar of the tenant's webpages.
+                    description: The displayed tenant name. In lack of such name, the DNS name of
+                      the tenant is displayed in the address bar of the tenant's
+                      webpages.
                     type: string
                   script:
-                    description: The URL of a custom JavaScript file can be automatically inserted in the login.html, consent.html, és test.html pages.
+                    description: The URL of a custom JavaScript file can be automatically inserted
+                      in the login.html, consent.html, és test.html pages.
                     type: string
                   sheet:
                     description: >-
-                      It is used to give the identifyer of a public Google Sheet document. The first line of the table contains the user property names, the following lines, on the other hand, contain the relevant data.
+                      It is used to give the identifyer of a public Google Sheet
+                      document. The first line of the table contains the user
+                      property names, the following lines, on the other hand,
+                      contain the relevant data.
 
                       In the case of nested properties, a '.' character separates the elements of the property name (e.g. address.formatted).
                     type: string
                   sub:
-                    description: The fully qualified DNS domain name of the tenant. In the case of official and shared tenants (phantauth.net and phantauth.cf DNS domain), the DNS domain can be omitted (e.g. *default* or *faker*).
+                    description: The fully qualified DNS domain name of the tenant. In the case of
+                      official and shared tenants (phantauth.net and
+                      phantauth.cf DNS domain), the DNS domain can be omitted
+                      (e.g. *default* or *faker*).
                     type: string
                   subtenant:
-                    description: True in the case of a tenant referred to in a domain tenant, otherwise false.
+                    description: True in the case of a tenant referred to in a domain tenant,
+                      otherwise false.
                     type: boolean
                   summary:
-                    description: A one-line description, the watchword of the tenant. It appears on the tenant's startup page and the pages that contain the list of available tenants. It takes the valua of an unformatted text.
+                    description: A one-line description, the watchword of the tenant. It appears on
+                      the tenant's startup page and the pages that contain the
+                      list of available tenants. It takes the valua of an
+                      unformatted text.
                     type: string
                   template:
                     description: >-
-                      It defines the place of the templates of the HTML pages of the tenant in [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) format.
+                      It defines the place of the templates of the HTML pages of the
+                      tenant in [RFC 6570 - URI
+                      temaplate](https://tools.ietf.org/html/rfc6570) format.
 
                       The URI template receives the page name in a `resource` parameter. By default, it takes the following value: `https://default.phantauth.net{/resource}`.
                     type: string
@@ -1750,7 +1869,9 @@ paths:
                   userinfo:
                     type: string
                   website:
-                    description: The website address associated with the tenant. If a tenant doesn't have a website, its value is identical with that of the `issuer` property.
+                    description: The website address associated with the tenant. If a tenant doesn't
+                      have a website, its value is identical with that of the
+                      `issuer` property.
                     type: string
                 required:
                   - sub
@@ -1764,7 +1885,9 @@ paths:
   /user:
     post:
       description: >-
-        To create a selfie token from the user data, you need an opaqe string token, which contains the encoded user properties sent in the request.
+        To create a selfie token from the user data, you need an opaqe
+        string token, which contains the encoded user properties sent in the
+        request.
 
         Later, the selfie token can be used as a login name. In this case, the user data is included in the selfie token, that is, the user properties are taken from the token.
 
@@ -1779,9 +1902,8 @@ paths:
               example:
                 address:
                   country: USA
-                  formatted: >-
+                  formatted: |-
                     160 Washington Walk
-
                     San Francisco 98239
                   locality: San Francisco
                   postal_code: "98239"
@@ -1814,7 +1936,11 @@ paths:
                       description: Country name component.
                       type: string
                     formatted:
-                      description: Full mailing address, formatted for display or use on a mailing label. This field MAY contain multiple lines, separated by newlines. Newlines can be represented either as a carriage return/line feed pair or as a single line feed character.
+                      description: Full mailing address, formatted for display or use on a mailing
+                        label. This field MAY contain multiple lines, separated
+                        by newlines. Newlines can be represented either as a
+                        carriage return/line feed pair or as a single line feed
+                        character.
                       type: string
                     locality:
                       description: City or locality component.
@@ -1826,29 +1952,40 @@ paths:
                       description: State, province, prefecture, or region component.
                       type: string
                     street_address:
-                      description: Full street address component, which MAY include house number, street name, post office box, and multi-line extended street address information. This field MAY contain multiple lines, separated by newlines. Newlines can be represented either as a carriage return/line feed pair or as a single line feed character.
+                      description: Full street address component, which MAY include house number,
+                        street name, post office box, and multi-line extended
+                        street address information. This field MAY contain
+                        multiple lines, separated by newlines. Newlines can be
+                        represented either as a carriage return/line feed pair
+                        or as a single line feed character.
                       type: string
                   type: object
                 birthdate:
-                  description: The user's birthday, represented as an ISO 8601:2004 [ISO8601‑2004] YYYY-MM-DD format.
+                  description: The user's birthday, represented as an ISO 8601:2004 [ISO8601‑2004]
+                    YYYY-MM-DD format.
                   type: string
                 email:
                   description: The user's preferred email address.
                   type: string
                 email_verified:
-                  description: True if the user's e-mail address has been verified; otherwise false.
+                  description: True if the user's e-mail address has been verified; otherwise
+                    false.
                   type: boolean
                 family_name:
                   description: The user's surname(s) or last name(s).
                   type: string
                 gender:
-                  description: "The enduser's gender. Possible values are: female, male, and unknown."
+                  description: "The enduser's gender. Possible values are: female, male, and
+                    unknown."
                   type: string
                 given_name:
                   description: The user's given name(s) or first name(s).
                   type: string
                 locale:
-                  description: The user's locale, represented as a BCP47 [RFC5646] language tag. It is an ISO 639-1 Alpha-2 language code in lowercase and an ISO 3166-1 Alpha-2 country code in uppercase letters, separated by a dash.
+                  description: The user's locale, represented as a BCP47 [RFC5646] language tag.
+                    It is an ISO 639-1 Alpha-2 language code in lowercase and an
+                    ISO 3166-1 Alpha-2 country code in uppercase letters,
+                    separated by a dash.
                   type: string
                 me:
                   description: The simplified URL of the user's profile page.
@@ -1857,10 +1994,13 @@ paths:
                   description: The user's middle name(s).
                   type: string
                 name:
-                  description: The user's full name in displayable form, including all name parts, possibly including titles and suffixes, ordered according to the enduser's locale and preferences.
+                  description: The user's full name in displayable form, including all name parts,
+                    possibly including titles and suffixes, ordered according to
+                    the enduser's locale and preferences.
                   type: string
                 nickname:
-                  description: A casual name of the User that may or may not be the same as the given_name.
+                  description: A casual name of the User that may or may not be the same as the
+                    given_name.
                   type: string
                 password:
                   description: The user's generated password.
@@ -1869,13 +2009,15 @@ paths:
                   description: The user's preferred telephone number.
                   type: string
                 phone_number_verified:
-                  description: True if the enduser's phone number has been verified; otherwise false.
+                  description: True if the enduser's phone number has been verified; otherwise
+                    false.
                   type: boolean
                 picture:
                   description: The URL of the user's profile picture.
                   type: string
                 preferred_username:
-                  description: A shorthand name by which the user wishes to be referred to at the Relying Party.
+                  description: A shorthand name by which the user wishes to be referred to at the
+                    Relying Party.
                   type: string
                 profile:
                   description: The URL of the user's profile page.
@@ -1887,7 +2029,9 @@ paths:
                   description: The user's simplified, shortened identifier at the Issuer.
                   type: string
                 updated_at:
-                  description: The time when the User's information was last updated. Its value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the date/time.
+                  description: The time when the User's information was last updated. Its value is
+                    a JSON number representing the number of seconds from
+                    1970-01-01T0:0:0Z as measured in UTC until the date/time.
                   type: number
                 webmail:
                   description: The URL of user's mailbox in a webmail application.
@@ -1896,7 +2040,9 @@ paths:
                   description: The URL of the user's webpage or blog.
                   type: string
                 zoneinfo:
-                  description: A string from the zoneinfo time zone database representing the user's time zone. For example, Europe/Paris or America/Los_Angeles.
+                  description: A string from the zoneinfo time zone database representing the
+                    user's time zone. For example, Europe/Paris or
+                    America/Los_Angeles.
                   type: string
               required:
                 - sub
@@ -1917,7 +2063,9 @@ paths:
   "/user/{username}":
     get:
       description: >-
-        Use this endpoint to generate a random user. The user is generated in a deterministic way, on the bases of the user name given as a path parameter.
+        Use this endpoint to generate a random user. The user is generated
+        in a deterministic way, on the bases of the user name given as a path
+        parameter.
 
         In the case of identical user names, the endpoint will generate the same user object. The properties of the generated user object are randomly generated on the basis of the user name.
 
@@ -1952,9 +2100,8 @@ paths:
                     "@id": https://phantauth.net/user/john.smith
                     address:
                       country: USA
-                      formatted: >-
+                      formatted: |-
                         160 Washington Walk
-
                         San Francisco 98239
                       locality: San Francisco
                       postal_code: "98239"
@@ -1993,7 +2140,11 @@ paths:
                         description: Country name component.
                         type: string
                       formatted:
-                        description: Full mailing address, formatted for display or use on a mailing label. This field MAY contain multiple lines, separated by newlines. Newlines can be represented either as a carriage return/line feed pair or as a single line feed character.
+                        description: Full mailing address, formatted for display or use on a mailing
+                          label. This field MAY contain multiple lines,
+                          separated by newlines. Newlines can be represented
+                          either as a carriage return/line feed pair or as a
+                          single line feed character.
                         type: string
                       locality:
                         description: City or locality component.
@@ -2005,29 +2156,40 @@ paths:
                         description: State, province, prefecture, or region component.
                         type: string
                       street_address:
-                        description: Full street address component, which MAY include house number, street name, post office box, and multi-line extended street address information. This field MAY contain multiple lines, separated by newlines. Newlines can be represented either as a carriage return/line feed pair or as a single line feed character.
+                        description: Full street address component, which MAY include house number,
+                          street name, post office box, and multi-line extended
+                          street address information. This field MAY contain
+                          multiple lines, separated by newlines. Newlines can be
+                          represented either as a carriage return/line feed pair
+                          or as a single line feed character.
                         type: string
                     type: object
                   birthdate:
-                    description: The user's birthday, represented as an ISO 8601:2004 [ISO8601‑2004] YYYY-MM-DD format.
+                    description: The user's birthday, represented as an ISO 8601:2004 [ISO8601‑2004]
+                      YYYY-MM-DD format.
                     type: string
                   email:
                     description: The user's preferred email address.
                     type: string
                   email_verified:
-                    description: True if the user's e-mail address has been verified; otherwise false.
+                    description: True if the user's e-mail address has been verified; otherwise
+                      false.
                     type: boolean
                   family_name:
                     description: The user's surname(s) or last name(s).
                     type: string
                   gender:
-                    description: "The enduser's gender. Possible values are: female, male, and unknown."
+                    description: "The enduser's gender. Possible values are: female, male, and
+                      unknown."
                     type: string
                   given_name:
                     description: The user's given name(s) or first name(s).
                     type: string
                   locale:
-                    description: The user's locale, represented as a BCP47 [RFC5646] language tag. It is an ISO 639-1 Alpha-2 language code in lowercase and an ISO 3166-1 Alpha-2 country code in uppercase letters, separated by a dash.
+                    description: The user's locale, represented as a BCP47 [RFC5646] language tag.
+                      It is an ISO 639-1 Alpha-2 language code in lowercase and
+                      an ISO 3166-1 Alpha-2 country code in uppercase letters,
+                      separated by a dash.
                     type: string
                   me:
                     description: The simplified URL of the user's profile page.
@@ -2036,10 +2198,13 @@ paths:
                     description: The user's middle name(s).
                     type: string
                   name:
-                    description: The user's full name in displayable form, including all name parts, possibly including titles and suffixes, ordered according to the enduser's locale and preferences.
+                    description: The user's full name in displayable form, including all name parts,
+                      possibly including titles and suffixes, ordered according
+                      to the enduser's locale and preferences.
                     type: string
                   nickname:
-                    description: A casual name of the User that may or may not be the same as the given_name.
+                    description: A casual name of the User that may or may not be the same as the
+                      given_name.
                     type: string
                   password:
                     description: The user's generated password.
@@ -2048,13 +2213,15 @@ paths:
                     description: The user's preferred telephone number.
                     type: string
                   phone_number_verified:
-                    description: True if the enduser's phone number has been verified; otherwise false.
+                    description: True if the enduser's phone number has been verified; otherwise
+                      false.
                     type: boolean
                   picture:
                     description: The URL of the user's profile picture.
                     type: string
                   preferred_username:
-                    description: A shorthand name by which the user wishes to be referred to at the Relying Party.
+                    description: A shorthand name by which the user wishes to be referred to at the
+                      Relying Party.
                     type: string
                   profile:
                     description: The URL of the user's profile page.
@@ -2066,7 +2233,9 @@ paths:
                     description: The user's simplified, shortened identifier at the Issuer.
                     type: string
                   updated_at:
-                    description: The time when the User's information was last updated. Its value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the date/time.
+                    description: The time when the User's information was last updated. Its value is
+                      a JSON number representing the number of seconds from
+                      1970-01-01T0:0:0Z as measured in UTC until the date/time.
                     type: number
                   webmail:
                     description: The URL of user's mailbox in a webmail application.
@@ -2075,7 +2244,9 @@ paths:
                     description: The URL of the user's webpage or blog.
                     type: string
                   zoneinfo:
-                    description: A string from the zoneinfo time zone database representing the user's time zone. For example, Europe/Paris or America/Los_Angeles.
+                    description: A string from the zoneinfo time zone database representing the
+                      user's time zone. For example, Europe/Paris or
+                      America/Los_Angeles.
                     type: string
                 required:
                   - sub
@@ -2088,7 +2259,8 @@ paths:
   "/user/{username}/token/{kind}":
     get:
       description: >-
-        It is used to generate OpenID Connect tokens as path parameters to a user of a given name.
+        It is used to generate OpenID Connect tokens as path parameters to
+        a user of a given name.
 
 
         This method is mainly used in the testing process, when, for example, the token received from the normal authenticaton flow is not available to the test code.
@@ -2141,7 +2313,10 @@ components:
           description: Country name component.
           type: string
         formatted:
-          description: Full mailing address, formatted for display or use on a mailing label. This field MAY contain multiple lines, separated by newlines. Newlines can be represented either as a carriage return/line feed pair or as a single line feed character.
+          description: Full mailing address, formatted for display or use on a mailing
+            label. This field MAY contain multiple lines, separated by newlines.
+            Newlines can be represented either as a carriage return/line feed
+            pair or as a single line feed character.
           type: string
         locality:
           description: City or locality component.
@@ -2153,7 +2328,11 @@ components:
           description: State, province, prefecture, or region component.
           type: string
         street_address:
-          description: Full street address component, which MAY include house number, street name, post office box, and multi-line extended street address information. This field MAY contain multiple lines, separated by newlines. Newlines can be represented either as a carriage return/line feed pair or as a single line feed character.
+          description: Full street address component, which MAY include house number,
+            street name, post office box, and multi-line extended street address
+            information. This field MAY contain multiple lines, separated by
+            newlines. Newlines can be represented either as a carriage
+            return/line feed pair or as a single line feed character.
           type: string
       type: object
     Client:
@@ -2165,7 +2344,8 @@ components:
           description: OAuth 2.0 client identifier string.
           type: string
         client_name:
-          description: Human-readable string name of the client to be presented to the end-user during authorization.
+          description: Human-readable string name of the client to be presented to the
+            end-user during authorization.
           type: string
         client_secret:
           description: "OAuth 2.0 client secret string. "
@@ -2174,19 +2354,24 @@ components:
           description: URL string of a web page providing information about the client.
           type: string
         contacts:
-          description: Array of strings representing ways to contact people responsible for this client, typically email addresses.
+          description: Array of strings representing ways to contact people responsible
+            for this client, typically email addresses.
           items: {}
           type: array
         grant_types:
-          description: Array of OAuth 2.0 grant type strings that the client can use at the token endpoint.
+          description: Array of OAuth 2.0 grant type strings that the client can use at
+            the token endpoint.
           items: {}
           type: array
         jwks:
-          description: Client's JSON Web Key Set [RFC7517] document value, which contains the client's public keys.  The value of this field MUST be a JSON object containing a valid JWK Set.
+          description: Client's JSON Web Key Set [RFC7517] document value, which contains
+            the client's public keys.  The value of this field MUST be a JSON
+            object containing a valid JWK Set.
           items: {}
           type: array
         jwks_uri:
-          description: URL string referencing the client's JSON Web Key (JWK) Set [RFC7517] document, which contains the client's public keys.
+          description: URL string referencing the client's JSON Web Key (JWK) Set
+            [RFC7517] document, which contains the client's public keys.
           type: string
         logo_email:
           description: An email address used to generate a gravatar.com logo_uri.
@@ -2195,30 +2380,44 @@ components:
           description: URL string that references a logo for the client.
           type: string
         policy_uri:
-          description: URL string that points to a human-readable privacy policy document that describes how the deployment organization collects, uses, retains, and discloses personal data.
+          description: URL string that points to a human-readable privacy policy document
+            that describes how the deployment organization collects, uses,
+            retains, and discloses personal data.
           type: string
         redirect_uris:
-          description: Array of redirection URI strings for use in redirect-based flows such as the authorization code and implicit flows.
+          description: Array of redirection URI strings for use in redirect-based flows
+            such as the authorization code and implicit flows.
           items: {}
           type: array
         response_types:
-          description: Array of the OAuth 2.0 response type strings that the client can use at the authorization endpoint.
+          description: Array of the OAuth 2.0 response type strings that the client can
+            use at the authorization endpoint.
           items: {}
           type: array
         scope:
-          description: String containing a space-separated list of scope values (as described in Section 3.3 of OAuth 2.0 [RFC6749]) that the client can use when requesting access tokens.
+          description: String containing a space-separated list of scope values (as
+            described in Section 3.3 of OAuth 2.0 [RFC6749]) that the client can
+            use when requesting access tokens.
           type: string
         software_id:
-          description: A unique identifier string (e.g., a Universally Unique Identifier (UUID)) assigned by the client developer or software publisher used by registration endpoints to identify the client software to be dynamically registered.
+          description: A unique identifier string (e.g., a Universally Unique Identifier
+            (UUID)) assigned by the client developer or software publisher used
+            by registration endpoints to identify the client software to be
+            dynamically registered.
           type: string
         software_version:
-          description: A version identifier string for the client software identified by software_id.
+          description: A version identifier string for the client software identified by
+            software_id.
           type: string
         token_endpoint_auth_method:
-          description: String indicator of the requested authentication method for the token endpoint.
+          description: String indicator of the requested authentication method for the
+            token endpoint.
           type: string
         tos_uri:
-          description: URL string that points to a human-readable terms of service document for the client that describes a contractual relationship between the end-user and the client that the end-user accepts when authorizing the client.
+          description: URL string that points to a human-readable terms of service
+            document for the client that describes a contractual relationship
+            between the end-user and the client that the end-user accepts when
+            authorizing the client.
           type: string
       required:
         - client_id
@@ -2229,7 +2428,8 @@ components:
           description: The URL of the domain's JSON representation.
           type: string
         logo:
-          description: The URL of the domain logo. The image from this address is displayed on the webpage of the domain.
+          description: The URL of the domain logo. The image from this address is
+            displayed on the webpage of the domain.
           type: string
         members:
           description: The tenants included in a domain.
@@ -2251,10 +2451,13 @@ components:
           description: URL of the Fleet's JSON representation.
           type: string
         logo:
-          description: The URL of the fleet logo, which can be customized by the gravatar associated with the email address in the `logo_email` property.
+          description: The URL of the fleet logo, which can be customized by the gravatar
+            associated with the email address in the `logo_email` property.
           type: string
         logo_email:
-          description: The email address of the fleet, either generated or provided in the `sub` property. The fleet logo can be customized by the use of the gravater associated with this email address.
+          description: The email address of the fleet, either generated or provided in the
+            `sub` property. The fleet logo can be customized by the use of the
+            gravater associated with this email address.
           type: string
         members:
           description: The client objects included in a fleet.
@@ -2267,7 +2470,10 @@ components:
           description: The URL of the Fleet profile.
           type: string
         sub:
-          description: The name or email address of a given fleet. The fleet properties and fleet members are generated from this name. If provide an email address, you can customize the fleet logo by the use of the gravatar associated with the email address.
+          description: The name or email address of a given fleet. The fleet properties
+            and fleet members are generated from this name. If provide an email
+            address, you can customize the fleet logo by the use of the gravatar
+            associated with the email address.
           type: string
       required:
         - sub
@@ -2278,10 +2484,13 @@ components:
           description: URL of the Teams's JSON representation.
           type: string
         logo:
-          description: The URL of the team logo, which can be customized by the gravatar associated with the email address in the `logo_email` property.
+          description: The URL of the team logo, which can be customized by the gravatar
+            associated with the email address in the `logo_email` property.
           type: string
         logo_email:
-          description: The email address of the team, either generated or provided in the `sub` property. The team logo can be customized by the use of the gravater associated with this email address.
+          description: The email address of the team, either generated or provided in the
+            `sub` property. The team logo can be customized by the use of the
+            gravater associated with this email address.
           type: string
         members:
           description: The user objects that generate a team member.
@@ -2294,7 +2503,10 @@ components:
           description: The URL of the Team profile.
           type: string
         sub:
-          description: The name or email address of a given team. The team properties and team members are generated from this name. If you provide an email address, you can customize the team logo by the use of the gravatar associated with the email address.
+          description: The name or email address of a given team. The team properties and
+            team members are generated from this name. If you provide an email
+            address, you can customize the team logo by the use of the gravatar
+            associated with the email address.
           type: string
       required:
         - sub
@@ -2305,14 +2517,21 @@ components:
           description: The URL of the tenant's JSON representation.
           type: string
         about:
-          description: A detailed description of the tenant. If it takes the value of an URL, the description is downloaded from the given URL, otherwise the value it takes is the description itself. Markdown formatting can be used in the description.
+          description: A detailed description of the tenant. If it takes the value of an
+            URL, the description is downloaded from the given URL, otherwise the
+            value it takes is the description itself. Markdown formatting can be
+            used in the description.
           type: string
         attribution:
-          description: The attribution of the external data source or random user generator. Its value can have markdown formatting, that is, the external source can contain highlights and links.
+          description: The attribution of the external data source or random user
+            generator. Its value can have markdown formatting, that is, the
+            external source can contain highlights and links.
           type: string
         depot:
           description: >-
-            It defines the place of the CSV file containing the resource data in [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) format.
+            It defines the place of the CSV file containing the resource data
+            in [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570)
+            format.
 
             The URI template receives the type of the object to be generated (user, team) in the `kind` parameter.
 
@@ -2322,58 +2541,81 @@ components:
             In the case of nested properties, a '.' character separates the elements of the property name (e.g. address.formatted).
           type: string
         depots:
-          description: A list of resource types supported by the external CSV set in `depot`.
+          description: A list of resource types supported by the external CSV set in
+            `depot`.
           items: {}
           type: array
         domain:
-          description: True in the case of a domain tenant collecting several tenants, otherwise false.
+          description: True in the case of a domain tenant collecting several tenants,
+            otherwise false.
           type: boolean
         factories:
-          description: A list of resource types supported by the external generator set in `factory`.
+          description: A list of resource types supported by the external generator set in
+            `factory`.
           items: {}
           type: array
         factory:
           description: >-
-            The address of the custom random resource generator (user, team) in [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) format.
+            The address of the custom random resource generator (user, team) in
+            [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570)
+            format.
 
             The URI template receives the type of the object to be generated (user, team) in the `kind` parameter, and the identifier of the object to be generated in the `name` parameter.
           type: string
         favicon:
-          description: The URL of the tenant favicon. The image from this address appears as a shortcut icon in the browser when a user visits the tenant's webpages.
+          description: The URL of the tenant favicon. The image from this address appears
+            as a shortcut icon in the browser when a user visits the tenant's
+            webpages.
           type: string
         issuer:
           description: >-
-            The URL of the tenant OpenID Connect issuer. This value allows you to get, for example, the [OpenID Provider Metadata](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata).
+            The URL of the tenant OpenID Connect issuer. This value allows you
+            to get, for example, the [OpenID Provider
+            Metadata](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata).
 
             As a webpage, it contains information on the use if the given tenant.
           type: string
         logo:
-          description: The URL of the tenant logo. The image from this address appears in the address bar of the tenant's webpages and the pages that contain the list of available tenants.
+          description: The URL of the tenant logo. The image from this address appears in
+            the address bar of the tenant's webpages and the pages that contain
+            the list of available tenants.
           type: string
         name:
-          description: The displayed tenant name. In lack of such name, the DNS name of the tenant is displayed in the address bar of the tenant's webpages.
+          description: The displayed tenant name. In lack of such name, the DNS name of
+            the tenant is displayed in the address bar of the tenant's webpages.
           type: string
         script:
-          description: The URL of a custom JavaScript file can be automatically inserted in the login.html, consent.html, és test.html pages.
+          description: The URL of a custom JavaScript file can be automatically inserted
+            in the login.html, consent.html, és test.html pages.
           type: string
         sheet:
           description: >-
-            It is used to give the identifyer of a public Google Sheet document. The first line of the table contains the user property names, the following lines, on the other hand, contain the relevant data.
+            It is used to give the identifyer of a public Google Sheet
+            document. The first line of the table contains the user property
+            names, the following lines, on the other hand, contain the relevant
+            data.
 
             In the case of nested properties, a '.' character separates the elements of the property name (e.g. address.formatted).
           type: string
         sub:
-          description: The fully qualified DNS domain name of the tenant. In the case of official and shared tenants (phantauth.net and phantauth.cf DNS domain), the DNS domain can be omitted (e.g. *default* or *faker*).
+          description: The fully qualified DNS domain name of the tenant. In the case of
+            official and shared tenants (phantauth.net and phantauth.cf DNS
+            domain), the DNS domain can be omitted (e.g. *default* or *faker*).
           type: string
         subtenant:
-          description: True in the case of a tenant referred to in a domain tenant, otherwise false.
+          description: True in the case of a tenant referred to in a domain tenant,
+            otherwise false.
           type: boolean
         summary:
-          description: A one-line description, the watchword of the tenant. It appears on the tenant's startup page and the pages that contain the list of available tenants. It takes the valua of an unformatted text.
+          description: A one-line description, the watchword of the tenant. It appears on
+            the tenant's startup page and the pages that contain the list of
+            available tenants. It takes the valua of an unformatted text.
           type: string
         template:
           description: >-
-            It defines the place of the templates of the HTML pages of the tenant in [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) format.
+            It defines the place of the templates of the HTML pages of the
+            tenant in [RFC 6570 - URI
+            temaplate](https://tools.ietf.org/html/rfc6570) format.
 
             The URI template receives the page name in a `resource` parameter. By default, it takes the following value: `https://default.phantauth.net{/resource}`.
           type: string
@@ -2386,7 +2628,9 @@ components:
         userinfo:
           type: string
         website:
-          description: The website address associated with the tenant. If a tenant doesn't have a website, its value is identical with that of the `issuer` property.
+          description: The website address associated with the tenant. If a tenant doesn't
+            have a website, its value is identical with that of the `issuer`
+            property.
           type: string
       required:
         - sub
@@ -2400,7 +2644,8 @@ components:
         address:
           $ref: "#/components/schemas/Address"
         birthdate:
-          description: The user's birthday, represented as an ISO 8601:2004 [ISO8601‑2004] YYYY-MM-DD format.
+          description: The user's birthday, represented as an ISO 8601:2004 [ISO8601‑2004]
+            YYYY-MM-DD format.
           type: string
         email:
           description: The user's preferred email address.
@@ -2412,13 +2657,17 @@ components:
           description: The user's surname(s) or last name(s).
           type: string
         gender:
-          description: "The enduser's gender. Possible values are: female, male, and unknown."
+          description: "The enduser's gender. Possible values are: female, male, and
+            unknown."
           type: string
         given_name:
           description: The user's given name(s) or first name(s).
           type: string
         locale:
-          description: The user's locale, represented as a BCP47 [RFC5646] language tag. It is an ISO 639-1 Alpha-2 language code in lowercase and an ISO 3166-1 Alpha-2 country code in uppercase letters, separated by a dash.
+          description: The user's locale, represented as a BCP47 [RFC5646] language tag.
+            It is an ISO 639-1 Alpha-2 language code in lowercase and an ISO
+            3166-1 Alpha-2 country code in uppercase letters, separated by a
+            dash.
           type: string
         me:
           description: The simplified URL of the user's profile page.
@@ -2427,10 +2676,13 @@ components:
           description: The user's middle name(s).
           type: string
         name:
-          description: The user's full name in displayable form, including all name parts, possibly including titles and suffixes, ordered according to the enduser's locale and preferences.
+          description: The user's full name in displayable form, including all name parts,
+            possibly including titles and suffixes, ordered according to the
+            enduser's locale and preferences.
           type: string
         nickname:
-          description: A casual name of the User that may or may not be the same as the given_name.
+          description: A casual name of the User that may or may not be the same as the
+            given_name.
           type: string
         password:
           description: The user's generated password.
@@ -2439,13 +2691,15 @@ components:
           description: The user's preferred telephone number.
           type: string
         phone_number_verified:
-          description: True if the enduser's phone number has been verified; otherwise false.
+          description: True if the enduser's phone number has been verified; otherwise
+            false.
           type: boolean
         picture:
           description: The URL of the user's profile picture.
           type: string
         preferred_username:
-          description: A shorthand name by which the user wishes to be referred to at the Relying Party.
+          description: A shorthand name by which the user wishes to be referred to at the
+            Relying Party.
           type: string
         profile:
           description: The URL of the user's profile page.
@@ -2457,7 +2711,9 @@ components:
           description: The user's simplified, shortened identifier at the Issuer.
           type: string
         updated_at:
-          description: The time when the User's information was last updated. Its value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the date/time.
+          description: The time when the User's information was last updated. Its value is
+            a JSON number representing the number of seconds from
+            1970-01-01T0:0:0Z as measured in UTC until the date/time.
           type: number
         webmail:
           description: The URL of user's mailbox in a webmail application.
@@ -2466,7 +2722,8 @@ components:
           description: The URL of the user's webpage or blog.
           type: string
         zoneinfo:
-          description: A string from the zoneinfo time zone database representing the user's time zone. For example, Europe/Paris or America/Los_Angeles.
+          description: A string from the zoneinfo time zone database representing the
+            user's time zone. For example, Europe/Paris or America/Los_Angeles.
           type: string
       required:
         - sub

@@ -187,7 +187,12 @@ paths:
   /v1/tax/countrycode:
     get:
       description: >
-        Get request. This method returns all tax rates for country discovered based on country code. The country code must be 2 letters ISO 3166-1 alfa-2 country code (see <a href="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes">here</a> for more information). You can use 'filter' parameter to narrow results to selected type of tax
+        Get request. This method returns all tax rates for country
+        discovered based on country code. The country code must be 2 letters ISO
+        3166-1 alfa-2 country code (see <a
+        href="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes">here</a>
+        for more information). You can use 'filter' parameter to narrow results
+        to selected type of tax
 
         <p>For US sales tax you can filter the tax rate you want for each state or zip code with one of the following: (they are case sensitive)</p>
 
@@ -265,13 +270,16 @@ paths:
           schema:
             example: US
             type: string
-        - description: "You can filter your taxes by one of following types: 'standard', 'reduced', 'second reduced', 'third reduced' and 'super reduced'."
+        - description: "You can filter your taxes by one of following types: 'standard',
+            'reduced', 'second reduced', 'third reduced' and 'super reduced'."
           in: query
           name: filter
           schema:
             example: ""
             type: string
-        - description: You must provide a zip code if one of your selected countries is United States and you've had selected a state on your Taxrates.io member's dashboard.
+        - description: You must provide a zip code if one of your selected countries is
+            United States and you've had selected a state on your Taxrates.io
+            member's dashboard.
           in: query
           name: zip
           schema:
@@ -370,7 +378,11 @@ paths:
   /v1/tax/ip:
     get:
       description: >
-        Get request. This method returns all tax rates for country discovered on either your IP address or IP address param. The IP param is not required. When empty, the taxrates.io will try to discover your IP address and based on this will retrieve the tax rates. You can use 'filter' parameter to narrow results to selected type of tax
+        Get request. This method returns all tax rates for country
+        discovered on either your IP address or IP address param. The IP param
+        is not required. When empty, the taxrates.io will try to discover your
+        IP address and based on this will retrieve the tax rates. You can use
+        'filter' parameter to narrow results to selected type of tax
 
         <p>For US sales tax you can filter the tax rate you want for each state or zip code with one of the following: (they are case sensitive)</p>
 
@@ -554,7 +566,11 @@ paths:
   /v3/tax/rates:
     get:
       description: >
-        <p>Get request. This method returns all tax rates configured on your account. Based on your country selection the endpoint will return all taxes for all countries. You can use the 'filter' parameter to narrow results to selected type of tax. Use 'zip' parameter when you have selected the United States.</p>
+        <p>Get request. This method returns all tax rates configured on
+        your account. Based on your country selection the endpoint will return
+        all taxes for all countries. You can use the 'filter' parameter to
+        narrow results to selected type of tax. Use 'zip' parameter when you
+        have selected the United States.</p>
 
         <p>We have development an easy to use scheduler so you can call the API to get the rates every hour or day. Please click on the following link to see the <a href="https://gist.github.com/gregbird/cd904ff230cdf86253716aa351154edb">code on Github</a>.</p>
 
@@ -637,13 +653,15 @@ paths:
           schema:
             example: <string>
             type: string
-        - description: "You can filter your taxes by one of following types: 'standard', 'CombinedRate', 'CountyRate', 'CityRate', 'SPDRate' and 'MTARate'."
+        - description: "You can filter your taxes by one of following types: 'standard',
+            'CombinedRate', 'CountyRate', 'CityRate', 'SPDRate' and 'MTARate'."
           in: query
           name: filter
           schema:
             example: ""
             type: string
-        - description: Cursor shows from which record you want to get information. Default value is 0, next value can be retrieved from X-Cursor-Next header.
+        - description: Cursor shows from which record you want to get information. Default
+            value is 0, next value can be retrieved from X-Cursor-Next header.
           in: query
           name: cursor
           schema:
@@ -728,7 +746,8 @@ paths:
               examples:
                 No configured tax rates found. Have you added any country to your account?:
                   value: ""
-          description: No configured tax rates found. Have you added any country to your account?
+          description: No configured tax rates found. Have you added any country to your
+            account?
         "500":
           content:
             application/json:

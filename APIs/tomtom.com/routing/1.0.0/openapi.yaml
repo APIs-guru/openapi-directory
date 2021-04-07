@@ -80,7 +80,8 @@ paths:
               - combustion
               - electric
             type: string
-        - description: Specifies the speed-dependent component of consumption. Provided as an unordered list of speed/consumption-rate pairs.
+        - description: Specifies the speed-dependent component of consumption. Provided as
+            an unordered list of speed/consumption-rate pairs.
           example: 50,8.2:130,21.3
           in: query
           name: constantSpeedConsumptionInkWhPerHundredkm
@@ -89,9 +90,12 @@ paths:
             type: string
       responses:
         "200":
-          description: "OK: a range was calculated and the body of the response contains the polygon description and further data."
+          description: "OK: a range was calculated and the body of the response contains
+            the polygon description and further data."
         "400":
-          description: "Bad request: one or more parameters were incorrectly specified or are mutually exclusive, or the origin point specified in the request is not near enough to a road."
+          description: "Bad request: one or more parameters were incorrectly specified or
+            are mutually exclusive, or the origin point specified in the request
+            is not near enough to a road."
         "403":
           $ref: "#/components/responses/403"
         "404":
@@ -116,7 +120,10 @@ paths:
       tags:
         - Routing
     post:
-      description: "Calculates a set of locations that can be reached from the origin point. POST method handles additionally parameters: <em>supportingPoints</em>, <em>allowVignette</em>, <em>avoidVignette</em>, <em>avoidAreas</em>."
+      description: "Calculates a set of locations that can be reached from the origin
+        point. POST method handles additionally parameters:
+        <em>supportingPoints</em>, <em>allowVignette</em>,
+        <em>avoidVignette</em>, <em>avoidAreas</em>."
       parameters:
         - $ref: "#/components/parameters/versionNumber"
         - $ref: "#/components/parameters/origin"
@@ -160,7 +167,8 @@ paths:
               - combustion
               - electric
             type: string
-        - description: Specifies the speed-dependent component of consumption. Provided as an unordered list of speed/consumption-rate pairs.
+        - description: Specifies the speed-dependent component of consumption. Provided as
+            an unordered list of speed/consumption-rate pairs.
           example: 50,8.2:130,21.3
           in: query
           name: constantSpeedConsumptionInkWhPerHundredkm
@@ -177,9 +185,12 @@ paths:
               $ref: "#/components/schemas/calculateReachableRangePostDataParameters"
       responses:
         "200":
-          description: "OK: a range was calculated and the body of the response contains the polygon description and further data."
+          description: "OK: a range was calculated and the body of the response contains
+            the polygon description and further data."
         "400":
-          description: "Bad request: one or more parameters were incorrectly specified or are mutually exclusive, or the origin point specified in the request is not near enough to a road."
+          description: "Bad request: one or more parameters were incorrectly specified or
+            are mutually exclusive, or the origin point specified in the request
+            is not near enough to a road."
         "403":
           $ref: "#/components/responses/403"
         "404":
@@ -251,9 +262,13 @@ paths:
         - $ref: "#/components/parameters/constantSpeedConsumptionInkWhPerHundredkm"
       responses:
         "200":
-          description: "OK: a route was calculated and the body of the response contains the route description and any other requested data."
+          description: "OK: a route was calculated and the body of the response contains
+            the route description and any other requested data."
         "400":
-          description: "Bad request: one or more parameters were incorrectly specified, are mutually exclusive, the points in the request are not connected by the road network or the points in the request are not near enough to a road."
+          description: "Bad request: one or more parameters were incorrectly specified,
+            are mutually exclusive, the points in the request are not connected
+            by the road network or the points in the request are not near enough
+            to a road."
         "403":
           $ref: "#/components/responses/403"
         "404":
@@ -278,7 +293,9 @@ paths:
       tags:
         - Routing
     post:
-      description: "Calculates a route between an origin and a destination. POST method handles additionally parameters: <em>supportingPoints</em>, <em>allowVignette</em>, <em>avoidVignette</em>, <em>avoidAreas</em>."
+      description: "Calculates a route between an origin and a destination. POST
+        method handles additionally parameters: <em>supportingPoints</em>,
+        <em>allowVignette</em>, <em>avoidVignette</em>, <em>avoidAreas</em>."
       parameters:
         - $ref: "#/components/parameters/versionNumber"
         - $ref: "#/components/parameters/locations"
@@ -332,9 +349,13 @@ paths:
               $ref: "#/components/schemas/calculateRoutePostDataParameters"
       responses:
         "200":
-          description: "OK: a route was calculated and the body of the response contains the route description and any other requested data."
+          description: "OK: a route was calculated and the body of the response contains
+            the route description and any other requested data."
         "400":
-          description: "Bad request: one or more parameters were incorrectly specified, are mutually exclusive, the points in the request are not connected by the road network or the points in the request are not near enough to a road."
+          description: "Bad request: one or more parameters were incorrectly specified,
+            are mutually exclusive, the points in the request are not connected
+            by the road network or the points in the request are not near enough
+            to a road."
         "403":
           $ref: "#/components/responses/403"
         "404":
@@ -361,14 +382,18 @@ paths:
 components:
   parameters:
     accelerationEfficiency:
-      description: Specifies the efficiency of converting chemical energy stored in fuel to kinetic energy when the vehicle accelerates (i.e. KineticEnergyGained/ChemicalEnergyConsumed).
+      description: Specifies the efficiency of converting chemical energy stored in
+        fuel to kinetic energy when the vehicle accelerates (i.e.
+        KineticEnergyGained/ChemicalEnergyConsumed).
       in: query
       name: accelerationEfficiency
       schema:
         format: float
         type: number
     alternativeType:
-      description: Determines whether the alternative routes to be calculated should be better with respect to the planning criteria provided than the reference route.
+      description: Determines whether the alternative routes to be calculated should
+        be better with respect to the planning criteria provided than the
+        reference route.
       in: query
       name: alternativeType
       schema:
@@ -378,21 +403,24 @@ components:
           - betterRoute
         type: string
     arriveAt:
-      description: The date and time of arrival at the destination point. It must be specified as a dateTime.
+      description: The date and time of arrival at the destination point. It must be
+        specified as a dateTime.
       in: query
       name: arriveAt
       schema:
         format: dateTime
         type: string
     auxiliaryPowerInLitersPerHour:
-      description: Specifies the amount of fuel consumed for sustaining auxiliary systems of the vehicle, in liters per hour.
+      description: Specifies the amount of fuel consumed for sustaining auxiliary
+        systems of the vehicle, in liters per hour.
       in: query
       name: auxiliaryPowerInLitersPerHour
       schema:
         format: float
         type: number
     auxiliaryPowerInkW:
-      description: Specifies the amount of power consumed by auxiliary systems, in kilowatts (kW).
+      description: Specifies the amount of power consumed by auxiliary systems, in
+        kilowatts (kW).
       in: query
       name: auxiliaryPowerInkW
       schema:
@@ -400,7 +428,9 @@ components:
         type: number
     avoid:
       description: >-
-        Specifies whether the routing engine should try to avoid specific types of road segment when calculating the route. Can be specified multiple times.
+        Specifies whether the routing engine should try to avoid specific
+        types of road segment when calculating the route. Can be specified
+        multiple times.
 
         Possible values:
           - tollRoads
@@ -416,7 +446,9 @@ components:
         type: string
     avoidInCalculateReachableRange:
       description: >-
-        Specifies whether the routing engine should try to avoid specific types of road segment when calculating the route. Can be specified multiple times.
+        Specifies whether the routing engine should try to avoid specific
+        types of road segment when calculating the route. Can be specified
+        multiple times.
 
         Possible values:
           - tollRoads
@@ -444,7 +476,9 @@ components:
         default: false
         type: boolean
     computeTravelTimeFor:
-      description: Specifies whether to return additional travel times using different types of traffic information (none, historic, live) as well as the default best-estimate travel time.
+      description: Specifies whether to return additional travel times using different
+        types of traffic information (none, historic, live) as well as the
+        default best-estimate travel time.
       in: query
       name: computeTravelTimeFor
       schema:
@@ -454,21 +488,24 @@ components:
           - all
         type: string
     constantSpeedConsumptionInLitersPerHundredkm:
-      description: Specifies the speed-dependent component of consumption. Provided as an unordered list of speed/consumption-rate pairs.
+      description: Specifies the speed-dependent component of consumption. Provided as
+        an unordered list of speed/consumption-rate pairs.
       in: query
       name: constantSpeedConsumptionInLitersPerHundredkm
       schema:
         pattern: ^((\d+\.?\d*,\d+\.?\d*):?)+$
         type: string
     constantSpeedConsumptionInkWhPerHundredkm:
-      description: Specifies the speed-dependent component of consumption. Provided as an unordered list of speed/consumption-rate pairs.
+      description: Specifies the speed-dependent component of consumption. Provided as
+        an unordered list of speed/consumption-rate pairs.
       in: query
       name: constantSpeedConsumptionInkWhPerHundredkm
       schema:
         pattern: ^((\d+\.?\d*,\d+\.?\d*):?)+$
         type: string
     contentType:
-      description: The content type of the response structure. If the content type is jsonp, a callback method can be specified in the query parameters.
+      description: The content type of the response structure. If the content type is
+        jsonp, a callback method can be specified in the query parameters.
       in: path
       name: contentType
       required: true
@@ -495,28 +532,34 @@ components:
         format: float
         type: number
     decelerationEfficiency:
-      description: Specifies the efficiency of converting kinetic energy to saved (not consumed) fuel when the vehicle decelerates (i.e. ChemicalEnergySaved/KineticEnergyLost).
+      description: Specifies the efficiency of converting kinetic energy to saved (not
+        consumed) fuel when the vehicle decelerates (i.e.
+        ChemicalEnergySaved/KineticEnergyLost).
       in: query
       name: decelerationEfficiency
       schema:
         format: float
         type: number
     departAt:
-      description: The date and time of departure from the origin point. Departure times apart from <i>now</i> must be specified as a dateTime.
+      description: The date and time of departure from the origin point. Departure
+        times apart from <i>now</i> must be specified as a dateTime.
       in: query
       name: departAt
       schema:
         default: now
         type: string
     downhillEfficiency:
-      description: Specifies the efficiency of converting potential energy to saved (not consumed) fuel when the vehicle loses elevation (i.e. ChemicalEnergySaved/PotentialEnergyLost).
+      description: Specifies the efficiency of converting potential energy to saved
+        (not consumed) fuel when the vehicle loses elevation (i.e.
+        ChemicalEnergySaved/PotentialEnergyLost).
       in: query
       name: downhillEfficiency
       schema:
         format: float
         type: number
     energyBudgetInkWh:
-      description: Electric energy budget in kilowatt hours (kWh). Determines the maximum vehicle range using the specified Electric Consumption Model.
+      description: Electric energy budget in kilowatt hours (kWh). Determines the
+        maximum vehicle range using the specified Electric Consumption Model.
       example: 43
       in: query
       name: energyBudgetInkWh
@@ -525,7 +568,8 @@ components:
         minimum: 0
         type: number
     fuelBudgetInLiters:
-      description: Fuel budget in liters. Determines the maximum vehicle range using the specified Combustion Consumption Model.
+      description: Fuel budget in liters. Determines the maximum vehicle range using
+        the specified Combustion Consumption Model.
       in: query
       name: fuelBudgetInLiters
       schema:
@@ -533,7 +577,8 @@ components:
         minimum: 0
         type: number
     fuelEnergyDensityInMJoulesPerLiter:
-      description: Specifies the amount of chemical energy stored in one liter of fuel in megajoules (MJ).
+      description: Specifies the amount of chemical energy stored in one liter of fuel
+        in megajoules (MJ).
       in: query
       name: fuelEnergyDensityInMJoulesPerLiter
       schema:
@@ -585,21 +630,24 @@ components:
         minimum: 0
         type: integer
     maxChargeInkWh:
-      description: Specifies the maximum electric energy supply in kilowatt hours (kWh) that may be stored in the vehicle's battery.
+      description: Specifies the maximum electric energy supply in kilowatt hours
+        (kWh) that may be stored in the vehicle's battery.
       in: query
       name: maxChargeInkWh
       schema:
         format: float
         type: number
     minDeviationDistance:
-      description: All alternative routes will follow the reference route for the specified minimum number of meters starting from the origin point.
+      description: All alternative routes will follow the reference route for the
+        specified minimum number of meters starting from the origin point.
       in: query
       name: minDeviationDistance
       schema:
         default: 0
         type: integer
     minDeviationTime:
-      description: All alternative routes will follow the reference route for the specified minimum number of seconds starting from the origin point.
+      description: All alternative routes will follow the reference route for the
+        specified minimum number of seconds starting from the origin point.
       in: query
       name: minDeviationTime
       schema:
@@ -645,7 +693,8 @@ components:
         type: string
     sectionType:
       description: >-
-        Specifies which section types are explicitly reported in the route response. Can be specified multiple times.
+        Specifies which section types are explicitly reported in the route
+        response. Can be specified multiple times.
           - carTrain, ferry, tunnel or motorway
           - pedestrian
           - tollRoad
@@ -659,7 +708,9 @@ components:
         default: travelMode
         type: string
     timeBudgetInSec:
-      description: Time budget in seconds. Determines the maximum vehicle range using the specified driving time. The consumption parameters in the request will only affect eco-routes, and thereby indirectly the driving time.
+      description: Time budget in seconds. Determines the maximum vehicle range using
+        the specified driving time. The consumption parameters in the request
+        will only affect eco-routes, and thereby indirectly the driving time.
       in: query
       name: timeBudgetInSec
       schema:
@@ -667,7 +718,8 @@ components:
         minimum: 0
         type: number
     traffic:
-      description: Determines whether current traffic is used in route calculations. Note that information on historic road speeds is always used.
+      description: Determines whether current traffic is used in route calculations.
+        Note that information on historic road speeds is always used.
       in: query
       name: traffic
       schema:
@@ -690,7 +742,9 @@ components:
           - pedestrian
         type: string
     uphillEfficiency:
-      description: Specifies the efficiency of converting chemical energy stored in fuel to potential energy when the vehicle gains elevation (i.e. PotentialEnergyGained/ChemicalEnergyConsumed).
+      description: Specifies the efficiency of converting chemical energy stored in
+        fuel to potential energy when the vehicle gains elevation (i.e.
+        PotentialEnergyGained/ChemicalEnergyConsumed).
       in: query
       name: uphillEfficiency
       schema:
@@ -704,7 +758,8 @@ components:
         default: 0
         type: integer
     vehicleCommercial:
-      description: Indicates that the vehicle is used for commercial purposes. This means it may not be allowed on certain roads.
+      description: Indicates that the vehicle is used for commercial purposes. This
+        means it may not be allowed on certain roads.
       in: query
       name: vehicleCommercial
       schema:
@@ -721,7 +776,9 @@ components:
           - electric
         type: string
     vehicleHeading:
-      description: The directional heading of the vehicle in degrees. Entered in degrees, measured clockwise from north (so north is 0, east is 90, etc.).
+      description: The directional heading of the vehicle in degrees. Entered in
+        degrees, measured clockwise from north (so north is 0, east is 90,
+        etc.).
       in: query
       name: vehicleHeading
       schema:
@@ -746,7 +803,8 @@ components:
         type: number
     vehicleLoadType:
       description: >-
-        Indicates what kinds of hazardous materials the vehicle is carrying (if any). This means it may not be allowed on certain roads.
+        Indicates what kinds of hazardous materials the vehicle is carrying
+        (if any). This means it may not be allowed on certain roads.
 
         Use these for routing in the US:
 
@@ -815,7 +873,7 @@ components:
         type: string
   responses:
     "403":
-      description: >-
+      description: |-
         Permission, capacity, or authentication issues:
           - Forbidden
           - Not authorized
@@ -824,9 +882,11 @@ components:
           - Account over rate limit
           - Rate limit exceeded
     "404":
-      description: "Not Found: the requested resource could not be found, but it may be available again in the future."
+      description: "Not Found: the requested resource could not be found, but it may
+        be available again in the future."
     "405":
-      description: "Method Not Allowed: the client used a HTTP method other than GET or POST."
+      description: "Method Not Allowed: the client used a HTTP method other than GET
+        or POST."
     "408":
       description: Request timeout.
     "414":
@@ -838,7 +898,8 @@ components:
     "503":
       description: Service currently unavailable.
     "504":
-      description: Internal network connectivity issue or a request that has taken too long to complete.
+      description: Internal network connectivity issue or a request that has taken too
+        long to complete.
     "596":
       description: Service not found.
   schemas:

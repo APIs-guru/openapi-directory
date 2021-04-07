@@ -241,14 +241,15 @@ security:
   - basicAuth: []
 responses:
   bad-request:
-    description: Bad Request. The content or structure of your submission, or a parameter, was found to be invalid.
+    description: Bad Request. The content or structure of your submission, or a
+      parameter, was found to be invalid.
     schema:
       $ref: "#/definitions/Error"
   bad-webhook-id:
     description: A webhook with the given id does not exit
     examples:
       application/json:
-        detail: >
+        detail: |
           Webhook with id '1' does not exist
         status: 404
         title: Not Found
@@ -259,7 +260,7 @@ responses:
     description: The url given for the webhook is not callable
     examples:
       application/json:
-        detail: >
+        detail: |
           Invoking the Webhook URL caused an error: 403 - Forbidden
         status: 400
         title: Bad Request
@@ -267,7 +268,8 @@ responses:
     schema:
       $ref: "#/definitions/Error"
   credits:
-    description: Forbidden.  Inspect the body of the response for further details - for example, you may have insufficient credits remaining
+    description: Forbidden.  Inspect the body of the response for further details -
+      for example, you may have insufficient credits remaining
     examples:
       application/json:
         status: 403
@@ -342,7 +344,8 @@ paths:
         | userSuppliedId  | String | | Use a string value you specified in the `userSuppliedId` property when you sent the message. Only `SENT` messages will be retrieved. <br/>`filter=userSuppliedId%3Dacc009876` |
       parameters:
         - description: >-
-            The maximum number of messages that are returned.  The default is 1000.
+            The maximum number of messages that are returned.  The default is
+            1000.
 
             The value of `limit` is not a guarantee that a specific number of messages will be in the response, even if there are more messages available.  Consider the case where you have 150 messages and you specify `limit=50`.  It is possible that only 49 messages will be returned.  The  way to make sure that there are no more messages is to submit a new call using the `id` filter field with the `<` operator (described below).
           format: int
@@ -509,7 +512,8 @@ paths:
         ```
       parameters:
         - description: >
-            Safeguards against the possibility of sending the same messages more than once.
+            Safeguards against the possibility of sending the same messages
+            more than once.
 
 
             If a communication failure occurs during a submission, you cannot be sure that the submission was processed; therefore you would have to submit it again. When you post the retry, you must use the `deduplication-id` of the original post. The BulkSMS system uses this ID to check that the request was not previously processed. (If it was previously processed, the submission will succeed, and the behaviour will be indistinguishable to you from a non-duplicated submission). The ID expires after about 12 hours.
@@ -519,7 +523,8 @@ paths:
           type: integer
         - default: false
           description: >
-            Specifies how to deal with message text that contains characters not present in the GSM 03.38 character set.
+            Specifies how to deal with message text that contains characters
+            not present in the GSM 03.38 character set.
 
 
             Messages that contain only GSM 03.38 characters are not affected by this setting. If the value is `true` then a message containing non-GSM 03.38 characters will be transmitted as a Unicode SMS (which is shorter, and could require extra SMSs to transmit). If the value is `false`, then non-GSM 03.38 characters will be replaced by the `?` character.
@@ -544,7 +549,9 @@ paths:
           name: schedule-date
           type: string
         - description: >
-            A note that is stored together with a scheduled submission, which could be used to more easily identify the scheduled submission at a later date.
+            A note that is stored together with a scheduled submission, which
+            could be used to more easily identify the scheduled submission at a
+            later date.
 
 
             The value of this field is ignored if the `schedule-date` is not provided.
@@ -554,7 +561,8 @@ paths:
           name: schedule-description
           type: string
         - description: >
-            Contains details of the message (or messages) that you want to send.
+            Contains details of the message (or messages) that you want to
+            send.
 
 
             One `SubmissionEntry` can produce many messages, and your request may contain multiple such entries.
@@ -779,7 +787,8 @@ paths:
   /messages/send:
     get:
       description: >
-        A really simple interface for people who require a GET mechanism to submit a message.
+        A really simple interface for people who require a GET mechanism to
+        submit a message.
 
 
         The URI is interpreted as UTF-8.
@@ -845,13 +854,10 @@ paths:
         - Message
   "/messages/{id}":
     get:
-      description: >
+      description: |
         Get a the message by `id`.
-
         ```http
-
         GET /v1/messages/4023457654
-
         ```
       parameters:
         - description: The `id` of the message you want to retrieve
@@ -867,7 +873,8 @@ paths:
         "400":
           $ref: "#/responses/bad-request"
         "404":
-          description: A [not-found error](errors/#not-found) if the message cannot be found.
+          description: A [not-found error](errors/#not-found) if the message cannot be
+            found.
           schema:
             $ref: "#/definitions/Error"
       summary: Show Message
@@ -888,7 +895,8 @@ paths:
           type: string
       responses:
         "200":
-          description: An array of related messages.  If the `id` is not a sent message, the array will be empty.
+          description: An array of related messages.  If the `id` is not a sent message,
+            the array will be empty.
           schema:
             items:
               $ref: "#/definitions/Message"
@@ -931,7 +939,8 @@ paths:
         - Webhooks
     post:
       description: >
-        A webhook is an URL that you can register if you want the BulkSMS system to notify you about your messages.
+        A webhook is an URL that you can register if you want the BulkSMS
+        system to notify you about your messages.
 
         You can create multiple webhooks, and each one will be called.
 
@@ -994,7 +1003,7 @@ paths:
          - A __message retrying__ email is sent after an invocation has failed with a retry-able error.  This email is an early warning, allowing you to investigate your systems.
          - A __message discarded__ email is sent after failure email is send when a message is discarded as a consequence of a non-retry-able error; or when the system decides to stop retrying.
       parameters:
-        - description: >
+        - description: |
             Contains the property values for your new webhook
           in: body
           name: body
@@ -1044,7 +1053,7 @@ paths:
         type: string
     post:
       parameters:
-        - description: >
+        - description: |
             Contains the new property values for the webhook
           in: body
           name: body
@@ -1063,7 +1072,8 @@ paths:
         - Webhooks
 definitions:
   Error:
-    description: See the [errors page](errors/) for more detail on what kind of errors you can get.
+    description: See the [errors page](errors/) for more detail on what kind of
+      errors you can get.
     properties:
       detail:
         description: More information about why the error occurred.
@@ -1088,11 +1098,13 @@ definitions:
       body:
         description: The content of the message
       creditCost:
-        description: The cost of the message (in credits).   Note that this field does not have a value in the submission response.
+        description: The cost of the message (in credits).   Note that this field does
+          not have a value in the submission response.
         format: float
         type: number
       encoding:
-        description: The type of the content.  See the `encoding` field for more information.
+        description: The type of the content.  See the `encoding` field for more
+          information.
         enum:
           - TEXT
           - UNICODE
@@ -1109,7 +1121,9 @@ definitions:
         format: int32
         type: integer
       numberOfParts:
-        description: The number of parts.  If this is a concatenated message, the number of parts will be more than 1.  Note that this field does not have a value in the submission response.
+        description: The number of parts.  If this is a concatenated message, the number
+          of parts will be more than 1.  Note that this field does not have a
+          value in the submission response.
         format: int32
         type: integer
       protocolId:
@@ -1135,7 +1149,8 @@ definitions:
         properties:
           id:
             description: >
-              A concatenated value A.B where A is the `status.type` and B is the `status.subtype`.  
+              A concatenated value A.B where A is the `status.type` and B is the
+              `status.subtype`.  
 
               It there is no value for `subtype` then B takes string value `"null"` (e.g. `"SENT.null"`).   
             type: string
@@ -1192,9 +1207,8 @@ definitions:
           - type
         type: object
       submission:
-        description: >
+        description: |
           Identifies the submission.
-
           This field has a value only if the `type` is SENT.
         properties:
           date:
@@ -1202,7 +1216,8 @@ definitions:
             format: date-time
             type: string
           id:
-            description: A unique identity shared by all messages that were created from the same submission.
+            description: A unique identity shared by all messages that were created from the
+              same submission.
             type: string
         required:
           - id
@@ -1218,9 +1233,8 @@ definitions:
           - RECEIVED
         type: string
       userSuppliedId:
-        description: >
+        description: |
           This is the value you supplied in the `userSuppliedId` field.
-
           Has a value only if the `type` is SENT.
         type: string
     required:
@@ -1291,7 +1305,8 @@ definitions:
             format: int32
             type: integer
           size:
-            description: The setting that limits the number of messages you can send in a day.
+            description: The setting that limits the number of messages you can send in a
+              day.
             format: int32
             type: integer
         required:
@@ -1312,7 +1327,11 @@ definitions:
     properties:
       body:
         description: >
-          The message content as described in the `encoding`. If the `encoding` is BINARY, the body must contain only hexadecimal digits where one byte is represented as two digits. For example, if you want to send two bytes '0x05' and '0x1F', the message body must contain the text '051F'.
+          The message content as described in the `encoding`. If the
+          `encoding` is BINARY, the body must contain only hexadecimal digits
+          where one byte is represented as two digits. For example, if you want
+          to send two bytes '0x05' and '0x1F', the message body must contain the
+          text '051F'.
 
 
           The message content can also contain templates, read the [body templates section](#tag/Message) for more information.
@@ -1320,7 +1339,8 @@ definitions:
         type: string
       deliveryReports:
         description: >-
-          The type of delivery reports to request from the delivering network.
+          The type of delivery reports to request from the delivering
+          network.
 
           The default value  is `ALL`. Please note that not all networks support delivery reports.
 
@@ -1395,7 +1415,9 @@ definitions:
         type: object
       longMessageMaxParts:
         description: >
-          The maximum number of message parts that can be used for a [concatenated message](https://en.wikipedia.org/wiki/Concatenated_SMS).
+          The maximum number of message parts that can be used for a
+          [concatenated
+          message](https://en.wikipedia.org/wiki/Concatenated_SMS).
 
           The default is `3`.
         example: 99
@@ -1403,7 +1425,8 @@ definitions:
         type: integer
       messageClass:
         description: >
-          The class of the message, as specified by §4 of the GSM 03.38 specification.
+          The class of the message, as specified by §4 of the GSM 03.38
+          specification.
 
 
           You can provide either an integer value, or a mnemonic string.
@@ -1487,7 +1510,7 @@ definitions:
           - SIM_DOWNLOAD
         type: string
       routingGroup:
-        description: >
+        description: |
           Allows you to choose routing. The default is STANDARD.
         enum:
           - ECONOMY
@@ -1511,11 +1534,13 @@ definitions:
             type: INTERNATIONAL
           properties:
             address:
-              description: The phone number of the recipient.  It must be supplied if the `type` is INTERNATIONAL
+              description: The phone number of the recipient.  It must be supplied if the
+                `type` is INTERNATIONAL
               type: string
             fields:
               description: >
-                Custom fields that can be used in the message body. A value can be given if the `type` is INTERNATIONAL
+                Custom fields that can be used in the message body. A value can be
+                given if the `type` is INTERNATIONAL
 
 
                 Read the [body templates section](#tag/Message) for more information.
@@ -1523,10 +1548,12 @@ definitions:
                 type: string
               type: array
             id:
-              description: The id of a group in your phonebook.  A value can be given if the `type` is GROUP.
+              description: The id of a group in your phonebook.  A value can be given if the
+                `type` is GROUP.
               type: string
             name:
-              description: The name of a group in your phonebook. A value can be given if the `type` is GROUP.
+              description: The name of a group in your phonebook. A value can be given if the
+                `type` is GROUP.
               type: string
             type:
               description: Type of the recipient. The default value is INTERNATIONAL.
@@ -1537,9 +1564,8 @@ definitions:
           type: object
         type: array
       userSuppliedId:
-        description: >
+        description: |
           Correlate the messages created from this submission to your data.
-
 
           The value can contain no more than 20 characters.
         example: submission-12765
@@ -1592,7 +1618,8 @@ definitions:
         type: boolean
       contactEmailAddress:
         description: >
-          The email address to which emails will be sent if there are problem with invoking the webhook.
+          The email address to which emails will be sent if there are problem
+          with invoking the webhook.
 
 
           The value must be a valid email address.
@@ -1604,9 +1631,8 @@ definitions:
         example: tech_team@example.com
         type: string
       name:
-        description: >
+        description: |
           A text identifier for the webhook.
-
           More than one webhook cannot have the same name.
         example: My MT Webhook
         type: string

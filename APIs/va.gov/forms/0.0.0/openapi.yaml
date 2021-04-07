@@ -31,6 +31,8 @@ info:
   version: 0.0.0
   x-apisguru-categories:
     - forms
+  x-logo:
+    url: https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/design/icons/apple-touch-icon.png
   x-origin:
     - format: openapi
       url: https://api.va.gov/services/va_forms/docs/v0/api
@@ -129,20 +131,24 @@ components:
                     description: Name of the benefit category of the form
                     example: Health care
                     type: string
+              nullable: true
               type: array
             deleted_at:
               description: The timestamp at which the form was deleted
-              example: "null"
+              example: null
               format: date-time
+              nullable: true
               type: string
             first_issued_on:
               description: The date the form first became available
               example: 2016-07-10
               format: date
+              nullable: true
               type: string
             form_details_url:
               description: Location on www.va.gov of the info page for this form
               example: https://www.va.gov/find-forms/about-form-10-10ez
+              nullable: true
               type: string
             form_name:
               description: Name of the VA Form
@@ -152,28 +158,34 @@ components:
               description: Introductory text describing the VA online tool for this form
               example: You can apply online instead of filling out and sending us the paper
                 form.
+              nullable: true
               type: string
             form_tool_url:
               description: Location of the online tool for this form
               example: https://www.va.gov/health-care/apply/application/introduction
+              nullable: true
               type: string
             form_type:
               description: VA Type of the form
               example: benefit
+              nullable: true
               type: string
             form_usage:
               description: A description of how the form is to be used
               example: <p>Use VA Form 10-10EZ if you’re a Veteran and want to apply for VA
                 health care. You must be enrolled in...</p>
+              nullable: true
               type: string
             language:
               description: Language code of the form
               example: en
+              nullable: true
               type: string
-            last_revised_on:
+            last_revision_on:
               description: The date the form was last updated
               example: 2020-01-17
               format: date
+              nullable: true
               type: string
             pages:
               description: Number of pages contained in the form
@@ -184,10 +196,12 @@ components:
               items:
                 example: 10-10EZR
                 type: string
+              nullable: true
               type: array
             sha256:
               description: A sha256 hash of the form contents
               example: 5fe171299ece147e8b456961a38e17f1391026f26e9e170229317bc95d9827b7
+              nullable: true
               type: string
             title:
               description: Title of the form as given by VA
@@ -200,6 +214,7 @@ components:
             va_form_administration:
               description: The VA organization that administers the form
               example: Veterans Health Administration
+              nullable: true
               type: string
             valid_pdf:
               description: A flag indicating whether the form url was confirmed as a valid
@@ -219,6 +234,7 @@ components:
                     description: A sha256 hash of the form contents for that version
                     example: 5fe171299ece147e8b456961a38e17f1391026f26e9e170229317bc95d9827b7
                     type: string
+              nullable: true
               type: array
         id:
           description: JSON API identifier
@@ -245,20 +261,24 @@ components:
                     description: Name of the benefit category of the form
                     example: Health care
                     type: string
+              nullable: true
               type: array
             deleted_at:
               description: The timestamp at which the form was deleted
               example: "null"
               format: date-time
+              nullable: true
               type: string
             first_issued_on:
               description: The date the form first became available
               example: 2016-07-10
               format: date
+              nullable: true
               type: string
             form_details_url:
               description: Location on www.va.gov of the info page for this form
               example: https://www.va.gov/find-forms/about-form-10-10ez
+              nullable: true
               type: string
             form_name:
               description: Name of the VA Form
@@ -268,33 +288,39 @@ components:
               description: Introductory text describing the VA online tool for this form
               example: You can apply online instead of filling out and sending us the paper
                 form.
+              nullable: true
               type: string
             form_tool_url:
               description: Location of the online tool for this form
               example: https://www.va.gov/health-care/apply/application/introduction
+              nullable: true
               type: string
             form_type:
               description: VA Type of the form
               example: benefit
+              nullable: true
               type: string
             form_usage:
               description: A description of how the form is to be used
               example: <p>Use VA Form 10-10EZ if you’re a Veteran and want to apply for VA
                 health care. You must be enrolled in...</p>
+              nullable: true
               type: string
             language:
               description: Language code of the form
               example: en
               type: string
-            last_revised_on:
+            last_revision_on:
               description: The date the form was last updated
               example: 2020-01-17
               format: date
+              nullable: true
               type: string
             last_sha256_change:
               description: The date of the last sha256 hash change
               example: 2019-05-30
               format: date
+              nullable: true
               type: string
             pages:
               description: Number of pages contained in the form
@@ -305,10 +331,12 @@ components:
               items:
                 example: 10-10EZR
                 type: string
+              nullable: true
               type: array
             sha256:
               description: A sha256 hash of the form contents
               example: 6e6465e2e1c89225871daa9b6d86b92d1c263c7b02f98541212af7b35272372b
+              nullable: true
               type: string
             title:
               description: Title of the form as given by VA
@@ -321,6 +349,7 @@ components:
             va_form_administration:
               description: The VA organization that administers the form
               example: Veterans Health Administration
+              nullable: true
               type: string
             valid_pdf:
               description: A flag indicating whether the form url was confirmed as a valid

@@ -6,7 +6,11 @@ servers:
 info:
   contact:
     x-twitter: MailBoxV
-  description: The MailboxValidator Disposable Email Checker API checks if a single email address is from a disposable email provider and returns the results in either JSON or XML format. Refer to https://www.mailboxvalidator.com/api-email-disposable for further information.
+  description: The MailboxValidator Disposable Email Checker API checks if a
+    single email address is from a disposable email provider and returns the
+    results in either JSON or XML format. Refer to
+    https://www.mailboxvalidator.com/api-email-disposable for further
+    information.
   title: MailboxValidator Disposable Email Checker
   version: 1.0.0
   x-apisguru-categories:
@@ -25,7 +29,9 @@ info:
 paths:
   /v1/email/disposable:
     get:
-      description: The Disposable Email Checker API does checking on a single email address and returns if it is from a disposable email provider in either JSON or XML format.
+      description: The Disposable Email Checker API does checking on a single email
+        address and returns if it is from a disposable email provider in either
+        JSON or XML format.
       parameters:
         - description: Return the result in json (default) or xml format.
           in: query

@@ -58,7 +58,8 @@ paths:
           name: sourceSandboxes
           required: false
           type: string
-        - description: A keyword to search activities by, will match any part of the ActivityMessage.
+        - description: A keyword to search activities by, will match any part of the
+            ActivityMessage.
           in: query
           name: keyword
           required: false
@@ -197,7 +198,7 @@ paths:
         "200":
           description: successful operation
           examples:
-            application/json: >-
+            application/json: |-
               [
                 {
                   "id": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
@@ -240,7 +241,7 @@ paths:
         "200":
           description: successful operation
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "id": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
                 "name": "testbox",
@@ -298,7 +299,7 @@ paths:
         "200":
           description: successful operation
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "id": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
                 "name": "testbox",
@@ -342,7 +343,7 @@ paths:
         "200":
           description: successful operation
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "id": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
                 "name": "testbox",
@@ -381,7 +382,7 @@ paths:
         "200":
           description: successful operation
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "id": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
                 "name": "testbox",
@@ -533,7 +534,8 @@ definitions:
         pattern: ^[a-zA-Z-_0-9]*$
         type: string
       parentSandboxName:
-        description: Name of the Sandbox this should be created under, if exists will be a 'clone'.
+        description: Name of the Sandbox this should be created under, if exists will be
+          a 'clone'.
         pattern: ^[A-Za-z-_ 0-9]*$
         type: string
       transportType:

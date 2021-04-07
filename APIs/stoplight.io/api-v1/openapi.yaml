@@ -170,7 +170,8 @@ paths:
                     swagger: "2.0"
             text/yaml:
               schema:
-                description: The specification. Returned as a string when YAML, object when JSON.
+                description: The specification. Returned as a string when YAML, object when
+                  JSON.
                 oneOf:
                   - type: object
                   - type: string
@@ -368,7 +369,9 @@ paths:
           type: string
     post:
       description: >-
-        Re-publish an API version in Stoplight. This will re-publish the given API version, with whatever publish settings have already been setup in the app.
+        Re-publish an API version in Stoplight. This will re-publish the
+        given API version, with whatever publish settings have already been
+        setup in the app.
 
 
         This will only work with APIs that have previously been published at least once.

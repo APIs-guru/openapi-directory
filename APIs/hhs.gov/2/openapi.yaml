@@ -4,7 +4,22 @@ servers:
 info:
   contact:
     email: syndicationadmin@hhs.gov
-  description: <div class="swagger-ui-wrap extraFooter"><h3>Common Features / Behaviors</h3> <div class="features"> <ul> <li><strong>* "sort" param:</strong> supports multi column sorting through the use of commas as delimiters, and a hyphen to denote descending order. <br/> <strong><span>Examples:</span></strong> <ul> <li><span class="example">name</span><span class="description">sort results by name ascending</span></li> <li><span class="example">-name</span><span class="description">sort results by name descending</span></li> <li><span class="example">-name,id</span><span class="description">sort results by name descending and then by id ascending</span></li> <li><span class="example">id,-dateContentAuthored</span><span class="description">sort results by id ascending and then date descending</span></li> </ul> </li> <li><strong>Date formats:</strong> Date input format is expected to be based on <a href="http://www.ietf.org/rfc/rfc3339.txt">RFC 3339</a>. <br/> <span><strong>Example:</strong></span> <ul><li>2013-11-18T18:43:01Z</li></ul> </li> </ul> </div> </div>
+  description: <div class="swagger-ui-wrap extraFooter"><h3>Common Features /
+    Behaviors</h3> <div class="features"> <ul> <li><strong>* "sort"
+    param:</strong> supports multi column sorting through the use of commas as
+    delimiters, and a hyphen to denote descending order. <br/>
+    <strong><span>Examples:</span></strong> <ul> <li><span
+    class="example">name</span><span class="description">sort results by name
+    ascending</span></li> <li><span class="example">-name</span><span
+    class="description">sort results by name descending</span></li> <li><span
+    class="example">-name,id</span><span class="description">sort results by
+    name descending and then by id ascending</span></li> <li><span
+    class="example">id,-dateContentAuthored</span><span class="description">sort
+    results by id ascending and then date descending</span></li> </ul> </li>
+    <li><strong>Date formats:</strong> Date input format is expected to be based
+    on <a href="http://www.ietf.org/rfc/rfc3339.txt">RFC 3339</a>. <br/>
+    <span><strong>Example:</strong></span>
+    <ul><li>2013-11-18T18:43:01Z</li></ul> </li> </ul> </div> </div>
   license:
     name: GNU GENERAL PUBLIC LICENSE
     url: http://www.gnu.org/licenses/gpl.html
@@ -65,7 +80,11 @@ paths:
                   $ref: "#/components/schemas/ResourceWrapped"
                 title: ArrayOfResources
                 type: array
-          description: "\"Returns the list of Resources matching the search query 'q'.<p>The search query 'q' is a Lucene query.<br>The syntax for a Lucene query can be found <a href=\"http://lucene.apache.org/core/2_9_4/queryparsersyntax.html\">here</a>.\""
+          description: "\"Returns the list of Resources matching the search query
+            'q'.<p>The search query 'q' is a Lucene query.<br>The syntax for a
+            Lucene query can be found <a
+            href=\"http://lucene.apache.org/core/2_9_4/queryparsersyntax.html\"\
+            >here</a>.\""
         "400":
           description: Invalid ID
         "500":
@@ -195,7 +214,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MediaItemWrapped"
-          description: Returns the list of MediaItems for the Campaign identified by the 'id'.
+          description: Returns the list of MediaItems for the Campaign identified by the
+            'id'.
         "400":
           description: Bad Request
         "500":
@@ -216,7 +236,8 @@ paths:
             type: integer
           style: simple
         - allowEmptyValue: false
-          description: "Method used to render an html request. Accepts one: [mv, list, feed]"
+          description: "Method used to render an html request. Accepts one: [mv, list,
+            feed]"
           explode: false
           in: query
           name: displayMethod
@@ -236,7 +257,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SyndicateMarshallerWrapped"
-          description: Renders the list of MediaItems associated with the Tag identified by the 'id'.
+          description: Renders the list of MediaItems associated with the Tag identified
+            by the 'id'.
         "400":
           description: Invalid ID
         "500":
@@ -409,7 +431,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items containing the provided partial description, case insensitive.
+          description: Find all media items containing the provided partial description,
+            case insensitive.
           explode: false
           in: query
           name: descriptionContains
@@ -419,7 +442,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items which have the provided sourceUrl, case insensitive.
+          description: Find all media items which have the provided sourceUrl, case
+            insensitive.
           explode: false
           in: query
           name: sourceUrl
@@ -429,7 +453,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items which contain the provided partial sourceUrl, case insensitive.
+          description: Find all media items which contain the provided partial sourceUrl,
+            case insensitive.
           explode: false
           in: query
           name: sourceUrlContains
@@ -439,7 +464,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items which have the provided customThumbnailUrl, case insensitive.
+          description: Find all media items which have the provided customThumbnailUrl,
+            case insensitive.
           explode: false
           in: query
           name: customThumbnailUrl
@@ -449,7 +475,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items which contain the provided partial customThumbnailUrl, case insensitive.
+          description: Find all media items which contain the provided partial
+            customThumbnailUrl, case insensitive.
           explode: false
           in: query
           name: customThumbnailUrlContains
@@ -459,7 +486,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items authored on the provided day (RFC 3339, time ignored).
+          description: Find all media items authored on the provided day (RFC 3339, time
+            ignored).
           explode: false
           in: query
           name: dateContentAuthored
@@ -469,7 +497,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items updated on the provided day (RFC 3339, time ignored).
+          description: Find all media items updated on the provided day (RFC 3339, time
+            ignored).
           explode: false
           in: query
           name: dateContentUpdated
@@ -479,7 +508,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items published on the provided day (RFC 3339, time ignored).
+          description: Find all media items published on the provided day (RFC 3339, time
+            ignored).
           explode: false
           in: query
           name: dateContentPublished
@@ -489,7 +519,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items reviewed on the provided day (RFC 3339, time ignored).
+          description: Find all media items reviewed on the provided day (RFC 3339, time
+            ignored).
           explode: false
           in: query
           name: dateContentReviewed
@@ -499,7 +530,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items syndicated on the provided day (RFC 3339, time ignored).
+          description: Find all media items syndicated on the provided day (RFC 3339, time
+            ignored).
           explode: false
           in: query
           name: dateSyndicationCaptured
@@ -509,7 +541,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items updated through the syndication system on the provided day, (RFC 3339, time ignored).
+          description: Find all media items updated through the syndication system on the
+            provided day, (RFC 3339, time ignored).
           explode: false
           in: query
           name: dateSyndicationUpdated
@@ -519,7 +552,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items authored since the provided day (RFC 3339, time ignored).
+          description: Find all media items authored since the provided day (RFC 3339,
+            time ignored).
           explode: false
           in: query
           name: contentAuthoredSinceDate
@@ -529,7 +563,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items authored before the provided day (RFC 3339, time ignored).
+          description: Find all media items authored before the provided day (RFC 3339,
+            time ignored).
           explode: false
           in: query
           name: contentAuthoredBeforeDate
@@ -539,7 +574,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items authored between the provided start and end days (RFC 3339, comma separated, time ignored).
+          description: Find all media items authored between the provided start and end
+            days (RFC 3339, comma separated, time ignored).
           explode: false
           in: query
           name: contentAuthoredInRange
@@ -549,7 +585,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items updated since the provided day (RFC 3339, time ignored).
+          description: Find all media items updated since the provided day (RFC 3339, time
+            ignored).
           explode: false
           in: query
           name: contentUpdatedSinceDate
@@ -559,7 +596,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items updated before the provided day (RFC 3339, time ignored).
+          description: Find all media items updated before the provided day (RFC 3339,
+            time ignored).
           explode: false
           in: query
           name: contentUpdatedBeforeDate
@@ -569,7 +607,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items updated between the provided start and end days (RFC 3339, comma separated, time ignored).
+          description: Find all media items updated between the provided start and end
+            days (RFC 3339, comma separated, time ignored).
           explode: false
           in: query
           name: contentUpdatedInRange
@@ -579,7 +618,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items updated since the provided day (RFC 3339, time ignored).
+          description: Find all media items updated since the provided day (RFC 3339, time
+            ignored).
           explode: false
           in: query
           name: contentPublishedSinceDate
@@ -589,7 +629,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items published before the provided day (RFC 3339, time ignored).
+          description: Find all media items published before the provided day (RFC 3339,
+            time ignored).
           explode: false
           in: query
           name: contentPublishedBeforeDate
@@ -599,7 +640,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items published between the provided start and end days (RFC 3339, comma separated, time ignored).
+          description: Find all media items published between the provided start and end
+            days (RFC 3339, comma separated, time ignored).
           explode: false
           in: query
           name: contentPublishedInRange
@@ -609,7 +651,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items reviewed since the provided day (RFC 3339, time ignored).
+          description: Find all media items reviewed since the provided day (RFC 3339,
+            time ignored).
           explode: false
           in: query
           name: contentReviewedSinceDate
@@ -619,7 +662,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items reviewed before the provided day (RFC 3339, time ignored).
+          description: Find all media items reviewed before the provided day (RFC 3339,
+            time ignored).
           explode: false
           in: query
           name: contentReviewedBeforeDate
@@ -629,7 +673,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items reviewed between the provided start and end days (RFC 3339, comma separated, time ignored).
+          description: Find all media items reviewed between the provided start and end
+            days (RFC 3339, comma separated, time ignored).
           explode: false
           in: query
           name: contentReviewedInRange
@@ -639,7 +684,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items authored since the provided day (RFC 3339, time ignored).
+          description: Find all media items authored since the provided day (RFC 3339,
+            time ignored).
           explode: false
           in: query
           name: syndicationCapturedSinceDate
@@ -649,7 +695,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items authored before the provided day (RFC 3339, time ignored).
+          description: Find all media items authored before the provided day (RFC 3339,
+            time ignored).
           explode: false
           in: query
           name: syndicationCapturedBeforeDate
@@ -659,7 +706,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items authored between the provided start and end days (RFC 3339, comma separated, time ignored).
+          description: Find all media items authored between the provided start and end
+            days (RFC 3339, comma separated, time ignored).
           explode: false
           in: query
           name: syndicationCapturedInRange
@@ -669,7 +717,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items updated since the provided day, (RFC 3339, time ignored).
+          description: Find all media items updated since the provided day, (RFC 3339,
+            time ignored).
           explode: false
           in: query
           name: syndicationUpdatedSinceDate
@@ -679,7 +728,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items updated before the provided day, (RFC 3339, time ignored).
+          description: Find all media items updated before the provided day, (RFC 3339,
+            time ignored).
           explode: false
           in: query
           name: syndicationUpdatedBeforeDate
@@ -689,7 +739,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items updated between the provided start and end days, (RFC 3339, comma separated, time ignored).
+          description: Find all media items updated between the provided start and end
+            days, (RFC 3339, comma separated, time ignored).
           explode: false
           in: query
           name: syndicationUpdatedInRange
@@ -699,7 +750,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items visible since the provided day, (RFC 3339, time ignored).
+          description: Find all media items visible since the provided day, (RFC 3339,
+            time ignored).
           explode: false
           in: query
           name: syndicationVisibleSinceDate
@@ -709,7 +761,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items visible before the provided day, (RFC 3339, time ignored).
+          description: Find all media items visible before the provided day, (RFC 3339,
+            time ignored).
           explode: false
           in: query
           name: syndicationVisibleBeforeDate
@@ -719,7 +772,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items visible between the provided start and end days, (RFC 3339, comma separated, time ignored).
+          description: Find all media items visible between the provided start and end
+            days, (RFC 3339, comma separated, time ignored).
           explode: false
           in: query
           name: syndicationVisibleInRange
@@ -739,7 +793,8 @@ paths:
             type: integer
           style: form
         - allowEmptyValue: false
-          description: Find all media items written in the language specified by name, case insensitive.
+          description: Find all media items written in the language specified by name,
+            case insensitive.
           explode: false
           in: query
           name: languageName
@@ -749,7 +804,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items written in the language specified by 639-2 isoCode , case insensitive.
+          description: Find all media items written in the language specified by 639-2
+            isoCode , case insensitive.
           explode: false
           in: query
           name: languageIsoCode
@@ -769,7 +825,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items which match the provided partial hash, case insensitive.
+          description: Find all media items which match the provided partial hash, case
+            insensitive.
           explode: false
           in: query
           name: hashContains
@@ -789,7 +846,8 @@ paths:
             type: integer
           style: form
         - allowEmptyValue: false
-          description: Find all media items that belong to the source specified by name, case insensitive.
+          description: Find all media items that belong to the source specified by name,
+            case insensitive.
           explode: false
           in: query
           name: sourceName
@@ -799,7 +857,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items that belong to the source specified by partial name, case insensitive.
+          description: Find all media items that belong to the source specified by partial
+            name, case insensitive.
           explode: false
           in: query
           name: sourceNameContains
@@ -809,7 +868,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items that belong to the source specified by acronym, case insensitive.
+          description: Find all media items that belong to the source specified by
+            acronym, case insensitive.
           explode: false
           in: query
           name: sourceAcronym
@@ -819,7 +879,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Find all media items that belong to the source specified by partial acronym, case insensitive.
+          description: Find all media items that belong to the source specified by partial
+            acronym, case insensitive.
           explode: false
           in: query
           name: sourceAcronymContains
@@ -867,7 +928,8 @@ paths:
                   $ref: "#/components/schemas/MediaItemWrapped"
                 title: ArrayOfMediaItems
                 type: array
-          description: Returns the list of MediaItems matching the specified query parameters.
+          description: Returns the list of MediaItems matching the specified query
+            parameters.
         "400":
           description: Bad Request
         "500":
@@ -1015,7 +1077,8 @@ paths:
                   $ref: "#/components/schemas/MediaItemWrapped"
                 title: ArrayOfMediaItems
                 type: array
-          description: Returns the list of MediaItems matching the search query 'q'.<p>Please enter keyword or URL in search query 'q'.
+          description: Returns the list of MediaItems matching the search query
+            'q'.<p>Please enter keyword or URL in search query 'q'.
         "400":
           description: Bad Request
         "500":
@@ -1080,7 +1143,8 @@ paths:
             application/json:
               schema:
                 type: string
-          description: Returns the raw content (html, image, etc...) for the MediaItem identified by the 'id'.
+          description: Returns the raw content (html, image, etc...) for the MediaItem
+            identified by the 'id'.
         "400":
           description: Invalid ID
         "500":
@@ -1090,7 +1154,8 @@ paths:
         - media
   "/resources/media/{id}/embed.json":
     get:
-      description: Get the javascript or iframe embed code for this item (to embed it on a web page).
+      description: Get the javascript or iframe embed code for this item (to embed it
+        on a web page).
       parameters:
         - description: The id of the media to get embed code for.
           in: path
@@ -1173,7 +1238,8 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: "Method used to render an html request. Accepts one: [mv, list, feed]"
+          description: "Method used to render an html request. Accepts one: [mv, list,
+            feed]"
           explode: false
           in: query
           name: displayMethod
@@ -1188,7 +1254,8 @@ paths:
             application/json:
               schema:
                 type: string
-          description: Returns the javascript or iframe embed code for the MediaItem identified by 'id'.
+          description: Returns the javascript or iframe embed code for the MediaItem
+            identified by 'id'.
         "400":
           description: Bad Request
         "500":
@@ -1214,7 +1281,8 @@ paths:
             application/json:
               schema:
                 type: object
-          description: Returns the JPG preview, where applicable, for the MediaItem identified by the 'id'.
+          description: Returns the JPG preview, where applicable, for the MediaItem
+            identified by the 'id'.
         "400":
           description: Invalid ID
         "500":
@@ -1278,7 +1346,8 @@ paths:
                   $ref: "#/components/schemas/MediaItemWrapped"
                 title: ArrayOfMediaItems
                 type: array
-          description: Returns the list of MediaItems related to the MediaItem identified by the 'id'.
+          description: Returns the list of MediaItems related to the MediaItem identified
+            by the 'id'.
         "400":
           description: Bad Request
         "500":
@@ -1375,7 +1444,8 @@ paths:
             type: integer
           style: form
         - allowEmptyValue: false
-          description: Accepts valid CSS float options, such as 'left' or 'right'. Will inject a style into the content before rendering.
+          description: Accepts valid CSS float options, such as 'left' or 'right'. Will
+            inject a style into the content before rendering.
           explode: false
           in: query
           name: imageFloat
@@ -1385,7 +1455,11 @@ paths:
             type: string
           style: form
         - allowEmptyValue: false
-          description: Accepts 4 CSV values representing pixel sizes of margin similar to CSS. Default format is 'north,east,south,west' - for example '0,10,10,0' would put a 10 pixel margin on the right and bottom sides of an image. Will inject a style into the content before rendering.
+          description: Accepts 4 CSV values representing pixel sizes of margin similar to
+            CSS. Default format is 'north,east,south,west' - for example
+            '0,10,10,0' would put a 10 pixel margin on the right and bottom
+            sides of an image. Will inject a style into the content before
+            rendering.
           explode: false
           in: query
           name: imageMargin
@@ -1406,7 +1480,8 @@ paths:
             type: boolean
           style: form
         - allowEmptyValue: false
-          description: If content is a video, related items will be shown at the end of playback.
+          description: If content is a video, related items will be shown at the end of
+            playback.
           explode: false
           in: query
           name: rel
@@ -1427,7 +1502,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SyndicateMarshallerWrapped"
-          description: Returns the syndicated content for a given MediaItem in the specified 'format' (HTML or JSON).
+          description: Returns the syndicated content for a given MediaItem in the
+            specified 'format' (HTML or JSON).
         "400":
           description: Invalid ID
         "500":
@@ -1453,7 +1529,8 @@ paths:
             application/json:
               schema:
                 type: object
-          description: Returns the JPG thumbnail, where applicable, for the MediaItem identified by the 'id'.
+          description: Returns the JPG thumbnail, where applicable, for the MediaItem
+            identified by the 'id'.
         "400":
           description: Invalid ID
         "500":
@@ -1488,7 +1565,8 @@ paths:
                       $ref: "#/components/schemas/YoutubeMetadata"
                     type: array
                 type: object
-          description: Returns the Youtube metadata, where applicable, for the MediaItem identified by the 'id'.
+          description: Returns the Youtube metadata, where applicable, for the MediaItem
+            identified by the 'id'.
         "400":
           description: Invalid ID
         "500":
@@ -1615,7 +1693,8 @@ paths:
             type: integer
           style: simple
         - allowEmptyValue: false
-          description: "Method used to render an html request. Accepts one: [mv, list, feed]"
+          description: "Method used to render an html request. Accepts one: [mv, list,
+            feed]"
           explode: false
           in: query
           name: displayMethod
@@ -1638,7 +1717,8 @@ paths:
                   $ref: "#/components/schemas/MediaItemWrapped"
                 title: ArrayOfSyndicatedItems
                 type: array
-          description: Renders the list of MediaItems associated with the Source identified by the 'id'.
+          description: Renders the list of MediaItems associated with the Source
+            identified by the 'id'.
         "400":
           description: Invalid ID
         "500":
@@ -1744,7 +1824,8 @@ paths:
                   $ref: "#/components/schemas/TagMarshallerWrapped"
                 title: ArrayOfTags
                 type: array
-          description: Returns the list of Tags matching the specified query parameters in the specified 'format'.
+          description: Returns the list of Tags matching the specified query parameters in
+            the specified 'format'.
         "400":
           description: Bad Request
         "500":
@@ -1796,7 +1877,8 @@ paths:
                   $ref: "#/components/schemas/TagTypeMarshallerWrapped"
                 title: ArrayOfTagTypes
                 type: array
-          description: Renders the list of MediaItems associated with the Tag identified by the 'id'.
+          description: Renders the list of MediaItems associated with the Tag identified
+            by the 'id'.
         "400":
           description: Invalid ID
         "500":
@@ -1894,7 +1976,8 @@ paths:
                   $ref: "#/components/schemas/MediaItemWrapped"
                 title: ArrayOfMediaItems
                 type: array
-          description: Returns the list of MediaItems associated with the Tag identified by the 'id'.
+          description: Returns the list of MediaItems associated with the Tag identified
+            by the 'id'.
         "400":
           description: Bad Request
         "500":
@@ -1958,7 +2041,8 @@ paths:
                   $ref: "#/components/schemas/TagMarshallerWrapped"
                 title: ArrayOfTags
                 type: array
-          description: Returns the list of Tags related to the Tag identified by the 'id' in the specified format.
+          description: Returns the list of Tags related to the Tag identified by the 'id'
+            in the specified format.
         "400":
           description: Bad Request
         "500":
@@ -1979,7 +2063,8 @@ paths:
             type: integer
           style: simple
         - allowEmptyValue: false
-          description: "Method used to render an html request. Accepts one: [mv, list, feed]"
+          description: "Method used to render an html request. Accepts one: [mv, list,
+            feed]"
           explode: false
           in: query
           name: displayMethod
@@ -1999,7 +2084,8 @@ paths:
             application/json:
               schema:
                 type: string
-          description: Renders the list of MediaItems associated with the Tag identified by the 'id'.
+          description: Renders the list of MediaItems associated with the Tag identified
+            by the 'id'.
         "400":
           description: Invalid ID
         "500":
@@ -2020,7 +2106,8 @@ paths:
             type: integer
           style: simple
         - allowEmptyValue: false
-          description: "Method used to render an html request. Accepts one: [mv, list, feed]"
+          description: "Method used to render an html request. Accepts one: [mv, list,
+            feed]"
           explode: false
           in: query
           name: displayMethod

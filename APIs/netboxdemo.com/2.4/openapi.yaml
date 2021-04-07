@@ -757,16 +757,12 @@ paths:
           type: string
   /dcim/connected-device/:
     get:
-      description: >-
+      description: |-
         This endpoint allows a user to determine what device (if any) is connected to a given peer device and peer
-
         interface. This is useful in a situation where a device boots with no configuration, but can detect its neighbors
-
         via a protocol such as LLDP. Two query parameters must be included in the request:
 
-
         * `peer_device`: The name of the peer device
-
         * `peer_interface`: The name of the peer interface
       operationId: dcim_connected-device_list
       parameters:
@@ -6779,11 +6775,9 @@ paths:
         - ipam
   "/ipam/prefixes/{id}/available-ips/":
     get:
-      description: >-
+      description: |-
         A convenience method for returning available IP addresses within a prefix. By default, the number of IPs
-
         returned will be equivalent to PAGINATE_COUNT. An arbitrary limit (up to MAX_PAGE_SIZE, if set) may be passed,
-
         however results will not be paginated.
       operationId: ipam_prefixes_available-ips_read
       responses:
@@ -6803,11 +6797,9 @@ paths:
         schema:
           type: integer
     post:
-      description: >-
+      description: |-
         A convenience method for returning available IP addresses within a prefix. By default, the number of IPs
-
         returned will be equivalent to PAGINATE_COUNT. An arbitrary limit (up to MAX_PAGE_SIZE, if set) may be passed,
-
         however results will not be paginated.
       operationId: ipam_prefixes_available-ips_create
       requestBody:
@@ -7818,7 +7810,7 @@ paths:
           type: string
   /secrets/generate-rsa-key-pair/:
     get:
-      description: >-
+      description: |-
         This endpoint can be used to generate a new RSA key pair. The keys are returned in PEM format.
 
             {
@@ -7835,9 +7827,8 @@ paths:
   /secrets/get-session-key/:
     parameters: []
     post:
-      description: >-
+      description: |-
         Retrieve a temporary session key to use for encrypting and decrypting secrets via the API. The user's private RSA
-
         key is POSTed with the name `private_key`. An example:
 
             curl -v -X POST -H "Authorization: Token <token>" -H "Accept: application/json; indent=4" \
@@ -7850,7 +7841,6 @@ paths:
             }
 
         This endpoint accepts one optional parameter: `preserve_key`. If True and a session key exists, the existing session
-
         key will be returned instead of a new one.
       operationId: secrets_get-session-key_create
       responses:

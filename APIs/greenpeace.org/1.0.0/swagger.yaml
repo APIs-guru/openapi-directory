@@ -8,7 +8,9 @@ info:
     name: Greenpeace International contact
     url: http://www.greenpeace.org/international/en/about/contactus/
     x-twitter: Greenpeace
-  description: Greenpeace Greenwire allows you connect with other volunteers, activists and groups working on environmental campaigns all across the world!
+  description: Greenpeace Greenwire allows you connect with other volunteers,
+    activists and groups working on environmental campaigns all across the
+    world!
   license:
     name: MIT
     url: http://opensource.org/licenses/MIT
@@ -31,7 +33,9 @@ produces:
 paths:
   /events:
     get:
-      description: Return the upcoming events (e.g. start date >= today). Gets an array of `Event` object. Mandatory query param of **domain** determines the site / country the event belongs to.
+      description: Return the upcoming events (e.g. start date >= today). Gets an
+        array of `Event` object. Mandatory query param of **domain** determines
+        the site / country the event belongs to.
       parameters:
         - description: "the site the groups belongs to, example: netherlands"
           in: query
@@ -81,7 +85,8 @@ paths:
                 $ref: "#/definitions/HeaderError"
   /groups:
     get:
-      description: Gets an array of `Group` object. Mandatory query param of **domain** determines the site / country the group belongs to.
+      description: Gets an array of `Group` object. Mandatory query param of
+        **domain** determines the site / country the group belongs to.
       parameters:
         - description: "the site the groups belongs to, example: netherlands"
           in: query
@@ -131,7 +136,8 @@ paths:
                 $ref: "#/definitions/HeaderError"
   /volunteers:
     get:
-      description: Gets an array of `Volunteer` object. Mandatory query param of **domain** determines the site / country the volunteers are from.
+      description: Gets an array of `Volunteer` object. Mandatory query param of
+        **domain** determines the site / country the volunteers are from.
       parameters:
         - description: "the site the users are registered on, example: netherlands"
           in: query
@@ -160,7 +166,8 @@ paths:
                 $ref: "#/definitions/HeaderSuccess"
   "/volunteers/{UUID}":
     get:
-      description: Get one specific `Volunteer` object by specifying its UUID in the url path.
+      description: Get one specific `Volunteer` object by specifying its UUID in the
+        url path.
       parameters:
         - in: path
           name: UUID
@@ -362,7 +369,8 @@ definitions:
     description: "A resource location, example: https://greenwire.greenpeace.org"
     type: string
   UUID:
-    description: "Universally unique identifier in canonical format, example: de305d54-75b4-431b-adb2-eb6b9e546014"
+    description: "Universally unique identifier in canonical format, example:
+      de305d54-75b4-431b-adb2-eb6b9e546014"
     type: string
   Volunteer:
     properties:

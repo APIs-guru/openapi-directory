@@ -158,7 +158,8 @@ paths:
         - Programmes (TLEOs)
   "/categories/{category}/programmes":
     get:
-      description: Get the list of all the Programmes (TLEOs) for a given category in TV & iPlayer.
+      description: Get the list of all the Programmes (TLEOs) for a given category in
+        TV & iPlayer.
       operationId: Get_Programmes by category_
       parameters:
         - $ref: "#/components/parameters/category"
@@ -604,7 +605,10 @@ paths:
         - Search
   /status:
     get:
-      description: Get the current iPlayer business layer status. This tells the caller the status of the iPlayer data, but not necessarily the overall status of the website. In the future it might include the status of the dependent data services within the BBC.
+      description: Get the current iPlayer business layer status. This tells the
+        caller the status of the iPlayer data, but not necessarily the overall
+        status of the website. In the future it might include the status of the
+        dependent data services within the BBC.
       operationId: Get_Status_
       responses:
         "200":

@@ -224,29 +224,21 @@ security:
   - SecretApiKey: []
   - JWT: []
 tags:
-  - description: >
+  - description: |
       3D Secure is a way to authenticate and protect transactions.  Typically,
-
       it's only possible to protect the initial transaction in a subscription
-
       with 3D Secure.
     name: 3D Secure
-  - description: >
+  - description: |
       Bank Accounts are a type of payment instrument used to collect
-
       ACH (echeck) payments, similar to how a payment
-
       card would be used to for a credit card payment.
     name: Bank Accounts
-  - description: >
+  - description: |
       Your blacklists contains values of customerIds, email addresses,
-
       ipAddresses, bank identification numbers, countries or payment cards that
-
       you do NOT want to do business with. They are a good tool for managing
-
       risk. A blacklist entry that expires after a period of time we call a
-
       greylist.
     name: Blacklists
   - description: >
@@ -255,32 +247,36 @@ tags:
       All contact information used in Invoices, Subscriptions, Transactions, etc is enlisted here. Hovewer, changing a Contact won't change corresponding contact information in related resources
     name: Contacts
   - description: >
-      Coupons allows to apply different types of discounts to Invoices, Subscriptions and Plans. Redeemed Coupons will be applied only to Invoices with the same currency.
+      Coupons allows to apply different types of discounts to Invoices,
+      Subscriptions and Plans. Redeemed Coupons will be applied only to Invoices
+      with the same currency.
     name: Coupons
-  - description: >
+  - description: |
       Customers are your customers, sometimes known as accounts, clients,
-
       members, patrons, or players in other systems.
     name: Customers
   - description: >
-      The customers timeline keeps an audit trail of changes and activity for each customer.
+      The customers timeline keeps an audit trail of changes and activity
+      for each customer.
     name: Customers Timeline
   - description: >
-      Customer KYC files uploaded on behalf of a customer, tagged with a document type and submitted for validation.
+      Customer KYC files uploaded on behalf of a customer, tagged with a
+      document type and submitted for validation.
     name: KYC Documents
   - description: >
-      Create authentication credentials, login, logout, and verify your customers.
+      Create authentication credentials, login, logout, and verify your
+      customers.
     name: Customer Authentication
-  - description: >
+  - description: |
       Create additional custom fields for particular resources.  You may name,
-
       describe, and determine the type of the schema.
     name: Custom Fields
-  - description: >
+  - description: |
       Handle disputes (chargebacks and retrievals).
     name: Disputes
   - description: >
-      A File is an entity that can store a physical file and some metadata. It also provides an easy access to
+      A File is an entity that can store a physical file and some
+      metadata. It also provides an easy access to
 
       its size, mime-type, user-defined tags and description thus allowing easy sorting and searching among stored
 
@@ -297,10 +293,12 @@ tags:
       those specific entities.
     name: Files
   - description: >
-      Invoices leave a record for both you and your customer of the products sold.
+      Invoices leave a record for both you and your customer of the
+      products sold.
     name: Invoices
   - description: >
-      Payments endpoints are deprecated.  Please use the transactions resource
+      Payments endpoints are deprecated.  Please use the transactions
+      resource
 
       instead.  A payment is a transaction with type `sale`.  The transactions
 
@@ -323,19 +321,22 @@ tags:
       complete the payment.  We call these a "offsite" payment flow.
     name: Payments
   - description: >
-      Payment cards are a type of payment instrument used for credit and debit card
+      Payment cards are a type of payment instrument used for credit and
+      debit card
 
       sales.  Rebilly securely vaults the full payment card number, and can pass it
 
       onward securely to any gateway account to transact business.
     name: Payment Cards
   - description: >
-      PayPal Accounts are used for paying with PayPal.  We can generate a BAID (billing
+      PayPal Accounts are used for paying with PayPal.  We can generate a
+      BAID (billing
 
       agreement id) which will allow for recurring billing.
     name: PayPal Accounts
   - description: >
-      Payment tokens are used to reduce the scope of PCI DSS compliance.  A payment
+      Payment tokens are used to reduce the scope of PCI DSS
+      compliance.  A payment
 
       token can be made using a different authentication scheme (refer to the public key
 
@@ -350,7 +351,8 @@ tags:
       payment tokens.
     name: Payment Tokens
   - description: >
-      Plans are a template for making a subscription.  For example, you may have a plan
+      Plans are a template for making a subscription.  For example, you
+      may have a plan
 
       that has a 30-day free trial followed by a recurring charge of $19.95 per month
 
@@ -360,13 +362,10 @@ tags:
 
       schedule.
     name: Plans
-  - description: >
+  - description: |
       A product describes what you sell (goods or services).
-
       A product determines how what you sell appears on invoices and receipts.
-
       The pricing for products is set in Plans.  One product can have many
-
       plans.
     name: Products
   - description: >
@@ -374,25 +373,26 @@ tags:
 
       the [Reports API Documentation here](https://reports-api-docs.rebilly.com).
     name: Reports
-  - description: >
+  - description: |
       Search data including customers, invoices, orders, transactions and more.
     name: Search
   - description: >
-      A shipping zone contains regions and countries that you ship to. Each shipping zone has its own shipping rates.
+      A shipping zone contains regions and countries that you ship to.
+      Each shipping zone has its own shipping rates.
     name: Shipping Zones
   - description: >
-      A subscription applies a plan's template to create invoices for a customer at the
+      A subscription applies a plan's template to create invoices for a
+      customer at the
 
       appropriate scheduled intervals.  A subscription may also determine if the payment
 
       is collected automatically (with autopay set true).
     name: Subscriptions
-  - description: >
+  - description: |
       You can map a product to a tax category.  The tax category is used by
-
       tax providers to calculate taxes for invoices.
     name: Taxes
-  - description: >
+  - description: |
       Get and refund transactions.
     name: Transactions
   - description: >
@@ -443,7 +443,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a ThreeDSecure entry
       operationId: Post3DSecure
       requestBody:
@@ -476,7 +476,7 @@ paths:
         - 3D Secure
   "/3dsecure/{id}":
     get:
-      description: >
+      description: |
         Retrieve a ThreeDSecure entry with specified identifier string
       operationId: Get3DSecure
       responses:
@@ -505,7 +505,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   /attachments:
     get:
-      description: >
+      description: |
         Retrieve a list of Attachments
       operationId: GetAttachmentCollection
       parameters:
@@ -515,7 +515,8 @@ paths:
         - $ref: "#/components/parameters/collectionQuery"
         - $ref: "#/components/parameters/collectionExpand"
         - $ref: "#/components/parameters/collectionFields"
-        - description: The collection items sort field and order (prefix with "-" for descending sort).
+        - description: The collection items sort field and order (prefix with "-" for
+            descending sort).
           explode: false
           in: query
           name: sort
@@ -568,14 +569,14 @@ paths:
         - Files
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $attachments = $client->attachments()->search([
                 'filter' => 'relatedType:customer',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create an Attachment
       operationId: PostAttachment
       requestBody:
@@ -605,15 +606,11 @@ paths:
         - Files
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $attachmentForm = new Rebilly\Entities\Attachment();
-
             $attachmentForm->setFileId('fileId');
-
             $attachmentForm->setRelatedType($attachmentForm::TYPE_CUSTOMER);
-
             $attachmentForm->setRelatedId('customerId');
-
 
             try {
                 $attachment = $client->attachments()->create($attachmentForm);
@@ -622,7 +619,7 @@ paths:
             }
   "/attachments/{id}":
     delete:
-      description: >
+      description: |
         Delete the Attachment with predefined identifier string
       operationId: DeleteAttachment
       responses:
@@ -644,10 +641,10 @@ paths:
         - Files
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $client->attachments()->delete('attachmentId');
     get:
-      description: >
+      description: |
         Retrieve a Attachment with specified identifier string
       operationId: GetAttachment
       responses:
@@ -673,13 +670,13 @@ paths:
         - Files
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $attachment = $client->attachments()->load('attachmentId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
-      description: >
+      description: |
         Update the Attachment with predefined ID
       operationId: PutAttachment
       requestBody:
@@ -741,7 +738,7 @@ paths:
             }
   /authentication-options:
     get:
-      description: >
+      description: |
         Read current authentication options
       operationId: GetAuthenticationOption
       responses:
@@ -767,12 +764,12 @@ paths:
         - Customer Authentication
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $authenticationOptions = $client->authenticationOptions()->load();
     parameters:
       - $ref: "#/components/parameters/organizationId"
     put:
-      description: >
+      description: |
         Change options
       operationId: PutAuthenticationOption
       requestBody:
@@ -806,7 +803,8 @@ paths:
       x-code-samples:
         - lang: PHP
           source: >
-            $authenticationOptionsForm = new Rebilly\Entities\AuthenticationOptions();
+            $authenticationOptionsForm = new
+            Rebilly\Entities\AuthenticationOptions();
 
             // Regular expression below matches any password with 6+ length that contains alphabet symbols and/or numbers.
 
@@ -820,7 +818,7 @@ paths:
             }
   /authentication-tokens:
     get:
-      description: >
+      description: |
         Retrieve a list of auth tokens
       operationId: GetAuthenticationTokenCollection
       parameters:
@@ -855,14 +853,14 @@ paths:
         - Customer Authentication
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $authenticationTokens = $client->authenticationTokens()->search([
                 'filter' => 'customerId:testCustomer',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Login a customer
       operationId: PostAuthenticationToken
       requestBody:
@@ -914,7 +912,7 @@ paths:
             }
   "/authentication-tokens/{token}":
     delete:
-      description: >
+      description: |
         Logout a customer
       operationId: DeleteAuthenticationToken
       responses:
@@ -940,10 +938,10 @@ paths:
         - Customer Authentication
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $client->authenticationTokens()->logout('token');
     get:
-      description: >
+      description: |
         Verify an authentication token
       operationId: GetAuthenticationTokenVerification
       responses:
@@ -973,7 +971,7 @@ paths:
         - Customer Authentication
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $isVerified = $client->authenticationTokens()->verify('token');
     parameters:
       - description: The token identifier string
@@ -1032,7 +1030,7 @@ paths:
         - Customer Authentication
   /bank-accounts:
     get:
-      description: >
+      description: |
         Retrieve a list of Bank Accounts
       operationId: GetBankAccountCollection
       parameters:
@@ -1067,14 +1065,14 @@ paths:
         - Bank Accounts
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $bankAccounts = $client->bankAccounts()->search([
                 'filter' => 'customerId:testId',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a Bank Account
       operationId: PostBankAccount
       requestBody:
@@ -1162,7 +1160,7 @@ paths:
             }
   "/bank-accounts/{id}":
     get:
-      description: >
+      description: |
         Retrieve a Bank Account with specified identifier string
       operationId: GetBankAccount
       responses:
@@ -1188,14 +1186,15 @@ paths:
         - Bank Accounts
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $bankAccount = $client->bankAccounts()->load('bankAccountId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     patch:
       description: >
-        Update bank account's values except for the account number and routing number
+        Update bank account's values except for the account number and
+        routing number
       operationId: PatchBankAccount
       requestBody:
         content:
@@ -1244,7 +1243,7 @@ paths:
       tags:
         - Bank Accounts
     put:
-      description: >
+      description: |
         Create or update a BankAccount with predefined identifier string
       operationId: PutBankAccount
       requestBody:
@@ -1350,7 +1349,7 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Deactivate a Bank Account
       operationId: PostBankAccountDeactivation
       responses:
@@ -1378,11 +1377,11 @@ paths:
         - Bank Accounts
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $bankAccount = $client->bankAccounts()->deactivate('bankAccountId');
   /blacklists:
     get:
-      description: >
+      description: |
         Retrieve a list of blacklists
       operationId: GetBlacklistCollection
       parameters:
@@ -1417,14 +1416,14 @@ paths:
         - Blacklists
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $blacklists = $client->blacklists()->search([
                 'filter' => 'value:testValue',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a blacklist
       operationId: PostBlacklist
       requestBody:
@@ -1452,15 +1451,11 @@ paths:
         - Blacklists
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $blacklistForm = new Rebilly\Entities\Blacklist();
-
             $blacklistForm->setType($blacklistForm::TYPE_EMAIL);
-
             $blacklistForm->setValue('test@test.com');
-
             $blacklistForm->setExpiredTime('2025-01-01 05:00:00');
-
 
             try {
                 $blacklist = $client->blacklists()->create($blacklistForm);
@@ -1469,7 +1464,7 @@ paths:
             }
   "/blacklists/{id}":
     delete:
-      description: >
+      description: |
         Delete a blacklist with predefined identifier string
       operationId: DeleteBlacklist
       responses:
@@ -1491,10 +1486,10 @@ paths:
         - Blacklists
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $client->blacklists()->delete('blacklistId');
     get:
-      description: >
+      description: |
         Retrieve a blacklist with specified identifier string
       operationId: GetBlacklist
       responses:
@@ -1520,13 +1515,13 @@ paths:
         - Blacklists
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $blacklist = $client->blacklists()->load('blacklistId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
-      description: >
+      description: |
         Create a blacklist with predefined identifier string
       operationId: PutBlacklist
       requestBody:
@@ -1578,11 +1573,9 @@ paths:
   /contacts:
     get:
       deprecated: true
-      description: >
+      description: |
         Retrieve a list of contacts.  This may be useful
-
         when giving the customer a choice between previous
-
         addresses they've used before.
       operationId: GetContactCollection
       parameters:
@@ -1617,7 +1610,7 @@ paths:
         - Contacts
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $contacts = $client->contacts()->search([
                 'filter' => 'firstName:John',
             ]);
@@ -1625,15 +1618,11 @@ paths:
       - $ref: "#/components/parameters/organizationId"
     post:
       deprecated: true
-      description: >
+      description: |
         Contacts are created automatically by data passed to the
-
         contact-related hashes within the customer, invoice,
-
         payment instrument (like payment card), subscriptions,
-
         and more.
-
         <div class="alert alert-warning">
           Note: This method should almost never be used.
           Please check with us on your use case before using it.
@@ -1664,15 +1653,11 @@ paths:
         - Contacts
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $contactForm = new Rebilly\Entities\Contact();
-
             $contactForm->setFirstName('Sherlock');
-
             $contactForm->setLastName('Holmes');
-
             $contactForm->setOrganization('TestOrganization');
-
             $contactForm->setEmails(
                 [
                     [
@@ -1686,7 +1671,6 @@ paths:
                     ],
                 ]
             );
-
             $contactForm->setPhoneNumbers(
                 [
                     [
@@ -1701,7 +1685,6 @@ paths:
                 ]
             );
 
-
             try {
                 $contact = $client->contacts()->create($contactForm);
             } catch (UnprocessableEntityException $e) {
@@ -1710,7 +1693,7 @@ paths:
   "/contacts/{id}":
     delete:
       deprecated: true
-      description: >
+      description: |
         Delete a contact with predefined identifier string
       operationId: DeleteContact
       responses:
@@ -1734,7 +1717,7 @@ paths:
         - Contacts
     get:
       deprecated: true
-      description: >
+      description: |
         Retrieve a contact with specified identifier string
       operationId: GetContact
       responses:
@@ -1760,14 +1743,14 @@ paths:
         - Contacts
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $contact = $client->contacts()->load('contactId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
       deprecated: true
-      description: >
+      description: |
         Create or update a contact with predefined identifier string
       operationId: PutContact
       requestBody:
@@ -1844,7 +1827,7 @@ paths:
             }
   /coupons:
     get:
-      description: >
+      description: |
         Retrieve a list of coupons
       operationId: GetCouponCollection
       parameters:
@@ -1882,14 +1865,14 @@ paths:
         - Coupons
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $coupons = $client->coupons()->search([
                 'filter' => 'status:issued',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a coupon
       operationId: PostCoupon
       requestBody:
@@ -1990,14 +1973,14 @@ paths:
         - Coupons
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $couponRedemptions = $client->couponsRedemptions()->search([
                 'filter' => 'customerId:testCustomer',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Redeem a coupon
       operationId: PostCouponRedemption
       requestBody:
@@ -2077,7 +2060,8 @@ paths:
       x-code-samples:
         - lang: PHP
           source: >
-            $couponRedemption = $client->couponsRedemptions()->load('redemptionCode');
+            $couponRedemption =
+            $client->couponsRedemptions()->load('redemptionCode');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
@@ -2099,11 +2083,11 @@ paths:
         - Coupons
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $client->couponsRedemptions()->cancel('id');
   "/coupons/{redemptionCode}":
     get:
-      description: >
+      description: |
         Retrieve a coupon with specified redemption code string
       operationId: GetCoupon
       responses:
@@ -2129,7 +2113,7 @@ paths:
         - Coupons
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $coupon = $client->coupons()->load('redemptionCode');
     parameters:
       - description: The Coupon's redemption code
@@ -2140,7 +2124,7 @@ paths:
           type: string
       - $ref: "#/components/parameters/organizationId"
     put:
-      description: >
+      description: |
         Create or update a coupon with predefined redemption code
       operationId: PutCoupon
       requestBody:
@@ -2230,11 +2214,9 @@ paths:
           type: string
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Set a coupon's expiry time with the specified redemption code.
-
         The expiredTime of a coupon must be greater than its issuedTime.
-
         This cannot be performed on expired coupons.
       operationId: PostCouponExpiration
       requestBody:
@@ -2266,7 +2248,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: The coupon is already expired and has been redeemed, unable to reschedule expiration
+          description: The coupon is already expired and has been redeemed, unable to
+            reschedule expiration
         "422":
           $ref: "#/components/responses/InvalidDataError"
       summary: Set a coupon's expiration time.
@@ -2274,7 +2257,7 @@ paths:
         - Coupons
   /credentials:
     get:
-      description: >
+      description: |
         Retrieve a list of credentials
       operationId: GetCredentialCollection
       parameters:
@@ -2309,14 +2292,14 @@ paths:
         - Customer Authentication
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $customerCredentials = $client->customerCredentials()->search([
                 'filter' => 'customerId:testCustomer',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a credential
       operationId: PostCredential
       requestBody:
@@ -2361,7 +2344,7 @@ paths:
             }
   "/credentials/{id}":
     delete:
-      description: >
+      description: |
         Delete a credential with predefined identifier string
       operationId: DeleteCredential
       responses:
@@ -2383,10 +2366,10 @@ paths:
         - Customer Authentication
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $client->customerCredentials()->delete('credentialId');
     get:
-      description: >
+      description: |
         Retrieve a credential with specified identifier string
       operationId: GetCredential
       responses:
@@ -2413,12 +2396,13 @@ paths:
       x-code-samples:
         - lang: PHP
           source: >
-            $customerCredential = $client->customerCredentials()->load('credentialId');
+            $customerCredential =
+            $client->customerCredentials()->load('credentialId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
-      description: >
+      description: |
         Create or update a credential with predefined identifier string
       operationId: PutCredential
       requestBody:
@@ -2478,7 +2462,7 @@ paths:
             }
   "/custom-fields/{resource}":
     get:
-      description: >
+      description: |
         Retrieve a schema of Custom Fields for the given resource type
       operationId: GetCustomFieldCollection
       responses:
@@ -2505,7 +2489,7 @@ paths:
         - Custom Fields
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $customFields = $client->customFields()->search('customers', [
                 'filter' => 'type:boolean',
             ]);
@@ -2514,7 +2498,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   "/custom-fields/{resource}/{name}":
     get:
-      description: >
+      description: |
         Retrieve a schema of the given Custom Field for the given resource type
       operationId: GetCustomField
       responses:
@@ -2541,7 +2525,8 @@ paths:
       x-code-samples:
         - lang: PHP
           source: >
-            $customField = $client->customFields()->load('customers', 'testFieldName');
+            $customField = $client->customFields()->load('customers',
+            'testFieldName');
     parameters:
       - $ref: "#/components/parameters/customFieldResource"
       - description: The custom field's identifier string
@@ -2555,7 +2540,8 @@ paths:
       - $ref: "#/components/parameters/organizationId"
     put:
       description: >
-        Create or alter a schema of the given Custom Field for the given resource type.
+        Create or alter a schema of the given Custom Field for the given
+        resource type.
       operationId: PutCustomField
       requestBody:
         content:
@@ -2599,7 +2585,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: >
-            The schema is in use: remove all the associated data in order to remove or alter the schema
+            The schema is in use: remove all the associated data in order to
+            remove or alter the schema
         "422":
           $ref: "#/components/responses/InvalidDataError"
       summary: Create or alter a Custom Field
@@ -2620,7 +2607,7 @@ paths:
             }
   /customer-timeline-custom-events:
     get:
-      description: >
+      description: |
         Retrieve a list of customer timeline custom event types
       operationId: GetCustomerTimelineCustomEventTypeCollection
       parameters:
@@ -2635,7 +2622,8 @@ paths:
                 items:
                   $ref: "#/components/schemas/CustomerTimelineCustomEvent"
                 type: array
-          description: A list of customer timeline custom event types was retrieved successfully
+          description: A list of customer timeline custom event types was retrieved
+            successfully
           headers:
             Pagination-Limit:
               $ref: "#/components/headers/Pagination-Limit"
@@ -2657,7 +2645,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create Customer Timeline custom event type
       operationId: PostCustomerTimelineCustomEventType
       requestBody:
@@ -2690,7 +2678,7 @@ paths:
         - Customers
   "/customer-timeline-custom-events/{id}":
     get:
-      description: >
+      description: |
         Retrieve customer timeline custom event type
       operationId: GetCustomerTimelineCustomEventType
       responses:
@@ -2715,7 +2703,8 @@ paths:
               $ref: "#/components/headers/Rate-Limit-Reset"
         "401":
           $ref: "#/components/responses/AccessForbidden"
-      summary: Retrieve customer timeline custom event type with specified identifier string
+      summary: Retrieve customer timeline custom event type with specified identifier
+        string
       tags:
         - Customers Timeline
     parameters:
@@ -2723,7 +2712,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   /customer-timeline-events:
     get:
-      description: >
+      description: |
         Retrieve a list of customer timeline messages for all customers
       operationId: GetCustomerTimelineEventCollection
       parameters:
@@ -2761,7 +2750,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   /customers:
     get:
-      description: >
+      description: |
         Retrieve a list of customers
       operationId: GetCustomerCollection
       parameters:
@@ -2771,7 +2760,8 @@ paths:
         - $ref: "#/components/parameters/collectionQuery"
         - $ref: "#/components/parameters/collectionExpand"
         - $ref: "#/components/parameters/collectionFields"
-        - description: The collection items sort field and order (prefix with "-" for descending sort).
+        - description: The collection items sort field and order (prefix with "-" for
+            descending sort).
           explode: false
           in: query
           name: sort
@@ -2842,7 +2832,7 @@ paths:
         - Customers
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $customers = $client->customers()->search([
                 'filter' => 'firstName:John',
             ]);
@@ -2888,9 +2878,8 @@ paths:
         - Customers
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $customerForm = new Rebilly\Entities\Customer();
-
             $customerForm->setPrimaryAddress([
                 'firstName' => 'John',
                 'lastName' => 'Doe',
@@ -2925,7 +2914,6 @@ paths:
                 ],
             ]);
 
-
             try {
                 $customer = $client->customers()->create($customerForm);
             } catch (UnprocessableEntityException $e) {
@@ -2933,10 +2921,12 @@ paths:
             }
   "/customers/{id}":
     delete:
-      description: Merge one duplicate customer to another target customer and delete the former.
+      description: Merge one duplicate customer to another target customer and delete
+        the former.
       operationId: DeleteCustomer
       parameters:
-        - description: The customer idendifier to get the data of the deleted duplicate customer
+        - description: The customer idendifier to get the data of the deleted duplicate
+            customer
           in: query
           name: targetCustomerId
           required: true
@@ -2960,7 +2950,7 @@ paths:
       tags:
         - Customers
     get:
-      description: >
+      description: |
         Retrieve a customer with specified identifier string
       operationId: GetCustomer
       responses:
@@ -2986,14 +2976,15 @@ paths:
         - Customers
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $customers = $client->customers()->load('myCustomerId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
       description: >
-        Create or update (upsert) a customer with predefined identifier string.
+        Create or update (upsert) a customer with predefined identifier
+        string.
 
         Read our guide to [preventing duplicates](https://api-guides.rebilly.com/core-concepts/preventing-duplicates)
 
@@ -3062,7 +3053,7 @@ paths:
             }
   "/customers/{id}/lead-source":
     delete:
-      description: >
+      description: |
         Delete a Lead Source that belongs to a certain customer
       operationId: DeleteCustomerLeadSource
       responses:
@@ -3086,10 +3077,10 @@ paths:
         - Customers
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $customer = $client->customers()->deleteLeadSource('myCustomerId');
     get:
-      description: >
+      description: |
         Retrieve a Lead Source of given customer
       operationId: GetCustomerLeadSource
       responses:
@@ -3115,15 +3106,14 @@ paths:
         - Customers
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $customer = $client->customers()->load('myCustomerId');
-
             $leadSource = $customer->getLeadSource();
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
-      description: >
+      description: |
         Create a Lead Source for a customer
       operationId: PutCustomerLeadSource
       requestBody:
@@ -3171,7 +3161,7 @@ paths:
             }
   "/customers/{id}/timeline":
     get:
-      description: >
+      description: |
         Retrieve a list of customer timeline messages
       operationId: GetCustomerTimelineCollection
       parameters:
@@ -3209,7 +3199,7 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a customer Timeline comment or custom defined event
       operationId: PostCustomerTimeline
       requestBody:
@@ -3242,7 +3232,7 @@ paths:
         - Customers Timeline
   "/customers/{id}/timeline/{messageId}":
     delete:
-      description: >
+      description: |
         Delete a Customer Timeline message with predefined identifier string
       operationId: DeleteCustomerTimeline
       responses:
@@ -3265,7 +3255,7 @@ paths:
       tags:
         - Customers Timeline
     get:
-      description: >
+      description: |
         Retrieve a customer message with specified identifier string
       operationId: GetCustomerTimeline
       responses:
@@ -3301,7 +3291,8 @@ paths:
   "/customers/{id}/upcoming-invoices":
     get:
       description: >
-        Retrieve a list of upcoming invoices from the subscriptions which belong to the given customer.
+        Retrieve a list of upcoming invoices from the subscriptions which
+        belong to the given customer.
 
         The endpoint is temporary before upcoming invoices get a complete integration.
       operationId: GetCustomerUpcomingInvoiceCollection
@@ -3335,7 +3326,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   /disputes:
     get:
-      description: >
+      description: |
         Retrieve a list of disputes
       operationId: GetDisputeCollection
       parameters:
@@ -3370,14 +3361,14 @@ paths:
         - Disputes
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $disputes = $client->disputes()->search([
                 'filter' => 'transactionId:testId',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a dispute
       operationId: PostDispute
       requestBody:
@@ -3405,23 +3396,15 @@ paths:
         - Disputes
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $disputeForm = new Rebilly\Entities\Dispute();
-
             $disputeForm->setTransactionId('transactionId');
-
             $disputeForm->setCurrency('USD');
-
             $disputeForm->setAmount(10);
-
             $disputeForm->setReasonCode(1000);
-
             $disputeForm->setType($disputeForm::TYPE_1CB);
-
             $disputeForm->setStatus($disputeForm::STATUS_RESPONSE_NEEDED);
-
             $disputeForm->setPostedTime('2025-01-01 05:00:00');
-
 
             try {
                 $dispute = $client->disputes()->create($disputeForm);
@@ -3430,7 +3413,7 @@ paths:
             }
   "/disputes/{id}":
     get:
-      description: >
+      description: |
         Retrieve a dispute with specified identifier string
       operationId: GetDispute
       responses:
@@ -3456,13 +3439,13 @@ paths:
         - Disputes
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $dispute = $client->disputes()->load('disputeId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
-      description: >
+      description: |
         Create or update a Dispute with predefined identifier string
       operationId: PutDispute
       requestBody:
@@ -3503,23 +3486,15 @@ paths:
         - Disputes
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $disputeForm = new Rebilly\Entities\Dispute();
-
             $disputeForm->setTransactionId('transactionId');
-
             $disputeForm->setCurrency('USD');
-
             $disputeForm->setAmount(10);
-
             $disputeForm->setReasonCode(1000);
-
             $disputeForm->setType($disputeForm::TYPE_1CB);
-
             $disputeForm->setStatus($disputeForm::STATUS_RESPONSE_NEEDED);
-
             $disputeForm->setPostedTime('2025-01-01 05:00:00');
-
 
             try {
                 $dispute = $client->disputes()->update('disputeId', $dispute);
@@ -3558,7 +3533,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   /files:
     get:
-      description: >
+      description: |
         Retrieve a list of files
       operationId: GetFileCollection
       parameters:
@@ -3568,7 +3543,8 @@ paths:
         - $ref: "#/components/parameters/collectionQuery"
         - $ref: "#/components/parameters/collectionExpand"
         - $ref: "#/components/parameters/collectionFields"
-        - description: The collection items sort field and order (prefix with "-" for descending sort).
+        - description: The collection items sort field and order (prefix with "-" for
+            descending sort).
           explode: false
           in: query
           name: sort
@@ -3623,7 +3599,7 @@ paths:
         - Files
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $files = $client->files()->search([
                 'filter' => 'name:TestFile',
             ]);
@@ -3682,11 +3658,9 @@ paths:
         - Files
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $fileForm = new Rebilly\Entities\File();
-
             $fileForm->setUrl('http://test.com/somefile.jpg');
-
 
             try {
                 $file = $client->files()->create($fileForm);
@@ -3695,7 +3669,7 @@ paths:
             }
   "/files/{id}":
     delete:
-      description: >
+      description: |
         Delete the File with predefined identifier string
       operationId: DeleteFile
       responses:
@@ -3717,10 +3691,10 @@ paths:
         - Files
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $client->files()->delete('fileId');
     get:
-      description: >
+      description: |
         Retrieve a File with specified identifier string
       operationId: GetFile
       responses:
@@ -3746,14 +3720,15 @@ paths:
         - Files
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $file = $client->files()->load('fileId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
       description: >
-        Update the File with predefined ID. Note that file can be uploaded with POST only.
+        Update the File with predefined ID. Note that file can be uploaded
+        with POST only.
       operationId: PutFile
       requestBody:
         content:
@@ -3787,11 +3762,9 @@ paths:
         - Files
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $fileForm = new Rebilly\Entities\File();
-
             $fileForm->setDescription('This is a test file');
-
 
             try {
                 $file = $client->files()->update('fileId', $fileForm);
@@ -3800,7 +3773,7 @@ paths:
             }
   "/files/{id}/download":
     get:
-      description: >
+      description: |
         Download a file
       operationId: GetFileDownload
       responses:
@@ -3834,7 +3807,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   "/files/{id}/download{extension}":
     get:
-      description: >
+      description: |
         Download image in specific format. Images are converted server-side
       operationId: GetFileDownloadExtension
       responses:
@@ -3878,7 +3851,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   /invoices:
     get:
-      description: >
+      description: |
         Retrieve a list of invoices
       operationId: GetInvoiceCollection
       parameters:
@@ -3927,14 +3900,14 @@ paths:
         - Invoices
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $invoices = $client->invoices()->search([
                 'filter' => 'customerId:testCustomerId',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create an invoice
       operationId: PostInvoice
       requestBody:
@@ -3962,17 +3935,12 @@ paths:
         - Invoices
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             <?
-
             $invoiceForm = new Rebilly\Entities\Invoice();
-
             $invoiceForm->setCustomerId('customerId');
-
             $invoiceForm->setWebsiteId('websiteId');
-
             $invoiceForm->setCurrency('USD');
-
             $invoiceForm->setBillingAddress([
                 'firstName' => 'John',
                 'lastName' => 'Doe',
@@ -4007,7 +3975,6 @@ paths:
                 ],
             ]);
 
-
             try {
                 $invoice = $client->invoices()->create($invoiceForm);
             } catch (UnprocessableEntityException $e) {
@@ -4015,7 +3982,7 @@ paths:
             }
   "/invoices/{id}":
     get:
-      description: >
+      description: |
         Retrieve an invoice with specified identifier string
       operationId: GetInvoice
       parameters:
@@ -4054,13 +4021,13 @@ paths:
         - Invoices
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $invoice = $client->invoices()->load('invoiceId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
-      description: >
+      description: |
         Create or update an invoice with predefined identifier string
       operationId: PutInvoice
       requestBody:
@@ -4159,7 +4126,7 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Abandon an invoice with specified identifier string
       operationId: PostInvoiceAbandonment
       responses:
@@ -4185,7 +4152,7 @@ paths:
         - Invoices
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $invoice = $client->invoices()->abandon('invoiceId');
   "/invoices/{id}/issue":
     parameters:
@@ -4193,7 +4160,8 @@ paths:
       - $ref: "#/components/parameters/organizationId"
     post:
       description: >
-        Issue an invoice with specified identifier string. It must be in `draft` status.
+        Issue an invoice with specified identifier string. It must be in
+        `draft` status.
       operationId: PostInvoiceIssuance
       requestBody:
         content:
@@ -4228,10 +4196,11 @@ paths:
       x-code-samples:
         - lang: PHP
           source: >
-            $invoice = $client->invoices()->issue('invoiceId', '2025-01-01 05:00:00');
+            $invoice = $client->invoices()->issue('invoiceId', '2025-01-01
+            05:00:00');
   "/invoices/{id}/items":
     get:
-      description: >
+      description: |
         Retrieve an invoice items with specified invoice identifier string
       operationId: GetInvoiceItemCollection
       parameters:
@@ -4262,7 +4231,7 @@ paths:
         - Invoices
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $invoiceItems = $client->invoiceItems()->search('invoiceId', [
                 'filter' => 'quantity:5',
             ]);
@@ -4270,7 +4239,7 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create an invoice item
       operationId: PostInvoiceItem
       requestBody:
@@ -4387,7 +4356,8 @@ paths:
       - $ref: "#/components/parameters/organizationId"
     post:
       description: >
-        Reissue an invoice with specified identifier string. It must be issued (status must be `unpaid` or `past-due`).
+        Reissue an invoice with specified identifier string. It must be
+        issued (status must be `unpaid` or `past-due`).
       operationId: PostInvoiceReissuance
       requestBody:
         content:
@@ -4421,7 +4391,7 @@ paths:
         - Invoices
   "/invoices/{id}/timeline":
     get:
-      description: >
+      description: |
         Retrieve a list of invoice timeline messages
       operationId: GetInvoiceTimelineCollection
       parameters:
@@ -4459,7 +4429,7 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create an invoice Timeline comment
       operationId: PostInvoiceTimeline
       requestBody:
@@ -4492,7 +4462,7 @@ paths:
         - Invoices
   "/invoices/{id}/timeline/{messageId}":
     delete:
-      description: >
+      description: |
         Delete an Invoice Timeline message with predefined identifier string
       operationId: DeleteInvoiceTimeline
       responses:
@@ -4515,7 +4485,7 @@ paths:
       tags:
         - Invoices
     get:
-      description: >
+      description: |
         Retrieve a invoice message with specified identifier string
       operationId: GetInvoiceTimeline
       responses:
@@ -4589,7 +4559,7 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Void an invoice with specified identifier string
       operationId: PostInvoiceVoid
       responses:
@@ -4615,18 +4585,19 @@ paths:
         - Invoices
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $invoice = $client->invoices()->void('invoiceId');
   /kyc-documents:
     get:
-      description: >
+      description: |
         Retrieve a list of KYC documents
       operationId: GetKycDocumentCollection
       parameters:
         - $ref: "#/components/parameters/collectionLimit"
         - $ref: "#/components/parameters/collectionOffset"
         - $ref: "#/components/parameters/collectionFilter"
-        - description: The collection items sort field and order (prefix with "-" for descending sort).
+        - description: The collection items sort field and order (prefix with "-" for
+            descending sort).
           explode: false
           in: query
           name: sort
@@ -4680,7 +4651,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a KYC Document
       operationId: PostKycDocument
       requestBody:
@@ -4800,7 +4771,8 @@ paths:
       - $ref: "#/components/parameters/organizationId"
     post:
       description: >
-        Marks that status of the document as `accepted`. Updates the review time and reviewer information. Intended to be used for manual overrides.
+        Marks that status of the document as `accepted`. Updates the review
+        time and reviewer information. Intended to be used for manual overrides.
       operationId: PostKycDocumentAcceptance
       responses:
         "201":
@@ -4829,7 +4801,8 @@ paths:
       - $ref: "#/components/parameters/organizationId"
     post:
       description: >
-        Marks that status of the document as `rejected`. Updates the review time and reviewer information. Intended to be used for manual overrides.
+        Marks that status of the document as `rejected`. Updates the review
+        time and reviewer information. Intended to be used for manual overrides.
       operationId: PostKycDocumentRejection
       requestBody:
         content:
@@ -4866,7 +4839,8 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: Mark the KYC document as reviewed. Updates the review time and reviewer information.
+      description: Mark the KYC document as reviewed. Updates the review time and
+        reviewer information.
       operationId: PostKycDocumentReview
       responses:
         "201":
@@ -4893,7 +4867,7 @@ paths:
         - KYC Documents
   /password-tokens:
     get:
-      description: >
+      description: |
         Retrieve a list of tokens
       operationId: GetPasswordTokenCollection
       parameters:
@@ -4929,7 +4903,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a Reset Password Token
       operationId: PostPasswordToken
       requestBody:
@@ -4962,7 +4936,7 @@ paths:
         - Customer Authentication
   "/password-tokens/{id}":
     delete:
-      description: >
+      description: |
         Delete a Reset Password Token with predefined identifier string
       operationId: DeletePasswordToken
       responses:
@@ -4985,7 +4959,7 @@ paths:
       tags:
         - Customer Authentication
     get:
-      description: >
+      description: |
         Retrieve a Reset Password Token with specified identifier string
       operationId: GetPasswordToken
       responses:
@@ -5014,7 +4988,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   /payment-cards:
     get:
-      description: >
+      description: |
         Retrieve a list of Payments Cards
       operationId: GetPaymentCardCollection
       parameters:
@@ -5049,14 +5023,14 @@ paths:
         - Payment Cards
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $paymentCards = $client->paymentCards()->search([
                 'filter' => 'status:active',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a Payment Card
       operationId: PostPaymentCard
       requestBody:
@@ -5157,7 +5131,7 @@ paths:
             }
   "/payment-cards/{id}":
     get:
-      description: >
+      description: |
         Retrieve a Payment Card with specified identifier string
       operationId: GetPaymentCard
       responses:
@@ -5183,13 +5157,13 @@ paths:
         - Payment Cards
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $paymentCard = $client->paymentCards()->load('paymentCardId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     patch:
-      description: >
+      description: |
         Update any of the payment card's values except for the pan
       operationId: PatchPaymentCard
       requestBody:
@@ -5350,12 +5324,10 @@ paths:
       - $ref: "#/components/parameters/organizationId"
     post:
       deprecated: true
-      description: >
+      description: |
         Authorize a Payment Card
 
-
         Instead of using this endpoint a Payment Card will
-
         be authorized on first usage (new transaction or order).
       operationId: PostPaymentCardAuthorization
       requestBody:
@@ -5409,7 +5381,8 @@ paths:
       x-code-samples:
         - lang: PHP
           source: >
-            $paymentCardAuthorizationForm = new Rebilly\Entities\PaymentCardAuthorization();
+            $paymentCardAuthorizationForm = new
+            Rebilly\Entities\PaymentCardAuthorization();
 
             $paymentCardAuthorizationForm->setWebsiteId('websiteId');
 
@@ -5428,7 +5401,7 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Deactivate a Payment Card
       operationId: PostPaymentCardDeactivation
       responses:
@@ -5456,7 +5429,7 @@ paths:
         - Payment Cards
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $client->paymentCards()->deactivate('paymentCardId');
   "/payment-cards/{id}/matched-rules":
     get:
@@ -5517,7 +5490,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Validate a payment instrument
       operationId: PostPaymentInstrumentValidation
       requestBody:
@@ -5559,7 +5532,7 @@ paths:
         - Payment Instrument Validation
   "/payment-instrument-validation/{id}":
     get:
-      description: >
+      description: |
         Retrieve a list of validated payment instruments
       operationId: GetPaymentInstrumentValidation
       parameters:
@@ -5596,7 +5569,7 @@ paths:
   /payments:
     get:
       deprecated: true
-      description: >
+      description: |
         Retrieve a payment list
       operationId: GetPaymentCollection
       parameters:
@@ -5647,7 +5620,7 @@ paths:
         - Payments
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $payments = $client->payments()->search([
                 'filter' => 'currency:USD',
             ]);
@@ -5655,7 +5628,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
     post:
       deprecated: true
-      description: >
+      description: |
         Create a payment (deprecated).  Use create a transaction instead.
       operationId: PostPayment
       requestBody:
@@ -5718,7 +5691,7 @@ paths:
   "/payments/{id}":
     get:
       deprecated: true
-      description: >
+      description: |
         Retrieve a payment with specified identifier string
       operationId: GetPayment
       responses:
@@ -5744,14 +5717,14 @@ paths:
         - Payments
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $payment = $client->payments()->load('paymentId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
       deprecated: true
-      description: >
+      description: |
         Make a payment with predefined identifier string
       operationId: PutPayment
       requestBody:
@@ -5825,7 +5798,7 @@ paths:
             }
   /paypal-accounts:
     get:
-      description: >
+      description: |
         Retrieve a list of PayPal Accounts
       operationId: GetPayPalAccountCollection
       parameters:
@@ -5847,14 +5820,14 @@ paths:
         - PayPal Accounts
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $payPalAccounts = $client->payPalAccounts()->search([
                 'filter' => 'status:active',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a PayPal Account
       operationId: PostPayPalAccount
       requestBody:
@@ -5880,11 +5853,9 @@ paths:
         - PayPal Accounts
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $payPalForm = new Rebilly\Entities\PayPalAccount();
-
             $payPalForm->setCustomerId('customerId');
-
             $payPalForm->setBillingAddress([
                 'firstName' => 'John',
                 'lastName' => 'Doe',
@@ -5919,7 +5890,6 @@ paths:
                 ],
             ]);
 
-
             try {
                 $payPalAccount = $client->payPalAccounts()->create($payPalForm);
             } catch (UnprocessableEntityException $e) {
@@ -5927,7 +5897,7 @@ paths:
             }
   "/paypal-accounts/{id}":
     get:
-      description: >
+      description: |
         Retrieve a PayPal Account with specified identifier string
       operationId: GetPayPalAccount
       responses:
@@ -5953,7 +5923,7 @@ paths:
         - PayPal Accounts
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $payPalAccount = $client->payPalAccounts()->load('payPalAccountId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
@@ -6047,12 +6017,10 @@ paths:
       - $ref: "#/components/parameters/organizationId"
     post:
       deprecated: true
-      description: >
+      description: |
         Activate a PayPal Account
 
-
         Instead of using this endpoint a PayPal Account will
-
         be authorized on first usage (new transaction or order).
       operationId: PostPayPalAccountActivation
       requestBody:
@@ -6102,7 +6070,7 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Deactivate a PayPal Account
       operationId: PostPayPalAccountDeactivation
       responses:
@@ -6130,11 +6098,11 @@ paths:
         - PayPal Accounts
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $client->payPalAccounts()->deactivate('payPalAccountId');
   /plans:
     get:
-      description: >
+      description: |
         Retrieve a list of plans
       operationId: GetPlanCollection
       parameters:
@@ -6169,14 +6137,14 @@ paths:
         - Plans
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $plans = $client->plans()->search([
                 'filter' => 'name:TestPlan',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a plan
       operationId: PostPlan
       requestBody:
@@ -6197,21 +6165,14 @@ paths:
         - Plans
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $planForm = new Rebilly\Entities\Plan();
-
             $planForm->setName('TestPlan');
-
             $planForm->setCurrency('USD');
-
             $planForm->setTrialAmount(1);
-
             $planForm->setTrialPeriodUnit('day');
-
             $planForm->setTrialPeriodLength(1);
-
             $planForm->setProductId('test-product');
-
 
             try {
                 $plan = $client->plans()->create($planForm);
@@ -6220,7 +6181,7 @@ paths:
             }
   "/plans/{id}":
     delete:
-      description: >
+      description: |
         Delete a Plan with predefined identifier string
       operationId: DeletePlan
       responses:
@@ -6244,10 +6205,10 @@ paths:
         - Plans
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $client->plans()->delete('planId');
     get:
-      description: >
+      description: |
         Retrieve a plan with specified identifier string
       operationId: GetPlan
       responses:
@@ -6273,13 +6234,13 @@ paths:
         - Plans
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $plan = $client->plans()->load('planId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
-      description: >
+      description: |
         Create or update a Plan with predefined identifier string
       operationId: PutPlan
       requestBody:
@@ -6322,19 +6283,13 @@ paths:
         - Plans
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $planForm = new Rebilly\Entities\Plan();
-
             $planForm->setName('TestPlan');
-
             $planForm->setCurrency('USD');
-
             $planForm->setTrialAmount(1);
-
             $planForm->setTrialPeriodUnit('day');
-
             $planForm->setTrialPeriodLength(1);
-
 
             try {
                 $plan = $client->plans()->update('planId', $planForm);
@@ -6343,7 +6298,7 @@ paths:
             }
   /products:
     get:
-      description: >
+      description: |
         Retrieve a list of products
       operationId: GetProductCollection
       parameters:
@@ -6379,7 +6334,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a Product
       operationId: PostProduct
       requestBody:
@@ -6407,7 +6362,7 @@ paths:
         - Products
   "/products/{id}":
     delete:
-      description: >
+      description: |
         Delete a product with predefined identifier string
       operationId: DeleteProduct
       responses:
@@ -6428,7 +6383,7 @@ paths:
       tags:
         - Products
     get:
-      description: >
+      description: |
         Retrieve a product with specified identifier string
       operationId: GetProduct
       responses:
@@ -6456,7 +6411,7 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
-      description: >
+      description: |
         Create a product with predefined identifier string
       operationId: PutProduct
       requestBody:
@@ -6498,11 +6453,13 @@ paths:
   /search:
     get:
       description: >
-        Search merchant's data to return resources such as customers, invoices, orders, transactions
+        Search merchant's data to return resources such as customers,
+        invoices, orders, transactions
       operationId: GetSearch
       parameters:
         - description: >
-            The default or "global" search. It will search all searchable resources across as many fields as possible.
+            The default or "global" search. It will search all searchable
+            resources across as many fields as possible.
           in: query
           name: q
           schema:
@@ -6566,7 +6523,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   /shipping-zones:
     get:
-      description: >
+      description: |
         Retrieve a list of shipping zones
       operationId: GetShippingZoneCollection
       parameters:
@@ -6602,7 +6559,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a Shipping Zone
       operationId: PostShippingZone
       requestBody:
@@ -6635,7 +6592,7 @@ paths:
         - Shipping Zones
   "/shipping-zones/{id}":
     delete:
-      description: >
+      description: |
         Delete a shipping zone with predefined identifier string
       operationId: DeleteShippingZone
       responses:
@@ -6656,7 +6613,7 @@ paths:
       tags:
         - Shipping Zones
     get:
-      description: >
+      description: |
         Retrieve a shipping zone with specified identifier string
       operationId: GetShippingZone
       responses:
@@ -6684,7 +6641,7 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
-      description: >
+      description: |
         Create a shipping zone with predefined identifier string
       operationId: PutShippingZone
       requestBody:
@@ -6945,7 +6902,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/SubscriptionReactivation"
           description: >
-            Reactivation was created, subscription is active and won't be deactivated.
+            Reactivation was created, subscription is active and won't be
+            deactivated.
 
             If there was a cancellation with status "confirmed", it is revoked.
           headers:
@@ -6992,7 +6950,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   /subscriptions:
     get:
-      description: >
+      description: |
         Retrieve a list of subscriptions
       operationId: GetSubscriptionCollection
       parameters:
@@ -7042,16 +7000,15 @@ paths:
         - Subscriptions
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $subscriptions = $client->subscriptions()->search([
                 'filter' => 'customerId:testCustomerId',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a subscription. Consider using the upsert
-
         operation to accomplish this task.
       operationId: PostSubscription
       parameters:
@@ -7137,7 +7094,7 @@ paths:
             }
   "/subscriptions/{id}":
     get:
-      description: >
+      description: |
         Retrieve a subscription with specified identifier string
       operationId: GetSubscription
       parameters:
@@ -7165,13 +7122,13 @@ paths:
         - Subscriptions
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $subscription = $client->subscriptions()->load('subscriptionId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     put:
-      description: >
+      description: |
         Create or update a subscription with predefined identifier string
       operationId: PutSubscription
       parameters:
@@ -7274,7 +7231,8 @@ paths:
       - $ref: "#/components/parameters/organizationId"
     post:
       description: >
-        Change a subscription's plan and designate when and if there should be pro rata credits given.
+        Change a subscription's plan and designate when and if there should
+        be pro rata credits given.
 
         Only active subscriptions with a single plan can be changed.
 
@@ -7311,7 +7269,8 @@ paths:
       x-code-samples:
         - lang: PHP
           source: >
-            $subscriptionChangePlanForm = new Rebilly\Entities\SubscriptionChangePlan();
+            $subscriptionChangePlanForm = new
+            Rebilly\Entities\SubscriptionChangePlan();
 
             $subscriptionChangePlanForm->setPlanId('newPlanId');
 
@@ -7336,7 +7295,8 @@ paths:
       - $ref: "#/components/parameters/organizationId"
     post:
       description: >
-        Issue an interim invoice for a subscription, typically used in conjunction with plan changes and pro rata adjustments.
+        Issue an interim invoice for a subscription, typically used in
+        conjunction with plan changes and pro rata adjustments.
 
         This process creates an invoice, adds the subscription's line items to the invoice, and issues the invoice, and applies
 
@@ -7402,7 +7362,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   "/subscriptions/{id}/timeline":
     get:
-      description: >
+      description: |
         Retrieve a list of order timeline messages
       operationId: GetSubscriptionTimelineCollection
       parameters:
@@ -7440,7 +7400,7 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create an order Timeline comment
       operationId: PostSubscriptionTimeline
       requestBody:
@@ -7473,7 +7433,7 @@ paths:
         - Subscriptions
   "/subscriptions/{id}/timeline/{messageId}":
     delete:
-      description: >
+      description: |
         Delete an Order Timeline message with predefined identifier string
       operationId: DeleteSubscriptionTimeline
       responses:
@@ -7496,7 +7456,7 @@ paths:
       tags:
         - Subscriptions
     get:
-      description: >
+      description: |
         Retrieve a order message with specified identifier string
       operationId: GetSubscriptionTimeline
       responses:
@@ -7610,7 +7570,7 @@ paths:
         - Subscriptions
   /tags:
     get:
-      description: >
+      description: |
         Retrieve a list of tags
       operationId: GetTagCollection
       parameters:
@@ -7618,7 +7578,8 @@ paths:
         - $ref: "#/components/parameters/collectionOffset"
         - $ref: "#/components/parameters/collectionFilter"
         - $ref: "#/components/parameters/collectionQuery"
-        - description: The collection items sort field and order (prefix with "-" for descending sort).
+        - description: The collection items sort field and order (prefix with "-" for
+            descending sort).
           explode: false
           in: query
           name: sort
@@ -7666,7 +7627,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a tag
       operationId: PostTag
       requestBody:
@@ -7696,9 +7657,8 @@ paths:
         - Tags
   "/tags/{tag}":
     delete:
-      description: >
+      description: |
         Delete a tag.
-
         It's an asynchronous operation.
       operationId: DeleteTag
       responses:
@@ -7712,7 +7672,7 @@ paths:
       tags:
         - Tags
     get:
-      description: >
+      description: |
         Retrieve a tag
       operationId: GetTag
       responses:
@@ -7733,7 +7693,7 @@ paths:
       - $ref: "#/components/parameters/tag"
       - $ref: "#/components/parameters/organizationId"
     patch:
-      description: >
+      description: |
         Update a tag
       operationId: PatchTag
       requestBody:
@@ -7758,11 +7718,9 @@ paths:
         - Tags
   "/tags/{tag}/customers":
     delete:
-      description: >
+      description: |
         Untag a list of customers.
-
         If the customer from the list is already untagged it will be ignored.
-
         It's an asynchronous operation.
       operationId: DeleteTagCustomerCollection
       requestBody:
@@ -7795,11 +7753,9 @@ paths:
       - $ref: "#/components/parameters/tag"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Tag a list of customers.
-
         If the customer from the list is already tagged it will be ignored.
-
         It's an asynchronous operation.
       operationId: PostTagCustomerCollection
       requestBody:
@@ -7830,7 +7786,7 @@ paths:
         - Tags
   "/tags/{tag}/customers/{customerId}":
     delete:
-      description: >
+      description: |
         Untag a customer
       operationId: DeleteTagCustomer
       responses:
@@ -7848,7 +7804,7 @@ paths:
       - $ref: "#/components/parameters/customerId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Tag a customer
       operationId: PostTagCustomer
       responses:
@@ -7863,7 +7819,7 @@ paths:
         - Tags
   /tokens:
     get:
-      description: >
+      description: |
         Retrieve a list of tokens
       operationId: GetTokenCollection
       parameters:
@@ -7898,29 +7854,22 @@ paths:
         - Payment Tokens
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $paymentCardTokens = $client->paymentCardTokens()->search([
                 'filter' => 'token:string',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         [FramePay](https://rebilly.github.io/framepay-docs/)
-
         is the recommended way to
-
         create a payment token because it minimizes
-
         PCI DSS compliance.  Once a payment token
-
         is created, it can only be used once.
 
-
         A payment token expires upon first use
-
         or within 30 minutes of the token creation
-
         (whichever comes first).
       operationId: PostToken
       requestBody:
@@ -8022,7 +7971,7 @@ paths:
             }
   "/tokens/{token}":
     get:
-      description: >
+      description: |
         Retrieve a token with specified identifier string
       operationId: GetToken
       responses:
@@ -8050,7 +7999,7 @@ paths:
         - Payment Tokens
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $paymentCardToken = $client->paymentCardTokens()->load('tokenId');
     parameters:
       - description: The token identifier string
@@ -8062,7 +8011,7 @@ paths:
       - $ref: "#/components/parameters/organizationId"
   /transactions:
     get:
-      description: >
+      description: |
         Retrieve a list of transactions
       operationId: GetTransactionCollection
       parameters:
@@ -8116,51 +8065,36 @@ paths:
         - Transactions
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $transactions = $client->transactions()->search([
                 'filter' => 'result:approved',
             ]);
     parameters:
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a transactions of type `sale`, `authorize`, or `credit`.
-
         This endpoint supports two main styles of transactions:
           1. A real-time decision and response.
           2. User approval/interaction is required.
 
         A real-time decision is very familiar.  You send a request, and
-
         inspect the `result` of the response for `approved` or `declined`.
 
-
         However, many transactions, especially those for alternative
-
         methods, require the user to interact with a 3rd party.  You
-
         may be able to envision PayPal, for example, the user must
-
         give permission to complete the payment (or accept the
-
         billing agreement).
 
-
         Even payment cards may require user approval in the case of
-
         3D secure authentication.  In the event that approval is
-
         required, you will receive a response back and notice
-
         that the `result` is `unknown`.  You will find that the
-
         `status` is `waiting-approval`. And you will find in the
-
         `_links` section of the response a link for the `approvalUrl`.
 
-
         In this case you would either open the `approvalUrl` in an
-
         iframe or in a pop (better workflow for mobile).
       operationId: PostTransaction
       requestBody:
@@ -8183,7 +8117,7 @@ paths:
         - Transactions
   "/transactions/{id}":
     get:
-      description: >
+      description: |
         Retrieve a Transaction with specified identifier string
       operationId: GetTransaction
       responses:
@@ -8209,7 +8143,7 @@ paths:
         - Transactions
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             $transaction = $client->transactions()->load('transactionId');
     parameters:
       - $ref: "#/components/parameters/resourceId"
@@ -8219,7 +8153,8 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: Cancel a scheduled transaction. Once handled a transaction cannot be canceled
+      description: Cancel a scheduled transaction. Once handled a transaction cannot
+        be canceled
       operationId: PostTransactionCancellation
       responses:
         "201":
@@ -8244,7 +8179,7 @@ paths:
         - Transactions
       x-code-samples:
         - lang: PHP
-          source: >
+          source: |
             try {
                 $payment = $client->transactions()->cancel('transactionId');
             } catch (UnprocessableEntityException $e) {
@@ -8252,7 +8187,8 @@ paths:
             }
   "/transactions/{id}/gateway-logs":
     get:
-      description: Retrieve Gateway communication Logs for Transaction with specified identifier string
+      description: Retrieve Gateway communication Logs for Transaction with specified
+        identifier string
       operationId: GetTransactionGatewayLogCollection
       responses:
         "200":
@@ -8345,7 +8281,7 @@ paths:
             $transaction = $client->transactions()->refund('transactionId', 1.99);
   "/transactions/{id}/timeline":
     get:
-      description: >
+      description: |
         Retrieve a list of transaction timeline messages
       operationId: GetTransactionTimelineCollection
       parameters:
@@ -8383,7 +8319,7 @@ paths:
       - $ref: "#/components/parameters/resourceId"
       - $ref: "#/components/parameters/organizationId"
     post:
-      description: >
+      description: |
         Create a transaction Timeline comment
       operationId: PostTransactionTimeline
       requestBody:
@@ -8416,7 +8352,7 @@ paths:
         - Transactions
   "/transactions/{id}/timeline/{messageId}":
     delete:
-      description: >
+      description: |
         Delete a Transaction Timeline message with predefined identifier string
       operationId: DeleteTransactionTimeline
       responses:
@@ -8439,7 +8375,7 @@ paths:
       tags:
         - Transactions
     get:
-      description: >
+      description: |
         Retrieve a timeline message with specified identifier string
       operationId: GetTransactionTimeline
       responses:
@@ -8496,7 +8432,8 @@ components:
         type: integer
     Rate-Limit-Reset:
       description: >
-        The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+        The date in format defined by [RFC
+        822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
 
         when the current period will reset
       schema:
@@ -8518,7 +8455,8 @@ components:
       schema:
         type: string
     collectionFields:
-      description: Limit the returned fields to the list specified, separated by comma. Note that id is always returned.
+      description: Limit the returned fields to the list specified, separated by
+        comma. Note that id is always returned.
       in: query
       name: fields
       schema:
@@ -8556,7 +8494,8 @@ components:
       schema:
         type: string
     collectionSort:
-      description: The collection items sort field and order (prefix with "-" for descending sort).
+      description: The collection items sort field and order (prefix with "-" for
+        descending sort).
       explode: false
       in: query
       name: sort
@@ -8591,7 +8530,8 @@ components:
         pattern: ^[@~\-\.\w]+$
         type: string
     organizationId:
-      description: Organization identifier in scope of which need to perform request (if not specified, the default organization will be used)
+      description: Organization identifier in scope of which need to perform request
+        (if not specified, the default organization will be used)
       in: header
       name: Organization-Id
       required: false
@@ -9077,7 +9017,8 @@ components:
     Attachment:
       properties:
         _embedded:
-          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          description: Any embedded objects available that are requested by the `expand`
+            querystring parameter.
           items:
             anyOf:
               - $ref: "#/components/schemas/FileEmbed"
@@ -9362,7 +9303,8 @@ components:
     BankAccount:
       properties:
         _embedded:
-          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          description: Any embedded objects available that are requested by the `expand`
+            querystring parameter.
           items:
             anyOf:
               - $ref: "#/components/schemas/CustomerEmbed"
@@ -9380,7 +9322,8 @@ components:
           type: array
         accountNumberType:
           default: BBAN
-          description: Bank's Account Number type. A valid value is basic bank account number (BBAN) or international bank account number (IBAN).
+          description: Bank's Account Number type. A valid value is basic bank account
+            number (BBAN) or international bank account number (IBAN).
           enum:
             - BBAN
             - IBAN
@@ -9413,7 +9356,8 @@ components:
             - $ref: "#/components/schemas/ResourceId"
           description: The Customer's ID.
         fingerprint:
-          description: A unique value to identify the Bank Account. It contains alphanumeric values.
+          description: A unique value to identify the Bank Account. It contains
+            alphanumeric values.
           readOnly: true
           type: string
         id:
@@ -9457,7 +9401,8 @@ components:
       properties:
         accountNumberType:
           default: BBAN
-          description: Bank's Account Number type. A valid value is basic bank account number (BBAN) or international bank account number (IBAN).
+          description: Bank's Account Number type. A valid value is basic bank account
+            number (BBAN) or international bank account number (IBAN).
           enum:
             - IBAN
             - BBAN
@@ -9969,7 +9914,8 @@ components:
               format: password
               type: string
             merchantId:
-              description: Merchant account ID or Card Acceptor ID provided by the acquiring bank.
+              description: Merchant account ID or Card Acceptor ID provided by the acquiring
+                bank.
               type: string
           required:
             - merchantId
@@ -10069,7 +10015,8 @@ components:
     Contact:
       properties:
         _embedded:
-          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          description: Any embedded objects available that are requested by the `expand`
+            querystring parameter.
           items:
             anyOf:
               - $ref: "#/components/schemas/CustomerEmbed"
@@ -10117,7 +10064,9 @@ components:
           description: The contact first name
           type: string
         hash:
-          description: A hash that can be used to compare multiple contacts for identical attribute values, excluding id, customer id, createdTime, updatedTime.
+          description: A hash that can be used to compare multiple contacts for identical
+            attribute values, excluding id, customer id, createdTime,
+            updatedTime.
           example: 056ae6d97c788b9e98b049ebafd7b229bf852221
           maxLength: 40
           readOnly: true
@@ -10202,7 +10151,8 @@ components:
           nullable: true
           type: string
         hash:
-          description: A hash that can be used to compare multiple contacts for identical attribute values
+          description: A hash that can be used to compare multiple contacts for identical
+            attribute values
           example: 056ae6d97c788b9e98b049ebafd7b229bf852221
           maxLength: 40
           readOnly: true
@@ -10291,7 +10241,8 @@ components:
           description: Coupon created time
         description:
           description: >
-            Your coupon description. When it is not empty this is used for invoice discount item description,
+            Your coupon description. When it is not empty this is used for
+            invoice discount item description,
 
             otherwise the item's description uses coupon's redemptionCode like 'Coupon "redemptionCode"'
           type: string
@@ -10339,7 +10290,8 @@ components:
     CouponExpiration:
       properties:
         expiredTime:
-          description: The coupon's expiry time, must be greater than the issued time. Null or empty string will immediately expire the coupon.
+          description: The coupon's expiry time, must be greater than the issued time.
+            Null or empty string will immediately expire the coupon.
           format: date-time
           type: string
       required:
@@ -10582,7 +10534,8 @@ components:
     Customer:
       properties:
         _embedded:
-          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          description: Any embedded objects available that are requested by the `expand`
+            querystring parameter.
           items:
             anyOf:
               - $ref: "#/components/schemas/LeadSourceEmbed"
@@ -10616,7 +10569,8 @@ components:
           description: The customer identifier string
           readOnly: true
         invoiceCount:
-          description: An auto-incrementing number based on the sequence of invoices. If set to 0, then this record is a Lead, otherwise is a Customer
+          description: An auto-incrementing number based on the sequence of invoices. If
+            set to 0, then this record is a Lead, otherwise is a Customer
           readOnly: true
           type: integer
         lastPaymentTime:
@@ -10630,15 +10584,11 @@ components:
           readOnly: true
           type: integer
         paymentToken:
-          description: >
+          description: |
             A write-only payment token; if supplied, it will be converted into a
-
             payment instrument and be set as the `defaultPaymentInstrument`. The
-
             value of this property will override the `defaultPaymentInstrument`
-
             in the case that both are supplied. The token may only be used once
-
             before it is expired.
           type: string
           writeOnly: true
@@ -10782,14 +10732,17 @@ components:
           readOnly: true
           type: array
         customData:
-          description: Timeline custom event data. Used with `custom-event` type. Will be transformed to `extraData` two-column table in response
+          description: Timeline custom event data. Used with `custom-event` type. Will be
+            transformed to `extraData` two-column table in response
           example:
             customAttribute: customValue
             otherAttribute: otherValue
           type: object
           writeOnly: true
         customEventType:
-          description: Timeline custom event type. Used with `custom-event` type. Must be defined using [Customer Timeline custom event API](#operation/PostCustomerTimelineCustomEventType)
+          description: Timeline custom event type. Used with `custom-event` type. Must be
+            defined using [Customer Timeline custom event
+            API](#operation/PostCustomerTimelineCustomEventType)
           maxLength: 255
           minLength: 1
           nullable: true
@@ -10891,7 +10844,8 @@ components:
           description: Customer Timeline Custom Event identifier string
           readOnly: true
         name:
-          description: Customer Timeline Custom Event type name. It must not be similar to any Rebilly system event.
+          description: Customer Timeline Custom Event type name. It must not be similar to
+            any Rebilly system event.
           maxLength: 255
           minLength: 1
           type: string
@@ -11038,7 +10992,8 @@ components:
     Dispute:
       properties:
         _embedded:
-          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          description: Any embedded objects available that are requested by the `expand`
+            querystring parameter.
           items:
             anyOf:
               - $ref: "#/components/schemas/TransactionEmbed"
@@ -11423,10 +11378,15 @@ components:
           minimum: 100
           type: integer
         title:
-          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
+          description: A short, human-readable summary of the problem type. It SHOULD NOT
+            change from occurrence to occurrence of the problem, except for
+            purposes of localization.
           type: string
         type:
-          description: A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that identifies the problem type. It should provide human-readable documentation for the problem type. When this member is not present, its value is assumed to be "about:blank".
+          description: A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)]
+            that identifies the problem type. It should provide human-readable
+            documentation for the problem type. When this member is not present,
+            its value is assumed to be "about:blank".
           type: string
       type: object
     EventType:
@@ -11480,7 +11440,8 @@ components:
             - $ref: "#/components/schemas/ResourceId"
           readOnly: true
         isPublic:
-          description: Is the file available publicly (without authentication). If true, the permalink in the _links section contains the public URL.
+          description: Is the file available publicly (without authentication). If true,
+            the permalink in the _links section contains the public URL.
           type: boolean
         mime:
           description: The mime type
@@ -11911,10 +11872,12 @@ components:
           allOf:
             - $ref: "#/components/schemas/Condition"
           description: >
-            The additional criteria that allows to check whether the gateway account can be selected for the transaction to be processed.
+            The additional criteria that allows to check whether the gateway
+            account can be selected for the transaction to be processed.
         approvalWindowTtl:
           default: 3600
-          description: The time window (in seconds) allotted for approving a suspended transaction before it is automatically canceled
+          description: The time window (in seconds) allotted for approving a suspended
+            transaction before it is automatically canceled
           maximum: 16777215
           minimum: 300
           type: integer
@@ -11927,7 +11890,8 @@ components:
           description: Gateway Account created time
         dccForceCurrency:
           description: >
-            Force dynamic currency conversion to the specified currency on each sale.
+            Force dynamic currency conversion to the specified currency on each
+            sale.
 
             Leave it empty to disable force DCC.
           type: string
@@ -12169,7 +12133,8 @@ components:
         - properties:
             accountNumber:
               description: >
-                Bank Account Number. Detailed information about all ISO 13616-compliant national IBAN formats is available
+                Bank Account Number. Detailed information about all ISO
+                13616-compliant national IBAN formats is available
 
                 in [SWIFT IBAN Registry](https://www.swift.com/standards/data-standards/iban).
               type: string
@@ -12194,7 +12159,8 @@ components:
         - properties:
             accountNumber:
               description: >
-                Bank's Account Number. Detailed information about all ISO 13616-compliant national IBAN formats is available
+                Bank's Account Number. Detailed information about all ISO
+                13616-compliant national IBAN formats is available
 
                 in [SWIFT IBAN Registry](https://www.swift.com/standards/data-standards/iban).
               type: string
@@ -12494,7 +12460,8 @@ components:
     Invoice:
       properties:
         _embedded:
-          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          description: Any embedded objects available that are requested by the `expand`
+            querystring parameter.
           items:
             anyOf:
               - $ref: "#/components/schemas/CustomerEmbed"
@@ -12548,7 +12515,8 @@ components:
             - $ref: "#/components/schemas/ContactObject"
           description: Invoice's billing address
         collectionPeriod:
-          description: Collection Period - difference between paidTime and issuedTime in days.
+          description: Collection Period - difference between paidTime and issuedTime in
+            days.
           readOnly: true
           type: integer
         createdTime:
@@ -12563,7 +12531,8 @@ components:
             - $ref: "#/components/schemas/ResourceId"
           description: The customer's ID
         delinquentCollectionPeriod:
-          description: Delinquent Collection Period - difference between paidTime and dueTime in days.
+          description: Delinquent Collection Period - difference between paidTime and
+            dueTime in days.
           readOnly: true
           type: integer
         deliveryAddress:
@@ -12601,7 +12570,8 @@ components:
           description: The invoice identifier string
           readOnly: true
         invoiceNumber:
-          description: An auto-incrementing number based on the sequence of invoices for any particular customer.
+          description: An auto-incrementing number based on the sequence of invoices for
+            any particular customer.
           readOnly: true
           type: integer
         issuedTime:
@@ -12771,7 +12741,8 @@ components:
     InvoiceIssue:
       properties:
         dueTime:
-          description: Invoice due time. Will be set same as `issuedTime` if `null` or omitted.
+          description: Invoice due time. Will be set same as `issuedTime` if `null` or
+            omitted.
           format: date-time
           nullable: true
           type: string
@@ -12784,7 +12755,8 @@ components:
     InvoiceItem:
       properties:
         _embedded:
-          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          description: Any embedded objects available that are requested by the `expand`
+            querystring parameter.
           items:
             anyOf:
               - $ref: "#/components/schemas/ProductEmbed"
@@ -12874,7 +12846,8 @@ components:
     InvoiceReissue:
       properties:
         dueTime:
-          description: Invoice due time. Will be set as current date-time if `null` or omitted.
+          description: Invoice due time. Will be set as current date-time if `null` or
+            omitted.
           format: date-time
           nullable: true
           type: string
@@ -12914,7 +12887,8 @@ components:
       type: object
     InvoiceTimeShift:
       description: >
-        The invoice time shift in conjunction with `billingTiming` allows to setup different billing use cases such as:
+        The invoice time shift in conjunction with `billingTiming` allows
+        to setup different billing use cases such as:
 
 
         - Bill immediately when the service period _starts_
@@ -13084,7 +13058,8 @@ components:
         This is used in conjunction with the **service period anchor** to calculate the time the invoice is issued.
       properties:
         chronology:
-          description: The chronology of the billing time relatively to the service period start.
+          description: The chronology of the billing time relatively to the service period
+            start.
           enum:
             - before
           type: string
@@ -13174,7 +13149,8 @@ components:
         documentMatches:
           $ref: "#/components/schemas/KycDocumentMatches"
         documentType:
-          description: Document type submitted for validation, only identity-proof type is analyzed in an automated manner.
+          description: Document type submitted for validation, only identity-proof type is
+            analyzed in an automated manner.
           enum:
             - identity-proof
             - address-proof
@@ -13250,7 +13226,8 @@ components:
               example: John
               type: string
             hasMinimalAge:
-              description: Checks the minimal age, 21+ for USA and 18+ for all other countries. Null if dateOfBirth could not be determined.
+              description: Checks the minimal age, 21+ for USA and 18+ for all other
+                countries. Null if dateOfBirth could not be determined.
               example: true
               type: boolean
             isIdentityDocument:
@@ -13271,7 +13248,8 @@ components:
               type: string
           type: object
         score:
-          description: The calculated score that represents the % of confidence that this ID represents the given customer
+          description: The calculated score that represents the % of confidence that this
+            ID represents the given customer
           example: 0.75
           format: double
           type: number
@@ -13372,7 +13350,8 @@ components:
           description: Lead Source's source (eg google, yahoo)
           type: string
         subAffiliate:
-          description: Lead Source's sub-affiliate also called a sub-id or click id in some circles (eg 123456)
+          description: Lead Source's sub-affiliate also called a sub-id or click id in
+            some circles (eg 123456)
           type: string
         term:
           description: Lead Source's term (eg salt shakers)
@@ -13956,11 +13935,13 @@ components:
           description: The organization identifier string
           readOnly: true
         invoiceTimeZone:
-          description: Invoice will use this time zone to display time otherwise UTC will be used. Example "America/New_York"
+          description: Invoice will use this time zone to display time otherwise UTC will
+            be used. Example "America/New_York"
           maxLength: 50
           type: string
         isPrimary:
-          description: True, if Organization is primary (available to set as true only, other organizations will become as isPrimary=false)
+          description: True, if Organization is primary (available to set as true only,
+            other organizations will become as isPrimary=false)
           type: boolean
         name:
           description: The organization name
@@ -14386,7 +14367,10 @@ components:
                   format: password
                   type: string
                 user:
-                  description: If you set up one or more additional users on the account, this value is the ID of the user authorized to process transactions. If, however, you have not set up additional users, USER has the same value as VENDOR
+                  description: If you set up one or more additional users on the account, this
+                    value is the ID of the user authorized to process
+                    transactions. If, however, you have not set up additional
+                    users, USER has the same value as VENDOR
                   type: string
                 vendor:
                   description: Your merchant login ID created when you registered for the account.
@@ -14439,7 +14423,8 @@ components:
     Payment:
       properties:
         _embedded:
-          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          description: Any embedded objects available that are requested by the `expand`
+            querystring parameter.
           items:
             anyOf:
               - $ref: "#/components/schemas/WebsiteEmbed"
@@ -14555,7 +14540,8 @@ components:
     PaymentCard:
       properties:
         _embedded:
-          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          description: Any embedded objects available that are requested by the `expand`
+            querystring parameter.
           items:
             anyOf:
               - $ref: "#/components/schemas/AuthTransactionEmbed"
@@ -14621,7 +14607,8 @@ components:
           description: Time expiration reminder event will be triggered
           nullable: true
         fingerprint:
-          description: A unique value to identify the PAN regardless of expiration dates.  It contains alphanumeric values.
+          description: A unique value to identify the PAN regardless of expiration
+            dates.  It contains alphanumeric values.
           readOnly: true
           type: string
         id:
@@ -14641,12 +14628,14 @@ components:
           type: string
         panFingerprint:
           deprecated: true
-          description: A unique value to identify the PAN regardless of expiration dates.  It contains alphanumeric values. Use `fingerprint` instead.
+          description: A unique value to identify the PAN regardless of expiration
+            dates.  It contains alphanumeric values. Use `fingerprint` instead.
           readOnly: true
           type: string
         status:
           description: >
-            Payment Card status.  When a card is `active` it means it has been used at least once for an approved transaction.
+            Payment Card status.  When a card is `active` it means it has been
+            used at least once for an approved transaction.
 
             To remove a card from being in use, set it as `deactivated` (see the deactivation endpoint).
           enum:
@@ -15216,7 +15205,11 @@ components:
                 billingTiming:
                   $ref: "#/components/schemas/PlanBillingTiming"
                 limit:
-                  description: The number of invoices this subscription will generate (if 1, it will not generate any beyond the initial subscription creation).  For example, set this property to `12`, when the `periodUnit` is month and the `periodLength` is 1, for a 1 year contract billed monthly.
+                  description: The number of invoices this subscription will generate (if 1, it
+                    will not generate any beyond the initial subscription
+                    creation).  For example, set this property to `12`, when the
+                    `periodUnit` is month and the `periodLength` is 1, for a 1
+                    year contract billed monthly.
                   type: integer
                 periodAnchorInstruction:
                   $ref: "#/components/schemas/ServicePeriodAnchorInstruction"
@@ -15307,7 +15300,8 @@ components:
       properties:
         formula:
           description: >
-            The price formula determines what algorithm is used to calculate the invoice price based on a few factors,
+            The price formula determines what algorithm is used to calculate
+            the invoice price based on a few factors,
 
             - the quantity in the subscription (which may be variable if usage pricing, otherwise determined when creating the subscription)
 
@@ -15359,12 +15353,14 @@ components:
           allOf:
             - $ref: "#/components/schemas/CurrencyCode"
         maxOrderSubtotal:
-          description: Maximum order subtotal for which this shipping rate is applicable (NULL if no maximum)
+          description: Maximum order subtotal for which this shipping rate is applicable
+            (NULL if no maximum)
           format: double
           type: number
         minOrderSubtotal:
           default: 0
-          description: Minimum order subtotal for which this shipping rate is applicable, defaults to 0.00
+          description: Minimum order subtotal for which this shipping rate is applicable,
+            defaults to 0.00
           format: double
           type: number
         name:
@@ -15425,12 +15421,15 @@ components:
           maxLength: 255
           type: string
         options:
-          description: The product options such as Color, Size, etc.  The product options definition does not include option values.  Those are defined within the Plans.
+          description: The product options such as Color, Size, etc.  The product options
+            definition does not include option values.  Those are defined within
+            the Plans.
           items:
             type: string
           type: array
         requiresShipping:
-          description: If the product requires shipping, shipping calculations will be applied
+          description: If the product requires shipping, shipping calculations will be
+            applied
           example: false
           type: boolean
         taxCategoryId:
@@ -15697,7 +15696,8 @@ components:
       type: object
     ResourceCustomFields:
       description: >
-        "Custom Fields list as a map `{"custom field name": "custom field value", ...}"`.
+        "Custom Fields list as a map `{"custom field name": "custom field
+        value", ...}"`.
 
         The format must follow the saved format (see Custom Fields section for the formats).
       type: object
@@ -15743,7 +15743,8 @@ components:
           readOnly: true
           type: string
         distance:
-          description: Distance between IP Address and Billing Address geolocation (kilometers)
+          description: Distance between IP Address and Billing Address geolocation
+            (kilometers)
           readOnly: true
           type: integer
         fingerprint:
@@ -16042,7 +16043,8 @@ components:
           type: array
         countries:
           description: >
-            Countries covered by the shipping zone. A country can only belong to one shipping zone (no overlapping).
+            Countries covered by the shipping zone. A country can only belong
+            to one shipping zone (no overlapping).
 
             This property can be empty or null to create a default shipping zone for countries that were not specified in other zones.
           items:
@@ -16234,7 +16236,8 @@ components:
         propertyName: orderType
       properties:
         _embedded:
-          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          description: Any embedded objects available that are requested by the `expand`
+            querystring parameter.
           items:
             anyOf:
               - $ref: "#/components/schemas/RecentInvoiceEmbed"
@@ -16267,11 +16270,9 @@ components:
           description: Billing address
           nullable: true
         billingStatus:
-          description: >
+          description: |
             The billing status of the most recent invoice.  It may
-
             help you determine if you should change the service status
-
             such as suspending the service.
           enum:
             - unpaid
@@ -16286,7 +16287,8 @@ components:
           type: string
         couponIds:
           description: >
-            A list of coupons to redeem on the customer and restrict to this subscription.
+            A list of coupons to redeem on the customer and restrict to this
+            subscription.
 
             Read more about [coupons here](https://help.rebilly.com/invoices-and-subscriptions/coupons-discounts).
 
@@ -16349,7 +16351,7 @@ components:
           type: array
         orderType:
           default: subscription-order
-          description: >
+          description: |
             Specifies the type of order, a subscription or a one-time purchase.
           enum:
             - subscription-order
@@ -16363,7 +16365,8 @@ components:
         recentInvoiceId:
           allOf:
             - $ref: "#/components/schemas/ResourceId"
-          description: Unique id for the most recently issued invoice. It might not be `paid` yet.
+          description: Unique id for the most recently issued invoice. It might not be
+            `paid` yet.
           readOnly: true
         revision:
           description: >
@@ -16375,7 +16378,8 @@ components:
         riskMetadata:
           allOf:
             - $ref: "#/components/schemas/RiskMetadata"
-          description: Risk metadata. If null, the value would coalesce to the risk metadata captured when creating the payment token.
+          description: Risk metadata. If null, the value would coalesce to the risk
+            metadata captured when creating the payment token.
           example: null
           nullable: true
         websiteId:
@@ -16400,7 +16404,8 @@ components:
         appliedInvoiceId:
           allOf:
             - $ref: "#/components/schemas/ResourceId"
-          description: The identifier of the invoice where the cancellation fees or credits are applied.
+          description: The identifier of the invoice where the cancellation fees or
+            credits are applied.
           readOnly: true
         canceledBy:
           default: customer
@@ -16410,7 +16415,8 @@ components:
             - customer
           type: string
         canceledTime:
-          description: The cancellation time (when the status is confirmed which is by default unless specified "draft").
+          description: The cancellation time (when the status is confirmed which is by
+            default unless specified "draft").
           format: date-time
           readOnly: true
           type: string
@@ -16432,25 +16438,29 @@ components:
           description: Cancellation identifier
           readOnly: true
         lineItemSubtotal:
-          description: Subtotal of the line items which will be added after the subscription's cancellation
+          description: Subtotal of the line items which will be added after the
+            subscription's cancellation
           example: 49.95
           readOnly: true
           type: number
         lineItems:
           allOf:
             - $ref: "#/components/schemas/UpcomingInvoiceItemCollection"
-          description: Items to be added to the new invoice. Proration item is generated and added automatically.
+          description: Items to be added to the new invoice. Proration item is generated
+            and added automatically.
         prorated:
           default: false
           description: >
-            Defines if the customer gets a pro-rata credit for the time remaining between `churnTime` and
+            Defines if the customer gets a pro-rata credit for the time
+            remaining between `churnTime` and
 
             subscription's next renewal time.
           type: boolean
         proratedInvoiceId:
           allOf:
             - $ref: "#/components/schemas/ResourceId"
-          description: Identifier of the invoice on which the cancellation proration is calculated.
+          description: Identifier of the invoice on which the cancellation proration is
+            calculated.
           readOnly: true
         reason:
           default: other
@@ -16470,7 +16480,8 @@ components:
         status:
           default: confirmed
           description: >
-            "draft" defines that the cancellation isn't applied on an invoice and subscription but
+            "draft" defines that the cancellation isn't applied on an invoice
+            and subscription but
 
             can be inspected to see the charge.
 
@@ -16533,7 +16544,9 @@ components:
     SubscriptionChange:
       properties:
         effectiveTime:
-          description: The date from which the renewal time (for `reset` operations) and proration calculations are made.  If omitted, it will default to the current time.
+          description: The date from which the renewal time (for `reset` operations) and
+            proration calculations are made.  If omitted, it will default to the
+            current time.
           format: date-time
           type: string
         planId:
@@ -16542,21 +16555,26 @@ components:
           description: The plan identifier string
         preview:
           default: false
-          description: If set to true, it will not change the subscription.  It allows for a way to preview the changes that would be made to a subscription.
+          description: If set to true, it will not change the subscription.  It allows for
+            a way to preview the changes that would be made to a subscription.
           type: boolean
         prorated:
           description: >
-            Whether or not to give a pro rata credit for the amount of time remaining between the `effectiveTime` and the end of the current period.
+            Whether or not to give a pro rata credit for the amount of time
+            remaining between the `effectiveTime` and the end of the current
+            period.
 
             In addition, if the `renewalTime` is retained (by setting the `renewalPolicy` to `retain`), then a pro rata debit will occur as well,
 
             for the amount between the `effectiveTime` and the `renewalTime` as a percentage of the normal period size.
           type: boolean
         quantity:
-          description: Number of units of the product on the given plan. If null or omitted, current quantity will not be changed.
+          description: Number of units of the product on the given plan. If null or
+            omitted, current quantity will not be changed.
           type: integer
         renewalPolicy:
-          description: The value determines whether the subscription retains its current `renewalTime` or resets it to a newly calculated `renewalTime`.
+          description: The value determines whether the subscription retains its current
+            `renewalTime` or resets it to a newly calculated `renewalTime`.
           enum:
             - reset
             - retain
@@ -16571,7 +16589,8 @@ components:
         transactionId:
           allOf:
             - $ref: "#/components/schemas/ResourceId"
-          description: If present, applies a payment to the invoice created.  If the payment is for the invoice total, it would be marked as paid.
+          description: If present, applies a payment to the invoice created.  If the
+            payment is for the invoice total, it would be marked as paid.
       type: object
     SubscriptionLink:
       allOf:
@@ -16634,7 +16653,8 @@ components:
           type: string
         effectiveTime:
           description: >
-            The date from which the service period would start, unless the subscription is canceled but still active.
+            The date from which the service period would start, unless the
+            subscription is canceled but still active.
 
             In case the susbcription is still active, the subscription will continue the current service period.
 
@@ -16648,7 +16668,8 @@ components:
           readOnly: true
         renewalTime:
           description: >
-            The time of the next subscription renewal. If omitted then it is computed from the effective time.
+            The time of the next subscription renewal. If omitted then it is
+            computed from the effective time.
 
             If the subscription is canceled but active it is ignored, so the next renewal will happen as scheduled.
           format: date-time
@@ -16852,7 +16873,8 @@ components:
       description: Additional data
       properties:
         actions:
-          description: Actions available to a Timeline message. Can be empty in case no actions are available for a message
+          description: Actions available to a Timeline message. Can be empty in case no
+            actions are available for a message
           items:
             $ref: "#/components/schemas/TimelineAction"
           minItems: 0
@@ -16946,7 +16968,8 @@ components:
       properties:
         accountNumberType:
           default: BBAN
-          description: Bank's Account Number type. A valid value is basic bank account number (BBAN) or international bank account number (IBAN).
+          description: Bank's Account Number type. A valid value is basic bank account
+            number (BBAN) or international bank account number (IBAN).
           enum:
             - IBAN
             - BBAN
@@ -17055,7 +17078,8 @@ components:
           allOf:
             - $ref: "#/components/schemas/ThreeDSecureResult"
         _embedded:
-          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          description: Any embedded objects available that are requested by the `expand`
+            querystring parameter.
           items:
             anyOf:
               - $ref: "#/components/schemas/ParentTransactionEmbed"
@@ -17105,7 +17129,9 @@ components:
             - $ref: "#/components/schemas/ContactObject"
           description: Billing Address
         billingDescriptor:
-          description: The billing descriptor that appears on the periodic billing statement. Commonly 12 or fewer characters for a credit card statement.
+          description: The billing descriptor that appears on the periodic billing
+            statement. Commonly 12 or fewer characters for a credit card
+            statement.
           readOnly: true
           type: string
         bin:
@@ -17137,7 +17163,8 @@ components:
                     - $ref: "#/components/schemas/CurrencyCode"
               type: object
             language:
-              description: The language of the bump offer that was displayed to user (useful for finding any translation problems)
+              description: The language of the bump offer that was displayed to user (useful
+                for finding any translation problems)
               type: string
             order:
               description: Initial amount and currency
@@ -17169,7 +17196,8 @@ components:
               format: double
               type: number
             version:
-              description: The name of the version that was picked (useful for measuring split tests)
+              description: The name of the version that was picked (useful for measuring split
+                tests)
               type: string
           readOnly: true
           type: object
@@ -17195,7 +17223,8 @@ components:
           description: Customer's ID
           readOnly: true
         dcc:
-          description: Dynamic Currency Conversion detailed information. Null if hasDcc is false
+          description: Dynamic Currency Conversion detailed information. Null if hasDcc is
+            false
           properties:
             base:
               description: Initial amount and currency to convert from
@@ -17298,7 +17327,8 @@ components:
         gatewayName:
           allOf:
             - $ref: "#/components/schemas/gateway-name"
-          description: Payment Gateway name, available only when transaction use gateway, else null
+          description: Payment Gateway name, available only when transaction use gateway,
+            else null
           readOnly: true
         gatewayTransactionId:
           allOf:
@@ -17306,7 +17336,8 @@ components:
           description: The gateway's transaction ID
           readOnly: true
         hadDiscrepancy:
-          description: True if the transaction has been updated due to a disprepancy with its source of truth
+          description: True if the transaction has been updated due to a disprepancy with
+            its source of truth
           readOnly: true
           type: boolean
         has3ds:
@@ -17354,7 +17385,8 @@ components:
           $ref: "#/components/schemas/TransactionNotificationUrl"
         orderId:
           deprecated: true
-          description: The transactions's order ID.  This ID must be unique within a 24 hour period. This field was renamed to the `requestId`.
+          description: The transactions's order ID.  This ID must be unique within a 24
+            hour period. This field was renamed to the `requestId`.
           type: string
         parentTransactionId:
           allOf:
@@ -17416,7 +17448,8 @@ components:
             - $ref: "#/components/schemas/CurrencyCode"
           readOnly: true
         requestId:
-          description: The transactions's request ID.  This ID must be unique within a 24 hour period. Use this field to prevent duplicated transactions.
+          description: The transactions's request ID.  This ID must be unique within a 24
+            hour period. Use this field to prevent duplicated transactions.
           type: string
         result:
           description: Transaction result
@@ -17580,7 +17613,8 @@ components:
       type: object
     TransactionNotificationUrl:
       description: >
-        The URL where a server-to-server POST notification will be sent.  It  will be sent when the
+        The URL where a server-to-server POST notification will be
+        sent.  It  will be sent when the
 
         transaction's result is finalized after a timeout or an offsite interaction. Do not trust the
 
@@ -17593,7 +17627,8 @@ components:
       type: string
     TransactionRedirectUrl:
       description: >
-        The URL to redirect the end-user when an offsite transaction is completed.
+        The URL to redirect the end-user when an offsite transaction is
+        completed.
 
         The 2 placeholders are available to use in this URI: `{id}` and `{result}`.
 
@@ -17613,7 +17648,8 @@ components:
       properties:
         amount:
           description: >
-            The transaction amount.  Use `0` for a zero dollar verification. This is important if
+            The transaction amount.  Use `0` for a zero dollar verification.
+            This is important if
 
             you want to authorize a payment instrument before giving access to a free trial, for example.
           example: 97.97
@@ -17622,7 +17658,8 @@ components:
         billingAddress:
           allOf:
             - $ref: "#/components/schemas/ContactObject"
-          description: Billing Address. If not supplied, we use the billing address associated with the payment instrument, and then customer.
+          description: Billing Address. If not supplied, we use the billing address
+            associated with the payment instrument, and then customer.
           nullable: true
         currency:
           allOf:
@@ -17645,7 +17682,8 @@ components:
           readOnly: true
         invoiceIds:
           description: >
-            The array of invoice identifiers.  It's important to note that the transaction
+            The array of invoice identifiers.  It's important to note that the
+            transaction
 
             amount can be more or less than the combined invoice amounts.  If the transaction
 
@@ -17666,7 +17704,8 @@ components:
           type: boolean
         notificationUrl:
           description: >
-            The URL where a server-to-server notification request type `POST` with a transaction payload will be sent
+            The URL where a server-to-server notification request type `POST`
+            with a transaction payload will be sent
 
             when the transaction's result is finalized. Do not trust the notification;
 
@@ -17679,16 +17718,22 @@ components:
         paymentInstrument:
           $ref: "#/components/schemas/PaymentInstrument"
         processedTime:
-          description: The time the transaction was processed. Can be specified only if transaction was processed outside Rebilly.
+          description: The time the transaction was processed. Can be specified only if
+            transaction was processed outside Rebilly.
           format: date-time
           type: string
         redirectUrl:
-          description: The URL to redirect the end-user when an offsite transaction is completed.  Defaults to the website's configured URL.
+          description: The URL to redirect the end-user when an offsite transaction is
+            completed.  Defaults to the website's configured URL.
           format: uri
           nullable: true
           type: string
         requestId:
-          description: The request id is **recommended**. It prevents duplicate transaction requests within a short period of time. If a duplicate request is sent with the same `requestId` it will be ignored to prevent double-billing anyone.  It must be unique within a 24-hour period.  We recommend generating a UUID v4 as its value.
+          description: The request id is **recommended**. It prevents duplicate
+            transaction requests within a short period of time. If a duplicate
+            request is sent with the same `requestId` it will be ignored to
+            prevent double-billing anyone.  It must be unique within a 24-hour
+            period.  We recommend generating a UUID v4 as its value.
           example: 44433322-2c4y-483z-a0a9-158621f77a21
           maxLength: 50
           nullable: true
@@ -18366,11 +18411,9 @@ components:
         - $ref: "#/components/schemas/InvoiceRetryScheduleInstruction"
         - properties:
             day:
-              description: >
+              description: |
                 The day of the month when event will be scheduled.
-
                 Be aware if the month has less days,
-
                 the last day of the month will be selected.
               maximum: 31
               minimum: 1
@@ -18567,7 +18610,8 @@ components:
         - properties:
             price:
               description: >
-                For the very simple price when it's fixed and does not depend on the quantity chosen by customer.
+                For the very simple price when it's fixed and does not depend on
+                the quantity chosen by customer.
 
 
                 If the price is 0, it's free.
@@ -18586,18 +18630,13 @@ components:
               example: 1
               type: integer
             price:
-              description: >
+              description: |
                 Flat-rate pricing is represented in a simple price per unit.
-
                 Some examples:
 
-
                 - $30 per unit
-
                 - $0.10 per transaction
-
                 - $50 per period
-
 
                 If the price is 0, it's free.
               example: 99.95
@@ -18945,7 +18984,9 @@ components:
         - $ref: "#/components/schemas/RedemptionRestriction"
         - properties:
             time:
-              description: The time when the coupon's redemption is no longer valid and removed from unpaid invoices if applied. Note that this datetime cannot be changed.
+              description: The time when the coupon's redemption is no longer valid and
+                removed from unpaid invoices if applied. Note that this datetime
+                cannot be changed.
               format: date-time
               type: string
           required:
@@ -19308,7 +19349,8 @@ components:
                 properties:
                   maxQuantity:
                     description: >
-                      If the value is `null`, it's assumed to be infinite.  It starts at the end of the previous bracket.
+                      If the value is `null`, it's assumed to be infinite.  It starts at
+                      the end of the previous bracket.
 
                       If there is no previous bracket, it starts at 1.
                     example: 1
@@ -19344,7 +19386,8 @@ components:
               allOf:
                 - $ref: "#/components/schemas/InvoiceTimeShift"
               description: >
-                You can shift issue time and due time of invoices for this subscription.
+                You can shift issue time and due time of invoices for this
+                subscription.
 
                 This setting overrides plan settings. To use plan settings, set `null`.
 
@@ -19354,7 +19397,8 @@ components:
               example: null
               nullable: true
             lineItemSubtotal:
-              description: Subtotal of line items in this subscription (signed value). If credits exceed debits, it will be a negative number.
+              description: Subtotal of line items in this subscription (signed value). If
+                credits exceed debits, it will be a negative number.
               properties:
                 amount:
                   example: 49.95
@@ -19367,7 +19411,8 @@ components:
             lineItems:
               allOf:
                 - $ref: "#/components/schemas/UpcomingInvoiceItemCollection"
-              description: Subscription line items which queue until the next renewal (or interim) invoice is issued for the subscription.
+              description: Subscription line items which queue until the next renewal (or
+                interim) invoice is issued for the subscription.
               readOnly: true
             rebillNumber:
               description: The current period number
@@ -19375,7 +19420,8 @@ components:
               type: integer
             recurringInterval:
               description: >
-                The recurring interval to override plan settings. To use plan settings, set `null`.
+                The recurring interval to override plan settings. To use plan
+                settings, set `null`.
 
                 To use multiple plans in one subscription they all must have the same recurring period length,
 
@@ -19400,17 +19446,17 @@ components:
               format: date-time
               type: string
             startTime:
-              description: Subscription start time.  When the value is sent as null, it will use the current time. This value can't be in past more than one service period.
+              description: Subscription start time.  When the value is sent as null, it will
+                use the current time. This value can't be in past more than one
+                service period.
               example: null
               format: date-time
               nullable: true
               type: string
             status:
-              description: >
+              description: |
                 The status of the subscription service. A subscription starts
-
                 in the `pending` status, and will become `active` when the
-
                 service period begins.
               enum:
                 - pending
@@ -19423,10 +19469,12 @@ components:
               readOnly: true
               type: string
             trial:
-              description: To use plan defaults do not send the `trial` key, or send a `null` value with it.
+              description: To use plan defaults do not send the `trial` key, or send a `null`
+                value with it.
               properties:
                 enabled:
-                  description: Enable or disable the trial for this subscription. If enabled for plans without trial prices, the trial will be free.
+                  description: Enable or disable the trial for this subscription. If enabled for
+                    plans without trial prices, the trial will be free.
                   type: boolean
                 endTime:
                   description: The time the trial should end
@@ -19500,7 +19548,8 @@ components:
                 properties:
                   maxQuantity:
                     description: >
-                      If the value is `null`, it's assumed to be infinite.  It starts at the end of the previous bracket.
+                      If the value is `null`, it's assumed to be infinite.  It starts at
+                      the end of the previous bracket.
 
                       If there is no previous bracket, it starts at 1.
                     example: 1
@@ -19618,7 +19667,8 @@ components:
                 properties:
                   maxQuantity:
                     description: >
-                      If the value is `null`, it's assumed to be infinite.  It starts at the end of the previous bracket.
+                      If the value is `null`, it's assumed to be infinite.  It starts at
+                      the end of the previous bracket.
 
                       If there is no previous bracket, it starts at 1.
                     example: 1
@@ -19638,7 +19688,8 @@ components:
     JWT:
       bearerFormat: JWT
       description: >
-        You can create a JSON Web Token (JWT) via our [JWT Session resource](hhttps://user-api-docs.rebilly.com/#operation/PostSigninRequest).
+        You can create a JSON Web Token (JWT) via our [JWT Session
+        resource](hhttps://user-api-docs.rebilly.com/#operation/PostSigninRequest).
 
         Usage format: `Bearer <JWT>`
       scheme: bearer
@@ -19653,7 +19704,8 @@ components:
       type: apiKey
     SecretApiKey:
       description: >
-        When you sign up for an account, you are given your first secret API key.
+        When you sign up for an account, you are given your first secret
+        API key.
 
         To do so please [follow this link.](https://app.rebilly.com/signup)
 

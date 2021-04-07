@@ -6,7 +6,14 @@ info:
     email: devrel@vonage.com
     name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: The Dispatch API enables the developer to specify a multiple message workflow. A workflow follows a template. The first one we are adding is the failover template. The failover template instructs the Messages API to first send a message to the specified channel. If that message fails immediately or if the condition_status is not reached within the given time period the next message is sent. The developer will also receive status webhooks from the messages resource for each delivery and read event. This API is currently in Beta.
+  description: The Dispatch API enables the developer to specify a multiple
+    message workflow. A workflow follows a template. The first one we are adding
+    is the failover template. The failover template instructs the Messages API
+    to first send a message to the specified channel. If that message fails
+    immediately or if the condition_status is not reached within the given time
+    period the next message is sent. The developer will also receive status
+    webhooks from the messages resource for each delivery and read event. This
+    API is currently in Beta.
   title: Dispatch API
   version: 0.3.3
   x-label: Beta
@@ -23,7 +30,17 @@ paths:
         final-report:
           "{$request.body#/callback}":
             post:
-              description: The final workflow callback is sent when The condition_status was met within the expiry_time. If we take the example API call above. If we received a delivered status at 300 seconds (within the expiry_time) the workflow would be marked as completed. We would not send an SMS. We would then send the final callback. The final message in the failover is delivered. If the message Errors on the last step we will send the final callback. Please note GET is not currently supported. You will notice we have an href to a resource in some of the callbacks. These will fail to load but we wanted to maintain the same structure so that we can seamlessly integrate GET later.
+              description: The final workflow callback is sent when The condition_status was
+                met within the expiry_time. If we take the example API call
+                above. If we received a delivered status at 300 seconds (within
+                the expiry_time) the workflow would be marked as completed. We
+                would not send an SMS. We would then send the final callback.
+                The final message in the failover is delivered. If the message
+                Errors on the last step we will send the final callback. Please
+                note GET is not currently supported. You will notice we have an
+                href to a resource in some of the callbacks. These will fail to
+                load but we wanted to maintain the same structure so that we can
+                seamlessly integrate GET later.
               operationId: final-report
               requestBody:
                 content:
@@ -58,7 +75,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/createWorkflow"
-        description: Please note that last message does not have failover attribute inside it. All other messages must contain a failover attribute.
+        description: Please note that last message does not have failover attribute
+          inside it. All other messages must contain a failover attribute.
         required: true
         x-hide-request: true
       responses:
@@ -83,14 +101,16 @@ components:
     AudioProperty:
       properties:
         url:
-          description: The URL of the audio attachment. `messenger` supports .mp3. `whatsapp` supports .aac, .m4a, .amr, .mp3 and .opus.
+          description: The URL of the audio attachment. `messenger` supports .mp3.
+            `whatsapp` supports .aac, .m4a, .amr, .mp3 and .opus.
           example: https://example.com/audio.mp3
           maxLength: 2000
           minLength: 1
           type: string
       type: object
     Error:
-      description: The error format is standardized to the 4xx/5xx range with a code and a human readable explanation.
+      description: The error format is standardized to the 4xx/5xx range with a code
+        and a human readable explanation.
       properties:
         detail:
           example: Your request parameters did not validate.
@@ -117,17 +137,20 @@ components:
         - instance
       type: object
     FailoverProperty:
-      description: Please note that last message does not have failover attribute inside it. All other messages must contain a failover attribute.
+      description: Please note that last message does not have failover attribute
+        inside it. All other messages must contain a failover attribute.
       properties:
         condition_status:
-          description: Set the status the message must reach in the expiry_time before failing over. Options are delivered or read.
+          description: Set the status the message must reach in the expiry_time before
+            failing over. Options are delivered or read.
           enum:
             - delivered
             - read
           example: delivered
           type: string
         expiry_time:
-          description: In seconds. Minimum value is 15 and maximum value is 86,400 seconds (1 day).
+          description: In seconds. Minimum value is 15 and maximum value is 86,400 seconds
+            (1 day).
           example: 600
           maximum: 86400
           minimum: 15
@@ -136,13 +159,16 @@ components:
     FileProperty:
       properties:
         caption:
-          description: Additional text to accompany the image. Supported by WhatsApp and MMS.
+          description: Additional text to accompany the image. Supported by WhatsApp and
+            MMS.
           example: Additional text to accompany the image.
           maxLength: 3000
           minLength: 1
           type: string
         url:
-          description: The URL of the file attachment. `messenger` supports a wide range of attachments including .zip, .csv and .pdf. `whatsapp` supports .pdf, .doc(x), .ppt(x) and .xls(x).
+          description: The URL of the file attachment. `messenger` supports a wide range
+            of attachments including .zip, .csv and .pdf. `whatsapp` supports
+            .pdf, .doc(x), .ppt(x) and .xls(x).
           example: https://example.com/file.zip
           maxLength: 2000
           minLength: 1
@@ -168,7 +194,8 @@ components:
           type: string
         number:
           description: >
-            **SMS**: or **MMS**: The phone number of the message sender in the [E.164](https://en.wikipedia.org/wiki/E.164) format.
+            **SMS**: or **MMS**: The phone number of the message sender in the
+            [E.164](https://en.wikipedia.org/wiki/E.164) format.
 
 
             **WhatsApp**: This is your WhatsApp Business Number given to you by your Vonage Account Manager. To find out more please visit [vonage.com](https://www.vonage.com/communications-apis/messages/).
@@ -194,13 +221,16 @@ components:
     ImageProperty:
       properties:
         caption:
-          description: Additional text to accompany the image. Supported by WhatsApp and MMS.
+          description: Additional text to accompany the image. Supported by WhatsApp and
+            MMS.
           example: Additional text to accompany the image.
           maxLength: 3000
           minLength: 1
           type: string
         url:
-          description: The URL of the image attachment. `messenger` and `mms` supports .jpg, .jpeg, .png and .gif. `viber_service_msg` supports .jpg .jpeg, and .png. `whatsapp` supports .jpg .jpeg, and .png.
+          description: The URL of the image attachment. `messenger` and `mms` supports
+            .jpg, .jpeg, .png and .gif. `viber_service_msg` supports .jpg .jpeg,
+            and .png. `whatsapp` supports .jpg .jpeg, and .png.
           example: https://example.com/image.jpg
           maxLength: 2000
           minLength: 1
@@ -219,15 +249,12 @@ components:
             template:
               $ref: "#/components/schemas/TemplateProperty"
             text:
-              description: >
+              description: |
                 The text of the message.
-
 
                 **Messenger**: Is limited to 640 characters
 
-
                 **SMS** or **Viber**: Is 1000 characters
-
 
                 **WhatsApp**: is 4096 characters
               example: "Vonage Verification code: 64873. Valid for 10 minutes."
@@ -267,7 +294,14 @@ components:
         messenger:
           properties:
             category:
-              description: The use of different category tags enables the business to send messages for different use cases. For Facebook Messenger they need to comply with their [Messaging Types policy]( https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types). Vonage maps our `category` to their `messaging_type`. If `message_tag` is used, then an additional `tag` for that type is mandatory. By default Vonage sends the `response` category to Facebook Messenger.
+              description: The use of different category tags enables the business to send
+                messages for different use cases. For Facebook Messenger they
+                need to comply with their [Messaging Types policy](
+                https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types).
+                Vonage maps our `category` to their `messaging_type`. If
+                `message_tag` is used, then an additional `tag` for that type is
+                mandatory. By default Vonage sends the `response` category to
+                Facebook Messenger.
               enum:
                 - response
                 - update
@@ -275,21 +309,29 @@ components:
               example: message_tag
               type: string
             tag:
-              description: ‘A full list of the possible tags is available on [developers.facebook.com](https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags)'
+              description: ‘A full list of the possible tags is available on
+                [developers.facebook.com](https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags)'
               example: ticket_update
               type: string
           type: object
         viber_service_msg:
           properties:
             category:
-              description: The use of different category tags enables the business to send messages for different use cases. For Viber Service Messages the first message sent from a business to a user must be personal, informative and a targeted message - not promotional. By default Vonage sends the `transaction` category to Viber Service Messages.
+              description: The use of different category tags enables the business to send
+                messages for different use cases. For Viber Service Messages the
+                first message sent from a business to a user must be personal,
+                informative and a targeted message - not promotional. By default
+                Vonage sends the `transaction` category to Viber Service
+                Messages.
               enum:
                 - transaction
                 - promotion
               example: transaction
               type: string
             ttl:
-              description: Only valid for Viber Service Messages. Set the time-to-live of message to be delivered in seconds. i.e. if the message is not delivered in 600 seconds then delete the message.
+              description: Only valid for Viber Service Messages. Set the time-to-live of
+                message to be delivered in seconds. i.e. if the message is not
+                delivered in 600 seconds then delete the message.
               example: 600
               maximum: 86400
               minimum: 30
@@ -298,11 +340,22 @@ components:
         whatsapp:
           properties:
             locale:
-              description: We are using the industry standard, BCP 47, for locales. So in your API call to the /messages API you will need to put “en-GB” and this will refer to the “en_GB” template for WhatsApp. A full list of the possible locales is available on [developers.facebook.com](https://developers.facebook.com/docs/whatsapp/message-templates/creation#translations).
+              description: We are using the industry standard, BCP 47, for locales. So in your
+                API call to the /messages API you will need to put “en-GB” and
+                this will refer to the “en_GB” template for WhatsApp. A full
+                list of the possible locales is available on
+                [developers.facebook.com](https://developers.facebook.com/docs/whatsapp/message-templates/creation#translations).
               example: en-GB
               type: string
             policy:
-              description: "Please note that WhatsApp will deprecate `fallback` policy in January 2020. There are two policies that you can specify when sending a Message Template: `deterministic` and `fallback`. `deterministic` — Deliver the Message Template in exactly the language and locale asked for. `fallback` — Deliver the Message Template in the language that matches users language/locale setting on device. If one can not be found, deliver using the specified fallback language."
+              description: "Please note that WhatsApp will deprecate `fallback` policy in
+                January 2020. There are two policies that you can specify when
+                sending a Message Template: `deterministic` and `fallback`.
+                `deterministic` — Deliver the Message Template in exactly the
+                language and locale asked for. `fallback` — Deliver the Message
+                Template in the language that matches users language/locale
+                setting on device. If one can not be found, deliver using the
+                specified fallback language."
               enum:
                 - fallback
                 - deterministic
@@ -313,7 +366,9 @@ components:
         - content
       type: object
     MessageStatus:
-      description: The callbacks for the message status are the same as defined in the Messaging API. The only difference will be that dispatch_uuid and link will be appended.
+      description: The callbacks for the message status are the same as defined in the
+        Messaging API. The only difference will be that dispatch_uuid and link
+        will be appended.
       properties:
         _links:
           properties:
@@ -331,11 +386,14 @@ components:
         error:
           properties:
             code:
-              description: The error code. See [our errors list](/api-errors/messages-olympus) for a list of possible errors
+              description: The error code. See [our errors list](/api-errors/messages-olympus)
+                for a list of possible errors
               example: 1300
               type: integer
             reason:
-              description: Text describing the error. See [our errors list](/api-errors/messages-olympus) for a list of possible errors
+              description: Text describing the error. See [our errors
+                list](/api-errors/messages-olympus) for a list of possible
+                errors
               example: Not part of the provider network
               type: string
           type: object
@@ -391,7 +449,8 @@ components:
           items:
             properties:
               default:
-                description: The parameters are an array. The first value being {{1}} in the template.
+                description: The parameters are an array. The first value being {{1}} in the
+                  template.
                 example: "1234"
                 type: string
             type: object
@@ -419,7 +478,11 @@ components:
           type: string
         number:
           description: >
-            **SMS**: or **MMS**: or **Viber**: or **WhatsApp** The phone number of the message recipient in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
+            **SMS**: or **MMS**: or **Viber**: or **WhatsApp** The phone number
+            of the message recipient in the
+            [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a
+            leading + or 00 when entering a phone number, start with the country
+            code, for example, 447700900000.
 
 
             **Messenger**: This value is not required.
@@ -458,13 +521,16 @@ components:
     createWorkflow:
       properties:
         template:
-          description: The template that the Dispatch API will execute. For the initial version of the API the only available value will be failover
+          description: The template that the Dispatch API will execute. For the initial
+            version of the API the only available value will be failover
           enum:
             - failover
           example: failover
           type: string
         workflow:
-          description: Contains a message object that must reflect the current /messages resource. All parameters within the content object reflect the /messages docs.
+          description: Contains a message object that must reflect the current /messages
+            resource. All parameters within the content object reflect the
+            /messages docs.
           items:
             oneOf:
               - $ref: "#/components/schemas/sendWithFailoverMessage"
@@ -535,7 +601,10 @@ components:
         timestamp:
           $ref: "#/components/schemas/TimestampProperty"
         usage:
-          description: This is the total cost of your Workflow request. Please note if a preceding message in the workflow request is delivered after the final message in the workflow is delivered it may not reflect the true total cost of the workflow.
+          description: This is the total cost of your Workflow request. Please note if a
+            preceding message in the workflow request is delivered after the
+            final message in the workflow is delivered it may not reflect the
+            true total cost of the workflow.
           properties:
             currency:
               description: The charge currency in ISO 4217 format.

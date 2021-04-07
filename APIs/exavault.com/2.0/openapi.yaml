@@ -7,7 +7,8 @@ info:
     email: support@exavault.com
     name: ExaVault Support
   description: >
-    ExaVault's API allows you to incorporate ExaVault's suite of file transfer and user management tools into your own application.
+    ExaVault's API allows you to incorporate ExaVault's suite of file
+    transfer and user management tools into your own application.
 
 
     ExaVault supports both POST (recommended when requesting large data sets) and GET operations, and requires an API key in order to use.
@@ -29,32 +30,57 @@ info:
 externalDocs:
   url: https://www.exavault.com/developer/
 tags:
-  - description: This section contains information on how to authenticate and logout from the API. **All ExaVault API calls (other than the authenticateUser method itself) require an access token.**
+  - description: This section contains information on how to authenticate and logout
+      from the API. **All ExaVault API calls (other than the authenticateUser
+      method itself) require an access token.**
     name: Authentication
-  - description: The file and folder management APIs allow you to work with the core of your account. You can upload or download files and create, move and delete files & folders, to name a few options.
+  - description: The file and folder management APIs allow you to work with the core
+      of your account. You can upload or download files and create, move and
+      delete files & folders, to name a few options.
     name: Resources
-  - description: The activity APIs allow you to get logs from your account. We track multiple types of under the umbrellas; __Activity Logs__ that show an action a user performed or initiated on a file, folder or the account. __Webhooks Logs__ that show records of all outbound webhook calls made by ExaVault. Both can be optionally filtered to only return specific data you’re looking for.
+  - description: The activity APIs allow you to get logs from your account. We track
+      multiple types of under the umbrellas; __Activity Logs__ that show an
+      action a user performed or initiated on a file, folder or the account.
+      __Webhooks Logs__ that show records of all outbound webhook calls made by
+      ExaVault. Both can be optionally filtered to only return specific data
+      you’re looking for.
     name: Activity
-  - description: The user APIs allow you to create, update and delete users from your account. Users can be assigned unique permissions, set to expire after a certain time period, and more.
+  - description: The user APIs allow you to create, update and delete users from
+      your account. Users can be assigned unique permissions, set to expire
+      after a certain time period, and more.
     name: Users
-  - description: The sharing APIs allow you create and manage shares. Shares can be used to send a single file, share a folder, or set up a receive folder and its input form.
+  - description: The sharing APIs allow you create and manage shares. Shares can be
+      used to send a single file, share a folder, or set up a receive folder and
+      its input form.
     name: Shares
-  - description: The notifications APIs allow you to set up and manage notifications in your account. When an action is taken on a file folder, you can be notified via email or webhook.
+  - description: The notifications APIs allow you to set up and manage notifications
+      in your account. When an action is taken on a file folder, you can be
+      notified via email or webhook.
     name: Notifications
-  - description: The email lists APIs allow you to manage email lists that can be used for speeding up actions within the ExaVault File Manager such as adding your marketing team, Tom, Jane, and Harry, to a shared folder in a single action instead of three.
+  - description: The email lists APIs allow you to manage email lists that can be
+      used for speeding up actions within the ExaVault File Manager such as
+      adding your marketing team, Tom, Jane, and Harry, to a shared folder in a
+      single action instead of three.
     name: Email Lists
-  - description: The account APIs allow you review and change account settings. Many account settings will have immediate effects on all current and future users, so consider adding a user facing confirmation step before sending an update call.
+  - description: The account APIs allow you review and change account settings. Many
+      account settings will have immediate effects on all current and future
+      users, so consider adding a user facing confirmation step before sending
+      an update call.
     name: Account
-  - description: The forms APIs allow you to manage the inputs and data submitted through receive folder forms.
+  - description: The forms APIs allow you to manage the inputs and data submitted
+      through receive folder forms.
     name: Form
-  - description: The recipients APIs allow to retrieve, delete, or resend invitations for recipients of shared folders.
+  - description: The recipients APIs allow to retrieve, delete, or resend
+      invitations for recipients of shared folders.
     name: Recipients
-  - description: The emails APIs allow you to generate welcome emails for account users and referral emails.
+  - description: The emails APIs allow you to generate welcome emails for account
+      users and referral emails.
     name: Email
 paths:
   /account:
     get:
-      description: Get settings for your account, such as current space usage, webhooks settings, welcome email content and IP address restrictions.
+      description: Get settings for your account, such as current space usage,
+        webhooks settings, welcome email content and IP address restrictions.
       operationId: getAccount
       parameters:
         - description: API Key required for the request
@@ -71,7 +97,8 @@ paths:
           schema:
             example: 19853ef63a0bc348024a9e4cfd4a92520d2dfd04e88d8679fb1ed6bc551593d1
             type: string
-        - description: Related records to include in the response. Valid option is **masterUser**
+        - description: Related records to include in the response. Valid option is
+            **masterUser**
           in: query
           name: include
           schema:
@@ -136,7 +163,10 @@ paths:
                     status: 1
                     userCount: 4
                     welcomeEmailContent: >
-                      "Great news, your new account is ready!\n\nFor your records, we've listed information you'll use to log in below:\n\nFTP Server: [[ftpserver]]\n\nUsername (Web and FTP access): [[username]]\n\n[[setpassword]]"
+                      "Great news, your new account is ready!\n\nFor your
+                      records, we've listed information you'll use to log in
+                      below:\n\nFTP Server: [[ftpserver]]\n\nUsername (Web and
+                      FTP access): [[username]]\n\n[[setpassword]]"
                     welcomeEmailSubject: ExaVault File Sharing Account
                   id: 7
                   included:
@@ -193,7 +223,8 @@ paths:
         - Account
     patch:
       description: >-
-        Update account settings, such as welcome email content, IP address restrictions, webhooks settings and secure password requirements.
+        Update account settings, such as welcome email content, IP address
+        restrictions, webhooks settings and secure password requirements.
 
 
         **Notes**
@@ -257,7 +288,10 @@ paths:
                   userDisconnect: false
               complexPasswords: true
               customSignature: Please consider the planet before printing this email
-              emailContent: Greetings, ExampleUser!  Your account is ready for you to start transferring files right now. Here's your link to set up your account [[setpassword]]  Henceforth, you shall be known as [[username]]
+              emailContent: Greetings, ExampleUser!  Your account is ready for you to start
+                transferring files right now. Here's your link to set up your
+                account [[setpassword]]  Henceforth, you shall be known as
+                [[username]]
               emailSubject: Welcome to the Example Account
               externalDomain: https://example.com/files
               quotaNoticeEnabled: false
@@ -267,7 +301,8 @@ paths:
             schema:
               properties:
                 accountOnboarding:
-                  description: Whether extra help popups can be enabled for users in the web file manager.
+                  description: Whether extra help popups can be enabled for users in the web file
+                    manager.
                   example: true
                   type: boolean
                 allowedIpRanges:
@@ -294,7 +329,8 @@ paths:
                       format: email
                       type: string
                     theme:
-                      description: Color scheme for web file manager. Valid options are **default**, **light** and **dark**
+                      description: Color scheme for web file manager. Valid options are **default**,
+                        **light** and **dark**
                       example: default
                       type: string
                   title: BrandingSettingsValues
@@ -365,23 +401,29 @@ paths:
                   example: false
                   type: boolean
                 customSignature:
-                  description: Signature to be automatically added to the bottom of emails generated by the account.
+                  description: Signature to be automatically added to the bottom of emails
+                    generated by the account.
                   example: null
                   type: string
                 emailContent:
                   description: Content of welcome email template.
-                  example: "Great news, your new account is ready! For your records, we've listed information you'll use to log in below: FTP Server: [[ftpserver]] Username (Web and FTP access): [[username]] [[setpassword]]"
+                  example: "Great news, your new account is ready! For your records, we've listed
+                    information you'll use to log in below: FTP Server:
+                    [[ftpserver]] Username (Web and FTP access): [[username]]
+                    [[setpassword]]"
                   type: string
                 emailSubject:
                   description: Subject line for welcome emails
                   example: ExaVault File Sharing Account
                   type: string
                 externalDomain:
-                  description: Custom address used for web file manager. Not available for all account types.
+                  description: Custom address used for web file manager. Not available for all
+                    account types.
                   example: null
                   type: string
                 quotaNoticeEnabled:
-                  description: Whether the system should email the account owner when usage exceeds quotaNoticeThreshold value
+                  description: Whether the system should email the account owner when usage
+                    exceeds quotaNoticeThreshold value
                   example: false
                   type: boolean
                 quotaNoticeThreshold:
@@ -392,11 +434,13 @@ paths:
                   multipleOf: 10
                   type: integer
                 secureOnly:
-                  description: Whether unencrypted FTP connections should be denied for the account.
+                  description: Whether unencrypted FTP connections should be denied for the
+                    account.
                   example: false
                   type: boolean
                 showReferralLinks:
-                  description: Whether to display links for others to sign up on share views and invitation emails
+                  description: Whether to display links for others to sign up on share views and
+                    invitation emails
                   example: false
                   type: boolean
               title: UpdateAccountRequestBody
@@ -467,7 +511,10 @@ paths:
                     status: 1
                     userCount: 4
                     welcomeEmailContent: >
-                      "Great news, your new account is ready!\n\nFor your records, we've listed information you'll use to log in below:\n\nFTP Server: [[ftpserver]]\n\nUsername (Web and FTP access): [[username]]\n\n[[setpassword]]"
+                      "Great news, your new account is ready!\n\nFor your
+                      records, we've listed information you'll use to log in
+                      below:\n\nFTP Server: [[ftpserver]]\n\nUsername (Web and
+                      FTP access): [[username]]\n\n[[setpassword]]"
                     welcomeEmailSubject: ExaVault File Sharing Account
                   id: 6
                   relationships:
@@ -487,7 +534,9 @@ paths:
   /activity/session:
     get:
       description: >
-        Returns the detailed activity logs for your account. Optional query paramaters will filter the returned results based on a number of options including usernames, activity types, or date ranges. 
+        Returns the detailed activity logs for your account. Optional query
+        paramaters will filter the returned results based on a number of options
+        including usernames, activity types, or date ranges. 
           
         **Operation Types**
 
@@ -603,7 +652,8 @@ paths:
           name: path
           schema:
             type: string
-        - description: Filter session logs for operation type (see table above for acceptable values)
+        - description: Filter session logs for operation type (see table above for
+            acceptable values)
           example: EDIT_SHARE
           in: query
           name: type
@@ -640,7 +690,9 @@ paths:
   /activity/webhooks:
     get:
       description: >-
-        Returns the webhook logs for your account. Optional query paramaters will filter the returned results based on a number of options including path, tpye of event, or status code. 
+        Returns the webhook logs for your account. Optional query
+        paramaters will filter the returned results based on a number of options
+        including path, tpye of event, or status code. 
 
 
         **Event Types**
@@ -832,7 +884,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: Related record types to include in the response. Valid option is `ownerUser`
+        - description: Related record types to include in the response. Valid option is
+            `ownerUser`
           in: query
           name: include
           schema:
@@ -896,7 +949,9 @@ paths:
       tags:
         - Email Lists
     post:
-      description: Create a new email list. Among other things, email lists can be used to send files or share folders with a group of email addresses at once.
+      description: Create a new email list. Among other things, email lists can be
+        used to send files or share folders with a group of email addresses at
+        once.
       operationId: addEmailList
       parameters:
         - description: API Key required to make the API call.
@@ -971,7 +1026,9 @@ paths:
         - Email Lists
   "/email-lists/{id}":
     delete:
-      description: "Permanently delete an email group. This action is not reversible. We recommend making a user confirm this action before sending the API call. "
+      description: "Permanently delete an email group. This action is not reversible.
+        We recommend making a user confirm this action before sending the API
+        call. "
       operationId: deleteEmailListById
       parameters:
         - description: API Key required to make the API call.
@@ -1008,7 +1065,9 @@ paths:
       tags:
         - Email Lists
     get:
-      description: Retrieve all the details of a specific email list including it's name, when it was created and all the email addresses that belong to the group.
+      description: Retrieve all the details of a specific email list including it's
+        name, when it was created and all the email addresses that belong to the
+        group.
       operationId: getEmailListById
       parameters:
         - description: API Key required to make the API call.
@@ -1031,7 +1090,8 @@ paths:
           required: true
           schema:
             type: integer
-        - description: Related record types to include in the response. Valid option is `ownerUser`
+        - description: Related record types to include in the response. Valid option is
+            `ownerUser`
           in: query
           name: include
           schema:
@@ -1093,7 +1153,8 @@ paths:
         - Email Lists
     patch:
       description: >-
-        Add or remove emails from an email list that can be used to send and share files with groups. 
+        Add or remove emails from an email list that can be used to send
+        and share files with groups. 
 
 
         **Notes**
@@ -1179,7 +1240,10 @@ paths:
         - Email Lists
   /email/referral:
     post:
-      description: "Invite a friend to sign up for a free trial of ExaVault. Send a [referral](/lp/referafriend/) email to an email address. If the recipient signs up for ExaVault, we'll apply a credit to your account for the referral. "
+      description: "Invite a friend to sign up for a free trial of ExaVault. Send a
+        [referral](/lp/referafriend/) email to an email address. If the
+        recipient signs up for ExaVault, we'll apply a credit to your account
+        for the referral. "
       operationId: sendReferralEmail
       parameters:
         - description: API Key required to make the API call.
@@ -1228,7 +1292,8 @@ paths:
         - Email
   "/email/welcome/{username}":
     post:
-      description: Send a welcome email to a user. The contents of the welcome email can be set by [PATCH /accounts](#operation/updateAccount).
+      description: Send a welcome email to a user. The contents of the welcome email
+        can be set by [PATCH /accounts](#operation/updateAccount).
       operationId: sendWelcomeEmail
       parameters:
         - description: API Key required to make the API call.
@@ -1268,7 +1333,11 @@ paths:
   /forms:
     get:
       description: >
-        Get the information for the [file upload form](/docs/account/05-file-sharing/05-form-builder) assigned to a [receive folder](/docs/account/05-file-sharing/04-receive-folders) by its shareHash. The form details will return all the input field settings and the CSS for the form.
+        Get the information for the [file upload
+        form](/docs/account/05-file-sharing/05-form-builder) assigned to a
+        [receive folder](/docs/account/05-file-sharing/04-receive-folders) by
+        its shareHash. The form details will return all the input field settings
+        and the CSS for the form.
 
 
         Use the `include` parameter (with the value **share**) to also get the details of the associated receive folder.
@@ -1298,7 +1367,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: Related record types to include in the response. Valid option is **share**
+        - description: Related record types to include in the response. Valid option is
+            **share**
           in: query
           name: include
           schema:
@@ -1474,7 +1544,11 @@ paths:
   "/forms/entries/{id}":
     delete:
       description: >
-        Deletes a form submission entry, which represents one time that a visitor filled out the form and uploaded files. This deletes only the record of the submission (the date, the values entered in the form and the names of the files uploaded by the visitor).The share and any associated file resources will not be deleted by this. 
+        Deletes a form submission entry, which represents one time that a
+        visitor filled out the form and uploaded files. This deletes only the
+        record of the submission (the date, the values entered in the form and
+        the names of the files uploaded by the visitor).The share and any
+        associated file resources will not be deleted by this. 
 
 
         **Notes**:
@@ -1522,7 +1596,9 @@ paths:
         - Form
     get:
       description: >
-        Returns the form data entries for a specific form for a receive. Optional parameters can be included in the call to manage larger data sets.
+        Returns the form data entries for a specific form for a receive.
+        Optional parameters can be included in the call to manage larger data
+        sets.
       operationId: getFormEntries
       parameters:
         - description: "API Key required to make the API call. "
@@ -1600,7 +1676,10 @@ paths:
   "/forms/{id}":
     get:
       description: >
-        Returns the [file upload form](/docs/account/05-file-sharing/05-form-builder) assigned to a [receive folder](/docs/account/05-file-sharing/04-receive-folders). The form details will return all the input fields and their settings. 
+        Returns the [file upload
+        form](/docs/account/05-file-sharing/05-form-builder) assigned to a
+        [receive folder](/docs/account/05-file-sharing/04-receive-folders). The
+        form details will return all the input fields and their settings. 
 
 
         Use the `include` parameter (with the value **share**) to also retrieve the details of the associated receive folder. 
@@ -1806,7 +1885,9 @@ paths:
           type: integer
     patch:
       description: >-
-        Add, update, or delete a form's parameters. This will alter how your users/customers will see and interact with the form when sending you files. 
+        Add, update, or delete a form's parameters. This will alter how
+        your users/customers will see and interact with the form when sending
+        you files. 
 
 
         **Notes**
@@ -1950,7 +2031,8 @@ paths:
                   items:
                     properties:
                       id:
-                        description: ID of the form element. If you're adding a new element to the form, do not include this field.
+                        description: ID of the form element. If you're adding a new element to the form,
+                          do not include this field.
                         example: 123
                         type: integer
                       name:
@@ -1958,7 +2040,8 @@ paths:
                         example: Your name
                         type: string
                       order:
-                        description: "The order the fields will be displayed to the recipient. Starts at 0. "
+                        description: "The order the fields will be displayed to the recipient. Starts at
+                          0. "
                         example: 0
                         type: integer
                       settings:
@@ -1971,7 +2054,8 @@ paths:
                             example: false
                             type: boolean
                           useAsFolderName:
-                            description: "True if the submitted response should be used as the name for the new folder. "
+                            description: "True if the submitted response should be used as the name for the
+                              new folder. "
                             example: false
                             type: boolean
                         type: object
@@ -1988,7 +2072,8 @@ paths:
                     type: object
                   type: array
                 formDescription:
-                  description: "Set a description for the form that will be visible to recipients. "
+                  description: "Set a description for the form that will be visible to recipients.
+                    "
                   example: Send your files
                   type: string
                 submitButtonText:
@@ -2081,7 +2166,9 @@ paths:
   /notifications:
     get:
       description: >-
-        Get a list of all the [notifications](/docs/account/06-notifications) you have access to. You can use sorting and filtering to limit the returned list.
+        Get a list of all the
+        [notifications](/docs/account/06-notifications) you have access to. You
+        can use sorting and filtering to limit the returned list.
 
 
         **Notes:**
@@ -2102,7 +2189,9 @@ paths:
           schema:
             type: string
         - description: >-
-            Type of notification include in the list. Valid options are **file**, **folder**, **send_receipt**, **share_receipt**, **file_drop**
+            Type of notification include in the list. Valid options are
+            **file**, **folder**, **send_receipt**, **share_receipt**,
+            **file_drop**
 
 
             If this parameter is not used, only **file** and **folder** type notifications are included in the list.
@@ -2118,7 +2207,8 @@ paths:
               - share_receipt
               - file_drop
             type: string
-        - description: Starting notification record in the result set. Can be used for pagination.
+        - description: Starting notification record in the result set. Can be used for
+            pagination.
           example: 50
           in: query
           name: offset
@@ -2128,7 +2218,10 @@ paths:
             format: int32
             type: integer
         - description: >-
-            What order the list of matches should be in. Valid sort fields are **resourcename**, **date**, **action** and **type**. The sort order for each sort field is ascending unless it is prefixed with a minus (“-“), in which case it will be descending.
+            What order the list of matches should be in. Valid sort fields are
+            **resourcename**, **date**, **action** and **type**. The sort order
+            for each sort field is ascending unless it is prefixed with a minus
+            (“-“), in which case it will be descending.
 
 
             You can chose multiple options for the sort by separating them with commmas, such as "type,-date" to sort by type, then most recent.
@@ -2147,7 +2240,8 @@ paths:
             default: 25
             format: int32
             type: integer
-        - description: Related records to include in the response. Valid options are **ownerUser**, **resource**, **share**
+        - description: Related records to include in the response. Valid options are
+            **ownerUser**, **resource**, **share**
           example: resource,share,user
           in: query
           name: include
@@ -2158,7 +2252,9 @@ paths:
               - user
             type: string
         - description: >-
-            The kind of action which triggers the notification. Valid choices are **connect** (only for delivery receipts), **download**, **upload**, **delete**, or **all** 
+            The kind of action which triggers the notification. Valid choices
+            are **connect** (only for delivery receipts), **download**,
+            **upload**, **delete**, or **all** 
 
 
             **Note** The **all** action matches notifications set to "all", not all notifications. For example, notifications set to trigger only on delete are not included if you filter for action=all
@@ -2223,7 +2319,9 @@ paths:
         - Notifications
     post:
       description: >
-        Create a new notification for a [resource](#section/Identifying-Resources) in your account. Notifications can be sent via email or webhook;
+        Create a new notification for a
+        [resource](#section/Identifying-Resources) in your account.
+        Notifications can be sent via email or webhook;
 
 
         - To enable email, pass an array of email addresses to the `recipients` parameter of this call. 
@@ -2254,7 +2352,9 @@ paths:
             schema:
               properties:
                 action:
-                  description: Type of action be notified about. Notifications will only be fired for the given type of action. Valid choices are **upload**, **download**, **delete** or **all** (upload/download/delete)
+                  description: Type of action be notified about. Notifications will only be fired
+                    for the given type of action. Valid choices are **upload**,
+                    **download**, **delete** or **all** (upload/download/delete)
                   enum:
                     - upload
                     - download
@@ -2266,7 +2366,8 @@ paths:
                   description: Custom message to include in notification emails.
                   type: string
                 recipients:
-                  description: Email addresses to send notification emails to. If not specified, sends to the current user's email address.
+                  description: Email addresses to send notification emails to. If not specified,
+                    sends to the current user's email address.
                   example:
                     - myemail@example.com
                   items:
@@ -2274,19 +2375,19 @@ paths:
                     type: string
                   type: array
                 resource:
-                  description: Resources for this notification. See details on [how to specify resources](#section/Identifying-Resources) above.
+                  description: Resources for this notification. See details on [how to specify
+                    resources](#section/Identifying-Resources) above.
                   type: string
                 sendEmail:
-                  description: Set to true if the user should be notified by email when the notification is triggered.
+                  description: Set to true if the user should be notified by email when the
+                    notification is triggered.
                   example: true
                   type: boolean
                 type:
-                  description: >-
+                  description: |-
                     What kind of notification you're making. Valid choices are:
 
-
                     - **file** to monitor activity for a file resource
-
                     - **folder** to monitor activity for a folder resource
                   enum:
                     - file
@@ -2368,7 +2469,9 @@ paths:
   "/notifications/{id}":
     delete:
       description: >-
-        Deletes a notification. Note that deleting a notification _only_ deletes the notification &ndash; it does not delete any underlying files or folders.
+        Deletes a notification. Note that deleting a notification _only_
+        deletes the notification &ndash; it does not delete any underlying files
+        or folders.
 
 
         **Notes:**
@@ -2392,7 +2495,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: ID of the notification. Use [GET /notifications](#operation/listNotifications) if you need to lookup an ID.
+        - description: ID of the notification. Use [GET
+            /notifications](#operation/listNotifications) if you need to lookup
+            an ID.
           example: 3
           in: path
           name: id
@@ -2412,7 +2517,9 @@ paths:
         - Notifications
     get:
       description: >-
-        Get the details for a notification with a specific ID number. You'll be able to review its path, triggers and who's getting the notification. 
+        Get the details for a notification with a specific ID number.
+        You'll be able to review its path, triggers and who's getting the
+        notification. 
 
 
         **Notes**
@@ -2436,14 +2543,18 @@ paths:
           required: true
           schema:
             type: string
-        - description: ID of the notification. Use [GET /notifications](#operation/listNotifications) if you need to lookup an ID.
+        - description: ID of the notification. Use [GET
+            /notifications](#operation/listNotifications) if you need to lookup
+            an ID.
           example: 3
           in: path
           name: id
           required: true
           schema:
             type: integer
-        - description: Related record types to include in the response. You can include multiple types by separating them with commas. Valid options are **ownerUser**, **resource**, and **share**.
+        - description: Related record types to include in the response. You can include
+            multiple types by separating them with commas. Valid options are
+            **ownerUser**, **resource**, and **share**.
           example: resource,share
           in: query
           name: include
@@ -2500,7 +2611,8 @@ paths:
         - Notifications
     patch:
       description: >-
-        Update an existing notification. You can add additional emails or change the action or users that cause a notification to trigger. 
+        Update an existing notification. You can add additional emails or
+        change the action or users that cause a notification to trigger. 
 
 
         When updating recipient emails, make sure your `recipients` parameter contains the full list of people who should be included on the notification. If you resend the list without an existing recipient, they will be deleted from the notification emails. 
@@ -2527,7 +2639,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: ID of the notification. Use [GET /notifications](#operation/listNotifications) if you need to lookup an ID.
+        - description: ID of the notification. Use [GET
+            /notifications](#operation/listNotifications) if you need to lookup
+            an ID.
           example: 3
           in: path
           name: id
@@ -2551,7 +2665,9 @@ paths:
             schema:
               properties:
                 action:
-                  description: Type of action be notified about. Notifications will only be sent for the given type of action. Valid choices are **upload**, **download**, **delete** or **all** (upload/download/delete)
+                  description: Type of action be notified about. Notifications will only be sent
+                    for the given type of action. Valid choices are **upload**,
+                    **download**, **delete** or **all** (upload/download/delete)
                   enum:
                     - upload
                     - download
@@ -2560,10 +2676,12 @@ paths:
                   example: all
                   type: string
                 message:
-                  description: Custom message to insert into the notification emails, along with the matching activity.
+                  description: Custom message to insert into the notification emails, along with
+                    the matching activity.
                   type: string
                 recipients:
-                  description: Email addresses to send notification emails to. If empty, sends to the current user's email address.
+                  description: Email addresses to send notification emails to. If empty, sends to
+                    the current user's email address.
                   example:
                     - myemail@example.com
                   items:
@@ -2571,7 +2689,8 @@ paths:
                     type: string
                   type: array
                 sendEmail:
-                  description: Whether an email should be sent to the recipients when matching activity happens.
+                  description: Whether an email should be sent to the recipients when matching
+                    activity happens.
                   example: true
                   type: boolean
                 usernames:
@@ -2646,7 +2765,9 @@ paths:
   "/recipients/shares/invites/{shareId}":
     post:
       description: >-
-        Resend invitations to one or all recipients attached to specified share. The most recent message that was sent for the share will be re-used for this email.
+        Resend invitations to one or all recipients attached to specified
+        share. The most recent message that was sent for the share will be
+        re-used for this email.
 
 
         You can use [GET /shares/{id}](#operation/getShareById) to view the recipient list and message history for a share. Use [PATCH /shares/{id}](#operation/updateShareById) to add or remove recipients.
@@ -2701,7 +2822,8 @@ paths:
   /resources:
     delete:
       description: >
-        Delete multiple file or folder resourcess. Deleting a folder resource will also delete any resources in that folder.
+        Delete multiple file or folder resourcess. Deleting a folder
+        resource will also delete any resources in that folder.
 
 
         **Notes:**
@@ -2775,7 +2897,9 @@ paths:
         - Resources
     get:
       description: >
-        Returns details for specified file/folder id or hash, including upload date, size and type. For the full list of returned properties, see the response syntax, below.
+        Returns details for specified file/folder id or hash, including
+        upload date, size and type. For the full list of returned properties,
+        see the response syntax, below.
 
 
         **Notes:**
@@ -2802,7 +2926,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: Comma separated list of relationships to include in response. Possible values are **share**, **notifications**, **directFile**, **parentResource**, **ownerUser**, **ownerUser**.
+        - description: Comma separated list of relationships to include in response.
+            Possible values are **share**, **notifications**, **directFile**,
+            **parentResource**, **ownerUser**, **ownerUser**.
           in: query
           name: include
           schema:
@@ -3027,7 +3153,10 @@ paths:
                       status: 1
                       userCount: 4
                       welcomeEmailContent: >
-                        "Great news, your new account is ready!\n\nFor your records, we've listed information you'll use to log in below:\n\nFTP Server: [[ftpserver]]\n\nUsername (Web and FTP access): [[username]]\n\n[[setpassword]]"
+                        "Great news, your new account is ready!\n\nFor your
+                        records, we've listed information you'll use to log in
+                        below:\n\nFTP Server: [[ftpserver]]\n\nUsername (Web and
+                        FTP access): [[username]]\n\n[[setpassword]]"
                       welcomeEmailSubject: ExaVault File Sharing Account
                     id: 7
                     relationships:
@@ -3085,7 +3214,8 @@ paths:
         - Resources
     post:
       description: >
-        Create a new empty folder at the specified path. New files can be uploaded via the [/resources/upload](#operation/uploadFile) endpoint.
+        Create a new empty folder at the specified path. New files can be
+        uploaded via the [/resources/upload](#operation/uploadFile) endpoint.
 
 
         **Notes:**
@@ -3115,7 +3245,8 @@ paths:
                   description: Name of the folder to create. Required if **path** is not used
                   type: string
                 parentResource:
-                  description: Resource identifier where to create a folder. Required if **path** is not used
+                  description: Resource identifier where to create a folder. Required if **path**
+                    is not used
                   type: string
                 path:
                   description: Fully-qualified path to the new folder including folder's name
@@ -3180,7 +3311,9 @@ paths:
   /resources/compress:
     post:
       description: >
-        Create a zip archive containing the files from given set of paths. Note that this can be a very slow operation if you have indicated many files should be included in the archive.
+        Create a zip archive containing the files from given set of paths.
+        Note that this can be a very slow operation if you have indicated many
+        files should be included in the archive.
 
 
         **Notes:**
@@ -3214,13 +3347,16 @@ paths:
             schema:
               properties:
                 archiveName:
-                  description: Name of the zip archive to create. If left blank, current date will be used.
+                  description: Name of the zip archive to create. If left blank, current date will
+                    be used.
                   type: string
                 parentResource:
-                  description: Resource identifier of the folder where zip archive should be created.
+                  description: Resource identifier of the folder where zip archive should be
+                    created.
                   type: string
                 resources:
-                  description: Resource identifiers for file(s)/folder(s) to include in new zip file
+                  description: Resource identifiers for file(s)/folder(s) to include in new zip
+                    file
                   items:
                     type: string
                   type: array
@@ -3273,7 +3409,8 @@ paths:
   /resources/copy:
     post:
       description: >
-        Copies a set of exisiting files/folders (provided by an array `resources`) to the requested `parentResource` in your account.
+        Copies a set of exisiting files/folders (provided by an array
+        `resources`) to the requested `parentResource` in your account.
 
         In the `resources` array, you may specify paths pointing files/folders throughout the account, but everything will be copied to the 
 
@@ -3394,7 +3531,10 @@ paths:
   /resources/download:
     get:
       description: >-
-        Downloads a file from the server. Whenever more than one file is being downloaded, the file are first zipped into  a single file before the download starts, and the resulting zip file is named to match the `downloadArchiveName` parameter.
+        Downloads a file from the server. Whenever more than one file is
+        being downloaded, the file are first zipped into  a single file before
+        the download starts, and the resulting zip file is named to match the
+        `downloadArchiveName` parameter.
 
 
         **NOTE**: Downloading many files at once  may result in a long delay before the API will return a response. You may need to override default timeout values in your API client, or download files individually.
@@ -3413,7 +3553,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: Path of file or folder to be downloaded, starting from the root. Can also be an array of paths.
+        - description: Path of file or folder to be downloaded, starting from the root.
+            Can also be an array of paths.
           in: query
           name: resources[]
           required: true
@@ -3421,7 +3562,8 @@ paths:
             items:
               type: string
             type: array
-        - description: When downloading multiple files, this will be used as the name of the zip file that is created.
+        - description: When downloading multiple files, this will be used as the name of
+            the zip file that is created.
           in: query
           name: downloadArchiveName
           required: false
@@ -3445,7 +3587,8 @@ paths:
   /resources/extract:
     post:
       description: >
-        Extract the contents of a zip archive to a specified directory. Note that this can be a very slow operation.
+        Extract the contents of a zip archive to a specified directory.
+        Note that this can be a very slow operation.
 
 
         **Notes:**
@@ -3532,7 +3675,9 @@ paths:
   /resources/list:
     get:
       description: >-
-        Returns a list of files and folders in the account. Use the `resource` query parameter to indicate the folder you wish to search in (which can be /). 
+        Returns a list of files and folders in the account. Use the
+        `resource` query parameter to indicate the folder you wish to search in
+        (which can be /). 
 
 
         **Searching for Files and Folders**
@@ -3577,13 +3722,19 @@ paths:
           required: true
           schema:
             type: string
-        - description: Endpoint support multiple sort fields by allowing array of sort params. Sort fields should be applied in the order specified. The sort order for each sort field is ascending unless it is prefixed with a minus (“-“), in which case it will be descending.
+        - description: Endpoint support multiple sort fields by allowing array of sort
+            params. Sort fields should be applied in the order specified. The
+            sort order for each sort field is ascending unless it is prefixed
+            with a minus (“-“), in which case it will be descending.
           in: query
           name: sort
           schema:
             example: name
             type: string
-        - description: Determines which item to start on for pagination. Use zero (0) to start at the beginning of the list. e.g, setting `offset=200` would trigger the server to skip the first 200 matching entries when returning the results.
+        - description: Determines which item to start on for pagination. Use zero (0) to
+            start at the beginning of the list. e.g, setting `offset=200` would
+            trigger the server to skip the first 200 matching entries when
+            returning the results.
           in: query
           name: offset
           required: false
@@ -3591,25 +3742,33 @@ paths:
             default: 0
             format: int32
             type: integer
-        - description: The number of files to limit the result. If you have more files in your directory than this limit, make multiple calls, incrementing the `offset` parameter, above.
+        - description: The number of files to limit the result. If you have more files in
+            your directory than this limit, make multiple calls, incrementing
+            the `offset` parameter, above.
           in: query
           name: limit
           required: false
           schema:
             format: int32
             type: integer
-        - description: Limit types of resources returned to "file" or "dir" only. This is ignored if you are using the `name` parameter to trigger a search.
+        - description: Limit types of resources returned to "file" or "dir" only. This is
+            ignored if you are using the `name` parameter to trigger a search.
           in: query
           name: type
           required: false
           schema:
             type: string
-        - description: Text to match resource names. This allows you to filter the results returned. For example, to locate only zip archive files, you can enter `*zip` and only resources ending in "zip" will be included in the list of results.
+        - description: Text to match resource names. This allows you to filter the results
+            returned. For example, to locate only zip archive files, you can
+            enter `*zip` and only resources ending in "zip" will be included in
+            the list of results.
           in: query
           name: name
           schema:
             type: string
-        - description: Comma separated list of relationships to include in response. Possible values are **share**, **notifications**, **directFile**, **parentResource**, **ownerUser**, **ownerAccount**.
+        - description: Comma separated list of relationships to include in response.
+            Possible values are **share**, **notifications**, **directFile**,
+            **parentResource**, **ownerUser**, **ownerAccount**.
           in: query
           name: include
           schema:
@@ -3833,7 +3992,10 @@ paths:
                       status: 1
                       userCount: 4
                       welcomeEmailContent: >
-                        "Great news, your new account is ready!\n\nFor your records, we've listed information you'll use to log in below:\n\nFTP Server: [[ftpserver]]\n\nUsername (Web and FTP access): [[username]]\n\n[[setpassword]]"
+                        "Great news, your new account is ready!\n\nFor your
+                        records, we've listed information you'll use to log in
+                        below:\n\nFTP Server: [[ftpserver]]\n\nUsername (Web and
+                        FTP access): [[username]]\n\n[[setpassword]]"
                       welcomeEmailSubject: ExaVault File Sharing Account
                     id: 7
                     relationships:
@@ -3925,13 +4087,17 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Endpoint support multiple sort fields by allowing array of sort params. Sort fields should be applied in the order specified. The sort order for each sort field is ascending unless it is prefixed with a minus (“-“), in which case it will be descending.
+        - description: Endpoint support multiple sort fields by allowing array of sort
+            params. Sort fields should be applied in the order specified. The
+            sort order for each sort field is ascending unless it is prefixed
+            with a minus (“-“), in which case it will be descending.
           in: query
           name: sort
           schema:
             example: name
             type: string
-        - description: Determines which item to start on for pagination. Use zero (0) to start at the beginning of the list.
+        - description: Determines which item to start on for pagination. Use zero (0) to
+            start at the beginning of the list.
           in: query
           name: offset
           required: false
@@ -3939,7 +4105,9 @@ paths:
             default: 0
             format: int32
             type: integer
-        - description: The number of files to limit the result. Cannot be set higher than 100. If you have more than one hundred files in your directory, make multiple calls, incrementing the `offset parameter, above.
+        - description: The number of files to limit the result. Cannot be set higher than
+            100. If you have more than one hundred files in your directory, make
+            multiple calls, incrementing the `offset parameter, above.
           in: query
           name: limit
           required: false
@@ -3952,7 +4120,9 @@ paths:
           required: false
           schema:
             type: string
-        - description: Comma separated list of relationships to include in response. Possible values are **share**, **notifications**, **directFile**, **parentResource**, **ownerUser**, **ownerUser**.
+        - description: Comma separated list of relationships to include in response.
+            Possible values are **share**, **notifications**, **directFile**,
+            **parentResource**, **ownerUser**, **ownerUser**.
           in: query
           name: include
           schema:
@@ -4176,7 +4346,10 @@ paths:
                       status: 1
                       userCount: 4
                       welcomeEmailContent: >
-                        "Great news, your new account is ready!\n\nFor your records, we've listed information you'll use to log in below:\n\nFTP Server: [[ftpserver]]\n\nUsername (Web and FTP access): [[username]]\n\n[[setpassword]]"
+                        "Great news, your new account is ready!\n\nFor your
+                        records, we've listed information you'll use to log in
+                        below:\n\nFTP Server: [[ftpserver]]\n\nUsername (Web and
+                        FTP access): [[username]]\n\n[[setpassword]]"
                       welcomeEmailSubject: ExaVault File Sharing Account
                     id: 7
                     relationships:
@@ -4237,7 +4410,8 @@ paths:
   /resources/move:
     post:
       description: >
-        Moves a set of exisiting files/folders (provided by an array `resources`) to the requested `parentResource` in your account.
+        Moves a set of exisiting files/folders (provided by an array
+        `resources`) to the requested `parentResource` in your account.
 
         In the `resources` array, you may specify paths pointing files/folders throughout the account, but everything will be moved to the root of the `parentResource`.
 
@@ -4354,7 +4528,8 @@ paths:
   /resources/preview:
     get:
       description: >
-        Returns a resized image of the specified document for supported file types.
+        Returns a resized image of the specified document for supported
+        file types.
 
 
         Image data returned is encoded in base64 format and can be viewed using the `<img>` element. 
@@ -4412,7 +4587,8 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: Page number to extract from a multi-page document (0 is the first page). Vaild for **.pdf** or **.doc** files.
+        - description: Page number to extract from a multi-page document (0 is the first
+            page). Vaild for **.pdf** or **.doc** files.
           in: query
           name: page
           required: false
@@ -4442,7 +4618,8 @@ paths:
   /resources/upload:
     post:
       description: >
-        Uploads a file to a specified path, with optional support for resuming a partially uploaded existing file.
+        Uploads a file to a specified path, with optional support for
+        resuming a partially uploaded existing file.
       operationId: uploadFile
       parameters:
         - description: API Key required to make the API call.
@@ -4465,7 +4642,8 @@ paths:
           required: false
           schema:
             type: integer
-        - description: Destination path for the file being uploaded, including the file name.
+        - description: Destination path for the file being uploaded, including the file
+            name.
           in: query
           name: path
           required: true
@@ -4478,7 +4656,7 @@ paths:
           required: true
           schema:
             type: integer
-        - description: >
+        - description: |
             True if upload resume is supported, false if it isn't.
           example: true
           in: query
@@ -4486,7 +4664,9 @@ paths:
           schema:
             default: "true"
             type: boolean
-        - description: "True if a file with the same name is found in the designated path, should be overwritten. False if different file names should be generated. "
+        - description: "True if a file with the same name is found in the designated path,
+            should be overwritten. False if different file names should be
+            generated. "
           example: true
           in: query
           name: allowOverwrite
@@ -4551,7 +4731,8 @@ paths:
   "/resources/{id}":
     delete:
       description: >
-        Delete a single file or folder resource. Deleting a folder will also delete all of the contents.
+        Delete a single file or folder resource. Deleting a folder will
+        also delete all of the contents.
 
 
         **Notes:**
@@ -4589,7 +4770,9 @@ paths:
         - Resources
     get:
       description: >
-        Returns metadata for specified file/folder path, including upload date, size and type. For the full list of returned properties, see the response syntax, below.
+        Returns metadata for specified file/folder path, including upload
+        date, size and type. For the full list of returned properties, see the
+        response syntax, below.
 
 
         **Notes:**
@@ -4610,7 +4793,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: Comma separated list of relationships to include in response. Possible values are **share**, **notifications**, **directFile**, **parentResource**, **ownerUser**, **ownerAccount**.
+        - description: Comma separated list of relationships to include in response.
+            Possible values are **share**, **notifications**, **directFile**,
+            **parentResource**, **ownerUser**, **ownerAccount**.
           in: query
           name: include
           schema:
@@ -4835,7 +5020,10 @@ paths:
                       status: 1
                       userCount: 4
                       welcomeEmailContent: >
-                        "Great news, your new account is ready!\n\nFor your records, we've listed information you'll use to log in below:\n\nFTP Server: [[ftpserver]]\n\nUsername (Web and FTP access): [[username]]\n\n[[setpassword]]"
+                        "Great news, your new account is ready!\n\nFor your
+                        records, we've listed information you'll use to log in
+                        below:\n\nFTP Server: [[ftpserver]]\n\nUsername (Web and
+                        FTP access): [[username]]\n\n[[setpassword]]"
                       welcomeEmailSubject: ExaVault File Sharing Account
                     id: 7
                     relationships:
@@ -4901,7 +5089,9 @@ paths:
           type: integer
     patch:
       description: >
-        Update the specified file or folder resource record's "name" parameter. The resource is identified by the numeric resource ID that is passed in as the last segment of the URI.
+        Update the specified file or folder resource record's "name"
+        parameter. The resource is identified by the numeric resource ID that is
+        passed in as the last segment of the URI.
       operationId: updateResourceById
       parameters:
         - description: Access token required to make the API call.
@@ -4990,7 +5180,11 @@ paths:
   /shares:
     get:
       description: >-
-        Get a list of shares that you would have access to view through the web interface. You can limit which results are returned by specifying specific types of shares you wish to view, finding things shared with a specific email address, as well as finding shares for specific folder names.
+        Get a list of shares that you would have access to view through the
+        web interface. You can limit which results are returned by specifying
+        specific types of shares you wish to view, finding things shared with a
+        specific email address, as well as finding shares for specific folder
+        names.
 
 
 
@@ -5029,7 +5223,8 @@ paths:
           schema:
             default: 100
             type: integer
-        - description: Set of shares to return. (**all**=all of them, **active**=shares that are currently active, **curentUser**=shares created by you)
+        - description: Set of shares to return. (**all**=all of them, **active**=shares
+            that are currently active, **curentUser**=shares created by you)
           example: active
           in: query
           name: scope
@@ -5058,14 +5253,18 @@ paths:
               - shared_folder
               - send
             type: string
-        - description: Comma separated list of relationships to include in response. Possible values are **owner**, **resources**, **notifications**, **activity**.
+        - description: Comma separated list of relationships to include in response.
+            Possible values are **owner**, **resources**, **notifications**,
+            **activity**.
           example: owner,notifications
           in: query
           name: include
           schema:
             type: string
         - description: >-
-            When provided, only shares whose names include this value will be in the list. Supports wildcards, such as **send\*** to return everything starting with "send".
+            When provided, only shares whose names include this value will be
+            in the list. Supports wildcards, such as **send\*** to return
+            everything starting with "send".
 
 
             Use this parameter if you are searching for shares or receives for a specific folder name. For example **/Clients/ACME/To Be Processed**.
@@ -5074,25 +5273,34 @@ paths:
           schema:
             example: Customer*
             type: string
-        - description: 'Filter the results to include only shares that invited a certain email address. Supports wildcard matching so that **\*@example.com** will give back entries shared with addresses ending in "@example.com". '
+        - description: 'Filter the results to include only shares that invited a certain
+            email address. Supports wildcard matching so that **\*@example.com**
+            will give back entries shared with addresses ending in
+            "@example.com". '
           in: query
           name: recipient
           schema:
             example: test@example.com
             type: string
-        - description: When provided, only shares with a message that contains the text will be included in the list of matches. Both the subject and the body of all messages will be checked for matches. This will always be a wildcard match, so that searching for **taxes** will return any shares with a message that contains the word "taxes".
+        - description: When provided, only shares with a message that contains the text
+            will be included in the list of matches. Both the subject and the
+            body of all messages will be checked for matches. This will always
+            be a wildcard match, so that searching for **taxes** will return any
+            shares with a message that contains the word "taxes".
           in: query
           name: message
           schema:
             example: submitted
             type: string
-        - description: When provided, only shares created by the user with that `username` will be included in the list. Does not support wildcard searching.
+        - description: When provided, only shares created by the user with that `username`
+            will be included in the list. Does not support wildcard searching.
           in: query
           name: username
           schema:
             example: example
             type: string
-        - description: Searches the share name, username, recipients, share messages fields for the provided value. Supports wildcard searches.
+        - description: Searches the share name, username, recipients, share messages
+            fields for the provided value. Supports wildcard searches.
           in: query
           name: search
           schema:
@@ -5209,11 +5417,13 @@ paths:
         - Shares
     post:
       description: >-
-        Creates a new share object for the given path in your account. We support three types of shares:
+        Creates a new share object for the given path in your account. We
+        support three types of shares:
 
           - A **shared folder** allows you to let outside parties access a folder in your account (including any files and nested subfolders) using just a link. Shared folders can be restricted; e.g. with an expiration date, password, download-only, etc. Shared folders are 'live'; if someone makes a change to a file in your shared folder, it will be immediately reflected in your account, and vice-versa.
           - A file **send** lets you send one or more files via an easy download link. File sends are different than shared folders because file sends are 'point in time' -- the recipient will get the files as you sent them. If you later make a change to the source file, it will not be updated for the recipient.
           - A **receive** folder lets you receive files into your account. You can either send users a link, or optionally [embed a customized form](/docs/account/05-file-sharing/05-upload-widget) on your website.
+
 
 
 
@@ -5270,12 +5480,16 @@ paths:
                   example: false
                   type: boolean
                 expiration:
-                  description: Expiration date for the share. If someone attempts to use the share after this date, they will receive an error that the share is not available.
+                  description: Expiration date for the share. If someone attempts to use the share
+                    after this date, they will receive an error that the share
+                    is not available.
                   example: 2017-09-25T14:12:10Z
                   format: date-time
                   type: string
                 fileDropCreateFolders:
-                  description: "Only used for **receive** shares. If true, uploads will be automatically placed into sub-folders of the folder, named after the chosen field on your form. "
+                  description: "Only used for **receive** shares. If true, uploads will be
+                    automatically placed into sub-folders of the folder, named
+                    after the chosen field on your form. "
                   example: false
                   type: boolean
                 hasNotification:
@@ -5283,23 +5497,31 @@ paths:
                   example: false
                   type: boolean
                 isPublic:
-                  description: Whether someone can visit the share without following a personalized recipient link.
+                  description: Whether someone can visit the share without following a
+                    personalized recipient link.
                   example: true
                   type: boolean
                 messageBody:
-                  description: The message to be included in email invitations for your recipients. Ignored if you have not also provided `recipients` and `messageSubject`
+                  description: The message to be included in email invitations for your
+                    recipients. Ignored if you have not also provided
+                    `recipients` and `messageSubject`
                   example: null
                   type: string
                 messageSubject:
-                  description: Subject to use on emails inviting recipients to the share. Ignored if you have not also provided `recipients` and a `messageBody`
+                  description: Subject to use on emails inviting recipients to the share. Ignored
+                    if you have not also provided `recipients` and a
+                    `messageBody`
                   example: Invitation to a shared folder
                   type: string
                 name:
-                  description: "A name for the share. This will be visible on the page that recipients visit. "
+                  description: "A name for the share. This will be visible on the page that
+                    recipients visit. "
                   example: Shared Folder
                   type: string
                 notificationEmails:
-                  description: Emails that will receive delivery receipts for this share. `hasNotification` must be **true** for delivery receipts will be sent.
+                  description: Emails that will receive delivery receipts for this share.
+                    `hasNotification` must be **true** for delivery receipts
+                    will be sent.
                   example:
                     - notify@example.com
                     - notify2@example.com
@@ -5308,11 +5530,15 @@ paths:
                     type: string
                   type: array
                 password:
-                  description: Set a password for recipients to access the share. All recipients will use the same password.
+                  description: Set a password for recipients to access the share. All recipients
+                    will use the same password.
                   example: null
                   type: string
                 recipients:
-                  description: "People you want to invite to the share. **Note**: unless you also set the `messageSubject` and `messageBody` for the new share, invitation emails will not be sent to these recipients."
+                  description: "People you want to invite to the share. **Note**: unless you also
+                    set the `messageSubject` and `messageBody` for the new
+                    share, invitation emails will not be sent to these
+                    recipients."
                   items:
                     properties:
                       email:
@@ -5320,7 +5546,8 @@ paths:
                         format: email
                         type: string
                       type:
-                        description: What kind of email should be sent to this recipient. Valid choices are **direct** and **cc**
+                        description: What kind of email should be sent to this recipient. Valid choices
+                          are **direct** and **cc**
                         type: string
                     type: object
                   type: array
@@ -5330,7 +5557,8 @@ paths:
                   type: boolean
                 resources:
                   description: >
-                    Array of resources for this share. See details on [how to specify resources](#section/Identifying-Resources) above.
+                    Array of resources for this share. See details on [how to specify
+                    resources](#section/Identifying-Resources) above.
 
 
                     **shared_folder** and **receive** shares must have only one `resource`, which is a directory that does not have a current share attached.
@@ -5343,7 +5571,13 @@ paths:
                     type: string
                   type: array
                 sendingLocalFiles:
-                  description: Use this only for **send** shares. Flag to indicate that you are going to upload additional files from your computer to the share. If this is **true**, you will also need to use the [POST /shares/complete-send/{id}](#operation/completeDirectSend) call to finish setting up your share after the files are uploaded.
+                  description: Use this only for **send** shares. Flag to indicate that you are
+                    going to upload additional files from your computer to the
+                    share. If this is **true**, you will also need to use the
+                    [POST
+                    /shares/complete-send/{id}](#operation/completeDirectSend)
+                    call to finish setting up your share after the files are
+                    uploaded.
                   type: boolean
                 type:
                   description: The type of share to create. See above for a description of each.
@@ -5432,7 +5666,10 @@ paths:
   "/shares/complete-send/{id}":
     post:
       description: >
-        After uploading the file(s) to be sent, this method will trigger invitation emails and finish the send files setup. If you are not sending files from your own computer in a send, you will not need this step.
+        After uploading the file(s) to be sent, this method will trigger
+        invitation emails and finish the send files setup. If you are not
+        sending files from your own computer in a send, you will not need this
+        step.
           
         **How to send files from your computer using the API**:
 
@@ -5480,7 +5717,12 @@ paths:
   "/shares/{id}":
     delete:
       description: >-
-        Deactivate a share. Deactivating a share does not remove the underlying files for **shared_folder** and **receive** share types; it merely removes the access URL. Deleting a **send** share type does remove the associated files, as files that have been sent are only associated with the share, and aren't stored anywhere else in the account.
+        Deactivate a share. Deactivating a share does not remove the
+        underlying files for **shared_folder** and **receive** share types; it
+        merely removes the access URL. Deleting a **send** share type does
+        remove the associated files, as files that have been sent are only
+        associated with the share, and aren't stored anywhere else in the
+        account.
 
 
         **Notes:**
@@ -5517,7 +5759,9 @@ paths:
         - Shares
     get:
       description: >-
-        Get the details for a specific share entry. You can use the `include` parameter to also get the details of related records, such as the owning user or the resources involved in the share.
+        Get the details for a specific share entry. You can use the
+        `include` parameter to also get the details of related records, such as
+        the owning user or the resources involved in the share.
 
 
         **Notes:**
@@ -5542,7 +5786,9 @@ paths:
           schema:
             example: 19853ef63a0bc348024a9e4cfd4a92520d2dfd04e88d8679fb1ed6bc551593d1
             type: string
-        - description: Comma separated list of relationships to include in response. Possible values are **owner**, **resources**, **notifications**, **activity**.
+        - description: Comma separated list of relationships to include in response.
+            Possible values are **owner**, **resources**, **notifications**,
+            **activity**.
           example: owner,notifications
           in: query
           name: include
@@ -5719,7 +5965,8 @@ paths:
           type: integer
     patch:
       description: >-
-        Change the settings on an active share. Any changes made will affect all users that have access to the share. 
+        Change the settings on an active share. Any changes made will
+        affect all users that have access to the share. 
 
 
         When updating invitees, pass the `recipients` body paramater with the full list of people who should be included on the share. If you resend the list without an existing recipient, they will be removed from the share.
@@ -5761,7 +6008,9 @@ paths:
                   format: date-time
                   type: string
                 fileDropCreateFolders:
-                  description: Whether uploads to a receive folder should be automatically placed into subfolders. See our [receive folder documentation](/docs/account/05-file-sharing/05-form-builder#advanced-form-settings)
+                  description: Whether uploads to a receive folder should be automatically placed
+                    into subfolders. See our [receive folder
+                    documentation](/docs/account/05-file-sharing/05-form-builder#advanced-form-settings)
                   example: false
                   type: boolean
                 hasNotification:
@@ -5769,15 +6018,19 @@ paths:
                   example: false
                   type: boolean
                 isPublic:
-                  description: Whether people can visit the share without following a link from an invitation email
+                  description: Whether people can visit the share without following a link from an
+                    invitation email
                   example: true
                   type: boolean
                 messageBody:
-                  description: Message content to use for emails inviting recipients to the share. Ignored if you have not also provided `recipients` and a `subject`
+                  description: Message content to use for emails inviting recipients to the share.
+                    Ignored if you have not also provided `recipients` and a
+                    `subject`
                   example: null
                   type: string
                 messageSubject:
-                  description: Subject to use on emails inviting recipients to the share. Ignored if you have not also provided `recipients` and a `message`
+                  description: Subject to use on emails inviting recipients to the share. Ignored
+                    if you have not also provided `recipients` and a `message`
                   example: Invitation to a shared folder
                   type: string
                 name:
@@ -5785,7 +6038,8 @@ paths:
                   example: Shared Folder
                   type: string
                 notificationEmails:
-                  description: "List of email addresses to send delivery receipts to. Ignored if `hasNotification` is false. "
+                  description: "List of email addresses to send delivery receipts to. Ignored if
+                    `hasNotification` is false. "
                   example:
                     - notify@example.com
                     - notify2@example.com
@@ -5794,7 +6048,8 @@ paths:
                     type: string
                   type: array
                 password:
-                  description: New password for the share. To leave the password unchanged, do not send this parameter.
+                  description: New password for the share. To leave the password unchanged, do not
+                    send this parameter.
                   example: null
                   type: string
                 recipients:
@@ -5813,17 +6068,20 @@ paths:
                         format: email
                         type: string
                       type:
-                        description: What kind of email should be sent to this recipient. Valid choices are **direct** and **cc**
+                        description: What kind of email should be sent to this recipient. Valid choices
+                          are **direct** and **cc**
                         type: string
                     type: object
                   type: array
                 requireEmail:
-                  description: Whether visitors to the share will be required to enter their email in order to access the share.
+                  description: Whether visitors to the share will be required to enter their email
+                    in order to access the share.
                   example: false
                   type: boolean
                 resources:
                   description: >-
-                    Array of resources for this share. See details on [how to specify resources](#section/Identifying-Resources) above.
+                    Array of resources for this share. See details on [how to specify
+                    resources](#section/Identifying-Resources) above.
 
 
                     **shared_folder** and **receive** shares must have only one `resource`, which is a directory that does not have a current share attached.
@@ -5839,7 +6097,8 @@ paths:
                     type: string
                   type: array
                 status:
-                  description: New status for the share. You can set an active share to inactive by setting the status to **0**
+                  description: New status for the share. You can set an active share to inactive
+                    by setting the status to **0**
                   type: integer
               title: UpdateShareRequestBody
               type: object
@@ -5919,7 +6178,8 @@ paths:
   /users:
     get:
       description: >-
-        Get a list of the users in your account. There are three main types of searches you can do with this method:
+        Get a list of the users in your account. There are three main types
+        of searches you can do with this method:
 
 
         1. Search for a user by username. If you provide the `username` parameter in your call, then only the user who exactly matches that username will be in the list of matches. Any other parameters are ignored.
@@ -5950,41 +6210,50 @@ paths:
           required: true
           schema:
             type: string
-        - description: The username of the user you are looking for. Only entries with the same username as this will be in the list of results. Does not support wildcard searches.
+        - description: The username of the user you are looking for. Only entries with the
+            same username as this will be in the list of results. Does not
+            support wildcard searches.
           example: testuser
           in: query
           name: username
           required: false
           schema:
             type: string
-        - description: Nickname to search for. Ignored if `username` is provided. Supports wildcard searches.
+        - description: Nickname to search for. Ignored if `username` is provided. Supports
+            wildcard searches.
           in: query
           name: nickname
           schema:
             type: string
-        - description: Email to search for. Ignored if `username` is provided. Supports wildcard searches
+        - description: Email to search for. Ignored if `username` is provided. Supports
+            wildcard searches
           in: query
           name: email
           schema:
             example: "*@example.co"
             type: string
-        - description: Types of users to include the list. Ignored if `username` is provided. Valid options are **admin**, **master** and **user**
+        - description: Types of users to include the list. Ignored if `username` is
+            provided. Valid options are **admin**, **master** and **user**
           in: query
           name: role
           schema:
             example: use
             type: string
-        - description: "Whether a user is locked. Ignored if `username` is provided. **0** means user is locked, **1** means user is not locked. "
+        - description: "Whether a user is locked. Ignored if `username` is provided. **0**
+            means user is locked, **1** means user is not locked. "
           in: query
           name: status
           schema:
             type: integer
-        - description: Path for user's home directory. Ignored if `username` is provided. Supports wildcard searches.
+        - description: Path for user's home directory. Ignored if `username` is provided.
+            Supports wildcard searches.
           in: query
           name: homeDir
           schema:
             type: string
-        - description: Searches the nickname, email, role and homeDir fields for the provided value. Ignored if `username` is provided. Supports wildcard searches.
+        - description: Searches the nickname, email, role and homeDir fields for the
+            provided value. Ignored if `username` is provided. Supports wildcard
+            searches.
           in: query
           name: search
           schema:
@@ -5998,7 +6267,11 @@ paths:
             format: int32
             type: integer
         - description: >-
-            Sort order or matching users. You can sort by multiple columns by separating sort options with a comma; the sort will be applied in the order specified. The sort order for each sort field is ascending unless it is prefixed with a minus (“-“), in which case it will be descending.
+            Sort order or matching users. You can sort by multiple columns by
+            separating sort options with a comma; the sort will be applied in
+            the order specified. The sort order for each sort field is ascending
+            unless it is prefixed with a minus (“-“), in which case it will be
+            descending.
 
 
             Valid sort fields are: **nickname**, **username**, **email**, **homeDir** and **modified**
@@ -6016,7 +6289,8 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: Comma separated list of relationships to include in response. Valid options are **homeResource** and **ownerAccount**.
+        - description: Comma separated list of relationships to include in response. Valid
+            options are **homeResource** and **ownerAccount**.
           example: homeResource,ownerAccount
           in: query
           name: include
@@ -6151,7 +6425,12 @@ paths:
         - Users
     post:
       description: >-
-        Adds a new user to the account. The user may be configured as an admin or standard user, and (if a standard user) may be assigned a restricted [home directory](/docs/account/04-users/00-introduction#setting-the-user-s-home-directory) and restricted [permissions](/docs/account/04-users/00-introduction#managing-user-roles-and-permissions). 
+        Adds a new user to the account. The user may be configured as an
+        admin or standard user, and (if a standard user) may be assigned a
+        restricted [home
+        directory](/docs/account/04-users/00-introduction#setting-the-user-s-home-directory)
+        and restricted
+        [permissions](/docs/account/04-users/00-introduction#managing-user-roles-and-permissions). 
 
 
         **Notes:**
@@ -6184,12 +6463,14 @@ paths:
                   format: email
                   type: string
                 expiration:
-                  description: Optional timestamp when the user should expire, formatted in date-time.
+                  description: Optional timestamp when the user should expire, formatted in
+                    date-time.
                   example: 2011-03-21 00:18:56
                   type: string
                 homeResource:
                   description: >-
-                    Resource identifier for the user's home folder. See details on [how to specify resources](#section/Identifying-Resources) above.
+                    Resource identifier for the user's home folder. See details on [how
+                    to specify resources](#section/Identifying-Resources) above.
 
 
                     The user will be locked to this directory and unable to move 'up' in the account. If the folder does not exist in the account, it will be created when the user is created. 
@@ -6207,14 +6488,18 @@ paths:
                   example: testnickname
                   type: string
                 onboarding:
-                  description: Set this to **true** to enable extra help popups in the web file manager for this user.
+                  description: Set this to **true** to enable extra help popups in the web file
+                    manager for this user.
                   example: true
                   type: boolean
                 password:
                   description: Password for the user
                   type: string
                 permissions:
-                  description: An object containing name/value pairs for each permission. Any permission that is not passed will be set to `false` by default. Note that users will be unable to see any files in the account unless you include `list` permission.
+                  description: An object containing name/value pairs for each permission. Any
+                    permission that is not passed will be set to `false` by
+                    default. Note that users will be unable to see any files in
+                    the account unless you include `list` permission.
                   properties:
                     changePassword:
                       example: true
@@ -6248,7 +6533,11 @@ paths:
                       type: boolean
                   type: object
                 role:
-                  description: The type of user to create. Note that admin users cannot have a `homeResource` other than '/', and will have full permissions, but you must provide at least "download,upload,list,delete" in the `permissions` parameter.
+                  description: The type of user to create. Note that admin users cannot have a
+                    `homeResource` other than '/', and will have full
+                    permissions, but you must provide at least
+                    "download,upload,list,delete" in the `permissions`
+                    parameter.
                   enum:
                     - user
                     - admin
@@ -6256,19 +6545,25 @@ paths:
                   type: string
                 timeZone:
                   description: >
-                    Time zone, used for accurate time display within the application. See <a href='https://php.net/manual/en/timezones.php' target='blank'>this page</a> for allowed values.
+                    Time zone, used for accurate time display within the application.
+                    See <a href='https://php.net/manual/en/timezones.php'
+                    target='blank'>this page</a> for allowed values.
                   example: America/Los_Angeles
                   type: string
                 username:
                   description: >-
-                    Username of the user to create. This should follow standard username conventions - spaces are not allowed, etc. We do allow email addresses as usernames.
+                    Username of the user to create. This should follow standard
+                    username conventions - spaces are not allowed, etc. We do
+                    allow email addresses as usernames.
 
 
                     **Note** Usernames must be unique across all ExaVault accounts.
                   example: testuser
                   type: string
                 welcomeEmail:
-                  description: If **true**, send this new user a welcome email upon creation. The content of the welcome email can be configured with the [PATCH /accounts](#operation/updateAccount) method.
+                  description: If **true**, send this new user a welcome email upon creation. The
+                    content of the welcome email can be configured with the
+                    [PATCH /accounts](#operation/updateAccount) method.
                   example: true
                   type: boolean
               required:
@@ -6335,7 +6630,11 @@ paths:
   "/users/{id}":
     delete:
       description: >
-        Delete a user from the account. Deleting a user does **NOT** delete any files from the account; it merely removes a user's access. Aternatively, locking a user via the [PATCH /users/{id}](#operation/updateUser) will keep the user in your account, but make it unable to log in. 
+        Delete a user from the account. Deleting a user does **NOT** delete
+        any files from the account; it merely removes a user's access.
+        Aternatively, locking a user via the [PATCH
+        /users/{id}](#operation/updateUser) will keep the user in your account,
+        but make it unable to log in. 
 
 
         Resources and shares owned by the deleted user will be owned by the master user after the deletion.
@@ -6377,7 +6676,9 @@ paths:
         - Users
     get:
       description: >-
-        Get the details for a specific user. You can use the `include` parameter to also get the details of related records, such as the account or the home directory.
+        Get the details for a specific user. You can use the `include`
+        parameter to also get the details of related records, such as the
+        account or the home directory.
 
 
         **Notes:**
@@ -6401,7 +6702,8 @@ paths:
           schema:
             example: 19853ef63a0bc348024a9e4cfd4a92520d2dfd04e88d8679fb1ed6bc551593d1
             type: string
-        - description: Comma-separated list of relationships to include in response. Possible values include **homeResource** and **ownerAccount**.
+        - description: Comma-separated list of relationships to include in response.
+            Possible values include **homeResource** and **ownerAccount**.
           example: homeResource,owneraccount
           in: query
           name: include
@@ -6460,7 +6762,9 @@ paths:
       tags:
         - Users
     parameters:
-      - description: The user's ID. Note that this is our internal ID, and _not the username_. You can obtain it by calling the [GET /users](#operation/listUsers) method.
+      - description: The user's ID. Note that this is our internal ID, and _not the
+          username_. You can obtain it by calling the [GET
+          /users](#operation/listUsers) method.
         in: path
         name: id
         required: true
@@ -6470,7 +6774,9 @@ paths:
           type: number
     patch:
       description: >-
-        Updates the settings for the user. Note that the unique key for this API call is our internal ID, and _not_ the username, as the username can be changed.
+        Updates the settings for the user. Note that the unique key for
+        this API call is our internal ID, and _not_ the username, as the
+        username can be changed.
 
 
         In the request body, you should only send the parameters for values that you wish to change for the user.
@@ -6505,7 +6811,8 @@ paths:
             schema:
               properties:
                 currentUserPassword:
-                  description: The password of the currently authenticated user. Required when updating any user’s email, username or password.
+                  description: The password of the currently authenticated user. Required when
+                    updating any user’s email, username or password.
                   example: examplespass
                   type: string
                 email:
@@ -6519,7 +6826,8 @@ paths:
                   type: string
                 homeResource:
                   description: >-
-                    Resource identifier for the user's home folder. See details on [how to specify resources](#section/Identifying-Resources) above.
+                    Resource identifier for the user's home folder. See details on [how
+                    to specify resources](#section/Identifying-Resources) above.
 
 
                     The user will be locked to this directory and unable to move 'up' in the account. If the folder does not exist in the account, it will be created when the user logs in.
@@ -6537,14 +6845,18 @@ paths:
                   example: testnickname
                   type: string
                 onboarding:
-                  description: Set this to **true** to enable extra help popups in the web file manager for this user.
+                  description: Set this to **true** to enable extra help popups in the web file
+                    manager for this user.
                   example: true
                   type: boolean
                 password:
                   description: New password for the user
                   type: string
                 permissions:
-                  description: An object containing name/value pairs for each permission. Any permission that is not passed will be set to `false` by default. Note that users will be unable to see any files in the account unless you include `list` permission.
+                  description: An object containing name/value pairs for each permission. Any
+                    permission that is not passed will be set to `false` by
+                    default. Note that users will be unable to see any files in
+                    the account unless you include `list` permission.
                   properties:
                     changePassword:
                       example: true
@@ -6578,7 +6890,11 @@ paths:
                       type: boolean
                   type: object
                 role:
-                  description: The type of user (**admin** or **user**). Note that admin users cannot have a `homeResource` other than '/', and will have full permissions, but you must provide at least "download,upload,list,delete" in the `permissions` parameter.
+                  description: The type of user (**admin** or **user**). Note that admin users
+                    cannot have a `homeResource` other than '/', and will have
+                    full permissions, but you must provide at least
+                    "download,upload,list,delete" in the `permissions`
+                    parameter.
                   enum:
                     - user
                     - admin
@@ -6586,12 +6902,16 @@ paths:
                   type: string
                 timeZone:
                   description: >
-                    Time zone, used for accurate time display within the application. See <a href='https://php.net/manual/en/timezones.php' target='blank'>this page</a> for allowed values.
+                    Time zone, used for accurate time display within the application.
+                    See <a href='https://php.net/manual/en/timezones.php'
+                    target='blank'>this page</a> for allowed values.
                   example: America/Los_Angeles
                   type: string
                 username:
                   description: >-
-                    New username for the user. This should follow standard username conventions - spaces are not allowed, etc. We do allow email addresses as usernames.
+                    New username for the user. This should follow standard username
+                    conventions - spaces are not allowed, etc. We do allow email
+                    addresses as usernames.
 
 
                     **Note** Usernames must be unique across all ExaVault accounts.
@@ -7498,7 +7818,10 @@ components:
                 example: null
                 type: string
               emailContent:
-                example: "Great news, your new account is ready! For your records, we've listed information you'll use to log in below: FTP Server: [[ftpserver]] Username (Web and FTP access): [[username]] [[setpassword]]"
+                example: "Great news, your new account is ready! For your records, we've listed
+                  information you'll use to log in below: FTP Server:
+                  [[ftpserver]] Username (Web and FTP access): [[username]]
+                  [[setpassword]]"
                 type: string
               emailSubject:
                 example: ExaVault File Sharing Account
@@ -7518,7 +7841,8 @@ components:
             type: object
   schemas:
     AccessMode:
-      description: An object defining what a not-logged-in visitor can do with the share contents
+      description: An object defining what a not-logged-in visitor can do with the
+        share contents
       properties:
         delete:
           description: Whether share allows visitors to delete contents
@@ -7578,7 +7902,8 @@ components:
           example: exampleaccount
           type: string
         accountOnboarding:
-          description: Whether the web application onboarding help is enabled for new users in the account.
+          description: Whether the web application onboarding help is enabled for new
+            users in the account.
           example: false
           type: boolean
         allowedIp:
@@ -7595,7 +7920,8 @@ components:
             type: object
           type: array
         branding:
-          description: Branding flag. Set to `true` if the account has branding functionality enabled.
+          description: Branding flag. Set to `true` if the account has branding
+            functionality enabled.
           enum:
             - true
             - false
@@ -7611,7 +7937,8 @@ components:
           format: int32
           type: integer
         complexPasswords:
-          description: Flag to indicate whether the account requires complex passwords. Set to `true` to require complex passwords on all users and shares.
+          description: Flag to indicate whether the account requires complex passwords.
+            Set to `true` to require complex passwords on all users and shares.
           example: false
           type: boolean
         created:
@@ -7620,14 +7947,16 @@ components:
           format: date-time
           type: string
         customDomain:
-          description: Custom domain flag. Set to `true` if account type allows custom domain functionality.
+          description: Custom domain flag. Set to `true` if account type allows custom
+            domain functionality.
           enum:
             - true
             - false
           example: true
           type: boolean
         customSignature:
-          description: Custom signature for all account emails users or recipients will receive.
+          description: Custom signature for all account emails users or recipients will
+            receive.
           example: null
           type: string
         externalDomains:
@@ -7637,7 +7966,8 @@ components:
             type: string
           type: array
         maxUsers:
-          description: Maximum number of users the account can have. This can be increased by contacting ExaVault Support.
+          description: Maximum number of users the account can have. This can be increased
+            by contacting ExaVault Support.
           example: 1000
           format: int32
           type: integer
@@ -7649,15 +7979,19 @@ components:
         quota:
           $ref: "#/components/schemas/Quota"
         secureOnly:
-          description: Flag to indicate whether the account disables connections via insecure protocols (e.g. FTP). Set to `true` to disable all traffic over port 21.
+          description: Flag to indicate whether the account disables connections via
+            insecure protocols (e.g. FTP). Set to `true` to disable all traffic
+            over port 21.
           example: false
           type: boolean
         showReferralLinks:
-          description: Flag to indicate showing of referrals links in the account. Set to `true` to include marketing messages in share invitations.
+          description: Flag to indicate showing of referrals links in the account. Set to
+            `true` to include marketing messages in share invitations.
           example: true
           type: boolean
         status:
-          description: Account status flag. A one (1) means the account is active; zero (0) means it is suspended.
+          description: Account status flag. A one (1) means the account is active; zero
+            (0) means it is suspended.
           enum:
             - 1
             - 0
@@ -7687,7 +8021,8 @@ components:
         data:
           $ref: "#/components/schemas/Account"
         included:
-          description: Array can contain objects specified in include param of the get call e.g User object
+          description: Array can contain objects specified in include param of the get
+            call e.g User object
           items:
             $ref: "#/components/schemas/User"
           type: array
@@ -7851,7 +8186,8 @@ components:
       title: EmailList
       type: object
     EmailListAttributes:
-      description: Information for the email list, including its short title and recipient emails
+      description: Information for the email list, including its short title and
+        recipient emails
       properties:
         created:
           description: Created datetime
@@ -7943,7 +8279,8 @@ components:
           example: <_ERROR_CODE>
           type: string
         detail:
-          description: human-readable explanation specific to this occurrence of the problem.
+          description: human-readable explanation specific to this occurrence of the
+            problem.
           example: <_DETAIL>
           type: string
         meta:
@@ -8080,7 +8417,7 @@ components:
               name: Upload Area
               order: 2
               settings:
-                ? fileTypes
+                fileTypes: null
               type: upload_area
           items:
             $ref: "#/components/schemas/FormField"
@@ -8247,7 +8584,11 @@ components:
             senderEmail:
               type: boolean
             useAsFolderName:
-              description: Whether to place submitted files into a subfolder named the contents of this field. Only takes effect when the `fileDropCreateFolders` parameter on the receive folder is `true`. `isRequired` must be set to `true` if this setting is `true`.
+              description: Whether to place submitted files into a subfolder named the
+                contents of this field. Only takes effect when the
+                `fileDropCreateFolders` parameter on the receive folder is
+                `true`. `isRequired` must be set to `true` if this setting is
+                `true`.
               example: false
               type: boolean
             width:
@@ -8285,7 +8626,8 @@ components:
           description: Advanced field settings
           properties:
             fileTypes:
-              description: File types that can be uploaded. Comma-delimited string of MIME file types.
+              description: File types that can be uploaded. Comma-delimited string of MIME
+                file types.
               example: null
               type: string
           type: object
@@ -8367,7 +8709,8 @@ components:
       title: Notification
       type: object
     NotificationAttributes:
-      description: "Attributes for the notification including the path, recipients, and share data. "
+      description: "Attributes for the notification including the path, recipients,
+        and share data. "
       properties:
         action:
           description: Action that triggers notification.
@@ -8539,7 +8882,8 @@ components:
               example: 6afaa3ef4056dc602ccfc69ab52d6f40
               type: string
             pageCount:
-              description: Amount of pages available in the file. Used only for multipage documents.
+              description: Amount of pages available in the file. Used only for multipage
+                documents.
               example: 10
               format: int32
               type: integer
@@ -8572,7 +8916,8 @@ components:
     Quota:
       properties:
         diskLimit:
-          description: Amount of disk space that the account has available to it. This may be increased by upgrading to a larger plan.
+          description: Amount of disk space that the account has available to it. This may
+            be increased by upgrading to a larger plan.
           example: 375809638400
           format: int64
           type: integer
@@ -8582,11 +8927,14 @@ components:
           format: int64
           type: integer
         noticeEnabled:
-          description: Should a quota warning be sent to the account owner when a threshold level of space utilization is reached?
+          description: Should a quota warning be sent to the account owner when a
+            threshold level of space utilization is reached?
           example: true
           type: boolean
         noticeThreshold:
-          description: Treshold that triggers a quota notification. This represents the "percent full" your account must be before the quota notification is generated.
+          description: Treshold that triggers a quota notification. This represents the
+            "percent full" your account must be before the quota notification is
+            generated.
           example: 80
           format: int32
           type: integer
@@ -8721,7 +9069,8 @@ components:
           example: /examplefolder
           type: string
         previewable:
-          description: Can resource be previewed. Property equals `null` if resource `type` is dir.
+          description: Can resource be previewed. Property equals `null` if resource
+            `type` is dir.
           enum:
             - true
             - false
@@ -8792,7 +9141,8 @@ components:
         data:
           $ref: "#/components/schemas/Resource"
         meta:
-          description: Meta object containing non-standard meta-information about the operation.
+          description: Meta object containing non-standard meta-information about the
+            operation.
           example:
             id: 2321
           type: object
@@ -8806,7 +9156,8 @@ components:
           format: int64
           type: integer
         meta:
-          description: Meta object containing non-standard meta-information about the delete operation.
+          description: Meta object containing non-standard meta-information about the
+            delete operation.
           example:
             id: 2321
           type: object
@@ -8932,7 +9283,8 @@ components:
           format: int32
           type: integer
         relationships:
-          description: "Message, owner, resource, and notification relationships of the share. "
+          description: "Message, owner, resource, and notification relationships of the
+            share. "
           properties:
             messages:
               items:
@@ -9048,7 +9400,8 @@ components:
           example: false
           type: boolean
         fileDropCreateFolders:
-          description: Flag to show if separate folders should be created for each file upload to receive folder.
+          description: Flag to show if separate folders should be created for each file
+            upload to receive folder.
           enum:
             - true
             - false
@@ -9146,7 +9499,9 @@ components:
                 format: int32
                 type: integer
               received:
-                description: Set to true if recipient has accessed the share. Note this is set to true when the recipient clicks the link to access the share; not when they download a file.
+                description: Set to true if recipient has accessed the share. Note this is set
+                  to true when the recipient clicks the link to access the
+                  share; not when they download a file.
                 enum:
                   - true
                   - false
@@ -9191,7 +9546,9 @@ components:
           format: int32
           type: integer
         trackingStatus:
-          description: Checks recipient received status and returns whether it's been received (`complete`,) partial received (`incomplete`,) or not received yet (`pending`.)
+          description: Checks recipient received status and returns whether it's been
+            received (`complete`,) partial received (`incomplete`,) or not
+            received yet (`pending`.)
           enum:
             - complete
             - incomplete
@@ -9363,7 +9720,8 @@ components:
       title: User
       type: object
     UserAttributes:
-      description: "Attributes of the user including expiration, home directory, and permissions. "
+      description: "Attributes of the user including expiration, home directory, and
+        permissions. "
       properties:
         accessTimestamp:
           description: Timestamp of most recent successful user login.
@@ -9408,7 +9766,9 @@ components:
           example: exampleuser
           type: string
         onboarding:
-          description: Whether the onboarding help system is enabled for this user. `true` means that additional help popups are displayed in the web application for this user.
+          description: Whether the onboarding help system is enabled for this user. `true`
+            means that additional help popups are displayed in the web
+            application for this user.
           example: false
           type: boolean
         permissions:
@@ -9422,7 +9782,8 @@ components:
           example: user
           type: string
         status:
-          description: Indicates user activity status. `0` means the user is locked and cannot log in. `1` means the user is active and can log in.
+          description: Indicates user activity status. `0` means the user is locked and
+            cannot log in. `1` means the user is active and can log in.
           enum:
             - 0
             - 1
@@ -9430,7 +9791,9 @@ components:
           format: int32
           type: integer
         timeZone:
-          description: User's timezone. See <a href='https://php.net/manual/en/timezones.php' target='blank'>this page</a> for allowed values.
+          description: User's timezone. See <a
+            href='https://php.net/manual/en/timezones.php' target='blank'>this
+            page</a> for allowed values.
           example: America/Chicago
           type: string
         username:
@@ -9487,7 +9850,9 @@ components:
           description: Delete permission flag
           type: boolean
         deleteFormData:
-          description: Delete form data permission flag. If true, user can remove data that was submitted for a receive folder. This applies only to data submitted in the receive folder form, not the actual files uploaded.
+          description: Delete form data permission flag. If true, user can remove data
+            that was submitted for a receive folder. This applies only to data
+            submitted in the receive folder form, not the actual files uploaded.
           type: boolean
         download:
           description: Download permission flag
@@ -9508,7 +9873,9 @@ components:
           description: Upload permission flag
           type: boolean
         viewFormData:
-          description: Access Form Data permission flag. If true, user can view submissions that have been stored for a receive folder. This includes any data submitted in the receive folder form.
+          description: Access Form Data permission flag. If true, user can view
+            submissions that have been stored for a receive folder. This
+            includes any data submitted in the receive folder form.
           type: boolean
       required:
         - download

@@ -73,7 +73,8 @@ paths:
         required: true
         type: string
     post:
-      description: Retrieves detailed information about a set of changesets in a repository, designed to be used with the FishEye commit graph
+      description: Retrieves detailed information about a set of changesets in a
+        repository, designed to be used with the FishEye commit graph
       operationId: getChangesetDetails
       parameters: []
       responses:
@@ -84,7 +85,8 @@ paths:
       description: finds slice data the query
       operationId: findSliceData
       parameters:
-        - description: the set of branches to search. If not specified, will search all branches
+        - description: the set of branches to search. If not specified, will search all
+            branches
           in: query
           name: branch
           required: false
@@ -159,7 +161,8 @@ paths:
       description: Get a list of changesets on a repository.
       operationId: listChangesets
       parameters:
-        - description: restrict the changesets to those in this path, should be "/" to look at the whole repository.
+        - description: restrict the changesets to those in this path, should be "/" to
+            look at the whole repository.
           in: query
           name: path
           required: false
@@ -230,7 +233,8 @@ paths:
     get:
       operationId: getRevisionInfo
       parameters:
-        - description: the path of the filerevision, with respect to the fisheye repository root.
+        - description: the path of the filerevision, with respect to the fisheye
+            repository root.
           in: query
           name: path
           required: false
@@ -253,7 +257,8 @@ paths:
     get:
       operationId: listTagsForRevision
       parameters:
-        - description: the path of the filerevision, with respect to the fisheye repository root.
+        - description: the path of the filerevision, with respect to the fisheye
+            repository root.
           in: query
           name: path
           required: false
@@ -274,7 +279,8 @@ paths:
         type: string
   /rest-service-fe/search-v1/crossRepositoryQuery:
     get:
-      description: Execute a query across repositories. By default, this will search all repositories.
+      description: Execute a query across repositories. By default, this will search
+        all repositories.
       operationId: getCrossRepositoryQuery
       parameters:
         - description: text to search for in commit message and p4 jobId. Must not be empty.
@@ -288,7 +294,8 @@ paths:
           required: false
           type: string
         - description: >-
-            expand query parameter to specify the maximum number of results. Format is changesets[n:m].revisions[n:m],reviews
+            expand query parameter to specify the maximum number of results.
+            Format is changesets[n:m].revisions[n:m],reviews
                     the default number of changesets returned is 30, the maximum returned is 100
           in: query
           name: expand
@@ -309,7 +316,8 @@ paths:
           required: false
           type: string
         - description: >-
-            maximum number of results (which can be left unspecified, but in that case,
+            maximum number of results (which can be left unspecified, but in
+            that case,
              the maximum number of results will set to 3000 results)
           in: query
           name: maxReturn
@@ -326,7 +334,8 @@ paths:
         type: string
   "/rest-service-fe/search-v1/queryAsRows/{repository}":
     get:
-      description: Execute a FishEye query (that contains a "return" statement) against a specific repository.
+      description: Execute a FishEye query (that contains a "return" statement)
+        against a specific repository.
       operationId: getQueryAsRows
       parameters:
         - description: FishEye query to execute (which must contain a "return" statement)
@@ -335,7 +344,8 @@ paths:
           required: false
           type: string
         - description: >-
-            maximum number of results (which can be left unspecified, but in that case,
+            maximum number of results (which can be left unspecified, but in
+            that case,
              the maximum number of results will set to 3000 results)
           in: query
           name: maxReturn
@@ -372,7 +382,8 @@ paths:
         required: true
         type: string
     post:
-      description: Retrieve a list of reviews for each given changeset in a given repository.
+      description: Retrieve a list of reviews for each given changeset in a given
+        repository.
       operationId: getReviewsForChangesets
       parameters: []
       responses:

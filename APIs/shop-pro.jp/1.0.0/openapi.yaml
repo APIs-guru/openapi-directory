@@ -410,7 +410,8 @@ tags:
       - 登録・更新時にカラーミーAPIがスクリプトを取得します。スクリプトが取得できない場合は登録できません
     name: script
     x-displayName: スクリプトタグ
-  - description: スクリプトタグを挿入するAPIです。※新規デベロッパーはこのエンドポイントを利用できません。代わりに [スクリプトタグ](/open_api#tag/script) をご利用ください
+  - description: スクリプトタグを挿入するAPIです。※新規デベロッパーはこのエンドポイントを利用できません。代わりに
+      [スクリプトタグ](/open_api#tag/script) をご利用ください
     name: script(deprecated)
     x-displayName: スクリプトタグ(deprecated)
   - description: インラインスクリプトを挿入するAPIです。※新規デベロッパーはこのエンドポイントを利用できません
@@ -534,9 +535,8 @@ paths:
         - uninstallation
   "/appstore/v1/recurring_application_charges/{recurringApplicationChargeId}/usage_charges.json":
     post:
-      description: >
+      description: |
         アプリ内で基本機能が利用された頻度に伴って毎月の請求が変動するようなアプリの場合は「従量課金」を使って利用者に変動分の請求を行うことができます。
-
         ※無料お試し期間中のショップに対しては従量課金データを作成できません。
       operationId: createUsageCharge
       parameters:
@@ -547,7 +547,8 @@ paths:
           schema:
             type: string
         - description: >-
-            アンインストール後の従量課金の精算する際に、 `Authorization` ヘッダへアクセストークンを指定する代わりにこのヘッダを指定することで、このAPIを実行することができます。
+            アンインストール後の従量課金の精算をする際に、 `Authorization`
+            ヘッダへアクセストークンを指定する代わりにこのヘッダを指定することで、このAPIを実行することができます。
 
             インストール中は指定不要で、アンインストール後のみ必須となります。
 
@@ -587,7 +588,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "usage_charge": {
                         "id": "X20SHDG",
@@ -625,6 +626,9 @@ paths:
                     type: object
                 type: object
           description: ""
+      security:
+        - OAuth2:
+            - write_application_charge
       summary: 従量課金データの作成
       tags:
         - application_charge
@@ -647,11 +651,9 @@ paths:
                           example: PA12345678
                           type: string
                         display_scope:
-                          description: >
+                          description: |
                             スクリプトを出力するページ
-
                             - `shop`: ショップページ
-
                             - `thanks_page`: 注文完了ページ
                           enum:
                             - shop
@@ -711,11 +713,9 @@ paths:
                         example: PA12345678
                         type: string
                       display_scope:
-                        description: >
+                        description: |
                           スクリプトを出力するページ
-
                           - `shop`: ショップページ
-
                           - `thanks_page`: 注文完了ページ
                         enum:
                           - shop
@@ -799,11 +799,9 @@ paths:
                         example: PA12345678
                         type: string
                       display_scope:
-                        description: >
+                        description: |
                           スクリプトを出力するページ
-
                           - `shop`: ショップページ
-
                           - `thanks_page`: 注文完了ページ
                         enum:
                           - shop
@@ -869,11 +867,9 @@ paths:
                         example: PA12345678
                         type: string
                       display_scope:
-                        description: >
+                        description: |
                           スクリプトを出力するページ
-
                           - `shop`: ショップページ
-
                           - `thanks_page`: 注文完了ページ
                         enum:
                           - shop
@@ -932,14 +928,11 @@ paths:
                           example: PA04511366
                           type: string
                         display_scope:
-                          description: >
+                          description: |
                             インラインスクリプトを出力するページ。
 
-
                             - `all`: カートの途中のページと注文完了ページの両方
-
                             - `thanks_page`: 注文完了ページ
-
                             - `cart`: カートの途中のページ
                           enum:
                             - all
@@ -964,9 +957,8 @@ paths:
                           example: console.log("aaaaa")
                           type: string
                         trigger_event:
-                          description: >
+                          description: |
                             インラインスクリプトを実行するタイミング。
-
 
                             - `object_builded`: JSオブジェクトの作成が完了した時
                           enum:
@@ -998,14 +990,11 @@ paths:
                 inline_script_tag:
                   properties:
                     display_scope:
-                      description: >
+                      description: |
                         インラインスクリプトを出力するページ。
 
-
                         - `all`: カートの途中のページと注文完了ページの両方
-
                         - `thanks_page`: 注文完了ページ
-
                         - `cart`: カートの途中のページ
                       enum:
                         - all
@@ -1018,9 +1007,8 @@ paths:
                       example: console.log("aaaaa")
                       type: string
                     trigger_event:
-                      description: >
+                      description: |
                         インラインスクリプトを実行するタイミング。
-
 
                         - `object_builded`: JSオブジェクトの作成が完了した時
                       enum:
@@ -1044,14 +1032,11 @@ paths:
                         example: PA04511366
                         type: string
                       display_scope:
-                        description: >
+                        description: |
                           インラインスクリプトを出力するページ。
 
-
                           - `all`: カートの途中のページと注文完了ページの両方
-
                           - `thanks_page`: 注文完了ページ
-
                           - `cart`: カートの途中のページ
                         enum:
                           - all
@@ -1076,9 +1061,8 @@ paths:
                         example: console.log("aaaaa")
                         type: string
                       trigger_event:
-                        description: >
+                        description: |
                           インラインスクリプトを実行するタイミング。
-
 
                           - `object_builded`: JSオブジェクトの作成が完了した時
                         enum:
@@ -1142,14 +1126,11 @@ paths:
                         example: PA04511366
                         type: string
                       display_scope:
-                        description: >
+                        description: |
                           インラインスクリプトを出力するページ。
 
-
                           - `all`: カートの途中のページと注文完了ページの両方
-
                           - `thanks_page`: 注文完了ページ
-
                           - `cart`: カートの途中のページ
                         enum:
                           - all
@@ -1174,9 +1155,8 @@ paths:
                         example: console.log("aaaaa")
                         type: string
                       trigger_event:
-                        description: >
+                        description: |
                           インラインスクリプトを実行するタイミング。
-
 
                           - `object_builded`: JSオブジェクトの作成が完了した時
                         enum:
@@ -1214,14 +1194,11 @@ paths:
                 inline_script_tag:
                   properties:
                     display_scope:
-                      description: >
+                      description: |
                         インラインスクリプトを出力するページ。
 
-
                         - `all`: カートの途中のページと注文完了ページの両方
-
                         - `thanks_page`: 注文完了ページ
-
                         - `cart`: カートの途中のページ
                       enum:
                         - all
@@ -1234,9 +1211,8 @@ paths:
                       example: console.log("aaaaa")
                       type: string
                     trigger_event:
-                      description: >
+                      description: |
                         インラインスクリプトを実行するタイミング。
-
 
                         - `object_builded`: JSオブジェクトの作成が完了した時
                       enum:
@@ -1260,14 +1236,11 @@ paths:
                         example: PA04511366
                         type: string
                       display_scope:
-                        description: >
+                        description: |
                           インラインスクリプトを出力するページ。
 
-
                           - `all`: カートの途中のページと注文完了ページの両方
-
                           - `thanks_page`: 注文完了ページ
-
                           - `cart`: カートの途中のページ
                         enum:
                           - all
@@ -1292,9 +1265,8 @@ paths:
                         example: console.log("aaaaa")
                         type: string
                       trigger_event:
-                        description: >
+                        description: |
                           インラインスクリプトを実行するタイミング。
-
 
                           - `object_builded`: JSオブジェクトの作成が完了した時
                         enum:
@@ -1329,16 +1301,12 @@ paths:
                       additionalProperties: false
                       properties:
                         display_scope:
-                          description: >
+                          description: |
                             スクリプトを出力するページ。
 
-
                             - `all`: ショップページと注文完了ページの両方
-
                             - `shop`: ショップページ
-
                             - `thanks_page`: 注文完了ページ
-
                             - `cart`: カートの途中のページ
                           enum:
                             - all
@@ -1388,16 +1356,12 @@ paths:
                     additionalProperties: false
                     properties:
                       display_scope:
-                        description: >
+                        description: |
                           スクリプトを出力するページ。
 
-
                           - `all`: ショップページと注文完了ページの両方
-
                           - `shop`: ショップページ
-
                           - `thanks_page`: 注文完了ページ
-
                           - `cart`: カートの途中のページ
                         enum:
                           - all
@@ -1470,16 +1434,12 @@ paths:
                     additionalProperties: false
                     properties:
                       display_scope:
-                        description: >
+                        description: |
                           スクリプトを出力するページ。
 
-
                           - `all`: ショップページと注文完了ページの両方
-
                           - `shop`: ショップページ
-
                           - `thanks_page`: 注文完了ページ
-
                           - `cart`: カートの途中のページ
                         enum:
                           - all
@@ -1535,16 +1495,12 @@ paths:
                     additionalProperties: false
                     properties:
                       display_scope:
-                        description: >
+                        description: |
                           スクリプトを出力するページ。
 
-
                           - `all`: ショップページと注文完了ページの両方
-
                           - `shop`: ショップページ
-
                           - `thanks_page`: 注文完了ページ
-
                           - `cart`: カートの途中のページ
                         enum:
                           - all
@@ -1610,16 +1566,12 @@ components:
               script_tag:
                 properties:
                   display_scope:
-                    description: >
+                    description: |
                       スクリプトを出力するページ。
 
-
                       - `all`: ショップページと注文完了ページの両方
-
                       - `shop`: ショップページ
-
                       - `thanks_page`: 注文完了ページ
-
                       - `cart`: カートの途中のページ
                     enum:
                       - all
@@ -1643,11 +1595,9 @@ components:
               script_tag:
                 properties:
                   display_scope:
-                    description: >
+                    description: |
                       スクリプトを出力するページ
-
                       - `shop`: ショップページ
-
                       - `thanks_page`: 注文完了ページ
                     enum:
                       - shop
@@ -1731,14 +1681,11 @@ components:
           example: PA04511366
           type: string
         display_scope:
-          description: >
+          description: |
             インラインスクリプトを出力するページ。
 
-
             - `all`: カートの途中のページと注文完了ページの両方
-
             - `thanks_page`: 注文完了ページ
-
             - `cart`: カートの途中のページ
           enum:
             - all
@@ -1763,9 +1710,8 @@ components:
           example: console.log("aaaaa")
           type: string
         trigger_event:
-          description: >
+          description: |
             インラインスクリプトを実行するタイミング。
-
 
             - `object_builded`: JSオブジェクトの作成が完了した時
           enum:
@@ -1781,16 +1727,12 @@ components:
       additionalProperties: false
       properties:
         display_scope:
-          description: >
+          description: |
             スクリプトを出力するページ。
 
-
             - `all`: ショップページと注文完了ページの両方
-
             - `shop`: ショップページ
-
             - `thanks_page`: 注文完了ページ
-
             - `cart`: カートの途中のページ
           enum:
             - all
@@ -1824,11 +1766,9 @@ components:
           example: PA12345678
           type: string
         display_scope:
-          description: >
+          description: |
             スクリプトを出力するページ
-
             - `shop`: ショップページ
-
             - `thanks_page`: 注文完了ページ
           enum:
             - shop

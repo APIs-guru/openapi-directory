@@ -53,12 +53,14 @@ paths:
           description: Successful Response
   /rest-service/projects-v1:
     get:
-      description: Get the list of projects that the authenticated user is entitled to access.
+      description: Get the list of projects that the authenticated user is entitled to
+        access.
       operationId: getAllProjects
       parameters:
         - default: false
           description: >-
-            if set to true, user data (e.g. allowedReviewers) which is expensive
+            if set to true, user data (e.g. allowedReviewers) which is
+            expensive
              to compute, will not be included in the response data. Defaults to false so allowedReviewers are included in the response.
           in: query
           name: excludeAllowedReviewers
@@ -89,32 +91,37 @@ paths:
         type: string
   /rest-service/repositories-v1:
     get:
-      description: Returns a list of all repositories. This includes plugin provided repositories
+      description: Returns a list of all repositories. This includes plugin provided
+        repositories
       operationId: getAllRepositories
       parameters:
         - description: >-
-            filter repositories by the repository key, only repositories of keys containing this value
+            filter repositories by the repository key, only repositories of
+            keys containing this value
              would be returned if value was provided.  Case insensitive.
           in: query
           name: name
           required: false
           type: string
         - description: >-
-            filter repositories by enabled flag.  Only enabled/disabled repositories would be returned
+            filter repositories by enabled flag.  Only enabled/disabled
+            repositories would be returned
              accordingly if value was provided.
           in: query
           name: enabled
           required: false
           type: boolean
         - description: >-
-            filter repositories by its availability.  Only available/unavailable repositories would be returned
+            filter repositories by its availability.  Only
+            available/unavailable repositories would be returned
              accordingly if value was provided.
           in: query
           name: available
           required: false
           type: boolean
         - description: >-
-            filter repositories by type.  Allowed values: cvs, svn, p4, git, hg, plugin (for light SCM repositories).
+            filter repositories by type.  Allowed values: cvs, svn, p4, git,
+            hg, plugin (for light SCM repositories).
              Parameter can be specified more than once.
           in: query
           name: type
@@ -139,7 +146,8 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: path to a directory. When path represents a file name, the result is unspecified.
+      - description: path to a directory. When path represents a file name, the result
+          is unspecified.
         in: path
         name: path
         required: true
@@ -172,7 +180,8 @@ paths:
       description: Represents a sorted list of changesets, newest first.
       operationId: changes
       parameters:
-        - description: only return change sets after this change set. If omitted there is no restriction.
+        - description: only return change sets after this change set. If omitted there is
+            no restriction.
           in: query
           name: oldestCsid
           required: false
@@ -182,7 +191,8 @@ paths:
           name: includeOldest
           required: false
           type: boolean
-        - description: only return change sets before this change set. If omitted there is no restriction.
+        - description: only return change sets before this change set. If omitted there is
+            no restriction.
           in: query
           name: newestCsid
           required: false
@@ -203,7 +213,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          only show change sets which contain at least one revision with a path under this path.
+          only show change sets which contain at least one revision with a
+          path under this path.
            Changesets with some revisions outside this path still include all revisions.
            i.e. Revisions outside the path are *not* excluded from the change set.
         in: path
@@ -217,7 +228,7 @@ paths:
         type: string
   "/rest-service/repositories-v1/content/{repository}/{revision}/{path}":
     get:
-      description: >-
+      description: |-
         Returns the raw content of the specified file revision as a binary
          stream. No attempt is made to identify the content type and no mime
          type is provided.
@@ -249,7 +260,7 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: >-
+      - description: |-
           the path of a file or versioned directory (note that
            versioned directories are not supported by all SCM plugins).
         in: path
@@ -280,7 +291,8 @@ paths:
         type: string
   "/rest-service/repositories-v1/{repository}/svn":
     get:
-      description: For backward compatibility we provide this method, but repositories should be referred to just by their key.
+      description: For backward compatibility we provide this method, but repositories
+        should be referred to just by their key.
       operationId: getSvnRepositoryDetails
       responses:
         "200":
@@ -298,7 +310,7 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: >-
+      - description: |-
           the path of a file or versioned directory (note that
            versioned directories are not supported by all SCM plugins).
         in: path
@@ -337,7 +349,8 @@ paths:
   /rest-service/reviews-v1/details:
     get:
       description: >-
-        Retrieves all reviews that are in one of the the specified states. For each review all details are included (review items + comments). The
+        Retrieves all reviews that are in one of the the specified states.
+        For each review all details are included (review items + comments). The
          wiki rendered comments will be available via the <messageAsHtml> element
       operationId: getAllDetailedReviews
       parameters:
@@ -375,7 +388,7 @@ paths:
           name: creator
           required: false
           type: string
-        - description: >-
+        - description: |-
             comma-separated list of amy of the following strings: (Draft,
              Approval, Review, Summarize, Closed, Dead, Rejected, Unknown).
           in: query
@@ -387,7 +400,7 @@ paths:
           name: reviewer
           required: false
           type: string
-        - description: >-
+        - description: |-
             whether the value of , ,
               and  should be OR'd
              () or AND'd ()
@@ -411,13 +424,15 @@ paths:
           name: project
           required: false
           type: string
-        - description: reviews with last activity date after the specified timestamp, in milliseconds. Inclusive.
+        - description: reviews with last activity date after the specified timestamp, in
+            milliseconds. Inclusive.
           format: int64
           in: query
           name: fromDate
           required: false
           type: integer
-        - description: reviews with last activity date before the specified timestamp, in milliseconds. Inclusive.
+        - description: reviews with last activity date before the specified timestamp, in
+            milliseconds. Inclusive.
           format: int64
           in: query
           name: toDate
@@ -428,7 +443,7 @@ paths:
           description: Successful Response
     parameters: []
     post:
-      description: >-
+      description: |-
         This method should no longer be used, as it uses a POST for a read-only
          retrieval operation and is provided for backward compatibility only.
       operationId: postCustomFilterReviews
@@ -461,7 +476,7 @@ paths:
           name: creator
           required: false
           type: string
-        - description: >-
+        - description: |-
             comma-separated list of amy of the following strings: (Draft,
              Approval, Review, Summarize, Closed, Dead, Rejected, Unknown).
           in: query
@@ -473,7 +488,7 @@ paths:
           name: reviewer
           required: false
           type: string
-        - description: >-
+        - description: |-
             whether the value of , ,
               and  should be OR'd
              () or AND'd ()
@@ -497,13 +512,15 @@ paths:
           name: project
           required: false
           type: string
-        - description: reviews with last activity date after the specified timestamp, in milliseconds. Inclusive.
+        - description: reviews with last activity date after the specified timestamp, in
+            milliseconds. Inclusive.
           format: int64
           in: query
           name: fromDate
           required: false
           type: integer
-        - description: reviews with last activity date before the specified timestamp, in milliseconds. Inclusive.
+        - description: reviews with last activity date before the specified timestamp, in
+            milliseconds. Inclusive.
           format: int64
           in: query
           name: toDate
@@ -514,7 +531,7 @@ paths:
           description: Successful Response
     parameters: []
     post:
-      description: >-
+      description: |-
         This method should no longer be used, as it uses a POST for a read-only
          retrieval operation and is provided for backward compatibility only.
       operationId: postDetailedCustomFilterReviews
@@ -609,7 +626,7 @@ paths:
     parameters: []
   "/rest-service/reviews-v1/{id}":
     delete:
-      description: >-
+      description: |-
         Permanently deletes the specified review.
          The review must have been abandoned.
       operationId: deleteReview
@@ -634,7 +651,7 @@ paths:
         type: string
   "/rest-service/reviews-v1/{id}/actions":
     get:
-      description: >-
+      description: |-
         Get a list of the actions which the current user is allowed to perform
          on the review.
       operationId: getAvailableActions
@@ -679,7 +696,8 @@ paths:
         required: true
         type: string
     post:
-      description: Old, non-restful name. Kept for backwards compatibility. Exactly the same as POSTing to /{id}/patch
+      description: Old, non-restful name. Kept for backwards compatibility. Exactly
+        the same as POSTing to /{id}/patch
       operationId: addPatchReview0
       parameters: []
       responses:
@@ -706,7 +724,8 @@ paths:
       parameters:
         - default: false
           description: >-
-            indicate whether to render the wiki text in the returned comments. If set to "true", the comments will contain a
+            indicate whether to render the wiki text in the returned comments.
+            If set to "true", the comments will contain a
              <messageAsHtml> element containing the wiki rendered html.
           in: query
           name: render
@@ -734,7 +753,8 @@ paths:
       parameters:
         - default: false
           description: >-
-            indicate whether to render the wiki text in the returned comments. If set to "true", the comments will contain a
+            indicate whether to render the wiki text in the returned comments.
+            If set to "true", the comments will contain a
              <messageAsHtml> element containing the wiki rendered html.
           in: query
           name: render
@@ -757,7 +777,7 @@ paths:
         required: true
         type: string
     post:
-      description: >-
+      description: |-
         For the effective user, mark all comments in a review as read (except
          those marked as leave unread).
       operationId: markAllCommentsAsRead
@@ -770,7 +790,8 @@ paths:
       parameters:
         - default: false
           description: >-
-            indicate whether to render the wiki text in the returned comments. If set to "true", the comments will contain a
+            indicate whether to render the wiki text in the returned comments.
+            If set to "true", the comments will contain a
              <messageAsHtml> element containing the wiki rendered html.
           in: query
           name: render
@@ -797,7 +818,8 @@ paths:
       operationId: getComment
       parameters:
         - default: false
-          description: true if the wiki text should be rendered into html, into the field <messageAsHtml>.
+          description: true if the wiki text should be rendered into html, into the field
+            <messageAsHtml>.
           in: query
           name: render
           required: false
@@ -836,7 +858,8 @@ paths:
         required: true
         type: string
     post:
-      description: Marks the comment as leave unread to the current user - it will not automatically be marked as read by crucible.
+      description: Marks the comment as leave unread to the current user - it will not
+        automatically be marked as read by crucible.
       operationId: markCommentAsLeaveUnread
       responses:
         "200":
@@ -865,7 +888,8 @@ paths:
       operationId: getReplies
       parameters:
         - default: false
-          description: true if the comments should also be rendered into html, into the element <messageAsHtml>
+          description: true if the comments should also be rendered into html, into the
+            element <messageAsHtml>
           in: query
           name: render
           required: false
@@ -886,7 +910,8 @@ paths:
         type: string
     post:
       description: >-
-        Adds a reply to the given comment. This call includes the  repsonse header that
+        Adds a reply to the given comment. This call includes the  repsonse
+        header that
          contains the URL of the newly created entity.
       operationId: addReply
       parameters: []
@@ -935,7 +960,8 @@ paths:
       operationId: completeReview
       parameters:
         - default: true
-          description: if {@code ignoreWarnings==true} then condition failure warnings will be ignored
+          description: if {@code ignoreWarnings==true} then condition failure warnings
+            will be ignored
           in: query
           name: ignoreWarnings
           required: false
@@ -978,7 +1004,8 @@ paths:
           description: Successful Response
   "/rest-service/reviews-v1/{id}/patch/{patchId}":
     delete:
-      description: Removes the patch with the given id from the review. All of the revisions provided by the patch will be removed as well.
+      description: Removes the patch with the given id from the review. All of the
+        revisions provided by the patch will be removed as well.
       operationId: removePatch
       responses:
         "200":
@@ -1034,7 +1061,8 @@ paths:
         required: true
         type: string
     post:
-      description: Immediately send a reminder to incomplete reviewers about the given review.
+      description: Immediately send a reminder to incomplete reviewers about the given
+        review.
       operationId: remindIncompleteReviewers
       parameters: []
       responses:
@@ -1133,7 +1161,8 @@ paths:
         type: string
     post:
       description: >-
-        Adds the given review item to the review. This will always create a new review item, even if there is an existing
+        Adds the given review item to the review. This will always create a
+        new review item, even if there is an existing
          one with the same data in the review (in which case the existing item will be replaced).
       operationId: addReviewItem
       parameters: []
@@ -1148,7 +1177,8 @@ paths:
         required: true
         type: string
     post:
-      description: Adds a review item for each of the supplied crucibleRevisionData elements.
+      description: Adds a review item for each of the supplied crucibleRevisionData
+        elements.
       operationId: addReviewItems
       parameters: []
       responses:
@@ -1184,7 +1214,8 @@ paths:
       parameters:
         - default: false
           description: >-
-            indicate whether to render the wiki text in the returned comments. If set to "true", the comments will contain a
+            indicate whether to render the wiki text in the returned comments.
+            If set to "true", the comments will contain a
              <messageAsHtml> element containing the wiki rendered html.
           in: query
           name: render
@@ -1205,7 +1236,8 @@ paths:
         required: true
         type: string
     post:
-      description: This call includes the  repsonse header that contains the URL of the newly created entity.
+      description: This call includes the  repsonse header that contains the URL of
+        the newly created entity.
       operationId: addVersionedComment
       parameters: []
       responses:
@@ -1225,7 +1257,8 @@ paths:
         type: string
     put:
       description: >-
-        Sets the review item specified by itemId with the given reviewItem. The old review item is discarded. Can only
+        Sets the review item specified by itemId with the given reviewItem.
+        The old review item is discarded. Can only
          perform this operation if the old review item specified by itemId can be deleted. The old review item's permId is
          not changed.
       operationId: setReviewItem
@@ -1236,7 +1269,8 @@ paths:
   "/rest-service/reviews-v1/{id}/reviewitems/{riId}/revisions":
     delete:
       description: >-
-        Removes the revisions given from the review item in the review specified by the id. If the review item has no
+        Removes the revisions given from the review item in the review
+        specified by the id. If the review item has no
          more revisions left, it is automatically deleted.
       operationId: removeReviewItemRevisions
       responses:
@@ -1244,7 +1278,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          a list of revisions to add to the review item, merging if required. If a revision already exists
+          a list of revisions to add to the review item, merging if required.
+          If a revision already exists
            in the given review item, then the given revision is ignored.
         in: query
         name: rev
@@ -1262,7 +1297,8 @@ paths:
         type: string
     post:
       description: >-
-        Adds the given list of revisions to the supplied review item, merging if required. For example, if the review
+        Adds the given list of revisions to the supplied review item,
+        merging if required. For example, if the review
          item for  contains revisions 3 to 6, and if:
       operationId: addReviewItemRevisions
       responses:
@@ -1280,7 +1316,8 @@ paths:
       operationId: changeState
       parameters:
         - description: >-
-            the string representation of the action to perform. Valid actions are:
+            the string representation of the action to perform. Valid actions
+            are:
              
              Note:
           in: query
@@ -1298,7 +1335,7 @@ paths:
           description: Successful Response
   "/rest-service/reviews-v1/{id}/transitions":
     get:
-      description: >-
+      description: |-
         Get a list of the actions which the current user can perform on this
          review, given its current state and the user's permissions.
       operationId: getAvailableTransitions
@@ -1323,7 +1360,8 @@ paths:
       operationId: uncompleteReview
       parameters:
         - default: true
-          description: if {@code ignoreWarnings==true} then condition failure warnings will be ignored
+          description: if {@code ignoreWarnings==true} then condition failure warnings
+            will be ignored
           in: query
           name: ignoreWarnings
           required: false
@@ -1333,7 +1371,8 @@ paths:
           description: Successful Response
   /rest-service/search-v1/reviews:
     get:
-      description: Search for reviews where the name, description, state or permaId contain the specified term.
+      description: Search for reviews where the name, description, state or permaId
+        contain the specified term.
       operationId: getReviewsForTerm
       parameters:
         - description: a search term.
@@ -1352,7 +1391,8 @@ paths:
     parameters: []
   /rest-service/search-v1/reviewsForIssue:
     get:
-      description: Get a list of all reviews that have been linked to the specified JIRA issue key.
+      description: Get a list of all reviews that have been linked to the specified
+        JIRA issue key.
       operationId: getReviewsForIssueKey
       parameters:
         - description: a Jira issue key (e.g. "FOO-3453")
@@ -1374,7 +1414,8 @@ paths:
       description: Get a list of all the users. You can also ask for a set of users.
       operationId: getUsers
       parameters:
-        - description: a username (or a few) to limit the number of returned entries. It will return only existing users.
+        - description: a username (or a few) to limit the number of returned entries. It
+            will return only existing users.
           in: query
           name: username
           required: false
@@ -1385,7 +1426,8 @@ paths:
     parameters: []
   "/rest-service/users-v1/{repository}/{username}":
     get:
-      description: Returns the user details of the user mapped to a committer in a repository.
+      description: Returns the user details of the user mapped to a committer in a
+        repository.
       operationId: getMappedUser
       responses:
         "200":

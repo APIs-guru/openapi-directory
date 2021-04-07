@@ -127,7 +127,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/inpath_full_vin"
-        - description: Page number to fetch the results for the given criteria. Default is 1.
+        - description: Page number to fetch the results for the given criteria. Default is
+            1.
           in: query
           name: page
           required: false
@@ -153,12 +154,14 @@ paths:
     x-swagger-router-controller: history
   "/crm_check/car/{vin}":
     get:
-      description: Check whether particular vin has had a listing after stipulated date or not
+      description: Check whether particular vin has had a listing after stipulated
+        date or not
       operationId: crmCheck
       parameters:
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/inpath_full_vin"
-        - description: sale date to check whether after this listing has appeared or not. Must be 8 character long, with YYYYMMDD format
+        - description: sale date to check whether after this listing has appeared or not.
+            Must be 8 character long, with YYYYMMDD format
           in: query
           name: sale_date
           required: true
@@ -330,7 +333,8 @@ paths:
       x-swagger-router-controller: search
   /dealers/car:
     get:
-      description: The dealers API returns a list of dealers around a given point and radius.
+      description: The dealers API returns a list of dealers around a given point and
+        radius.
       operationId: dealerSearch
       parameters:
         - $ref: "#/components/parameters/api_key"
@@ -376,7 +380,8 @@ paths:
     x-swagger-router-controller: search
   /dealers/heavy-equipment:
     get:
-      description: The dealers API returns a list of dealers around a given point and radius.
+      description: The dealers API returns a list of dealers around a given point and
+        radius.
       parameters:
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/latitude"
@@ -421,7 +426,8 @@ paths:
     x-swagger-router-controller: search
   /dealers/motorcycle:
     get:
-      description: The dealers API returns a list of dealers around a given point and radius.
+      description: The dealers API returns a list of dealers around a given point and
+        radius.
       parameters:
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/latitude"
@@ -466,7 +472,8 @@ paths:
     x-swagger-router-controller: search
   /dealers/rv:
     get:
-      description: The dealers API returns a list of dealers around a given point and radius.
+      description: The dealers API returns a list of dealers around a given point and
+        radius.
       parameters:
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/latitude"
@@ -511,7 +518,8 @@ paths:
     x-swagger-router-controller: search
   "/decode/car/epi/{vin}/specs":
     get:
-      description: Get the basic information on specifications for a car identified by a valid VIN from EPI's decoder
+      description: Get the basic information on specifications for a car identified by
+        a valid VIN from EPI's decoder
       operationId: decodeViaEPI
       parameters:
         - $ref: "#/components/parameters/api_key"
@@ -535,7 +543,8 @@ paths:
       x-swagger-router-controller: vin_decoder
   "/decode/car/{vin}/specs":
     get:
-      description: Get the basic information on specifications for a car identified by a valid VIN
+      description: Get the basic information on specifications for a car identified by
+        a valid VIN
       operationId: decode
       parameters:
         - $ref: "#/components/parameters/api_key"
@@ -559,26 +568,31 @@ paths:
       x-swagger-router-controller: vin_decoder
   "/history/car/{vin}":
     get:
-      description: The history API returns online listing history for a car identified by its VIN. History listings are sorted in the descending order of the listing date / last seen date
+      description: The history API returns online listing history for a car identified
+        by its VIN. History listings are sorted in the descending order of the
+        listing date / last seen date
       operationId: getCarHistory
       parameters:
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/inpath_full_vin"
-        - description: List of fields to fetch, in case the default fields list in the response is to be trimmed down
+        - description: List of fields to fetch, in case the default fields list in the
+            response is to be trimmed down
           in: query
           name: fields
           required: false
           schema:
             format: string
             type: string
-        - description: Page number to fetch the results for the given criteria. Default is 1.
+        - description: Page number to fetch the results for the given criteria. Default is
+            1.
           in: query
           name: page
           required: false
           schema:
             format: number
             type: number
-        - description: Flag to indicate whether to include duplicate historical records as well in the response
+        - description: Flag to indicate whether to include duplicate historical records as
+            well in the response
           in: query
           name: include_duplicates
           required: false
@@ -894,7 +908,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: Error
-      summary: Long text Heavy equipment Listings attributes for Listing with the given id
+      summary: Long text Heavy equipment Listings attributes for Listing with the
+        given id
       tags:
         - Heavy Equipment Search
     x-swagger-router-controller: search
@@ -1061,7 +1076,8 @@ paths:
     x-swagger-router-controller: search
   /mds/car:
     get:
-      description: Get the basic information on specifications for a car identified by a valid VIN
+      description: Get the basic information on specifications for a car identified by
+        a valid VIN
       operationId: getMDS
       parameters:
         - $ref: "#/components/parameters/api_key"
@@ -1136,7 +1152,8 @@ paths:
           schema:
             format: string
             type: string
-        - description: City level sales count, pipe seperated like city_state=jacksonville|FL
+        - description: City level sales count, pipe seperated like
+            city_state=jacksonville|FL
           in: query
           name: city_state
           required: false
@@ -1184,11 +1201,13 @@ paths:
       x-swagger-router-controller: market
   /sales/car:
     get:
-      description: Get a sales count for city, state or national level by make, model, year, trim or taxonomy vin
+      description: Get a sales count for city, state or national level by make, model,
+        year, trim or taxonomy vin
       operationId: getSalesCount
       parameters:
         - $ref: "#/components/parameters/api_key"
-        - description: Inventory type for which sales count is to be searched, default is used
+        - description: Inventory type for which sales count is to be searched, default is
+            used
           in: query
           name: car_type
           required: false
@@ -1206,21 +1225,24 @@ paths:
           schema:
             format: string
             type: string
-        - description: Make-Model for which sales count is to be searched, pipe seperated like mm=ford|f-150
+        - description: Make-Model for which sales count is to be searched, pipe seperated
+            like mm=ford|f-150
           in: query
           name: mm
           required: false
           schema:
             format: string
             type: string
-        - description: Year-Make-Model for which sales count is to be searched, pipe seperated like ymm=2015|ford|f-150
+        - description: Year-Make-Model for which sales count is to be searched, pipe
+            seperated like ymm=2015|ford|f-150
           in: query
           name: ymm
           required: false
           schema:
             format: string
             type: string
-        - description: Year-Make-Model-Trim for which sales count is to be searched, pipe seperated like ymmt=2015|ford|f-150|platinum
+        - description: Year-Make-Model-Trim for which sales count is to be searched, pipe
+            seperated like ymmt=2015|ford|f-150|platinum
           in: query
           name: ymmt
           required: false
@@ -1241,7 +1263,8 @@ paths:
           schema:
             format: string
             type: string
-        - description: City level sales count, pipe seperated like city_state=jacksonville|FL
+        - description: City level sales count, pipe seperated like
+            city_state=jacksonville|FL
           in: query
           name: city_state
           required: false
@@ -1287,7 +1310,10 @@ paths:
   /search/car/active:
     get:
       description: >-
-        This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active cars from the market for the given search criteria. The API results are limited to allow pagination upto 10000 rows. 
+        This endpoint is the meat of the API and serves many purposes. This
+        API produces a list of currently active cars from the market for the
+        given search criteria. The API results are limited to allow pagination
+        upto 10000 rows. 
          The search API facilitates the following use cases - 
         1. Search Cars around a given geo-point within a given radius 
 
@@ -1406,10 +1432,152 @@ paths:
       tags:
         - Car Search
     x-swagger-router-controller: search
+  /search/car/active/rank:
+    post:
+      description: Computer rank for car listings based on inputs provided.Weights for
+        ranking parameters can also be provided.
+      operationId: searchAndRankCar
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/append_api_key"
+        - $ref: "#/components/parameters/latitude"
+        - $ref: "#/components/parameters/longitude"
+        - $ref: "#/components/parameters/radius"
+        - $ref: "#/components/parameters/zip"
+        - $ref: "#/components/parameters/car_include_lease"
+        - $ref: "#/components/parameters/car_include_finance"
+        - $ref: "#/components/parameters/lease_term"
+        - $ref: "#/components/parameters/lease_down_payment"
+        - $ref: "#/components/parameters/lease_emp"
+        - $ref: "#/components/parameters/finance_loan_term"
+        - $ref: "#/components/parameters/finance_loan_apr"
+        - $ref: "#/components/parameters/finance_emp"
+        - $ref: "#/components/parameters/finance_down_payment"
+        - $ref: "#/components/parameters/finance_down_payment_per"
+        - $ref: "#/components/parameters/car_car_type"
+        - $ref: "#/components/parameters/carfax_1_owner"
+        - $ref: "#/components/parameters/carfax_clean_title"
+        - $ref: "#/components/parameters/year"
+        - $ref: "#/components/parameters/make"
+        - $ref: "#/components/parameters/model"
+        - $ref: "#/components/parameters/trim"
+        - $ref: "#/components/parameters/vin"
+        - $ref: "#/components/parameters/body_type"
+        - $ref: "#/components/parameters/body_subtype"
+        - $ref: "#/components/parameters/vehicle_type"
+        - $ref: "#/components/parameters/car_vins"
+        - $ref: "#/components/parameters/car_taxonomy_vins"
+        - $ref: "#/components/parameters/ymmt"
+        - $ref: "#/components/parameters/match"
+        - $ref: "#/components/parameters/cylinders"
+        - $ref: "#/components/parameters/transmission"
+        - $ref: "#/components/parameters/doors"
+        - $ref: "#/components/parameters/drivetrain"
+        - $ref: "#/components/parameters/exterior_color"
+        - $ref: "#/components/parameters/interior_color"
+        - $ref: "#/components/parameters/base_exterior_color"
+        - $ref: "#/components/parameters/base_interior_color"
+        - $ref: "#/components/parameters/engine"
+        - $ref: "#/components/parameters/engine_size"
+        - $ref: "#/components/parameters/engine_aspiration"
+        - $ref: "#/components/parameters/engine_block"
+        - $ref: "#/components/parameters/highway_mpg_range"
+        - $ref: "#/components/parameters/city_mpg_range"
+        - $ref: "#/components/parameters/rank_miles_range"
+        - $ref: "#/components/parameters/rank_price_range"
+        - $ref: "#/components/parameters/msrp_range"
+        - $ref: "#/components/parameters/dom_range"
+        - $ref: "#/components/parameters/sort_by"
+        - $ref: "#/components/parameters/sort_order"
+        - $ref: "#/components/parameters/rows"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/include_non_vin_listings"
+        - $ref: "#/components/parameters/msa_code"
+        - $ref: "#/components/parameters/facets"
+        - $ref: "#/components/parameters/range_facets"
+        - $ref: "#/components/parameters/facet_sort"
+        - $ref: "#/components/parameters/stats"
+        - $ref: "#/components/parameters/car_country"
+        - $ref: "#/components/parameters/car_plot"
+        - $ref: "#/components/parameters/car_nodedup"
+        - $ref: "#/components/parameters/car_dedup"
+        - $ref: "#/components/parameters/owned"
+        - $ref: "#/components/parameters/state"
+        - $ref: "#/components/parameters/city"
+        - $ref: "#/components/parameters/trim_o"
+        - $ref: "#/components/parameters/trim_r"
+        - $ref: "#/components/parameters/dom_active_range"
+        - $ref: "#/components/parameters/dom_180_range"
+        - $ref: "#/components/parameters/exclude_certified"
+        - $ref: "#/components/parameters/fuel_type"
+        - $ref: "#/components/parameters/dealer_type"
+        - $ref: "#/components/parameters/photo_links"
+        - $ref: "#/components/parameters/stock_no"
+        - $ref: "#/components/parameters/last_seen_range"
+        - $ref: "#/components/parameters/first_seen_range"
+        - $ref: "#/components/parameters/last_seen_days"
+        - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/inventory_type"
+        - description: Page number to fetch the results for the given criteria. Default is
+            1.
+          in: query
+          name: page
+          required: false
+          schema:
+            format: number
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/CarRankRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CarRankResponse"
+          description: Rank listings based on inputs provided.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Compute relative rank for car listings.
+      tags:
+        - Rank Car Listings
+    x-swagger-router-controller: search
+  /search/car/active/rank/listings:
+    post:
+      description: Computer rank for car listings based on inputs provided.Weights for
+        ranking parameters can also be provided.
+      operationId: rankCar
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/append_api_key"
+      requestBody:
+        $ref: "#/components/requestBodies/CarRankRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CarRankResponse"
+          description: Rank listings based on inputs provided.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Compute relative rank for car listings.
+      tags:
+        - Rank Car Listings
+    x-swagger-router-controller: search
   /search/car/auction/active:
     get:
       description: >-
-        This API produces a list of currently active auction cars from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
+        This API produces a list of currently active auction cars from the
+        market for the given search criteria. The API results are limited to
+        allow pagination upto 5000 rows. 
          The search API facilitates the following use cases - 
         1. Search Cars around a given geo-point within a given radius 
 
@@ -1516,7 +1684,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SearchResponse"
-          description: List of all auction cars listings matching the search & filter criteria
+          description: List of all auction cars listings matching the search & filter
+            criteria
         default:
           content:
             application/json:
@@ -1592,7 +1761,8 @@ paths:
           schema:
             default: true
             type: boolean
-        - description: Boolean variable to indicate wheather to include term counts as well in response
+        - description: Boolean variable to indicate wheather to include term counts as
+            well in response
           in: query
           name: term_counts
           required: false
@@ -1629,7 +1799,9 @@ paths:
   /search/car/fsbo/active:
     get:
       description: >-
-        This API produces a list of currently active FSBO cars from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
+        This API produces a list of currently active FSBO cars from the
+        market for the given search criteria. The API results are limited to
+        allow pagination upto 5000 rows. 
          The search API facilitates the following use cases - 
         1. Search Cars around a given geo-point within a given radius 
 
@@ -1750,7 +1922,10 @@ paths:
   /search/car/incentive/oem:
     get:
       description: >-
-        This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active oem incentive from the market for the given search criteria. The API results are limited to allow pagination upto 10000 rows. 
+        This endpoint is the meat of the API and serves many purposes. This
+        API produces a list of currently active oem incentive from the market
+        for the given search criteria. The API results are limited to allow
+        pagination upto 10000 rows. 
          The search API facilitates the following use cases - 
         1. Search Cars around a given geo-point within a given radius 
 
@@ -1792,7 +1967,8 @@ paths:
         - $ref: "#/components/parameters/make"
         - $ref: "#/components/parameters/model"
         - $ref: "#/components/parameters/trim"
-        - description: MSRP range to filter listings with the msrp in the range given. Range to be given in the format - min-max e.g. 1000-5000
+        - description: MSRP range to filter listings with the msrp in the range given.
+            Range to be given in the format - min-max e.g. 1000-5000
           in: query
           name: msrp
           required: false
@@ -1809,7 +1985,8 @@ paths:
                 defaultMin: 500
                 transformer: parseInt
                 type: integer
-        - description: APR range to filter listings with the msrp in the range given. Range to be given in the format - min-max e.g. 1000-5000
+        - description: APR range to filter listings with the msrp in the range given.
+            Range to be given in the format - min-max e.g. 1000-5000
           in: query
           name: apr
           required: false
@@ -1826,7 +2003,8 @@ paths:
                 defaultMin: 0
                 transformer: parseFloat
                 type: integer
-        - description: To filter listing on Monthly payment amount, usually populated in Lease offers
+        - description: To filter listing on Monthly payment amount, usually populated in
+            Lease offers
           in: query
           name: monthly
           required: false
@@ -1842,7 +2020,8 @@ paths:
                 defaultMin: 100
                 transformer: parseInt
                 type: integer
-        - description: To filter listing on monthly amount to be paid by customer for every $1000 financed at the advertised APR rate
+        - description: To filter listing on monthly amount to be paid by customer for
+            every $1000 financed at the advertised APR rate
           in: query
           name: monthly_per_thousand
           required: false
@@ -1874,7 +2053,8 @@ paths:
                 defaultMin: 0
                 transformer: parseInt
                 type: integer
-        - description: To filter listing on total amount due at signing, that usually includes first month payment, down payment, acquisition fee etc
+        - description: To filter listing on total amount due at signing, that usually
+            includes first month payment, down payment, acquisition fee etc
           in: query
           name: due_at_signing
           required: false
@@ -1971,7 +2151,8 @@ paths:
                 defaultMin: 0
                 transformer: parseInt
                 type: integer
-        - description: Mileage Charge Range range to filter listings with the msrp in the range given. Range to be given in the format - min-max e.g. 100-1000
+        - description: Mileage Charge Range range to filter listings with the msrp in the
+            range given. Range to be given in the format - min-max e.g. 100-1000
           in: query
           name: mileage_charge
           required: false
@@ -1988,7 +2169,8 @@ paths:
                 defaultMin: 0
                 transformer: parseFloat
                 type: integer
-        - description: To filter listing on mileage charge limit the offer is valid up to under the default clauses
+        - description: To filter listing on mileage charge limit the offer is valid up to
+            under the default clauses
           in: query
           name: mileage_charge_limit
           required: false
@@ -2020,7 +2202,10 @@ paths:
                 defaultMin: 0
                 transformer: parseInt
                 type: integer
-        - description: To filter listing on the demographic or any other entity for whom this cashback offer is for. Not all target groups are identified but the most common ones are tagged like Military, Grad students Current owners etc
+        - description: To filter listing on the demographic or any other entity for whom
+            this cashback offer is for. Not all target groups are identified but
+            the most common ones are tagged like Military, Grad students Current
+            owners etc
           in: query
           name: cashback_target_group
           required: false
@@ -2035,7 +2220,8 @@ paths:
             transformConstraints:
               - transformer: caseTransformer
                 type: string
-        - description: To filter listing on amount at the lease end to pay for buying the car
+        - description: To filter listing on amount at the lease end to pay for buying the
+            car
           in: query
           name: lease_end_purchase_option
           required: false
@@ -2123,7 +2309,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SearchResponse"
-          description: List of all oem incentive listings matching the search & filter criteria
+          description: List of all oem incentive listings matching the search & filter
+            criteria
         default:
           content:
             application/json:
@@ -2136,7 +2323,8 @@ paths:
     x-swagger-router-controller: search
   /search/car/recents:
     get:
-      description: This API produces a list of recently active (past 90 days) cars from the market for the given search criteria
+      description: This API produces a list of recently active (past 90 days) cars
+        from the market for the given search criteria
       parameters:
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/append_api_key"
@@ -2254,7 +2442,10 @@ paths:
   /search/heavy-equipment/active:
     get:
       description: >-
-        This endpoint provides search on heavy equipment inventory. This API produces a list of currently active heavy equipments from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
+        This endpoint provides search on heavy equipment inventory. This
+        API produces a list of currently active heavy equipments from the market
+        for the given search criteria. The API results are limited to allow
+        pagination upto 5000 rows. 
          The search API facilitates the following use cases - 
         1. Search heavy equipments around a given geo-point within a given radius 
 
@@ -2327,7 +2518,9 @@ paths:
             transformConstraints:
               - transformer: caseTransformer
                 type: string
-        - description: Hours used range to filter heavy equipments with the their usage in the range given. Range to be given in the format - min-max e.g. 1000-5000
+        - description: Hours used range to filter heavy equipments with the their usage in
+            the range given. Range to be given in the format - min-max e.g.
+            1000-5000
           in: query
           name: hours_used_range
           required: false
@@ -2367,7 +2560,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HeavyEquipmentsSearchResponse"
-          description: List of all heavy equipment listings matching the search & filter criteria
+          description: List of all heavy equipment listings matching the search & filter
+            criteria
         default:
           content:
             application/json:
@@ -2433,7 +2627,8 @@ paths:
           schema:
             default: true
             type: boolean
-        - description: Boolean variable to indicate wheather to include term counts as well in response
+        - description: Boolean variable to indicate wheather to include term counts as
+            well in response
           in: query
           name: term_counts
           required: false
@@ -2470,7 +2665,10 @@ paths:
   /search/motorcycle/active:
     get:
       description: >-
-        This endpoint provides search on motorcycle inventory. This API produces a list of currently active motorcycles from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
+        This endpoint provides search on motorcycle inventory. This API
+        produces a list of currently active motorcycles from the market for the
+        given search criteria. The API results are limited to allow pagination
+        upto 5000 rows. 
          The search API facilitates the following use cases - 
         1. Search motorcycles around a given geo-point within a given radius 
 
@@ -2554,7 +2752,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MotorcycleSearchResponse"
-          description: List of all motorcycles listings matching the search & filter criteria
+          description: List of all motorcycles listings matching the search & filter
+            criteria
         default:
           content:
             application/json:
@@ -2618,7 +2817,8 @@ paths:
           schema:
             default: true
             type: boolean
-        - description: Boolean variable to indicate wheather to include term counts as well in response
+        - description: Boolean variable to indicate wheather to include term counts as
+            well in response
           in: query
           name: term_counts
           required: false
@@ -2655,7 +2855,10 @@ paths:
   /search/rv/active:
     get:
       description: >-
-        This endpoint provides search on RV inventory. This API produces a list of currently active RV from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
+        This endpoint provides search on RV inventory. This API produces a
+        list of currently active RV from the market for the given search
+        criteria. The API results are limited to allow pagination upto 5000
+        rows. 
          The search API facilitates the following use cases - 
         1. Search RV around a given geo-point within a given radius 
 
@@ -2798,7 +3001,8 @@ paths:
           schema:
             default: true
             type: boolean
-        - description: Boolean variable to indicate wheather to include term counts as well in response
+        - description: Boolean variable to indicate wheather to include term counts as
+            well in response
           in: query
           name: term_counts
           required: false
@@ -2834,7 +3038,8 @@ paths:
       x-swagger-router-controller: search
   /specs/car/auto-complete:
     get:
-      description: Auto-complete the inputs of your end users, not from active set but from taxonomy (decoder database)
+      description: Auto-complete the inputs of your end users, not from active set but
+        from taxonomy (decoder database)
       parameters:
         - $ref: "#/components/parameters/api_key"
         - description: Field name for which you want auto-completion
@@ -2972,14 +3177,16 @@ paths:
               - used
             format: string
             type: string
-        - description: Year, Make, Model of the car, Separated by pipe e.g. ymm=2015|ford|f-150
+        - description: Year, Make, Model of the car, Separated by pipe e.g.
+            ymm=2015|ford|f-150
           in: query
           name: ymm
           required: false
           schema:
             format: string
             type: string
-        - description: Year, Make, Model, Trim of the car, Separated by pipe e.g. ymmt=2015|ford|f-150|platinum
+        - description: Year, Make, Model, Trim of the car, Separated by pipe e.g.
+            ymmt=2015|ford|f-150|platinum
           in: query
           name: ymmt
           required: false
@@ -3047,7 +3254,9 @@ components:
         default: true
         type: boolean
     base_exterior_color:
-      description: Base exterior color to match. Valid filter values are those that our Search facets API returns for unique base exterior colors. You can pass in multiple base interior color values comma separated
+      description: Base exterior color to match. Valid filter values are those that
+        our Search facets API returns for unique base exterior colors. You can
+        pass in multiple base interior color values comma separated
       in: query
       name: base_exterior_color
       required: false
@@ -3063,7 +3272,9 @@ components:
           - transformer: caseTransformer
             type: string
     base_interior_color:
-      description: Base interior color to match. Valid filter values are those that our Search facets API returns for unique base interior colors. You can pass in multiple base interior color values comma separated
+      description: Base interior color to match. Valid filter values are those that
+        our Search facets API returns for unique base interior colors. You can
+        pass in multiple base interior color values comma separated
       in: query
       name: base_interior_color
       required: false
@@ -3079,7 +3290,9 @@ components:
           - transformer: caseTransformer
             type: string
     body_subtype:
-      description: Body subtype to filter the listings on. Valid filter values are those that our Search facets API returns for unique body subtypes. You can pass in multiple body subtype values comma separated
+      description: Body subtype to filter the listings on. Valid filter values are
+        those that our Search facets API returns for unique body subtypes. You
+        can pass in multiple body subtype values comma separated
       in: query
       name: body_subtype
       required: false
@@ -3136,7 +3349,8 @@ components:
           - ALL
         type: string
     car_dedup:
-      description: If dedup is set to true then will give results with is_searchable irrespecive of dealer_id or source
+      description: If dedup is set to true then will give results with is_searchable
+        irrespecive of dealer_id or source
       in: query
       name: dedup
       required: false
@@ -3157,21 +3371,25 @@ components:
       schema:
         type: boolean
     car_nodedup:
-      description: If nodedup is set to true then API will give results without is_searchable i.e multiple listings for single vin
+      description: If nodedup is set to true then API will give results without
+        is_searchable i.e multiple listings for single vin
       in: query
       name: nodedup
       required: false
       schema:
         type: boolean
     car_plot:
-      description: If plot has value true results in around 25k coordinates with limited fields to plot respective graph
+      description: If plot has value true results in around 25k coordinates with
+        limited fields to plot respective graph
       in: query
       name: plot
       required: false
       schema:
         type: boolean
     car_seller_type:
-      description: Seller type to filter cars on. Valid filter values are those that our Search facets API returns for unique seller types. You can pass in multiple seller type values comma separated.
+      description: Seller type to filter cars on. Valid filter values are those that
+        our Search facets API returns for unique seller types. You can pass in
+        multiple seller type values comma separated.
       in: query
       name: seller_type
       required: false
@@ -3180,7 +3398,13 @@ components:
         format: string
         type: string
     car_taxonomy_vins:
-      description: Comma separated list of 10 letters excert from the 17 letter VIN. The 10 letters to be picked up from the 17 letter VIN are - first 8 letters and the 10th and 11th letter. E.g. For a VIN - 1FTFW1EF3EKE57182 the taxonomy vin would be - 1FTFW1EFEK  A taxonomy VIN identified a build of a car and could be used to filter our cars of a particular build. This is an alternative to the vin or ymmt parameters to the search API.
+      description: Comma separated list of 10 letters excert from the 17 letter VIN.
+        The 10 letters to be picked up from the 17 letter VIN are - first 8
+        letters and the 10th and 11th letter. E.g. For a VIN - 1FTFW1EF3EKE57182
+        the taxonomy vin would be - 1FTFW1EFEK  A taxonomy VIN identified a
+        build of a car and could be used to filter our cars of a particular
+        build. This is an alternative to the vin or ymmt parameters to the
+        search API.
       in: query
       name: taxonomy_vins
       required: false
@@ -3205,7 +3429,16 @@ components:
           - transformer: caseTransformer
             type: string
     car_vins:
-      description: Comma separated list of 17 digit vins to search the matching cars for. Only 10 VINs allowed per request. If the request contains more than 10 VINs the first 10 VINs will be considered. Could be used as a More Like This or Similar Vehicles search for the given VINs. Ths vins parameter is an alternative to taxonomy_vins or ymmt parameters available with the search API. vins and taxonomy_vins parameters could be used to filter our cars with the exact build represented by the vins or taxonomy_vins whereas ymmt is a top level filter that does not filter cars by the build attributes like doors, drivetrain, cylinders, body type, body subtype, vehicle type etc
+      description: Comma separated list of 17 digit vins to search the matching cars
+        for. Only 10 VINs allowed per request. If the request contains more than
+        10 VINs the first 10 VINs will be considered. Could be used as a More
+        Like This or Similar Vehicles search for the given VINs. Ths vins
+        parameter is an alternative to taxonomy_vins or ymmt parameters
+        available with the search API. vins and taxonomy_vins parameters could
+        be used to filter our cars with the exact build represented by the vins
+        or taxonomy_vins whereas ymmt is a top level filter that does not filter
+        cars by the build attributes like doors, drivetrain, cylinders, body
+        type, body subtype, vehicle type etc
       in: query
       name: vins
       required: false
@@ -3247,7 +3480,8 @@ components:
           - transformer: caseTransformer
             type: string
     city_mpg_range:
-      description: City mileage range to filter listings with the mileage in the range given. Range to be given in the format - min-max e.g. 1000-5000
+      description: City mileage range to filter listings with the mileage in the range
+        given. Range to be given in the format - min-max e.g. 1000-5000
       in: query
       name: city_mpg_range
       required: false
@@ -3387,7 +3621,8 @@ components:
           - transformer: caseTransformer
             type: string
     dom_180_range:
-      description: Last 180 Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+      description: Last 180 Days on Market range to filter cars with the DOM within
+        the given range. Range to be given in the format - min-max e.g. 10-50
       in: query
       name: dom_180_range
       required: false
@@ -3406,7 +3641,8 @@ components:
             transformer: parseInt
             type: integer
     dom_active_range:
-      description: Active Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+      description: Active Days on Market range to filter cars with the DOM within the
+        given range. Range to be given in the format - min-max e.g. 10-50
       in: query
       name: dom_active_range
       required: false
@@ -3425,7 +3661,8 @@ components:
             transformer: parseInt
             type: integer
     dom_range:
-      description: Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+      description: Days on Market range to filter cars with the DOM within the given
+        range. Range to be given in the format - min-max e.g. 10-50
       in: query
       name: dom_range
       required: false
@@ -3444,7 +3681,9 @@ components:
             transformer: parseInt
             type: integer
     doors:
-      description: Doors to filter the cars on. Valid filter values are those that our Search facets API returns for unique doors. You can pass in multiple doors values comma separated
+      description: Doors to filter the cars on. Valid filter values are those that our
+        Search facets API returns for unique doors. You can pass in multiple
+        doors values comma separated
       in: query
       name: doors
       required: false
@@ -3492,7 +3731,9 @@ components:
           - transformer: caseTransformer
             type: string
     engine_aspiration:
-      description: Engine Aspiration to match. Valid filter values are those that our Search facets API returns for unique Engine Aspirations. You can pass in multiple Engine aspirations values comma separated
+      description: Engine Aspiration to match. Valid filter values are those that our
+        Search facets API returns for unique Engine Aspirations. You can pass in
+        multiple Engine aspirations values comma separated
       in: query
       name: engine_aspiration
       required: false
@@ -3508,7 +3749,9 @@ components:
           - transformer: caseTransformer
             type: string
     engine_block:
-      description: Engine Block to match. Valid filter values are those that our Search facets API returns for unique Engine Block. You can pass in multiple Engine Block values comma separated
+      description: Engine Block to match. Valid filter values are those that our
+        Search facets API returns for unique Engine Block. You can pass in
+        multiple Engine Block values comma separated
       in: query
       name: engine_block
       required: false
@@ -3524,7 +3767,9 @@ components:
           - transformer: caseTransformer
             type: string
     engine_size:
-      description: Engine Size to match. Valid filter values are those that our Search facets API returns for unique engine size. You can pass in multiple engine size values comma separated
+      description: Engine Size to match. Valid filter values are those that our Search
+        facets API returns for unique engine size. You can pass in multiple
+        engine size values comma separated
       in: query
       name: engine_size
       required: false
@@ -3547,7 +3792,9 @@ components:
       schema:
         type: boolean
     exterior_color:
-      description: Exterior color to match. Valid filter values are those that our Search facets API returns for unique exterior colors. You can pass in multiple exterior color values comma separated
+      description: Exterior color to match. Valid filter values are those that our
+        Search facets API returns for unique exterior colors. You can pass in
+        multiple exterior color values comma separated
       in: query
       name: exterior_color
       required: false
@@ -3563,7 +3810,9 @@ components:
           - transformer: caseTransformer
             type: string
     facet_sort:
-      description: Control sort order of facets with this parameter with default sort being on count, Other available sort is alphabetical sort, which can be obtained by using index as value for this param
+      description: Control sort order of facets with this parameter with default sort
+        being on count, Other available sort is alphabetical sort, which can be
+        obtained by using index as value for this param
       in: query
       name: facet_sort
       required: false
@@ -3574,14 +3823,19 @@ components:
           - index
         type: string
     facets:
-      description: The comma separated list of fields for which facets are requested. Facets could be requested in addition to the listings for the search. Please note - The API calls with lots of facet fields may take longer to respond.
+      description: The comma separated list of fields for which facets are requested.
+        Facets could be requested in addition to the listings for the search.
+        Please note - The API calls with lots of facet fields may take longer to
+        respond.
       in: query
       name: facets
       required: false
       schema:
         type: string
     finance_down_payment:
-      description: Search listings with exact down payment in finance offers, or inside a range with min and max seperated by a dash like finance_down_payment=30-60
+      description: Search listings with exact down payment in finance offers, or
+        inside a range with min and max seperated by a dash like
+        finance_down_payment=30-60
       in: query
       name: finance_down_payment
       required: false
@@ -3598,7 +3852,9 @@ components:
             transformer: parseInt
             type: integer
     finance_down_payment_per:
-      description: Search listings with exact down payment percentage in finance offers, or inside a range with min and max seperated by a dash like finance_down_payment_per=30-60
+      description: Search listings with exact down payment percentage in finance
+        offers, or inside a range with min and max seperated by a dash like
+        finance_down_payment_per=30-60
       in: query
       name: finance_down_payment_per
       required: false
@@ -3615,7 +3871,9 @@ components:
             transformer: parseInt
             type: integer
     finance_emp:
-      description: Search listings with finance offers exactly matching Estimated Monthly Payment(EMI), or inside a range with min and max seperated by a dash like finance_emp=30-60
+      description: Search listings with finance offers exactly matching Estimated
+        Monthly Payment(EMI), or inside a range with min and max seperated by a
+        dash like finance_emp=30-60
       in: query
       name: finance_emp
       required: false
@@ -3632,7 +3890,9 @@ components:
             transformer: parseInt
             type: integer
     finance_loan_apr:
-      description: Search listings with finance offers exactly matching loans Annual Percentage Rate, or inside a range with min and max seperated by a dash like finance_loan_apr=30-60
+      description: Search listings with finance offers exactly matching loans Annual
+        Percentage Rate, or inside a range with min and max seperated by a dash
+        like finance_loan_apr=30-60
       in: query
       name: finance_loan_apr
       required: false
@@ -3649,7 +3909,8 @@ components:
             transformer: parseInt
             type: integer
     finance_loan_term:
-      description: Search listings with exact finance loan term, or inside a range with min and max seperated by a dash like finance_loan_term=30-60
+      description: Search listings with exact finance loan term, or inside a range
+        with min and max seperated by a dash like finance_loan_term=30-60
       in: query
       name: finance_loan_term
       required: false
@@ -3666,7 +3927,8 @@ components:
             transformer: parseInt
             type: integer
     first_seen_days:
-      description: First seen days range to filter listings with the first seen in the range given. Range to be given in the format - min-max e.g. 25-12
+      description: First seen days range to filter listings with the first seen in the
+        range given. Range to be given in the format - min-max e.g. 25-12
       in: query
       name: first_seen_days
       required: false
@@ -3684,7 +3946,9 @@ components:
             transformer: parseDate
             type: date
     first_seen_range:
-      description: First seen date range to filter listings with the first seen in the range given. Range to be given in the format [YYYYMMDD] - min-max e.g. 20190523-20190623
+      description: First seen date range to filter listings with the first seen in the
+        range given. Range to be given in the format [YYYYMMDD] - min-max e.g.
+        20190523-20190623
       in: query
       name: first_seen_range
       required: false
@@ -3716,7 +3980,8 @@ components:
           - transformer: caseTransformer
             type: string
     highway_mpg_range:
-      description: Highway mileage range to filter listings with the mileage in the range given. Range to be given in the format - min-max e.g. 1000-5000
+      description: Highway mileage range to filter listings with the mileage in the
+        range given. Range to be given in the format - min-max e.g. 1000-5000
       in: query
       name: highway_mpg_range
       required: false
@@ -3760,7 +4025,9 @@ components:
         minLength: 10
         type: string
     interior_color:
-      description: Interior color to match. Valid filter values are those that our Search facets API returns for unique interior colors. You can pass in multiple interior color values comma separated
+      description: Interior color to match. Valid filter values are those that our
+        Search facets API returns for unique interior colors. You can pass in
+        multiple interior color values comma separated
       in: query
       name: interior_color
       required: false
@@ -3810,7 +4077,8 @@ components:
           - transformer: urlTransformer
             type: string
     last_seen_days:
-      description: Last seen days range to filter listings with the last seen in the range given. Range to be given in the format - min-max e.g. 25-12
+      description: Last seen days range to filter listings with the last seen in the
+        range given. Range to be given in the format - min-max e.g. 25-12
       in: query
       name: last_seen_days
       required: false
@@ -3828,7 +4096,9 @@ components:
             transformer: parseDate
             type: date
     last_seen_range:
-      description: Last seen date range to filter listings with the last seen in the range given. Range to be given in the format [YYYYMMDD] - min-max e.g. 20190523-20190623
+      description: Last seen date range to filter listings with the last seen in the
+        range given. Range to be given in the format [YYYYMMDD] - min-max e.g.
+        20190523-20190623
       in: query
       name: last_seen_range
       required: false
@@ -3852,7 +4122,9 @@ components:
         format: double
         type: number
     lease_down_payment:
-      description: Search listings with exact down payment in lease offers, or inside a range with min and max seperated by a dash like lease_down_payment=30-60
+      description: Search listings with exact down payment in lease offers, or inside
+        a range with min and max seperated by a dash like
+        lease_down_payment=30-60
       in: query
       name: lease_down_payment
       required: false
@@ -3869,7 +4141,9 @@ components:
             transformer: parseInt
             type: integer
     lease_emp:
-      description: Search listings with lease offers exactly matching Estimated Monthly Payment(EMI), or inside a range with min and max seperated by a dash like lease_emp=30-60
+      description: Search listings with lease offers exactly matching Estimated
+        Monthly Payment(EMI), or inside a range with min and max seperated by a
+        dash like lease_emp=30-60
       in: query
       name: lease_emp
       required: false
@@ -3886,7 +4160,8 @@ components:
             transformer: parseInt
             type: integer
     lease_term:
-      description: Search listings with exact lease term, or inside a range with min and max seperated by a dash like lease_term=30-60
+      description: Search listings with exact lease term, or inside a range with min
+        and max seperated by a dash like lease_term=30-60
       in: query
       name: lease_term
       required: false
@@ -3903,7 +4178,8 @@ components:
             transformer: parseInt
             type: integer
     listing_count_range:
-      description: To filter dealers based on their inventory size. Range can be given in the format - min-max e.g. 50-100
+      description: To filter dealers based on their inventory size. Range can be given
+        in the format - min-max e.g. 50-100
       in: query
       name: listing_count_range
       required: false
@@ -3944,14 +4220,16 @@ components:
           - transformer: caseTransformer
             type: string
     match:
-      description: Comma separated list of Year, Make, Model, Trim fields. For example - year,make,model,trim fields for which user wants to do an exact match
+      description: Comma separated list of Year, Make, Model, Trim fields. For example
+        - year,make,model,trim fields for which user wants to do an exact match
       in: query
       name: match
       required: false
       schema:
         type: string
     miles_range:
-      description: Miles range to filter listings with miles in the given range. Range to be given in the format - min-max e.g. 1000-5000
+      description: Miles range to filter listings with miles in the given range. Range
+        to be given in the format - min-max e.g. 1000-5000
       in: query
       name: miles_range
       required: false
@@ -4013,7 +4291,8 @@ components:
         separator: ","
         targetAlias: msa_code
     msrp_range:
-      description: MSRP range to filter listings with the msrp in the range given. Range to be given in the format - min-max e.g. 1000-5000
+      description: MSRP range to filter listings with the msrp in the range given.
+        Range to be given in the format - min-max e.g. 1000-5000
       in: query
       name: msrp_range
       required: false
@@ -4032,7 +4311,8 @@ components:
             transformer: parseInt
             type: integer
     nhtsa_recall_number:
-      description: nhtsa_recall_number to match. You can pass in multiple nhtsa_recall_number values comma separated
+      description: nhtsa_recall_number to match. You can pass in multiple
+        nhtsa_recall_number values comma separated
       in: query
       name: nhtsa_recall_number
       required: false
@@ -4069,21 +4349,25 @@ components:
             transformer: caseTransformer
             type: string
     owned:
-      description: Used in combination with dealer_id or source, when true returns the listings actually owned by dealer himself
+      description: Used in combination with dealer_id or source, when true returns the
+        listings actually owned by dealer himself
       in: query
       name: owned
       required: false
       schema:
         type: boolean
     photo_links:
-      description: A boolean indicating whether to include only those listings that have photo_links in search results, And discard those that don't have them
+      description: A boolean indicating whether to include only those listings that
+        have photo_links in search results, And discard those that don't have
+        them
       in: query
       name: photo_links
       required: false
       schema:
         type: boolean
     price_range:
-      description: Price range to filter listings with the price in the range given. Range to be given in the format - min-max e.g. 1000-5000
+      description: Price range to filter listings with the price in the range given.
+        Range to be given in the format - min-max e.g. 1000-5000
       in: query
       name: price_range
       required: false
@@ -4111,12 +4395,57 @@ components:
         minimum: 0
         type: integer
     range_facets:
-      description: The comma separated list of numeric fields for which range facets are requested. Range facets could be requested in addition to the listings for the search. Please note - The API calls with lots of range facet fields may take longer to respond.
+      description: The comma separated list of numeric fields for which range facets
+        are requested. Range facets could be requested in addition to the
+        listings for the search. Please note - The API calls with lots of range
+        facet fields may take longer to respond.
       in: query
       name: range_facets
       required: false
       schema:
         type: string
+    rank_miles_range:
+      description: Miles range to filter listings with miles in the given range. Range
+        to be given in the format - min-max e.g. 1000-5000
+      in: query
+      name: miles_range
+      required: false
+      schema:
+        default: 1-
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: miles
+        transformConstraints:
+          - defaultMax: 100000
+            defaultMin: 1000
+            transformer: parseInt
+            type: integer
+    rank_price_range:
+      description: Price range to filter listings with the price in the range given.
+        Range to be given in the format - min-max e.g. 1000-5000
+      in: query
+      name: price_range
+      required: false
+      schema:
+        default: 1-
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: price
+        transformConstraints:
+          - defaultMax: 100000
+            defaultMin: 1000
+            transformer: parseInt
+            type: integer
     rows:
       description: Number of results to return. Default is 10. Max is 50
       in: query
@@ -4175,7 +4504,9 @@ components:
           - transformer: urlTransformer
             type: string
     start:
-      description: Page number to fetch the results for the given criteria. Default is 0. Pagination is allowed only till first 10000 results for the search and sort criteria. The page value can be only between 1 to 10000/rows
+      description: Page number to fetch the results for the given criteria. Default is
+        0. Pagination is allowed only till first 10000 results for the search
+        and sort criteria. The page value can be only between 1 to 10000/rows
       in: query
       name: start
       required: false
@@ -4201,7 +4532,12 @@ components:
             transformer: caseTransformer
             type: string
     stats:
-      description: The list of fields for which stats need to be generated based on the matching listings for the search criteria. The stats consists of mean, max, average and count of listings based on which the stats are calculated for the field. Stats could be requested in addition to the listings for the search. Please note - The API calls with the stats fields may take longer to respond.
+      description: The list of fields for which stats need to be generated based on
+        the matching listings for the search criteria. The stats consists of
+        mean, max, average and count of listings based on which the stats are
+        calculated for the field. Stats could be requested in addition to the
+        listings for the search. Please note - The API calls with the stats
+        fields may take longer to respond.
       in: query
       name: stats
       required: false
@@ -4334,7 +4670,17 @@ components:
             transformer: parseInt
             type: integer
     ymmt:
-      description: Comma separated list of Year, Make, Model, Trim combinations. Each combination needs to have the year,make,model, trim values separated by a pipe '|' character in the form year|make|model|trim. e.g. 2010|Audi|A5,2014|Nissan|Sentra|S 6MT,|Honda|City|   You could just provide strings of the form - 'year|make||' or 'year|make|model' or '|make|model|' combinations. Individual year / make / model filters provied with the API calls will take precedence over the Year, Make, Model, Trim combinations. The Make, Model, Trim values must be valid values as per the Marketcheck Vin Decoder. If you are using a separate vin decoder then look at using the 'vins' or 'taxonomy_vins' parameter to the search api instead the year|make|model|trim combinations.
+      description: Comma separated list of Year, Make, Model, Trim combinations. Each
+        combination needs to have the year,make,model, trim values separated by
+        a pipe '|' character in the form year|make|model|trim. e.g.
+        2010|Audi|A5,2014|Nissan|Sentra|S 6MT,|Honda|City|   You could just
+        provide strings of the form - 'year|make||' or 'year|make|model' or
+        '|make|model|' combinations. Individual year / make / model filters
+        provied with the API calls will take precedence over the Year, Make,
+        Model, Trim combinations. The Make, Model, Trim values must be valid
+        values as per the Marketcheck Vin Decoder. If you are using a separate
+        vin decoder then look at using the 'vins' or 'taxonomy_vins' parameter
+        to the search api instead the year|make|model|trim combinations.
       in: query
       name: ymmt
       required: false
@@ -4355,6 +4701,14 @@ components:
         transformConstraints:
           - transformer: caseTransformer
             type: string
+  requestBodies:
+    CarRankRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CarRankRequest"
+      description: Inputs needed for ranking a group of car listings
+      required: true
   schemas:
     Averages:
       properties:
@@ -4362,7 +4716,8 @@ components:
           description: Average age of the car
           type: number
         dom:
-          description: Average Days on Market value for the car based on all listings found in the Marketcheck database for this car
+          description: Average Days on Market value for the car based on all listings
+            found in the Marketcheck database for this car
           type: number
         miles:
           description: Mean miles value for the car
@@ -4398,13 +4753,16 @@ components:
           format: double
           type: number
         dom:
-          description: Days on Market value for the car based on current and historical listings found in the Marketcheck database for this car
+          description: Days on Market value for the car based on current and historical
+            listings found in the Marketcheck database for this car
           type: integer
         dom_180:
-          description: Days on Market value for the car based on current and last 6 month listings found in the Marketcheck database for this car
+          description: Days on Market value for the car based on current and last 6 month
+            listings found in the Marketcheck database for this car
           type: integer
         dom_active:
-          description: Days on Market value for the car based on current and last 30 days listings found in the Marketcheck database for this car
+          description: Days on Market value for the car based on current and last 30 days
+            listings found in the Marketcheck database for this car
           type: integer
         exterior_color:
           description: Exterior color of the car
@@ -4424,7 +4782,8 @@ components:
           description: Listing title as displayed on the source website
           type: string
         id:
-          description: Unique identifier representing a specific listing from the Marketcheck database
+          description: Unique identifier representing a specific listing from the
+            Marketcheck database
           type: string
         interior_color:
           description: Interior color of the car
@@ -4461,16 +4820,24 @@ components:
           description: Asking price for the car
           type: integer
         ref_miles:
-          description: Last Odometer reading / reported miles usage for the car. If the asking miles value is not or is available then the last_miles could perhaps be used. last_miles is the miles for the car listed on the source website as of last_miles_dt date
+          description: Last Odometer reading / reported miles usage for the car. If the
+            asking miles value is not or is available then the last_miles could
+            perhaps be used. last_miles is the miles for the car listed on the
+            source website as of last_miles_dt date
           type: string
         ref_miles_dt:
-          description: The date at which the last miles was reported online. This is earlier to last_seen_date
+          description: The date at which the last miles was reported online. This is
+            earlier to last_seen_date
           type: integer
         ref_price:
-          description: Last reported price for the car. If the asking price value is not or is available then the last_price could perhaps be used. last_price is the price for the car listed on the source website as of last_price_dt date
+          description: Last reported price for the car. If the asking price value is not
+            or is available then the last_price could perhaps be used.
+            last_price is the price for the car listed on the source website as
+            of last_price_dt date
           type: string
         ref_price_dt:
-          description: The date at which the last price was reported online. This is earlier to last_seen_date
+          description: The date at which the last price was reported online. This is
+            earlier to last_seen_date
           type: integer
         scraped_at:
           description: Listing last seen at date timestamp
@@ -4621,13 +4988,92 @@ components:
     CRMResponse:
       properties:
         for_sale:
-          description: Boolean to indicate whether given vin has had listing after given date or not
+          description: Boolean to indicate whether given vin has had listing after given
+            date or not
           type: string
       type: object
     CacheImageResponse:
       description: Cached JPEG image
       format: binary
       type: string
+    CarListingRank:
+      description: Ranking query response
+      properties:
+        ranked_listing:
+          items:
+            $ref: "#/components/schemas/Listing"
+          type: object
+      type: object
+    CarRankCriteria:
+      description: Ranking query request
+      properties:
+        carfax_1_owner:
+          default: 0.9
+          description: Flag to indicate whether listing is carfax_1_owner.Weight for this
+            is ranking process between 0-1.
+          type: number
+        carfax_clean_title:
+          default: 0.9
+          description: Flag to indicate whether listing is carfax_clean_title.Weight for
+            this is ranking process between 0-1
+          type: number
+        dom:
+          default: 0.9
+          description: Days on Market value for the car based on current and historical
+            listings found in the Marketcheck database for this car.Weight for
+            this is ranking process between 0-1
+          type: number
+        dom_180:
+          default: 0.9
+          description: Days on Market value for the car based on current and last 6 month
+            listings found in the Marketcheck database for this car.Weight for
+            this is ranking process between 0-1
+          type: number
+        dom_active:
+          default: 0.9
+          description: Days on Market value for the car based on current and last 30 days
+            listings found in the Marketcheck database for this car.Weight for
+            this is ranking process between 0-1
+          type: number
+        is_certified:
+          default: 1
+          description: Certified car.Weight for this is ranking process between 0-1
+          type: number
+        miles:
+          default: 0.9
+          description: Odometer reading / reported miles usage for the car.Weight for this
+            is ranking process between 0-1
+          type: number
+        price:
+          default: 0.9
+          description: Asking price for the vehicle. Weight for this is ranking process
+            between 0-1.
+          type: number
+      type: object
+    CarRankRequest:
+      description: Ranking query request
+      properties:
+        listing_ids:
+          items:
+            description: MC active listing id
+            type: string
+          type: array
+        ranking_criteria:
+          items:
+            $ref: "#/components/schemas/CarRankCriteria"
+          type: object
+      type: object
+    CarRankResponse:
+      description: Ranking query response
+      properties:
+        num_ranked:
+          description: The number of listings ranked
+          type: integer
+        ranked_listings:
+          items:
+            $ref: "#/components/schemas/CarListingRank"
+          type: array
+      type: object
     CarSearchFacets:
       properties:
         base_exterior_color:
@@ -5141,13 +5587,16 @@ components:
           description: Contains text like bad|Good|Very Good| Excellent
           type: string
         ghg_emissions_rating:
-          description: Show vehicle impact on climate change in terms of greeenhouse gases. This rating will be in the range of 1 - 10
+          description: Show vehicle impact on climate change in terms of greeenhouse
+            gases. This rating will be in the range of 1 - 10
           type: number
         smog_indicator:
           description: Contains text like bad|Good|Very Good| Excellent
           type: string
         smog_rating:
-          description: Shows vehicle's emissions of pollutants known to cause smog and other forms of air pollution. This rating will be in the range of 1 - 10
+          description: Shows vehicle's emissions of pollutants known to cause smog and
+            other forms of air pollution. This rating will be in the range of 1
+            - 10
           type: number
       type: object
     Error:
@@ -5213,7 +5662,8 @@ components:
           description: Listing title as displayed on the source website
           type: string
         id:
-          description: Unique identifier representing a specific listing from the Marketcheck database
+          description: Unique identifier representing a specific listing from the
+            Marketcheck database
           type: string
         interior_color:
           description: Interior color of the heavy equipment
@@ -5323,7 +5773,8 @@ components:
           description: Listing title as displayed on the source website
           type: string
         id:
-          description: Unique identifier representing a specific listing from the Marketcheck database
+          description: Unique identifier representing a specific listing from the
+            Marketcheck database
           type: string
         interior_color:
           description: Interior color of the heavy equipment
@@ -5517,13 +5968,16 @@ components:
           description: Unique MC assigned dealers id for the listing
           type: integer
         dom:
-          description: Days on Market value for the car based on current and historical listings found in the Marketcheck database for this car
+          description: Days on Market value for the car based on current and historical
+            listings found in the Marketcheck database for this car
           type: integer
         dom_180:
-          description: Days on Market value for the car based on current and last 6 month listings found in the Marketcheck database for this car
+          description: Days on Market value for the car based on current and last 6 month
+            listings found in the Marketcheck database for this car
           type: integer
         dom_active:
-          description: Days on Market value for the car based on current and last 30 days listings found in the Marketcheck database for this car
+          description: Days on Market value for the car based on current and last 30 days
+            listings found in the Marketcheck database for this car
           type: integer
         exterior_color:
           description: Exterior color of the car
@@ -5543,7 +5997,8 @@ components:
           description: Listing title as displayed on the source website
           type: string
         id:
-          description: Unique identifier representing a specific listing from the Marketcheck database
+          description: Unique identifier representing a specific listing from the
+            Marketcheck database
           type: string
         interior_color:
           description: Interior color of the car
@@ -5584,16 +6039,24 @@ components:
           description: Asking price for the car
           type: integer
         ref_miles:
-          description: Last Odometer reading / reported miles usage for the car. If the asking miles value is not or is available then the last_miles could perhaps be used. last_miles is the miles for the car listed on the source website as of last_miles_dt date
+          description: Last Odometer reading / reported miles usage for the car. If the
+            asking miles value is not or is available then the last_miles could
+            perhaps be used. last_miles is the miles for the car listed on the
+            source website as of last_miles_dt date
           type: string
         ref_miles_dt:
-          description: The date at which the last miles was reported online. This is earlier to last_seen_date
+          description: The date at which the last miles was reported online. This is
+            earlier to last_seen_date
           type: integer
         ref_price:
-          description: Last reported price for the car. If the asking price value is not or is available then the last_price could perhaps be used. last_price is the price for the car listed on the source website as of last_price_dt date
+          description: Last reported price for the car. If the asking price value is not
+            or is available then the last_price could perhaps be used.
+            last_price is the price for the car listed on the source website as
+            of last_price_dt date
           type: string
         ref_price_dt:
-          description: The date at which the last price was reported online. This is earlier to last_seen_date
+          description: The date at which the last price was reported online. This is
+            earlier to last_seen_date
           type: integer
         scraped_at:
           description: Listing last seen at date timestamp
@@ -5655,13 +6118,16 @@ components:
         dealer:
           $ref: "#/components/schemas/NestDealer"
         dom:
-          description: Days on Market value for the car based on current and historical listings found in the Marketcheck database for this car
+          description: Days on Market value for the car based on current and historical
+            listings found in the Marketcheck database for this car
           type: integer
         dom_180:
-          description: Days on Market value for the car based on current and last 6 month listings found in the Marketcheck database for this car
+          description: Days on Market value for the car based on current and last 6 month
+            listings found in the Marketcheck database for this car
           type: integer
         dom_active:
-          description: Days on Market value for the car based on current and last 30 days listings found in the Marketcheck database for this car
+          description: Days on Market value for the car based on current and last 30 days
+            listings found in the Marketcheck database for this car
           type: integer
         exterior_color:
           description: Exterior color of the car
@@ -5683,7 +6149,8 @@ components:
           description: Listing title as displayed on the source website
           type: string
         id:
-          description: Unique identifier representing a specific listing from the Marketcheck database
+          description: Unique identifier representing a specific listing from the
+            Marketcheck database
           type: string
         interior_color:
           description: Interior color of the car
@@ -5716,18 +6183,34 @@ components:
         price:
           description: Asking price for the car
           type: integer
+        rank:
+          description: Relative rank of the listing determined by ranking service
+          type: integer
         ref_miles:
-          description: Last Odometer reading / reported miles usage for the car. If the asking miles value is not or is available then the last_miles could perhaps be used. last_miles is the miles for the car listed on the source website as of last_miles_dt date
+          description: Last Odometer reading / reported miles usage for the car. If the
+            asking miles value is not or is available then the last_miles could
+            perhaps be used. last_miles is the miles for the car listed on the
+            source website as of last_miles_dt date
           type: string
         ref_miles_dt:
-          description: The date at which the last miles was reported online. This is earlier to last_seen_date
+          description: The date at which the last miles was reported online. This is
+            earlier to last_seen_date
           type: integer
         ref_price:
-          description: Last reported price for the car. If the asking price value is not or is available then the last_price could perhaps be used. last_price is the price for the car listed on the source website as of last_price_dt date
+          description: Last reported price for the car. If the asking price value is not
+            or is available then the last_price could perhaps be used.
+            last_price is the price for the car listed on the source website as
+            of last_price_dt date
           type: string
         ref_price_dt:
-          description: The date at which the last price was reported online. This is earlier to last_seen_date
+          description: The date at which the last price was reported online. This is
+            earlier to last_seen_date
           type: integer
+        score:
+          description: Score of the ranked listing as per the ranking criteria determined
+            by ranking service
+          format: double
+          type: number
         scraped_at:
           description: Listing last seen at date timestamp
           type: integer
@@ -5794,7 +6277,8 @@ components:
             type: string
           type: array
         id:
-          description: Unique identifier representing a specific listing from the Marketcheck database
+          description: Unique identifier representing a specific listing from the
+            Marketcheck database
           type: string
         interior_f:
           description: List of interior features available with the car
@@ -5865,7 +6349,8 @@ components:
     ListingMedia:
       properties:
         id:
-          description: Unique identifier representing a specific listing from the Marketcheck database
+          description: Unique identifier representing a specific listing from the
+            Marketcheck database
           type: string
         photo_links:
           description: A list of photo urls for the car
@@ -6018,7 +6503,8 @@ components:
         dealer:
           $ref: "#/components/schemas/NestDealer"
         dist:
-          description: Distance of the motorcycle's location from the specified user lcoation
+          description: Distance of the motorcycle's location from the specified user
+            lcoation
           format: double
           type: number
         dp_url:
@@ -6034,7 +6520,8 @@ components:
           description: Listing title as displayed on the source website
           type: string
         id:
-          description: Unique identifier representing a specific listing from the Marketcheck database
+          description: Unique identifier representing a specific listing from the
+            Marketcheck database
           type: string
         inventory_type:
           description: Inventory type of motorcycle
@@ -6144,7 +6631,8 @@ components:
           description: Listing title as displayed on the source website
           type: string
         id:
-          description: Unique identifier representing a specific listing from the Marketcheck database
+          description: Unique identifier representing a specific listing from the
+            Marketcheck database
           type: string
         inventory_type:
           description: Inventory type of motorcycle
@@ -6400,7 +6888,8 @@ components:
           description: Right side rating for above description (All Other Cars)
           type: number
         text:
-          description: "Description for which popularity should be show eg: 2016 ford F-150 Lariat vs All Other Cars"
+          description: "Description for which popularity should be show eg: 2016 ford
+            F-150 Lariat vs All Other Cars"
           type: string
         thumbs:
           description: Thumbs up/down depending upon left and right analysis numbers
@@ -6433,7 +6922,8 @@ components:
           description: Listing title as displayed on the source website
           type: string
         id:
-          description: Unique identifier representing a specific listing from the Marketcheck database
+          description: Unique identifier representing a specific listing from the
+            Marketcheck database
           type: string
         interior_color:
           description: Interior color of the RV
@@ -6546,7 +7036,8 @@ components:
           description: Listing title as displayed on the source website
           type: string
         id:
-          description: Unique identifier representing a specific listing from the Marketcheck database
+          description: Unique identifier representing a specific listing from the
+            Marketcheck database
           type: string
         interior_color:
           description: Interior color of the RV
@@ -6706,7 +7197,8 @@ components:
           description: Number of listings that have field value before range start
           type: integer
         between:
-          description: Number of listings that have field value between range start and range end
+          description: Number of listings that have field value between range start and
+            range end
           type: integer
         counts:
           items:

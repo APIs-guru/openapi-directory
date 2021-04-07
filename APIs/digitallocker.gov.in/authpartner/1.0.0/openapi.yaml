@@ -4,7 +4,8 @@ servers:
 info:
   contact:
     email: support@digitallocker.gov.in
-  description: To access files in user’s DigiLocker account from your application, you must first obtain user’s authorization.
+  description: To access files in user’s DigiLocker account from your application,
+    you must first obtain user’s authorization.
   termsOfService: https://ndh.digitallocker.gov.in/terms.php
   title: Authorized Partner API Specification
   version: 1.0.0
@@ -25,16 +26,24 @@ tags:
     name: Token Revocation API
   - description: Get User Details
     name: Account Detail API
-  - description: File APIs allow your application to get the meta-data about issued and uploaded documents in user’s DigiLocker.
+  - description: File APIs allow your application to get the meta-data about issued
+      and uploaded documents in user’s DigiLocker.
     name: File APIs
   - description: This API can be used to sign up a user for DigiLocker.
     name: DigiLocker Sign up APIs
-  - description: DigiLocker Meta APIs provide information about a user account, issuers, document types and parameters required to pull a document.
+  - description: DigiLocker Meta APIs provide information about a user account,
+      issuers, document types and parameters required to pull a document.
     name: DigiLocker Meta APIs
 paths:
   /account/1/pushuri:
     post:
-      description: The API can use to push or delete a single URI into Digital Locker using DigiLocker Id acquired using Get User Details API. This API can be used to push the certificate details to Digital Locker as and when a certificate is generated in the issuer system. The issuing departments must register on DigiLocker as a registered Issuer and implement the requisite Issuer APIs as mentioned in Digital Locker Issuer API Specification document prior to pushing certificates using this API.
+      description: The API can use to push or delete a single URI into Digital Locker
+        using DigiLocker Id acquired using Get User Details API. This API can be
+        used to push the certificate details to Digital Locker as and when a
+        certificate is generated in the issuer system. The issuing departments
+        must register on DigiLocker as a registered Issuer and implement the
+        requisite Issuer APIs as mentioned in Digital Locker Issuer API
+        Specification document prior to pushing certificates using this API.
       operationId: Push URI to Account id
       requestBody:
         content:
@@ -57,7 +66,16 @@ paths:
                     description: invalid_parameter
                     type: string
                   error_description:
-                    description: One or more of the mandatory parameters is missing or invalid. The error description text will contain one or more of the following error texts:|-  URI parameter is missing or invalid  Doctype parameter is missing or invalid  Description parameter is missing or invalid  Docid parameter is missing or invalid  Issuedate parameter is missing orinvalid  Timestamp parameter is missing or invalid  HMAC parameter is missing or invalid   URI already exists in this account   URI already exists in another account
+                    description: One or more of the mandatory parameters is missing or invalid. The
+                      error description text will contain one or more of the
+                      following error texts:|-  URI parameter is missing or
+                      invalid  Doctype parameter is missing or invalid 
+                      Description parameter is missing or invalid  Docid
+                      parameter is missing or invalid  Issuedate parameter is
+                      missing orinvalid  Timestamp parameter is missing or
+                      invalid  HMAC parameter is missing or invalid   URI
+                      already exists in this account   URI already exists in
+                      another account
                     type: string
                 type: object
           description: Bad request
@@ -107,7 +125,8 @@ paths:
         - DigiLocker Meta APIs
   /account/2/verify:
     post:
-      description: This API can be used to verify whether a mobile number or Aadhaar number is already registered with DigiLocker.
+      description: This API can be used to verify whether a mobile number or Aadhaar
+        number is already registered with DigiLocker.
       operationId: Verify Account id
       requestBody:
         content:
@@ -129,7 +148,11 @@ paths:
                   error:
                     description: invalid_parameter
                   error_description:
-                    description: One or more of the mandatory parameters is missing or invalid. The error description text will contain one or more of the following error texts:|-  Either one of uid or mobile number is mandatory  Timestamp parameter is missing or invalid  HMAC parameter is missing or invalid
+                    description: One or more of the mandatory parameters is missing or invalid. The
+                      error description text will contain one or more of the
+                      following error texts:|-  Either one of uid or mobile
+                      number is mandatory  Timestamp parameter is missing or
+                      invalid  HMAC parameter is missing or invalid
                 type: object
           description: Bad request
         "401":
@@ -163,10 +186,16 @@ paths:
         - DigiLocker Meta APIs
   /oauth2/1/authorize:
     get:
-      description: Call to this API starts authorization flow using OAuth 2.0 protocol. This isn't an API call—it's a DigiLocker web page that lets the user sign in to DigiLocker and authorize your application to access user’s data. After the user decides whether or not to authorize your app, they will be redirected to the redirect link provided by your application.
+      description: Call to this API starts authorization flow using OAuth 2.0
+        protocol. This isn't an API call—it's a DigiLocker web page that lets
+        the user sign in to DigiLocker and authorize your application to access
+        user’s data. After the user decides whether or not to authorize your
+        app, they will be redirected to the redirect link provided by your
+        application.
       operationId: Get Authorization Code id
       parameters:
-        - description: Provide the client id that was created during the application registration process on Partners Portal.
+        - description: Provide the client id that was created during the application
+            registration process on Partners Portal.
           in: query
           name: client_id
           schema:
@@ -183,7 +212,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: This is your application specific data that will be passed back to your application through redirect_uri.
+        - description: This is your application specific data that will be passed back to
+            your application through redirect_uri.
           in: query
           name: state
           required: true
@@ -220,7 +250,10 @@ paths:
                   - SHA256
                 type: string
             type: string
-        - description: Specifies what method was used to encode a code_verifier to generate code_challenge parameter above. This parameter must be used with the code_challenge parameter. The only supported values for this parameter is S256.
+        - description: Specifies what method was used to encode a code_verifier to
+            generate code_challenge parameter above. This parameter must be used
+            with the code_challenge parameter. The only supported values for
+            this parameter is S256.
           in: query
           name: Code_challenge_method
           required: false
@@ -231,13 +264,23 @@ paths:
                   - S256
                 type: string
             type: string
-        - description: If this parameter is provided its value will always be signup. This parameter indicates that the user does not have a DigiLocker account and will be directed to the signup flow directly. After the account is created, the user will be directed to the authorization flow. If this parameter is not sent, the user will be redirected to the sign in flow.
+        - description: If this parameter is provided its value will always be signup. This
+            parameter indicates that the user does not have a DigiLocker account
+            and will be directed to the signup flow directly. After the account
+            is created, the user will be directed to the authorization flow. If
+            this parameter is not sent, the user will be redirected to the sign
+            in flow.
           in: query
           name: dl_flow
           required: false
           schema:
             type: string
-        - description: Verified mobile number of the user. If this parameter is passed, DigiLocker will skip the mobile OTP verification step during sign up. DigiLocker will treat the mobile number passed in this parameter as a verified mobile number by the trusted client application. This parameter will be used only if dl_flow parameter mentioned above is set to signup and will be ignored otherwise.
+        - description: Verified mobile number of the user. If this parameter is passed,
+            DigiLocker will skip the mobile OTP verification step during sign
+            up. DigiLocker will treat the mobile number passed in this parameter
+            as a verified mobile number by the trusted client application. This
+            parameter will be used only if dl_flow parameter mentioned above is
+            set to signup and will be ignored otherwise.
           in: query
           name: Verified_mobile
           required: false
@@ -276,7 +319,14 @@ paths:
         - Authorization
   /oauth2/1/code:
     post:
-      description: The client device calls the DigiLocker API to get the device code by providing the client_id issued to the device OEM and either the username or the mobile number of the user. DigiLocker responds with a device code and then sends an OTP on the mobile number and email address associated with the user’s account. The masked mobile number and email address is also sent in response. The device should use these values to notify the users about the mobile and email address on which the OTP has been sent.
+      description: The client device calls the DigiLocker API to get the device code
+        by providing the client_id issued to the device OEM and either the
+        username or the mobile number of the user. DigiLocker responds with a
+        device code and then sends an OTP on the mobile number and email address
+        associated with the user’s account. The masked mobile number and email
+        address is also sent in response. The device should use these values to
+        notify the users about the mobile and email address on which the OTP has
+        been sent.
       operationId: Get Device Code id
       requestBody:
         content:
@@ -328,7 +378,9 @@ paths:
         - Authorization API
   /oauth2/1/file/upload:
     post:
-      description: This API can be used to save/upload a file to uploaded documents in DigiLocker. The allowed file types are JPG, JPEG, PNG and PDF. The file size must not exceed 10MB.
+      description: This API can be used to save/upload a file to uploaded documents in
+        DigiLocker. The allowed file types are JPG, JPEG, PNG and PDF. The file
+        size must not exceed 10MB.
       operationId: Upload File to Locker id
       parameters:
         - description: The destination path of the file in DigiLocker including filename.
@@ -337,7 +389,13 @@ paths:
           required: false
           schema:
             type: string
-        - description: This is used to verify the integrity of the file data. The client app calculates the hash message authentication code (HMAC) of the file content using SHA256 hashing algorithm and the client secret as the hashing key. The resulting HMAC is converted to Base64 format and sent in this parameter. Upon upload of file, DigiLocker calculates the HMAC of the file data and compares it with this HMAC..
+        - description: This is used to verify the integrity of the file data. The client
+            app calculates the hash message authentication code (HMAC) of the
+            file content using SHA256 hashing algorithm and the client secret as
+            the hashing key. The resulting HMAC is converted to Base64 format
+            and sent in this parameter. Upon upload of file, DigiLocker
+            calculates the HMAC of the file data and compares it with this
+            HMAC..
           in: header
           name: hmac
           required: false
@@ -401,7 +459,8 @@ paths:
                       - The file type is not allowed
                       - The destination folder does not exist
                       - Missing file content in the request
-                      - The mimetype provided in Content-Type parameter does not match with the mimetype of the file
+                      - The mimetype provided in Content-Type parameter does not
+                        match with the mimetype of the file
                 type: object
           description: Bad request
         "401":
@@ -437,7 +496,8 @@ paths:
         - File APIs
   "/oauth2/1/file/{uri}":
     get:
-      description: Returns a file from URI. This API can be used to fetch both issued document and uploaded document.
+      description: Returns a file from URI. This API can be used to fetch both issued
+        document and uploaded document.
       operationId: Get File from URI id
       parameters:
         - description: This is the unique identifier of the document.
@@ -530,7 +590,8 @@ paths:
         - File APIs
   /oauth2/1/files/:
     get:
-      description: Returns the list of meta-data about documents or folders in user’s DigiLocker in a specific location.
+      description: Returns the list of meta-data about documents or folders in user’s
+        DigiLocker in a specific location.
       operationId: Get List of Self Uploaded Documents
       responses:
         "200":
@@ -636,7 +697,8 @@ paths:
         - File APIs
   /oauth2/1/files/issued:
     get:
-      description: Returns the list of meta-data about issued documents in user’s DigiLocker.
+      description: Returns the list of meta-data about issued documents in user’s
+        DigiLocker.
       operationId: Get List of issued Documents Version1 id
       responses:
         "200":
@@ -647,11 +709,13 @@ paths:
                   details:
                     properties:
                       date:
-                        description: This contains the date on which the certificate was last modified in DigiLocker.
+                        description: This contains the date on which the certificate was last modified
+                          in DigiLocker.
                         example: 2015-05-12T15:50:38Z
                         type: string
                       description:
-                        description: This is the descriptive document type stored in DigiLocker such as ‘Income Certificate’ or ‘Driving License’.
+                        description: This is the descriptive document type stored in DigiLocker such as
+                          ‘Income Certificate’ or ‘Driving License’.
                         example: Class XII Marksheet
                         type: string
                       doctype:
@@ -667,7 +731,8 @@ paths:
                         example: in.gov.cbse
                         type: string
                       mime:
-                        description: The list of mime types for the certificate data. This field will contain “application/PDF” or “application/xml”.
+                        description: The list of mime types for the certificate data. This field will
+                          contain “application/PDF” or “application/xml”.
                         example: application/pdf
                         type: string
                       name:
@@ -687,7 +752,9 @@ paths:
                         example: file
                         type: string
                       uri:
-                        description: This is the unique identifier of the document shared by the user in DigiLocker. You will use this identifier to get the actual file from DigiLocker using the API.
+                        description: This is the unique identifier of the document shared by the user in
+                          DigiLocker. You will use this identifier to get the
+                          actual file from DigiLocker using the API.
                         example: in.gov.cbse-HSCER-201412345678
                         type: string
                     required:
@@ -733,10 +800,13 @@ paths:
         - File APIs
   "/oauth2/1/files/{id}":
     get:
-      description: Returns the list of meta-data about documents or folders in user’s DigiLocker in a specific location.
+      description: Returns the list of meta-data about documents or folders in user’s
+        DigiLocker in a specific location.
       operationId: Get List of Self Uploaded Documents id
       parameters:
-        - description: The id of the folder to list. To list the files of root folder of a user’s locker, do not send this parameter. This is sent as a part of the URL.
+        - description: The id of the folder to list. To list the files of root folder of a
+            user’s locker, do not send this parameter. This is sent as a part of
+            the URL.
           in: path
           name: id
           required: true
@@ -751,11 +821,13 @@ paths:
                   details:
                     properties:
                       date:
-                        description: This contains the date of file upload in case of self uploaded documents
+                        description: This contains the date of file upload in case of self uploaded
+                          documents
                         example: 2015-05-12T15:50:38Z
                         type: string
                       description:
-                        description: This is the descriptive document type stored in DigiLocker such as ‘Income Certificate’ or ‘Driving License’.
+                        description: This is the descriptive document type stored in DigiLocker such as
+                          ‘Income Certificate’ or ‘Driving License’.
                         example: ""
                         type: string
                       id:
@@ -763,11 +835,15 @@ paths:
                         example: "5678"
                         type: integer
                       issuer:
-                        description: The name of the issuer. This is blank in case of uploaded documents and folders.
+                        description: The name of the issuer. This is blank in case of uploaded documents
+                          and folders.
                         example: ""
                         type: string
                       mime:
-                        description: The mime type of the file. This field will contain “application/PDF” for PDF files; “image/png” for PNG files and “image/jpg” or “image/jpeg” for JPG/JPEG files. This will be blank in case of folder.
+                        description: The mime type of the file. This field will contain
+                          “application/PDF” for PDF files; “image/png” for PNG
+                          files and “image/jpg” or “image/jpeg” for JPG/JPEG
+                          files. This will be blank in case of folder.
                         example: ""
                         type: string
                       name:
@@ -787,7 +863,10 @@ paths:
                         example: dir
                         type: string
                       uri:
-                        description: This is the unique identifier of the document shared by the user in DigiLocker. You will use this identifier to get the actual file from DigiLocker using the API. URI will be blank in case of folder.
+                        description: This is the unique identifier of the document shared by the user in
+                          DigiLocker. You will use this identifier to get the
+                          actual file from DigiLocker using the API. URI will be
+                          blank in case of folder.
                         example: ""
                         type: string
                     required:
@@ -850,7 +929,8 @@ paths:
         - File APIs
   /oauth2/1/pull/doctype:
     post:
-      description: Returns a list of documents/certificates issued by an issuer organization registered with DigiLocker.
+      description: Returns a list of documents/certificates issued by an issuer
+        organization registered with DigiLocker.
       operationId: Get List of Documents Provided by an Issuer id
       requestBody:
         content:
@@ -872,7 +952,11 @@ paths:
                   error:
                     description: invalid_parameter
                   error_description:
-                    description: One or more of the mandatory parameters is missing or invalid. The error description text will contain one or more of the following error texts:|-  The orgid parameter is missing or invalid  Timestamp parameter is missing or invalid  HMAC parameter is missing or invalid
+                    description: One or more of the mandatory parameters is missing or invalid. The
+                      error description text will contain one or more of the
+                      following error texts:|-  The orgid parameter is missing
+                      or invalid  Timestamp parameter is missing or invalid 
+                      HMAC parameter is missing or invalid
                 type: object
           description: Bad request
         "401":
@@ -929,7 +1013,10 @@ paths:
                     example: invalid_parameter
                     type: string
                   error_description:
-                    example: One or more of the mandatory parameters is missing or invalid. The error description text will contain one or more of the following error texts:|-  Timestamp parameter is missing or invalid  HMAC parameter is missing or invalid
+                    example: One or more of the mandatory parameters is missing or invalid. The
+                      error description text will contain one or more of the
+                      following error texts:|-  Timestamp parameter is missing
+                      or invalid  HMAC parameter is missing or invalid
                     type: string
                 type: object
           description: Bad request
@@ -964,7 +1051,10 @@ paths:
         - DigiLocker Meta APIs
   /oauth2/1/pull/parameters:
     post:
-      description: Returns a list of parameters required to search a document/certificate of an issuer organization registered with DigiLocker. These parameters are used to pull a document from issuer’s repository using Pull Document API mentioned in subsequent section.
+      description: Returns a list of parameters required to search a
+        document/certificate of an issuer organization registered with
+        DigiLocker. These parameters are used to pull a document from issuer’s
+        repository using Pull Document API mentioned in subsequent section.
       operationId: Get Search Parameters for a Document id
       requestBody:
         content:
@@ -986,7 +1076,12 @@ paths:
                   error:
                     description: invalid_parameter
                   error_description:
-                    description: One or more of the mandatory parameters is missing or invalid. The error description text will contain one or more of the following error texts:|-  The orgid parameter is missing or invalid  The doctype parameter is missing or invalid  Timestamp parameter is missing or invalid  HMAC parameter is missing or invalid
+                    description: One or more of the mandatory parameters is missing or invalid. The
+                      error description text will contain one or more of the
+                      following error texts:|-  The orgid parameter is missing
+                      or invalid  The doctype parameter is missing or invalid 
+                      Timestamp parameter is missing or invalid  HMAC parameter
+                      is missing or invalid
                 type: object
           description: Bad request
         "401":
@@ -1020,7 +1115,10 @@ paths:
         - DigiLocker Meta APIs
   /oauth2/1/pull/pulldocument:
     post:
-      description: This API allows a client application to search a document/certificate from issuer’s repository using the parameters provided by a user. The searched document is saved in user’s issued document section of DigiLocker if the search is successful.
+      description: This API allows a client application to search a
+        document/certificate from issuer’s repository using the parameters
+        provided by a user. The searched document is saved in user’s issued
+        document section of DigiLocker if the search is successful.
       operationId: Pull Document id
       requestBody:
         content:
@@ -1071,7 +1169,9 @@ paths:
                   error:
                     description: record_not_found
                   error_description:
-                    description: No record found in issuer database for given criteria. Please check the details and try again. If problem persists, see the FAQ section for possible causes.
+                    description: No record found in issuer database for given criteria. Please check
+                      the details and try again. If problem persists, see the
+                      FAQ section for possible causes.
                 type: object
           description: Not found
         "500":
@@ -1092,7 +1192,13 @@ paths:
         - File APIs
   /oauth2/1/revoke:
     post:
-      description: Client applications can revoke a previously obtained refresh or access token when it is no longer needed. This is done by making a request to the token revocation endpoint. DigiLocker will invalidate the specified token and, if applicable, other tokens based on the same authorisation grant. This API may be used to sign out a user from DigiLocker. This API will work for server based web applications, mobile application and limited input devices.
+      description: Client applications can revoke a previously obtained refresh or
+        access token when it is no longer needed. This is done by making a
+        request to the token revocation endpoint. DigiLocker will invalidate the
+        specified token and, if applicable, other tokens based on the same
+        authorisation grant. This API may be used to sign out a user from
+        DigiLocker. This API will work for server based web applications, mobile
+        application and limited input devices.
       operationId: get token revocation id
       requestBody:
         content:
@@ -1103,7 +1209,10 @@ paths:
                   description: The token that needs to be revoked.
                   type: string
                 token_type_hint:
-                  description: The type of the above token. The value will be one of access_token or refresh_token. If this parameter is not sent, DigiLocker will look for this token in both access and refresh tokens and then revoke it.
+                  description: The type of the above token. The value will be one of access_token
+                    or refresh_token. If this parameter is not sent, DigiLocker
+                    will look for this token in both access and refresh tokens
+                    and then revoke it.
                   enum:
                     - refresh_token
                     - access_token
@@ -1123,7 +1232,14 @@ paths:
         - Token Revocation API
   /oauth2/1/token:
     post:
-      description: This endpoint only applies to apps using the authorization code flow. An app calls this endpoint to acquire a bearer token once the user has authorized the app. Calls to /oauth2/1/token need to be authenticated using the app's key and secret. These can either be passed as application/x-www-form-urlencoded POST parameters (see parameters below) or via HTTP basic authentication. If basic authentication is used, the app key should be provided as the username, and the app secret should be provided as the password.
+      description: This endpoint only applies to apps using the authorization code
+        flow. An app calls this endpoint to acquire a bearer token once the user
+        has authorized the app. Calls to /oauth2/1/token need to be
+        authenticated using the app's key and secret. These can either be passed
+        as application/x-www-form-urlencoded POST parameters (see parameters
+        below) or via HTTP basic authentication. If basic authentication is
+        used, the app key should be provided as the username, and the app secret
+        should be provided as the password.
       operationId: getaccesstoken id
       requestBody:
         content:
@@ -1149,13 +1265,21 @@ paths:
         "400":
           description: Bad request
         "401":
-          description: If the access token is expired or has been revoked by DigiLocker user.
+          description: If the access token is expired or has been revoked by DigiLocker
+            user.
       summary: Get Access Token
       tags:
         - Authorization
   /oauth2/1/user:
     get:
-      description: Client applications can call this API to get the DigiLocker Id, name, date of birth and gender of the account holder. An access token is required to call this API. The API will return the user details of the account with which the access token is linked. It is strongly recommended that the API can be called by client application only once after acquiring the access token. Since the user details do not change, the client application may store the values and use them when necessary than calling this API repeatedly.
+      description: Client applications can call this API to get the DigiLocker Id,
+        name, date of birth and gender of the account holder. An access token is
+        required to call this API. The API will return the user details of the
+        account with which the access token is linked. It is strongly
+        recommended that the API can be called by client application only once
+        after acquiring the access token. Since the user details do not change,
+        the client application may store the values and use them when necessary
+        than calling this API repeatedly.
       operationId: Account Detail API id
       responses:
         "200":
@@ -1170,18 +1294,22 @@ paths:
                         example: 123e4567-e89b-12d3-a456-426655440000
                         type: string
                       dob:
-                        description: This is date of birth of the user as registered with DigiLocker in DDMMYYYY format.
+                        description: This is date of birth of the user as registered with DigiLocker in
+                          DDMMYYYY format.
                         example: "31121970"
                         format: dd-mm-yyy
                         type: string
                       eaadhar:
-                        description: This indicates whether eAadhaar data is available for this account. Possible values are Y and N.
+                        description: This indicates whether eAadhaar data is available for this account.
+                          Possible values are Y and N.
                         enum:
                           - Y
                           - N
                         type: string
                       gender:
-                        description: This is gender of the user as registered with DigiLocker. The possible values are M, F, T for male, female and transgender respectively.
+                        description: This is gender of the user as registered with DigiLocker. The
+                          possible values are M, F, T for male, female and
+                          transgender respectively.
                         enum:
                           - M
                           - F
@@ -1233,7 +1361,13 @@ paths:
         - Account Detail API
   "/oauth2/1/xml/{uri}":
     get:
-      description: Returns the certificate data in machine readable XML format for a URI. This API can be used to only for issued documents. The XML data may not be available for all documents. If the XML data is available for a particular document, the mime parameter in Get List of Issued Documents API will contain application/xml. Please refer to Digital Locker XML Certificate Formats for more details of XML formats of various documents.
+      description: Returns the certificate data in machine readable XML format for a
+        URI. This API can be used to only for issued documents. The XML data may
+        not be available for all documents. If the XML data is available for a
+        particular document, the mime parameter in Get List of Issued Documents
+        API will contain application/xml. Please refer to Digital Locker XML
+        Certificate Formats for more details of XML formats of various
+        documents.
       operationId: Get Certificate Data in XML Format from URI id
       parameters:
         - in: path
@@ -1312,7 +1446,8 @@ paths:
         - File APIs
   /oauth2/2/files/issued:
     get:
-      description: Returns the list of meta-data about issued documents in user’s DigiLocker.
+      description: Returns the list of meta-data about issued documents in user’s
+        DigiLocker.
       operationId: Get List of issued Documents id
       responses:
         "200":
@@ -1437,7 +1572,8 @@ paths:
                   error_description:
                     enum:
                       - Aadhaar is not linked to the account
-                      - Aadhaar data is not available for this user. Please perform Aadhaar eKYC again.
+                      - Aadhaar data is not available for this user. Please
+                        perform Aadhaar eKYC again.
                 type: object
           description: Not found
         "500":
@@ -1465,7 +1601,8 @@ paths:
         - File APIs
   /signup/1/demoauthverify:
     post:
-      description: This API is used to verify the OTP sent by DigiLocker during the sign up API call above.
+      description: This API is used to verify the OTP sent by DigiLocker during the
+        sign up API call above.
       operationId: Verify OTP id
       requestBody:
         content:
@@ -1519,7 +1656,11 @@ paths:
         - DigiLocker Sign up APIs
   /signup/2/demoauth:
     post:
-      description: This API is used to validate Aadhaar details and verify the mobile number by generating an OTP. This API call, if successful, will be followed by verify OTP call by the partner application if the user is online or available to perform OTP validation as indicated in verification parameter
+      description: This API is used to validate Aadhaar details and verify the mobile
+        number by generating an OTP. This API call, if successful, will be
+        followed by verify OTP call by the partner application if the user is
+        online or available to perform OTP validation as indicated in
+        verification parameter
       operationId: SIGN UP id
       requestBody:
         content:
@@ -1573,7 +1714,8 @@ paths:
         - DigiLocker Sign up APIs
   /statistics/1/counts:
     post:
-      description: Returns DigiLocker statistics such as the count of users, authentic documents, issuers and requesters as on a specific date.
+      description: Returns DigiLocker statistics such as the count of users, authentic
+        documents, issuers and requesters as on a specific date.
       operationId: Get Statistics id
       requestBody:
         content:
@@ -1596,7 +1738,10 @@ paths:
                     description: invalid_parameter
                     type: string
                   error_description:
-                    description: One or more of the mandatory parameters is missing or invalid. The error description text will contain one or more of the following error texts:|-  Timestamp parameter is missing or invalid  HMAC parameter is missing or invalid
+                    description: One or more of the mandatory parameters is missing or invalid. The
+                      error description text will contain one or more of the
+                      following error texts:|-  Timestamp parameter is missing
+                      or invalid  HMAC parameter is missing or invalid
                     type: string
                 type: object
           description: Bad request
@@ -1644,12 +1789,14 @@ components:
           example: 123e4567-e89b-12d3-a456-426655440000
           type: string
         dob:
-          description: This is date of birth of the user as registered with DigiLocker in DDMMYYYY format.
+          description: This is date of birth of the user as registered with DigiLocker in
+            DDMMYYYY format.
           example: "31121970"
           format: dd-mm-yyy
           type: integer
         eaadhar:
-          description: This indicates whether eAadhaar data is available for this account. Possible values are Y and N.
+          description: This indicates whether eAadhaar data is available for this account.
+            Possible values are Y and N.
           enum:
             - Y
             - N
@@ -1660,7 +1807,9 @@ components:
           format: int64
           type: integer
         gender:
-          description: This is gender of the user as registered with DigiLocker. The possible values are M, F, T for male, female and transgender respectively.
+          description: This is gender of the user as registered with DigiLocker. The
+            possible values are M, F, T for male, female and transgender
+            respectively.
           enum:
             - M
             - F
@@ -1675,7 +1824,8 @@ components:
           example: 1c66bec26364cd6fefaabc6cae91840a
           type: string
         refresh_token:
-          description: The refresh token used to refresh the above access token when it expires. Please refer to Refresh Access Token API for more details.
+          description: The refresh token used to refresh the above access token when it
+            expires. Please refer to Refresh Access Token API for more details.
           example: a47ab18c593703e4f83a274694db7422a8cfcb8f
           type: string
         scope:
@@ -1727,20 +1877,20 @@ components:
     AuthTokenResponse:
       properties:
         access_token:
-          description: >-
+          description: |-
             The access token that can be used to call the
                 DigiLocker APIs.
           example: bc125c212a4b03a9a188a858be5a163f379e878a
           type: string
         expires_in:
-          description: >-
+          description: |-
             The duration in seconds for which the access token is
                         valid.
           example: 3600
           format: int64
           type: integer
         refresh_token:
-          description: >-
+          description: |-
             The refresh token used to refresh the above access
               token when it expires. This will value will be
               returned only in case of web applications and not be
@@ -1764,41 +1914,77 @@ components:
     DemoAuth:
       properties:
         clientid:
-          description: Provide the client id that was created during the application registration process on Partners Portal.
+          description: Provide the client id that was created during the application
+            registration process on Partners Portal.
           type: string
         consent:
-          description: The consent indicator from the user for performing demographic authentication using Aadhaar details. This Partner Application must capture the user consent for performing the Aadhaar demographic authentication. The possible values are ‘Y’ and ‘N’. The sign up request will be processed only when this indicator is ‘Y’.
+          description: The consent indicator from the user for performing demographic
+            authentication using Aadhaar details. This Partner Application must
+            capture the user consent for performing the Aadhaar demographic
+            authentication. The possible values are ‘Y’ and ‘N’. The sign up
+            request will be processed only when this indicator is ‘Y’.
           type: string
         demoauth:
-          description: The parameter indicates whether Aadhaar demographic authentication must be successful for creating DigiLocker account. The possible values are ‘Y’ and ‘N’. The value of ‘Y’ will perform Aadhaar demographic authentication and will return errors if any in response. The value of ‘N’ will also perform Aadhaar demographic authentication but will return any error in case of authentication failure. It will create a basic mobile based account for the user. Value ‘N’ should be used when the user account needs to be created in the absence of the user.
+          description: The parameter indicates whether Aadhaar demographic authentication
+            must be successful for creating DigiLocker account. The possible
+            values are ‘Y’ and ‘N’. The value of ‘Y’ will perform Aadhaar
+            demographic authentication and will return errors if any in
+            response. The value of ‘N’ will also perform Aadhaar demographic
+            authentication but will return any error in case of authentication
+            failure. It will create a basic mobile based account for the user.
+            Value ‘N’ should be used when the user account needs to be created
+            in the absence of the user.
           type: string
         dob:
-          description: This is date of birth of the user as mentioned in Aadhaar in DDMMYYYY format.
+          description: This is date of birth of the user as mentioned in Aadhaar in
+            DDMMYYYY format.
           type: integer
         gender:
-          description: This is gender of the user as mentioned in Aadhaar. The possible values are M, F, T for male, female and transgender respectively.
+          description: This is gender of the user as mentioned in Aadhaar. The possible
+            values are M, F, T for male, female and transgender respectively.
           enum:
             - M
             - F
             - T
         hmac:
-          description: Provide SHA-256 encrypted value of the client secret, clientid and ts parameters above concatenated in this sequence (client secret, clientid, ts). The hmac parameter is used by DigiLocker to ensure the data integrity and authentication of the request. Use the Client Secret Key generated during the application registration process on Partners Portal as the client secret.
+          description: Provide SHA-256 encrypted value of the client secret, clientid and
+            ts parameters above concatenated in this sequence (client secret,
+            clientid, ts). The hmac parameter is used by DigiLocker to ensure
+            the data integrity and authentication of the request. Use the Client
+            Secret Key generated during the application registration process on
+            Partners Portal as the client secret.
           format: binary
           type: string
         mobile:
-          description: This is the mobile number of the user. DigiLocker will check whether an account exists for this mobile number. Either uid or mobile is required to verify whether an account exists.
+          description: This is the mobile number of the user. DigiLocker will check
+            whether an account exists for this mobile number. Either uid or
+            mobile is required to verify whether an account exists.
           type: integer
         name:
           description: This is name of the user as mentioned in Aadhaar.
           type: string
         ts:
-          description: Provide a timestamp value in UNIX (or POSIX) format in IST time zone in seconds. This timestamp value must not be older than 30 minutes.
+          description: Provide a timestamp value in UNIX (or POSIX) format in IST time
+            zone in seconds. This timestamp value must not be older than 30
+            minutes.
           type: string
         uid:
-          description: This is the Aadhaar number of the user. DigiLocker will check whether an account exists for this Aadhaar number. Either uid or mobile is required to verify whether an account exists.
+          description: This is the Aadhaar number of the user. DigiLocker will check
+            whether an account exists for this Aadhaar number. Either uid or
+            mobile is required to verify whether an account exists.
           type: integer
         verification:
-          description: The parameter indicates whether the mobile number provided above should be validated by DigiLocker. If this parameter is ‘Y’, the DigiLocker sends an OTP to verify the mobile number. In this case the client application will call the second API to validate the OTP. The user will be signed on only after successful OTP validation. This flow should be used when the user account is created by user himself/herself or the user is present to provide the OTP. If this parameter is ‘N’, the user account will be created without OTP validation. The OTP validation will be performed when the user signs in for the first time in DigiLocker. This flow should be used when the user account needs to be created in the absence of the user.
+          description: The parameter indicates whether the mobile number provided above
+            should be validated by DigiLocker. If this parameter is ‘Y’, the
+            DigiLocker sends an OTP to verify the mobile number. In this case
+            the client application will call the second API to validate the OTP.
+            The user will be signed on only after successful OTP validation.
+            This flow should be used when the user account is created by user
+            himself/herself or the user is present to provide the OTP. If this
+            parameter is ‘N’, the user account will be created without OTP
+            validation. The OTP validation will be performed when the user signs
+            in for the first time in DigiLocker. This flow should be used when
+            the user account needs to be created in the absence of the user.
           type: string
     DemoAuthResponse:
       properties:
@@ -1813,11 +1999,14 @@ components:
               example: 3600
               type: string
             mobile:
-              description: "The masked mobile number of the user on which the OTP has been sent.           "
+              description: "The masked mobile number of the user on which the OTP has been
+                sent.           "
               example: "******3712"
               type: integer
             refresh_token:
-              description: The refresh token used to refresh the above access token when it expires. Please refer to Refresh Access Token API for more details.
+              description: The refresh token used to refresh the above access token when it
+                expires. Please refer to Refresh Access Token API for more
+                details.
               example: a47ab18c593703e4f83a274694db7422a8cfcb8f
               type: string
             scope:
@@ -1839,20 +2028,30 @@ components:
     DemoAuthVerify:
       properties:
         clientid:
-          description: Provide the client id that was created during the application registration process on Partners Portal.
+          description: Provide the client id that was created during the application
+            registration process on Partners Portal.
           type: string
         hmac:
-          description: Provide SHA-256 encrypted value of the client secret, clientid and ts parameters above concatenated in this sequence (client secret, clientid, ts). The hmac parameter is used by DigiLocker to ensure the data integrity and authentication of the request. Use the Client Secret Key generated during the application registration process on Partners Portal as the client secret.
+          description: Provide SHA-256 encrypted value of the client secret, clientid and
+            ts parameters above concatenated in this sequence (client secret,
+            clientid, ts). The hmac parameter is used by DigiLocker to ensure
+            the data integrity and authentication of the request. Use the Client
+            Secret Key generated during the application registration process on
+            Partners Portal as the client secret.
           format: binary
           type: string
         mobile:
-          description: This is the mobile number of the user. DigiLocker will check whether an account exists for this mobile number. Either uid or mobile is required to verify whether an account exists.
+          description: This is the mobile number of the user. DigiLocker will check
+            whether an account exists for this mobile number. Either uid or
+            mobile is required to verify whether an account exists.
           type: integer
         otp:
           description: The OTP provided by the user.
           type: integer
         ts:
-          description: Provide a timestamp value in UNIX (or POSIX) format in IST time zone in seconds. This timestamp value must not be older than 30 minutes.
+          description: Provide a timestamp value in UNIX (or POSIX) format in IST time
+            zone in seconds. This timestamp value must not be older than 30
+            minutes.
           type: string
     DemoAuthVerifyResponse:
       properties:
@@ -1867,7 +2066,9 @@ components:
               example: 3600
               type: string
             refresh_token:
-              description: The refresh token used to refresh the above access token when it expires. Please refer to Refresh Access Token API for more details.
+              description: The refresh token used to refresh the above access token when it
+                expires. Please refer to Refresh Access Token API for more
+                details.
               example: a47ab18c593703e4f83a274694db7422a8cfcb8f
               type: string
             scope:
@@ -1888,16 +2089,19 @@ components:
     DeviceAccessToken:
       properties:
         client_id:
-          description: Provide the client id that was created during the application registration process on Partners Portal.
+          description: Provide the client id that was created during the application
+            registration process on Partners Portal.
           type: string
         device_code:
-          description: The device verification code. The device_code field from Get Device Code Response.
+          description: The device verification code. The device_code field from Get Device
+            Code Response.
           type: string
         dl_otp:
           description: The OTP collected from the user
           type: string
         grant_type:
-          description: The grant type, which must be “urn:ietf:params:oauth:grant-type:device_code”.
+          description: The grant type, which must be
+            “urn:ietf:params:oauth:grant-type:device_code”.
           example: urn:ietf:params:oauth:grant-type:device_code
           type: string
     DeviceAuthorizationCode:
@@ -1910,7 +2114,10 @@ components:
               user. The client device accepts the mobile number on the device from user and sends it in this parameter. Either the username or the mobile number must be provided.
           type: integer
         dl_username:
-          description: "DigiLocker username of the user. The client device accepts the username on the device from user and sends the username in this parameter. Either the username or the mobile number must be provided.   "
+          description: "DigiLocker username of the user. The client device accepts the
+            username on the device from user and sends the username in this
+            parameter. Either the username or the mobile number must be
+            provided.   "
           type: string
         response_type:
           description: The parameter must be set to device_code.
@@ -1943,17 +2150,26 @@ components:
     DocType:
       properties:
         clientid:
-          description: Provide the client id that was created during the application registration process on Partners Portal.
+          description: Provide the client id that was created during the application
+            registration process on Partners Portal.
           type: string
         hmac:
-          description: Provide SHA-256 encrypted value of the client secret, clientid and ts parameters above concatenated in this sequence (client secret, clientid, ts). The hmac parameter is used by DigiLocker to ensure the data integrity and authentication of the request. Use the Client Secret Key generated during the application registration process on Partners Portal as the client secret.
+          description: Provide SHA-256 encrypted value of the client secret, clientid and
+            ts parameters above concatenated in this sequence (client secret,
+            clientid, ts). The hmac parameter is used by DigiLocker to ensure
+            the data integrity and authentication of the request. Use the Client
+            Secret Key generated during the application registration process on
+            Partners Portal as the client secret.
           format: binary
           type: string
         orgid:
-          description: The organization id for the issuer in DigiLocker. This organization id is returned in Get List of Issuers API mentioned earlier.
+          description: The organization id for the issuer in DigiLocker. This organization
+            id is returned in Get List of Issuers API mentioned earlier.
           type: string
         ts:
-          description: Provide a timestamp value in UNIX (or POSIX) format in IST time zone in seconds. This timestamp value must not be older than 30 minutes.
+          description: Provide a timestamp value in UNIX (or POSIX) format in IST time
+            zone in seconds. This timestamp value must not be older than 30
+            minutes.
           type: string
     DocTypeResponse:
       properties:
@@ -2229,7 +2445,8 @@ components:
     FileUpload:
       properties:
         Content-Type:
-          description: The mime type of the file e.g. image/jpg, image/jpeg, image/png, application/pdf.
+          description: The mime type of the file e.g. image/jpg, image/jpeg, image/png,
+            application/pdf.
           type: string
     FileUploadResponse:
       properties:
@@ -2248,14 +2465,22 @@ components:
     GetStatistics:
       properties:
         clientid:
-          description: Provide the client id that was created during the application registration process on Partners Portal.
+          description: Provide the client id that was created during the application
+            registration process on Partners Portal.
           type: string
         hmac:
-          description: Provide SHA-256 encrypted value of the client secret, clientid and ts parameters above concatenated in this sequence (client secret, clientid, ts). The hmac parameter is used by DigiLocker to ensure the data integrity and authentication of the request. Use the Client Secret Key generated during the application registration process on Partners Portal as the client secret.
+          description: Provide SHA-256 encrypted value of the client secret, clientid and
+            ts parameters above concatenated in this sequence (client secret,
+            clientid, ts). The hmac parameter is used by DigiLocker to ensure
+            the data integrity and authentication of the request. Use the Client
+            Secret Key generated during the application registration process on
+            Partners Portal as the client secret.
           format: binary
           type: string
         ts:
-          description: Provide a timestamp value in UNIX (or POSIX) format in IST time zone in seconds. This timestamp value must not be older than 30 minutes.
+          description: Provide a timestamp value in UNIX (or POSIX) format in IST time
+            zone in seconds. This timestamp value must not be older than 30
+            minutes.
           type: string
     GetStatisticsResponse:
       properties:
@@ -2319,10 +2544,11 @@ components:
           example: "25873490"
           type: string
         yearwise_authentic_documents:
-          description: List of cumulative year-wise counts of authentic documents in DigiLocker.
+          description: List of cumulative year-wise counts of authentic documents in
+            DigiLocker.
           properties:
             count:
-              description: >-
+              description: |-
                 Count of cumulative user authentic documents in
                   the given year.
               example: "10134567"
@@ -2397,14 +2623,22 @@ components:
     Issuer:
       properties:
         clientid:
-          description: Provide the client id that was created during the application registration process on Partners Portal.
+          description: Provide the client id that was created during the application
+            registration process on Partners Portal.
           type: string
         hmac:
-          description: Provide SHA-256 encrypted value of the client secret, clientid and ts parameters above concatenated in this sequence (client secret, clientid, ts). The hmac parameter is used by DigiLocker to ensure the data integrity and authentication of the request. Use the Client Secret Key generated during the application registration process on Partners Portal as the client secret.
+          description: Provide SHA-256 encrypted value of the client secret, clientid and
+            ts parameters above concatenated in this sequence (client secret,
+            clientid, ts). The hmac parameter is used by DigiLocker to ensure
+            the data integrity and authentication of the request. Use the Client
+            Secret Key generated during the application registration process on
+            Partners Portal as the client secret.
           format: binary
           type: string
         ts:
-          description: Provide a timestamp value in UNIX (or POSIX) format in IST time zone in seconds. This timestamp value must not be older than 30 minutes.
+          description: Provide a timestamp value in UNIX (or POSIX) format in IST time
+            zone in seconds. This timestamp value must not be older than 30
+            minutes.
           type: string
     IssuerResponse:
       properties:
@@ -2440,49 +2674,69 @@ components:
     PullDocumentSchema:
       properties:
         chasis_no:
-          description: Other parameters required for fetching a document as listed in paramname field of Get Search Parameters API.
+          description: Other parameters required for fetching a document as listed in
+            paramname field of Get Search Parameters API.
           type: string
         consent:
-          description: The consent indicator from the user for performing demographic authentication using Aadhaar details. This Partner Application must capture the user consent for performing the Aadhaar demographic authentication. The possible values are ‘Y’ and ‘N’. The sign up request will be processed only when this indicator is ‘Y’.
+          description: The consent indicator from the user for performing demographic
+            authentication using Aadhaar details. This Partner Application must
+            capture the user consent for performing the Aadhaar demographic
+            authentication. The possible values are ‘Y’ and ‘N’. The sign up
+            request will be processed only when this indicator is ‘Y’.
           type: string
         doctype:
           description: A 5 character unique document type provided by DigiLocker.
           type: string
         orgid:
-          description: The organization id for the issuer in DigiLocker. This organization id is returned in Get List of Issuers API mentioned above.
+          description: The organization id for the issuer in DigiLocker. This organization
+            id is returned in Get List of Issuers API mentioned above.
           type: string
         reg_no:
-          description: Other parameters required for fetching a document as listed in paramname field of Get Search Parameters API.
+          description: Other parameters required for fetching a document as listed in
+            paramname field of Get Search Parameters API.
           type: string
     PushUri:
       properties:
         action:
-          description: Action that needs to be taken for the Aadhaar number and URI combination. Possible values are A for adding a new URI, U for updating an already added URI details or D for deleting the URI.
+          description: Action that needs to be taken for the Aadhaar number and URI
+            combination. Possible values are A for adding a new URI, U for
+            updating an already added URI details or D for deleting the URI.
           type: string
         clientid:
-          description: Provide the client id that was created during the application registration process on Partners Portal.
+          description: Provide the client id that was created during the application
+            registration process on Partners Portal.
           type: string
         digilockerid:
-          description: This is the DigiLocker Id of the user that was acquired using Get User Details API.
+          description: This is the DigiLocker Id of the user that was acquired using Get
+            User Details API.
           type: integer
         docid:
-          description: A unique number of the document. This id will be unique within the document type issued by the issuer.
+          description: A unique number of the document. This id will be unique within the
+            document type issued by the issuer.
           type: string
         hmac:
-          description: Provide SHA-256 encrypted value of the client secret, clientid and ts parameters above concatenated in this sequence (client secret, clientid, ts). The hmac parameter is used by DigiLocker to ensure the data integrity and authentication of the request. Use the Client Secret Key generated during the application registration process on Partners Portal as the client secret.
+          description: Provide SHA-256 encrypted value of the client secret, clientid and
+            ts parameters above concatenated in this sequence (client secret,
+            clientid, ts). The hmac parameter is used by DigiLocker to ensure
+            the data integrity and authentication of the request. Use the Client
+            Secret Key generated during the application registration process on
+            Partners Portal as the client secret.
           format: binary
           type: string
         issuedate:
           description: The issue date of the document in DDMMYYYY format.
           type: string
         ts:
-          description: Provide a timestamp value in UNIX (or POSIX) format in IST time zone in seconds. This timestamp value must not be older than 30 minutes.
+          description: Provide a timestamp value in UNIX (or POSIX) format in IST time
+            zone in seconds. This timestamp value must not be older than 30
+            minutes.
           type: string
         uri:
           description: This is the unique identifier of the document.
           type: string
         validfrom:
-          description: The date from which the document is valid in DDMMYYYY format. This may be same as the issue date.
+          description: The date from which the document is valid in DDMMYYYY format. This
+            may be same as the issue date.
           type: integer
         validto:
           description: The expiry date of the document in DDMMYYYY format.
@@ -2544,7 +2798,9 @@ components:
           description: auth_failure
           type: string
         error_description:
-          description: The data on Aadhaar does not match with one or more of Aadhaar, Name, DOB and Gender data provided. Aadhaar demographic authentication failure.
+          description: The data on Aadhaar does not match with one or more of Aadhaar,
+            Name, DOB and Gender data provided. Aadhaar demographic
+            authentication failure.
           type: string
       type: object
     Response12:
@@ -2553,7 +2809,14 @@ components:
           description: invalid_parameter
           type: string
         error_description:
-          description: One or more of the mandatory parameters is missing or invalid. The error description text will contain one or more of the following error texts:|-  uid parameter is missing or invalid  Name parameter is missing or invalid  Dob parameter is missing or invalid  Gender parameter is missing or invalid  Mobile parameter is missing or invalid  Verification parameter is missing or invalid  Consent parameter is missing or invalid  Timestamp parameter is missing or invalid  HMAC parameter is missing or invalid
+          description: One or more of the mandatory parameters is missing or invalid. The
+            error description text will contain one or more of the following
+            error texts:|-  uid parameter is missing or invalid  Name
+            parameter is missing or invalid  Dob parameter is missing or
+            invalid  Gender parameter is missing or invalid  Mobile parameter
+            is missing or invalid  Verification parameter is missing or invalid
+             Consent parameter is missing or invalid  Timestamp parameter is
+            missing or invalid  HMAC parameter is missing or invalid
           type: string
       type: object
     Response13:
@@ -2562,7 +2825,8 @@ components:
           description: repository_service_configerror
           type: string
         error_description:
-          description: The issuer service is not available. Please contact DigiLocker support.
+          description: The issuer service is not available. Please contact DigiLocker
+            support.
           type: string
       type: object
     Response14:
@@ -2589,7 +2853,11 @@ components:
           description: pull_response_pending
           type: string
         error_description:
-          description: The details provided above do not exactly match with the details on the certificate. Your request has been forwarded to the Issuer department. The Issuer department will verify the details provided above. If the verification is successful, your certificate will be made available in the Issued Documents section of your DigiLocker.
+          description: The details provided above do not exactly match with the details on
+            the certificate. Your request has been forwarded to the Issuer
+            department. The Issuer department will verify the details provided
+            above. If the verification is successful, your certificate will be
+            made available in the Issued Documents section of your DigiLocker.
           type: string
       type: object
     Response17:
@@ -2607,7 +2875,8 @@ components:
           description: aadhaar_not_linked
           type: string
         error_description:
-          description: To access issued documents, please link your Aadhaar number to your DigiLocker account.
+          description: To access issued documents, please link your Aadhaar number to your
+            DigiLocker account.
           type: string
       type: object
     Response2:
@@ -2688,7 +2957,8 @@ components:
           description: otp_error
           type: string
         error_description:
-          description: OTP could not be sent as the account may not have a valid mobile or a valid email.
+          description: OTP could not be sent as the account may not have a valid mobile or
+            a valid email.
           type: string
       type: object
     ResponseFour:
@@ -2697,7 +2967,8 @@ components:
           description: multiple_mobile_accounts
           type: string
         error_description:
-          description: The mobile number provided is associated with more than one DigiLocker accounts. Please login using username.
+          description: The mobile number provided is associated with more than one
+            DigiLocker accounts. Please login using username.
           type: string
       type: object
     ResponseOne:
@@ -2748,20 +3019,29 @@ components:
     SearchParameters:
       properties:
         clientid:
-          description: Provide the client id that was created during the application registration process on Partners Portal.
+          description: Provide the client id that was created during the application
+            registration process on Partners Portal.
           type: string
         doctype:
           description: A 5 character unique document type provided by DigiLocker.
           type: string
         hmac:
-          description: Provide SHA-256 encrypted value of the client secret, clientid and ts parameters above concatenated in this sequence (client secret, clientid, ts). The hmac parameter is used by DigiLocker to ensure the data integrity and authentication of the request. Use the Client Secret Key generated during the application registration process on Partners Portal as the client secret.
+          description: Provide SHA-256 encrypted value of the client secret, clientid and
+            ts parameters above concatenated in this sequence (client secret,
+            clientid, ts). The hmac parameter is used by DigiLocker to ensure
+            the data integrity and authentication of the request. Use the Client
+            Secret Key generated during the application registration process on
+            Partners Portal as the client secret.
           format: binary
           type: string
         orgid:
-          description: The organization id for the issuer in DigiLocker. This organization id is returned in Get List of Issuers API mentioned earlier.
+          description: The organization id for the issuer in DigiLocker. This organization
+            id is returned in Get List of Issuers API mentioned earlier.
           type: string
         ts:
-          description: Provide a timestamp value in UNIX (or POSIX) format in IST time zone in seconds. This timestamp value must not be older than 30 minutes.
+          description: Provide a timestamp value in UNIX (or POSIX) format in IST time
+            zone in seconds. This timestamp value must not be older than 30
+            minutes.
           type: string
     SearchParametersResponse:
       items:
@@ -2787,20 +3067,32 @@ components:
     VerifyAccount:
       properties:
         clientid:
-          description: Provide the client id that was created during the application registration process on Partners Portal.
+          description: Provide the client id that was created during the application
+            registration process on Partners Portal.
           type: string
         hmac:
-          description: Provide SHA-256 encrypted value of the client secret, clientid and ts parameters above concatenated in this sequence (client secret, clientid, ts). The hmac parameter is used by DigiLocker to ensure the data integrity and authentication of the request. Use the Client Secret Key generated during the application registration process on Partners Portal as the client secret.
+          description: Provide SHA-256 encrypted value of the client secret, clientid and
+            ts parameters above concatenated in this sequence (client secret,
+            clientid, ts). The hmac parameter is used by DigiLocker to ensure
+            the data integrity and authentication of the request. Use the Client
+            Secret Key generated during the application registration process on
+            Partners Portal as the client secret.
           format: binary
           type: string
         mobile:
-          description: This is the mobile number of the user. DigiLocker will check whether an account exists for this mobile number. Either uid or mobile is required to verify whether an account exists.
+          description: This is the mobile number of the user. DigiLocker will check
+            whether an account exists for this mobile number. Either uid or
+            mobile is required to verify whether an account exists.
           type: integer
         ts:
-          description: Provide a timestamp value in UNIX (or POSIX) format in IST time zone in seconds. This timestamp value must not be older than 30 minutes.
+          description: Provide a timestamp value in UNIX (or POSIX) format in IST time
+            zone in seconds. This timestamp value must not be older than 30
+            minutes.
           type: string
         uid:
-          description: This is the Aadhaar number of the user. DigiLocker will check whether an account exists for this Aadhaar number. Either uid or mobile is required to verify whether an account exists.
+          description: This is the Aadhaar number of the user. DigiLocker will check
+            whether an account exists for this Aadhaar number. Either uid or
+            mobile is required to verify whether an account exists.
           type: integer
     VerifyAccountResponse:
       properties:
@@ -2809,7 +3101,8 @@ components:
           example: 123e4567-e89b-12d3-a456-426655440000
           type: string
         registered:
-          description: true indicates that the provided Aadhaar/mobile number is already registered and false indicates otherwise.
+          description: true indicates that the provided Aadhaar/mobile number is already
+            registered and false indicates otherwise.
           example: "true"
           type: string
       required:

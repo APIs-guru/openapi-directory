@@ -4,7 +4,7 @@ info:
   contact:
     name: Auckland Museum API Team
     url: http://www.aucklandmuseum.com
-  description: >
+  description: |
     This is technical documentation for the Auckland Museum API
   license:
     name: Auckland Museum licence
@@ -34,30 +34,24 @@ tags:
 paths:
   "/id/media/{path}":
     get:
-      description: >
+      description: |
         Gets `media` at a given path
       operationId: get media
       parameters:
-        - description: >
+        - description: |
             The media `identifier`
           in: path
           name: path
           required: true
           type: string
-        - description: >
+        - description: |
             The desired media `rendering`
 
-
             Possible values:
-
             * `original.jpg`
-
             * `original.pdf`
-
             * `thumbnail.jpg` (fixed with 70px)
-
             * `standard.jpg` (fixed width 440px and height 440px)
-
             * `preview.jpg` (fixed height 100px)
           in: query
           name: rendering
@@ -68,12 +62,13 @@ paths:
         - application/pdf
       responses:
         "200":
-          description: >
+          description: |
             `media` found
         "404":
-          description: >
+          description: |
             `media` not found
-      summary: Retrieve media associated with Collections and Cenotaph subjects in Auckland Museum
+      summary: Retrieve media associated with Collections and Cenotaph subjects in
+        Auckland Museum
       tags:
         - media
   "/id/{identifier}":
@@ -88,7 +83,7 @@ paths:
           - `application/json` - the response will be a simple JSON Object with keys (predicates) and values (objects).
       operationId: get subject
       parameters:
-        - description: >
+        - description: |
             The identifier path of the `subject` you're looking for
           in: path
           name: identifier
@@ -100,10 +95,10 @@ paths:
         - application/json
       responses:
         "200":
-          description: >
+          description: |
             `subject` found
         "404":
-          description: >
+          description: |
             `subject` not found
       summary: Explore details about a given subject node
       tags:
@@ -111,7 +106,8 @@ paths:
   "/search/{index}/{operation}":
     get:
       description: >
-        Use this endpoint to perform simple search queries for finding information and subjects you may be interested in
+        Use this endpoint to perform simple search queries for finding
+        information and subjects you may be interested in
 
 
         Searches performed via this endpoint run against an [Elastic](www.elastic.co) server. This endpoint mirrors the Elastic search API documented [here](https://www.elastic.co/guide/en/elasticsearch/reference/1.5/search-search.html)
@@ -123,19 +119,17 @@ paths:
           - `cenotaph` index to perform searches over Cenotaph data
       operationId: get search
       parameters:
-        - description: >
+        - description: |
             search index name
-
             Possible values:
-
             * `collectionsonline`
-
             * `cenotaph`
           in: path
           name: index
           required: true
           type: string
-        - description: One of the supported elasticsearch operations like `_search` or `_suggest`
+        - description: One of the supported elasticsearch operations like `_search` or
+            `_suggest`
           in: path
           name: operation
           required: true
@@ -152,14 +146,18 @@ paths:
           description: bad request
         "404":
           description: not found
-      summary: Perform simple search queries over Auckland Museum Collections and Cenotaph data
+      summary: Perform simple search queries over Auckland Museum Collections and
+        Cenotaph data
       tags:
         - search
     post:
       consumes:
         - application/json
       description: >
-        Searches performed via this endpoint run against an [Elastic](www.elastic.co) server. This endpoint mirrors the Elastic search API documented [here](https://www.elastic.co/guide/en/elasticsearch/reference/1.5/search-search.html)
+        Searches performed via this endpoint run against an
+        [Elastic](www.elastic.co) server. This endpoint mirrors the Elastic
+        search API documented
+        [here](https://www.elastic.co/guide/en/elasticsearch/reference/1.5/search-search.html)
 
 
         Use the
@@ -167,19 +165,17 @@ paths:
           - `cenotaph` index to perform searches over Cenotaph data
       operationId: post search
       parameters:
-        - description: >
+        - description: |
             search index name
-
             Possible values:
-
             * `collectionsonline`
-
             * `cenotaph`
           in: path
           name: index
           required: true
           type: string
-        - description: One of the supported elasticsearch operations like `_search` or `_suggest`
+        - description: One of the supported elasticsearch operations like `_search` or
+            `_suggest`
           in: path
           name: operation
           required: true
@@ -198,13 +194,16 @@ paths:
           description: bad request
         "404":
           description: not found
-      summary: Perform complex search queries over Auckland Museum Collections and Cenotaph data
+      summary: Perform complex search queries over Auckland Museum Collections and
+        Cenotaph data
       tags:
         - search
   /sparql:
     get:
       description: >
-        You can execute your [SPARQL](http://www.w3.org/TR/rdf-sparql-query/) queries against this endpoint.
+        You can execute your
+        [SPARQL](http://www.w3.org/TR/rdf-sparql-query/) queries against this
+        endpoint.
 
 
         The sparql query should be provided as the value of the request parameter `query`.
@@ -249,7 +248,9 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
       description: >
-        You can execute your [SPARQL](http://www.w3.org/TR/rdf-sparql-query/) queries against this endpoint.
+        You can execute your
+        [SPARQL](http://www.w3.org/TR/rdf-sparql-query/) queries against this
+        endpoint.
 
         The sparql query should be provided as the value of the request parameter `query`.
 

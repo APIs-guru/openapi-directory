@@ -65,7 +65,9 @@ paths:
         - all
   /events/event-socket:
     get:
-      description: 'Retrieve events as they come through a websocket connection. To have authorization, you have to send a `{ "message_type": "oauth", "authorization": "oauth authorization string" }` message'
+      description: 'Retrieve events as they come through a websocket connection. To
+        have authorization, you have to send a `{ "message_type": "oauth",
+        "authorization": "oauth authorization string" }` message'
       responses:
         default:
           description: <No description>
@@ -324,7 +326,9 @@ paths:
         - logs
   "/logs/logs-socket/{appId}":
     get:
-      description: 'Retrieve logs as they come through a websocket connection. To have authorization, you have to send a `{ "message_type": "oauth", "authorization": "oauth authorization string" }` message'
+      description: 'Retrieve logs as they come through a websocket connection. To have
+        authorization, you have to send a `{ "message_type": "oauth",
+        "authorization": "oauth authorization string" }` message'
       parameters:
         - description: Application Id
           in: path
@@ -1749,7 +1753,9 @@ paths:
     post:
       consumes:
         - application/json
-      description: "Creates an application. If you want to create a Github app, you need to replace the oauthApp field with what you will find here: https://github.com/CleverCloud/doc.clever-cloud.com/issues/179"
+      description: "Creates an application. If you want to create a Github app, you
+        need to replace the oauthApp field with what you will find here:
+        https://github.com/CleverCloud/doc.clever-cloud.com/issues/179"
       operationId: postOrganisationsIdApplications
       parameters:
         - in: path
@@ -2606,7 +2612,8 @@ paths:
         - organisations
   "/organisations/{id}/avatar":
     put:
-      description: If you want to upload an image from your computer, send the image in the body of the request without anything else.
+      description: If you want to upload an image from your computer, send the image
+        in the body of the request without anything else.
       operationId: putOrganisationsIdAvatar
       parameters:
         - in: path
@@ -2615,9 +2622,8 @@ paths:
           type: string
       responses:
         "200":
-          description: >-
+          description: |-
             setOrgaAvatar
-
             setOrgaAvatarFromSource
       tags:
         - all
@@ -3823,7 +3829,9 @@ paths:
     post:
       consumes:
         - application/json
-      description: "Creates an application. If you want to create a Github app, you need to replace the oauthApp field with what you will find here: https://github.com/CleverCloud/doc.clever-cloud.com/issues/179"
+      description: "Creates an application. If you want to create a Github app, you
+        need to replace the oauthApp field with what you will find here:
+        https://github.com/CleverCloud/doc.clever-cloud.com/issues/179"
       operationId: postSelfApplications
       parameters:
         - in: body
@@ -4539,9 +4547,8 @@ paths:
             $ref: "#/definitions/Avatar"
       responses:
         "200":
-          description: >-
+          description: |-
             setUserAvatar
-
             setUserAvatarFromSource
       tags:
         - all
@@ -5206,9 +5213,8 @@ paths:
             $ref: "#/definitions/WannabeUser"
       responses:
         "200":
-          description: >-
+          description: |-
             createUser
-
             createUserFromForm
       tags:
         - all
@@ -5486,7 +5492,8 @@ definitions:
       - zone
     type: object
   Avatar:
-    description: If you want to upload an image from your computer, send the image in the body of the request without anything else.
+    description: If you want to upload an image from your computer, send the image
+      in the body of the request without anything else.
     properties:
       source:
         description: ""
@@ -6008,10 +6015,12 @@ definitions:
         description: The mail to contact in case of issue with this addon
         type: string
       twitterName:
-        description: The name of the user to contact on twitter for this addon (could be empty)
+        description: The name of the user to contact on twitter for this addon (could be
+          empty)
         type: string
       website:
-        description: The website of the provider. If the addon is developped by clever-cloud, the site is "http://www.clever-cloud.com/"
+        description: The website of the provider. If the addon is developped by
+          clever-cloud, the site is "http://www.clever-cloud.com/"
         type: string
     required:
       - analyticsId

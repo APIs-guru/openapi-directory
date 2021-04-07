@@ -9,7 +9,8 @@ info:
   contact:
     name: eBay Inc,
     x-twitter: ebay
-  description: This API allows 3rd party developers to translate item title, description, search query.
+  description: This API allows 3rd party developers to translate item title,
+    description, search query.
   license:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
@@ -80,7 +81,8 @@ components:
           description: Identifies the type of erro.
           type: string
         domain:
-          description: Name for the primary system where the error occurred. This is relevant for application errors.
+          description: Name for the primary system where the error occurred. This is
+            relevant for application errors.
           type: string
         errorId:
           description: A unique number to identify the error.
@@ -95,7 +97,8 @@ components:
           description: A more detailed explanation of the error.
           type: string
         message:
-          description: Information on how to correct the problem, in the end user's terms and language where applicable.
+          description: Information on how to correct the problem, in the end user's terms
+            and language where applicable.
           type: string
         outputRefIds:
           description: An array of request elements most closely associated to the error.
@@ -103,12 +106,15 @@ components:
             type: string
           type: array
         parameters:
-          description: An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned.
+          description: An array of name/value pairs that describe details the error
+            condition. These are useful when multiple errors are returned.
           items:
             $ref: "#/components/schemas/ErrorParameter"
           type: array
         subdomain:
-          description: "Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc."
+          description: "Further helps indicate which subsystem the error is coming from.
+            System subcategories include: Initialization, Serialization,
+            Security, Monitoring, Rate Limiting, etc."
           type: string
       type: object
     ErrorParameter:
@@ -123,7 +129,10 @@ components:
     TranslateRequest:
       properties:
         from:
-          description: The language of the input text. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/translation/types/LanguageEnum.html'>eBay API documentation</a>
+          description: The language of the input text. For implementation help, refer to
+            <a
+            href='https://developer.ebay.com/devzone/rest/api-ref/translation/types/LanguageEnum.html'>eBay
+            API documentation</a>
           type: string
         text:
           description: The input text.
@@ -131,10 +140,16 @@ components:
             type: string
           type: array
         to:
-          description: The language to use for the translation of th einput text. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/translation/types/LanguageEnum.html'>eBay API documentation</a>
+          description: The language to use for the translation of th einput text. For
+            implementation help, refer to <a
+            href='https://developer.ebay.com/devzone/rest/api-ref/translation/types/LanguageEnum.html'>eBay
+            API documentation</a>
           type: string
         translationContext:
-          description: The context of the translation. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/translation/types/TranslationContextEnum.html'>eBay API documentation</a>
+          description: The context of the translation. For implementation help, refer to
+            <a
+            href='https://developer.ebay.com/devzone/rest/api-ref/translation/types/TranslationContextEnum.html'>eBay
+            API documentation</a>
           type: string
       type: object
     TranslateResponse:
@@ -148,13 +163,19 @@ components:
     Translation:
       properties:
         from:
-          description: The language of the input text. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/translation/types/LanguageEnum.html'>eBay API documentation</a>
+          description: The language of the input text. For implementation help, refer to
+            <a
+            href='https://developer.ebay.com/devzone/rest/api-ref/translation/types/LanguageEnum.html'>eBay
+            API documentation</a>
           type: string
         originalText:
           description: Original text.
           type: string
         to:
-          description: The language to use for the translation of th einput text. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/translation/types/LanguageEnum.html'>eBay API documentation</a>
+          description: The language to use for the translation of th einput text. For
+            implementation help, refer to <a
+            href='https://developer.ebay.com/devzone/rest/api-ref/translation/types/LanguageEnum.html'>eBay
+            API documentation</a>
           type: string
         translatedText:
           description: Translated text.
@@ -162,7 +183,8 @@ components:
       type: object
   securitySchemes:
     api_auth:
-      description: The security definitions for this API. Please check individual operations for applicable scopes.
+      description: The security definitions for this API. Please check individual
+        operations for applicable scopes.
       flows:
         clientCredentials:
           scopes:

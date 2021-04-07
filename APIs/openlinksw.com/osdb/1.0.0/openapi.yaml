@@ -28,7 +28,8 @@ info:
 paths:
   "/api/v1/actions/{serviceId}":
     get:
-      description: Returns an array of action descriptions for the actions supported by the given service
+      description: Returns an array of action descriptions for the actions supported
+        by the given service
       operationId: listActions
       parameters:
         - description: Service ID of the service for which actions are to be listed
@@ -53,7 +54,8 @@ paths:
                         - text/turtle
                       description: Retrieve a description of an LDP resource or container
                       encoding_types:
-                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                          example/response/1/description"
                       http_method: GET
                       name: LDP Read - Retrieve a resource description
                       parameters:
@@ -61,11 +63,13 @@ paths:
                           display_name: Resource URL
                           parameter_name: ldpResourceUri
                           permitted_values:
-                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                              example/response/1/description"
                           required: 1
                           type: uri
                       url:
-                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                          example/response/1/description"
                       url_template: (ldpResourceUri)
                   - action_id: update
                     description: Update an LDP RDF resource
@@ -82,11 +86,13 @@ paths:
                           display_name: Resource URL
                           parameter_name: ldpResourceUri
                           permitted_values:
-                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                              example/response/1/description"
                           required: 1
                           type: uri
                       url:
-                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                          example/response/1/description"
                       url_template: (ldpResourceUri)
                   - action_id: delete
                     description: Delete an LDP resource
@@ -94,7 +100,8 @@ paths:
                       content_types: ""
                       description: Deletes an LDP resource or container
                       encoding_types:
-                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                          example/response/1/description"
                       http_method: DELETE
                       name: LDP Delete - Delete an LDP resource
                       parameters:
@@ -102,11 +109,13 @@ paths:
                           display_name: Resource URL
                           parameter_name: ldpResourceUri
                           permitted_values:
-                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                              example/response/1/description"
                           required: 1
                           type: uri
                       url:
-                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                          example/response/1/description"
                       url_template: (ldpResourceUri)
                   - action_id: create
                     description: Create an LDP RDF resource
@@ -123,23 +132,27 @@ paths:
                           display_name: Suggested name
                           parameter_name: Slug
                           permitted_values:
-                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                              example/response/1/description"
                           required: 1
                           type: header
                         - description: The URL of an LDPR or LDPC. LDPCs must be terminated by /
                           display_name: Resource URL
                           parameter_name: ldpResourceUri
                           permitted_values:
-                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                              example/response/1/description"
                           required: 1
                           type: uri
                       url:
-                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                          example/response/1/description"
                       url_template: (ldpResourceUri)
                 status: success
               schema:
                 $ref: "#/components/schemas/ListActionsResponse"
-          description: An array of action descriptions for the actions supported by the given service.
+          description: An array of action descriptions for the actions supported by the
+            given service.
         default:
           content:
             application/json:
@@ -175,31 +188,41 @@ paths:
                 method: describe_action
                 response:
                   action_id: products
-                  description: Returns information about the Uber products offered at a given location
+                  description: Returns information about the Uber products offered at a given
+                    location
                   entry_point:
                     content_types:
                       - application/json
                       - text/turtle
                       - application/rdf+xml
                       - application/ld+json
-                    description: "The Products endpoint returns information about the Uber products offered at a given location.\ 
+                    description: "The Products endpoint returns information about the Uber products
+                      offered at a given location.\ 
 
-                      \    The response includes the display name and other details about each product.
+                      \    The response includes the
+                      display name and other details about each product.
 
                       \   \ 
 
-                      \    This endpoint does not reflect real-time availability of the products. Please use the Time\ 
+                      \    This endpoint does not reflect
+                      real-time availability of the products. Please use the
+                      Time\ 
 
-                      \    Estimates endpoint to determine real-time availability and ETAs of products.
+                      \    Estimates endpoint to determine
+                      real-time availability and ETAs of products.
 
 
-                      \    In some markets, the list of products returned from this endpoint may vary by the time of\ 
+                      \    In some markets, the list of
+                      products returned from this endpoint may vary by the time
+                      of\ 
 
-                      \    day due to time restrictions on when that product may be utilized.
+                      \    day due to time restrictions on
+                      when that product may be utilized.
 
                       \   "
                     encoding_types:
-                      $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                      $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                        example/response/1/description"
                     http_method: GET
                     name: Products — Uber products at a given location
                     parameters:
@@ -207,14 +230,16 @@ paths:
                         display_name: Longitude
                         parameter_name: longitude
                         permitted_values:
-                          $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                          $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                            example/response/1/description"
                         required: 1
                         type: query
                       - description: Latitude component of location
                         display_name: Latitude
                         parameter_name: latitude
                         permitted_values:
-                          $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
+                          $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/\
+                            example/response/1/description"
                         required: 1
                         type: query
                     url: https://sandbox-api.uber.com/v1/products
@@ -235,7 +260,8 @@ paths:
   "/api/v1/actions/{serviceId}/{actionId}/exec":
     post:
       description: >-
-        Executes a registered service action and returns any output from the action.
+        Executes a registered service action and returns any output from
+        the action.
 
         The data returned in the POST response body may be: 
 
@@ -288,13 +314,16 @@ paths:
                   longitude: "-122.41823"
             schema:
               $ref: "#/components/schemas/ExecBody"
-        description: Any parameters required by the action are supplied as a JSON object in the request body. The properties of this object depend on the service action being invoked.
+        description: Any parameters required by the action are supplied as a JSON object
+          in the request body. The properties of this object depend on the
+          service action being invoked.
       responses:
         2XX:
           content:
             "*/*":
               example:
-                description: The response from an action varies depending on the target service invoked by the action.
+                description: The response from an action varies depending on the target service
+                  invoked by the action.
           description: Response from an OSDB action invocation.
         default:
           content:
@@ -380,7 +409,8 @@ paths:
         - OSDB
   /api/v1/login:
     get:
-      description: Logs a user into the OSDB server, authenticating them by their WebID and returning an OSDB session ID in cookie osdb.sid
+      description: Logs a user into the OSDB server, authenticating them by their
+        WebID and returning an OSDB session ID in cookie osdb.sid
       operationId: login
       responses:
         "200":
@@ -453,7 +483,8 @@ paths:
                 status: success
               schema:
                 $ref: "#/components/schemas/ListServicesResponse"
-          description: An array of service descriptions for all services registered with the OSDB server
+          description: An array of service descriptions for all services registered with
+            the OSDB server
         default:
           content:
             application/json:
@@ -478,7 +509,9 @@ paths:
                   description: The URL of the resource containing the service description to load.
                   type: string
                 service_moniker:
-                  description: "Service ID to be used to uniquely identify the service. (Optional: Required for anonymous services or to override the service name in the service description.)"
+                  description: "Service ID to be used to uniquely identify the service. (Optional:
+                    Required for anonymous services or to override the service
+                    name in the service description.)"
                   type: string
               required:
                 - service_description_url
@@ -718,7 +751,8 @@ components:
           description: A short description of the action. Optional - may be null.
           type: string
         encoding_types:
-          description: The supported MIME type(s) for an EntryPoint request. Null if not applicable.
+          description: The supported MIME type(s) for an EntryPoint request. Null if not
+            applicable.
           items:
             type: string
           type: array
@@ -731,7 +765,8 @@ components:
             - DELETE
           type: string
         name:
-          description: A word or short phrase to be used as the action's display name. Optional - may be null.
+          description: A word or short phrase to be used as the action's display name.
+            Optional - may be null.
           type: string
         parameters:
           description: Descriptions of the EntryPoint parameters. Null if not applicable.
@@ -743,7 +778,9 @@ components:
           format: uri
           type: string
         url_template:
-          description: The EntryPoint's URL template. Only required if the entry point URL is parameterized. Property 'url' will be null if url_template is non-null.
+          description: The EntryPoint's URL template. Only required if the entry point URL
+            is parameterized. Property 'url' will be null if url_template is
+            non-null.
           format: uri-template
           type: string
       required:
@@ -759,16 +796,20 @@ components:
     EntryPointParameter:
       properties:
         description:
-          description: A short description of the parameter for use in the OSDB Action Console. Optional - may be null.
+          description: A short description of the parameter for use in the OSDB Action
+            Console. Optional - may be null.
           type: string
         display_name:
-          description: The parameter's display name in the OSDB Action Console. Optional - may be null.
+          description: The parameter's display name in the OSDB Action Console. Optional -
+            may be null.
           type: string
         parameter_name:
-          description: The parameter name as present in the HTTP request. e.g. the key name in a query string key-value pair.
+          description: The parameter name as present in the HTTP request. e.g. the key
+            name in a query string key-value pair.
           type: string
         permitted_values:
-          description: If the parameter accepts only a limited set of values, the allowed set of values. Null if not applicable.
+          description: If the parameter accepts only a limited set of values, the allowed
+            set of values. Null if not applicable.
           items:
             type: string
           type: array
@@ -779,7 +820,8 @@ components:
           minimum: 0
           type: integer
         type:
-          description: The type of the parameter, indicating its location in the HTTP request.
+          description: The type of the parameter, indicating its location in the HTTP
+            request.
           enum:
             - query
             - header
@@ -815,31 +857,46 @@ components:
     ExecBody:
       properties:
         action_specific_property1:
-          description: An example action specific property. There may be 0, 1 or more action specific properties, each holding an action specific parameter value.
+          description: An example action specific property. There may be 0, 1 or more
+            action specific properties, each holding an action specific
+            parameter value.
           type: string
         action_specific_property2:
-          description: An example action specific property. There may be 0, 1 or more action specific properties, each holding an action specific parameter value.
+          description: An example action specific property. There may be 0, 1 or more
+            action specific properties, each holding an action specific
+            parameter value.
           type: string
         osdb:body_data_encoding:
-          description: The media type of the data associated with osdb:body_data_raw or osdb:body_data_src_url. In the case of osdb:body_data_raw, this is the media type before base64 encoding.
+          description: The media type of the data associated with osdb:body_data_raw or
+            osdb:body_data_src_url. In the case of osdb:body_data_raw, this is
+            the media type before base64 encoding.
           type: string
         osdb:body_data_raw:
-          description: Input data for the action (e.g. CSV data). The data must be base64 encoded by the client. Alternatively, clients can use osdb:body_data_src_url to supply the input data via a web-accessible document.
+          description: Input data for the action (e.g. CSV data). The data must be base64
+            encoded by the client. Alternatively, clients can use
+            osdb:body_data_src_url to supply the input data via a web-accessible
+            document.
           format: byte
           type: string
         osdb:body_data_src_url:
-          description: URL of a resource containing input data for the action (e.g. CSV data). Clients can instead use osdb:body_data_raw to supply the input data directly.
+          description: URL of a resource containing input data for the action (e.g. CSV
+            data). Clients can instead use osdb:body_data_raw to supply the
+            input data directly.
           format: uri
           type: string
         osdb:output_type:
-          description: An OSDB-specific parameter controlling the action output type. If omitted, the native action output is returned.
+          description: An OSDB-specific parameter controlling the action output type. If
+            omitted, the native action output is returned.
           enum:
             - url_only
             - generate_rdf
             - display_rdf
           type: string
         osdb:response_format:
-          description: Preferred response MIME type. This must be an output MIME type supported natively by the action or, if 'osdb:output_type' is set to 'generate_rdf', a Virtuoso Sponger output format. i.e. 'application/ld+json', 'text/turtle' or 'application/rdf+xml'.
+          description: Preferred response MIME type. This must be an output MIME type
+            supported natively by the action or, if 'osdb:output_type' is set to
+            'generate_rdf', a Virtuoso Sponger output format. i.e.
+            'application/ld+json', 'text/turtle' or 'application/rdf+xml'.
           type: string
       type: object
     ListActionsResponse:
@@ -948,7 +1005,8 @@ components:
           description: A short description of the service.
           type: string
         import_source_uri:
-          description: The URI of the source service description document used to load the service into OSDB.
+          description: The URI of the source service description document used to load the
+            service into OSDB.
           format: uri
           type: string
         service_id:

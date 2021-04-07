@@ -8,37 +8,24 @@ info:
     email: team@appveyor.com
     name: AppVeyor Team
     url: https://www.appveyor.com/about/
-  description: >
+  description: |
     AppVeyor is a hosted continuous integration service which runs on Microsoft
-
     Windows.  The AppVeyor REST API provides a RESTful way to interact with the
-
     AppVeyor service.  This includes managing projects, builds, deployments,
-
     and the teams that build them.
 
-
     Additional help and discussion of the AppVeyor REST API is available at
-
     http://help.appveyor.com/discussions
 
-
     This Swagger definition is an **unofficial** description of the AppVeyor
-
     REST API maintained at https://github.com/kevinoid/appveyor-swagger
-
     Please report any issues or suggestions for this Swagger definition at
-
     https://github.com/kevinoid/appveyor-swagger/issues/new
-
 
     #### API Conventions
 
-
     Fields which are missing from update operations (`PUT` requests) are
-
     typically reset to their default values.  So although most fields are not
-
     technically required, they should usually be specified in practice.
   license:
     name: AppVeyor End User License Agreement (EULA)
@@ -91,19 +78,16 @@ parameters:
     type: string
   all:
     default: false
-    description: >-
+    description: |-
       Include not only `successful`, but also jobs with `failed`, and
-
       `cancelled` status.
     in: query
     name: all
     type: boolean
   artifactFileName:
-    description: >-
+    description: |-
       File name (or path) of a build artifact file.
-
       Corresponds to the `fileName` property of `ArtifactModel`.
-
       URL-encoding of slashes in parameter values is optional.
     in: path
     minLength: 1
@@ -139,7 +123,8 @@ parameters:
     type: string
   deploymentEnvironmentId:
     description: >
-      Deployment Environment ID (`deploymentEnvironmentId` property of `DeploymentEnvironment`)
+      Deployment Environment ID (`deploymentEnvironmentId` property of
+      `DeploymentEnvironment`)
     in: path
     minimum: 0
     name: deploymentEnvironmentId
@@ -182,13 +167,10 @@ parameters:
     name: pendingText
     type: string
   pr:
-    description: >
+    description: |
       Include PR builds in the search results?
-
       `true` - take artifact from PR builds only;
-
       `false` - do not look for artifact in PR builds;
-
       default/unspecified - look for artifact in both PR an non-PR builds.
     in: query
     name: pr
@@ -200,7 +182,12 @@ parameters:
     required: true
     type: string
   recordsNumber:
-    description: Number of results to include in the response. getProjectDeployments is documented to have a maximum of 20. It currently returns 500 Internal Server Error for recordsNumber <= 5. In the past it has returned 500 Internal Server Error for many different values which did not match the value used by the ci.appveyor.com web interface at the time.  As of 2018-09-08, the value used by the web interface is 10.
+    description: Number of results to include in the response. getProjectDeployments
+      is documented to have a maximum of 20. It currently returns 500 Internal
+      Server Error for recordsNumber <= 5. In the past it has returned 500
+      Internal Server Error for many different values which did not match the
+      value used by the ci.appveyor.com web interface at the time.  As of
+      2018-09-08, the value used by the web interface is 10.
     in: query
     minimum: 0
     name: recordsNumber
@@ -426,7 +413,9 @@ paths:
       tags:
         - Build
     put:
-      description: If `reRunIncomplete` is `true` and all jobs in the referenced build completed successfully, a 500 Internal Server Error is returned with the message "No failed or cancelled jobs in build with ID {buildId}".
+      description: If `reRunIncomplete` is `true` and all jobs in the referenced build
+        completed successfully, a 500 Internal Server Error is returned with the
+        message "No failed or cancelled jobs in build with ID {buildId}".
       externalDocs:
         url: https://www.appveyor.com/docs/api/projects-builds/#re-run-build
       operationId: reRunBuild
@@ -1929,23 +1918,17 @@ paths:
         - text/plain
       responses:
         "200":
-          description: >
+          description: |
             Success
 
-
             The schema type of this response could be specified as `file` to
-
             denote opaque binary data.  The generated Java code for `file`
-
             saves the response as a temporary file, making it a little more
-
             difficult to use and less efficient for common cases.  If `string`
-
             causes problems for other generators, can switch to `file` type.
           examples:
-            text/plain: >
+            text/plain: |
               version: 1.0.{build}
-
               build:
                 project: MySolution.sln
                 verbosity: minimal
@@ -2314,13 +2297,10 @@ definitions:
         title: Deployment name
         type: string
       path:
-        description: >
+        description: |
           Path glob of artifact files.
-
           Note that updateProject does not require path, but omitting path
-
           results in post-build error "Collecting artifacts... Value cannot
-
           be null.  Parameter name: input"
         type: string
       type:
@@ -2344,26 +2324,20 @@ definitions:
       type:
         $ref: "#/definitions/ArtifactType"
       url:
-        description: >
+        description: |
           This property has not been observed in JSON responses, but is
-
           present and nil in XML responses.
         type: string
     type: object
   ArtifactType:
-    description: >-
+    description: |-
       Possible values from `Push-AppveyorArtifact` cmdlet `-Type` parameter.
 
-
       The web UI only allows selection of `Auto`, `WebDeployPackage`, and
-
       unspecified (which it sends as the empty string but functions like
-
       omitting the property) for `updateProject`.
 
-
       Any string can be sent and will be saved/returned, but only these
-
       values have a function (as far as I am aware).
     enum:
       - Auto
@@ -2559,7 +2533,10 @@ definitions:
     type: object
   BuildWorkerImageName:
     description: >-
-      Defines the available build worker image templates used to provision a virtual machine for a build.  Images are updated regularly.  "Previous" selects the previous version of an image, for use as a temporary workaround for regressions.
+      Defines the available build worker image templates used to
+      provision a virtual machine for a build.  Images are updated
+      regularly.  "Previous" selects the previous version of an image, for use
+      as a temporary workaround for regressions.
 
       `Ubuntu` is the same as `Ubuntu1604`. `Previous Ubuntu` is the same as `Previous Ubuntu1604`.
 
@@ -2584,9 +2561,8 @@ definitions:
       - Windows Server 2019
     type: string
   CollaboratorAddition:
-    description: >
+    description: |
       Technically `roleId` has default value 0 and is not required, but
-
       since role 0 never exists it would always cause a 404 response.
     example:
       email: john@smith.com
@@ -2603,11 +2579,9 @@ definitions:
       - roleId
     type: object
   CollaboratorUpdate:
-    description: >
+    description: |
       Technically `userId` and `roleId` have default value 0 and are not
-
       required, but since user 0 and role 0 never exist it would always cause
-
       a 404 response.
     example:
       roleId: 3040
@@ -2675,15 +2649,11 @@ definitions:
           securityDescriptor:
             $ref: "#/definitions/SecurityDescriptor"
           tags:
-            description: >-
+            description: |-
               Comma-separated list of environment tags for dynamic grouping.
-
               Appears that any input is accepted.  The returned value only
-
               contains case-preserving but insensitive unique values where
-
               spaces around "," are removed but otherwise preserved.  Empty
-
               values and items are allowed.
             type: string
         type: object
@@ -2785,9 +2755,8 @@ definitions:
           environmentAccessKey:
             type: string
           projects:
-            description: >
+            description: |
               Projects available for selection in UI.
-
               Only present in response from getEnvironmentSettings.
             items:
               $ref: "#/definitions/DeploymentEnvironmentProject"
@@ -2941,15 +2910,11 @@ definitions:
             $ref: "#/definitions/ProjectLookupModel"
         type: object
   Error:
-    description: >
+    description: |
       Schema of object returned in 4XX and 5XX responses.
-
       Note:  The name is unfortunate, since it conflicts with `java.lang.Error`
-
       and other generic error classes.  It is the name used in XML responses,
-
       so it is used for consistency and possible future XML deserialization
-
       support.
     properties:
       message:
@@ -2959,11 +2924,9 @@ definitions:
           items:
             type: string
           type: array
-        description: >
+        description: |
           When present, this property is a map of property names in the format
-
           `request.<capitalized name>` to an `Array` of validation error
-
           message strings for the property.
         type: object
     required:
@@ -3054,103 +3017,59 @@ definitions:
       - VSOTeamRoom
     type: string
   NotificationSettings:
-    description: >
+    description: |
       This type is the union of the settings types for each of the various
-
       notification types supported by the API.  The properties correspond to
-
       the following notification types:
 
-
       #### All Types
-
       - onBuildSuccess
-
       - onBuildFailure
-
       - onBuildStatusChanged
 
-
       #### Campfire
-
       - account
-
       - authToken
-
       - room
-
       - template
-
 
       #### Email
-
       - subjectTemplate
-
       - bodyTemplate
-
       - recipients
-
       - recipientsValue
 
-
       #### GitHubPullRequest
-
       - authToken
-
       - template
-
 
       #### HipChat
-
       - authToken
-
       - from
-
       - room
-
       - template
-
       - serverUrl
 
-
       #### Slack
-
       - incomingWebhookUrl
-
       - authToken
-
       - channel
-
       - template
 
-
       #### Webhook
-
       - method
-
       - url
-
       - headers
-
       - headersValue
-
       - addCustomRequestBody
-
       - customRequestBodyContentType
-
       - customRequestBody
 
-
       #### VSOTeamRoom
-
       - vsoAccount
-
       - username
-
       - password
-
       - room
-
       - template
     properties:
       $type:
@@ -3265,59 +3184,33 @@ definitions:
       - Windows
     type: string
   PermissionName:
-    description: >
+    description: |
       Available permission names.  The names correspond to the following groups:
-
       #### AccountPermission
-
       - ManageApplicationAuthorizations
-
       - UpdateAccountDetails
-
       - UpdateBillingDetails
-
       #### BuildEnvironmentPermission
-
       - ConfigureBuildEnvironment
-
       #### DenyPermission
-
       - DenyAllProjectsEnvironments
-
       #### EnvironmentsPermission
-
       - DeployToEnvironment
-
       - ManageEnvironments
-
       - UpdateEnvironmentSettings
-
       #### ProjectsPermission
-
       - ManageProjects
-
       - RunProjectBuild
-
       - UpdateProjectSettings
-
       #### RolesPermission
-
       - AddRole
-
       - DeleteRole
-
       - UpdateRoleDetails
-
       #### UserPermission
-
       - ConfigureApiKeys
-
       #### UsersPermission
-
       - AddUser
-
       - DeleteUser
-
       - UpdateUserDetails
     enum:
       - ManageApplicationAuthorizations
@@ -3342,9 +3235,8 @@ definitions:
   PermissionState:
     properties:
       allowed:
-        description: >
+        description: |
           State of the named permission.  `true` to allow, `false` to deny,
-
           missing to inherit.
         type: boolean
       description:
@@ -3417,26 +3309,25 @@ definitions:
             type: boolean
           securityDescriptor:
             $ref: "#/definitions/SecurityDescriptor"
-            description: Not present in response from addProject. Not always present in response from getProjects (only after updateProject or startBuild?).
+            description: Not present in response from addProject. Not always present in
+              response from getProjects (only after updateProject or
+              startBuild?).
           skipBranchesWithoutAppveyorYml:
             type: boolean
           tags:
-            description: >-
+            description: |-
               Comma-separated list of project tags for dynamic grouping.
-
               Appears that any input is accepted.  The returned value only
-
               contains case-preserving but insensitive unique values where
-
               spaces around "," are removed but otherwise preserved.  Empty
-
               values and items are allowed.
             type: string
         required:
           - repositoryName
         type: object
   ProjectAddition:
-    description: "`repositoryAuthentication` is only used for git, mercurial, subversion `repositoryProvider`."
+    description: "`repositoryAuthentication` is only used for git, mercurial,
+      subversion `repositoryProvider`."
     example:
       repositoryName: FeodorFitsner/demo-app
       repositoryProvider: gitHub
@@ -3444,7 +3335,8 @@ definitions:
       repositoryAuthentication:
         $ref: "#/definitions/RepositoryAuthenticationType"
       repositoryName:
-        description: URL when repositoryProvider is git, mercurial, subversion username/project when repositoryProvider is gitHub
+        description: URL when repositoryProvider is git, mercurial, subversion
+          username/project when repositoryProvider is gitHub
         minLength: 1
         type: string
       repositoryPassword:
@@ -3623,7 +3515,9 @@ definitions:
           $ref: "#/definitions/Script"
         type: array
       matrixAllowFailures:
-        description: Although the names and values are not enforced, the combinations which are meaningful are documented at https://www.appveyor.com/docs/build-configuration/#allow-failing-jobs
+        description: Although the names and values are not enforced, the combinations
+          which are meaningful are documented at
+          https://www.appveyor.com/docs/build-configuration/#allow-failing-jobs
         items:
           $ref: "#/definitions/StoredNameValueMatrix"
         type: array
@@ -3966,7 +3860,8 @@ definitions:
           repositoryUsername:
             type: string
           scheduleCrontabExpression:
-            description: Build schedule as an NCrontab Expression.  See https://github.com/atifaziz/NCrontab/wiki/Crontab-Expression
+            description: Build schedule as an NCrontab Expression.  See
+              https://github.com/atifaziz/NCrontab/wiki/Crontab-Expression
             externalDocs:
               url: https://www.appveyor.com/docs/build-configuration/#scheduled-builds
             type: string
@@ -3997,7 +3892,9 @@ definitions:
         minimum: 0
         type: integer
       reRunIncomplete:
-        description: Set `reRunIncomplete` set to `false` (default value) for full build re-run. Set it set to `true` to rerun only failed or cancelled jobs in multijob build.
+        description: Set `reRunIncomplete` set to `false` (default value) for full build
+          re-run. Set it set to `true` to rerun only failed or cancelled jobs in
+          multijob build.
         type: boolean
     required:
       - buildId
@@ -4042,9 +3939,8 @@ definitions:
           - roleId
           - name
         type: object
-    description: >
+    description: |
       Technically `roleId` has default value 0 and is not required, but
-
       since role 0 never exists it would always cause a 404 response.
   RoleAce:
     properties:
@@ -4205,12 +4101,10 @@ definitions:
       isEncrypted:
         type: boolean
       value:
-        description: >-
+        description: |-
           Encrypted values can be created using the encryptValue operation.
 
-
           Empty environment variables are represented by missing (null) value
-
           rather than an empty string.
         type: string
     type: object
@@ -4237,16 +4131,12 @@ definitions:
         type: string
     type: object
   UnknownType:
-    description: >
+    description: |
       A schema for values which have an undocumented/unknown type.
 
-
       Although the type of such values could be left unspecified according to
-
       JSON Schema (and by extension OpenAPI 2.0), such unspecified types cause
-
       tool failures (e.g. swagger-codegen).  So this type can be used as a
-
       placeholder to prevent errors and document the behavior.
     enum:
       - unknown
@@ -4305,7 +4195,8 @@ definitions:
       successfulBuildNotification: all
       userId: 3019
   UserAccountRolesResults:
-    description: The roles property contains all roles, not only the role for which the user is a member.
+    description: The roles property contains all roles, not only the role for which
+      the user is a member.
     properties:
       roles:
         items:
@@ -4322,16 +4213,14 @@ definitions:
         $ref: "#/definitions/DeploymentNotificationFrequency"
       notifyWhenBuildStatusChangedOnly:
         default: false
-        description: >
+        description: |
           Note that this value is `true` on user creation, but behaves as
-
           `false` when not specified on update.
         type: boolean
       notifyWhenDeploymentStatusChangedOnly:
         default: false
-        description: >
+        description: |
           Note that this value is `true` on user creation, but behaves as
-
           `false` when not specified on update.
         type: boolean
       successfulBuildNotification:
@@ -4369,9 +4258,8 @@ definitions:
         minLength: 1
         type: string
       roleId:
-        description: >
+        description: |
           Technically `roleId` has default value 0 and is not required, but
-
           since role 0 never exists it would always cause a 404 response.
         minimum: 0
         type: integer

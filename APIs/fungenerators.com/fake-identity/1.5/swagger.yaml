@@ -8,7 +8,9 @@ info:
     name: Fun Generators
     url: http://fungenerators.com/
   description: >
-    Generate random fake identities (name, address, email, phone , credit card info etc). [Click here to subscribe](http://fungenerators.com/api/fakeidentity/)
+    Generate random fake identities (name, address, email, phone ,
+    credit card info etc). [Click here to
+    subscribe](http://fungenerators.com/api/fakeidentity/)
   termsOfService: https://fungenerators.com/terms
   title: Fake identity generation API
   version: "1.5"
@@ -49,7 +51,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "success": {
                     "total": 5
@@ -72,7 +74,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -101,7 +103,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 5
@@ -150,7 +152,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -179,7 +181,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": "5"
@@ -198,7 +200,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -227,7 +229,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 5
@@ -246,7 +248,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -268,7 +270,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 5
@@ -300,7 +302,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -329,7 +331,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 5
@@ -378,7 +380,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -391,7 +393,8 @@ paths:
         - Fake Identity
   /identity/person/creditcard:
     get:
-      description: Generate credit card details (number, type, expiration date, name on the card etc).
+      description: Generate credit card details (number, type, expiration date, name
+        on the card etc).
       parameters:
         - description: No of credit card details to return. Defaults to 1.
           format: integer
@@ -407,7 +410,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 5
@@ -451,7 +454,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -480,7 +483,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 5
@@ -499,7 +502,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -514,7 +517,8 @@ paths:
     get:
       description: Generate full name(s)
       parameters:
-        - description: Gender of the names. If not specified both gender names will be returned.
+        - description: Gender of the names. If not specified both gender names will be
+            returned.
           format: string
           in: query
           name: gender
@@ -534,7 +538,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 5
@@ -553,7 +557,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -568,7 +572,8 @@ paths:
     get:
       description: Generate first name (in a given gender)
       parameters:
-        - description: Gender of the names. If not specified both gender names will be returned.
+        - description: Gender of the names. If not specified both gender names will be
+            returned.
           format: string
           in: query
           name: gender
@@ -588,7 +593,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 5
@@ -607,7 +612,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -636,7 +641,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 5
@@ -655,7 +660,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -684,7 +689,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 5
@@ -703,7 +708,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,

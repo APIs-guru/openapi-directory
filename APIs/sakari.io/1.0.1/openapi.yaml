@@ -133,7 +133,11 @@ externalDocs:
   url: https://sakari.io
 tags:
   - description: >
-      Sakari uses OAuth2 for authentication. After you have created an account at [https://hub.sakari.io](https://hub.sakari.io), you can retrieve your client id and secret from the 'Account Details' screen (click on the 'cog' icon in the top right corner and scroll down to API Credentials)
+      Sakari uses OAuth2 for authentication. After you have created an
+      account at [https://hub.sakari.io](https://hub.sakari.io), you can
+      retrieve your client id and secret from the 'Account Details' screen
+      (click on the 'cog' icon in the top right corner and scroll down to API
+      Credentials)
 
 
       Using your client id and secret, you can exchange these for a JWT ([JSON Web Token](https://en.wikipedia.org/wiki/JSON_Web_Token))
@@ -149,17 +153,22 @@ tags:
     name: authentication
   - description: Create, modify or delete contacts
     name: contacts
-  - description: Send or track messages to one contact, a group of contacts or your entire address book
+  - description: Send or track messages to one contact, a group of contacts or your
+      entire address book
     name: messages
   - description: Define reusable message or web templates
     name: templates
-  - description: Define reusable message campaigns with a predefined contact list/filter, template and schedule
+  - description: Define reusable message campaigns with a predefined contact
+      list/filter, template and schedule
     name: campaigns
   - description: Conversations group your message history with each contact into one thread
     name: conversations
-  - description: Tools to assist with sending and receiving messages, such as file sharing, translation, etc.
+  - description: Tools to assist with sending and receiving messages, such as file
+      sharing, translation, etc.
     name: tools
-  - description: Webhooks allow your own system to be automatically notified upon certin events, such as a new message received from one of your contacts or a status change notification for your messages
+  - description: Webhooks allow your own system to be automatically notified upon
+      certin events, such as a new message received from one of your contacts or
+      a status change notification for your messages
     name: webhooks
 paths:
   "/accounts/{accountId}/campaigns":
@@ -196,14 +205,13 @@ paths:
         - campaigns
       x-code-samples:
         - lang: CURL
-          source: >
+          source: |
             curl -X GET \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: >
+          source: |
             var request = require("request");
-
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns',
               headers:
@@ -255,7 +263,7 @@ paths:
         - campaigns
       x-code-samples:
         - lang: CURL
-          source: >
+          source: |
             curl -X POST \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns \
               -H 'Authorization: Bearer {{TOKEN}}' \
@@ -269,9 +277,8 @@ paths:
               "reporting":{"when":"NoReport"}
             }'
         - lang: JavaScript
-          source: >
+          source: |
             var request = require("request");
-
             var options = { method: 'POST',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns',
               headers:
@@ -565,14 +572,13 @@ paths:
         - contacts
       x-code-samples:
         - lang: CURL
-          source: >
+          source: |
             curl -X GET \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: >
+          source: |
             var request = require("request");
-
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts',
               headers:
@@ -605,7 +611,8 @@ paths:
       operationId: contacts.create
       parameters:
         - $ref: "#/components/parameters/accountId"
-        - description: Determines how existing contacts with matching mobile numbers are treated
+        - description: Determines how existing contacts with matching mobile numbers are
+            treated
           in: query
           name: mergeStrategy
           required: false
@@ -623,7 +630,9 @@ paths:
           text/csv:
             schema:
               example: >
-                country,firstName,lastName,email,mobile,jobTitle,Address,City,State,ZipCode US,Joe,Bloggs,joebloggs@sakari.co,123-456-7890,mover,123 Text Street,San Francisco,CA,12345
+                country,firstName,lastName,email,mobile,jobTitle,Address,City,State,ZipCode
+                US,Joe,Bloggs,joebloggs@sakari.co,123-456-7890,mover,123 Text
+                Street,San Francisco,CA,12345
               type: string
       responses:
         "201":
@@ -641,7 +650,7 @@ paths:
         - contacts
       x-code-samples:
         - lang: CURL
-          source: >
+          source: |
             curl -X POST \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts \
               -H 'Content-Type: application/json' \
@@ -654,9 +663,8 @@ paths:
               }
             }'
         - lang: JavaScript
-          source: >
+          source: |
             var request = require("request");
-
             var options = { method: 'POST',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts',
               headers: {
@@ -955,7 +963,7 @@ paths:
         - conversations
       x-code-samples:
         - lang: CURL
-          source: >
+          source: |
             curl -X GET \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations \
               -H 'Authorization: Bearer {{TOKEN}}'
@@ -1143,7 +1151,7 @@ paths:
         - messages
       x-code-samples:
         - lang: CURL
-          source: >
+          source: |
             curl -X GET \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages \
               -H 'Authorization: Bearer {{TOKEN}}'
@@ -1204,7 +1212,7 @@ paths:
         - messages
       x-code-samples:
         - lang: CURL
-          source: >
+          source: |
             curl -X POST \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages \
               -H 'Accept: application/json' \
@@ -1365,14 +1373,13 @@ paths:
         - templates
       x-code-samples:
         - lang: CURL
-          source: >
+          source: |
             curl -X GET \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: >
+          source: |
             var request = require("request");
-
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates',
               headers:
@@ -1424,7 +1431,7 @@ paths:
         - templates
       x-code-samples:
         - lang: CURL
-          source: >
+          source: |
             curl -X POST \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates \
               -H 'Authorization: Bearer {{TOKEN}}' \
@@ -1435,9 +1442,8 @@ paths:
               "type": "SMS"
             }'
         - lang: JavaScript
-          source: >
+          source: |
             var request = require("request");
-
             var options = { method: 'POST',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates',
               headers:
@@ -1685,7 +1691,8 @@ paths:
               }
   "/accounts/{accountId}/webhooks":
     get:
-      description: When messages are acknowledge by carriers, a notification is sent to the specified URL
+      description: When messages are acknowledge by carriers, a notification is sent
+        to the specified URL
       operationId: webhooks.fetchAll
       parameters:
         - $ref: "#/components/parameters/accountId"
@@ -1703,7 +1710,7 @@ paths:
         - webhooks
       x-code-samples:
         - lang: CURL
-          source: >
+          source: |
             curl -X GET \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks \
               -H 'Authorization: Bearer {{TOKEN}}' \
@@ -1750,7 +1757,8 @@ paths:
                 echo $ex;
               }
     post:
-      description: When messages are acknowledge by carriers, a notification is sent to the specified URL
+      description: When messages are acknowledge by carriers, a notification is sent
+        to the specified URL
       operationId: webhooks.subscribe
       parameters:
         - $ref: "#/components/parameters/accountId"
@@ -1785,7 +1793,7 @@ paths:
         - webhooks
       x-code-samples:
         - lang: CURL
-          source: >
+          source: |
             curl -X POST \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks \
               -H 'Authorization: Bearer {{TOKEN}}' \
@@ -1926,7 +1934,7 @@ paths:
         - authentication
       x-code-samples:
         - lang: CURL
-          source: >
+          source: |
             curl -X POST \
               https://api.sakari.io/oauth2/token \
               -H 'Content-Type: application/json' \
@@ -1954,7 +1962,7 @@ paths:
               console.log(response);
             });
         - lang: PHP
-          source: >
+          source: |
             <?php
 
               $request = new HttpRequest();
@@ -2016,7 +2024,8 @@ paths:
           description: invalid request
       security:
         - sakari_auth: []
-      summary: Share file - use to host a file and generate a short link to be used directly in a message or as a link to media for a MMS
+      summary: Share file - use to host a file and generate a short link to be used
+        directly in a message or as a link to media for a MMS
       tags:
         - tools
 components:
@@ -2215,7 +2224,8 @@ components:
           properties:
             code:
               description: >
-                Campaign type specifies how it sources contacts and what event triggers its execution Sort order
+                Campaign type specifies how it sources contacts and what event
+                triggers its execution Sort order
                   * `M` - Manual
                   * `S` - Scheduled
                   * `FU` - File Upload

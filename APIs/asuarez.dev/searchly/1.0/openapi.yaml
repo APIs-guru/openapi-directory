@@ -86,7 +86,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIResponseSimilarity"
-          description: Standard SearchLy API v1 JSON response. You should check the `error` attribute to determine if there was an error.
+          description: Standard SearchLy API v1 JSON response. You should check the
+            `error` attribute to determine if there was an error.
         default:
           content:
             application/text:
@@ -99,27 +100,19 @@ paths:
         - similarity
       x-code-samples:
         - lang: python
-          source: >
+          source: |
             # Make sure you have installed the required packages:
-
             #   pip install requests
-
 
             import requests
 
-
             url = 'https://searchly.asuarez.dev/api/v1/similarity/by_content'
-
             request_body = {"content": "CONTENT"}
 
-
             # Make the classify request
-
             response = requests.post(url, json=request_body)
 
-
             # The response is formatted in JSON
-
             json_response = response.json()
         - lang: Java
           source: >
@@ -152,7 +145,8 @@ paths:
             }
         - lang: C#
           source: >
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://searchly.asuarez.dev/api/v1/similarity/by_content");
+            var httpWebRequest =
+            (HttpWebRequest)WebRequest.Create("https://searchly.asuarez.dev/api/v1/similarity/by_content");
 
             httpWebRequest.ContentType = "application/json";
 
@@ -199,14 +193,14 @@ paths:
               $response = curl_exec($ch);
             ?>
         - lang: shell
-          source: >
+          source: |
             curl "https://searchly.asuarez.dev/api/v1/similarity/by_content"\
-
             -d content="CONTENT"
   /similarity/by_song:
     get:
       description: >
-        Endpoint for an end-user client to search similarity by song identifier.
+        Endpoint for an end-user client to search similarity by song
+        identifier.
 
 
         If you want to run the /similarity/by_song operation, you can do so via an HTTP GET command to the following URL:
@@ -232,7 +226,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIResponseSimilarity"
-          description: Standard SearchLy API v1 JSON response. You should check the `error` attribute to determine if there was an error.
+          description: Standard SearchLy API v1 JSON response. You should check the
+            `error` attribute to determine if there was an error.
         default:
           content:
             application/text:
@@ -245,27 +240,19 @@ paths:
         - similarity
       x-code-samples:
         - lang: python
-          source: >
+          source: |
             # Make sure you have installed the required packages:
-
             #   pip install requests
-
 
             import requests
 
-
             url = 'https://searchly.asuarez.dev/api/v1/similarity/by_song'
-
             payload = {'song_id': SONG_IDENTIFIER}
 
-
             # Make the classify request
-
             response = requests.get(url, params=payload)
 
-
             # The response is formatted in JSON
-
             json_response = response.json()
         - lang: Java
           source: >
@@ -291,7 +278,9 @@ paths:
             }
         - lang: C#
           source: >
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://searchly.asuarez.dev/api/v1/similarity/by_song" +
+            var httpWebRequest =
+            (HttpWebRequest)WebRequest.Create("https://searchly.asuarez.dev/api/v1/similarity/by_song"
+            +
               "?song_id=" + "SONG_IDENTIFIER");
             httpWebRequest.Method = "GET";
 
@@ -314,11 +303,13 @@ paths:
             ?>
         - lang: shell
           source: >
-            curl "https://searchly.asuarez.dev/api/v1/similarity/by_song?song_id=SONG_IDENTIFIER"
+            curl
+            "https://searchly.asuarez.dev/api/v1/similarity/by_song?song_id=SONG_IDENTIFIER"
   /song/search:
     get:
       description: >
-        Endpoint for an end-user client to search songs from the database given a String query.
+        Endpoint for an end-user client to search songs from the database
+        given a String query.
 
 
         If you want to run the /song/search operation, you can do so via an HTTP GET command to the following URL:
@@ -344,7 +335,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIResponseSong"
-          description: Standard SearchLy API v1 JSON response. You should check the `error` attribute to determine if there was an error.
+          description: Standard SearchLy API v1 JSON response. You should check the
+            `error` attribute to determine if there was an error.
         default:
           content:
             application/text:
@@ -357,27 +349,19 @@ paths:
         - song
       x-code-samples:
         - lang: python
-          source: >
+          source: |
             # Make sure you have installed the required packages:
-
             #   pip install requests
-
 
             import requests
 
-
             url = 'https://searchly.asuarez.dev/api/v1/song/search'
-
             payload = {'query': 'QUERY'}
 
-
             # Make the classify request
-
             response = requests.get(url, params=payload)
 
-
             # The response is formatted in JSON
-
             json_response = response.json()
         - lang: Java
           source: >
@@ -403,7 +387,9 @@ paths:
             }
         - lang: C#
           source: >
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://searchly.asuarez.dev/api/v1/song/search" +
+            var httpWebRequest =
+            (HttpWebRequest)WebRequest.Create("https://searchly.asuarez.dev/api/v1/song/search"
+            +
               "?query=" + "QUERY");
             httpWebRequest.Method = "GET";
 
@@ -425,7 +411,7 @@ paths:
               $response = curl_exec($ch);
             ?>
         - lang: shell
-          source: >
+          source: |
             curl "https://searchly.asuarez.dev/api/v1/song/search?query=QUERY"
 components:
   schemas:

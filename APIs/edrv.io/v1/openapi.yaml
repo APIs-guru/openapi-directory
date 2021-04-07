@@ -238,7 +238,9 @@ paths:
         - Commands
   /v1/commands/cancelreservation:
     post:
-      description: Use to request a delete an existing reservation. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+      description: Use to request a delete an existing reservation. The request will
+        wait for the charge station to process the command. It will timeout
+        after 60 seconds.
       operationId: cancelreservation
       requestBody:
         content:
@@ -299,7 +301,8 @@ paths:
       tags:
         - Smart Charging
     post:
-      description: Set one of charging power or current of a specific chargestation connector
+      description: Set one of charging power or current of a specific chargestation
+        connector
       operationId: setchargingschedule
       requestBody:
         content:
@@ -342,7 +345,9 @@ paths:
         - Smart Charging
   /v1/commands/remotestart:
     post:
-      description: Use to request a remote start command. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+      description: Use to request a remote start command. The request will wait for
+        the charge station to process the command. It will timeout after 60
+        seconds.
       operationId: remotestart
       requestBody:
         content:
@@ -379,7 +384,8 @@ paths:
         - Commands
   /v1/commands/remotestop:
     post:
-      description: Use to request a remote stop command. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+      description: Use to request a remote stop command. The request will wait for the
+        charge station to process the command. It will timeout after 60 seconds.
       operationId: remotestop
       requestBody:
         content:
@@ -404,7 +410,8 @@ paths:
         - Commands
   /v1/commands/reserve:
     post:
-      description: Use to request a reserve command. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+      description: Use to request a reserve command. The request will wait for the
+        charge station to process the command. It will timeout after 60 seconds.
       operationId: reserve
       requestBody:
         content:
@@ -443,7 +450,8 @@ paths:
         - Commands
   /v1/commands/reset:
     post:
-      description: Use to request a reset command. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+      description: Use to request a reset command. The request will wait for the
+        charge station to process the command. It will timeout after 60 seconds.
       operationId: reset
       requestBody:
         content:
@@ -476,7 +484,9 @@ paths:
         - Commands
   /v1/commands/unlockconnector:
     post:
-      description: Use to request an unlock command for a connector. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+      description: Use to request an unlock command for a connector. The request will
+        wait for the charge station to process the command. It will timeout
+        after 60 seconds.
       operationId: unlockconnector
       requestBody:
         content:
@@ -1494,7 +1504,9 @@ paths:
       tags:
         - Reservations
     patch:
-      description: Use to request a update an existing reservation. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+      description: Use to request a update an existing reservation. The request will
+        wait for the charge station to process the command. It will timeout
+        after 60 seconds.
       operationId: updatereservation
       parameters:
         - description: ID of the reservation that needs to be fetched

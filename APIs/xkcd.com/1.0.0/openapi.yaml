@@ -23,7 +23,7 @@ externalDocs:
 paths:
   /info.0.json:
     get:
-      description: >
+      description: |
         Fetch current comic and metadata.
       responses:
         "200":
@@ -34,7 +34,7 @@ paths:
           description: OK
   "/{comicId}/info.0.json":
     get:
-      description: >
+      description: |
         Fetch comics and metadata  by comic id.
       parameters:
         - in: path

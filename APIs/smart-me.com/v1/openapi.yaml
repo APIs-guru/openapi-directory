@@ -2,7 +2,9 @@ openapi: 3.0.0
 servers:
   - url: https://smart-me.com:443
 info:
-  description: With the smart-me REST API you get Access to all your devices in the smart-me Cloud and you can add your own devices. So its an easy way to add the smart-me Cloud support to your Hardware or Software Product.
+  description: With the smart-me REST API you get Access to all your devices in
+    the smart-me Cloud and you can add your own devices. So its an easy way to
+    add the smart-me Cloud support to your Hardware or Software Product.
   title: smart-me
   version: v1
   x-apisguru-categories:
@@ -229,13 +231,16 @@ paths:
       deprecated: false
       description: "Creates or updates a Custom Device or updates it's values.\r
 
-        \            A Custom Device can be any device that like to add some measurement values to the smart-me Cloud.\r
+        \            A Custom Device can be any device that like to add
+        some measurement values to the smart-me Cloud.\r
 
         \            Only use a custom device for all non meters.\r
 
-        \            For a new device leave the ID empty. To create a device you have to set the DeviceEnergyType.\r
+        \            For a new device leave the ID empty. To create a
+        device you have to set the DeviceEnergyType.\r
 
-        \            To update values, add the ID of the device and the values you like to set.  (See the Data Type Model for more Information)"
+        \            To update values, add the ID of the device and the
+        values you like to set.  (See the Data Type Model for more Information)"
       operationId: CustomDevice_Post
       requestBody:
         content:
@@ -310,7 +315,8 @@ paths:
   /api/DeviceBySerial:
     get:
       deprecated: false
-      description: Gets a Device by it's Serial Number. The Serial is the part before the "-".
+      description: Gets a Device by it's Serial Number. The Serial is the part before
+        the "-".
       operationId: DeviceBySerial_Get
       parameters:
         - description: The Serial Number of the device
@@ -336,7 +342,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Device"
           description: OK
-      summary: Gets a Device by it's Serial Number. The Serial is the part before the "-".
+      summary: Gets a Device by it's Serial Number. The Serial is the part before the
+        "-".
       tags:
         - DeviceBySerial
   /api/Devices:
@@ -375,9 +382,11 @@ paths:
       deprecated: false
       description: "Creates or updates a Device or updates it's values. \r
 
-        \            For a new device leave the ID empty. To create a device you have to set the DeviceEnergyType.\r
+        \            For a new device leave the ID empty. To create a
+        device you have to set the DeviceEnergyType.\r
 
-        \            To update values, add the ID of the device and the values you like to set.  (See the Data Type Model for more Information)"
+        \            To update values, add the ID of the device and the
+        values you like to set.  (See the Data Type Model for more Information)"
       operationId: Devices_Post
       requestBody:
         content:
@@ -453,7 +462,8 @@ paths:
       deprecated: false
       description: "Updates the On/Off Switch on a device\r
 
-        \            For new implementations please use the \"actions\" command"
+        \            For new implementations please use the \"actions\"
+        command"
       operationId: Devices_Put
       parameters:
         - description: The ID of the device
@@ -497,7 +507,8 @@ paths:
           description: MethodNotAllowed
       summary: "Updates the On/Off Switch on a device. \r
 
-        \            For new implementations please use the \"actions\" command"
+        \            For new implementations please use the \"actions\"
+        command"
       tags:
         - Devices
   /api/DevicesByEnergy:
@@ -616,9 +627,11 @@ paths:
       responses:
         "204":
           description: No Content
-      summary: "Force a device to send the data every second (if supported). This for about 30s.\r
+      summary: "Force a device to send the data every second (if supported). This for
+        about 30s.\r
 
-        \            Don't use this call to force a device to send the data every second for a longer time."
+        \            Don't use this call to force a device to send the
+        data every second for a longer time."
       tags:
         - FastSendDeviceValues
   "/api/Folder/{id}":
@@ -654,11 +667,14 @@ paths:
 
             \            all: load everything\r
 
-            \            assigned: load only folders and meters that are assigend to a folder\r
+            \            assigned: load only folders and meters that
+            are assigend to a folder\r
 
-            \            unassigend: load only meters that are not assigend to a folder\r
+            \            unassigend: load only meters that are not
+            assigend to a folder\r
 
-            \            user: load only folder and all users assigned to this folders\r
+            \            user: load only folder and all users
+            assigned to this folders\r
 
             \            subuserlist: load all subusers as a list"
           in: query
@@ -734,7 +750,8 @@ paths:
           description: OK
       summary: "A method returning HTTP 200 OK when queried.\r
 
-        \            It is used by Kubernetes probes to determine whether the app is healthy."
+        \            It is used by Kubernetes probes to determine
+        whether the app is healthy."
       tags:
         - Health
   /api/MBus:
@@ -742,7 +759,8 @@ paths:
       deprecated: false
       description: "M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.\r
 
-        \            Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest."
+        \            Just send us the M-BUS Telegram (RSP_UD) and we
+        will do the Rest."
       operationId: MBus_Post
       requestBody:
         content:
@@ -785,7 +803,8 @@ paths:
           description: Unauthorized
       summary: "M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.\r
 
-        \            Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest."
+        \            Just send us the M-BUS Telegram (RSP_UD) and we
+        will do the Rest."
       tags:
         - MBus
   /api/MeterFolderInformation:
@@ -850,7 +869,8 @@ paths:
   "/api/MeterValues/{id}":
     get:
       deprecated: false
-      description: Gets the Values for a Meter at a given Date. The first Value found before the given Date is returned.
+      description: Gets the Values for a Meter at a given Date. The first Value found
+        before the given Date is returned.
       operationId: MeterValues_Get
       parameters:
         - in: path
@@ -882,7 +902,8 @@ paths:
           description: OK
       summary: "Gets the Values for a Meter at a given Date. \r
 
-        \            The first Value found before the given Date is returned."
+        \            The first Value found before the given Date is
+        returned."
       tags:
         - MeterValues
   /api/RegisterForRealtimeApi:
@@ -919,7 +940,10 @@ paths:
         - RegisterForRealtimeApi
     post:
       deprecated: false
-      description: "Creates a new registration for the realtime API. The Realtime API sends you the data of the registred devices as soon as we have them on the cloud. More Information about the realtime API: https://www.smart-me.com/Description/api/realtimeapi.aspx"
+      description: "Creates a new registration for the realtime API. The Realtime API
+        sends you the data of the registred devices as soon as we have them on
+        the cloud. More Information about the realtime API:
+        https://www.smart-me.com/Description/api/realtimeapi.aspx"
       operationId: RegisterForRealtimeApi_Post
       requestBody:
         content:
@@ -942,9 +966,12 @@ paths:
       responses:
         "204":
           description: No Content
-      summary: "Creates a new registration for the realtime API. The Realtime API sends you the data of the registred devices as soon as we have them on the cloud.\r
+      summary: "Creates a new registration for the realtime API. The Realtime API
+        sends you the data of the registred devices as soon as we have them on
+        the cloud.\r
 
-        \             More Information about the realtime API: https://www.smart-me.com/Description/api/realtimeapi.aspx"
+        \             More Information about the realtime API:
+        https://www.smart-me.com/Description/api/realtimeapi.aspx"
       tags:
         - RegisterForRealtimeApi
   "/api/RegisterForRealtimeApi/{id}":
@@ -990,7 +1017,8 @@ paths:
       responses:
         "204":
           description: No Content
-      summary: Sets the configuration of a smart-me device. The device needs to be online.
+      summary: Sets the configuration of a smart-me device. The device needs to be
+        online.
       tags:
         - SmartMeDeviceConfiguration
   "/api/SmartMeDeviceConfiguration/{id}":
@@ -1093,7 +1121,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/SubUserData"
           description: OK
-      summary: Get a sub user. The user must be assigend to the user that makes this call.
+      summary: Get a sub user. The user must be assigend to the user that makes this
+        call.
       tags:
         - SubUser
   /api/User:
@@ -1147,7 +1176,8 @@ paths:
   "/api/ValuesInPast/{id}":
     get:
       deprecated: false
-      description: Gets the Values for a device at a given Date. The first Value found before the given Date is returned.
+      description: Gets the Values for a device at a given Date. The first Value found
+        before the given Date is returned.
       operationId: ValuesInPast_Get
       parameters:
         - description: The ID of the device
@@ -1175,7 +1205,8 @@ paths:
           description: OK
       summary: "Gets all (last) values of a device\r
 
-        \            The first Value found before the given Date is returned."
+        \            The first Value found before the given Date is
+        returned."
       tags:
         - ValuesInPast
   "/api/ValuesInPastMultiple/{id}":
@@ -1203,7 +1234,8 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: The interval in minutes betwenn the values. 0 means as fast as possible. Only 1000 values can be get in one call.
+        - description: The interval in minutes betwenn the values. 0 means as fast as
+            possible. Only 1000 values can be get in one call.
           in: query
           name: interval
           required: true
@@ -1234,7 +1266,8 @@ paths:
                   $ref: "#/components/schemas/ValuesData"
                 type: array
           description: OK
-      summary: Gets multiple values of a device. This call needs a smart-me professional licence.
+      summary: Gets multiple values of a device. This call needs a smart-me
+        professional licence.
       tags:
         - ValuesInPastMultiple
   /api/VirtualBillingMeterActive:
@@ -1271,7 +1304,8 @@ paths:
         - VirtualBillingMeterActive
     post:
       deprecated: false
-      description: "Beta: Virtual Meter API: Activates a Meter and add the Consumption to a Virtual Meter assosiated with the User."
+      description: "Beta: Virtual Meter API: Activates a Meter and add the Consumption
+        to a Virtual Meter assosiated with the User."
       operationId: VirtualBillingMeterActive_Post
       requestBody:
         content:
@@ -1314,7 +1348,8 @@ paths:
           description: Unauthorized
         "403":
           description: Forbidden
-      summary: "Beta: Virtual Meter API: Activates a Meter and add the Consumption to a Virtual Meter assosiated with the User."
+      summary: "Beta: Virtual Meter API: Activates a Meter and add the Consumption to
+        a Virtual Meter assosiated with the User."
       tags:
         - VirtualBillingMeterActive
   /api/VirtualBillingMeterDeactivate:
@@ -1419,7 +1454,9 @@ paths:
 
         \             /  divide symbol (a / b); \r
 
-        \            Example: (ID(\"63ac09cb-4e5f-4f3e-bd27-ad8c30bdfc0c\") + ID(\"0209555e-9dc4-4e84-a166-a864488b4b12\")) * 2"
+        \            Example:
+        (ID(\"63ac09cb-4e5f-4f3e-bd27-ad8c30bdfc0c\") +
+        ID(\"0209555e-9dc4-4e84-a166-a864488b4b12\")) * 2"
       operationId: VirtualMeterCalculateFormula_Get
       parameters:
         - in: query
@@ -1621,7 +1658,8 @@ paths:
       responses:
         "204":
           description: No Content
-      summary: Assign a folder (source) or meter to another folder (target). Can be used to create a folder structure.
+      summary: Assign a folder (source) or meter to another folder (target). Can be
+        used to create a folder structure.
       tags:
         - FolderAssign
   "/api/folder/settings/{id}":
@@ -1673,7 +1711,8 @@ paths:
       deprecated: false
       operationId: FolderSettings_Post
       parameters:
-        - description: The ID of the folder or meter to edit. Use and empty ID to add a new folder
+        - description: The ID of the folder or meter to edit. Use and empty ID to add a
+            new folder
           in: path
           name: id
           required: true
@@ -2025,9 +2064,11 @@ components:
           format: int64
           type: integer
         UserId:
-          description: "The ID of the User. The credentials provided must have permission to edit the user.\r
+          description: "The ID of the User. The credentials provided must have permission
+            to edit the user.\r
 
-            \            If no ID is provided, the user in the credentials is taken."
+            \            If no ID is provided, the user in the
+            credentials is taken."
           format: int64
           type: integer
       type: object
@@ -2082,7 +2123,8 @@ components:
       description: Additional Information For a device
       properties:
         AdditionalMeterSerialNumber:
-          description: An additional Meter serial number. e.g. the number of a meter a smart-me device is connected to.
+          description: An additional Meter serial number. e.g. the number of a meter a
+            smart-me device is connected to.
           type: string
         FirmwareVersion:
           description: The Firmware Version of a Meter
@@ -2096,9 +2138,11 @@ components:
           description: The ID of the device
           type: string
         NetworkConnection:
-          description: "The mode how the device is connected to the network. Valid values are:\r
+          description: "The mode how the device is connected to the network. Valid values
+            are:\r
 
-            \            wifi, gprs, ltecatm1, ltenbiot, meshmobile, meshwifi"
+            \            wifi, gprs, ltecatm1, ltenbiot, meshmobile,
+            meshwifi"
           type: string
         NetworkConnectionRSSI:
           description: The connection RSSI value (0 is bad, 100 is best)
@@ -2144,7 +2188,8 @@ components:
           format: int64
           type: integer
         ValueDate:
-          description: The Date of the Value (in UTC). If this is null the Server Time is used.
+          description: The Date of the Value (in UTC). If this is null the Server Time is
+            used.
           format: date-time
           type: string
         Values:
@@ -2191,7 +2236,8 @@ components:
           format: int32
           type: integer
         AdditionalMeterSerialNumber:
-          description: An additional Meter serial number. e.g. the number of a meter a smart-me device is connected to.
+          description: An additional Meter serial number. e.g. the number of a meter a
+            smart-me device is connected to.
           type: string
         AnalogOutput1:
           description: The analog output number 1 (PWM signal) (0 - 32183)
@@ -2202,7 +2248,8 @@ components:
           format: int32
           type: integer
         ChargingStationState:
-          description: The state of a pico charging station. (Only available for pico charging stations)
+          description: The state of a pico charging station. (Only available for pico
+            charging stations)
           enum:
             - Booting
             - ReadyNoCarConnected
@@ -2588,7 +2635,8 @@ components:
           format: double
           type: number
         ValueDate:
-          description: The Date of the Value (in UTC). If this is null the Server Time is used.
+          description: The Date of the Value (in UTC). If this is null the Server Time is
+            used.
           format: date-time
           type: string
         Voltage:
@@ -2705,7 +2753,8 @@ components:
         MeterSerialNumber:
           description: "The serial number if the folder menu item is a meter. \r
 
-            \            Serial number is handled as a string, as javascript on client side cannot handle long integers properly."
+            \            Serial number is handled as a string, as
+            javascript on client side cannot handle long integers properly."
           type: string
         Name:
           description: The Name of the item
@@ -2762,14 +2811,16 @@ components:
           format: int64
           type: integer
         UseableForVirtualBillingMeters:
-          description: Flag if the meter is usable for virtual billing meters (e.g. washroom)
+          description: Flag if the meter is usable for virtual billing meters (e.g.
+            washroom)
           type: boolean
         ValueCorrection:
           description: The value correction on this meter
           format: double
           type: number
         ValueCorrectionParentFolder:
-          description: The value correction on all parent folders. but not on the meter itself
+          description: The value correction on all parent folders. but not on the meter
+            itself
           format: double
           type: number
         VisualizationName:
@@ -2813,13 +2864,16 @@ components:
     MBusData:
       properties:
         Date:
-          description: The Date of the M-BUS Telegram Readout (in UTC). If this is null the Server Time is used.
+          description: The Date of the M-BUS Telegram Readout (in UTC). If this is null
+            the Server Time is used.
           format: date-time
           type: string
         Telegram:
           description: "The M-BUS Telegram as Hex string. \r
 
-            \            Example: 68 1F 1F 68 08 02 72 78 56 34 12 24 40 01 07 55 00 00 00 03 13 15 31 00 DA 02 3B 13 01 8B 60 04 37 18 02 18 16"
+            \            Example: 68 1F 1F 68 08 02 72 78 56 34 12
+            24 40 01 07 55 00 00 00 03 13 15 31 00 DA 02 3B 13 01 8B 60 04 37 18
+            02 18 16"
           type: string
       type: object
     MeterFolderInformation:
@@ -3001,7 +3055,8 @@ components:
       description: Container class for the register realtime API API
       properties:
         ApiUrl:
-          description: The URL of your endpoint. To this endpoint all the values are send to.
+          description: The URL of your endpoint. To this endpoint all the values are send
+            to.
           type: string
         BasicAuthPassword:
           description: The Password (basic auth) of your endpoint. Leave empty of none.
@@ -3013,7 +3068,8 @@ components:
           description: The ID of the registration
           type: string
         MeterId:
-          description: The ID of the Meter. Just used if the RegistrationType is "SingleMeterRegistration".
+          description: The ID of the Meter. Just used if the RegistrationType is
+            "SingleMeterRegistration".
           type: string
         RegistrationType:
           description: The Type of this registration (per meter, per user, ...)
@@ -3023,7 +3079,8 @@ components:
             - UserRegistration
           type: string
         SerialNumber:
-          description: "The serial number of the Meter. Just used if the RegistrationType is \"SingleMeterRegistration\" and the MeterId is null. \r
+          description: "The serial number of the Meter. Just used if the RegistrationType
+            is \"SingleMeterRegistration\" and the MeterId is null. \r
 
             \            Example: 1 SME 01 63000000 or 6300000"
           type: string
@@ -3032,13 +3089,15 @@ components:
       description: API Container class for the meter configuration
       properties:
         DeviceEncryptionKey:
-          description: The encryption key used to decrypt messages received from an external meter (used only for the smart-me modules)
+          description: The encryption key used to decrypt messages received from an
+            external meter (used only for the smart-me modules)
           type: string
         DevicePinCode:
           description: PIN code to enter on a external meter (e.g. for the FNN meters)
           type: string
         DnsUpdateState:
-          description: "Configuration of the dynamic DNS service. More information: http://wiki.smart-me.com/index.php/Dynamisches_DNS"
+          description: "Configuration of the dynamic DNS service. More information:
+            http://wiki.smart-me.com/index.php/Dynamisches_DNS"
           enum:
             - NoUpdate
             - DnsUpdatePublicIp
@@ -3069,7 +3128,8 @@ components:
             $ref: "#/components/schemas/SwitchConfigurationContainer"
           type: array
         UploadInterval:
-          description: Number of seconds the device will upload the data. For smaller values maybe a professional license is needed.
+          description: Number of seconds the device will upload the data. For smaller
+            values maybe a professional license is needed.
           enum:
             - UploadInterval_1s
             - UploadInterval_5s
@@ -3253,7 +3313,8 @@ components:
 
             \            A description you can find here:\r
 
-            \            http://wiki.smart-me.com/index.php/Obis_codes"
+            \            http://wiki.smart-me.com/index.php/Obis_co\
+            des"
           type: string
         Value:
           description: The Value
@@ -3280,7 +3341,8 @@ components:
       description: Container class for the virtual tariffs
       properties:
         Factor:
-          description: Says how many of the active power is used in this tariff. This is calculated from the last meter values.
+          description: Says how many of the active power is used in this tariff. This is
+            calculated from the last meter values.
           format: double
           type: number
         Id:

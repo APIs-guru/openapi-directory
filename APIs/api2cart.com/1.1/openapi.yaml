@@ -68,14 +68,16 @@ paths:
       description: Get list of carts.
       operationId: AccountCartList
       parameters:
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: force_all
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -152,13 +154,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: This parameter allows to set up store with custom bridge url (also you must use store_root parameter if a bridge folder is not in the root folder of the store)
+        - description: This parameter allows to set up store with custom bridge url (also
+            you must use store_root parameter if a bridge folder is not in the
+            root folder of the store)
           in: query
           name: bridge_url
           required: false
           schema:
             type: string
-        - description: Absolute path to the store root directory (used with "bridge_url" parameter)
+        - description: Absolute path to the store root directory (used with "bridge_url"
+            parameter)
           in: query
           name: store_root
           required: false
@@ -225,7 +230,8 @@ paths:
           schema:
             default: production
             type: string
-        - description: MWS Auth Token. Access token authorizing the app to access resources on behalf of a user
+        - description: MWS Auth Token. Access token authorizing the app to access
+            resources on behalf of a user
           in: query
           name: amazon_access_token
           required: false
@@ -291,7 +297,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Access token authorizing the app to access resources on behalf of a user
+        - description: Access token authorizing the app to access resources on behalf of a
+            user
           in: query
           name: bigcommerceapi_access_token
           required: false
@@ -376,7 +383,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: Access token authorizing the app to access resources on behalf of a user
+        - description: Access token authorizing the app to access resources on behalf of a
+            user
           in: query
           name: ecwid_acess_token
           required: false
@@ -400,13 +408,15 @@ paths:
           required: false
           schema:
             type: string
-        - description: Access token authorizing the app to access resources on behalf of a user
+        - description: Access token authorizing the app to access resources on behalf of a
+            user
           in: query
           name: etsy_access_token
           required: false
           schema:
             type: string
-        - description: Secret token authorizing the app to access resources on behalf of a user
+        - description: Secret token authorizing the app to access resources on behalf of a
+            user
           in: query
           name: etsy_token_secret
           required: false
@@ -442,7 +452,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Access token authorizing the app to access resources on behalf of a user
+        - description: Access token authorizing the app to access resources on behalf of a
+            user
           in: query
           name: shopify_access_token
           required: false
@@ -575,7 +586,8 @@ paths:
       description: List webhooks that was not delivered to the callback.
       operationId: AccountFailedWebhooks
       parameters:
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -962,21 +974,24 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,name
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -1117,7 +1132,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -1130,14 +1146,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,name
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -1193,14 +1211,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: force_all
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -1237,7 +1257,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -1268,14 +1289,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,name,code,type
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -1497,14 +1520,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: force_all
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -1604,7 +1629,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: Callback url that returns shipping rates. It should be able to accept POST requests with json data.
+        - description: Callback url that returns shipping rates. It should be able to
+            accept POST requests with json data.
           in: query
           name: callback
           required: true
@@ -1683,7 +1709,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -1849,7 +1876,8 @@ paths:
       description: Get cart catalog price rules discounts.
       operationId: CartCatalogPriceRulesList
       parameters:
-        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve entities via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -1862,7 +1890,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -1875,14 +1904,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,name,description
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -1938,14 +1969,16 @@ paths:
       description: Get list of cart configs
       operationId: CartConfig
       parameters:
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: store_name,store_url,db_prefix
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -2107,7 +2140,8 @@ paths:
               - ">="
               - ONE_OF
             type: string
-        - description: Defines condition value, can be comma separated according to the operator.
+        - description: Defines condition value, can be comma separated according to the
+            operator.
           in: query
           name: value
           required: true
@@ -2243,7 +2277,8 @@ paths:
       description: Get cart coupon discounts.
       operationId: CartCouponList
       parameters:
-        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve entities via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -2256,7 +2291,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -2311,14 +2347,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: force_all
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -2399,13 +2437,16 @@ paths:
           required: true
           schema:
             type: string
-        - description: This parameter allows to set up store with custom bridge url (also you must use store_root parameter if a bridge folder is not in the root folder of the store)
+        - description: This parameter allows to set up store with custom bridge url (also
+            you must use store_root parameter if a bridge folder is not in the
+            root folder of the store)
           in: query
           name: bridge_url
           required: false
           schema:
             type: string
-        - description: Absolute path to the store root directory (used with "bridge_url" parameter)
+        - description: Absolute path to the store root directory (used with "bridge_url"
+            parameter)
           in: query
           name: store_root
           required: false
@@ -2503,7 +2544,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Access token authorizing the app to access resources on behalf of a user
+        - description: Access token authorizing the app to access resources on behalf of a
+            user
           in: query
           name: accessToken
           required: false
@@ -2515,7 +2557,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Access token authorizing the app to access resources on behalf of a user
+        - description: Access token authorizing the app to access resources on behalf of a
+            user
           in: query
           name: access_token
           required: false
@@ -2533,7 +2576,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Access token authorizing the app to access resources on behalf of a user
+        - description: Access token authorizing the app to access resources on behalf of a
+            user
           in: query
           name: accessToken_shopify
           required: false
@@ -2617,7 +2661,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Secret token authorizing the app to access resources on behalf of a user
+        - description: Secret token authorizing the app to access resources on behalf of a
+            user
           in: query
           name: tokenSecret
           required: false
@@ -2984,7 +3029,8 @@ paths:
       description: Get gift cards list.
       operationId: CartGiftcardList
       parameters:
-        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve entities via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -2997,7 +3043,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -3010,14 +3057,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: force_all
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -3040,14 +3089,16 @@ paths:
       description: Get cart information
       operationId: CartInfo
       parameters:
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: store_name,store_url,db_prefix
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -3146,27 +3197,31 @@ paths:
           required: false
           schema:
             type: string
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve entities via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: key,value
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -3346,7 +3401,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -3414,7 +3470,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: The page or pages on the online store where the script should be included
+        - description: The page or pages on the online store where the script should be
+            included
           in: query
           name: scope
           required: false
@@ -3493,7 +3550,8 @@ paths:
       description: Get scripts installed to the storefront
       operationId: CartScriptList
       parameters:
-        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve entities via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -3506,7 +3564,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -3549,14 +3608,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: force_all
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -3606,7 +3667,8 @@ paths:
         - cart
   /cart.validate.json:
     get:
-      description: Check store availability, bridge connection for the downloadable carts, identify DB prefix, validate API accesses for API carts.
+      description: Check store availability, bridge connection for the downloadable
+        carts, identify DB prefix, validate API accesses for API carts.
       operationId: CartValidate
       parameters:
         - description: Specify if api2cart should validate cart version
@@ -3655,7 +3717,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Create category in the stores that is specified by comma-separated stores' id
+        - description: Create category in the stores that is specified by comma-separated
+            stores' id
           in: query
           name: stores_ids
           required: false
@@ -4057,14 +4120,16 @@ paths:
           required: true
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,parent_id,name,description
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -4113,14 +4178,16 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve entities via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -4132,14 +4199,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,parent_id,name,description
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -4228,7 +4297,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Update category in the stores that is specified by comma-separated stores' id
+        - description: Update category in the stores that is specified by comma-separated
+            stores' id
           in: query
           name: stores_ids
           required: false
@@ -4354,14 +4424,16 @@ paths:
       description: Get attributes for specific customer
       operationId: CustomerAttributeList
       parameters:
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve entities via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -4385,14 +4457,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: force_all
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -4555,7 +4629,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Assign customer group to the stores that is specified by comma-separated stores' id
+        - description: Assign customer group to the stores that is specified by
+            comma-separated stores' id
           in: query
           name: stores_ids
           required: false
@@ -4587,7 +4662,8 @@ paths:
       description: Get list of customers groups.
       operationId: CustomerGroupList
       parameters:
-        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve entities via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -4600,7 +4676,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -4625,14 +4702,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: force_all
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -4661,14 +4740,16 @@ paths:
           required: true
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,email,first_name,last_name
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -4704,7 +4785,8 @@ paths:
       description: Get list of customers from store.
       operationId: CustomerList
       parameters:
-        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve entities via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -4717,7 +4799,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -4748,14 +4831,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,email,first_name,last_name
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -4862,7 +4947,8 @@ paths:
         - customer
   /order.abandoned.list.json:
     get:
-      description: Get list of orders that were left by customers before completing the order.
+      description: Get list of orders that were left by customers before completing
+        the order.
       operationId: OrderAbandonedList
       parameters:
         - description: Retrieves orders specified by customer id
@@ -4914,13 +5000,15 @@ paths:
           required: false
           schema:
             type: string
-        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve entities via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
           schema:
             type: string
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -4934,14 +5022,16 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: customer,totals,items
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -5175,21 +5265,24 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: order_id,customer,totals,address,items,bundles,status
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -5266,14 +5359,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: order_id,customer,totals,address,items,bundles,status
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -5285,7 +5380,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: If the value is 'true' and order exist in our cache, we will return order.info response from cache
+        - description: If the value is 'true' and order exist in our cache, we will return
+            order.info response from cache
           in: query
           name: enable_cache
           required: false
@@ -5357,14 +5453,16 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Used to retrieve orders via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve orders via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -5384,14 +5482,16 @@ paths:
           schema:
             default: asc
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: order_id,customer,totals,address,items,bundles,status
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -5493,7 +5593,9 @@ paths:
           required: false
           schema:
             type: string
-        - description: If the value is 'true', we will cache orders for a 15 minutes in order to increase speed and reduce requests throttling for some methods and shoping platforms (for example order.shipment.add)
+        - description: If the value is 'true', we will cache orders for a 15 minutes in
+            order to increase speed and reduce requests throttling for some
+            methods and shoping platforms (for example order.shipment.add)
           in: query
           name: enable_cache
           required: false
@@ -5576,6 +5678,45 @@ paths:
           store_key: []
       tags:
         - order
+  /order.shipment.delete.json:
+    delete:
+      description: Delete order's shipment.
+      operationId: OrderShipmentDelete
+      parameters:
+        - description: Shipment id indicates the number of delivery
+          in: query
+          name: shipment_id
+          required: true
+          schema:
+            type: string
+        - description: Defines the order for which the shipment will be deleted
+          in: query
+          name: order_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    properties:
+                      status:
+                        type: integer
+                    type: object
+                  return_code:
+                    type: integer
+                  return_message:
+                    type: string
+                type: object
+          description: successful operation
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - order
   /order.shipment.list.json:
     get:
       description: Get list of shipments by orders.
@@ -5587,7 +5728,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve entities via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -5600,21 +5742,24 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,order_id,items,tracking_numbers
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -5813,7 +5958,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Defines order payment method.<br/>Setting order_payment_method on Shopify will also change financial_status field value to 'paid'
+        - description: Defines order payment method.<br/>Setting order_payment_method on
+            Shopify will also change financial_status field value to 'paid'
           in: query
           name: order_payment_method
           required: false
@@ -5885,7 +6031,8 @@ paths:
       description: Get list of attributes and values.
       operationId: ProductAttributeList
       parameters:
-        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve entities via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -5898,7 +6045,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -5961,14 +6109,16 @@ paths:
           schema:
             default: asc
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: attribute_id,name
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -6088,7 +6238,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Boolean, whether or not to unset default value of the attribute, if applicable
+        - description: Boolean, whether or not to unset default value of the attribute, if
+            applicable
           in: query
           name: include_default
           required: false
@@ -6143,14 +6294,16 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
@@ -6163,7 +6316,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -6231,7 +6385,8 @@ paths:
         - product
   /product.child_item.find.json:
     get:
-      description: Search product child item (bundled item or configurable product variant) in store catalog.
+      description: Search product child item (bundled item or configurable product
+        variant) in store catalog.
       operationId: ProductChildItemFind
       parameters:
         - description: Entity search that is specified by some value
@@ -6288,14 +6443,16 @@ paths:
       description: Get child for specific product.
       operationId: ProductChildItemInfo
       parameters:
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: force_all
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -6349,7 +6506,8 @@ paths:
       description: Get child items list of specific product(s).
       operationId: ProductChildItemList
       parameters:
-        - description: Used to retrieve products child items via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve products child items via cursor-based pagination
+            (it can't be used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -6362,21 +6520,24 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: force_all
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -6666,21 +6827,24 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: name,iso3,default,avail
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -7094,14 +7258,16 @@ paths:
           required: true
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,name,description,price,categories_ids
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -7125,7 +7291,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which product variants fields you want to retrieve
+        - description: Set this parameter in order to choose which product variants fields
+            you want to retrieve
           in: query
           name: product_variant_params
           required: false
@@ -7169,7 +7336,8 @@ paths:
       description: Get list of products from your store. Returns 10 products by default.
       operationId: ProductList
       parameters:
-        - description: Used to retrieve products via cursor-based pagination (it can't be used with any other filtering parameter)
+        - description: Used to retrieve products via cursor-based pagination (it can't be
+            used with any other filtering parameter)
           in: query
           name: page_cursor
           required: false
@@ -7182,21 +7350,24 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,name,description,price,categories_ids
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -7268,7 +7439,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which product variants fields you want to retrieve
+        - description: Set this parameter in order to choose which product variants fields
+            you want to retrieve
           in: query
           name: product_variant_params
           required: false
@@ -7532,21 +7704,24 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,name,description
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -7839,7 +8014,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -7870,14 +8046,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,customer_id,email,message,status
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -8063,7 +8241,8 @@ paths:
           required: false
           schema:
             type: number
-        - description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+        - description: This parameter is used for selecting a warehouse where you need to
+            set/modify a product quantity.
           in: query
           name: warehouse_id
           required: false
@@ -8117,7 +8296,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Defines product add that is specified by comma-separated categories id
+        - description: Defines product add that is specified by comma-separated categories
+            id
           in: query
           name: categories_ids
           required: false
@@ -8498,14 +8678,16 @@ paths:
       description: Get variant info.
       operationId: ProductVariantInfo
       parameters:
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,name,description,price
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -8554,21 +8736,24 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
           schema:
             default: 10
             type: integer
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: id,name,description,price
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -8766,7 +8951,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+        - description: This parameter is used for selecting a warehouse where you need to
+            set/modify a product quantity.
           in: query
           name: warehouse_id
           required: false
@@ -8913,7 +9099,8 @@ paths:
           schema:
             default: 0
             type: number
-        - description: A barcode is a unique code composed of numbers used as a product identifier.
+        - description: A barcode is a unique code composed of numbers used as a product
+            identifier.
           in: query
           name: barcode
           required: false
@@ -8977,7 +9164,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -9003,14 +9191,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: force_all
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -9053,14 +9243,16 @@ paths:
           required: true
           schema:
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
           schema:
             default: tax_class_id,name,avail
             type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Set this parameter in order to choose which entity fields you want
+            to ignore. Works only if parameter `params` equal force_all
           in: query
           name: exclude
           required: false
@@ -9135,19 +9327,22 @@ paths:
       description: Create webhook on the store and subscribe to it.
       operationId: WebhookCreate
       parameters:
-        - description: Specify the entity that you want to enable webhooks for (e.g product, order, customer, category)
+        - description: Specify the entity that you want to enable webhooks for (e.g
+            product, order, customer, category)
           in: query
           name: entity
           required: true
           schema:
             type: string
-        - description: Specify what action (event) will trigger the webhook (e.g add, delete, or update)
+        - description: Specify what action (event) will trigger the webhook (e.g add,
+            delete, or update)
           in: query
           name: action
           required: true
           schema:
             type: string
-        - description: Callback where the webhook should send the POST request when the event occurs
+        - description: Callback where the webhook should send the POST request when the
+            event occurs
           in: query
           name: callback
           required: true
@@ -9274,7 +9469,8 @@ paths:
       description: List registered webhook on the store.
       operationId: WebhookList
       parameters:
-        - description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Set this parameter in order to choose which entity fields you want
+            to retrieve
           in: query
           name: params
           required: false
@@ -9288,7 +9484,8 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+        - description: This parameter sets the entity amount that has to be retrieved. Max
+            allowed count=250
           in: query
           name: count
           required: false
@@ -9301,7 +9498,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: The action you want to filter webhooks by (e.g. add, update, or delete)
+        - description: The action you want to filter webhooks by (e.g. add, update, or
+            delete)
           in: query
           name: action
           required: false
@@ -9354,7 +9552,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: Callback where the webhook should send the POST request when the event occurs
+        - description: Callback where the webhook should send the POST request when the
+            event occurs
           in: query
           name: callback
           required: false
@@ -9422,7 +9621,8 @@ components:
           description: Amazon Secret Key Id
           type: string
         amazon_access_token:
-          description: MWS Auth Token. Access token authorizing the app to access resources on behalf of a user
+          description: MWS Auth Token. Access token authorizing the app to access
+            resources on behalf of a user
           type: string
         amazon_marketplaces_ids:
           description: Amazon Marketplace IDs comma separated string
@@ -9469,7 +9669,8 @@ components:
           description: It's a AspDotNetStorefront account for which API is available
           type: string
         bigcommerceapi_access_token:
-          description: Access token authorizing the app to access resources on behalf of a user
+          description: Access token authorizing the app to access resources on behalf of a
+            user
           type: string
         bigcommerceapi_admin_account:
           description: It's a BigCommerce account for which API is enabled
@@ -9487,7 +9688,9 @@ components:
           description: API Path section unique to the store
           type: string
         bridge_url:
-          description: This parameter allows to set up store with custom bridge url (also you must use store_root parameter if a bridge folder is not in the root folder of the store)
+          description: This parameter allows to set up store with custom bridge url (also
+            you must use store_root parameter if a bridge folder is not in the
+            root folder of the store)
           type: string
         cart_id:
           description: Store’s identifier which you can get from cart_list method
@@ -9587,13 +9790,15 @@ components:
           description: eBay global ID
           type: integer
         ecwid_acess_token:
-          description: Access token authorizing the app to access resources on behalf of a user
+          description: Access token authorizing the app to access resources on behalf of a
+            user
           type: string
         ecwid_store_id:
           description: Store Id
           type: string
         etsy_access_token:
-          description: Access token authorizing the app to access resources on behalf of a user
+          description: Access token authorizing the app to access resources on behalf of a
+            user
           type: string
         etsy_keystring:
           description: Etsy keystring
@@ -9602,7 +9807,8 @@ components:
           description: Etsy shared secret
           type: string
         etsy_token_secret:
-          description: Secret token authorizing the app to access resources on behalf of a user
+          description: Secret token authorizing the app to access resources on behalf of a
+            user
           type: string
         ftp_host:
           description: FTP connection host
@@ -9660,7 +9866,8 @@ components:
           description: Neto User Name
           type: string
         shopify_access_token:
-          description: Access token authorizing the app to access resources on behalf of a user
+          description: Access token authorizing the app to access resources on behalf of a
+            user
           type: string
         shopify_api_key:
           description: Shopify API Key
@@ -9684,7 +9891,8 @@ components:
           description: Set this parameter if bridge is already uploaded to store
           type: string
         store_root:
-          description: Absolute path to the store root directory (used with "bridge_url" parameter)
+          description: Absolute path to the store root directory (used with "bridge_url"
+            parameter)
           type: string
         store_url:
           description: A web address of a store that you would like to connect to API2Cart
@@ -9910,7 +10118,8 @@ components:
           description: This parameter sets the list of params to the shopping cart.
           type: object
         db_tables_prefix:
-          description: This parameter is deprecated for this method. Please, use this parameter in method account.config.update
+          description: This parameter is deprecated for this method. Please, use this
+            parameter in method account.config.update
           type: string
         store_id:
           description: Store Id
@@ -9941,7 +10150,9 @@ components:
           description: Defines condition attribute value/s. Can be comma separated string.
           type: string
         action_scope:
-          description: Specify how discount should be applied. If scope=matching_items, then discount will be applied to each of the items that match action conditions. Scope order means that discount will be applied once.
+          description: Specify how discount should be applied. If scope=matching_items,
+            then discount will be applied to each of the items that match action
+            conditions. Scope order means that discount will be applied once.
           enum:
             - order
             - matching_items
@@ -11213,7 +11424,8 @@ components:
           type: number
         create_invoice:
           default: false
-          description: Defines whether the invoice is created automatically along with the order
+          description: Defines whether the invoice is created automatically along with the
+            order
           type: boolean
         currency:
           description: Currency code of order
@@ -11222,7 +11434,8 @@ components:
           description: Specifies customer’s birthday
           type: string
         customer_email:
-          description: Defines the customer specified by email for whom order has to be created
+          description: Defines the customer specified by email for whom order has to be
+            created
           type: string
         customer_fax:
           description: Specifies customer’s fax
@@ -11267,7 +11480,14 @@ components:
           type: string
         inventory_behaviour:
           default: bypass
-          description: "The behaviour to use when updating inventory.<hr><div style=\"font-style:normal\">Values description:<div style=\"margin-left: 2%; padding-top: 2%\"><div style=\"font-size:85%\"><b>bypass</b> = Do not claim inventory </br></br><b>decrement_ignoring_policy</b> = Ignore the product's </br> inventory policy and claim amounts</br></br><b>decrement_obeying_policy</b> =  Obey the product's </br> inventory policy.</br></br></div></div></div>"
+          description: "The behaviour to use when updating inventory.<hr><div
+            style=\"font-style:normal\">Values description:<div
+            style=\"margin-left: 2%; padding-top: 2%\"><div
+            style=\"font-size:85%\"><b>bypass</b> = Do not claim inventory
+            </br></br><b>decrement_ignoring_policy</b> = Ignore the product's
+            </br> inventory policy and claim
+            amounts</br></br><b>decrement_obeying_policy</b> =  Obey the
+            product's </br> inventory policy.</br></br></div></div></div>"
           type: string
         note_attributes:
           description: Defines note attributes
@@ -11286,10 +11506,12 @@ components:
           items:
             properties:
               order_item_allow_refund_items_separately:
-                description: Indicates whether subitems of the grouped/bundle product can be refunded separately
+                description: Indicates whether subitems of the grouped/bundle product can be
+                  refunded separately
                 type: boolean
               order_item_allow_ship_items_separately:
-                description: Indicates whether subitems of the grouped/bundle product can be shipped separately
+                description: Indicates whether subitems of the grouped/bundle product can be
+                  shipped separately
                 type: boolean
               order_item_id:
                 description: Defines orders specified by order item id
@@ -11304,13 +11526,16 @@ components:
                 items:
                   properties:
                     order_item_option_name:
-                      description: Ordered Product Option Name. Where x is order item ID, y is order item option ID
+                      description: Ordered Product Option Name. Where x is order item ID, y is order
+                        item option ID
                       type: string
                     order_item_option_price:
-                      description: Ordered product option price Where x is order item ID, y - order item option ID
+                      description: Ordered product option price Where x is order item ID, y - order
+                        item option ID
                       type: number
                     order_item_option_value:
-                      description: Ordered product option value Where x is order item ID, y - order item option ID
+                      description: Ordered product option value Where x is order item ID, y - order
+                        item option ID
                       type: string
                   type: object
                 type: array
@@ -11331,10 +11556,12 @@ components:
                 items:
                   properties:
                     order_item_property_name:
-                      description: Ordered product property name. Where x is order item ID, y is order item property ID
+                      description: Ordered product property name. Where x is order item ID, y is order
+                        item property ID
                       type: string
                     order_item_property_value:
-                      description: Ordered product property value. Where x is order item ID, y - order item property ID
+                      description: Ordered product property value. Where x is order item ID, y - order
+                        item property ID
                       type: string
                   type: object
                 type: array
@@ -11356,7 +11583,8 @@ components:
             type: object
           type: array
         order_payment_method:
-          description: Defines order payment method.<br/>Setting order_payment_method on Shopify will also change financial_status field value to 'paid'
+          description: Defines order payment method.<br/>Setting order_payment_method on
+            Shopify will also change financial_status field value to 'paid'
           type: string
         order_shipping_method:
           description: Defines order shipping method
@@ -11416,7 +11644,8 @@ components:
           description: Defines store id where the order should be assigned
           type: string
         subtotal_price:
-          description: Total price of all ordered products multiplied by their number, excluding tax, shipping price and discounts
+          description: Total price of all ordered products multiplied by their number,
+            excluding tax, shipping price and discounts
           type: number
         tags:
           description: Order tags
@@ -11463,7 +11692,8 @@ components:
           type: boolean
         item_restock:
           default: false
-          description: Boolean, whether or not to add the line items back to the store inventory.
+          description: Boolean, whether or not to add the line items back to the store
+            inventory.
           type: boolean
         items:
           description: Defines items in the order that will be refunded
@@ -11502,7 +11732,8 @@ components:
           type: boolean
         enable_cache:
           default: false
-          description: If the value is 'true' and order exist in our cache, we will use order.info from cache to prepare shipment items.
+          description: If the value is 'true' and order exist in our cache, we will use
+            order.info from cache to prepare shipment items.
           type: boolean
         items:
           description: Defines items in the order that will be shipped
@@ -11534,7 +11765,13 @@ components:
           description: Defines custom tracking link
           type: string
         tracking_numbers:
-          description: Defines shipment's tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = "http://docs.api2cart.com/cart-info">cart.info</a > method
+          description: Defines shipment's tracking numbers that have to be added</br> How
+            set tracking numbers to appropriate
+            carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default
+            carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set
+            appropriate carrier</li></ul>To get the list of carriers IDs that
+            are available in your store, use the <a href =
+            "http://docs.api2cart.com/cart-info">cart.info</a > method
           items:
             properties:
               carrier_id:
@@ -11544,7 +11781,8 @@ components:
             type: object
           type: array
         warehouse_id:
-          description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+          description: This parameter is used for selecting a warehouse where you need to
+            set/modify a product quantity.
           type: string
       type: object
     OrderShipmentTrackingAdd:
@@ -11591,7 +11829,13 @@ components:
           description: Shipment id indicates the number of delivery
           type: string
         tracking_numbers:
-          description: Defines shipment's tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = "http://docs.api2cart.com/cart-info">cart.info</a > method
+          description: Defines shipment's tracking numbers that have to be added</br> How
+            set tracking numbers to appropriate
+            carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default
+            carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set
+            appropriate carrier</li></ul>To get the list of carriers IDs that
+            are available in your store, use the <a href =
+            "http://docs.api2cart.com/cart-info">cart.info</a > method
           items:
             properties:
               carrier_id:
@@ -11997,7 +12241,9 @@ components:
           description: Defines product’s attribute set name in Magento
           type: string
         avail_from:
-          description: Allows to schedule a time in the future that the item becomes available. The value should be greater than the current date and time.
+          description: Allows to schedule a time in the future that the item becomes
+            available. The value should be greater than the current date and
+            time.
           type: string
         available_for_sale:
           default: true
@@ -12011,15 +12257,22 @@ components:
           description: Set backorder status
           type: string
         barcode:
-          description: A barcode is a unique code composed of numbers used as a product identifier.
+          description: A barcode is a unique code composed of numbers used as a product
+            identifier.
           type: string
         best_offer:
-          description: 'The price at which Best Offers are automatically accepted.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">best_offer[<b>minimum_offer_price</b>] = decimal</br>best_offer[<b>auto_accept_price</b>] = decimal</br></code></div></div>'
+          description: 'The price at which Best Offers are automatically accepted.<hr><div
+            style="font-style:normal">Param structure:<div style="margin-left:
+            2%;"><code style="padding:0;
+            background-color:#ffffff;font-size:85%;font-family:monospace;">best_offer[<b>minimum_offer_price</b>]
+            = decimal</br>best_offer[<b>auto_accept_price</b>] =
+            decimal</br></code></div></div>'
           items:
             type: string
           type: array
         categories_ids:
-          description: Defines product add that is specified by comma-separated categories id
+          description: Defines product add that is specified by comma-separated categories
+            id
           type: string
         clear_cache:
           default: true
@@ -12042,7 +12295,9 @@ components:
           description: Defines whether the product is downloadable
           type: boolean
         ean:
-          description: European Article Number. An EAN is a unique 8 or 13-digit identifier that many industries (such as book publishers) use to identify products.
+          description: European Article Number. An EAN is a unique 8 or 13-digit
+            identifier that many industries (such as book publishers) use to
+            identify products.
           type: string
         group_prices:
           description: Defines product's group prices
@@ -12064,13 +12319,15 @@ components:
           description: Image Url
           type: string
         isbn:
-          description: International Standard Book Number. An ISBN is a unique identifier for books.
+          description: International Standard Book Number. An ISBN is a unique identifier
+            for books.
           type: string
         lang_id:
           description: Language id
           type: string
         listing_duration:
-          description: Describes the number of days the seller wants the listing to be active. Look at cart.info method response for allowed values.
+          description: Describes the number of days the seller wants the listing to be
+            active. Look at cart.info method response for allowed values.
           type: string
         listing_type:
           default: FixedPrice
@@ -12102,17 +12359,39 @@ components:
           description: Defines how many times the product was ordered
           type: integer
         package_details:
-          description: 'If the seller is subscribed to "Business Policies", use the seller_profiles instead of the shipping_details, payment_methods and return_accepted params.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">package_details[<b>measure_unit</b>] = string</br> Allowed measure_unit values: [English or Metric] </br> Default: Metric</br>package_details[<b>weigh_unit</b>] = string</br> Allowed weigh_unit values: [kg, g, lbs, oz]</br>package_details[<b>package_depth</b>] = decimal</br>package_details[<b>package_length</b>] = decimal</br>package_details[<b>package_width</b>] = decimal</br>package_details[<b>weight_major</b>] = decimal</br>package_details[<b>weight_minor</b>] = decimal</br>package_details[<b>shipping_package</b>] = string</br> See cart.info method, param `eBay_shipping_package_details`</code></div></div>'
+          description: 'If the seller is subscribed to "Business Policies", use the
+            seller_profiles instead of the shipping_details, payment_methods and
+            return_accepted params.<hr><div style="font-style:normal">Param
+            structure:<div style="margin-left: 2%;"><code style="padding:0;
+            background-color:#ffffff;font-size:85%;font-family:monospace;">package_details[<b>measure_unit</b>]
+            = string</br> Allowed measure_unit values: [English or Metric] </br>
+            Default: Metric</br>package_details[<b>weigh_unit</b>] = string</br>
+            Allowed weigh_unit values: [kg, g, lbs,
+            oz]</br>package_details[<b>package_depth</b>] =
+            decimal</br>package_details[<b>package_length</b>] =
+            decimal</br>package_details[<b>package_width</b>] =
+            decimal</br>package_details[<b>weight_major</b>] =
+            decimal</br>package_details[<b>weight_minor</b>] =
+            decimal</br>package_details[<b>shipping_package</b>] = string</br>
+            See cart.info method, param
+            `eBay_shipping_package_details`</code></div></div>'
           items:
             type: string
           type: array
         payment_methods:
-          description: 'Identifies the payment method (such as PayPal) that the seller will accept when the buyer pays for the item. Look at cart.info method response for allowed values.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">payment_methods[0] = string</br>payment_methods[1] = string</br></code></div></div>'
+          description: 'Identifies the payment method (such as PayPal) that the seller
+            will accept when the buyer pays for the item. Look at cart.info
+            method response for allowed values.<hr><div
+            style="font-style:normal">Param structure:<div style="margin-left:
+            2%;"><code style="padding:0;
+            background-color:#ffffff;font-size:85%;font-family:monospace;">payment_methods[0]
+            = string</br>payment_methods[1] = string</br></code></div></div>'
           items:
             type: string
           type: array
         paypal_email:
-          description: Valid PayPal email address for the PayPal account that the seller will use if they offer PayPal as a payment method for the listing.
+          description: Valid PayPal email address for the PayPal account that the seller
+            will use if they offer PayPal as a payment method for the listing.
           type: string
         price:
           description: Defines product's price that has to be added
@@ -12128,12 +12407,27 @@ components:
           description: Indicates whether the seller allows the buyer to return the item.
           type: boolean
         sales_tax:
-          description: "Percent of an item's price to be charged as the sales tax for the order. Look at cart.info method response for allowed values.<hr><div style=\"font-style:normal\">Param structure:<div style=\"margin-left: 2%;\"><code style=\"padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;\">sales_tax[<b>tax_percent</b>] = decimal (##.###)</br>sales_tax[<b>tax_state</b>] = string</br>sales_tax[<b>shipping_inc_in_tax</b>] = bool</br></code></div></div>"
+          description: "Percent of an item's price to be charged as the sales tax for the
+            order. Look at cart.info method response for allowed values.<hr><div
+            style=\"font-style:normal\">Param structure:<div
+            style=\"margin-left: 2%;\"><code style=\"padding:0;
+            background-color:#ffffff;font-size:85%;font-family:monospace;\">sal\
+            es_tax[<b>tax_percent</b>] = decimal
+            (##.###)</br>sales_tax[<b>tax_state</b>] =
+            string</br>sales_tax[<b>shipping_inc_in_tax</b>] =
+            bool</br></code></div></div>"
           items:
             type: string
           type: array
         seller_profiles:
-          description: 'If the seller is subscribed to "Business Policies", use the seller_profiles instead of the shipping_details, payment_methods and return_accepted params.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">seller_profiles[<b>shipping_profile_id</b>] = integer</br>seller_profiles[<b>payment_profile_id</b>] = integer</br>seller_profiles[<b>return_profile_id</b>] = integer</br></code></div></div>'
+          description: 'If the seller is subscribed to "Business Policies", use the
+            seller_profiles instead of the shipping_details, payment_methods and
+            return_accepted params.<hr><div style="font-style:normal">Param
+            structure:<div style="margin-left: 2%;"><code style="padding:0;
+            background-color:#ffffff;font-size:85%;font-family:monospace;">seller_profiles[<b>shipping_profile_id</b>]
+            = integer</br>seller_profiles[<b>payment_profile_id</b>] =
+            integer</br>seller_profiles[<b>return_profile_id</b>] =
+            integer</br></code></div></div>'
           properties:
             payment_profile_id:
               type: string
@@ -12143,7 +12437,17 @@ components:
               type: string
           type: object
         shipping_details:
-          description: 'The shipping details, including flat and calculated shipping costs and shipping insurance costs. Look at cart.info method response for allowed values.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">shipping_details[0][<b>shipping_type</b>] = string </br>shipping_details[0][<b>shipping_service</b>] = string</br>shipping_details[0][<b>shipping_cost</b>] = decimal</br>shipping_details[1][<b>shipping_type</b>] = string </br>shipping_details[1][<b>shipping_service</b>] = string</br>shipping_details[1][<b>shipping_cost</b>] = decimal</br></code></div></div>'
+          description: 'The shipping details, including flat and calculated shipping costs
+            and shipping insurance costs. Look at cart.info method response for
+            allowed values.<hr><div style="font-style:normal">Param
+            structure:<div style="margin-left: 2%;"><code style="padding:0;
+            background-color:#ffffff;font-size:85%;font-family:monospace;">shipping_details[0][<b>shipping_type</b>]
+            = string </br>shipping_details[0][<b>shipping_service</b>] =
+            string</br>shipping_details[0][<b>shipping_cost</b>] =
+            decimal</br>shipping_details[1][<b>shipping_type</b>] = string
+            </br>shipping_details[1][<b>shipping_service</b>] =
+            string</br>shipping_details[1][<b>shipping_cost</b>] =
+            decimal</br></code></div></div>'
           items:
             properties:
               shipping_cost:
@@ -12156,7 +12460,8 @@ components:
           type: array
         shipping_template_id:
           default: 0
-          description: The numeric ID of the shipping template associated with the products in Etsy.
+          description: The numeric ID of the shipping template associated with the
+            products in Etsy.
           type: integer
         short_description:
           description: Defines short description
@@ -12169,7 +12474,8 @@ components:
           type: number
         specifics:
           description: >-
-            An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.
+            An array of Item Specific Name/Value pairs used by the seller to
+            provide descriptive details of an item in a structured manner.
                     <hr>
                     <div style="font-style:normal">Param structure:
                       <div style="margin-left: 2%;">
@@ -12196,7 +12502,8 @@ components:
           type: string
         stores_ids:
           default: 0
-          description: Assign product to the stores that is specified by comma-separated stores' id
+          description: Assign product to the stores that is specified by comma-separated
+            stores' id
           type: string
         tags:
           description: Product tags
@@ -12223,7 +12530,8 @@ components:
           description: Defines product's type
           type: string
         upc:
-          description: Universal Product Code. A UPC (UPC-A) is a commonly used identifer for many different products.
+          description: Universal Product Code. A UPC (UPC-A) is a commonly used identifer
+            for many different products.
           type: string
         url:
           description: Defines unique product's URL
@@ -12236,7 +12544,8 @@ components:
           description: Set visibility status
           type: string
         warehouse_id:
-          description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+          description: This parameter is used for selecting a warehouse where you need to
+            set/modify a product quantity.
           type: string
         weight:
           default: 0
@@ -12335,7 +12644,8 @@ components:
           description: Specifies the set of visible/invisible product's variants for users
           type: boolean
         barcode:
-          description: A barcode is a unique code composed of numbers used as a product identifier.
+          description: A barcode is a unique code composed of numbers used as a product
+            identifier.
           type: string
         clear_cache:
           default: true
@@ -12413,7 +12723,8 @@ components:
           description: Defines unique product variant's URL
           type: string
         warehouse_id:
-          description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+          description: This parameter is used for selecting a warehouse where you need to
+            set/modify a product quantity.
           type: string
         weight:
           default: 0

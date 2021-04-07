@@ -5,7 +5,10 @@ servers:
 info:
   contact:
     x-twitter: TisaneLabs
-  description: <table><tr><td style="font-size:large">&nbsp;&nbsp;🔬&nbsp;&nbsp;&nbsp;</td><td>Detect abusive content, obtain sentiment analysis, extract entities, detect topics, automatically correct spelling errors, and more.</td></tr></table>
+  description: <table><tr><td
+    style="font-size:large">&nbsp;&nbsp;🔬&nbsp;&nbsp;&nbsp;</td><td>Detect
+    abusive content, obtain sentiment analysis, extract entities, detect topics,
+    automatically correct spelling errors, and more.</td></tr></table>
   title: Text Analysis
   version: "1.0"
   x-apisguru-categories:
@@ -26,7 +29,8 @@ security:
 paths:
   /compare/entities:
     post:
-      description: "Compares two compound named entities and outputs the differences found. "
+      description: "Compares two compound named entities and outputs the differences
+        found. "
       operationId: compare-named-entities
       requestBody:
         content:
@@ -38,7 +42,8 @@ paths:
               language2: en
               type: person
         description: >
-          The request body is a JSON structure made of the following elements:
+          The request body is a JSON structure made of the following
+          elements:
 
 
           * `language1` (string) - a standard IETF tag for the language of the first entity
@@ -60,7 +65,8 @@ paths:
                   - social_role
                 result: different
           description: >-
-            A JSON structure containing the comparison result and the different segments, if applicable. The elements are:
+            A JSON structure containing the comparison result and the different
+            segments, if applicable. The elements are:
 
 
             * `result` (string) - the result of the comparison. Values: 
@@ -75,14 +81,56 @@ paths:
               * `suffix`
               * `variation` - substantially the same; the only difference is a style (e.g. hypocorism or colloquial vs formal) or a language or a spelling
       summary: Named entity comparison
+  /detectLanguage:
+    post:
+      description: Detects the languages used in the specified text fragment. Returns
+        the breakdown by offsets.
+      operationId: detect-language
+      requestBody:
+        content:
+          application/json:
+            example:
+              content: "скушай\r\nmuffin\r\nכפארה"
+              delimiter: "[\\r\\n]"
+              languages: en|ru|th|he
+        description: >
+          A request is made of three elements:
+
+            + `content` - a text fragment to analyze
+            + `languages` - (optional) a comma-delimited or vertical bar-delimited list of language codes to choose from; used for intelligent cues
+            + `delimiter` - (optional) a regular expression to segment the fragment; by default, languages are detected globally
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                languages:
+                  - language: ru
+                    length: 7
+                    offset: 0
+                    score: 866
+                  - language: en
+                    length: 7
+                    offset: 8
+                    score: 731
+                  - language: he
+                    length: 6
+                    offset: 16
+                    score: 1024
+          description: The breakdown of detected languages
+      summary: Detect language
+      tags:
+        - detect
   /helper/extract_text:
     post:
-      description: "A service method to remove JavaScript, CSS tags, JSON, and other markup, returning pure decoded text. "
+      description: "A service method to remove JavaScript, CSS tags, JSON, and other
+        markup, returning pure decoded text. "
       operationId: clean-up-text
       requestBody:
         content:
           text/plain:
-            example: <p>Clean me up</p> <style>/* I'm a super kewl programmer dude who likes to leave comments. Who needs style when analyzing text? */</style>
+            example: <p>Clean me up</p> <style>/* I'm a super kewl programmer dude who likes
+              to leave comments. Who needs style when analyzing text? */</style>
         description: Text to clean up.
       responses:
         "200":
@@ -269,7 +317,8 @@ paths:
                   nativeEncoding: utf-8
                   preferredFont: Arial Unicode MS
           description: >-
-            An array of elements containing basic info for the supported languages. Every array member contains:
+            An array of elements containing basic info for the supported
+            languages. Every array member contains:
 
 
             * `id` (string) - a standard IETF language tag
@@ -289,7 +338,8 @@ paths:
   /parse:
     post:
       description: >+
-        The method analyzes the input, returning high-level and low-level metadata. 
+        The method analyzes the input, returning high-level and low-level
+        metadata. 
 
 
         The request body is a JSON structure made of three elements:
@@ -858,7 +908,6 @@ paths:
            * `topic_stats` (boolean) - include coverage statistics in the topic output (default: `false`). When set, the topic is an object containing the attributes `topic` (string) and `coverage` (floating-point number). The coverage indicates a share of sentences touching the topic among all the sentences. 
            * `optimize_topics` (boolean) - if `true`, the less specific topics are removed if they are parts of the more specific topics. For example, when the topic is `cryptocurrency`, the optimization removes `finance`.  
 
-
            
           `words` (boolean) - output the lexical chunks / words for every sentence (default: `false`). In languages without white spaces (Chinese, Japanese, Thai), the tokens are tokenized words. In languages with compounds (e.g. German, Dutch, Norwegian), the compounds are split. 
 
@@ -959,7 +1008,8 @@ paths:
           content:
             application/json:
               example:
-                text: An inertial force is a force that resists a change in velocity of an object.
+                text: An inertial force is a force that resists a change in velocity of an
+                  object.
                 topics:
                   - physics
           description: >-
@@ -970,7 +1020,8 @@ paths:
       summary: Analyze text
   /similarity:
     post:
-      description: Calculate semantic similarity between two text fragments, in the same language or in two different languages.
+      description: Calculate semantic similarity between two text fragments, in the
+        same language or in two different languages.
       operationId: semantic-similarity
       requestBody:
         content:
@@ -999,13 +1050,13 @@ paths:
           content:
             application/json:
               example: 0.8341
-          description: A number in range 0 thru 1 indicating the similarity of the submitted text fragments.
+          description: A number in range 0 thru 1 indicating the similarity of the
+            submitted text fragments.
       summary: Semantic similarity
   /text2picture:
     post:
-      description: >-
+      description: |-
         Finds a URL of an image (Creative Commons) best describing the text. 
-
 
         *WARNING*: may be slow, as Wikimedia servers are queried.
       operationId: generate-illustration-for-text
@@ -1013,7 +1064,9 @@ paths:
         content:
           application/json:
             example:
-              content: The largest Scandinavian country by area is Sweden. This nation is also the most populous with a population exceeding 10 million. Its capital is Stockholm
+              content: The largest Scandinavian country by area is Sweden. This nation is also
+                the most populous with a population exceeding 10 million. Its
+                capital is Stockholm
               language: en
         description: >+
           The request body is a JSON structure made of two elements:
@@ -1026,8 +1079,10 @@ paths:
       responses:
         "200":
           content:
-            application/json: {}
-          description: A JSON-escaped URL of a Creative Commons image on Wikimedia servers, if exists. Null if no image is found.
+            application/json:
+              example: https://upload.wikimedia.org/wikipedia/commons/7/7b/Stockholm_gamlastan_etc.jpg
+          description: A JSON-escaped URL of a Creative Commons image on Wikimedia
+            servers, if exists. Null if no image is found.
       summary: Generate image from text
 components:
   schemas:

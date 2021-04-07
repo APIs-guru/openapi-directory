@@ -92,7 +92,9 @@ paths:
   /architectures:
     get:
       description: >
-        Get a list of all known architectures known to OBS in general. This is not the list of architectures provided by this instance. Check the schedulers element from the `/configuration` route for this.
+        Get a list of all known architectures known to OBS in general. This
+        is not the list of architectures provided by this instance. Check the
+        schedulers element from the `/configuration` route for this.
       responses:
         "200":
           content:
@@ -105,7 +107,8 @@ paths:
                   - name: s390x
                   - name: x86_64
               schema:
-                $ref: "#/paths/~1group/get/responses/200/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: OK. The request has succeeded.
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -150,7 +153,8 @@ paths:
                 code: unknown_architecture
                 summary: "Architecture does not exist: x999"
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -170,7 +174,8 @@ paths:
                   - name: OBS
                   - name: openSUSE
               schema:
-                $ref: "#/paths/~1group/get/responses/200/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -222,7 +227,8 @@ paths:
                   - name: AutoCleanup
                   - name: OwnerRootProject
               schema:
-                $ref: "#/paths/~1group/get/responses/200/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -237,7 +243,8 @@ paths:
                 code: not_found
                 summary: Couldn't find AttribNamespace
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -272,7 +279,8 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1attribute~1{namespace}~1_meta/put/requestBody/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1attribute~1{namespace}~1_meta/put/requestBody/content/applicat\
+                  ion~1xml; charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -287,7 +295,8 @@ paths:
                 code: not_found
                 summary: Couldn't find AttribNamespace
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -296,7 +305,8 @@ paths:
         - Attribute Namespaces
     post:
       description: >
-        This endpoint can be used for both, creating an attribute namespace and updating it:
+        This endpoint can be used for both, creating an attribute namespace
+        and updating it:
           * If the attribute namespace passed as parameter doesn't exist, it will create the attribute namespace.
           * If the attribute namespace passed as parameter already exists, it will update the namespace attribute.
 
@@ -307,7 +317,8 @@ paths:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1attribute~1{namespace}~1_meta/put/requestBody/content/application~1xml; charset=utf-8/schema"
+              $ref: "#/paths/~1attribute~1{namespace}~1_meta/put/requestBody/content/applicat\
+                ion~1xml; charset=utf-8/schema"
         description: >
           Attribute namespace definition.
 
@@ -330,9 +341,12 @@ paths:
                   summary: Validation Failed (Wrong XML Element)
                   value:
                     code: validation_failed
-                    summary: "attribute_namespace_meta validation error: 1:0: ERROR: Element 'foo': No matching global declaration available for the validation root."
+                    summary: "attribute_namespace_meta validation error: 1:0: ERROR: Element 'foo':
+                      No matching global declaration available for the
+                      validation root."
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Validation Failed.
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -351,16 +365,19 @@ paths:
                     code: not_found
                     summary: Couldn't find User with login = user_login_name
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
-      summary: Change attribute namespace. Create an attribute namespace if it doesn't exist.
+      summary: Change attribute namespace. Create an attribute namespace if it doesn't
+        exist.
       tags:
         - Attribute Namespaces
     put:
       description: >
-        This endpoint can be used for both, creating an attribute namespace and updating it:
+        This endpoint can be used for both, creating an attribute namespace
+        and updating it:
           * If the attribute namespace passed as parameter doesn't exist, it will create the attribute namespace.
           * If the attribute namespace passed as parameter already exists, it will update the namespace attribute.
 
@@ -412,9 +429,12 @@ paths:
                   summary: Validation Failed (Wrong XML Element)
                   value:
                     code: validation_failed
-                    summary: "attribute_namespace_meta validation error: 1:0: ERROR: Element 'foo': No matching global declaration available for the validation root."
+                    summary: "attribute_namespace_meta validation error: 1:0: ERROR: Element 'foo':
+                      No matching global declaration available for the
+                      validation root."
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Validation Failed.
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -433,11 +453,13 @@ paths:
                     code: not_found
                     summary: Couldn't find User with login = user_login_name
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
-      summary: Change attribute namespace. Create an attribute namespace if it doesn't exist.
+      summary: Change attribute namespace. Create an attribute namespace if it doesn't
+        exist.
       tags:
         - Attribute Namespaces
   "/attribute/{namespace}/{attribute_name}":
@@ -471,7 +493,8 @@ paths:
                     code: not_found
                     summary: Couldn't find AttribNamespace
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -503,7 +526,8 @@ paths:
                     code: not_found
                     summary: Couldn't find AttribNamespace
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -520,7 +544,8 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1attribute~1{namespace}~1{attribute_name}~1_meta/put/requestBody/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1attribute~1{namespace}~1{attribute_name}~1_meta/put/requestBod\
+                  y/content/application~1xml; charset=utf-8/schema"
           description: OK. The request has succeeded.
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -539,7 +564,8 @@ paths:
                     code: unknown_attribute
                     summary: Unknown attribute 'OBS_TEST':'OwnerRootProjectTest'
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -548,7 +574,8 @@ paths:
         - Attributes
     post:
       description: >
-        This endpoint can be used for both, creating an attribute and updating it:
+        This endpoint can be used for both, creating an attribute and
+        updating it:
           * If the attribute passed as parameter doesn't exist, it will create the attribute.
           * If the attribute passed as parameter already exists, it will update the attribute.
 
@@ -560,7 +587,8 @@ paths:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1attribute~1{namespace}~1{attribute_name}~1_meta/put/requestBody/content/application~1xml; charset=utf-8/schema"
+              $ref: "#/paths/~1attribute~1{namespace}~1{attribute_name}~1_meta/put/requestBod\
+                y/content/application~1xml; charset=utf-8/schema"
         description: Attribute definition.
         required: true
       responses:
@@ -579,14 +607,18 @@ paths:
                   summary: Illegal Request
                   value:
                     code: illegal_request
-                    summary: "Illegal request: PUT/POST /attribute/OBS_TEST/OwnerRootProjectTest/_meta: path does not match content"
+                    summary: "Illegal request: PUT/POST
+                      /attribute/OBS_TEST/OwnerRootProjectTest/_meta: path does
+                      not match content"
                 wrong_xml_element:
                   summary: Validation Failed (Wrong XML Attributes)
                   value:
                     code: validation_failed
-                    summary: "attrib_type validation error: 1:0: ERROR: Element definition failed to validate attributes"
+                    summary: "attrib_type validation error: 1:0: ERROR: Element definition failed to
+                      validate attributes"
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Validation Failed.
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -605,7 +637,8 @@ paths:
                     code: unknown_attribute
                     summary: Unknown attribute 'OBS_TEST':'OwnerRootProjectTest'
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -614,7 +647,8 @@ paths:
         - Attributes
     put:
       description: >
-        This endpoint can be used for both, creating an attribute and updating it:
+        This endpoint can be used for both, creating an attribute and
+        updating it:
           * If the attribute passed as parameter doesn't exist, it will create the attribute.
           * If the attribute passed as parameter already exists, it will update the attribute.
 
@@ -684,14 +718,18 @@ paths:
                   summary: Illegal Request
                   value:
                     code: illegal_request
-                    summary: "Illegal request: PUT/POST /attribute/OBS_TEST/OwnerRootProjectTest/_meta: path does not match content"
+                    summary: "Illegal request: PUT/POST
+                      /attribute/OBS_TEST/OwnerRootProjectTest/_meta: path does
+                      not match content"
                 wrong_xml_element:
                   summary: Validation Failed (Wrong XML Attributes)
                   value:
                     code: validation_failed
-                    summary: "attrib_type validation error: 1:0: ERROR: Element definition failed to validate attributes"
+                    summary: "attrib_type validation error: 1:0: ERROR: Element definition failed to
+                      validate attributes"
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Validation Failed.
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -710,7 +748,8 @@ paths:
                     code: unknown_attribute
                     summary: Unknown attribute 'OBS_TEST':'OwnerRootProjectTest'
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -719,15 +758,16 @@ paths:
         - Attributes
   /configuration:
     get:
-      description: >
+      description: |
         Display the configuration of this Open Build Service instance.
       responses:
         "200":
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1configuration/put/requestBody/content/application~1xml; charset=utf-8/schema"
-          description: >
+                $ref: "#/paths/~1configuration/put/requestBody/content/application~1xml;
+                  charset=utf-8/schema"
+          description: |
             OK. The request has succeeded.
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -737,9 +777,8 @@ paths:
       tags:
         - Configuration
     put:
-      description: >
+      description: |
         Update the configuration of this Open Build Service instance.
-
 
         This is for admins only.
       requestBody:
@@ -766,7 +805,8 @@ paths:
                   example: off
                   type: string
                 description:
-                  example: The openSUSE Build Service is the public instance of the Open Build Service (OBS)
+                  example: The openSUSE Build Service is the public instance of the Open Build
+                    Service (OBS)
                   type: string
                 disable_publish_for_branches:
                   example: on
@@ -824,8 +864,9 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1configuration/put/requestBody/content/application~1xml; charset=utf-8/schema"
-          description: >
+                $ref: "#/paths/~1configuration/put/requestBody/content/application~1xml;
+                  charset=utf-8/schema"
+          description: |
             OK. The request has succeeded.
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -834,9 +875,11 @@ paths:
             application/xml; charset=utf-8:
               example:
                 code: no_permission_to_change
-                summary: The api has a different value for default_access_disabled configured in options.yml file. Remove it there first
+                summary: The api has a different value for default_access_disabled configured in
+                  options.yml file. Remove it there first
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Forbidden.
 
@@ -914,7 +957,8 @@ paths:
                     vendor: Fedora
                     version: "33"
               schema:
-                $ref: "#/paths/~1distributions/put/requestBody/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1distributions/put/requestBody/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -929,7 +973,8 @@ paths:
         - Distributions
     put:
       description: >
-        Create one or more distributions. Existing distributions will be deleted.
+        Create one or more distributions. Existing distributions will be
+        deleted.
 
 
         This is only for admins.
@@ -1016,7 +1061,8 @@ paths:
                 code: ok
                 summary: Ok
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The Request has succeded.
 
@@ -1027,9 +1073,11 @@ paths:
             application/xml; charset=utf-8:
               example:
                 code: validation_failed
-                summary: "distributions validation error: 40:0: ERROR: Expecting an element name, got nothing"
+                summary: "distributions validation error: 40:0: ERROR: Expecting an element
+                  name, got nothing"
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Bad Request.
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -1041,7 +1089,8 @@ paths:
   /distributions/include_remotes:
     get:
       description: >
-        List all distributions that can be build against, including the ones provided by the interconnect.
+        List all distributions that can be build against, including the
+        ones provided by the interconnect.
       responses:
         "200":
           $ref: "#/paths/~1distributions/get/responses/200"
@@ -1054,9 +1103,8 @@ paths:
         - Distributions
   "/distributions/{distribution_id}":
     delete:
-      description: >
+      description: |
         Delete a distribution.
-
 
         This is only for admins.
       parameters:
@@ -1069,8 +1117,9 @@ paths:
                 code: ok
                 summary: Ok
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
-          description: >
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
+          description: |
             OK. The request has succeded.
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -1081,7 +1130,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Distribution with 'id'=0
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not found.
       security:
         - basic_authentication: []
@@ -1089,7 +1139,7 @@ paths:
       tags:
         - Distributions
     get:
-      description: >
+      description: |
         Show a distribution that can be build against.
       parameters:
         - description: The id of the distribution
@@ -1104,8 +1154,9 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1distributions/put/requestBody/content/application~1xml; charset=utf-8/schema"
-          description: >
+                $ref: "#/paths/~1distributions/put/requestBody/content/application~1xml;
+                  charset=utf-8/schema"
+          description: |
             OK. The request has succeded.
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -1116,7 +1167,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Distribution with 'id'=0
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not found.
       security:
         - basic_authentication: []
@@ -1214,7 +1266,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Group 'group-testd'
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -1236,7 +1289,8 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1group~1{group_title}/put/requestBody/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group~1{group_title}/put/requestBody/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -1251,7 +1305,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Group 'group-testd'
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -1298,7 +1353,8 @@ paths:
                 code: bad_request
                 summary: cmd must be set to add_user or remove_user
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Bad Request.
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -1317,7 +1373,8 @@ paths:
                     code: not_found
                     summary: Couldn't find User with login = user_test
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -1361,9 +1418,8 @@ paths:
               type: object
               xml:
                 name: group
-        description: >
+        description: |
           Group definition.
-
 
           XML Schema used for body validation: [group.rng](../schema/group.rng)
         required: true
@@ -1379,7 +1435,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Group 'group-testd'
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -1395,7 +1452,8 @@ paths:
             application/xml; charset=utf-8:
               schema:
                 items:
-                  $ref: "#/paths/~1issue_trackers/post/requestBody/content/application~1xml; charset=utf-8/schema"
+                  $ref: "#/paths/~1issue_trackers/post/requestBody/content/application~1xml;
+                    charset=utf-8/schema"
                 type: array
                 xml:
                   name: issue-trackers
@@ -1468,9 +1526,11 @@ paths:
                   summary: Wrong XML Element
                   value:
                     code: validation_failed
-                    summary: "issue_tracker validation error: 1:0: ERROR: Expecting element issue-tracker, got foo"
+                    summary: "issue_tracker validation error: 1:0: ERROR: Expecting element
+                      issue-tracker, got foo"
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Validation failed.
 
@@ -1500,7 +1560,8 @@ paths:
                 code: not_found
                 summary: Unable to find issue tracker 'foo'
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not Found.
 
@@ -1526,7 +1587,8 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1issue_trackers/post/requestBody/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1issue_trackers/post/requestBody/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Issue tracker definition.
 
@@ -1541,7 +1603,8 @@ paths:
                 code: not_found
                 summary: Unable to find issue tracker 'foo'
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not Found.
 
@@ -1553,14 +1616,16 @@ paths:
       tags:
         - Issue Trackers
     put:
-      description: Update the issue tracker given as path parameter. If it is not found, create it.
+      description: Update the issue tracker given as path parameter. If it is not
+        found, create it.
       parameters:
         - $ref: "#/paths/~1issue_trackers~1{issue_tracker_name}/get/parameters/0"
       requestBody:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1issue_trackers/post/requestBody/content/application~1xml; charset=utf-8/schema"
+              $ref: "#/paths/~1issue_trackers/post/requestBody/content/application~1xml;
+                charset=utf-8/schema"
         description: >
           Issue tracker definition.
 
@@ -1583,9 +1648,11 @@ paths:
                   summary: Wrong XML Element
                   value:
                     code: validation_failed
-                    summary: "issue_tracker validation error: 1:0: ERROR: Expecting element issue-tracker, got foo"
+                    summary: "issue_tracker validation error: 1:0: ERROR: Expecting element
+                      issue-tracker, got foo"
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Validation failed.
 
@@ -1651,7 +1718,8 @@ paths:
                 code: issue_tracker_not_found
                 summary: "Error: Issue Tracker 'foo' not found."
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not Found.
 
@@ -1664,7 +1732,7 @@ paths:
         - Issue Trackers
   /person:
     get:
-      description: >
+      description: |
         List all people.
       parameters:
         - description: A prefix to filter the people to look for
@@ -1691,7 +1759,8 @@ paths:
                   - name: user_3
                   - name: Requestor
               schema:
-                $ref: "#/paths/~1group/get/responses/200/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -1702,9 +1771,8 @@ paths:
       tags:
         - Person
     post:
-      description: >
+      description: |
         Allows executing command on the person endpoint.
-
 
         As of now, the only command allowed is 'register'.
       parameters:
@@ -1753,7 +1821,8 @@ paths:
                 code: ok
                 summary: Ok
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -1766,13 +1835,15 @@ paths:
                 Bad Request:
                   value:
                     code: err_register_save
-                    summary: "Could not save the registration, details: Login is the name of an already existing user and Password can't be blank."
+                    summary: "Could not save the registration, details: Login is the name of an
+                      already existing user and Password can't be blank."
                 Unknown Command:
                   value:
                     code: unknown_command
                     summary: Allowed command is 'register'.
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Bad request.
 
@@ -1801,11 +1872,13 @@ paths:
               example:
                 code: permission_denied
                 summary: >
-                  User accounts can not be registered via OBS when in LDAP mode. Please refer
+                  User accounts can not be registered via OBS when in LDAP mode. Please
+                  refer
 
                   to your LDAP server to create new users.
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Forbidden
       summary: Registers a new person
       tags:
@@ -1869,9 +1942,8 @@ paths:
                 type: object
                 xml:
                   name: person
-          description: >
+          description: |
             OK. The request has succeeded.
-
             XML Schema used for body validation: [user.rng](../schema/user.rng)
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -1882,7 +1954,8 @@ paths:
                 code: not_found
                 summary: Couldn't find User with login = <login>
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not found.
 
@@ -1919,7 +1992,8 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -1931,13 +2005,15 @@ paths:
                 Bad Request:
                   value:
                     code: err_register_save
-                    summary: "Could not save the registration, details: Login is the name of an already existing user and Password can't be blank."
+                    summary: "Could not save the registration, details: Login is the name of an
+                      already existing user and Password can't be blank."
                 Unknown Command:
                   value:
                     code: unknown_command
                     summary: Allowed commands are '<some command>'.
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Bad request.
 
@@ -1953,7 +2029,8 @@ paths:
                     code: update_user_not_authorized
                     summary: You are not authorized to update this User.
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Forbidden.
 
@@ -1988,7 +2065,8 @@ paths:
                     code: subaccount_chaining
                     summary: A subaccount can not be assigned to subaccount <login>
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Bad request.
 
@@ -2005,7 +2083,8 @@ paths:
                     code: change_userinfo_no_permission
                     summary: no permission to change userinfo for user <login>
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Unauthorized.
 
@@ -2018,7 +2097,8 @@ paths:
                 code: password_empty
                 summary: Requested non-existing user
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not found.
 
@@ -2044,7 +2124,8 @@ paths:
                   - name: factory-maintainers
                   - name: obs-developers
               schema:
-                $ref: "#/paths/~1group/get/responses/200/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -2058,7 +2139,8 @@ paths:
                 code: not_found
                 summary: Couldn't find User with login = fake
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not Found.
 
@@ -2137,7 +2219,8 @@ paths:
                 code: view_user_not_authorized
                 summary: You are not authorized to view this User.
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Forbidden.
 
@@ -2162,7 +2245,8 @@ paths:
       parameters:
         - $ref: "#/paths/~1person~1{login}/get/parameters/0"
         - description: >
-            Project name. Should be provided, together with the package query parameter,
+            Project name. Should be provided, together with the package query
+            parameter,
 
             to limit the token to a specific package.
           example: home:hans
@@ -2171,7 +2255,8 @@ paths:
           schema:
             type: string
         - description: >
-            Package name. Should be provided, together with the project query parameter,
+            Package name. Should be provided, together with the project query
+            parameter,
 
             to limit the token to a specific package.
           example: gchz
@@ -2179,9 +2264,8 @@ paths:
           name: package
           schema:
             type: string
-        - description: >
+        - description: |
             Operation indicates the kind of token that is going to be created.
-
 
             When operation is not specified, 'runservice' is the default value.
           example: runservice
@@ -2204,7 +2288,8 @@ paths:
                   - 5
                 summary: Ok
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -2232,7 +2317,8 @@ paths:
                 code: update_user_not_authorized
                 summary: You are not authorized to update this User.
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Forbidden.
 
@@ -2263,7 +2349,8 @@ paths:
                 code: ok
                 summary: Ok
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -2278,7 +2365,8 @@ paths:
                 code: update_user_not_authorized
                 summary: You are not authorized to update this User.
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Forbidden.
 
@@ -2291,7 +2379,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Token with 'id'=33 [WHERE `tokens`.`user_id` = ?]
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not Found.
 
@@ -2312,7 +2401,8 @@ paths:
                   - name: 122
                   - name: 123
               schema:
-                $ref: "#/paths/~1group/get/responses/200/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK
 
@@ -2328,7 +2418,8 @@ paths:
     post:
       description: Create a request
       parameters:
-        - description: This endpoint will refuse the creation of a new request if this parameter is not set.
+        - description: This endpoint will refuse the creation of a new request if this
+            parameter is not set.
           in: query
           name: cmd
           required: true
@@ -2336,14 +2427,16 @@ paths:
             enum:
               - create
             type: string
-        - description: Ask the server to add revisions of the current sources to the request.
+        - description: Ask the server to add revisions of the current sources to the
+            request.
           in: query
           name: addrevision
           schema:
             enum:
               - 1
             type: string
-        - description: Enforce a new package instance in a project which has OBS:DelegateRequestTarget set
+        - description: Enforce a new package instance in a project which has
+            OBS:DelegateRequestTarget set
           in: query
           name: ignore_delegate
           schema:
@@ -2568,7 +2661,8 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1request/post/requestBody/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1request/post/requestBody/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK.
 
@@ -2579,9 +2673,11 @@ paths:
             application/xml; charset=utf-8:
               example:
                 code: expand_error
-                summary: The source of package test-project/test-package for revision 2 is broken
+                summary: The source of package test-project/test-package for revision 2 is
+                  broken
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Bad Request
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -2592,7 +2688,8 @@ paths:
                 code: create_bs_request_not_authorized
                 summary: You are not authorized to create this Bs request.
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Forbidden
       security:
         - basic_authentication: []
@@ -2616,7 +2713,8 @@ paths:
                 code: not_found
                 summary: Couldn't find request with id '10'
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found
       security:
         - basic_authentication: []
@@ -2657,7 +2755,8 @@ paths:
                 code: not_found
                 summary: Couldn't find request with id '5'
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found
       security:
         - basic_authentication: []
@@ -2787,11 +2886,13 @@ paths:
               example:
                 code: no_maintenance_release_target
                 summary: >
-                  Maintenance incident request contains release target project test_maintenance_project with
+                  Maintenance incident request contains release target project
+                  test_maintenance_project with
 
                   invalid project kind "standard" (should be "maintenance_release") for package package01
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Bad Request
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -2808,7 +2909,8 @@ paths:
                     code: request_not_modifiable
                     summary: request is not in review state
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found
       security:
         - basic_authentication: []
@@ -2816,9 +2918,8 @@ paths:
       tags:
         - Request
     put:
-      description: >
+      description: |
         Modify a given request.
-
 
         **NOTE:** Certain parts of a request can only be changed by admins.
       parameters:
@@ -2827,7 +2928,8 @@ paths:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1request/post/requestBody/content/application~1xml; charset=utf-8/schema"
+              $ref: "#/paths/~1request/post/requestBody/content/application~1xml;
+                charset=utf-8/schema"
         description: >
           Request XML
 
@@ -2847,7 +2949,8 @@ paths:
                 code: request_save_error
                 summary: Auto accept time is in the past
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Bad Request
         "401":
           $ref: "#/paths/~1group/get/responses/401"
@@ -2858,7 +2961,8 @@ paths:
                 code: not_found
                 summary: Couldn't find request with id '10'
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found
       security:
         - basic_authentication: []
@@ -2867,18 +2971,20 @@ paths:
         - Request
   "/request/{id}?cmd=diff":
     post:
-      description: >
+      description: |
         Get the diff for all packages affected by the request.
       parameters:
         - $ref: "#/paths/~1request~1{id}/get/parameters/0"
         - description: >
-            Diff relative to a given superseded request. State the id of the corresponding superseded request.
+            Diff relative to a given superseded request. State the id of the
+            corresponding superseded request.
           example: 10401
           in: query
           name: diff_to_superseded
           schema:
             type: string
-        - description: Set this parameter to xml in order to receive a structured diff instead of plain text.
+        - description: Set this parameter to xml in order to receive a structured diff
+            instead of plain text.
           in: query
           name: view
           schema:
@@ -2933,25 +3039,25 @@ paths:
                                 file:
                                   properties:
                                     diff:
-                                      example: >
+                                      example: |
                                         spec files:
-
                                         -----------
-
                                         --- test.spec
-
                                         +++ test.spec
-
                                         @@ -0,0 +1 @@
-
                                         +# NEW COMMENT
-
                                         \ No newline at end of file
                                       type: string
                                     new:
-                                      $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~1xml; charset=utf-8/schema/components/schemas/OldNewFile"
+                                      $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~\
+                                        1xml;
+                                        charset=utf-8/schema/components/schemas\
+                                        /OldNewFile"
                                     old:
-                                      $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~1xml; charset=utf-8/schema/components/schemas/OldNewFile"
+                                      $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~\
+                                        1xml;
+                                        charset=utf-8/schema/components/schemas\
+                                        /OldNewFile"
                                     state:
                                       example: changed
                                       type: string
@@ -2999,9 +3105,15 @@ paths:
                             xml:
                               attribute: true
                           new:
-                            $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~1xml; charset=utf-8/schema/components/schemas/NewOldDestination"
+                            $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~\
+                              1xml;
+                              charset=utf-8/schema/components/schemas/NewOldDes\
+                              tination"
                           old:
-                            $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~1xml; charset=utf-8/schema/components/schemas/NewOldDestination"
+                            $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~\
+                              1xml;
+                              charset=utf-8/schema/components/schemas/NewOldDes\
+                              tination"
                         type: object
                       target:
                         properties:
@@ -3079,19 +3191,13 @@ paths:
                 xml:
                   name: diff
             text/plain; charset=utf-8:
-              example: >
+              example: |
                 spec files:
-
                 -----------
-
                 --- test.spec
-
                 +++ test.spec
-
                 @@ -0,0 +1 @@
-
                 +# NEW COMMENT
-
                 \ No newline at end of file
               schema:
                 type: string
@@ -3105,7 +3211,8 @@ paths:
                 code: not_found
                 summary: Couldn't find request with id '355'
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found
       security:
         - basic_authentication: []
@@ -3114,28 +3221,21 @@ paths:
         - Request
   /request?view=collection:
     get:
-      description: >
+      description: |
         Get a collection of requests for a specified target. **NOTE:**
-
         You need to set at least one of the following parameters in order
-
         to use this endpoint:
 
-
         * `user`
-
         * `project`
-
         * `package`
-
         * `states`
-
         * `types`
-
         * `ids`
       parameters:
         - description: >
-            Filter the results of requests and open reviews for a certain user. If no other parameters are
+            Filter the results of requests and open reviews for a certain user.
+            If no other parameters are
 
             applied, it will include requests where the user is maintainer of the target or the creator of
 
@@ -3145,31 +3245,36 @@ paths:
           name: user
           schema:
             type: string
-        - description: Limit the results of requests and open review requests to the specified target project.
+        - description: Limit the results of requests and open review requests to the
+            specified target project.
           example: home:hans
           in: query
           name: project
           schema:
             type: string
-        - description: Limit the results of requests and open review requests to the specified target package.
+        - description: Limit the results of requests and open review requests to the
+            specified target package.
           example: ruby
           in: query
           name: package
           schema:
             type: string
-        - description: Limit results to a given request state. Multiple states can be provided as a comma separated list.
+        - description: Limit results to a given request state. Multiple states can be
+            provided as a comma separated list.
           example: new,review
           in: query
           name: states
           schema:
             type: string
-        - description: Limit the results to certain action types. Multiple types can be provided as a comma separated list.
+        - description: Limit the results to certain action types. Multiple types can be
+            provided as a comma separated list.
           example: add_role,submit
           in: query
           name: types
           schema:
             type: string
-        - description: Limit the results to a given role. Multiple roles can be provided as a comma separated list.
+        - description: Limit the results to a given role. Multiple roles can be provided
+            as a comma separated list.
           example: creator,maintainer,reviewer,source,target
           in: query
           name: roles
@@ -3183,7 +3288,8 @@ paths:
           name: limit
           schema:
             type: integer
-        - description: Limit the result to specified request id's. Multiple id's can be provided as a comma separated list.
+        - description: Limit the result to specified request id's. Multiple id's can be
+            provided as a comma separated list.
           example: 15,19,23
           in: query
           name: ids
@@ -3202,7 +3308,8 @@ paths:
                       attribute: true
                   request:
                     items:
-                      $ref: "#/paths/~1request/post/requestBody/content/application~1xml; charset=utf-8/schema"
+                      $ref: "#/paths/~1request/post/requestBody/content/application~1xml;
+                        charset=utf-8/schema"
                     type: array
                 type: object
                 xml:
@@ -3221,9 +3328,11 @@ paths:
                 Require Filter:
                   value:
                     code: require_filter
-                    summary: This call requires at least one filter, either by user, project or package or states or types or reviewstates
+                    summary: This call requires at least one filter, either by user, project or
+                      package or states or types or reviewstates
               schema:
-                $ref: "#/paths/~1group/get/responses/401/content/application~1xml; charset=utf-8/schema"
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found
       security:
         - basic_authentication: []

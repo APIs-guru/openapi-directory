@@ -24,7 +24,8 @@ tags:
 paths:
   /api/hashtags:
     get:
-      description: Search for specified tag (no pound sign necessary). If <b>tag</b> is empty, the 50 most popular hashtags will be returned.
+      description: Search for specified tag (no pound sign necessary). If <b>tag</b>
+        is empty, the 50 most popular hashtags will be returned.
       operationId: Marks#hashtags
       parameters:
         - description: Hashtag to search for
@@ -43,7 +44,8 @@ paths:
   /api/marks:
     get:
       description: >-
-        The main method for querying the marks database. You may use the following options:
+        The main method for querying the marks database. You may use the
+        following options:
                 <ol style='list-style-type: lower-roman;'>
                 <li>No parameters to retrieve all marks in descending chronological order (use <b>before</b> for pagination)</li>
                 <li><b>popular</b> (and optionally <b>last_popular_id</b>) to retrieve all popular marks</li>

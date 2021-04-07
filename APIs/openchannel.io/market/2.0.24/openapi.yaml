@@ -16,17 +16,20 @@ paths:
   /apps:
     get:
       description: >
-        - Results are paginated and the default is value is 1000 if no limit is provided
+        - Results are paginated and the default is value is 1000 if no
+        limit is provided
 
         - If no query is specified, returns all APPROVED or SUSPENDED apps within the marketplace
       parameters:
-        - description: "A query document. Example: {'name':'MyApp'} matches all the apps that have the name 'MyApp'"
+        - description: "A query document. Example: {'name':'MyApp'} matches all the apps
+            that have the name 'MyApp'"
           in: query
           name: query
           required: false
           schema:
             type: string
-        - description: "A sort document. Example: {'name':1} sorts the results by name in ascending order"
+        - description: "A sort document. Example: {'name':1} sorts the results by name in
+            ascending order"
           in: query
           name: sort
           required: false
@@ -50,7 +53,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Whether this result should only contain apps that are owned by this user
+        - description: Whether this result should only contain apps that are owned by this
+            user
           in: query
           name: isOwner
           required: false
@@ -69,11 +73,9 @@ paths:
       tags:
         - "apps : Find and modify apps"
     post:
-      description: >
+      description: |
         - This method is called on behalf of a developer.
-
         - Price is required if the model is 'single' or 'recurring'
-
         - Returns the newly created app
       parameters:
         - description: The unique id of the developer that is adding this app
@@ -106,19 +108,28 @@ paths:
           required: false
           schema:
             type: string
-        - description: A custom set of app attributes defined by the administrator and attached to this app
+        - description: A custom set of app attributes defined by the administrator and
+            attached to this app
           in: query
           name: attributes
           required: false
           schema:
             type: string
-        - description: "JSON object to restrict users from owning or viewing this app. Example: {'view':{'country':['Canada','Mexico']},'own':{'country':['Canada','Mexico']}} restricts users from canada and mexico from viewing or owning this app"
+        - description: "JSON object to restrict users from owning or viewing this app.
+            Example:
+            {'view':{'country':['Canada','Mexico']},'own':{'country':['Canada',\
+            'Mexico']}} restricts users from canada and mexico from viewing or
+            owning this app"
           in: query
           name: restrict
           required: false
           schema:
             type: string
-        - description: "JSON object to restrict users from owning or viewing this app. Example: {'view':{'country':['Canada','Mexico']},'own':{'country':['Canada','Mexico']}} restricts users from canada and mexico from viewing or owning this app"
+        - description: "JSON object to restrict users from owning or viewing this app.
+            Example:
+            {'view':{'country':['Canada','Mexico']},'own':{'country':['Canada',\
+            'Mexico']}} restricts users from canada and mexico from viewing or
+            owning this app"
           in: query
           name: allow
           required: false
@@ -146,7 +157,7 @@ paths:
         - "apps : Find and modify apps"
   "/apps/bySafeName/{safeName}":
     get:
-      description: >
+      description: |
         - A 'view' event is recorded when trackViews is set to true
       parameters:
         - description: The safeName of the App to be located
@@ -161,7 +172,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Whether this call should be tracked as a 'view' for this app. Default is false.
+        - description: Whether this call should be tracked as a 'view' for this app.
+            Default is false.
           in: query
           name: trackViews
           required: false
@@ -184,9 +196,11 @@ paths:
   /apps/textSearch:
     get:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials
+        - Results are returned for the market provided within the basic
+        authentication credentials
       parameters:
-        - description: "A query document. Example: {'name':'MyApp'} matches all the documents that have the name 'MyApp'"
+        - description: "A query document. Example: {'name':'MyApp'} matches all the
+            documents that have the name 'MyApp'"
           in: query
           name: query
           required: false
@@ -198,7 +212,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "A JSON array containing all the fields to be searched through. Example: ['name', 'customData.description']"
+        - description: "A JSON array containing all the fields to be searched through.
+            Example: ['name', 'customData.description']"
           in: query
           name: fields
           required: true
@@ -222,7 +237,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Whether this result should only contain apps that are owned by this user
+        - description: Whether this result should only contain apps that are owned by this
+            user
           in: query
           name: isOwned
           required: false
@@ -243,19 +259,22 @@ paths:
   /apps/versions:
     get:
       description: >
-        - Results are paginated when limit is set, otherwise all results are returned
+        - Results are paginated when limit is set, otherwise all results
+        are returned
 
         - If no query is specified, returns all AppVersions within the marketplace
 
         - Only returns AppVersions owned by this developer
       parameters:
-        - description: "A query document. Example: {'name':'MyApp'} matches all the apps that have the name 'MyApp'"
+        - description: "A query document. Example: {'name':'MyApp'} matches all the apps
+            that have the name 'MyApp'"
           in: query
           name: query
           required: false
           schema:
             type: string
-        - description: "A sort document. Example: {'name':1} sorts the results by name in ascending order"
+        - description: "A sort document. Example: {'name':1} sorts the results by name in
+            ascending order"
           in: query
           name: sort
           required: false
@@ -293,7 +312,7 @@ paths:
         - "apps : Find and modify apps"
   "/apps/{appId}":
     delete:
-      description: >
+      description: |
         - This method is called on behalf of a developer.
       parameters:
         - description: The id of the App to be removed
@@ -315,7 +334,7 @@ paths:
       tags:
         - "apps : Find and modify apps"
     get:
-      description: >
+      description: |
         - A 'view' event is recorded when trackViews is set to true
       parameters:
         - description: The id of the App to be located
@@ -330,7 +349,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Whether this call should be tracked as a 'view' for this app. Default is false.
+        - description: Whether this call should be tracked as a 'view' for this app.
+            Default is false.
           in: query
           name: trackViews
           required: false
@@ -352,7 +372,7 @@ paths:
         - "apps : Find and modify apps"
   "/apps/{appId}/live":
     post:
-      description: >
+      description: |
         - This method is called on behalf of a developer.
       parameters:
         - description: The id of the App to be changed
@@ -383,9 +403,8 @@ paths:
         - "apps : Find and modify apps"
   "/apps/{appId}/publish":
     post:
-      description: >
+      description: |
         - This method is called on behalf of a developer. 
-
         - Only effects the current working version of the app.
       parameters:
         - description: The id of the app to be published
@@ -406,7 +425,8 @@ paths:
           required: true
           schema:
             type: integer
-        - description: If true, this AppVersion is automatically approved and becomes immediately available to end users
+        - description: If true, this AppVersion is automatically approved and becomes
+            immediately available to end users
           in: query
           name: autoApprove
           required: false
@@ -426,7 +446,7 @@ paths:
         - "apps : Find and modify apps"
   "/apps/{appId}/versions/{version}":
     delete:
-      description: >
+      description: |
         - This method is called on behalf of a developer.
       parameters:
         - description: The id of the App to be removed
@@ -454,7 +474,7 @@ paths:
       tags:
         - "apps : Find and modify apps"
     get:
-      description: >
+      description: |
         - Only returns AppVersions owned by this developer
       parameters:
         - description: The id of the App to be located
@@ -541,19 +561,26 @@ paths:
           required: false
           schema:
             type: string
-        - description: A custom set of app attributes defined by the administrator and attached to this app
+        - description: A custom set of app attributes defined by the administrator and
+            attached to this app
           in: query
           name: attributes
           required: false
           schema:
             type: string
-        - description: "JSON object to restrict users from purchasing or viewing this app. Example: {'view':{'country':['Canada','Mexico']},'purchase':{'country':['Canada','Mexico']}} restricts users from canada and mexico from viewing or purchasing this app"
+        - description: "JSON object to restrict users from purchasing or viewing this app.
+            Example:
+            {'view':{'country':['Canada','Mexico']},'purchase':{'country':['Can\
+            ada','Mexico']}} restricts users from canada and mexico from viewing
+            or purchasing this app"
           in: query
           name: restrict
           required: false
           schema:
             type: string
-        - description: "JSON object to allow users to purchase or view this app. Example: {'purchase':{'country':['Canada','Mexico']}} allows only users from canada and mexico to purchase this app"
+        - description: "JSON object to allow users to purchase or view this app. Example:
+            {'purchase':{'country':['Canada','Mexico']}} allows only users from
+            canada and mexico to purchase this app"
           in: query
           name: allow
           required: false
@@ -565,7 +592,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: False if updates should skip the approval process and be available immediately. Default is True
+        - description: False if updates should skip the approval process and be available
+            immediately. Default is True
           in: query
           name: approvalRequired
           required: false
@@ -639,19 +667,26 @@ paths:
           required: false
           schema:
             type: string
-        - description: A custom set of app attributes defined by the administrator and attached to this app
+        - description: A custom set of app attributes defined by the administrator and
+            attached to this app
           in: query
           name: attributes
           required: false
           schema:
             type: string
-        - description: "JSON object to restrict users from purchasing or viewing this app. Example: {'view':{'country':['Canada','Mexico']},'purchase':{'country':['Canada','Mexico']}} restricts users from canada and mexico from viewing or purchasing this app"
+        - description: "JSON object to restrict users from purchasing or viewing this app.
+            Example:
+            {'view':{'country':['Canada','Mexico']},'purchase':{'country':['Can\
+            ada','Mexico']}} restricts users from canada and mexico from viewing
+            or purchasing this app"
           in: query
           name: restrict
           required: false
           schema:
             type: string
-        - description: "JSON object to allow users to purchase or view this app. Example: {'purchase':{'country':['Canada','Mexico']}} allows only users from canada and mexico to purchase this app"
+        - description: "JSON object to allow users to purchase or view this app. Example:
+            {'purchase':{'country':['Canada','Mexico']}} allows only users from
+            canada and mexico to purchase this app"
           in: query
           name: allow
           required: false
@@ -663,7 +698,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: False if updates should skip the approval process and be available immediately. Default is True
+        - description: False if updates should skip the approval process and be available
+            immediately. Default is True
           in: query
           name: approvalRequired
           required: false
@@ -688,7 +724,11 @@ paths:
   "/apps/{appId}/versions/{version}/status":
     post:
       description: >
-        Only certain status changes are allowed. For instance, a developer is only able to suspend and unsuspend their app (which must already be approved). See here for a state change diagram of allowed status changes for administrators: https://support.openchannel.io/documentation/api/#415-apps-status-change
+        Only certain status changes are allowed. For instance, a developer
+        is only able to suspend and unsuspend their app (which must already be
+        approved). See here for a state change diagram of allowed status changes
+        for administrators:
+        https://support.openchannel.io/documentation/api/#415-apps-status-change
       parameters:
         - description: The id of the App to be updated
           in: path
@@ -708,7 +748,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: The new status for this app. Can be either 'inReview', 'approved', 'suspended' or 'rejected'
+        - description: The new status for this app. Can be either 'inReview', 'approved',
+            'suspended' or 'rejected'
           in: query
           name: status
           required: false
@@ -719,7 +760,8 @@ paths:
               - suspended
               - rejected
             type: string
-        - description: The role initiating this status change. Can be either 'developer' or 'administrator' (default)
+        - description: The role initiating this status change. Can be either 'developer'
+            or 'administrator' (default)
           in: query
           name: modifiedBy
           required: false
@@ -741,14 +783,16 @@ paths:
         "404":
           description: Not Found - App is not found
         "412":
-          description: Precondition Failed - The app's new status is not valid because of the app's current status
+          description: Precondition Failed - The app's new status is not valid because of
+            the app's current status
       summary: Allows a developer or administrator to change the status of apps
       tags:
         - "apps : Find and modify apps"
   "/custom-gateway/payment/{ownershipId}":
     post:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials 
+        - Results are returned for the market provided within the basic
+        authentication credentials 
 
         - Payments must be enabled and 'Custom' must be selected as the gateway in order to use this API endpoint
       parameters:
@@ -771,19 +815,23 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: The fee (in cents) paid to a payment processors or third parties to process this payment. Default is 0.
+        - description: The fee (in cents) paid to a payment processors or third parties to
+            process this payment. Default is 0.
           in: query
           name: feeAmount
           required: false
           schema:
             type: integer
-        - description: The amount (in cents) paid to the marketplace owner as a commission for the purchase of this app. Defaults based on the commission amount configured for this marketplace.
+        - description: The amount (in cents) paid to the marketplace owner as a commission
+            for the purchase of this app. Defaults based on the commission
+            amount configured for this marketplace.
           in: query
           name: marketplaceAmount
           required: false
           schema:
             type: integer
-        - description: The amount (in cents) paid to the owner of the app. Defaults based on the commission amount configured for this marketplace.
+        - description: The amount (in cents) paid to the owner of the app. Defaults based
+            on the commission amount configured for this marketplace.
           in: query
           name: developerAmount
           required: false
@@ -799,7 +847,8 @@ paths:
         "400":
           description: Bad Request - Required parameters are missing, malformed or invalid
         "412":
-          description: Precondition Failed - Payments must be enabled and 'Custom' must be selected as the gateway in order to use this API endpoint
+          description: Precondition Failed - Payments must be enabled and 'Custom' must be
+            selected as the gateway in order to use this API endpoint
         default:
           content:
             "*/*":
@@ -812,7 +861,8 @@ paths:
   "/custom-gateway/refund/{ownershipId}":
     post:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials
+        - Results are returned for the market provided within the basic
+        authentication credentials
 
         - Payments must be enabled and 'Custom' must be selected as the gateway in order to use this API endpoint
       parameters:
@@ -835,13 +885,15 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: The fee (in cents) recovered from a payment processor or third party to process this payment. The default value is 0
+        - description: The fee (in cents) recovered from a payment processor or third
+            party to process this payment. The default value is 0
           in: query
           name: feeAmount
           required: false
           schema:
             type: integer
-        - description: The amount (in cents) recovered from the marketplace owner as a commission refund for the purchase of this app
+        - description: The amount (in cents) recovered from the marketplace owner as a
+            commission refund for the purchase of this app
           in: query
           name: marketplaceAmount
           required: false
@@ -863,7 +915,8 @@ paths:
         "400":
           description: Bad Request - Required parameters are missing, malformed or invalid
         "412":
-          description: Precondition Failed - Payments must be enabled and 'Custom' must be selected as the gateway in order to use this API endpoint
+          description: Precondition Failed - Payments must be enabled and 'Custom' must be
+            selected as the gateway in order to use this API endpoint
         default:
           content:
             "*/*":
@@ -876,15 +929,18 @@ paths:
   /developerAccounts:
     get:
       description: >
-        - Results are paginated and the default is value is 1000 if no limit is provided
+        - Results are paginated and the default is value is 1000 if no
+        limit is provided
       parameters:
-        - description: "A query document. Example: {'name':'NASA'} matches all the developerAccounts that have the name 'NASA'"
+        - description: "A query document. Example: {'name':'NASA'} matches all the
+            developerAccounts that have the name 'NASA'"
           in: query
           name: query
           required: false
           schema:
             type: string
-        - description: "A sort document. Example: {'name':1} sorts the results by name in ascending order"
+        - description: "A sort document. Example: {'name':1} sorts the results by name in
+            ascending order"
           in: query
           name: sort
           required: false
@@ -1040,21 +1096,25 @@ paths:
               schema:
                 $ref: "#/components/schemas/DeveloperAccount"
           description: OK
-      summary: Updates the developer account or adds the developer account if it doesn't exist
+      summary: Updates the developer account or adds the developer account if it
+        doesn't exist
       tags:
         - "developerAccounts : Find and modify developer accounts"
   /developers:
     get:
       description: >
-        - Results are paginated and the default is value is 100 if no limit is provided
+        - Results are paginated and the default is value is 100 if no limit
+        is provided
       parameters:
-        - description: "A query document. Example: {'name':'John'} matches all the developers that have the name 'John'"
+        - description: "A query document. Example: {'name':'John'} matches all the
+            developers that have the name 'John'"
           in: query
           name: query
           required: false
           schema:
             type: string
-        - description: "A sort document. Example: {'name':1} sorts the results by name in ascending order"
+        - description: "A sort document. Example: {'name':1} sorts the results by name in
+            ascending order"
           in: query
           name: sort
           required: false
@@ -1230,7 +1290,8 @@ paths:
   "/events/{eventId}":
     get:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials
+        - Results are returned for the market provided within the basic
+        authentication credentials
       parameters:
         - description: The id of the event
           in: path
@@ -1255,13 +1316,15 @@ paths:
   /files:
     get:
       parameters:
-        - description: "A query document. Example: {'name':'file.txt'} matches all the files that have the name 'file.txt'"
+        - description: "A query document. Example: {'name':'file.txt'} matches all the
+            files that have the name 'file.txt'"
           in: query
           name: query
           required: false
           schema:
             type: string
-        - description: "A sort document. Example: {'name':1} sorts the results by name in ascending order"
+        - description: "A sort document. Example: {'name':1} sorts the results by name in
+            ascending order"
           in: query
           name: sort
           required: false
@@ -1293,17 +1356,22 @@ paths:
         - "files : Upload files "
     post:
       description: >
-        - WARNING: File URLs or fileIds must be stored somewhere within the customData field for an app, review, developer or user. Unused files will be removed after a few days. 
+        - WARNING: File URLs or fileIds must be stored somewhere within the
+        customData field for an app, review, developer or user. Unused files
+        will be removed after a few days. 
 
         - This method is called on behalf of a developer.
       parameters:
-        - description: If true, this file will be protected as a private file and require the generation of a signed URL in order to download using the Download File API. The default is false.
+        - description: If true, this file will be protected as a private file and require
+            the generation of a signed URL in order to download using the
+            Download File API. The default is false.
           in: query
           name: isPrivate
           required: false
           schema:
             type: boolean
-        - description: A comma separated list of hashes to return in order to verify file integrity.
+        - description: A comma separated list of hashes to return in order to verify file
+            integrity.
           in: query
           name: hash
           required: false
@@ -1364,7 +1432,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: The number of seconds that this signed URL should be valid for. The default is 60.
+        - description: The number of seconds that this signed URL should be valid for. The
+            default is 60.
           in: query
           name: validSeconds
           required: false
@@ -1381,13 +1450,16 @@ paths:
               schema:
                 $ref: "#/components/schemas/FileDownload"
           description: OK
-      summary: A signed URL for downloading a private file can be returned by providing the fileId.
+      summary: A signed URL for downloading a private file can be returned by
+        providing the fileId.
       tags:
         - "files : Upload files "
   /files/url:
     post:
       description: >
-        - WARNING: File URLs or fileIds must be stored somewhere within the customData field for an app, review, developer or user. Unused files will be removed after a few days.
+        - WARNING: File URLs or fileIds must be stored somewhere within the
+        customData field for an app, review, developer or user. Unused files
+        will be removed after a few days.
 
         - This method is called on behalf of a developer.
       parameters:
@@ -1397,7 +1469,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: If true, this file will be protected as a private file and require the generation of a signed URL in order to download using the Download File API. The default is false.
+        - description: If true, this file will be protected as a private file and require
+            the generation of a signed URL in order to download using the
+            Download File API. The default is false.
           in: query
           name: isPrivate
           required: false
@@ -1431,15 +1505,18 @@ paths:
         - "markets : This marketplace"
   /ownership:
     get:
-      description: " - Results are returned for the market provided within the basic authentication credentials "
+      description: " - Results are returned for the market provided within the basic
+        authentication credentials "
       parameters:
-        - description: "A query document. Example: {'userId':'12'} matches all the ownership records that have the userId '12'."
+        - description: "A query document. Example: {'userId':'12'} matches all the
+            ownership records that have the userId '12'."
           in: query
           name: query
           required: false
           schema:
             type: string
-        - description: "A sort document. Example: {'date':1} sorts the results by date in ascending order"
+        - description: "A sort document. Example: {'date':1} sorts the results by date in
+            ascending order"
           in: query
           name: sort
           required: false
@@ -1471,7 +1548,9 @@ paths:
         - "ownership : Find ownership"
   /ownership/install:
     post:
-      description: " - This method is called on behalf of a user - This method requires either a modelId from the app or a custom model - User data and statistics are recorded when this method is called "
+      description: " - This method is called on behalf of a user - This method
+        requires either a modelId from the app or a custom model - User data and
+        statistics are recorded when this method is called "
       parameters:
         - description: The id of the App being owned
           in: query
@@ -1491,7 +1570,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: A custom model that will override the app's default model for this install
+        - description: A custom model that will override the app's default model for this
+            install
           in: query
           name: model
           required: false
@@ -1507,11 +1587,13 @@ paths:
         "400":
           description: Bad Request - Required parameters are missing, malformed or invalid
         "402":
-          description: Payment Required - The App requires a user with pre-set payment details
+          description: Payment Required - The App requires a user with pre-set payment
+            details
         "404":
           description: Not Found - The App is either restricted or was not found
         "409":
-          description: Already Exists - The User already owns this app (or is already participating in a trial)
+          description: Already Exists - The User already owns this app (or is already
+            participating in a trial)
         "412":
           description: Payment Failed - The User's payment details are invalid
         default:
@@ -1525,7 +1607,8 @@ paths:
         - "ownership : Find ownership"
   "/ownership/uninstall/{ownershipId}":
     post:
-      description: " - This method is called on behalf of a user - User data and statistics are recorded when this method is called "
+      description: " - This method is called on behalf of a user - User data and
+        statistics are recorded when this method is called "
       parameters:
         - description: The id of the ownership to be unintalled
           in: path
@@ -1539,7 +1622,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: True if this app will require payment to be re-installed. Default is false
+        - description: True if this app will require payment to be re-installed. Default
+            is false
           in: query
           name: cancelOwnership
           required: false
@@ -1569,7 +1653,8 @@ paths:
         - "ownership : Find ownership"
   "/ownership/{ownershipId}":
     get:
-      description: " - Results are returned for the market provided within the basic authentication credentials "
+      description: " - Results are returned for the market provided within the basic
+        authentication credentials "
       parameters:
         - description: The id belonging to the ownership record
           in: path
@@ -1590,7 +1675,8 @@ paths:
       tags:
         - "ownership : Find ownership"
     patch:
-      description: " - Results are returned for the market provided within the basic authentication credentials "
+      description: " - Results are returned for the market provided within the basic
+        authentication credentials "
       parameters:
         - description: The id of the ownership to be updated
           in: path
@@ -1626,7 +1712,8 @@ paths:
       tags:
         - "ownership : Find ownership"
     post:
-      description: " - Results are returned for the market provided within the basic authentication credentials "
+      description: " - Results are returned for the market provided within the basic
+        authentication credentials "
       parameters:
         - description: The id of the ownership to be updated
           in: path
@@ -1724,7 +1811,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: The time (in milliseconds) of when the user agreed to the access request
+        - description: The time (in milliseconds) of when the user agreed to the access
+            request
           in: query
           name: date
           required: false
@@ -1754,15 +1842,18 @@ paths:
   /reviews:
     get:
       description: >
-        - Results are paginated and the default is value is 100 if no limit is provided
+        - Results are paginated and the default is value is 100 if no limit
+        is provided
       parameters:
-        - description: "A query document. Example: {'rating': 500} matches all the reviews that have a rating of 500. "
+        - description: "A query document. Example: {'rating': 500} matches all the reviews
+            that have a rating of 500. "
           in: query
           name: query
           required: false
           schema:
             type: string
-        - description: "A sort document. Example: {'rating':1} sorts the results by rating in ascending order"
+        - description: "A sort document. Example: {'rating':1} sorts the results by rating
+            in ascending order"
           in: query
           name: sort
           required: false
@@ -1789,13 +1880,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/ReviewPages"
           description: OK
-      summary: Find reviews for a particular App and marketplace. Results are automatically paginated when limit is set
+      summary: Find reviews for a particular App and marketplace. Results are
+        automatically paginated when limit is set
       tags:
         - "reviews : Find and modify reviews "
     post:
-      description: >
+      description: |
         - Only authenticated users are able to post reviews
-
         - Returns the newly created review
       parameters:
         - description: The id of the App that will own this review
@@ -1822,7 +1913,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: The rating given within this review. The rating is represented as an integer between 0 and 500 (0 - 5 stars)
+        - description: The rating given within this review. The rating is represented as
+            an integer between 0 and 500 (0 - 5 stars)
           in: query
           name: rating
           required: true
@@ -1842,13 +1934,15 @@ paths:
           required: false
           schema:
             type: string
-        - description: True if a review can be created only by a user that has owned the app. The default is True.
+        - description: True if a review can be created only by a user that has owned the
+            app. The default is True.
           in: query
           name: mustOwnApp
           required: false
           schema:
             type: boolean
-        - description: True if the review should be automatically approved. The default is False.
+        - description: True if the review should be automatically approved. The default is
+            False.
           in: query
           name: autoApprove
           required: false
@@ -1864,7 +1958,8 @@ paths:
         "400":
           description: Bad Request - Required parameters are missing, malformed or invalid
         "403":
-          description: Forbidden - Users must have owned the app before they can post a review; Anonymous users cannot post reviews
+          description: Forbidden - Users must have owned the app before they can post a
+            review; Anonymous users cannot post reviews
         "409":
           description: Already Exists - The User has already reviewed this app
         default:
@@ -1878,7 +1973,7 @@ paths:
         - "reviews : Find and modify reviews "
   "/reviews/{reviewId}":
     delete:
-      description: >
+      description: |
         - Only the review author is able to remove their review
       parameters:
         - description: The id of the Review to be updated
@@ -1928,9 +2023,8 @@ paths:
       tags:
         - "reviews : Find and modify reviews "
     patch:
-      description: >
+      description: |
         - Only the review author is able to update their review
-
         - Returns the newly updated review
       parameters:
         - description: The id of the Review to be updated
@@ -1957,7 +2051,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: The rating given within this review. The rating is represented as an integer between 0 and 500 (0 - 5 stars)
+        - description: The rating given within this review. The rating is represented as
+            an integer between 0 and 500 (0 - 5 stars)
           in: query
           name: rating
           required: false
@@ -1994,9 +2089,8 @@ paths:
       tags:
         - "reviews : Find and modify reviews "
     post:
-      description: >
+      description: |
         - Only the review author is able to update their review
-
         - Returns the newly updated review
       parameters:
         - description: The id of the Review to be updated
@@ -2023,7 +2117,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: The rating given within this review. The rating is represented as an integer between 0 and 500 (0 - 5 stars)
+        - description: The rating given within this review. The rating is represented as
+            an integer between 0 and 500 (0 - 5 stars)
           in: query
           name: rating
           required: true
@@ -2087,7 +2182,8 @@ paths:
           required: false
           schema:
             type: integer
-        - description: The date (in millis) for when this increment occurred. The default is the current date if no value is provided.
+        - description: The date (in millis) for when this increment occurred. The default
+            is the current date if no value is provided.
           in: query
           name: date
           required: false
@@ -2102,7 +2198,8 @@ paths:
         - "stats: Find marketplace statistics"
   "/stats/series/{period}/{fields}":
     get:
-      description: "Return a timeseries nested array containing date and value. Example: [[1406520000000,2],[1406606400000,34],[1406692800000,245],...]"
+      description: "Return a timeseries nested array containing date and value.
+        Example: [[1406520000000,2],[1406606400000,34],[1406692800000,245],...]"
       parameters:
         - description: The period for the series (day or month)
           in: path
@@ -2113,7 +2210,9 @@ paths:
               - day
               - month
             type: string
-        - description: The field to be graphed. This also be a comma separated list of fields and the result will be a single timeseries containing the sum of all fields.
+        - description: The field to be graphed. This also be a comma separated list of
+            fields and the result will be a single timeseries containing the sum
+            of all fields.
           in: path
           name: fields
           required: true
@@ -2133,7 +2232,8 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: "A query document. Example: {'developerId': '112'} matches all the apps that have the developer with id 112"
+        - description: "A query document. Example: {'developerId': '112'} matches all the
+            apps that have the developer with id 112"
           in: query
           name: query
           required: false
@@ -2156,13 +2256,16 @@ paths:
   /stats/total:
     get:
       parameters:
-        - description: "A comma seperated list of all the fields to be returned in the total (available by default: dislikes, likes, reviews, totalSales, developerSales, marketplaceSales, downloads, ownerships, views)"
+        - description: "A comma seperated list of all the fields to be returned in the
+            total (available by default: dislikes, likes, reviews, totalSales,
+            developerSales, marketplaceSales, downloads, ownerships, views)"
           in: query
           name: fields
           required: true
           schema:
             type: string
-        - description: "A query document. Example: {'developerId': '112'} matches all the apps that have the developer with id 112"
+        - description: "A query document. Example: {'developerId': '112'} matches all the
+            apps that have the developer with id 112"
           in: query
           name: query
           required: false
@@ -2195,7 +2298,8 @@ paths:
   "/stripe-gateway/developer/{developerId}/accounts":
     get:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials
+        - Results are returned for the market provided within the basic
+        authentication credentials
       parameters:
         - description: The id of the developer connecting their Stripe account
           in: path
@@ -2207,7 +2311,8 @@ paths:
         "400":
           description: Bad Request - Required parameters are missing, malformed or invalid
         "412":
-          description: Precondition Failed - Payments must be enabled and 'Stripe' must be selected as the gateway in order to use this API endpoint
+          description: Precondition Failed - Payments must be enabled and 'Stripe' must be
+            selected as the gateway in order to use this API endpoint
         default:
           content:
             "*/*":
@@ -2219,7 +2324,8 @@ paths:
         - "stripe-gateway : Process payments and refunds "
     post:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials 
+        - Results are returned for the market provided within the basic
+        authentication credentials 
 
         - The URL generated by this method is only valid for 48 hours.
       parameters:
@@ -2229,7 +2335,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: The URL to redirect this developer after they have connected their Stripe account
+        - description: The URL to redirect this developer after they have connected their
+            Stripe account
           in: query
           name: redirectUrl
           required: true
@@ -2239,14 +2346,16 @@ paths:
         "400":
           description: Bad Request - Required parameters are missing, malformed or invalid
         "412":
-          description: Precondition Failed - Payments must be enabled and 'Stripe' must be selected as the gateway in order to use this API endpoint
+          description: Precondition Failed - Payments must be enabled and 'Stripe' must be
+            selected as the gateway in order to use this API endpoint
         default:
           content:
             "*/*":
               schema:
                 $ref: "#/components/schemas/DeveloperToken"
           description: OK
-      summary: Generate a temporary URL to allow a developer to connect their Stripe account
+      summary: Generate a temporary URL to allow a developer to connect their Stripe
+        account
       tags:
         - "stripe-gateway : Process payments and refunds "
   "/stripe-gateway/developer/{developerId}/accounts/{stripeId}":
@@ -2271,7 +2380,8 @@ paths:
         "400":
           description: Bad Request - Required parameters are missing, malformed or invalid
         "412":
-          description: Precondition Failed - Payments must be enabled and 'Stripe' must be selected as the gateway in order to use this API endpoint
+          description: Precondition Failed - Payments must be enabled and 'Stripe' must be
+            selected as the gateway in order to use this API endpoint
         default:
           content:
             "*/*":
@@ -2284,7 +2394,8 @@ paths:
   "/stripe-gateway/user/{userId}/cards":
     get:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials
+        - Results are returned for the market provided within the basic
+        authentication credentials
       parameters:
         - description: The id of the user requesting their credit cards
           in: path
@@ -2296,7 +2407,8 @@ paths:
         "400":
           description: Bad Request - Required parameters are missing, malformed or invalid
         "412":
-          description: Precondition Failed - Payments must be enabled and 'Stripe' must be selected as the gateway in order to use this API endpoint
+          description: Precondition Failed - Payments must be enabled and 'Stripe' must be
+            selected as the gateway in order to use this API endpoint
         default:
           content:
             "*/*":
@@ -2308,7 +2420,8 @@ paths:
         - "stripe-gateway : Process payments and refunds "
     post:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials
+        - Results are returned for the market provided within the basic
+        authentication credentials
       parameters:
         - description: The id of the user adding their credit card
           in: path
@@ -2316,7 +2429,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: The Stripe token returned by the Stripe.js Stripe.card.createToken call
+        - description: The Stripe token returned by the Stripe.js Stripe.card.createToken
+            call
           in: query
           name: token
           required: true
@@ -2332,7 +2446,8 @@ paths:
         "400":
           description: Bad Request - Required parameters are missing, malformed or invalid
         "412":
-          description: Precondition Failed - Payments must be enabled and 'Stripe' must be selected as the gateway in order to use this API endpoint
+          description: Precondition Failed - Payments must be enabled and 'Stripe' must be
+            selected as the gateway in order to use this API endpoint
         default:
           content:
             "*/*":
@@ -2361,7 +2476,8 @@ paths:
         "400":
           description: Bad Request - Required parameters are missing, malformed or invalid
         "412":
-          description: Precondition Failed - Payments must be enabled and 'Stripe' must be selected as the gateway in order to use this API endpoint
+          description: Precondition Failed - Payments must be enabled and 'Stripe' must be
+            selected as the gateway in order to use this API endpoint
         default:
           content:
             "*/*":
@@ -2434,7 +2550,8 @@ paths:
         "400":
           description: Bad Request - Required parameters are missing, malformed or invalid
         "412":
-          description: Precondition Failed - Payments must be enabled and 'Stripe' must be selected as the gateway in order to use this API endpoint
+          description: Precondition Failed - Payments must be enabled and 'Stripe' must be
+            selected as the gateway in order to use this API endpoint
         default:
           content:
             "*/*":
@@ -2447,15 +2564,18 @@ paths:
   /transactions:
     get:
       description: >
-        - Results are paginated and the default is value is 100 if no limit is provided
+        - Results are paginated and the default is value is 100 if no limit
+        is provided
       parameters:
-        - description: "A query document. Example: {'userId':'1'} matches all the transactions that have the userId '1'."
+        - description: "A query document. Example: {'userId':'1'} matches all the
+            transactions that have the userId '1'."
           in: query
           name: query
           required: false
           schema:
             type: string
-        - description: "A sort document. Example: {'date':1} sorts the results by total in ascending order"
+        - description: "A sort document. Example: {'date':1} sorts the results by total in
+            ascending order"
           in: query
           name: sort
           required: false
@@ -2488,7 +2608,8 @@ paths:
   "/transactions/{transactionId}":
     delete:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials
+        - Results are returned for the market provided within the basic
+        authentication credentials
       parameters:
         - description: The id of the transaction to be deleted
           in: path
@@ -2504,7 +2625,8 @@ paths:
         - "transactions : Find payments and refunds "
     get:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials
+        - Results are returned for the market provided within the basic
+        authentication credentials
       parameters:
         - description: The id of the transaction to return
           in: path
@@ -2520,7 +2642,8 @@ paths:
         - "transactions : Find payments and refunds "
     post:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials
+        - Results are returned for the market provided within the basic
+        authentication credentials
       parameters:
         - description: The id of the transaction to be updated
           in: path
@@ -2549,15 +2672,18 @@ paths:
   /userAccounts:
     get:
       description: >
-        - Results are paginated and the default is value is 1000 if no limit is provided
+        - Results are paginated and the default is value is 1000 if no
+        limit is provided
       parameters:
-        - description: "A query document. Example: {'name':'NASA'} matches all the userAccounts that have the name 'NASA'"
+        - description: "A query document. Example: {'name':'NASA'} matches all the
+            userAccounts that have the name 'NASA'"
           in: query
           name: query
           required: false
           schema:
             type: string
-        - description: "A sort document. Example: {'name':1} sorts the results by name in ascending order"
+        - description: "A sort document. Example: {'name':1} sorts the results by name in
+            ascending order"
           in: query
           name: sort
           required: false
@@ -2719,15 +2845,18 @@ paths:
   /users:
     get:
       description: >
-        - Results are paginated and the default is value is 100 if no limit is provided
+        - Results are paginated and the default is value is 100 if no limit
+        is provided
       parameters:
-        - description: "A query document. Example: {'name':'John'} matches all the users that have the name 'John'"
+        - description: "A query document. Example: {'name':'John'} matches all the users
+            that have the name 'John'"
           in: query
           name: query
           required: false
           schema:
             type: string
-        - description: "A sort document. Example: {'name':1} sorts the results by name in ascending order"
+        - description: "A sort document. Example: {'name':1} sorts the results by name in
+            ascending order"
           in: query
           name: sort
           required: false
@@ -2760,7 +2889,8 @@ paths:
   "/users/{userId}":
     delete:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials
+        - Results are returned for the market provided within the basic
+        authentication credentials
       parameters:
         - description: The id of the user to be removed
           in: path
@@ -2780,7 +2910,8 @@ paths:
         - "users : Find and modify users "
     get:
       description: >
-        - Results are returned for the market provided within the basic authentication credentials
+        - Results are returned for the market provided within the basic
+        authentication credentials
       parameters:
         - description: The id of the user to be located
           in: path
@@ -2918,7 +3049,8 @@ components:
           description: The id of the app that owns this access key
           type: string
         date:
-          description: The time (in milliseconds) of when the user agreed to the access request
+          description: The time (in milliseconds) of when the user agreed to the access
+            request
           format: int64
           type: integer
         ip:
@@ -3015,10 +3147,12 @@ components:
         ownership:
           $ref: "#/components/schemas/Ownership"
         randomize:
-          description: A random number that changes hourly and is used for achieving a random sort order when displaying apps
+          description: A random number that changes hourly and is used for achieving a
+            random sort order when displaying apps
           type: integer
         rating:
-          description: The average review rating for this app. Reviews are rated from 100 (one star) to 500 (five star)
+          description: The average review rating for this app. Reviews are rated from 100
+            (one star) to 500 (five star)
           maximum: 500
           minimum: 0
           type: integer
@@ -3028,12 +3162,14 @@ components:
           description: The number of approved reviews for this app.
           type: integer
         safeName:
-          description: URL safe aliases that can be used to identify this app even after name changes. The current alias is always at position 0.
+          description: URL safe aliases that can be used to identify this app even after
+            name changes. The current alias is always at position 0.
           items:
             type: string
           type: array
         statistics:
-          description: A field containing summary stats about the app and is specially designed to allow apps to be sorted by popularity
+          description: A field containing summary stats about the app and is specially
+            designed to allow apps to be sorted by popularity
           type: object
         status:
           $ref: "#/components/schemas/Status"
@@ -3138,7 +3274,8 @@ components:
         parent:
           $ref: "#/components/schemas/Parent"
         rating:
-          description: The average review rating for this app. Reviews are rated from 100 (one star) to 500 (five star)
+          description: The average review rating for this app. Reviews are rated from 100
+            (one star) to 500 (five star)
           maximum: 500
           minimum: 0
           type: integer
@@ -3148,7 +3285,8 @@ components:
           description: The number of approved reviews for this app.
           type: integer
         safeName:
-          description: URL safe aliases that can be used to identify this app even after name changes. The current alias is always at position 0.
+          description: URL safe aliases that can be used to identify this app even after
+            name changes. The current alias is always at position 0.
           items:
             type: string
           type: array
@@ -3493,7 +3631,8 @@ components:
         hash:
           $ref: "#/components/schemas/Hash"
         mimeCheck:
-          description: The mime type validation check to see if the extension of this file matches it's content. Can be PASSED or FAILED
+          description: The mime type validation check to see if the extension of this file
+            matches it's content. Can be PASSED or FAILED
           enum:
             - PASSED
             - FAILED
@@ -3617,7 +3756,8 @@ components:
       description: The model that describes the cost and pricing for apps
       properties:
         billingPeriod:
-          description: The billingPeriod along with the billingPeriodUnit make up the time between billing cycles
+          description: The billingPeriod along with the billingPeriodUnit make up the time
+            between billing cycles
           enum:
             - daily
             - weekly
@@ -3625,10 +3765,12 @@ components:
             - annually
           type: string
         billingPeriodUnit:
-          description: The billingPeriod along with the billingPeriodUnit make up the time between billing cycles
+          description: The billingPeriod along with the billingPeriodUnit make up the time
+            between billing cycles
           type: integer
         commission:
-          description: The marketplace commission applied to this app's model multiplied by 100 to include two digits for fractions of a percent
+          description: The marketplace commission applied to this app's model multiplied
+            by 100 to include two digits for fractions of a percent
           type: integer
         currency:
           description: The ISO 4217 currency code for this price
@@ -3643,7 +3785,8 @@ components:
             - marketplace
           type: string
         license:
-          description: The license model type. Single allows a purchase to a single user or organization
+          description: The license model type. Single allows a purchase to a single user
+            or organization
           enum:
             - single
           type: string
@@ -3663,7 +3806,8 @@ components:
           description: The maximum number of free trial days available
           type: integer
         type:
-          description: The pricing model type. Free has no cost, single has a one time purchase cost and recurring requires a monthly subscription
+          description: The pricing model type. Free has no cost, single has a one time
+            purchase cost and recurring requires a monthly subscription
           enum:
             - free
             - single
@@ -3778,10 +3922,14 @@ components:
       description: Resticts users from accessing this app
       properties:
         own:
-          description: "A custom object containing fields paired with an array value of restrictions. Restricts the users that may own this app. Example: {'country':['Canada','Mexico']}"
+          description: "A custom object containing fields paired with an array value of
+            restrictions. Restricts the users that may own this app. Example:
+            {'country':['Canada','Mexico']}"
           type: object
         view:
-          description: "A custom object containing fields paired with an array value of restrictions. Restricts the users that may view this app. Example: {'country':['Canada','Mexico']}"
+          description: "A custom object containing fields paired with an array value of
+            restrictions. Restricts the users that may view this app. Example:
+            {'country':['Canada','Mexico']}"
           type: object
     Revenue:
       description: The revenue generated by this app
@@ -3811,7 +3959,8 @@ components:
           description: The review's headline. Limited to 50 characters.
           type: string
         rating:
-          description: The rating given within this review. The rating is represented as an integer between 100 and 500 (1 - 5 stars)
+          description: The rating given within this review. The rating is represented as
+            an integer between 100 and 500 (1 - 5 stars)
           type: integer
         reportDate:
           description: The date (in millis) this Review was posted

@@ -5,7 +5,8 @@ host: wft-geo-db.p.rapidapi.com
 basePath: /v1
 info:
   description: >
-    The GeoDB API focuses on getting global city and region data. Easily obtain country, region, and city data for use
+    The GeoDB API focuses on getting global city and region data.
+    Easily obtain country, region, and city data for use
 
     in your apps! 
 
@@ -143,7 +144,8 @@ parameters:
     type: string
   query.entity.namePrefix:
     description: >
-      Only entities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name
+      Only entities whose names start with this prefix. If languageCode
+      is set, the prefix will be matched on the name
 
       as it appears in that language.
     in: query
@@ -159,7 +161,8 @@ parameters:
     type: boolean
   query.includeDeleted:
     default: NONE
-    description: "Whether to include any divisions marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
+    description: "Whether to include any divisions marked deleted: ALL |
+      SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
     in: query
     name: includeDeleted
     required: false
@@ -187,19 +190,22 @@ parameters:
     required: false
     type: integer
   query.place.countryIds:
-    description: Only places in these countries (comma-delimited country codes or WikiData ids)
+    description: Only places in these countries (comma-delimited country codes or
+      WikiData ids)
     in: query
     name: countryIds
     required: false
     type: string
   query.place.excludedCountryIds:
-    description: Only places NOT in these countries (comma-delimited country codes or WikiData ids)
+    description: Only places NOT in these countries (comma-delimited country codes
+      or WikiData ids)
     in: query
     name: excludedCountryIds
     required: false
     type: string
   query.place.location.id:
-    description: "Only places near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD"
+    description: "Only places near this location. Latitude/longitude in ISO-6709
+      format: ±DD.DDDD±DDD.DDDD"
     in: query
     name: location
     required: false
@@ -226,22 +232,18 @@ parameters:
     required: false
     type: integer
   query.place.sort:
-    description: >
+    description: |
       How to sort place results. 
-
       'Format: ±SORT_FIELD,±SORT_FIELD' 
-
       where SORT_FIELD = countryCode | elevation | name | population
     in: query
     name: sort
     required: false
     type: string
   query.place.sort.withinRegion:
-    description: >
+    description: |
       How to sort place results. 
-
       'Format: ±SORT_FIELD,±SORT_FIELD' 
-
       where SORT_FIELD = elevation | name | population
     in: query
     name: sort
@@ -254,11 +256,9 @@ parameters:
     required: false
     type: string
   query.sort:
-    description: >
+    description: |
       How to sort place results. 
-
       'Format: ±SORT_FIELD,±SORT_FIELD' 
-
       where SORT_FIELD = countryCode | elevation | name | population
     in: query
     name: sort
@@ -354,7 +354,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Find administrative divisions, filtering by optional criteria. If no criteria are set, you will get back all
+        Find administrative divisions, filtering by optional criteria. If
+        no criteria are set, you will get back all
 
         known divisions.
       operationId: findAdminDivisionsUsingGET
@@ -394,7 +395,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Get the details for a specific administrative division, including location coordinates, population, and
+        Get the details for a specific administrative division, including
+        location coordinates, population, and
 
         elevation above sea-level (if available).
       operationId: getAdminDivisionUsingGET
@@ -423,7 +425,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Find cities near the given administrative division, filtering by optional criteria. If no criteria are set, you
+        Find cities near the given administrative division, filtering by
+        optional criteria. If no criteria are set, you
 
         will get back all known cities.
       operationId: findCitiesNearAdminDivisionUsingGET
@@ -466,7 +469,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Find administrative divisions near the given origin division, filtering by optional criteria. If no criteria
+        Find administrative divisions near the given origin division,
+        filtering by optional criteria. If no criteria
 
         are set, you will get back all known divisions.
       operationId: findDivisionsNearAdminDivisionUsingGET
@@ -508,7 +512,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Find cities, filtering by optional criteria. If no criteria are set, you will get back all known cities.
+        Find cities, filtering by optional criteria. If no criteria are
+        set, you will get back all known cities.
       operationId: findCitiesUsingGET
       parameters:
         - $ref: "#/parameters/query.place.location.id"
@@ -547,7 +552,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Get the details for a specific city, including location coordinates, population, and elevation above sea-level
+        Get the details for a specific city, including location
+        coordinates, population, and elevation above sea-level
 
         (if available).
       operationId: getCityUsingGET
@@ -626,7 +632,9 @@ paths:
       consumes:
         - application/json
       description: >
-        Get the details for the containing populated place (e.g., its county or other administrative division), including location coordinates, population, and elevation above sea-level
+        Get the details for the containing populated place (e.g., its
+        county or other administrative division), including location
+        coordinates, population, and elevation above sea-level
 
         (if available).
       operationId: getCityLocatedInUsingGET
@@ -655,7 +663,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Find cities near the given origin city, filtering by optional criteria. If no criteria are set, you will get
+        Find cities near the given origin city, filtering by optional
+        criteria. If no criteria are set, you will get
 
         back all known cities.
       operationId: findCitiesNearCityUsingGET
@@ -722,7 +731,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Find countries, filtering by optional criteria. If no criteria are set, you will get back all known countries.
+        Find countries, filtering by optional criteria. If no criteria are
+        set, you will get back all known countries.
       operationId: getCountriesUsingGET
       parameters:
         - $ref: "#/parameters/query.country.currencyCode"
@@ -777,7 +787,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Get all regions in a specific country. These could be states, provinces, districts, or otherwise major
+        Get all regions in a specific country. These could be states,
+        provinces, districts, or otherwise major
 
         political divisions.
       operationId: getRegionsUsingGET
@@ -837,7 +848,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Get the administrative divisions in a specific country region. The country and region info is omitted in the
+        Get the administrative divisions in a specific country region. The
+        country and region info is omitted in the
 
         response.
       operationId: findRegionDivisionsUsingGET
@@ -876,7 +888,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Get the cities in a specific country region. The country and region info is omitted in the response.
+        Get the cities in a specific country region. The country and region
+        info is omitted in the response.
       operationId: findRegionCitiesUsingGET
       parameters:
         - $ref: "#/parameters/path.countryId"
@@ -914,7 +927,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Find cities near the given location, filtering by optional criteria. If no criteria are set, you will get back
+        Find cities near the given location, filtering by optional
+        criteria. If no criteria are set, you will get back
 
         all known cities.
       operationId: findCitiesNearLocationUsingGET
@@ -955,7 +969,8 @@ paths:
       consumes:
         - application/json
       description: >
-        Find administrative divisions near the given location, filtering by optional criteria. If no criteria are set,
+        Find administrative divisions near the given location, filtering by
+        optional criteria. If no criteria are set,
 
         you will get back all known divisions.
       operationId: findDivisionsNearLocationUsingGET
@@ -994,7 +1009,8 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find currencies, filtering by optional criteria. If no criteria are set, you will get back all known currencies.
+      description: Find currencies, filtering by optional criteria. If no criteria are
+        set, you will get back all known currencies.
       operationId: getCurrenciesUsingGET
       parameters:
         - $ref: "#/parameters/query.currency.countryId"
@@ -1408,7 +1424,8 @@ definitions:
       - $ref: "#/definitions/BaseResponse"
       - properties:
           data:
-            description: The distance in units as set by the distanceUnit param (defaults to miles)
+            description: The distance in units as set by the distanceUnit param (defaults to
+              miles)
             format: double
             type: number
     description: A decimal distance (in miles or kilometers)
@@ -1430,7 +1447,8 @@ definitions:
     type: object
   ErrorCode:
     description: >
-      One of a set of enumerated error codes representing the types of errors that can occur processing a
+      One of a set of enumerated error codes representing the types of
+      errors that can occur processing a
 
       request
     enum:
@@ -1906,7 +1924,8 @@ definitions:
     type: object
   PopulatedPlaceType:
     description: >
-      One of a set of enumerated populated-place types known by the service (currently only level-2 admin divisions and
+      One of a set of enumerated populated-place types known by the
+      service (currently only level-2 admin divisions and
 
       cities)
     enum:

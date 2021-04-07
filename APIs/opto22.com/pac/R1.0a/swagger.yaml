@@ -86,7 +86,8 @@ securityDefinitions:
     description: HTTP Basic Authentication over HTTPS
     type: basic
 tags:
-  - description: Everything available through this RESTful API related to the PAC and its strategy
+  - description: Everything available through this RESTful API related to the PAC
+      and its strategy
     name: all
   - description: PAC's type, firmware version, mac addresses, and uptime
     name: device
@@ -101,7 +102,8 @@ tags:
 paths:
   /device:
     get:
-      description: Returns controller's type; firmware version; both mac addresses; and uptime in seconds
+      description: Returns controller's type; firmware version; both mac addresses;
+        and uptime in seconds
       operationId: readDeviceDetails
       parameters: []
       responses:
@@ -124,7 +126,9 @@ paths:
         - device
   /device/strategy:
     get:
-      description: Returns the name, date, time, and CRC of the strategy currently in the controller, and the number of charts currently running. Empty strings and a 0 will be returned when there is no strategy.
+      description: Returns the name, date, time, and CRC of the strategy currently in
+        the controller, and the number of charts currently running. Empty
+        strings and a 0 will be returned when there is no strategy.
       operationId: readStrategyDetails
       parameters: []
       responses:
@@ -147,7 +151,8 @@ paths:
         - strategy
   /device/strategy/ios/analogInputs:
     get:
-      description: Returns the name and engineering units (EU) for all analog input points in the strategy
+      description: Returns the name and engineering units (EU) for all analog input
+        points in the strategy
       operationId: readAnalogInputs
       parameters: []
       responses:
@@ -204,7 +209,8 @@ paths:
         - ios
   /device/strategy/ios/analogOutputs:
     get:
-      description: Returns the name and engineering units (EU) for all analog output points in the strategy
+      description: Returns the name and engineering units (EU) for all analog output
+        points in the strategy
       operationId: readAnalogOutputs
       parameters: []
       responses:
@@ -296,7 +302,10 @@ paths:
         - ios
   /device/strategy/ios/digitalInputs:
     get:
-      description: Returns the name and state (true = on, false = off) of all digital input points in the strategy. If there is no strategy in the controller, or the strategy includes no digital inputs, the returned array will be empty.
+      description: Returns the name and state (true = on, false = off) of all digital
+        input points in the strategy. If there is no strategy in the controller,
+        or the strategy includes no digital inputs, the returned array will be
+        empty.
       operationId: readDigitalInputs
       parameters: []
       responses:
@@ -321,7 +330,8 @@ paths:
         - ios
   "/device/strategy/ios/digitalInputs/{ioName}/state":
     get:
-      description: Returns the specified digital input point's state (true = on, false = off)
+      description: Returns the specified digital input point's state (true = on, false
+        = off)
       operationId: readDigitalInputState
       parameters:
         - description: Name of the digital input point to read
@@ -353,7 +363,8 @@ paths:
         - ios
   /device/strategy/ios/digitalOutputs:
     get:
-      description: Returns the name and state (true = on, false = off) of all digital output points in the strategy
+      description: Returns the name and state (true = on, false = off) of all digital
+        output points in the strategy
       operationId: readDigitalOutputs
       parameters: []
       responses:
@@ -378,7 +389,8 @@ paths:
         - ios
   "/device/strategy/ios/digitalOutputs/{ioName}/state":
     get:
-      description: Returns the specified digital output point's state (true = on, false = off)
+      description: Returns the specified digital output point's state (true = on,
+        false = off)
       operationId: readDigitalOutputState
       parameters:
         - description: Name of the digit output point to read
@@ -445,7 +457,8 @@ paths:
         - ios
   /device/strategy/tables/floats:
     get:
-      description: Returns an array of the name and length of all the float tables in the strategy
+      description: Returns an array of the name and length of all the float tables in
+        the strategy
       operationId: readFloatTables
       parameters: []
       responses:
@@ -482,7 +495,8 @@ paths:
         * Read 3 consecutive elements in a table named ftable starting with the element at index 10: https://1.2.3.4/api/v1/device/strategy/tables/floats/ftable?startIndex=10&numElements=3
       operationId: readFloatTable
       parameters:
-        - description: Name of float table to read; starting index and number of elements may be specified (defaults to all elements)
+        - description: Name of float table to read; starting index and number of elements
+            may be specified (defaults to all elements)
           in: path
           name: tableName
           required: true
@@ -493,7 +507,8 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: Number of elements to read (default is number of elements in the table minus startIndex)
+        - description: Number of elements to read (default is number of elements in the
+            table minus startIndex)
           format: int32
           in: query
           name: numElements
@@ -656,7 +671,8 @@ paths:
         - tables
   /device/strategy/tables/int32s:
     get:
-      description: Returns an array of the name and length of all the integer32 tables in the strategy
+      description: Returns an array of the name and length of all the integer32 tables
+        in the strategy
       operationId: readInt32Tables
       parameters: []
       responses:
@@ -689,7 +705,8 @@ paths:
          * Read 3 consecutive elements in a table named itable starting with the element at index 10: https://1.2.3.4/api/v1/device/strategy/tables/int32s/itable?startIndex=10&numElements=3
       operationId: readInt32Table
       parameters:
-        - description: Name of integer32 table to read; starting index and number of elements may be specified (defaults to all elements)
+        - description: Name of integer32 table to read; starting index and number of
+            elements may be specified (defaults to all elements)
           in: path
           name: tableName
           required: true
@@ -700,7 +717,8 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: Number of elements to read (default is number of elements in the table minus startIndex)
+        - description: Number of elements to read (default is number of elements in the
+            table minus startIndex)
           format: int32
           in: query
           name: numElements
@@ -752,7 +770,9 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: Array of element values to write starting at startIndex; if the list of elements is too long to fit in the specified table, extra elements will be ignored
+        - description: Array of element values to write starting at startIndex; if the
+            list of elements is too long to fit in the specified table, extra
+            elements will be ignored
           in: body
           name: int32Array
           required: true
@@ -863,7 +883,8 @@ paths:
         - tables
   /device/strategy/tables/int64s:
     get:
-      description: Returns an array of the name and length of all the integer64 tables in the strategy
+      description: Returns an array of the name and length of all the integer64 tables
+        in the strategy
       operationId: readInt64Tables
       parameters: []
       responses:
@@ -896,7 +917,8 @@ paths:
          * Read 3 consecutive elements in a table named i64table starting with the element at index 10: https://1.2.3.4/api/v1/device/strategy/tables/int64s/i64table?startIndex=10&numElements=3
       operationId: readInt64Table
       parameters:
-        - description: Name of the integer64 table to read; starting index and number of elements may be specified (defaults to all elements)
+        - description: Name of the integer64 table to read; starting index and number of
+            elements may be specified (defaults to all elements)
           in: path
           name: tableName
           required: true
@@ -907,7 +929,8 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: Number of elements to read (default is number of elements in the table minus startIndex)
+        - description: Number of elements to read (default is number of elements in the
+            table minus startIndex)
           format: int32
           in: query
           name: numElements
@@ -959,7 +982,9 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: Array of element values to write starting at startIndex; if the array of elements is too long  to fit in the specified table, extra elements will be ignored
+        - description: Array of element values to write starting at startIndex; if the
+            array of elements is too long  to fit in the specified table, extra
+            elements will be ignored
           in: body
           name: int64Array
           required: true
@@ -999,7 +1024,8 @@ paths:
          * Read 3 consecutive elements in a table named i64table starting with the element at index 10: https://1.2.3.4/api/v1/device/strategy/tables/int64s/i64table/_string?startIndex=10&numElements=3
       operationId: readInt64TableAsString
       parameters:
-        - description: Name of the integer64 table to read; starting index and number of elements may be specified (defaults to all elements)
+        - description: Name of the integer64 table to read; starting index and number of
+            elements may be specified (defaults to all elements)
           in: path
           name: tableName
           required: true
@@ -1010,7 +1036,8 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: Number of elements to read (default is number of elements in the table minus startIndex)
+        - description: Number of elements to read (default is number of elements in the
+            table minus startIndex)
           format: int32
           in: query
           name: numElements
@@ -1021,7 +1048,8 @@ paths:
           description: OK
           schema:
             items:
-              description: Value of the integer64 variable expressed as a decimal string. E.g. "34359738367"
+              description: Value of the integer64 variable expressed as a decimal string. E.g.
+                "34359738367"
               type: string
             type: array
         "400":
@@ -1061,13 +1089,16 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: Array of element values to write starting at startIndex; if the array of elements is too long  to fit in the specified table, extra elements will be ignored
+        - description: Array of element values to write starting at startIndex; if the
+            array of elements is too long  to fit in the specified table, extra
+            elements will be ignored
           in: body
           name: int64AsStringArray
           required: true
           schema:
             items:
-              description: Value of the integer64 variable expressed as a decimal string. E.g. "34359738367"
+              description: Value of the integer64 variable expressed as a decimal string. E.g.
+                "34359738367"
               type: string
             type: array
       responses:
@@ -1250,7 +1281,8 @@ paths:
         - tables
   /device/strategy/tables/strings:
     get:
-      description: Returns an array of the name and length of all the string tables in the strategy
+      description: Returns an array of the name and length of all the string tables in
+        the strategy
       operationId: readStringTables
       parameters: []
       responses:
@@ -1283,7 +1315,8 @@ paths:
          * Read 3 consecutive elements in a table named i64table starting with the element at index 10: https://1.2.3.4/api/v1/device/strategy/tables/strings/strTable?startIndex=10&numElements=3
       operationId: readStringTable
       parameters:
-        - description: Name of string table to read; starting index and number of elements may be specified (defaults to all elements)
+        - description: Name of string table to read; starting index and number of elements
+            may be specified (defaults to all elements)
           in: path
           name: tableName
           required: true
@@ -1294,7 +1327,8 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: Number of elements to read (default is number of elements in the table minus startIndex)
+        - description: Number of elements to read (default is number of elements in the
+            table minus startIndex)
           format: int32
           in: query
           name: numElements
@@ -1305,7 +1339,8 @@ paths:
           description: OK
           schema:
             items:
-              description: The value of a string; string width (max length) for each string table is defined in the strategy
+              description: The value of a string; string width (max length) for each string
+                table is defined in the strategy
               maxLength: 1024
               type: string
             type: array
@@ -1346,13 +1381,16 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: Array of element values to write starting at startIndex; if an element value is longer than the string width, the string will be truncated to fit
+        - description: Array of element values to write starting at startIndex; if an
+            element value is longer than the string width, the string will be
+            truncated to fit
           in: body
           name: stringArray
           required: true
           schema:
             items:
-              description: The value of a string; string width (max length) for each string variable is defined in the strategy
+              description: The value of a string; string width (max length) for each string
+                variable is defined in the strategy
               maxLength: 1024
               type: string
             type: array
@@ -1516,7 +1554,8 @@ paths:
         - vars
   /device/strategy/vars/floats:
     get:
-      description: Returns the name and value of all (single-precision) float variables in the strategy
+      description: Returns the name and value of all (single-precision) float
+        variables in the strategy
       operationId: readFloatVars
       parameters: []
       responses:
@@ -1725,7 +1764,8 @@ paths:
         - vars
   /device/strategy/vars/int64s/_string:
     get:
-      description: Returns the name and value as a string of all integer64 variables in the strategy
+      description: Returns the name and value as a string of all integer64 variables
+        in the strategy
       operationId: readInt64VarsAsStrings
       parameters: []
       responses:
@@ -1948,7 +1988,8 @@ paths:
           name: stringName
           required: true
           type: string
-        - description: String to write. If the value is longer than the string width, the string will be truncated to fit.
+        - description: String to write. If the value is longer than the string width, the
+            string will be truncated to fit.
           in: body
           name: body
           required: true
@@ -2071,7 +2112,8 @@ definitions:
   ErrorResponse200OKish:
     properties:
       errorCode:
-        description: "Details: ** -23 ** The string you passed is longer than the width of PAC Control string variable or table element you are writing to."
+        description: "Details: ** -23 ** The string you passed is longer than the width
+          of PAC Control string variable or table element you are writing to."
         format: int32
         type: integer
       message:
@@ -2083,7 +2125,25 @@ definitions:
   ErrorResponse400BadAdminOrValue:
     properties:
       errorCode:
-        description: "Details: ** -1 ** Invalid or no strategy. Use PAC Control to download strategy logic. ** -3 ** Buffer overrun or invalid length. The number or range of table indicies you specified exceeds elements in the PAC Control table. ** -8 ** Invalid data. Check format of data written. Compare to what's read for the same endpoint. ** -12 ** You've passed a table index that is less than zero or greater than the length of the table minus 1. ** -13 ** The value you passed to write is outside of the valid range for the PAC Control data type you're writing to. For example, if you specified the value 999999999999999 for an integer32 (since integer32 data types must be in the range: -2147483648 to 2147483647). ** -17 or -20 ** The controller is busy with another task, for example, downloading a new strategy. Try again later. ** -36 ** Endpoint is not defined. ** -109 ** Attempting to write without write permissions. Check /admin/keys settings. ** -13019 ** Invalid endpoint. Check syntax of the URL (e.g. did you use 'ev' instead of 'eu'). ** 400 ** Before using the API on this device, you must first change the default user name and password via the URL /admin/keys. Use the default User Name: 'admin' and Password: 'password' to log ininitially."
+        description: "Details: ** -1 ** Invalid or no strategy. Use PAC Control to
+          download strategy logic. ** -3 ** Buffer overrun or invalid length.
+          The number or range of table indicies you specified exceeds elements
+          in the PAC Control table. ** -8 ** Invalid data. Check format of data
+          written. Compare to what's read for the same endpoint. ** -12 **
+          You've passed a table index that is less than zero or greater than the
+          length of the table minus 1. ** -13 ** The value you passed to write
+          is outside of the valid range for the PAC Control data type you're
+          writing to. For example, if you specified the value 999999999999999
+          for an integer32 (since integer32 data types must be in the range:
+          -2147483648 to 2147483647). ** -17 or -20 ** The controller is busy
+          with another task, for example, downloading a new strategy. Try again
+          later. ** -36 ** Endpoint is not defined. ** -109 ** Attempting to
+          write without write permissions. Check /admin/keys settings. ** -13019
+          ** Invalid endpoint. Check syntax of the URL (e.g. did you use 'ev'
+          instead of 'eu'). ** 400 ** Before using the API on this device, you
+          must first change the default user name and password via the URL
+          /admin/keys. Use the default User Name: 'admin' and Password:
+          'password' to log ininitially."
         format: int32
         type: integer
       message:
@@ -2095,7 +2155,10 @@ definitions:
   ErrorResponse401BadKeyForBasicAuth:
     properties:
       errorCode:
-        description: "Details: ** -104 ** Invalid key ID/value in HTTP header. Before using the API on this device, you must create at least one key ID/value via the URL /admin/keys. Then use one of those in your HTTP header for Basic Authentication."
+        description: "Details: ** -104 ** Invalid key ID/value in HTTP header. Before
+          using the API on this device, you must create at least one key
+          ID/value via the URL /admin/keys. Then use one of those in your HTTP
+          header for Basic Authentication."
         format: int32
         type: integer
       message:
@@ -2107,7 +2170,12 @@ definitions:
   ErrorResponse404NotFound:
     properties:
       errorCode:
-        description: "Details: ** -29 ** The tag (variable, table, timer, I/O point, etc.) you requested exists on the controller but does not match the data type for this endpoint.  ** -28 ** The tag (variable, table, timer, I/O point, etc.) does not currently exist on the controller. Check the tag name and the controller's status. ** 404 ** Endpoint does not exist. Check URL."
+        description: "Details: ** -29 ** The tag (variable, table, timer, I/O point,
+          etc.) you requested exists on the controller but does not match the
+          data type for this endpoint.  ** -28 ** The tag (variable, table,
+          timer, I/O point, etc.) does not currently exist on the controller.
+          Check the tag name and the controller's status. ** 404 ** Endpoint
+          does not exist. Check URL."
         format: int32
         type: integer
       message:
@@ -2155,7 +2223,8 @@ definitions:
   Int64StringValueObject:
     properties:
       value:
-        description: Value of the integer64 variable expressed as decimal string, e.g. "34359738367"
+        description: Value of the integer64 variable expressed as decimal string, e.g.
+          "34359738367"
         type: string
     type: object
   Int64ValueObject:
@@ -2183,7 +2252,8 @@ definitions:
         maxLength: 50
         type: string
       value:
-        description: Value of the integer64 variable expressed as a decimal string, E.g. "34359738367"
+        description: Value of the integer64 variable expressed as a decimal string, E.g.
+          "34359738367"
         type: string
     type: object
   StrategyResponse:
@@ -2203,7 +2273,8 @@ definitions:
   StringValueObject:
     properties:
       value:
-        description: The value of a string; string width (max length) for each string variable is defined in the strategy
+        description: The value of a string; string width (max length) for each string
+          variable is defined in the strategy
         maxLength: 1024
         type: string
     type: object
@@ -2214,7 +2285,8 @@ definitions:
         maxLength: 50
         type: string
       value:
-        description: The value of a string; string width (max length) for each string variable is defined in the strategy
+        description: The value of a string; string width (max length) for each string
+          variable is defined in the strategy
         maxLength: 1024
         type: string
     type: object

@@ -451,7 +451,8 @@ components:
           x-ms-visibility: internal
         topics:
           default: surveyengine.completedResponse.<Insert SurveyID>
-          description: The topics to subscribe to. Must follow the format surveyengine.completedResponse.[SurveyID]
+          description: The topics to subscribe to. Must follow the format
+            surveyengine.completedResponse.[SurveyID]
           type: string
       required:
         - topics

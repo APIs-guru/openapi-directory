@@ -7,7 +7,8 @@ info:
   contact:
     x-twitter: GoTurbine
   description: >
-    The Turbine Labs API provides CRUD operations for core object types, and is
+    The Turbine Labs API provides CRUD operations for core object
+    types, and is
 
     mostly RESTy. The easiest way to interact with the API is with
 
@@ -45,9 +46,11 @@ securityDefinitions:
 security:
   - api_key: []
 tags:
-  - description: A logical deployment of services, which typically maps to a datacenter, availability zone, or compute cluster.
+  - description: A logical deployment of services, which typically maps to a
+      datacenter, availability zone, or compute cluster.
     name: Zone
-  - description: A configuration that can be applied to one or more running Proxies serving one or more Domains.
+  - description: A configuration that can be applied to one or more running Proxies
+      serving one or more Domains.
     name: Proxy
   - description: An interface and port a Proxy will listen on
     name: Listener
@@ -55,11 +58,15 @@ tags:
     name: Domain
   - description: A served path within a Domain.
     name: Route
-  - description: A collection of rules specifying how a request should be mapped to an instance within a cluster. These may be shared between multiple Routes.
+  - description: A collection of rules specifying how a request should be mapped to
+      an instance within a cluster. These may be shared between multiple Routes.
     name: Shared Rules
-  - description: A collection of Instances, homogeneous in their purpose, heterogeneous in their metadata.
+  - description: A collection of Instances, homogeneous in their purpose,
+      heterogeneous in their metadata.
     name: Cluster
-  - description: A collection of events that have occurred in your infrastructure. This includes changes detected by the deployed collectors (new Clusters or Cluster instances) as well as routing changes through the UI or API.
+  - description: A collection of events that have occurred in your infrastructure.
+      This includes changes detected by the deployed collectors (new Clusters or
+      Cluster instances) as well as routing changes through the UI or API.
     name: Audit Log
 paths:
   /admin/user/self:
@@ -74,7 +81,8 @@ paths:
           description: Unexpected error.
           schema:
             $ref: "#/definitions/Error"
-      summary: Returns the user object for the account authorized and making this request.
+      summary: Returns the user object for the account authorized and making this
+        request.
       tags:
         - User Management
   "/admin/user/self/access_token/{access-token-key}":
@@ -96,7 +104,8 @@ paths:
         "200":
           description: An empty result if the API key deletion was successful.
         default:
-          description: An error; may be unexpected or validation error if the last API was removed.
+          description: An error; may be unexpected or validation error if the last API was
+            removed.
           schema:
             $ref: "#/definitions/Error"
       summary: Delete the specified access token.
@@ -120,7 +129,8 @@ paths:
       consumes:
         - application/json
       parameters:
-        - description: A short string (<255 characters) describing the expected use of the token.
+        - description: A short string (<255 characters) describing the expected use of the
+            token.
           in: body
           name: description
           required: true
@@ -140,9 +150,11 @@ paths:
         - User Management
   /changelog/adhoc:
     get:
-      description: Perform an adhoc query against the change log for your org. The filter is a JSON encoded FilterSum as defined in this file.
+      description: Perform an adhoc query against the change log for your org. The
+        filter is a JSON encoded FilterSum as defined in this file.
       parameters:
-        - description: Encoded FilterSums representing the query you would like to execute. See object definition for details.
+        - description: Encoded FilterSums representing the query you would like to
+            execute. See object definition for details.
           in: query
           name: filter
           type: string
@@ -156,12 +168,13 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/Error"
-      summary: Allows an arbitrary filter to be specified and applied to the org\'s change log.
+      summary: Allows an arbitrary filter to be specified and applied to the org\'s
+        change log.
       tags:
         - Audit Log
   "/changelog/cluster-graph/{clusterKey}":
     get:
-      description: >
+      description: |
         Gets all changes to a cluster.
       parameters:
         - description: the cluster key to see an audit log for
@@ -170,45 +183,41 @@ paths:
           required: true
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f0724070000
-        - description: >
+        - description: |
             The beginning of the window we want to see changes for; measured in
-
             microseconds since Unix Epoch.
           format: int64
           in: query
           name: start
           required: false
           type: number
-        - description: >
+        - description: |
             The end of the window we want to see changes for; measured in
-
             microseconds since Unix Epoch.
           format: int64
           in: query
           name: end
           required: false
           type: number
-        - description: >
+        - description: |
             Determines how many ChangeDescription object should be returned to
-
             the calling code.
           format: int64
           in: query
           name: max_results
           required: false
           type: number
-        - description: >
+        - description: |
             When paginating a Changelog request start on the entry that comes
-
             immediately before or after this ID (as determined by the direction
-
             argument).
           in: query
           name: ref_id
           required: false
           type: string
         - description: >
-            If set to "before" then changes will be returned that occurred before
+            If set to "before" then changes will be returned that occurred
+            before
 
             reference ID. If "after" then changes will be returned that have
 
@@ -235,7 +244,8 @@ paths:
   "/changelog/domain-graph/{domainKey}":
     get:
       description: >
-        Gets all changes to a domain, the proxies that front the specified domain,
+        Gets all changes to a domain, the proxies that front the specified
+        domain,
 
         routes within that domain, the shared rules of each route, the clusters
 
@@ -247,45 +257,41 @@ paths:
           required: true
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f0724070000
-        - description: >
+        - description: |
             The beginning of the window we want to see changes for; measured in
-
             microseconds since Unix Epoch.
           format: int64
           in: query
           name: start
           required: false
           type: number
-        - description: >
+        - description: |
             The end of the window we want to see changes for; measured in
-
             microseconds since Unix Epoch.
           format: int64
           in: query
           name: end
           required: false
           type: number
-        - description: >
+        - description: |
             Determines how many ChangeDescription object should be returned to
-
             the calling code.
           format: int64
           in: query
           name: max_results
           required: false
           type: number
-        - description: >
+        - description: |
             When paginating a Changelog request start on the entry that comes
-
             immediately before or after this ID (as determined by the direction
-
             argument).
           in: query
           name: ref_id
           required: false
           type: string
         - description: >
-            If set to "before" then changes will be returned that occurred before
+            If set to "before" then changes will be returned that occurred
+            before
 
             reference ID. If "after" then changes will be returned that have
 
@@ -311,9 +317,8 @@ paths:
         - Audit Log
   "/changelog/route-graph/{routeKey}":
     get:
-      description: >
+      description: |
         Gets all changes to a route, the domains associated with it, the shared
-
         rules it references, and the clusters connected to it.
       parameters:
         - description: the route key to see an audit log for
@@ -322,45 +327,41 @@ paths:
           required: true
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f0724070000
-        - description: >
+        - description: |
             The beginning of the window we want to see changes for; measured in
-
             microseconds since Unix Epoch.
           format: int64
           in: query
           name: start
           required: false
           type: number
-        - description: >
+        - description: |
             The end of the window we want to see changes for; measured in
-
             microseconds since Unix Epoch.
           format: int64
           in: query
           name: end
           required: false
           type: number
-        - description: >
+        - description: |
             Determines how many ChangeDescription object should be returned to
-
             the calling code.
           format: int64
           in: query
           name: max_results
           required: false
           type: number
-        - description: >
+        - description: |
             When paginating a Changelog request start on the entry that comes
-
             immediately before or after this ID (as determined by the direction
-
             argument).
           in: query
           name: ref_id
           required: false
           type: string
         - description: >
-            If set to "before" then changes will be returned that occurred before
+            If set to "before" then changes will be returned that occurred
+            before
 
             reference ID. If "after" then changes will be returned that have
 
@@ -386,9 +387,8 @@ paths:
         - Audit Log
   "/changelog/shared-rules-graph/{sharedRulesKey}":
     get:
-      description: >
+      description: |
         Gets all changes associated with set of Shared Rules; the domains using
-
         it and the clusters referenced by it.
       parameters:
         - description: the shared rules key to see an audit log for
@@ -397,45 +397,41 @@ paths:
           required: true
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f0724070000
-        - description: >
+        - description: |
             The beginning of the window we want to see changes for; measured in
-
             microseconds since Unix Epoch.
           format: int64
           in: query
           name: start
           required: false
           type: number
-        - description: >
+        - description: |
             The end of the window we want to see changes for; measured in
-
             microseconds since Unix Epoch.
           format: int64
           in: query
           name: end
           required: false
           type: number
-        - description: >
+        - description: |
             Determines how many ChangeDescription object should be returned to
-
             the calling code.
           format: int64
           in: query
           name: max_results
           required: false
           type: number
-        - description: >
+        - description: |
             When paginating a Changelog request start on the entry that comes
-
             immediately before or after this ID (as determined by the direction
-
             argument).
           in: query
           name: ref_id
           required: false
           type: string
         - description: >
-            If set to "before" then changes will be returned that occurred before
+            If set to "before" then changes will be returned that occurred
+            before
 
             reference ID. If "after" then changes will be returned that have
 
@@ -469,45 +465,41 @@ paths:
           required: true
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f0724070000
-        - description: >
+        - description: |
             The beginning of the window we want to see changes for; measured in
-
             microseconds since Unix Epoch.
           format: int64
           in: query
           name: start
           required: false
           type: number
-        - description: >
+        - description: |
             The end of the window we want to see changes for; measured in
-
             microseconds since Unix Epoch.
           format: int64
           in: query
           name: end
           required: false
           type: number
-        - description: >
+        - description: |
             Determines how many ChangeDescription object should be returned to
-
             the calling code.
           format: int64
           in: query
           name: max_results
           required: false
           type: number
-        - description: >
+        - description: |
             When paginating a Changelog request start on the entry that comes
-
             immediately before or after this ID (as determined by the direction
-
             argument).
           in: query
           name: ref_id
           required: false
           type: string
         - description: >
-            If set to "before" then changes will be returned that occurred before
+            If set to "before" then changes will be returned that occurred
+            before
 
             reference ID. If "after" then changes will be returned that have
 
@@ -535,11 +527,9 @@ paths:
     get:
       description: Get a list of clusters
       parameters:
-        - description: >
+        - description: |
             A JSON encoded array of ClusterFilter objects. The filter is taken
-
             as a union of intersections. In other words an object that matches
-
             every constraint in any ClusterFilter will be included.
           in: query
           name: filters
@@ -725,11 +715,9 @@ paths:
     get:
       description: Get a list of domains
       parameters:
-        - description: >
+        - description: |
             A JSON encoded array of DomainFilter objects. The filter is taken
-
             as a union of intersections. In other words an object that matches
-
             every constraint in any DomainFilter will be included.
           in: query
           name: filters
@@ -822,11 +810,9 @@ paths:
     get:
       description: Get a list of listeners
       parameters:
-        - description: >
+        - description: |
             A JSON encoded array of ListenerFilter objects. The filter is taken
-
             as a union of intersections. In other words an object that matches
-
             every constraint in any ListenerFilter will be included.
           in: query
           name: filters
@@ -948,11 +934,9 @@ paths:
     get:
       description: Get a list of proxies
       parameters:
-        - description: >
+        - description: |
             A JSON encoded array of ProxyFilter objects. The filter is taken
-
             as a union of intersections. In other words an object that matches
-
             every constraint in any ProxyFilter will be included.
           in: query
           name: filters
@@ -1045,11 +1029,9 @@ paths:
     get:
       description: Get a list of routes
       parameters:
-        - description: >
+        - description: |
             A JSON encoded array of RouteFilter objects. The filter is taken
-
             as a union of intersections. In other words an object that matches
-
             every constraint in any RouteFilter will be included.
           in: query
           name: filters
@@ -1172,7 +1154,8 @@ paths:
       description: Get a list of shared_rules
       parameters:
         - description: >
-            A JSON encoded array of SharedRulesFilter objects. The filter is taken
+            A JSON encoded array of SharedRulesFilter objects. The filter is
+            taken
 
             as a union of intersections. In other words an object that matches
 
@@ -1295,14 +1278,12 @@ paths:
         - Shared Rules
   /zone:
     get:
-      description: >
+      description: |
         Get all zones. possibly with filters
       parameters:
-        - description: >
+        - description: |
             A JSON encoded array of ZoneFilter objects. The filter is taken
-
             as a union of intersections. In other words an object that matches
-
             every constraint in any ZoneFilter will be included.
           in: query
           name: filters
@@ -1322,7 +1303,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
+      description: |
         Create a new zone.
       parameters:
         - description: the zone to create
@@ -1345,7 +1326,7 @@ paths:
         - Zone
   "/zone/{zoneKey}":
     delete:
-      description: >
+      description: |
         Delete a zone.
       parameters:
         - description: the zone key
@@ -1373,7 +1354,7 @@ paths:
       tags:
         - Zone
     get:
-      description: >
+      description: |
         Get details for a single zone
       parameters:
         - description: the zone key
@@ -1402,15 +1383,14 @@ definitions:
       checksum:
         type: string
       created_at:
-        description: >
+        description: |
           A timestamp that marks when a user was deleted. It is in the format
-
           yyyy-mm-ddThh:mm:ss.SZ. The timezone will always be UTC.
         type: string
       description:
         type: string
       signed_token:
-        description: >
+        description: |
           This will be set only when an AccessToken is initially created
         type: string
       user_key:
@@ -1442,7 +1422,8 @@ definitions:
     type: object
   CORSConfig:
     description: >
-      Experimental: Controls simple CORS responses for the associated domain.
+      Experimental: Controls simple CORS responses for the associated
+      domain.
 
       The configurable properties map closely to the CORS specification which
 
@@ -1460,7 +1441,8 @@ definitions:
         type: boolean
       allowed_headers:
         description: >
-          Specifies what headers are allowed to be set when a request is made.
+          Specifies what headers are allowed to be set when a request is
+          made.
 
           https://www.w3.org/TR/cors/#access-control-allow-headers-response-header.
         items:
@@ -1476,7 +1458,8 @@ definitions:
         type: array
       allowed_origins:
         description: >
-          Must contain a single element specifying the domain (origin) allowed
+          Must contain a single element specifying the domain (origin)
+          allowed
 
           to make requsets to this domain. If any origin is acceptable '*' may
 
@@ -1487,16 +1470,16 @@ definitions:
           type: string
         type: array
       exposed_headers:
-        description: >
+        description: |
           Indicates which response headers may be accessed from the browser.
-
           https://www.w3.org/TR/cors/#http-access-control-expose-headers.
         items:
           type: string
         type: array
       max_age:
         description: >
-          Sets how long (in seconds) the response to a preflight request may be
+          Sets how long (in seconds) the response to a preflight request may
+          be
 
           cached. A value of -1 will disable caching. https://www.w3.org/TR/cors/#access-control-max-age-response-header.
         type: integer
@@ -1505,11 +1488,9 @@ definitions:
       - allowed_methods
     type: object
   CertKeyPathPair:
-    description: >
+    description: |
       A key/cert pair that will be served when a domain terminates a SSL/TLS
-
       request.  Paths should be absolute and accessible to the user running
-
       the proxy instance.
     properties:
       certificate_path:
@@ -1523,7 +1504,7 @@ definitions:
           intermediary certificats.
         type: string
       key_path:
-        description: >
+        description: |
           Path to a file with the secret key in the PEM format for the domain.
         type: string
     required:
@@ -1549,9 +1530,8 @@ definitions:
           $ref: "#/definitions/ChangeEntry"
         type: array
       txn:
-        description: >
+        description: |
           A unique identifier for all this transaction. It is shared by all
-
           attribute updates within a change.
         type: string
         x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
@@ -1581,12 +1561,14 @@ definitions:
           - cluster
         type: string
       path:
-        description: A dot-separated / bracket-indexed path to the field changed on the object.
+        description: A dot-separated / bracket-indexed path to the field changed on the
+          object.
         type: string
         x-example: cluster.instance[10.0.1.5:8080].metadata[pod-template-hash]
       value:
         description: >
-          The value that has been added or removed to the object at the attribute
+          The value that has been added or removed to the object at the
+          attribute
 
           path indicated in path.
         type: string
@@ -1596,45 +1578,34 @@ definitions:
         x-example: 9cd24183-f848-48f8-6f55-0f0724070000
     type: object
   CircuitBreakers:
-    description: >
+    description: |
       Provides limits on various parameters to protect clusters against sudden
-
       surges in traffic.
     properties:
       max_connections:
-        description: >
+        description: |
           Maximum number of connections that will be established to all
-
           instances in a cluster within a proxy. If set to 0, no new connections
-
           will be created. If not specified, defaults to 1024.
         type: integer
       max_pending_requests:
-        description: >
+        description: |
           Maximum number of requests that will be queued while waiting on a
-
           connection pool to a cluster within a proxy. If set to 0, no requests
-
           will be queued. If not specified, defaults to 1024.
         type: integer
       max_requests:
-        description: >
+        description: |
           Maximum number of requests that can be outstanding to all instances in
-
           a cluster within  a proxy. Only applicable to HTTP/2 traffic since
-
           HTTP/1.1 clusters are governed by the maximum connections circuit
-
           breaker. If set to 0, no requests will be made. If not specified,
-
           defaults to 1024.
         type: integer
       max_retries:
-        description: >
+        description: |
           Maximum number of retries that can be outstanding to all instances in
-
           a cluster within a proxy. If set to 0, requests will not be retried.
-
           If not specified, defaults to 3.
         type: integer
     type: object
@@ -1664,7 +1635,8 @@ definitions:
         allOf:
           - $ref: "#/definitions/ResponseData"
         description: >
-          When a request is served by a cluster selected by this constraint annotate
+          When a request is served by a cluster selected by this constraint
+          annotate
 
           the response with the information specified within this ResponseData
 
@@ -1693,11 +1665,9 @@ definitions:
       outlier_detection:
         $ref: "#/definitions/OutlierDetection"
       require_tls:
-        description: >
+        description: |
           If set, requests to this collection of hosts will be made via HTTPS.
-
           At this time neither certificate validation and certificate pinning
-
           are supported for proxy clients of this cluster.
         type: boolean
       zone_key:
@@ -1723,9 +1693,8 @@ definitions:
   CohortSeed:
     properties:
       name:
-        description: >
+        description: |
           The name of the cookie, the header field, or the query argument to
-
           be checked for a cohort seed value.
         type: string
       type:
@@ -1736,33 +1705,28 @@ definitions:
           - query
         type: string
       use_zero_value_seed:
-        description: >
+        description: |
           If true, requests with a seed source which resolves to an empty value
-
           will still be grouped and routed consistently. This means a misspelled
-
           or missing seed source on a request will sort all such traffic into a
-
           single backend. This could result in all traffic being assigned to a
-
           backend intended for only a small percentage of traffic. Use with
-
           caution.
         type: boolean
     type: object
   CookieDatum:
-    description: >
+    description: |
       This describes a cookie that should be set in response to a HTTP request.
     properties:
       domain:
-        description: >
+        description: |
           Specifies the hosts to hich a cookie will be sent. Maps directly to a
-
           cookie's 'Domain' attribute.
         type: string
       expires_in_sec:
         description: >
-          This indicates how long a cookie will be valid, in seconds. If not set the
+          This indicates how long a cookie will be valid, in seconds. If not
+          set the
 
           default is to provide no expiration information. If set to 0 the cookie will
 
@@ -1772,7 +1736,8 @@ definitions:
         type: integer
       http_only:
         description: >
-          If set the cookie value will not be accessible via Document.cookie. Maps
+          If set the cookie value will not be accessible via Document.cookie.
+          Maps
 
           directly to 'HttpOnly' attribute.
         type: boolean
@@ -1780,14 +1745,14 @@ definitions:
         description: The name of the cookie that will be attached to the response sent.
         type: string
       path:
-        description: >
+        description: |
           Specifies the path a cookie will be associated with. Maps directly to
-
           the 'Path' attribute.
         type: string
       same_site:
         description: >
-          Allows assertions how a cookie should behave wend making cross-site requests.
+          Allows assertions how a cookie should behave wend making cross-site
+          requests.
 
           Maps directly to 'SameSite' attribute. If unset no guidance will be included
 
@@ -1798,21 +1763,21 @@ definitions:
         type: string
       secure:
         description: >
-          If set the cookie will only be sent on subsequent requests when accessing
+          If set the cookie will only be sent on subsequent requests when
+          accessing
 
           a server via HTTPS. Maps directly to 'Secure' attribute.
         type: boolean
       value:
-        description: >
+        description: |
           A literal value to send as the cookie value or a reference to
-
           some metadatum value set on the Cluster Intsance that handles
-
           a specific request.
         type: string
       value_is_literal:
         description: >
-          If true then the value attribute is treated as a literal and no attempt
+          If true then the value attribute is treated as a literal and no
+          attempt
 
           to resolve to a server metadatum.
         type: boolean
@@ -1832,9 +1797,8 @@ definitions:
   DomainCreate:
     properties:
       aliases:
-        description: >
+        description: |
           A set of alternate names that this Domain may be referenced by. May
-
           start ('*.') or end ('.*') with a wildcard.
         items:
           type: string
@@ -1847,14 +1811,16 @@ definitions:
         type: string
       force_https:
         description: >
-          If set to true, requests must use TLS. If a request is not using TLS, (as determined by
+          If set to true, requests must use TLS. If a request is not using
+          TLS, (as determined by
 
           the scheme or the presence of X-Forwarded-Proto header), a 301 redirect will be sent
 
           telling the client to use HTTPS.
         type: boolean
       gzip_enabled:
-        description: "Experimental: if set to true will enable gzip compression on data that passes trough this domain"
+        description: "Experimental: if set to true will enable gzip compression on data
+          that passes trough this domain"
         type: boolean
       name:
         type: string
@@ -1880,11 +1846,9 @@ definitions:
       name:
         type: string
       proxy_keys:
-        description: >
+        description: |
           matches Domains with a superset of the specified proxy_keys. A
-
           slice with a single value of "-" will produce Domains with no linked
-
           Proxies.
         items:
           type: string
@@ -1912,9 +1876,8 @@ definitions:
   Filter:
     properties:
       absolute_match_only:
-        description: >
+        description: |
           If set this will return ChangeEntry values with a path that matches
-
           the attribute_path property exactly.
         type: boolean
       actor_key:
@@ -1922,22 +1885,21 @@ definitions:
         type: string
         x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
       attribute_path:
-        description: >
+        description: |
           A dot-separated / bracket-indexed path to the field changed on the
-
           object. '%' may be used as a wildcard.
         type: string
         x-example: cluster.instance[%].metadata[app-name]
       attribute_value:
         description: >
-          The value that has been added or removed to the object at the attribute
+          The value that has been added or removed to the object at the
+          attribute
 
           path indicated in path.
         type: string
       change_txn:
-        description: >
+        description: |
           A unique identifier for all this transaction. It is shared by all
-
           attribute updates within a change.
         type: string
         x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
@@ -1948,15 +1910,13 @@ definitions:
           - removal
         type: string
       exclude_empty_values:
-        description: >
+        description: |
           If set this will exclude ChangeEntry records that save the addition
-
           or removal of an empty value.
         type: boolean
       negative_match:
-        description: >
+        description: |
           If set this filter will match the all ChangeEntry records that do
-
           NOT meet the constraints laid out in this Filter object.
         type: boolean
       object_key:
@@ -2005,36 +1965,32 @@ definitions:
   HTTPHealthCheck:
     properties:
       host:
-        description: >
+        description: |
           The value of the host header in the HTTP health check request.
-
           If left empty, the name of the cluster being health checked
-
           will be used.
         type: string
       path:
-        description: >
+        description: |
           Specifies the HTTP path that will be requested during health
-
           checking.
         type: string
       request_headers_to_add:
         allOf:
           - $ref: "#/definitions/Metadata"
-        description: >
+        description: |
           Specifies a list of HTTP headers that should be added to each request
-
           sent to the health checked cluster.
       service_name:
-        description: >
+        description: |
           An optional service name parameter which is used to validate
-
           the identity of the health checked cluster.
         type: string
     type: object
   HeaderConstraint:
     description: >
-      Indicates that a request's headers should meet some requirement before being
+      Indicates that a request's headers should meet some requirement
+      before being
 
       selected for a rewrite. Must have zore or one elements.
     properties:
@@ -2043,58 +1999,55 @@ definitions:
         type: boolean
       invert:
         description: >
-          If set, the header constraint will succeed if the match described faile.
+          If set, the header constraint will succeed if the match described
+          faile.
         type: boolean
       name:
         description: >
-          The header that is being checked. This must match the regexp "^[0-9a-zA-Z-]+$".
+          The header that is being checked. This must match the regexp
+          "^[0-9a-zA-Z-]+$".
 
           This is checked in a case insensitive manner.
         type: string
       value:
-        description: >
+        description: |
           If set the header's value will be compared to this. The default is to
-
           make case insensitive comparisons.
         type: string
     required:
       - name
     type: object
   HeaderDatum:
-    description: >
+    description: |
       This describes a HTTP header that should be attached to requests.
     properties:
       name:
-        description: >
+        description: |
           The name of the header that will be attached to the response sent.
-
           This is case insensitive.
         type: string
       value:
-        description: >
+        description: |
           A literal value to send as the header value or a reference to
-
           some metadatum value set on the Cluster Intsance that handles
-
           a specific request. If this value is empty after looking up an
-
           Instance metadatum value no header will be sent.
         type: string
       value_is_literal:
         description: >
-          If true then the value attribute is treated as a literal and no attempt
+          If true then the value attribute is treated as a literal and no
+          attempt
 
           to resolve instance metadatum to find a value.
         type: boolean
     type: object
   HealthCheck:
-    description: >
+    description: |
       Configures active health checking for every instance in a cluster.
     properties:
       health_checker:
-        description: >
+        description: |
           Defines the type of health checker to use. Only a single health
-
           checker can be defined per HealthCheck.
         properties:
           http_health_check:
@@ -2103,101 +2056,74 @@ definitions:
             $ref: "#/definitions/TCPHealthCheck"
         type: object
       healthy_edge_interval_msec:
-        description: >
+        description: |
           Interval used for the first health check right after a host is marked
-
           as healthy. For subsequent health checks, the proxy will shift back to
-
           using the standard health check interval(\'interval_msec\') that is
-
           defined. Defaults to the same value as \'interval_msec\' if not
-
           specified.
         type: integer
       healthy_threshold:
-        description: >
+        description: |
           The number of healthy health checks required before a host is marked
-
           healthy. Note that during startup, only a single successful health
-
           check is required to mark a host healthy.
         type: integer
       interval_jitter_msec:
-        description: >
+        description: |
           An optional jitter amount that is added to each interval value
-
           calculated by the proxy. If not specified, defaults to 0.
         type: integer
       interval_msec:
-        description: >
+        description: |
           The interval between health checks. The first round of health checks
-
           will occur during startup before any traffic is routed to a cluster.
-
           This means that the \'no_traffic_interval_msec\' value will be used as
-
           the first interval of health checks.
         type: integer
       no_traffic_interval_msec:
-        description: >
+        description: |
           Interval used when a cluster has never had traffic routed to it. It
-
           allows cluster information to be kept up to date, without sending a
-
           potentially large amount of active health checking traffic for no
-
           reason. Once a cluster has been used for traffic routing, The proxy
-
           will shift back to using the standard health check interval that is
-
           defined. Note that this interval takes precedence over any other.
-
           Defaults to 60s.
         type: integer
       reuse_connection:
         description: >
-          Whether or not to reuse health check connections between health checks.
+          Whether or not to reuse health check connections between health
+          checks.
 
           Default is true.
         type: boolean
       timeout_msec:
-        description: >
+        description: |
           The time to wait for a health check response. If the timeout is
-
           reached without a response, the health check attempt will be
-
           considered a failure. This is a required field and must be greater
-
           than 0.
         type: integer
       unhealthy_edge_interval_msec:
-        description: >
+        description: |
           Interval used for the first health check right after a host is marked
-
           as unhealthy. For subsequent health checks, the proxy will shift back
-
           to using either \'unhealthy_interval_msec\' if present or the standard
-
           health check interval, \'interval_msec\'.
         type: integer
       unhealthy_interval_msec:
-        description: >
+        description: |
           Interval used for hosts that are marked as unhealthy. As soon as the
-
           host is marked as healthy, The proxy will shift back to using the
-
           standard health check interval that is defined. This defaults to the
-
           same value as \'interval_msec\' if not specified.
         type: integer
       unhealthy_threshold:
-        description: >
+        description: |
           The number of unhealthy health checks required before a host is
-
           marked unhealthy. Note that for *http* health checking, if a host
-
           responds with 503, this threshold is ignored and the host is
-
           considered unhealthy immediately.
         type: integer
     required:
@@ -2265,7 +2191,8 @@ definitions:
         x-example: 80
       protocol:
         description: >
-          the protocol this listener will handle. http and http2 configure the listener to only
+          the protocol this listener will handle. http and http2 configure
+          the listener to only
 
           process requests of that type. http_auto will adapt to HTTP/1.1 and HTTP/2 as needed.
 
@@ -2293,11 +2220,9 @@ definitions:
         $ref: "#/definitions/Listener"
     type: object
   Match:
-    description: >
+    description: |
       Represents a mapping of request attributes to constraints on a cluster
-
       using different matching schemes.
-
 
       Certain combinations of `kind` and `behavior` are not allowed
         | kind | behavior |
@@ -2307,9 +2232,8 @@ definitions:
         | cookie | range |
     properties:
       behavior:
-        description: >
+        description: |
           Defines how a request attribute should be matched. If not specified,
-
           defaults to `exact`. Valid values are
             * exact
             * regex
@@ -2320,17 +2244,12 @@ definitions:
       from:
         allOf:
           - $ref: "#/definitions/Metadatum"
-        description: >
+        description: |
           The request attribute key and value to match. `key` must always be
-
           defined while `value` can be unspecified (only if behavior is set to
-
           `exact`) to indicate that all values should be matched. If to.value
-
           is also unspecified, the matched value of the request will be used as
-
           a constraint on the destination cluster.
-
 
           \# Behavior
             * `regex` if To.Value is unspecified, `value` must contain one and
@@ -2344,9 +2263,8 @@ definitions:
             * `cookie` does not support `range` behavior
             * `query` does not support `regex` behavior
       kind:
-        description: >
+        description: |
           Defines the attribute by which a request should be matched on. Valid
-
           values are
             * cookie
             * header
@@ -2355,19 +2273,13 @@ definitions:
       to:
         allOf:
           - $ref: "#/definitions/Metadatum"
-        description: >
+        description: |
           The constraints on a cluster that a matched request should map to. If
-
           to.key is specified and to.value is not, the matched from.value will
-
           be used as a metadata constraint on instances in the destination
-
           cluster, keyed by to.key. If using `regex` behavior with multiple
-
           subgroups in from.value, variables `$1` through `$n`, where n is the
-
           number of subgroups in the matching regex, can be used to interpolate
-
           captured matches in to.value.
     type: object
   Matches:
@@ -2442,26 +2354,22 @@ definitions:
         type: array
     type: object
   OutlierDetection:
-    description: >
+    description: |
       A form of passive health checking that dynamically determines whether
-
       instances in a cluster are performing unlike others and preemptively
-
       removes them from a load balancing set.
     properties:
       base_ejection_time_msec:
-        description: >
+        description: |
           The base time that a host is ejected for. The real time is equal to
-
           the base time multiplied by the number of times the host has been
-
           ejected. Defaults to 30s. Setting this to 0 means that no host will
-
           be ejected for longer than `interval_msec`.
         type: integer
       consecutive_5xx:
         description: >
-          The number of consecutive 5xx responses before a consecutive 5xx ejection
+          The number of consecutive 5xx responses before a consecutive 5xx
+          ejection
 
           occurs. Defaults to 5. Setting this to 0 effectively turns off the
 
@@ -2479,7 +2387,8 @@ definitions:
         type: integer
       enforcing_consecutive_5xx:
         description: >
-          The % chance that a host will be actually ejected when an outlier status
+          The % chance that a host will be actually ejected when an outlier
+          status
 
           is detected through consecutive 5xx. This setting can be used to disable
 
@@ -2487,7 +2396,8 @@ definitions:
         type: integer
       enforcing_consecutive_gateway_failure:
         description: >
-          The % chance that a host will be actually ejected when an outlier status
+          The % chance that a host will be actually ejected when an outlier
+          status
 
           is detected through consecutive gateway failures. This setting can be
 
@@ -2495,33 +2405,30 @@ definitions:
         type: integer
       enforcing_success_rate:
         description: >
-          The % chance that a host will be actually ejected when an outlier status
+          The % chance that a host will be actually ejected when an outlier
+          status
 
           is detected through success rate statistics. This setting can be used to
 
           disable ejection or to ramp it up slowly. Defaults to 100.
         type: integer
       interval_msec:
-        description: >
+        description: |
           The time interval between ejection analysis sweeps. This can result in
-
           both new ejections due to success rate outlier detection as well as
-
           hosts being returned to service. Defaults to 10s and must be greater
-
           than 0.
         type: integer
       max_ejection_percent:
-        description: >
+        description: |
           The maximum % of an upstream cluster that can be ejected due to
-
           outlier detection. Defaults to 10% but will always eject at least one
-
           host.
         type: integer
       success_rate_minimum_hosts:
         description: >
-          The number of hosts in a cluster that must have enough request volume to
+          The number of hosts in a cluster that must have enough request
+          volume to
 
           detect success rate outliers. If the number of hosts is less than this
 
@@ -2547,7 +2454,8 @@ definitions:
         type: integer
       success_rate_stdev_factor:
         description: >
-          This factor is used to determine the ejection threshold for success rate
+          This factor is used to determine the ejection threshold for success
+          rate
 
           outlier ejection. The ejection threshold is the difference between the
 
@@ -2579,9 +2487,8 @@ definitions:
         description: The ID used as a reference when building this page.
         type: string
       total_entries:
-        description: >
+        description: |
           How many total entries would have been returned in the time window
-
           if it had not been paginated.
         type: integer
     type: object
@@ -2633,11 +2540,9 @@ definitions:
   ProxyFilter:
     properties:
       domain_keys:
-        description: >
+        description: |
           matches Proxies with a superset of the specified domain_keys. A
-
           slice with a single value of "-" will produce Proxies with no linked
-
           Domains.
         items:
           type: string
@@ -2655,18 +2560,20 @@ definitions:
         $ref: "#/definitions/Proxy"
     type: object
   Redirect:
-    description: >
+    description: |
       Specifies how a URL within a domain should be rewritten when requested.
     properties:
       from:
-        description: A regexp that will be matched against the URL (not including the host/port). May include capture groups for reference in "to."
+        description: A regexp that will be matched against the URL (not including the
+          host/port). May include capture groups for reference in "to."
         type: string
       header_constraints:
         items:
           $ref: "#/definitions/HeaderConstraint"
         type: array
       name:
-        description: A unique (to this Domain) name for the Redirect. Must match the regexp "^[0-9a-zA-Z-]+$"
+        description: A unique (to this Domain) name for the Redirect. Must match the
+          regexp "^[0-9a-zA-Z-]+$"
         type: string
       redirect_type:
         description: How this redirect should be presented via HTTP response code.
@@ -2675,7 +2582,9 @@ definitions:
           - temporary
         type: string
       to:
-        description: The new URL that will be constructed from the request. Capture groups from "from" may be referenced as "$&lt;group number&gt;" which begins at 1.
+        description: The new URL that will be constructed from the request. Capture
+          groups from "from" may be referenced as "$&lt;group number&gt;" which
+          begins at 1.
         type: string
     required:
       - name
@@ -2712,7 +2621,8 @@ definitions:
         type: integer
       timeout_msec:
         description: >
-          Total time limit in milliseconds for all attempts (including the initial attempt)
+          Total time limit in milliseconds for all attempts (including the
+          initial attempt)
         format: int64
         type: integer
     type: object
@@ -2741,15 +2651,11 @@ definitions:
       response_data:
         allOf:
           - $ref: "#/definitions/ResponseData"
-        description: >
+        description: |
           When a request is served by this Route annotate the response with the
-
           information specified within this ResponseData object. It's possible
-
           that multiple response data configurations will apply; if that's the
-
           case then the values from Route take precedence over those from a
-
           SharedRules object.
       retry_policy:
         $ref: "#/definitions/RetryPolicy"
@@ -2819,7 +2725,8 @@ definitions:
         type: array
       cipher_filter:
         description: >
-          An OpenSSL compatible filter string indicating the ciphers acceptable
+          An OpenSSL compatible filter string indicating the ciphers
+          acceptable
 
           for this proxy to use while communicating with clients. The default value
 
@@ -2828,9 +2735,8 @@ definitions:
           see https://wiki.openssl.org/index.php/Manual:Ciphers(1)
         type: string
       protocols:
-        description: >
+        description: |
           A list of acceptable SSL/TLS protocol. The default values are TLSv1,
-
           TLSv1.1, TLSv1.2. Additional valid values are SSLv2 and SSLv3.
         items:
           type: string
@@ -2863,17 +2769,12 @@ definitions:
       response_data:
         allOf:
           - $ref: "#/definitions/ResponseData"
-        description: >
+        description: |
           When a request is served by a Route that is part of this SharedRules
-
           group the response is annotated with the information specified within
-
           this ResponseData object. It's possible that multiple response data
-
           configurations will apply; if that's the case then the values from
-
           the applicable Route and ClusterConstarint takes precedence over those
-
           specified here.
       retry_policy:
         $ref: "#/definitions/RetryPolicy"
@@ -2907,56 +2808,52 @@ definitions:
   TCPHealthCheck:
     properties:
       receive:
-        description: >
+        description: |
           An array of base64 encoded strings, each representing array of
-
           bytes that is expected in health check responses. When
-
           checking the response, "fuzzy" matching is performed such that
-
           each binary block must be found, and in the order specified,
-
           but not necessarily contiguously.
         items:
           type: string
         type: array
       send:
-        description: >
+        description: |
           Base64 encoded string representing an array of bytes to be
-
           sent in health check requests. Leaving this field empty
-
           implies a connect-only health check.
         type: string
     type: object
   TimeRange:
     properties:
       end:
-        description: >
+        description: |
           The end of the window we want to see changes for; measured in
-
           microseconds since Unix Epoch.
         format: int64
         type: integer
       start:
-        description: The beginning of the window we want to see changes for; measured in microseconds since Unix Epoch.
+        description: The beginning of the window we want to see changes for; measured in
+          microseconds since Unix Epoch.
         format: int64
         type: integer
     type: object
   TracingConfig:
-    description: >
+    description: |
       Configures tracing operations to be performed on the given listener
     properties:
       ingress:
         description: >
-          Determines whether spans sent from this listener should be treated as ingress
+          Determines whether spans sent from this listener should be treated
+          as ingress
 
           or egress operations.
         type: boolean
         x-example: true
       request_headers_for_tags:
         description: >
-          the headers specified here will be added to the generated spans as annotations
+          the headers specified here will be added to the generated spans as
+          annotations
         items:
           type: string
         type: array
@@ -2969,9 +2866,8 @@ definitions:
       checksum:
         type: string
       deleted_at:
-        description: >
+        description: |
           A timestamp that marks when a user was deleted. It is in the format
-
           yyyy-mm-ddThh:mm:ss.SZ. The timezone will always be UTC.
         type: string
         x-example: 2017-08-14T17:29:11.986438Z

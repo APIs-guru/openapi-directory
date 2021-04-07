@@ -7,7 +7,11 @@ info:
     name: National Health Authority
     url: https://ndhm.gov.in/
   description: >
-    The following are the specifications for the APIs to be implemented at the Health Repository end if an entity is only serving the role of a HIU. The specs are essentially duplicates from the Gateway and Bridge, but put together so as to make it clear to *HIUs* which set of APIs they should implement to participate in the network. 
+    The following are the specifications for the APIs to be implemented
+    at the Health Repository end if an entity is only serving the role of a HIU.
+    The specs are essentially duplicates from the Gateway and Bridge, but put
+    together so as to make it clear to *HIUs* which set of APIs they should
+    implement to participate in the network. 
 
       1. The APIs are organized by the flows - **identification**, **consent flow**, **data flow** and **monitoring**. They represent the APIs that are expected to be available at the HIU end by the Gateway. 
       2. For majority of the APIs, if Gateway has initiated a call, there are corresponding callback APIs on the Gateway. e.g for **/consents/hiu/notify** API on HIU end, its expected that a corresponding callback API **/consents/hiu/on-notify** on Gateway is called. Such APIs are organized under the **Gateway** label. 
@@ -52,7 +56,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid consent request id
         "500":
@@ -63,7 +67,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -90,7 +94,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid consent request id
         "500":
@@ -101,7 +105,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -134,7 +138,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid data sent 
               * Required attributes not mentioned
@@ -146,7 +150,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Expired/Invalid token.
         "500":
@@ -157,7 +161,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -167,7 +171,9 @@ paths:
   /v0.5/consent-requests/on-init:
     post:
       description: >
-        Result of consent request creation for a patient. **id** represents the consentrequest id created by CM. The result must contain either **id** or the **error** caused. <br/>
+        Result of consent request creation for a patient. **id** represents
+        the consentrequest id created by CM. The result must contain either
+        **id** or the **error** caused. <br/>
           Reasons for error may be
           * Invalid references (e.g patient id, hiu id), purpose, hiTypes, ranges, persmission
       parameters:
@@ -193,7 +199,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid data sent
         "401":
@@ -204,7 +210,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Expired/Invalid token.
         "500":
@@ -215,7 +221,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -227,7 +233,8 @@ paths:
   /v0.5/consent-requests/on-status:
     post:
       description: >
-        Result of consent request done previously. Status of request can be GRANTED,  DENIED, EXPIRED. If the request was GRANTED, then 
+        Result of consent request done previously. Status of request can be
+        GRANTED,  DENIED, EXPIRED. If the request was GRANTED, then 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-HIU-ID"
@@ -251,7 +258,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid data sent
         "401":
@@ -262,7 +269,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Expired/Invalid token.
         "500":
@@ -273,7 +280,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -308,7 +315,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid data sent
         "401":
@@ -319,7 +326,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Expired/Invalid token.
         "500":
@@ -330,7 +337,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -359,7 +366,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid data sent
         "401":
@@ -370,7 +377,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Expired/Invalid token.
         "500":
@@ -381,7 +388,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -391,7 +398,8 @@ paths:
   /v0.5/consents/hiu/notify:
     post:
       description: >
-        Health information user will get notified about the consent request granted or denied, consent revoked, consent expired. 
+        Health information user will get notified about the consent request
+        granted or denied, consent revoked, consent expired. 
 
         1. For consent request grant, status=GRANTED, consentRequestId=<consent-request-id>, and consentArtefacts is an array of generated consent artefact Ids.
 
@@ -420,7 +428,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid/Expired/Empty token.
         "500":
@@ -431,7 +439,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream services are down
       summary: Consent notification
@@ -442,7 +450,9 @@ paths:
   /v0.5/consents/hiu/on-notify:
     post:
       description: >
-        This API is called by HIU as acknowledgement to consent notifications, specifically for cases when consent is REVOKED or EXPIRED.
+        This API is called by HIU as acknowledgement to consent
+        notifications, specifically for cases when consent is REVOKED or
+        EXPIRED.
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -463,7 +473,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid/Expired/Empty token.
         "500":
@@ -474,7 +484,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream services are down
       summary: Consent notification
@@ -482,9 +492,8 @@ paths:
         - Gateway
   /v0.5/consents/on-fetch:
     post:
-      description: >
+      description: |
         Must contain either consent or error. Possible reason of errors are 
-
         1. consentId passed through /fetch is invalid
       parameters:
         - $ref: "#/components/parameters/authorization"
@@ -509,7 +518,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid data sent
         "401":
@@ -520,7 +529,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Expired/Invalid token.
         "500":
@@ -531,7 +540,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -543,7 +552,10 @@ paths:
   /v0.5/health-information/cm/request:
     post:
       description: >
-        Request for Health information against a consent id. CM would generate a transactionId against each consent and pass it as trnasaction context / correlation id to the HIP and also return the same to HIU via /on-request. 
+        Request for Health information against a consent id. CM would
+        generate a transactionId against each consent and pass it as trnasaction
+        context / correlation id to the HIP and also return the same to HIU via
+        /on-request. 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -567,7 +579,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Bad request
         "401":
@@ -578,7 +590,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Token is invalid or Link has expired
         "500":
@@ -589,7 +601,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -599,7 +611,12 @@ paths:
   /v0.5/health-information/hiu/on-request:
     post:
       description: >
-        Callback API for acknowledgement of Health information request made by HIU. Gateway calls this API when request has validated for the specified  consent id. Either the **hiRequest** or **error** would be specified. If the health info request was valid, then the ***hiRequest.transactionId*** specifies the transaction context against which HIP would send over the data.  Possible cases of errors are
+        Callback API for acknowledgement of Health information request made
+        by HIU. Gateway calls this API when request has validated for the
+        specified  consent id. Either the **hiRequest** or **error** would be
+        specified. If the health info request was valid, then the
+        ***hiRequest.transactionId*** specifies the transaction context against
+        which HIP would send over the data.  Possible cases of errors are
           1. **Invalid consent artefact id**
           2. **Consent has expired**
           3. **Date ranges are invalid**
@@ -626,7 +643,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Bad request
         "401":
@@ -637,7 +654,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Token is invalid or Link has expired
         "500":
@@ -648,7 +665,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -692,7 +709,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid Request
         "401":
@@ -703,7 +720,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Expired/Invalid token.
         "500":
@@ -714,7 +731,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -724,7 +741,11 @@ paths:
   /v0.5/health-information/transfer:
     post:
       description: >
-        **NOTE**: This API is actually the callback URL that is passed as **dataPushUrl** in the data request API - /v0.5/health-information/hip/request. This API is directly called by HIP Data Bridge and is not mediated via CM, and hence not routed through the Gateway. 
+        **NOTE**: This API is actually the callback URL that is passed as
+        **dataPushUrl** in the data request API -
+        /v0.5/health-information/hip/request. This API is directly called by HIP
+        Data Bridge and is not mediated via CM, and hence not routed through the
+        Gateway. 
           1. This API should be implemented at HIU side. It maybe implemented by the Data Bridge representing the HIU. 
           2. Entry elements maybe ***content*** or ***link***, although for version 1, entry ***content*** is preferred. 
           3. Entry ***content*** (or even link reference content) must be encrypted by means of Elliptic-curve Diffie–Hellman Key Exchange, utilizing the HIU keymaterials that are passed through the data request API - /v0.5/health-information/hip/request. 
@@ -753,7 +774,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid/Expired/Empty token.
         "500":
@@ -764,7 +785,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream services are down
       summary: health information transfer API
@@ -792,7 +813,8 @@ paths:
   /v0.5/patients/find:
     post:
       description: >
-        This API is meant for identify to patient given her consent-manager-user-id
+        This API is meant for identify to patient given her
+        consent-manager-user-id
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -813,7 +835,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             Invalid request, required attributes not provided
         "401":
           content:
@@ -823,7 +845,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Unauthorized request
         "500":
@@ -834,7 +856,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -844,7 +866,8 @@ paths:
   /v0.5/patients/on-find:
     post:
       description: >
-        If a patient is found then patient.name contains the patients name. 
+        If a patient is found then patient.name contains the patients
+        name. 
 
         Otherwise, patient is not provided, and possibly error is raised for invalid requests
 
@@ -872,7 +895,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             Invalid request, required attributes not provided
         "401":
           content:
@@ -882,7 +905,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Unauthorized request
         "500":
@@ -893,7 +916,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -931,7 +954,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid client Id or secret.
         "404":
@@ -942,7 +965,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid consent request id
         "500":
@@ -953,7 +976,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -962,7 +985,9 @@ paths:
         - Gateway
   /v0.5/subscription-requests/cm/init:
     post:
-      description: creates a request for subscription. The subscription categories can be for care-contexts linkages or availability of data against existing care-contexts. Note that the requester must have HIU role
+      description: creates a request for subscription. The subscription categories can
+        be for care-contexts linkages or availability of data against existing
+        care-contexts. Note that the requester must have HIU role
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -986,7 +1011,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid data sent 
               * Required attributes not mentioned
@@ -998,7 +1023,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Expired/Invalid token.
         "500":
@@ -1009,7 +1034,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -1019,7 +1044,11 @@ paths:
   /v0.5/subscription-requests/hiu/notify:
     post:
       description: >
-        This API is used by CM to notify a HIU to grant or deny a request for subscription, and also to notify that in case an existing subscription is revoked or expired. For notifying that a particular subscription request was GRANTED or DENIED, the **subscriptionRequestId** is passed. 
+        This API is used by CM to notify a HIU to grant or deny a request
+        for subscription, and also to notify that in case an existing
+        subscription is revoked or expired. For notifying that a particular
+        subscription request was GRANTED or DENIED, the
+        **subscriptionRequestId** is passed. 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-HIU-ID"
@@ -1043,7 +1072,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid data sent 
               * Required attributes not mentioned
@@ -1055,7 +1084,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Expired/Invalid token.
         "500":
@@ -1066,7 +1095,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -1076,7 +1105,9 @@ paths:
   /v0.5/subscription-requests/hiu/on-init:
     post:
       description: >
-        This callback API acknowledges the request for subscription from a HIU, and sends back a "id" that will be used when the patient/user approves or denies the subscription. 
+        This callback API acknowledges the request for subscription from a
+        HIU, and sends back a "id" that will be used when the patient/user
+        approves or denies the subscription. 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-HIU-ID"
@@ -1097,7 +1128,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid/Expired/Empty token.
         "500":
@@ -1108,16 +1139,18 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream services are down
-      summary: callback API for the /subscription-requests/cm/init to notify a HIU on acceptance/acknowledgement of the request for subscription.
+      summary: callback API for the /subscription-requests/cm/init to notify a HIU on
+        acceptance/acknowledgement of the request for subscription.
       tags:
         - subscriptions
   /v0.5/subscription-requests/hiu/on-notify:
     post:
       description: >
-        This API is called by HIU as acknowledgement to subscription request relevant notifications. 
+        This API is called by HIU as acknowledgement to subscription
+        request relevant notifications. 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -1138,7 +1171,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid/Expired/Empty token.
         "500":
@@ -1149,16 +1182,20 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream services are down
-      summary: Callback API for /subscription-requests/hiu/notify to acknowledge receipt of notification.
+      summary: Callback API for /subscription-requests/hiu/notify to acknowledge
+        receipt of notification.
       tags:
         - Gateway
   /v0.5/subscriptions/hiu/notify:
     post:
       description: >
-        This API is used by CM to notify a HIU for notification relevant to subscription. Notifications are sent to subscribed HIUs whenever a new care-context is linked or new data is available on an existing linked care-context. 
+        This API is used by CM to notify a HIU for notification relevant to
+        subscription. Notifications are sent to subscribed HIUs whenever a new
+        care-context is linked or new data is available on an existing linked
+        care-context. 
 
         1. if event.category = LINK, then only care-contexts are passed when new care-contexts are linked for patient. 
 
@@ -1186,7 +1223,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid data sent 
               * Required attributes not mentioned
@@ -1198,7 +1235,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Expired/Invalid token.
         "500":
@@ -1209,7 +1246,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -1219,7 +1256,9 @@ paths:
   /v0.5/subscriptions/hiu/on-notify:
     post:
       description: >
-        This API is called by HIU as acknowledgement to consent notifications, specifically for cases when consent is REVOKED or EXPIRED.
+        This API is called by HIU as acknowledgement to consent
+        notifications, specifically for cases when consent is REVOKED or
+        EXPIRED.
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -1240,7 +1279,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Invalid/Expired/Empty token.
         "500":
@@ -1251,16 +1290,22 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream services are down
-      summary: Callback API for /subscriptions/hiu/notify to acknowledge receipt of notification.
+      summary: Callback API for /subscriptions/hiu/notify to acknowledge receipt of
+        notification.
       tags:
         - Gateway
   /v0.5/users/auth/confirm:
     post:
       description: >
-        This API is called by HIP/HIUs to confirm authentication of users. The transactionId returned by the previous callback API /users/auth/on-init must be sent. If Authentication is successful the callback API will send an "access token" for subsequent purpose specific API calls. Note only **credential.authCode** or **credential.demographic** should be sent
+        This API is called by HIP/HIUs to confirm authentication of users.
+        The transactionId returned by the previous callback API
+        /users/auth/on-init must be sent. If Authentication is successful the
+        callback API will send an "access token" for subsequent purpose specific
+        API calls. Note only **credential.authCode** or
+        **credential.demographic** should be sent
           1. demographic details are only required for  demographic auth as of now. 
           2. demographic details are required only in MEDIATED cases and if the **auth.mode** so demands. e.g. if **auth.mode** is DEMOGRAPHICS. Usually for demographic authentication, the name, gender and DOB must be exactly as specified in User Account.
           3. demographic.identifier is optional, however maybe required if authentication so mandates. 
@@ -1288,7 +1333,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * transaction id is not provided or invalid
               * token or other auth confirmation details not provided or invalid
@@ -1300,7 +1345,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Unauthorized request
         "500":
@@ -1311,17 +1356,19 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
-      summary: Confirmation request sending token, otp or other authentication details from HIP/HIU for confirmation
+      summary: Confirmation request sending token, otp or other authentication details
+        from HIP/HIU for confirmation
       tags:
         - Gateway
   /v0.5/users/auth/fetch-modes:
     post:
       description: >
-        This API is meant for identify supported authentication modes for a patient given a specific purpose
+        This API is meant for identify supported authentication modes for a
+        patient given a specific purpose
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -1342,7 +1389,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             Invalid request, required attributes not provided
         "401":
           content:
@@ -1352,7 +1399,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Unauthorized request
         "500":
@@ -1363,7 +1410,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -1373,7 +1420,9 @@ paths:
   /v0.5/users/auth/init:
     post:
       description: >
-        This API is called by HIPs to initiate authentication of users. A transactionId is retuned by the corresponding callback API for confirmation of user auth.
+        This API is called by HIPs to initiate authentication of users. A
+        transactionId is retuned by the corresponding callback API for
+        confirmation of user auth.
           1. **NOTE**, only **KYC** purpose is applicable for HIU. Hence HIU should only sent KYC in **query.authMode** in the request
       parameters:
         - $ref: "#/components/parameters/authorization"
@@ -1398,7 +1447,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * patient id is not provided
         "401":
@@ -1409,7 +1458,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Unauthorized request
         "500":
@@ -1420,7 +1469,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -1430,7 +1479,9 @@ paths:
   /v0.5/users/auth/notify:
     post:
       description: >
-        This API is called by CM to confirm authentication of users. The transactionId returned is same as that passed in /auth/on-init. The "auth.status" conveys whether the request was GRANTED or DENIED.
+        This API is called by CM to confirm authentication of users. The
+        transactionId returned is same as that passed in /auth/on-init. The
+        "auth.status" conveys whether the request was GRANTED or DENIED.
 
           1. **auth.accessToken** - is specific to the purpose mentioned in the /auth/init. This token needs to be used for initiating the intended action. For example for HIP initiated linking of care-contexts
           2. **NOTE**, only one of **X-HIP-ID** or **X-HIU-ID** will be sent as part of header, not both.
@@ -1459,7 +1510,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * required details not provided
               * neither auth nor error specified 
@@ -1471,7 +1522,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Unauthorized request
         "500":
@@ -1482,7 +1533,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -1520,7 +1571,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * required details not provided
               * neither auth nor error specified 
@@ -1532,7 +1583,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Unauthorized request
         "500":
@@ -1543,17 +1594,19 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
-      summary: callback API for /auth/confirm (in case of MEDIATED auth) to confirm user authentication or not
+      summary: callback API for /auth/confirm (in case of MEDIATED auth) to confirm
+        user authentication or not
       tags:
         - user auth
   /v0.5/users/auth/on-fetch-modes:
     post:
       description: >
-        If a patient is found then **auth** attribute contains the supported modes for the specified purpose. 
+        If a patient is found then **auth** attribute contains the
+        supported modes for the specified purpose. 
 
         Otherwise, error is raised for invalid requests or for non-existent id.
 
@@ -1583,7 +1636,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             Invalid request, required attributes not provided
         "401":
           content:
@@ -1593,7 +1646,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Unauthorized request
         "500":
@@ -1604,7 +1657,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -1614,7 +1667,13 @@ paths:
   /v0.5/users/auth/on-init:
     post:
       description: >
-        If the patient's id is valid, CM will return a transactionId as initialization of user auth. If the request is valid, then 'auth.mode' will convey how the authentication should be done. The authentication can be *mediated* or *direct*. For mediated authentication modes, HIP or HIU is epected to send over relevant code (OTP/token) or demographic info via subsequent API call to /auth/confirm. for direct authentication case, CM will notify requester through/users/auth/notify API. 
+        If the patient's id is valid, CM will return a transactionId as
+        initialization of user auth. If the request is valid, then 'auth.mode'
+        will convey how the authentication should be done. The authentication
+        can be *mediated* or *direct*. For mediated authentication modes, HIP or
+        HIU is epected to send over relevant code (OTP/token) or demographic
+        info via subsequent API call to /auth/confirm. for direct authentication
+        case, CM will notify requester through/users/auth/notify API. 
 
           1. **auth.mode** conveys whats the mode of authentication is, and what is expected from HIP/HIU in the subsequent /auth/confirm API call. Possible values 
               1. MOBILE_OTP - auth via OTP to registered mobile. Mediated. 
@@ -1624,6 +1683,7 @@ paths:
           2. **meta.expiry** conveys the expiry time of the token and the authentication session
           3. **NOTE**, only one of **X-HIP-ID** or **X-HIU-ID** will be sent as part of header, not both. 
           4. **NOTE**, only KYC purpose is applicable for HIU
+
 
 
 
@@ -1659,7 +1719,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * required information not provided
               * neither authInit nor error specified 
@@ -1671,7 +1731,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Unauthorized request
         "500":
@@ -1682,7 +1742,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -1692,7 +1752,8 @@ paths:
   /v0.5/users/auth/on-notify:
     post:
       description: >
-        This API is called by HIU/HIPs to confirm acknowledgement for receipt of auth notification is case of DIRECT authentication. 
+        This API is called by HIU/HIPs to confirm acknowledgement for
+        receipt of auth notification is case of DIRECT authentication. 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -1716,7 +1777,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * required details not provided
               * neither auth nor error specified 
@@ -1728,7 +1789,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Unauthorized request
         "500":
@@ -1739,7 +1800,7 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: >
+          description: |
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
@@ -1779,14 +1840,16 @@ components:
       schema:
         type: string
     X-HIP-ID:
-      description: Identifier of the health information provider to which the request was intended.
+      description: Identifier of the health information provider to which the request
+        was intended.
       in: header
       name: X-HIP-ID
       required: true
       schema:
         type: string
     X-HIU-ID:
-      description: Identifier of the health information user to which the request was intended.
+      description: Identifier of the health information user to which the request was
+        intended.
       in: header
       name: X-HIU-ID
       required: true
@@ -1794,13 +1857,18 @@ components:
         type: string
     X-Origin-ID:
       description: >
-        Identifier of the health information provider user from which the request came. (Necessity of this header depends on the authentication at the Bridge) If gateway uses JWT authentication, from access token itself originator can be identified.
+        Identifier of the health information provider user from which the
+        request came. (Necessity of this header depends on the authentication at
+        the Bridge) If gateway uses JWT authentication, from access token itself
+        originator can be identified.
       in: header
       name: X-Origin-ID
       schema:
         type: string
     authorization:
-      description: Access token which was issued after successful login with gateway auth server, which will be sent by gateway to authenticate itself with API bridge.
+      description: Access token which was issued after successful login with gateway
+        auth server, which will be sent by gateway to authenticate itself with
+        API bridge.
       in: header
       name: Authorization
       required: true
@@ -2326,7 +2394,8 @@ components:
         notification:
           properties:
             consentArtefacts:
-              description: if the status is GRANTED or REVOKED, then the consentArtefact references (Ids) must be specified.
+              description: if the status is GRANTED or REVOKED, then the consentArtefact
+                references (Ids) must be specified.
               items:
                 $ref: "#/components/schemas/ConsentArtefactReference"
               type: array
@@ -2774,7 +2843,8 @@ components:
     PatientAuthConfirmRequest:
       properties:
         credential:
-          description: note, demographic details are only required for demographic auth at this point.
+          description: note, demographic details are only required for demographic auth at
+            this point.
           properties:
             authCode:
               type: string
@@ -2800,7 +2870,8 @@ components:
       properties:
         auth:
           description: >
-            depending on the purpose of auth, as specified in /auth/init, the response may include the following 
+            depending on the purpose of auth, as specified in /auth/init, the
+            response may include the following 
               1. LINK - only returns **accessToken**
               2. KYC - only returns **patient**
               3. KYC_AND_LINK - returns both **accessToken** and **patient**
@@ -2977,7 +3048,8 @@ components:
       properties:
         auth:
           description: >
-            depending on the purpose of auth, as specified in /auth/init, the response may include the following 
+            depending on the purpose of auth, as specified in /auth/init, the
+            response may include the following 
               1. LINK - only returns **accessToken**
               2. KYC - only returns **patient**
               3. KYC_AND_LINK - returns both **accessToken** and **patient**
@@ -3063,7 +3135,8 @@ components:
         - id
       type: object
     PatientDemographic:
-      description: Demographic details are only required for demographic auth at this point. Demographic details must be same as registered
+      description: Demographic details are only required for demographic auth at this
+        point. Demographic details must be same as registered
       properties:
         dateOfBirth:
           description: date of birth in YYYY-MM-DD format.

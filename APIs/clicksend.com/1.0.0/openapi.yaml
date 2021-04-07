@@ -2235,7 +2235,8 @@ paths:
                   description: Message Search Term.
                   type: string
                 message_search_type:
-                  description: "Message Search Type: 0=Any message, 1=starts with, 2=contains, 3=does not contain."
+                  description: "Message Search Type: 0=Any message, 1=starts with, 2=contains,
+                    3=does not contain."
                   type: number
                 rule_name:
                   description: Rule Name.
@@ -2379,7 +2380,8 @@ paths:
                   description: Message Search Term.
                   type: string
                 message_search_type:
-                  description: "Message Search Type: 0=Any message, 1=starts with, 2=contains, 3=does not contain."
+                  description: "Message Search Type: 0=Any message, 1=starts with, 2=contains,
+                    3=does not contain."
                   type: number
               required:
                 - dedicated_number
@@ -3094,7 +3096,9 @@ paths:
                   description: The message id of the message.
                   type: string
                 type:
-                  description: "The type of message, must be one of the following values: `SMS`, `MMS`, `VOICE`, `EMAIL_MARKETING`, `EMAIL_TRANSACTIONAL`, `FAX`, `POST`."
+                  description: "The type of message, must be one of the following values: `SMS`,
+                    `MMS`, `VOICE`, `EMAIL_MARKETING`, `EMAIL_TRANSACTIONAL`,
+                    `FAX`, `POST`."
                   type: string
               required:
                 - message_id
@@ -3395,7 +3399,8 @@ paths:
                     data:
                       abuse_count: 0
                       body: >
-                        <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+                        <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+                        "http://www.w3.org/TR/REC-html40/loose.dtd">
 
                         <html><body><p>This is a test</p></body></html>
                       body_plain_text: This is a test
@@ -3463,7 +3468,9 @@ paths:
                   description: The name of the sender.
                   type: string
                 schedule:
-                  description: Leave blank for immediate delivery. Will replace existing schedule (even if left blank). Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                  description: Leave blank for immediate delivery. Will replace existing schedule
+                    (even if left blank). Your schedule time as a [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                   type: number
                 subject:
                   description: The subject of the email campaign.
@@ -3601,7 +3608,8 @@ paths:
           required: true
           schema:
             type: number
-        - description: 6E8B-4FDB-99A7-7ED08DF97BCC (required, string) - Your activation token.
+        - description: 6E8B-4FDB-99A7-7ED08DF97BCC (required, string) - Your activation
+            token.
           example: 3BD73304
           in: path
           name: activation_token
@@ -3679,7 +3687,7 @@ paths:
                 email_address: johndoe1@user.com
               properties:
                 Body:
-                  description: >-
+                  description: |-
                     {
                         "email_address" : "test222@user.com"
                     }
@@ -3792,8 +3800,12 @@ paths:
                             currency_prefix_d: "?"
                           bcc:
                             $ref: "#/components/examples/example1/value"
-                          body: This is a test content <img src="cid:7c65ccc4a134a809db09a839df9b75f055afcb62@click-send.com" />
-                          body_plain_text: This is a test content <img src="cid:7c65ccc4a134a809db09a839df9b75f055afcb62@click-send.com" />
+                          body: This is a test content <img
+                            src="cid:7c65ccc4a134a809db09a839df9b75f055afcb62@click-send.com"
+                            />
+                          body_plain_text: This is a test content <img
+                            src="cid:7c65ccc4a134a809db09a839df9b75f055afcb62@click-send.com"
+                            />
                           cc:
                             $ref: "#/components/examples/example1/value"
                           custom_string:
@@ -4274,7 +4286,8 @@ paths:
                   description: The sender's name.
                   type: string
                 schedule:
-                  description: Leave blank for immediate delivery. Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                  description: Leave blank for immediate delivery. Your schedule time as a [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                   type: number
                 to:
                   description: The recipients of the email.
@@ -4402,7 +4415,8 @@ paths:
                 response:
                   value:
                     data:
-                      body: <div id="nb_wrapper"><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"...
+                      body: <div id="nb_wrapper"><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0
+                        Transitional//EN"...
                       template_id: 292
                       template_id_master: 57
                       template_name: new minion template!
@@ -4505,7 +4519,9 @@ paths:
                   value:
                     data:
                       body: >-
-                        <div id="nb_wrapper"><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+                        <div id="nb_wrapper"><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0
+                        Transitional//EN"
+                        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 
                         <html xmlns:v="urn:schemas-microsoft-com:vml">
 
@@ -4863,7 +4879,10 @@ paths:
                 date_before: 1441958441
               properties:
                 date_before:
-                  description: An optional [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp) - mark all as read before this timestamp. If not given, all receipts will be marked as read.
+                  description: An optional [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp)
+                    - mark all as read before this timestamp. If not given, all
+                    receipts will be marked as read.
                   type: number
               type: object
       responses:
@@ -5102,7 +5121,8 @@ paths:
                 phone_number: "3108147982"
               properties:
                 country:
-                  description: Your country. Used to format phone number. This is required if phone_number is not in international-format.
+                  description: Your country. Used to format phone number. This is required if
+                    phone_number is not in international-format.
                   type: string
                 email:
                   description: Your email. This is required if phone_number is not present.
@@ -5612,7 +5632,9 @@ paths:
       tags:
         - Contacts
     post:
-      description: Note that the fields `phone_number`, `fax_number` and email` are all optional; however at least one of them must be specified, otherwise the API call will fail.
+      description: Note that the fields `phone_number`, `fax_number` and email` are
+        all optional; however at least one of them must be specified, otherwise
+        the API call will fail.
       operationId: Create a new contact
       parameters:
         - description: Your contact list id where your contact be associated.
@@ -6319,14 +6341,18 @@ paths:
           required: true
           schema:
             type: string
-        - description: "[Unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp) (from) used to show records by date."
+        - description: "[Unix
+            timestamp](http://help.clicksend.com/what-is-a-unix-timestamp)
+            (from) used to show records by date."
           example: "1443501617"
           in: path
           name: date_from
           required: true
           schema:
             type: string
-        - description: "[Unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp) (to) used to show records by date."
+        - description: "[Unix
+            timestamp](http://help.clicksend.com/what-is-a-unix-timestamp) (to)
+            used to show records by date."
           example: "1443501727"
           in: path
           name: date_to
@@ -6789,22 +6815,28 @@ paths:
                   description: Recipient country.
                   type: string
                 custom_string:
-                  description: Your reference. Will be passed back with all replies and delivery reports.
+                  description: Your reference. Will be passed back with all replies and delivery
+                    reports.
                   type: string
                 from:
-                  description: Your sender id - [more info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
+                  description: Your sender id - [more
+                    info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
                   type: string
                 from_email:
-                  description: An email address where the reply should be emailed to. If omitted, the reply will be emailed back to the user who sent the outgoing SMS.
+                  description: An email address where the reply should be emailed to. If omitted,
+                    the reply will be emailed back to the user who sent the
+                    outgoing SMS.
                   type: string
                 list_id:
-                  description: Your list ID if sending to a whole list. Can be used instead of 'to'.
+                  description: Your list ID if sending to a whole list. Can be used instead of
+                    'to'.
                   type: number
                 media_file:
                   description: Media file you want to send.
                   type: string
                 schedule:
-                  description: Leave blank for immediate delivery. Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                  description: Leave blank for immediate delivery. Your schedule time as a [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                   type: number
                 source:
                   description: Your method of sending e.g. 'wordpress', 'php', 'c#'.
@@ -6813,7 +6845,8 @@ paths:
                   description: Subject line. Maximum 20 characters.
                   type: string
                 to:
-                  description: Recipient number in E.164 format or local format ([more info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
+                  description: Recipient number in E.164 format or local format ([more
+                    info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
                   type: string
               required:
                 - media_file
@@ -7121,22 +7154,28 @@ paths:
                   description: Recipient country.
                   type: string
                 custom_string:
-                  description: Your reference. Will be passed back with all replies and delivery reports.
+                  description: Your reference. Will be passed back with all replies and delivery
+                    reports.
                   type: string
                 from:
-                  description: The number to send from. Either leave blank or use a ClickSend number only.
+                  description: The number to send from. Either leave blank or use a ClickSend
+                    number only.
                   type: string
                 from_email:
-                  description: An email address where the reply should be emailed to. If omitted, the reply will be emailed back to the user who sent the outgoing SMS.
+                  description: An email address where the reply should be emailed to. If omitted,
+                    the reply will be emailed back to the user who sent the
+                    outgoing SMS.
                   type: string
                 list_id:
-                  description: Your list ID if sending to a whole list. Can be used instead of 'to'.
+                  description: Your list ID if sending to a whole list. Can be used instead of
+                    'to'.
                   type: number
                 media_file:
                   description: Media file you want to send.
                   type: string
                 schedule:
-                  description: Leave blank for immediate delivery. Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                  description: Leave blank for immediate delivery. Your schedule time as a [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                   type: number
                 source:
                   description: Your method of sending e.g. 'wordpress', 'php', 'c#'.
@@ -7145,7 +7184,8 @@ paths:
                   description: Subject line. Maximum 20 characters.
                   type: string
                 to:
-                  description: Recipient number in E.164 format or local format ([more info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
+                  description: Recipient number in E.164 format or local format ([more
+                    info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
                   type: string
               required:
                 - media_file
@@ -7473,7 +7513,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: Your strategy for searching, 0 = starts with, 1 = anywhere, 2 = ends with.
+        - description: Your strategy for searching, 0 = starts with, 1 = anywhere, 2 =
+            ends with.
           example: "1"
           in: path
           name: search_type
@@ -8095,7 +8136,8 @@ paths:
                 source: My Source
               properties:
                 areas:
-                  description: List of location where you want to send your campaign, and the quantity per location.
+                  description: List of location where you want to send your campaign, and the
+                    quantity per location.
                   items: {}
                   type: array
                 file_urls:
@@ -8106,7 +8148,8 @@ paths:
                   description: Campaign name.
                   type: string
                 schedule:
-                  description: Leave blank for immediate delivery. Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                  description: Leave blank for immediate delivery. Your schedule time as a [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                   type: number
                 size:
                   description: Campaign file size. It can be A5 or DL.
@@ -8209,7 +8252,8 @@ paths:
                 source: wordpress
               properties:
                 areas:
-                  description: List of location where you want to send your campaign, and the quantity per location.
+                  description: List of location where you want to send your campaign, and the
+                    quantity per location.
                   items: {}
                   type: array
                 file_urls:
@@ -8220,7 +8264,8 @@ paths:
                   description: Campaign name.
                   type: string
                 schedule:
-                  description: Leave blank for immediate delivery. Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                  description: Leave blank for immediate delivery. Your schedule time as a [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                   type: number
                 size:
                   description: Campaign file size. It can be A5 or DL.
@@ -8339,7 +8384,10 @@ paths:
   /post/letters/detect-address:
     post:
       description: >-
-        The `detect-address` endpoint accepts either a letter in PDF format or an address string and attempts to convert it to a standard address format. Note that the PDF should be in standard address format, having the recipient's name and address listed at the top.
+        The `detect-address` endpoint accepts either a letter in PDF format
+        or an address string and attempts to convert it to a standard address
+        format. Note that the PDF should be in standard address format, having
+        the recipient's name and address listed at the top.
 
 
         The endpoint accepts two types of data:
@@ -8672,7 +8720,8 @@ paths:
                   items: {}
                   type: array
                 template_used:
-                  description: Whether you used our template or not ([More Info](http://help.clicksend.com/13996-Post/post-letter-template)).
+                  description: Whether you used our template or not ([More
+                    Info](http://help.clicksend.com/13996-Post/post-letter-template)).
                   type: number
               required:
                 - file_url
@@ -8774,7 +8823,8 @@ paths:
                   items: {}
                   type: array
                 template_used:
-                  description: Whether you used our template or not ([More Info](http://help.clicksend.com/13996-Post/post-letter-template)).
+                  description: Whether you used our template or not ([More
+                    Info](http://help.clicksend.com/13996-Post/post-letter-template)).
                   type: number
               required:
                 - file_url
@@ -9454,7 +9504,8 @@ paths:
   /post/postcards/price:
     post:
       description: >-
-        For `file_urls` field. You can attach at least 1 and max of 2 PDF file urls.
+        For `file_urls` field. You can attach at least 1 and max of 2 PDF
+        file urls.
 
 
         - Supply a single pdf with 2 pages (front and back)
@@ -10483,9 +10534,8 @@ paths:
             application/pdf:
               examples:
                 response:
-                  value: >
+                  value: |
                     {
-
                     }
           description: OK
           headers: {}
@@ -11936,7 +11986,8 @@ paths:
                   description: Your campaign message.
                   type: string
                 from:
-                  description: Your sender id - [more info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
+                  description: Your sender id - [more
+                    info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
                   type: string
                 list_id:
                   description: Your list id.
@@ -11978,7 +12029,9 @@ paths:
         - SMS Campaigns
   /sms-campaigns/send:
     post:
-      description: This is functionally identical to the **POST /sms-campaigns/send** endpoint, other than adding the `smsg.us/xxxxx` string to the message body additional `url_to_shorten` parameter.
+      description: This is functionally identical to the **POST /sms-campaigns/send**
+        endpoint, other than adding the `smsg.us/xxxxx` string to the message
+        body additional `url_to_shorten` parameter.
       operationId: Use Short URL
       requestBody:
         content:
@@ -11996,7 +12049,8 @@ paths:
                   description: Your campaign message.
                   type: string
                 from:
-                  description: Your sender id - [more info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
+                  description: Your sender id - [more
+                    info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
                   type: string
                 list_id:
                   description: Your list id.
@@ -12005,10 +12059,12 @@ paths:
                   description: Your campaign name.
                   type: string
                 schedule:
-                  description: Leave blank for immediate delivery. Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                  description: Leave blank for immediate delivery. Your schedule time as a [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                   type: number
                 url_to_shorten:
-                  description: The URL you want to shorten (only required when using this feature). This must be only `http` or `https`.
+                  description: The URL you want to shorten (only required when using this
+                    feature). This must be only `http` or `https`.
                   type: string
               required:
                 - list_id
@@ -12049,7 +12105,8 @@ paths:
         - SMS Campaigns
   "/sms-campaigns/{campaign_id}/link-export?filename={filename}":
     get:
-      description: Compile all link tracking for the specified campaign into a CSV for download.
+      description: Compile all link tracking for the specified campaign into a CSV for
+        download.
       operationId: Link Tracking Export
       parameters:
         - description: Your campaign id.
@@ -12085,7 +12142,9 @@ paths:
         - SMS Campaigns
   "/sms-campaigns/{campaign_id}/link-statistics":
     get:
-      description: Get the breakdown of statistics for your campaign. Note that the returned values vary depending on your specific customers' interaction, so it's not safe to assume a value will always be specified.
+      description: Get the breakdown of statistics for your campaign. Note that the
+        returned values vary depending on your specific customers' interaction,
+        so it's not safe to assume a value will always be specified.
       operationId: Link Statistics
       parameters:
         - description: Your campaign id.
@@ -12190,7 +12249,8 @@ paths:
         - SMS Campaigns
   "/sms-campaigns/{campaign_id}/link-tracking":
     get:
-      description: This endpoint gives you a paginated overview of all the links in a particular campaign, and who has and hasn't visited them.
+      description: This endpoint gives you a paginated overview of all the links in a
+        particular campaign, and who has and hasn't visited them.
       operationId: Link Tracking
       parameters:
         - description: Your campaign id.
@@ -12338,7 +12398,8 @@ paths:
                   description: Your campaign message.
                   type: string
                 from:
-                  description: Your sender id - [more info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
+                  description: Your sender id - [more
+                    info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
                   type: string
                 list_id:
                   description: Your list id.
@@ -12347,7 +12408,9 @@ paths:
                   description: Your campaign name.
                   type: string
                 schedule:
-                  description: Leave blank for immediate delivery. Will replace existing schedule (even if left blank). Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                  description: Leave blank for immediate delivery. Will replace existing schedule
+                    (even if left blank). Your schedule time as a [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                   type: number
               required:
                 - list_id
@@ -12539,7 +12602,8 @@ paths:
                   description: Your email address.
                   type: string
                 from:
-                  description: Your sender id - [more info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
+                  description: Your sender id - [more
+                    info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
                   type: string
               required:
                 - email_address
@@ -12812,7 +12876,8 @@ paths:
                   description: Your email address.
                   type: string
                 from:
-                  description: Your sender id - [more info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
+                  description: Your sender id - [more
+                    info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
                   type: string
               required:
                 - email_address
@@ -13160,7 +13225,8 @@ paths:
                           custom_string: 2ATQKLETYX
                           from: Lemon drops brownie pie chocolate bar pie swe
                           message_id: C557B56E-83C0-4070-A74C-9BF05474B418
-                          original_body: Lemon drops brownie pie chocolate bar pie sweet jelly-o chocolate.
+                          original_body: Lemon drops brownie pie chocolate bar pie sweet jelly-o
+                            chocolate.
                           original_message_id: 373F7121-8089-42FA-8F5C-8F8F7C18DFAA
                           timestamp: "1436174406"
                           to: S373F7121-8089-42FA-8F5C-8F8F7C18DFAA
@@ -13233,7 +13299,8 @@ paths:
                 date_before: 1442398100
               properties:
                 date_before:
-                  description: An optional timestamp - mark all as read before this timestamp. If not given, all messages will be marked as read.
+                  description: An optional timestamp - mark all as read before this timestamp. If
+                    not given, all messages will be marked as read.
                   type: number
               required:
                 - date_before
@@ -13287,7 +13354,8 @@ paths:
       description: ""
       operationId: Get Specific Inbound - Pull
       parameters:
-        - description: Message ID of the original outbound message, to which the inbound message is a reply. Must be a valid GUID.
+        - description: Message ID of the original outbound message, to which the inbound
+            message is a reply. Must be a valid GUID.
           example: C557B56E-83C0-4070-A74C-9BF05474B418
           in: path
           name: outbound_message_id
@@ -13348,22 +13416,27 @@ paths:
                   description: Recipient country.
                   type: string
                 custom_string:
-                  description: Your reference. Will be passed back with all replies and delivery reports.
+                  description: Your reference. Will be passed back with all replies and delivery
+                    reports.
                   type: string
                 from:
-                  description: Your sender id - [more info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
+                  description: Your sender id - [more
+                    info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
                   type: string
                 list_id:
-                  description: Your list ID if sending to a whole list. Can be used instead of 'to'.
+                  description: Your list ID if sending to a whole list. Can be used instead of
+                    'to'.
                   type: number
                 schedule:
-                  description: Leave blank for immediate delivery. Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                  description: Leave blank for immediate delivery. Your schedule time as a [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                   type: number
                 source:
                   description: Your method of sending e.g. 'wordpress', 'php', 'c#'.
                   type: string
                 to:
-                  description: Recipient number in E.164 format or local format ([more info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
+                  description: Recipient number in E.164 format or local format ([more
+                    info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
                   type: string
               required:
                 - to
@@ -13535,7 +13608,8 @@ paths:
                 date_before: 1441958441
               properties:
                 date_before:
-                  description: An optional timestamp - mark all as read before this timestamp. If not given, all receipts will be marked as read.
+                  description: An optional timestamp - mark all as read before this timestamp. If
+                    not given, all receipts will be marked as read.
                   type: number
               type: object
       responses:
@@ -13621,25 +13695,32 @@ paths:
                   description: Recipient country.
                   type: string
                 custom_string:
-                  description: Your reference. Will be passed back with all replies and delivery reports.
+                  description: Your reference. Will be passed back with all replies and delivery
+                    reports.
                   type: string
                 from:
-                  description: Your sender id - [more info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
+                  description: Your sender id - [more
+                    info](http://help.clicksend.com/SMS/what-is-a-sender-id-or-sender-number).
                   type: string
                 from_email:
-                  description: An email address where the reply should be emailed to. If omitted, the reply will be emailed back to the user who sent the outgoing SMS.
+                  description: An email address where the reply should be emailed to. If omitted,
+                    the reply will be emailed back to the user who sent the
+                    outgoing SMS.
                   type: string
                 list_id:
-                  description: Your list ID if sending to a whole list. Can be used instead of 'to'.
+                  description: Your list ID if sending to a whole list. Can be used instead of
+                    'to'.
                   type: number
                 schedule:
-                  description: Leave blank for immediate delivery. Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                  description: Leave blank for immediate delivery. Your schedule time as a [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                   type: number
                 source:
                   description: Your method of sending e.g. 'wordpress', 'php', 'c#'.
                   type: string
                 to:
-                  description: Recipient number in E.164 format or local format ([more info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
+                  description: Recipient number in E.164 format or local format ([more
+                    info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
                   type: string
               required:
                 - to
@@ -13918,7 +13999,8 @@ paths:
       description: ""
       operationId: Cancel a Scheduled Message
       parameters:
-        - description: B7CE432193CD-0753597B7293 (string, required) - The message ID you want to cancel.
+        - description: B7CE432193CD-0753597B7293 (string, required) - The message ID you
+            want to cancel.
           example: 307EF035
           in: path
           name: message_id
@@ -15786,25 +15868,30 @@ paths:
                   description: The country of the recipient.
                   type: string
                 custom_string:
-                  description: Your reference. Will be passed back with all replies and delivery reports.
+                  description: Your reference. Will be passed back with all replies and delivery
+                    reports.
                   type: string
                 lang:
                   description: au (string, required) - See section on available languages.
                   type: string
                 list_id:
-                  description: Your list ID if sending to a whole list. Can be used instead of 'to'.
+                  description: Your list ID if sending to a whole list. Can be used instead of
+                    'to'.
                   type: number
                 require_input:
-                  description: Whether you want to receive a keypress from the call recipient (1 for on, 0 [default] for off)
+                  description: Whether you want to receive a keypress from the call recipient (1
+                    for on, 0 [default] for off)
                   type: number
                 schedule:
-                  description: Leave blank for immediate delivery. Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                  description: Leave blank for immediate delivery. Your schedule time as a [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                   type: number
                 source:
                   description: Your method of sending e.g. 'wordpress', 'php', 'c#'.
                   type: string
                 to:
-                  description: Recipient number in E.164 format or local format ([more info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
+                  description: Recipient number in E.164 format or local format ([more
+                    info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
                   type: string
                 voice:
                   description: Either 'female' or 'male'.
@@ -16008,7 +16095,10 @@ paths:
       description: ""
       operationId: Marked Voice Receipts as Read
       parameters:
-        - description: An optional [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp) - mark all as read before this timestamp. If not given, all receipts will be marked as read.
+        - description: An optional [unix
+            timestamp](http://help.clicksend.com/what-is-a-unix-timestamp) -
+            mark all as read before this timestamp. If not given, all receipts
+            will be marked as read.
           example: "1461897483"
           in: path
           name: date_before
@@ -16037,7 +16127,8 @@ paths:
       description: ""
       operationId: Get Specific Voice Receipt
       parameters:
-        - description: 3055-45F1-9B79-F2C43509FD16 (string, required) - The voice receipt message id.
+        - description: 3055-45F1-9B79-F2C43509FD16 (string, required) - The voice receipt
+            message id.
           example: 28DD2718
           in: path
           name: message_id
@@ -16109,28 +16200,34 @@ paths:
                   description: The country of the recipient.
                   type: string
                 custom_string:
-                  description: Your reference. Will be passed back with all replies and delivery reports.
+                  description: Your reference. Will be passed back with all replies and delivery
+                    reports.
                   type: string
                 lang:
                   description: au (string, required) - See section on available languages.
                   type: string
                 list_id:
-                  description: Your list ID if sending to a whole list. Can be used instead of 'to'. Will override 'to' if both are used.
+                  description: Your list ID if sending to a whole list. Can be used instead of
+                    'to'. Will override 'to' if both are used.
                   type: number
                 machine_detection:
-                  description: Whether to attempt to detect an answering machine or voicemail service and leave a message (1 for on, 0 [default] for off)
+                  description: Whether to attempt to detect an answering machine or voicemail
+                    service and leave a message (1 for on, 0 [default] for off)
                   type: number
                 require_input:
-                  description: Whether you want to receive a keypress from the call recipient (1 for on, 0 [default] for off)
+                  description: Whether you want to receive a keypress from the call recipient (1
+                    for on, 0 [default] for off)
                   type: number
                 schedule:
-                  description: Leave blank for immediate delivery. Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                  description: Leave blank for immediate delivery. Your schedule time as a [unix
+                    timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                   type: number
                 source:
                   description: Your method of sending e.g. 'wordpress', 'php', 'c#'.
                   type: string
                 to:
-                  description: Recipient number in E.164 format or local format ([more info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
+                  description: Recipient number in E.164 format or local format ([more
+                    info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
                   type: string
                 voice:
                   description: Either 'female' or 'male'.
@@ -16278,7 +16375,7 @@ paths:
 components:
   examples:
     example1:
-      ? value
+      value: null
   parameters:
     subaccount_id1:
       description: The subaccount ID you want to access.
@@ -16297,7 +16394,8 @@ components:
               url: http://yourdomain.com
             properties:
               url:
-                description: Your URL if using the push option or 'poll' if using the pull option.
+                description: Your URL if using the push option or 'poll' if using the pull
+                  option.
                 type: string
             required:
               - url
@@ -16328,7 +16426,8 @@ components:
                 description: The name of the sender.
                 type: string
               schedule:
-                description: Leave blank for immediate delivery. Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                description: Leave blank for immediate delivery. Your schedule time as a [unix
+                  timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                 type: number
               subject:
                 description: The subject of the email campaign.
@@ -16524,7 +16623,8 @@ components:
                 description: Recipient country.
                 type: string
               custom_string:
-                description: Your reference. Will be passed back with all replies and delivery reports.
+                description: Your reference. Will be passed back with all replies and delivery
+                  reports.
                 type: string
               file_url:
                 description: Your URL to your PDF file.
@@ -16536,20 +16636,23 @@ components:
                 description: An email address where the reply should be emailed to.
                 type: string
               list_id:
-                description: Your list ID if sending to a whole list. Can be used instead of 'to'.
+                description: Your list ID if sending to a whole list. Can be used instead of
+                  'to'.
                 type: number
               messages:
                 description: Your messages.
                 items: {}
                 type: array
               schedule:
-                description: Leave blank for immediate delivery. Your schedule time as a [unix timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
+                description: Leave blank for immediate delivery. Your schedule time as a [unix
+                  timestamp](http://help.clicksend.com/what-is-a-unix-timestamp).
                 type: number
               source:
                 description: Your method of sending e.g. 'wordpress', 'php', 'c#'.
                 type: string
               to:
-                description: Recipient number in E.164 format or local format ([more info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
+                description: Recipient number in E.164 format or local format ([more
+                  info](https://help.clicksend.com/SMS/what-format-does-the-recipient-phone-number-need-to-be-in)).
                 type: string
             required:
               - file_url

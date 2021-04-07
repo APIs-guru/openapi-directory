@@ -24,7 +24,11 @@ produces:
 paths:
   /open-banking/v2.2/atms:
     get:
-      description: This API will return data about all our ATMs and is prepared to the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. It is regulated by the UK Competition and Markets Authority (CMA). Data is only available for the United Kingdom.
+      description: This API will return data about all our ATMs and is prepared to the
+        Open Banking standards as defined by the Open Banking Implementation
+        Entity (OBIE) in data dictionary version 2.2. It is regulated by the UK
+        Competition and Markets Authority (CMA). Data is only available for the
+        United Kingdom.
       responses:
         "200":
           description: Success
@@ -54,7 +58,12 @@ paths:
         - ATMs
   "/x-open-banking/v2.2/atms/country/{country}":
     get:
-      description: This extended API will return data about all ATMs in the specified country. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.
+      description: This extended API will return data about all ATMs in the specified
+        country. It is based-on the Open Banking standards as defined by the
+        Open Banking Implementation Entity (OBIE) in data dictionary version
+        2.2. The extended functionality may not fully adhere to the
+        non-functional requirements of the regulator. Data is only available for
+        the United Kingdom.
       parameters:
         - description: The ISO country code e.g. &quot;GB&quot;
           in: path
@@ -90,7 +99,12 @@ paths:
         - ATMs
   "/x-open-banking/v2.2/atms/country/{country}/town/{town}":
     get:
-      description: This extended API will return data about all ATMs in the specified town. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.
+      description: This extended API will return data about all ATMs in the specified
+        town. It is based-on the Open Banking standards as defined by the Open
+        Banking Implementation Entity (OBIE) in data dictionary version 2.2. The
+        extended functionality may not fully adhere to the non-functional
+        requirements of the regulator. Data is only available for the United
+        Kingdom.
       parameters:
         - description: The ISO country code e.g. &quot;GB&quot;
           in: path
@@ -131,14 +145,22 @@ paths:
         - ATMs
   "/x-open-banking/v2.2/atms/geo-location/lat/{latitude}/long/{longitude}":
     get:
-      description: This extended API will data about all ATMs within a specified radius (1 to 10 miles) of the specified latitude and longitude. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.
+      description: This extended API will data about all ATMs within a specified
+        radius (1 to 10 miles) of the specified latitude and longitude. It is
+        based-on the Open Banking standards as defined by the Open Banking
+        Implementation Entity (OBIE) in data dictionary version 2.2. The
+        extended functionality may not fully adhere to the non-functional
+        requirements of the regulator. Data is only available for the United
+        Kingdom.
       parameters:
-        - description: Positive or negative decimal value in degrees. eg &quot;51.50551621597067&quot;
+        - description: Positive or negative decimal value in degrees. eg
+            &quot;51.50551621597067&quot;
           in: path
           name: latitude
           required: true
           type: string
-        - description: Positive or negative decimal value in degrees. eg &quot;-0.0180120225995&quot;
+        - description: Positive or negative decimal value in degrees. eg
+            &quot;-0.0180120225995&quot;
           in: path
           name: longitude
           required: true
@@ -177,9 +199,15 @@ paths:
         - ATMs
   "/x-open-banking/v2.2/atms/postcode/{postcode}":
     get:
-      description: This extended API will return data about all ATMs within a 5 mile radius of the specified postcode. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.
+      description: This extended API will return data about all ATMs within a 5 mile
+        radius of the specified postcode. It is based-on the Open Banking
+        standards as defined by the Open Banking Implementation Entity (OBIE) in
+        data dictionary version 2.2. The extended functionality may not fully
+        adhere to the non-functional requirements of the regulator. Data is only
+        available for the United Kingdom.
       parameters:
-        - description: Letters and numerals only. No spaces or special characters. eg  &quot;SW1A1AA&quot;
+        - description: Letters and numerals only. No spaces or special characters.
+            eg  &quot;SW1A1AA&quot;
           in: path
           name: postcode
           required: true
@@ -228,9 +256,11 @@ definitions:
                 description: ATM information.
                 properties:
                   ATMServices:
-                    description: Describes the type of transaction available for a customer on an ATM.
+                    description: Describes the type of transaction available for a customer on an
+                      ATM.
                     items:
-                      description: Describes the type of transaction available for a customer on an ATM.
+                      description: Describes the type of transaction available for a customer on an
+                        ATM.
                       enum:
                         - Balance
                         - BillPayments
@@ -253,7 +283,8 @@ definitions:
                     title: ATMServices
                     type: array
                   Access24HoursIndicator:
-                    description: Indicates that the ATM is available for use by customers 24 hours per day
+                    description: Indicates that the ATM is available for use by customers 24 hours
+                      per day
                     title: Access24HoursIndicator
                     type: boolean
                   Accessibility:
@@ -275,10 +306,12 @@ definitions:
                     type: array
                   Branch:
                     additionalProperties: false
-                    description: Information that locates and identifies a specific branch of a financial institution.
+                    description: Information that locates and identifies a specific branch of a
+                      financial institution.
                     properties:
                       Identification:
-                        description: Unique and unambiguous identification of a branch of a financial institution.
+                        description: Unique and unambiguous identification of a branch of a financial
+                          institution.
                         maxLength: 35
                         minLength: 1
                         title: Identification
@@ -311,9 +344,11 @@ definitions:
                         type: array
                       OtherLocationCategory:
                         additionalProperties: false
-                        description: Enter a new code , name and description for any other location category
+                        description: Enter a new code , name and description for any other location
+                          category
                         items:
-                          description: Enter a new code , name and description for any other location category
+                          description: Enter a new code , name and description for any other location
+                            category
                           properties:
                             Code:
                               description: The four letter Mnemonic used within an XML file to identify a code
@@ -342,10 +377,13 @@ definitions:
                         type: array
                       PostalAddress:
                         additionalProperties: false
-                        description: Information that locates and identifies a specific address, as defined by postal services or in free format text.
+                        description: Information that locates and identifies a specific address, as
+                          defined by postal services or in free format text.
                         properties:
                           AddressLine:
-                            description: Information that locates and identifies a specific address, as defined by postal services, that is presented in free format text.
+                            description: Information that locates and identifies a specific address, as
+                              defined by postal services, that is presented in
+                              free format text.
                             items:
                               description: maxLength 70 text
                               maxLength: 70
@@ -356,7 +394,8 @@ definitions:
                             title: AddressLine
                             type: array
                           BuildingNumber:
-                            description: Name or Number that identifies the position of a building on a street.
+                            description: Name or Number that identifies the position of a building on a
+                              street.
                             maxLength: 350
                             minLength: 1
                             title: BuildingNumber
@@ -367,7 +406,8 @@ definitions:
                             title: Country
                             type: string
                           CountrySubDivision:
-                            description: Identifies a subdivision of a country, for instance state, region, county.
+                            description: Identifies a subdivision of a country, for instance state, region,
+                              county.
                             items:
                               description: maxLength 35 text
                               maxLength: 35
@@ -379,11 +419,13 @@ definitions:
                             type: array
                           GeoLocation:
                             additionalProperties: false
-                            description: Geographic location of the ATM specified by geographic coordinates or UTM coordinates.
+                            description: Geographic location of the ATM specified by geographic coordinates
+                              or UTM coordinates.
                             properties:
                               GeographicCoordinates:
                                 additionalProperties: false
-                                description: Location on the earth specified by two numbers representing vertical and horizontal position.
+                                description: Location on the earth specified by two numbers representing
+                                  vertical and horizontal position.
                                 properties:
                                   Latitude:
                                     description: Latitude measured in decimal degrees.
@@ -392,7 +434,8 @@ definitions:
                                     type: string
                                   Longitude:
                                     description: >-
-                                      Angular measurement of the distance of a location on the earth east or west of the Greenwich observatory.
+                                      Angular measurement of the distance of a location on the earth east
+                                      or west of the Greenwich observatory.
 
                                       The longitude is measured in decimal degrees.
                                     pattern: ^-?\d{1,3}\.\d{1,8}$
@@ -408,7 +451,9 @@ definitions:
                             title: GeoLocation
                             type: object
                           PostCode:
-                            description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
+                            description: Identifier consisting of a group of letters and/or numbers that is
+                              added to a postal address to assist the sorting of
+                              mail.
                             maxLength: 16
                             minLength: 1
                             title: PostCode
@@ -420,7 +465,8 @@ definitions:
                             title: StreetName
                             type: string
                           TownName:
-                            description: Name of a built-up area, with defined boundaries, and a local government.
+                            description: Name of a built-up area, with defined boundaries, and a local
+                              government.
                             maxLength: 35
                             minLength: 1
                             title: TownName
@@ -429,7 +475,8 @@ definitions:
                         type: object
                       Site:
                         additionalProperties: false
-                        description: Used by a Financial Institution internally to identify the location of an ATM.
+                        description: Used by a Financial Institution internally to identify the location
+                          of an ATM.
                         properties:
                           Identification:
                             description: ATM site identification for the Financial Institution.
@@ -496,9 +543,11 @@ definitions:
                     type: array
                   OtherAccessibility:
                     additionalProperties: false
-                    description: Enter a new code , name and description for any other ATM accessibility options
+                    description: Enter a new code , name and description for any other ATM
+                      accessibility options
                     items:
-                      description: Enter a new code , name and description for any other ATM accessibility options
+                      description: Enter a new code , name and description for any other ATM
+                        accessibility options
                       properties:
                         Code:
                           description: The four letter Mnemonic used within an XML file to identify a code
@@ -535,9 +584,13 @@ definitions:
                     title: SupportedCurrencies
                     type: array
                   SupportedLanguages:
-                    description: Identification of the language name according to the ISO 639-1 codes. The type is validated by the list of values coded with two alphabetic characters, defined in the standard.
+                    description: Identification of the language name according to the ISO 639-1
+                      codes. The type is validated by the list of values coded
+                      with two alphabetic characters, defined in the standard.
                     items:
-                      description: Identification of the language name according to the ISO 639-1 codes. The type is validated by the list of values coded with two alphabetic characters, defined in the standard.
+                      description: Identification of the language name according to the ISO 639-1
+                        codes. The type is validated by the list of values coded
+                        with two alphabetic characters, defined in the standard.
                       pattern: "[a-z]{2}"
                       type: string
                     title: SupportedLanguages
@@ -551,7 +604,8 @@ definitions:
               title: ATM
               type: array
             BrandName:
-              description: Brand Name that an organisation uses to market its products or services to a consumer
+              description: Brand Name that an organisation uses to market its products or
+                services to a consumer
               maxLength: 140
               minLength: 1
               title: BrandName
@@ -603,7 +657,8 @@ definitions:
     properties:
       description:
         enum:
-          - Your client has failed to submit a request, and a timeout has occurred.
+          - Your client has failed to submit a request, and a timeout has
+            occurred.
         type: string
       status:
         enum:
@@ -687,7 +742,8 @@ definitions:
     properties:
       Agreement:
         enum:
-          - Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions
+          - Use of the APIs and any related data will be subject to the terms of
+            the Open Licence and subject to terms and conditions
         type: string
       LastUpdated:
         format: date-time

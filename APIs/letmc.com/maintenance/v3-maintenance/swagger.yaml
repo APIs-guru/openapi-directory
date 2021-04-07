@@ -69,7 +69,8 @@ paths:
         - MaintenanceController
 definitions:
   MaintenanceDocumentModel:
-    description: Submission Model - Handles all the fields required to attach documents to an online maintenance job
+    description: Submission Model - Handles all the fields required to attach
+      documents to an online maintenance job
     properties:
       MimeType:
         description: The document Mime Type
@@ -79,7 +80,8 @@ definitions:
         type: string
     type: object
   MaintenanceIssueModel:
-    description: Submission Model - Handles all fields required to submit an online maintenance job
+    description: Submission Model - Handles all fields required to submit an online
+      maintenance job
     properties:
       Documents:
         description: Documents linked to a submitted maintenance job
@@ -87,7 +89,8 @@ definitions:
           $ref: "#/definitions/MaintenanceDocumentModel"
         type: array
       ExternalID:
-        description: ID used externally to manage jobs before sending to the system. This has a 10 character limit.
+        description: ID used externally to manage jobs before sending to the system.
+          This has a 10 character limit.
         type: string
       IssueFault:
         description: The fault title if applicable
@@ -140,7 +143,8 @@ definitions:
         description: The secondary phone number of the Tenant
         type: string
       TenantPresenceRequested:
-        description: Is the Tenant’s presence requested during the maintenance visit? (Defaults to “false” if incorrect value or empty)
+        description: Is the Tenant’s presence requested during the maintenance visit?
+          (Defaults to “false” if incorrect value or empty)
         type: boolean
       TenantSurname:
         description: The surname of the Tenant

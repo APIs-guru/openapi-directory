@@ -7,7 +7,9 @@ info:
     email: support@example.com
     name: The Etherpad Foundation
     url: https://etherpad.org/
-  description: Etherpad is a real-time collaborative editor scalable to thousands of simultaneous real time users. It provides full data export capabilities, and runs on your server, under your control.
+  description: Etherpad is a real-time collaborative editor scalable to thousands
+    of simultaneous real time users. It provides full data export capabilities,
+    and runs on your server, under your control.
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -1051,7 +1053,8 @@ paths:
                     type: string
                 type: object
           description: internal api error (code 2)
-      summary: this functions helps you to map your application author ids to Etherpad author ids
+      summary: this functions helps you to map your application author ids to Etherpad
+        author ids
       tags:
         - author
     post:
@@ -1132,7 +1135,8 @@ paths:
                     type: string
                 type: object
           description: internal api error (code 2)
-      summary: this functions helps you to map your application author ids to Etherpad author ids
+      summary: this functions helps you to map your application author ids to Etherpad
+        author ids
       tags:
         - author
   /createDiffHTML:
@@ -1524,7 +1528,8 @@ paths:
                     type: string
                 type: object
           description: internal api error (code 2)
-      summary: this functions helps you to map your application group ids to Etherpad group ids
+      summary: this functions helps you to map your application group ids to Etherpad
+        group ids
       tags:
         - group
     post:
@@ -1601,7 +1606,8 @@ paths:
                     type: string
                 type: object
           description: internal api error (code 2)
-      summary: this functions helps you to map your application group ids to Etherpad group ids
+      summary: this functions helps you to map your application group ids to Etherpad
+        group ids
       tags:
         - group
   /createGroupPad:
@@ -1773,7 +1779,8 @@ paths:
         - group
   /createPad:
     get:
-      description: creates a new (non-group) pad. Note that if you need to create a group Pad, you should call createGroupPad
+      description: creates a new (non-group) pad. Note that if you need to create a
+        group Pad, you should call createGroupPad
       operationId: createPadUsingGET
       parameters:
         - in: query
@@ -1852,7 +1859,8 @@ paths:
       tags:
         - pad
     post:
-      description: creates a new (non-group) pad. Note that if you need to create a group Pad, you should call createGroupPad
+      description: creates a new (non-group) pad. Note that if you need to create a
+        group Pad, you should call createGroupPad
       operationId: createPadUsingPOST
       parameters:
         - in: query

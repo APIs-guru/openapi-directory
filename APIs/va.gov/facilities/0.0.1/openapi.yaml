@@ -127,6 +127,8 @@ info:
   version: 0.0.1
   x-apisguru-categories:
     - location
+  x-logo:
+    url: https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/design/icons/apple-touch-icon.png
   x-origin:
     - format: openapi
       url: https://api.va.gov/services/va_facilities/docs/v0/api
@@ -185,6 +187,10 @@ paths:
         - description: List of comma-separated facility IDs to retrieve in a single
             request. Can be combined with lat and long parameters to retrieve
             facilities sorted by distance from a location.
+          examples:
+            ids:
+              description: ids
+              value: vha_688,vha_644
           in: query
           name: ids
           schema:
@@ -195,6 +201,10 @@ paths:
         - description: Zip code to search for facilities. More detailed zip codes can be
             passed in, but only the first five digits are used to determine
             facilities to return.
+          examples:
+            zip:
+              description: zip
+              value: 80301-1000
           in: query
           name: zip
           schema:
@@ -202,6 +212,10 @@ paths:
             type: string
         - description: State in which to search for facilities. Except in rare cases, this
             is two characters.
+          examples:
+            state:
+              description: state
+              value: CO
           in: query
           name: state
           schema:
@@ -209,6 +223,10 @@ paths:
             type: string
         - description: Latitude of point to search for facilities, in WGS84 coordinate
             reference system.
+          examples:
+            coordinates:
+              description: coordinates
+              value: 40
           in: query
           name: lat
           schema:
@@ -216,6 +234,10 @@ paths:
             type: number
         - description: Longitude of point to search for facilities, in WGS84 coordinate
             reference system.
+          examples:
+            coordinates:
+              description: coordinates
+              value: -105
           in: query
           name: long
           schema:
@@ -225,6 +247,10 @@ paths:
         - description: Bounding box (longitude, latitude, longitude, latitude) within
             which facilities will be returned. (WGS84 coordinate reference
             system)
+          examples:
+            bbox:
+              description: bbox
+              value: -105.4, 39.4, -104.5, 40.1
           in: query
           name: bbox[]
           schema:
@@ -322,7 +348,8 @@ paths:
         patient satisfaction, and patient wait time data.
       operationId: getAllFacilities
       parameters:
-        - in: header
+        - example: application/geo+json
+          in: header
           name: Accept
           required: true
           schema:
@@ -382,6 +409,7 @@ paths:
         - description: Facility ID, in the form `<prefix>_<station>`, where prefix is one
             of "vha", "vba", "nca", or "vc", for health facility, benefits,
             cemetery, or vet center, respectively.
+          example: vha_688
           in: path
           name: id
           required: true
@@ -501,34 +529,58 @@ paths:
       parameters:
         - description: Street address of the location from which drive time will be
             calculated.
+          examples:
+            address:
+              description: address
+              value: 1350 I St. NW
           in: query
           name: street_address
           schema:
             type: string
         - description: City of the location from which drive time will be calculated.
+          examples:
+            address:
+              description: address
+              value: Washington
           in: query
           name: city
           schema:
             type: string
         - description: Two character state code of the location from which drive time will
             be calculated.
+          examples:
+            address:
+              description: address
+              value: DC
           in: query
           name: state
           schema:
             type: string
         - description: Zip code of the location from which drive time will be calculated.
+          examples:
+            address:
+              description: address
+              value: 20005-3305
           in: query
           name: zip
           schema:
             description: "##### or #####-####"
             type: string
         - description: Latitude of the location from which drive time will be calculated.
+          examples:
+            coordinates:
+              description: coordinates
+              value: 123.4
           in: query
           name: lat
           schema:
             format: float
             type: number
         - description: Longitude of the location from which drive time will be calculated.
+          examples:
+            coordinates:
+              description: coordinates
+              value: 456.7
           in: query
           name: lng
           schema:
@@ -650,6 +702,134 @@ components:
       required:
         - errors
       type: object
+    AppointmentPhoneNumber:
+      properties:
+        extension:
+          type: string
+        label:
+          type: string
+        number:
+          type: string
+        type:
+          type: string
+      type: object
+    DetailedService:
+      description: Detailed information of a facility service
+      properties:
+        appointment_leadin:
+          example: Your VA health care team will contact you if you...
+          type: string
+        appointment_phones:
+          items:
+            $ref: "#/components/schemas/AppointmentPhoneNumber"
+          type: array
+        description_facility:
+          example: Facility description for vaccine availability for COVID-19
+          type: string
+        description_national:
+          $ref: "#/components/schemas/DetailedService"
+        description_system:
+          $ref: "#/components/schemas/DetailedService"
+        health_service_api_id:
+          $ref: "#/components/schemas/DetailedService"
+        name:
+          example: COVID-19 vaccines
+          type: string
+        online_scheduling_available:
+          example: "True"
+          type: string
+        path:
+          example: https://www.boston.va.gov/services/covid-19-vaccines.asp
+          type: string
+        referral_required:
+          example: "False"
+          type: string
+        service_locations:
+          items:
+            $ref: "#/components/schemas/DetailedServiceLocation"
+          type: array
+        walk_ins_accepted:
+          example: "True"
+          type: string
+      type: object
+    DetailedServiceAddress:
+      properties:
+        address_line1:
+          example: 50 Irving Street, Northwest
+          type: string
+        address_line2:
+          type: string
+        building_name_number:
+          type: string
+        city:
+          type: string
+        clinic_name:
+          type: string
+        country_code:
+          type: string
+        state:
+          example: NY
+          type: string
+        wing_floor_or_room_number:
+          example: Wing East
+          type: string
+        zip_code:
+          example: 20422-0001
+          type: string
+      type: object
+    DetailedServiceEmailContact:
+      properties:
+        email_address:
+          example: georgea@va.gov
+          type: string
+        email_label:
+          example: George Anderson
+          type: string
+      type: object
+    DetailedServiceHours:
+      description: Standard hours of operation. Currently formatted as descriptive
+        text suitable for display, with no guarantee of a standard parseable
+        format. Hours of operation may vary due to holidays or other events.
+      properties:
+        Friday:
+          example: 9AM-5PM
+          type: string
+        Monday:
+          example: 9AM-5PM
+          type: string
+        Saturday:
+          example: Closed
+          type: string
+        Sunday:
+          example: Closed
+          type: string
+        Thursday:
+          example: 9AM-5PM
+          type: string
+        Tuesday:
+          example: 9AM-5PM
+          type: string
+        Wednesday:
+          example: 9AM-5PM
+          type: string
+      type: object
+    DetailedServiceLocation:
+      properties:
+        additional_hours_info:
+          type: string
+        appointment_phones:
+          items:
+            $ref: "#/components/schemas/AppointmentPhoneNumber"
+          type: array
+        email_contacts:
+          items:
+            $ref: "#/components/schemas/DetailedServiceEmailContact"
+          type: array
+        facility_service_hours:
+          $ref: "#/components/schemas/DetailedServiceHours"
+        service_location_address:
+          $ref: "#/components/schemas/DetailedServiceAddress"
+      type: object
     Distance:
       properties:
         distance:
@@ -741,6 +921,10 @@ components:
         classification:
           example: VA Medical Center (VAMC)
           type: string
+        detailed_services:
+          items:
+            $ref: "#/components/schemas/DetailedService"
+          type: array
         facility_type:
           enum:
             - va_benefits_facility
@@ -1112,6 +1296,10 @@ components:
         classification:
           example: VA Medical Center (VAMC)
           type: string
+        detailed_services:
+          items:
+            $ref: "#/components/schemas/DetailedService"
+          type: array
         facility_type:
           enum:
             - va_benefits_facility

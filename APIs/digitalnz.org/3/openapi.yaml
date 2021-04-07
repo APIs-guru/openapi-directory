@@ -32,12 +32,16 @@ tags:
 paths:
   "/records.{format}":
     get:
-      description: This is the main search endpoint allowing queries against the records database.
+      description: This is the main search endpoint allowing queries against the
+        records database.
       parameters:
         - $ref: "#/components/parameters/format"
         - $ref: "#/components/parameters/api_key"
         - description: >
-            This field enables queries based on one or more search terms and provides the functionality of the main search box on [digitalnz.org](https://digitalnz.org). Search terms can be combined with boolean operators (AND, OR).  
+            This field enables queries based on one or more search terms and
+            provides the functionality of the main search box on
+            [digitalnz.org](https://digitalnz.org). Search terms can be combined
+            with boolean operators (AND, OR).  
 
             A minus sign excludes certain terms, eg. "-horse".  
 
@@ -50,7 +54,8 @@ paths:
           name: text
           schema:
             type: string
-        - description: These are the same categories that are used across the tabs in [digitalnz.org](https://digitalnz.org/records?text=&tab=Videos)
+        - description: These are the same categories that are used across the tabs in
+            [digitalnz.org](https://digitalnz.org/records?text=&tab=Videos)
           explode: true
           in: query
           name: and[category][]
@@ -85,7 +90,8 @@ paths:
           schema:
             type: string
         - description: >
-            Allows filtering for records from a particular *primary_collection*.  
+            Allows filtering for records from a particular
+            *primary_collection*.  
 
             Examples: `"Puke Ariki"` `"NZHistory"` `"TAPUHI"`  
               
@@ -95,7 +101,9 @@ paths:
           schema:
             type: string
         - description: >
-            Allows filtering for records from a particular Collection. Collections can be thought of as sub-collections or groupings under Primary_Collections.  
+            Allows filtering for records from a particular Collection.
+            Collections can be thought of as sub-collections or groupings under
+            Primary_Collections.  
 
             Examples: `"Music 101"` `"Mollusks"` `"Wairarapa Daily Times"`
               
@@ -114,46 +122,54 @@ paths:
               - All rights reserved
               - Unknown
             type: string
-        - description: >
+        - description: |
             Examples: `"Cats"` `"Weddings"` `"climb*"`
           in: query
           name: and[subject][]
           schema:
             type: string
-        - description: >
+        - description: |
             Examples: `"Conference item"` `"Magazines"`
           in: query
           name: and[dc_type][]
           schema:
             type: string
-        - description: >
+        - description: |
             Examples: `"Photolithographs"` `"Glass*"`
           in: query
           name: and[format][]
           schema:
             type: string
         - description: >
-            This field can be used for text-based location search. For a more advanced coordinate-based search, see the "geo_bbox" field below.  
+            This field can be used for text-based location search. For a more
+            advanced coordinate-based search, see the "geo_bbox" field below.  
 
             Examples: `"Scott Base"` `"Wainuiomata"` `"castle*"`
           in: query
           name: and[placename][]
           schema:
             type: string
-        - description: >
+        - description: |
             Examples: `"Revelle Jackson"` `"Nicholas Chevalier"` `"Rita Angus"`
           in: query
           name: and[creator][]
           schema:
             type: string
-        - description: >
+        - description: |
             Examples: `"Pukeko"` `"Club"` `"Break*"`"
           in: query
           name: and[title][]
           schema:
             type: string
         - description: >
-            This field can be useful for querying and sorting (see the 'sort' param further down). But it should be noted that, as with some other fields, **not all records have date metadata associated**. There is good coverage of date metadata within certain collections, but there are plenty with no date information at all. So, if you query for records from a specific date you may get some matching results, but might also be missing other potentially relevant records that don't have date metadata available.  
+            This field can be useful for querying and sorting (see the 'sort'
+            param further down). But it should be noted that, as with some other
+            fields, **not all records have date metadata associated**. There is
+            good coverage of date metadata within certain collections, but there
+            are plenty with no date information at all. So, if you query for
+            records from a specific date you may get some matching results, but
+            might also be missing other potentially relevant records that don't
+            have date metadata available.  
 
             Example: `"1970-12-25"`
 
@@ -164,7 +180,10 @@ paths:
           schema:
             type: string
         - description: >
-            This field allows searching specifically by year. The metadata is derived from the same date information that is searchable and returned in the date field. It is possible to search across a range using syntax the following syntax `[{start year} TO {end year}]`.  
+            This field allows searching specifically by year. The metadata is
+            derived from the same date information that is searchable and
+            returned in the date field. It is possible to search across a range
+            using syntax the following syntax `[{start year} TO {end year}]`.  
 
             Example: `"1893"` `"[1982 TO 1987]"`
           in: query
@@ -172,7 +191,9 @@ paths:
           schema:
             type: string
         - description: >
-            This field allows searching specifically by decade. The metadata is derived from the same date information that is searchable and returned in the date field.  
+            This field allows searching specifically by decade. The metadata is
+            derived from the same date information that is searchable and
+            returned in the date field.  
 
             Example: `"1850"` `"1990"`
           in: query
@@ -180,7 +201,9 @@ paths:
           schema:
             type: string
         - description: >
-            This field allows searching specifically by century. The metadata is derived from the same date information that is searchable and returned in the date field.  
+            This field allows searching specifically by century. The metadata
+            is derived from the same date information that is searchable and
+            returned in the date field.  
 
             Example: `"1900"` `"2000"`
           in: query
@@ -188,13 +211,18 @@ paths:
           schema:
             type: string
         - description: >
-            All of the above `and[___][]` filters in this document are also able to be used with this syntax to exclude specific matches. For example to exclude Papers Past content `&without[primary_collection]=Papers+Past`
+            All of the above `and[___][]` filters in this document are also
+            able to be used with this syntax to exclude specific matches. For
+            example to exclude Papers Past content
+            `&without[primary_collection]=Papers+Past`
           in: query
           name: without[{filter_field}]
           schema:
             type: string
         - description: >
-            All of the above `and[___][]` filters in this document are also able to be used with the `and[or][___][]` syntax to allow multi-select *OR* queries within one field.  
+            All of the above `and[___][]` filters in this document are also
+            able to be used with the `and[or][___][]` syntax to allow
+            multi-select *OR* queries within one field.  
 
             Basic example: 
 
@@ -214,13 +242,20 @@ paths:
           schema:
             type: string
         - description: >
-            Some DigitalNZ partners offer their metadata for use in commercial applications. This content can be identified through the *is_commercial_use* flag. Only API results where the *is_commercial_use* field set to True can be used for commercial purposes. Check out the [terms of use](https://digitalnz.org/about/terms-of-use/developer-api-terms-of-use#commercial_use_terms) for more information.
+            Some DigitalNZ partners offer their metadata for use in commercial
+            applications. This content can be identified through the
+            *is_commercial_use* flag. Only API results where the
+            *is_commercial_use* field set to True can be used for commercial
+            purposes. Check out the [terms of
+            use](https://digitalnz.org/about/terms-of-use/developer-api-terms-of-use#commercial_use_terms)
+            for more information.
           in: query
           name: and[is_commercial_use]
           schema:
             type: boolean
         - description: >
-            Filters results to only those records that have an image available in the *large_thumbnail_url* field.  
+            Filters results to only those records that have an image available
+            in the *large_thumbnail_url* field.  
 
             **Note:** There is an issue with this field where, in order to get results, it needs to be specified with "Y" or not specified at all.
           in: query
@@ -230,7 +265,8 @@ paths:
               - Y
             type: string
         - description: >
-            Filters results to only those records that have latitude and longitude coordinates present in the metadata.
+            Filters results to only those records that have latitude and
+            longitude coordinates present in the metadata.
               
             *Tip* - To see the location metadata you'll need to specifically request that field using the *fields* parameter - *"&fields=verbose,locations"*  as it is not part of the default, or verbose field sets.
           in: query
@@ -241,17 +277,20 @@ paths:
               - false
             type: boolean
         - description: >
-            A geographic bounding box scoping a search to a geographic region. Order of latitude-longitude coordinates is north, west, south, east.   For example, filtering the Wellington region would be *"&geo_bbox=-41,174,-42,175"*
+            A geographic bounding box scoping a search to a geographic region.
+            Order of latitude-longitude coordinates is north, west, south,
+            east.   For example, filtering the Wellington region would be
+            *"&geo_bbox=-41,174,-42,175"*
           in: query
           name: geo_bbox
           schema:
             type: string
         - $ref: "#/components/parameters/fields"
         - description: >
-            Used to control the order of the results in conjunction with the *direction* field.
+            Used to control the order of the results in conjunction with the
+            *direction* field.
               - *syndication_date* - is the creation date of the record within DigitalNZ, ie. when DigitalNZ first harvested the record.
               - *date* - is the date metadata (if present) associated with the record.  
-
 
                 
             To sort the search results with newest records at the top use: "&sort=syndication_date&direction=desc"
@@ -262,7 +301,7 @@ paths:
               - syndication_date
               - date
             type: string
-        - description: >
+        - description: |
             Used in conjunction with *sort* to order the results
              - *asc* - Ascending, oldest first.
              - *desc* - Descending, newest first.
@@ -290,7 +329,11 @@ paths:
             minimum: 0
             type: integer
         - description: >
-            Shows a breakdown of record counts for the specified facets based on the current result set. In the [DigitalNZ search interface](https://digitalnz.org/records) these facets are used to list the values filterable for each field. A comma-separated list will return multiple facets in one call.
+            Shows a breakdown of record counts for the specified facets based
+            on the current result set. In the [DigitalNZ search
+            interface](https://digitalnz.org/records) these facets are used to
+            list the values filterable for each field. A comma-separated list
+            will return multiple facets in one call.
           explode: false
           in: query
           name: facets
@@ -317,7 +360,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: This value specifies which page of facet results to return. Allowing pagination through large lists of facet values.
+        - description: This value specifies which page of facet results to return.
+            Allowing pagination through large lists of facet values.
           in: query
           name: facets_page
           schema:
@@ -332,7 +376,14 @@ paths:
             maximum: 350
             type: integer
         - description: >
-            This field can be used when filtering into some facets, to maintain the context of the wider facet values. A common use case is to allow the results of a search to be filtered down into a specific category (eg Audio), while still showing the other possible filter options as facet counts (eg. Images, Audio, Video, etc). Setting this to 'true' will not effect the search results returned but will ignore all search filters (eg. "and[category]=Audio") when calculating the facet counts. 
+            This field can be used when filtering into some facets, to maintain
+            the context of the wider facet values. A common use case is to allow
+            the results of a search to be filtered down into a specific category
+            (eg Audio), while still showing the other possible filter options as
+            facet counts (eg. Images, Audio, Video, etc). Setting this to 'true'
+            will not effect the search results returned but will ignore all
+            search filters (eg. "and[category]=Audio") when calculating the
+            facet counts. 
           in: query
           name: exclude_filters_from_facets
           schema:
@@ -350,7 +401,11 @@ paths:
                         type: integer
                       type: object
                     description: >
-                      Each field you request from the list of facetable fields will be returned as separate elements. Each of those will contain a sorted list of elements that are made up of a value (eg collection name, subject, date) and the number of results associated with that value.  
+                      Each field you request from the list of facetable fields will be
+                      returned as separate elements. Each of those will contain
+                      a sorted list of elements that are made up of a value (eg
+                      collection name, subject, date) and the number of results
+                      associated with that value.  
                     example:
                       display_collection:
                         Canterbury Museum: 39109
@@ -399,7 +454,8 @@ paths:
   "/records/{record_id}.json":
     get:
       description: >
-        If you know its `record_id` you can use this endpoint to view all metadata associated with that specific record.
+        If you know its `record_id` you can use this endpoint to view all
+        metadata associated with that specific record.
       parameters:
         - description: Every record has a unique, persistent *record_id*.
           example: 189089
@@ -438,7 +494,8 @@ paths:
 components:
   parameters:
     api_key:
-      description: To access the API you will need your own DigitalNZ account and [API key](https://digitalnz.org/api_keys/edit).
+      description: To access the API you will need your own DigitalNZ account and [API
+        key](https://digitalnz.org/api_keys/edit).
       in: query
       name: api_key
       required: true
@@ -446,7 +503,10 @@ components:
         type: string
     fields:
       description: >
-        Comma-separated whitelist of fields to be returned. The syntax *"&fields=verbose"* can be used to return the bulk of the fields, or you can customise which fields you are interested in, eg. *"&fields=id,title,subject,collection,landing_url,locations"*.
+        Comma-separated whitelist of fields to be returned. The syntax
+        *"&fields=verbose"* can be used to return the bulk of the fields, or you
+        can customise which fields you are interested in, eg.
+        *"&fields=id,title,subject,collection,landing_url,locations"*.
       explode: false
       in: query
       name: fields
@@ -454,7 +514,8 @@ components:
         type: string
     format:
       description: >
-        Note - There is a small difference with some field names in the response between JSON and XML.  
+        Note - There is a small difference with some field names in the
+        response between JSON and XML.  
 
         When a field name has more than one word, JSON format will separate the words with an underscore, eg. "content_partner", whereas XML uses a hyphenated naming convention, eg. "content-partner".
       in: query
@@ -475,7 +536,8 @@ components:
           schema:
             type: object
         application/xml:
-          example: <hash><errors><error>No field configured for Record with name *field_name*</error></errors></hash>
+          example: <hash><errors><error>No field configured for Record with name
+            *field_name*</error></errors></hash>
           schema:
             type: object
       description: Incorrect field specified in the request.
@@ -494,10 +556,15 @@ components:
   schemas:
     record:
       description: >
-        *NOTE:* There are a lot of fields that are very rarely used in DigitalNZ. For instance there are custom built fields that are only relevant, and only found on specific collections. The schema below focuses on the most common / well populated fields and does not show every possible field available for a single record. 
+        *NOTE:* There are a lot of fields that are very rarely used in
+        DigitalNZ. For instance there are custom built fields that are only
+        relevant, and only found on specific collections. The schema below
+        focuses on the most common / well populated fields and does not show
+        every possible field available for a single record. 
       properties:
         category:
-          description: There will always be at least 1 human-readable category label in this field.
+          description: There will always be at least 1 human-readable category label in
+            this field.
           items:
             enum:
               - Newspapers
@@ -521,26 +588,33 @@ components:
           type: array
         collection:
           description: >
-            In addition to the top level *"display_collection"* above, this field can also contain sub-collections or groupings within the main collection. 
+            In addition to the top level *"display_collection"* above, this
+            field can also contain sub-collections or groupings within the main
+            collection. 
           items:
             type: string
           type: array
         collection_title:
-          description: For historic reasons this is a duplicate of the previous field ("collection").
+          description: For historic reasons this is a duplicate of the previous field
+            ("collection").
           items:
             type: string
           type: array
           xml:
             name: collection-title
         content_partner:
-          description: Name of the organisation(s), institution(s), or individual(s) making content available through DigitalNZ. This metadata will be present on all records and is usually the name of the organisation that has agreed to the DigitalNZ Metadata Contribution Terms.
+          description: Name of the organisation(s), institution(s), or individual(s)
+            making content available through DigitalNZ. This metadata will be
+            present on all records and is usually the name of the organisation
+            that has agreed to the DigitalNZ Metadata Contribution Terms.
           items:
             type: string
           type: array
           xml:
             name: content-partner
         copyright:
-          description: A copyright statement applying to the object referenced by this record. This field may be empty.
+          description: A copyright statement applying to the object referenced by this
+            record. This field may be empty.
           items:
             enum:
               - All rights reserved
@@ -557,18 +631,22 @@ components:
           xml:
             name: created-at
         creator:
-          description: The name's of the people, organisations, institutions, services etc. who created the content (eg. the photographer, artist, writer or author).
+          description: The name's of the people, organisations, institutions, services
+            etc. who created the content (eg. the photographer, artist, writer
+            or author).
           items:
             type: string
           type: array
         date:
-          description: Date information associated with this record (e.g. 1996-01-01T00:00:00.000Z). This field may be empty.
+          description: Date information associated with this record (e.g.
+            1996-01-01T00:00:00.000Z). This field may be empty.
           example: 1996-01-01T00:00:00.000Z
           items:
             type: string
           type: array
         dc_identifier:
-          description: Identifiers relating to the content from the content partner's system.
+          description: Identifiers relating to the content from the content partner's
+            system.
           items:
             type: string
           type: array
@@ -578,39 +656,49 @@ components:
           description: Description of the record. Most records have a description.
           type: string
         display_collection:
-          description: The single main collection or website that the item belongs to. This metadata will be present on all records.
+          description: The single main collection or website that the item belongs to.
+            This metadata will be present on all records.
           type: string
           xml:
             name: display-collection
         display_content_partner:
-          description: The main Content Partner, for cases when there are more than one. This metadata will be present on all records.
+          description: The main Content Partner, for cases when there are more than one.
+            This metadata will be present on all records.
           type: string
           xml:
             name: dispay-content-partner
         display_date:
-          description: Where provided, this field contains a human readable version of the date information.
+          description: Where provided, this field contains a human readable version of the
+            date information.
           example: Circa 1996
           type: string
           xml:
             name: display-date
         id:
-          description: All records have a unique identifier used within the DigitalNZ system.
+          description: All records have a unique identifier used within the DigitalNZ
+            system.
           example: 1788754
           type: integer
         landing_url:
           description: >
-            This field will always contain a URL of the item on the content partner's website.  
+            This field will always contain a URL of the item on the content
+            partner's website.  
 
             *Note:* Please use the source_url when providing HTML links.
           type: string
         large_thumbnail_url:
-          description: URL for a larger thumbnail image with a width of up to 800px. NOTE - the API Terms do not extend rights to the use of images accessable throught the *large_thumbnail_url* field.
+          description: URL for a larger thumbnail image with a width of up to 800px. NOTE
+            - the API Terms do not extend rights to the use of images accessable
+            throught the *large_thumbnail_url* field.
           type: string
           xml:
             name: large-thumbnail-url
         locations:
           description: >
-            Geographical location information including latitude and longitude co-ordinates, text based location information, and details about where the location information comes from (eg. "Location provided by Museum of New Zealand Te Papa Tongarewa")
+            Geographical location information including latitude and longitude
+            co-ordinates, text based location information, and details about
+            where the location information comes from (eg. "Location provided by
+            Museum of New Zealand Te Papa Tongarewa")
           items:
             properties:
               comment:
@@ -629,24 +717,32 @@ components:
             type: object
           type: array
         primary_collection:
-          description: In most cases this is the same as *display_collection*, but will occasionally a second value.
+          description: In most cases this is the same as *display_collection*, but will
+            occasionally a second value.
           items:
             type: string
           type: array
           xml:
             name: primary-collection
         rights:
-          description: Rights information. Can be a rights statement explaining the rights of the record or a link to a webpage with more detailed rights information.
+          description: Rights information. Can be a rights statement explaining the rights
+            of the record or a link to a webpage with more detailed rights
+            information.
           type: string
         rights_url:
-          description: An array of HTTP URLs resolving to a rights statement or terms of use information for the resource.
+          description: An array of HTTP URLs resolving to a rights statement or terms of
+            use information for the resource.
           items:
             type: string
           type: array
           xml:
             name: rights-url
         source_url:
-          description: This URL will always be present and provides a redirect to the landing_url. This link should be used as the main click-through to the content. Passing users through this link allows DNZ to count the number of click-throughs, as well as trigger link-checking activities that help clean up stale links in DigitalNZ.
+          description: This URL will always be present and provides a redirect to the
+            landing_url. This link should be used as the main click-through to
+            the content. Passing users through this link allows DNZ to count the
+            number of click-throughs, as well as trigger link-checking
+            activities that help clean up stale links in DigitalNZ.
           example: https://api.digitalnz.org/records/1788754/source
           type: string
           xml:
@@ -658,7 +754,10 @@ components:
           type: array
         thumbnail_url:
           description: >
-            URL for a thumbnail image of the content. The size varies depending on what is available but we aim for a width of 250px. This field is mostly populated on records with a 'category' of 'Images', but is also sometimes found on others (eg. "Videos").
+            URL for a thumbnail image of the content. The size varies depending
+            on what is available but we aim for a width of 250px. This field is
+            mostly populated on records with a 'category' of 'Images', but is
+            also sometimes found on others (eg. "Videos").
           type: string
           xml:
             name: thumbnail-url
@@ -674,7 +773,9 @@ components:
           xml:
             name: updated-at
         usage:
-          description: This field is always present and contains human-understandable information about how the item may be used based on its copyright/license.
+          description: This field is always present and contains human-understandable
+            information about how the item may be used based on its
+            copyright/license.
           items:
             enum:
               - All rights reserved

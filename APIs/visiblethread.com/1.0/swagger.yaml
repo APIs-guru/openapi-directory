@@ -294,7 +294,8 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get detailed results for a scan/url (readability, long sentence and passive language instances), identified by **scanId** & **urlId**
+      description: Get detailed results for a scan/url (readability, long sentence and
+        passive language instances), identified by **scanId** & **urlId**
       operationId: getSearchResults
       parameters:
         - description: Id of document
@@ -344,7 +345,8 @@ paths:
       consumes:
         - application/json
       description: >-
-        The scan runs in the background but returns immediately with a JSON response containing an "id" that represents your scan.        
+        The scan runs in the background but returns immediately with a JSON
+        response containing an "id" that represents your scan.        
 
         You can use this id in other requests to retrieve your scan result. 
 
@@ -403,7 +405,8 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get detailed results for a scan/url (readability, long sentence and passive language instances), identified by **scanId** & **urlId**
+      description: Get detailed results for a scan/url (readability, long sentence and
+        passive language instances), identified by **scanId** & **urlId**
       operationId: getScanUrlById
       parameters:
         - description: Id of scan
@@ -506,7 +509,9 @@ definitions:
                   type: array
               type: object
             text:
-              example: This is an exmaple sentence which was extracted from a web page during a scan previously run using the VisibleThread API service. This is a short, simple sentence.
+              example: This is an exmaple sentence which was extracted from a web page during
+                a scan previously run using the VisibleThread API service. This
+                is a short, simple sentence.
               type: string
           type: object
         type: array
@@ -833,7 +838,9 @@ definitions:
                   type: array
               type: object
             text:
-              example: This is an exmaple sentence which was extracted from a web page during a scan previously run using the VisibleThread API service. This is a short, simple sentence.
+              example: This is an exmaple sentence which was extracted from a web page during
+                a scan previously run using the VisibleThread API service. This
+                is a short, simple sentence.
               type: string
           type: object
         type: array

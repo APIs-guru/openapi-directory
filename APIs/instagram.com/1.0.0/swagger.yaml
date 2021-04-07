@@ -137,13 +137,15 @@ paths:
           name: distance
           required: false
           type: integer
-        - description: Returns a location mapped off of a Facebook places id. If used, a Foursquare id and `lat`, `lng` are not required.
+        - description: Returns a location mapped off of a Facebook places id. If used, a
+            Foursquare id and `lat`, `lng` are not required.
           in: query
           name: facebook_places_id
           required: false
           type: string
         - description: >
-            Returns a location mapped off of a foursquare v1 api location id. If used, you are not required to use
+            Returns a location mapped off of a foursquare v1 api location id.
+            If used, you are not required to use
 
             `lat` and `lng`. Note that this method is deprecated; you should use the new foursquare IDs with V2 of their API.
           in: query
@@ -156,14 +158,16 @@ paths:
           name: lat
           required: false
           type: number
-        - description: Longitude of the center search coordinate. If used, `lat` is required.
+        - description: Longitude of the center search coordinate. If used, `lat` is
+            required.
           format: double
           in: query
           name: lng
           required: false
           type: number
         - description: >
-            Returns a location mapped off of a foursquare v2 api location id. If used, you are not required to use
+            Returns a location mapped off of a foursquare v2 api location id.
+            If used, you are not required to use
 
             `lat` and `lng`.
           in: query
@@ -250,7 +254,8 @@ paths:
     get:
       deprecated: true
       description: >
-        Get a list of what media is most popular at the moment. Can return mix of `image` and `video` types.
+        Get a list of what media is most popular at the moment. Can return
+        mix of `image` and `video` types.
 
 
         **Warning:** [Deprecated](http://instagram.com/developer/changelog/) for Apps created **on or after** Nov 17, 2015
@@ -269,7 +274,8 @@ paths:
   /media/search:
     get:
       description: >
-        Search for media in a given area. The default time span is set to 5 days. The time span must not exceed 7 days.
+        Search for media in a given area. The default time span is set to 5
+        days. The time span must not exceed 7 days.
 
         Defaults time stamps cover the last 5 days. Can return mix of `image` and `video` types.
       parameters:
@@ -279,19 +285,22 @@ paths:
           name: lat
           required: true
           type: number
-        - description: Longitude of the center search coordinate. If used, `lat` is required.
+        - description: Longitude of the center search coordinate. If used, `lat` is
+            required.
           format: double
           in: query
           name: lng
           required: true
           type: number
-        - description: A unix timestamp. All media returned will be taken later than this timestamp.
+        - description: A unix timestamp. All media returned will be taken later than this
+            timestamp.
           format: int64
           in: query
           name: min_timestamp
           required: false
           type: integer
-        - description: A unix timestamp. All media returned will be taken earlier than this timestamp.
+        - description: A unix timestamp. All media returned will be taken earlier than
+            this timestamp.
           format: int64
           in: query
           name: max_timestamp
@@ -346,7 +355,8 @@ paths:
   "/media/{media-id}":
     get:
       description: >
-        Get information about a media object. The returned type key will allow you to differentiate between image and
+        Get information about a media object. The returned type key will
+        allow you to differentiate between image and
 
         video media.
 
@@ -396,7 +406,7 @@ paths:
       tags:
         - comments
     post:
-      description: >
+      description: |
         Create a comment on a media object with the following rules:
 
           * The total length of the comment cannot exceed 300 characters.
@@ -409,7 +419,8 @@ paths:
           name: media-id
           required: true
           type: string
-        - description: Text to post as a comment on the media object as specified in `media-id`.
+        - description: Text to post as a comment on the media object as specified in
+            `media-id`.
           in: query
           name: text
           required: true
@@ -429,7 +440,8 @@ paths:
   "/media/{media-id}/comments/{comment-id}":
     delete:
       description: >
-        Remove a comment either on the authenticated user's media object or authored by the authenticated user.
+        Remove a comment either on the authenticated user's media object or
+        authored by the authenticated user.
       parameters:
         - description: The ID of the media resource.
           in: path
@@ -560,7 +572,8 @@ paths:
   "/tags/{tag-name}/media/recent":
     get:
       description: >
-        Get a list of recently tagged media. Use the `max_tag_id` and `min_tag_id` parameters in the pagination
+        Get a list of recently tagged media. Use the `max_tag_id` and
+        `min_tag_id` parameters in the pagination
 
         response to paginate through these objects.
       parameters:
@@ -661,7 +674,8 @@ paths:
   /users/self/media/liked:
     get:
       description: >
-        See the list of media liked by the authenticated user. Private media is returned as long as the authenticated
+        See the list of media liked by the authenticated user. Private
+        media is returned as long as the authenticated
 
         user has permission to view that media. Liked media lists are only available for the currently authenticated
 
@@ -707,14 +721,16 @@ paths:
   "/users/{user-id}":
     get:
       description: >
-        Get basic information about a user. To get information about the owner of the access token, you can use
+        Get basic information about a user. To get information about the
+        owner of the access token, you can use
 
         **self** instead of the `user-id`.
 
 
         Security scope `public_content` is required to read information about other users.
       parameters:
-        - description: The ID of a user to get information about, or **self** to retrieve information about authenticated user.
+        - description: The ID of a user to get information about, or **self** to retrieve
+            information about authenticated user.
           in: path
           name: user-id
           required: true
@@ -737,11 +753,13 @@ paths:
   "/users/{user-id}/followed-by":
     get:
       description: >
-        Get the list of users this user is followed by. To get users followed by the owner of the access token, you
+        Get the list of users this user is followed by. To get users
+        followed by the owner of the access token, you
 
         can use **self** instead of the `user-id`.
       parameters:
-        - description: The ID of a user, or **self** to retrieve information about authenticated user.
+        - description: The ID of a user, or **self** to retrieve information about
+            authenticated user.
           in: path
           name: user-id
           required: true
@@ -761,11 +779,13 @@ paths:
   "/users/{user-id}/follows":
     get:
       description: >
-        Get the list of users this user follows. To get follows of the owner of the access token, you can use **self**
+        Get the list of users this user follows. To get follows of the
+        owner of the access token, you can use **self**
 
         instead of the `user-id`.
       parameters:
-        - description: The ID of a user, or **self** to retrieve information about authenticated user.
+        - description: The ID of a user, or **self** to retrieve information about
+            authenticated user.
           in: path
           name: user-id
           required: true
@@ -785,14 +805,16 @@ paths:
   "/users/{user-id}/media/recent":
     get:
       description: >
-        Get the most recent media published by a user. To get the most recent media published by the owner of the
+        Get the most recent media published by a user. To get the most
+        recent media published by the owner of the
 
         access token, you can use **self** instead of the `user-id`.
 
 
         Security scope `public_content` is required to read information about other users.
       parameters:
-        - description: The ID of a user to get recent media of, or **self** to retrieve media of authenticated user.
+        - description: The ID of a user to get recent media of, or **self** to retrieve
+            media of authenticated user.
           in: path
           name: user-id
           required: true
@@ -924,10 +946,13 @@ definitions:
   CommentsCollection:
     properties:
       count:
-        description: Nember of comments available, data does not necessary contain all comments
+        description: Nember of comments available, data does not necessary contain all
+          comments
         type: integer
       data:
-        description: Collection of comment entries; **warning:** deprecated for Apps [created on or after Nov 17, 2015](http://instagram.com/developer/changelog/)
+        description: Collection of comment entries; **warning:** deprecated for Apps
+          [created on or after Nov 17,
+          2015](http://instagram.com/developer/changelog/)
         items:
           $ref: "#/definitions/CommentEntry"
         type: array
@@ -991,7 +1016,9 @@ definitions:
         description: Nember of likes available, data does not necessary contain all comments
         type: integer
       data:
-        description: Collection of users who liked; **warning:** deprecated for Apps [created on or after Nov 17, 2015](http://instagram.com/developer/changelog/)
+        description: Collection of users who liked; **warning:** deprecated for Apps
+          [created on or after Nov 17,
+          2015](http://instagram.com/developer/changelog/)
         items:
           $ref: "#/definitions/UserShortInfo"
         type: array

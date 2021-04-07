@@ -5,7 +5,8 @@ schemes:
 host: api.fungenerators.com
 info:
   description: >
-    Below is the documentation for the API calls. You can try them out right here. 
+    Below is the documentation for the API calls. You can try them out
+    right here. 
   title: Random Lottery Number generator API
   version: "1.5"
   x-apisguru-categories:
@@ -36,7 +37,8 @@ tags:
 paths:
   /lottery/countries:
     get:
-      description: Get the complete list of countries supported in the number generation API.
+      description: Get the complete list of countries supported in the number
+        generation API.
       produces:
         - application/json
         - application/xml
@@ -45,7 +47,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               { 
                 "success":
                   {"total":76},
@@ -63,7 +65,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -98,7 +100,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "success": {
                       "total": 1
@@ -114,7 +116,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -143,7 +145,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "success": {
                       "total":4
@@ -163,7 +165,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,

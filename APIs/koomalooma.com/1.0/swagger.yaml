@@ -7,7 +7,14 @@ info:
   contact:
     email: support@koomalooma.com
     x-twitter: koomalooma_biz
-  description: This is the koomalooma Partner API. koomalooma is the first Loyalty BPaaS (Business Process as a Service) for mobile and web companies. With koomalooma merchants issue points for actions their customers / users make on your mobile or web store, for example a purchase or a referral. koomalooma takes care of all the rest, from signing up users, keeping track of points and delivering rewards in over 80 countries. koomalooma offers an easy to integrate API and web backend to configure loyalty campaigns and track performance. You can find more at http://support.koomalooma.com
+  description: This is the koomalooma Partner API. koomalooma is the first Loyalty
+    BPaaS (Business Process as a Service) for mobile and web companies. With
+    koomalooma merchants issue points for actions their customers / users make
+    on your mobile or web store, for example a purchase or a referral.
+    koomalooma takes care of all the rest, from signing up users, keeping track
+    of points and delivering rewards in over 80 countries. koomalooma offers an
+    easy to integrate API and web backend to configure loyalty campaigns and
+    track performance. You can find more at http://support.koomalooma.com
   termsOfService: https://partner.koomalooma.com/terms
   title: koomalooma Partner API
   version: "1.0"
@@ -26,7 +33,8 @@ produces:
   - application/json
 securityDefinitions:
   api_key:
-    description: Authenticate using the JWT token assigned to you by your koomalooma technical support specialist
+    description: Authenticate using the JWT token assigned to you by your koomalooma
+      technical support specialist
     in: header
     name: X-KoomaLooma-JWT
     type: apiKey
@@ -163,10 +171,13 @@ definitions:
         description: Your partner_id. You can use the value of data-partner-id parameter
         type: string
       partner_user_id:
-        description: A unique string that identify your customer. !!IMPORTANT!! You should use always the same partner_user_id for the same customer
+        description: A unique string that identify your customer. !!IMPORTANT!! You
+          should use always the same partner_user_id for the same customer
         type: string
       user_session_id:
-        description: A unique string that identify the current user session. !!IMPORTANT!! This value should be the same set in %%sessionId%% of koomalooma javascript
+        description: A unique string that identify the current user session.
+          !!IMPORTANT!! This value should be the same set in %%sessionId%% of
+          koomalooma javascript
         type: string
     required:
       - partner_id

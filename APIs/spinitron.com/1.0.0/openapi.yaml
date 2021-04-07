@@ -144,13 +144,14 @@ paths:
         Ordered chronologically from newest to oldest.
       parameters:
         - description: >
-            The datetime starting from items must be returned. Maximum 1 hour in future.
+            The datetime starting from items must be returned. Maximum 1 hour
+            in future.
           in: query
           name: start
           schema:
             format: date-time
             type: string
-        - description: >
+        - description: |
             The ending datetime. Maximum 1 hour in future.
           in: query
           name: end
@@ -238,7 +239,8 @@ paths:
   /shows:
     get:
       description: >
-        **Terminology**: Spinitron defines a *show* as a radio program. A show can have one or more *schedules*,
+        **Terminology**: Spinitron defines a *show* as a radio program. A
+        show can have one or more *schedules*,
 
         each of which may specify either an *occurence* or a *repetition*, which represents a set of occurences.
 
@@ -287,13 +289,14 @@ paths:
         Objects in `items` are ordered first by `datetime` and then by `id`.
       parameters:
         - description: >
-            The datetime starting from items must be returned. Maximum 1 hour in past.
+            The datetime starting from items must be returned. Maximum 1 hour
+            in past.
           in: query
           name: start
           schema:
             format: date-time
             type: string
-        - description: >
+        - description: |
             The ending datetime. Maximum 1 hour in past.
           in: query
           name: end
@@ -337,14 +340,17 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: >
-            Invalid datetimes in filter: either too old or {end} is less than {start}.
-      summary: Returns scheduled shows optionally filtered by {start} and/or {end} datetimes
+            Invalid datetimes in filter: either too old or {end} is less than
+            {start}.
+      summary: Returns scheduled shows optionally filtered by {start} and/or {end}
+        datetimes
       tags:
         - Show
   "/shows/{id}":
     get:
       description: >
-        The response object represents the next occurence of the show specified by {id}.
+        The response object represents the next occurence of the show
+        specified by {id}.
 
 
         Status 404 is returned if a show with {id} does not exist or if it does but all its scheduled occurences elapsed in the past.
@@ -381,16 +387,17 @@ paths:
   /spins:
     get:
       description: >
-        Get Spins optionally filtered by a datetime range. Only past Spins will be returned.
+        Get Spins optionally filtered by a datetime range. Only past Spins
+        will be returned.
       parameters:
-        - description: >
+        - description: |
             The datetime starting from items must be returned.
           in: query
           name: start
           schema:
             format: date-time
             type: string
-        - description: >
+        - description: |
             The ending datetime.
           in: query
           name: end
@@ -459,7 +466,8 @@ paths:
                   type: string
                 live:
                   description: >
-                    Only when automation params are configured with the "Pass through" mode.
+                    Only when automation params are configured with the "Pass through"
+                    mode.
 
                     Enables "live assist" mode. Default mode is "full automation".
                   type: boolean
@@ -615,7 +623,8 @@ components:
           type: integer
       type: object
     Persona:
-      description: The `Persona` object describes a radio DJ/host. One person can have multiple personas
+      description: The `Persona` object describes a radio DJ/host. One person can have
+        multiple personas
       properties:
         _links:
           properties:
@@ -628,7 +637,8 @@ components:
           type: object
         bio:
           description: HTML-formatted biography
-          example: <p>Besides DJ'ing industrial and experimental music since 1991, Deftly has performed in industrial ...
+          example: <p>Besides DJ'ing industrial and experimental music since 1991, Deftly
+            has performed in industrial ...
           type: string
         email:
           description: DJ/host's email address
@@ -671,7 +681,8 @@ components:
               $ref: "#/components/schemas/Link"
           type: object
         automation:
-          description: Was the playlist created playlists created by a radio station automation system?
+          description: Was the playlist created playlists created by a radio station
+            automation system?
           example: false
           type: boolean
         category:
@@ -680,7 +691,8 @@ components:
           type: string
         description:
           description: HTML-formatted description of the playlist or program/show
-          example: It is a <em>cross-­cultural musical journey united in voices and rhythms</em>.
+          example: It is a <em>cross-­cultural musical journey united in voices and
+            rhythms</em>.
           type: string
         duration:
           description: Duration in seconds
@@ -699,7 +711,8 @@ components:
           description: Title of this episode of the program/show
           type: string
         hide_dj:
-          description: Should the client application hide information about the playlist's DJ/host?
+          description: Should the client application hide information about the playlist's
+            DJ/host?
           example: false
           type: boolean
         id:
@@ -739,7 +752,9 @@ components:
           type: string
       type: object
     Show:
-      description: A `Show` object describes one occurrence of a radio program. A result set may contain multiple occurrences of the same show with difference `start` and `end` values.
+      description: A `Show` object describes one occurrence of a radio program. A
+        result set may contain multiple occurrences of the same show with
+        difference `start` and `end` values.
       properties:
         _links:
           properties:
@@ -758,7 +773,11 @@ components:
           type: string
         description:
           description: HTML-formatted description of the playlist or program/show
-          example: <p>Since 2001, <strong>The High Voltage Circumcision</strong> show has delivered a full spectrum barrage of dark hard and experimental music from industrial to noise to idm to ebm to bizarre to audio collage often with a side of live guests, social consciousness, interviews, twisted humor, studio experiments and left turns.</p>
+          example: <p>Since 2001, <strong>The High Voltage Circumcision</strong> show has
+            delivered a full spectrum barrage of dark hard and experimental
+            music from industrial to noise to idm to ebm to bizarre to audio
+            collage often with a side of live guests, social consciousness,
+            interviews, twisted humor, studio experiments and left turns.</p>
           type: string
         duration:
           description: Duration in seconds
@@ -770,7 +789,8 @@ components:
           format: date-time
           type: string
         hide_dj:
-          description: Should the client application hide information about the show's DJs/hosts?
+          description: Should the client application hide information about the show's
+            DJs/hosts?
           example: false
           type: boolean
         id:
@@ -889,7 +909,8 @@ components:
           type: boolean
         note:
           description: HTML-formatted DJ annotation of the spin, can include images etc.
-          example: B-side of the <strong>original</strong> 7" vinyl in the station's collection.
+          example: B-side of the <strong>original</strong> 7" vinyl in the station's
+            collection.
           type: string
         performers:
           description: For classical music, featured performing artists, e.g. soloists
@@ -934,7 +955,8 @@ components:
           example: false
           type: boolean
         work:
-          description: For classical music, the main compositional work the track (see `song` field) belongs to
+          description: For classical music, the main compositional work the track (see
+            `song` field) belongs to
           example: The Marriage of Figaro
           type: string
       type: object

@@ -58,7 +58,8 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
+        - description: "ORDER by this field separete by comas. Add + / - after field for
+            set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -168,7 +169,8 @@ paths:
           name: siteids
           required: false
           type: string
-        - description: Do a 'LIKE' search, you can also use '%'. technical name of the extension com_xxxx
+        - description: Do a 'LIKE' search, you can also use '%'. technical name of the
+            extension com_xxxx
           in: query
           name: ext_prefix
           required: false
@@ -205,7 +207,8 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
+        - description: "ORDER by this field separete by comas. Add + / - after field for
+            set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -445,7 +448,8 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
+        - description: "ORDER by this field separete by comas. Add + / - after field for
+            set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -764,7 +768,8 @@ paths:
           name: ip
           required: false
           type: string
-        - description: "Joomla core update status (1: update required, 0: update not required)"
+        - description: "Joomla core update status (1: update required, 0: update not
+            required)"
           enum:
             - 1
             - 0
@@ -822,7 +827,8 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
+        - description: "ORDER by this field separete by comas. Add + / - after field for
+            set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -1342,7 +1348,8 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
+        - description: "ORDER by this field separete by comas. Add + / - after field for
+            set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -1910,7 +1917,8 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
+        - description: "ORDER by this field separete by comas. Add + / - after field for
+            set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -2151,7 +2159,8 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
+        - description: "ORDER by this field separete by comas. Add + / - after field for
+            set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -2311,7 +2320,8 @@ definitions:
         description: Watchful secret word
         type: string
       tags:
-        description: JSON encoded array of tags for the site (e.g. [{<q>name</q>:<q>mytag</q>},{<q>name</q>:<q>anothertag</q>}])
+        description: JSON encoded array of tags for the site (e.g.
+          [{<q>name</q>:<q>mytag</q>},{<q>name</q>:<q>anothertag</q>}])
         format: json
         type: string
       word_akeeba:

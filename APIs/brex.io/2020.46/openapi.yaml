@@ -71,7 +71,8 @@ paths:
                     text:
                       type: string
                     time:
-                      $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content/application~1json/schema/properties/timestamp"
+                      $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content\
+                        /application~1json/schema/properties/timestamp"
                     type:
                       type: string
                 type: array
@@ -85,7 +86,9 @@ paths:
         - v1-company
   /api/v1/company/deepsearch/isin:
     post:
-      description: Lookup stock exchange listings identified by an ISIN (International Securities Identification Number) number. Search is forwarded to a provider.
+      description: Lookup stock exchange listings identified by an ISIN (International
+        Securities Identification Number) number. Search is forwarded to a
+        provider.
       operationId: CompanyDeepsearchISIN
       parameters: []
       requestBody:
@@ -144,7 +147,8 @@ paths:
         - v1-company
   "/api/v1/company/deepsearch/lei/{number}":
     get:
-      description: Lookup companies identified by a LEI (Legal Entity Identifier) number. Search is forwarded to a provider.
+      description: Lookup companies identified by a LEI (Legal Entity Identifier)
+        number. Search is forwarded to a provider.
       operationId: CompanyDeepsearchLEI
       parameters:
         - description: lei number
@@ -169,7 +173,8 @@ paths:
               schema:
                 properties:
                   company:
-                    $ref: "#/paths/~1api~1v1~1company~1{id}~1{dataset}/get/responses/200/content/application~1json/schema"
+                    $ref: "#/paths/~1api~1v1~1company~1{id}~1{dataset}/get/responses/200/content/ap\
+                      plication~1json/schema"
                   current_page:
                     format: int32
                     type: integer
@@ -199,7 +204,8 @@ paths:
         - v1-company
   "/api/v1/company/deepsearch/name/{country}/{name}":
     get:
-      description: Search for companies with a certain name. Search is forwarded to the respective business register of the country.
+      description: Search for companies with a certain name. Search is forwarded to
+        the respective business register of the country.
       operationId: CompanyDeepsearchName
       parameters:
         - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
@@ -228,7 +234,8 @@ paths:
         - v1-company
   "/api/v1/company/deepsearch/number/{country}/{number}":
     get:
-      description: Search for companies with a certain register number. Search is forwarded to the respective business register of the country.
+      description: Search for companies with a certain register number. Search is
+        forwarded to the respective business register of the country.
       operationId: CompanyDeepsearchNumber
       parameters:
         - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
@@ -272,7 +279,8 @@ paths:
                     callbackUrl:
                       type: string
                     created:
-                      $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content/application~1json/schema/properties/timestamp"
+                      $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content\
+                        /application~1json/schema/properties/timestamp"
                     monitorStatus:
                       type: string
                     notificationId:
@@ -290,7 +298,8 @@ paths:
         - v1-company
   "/api/v1/company/notification/list/{id}":
     get:
-      description: Query list of registered notifications for a specific company identified by a company id
+      description: Query list of registered notifications for a specific company
+        identified by a company id
       operationId: CompanyNotificationId
       parameters:
         - description: Company Hex ID
@@ -355,7 +364,8 @@ paths:
         - v1-company
   "/api/v1/company/notification/unregister/{id}":
     post:
-      description: Deactive a previously registered company notification identified by the notifier id
+      description: Deactive a previously registered company notification identified by
+        the notifier id
       operationId: CompanyNotificationUnregister
       parameters:
         - description: Registration id of monitoring request record
@@ -413,7 +423,8 @@ paths:
         - v1-company
   "/api/v1/company/search/number/{country}/{number}":
     get:
-      description: Brex company index lookup for companies with a certain register number in a country.
+      description: Brex company index lookup for companies with a certain register
+        number in a country.
       operationId: CompanySearchNumber
       parameters:
         - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
@@ -449,7 +460,8 @@ paths:
         - v1-company
   "/api/v1/company/search/{country}":
     post:
-      description: Brex company index lookup by country and mixed parameters. This function requires a country code then a mixture of name
+      description: Brex company index lookup by country and mixed parameters. This
+        function requires a country code then a mixture of name
       operationId: CompanyAlternativeSearch
       parameters:
         - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
@@ -540,7 +552,8 @@ paths:
         - v1-company
   "/api/v1/company/{id}/announcements":
     get:
-      description: Search announcements filed to the business register from a company identified by an id
+      description: Search announcements filed to the business register from a company
+        identified by an id
       operationId: CompanyIdAnnouncements
       parameters:
         - description: company hex ID
@@ -564,7 +577,9 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: If this parameter is set to false, you will only receive ids, and no additional data about announcements and no hits to the metric will be counted. (and potentially minimizing your costs)
+        - description: If this parameter is set to false, you will only receive ids, and
+            no additional data about announcements and no hits to the metric
+            will be counted. (and potentially minimizing your costs)
           in: query
           name: data
           required: false
@@ -612,7 +627,8 @@ paths:
         - v1-company
   "/api/v1/company/{id}/{dataset}":
     get:
-      description: Get company details by id. The level of details is defined by the dataset parameter
+      description: Get company details by id. The level of details is defined by the
+        dataset parameter
       operationId: CompanyIdDataset
       parameters:
         - description: company master data by id
@@ -622,7 +638,8 @@ paths:
           schema:
             format: string
             type: string
-        - description: Try to retrieve additional stock information for this company. (Only available on refresh)
+        - description: Try to retrieve additional stock information for this company.
+            (Only available on refresh)
           in: query
           name: check_stock_listing
           required: false
@@ -754,7 +771,8 @@ paths:
         - v1-ein-verification
   /api/v1/ein-verification/comprehensive-check:
     get:
-      description: Comprehensive verification of a given EIN number. Additionally to the basic verification it will lookup company details
+      description: Comprehensive verification of a given EIN number. Additionally to
+        the basic verification it will lookup company details
       operationId: EinVerificationComprehensive
       parameters:
         - description: Nine letter EIN number with or without hyphens
@@ -773,7 +791,8 @@ paths:
                   ein:
                     type: string
                   matched_ein_companies:
-                    $ref: "#/paths/~1api~1v1~1ein-verification~1lookup/get/responses/200/content/application~1json/schema/properties/matched_ein_companies"
+                    $ref: "#/paths/~1api~1v1~1ein-verification~1lookup/get/responses/200/content/ap\
+                      plication~1json/schema/properties/matched_ein_companies"
                   timestamp:
                     type: number
                   validationStatus:
@@ -803,21 +822,24 @@ paths:
           schema:
             format: string
             type: string
-        - description: Optional state parameter to improve results. (Two letter code for example CA or US-CA for California)
+        - description: Optional state parameter to improve results. (Two letter code for
+            example CA or US-CA for California)
           in: query
           name: state
           required: false
           schema:
             format: string
             type: string
-        - description: Optional zip code parameter to improve results. (Zip is preferred over state)
+        - description: Optional zip code parameter to improve results. (Zip is preferred
+            over state)
           in: query
           name: zip
           required: false
           schema:
             format: string
             type: string
-        - description: Optional parameter to do tight matching. (Only the best match will be returned rather then the top 5)
+        - description: Optional parameter to do tight matching. (Only the best match will
+            be returned rather then the top 5)
           in: query
           name: tight
           required: false
@@ -927,7 +949,8 @@ paths:
         - v1-iban-verification
   /api/v1/iban-verification/comprehensive-check-iban:
     post:
-      description: Comprehensive verification of IBAN number using a service provider for verification
+      description: Comprehensive verification of IBAN number using a service provider
+        for verification
       operationId: IbanComprehensive
       requestBody:
         content:
@@ -948,8 +971,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1api~1v1~1iban-verification~1check-iban/post/responses/200/content/application~1json/schema"
-          description: Denotes validity of checked IBAN and provides comprehensive information
+                $ref: "#/paths/~1api~1v1~1iban-verification~1check-iban/post/responses/200/cont\
+                  ent/application~1json/schema"
+          description: Denotes validity of checked IBAN and provides comprehensive
+            information
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -959,7 +984,9 @@ paths:
         - v1-iban-verification
   "/api/v1/nif-verification/basic-check/{country}":
     post:
-      description: Performs a basic verification check of a given NIF tax number against NIF.com. Optional parameters may be added to improve calculation of confidence score.
+      description: Performs a basic verification check of a given NIF tax number
+        against NIF.com. Optional parameters may be added to improve calculation
+        of confidence score.
       operationId: NifBasic
       parameters:
         - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
@@ -1016,7 +1043,9 @@ paths:
         - v1-nif-verification
   "/api/v1/nif-verification/comprehensive-check/{country}":
     post:
-      description: Comprehensive verification of given portuguese NIF number against NIF.com. Optional parameters may help to build a better confidence score. Additional company data will be provided.
+      description: Comprehensive verification of given portuguese NIF number against
+        NIF.com. Optional parameters may help to build a better confidence
+        score. Additional company data will be provided.
       operationId: NifComprehensive
       parameters:
         - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
@@ -1095,7 +1124,8 @@ paths:
         - v1-nif-verification
   /api/v1/pepsanction/monitor/list:
     get:
-      description: Retrieve a list of all active Pep Sanction Report monitors for this account
+      description: Retrieve a list of all active Pep Sanction Report monitors for this
+        account
       operationId: PepMonitorList
       parameters: []
       responses:
@@ -1110,7 +1140,8 @@ paths:
                     caseId:
                       type: string
                     created:
-                      $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content/application~1json/schema/properties/timestamp"
+                      $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content\
+                        /application~1json/schema/properties/timestamp"
                     identifier:
                       type: string
                     structured:
@@ -1168,7 +1199,8 @@ paths:
             schema:
               properties:
                 Webhook:
-                  description: If Monitoring is enabled this parameter is required. This is where updates will be sent to
+                  description: If Monitoring is enabled this parameter is required. This is where
+                    updates will be sent to
                   example: "null"
                   type: string
               type: object
@@ -1184,7 +1216,8 @@ paths:
                   caseId:
                     type: string
                   created:
-                    $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content/application~1json/schema/properties/timestamp"
+                    $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content\
+                      /application~1json/schema/properties/timestamp"
                   identifier:
                     type: string
                   structured:
@@ -1203,7 +1236,8 @@ paths:
         - v1-pepsanction
   "/api/v1/pepsanction/order/{type}/{search}":
     post:
-      description: Order a new Pep Sanction Check by providing either a business or person name with some additional optional parameters.
+      description: Order a new Pep Sanction Check by providing either a business or
+        person name with some additional optional parameters.
       operationId: PepOrder
       parameters:
         - description: Type (Business or Person) of the requested Pep Sanction Check
@@ -1230,15 +1264,18 @@ paths:
             schema:
               properties:
                 Aliases:
-                  description: Optional parameter for declaring alias names when doing a person search (seperated by commas)
+                  description: Optional parameter for declaring alias names when doing a person
+                    search (seperated by commas)
                   example: "null"
                   type: string
                 Country:
-                  description: Optional name of Country to assist in identifying matches based upon location/geography.
+                  description: Optional name of Country to assist in identifying matches based
+                    upon location/geography.
                   example: "null"
                   type: string
                 DOB:
-                  description: Optional parameter for date of birth name when doing a person search
+                  description: Optional parameter for date of birth name when doing a person
+                    search
                   example: "null"
                   type: string
                 FamilyName:
@@ -1246,7 +1283,8 @@ paths:
                   example: "null"
                   type: string
                 Filters:
-                  description: Optional parameter for restricting search when doing a person search (seperated by commas)
+                  description: Optional parameter for restricting search when doing a person
+                    search (seperated by commas)
                   example: "null"
                   type: string
                 GivenName:
@@ -1254,15 +1292,18 @@ paths:
                   example: "null"
                   type: string
                 LEI:
-                  description: Optional Legal Entity Identifier for additional business identifier verification.
+                  description: Optional Legal Entity Identifier for additional business identifier
+                    verification.
                   example: "null"
                   type: string
                 Locale:
-                  description: Optional name of City or Locale to assist in identifying matches based upon location/geography.
+                  description: Optional name of City or Locale to assist in identifying matches
+                    based upon location/geography.
                   example: "null"
                   type: string
                 Medialists:
-                  description: Optional parameter for selecting only specific media lists. By default all lists are queried
+                  description: Optional parameter for selecting only specific media lists. By
+                    default all lists are queried
                   example: NMEDIA
                   type: string
                 MiddleName:
@@ -1274,11 +1315,13 @@ paths:
                   example: false
                   type: boolean
                 Peplists:
-                  description: Optional parameter for selecting only specific pep lists. By default all lists are queried
+                  description: Optional parameter for selecting only specific pep lists. By
+                    default all lists are queried
                   example: GOV,PEPD,SOE
                   type: string
                 Region:
-                  description: Optional name of Region or State to assist in identifying matches based upon location/geography.
+                  description: Optional name of Region or State to assist in identifying matches
+                    based upon location/geography.
                   example: "null"
                   type: string
                 SmartMatch:
@@ -1286,11 +1329,13 @@ paths:
                   example: false
                   type: boolean
                 Watchlists:
-                  description: Optional parameter for selecting only specific watch lists. By default all lists are queried
+                  description: Optional parameter for selecting only specific watch lists. By
+                    default all lists are queried
                   example: SANCTIONS,FINANCE,TERRORISM,CRIME,SMAGOV,OFAC,MEDICAL
                   type: string
                 Webhook:
-                  description: If Monitoring is enabled this parameter is required. This is where updates will be sent to
+                  description: If Monitoring is enabled this parameter is required. This is where
+                    updates will be sent to
                   example: "null"
                   type: string
               type: object
@@ -1345,7 +1390,8 @@ paths:
         - v1-pepsanction
   "/api/v1/pepsanction/retrieve/{id}":
     get:
-      description: Retrieve a completed Pep Sanction check structured or in pdf depending on given accept header
+      description: Retrieve a completed Pep Sanction check structured or in pdf
+        depending on given accept header
       operationId: PepRetrieve
       parameters:
         - description: The type (pdf or json) in which the check should be returned
@@ -1359,7 +1405,8 @@ paths:
               - application/pdf
             format: string
             type: string
-        - description: The id of the ordered Pep Sanction Check (id as returned by orderPepSanction call)
+        - description: The id of the ordered Pep Sanction Check (id as returned by
+            orderPepSanction call)
           in: path
           name: id
           required: true
@@ -1418,7 +1465,8 @@ paths:
         - v1-pepsanction
   "/api/v1/product/availability/{sku}/{subjectId}":
     get:
-      description: Check availability and valid options for a particular product for a particular company identfied by its id
+      description: Check availability and valid options for a particular product for a
+        particular company identfied by its id
       operationId: ProductAvailability
       parameters:
         - description: SKU - 9 character value from a Product object
@@ -1437,7 +1485,8 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1pepsanction~1order~1{type}~1{search}/post/responses/200"
+          $ref: "#/paths/~1api~1v1~1pepsanction~1order~1{type}~1{search}/post/responses/2\
+            00"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -1447,7 +1496,8 @@ paths:
         - v1-product
   "/api/v1/product/catalog/{country}":
     get:
-      description: Returns a catalog of purchasable products available with some metadata for a particular country
+      description: Returns a catalog of purchasable products available with some
+        metadata for a particular country
       operationId: ProductCatalog
       parameters:
         - description: two letter country code in upper case
@@ -1492,10 +1542,12 @@ paths:
         - v1-product
   "/api/v1/product/notifier/{notifierId}":
     get:
-      description: Queries and returns all metadata associated with a notifier identified by its notifer id
+      description: Queries and returns all metadata associated with a notifier
+        identified by its notifer id
       operationId: ProductNotifier
       parameters:
-        - description: ID of the ProductOrderNotifier as returned from a /notifier POST call - 32 character hex value
+        - description: ID of the ProductOrderNotifier as returned from a /notifier POST
+            call - 32 character hex value
           in: path
           name: notifierId
           required: true
@@ -1513,7 +1565,8 @@ paths:
                   identity:
                     type: string
                   lastCallTime:
-                    $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content/application~1json/schema/properties/timestamp"
+                    $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content\
+                      /application~1json/schema/properties/timestamp"
                   lastResponseCode:
                     type: integer
                   notifierType:
@@ -1536,24 +1589,32 @@ paths:
         - v1-product
   "/api/v1/product/notifier/{orderId}/{type}/{uri}":
     post:
-      description: Create a notifier for a particular order. Parameters can be supplied in the path
+      description: Create a notifier for a particular order. Parameters can be
+        supplied in the path
       operationId: ProductNotifierCreate
       parameters:
-        - description: ID of the ProductOrder as returned from a /product/buy call - 32 character hex value
+        - description: ID of the ProductOrder as returned from a /product/buy call - 32
+            character hex value
           in: path
           name: orderId
           required: true
           schema:
             format: string
             type: string
-        - description: Type of the notifier - indicates the action the notifier will perform. Currently GET and POST are supported which performs an http(s) GET/POST to the supplied uri with appended notifierId= and orderId= parameters when the order processing is completed. Upon the POST request the order object is sent as a JSON body
+        - description: Type of the notifier - indicates the action the notifier will
+            perform. Currently GET and POST are supported which performs an
+            http(s) GET/POST to the supplied uri with appended notifierId= and
+            orderId= parameters when the order processing is completed. Upon the
+            POST request the order object is sent as a JSON body
           in: path
           name: type
           required: true
           schema:
             format: string
             type: string
-        - description: URI of the notifier for the 'complete' action. Currently only a GET method HTTP(s) URL is supported. 1 to 250 characters long. Every slash in the URI must be replaced by a ~
+        - description: URI of the notifier for the 'complete' action. Currently only a GET
+            method HTTP(s) URL is supported. 1 to 250 characters long. Every
+            slash in the URI must be replaced by a ~
           in: path
           name: uri
           required: true
@@ -1581,19 +1642,23 @@ paths:
             schema:
               properties:
                 companyName:
-                  description: Name of the company for which a document should be ordered. (Not required if subjectId is given)
+                  description: Name of the company for which a document should be ordered. (Not
+                    required if subjectId is given)
                   example: "null"
                   type: string
                 contactEmail:
-                  description: Contact E-Mail, will be contacted if concierge costs are exceeding the threshhold configured on your plan
+                  description: Contact E-Mail, will be contacted if concierge costs are exceeding
+                    the threshhold configured on your plan
                   example: "null"
                   type: string
                 contactPhone:
-                  description: Contact phone, will be contacted if concierge costs are exceeding the threshhold configured on your plan
+                  description: Contact phone, will be contacted if concierge costs are exceeding
+                    the threshhold configured on your plan
                   example: "null"
                   type: string
                 costConfirmation:
-                  description: If the concierge cost should require additional confirmation if a threshold is reached (configured on your plan)
+                  description: If the concierge cost should require additional confirmation if a
+                    threshold is reached (configured on your plan)
                   example: false
                   type: boolean
                 country:
@@ -1609,7 +1674,8 @@ paths:
                   example: false
                   type: boolean
                 informationRequirements:
-                  description: Requirements on what document or information should be provided. Please be very precise
+                  description: Requirements on what document or information should be provided.
+                    Please be very precise
                   example: "null"
                   type: string
                 locationInvestigation:
@@ -1625,7 +1691,8 @@ paths:
                   example: false
                   type: boolean
                 registerNumber:
-                  description: Registration number of the company for which a document should be ordered. (Not required if subjectId is given)
+                  description: Registration number of the company for which a document should be
+                    ordered. (Not required if subjectId is given)
                   example: "null"
                   type: string
                 subjectId:
@@ -1655,11 +1722,13 @@ paths:
             schema:
               properties:
                 callbackUrl:
-                  description: An optional callback URL to which updates about the order will be sent (for instance if credits are exceeded)
+                  description: An optional callback URL to which updates about the order will be
+                    sent (for instance if credits are exceeded)
                   example: "null"
                   type: string
                 credits:
-                  description: Specify a maximum amount of credits which should be used. To disable use -1
+                  description: Specify a maximum amount of credits which should be used. To
+                    disable use -1
                   example: -1
                   type: number
                 includeDocs:
@@ -1675,7 +1744,8 @@ paths:
                   example: FULL
                   type: string
                 subjectId:
-                  description: BrexId (32 byte hexid) of the company you want to place the order for
+                  description: BrexId (32 byte hexid) of the company you want to place the order
+                    for
                   example: "null"
                   type: string
               type: object
@@ -1691,7 +1761,8 @@ paths:
                   option:
                     type: string
                   ordered:
-                    $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content/application~1json/schema/properties/timestamp"
+                    $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content\
+                      /application~1json/schema/properties/timestamp"
                   owner:
                     type: string
                   price:
@@ -1725,7 +1796,8 @@ paths:
         - v1-product
   "/api/v1/product/order/{sku}/{option}/{subjectId}":
     post:
-      description: Place an order for a particular product identified by its SKU with a particular option for a particular company identified by its id
+      description: Place an order for a particular product identified by its SKU with
+        a particular option for a particular company identified by its id
       operationId: ProductOrderWithOption
       parameters:
         - description: SKU - 9 character value from a Product object
@@ -1761,7 +1833,8 @@ paths:
         - v1-product
   "/api/v1/product/order/{sku}/{subjectId}":
     post:
-      description: Place an order for a particular product identified by its SKU for a particular company identified by its id
+      description: Place an order for a particular product identified by its SKU for a
+        particular company identified by its id
       operationId: ProductOrder
       parameters:
         - description: SKU - 9 character value from a Product object
@@ -1790,7 +1863,8 @@ paths:
         - v1-product
   "/api/v1/product/search/{subjectId}":
     get:
-      description: Search for possible products for a particular company identified by its id
+      description: Search for possible products for a particular company identified by
+        its id
       operationId: ProductSearch
       parameters:
         - description: Subject (e.g. Company) ID - 32 character hex value
@@ -1844,7 +1918,8 @@ paths:
       description: Retrieve the current status of an order identified by its order id
       operationId: ProductStatus
       parameters:
-        - description: ID of the ProductOrder as returned from a /product/buy call - 32 character hex value
+        - description: ID of the ProductOrder as returned from a /product/buy call - 32
+            character hex value
           in: path
           name: orderId
           required: true
@@ -1873,7 +1948,8 @@ paths:
           schema:
             format: string
             type: string
-        - description: ID of the ProductOrder as returned from a /product/buy call - 32 character hex value
+        - description: ID of the ProductOrder as returned from a /product/buy call - 32
+            character hex value
           in: path
           name: orderId
           required: true
@@ -1903,10 +1979,12 @@ paths:
         - v1-product
   "/api/v1/product/{orderId}":
     get:
-      description: Retrieves the document or structured data associated with a completed order identified with its order id
+      description: Retrieves the document or structured data associated with a
+        completed order identified with its order id
       operationId: ProductRetrieve
       parameters:
-        - description: ID of the ProductOrder as returned from a /product/buy call - 32 character hex value
+        - description: ID of the ProductOrder as returned from a /product/buy call - 32
+            character hex value
           in: path
           name: orderId
           required: true
@@ -2080,7 +2158,8 @@ paths:
         - v1-tin-verification
   /api/v1/tin-verification/comprehensive-check:
     get:
-      description: Performs an EIN name match using provided TIN Number. Additionally to the name lookup it will lookup company details
+      description: Performs an EIN name match using provided TIN Number. Additionally
+        to the name lookup it will lookup company details
       operationId: TinVerificationComprehensiveCheck
       parameters:
         - description: Nine letter TIN number with or without hyphens
@@ -2097,7 +2176,8 @@ paths:
           schema:
             format: string
             type: string
-        - description: "The percentage of minimum similarity threshold for company matching (optional, default: 70%)"
+        - description: "The percentage of minimum similarity threshold for company
+            matching (optional, default: 70%)"
           in: query
           name: threshold
           required: false
@@ -2113,14 +2193,16 @@ paths:
                   einResult:
                     type: string
                   matchedCompanies:
-                    $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200/content/application~1json/schema"
+                    $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200/content\
+                      /application~1json/schema"
                   tinResult:
                     type: string
                 required:
                   - tinResult
                   - einResult
                   - matchedCompanies
-          description: Result of a basic TIN number check with company name and the list of matched companies
+          description: Result of a basic TIN number check with company name and the list
+            of matched companies
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -2166,7 +2248,8 @@ paths:
         - v1-tin-verification
   "/api/v1/vat-verification/basic-check/{country}":
     post:
-      description: Basic verification of given VAT number against VIES. Optional parameters may help to build a better confidence score.
+      description: Basic verification of given VAT number against VIES. Optional
+        parameters may help to build a better confidence score.
       operationId: VatBasic
       parameters:
         - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
@@ -2205,7 +2288,8 @@ paths:
               schema:
                 properties:
                   company:
-                    $ref: "#/paths/~1api~1v1~1company~1{id}~1{dataset}/get/responses/200/content/application~1json/schema"
+                    $ref: "#/paths/~1api~1v1~1company~1{id}~1{dataset}/get/responses/200/content/ap\
+                      plication~1json/schema"
                   confidenceScore:
                     type: number
                   validationStatus:
@@ -2223,7 +2307,8 @@ paths:
         - v1-vat-verification
   "/api/v1/vat-verification/comprehensive-check/{country}":
     post:
-      description: Extended verification of given VAT number against VIES. Optional parameters may help to build a better confidence score.
+      description: Extended verification of given VAT number against VIES. Optional
+        parameters may help to build a better confidence score.
       operationId: VatComprehensive
       parameters:
         - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
@@ -2257,7 +2342,8 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1vat-verification~1basic-check~1{country}/post/responses/200"
+          $ref: "#/paths/~1api~1v1~1vat-verification~1basic-check~1{country}/post/respons\
+            es/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -2267,7 +2353,9 @@ paths:
         - v1-vat-verification
   "/api/v1/vat-verification/leveltwo-check/{country}":
     post:
-      description: Second Level Verification of VAT number against BMF Austria. Optional confirmation parameter can be provided to order a Confirmation Report.
+      description: Second Level Verification of VAT number against BMF Austria.
+        Optional confirmation parameter can be provided to order a Confirmation
+        Report.
       operationId: VatLevelTwo
       parameters:
         - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
@@ -2322,7 +2410,8 @@ paths:
         - v1-vat-verification
   "/api/v1/vat-verification/lookup/{country}":
     post:
-      description: "Reverse VAT Lookup: Search for companies and their VAT numbers by company name. Search is forwarded to a provider."
+      description: "Reverse VAT Lookup: Search for companies and their VAT numbers by
+        company name. Search is forwarded to a provider."
       operationId: VatLookup
       parameters:
         - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
@@ -2360,7 +2449,8 @@ paths:
                     items:
                       properties:
                         company:
-                          $ref: "#/paths/~1api~1v1~1company~1{id}~1{dataset}/get/responses/200/content/application~1json/schema"
+                          $ref: "#/paths/~1api~1v1~1company~1{id}~1{dataset}/get/responses/200/content/ap\
+                            plication~1json/schema"
                         vat:
                           type: string
                     type: array

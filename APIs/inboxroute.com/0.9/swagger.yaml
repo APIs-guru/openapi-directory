@@ -7,7 +7,8 @@ info:
   contact:
     email: support@mailsquad.com
     url: https://mailsquad.com
-  description: MailSquad offers an affordable and super easy way to create, send and track delightful emails.
+  description: MailSquad offers an affordable and super easy way to create, send
+    and track delightful emails.
   title: Mailsquad
   version: "0.9"
   x-apisguru-categories:
@@ -252,7 +253,8 @@ paths:
   "/subscription/{listid}":
     post:
       description: >
-        Subscribe an email address to a list. This api call has the same behavior as
+        Subscribe an email address to a list. This api call has the same
+        behavior as
 
         a regular subscribe form. However, single opt-in is allowed for system integration
 
@@ -311,7 +313,7 @@ definitions:
         description: Email address
         type: string
       fullname:
-        description: >
+        description: |
           Full name (Last name, First Name) of the subscriber
         type: string
       ip:
@@ -319,7 +321,8 @@ definitions:
         type: string
       lang:
         description: >
-          ISO 639-1 language code of the subscriber. When lang is one the supported system language, all communication
+          ISO 639-1 language code of the subscriber. When lang is one the
+          supported system language, all communication
 
           will be in this language. 
         type: string
@@ -327,7 +330,7 @@ definitions:
         description: Unique 16 characters ID of the list owner
         type: string
       status:
-        description: >
+        description: |
           Status (
             1- Active,
             2- Unconfirmed,
@@ -353,7 +356,7 @@ definitions:
         description: Unique 16 characters ID of the list owner
         type: string
       status:
-        description: >
+        description: |
           Status (
             1- Active,
             2- Unconfirmed,
@@ -376,7 +379,7 @@ definitions:
         description: Is field required
         type: boolean
       type:
-        description: >
+        description: |
           Type (
             1- String / text free form
             2- Numeric / integer or decimal
@@ -417,7 +420,7 @@ definitions:
         description: full url of the destination landing page
         type: string
       type:
-        description: >
+        description: |
           Type (
             1- Subscribe confirmation request landing page
             2- Subscribe opt-in landing page
@@ -476,7 +479,7 @@ definitions:
         description: Subscriber's IP address when he/she confirmed list opt-in
         type: string
       status:
-        description: >
+        description: |
           Status (
             1- Active,
             2- Unconfirmed,
@@ -499,21 +502,24 @@ definitions:
         description: Email address of the subscriber
         type: string
       fullname:
-        description: >
+        description: |
           Full name (Last name, First Name) of the subscriber
         type: string
       ip:
-        description: Origin Ip of the subscriber when he/she opted-in. Required if singleoptin is true.
+        description: Origin Ip of the subscriber when he/she opted-in. Required if
+          singleoptin is true.
         type: string
       lang:
         description: >
-          ISO 639-1 language code of the subscriber. When lang is one the supported system language, all communication
+          ISO 639-1 language code of the subscriber. When lang is one the
+          supported system language, all communication
 
           will be in this language.
         type: string
       singleoptin:
         description: >
-          If true, no email will be sent asking user subscription confirmation. In that case, you must provide
+          If true, no email will be sent asking user subscription
+          confirmation. In that case, you must provide
 
           the confirmation date (confirmed) and origin ip (ip) manually.
         type: boolean

@@ -7,7 +7,8 @@ info:
     name: Vonage DevRel
     url: https://developer.nexmo.com/
   description: >-
-    The Verify API helps you to implement 2FA (two-factor authentication) in your applications. This is useful for:
+    The Verify API helps you to implement 2FA (two-factor
+    authentication) in your applications. This is useful for:
 
 
     * Protecting against spam, by preventing spammers from creating multiple accounts
@@ -36,7 +37,8 @@ paths:
   "/check/{format}":
     post:
       description: >-
-        Use Verify check to confirm that the PIN you received from your user matches the one sent by Vonage in your Verify request.
+        Use Verify check to confirm that the PIN you received from your
+        user matches the one sent by Vonage in your Verify request.
 
 
         1. Send the verification `code` that your user supplied, with the corresponding `request_id` from the Verify request.
@@ -106,7 +108,10 @@ paths:
                 unknown-requestid:
                   summary: This request_id is unknown or inactive
                   value:
-                    error_text: "The Vonage platform was unable to process this message for the following reason: Request 'abcdef0123456789abcdef0123456789' was not found or it has been verified already."
+                    error_text: "The Vonage platform was unable to process this message for the
+                      following reason: Request
+                      'abcdef0123456789abcdef0123456789' was not found or it has
+                      been verified already."
                     status: "6"
               schema:
                 oneOf:
@@ -122,7 +127,8 @@ paths:
   "/control/{format}":
     post:
       description: >-
-        Control the progress of your Verify requests. To cancel an existing Verify request, or to trigger the next verification event:
+        Control the progress of your Verify requests. To cancel an existing
+        Verify request, or to trigger the next verification event:
 
 
 
@@ -151,12 +157,15 @@ paths:
                 cancel-early:
                   summary: Cancellation requested less than 30 seconds into the request
                   value:
-                    error_text: Verification request ['abcdef0123456789abcdef0123456789'] can't be cancelled within the first 30 seconds.
+                    error_text: Verification request ['abcdef0123456789abcdef0123456789'] can't be
+                      cancelled within the first 30 seconds.
                     status: "19"
                 cancel-late:
                   summary: Cancellation requested after too many retry attempts
                   value:
-                    error_text: Verification request  ['abcdef0123456789abcdef0123456789'] can't be cancelled now. Too many attempts to re-deliver have already been made.
+                    error_text: Verification request  ['abcdef0123456789abcdef0123456789'] can't be
+                      cancelled now. Too many attempts to re-deliver have
+                      already been made.
                     status: "19"
                 internal-error:
                   summary: Internal Error
@@ -196,7 +205,8 @@ paths:
                 trigger-end:
                   summary: No more events to trigger
                   value:
-                    error_text: No more events are left to execute for the request ['abcdef0123456789abcdef0123456789']
+                    error_text: No more events are left to execute for the request
+                      ['abcdef0123456789abcdef0123456789']
                     status: "19"
               schema:
                 oneOf:
@@ -212,7 +222,8 @@ paths:
   "/psd2/{format}":
     post:
       description: >-
-        Use Verify request to generate and send a PIN to your user to authorize a payment:
+        Use Verify request to generate and send a PIN to your user to
+        authorize a payment:
 
         1. Create a request to send a verification code to your user.
 
@@ -243,7 +254,8 @@ paths:
   "/search/{format}":
     get:
       description: >-
-        Use Verify search to check the status of past or current verification requests:
+        Use Verify search to check the status of past or current
+        verification requests:
 
 
         1. Send a Verify search request containing the `request_id`s of the verification requests you are interested in.
@@ -257,14 +269,16 @@ paths:
         - $ref: "#/components/parameters/format"
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/api_secret"
-        - description: The `request_id` you received in the Verify Request Response. Required if `request_ids` not provided.
+        - description: The `request_id` you received in the Verify Request Response.
+            Required if `request_ids` not provided.
           example: abcdef0123456789abcdef0123456789
           in: query
           name: request_id
           required: true
           schema:
             type: string
-        - description: More than one `request_id`. Each `request_id` is a new parameter in the Verify Search request. Required if `request_id` not provided.
+        - description: More than one `request_id`. Each `request_id` is a new parameter in
+            the Verify Search request. Required if `request_id` not provided.
           explode: true
           in: query
           name: request_ids
@@ -302,7 +316,8 @@ paths:
                     error_text: Missing api_key
                     status: "2"
                 not-found:
-                  summary: Request not found (this also occurs immediately after completion, wait 60 seconds and try again)
+                  summary: Request not found (this also occurs immediately after completion, wait
+                    60 seconds and try again)
                   value:
                     error_text: No response found
                     status: "101"
@@ -384,7 +399,8 @@ paths:
                 account-disabled:
                   summary: Account is barred
                   value:
-                    error_text: The api_key you supplied is for an account that has been barred from submitting messages.
+                    error_text: The api_key you supplied is for an account that has been barred from
+                      submitting messages.
                     status: "8"
                 blacklist:
                   summary: Blacklisted number
@@ -394,7 +410,8 @@ paths:
                 cannot-process:
                   summary: Unable to process message
                   value:
-                    error_text: "The Vonage platform was unable to process this message for the following reason: The request could not be routed."
+                    error_text: "The Vonage platform was unable to process this message for the
+                      following reason: The request could not be routed."
                     status: "6"
                 concurrent:
                   summary: Concurrent verifications
@@ -425,7 +442,10 @@ paths:
                 not-permitted:
                   summary: Non-Permitted Destination
                   value:
-                    error_text: Your Vonage account is still in demo mode. While in demo mode you must add target numbers to the approved list for your account. Add funds to your account to remove this limitation.
+                    error_text: Your Vonage account is still in demo mode. While in demo mode you
+                      must add target numbers to the approved list for your
+                      account. Add funds to your account to remove this
+                      limitation.
                     status: "29"
                 quota-exceeded:
                   summary: Quota exceeded
@@ -485,11 +505,13 @@ components:
         type: string
   schemas:
     api_key:
-      description: You can find your API key in your [account dashboard](https://dashboard.nexmo.com)
+      description: You can find your API key in your [account
+        dashboard](https://dashboard.nexmo.com)
       example: abcd1234
       type: string
     api_secret:
-      description: You can find your API secret in your [account dashboard](https://dashboard.nexmo.com)
+      description: You can find your API secret in your [account
+        dashboard](https://dashboard.nexmo.com)
       example: Sup3rS3cr3t!!
       type: string
     checkErrorResponse:
@@ -500,7 +522,8 @@ components:
           example: The code inserted does not match the expected value
           type: string
         request_id:
-          description: The `request_id` that you received in the response to the Verify request and used in the Verify check request.
+          description: The `request_id` that you received in the response to the Verify
+            request and used in the Verify check request.
           example: abcdef0123456789abcdef0123456789
           type: string
         status:
@@ -559,7 +582,8 @@ components:
           example: 123.0.0.255
           type: string
         request_id:
-          description: The Verify request to check. This is the `request_id` you received in the response to the Verify request.
+          description: The Verify request to check. This is the `request_id` you received
+            in the response to the Verify request.
           example: abcdef0123456789abcdef0123456789
           maxLength: 32
           type: string
@@ -587,11 +611,13 @@ components:
           example: "0.10000000"
           type: string
         request_id:
-          description: The `request_id` that you received in the response to the Verify request and used in the Verify check request.
+          description: The `request_id` that you received in the response to the Verify
+            request and used in the Verify check request.
           example: abcdef0123456789abcdef0123456789
           type: string
         status:
-          description: A value of `0` indicates that your user entered the correct code. If it is non-zero, check the `error_text`.
+          description: A value of `0` indicates that your user entered the correct code.
+            If it is non-zero, check the `error_text`.
           example: "0"
           type: string
       type: object
@@ -602,7 +628,8 @@ components:
       properties:
         error_text:
           description: If the `status` is non-zero, this explains the error encountered.
-          example: The requestId 'abcdef0123456789abcdef' does not exist or its no longer active.
+          example: The requestId 'abcdef0123456789abcdef' does not exist or its no longer
+            active.
           type: string
         status:
           description: >
@@ -652,7 +679,11 @@ components:
         api_secret:
           $ref: "#/components/schemas/api_secret"
         cmd:
-          description: The possible commands are `cancel` to request cancellation of the verification process, or `trigger_next_event` to advance  to the next verification event (if any). Cancellation is only possible 30 seconds after the start of the verification request and before the second event (either TTS or SMS) has taken place.
+          description: The possible commands are `cancel` to request cancellation of the
+            verification process, or `trigger_next_event` to advance  to the
+            next verification event (if any). Cancellation is only possible 30
+            seconds after the start of the verification request and before the
+            second event (either TTS or SMS) has taken place.
           enum:
             - cancel
             - trigger_next_event
@@ -679,11 +710,9 @@ components:
           example: cancel
           type: string
         status:
-          description: >
+          description: |
             `cmd` | Code | Description
-
             -- | -- | --
-
             Any | 0 | Success
           example: "0"
           type: string
@@ -691,17 +720,12 @@ components:
       xml:
         name: response
     estimated_price_messages_sent:
-      description: >
+      description: |
         This field may not be present, depending on your pricing model. The
-
         value indicates the cost (in EUR) of the calls made and messages sent
-
         for the verification process. This value may be updated during and
-
         shortly after the request completes because user input events can
-
         overlap with message/call events. When this field is present, the total
-
         cost of the verification is the sum of this field and the `price` field.
       example: "0.03330000"
       type: string
@@ -725,13 +749,19 @@ components:
           example: 6
           type: integer
         country:
-          description: If you do not provide `number` in international format or you are not sure if `number` is correctly formatted, specify the two-character country code in `country`. Verify will then format the number for you.
+          description: If you do not provide `number` in international format or you are
+            not sure if `number` is correctly formatted, specify the
+            two-character country code in `country`. Verify will then format the
+            number for you.
           example: GB
           type: string
         lg:
           default: en-gb
           description: >-
-            By default, the SMS or text-to-speech (TTS) message is generated in the locale that matches the `number`. For example, the text message or TTS message for a `33*` number is sent in French. Use this parameter to explicitly control the language used.
+            By default, the SMS or text-to-speech (TTS) message is generated in
+            the locale that matches the `number`. For example, the text message
+            or TTS message for a `33*` number is sent in French. Use this
+            parameter to explicitly control the language used.
 
             *Note: Voice calls in English for `bg-bg`, `ee-et`, `ga-ie`, `lv-lv`, `lt-lt`, `mt-mt`, `sk-sk`, `sk-si`
           enum:
@@ -760,30 +790,43 @@ components:
           type: string
         next_event_wait:
           default: 300
-          description: Specifies the wait time in seconds between attempts to deliver the verification code.
+          description: Specifies the wait time in seconds between attempts to deliver the
+            verification code.
           example: 120
           maximum: 900
           minimum: 60
           type: integer
         number:
-          description: The mobile or landline phone number to verify. Unless you are setting `country` explicitly, this number must be in [E.164](https://en.wikipedia.org/wiki/E.164) format.
+          description: The mobile or landline phone number to verify. Unless you are
+            setting `country` explicitly, this number must be in
+            [E.164](https://en.wikipedia.org/wiki/E.164) format.
           example: "447700900000"
           type: string
         payee:
-          description: An alphanumeric string to indicate to the user the name of the recipient that they are confirming a payment to.
+          description: An alphanumeric string to indicate to the user the name of the
+            recipient that they are confirming a payment to.
           example: Acme Inc
           maxLength: 18
           type: string
         pin_expiry:
           default: 300
-          description: How long the generated verification code is valid for, in seconds. When you specify both `pin_expiry` and `next_event_wait` then `pin_expiry` must be an integer multiple of `next_event_wait` otherwise `pin_expiry` is defaulted to equal next_event_wait. See [changing the event timings](https://developer.nexmo.com/verify/guides/changing-default-timings).
+          description: How long the generated verification code is valid for, in seconds.
+            When you specify both `pin_expiry` and `next_event_wait` then
+            `pin_expiry` must be an integer multiple of `next_event_wait`
+            otherwise `pin_expiry` is defaulted to equal next_event_wait. See
+            [changing the event
+            timings](https://developer.nexmo.com/verify/guides/changing-default-timings).
           example: 240
           maximum: 3600
           minimum: 60
           type: integer
         workflow_id:
           default: 1
-          description: Selects the predefined sequence of SMS and TTS (Text To Speech) actions to use in order to convey the PIN to your user. For example, an id of 1 identifies the workflow SMS - TTS - TTS. For a list of all workflows and their associated ids, please visit the [developer portal](https://developer.nexmo.com/verify/guides/workflows-and-events).
+          description: Selects the predefined sequence of SMS and TTS (Text To Speech)
+            actions to use in order to convey the PIN to your user. For example,
+            an id of 1 identifies the workflow SMS - TTS - TTS. For a list of
+            all workflows and their associated ids, please visit the [developer
+            portal](https://developer.nexmo.com/verify/guides/workflows-and-events).
           enum:
             - 1
             - 2
@@ -809,7 +852,8 @@ components:
           example: Your request is incomplete and missing the mandatory parameter `number`
           type: string
         request_id:
-          description: The unique ID of the Verify request. This may be blank in an error situation
+          description: The unique ID of the Verify request. This may be blank in an error
+            situation
           example: ""
           maxLength: 32
           type: string
@@ -870,7 +914,8 @@ components:
       description: Success
       properties:
         request_id:
-          description: The unique ID of the Verify request. You need this `request_id` for the Verify check.
+          description: The unique ID of the Verify request. You need this `request_id` for
+            the Verify check.
           example: abcdef0123456789abcdef0123456789
           maxLength: 32
           type: string
@@ -885,11 +930,14 @@ components:
       description: Error
       properties:
         error_text:
-          description: If `status` is not `SUCCESS`, this message explains the issue encountered.
+          description: If `status` is not `SUCCESS`, this message explains the issue
+            encountered.
           example: No response found
           type: string
         request_id:
-          description: The `request_id` that you received in the response to the Verify request and used in the Verify search request. May be empty in an error situation.
+          description: The `request_id` that you received in the response to the Verify
+            request and used in the Verify search request. May be empty in an
+            error situation.
           example: abcdef0123456789abcdef0123456789
           type: string
         status:
@@ -936,7 +984,8 @@ components:
                 example: "987654"
                 type: string
               date_received:
-                description: The date and time this check was received (in the format YYYY-MM-DD HH:MM:SS)
+                description: The date and time this check was received (in the format YYYY-MM-DD
+                  HH:MM:SS)
                 example: 2020-01-01 12:00:00
                 type: string
               ip_address:
@@ -960,17 +1009,20 @@ components:
           example: EUR
           type: string
         date_finalized:
-          description: The date and time the verification request was completed. This response parameter is in the following format YYYY-MM-DD HH:MM:SS.
+          description: The date and time the verification request was completed. This
+            response parameter is in the following format YYYY-MM-DD HH:MM:SS.
           example: 2020-01-01 12:00:00
           type: string
         date_submitted:
-          description: The date and time the verification request was submitted, in the following format YYYY-MM-DD HH:MM:SS.
+          description: The date and time the verification request was submitted, in the
+            following format YYYY-MM-DD HH:MM:SS.
           example: 2020-01-01 12:00:00
           type: string
         estimated_price_messages_sent:
           $ref: "#/components/schemas/estimated_price_messages_sent"
         events:
-          description: The events that have taken place to verify this number, and their unique identifiers.
+          description: The events that have taken place to verify this number, and their
+            unique identifiers.
           items:
             properties:
               id:
@@ -987,11 +1039,13 @@ components:
           xml:
             wrapped: true
         first_event_date:
-          description: The time the first verification attempt was made, in the following format YYYY-MM-DD HH:MM:SS.
+          description: The time the first verification attempt was made, in the following
+            format YYYY-MM-DD HH:MM:SS.
           example: 2020-01-01 12:00:00
           type: string
         last_event_date:
-          description: The time the last verification attempt was made, in the following format YYYY-MM-DD HH:MM:SS.
+          description: The time the last verification attempt was made, in the following
+            format YYYY-MM-DD HH:MM:SS.
           example: 2020-01-01 12:00:00
           type: string
         number:
@@ -1003,7 +1057,8 @@ components:
           example: "0.10000000"
           type: string
         request_id:
-          description: The `request_id` that you received in the response to the Verify request and used in the Verify search request.
+          description: The `request_id` that you received in the response to the Verify
+            request and used in the Verify search request.
           example: abcdef0123456789abcdef0123456789
           type: string
         sender_id:
@@ -1044,7 +1099,9 @@ components:
         api_secret:
           $ref: "#/components/schemas/api_secret"
         brand:
-          description: 'An 18-character alphanumeric string you can use to personalize the verification request SMS body, to help users identify your company or application name. For example: "Your `Acme Inc` PIN is ..."'
+          description: 'An 18-character alphanumeric string you can use to personalize the
+            verification request SMS body, to help users identify your company
+            or application name. For example: "Your `Acme Inc` PIN is ..."'
           example: Acme Inc
           maxLength: 18
           type: string
@@ -1057,12 +1114,20 @@ components:
           example: 6
           type: integer
         country:
-          description: If you do not provide `number` in international format or you are not sure if `number` is correctly formatted, specify the two-character country code in `country`. Verify will then format the number for you.
+          description: If you do not provide `number` in international format or you are
+            not sure if `number` is correctly formatted, specify the
+            two-character country code in `country`. Verify will then format the
+            number for you.
           example: GB
           type: string
         lg:
           default: en-us
-          description: "By default, the SMS or text-to-speech (TTS) message is generated in the locale that matches the `number`. For example, the text message or TTS message for a `33*` number is sent in French. Use this parameter to explicitly control the language used for the Verify request. A list of languages is available: <https://developer.nexmo.com/verify/guides/verify-languages>"
+          description: "By default, the SMS or text-to-speech (TTS) message is generated
+            in the locale that matches the `number`. For example, the text
+            message or TTS message for a `33*` number is sent in French. Use
+            this parameter to explicitly control the language used for the
+            Verify request. A list of languages is available:
+            <https://developer.nexmo.com/verify/guides/verify-languages>"
           enum:
             - ar-xa
             - cs-cz
@@ -1107,31 +1172,48 @@ components:
           type: string
         next_event_wait:
           default: 300
-          description: Specifies the wait time in seconds between attempts to deliver the verification code.
+          description: Specifies the wait time in seconds between attempts to deliver the
+            verification code.
           example: 120
           maximum: 900
           minimum: 60
           type: integer
         number:
-          description: The mobile or landline phone number to verify. Unless you are setting `country` explicitly, this number must be in [E.164](https://en.wikipedia.org/wiki/E.164) format.
+          description: The mobile or landline phone number to verify. Unless you are
+            setting `country` explicitly, this number must be in
+            [E.164](https://en.wikipedia.org/wiki/E.164) format.
           example: "447700900000"
           type: string
         pin_expiry:
           default: 300
-          description: How long the generated verification code is valid for, in seconds. When you specify both `pin_expiry` and `next_event_wait` then `pin_expiry` must be an integer multiple of `next_event_wait` otherwise `pin_expiry` is defaulted to equal next_event_wait. See [changing the event timings](https://developer.nexmo.com/verify/guides/changing-default-timings).
+          description: How long the generated verification code is valid for, in seconds.
+            When you specify both `pin_expiry` and `next_event_wait` then
+            `pin_expiry` must be an integer multiple of `next_event_wait`
+            otherwise `pin_expiry` is defaulted to equal next_event_wait. See
+            [changing the event
+            timings](https://developer.nexmo.com/verify/guides/changing-default-timings).
           example: 240
           maximum: 3600
           minimum: 60
           type: integer
         sender_id:
           default: VERIFY
-          description: An 11-character alphanumeric string that represents the [identity of the sender](https://developer.nexmo.com/messaging/sms/guides/custom-sender-id) of the verification request. Depending on the destination of the phone number you are sending the verification SMS to, restrictions might apply.
+          description: An 11-character alphanumeric string that represents the [identity
+            of the
+            sender](https://developer.nexmo.com/messaging/sms/guides/custom-sender-id)
+            of the verification request. Depending on the destination of the
+            phone number you are sending the verification SMS to, restrictions
+            might apply.
           example: ACME
           maxLength: 11
           type: string
         workflow_id:
           default: 1
-          description: Selects the predefined sequence of SMS and TTS (Text To Speech) actions to use in order to convey the PIN to your user. For example, an id of 1 identifies the workflow SMS - TTS - TTS. For a list of all workflows and their associated ids, please visit the [developer portal](https://developer.nexmo.com/verify/guides/workflows-and-events).
+          description: Selects the predefined sequence of SMS and TTS (Text To Speech)
+            actions to use in order to convey the PIN to your user. For example,
+            an id of 1 identifies the workflow SMS - TTS - TTS. For a list of
+            all workflows and their associated ids, please visit the [developer
+            portal](https://developer.nexmo.com/verify/guides/workflows-and-events).
           enum:
             - 1
             - 2

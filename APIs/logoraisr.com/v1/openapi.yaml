@@ -5,7 +5,12 @@ info:
   contact:
     email: support@logoraisr.com
     url: https://logoraisr.com
-  description: <p style="font-size:110%;">Dig into our logoraisr API reference documentation. We also offer an OpenAPI specification to allow easy integration into your systems. You can download the json file by clicking on the download button.<p><br><p style="font-size:110%; font-weight:bold">OpenAPI 2.0 Validation Status</p><img src="https://online.swagger.io/validator?url=https://docs.logoraisr.com/">
+  description: <p style="font-size:110%;">Dig into our logoraisr API reference
+    documentation. We also offer an OpenAPI specification to allow easy
+    integration into your systems. You can download the json file by clicking on
+    the download button.<p><br><p style="font-size:110%;
+    font-weight:bold">OpenAPI 2.0 Validation Status</p><img
+    src="https://online.swagger.io/validator?url=https://docs.logoraisr.com/">
   termsOfService: https://logoraisr.com/terms-conditions
   title: API docs | logoraisr.com
   version: v1
@@ -24,7 +29,8 @@ security:
 paths:
   "/previews/{file_id}/":
     get:
-      description: This GET-Method returns the URL where the preview image of uploaded file can downloaded from.
+      description: This GET-Method returns the URL where the preview image of uploaded
+        file can downloaded from.
       operationId: previews_read
       parameters:
         - description: Id of the file for which the preview_img_url is generated.
@@ -70,9 +76,8 @@ paths:
 
             print(resp.json())
         - lang: node.js
-          source: >
+          source: |
             var request = require("request");
-
 
             var options = {
               method: 'GET',
@@ -84,7 +89,6 @@ paths:
 
             };
 
-
             request(options, function (error, response, body) {
               if (error) throw new Error(error);
 
@@ -92,7 +96,8 @@ paths:
             });
         - lang: java
           source: >-
-            HttpResponse<String> response = Unirest.GET("https://api.logoraisr.com/rest-v1/previews/{file_id}/")
+            HttpResponse<String> response =
+            Unirest.GET("https://api.logoraisr.com/rest-v1/previews/{file_id}/")
 
             .header("Authorization", "Token your_api_key")
 
@@ -101,7 +106,8 @@ paths:
             .asString();
         - lang: php
           source: >-
-            $response = Unirest\Request::GET("https://api.logoraisr.com/rest-v1/previews/{file_id}/",
+            $response =
+            Unirest\Request::GET("https://api.logoraisr.com/rest-v1/previews/{file_id}/",
               array(
                 "Authorization" => "Token your_api_key"
 
@@ -131,9 +137,8 @@ paths:
         - processes
       x-code-samples:
         - lang: cURL
-          source: >-
+          source: |-
             curl -X GET 'https://api.logoraisr.com/rest-v1/processes/' \
-
             -H "Authorization:Token your_api_key" \
         - lang: python
           source: >-
@@ -152,9 +157,8 @@ paths:
 
             print(resp.json())
         - lang: node.js
-          source: >
+          source: |
             var request = require("request");
-
 
             var options = {
               method: 'GET',
@@ -166,7 +170,6 @@ paths:
 
             };
 
-
             request(options, function (error, response, body) {
               if (error) throw new Error(error);
 
@@ -174,7 +177,8 @@ paths:
             });
         - lang: java
           source: >-
-            HttpResponse<String> response = Unirest.GET("https://api.logoraisr.com/rest-v1/processes/")
+            HttpResponse<String> response =
+            Unirest.GET("https://api.logoraisr.com/rest-v1/processes/")
 
             .header("Authorization", "Token your_api_key")
 
@@ -183,7 +187,8 @@ paths:
             .asString();
         - lang: php
           source: >-
-            $response = Unirest\Request::GET("https://api.logoraisr.com/rest-v1/processes/",
+            $response =
+            Unirest\Request::GET("https://api.logoraisr.com/rest-v1/processes/",
               array(
                 "Authorization" => "Token your_api_key"
 
@@ -212,11 +217,9 @@ paths:
         - projects
       x-code-samples:
         - lang: cURL
-          source: >
+          source: |
             curl -X GET 'https://api.logoraisr.com/rest-v1/projects/' \
-
             -H "Authorization:Token your_api_key" \ 
-
             -H "content-type:application/json" \
              -d processes=logo-super-resolution \
              -d file_id=string \
@@ -240,9 +243,8 @@ paths:
 
             print(resp.json())
         - lang: node.js
-          source: >
+          source: |
             var request = require("request");
-
 
             var options = {
               method: 'GET',
@@ -254,7 +256,6 @@ paths:
 
             };
 
-
             request(options, function (error, response, body) {
               if (error) throw new Error(error);
 
@@ -262,7 +263,8 @@ paths:
             });
         - lang: java
           source: >-
-            HttpResponse<String> response = Unirest.GET("https://api.logoraisr.com/rest-v1/projects/")
+            HttpResponse<String> response =
+            Unirest.GET("https://api.logoraisr.com/rest-v1/projects/")
 
             .header("Authorization", "Token your_api_key")
 
@@ -273,7 +275,8 @@ paths:
             .asString();
         - lang: php
           source: >-
-            $response = Unirest\Request::GET("https://api.logoraisr.com/rest-v1/projects/",
+            $response =
+            Unirest\Request::GET("https://api.logoraisr.com/rest-v1/projects/",
               array(
                 "Authorization" => "Token your_api_key"
                 "content-type" => "application/json"
@@ -309,11 +312,9 @@ paths:
         - projects
       x-code-samples:
         - lang: cURL
-          source: >
+          source: |
             curl -X POST 'https://api.logoraisr.com/rest-v1/projects/' \
-
             -H "Authorization:Token your_api_key" \ 
-
             -H "content-type:application/json" \
              -d processes=logo-super-resolution \
              -d file_id=string \
@@ -337,9 +338,8 @@ paths:
 
             print(resp.json())
         - lang: node.js
-          source: >
+          source: |
             var request = require("request");
-
 
             var options = {
               method: 'POST',
@@ -351,7 +351,6 @@ paths:
 
             };
 
-
             request(options, function (error, response, body) {
               if (error) throw new Error(error);
 
@@ -359,7 +358,8 @@ paths:
             });
         - lang: java
           source: >-
-            HttpResponse<String> response = Unirest.POST("https://api.logoraisr.com/rest-v1/projects/")
+            HttpResponse<String> response =
+            Unirest.POST("https://api.logoraisr.com/rest-v1/projects/")
 
             .header("Authorization", "Token your_api_key")
 
@@ -370,7 +370,8 @@ paths:
             .asString();
         - lang: php
           source: >-
-            $response = Unirest\Request::POST("https://api.logoraisr.com/rest-v1/projects/",
+            $response =
+            Unirest\Request::POST("https://api.logoraisr.com/rest-v1/projects/",
               array(
                 "Authorization" => "Token your_api_key"
                 "content-type" => "application/json"
@@ -406,7 +407,8 @@ paths:
       x-code-samples:
         - lang: cURL
           source: >-
-            curl -X GET 'https://api.logoraisr.com/rest-v1/projects/{project_number}/' \
+            curl -X GET
+            'https://api.logoraisr.com/rest-v1/projects/{project_number}/' \
 
             -H "Authorization:Token your_api_key" \
         - lang: python
@@ -448,7 +450,8 @@ paths:
             });
         - lang: java
           source: >-
-            HttpResponse<String> response = Unirest.GET("https://api.logoraisr.com/rest-v1/projects/{project_number}/")
+            HttpResponse<String> response =
+            Unirest.GET("https://api.logoraisr.com/rest-v1/projects/{project_number}/")
 
             .header("Authorization", "Token your_api_key")
 
@@ -457,7 +460,8 @@ paths:
             .asString();
         - lang: php
           source: >-
-            $response = Unirest\Request::GET("https://api.logoraisr.com/rest-v1/projects/{project_number}/",
+            $response =
+            Unirest\Request::GET("https://api.logoraisr.com/rest-v1/projects/{project_number}/",
               array(
                 "Authorization" => "Token your_api_key"
 
@@ -491,9 +495,8 @@ paths:
         - reports
       x-code-samples:
         - lang: cURL
-          source: >-
+          source: |-
             curl -X GET 'https://api.logoraisr.com/rest-v1/reports/' \
-
             -H "Authorization:Token your_api_key" \
         - lang: python
           source: >-
@@ -512,9 +515,8 @@ paths:
 
             print(resp.json())
         - lang: node.js
-          source: >
+          source: |
             var request = require("request");
-
 
             var options = {
               method: 'GET',
@@ -526,7 +528,6 @@ paths:
 
             };
 
-
             request(options, function (error, response, body) {
               if (error) throw new Error(error);
 
@@ -534,7 +535,8 @@ paths:
             });
         - lang: java
           source: >-
-            HttpResponse<String> response = Unirest.GET("https://api.logoraisr.com/rest-v1/reports/")
+            HttpResponse<String> response =
+            Unirest.GET("https://api.logoraisr.com/rest-v1/reports/")
 
             .header("Authorization", "Token your_api_key")
 
@@ -543,7 +545,8 @@ paths:
             .asString();
         - lang: php
           source: >-
-            $response = Unirest\Request::GET("https://api.logoraisr.com/rest-v1/reports/",
+            $response =
+            Unirest\Request::GET("https://api.logoraisr.com/rest-v1/reports/",
               array(
                 "Authorization" => "Token your_api_key"
 
@@ -579,29 +582,24 @@ paths:
         - reports
       x-code-samples:
         - lang: cURL
-          source: >-
+          source: |-
             curl -X POST 'https://api.logoraisr.com/rest-v1/reports/' \
-
             -H "Authorization:Token your_api_key" \
         - lang: python
-          source: >-
+          source: |-
             import requests
 
 
 
-
             # provide your API token here
-
             headers = {'Authorization:Token your_api_key'}
-
 
 
 
             print(resp.json())
         - lang: node.js
-          source: >
+          source: |
             var request = require("request");
-
 
             var options = {
               method: 'POST',
@@ -613,7 +611,6 @@ paths:
 
             };
 
-
             request(options, function (error, response, body) {
               if (error) throw new Error(error);
 
@@ -621,7 +618,8 @@ paths:
             });
         - lang: java
           source: >-
-            HttpResponse<String> response = Unirest.POST("https://api.logoraisr.com/rest-v1/reports/")
+            HttpResponse<String> response =
+            Unirest.POST("https://api.logoraisr.com/rest-v1/reports/")
 
             .header("Authorization", "Token your_api_key")
 
@@ -630,7 +628,8 @@ paths:
             .asString();
         - lang: php
           source: >-
-            $response = Unirest\Request::POST("https://api.logoraisr.com/rest-v1/reports/",
+            $response =
+            Unirest\Request::POST("https://api.logoraisr.com/rest-v1/reports/",
               array(
                 "Authorization" => "Token your_api_key"
 
@@ -659,7 +658,8 @@ paths:
       x-code-samples:
         - lang: cURL
           source: >-
-            curl -X GET 'https://api.logoraisr.com/rest-v1/reports/{report_number}/' \
+            curl -X GET 'https://api.logoraisr.com/rest-v1/reports/{report_number}/'
+            \
 
             -H "Authorization:Token your_api_key" \
         - lang: python
@@ -679,9 +679,8 @@ paths:
 
             print(resp.json())
         - lang: node.js
-          source: >
+          source: |
             var request = require("request");
-
 
             var options = {
               method: 'GET',
@@ -693,7 +692,6 @@ paths:
 
             };
 
-
             request(options, function (error, response, body) {
               if (error) throw new Error(error);
 
@@ -701,7 +699,8 @@ paths:
             });
         - lang: java
           source: >-
-            HttpResponse<String> response = Unirest.GET("https://api.logoraisr.com/rest-v1/reports/{report_number}/")
+            HttpResponse<String> response =
+            Unirest.GET("https://api.logoraisr.com/rest-v1/reports/{report_number}/")
 
             .header("Authorization", "Token your_api_key")
 
@@ -710,7 +709,8 @@ paths:
             .asString();
         - lang: php
           source: >-
-            $response = Unirest\Request::GET("https://api.logoraisr.com/rest-v1/reports/{report_number}/",
+            $response =
+            Unirest\Request::GET("https://api.logoraisr.com/rest-v1/reports/{report_number}/",
               array(
                 "Authorization" => "Token your_api_key"
 
@@ -752,7 +752,8 @@ paths:
       x-code-samples:
         - lang: cURL
           source: >-
-            curl -X GET 'https://api.logoraisr.com/rest-v1/results/{result_file_id}/' \
+            curl -X GET
+            'https://api.logoraisr.com/rest-v1/results/{result_file_id}/' \
 
             -H "Authorization:Token your_api_key" \
         - lang: python
@@ -794,7 +795,8 @@ paths:
             });
         - lang: java
           source: >-
-            HttpResponse<String> response = Unirest.GET("https://api.logoraisr.com/rest-v1/results/{result_file_id}/")
+            HttpResponse<String> response =
+            Unirest.GET("https://api.logoraisr.com/rest-v1/results/{result_file_id}/")
 
             .header("Authorization", "Token your_api_key")
 
@@ -803,7 +805,8 @@ paths:
             .asString();
         - lang: php
           source: >-
-            $response = Unirest\Request::GET("https://api.logoraisr.com/rest-v1/results/{result_file_id}/",
+            $response =
+            Unirest\Request::GET("https://api.logoraisr.com/rest-v1/results/{result_file_id}/",
               array(
                 "Authorization" => "Token your_api_key"
 
@@ -828,7 +831,8 @@ paths:
             schema:
               properties:
                 file:
-                  description: "File which should be uploaded. Supported file types are: JPEG and PNG"
+                  description: "File which should be uploaded. Supported file types are: JPEG and
+                    PNG"
                   format: binary
                   type: string
               required:
@@ -849,11 +853,9 @@ paths:
         - uploads
       x-code-samples:
         - lang: cURL
-          source: >-
+          source: |-
             curl -X POST 'https://api.logoraisr.com/rest-v1/uploads/' \
-
             -H "Authorization:Token your_api_key" \
-
             -F '@/path/to/your/logo.png'  \
         - lang: python
           source: >-
@@ -873,9 +875,8 @@ paths:
 
             print(resp.json())
         - lang: node.js
-          source: >
+          source: |
             var request = require("request");
-
 
             var options = {
               method: 'POST',
@@ -887,7 +888,6 @@ paths:
               formData: {file: {value: {'/path/to/your/logo.png'}}}
             };
 
-
             request(options, function (error, response, body) {
               if (error) throw new Error(error);
 
@@ -895,7 +895,8 @@ paths:
             });
         - lang: java
           source: >-
-            HttpResponse<String> response = Unirest.POST("https://api.logoraisr.com/rest-v1/uploads/")
+            HttpResponse<String> response =
+            Unirest.POST("https://api.logoraisr.com/rest-v1/uploads/")
 
             .header("Authorization", "Token your_api_key")
 
@@ -905,7 +906,8 @@ paths:
             .asString();
         - lang: php
           source: >-
-            $response = Unirest\Request::POST("https://api.logoraisr.com/rest-v1/uploads/",
+            $response =
+            Unirest\Request::POST("https://api.logoraisr.com/rest-v1/uploads/",
               array(
                 "Authorization" => "Token your_api_key"
 
@@ -947,7 +949,8 @@ components:
     FileResponse:
       properties:
         file_id:
-          description: Returns the file_id. To apply processes to the uploaded file, this file_id must be referenced in the API-calls.
+          description: Returns the file_id. To apply processes to the uploaded file, this
+            file_id must be referenced in the API-calls.
           format: uuid
           title: File id
           type: string
@@ -964,32 +967,44 @@ components:
     Process:
       properties:
         crop:
-          description: 'Crops the image according to the specified mechanism. If you specify the size "WidthexHeight", the image will be cropped centered. If coordinates "x1,y1,x2,y2" are given, the image is cropped according to the coordinates. The image will be cropped to the size of the stories if "faces" are specified as. Example Centered: "crop": "200x300". Example Region: "crop": "200,300,150,300". Example Faces: "crop": "faces".'
+          description: 'Crops the image according to the specified mechanism. If you
+            specify the size "WidthexHeight", the image will be cropped
+            centered. If coordinates "x1,y1,x2,y2" are given, the image is
+            cropped according to the coordinates. The image will be cropped to
+            the size of the stories if "faces" are specified as. Example
+            Centered: "crop": "200x300". Example Region: "crop":
+            "200,300,150,300". Example Faces: "crop": "faces".'
           maxLength: 255
           minLength: 1
           title: Crop
           type: string
         flip:
-          description: 'Flips the image around the horizontal axis, from top to bottom. Example: "flip": true'
+          description: 'Flips the image around the horizontal axis, from top to bottom.
+            Example: "flip": true'
           title: Flip
           type: boolean
         mirror:
-          description: 'Mirrors the image around the vertical axis, i.e. from right to left. Example: "mirror": true'
+          description: 'Mirrors the image around the vertical axis, i.e. from right to
+            left. Example: "mirror": true'
           title: Mirror
           type: boolean
         processing_algorithm:
-          description: Schlüssel welcher Verarbeitungs-Algorithmus angewendet wird. Zur Auswahl stehen "logo-to-vector", "logo-super-resolution", "logo-segmentation" und "image-processing".
+          description: Schlüssel welcher Verarbeitungs-Algorithmus angewendet wird. Zur
+            Auswahl stehen "logo-to-vector", "logo-super-resolution",
+            "logo-segmentation" und "image-processing".
           minLength: 1
           title: Processing algorithm
           type: string
         resize:
-          description: 'Changes the size of the image according to the specified size. Example: "resize": "200x300".'
+          description: 'Changes the size of the image according to the specified size.
+            Example: "resize": "200x300".'
           maxLength: 255
           minLength: 1
           title: Resize
           type: string
         rotate:
-          description: 'Rotates the image around the center according to the specified degree. Example: "rotate": 90'
+          description: 'Rotates the image around the center according to the specified
+            degree. Example: "rotate": 90'
           maximum: 360
           minimum: 0
           title: Rotate
@@ -1071,7 +1086,8 @@ components:
           title: Project number
           type: integer
         result_file_id:
-          description: Id of the result_file. This id must be specified to create the result_file_url.
+          description: Id of the result_file. This id must be specified to create the
+            result_file_url.
           format: uuid
           title: Result file id
           type: string
@@ -1089,7 +1105,8 @@ components:
           title: File id
           type: string
         process_id:
-          description: Process_id of the process which was applied. Processes are "color-classification".
+          description: Process_id of the process which was applied. Processes are
+            "color-classification".
           title: Process id
           type: integer
         report_number:

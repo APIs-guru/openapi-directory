@@ -350,7 +350,8 @@ paths:
       tags:
         - Categories
     post:
-      description: Category's permalink is automatically generated from the given category's name.
+      description: Category's permalink is automatically generated from the given
+        category's name.
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -472,7 +473,8 @@ paths:
       tags:
         - Checkout Custom Fields
     post:
-      description: "Type values can be: input, selection, checkbox, date or text. Area values can be: contact, billing_shipping or other."
+      description: "Type values can be: input, selection, checkbox, date or text. Area
+        values can be: contact, billing_shipping or other."
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -1447,7 +1449,8 @@ paths:
       tags:
         - Orders
     post:
-      description: Orders created externally keep the given order product's values (bypassing internal promotion or product amounts).
+      description: Orders created externally keep the given order product's values
+        (bypassing internal promotion or product amounts).
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -1467,7 +1470,8 @@ paths:
         - Orders
   "/orders/after/{id}.json":
     get:
-      description: For example the GET /orders/after/5000 will return Order 5001, 5002, 5003, etc.
+      description: For example the GET /orders/after/5000 will return Order 5001,
+        5002, 5003, etc.
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -1555,7 +1559,9 @@ paths:
       tags:
         - Orders
     put:
-      description: Only `status`, `shipment_status`, `tracking_number`, `tracking_company`, `additional_information` and `additional_fields` are available for update. An email is send if `shipment_status` changes.
+      description: Only `status`, `shipment_status`, `tracking_number`,
+        `tracking_company`, `additional_information` and `additional_fields` are
+        available for update. An email is send if `shipment_status` changes.
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -3233,7 +3239,8 @@ definitions:
         description: Postal code of the Customer's Billing Address
         type: string
       region:
-        description: Region code of the Customer's Billing Address (Use the FIPS standard - http://www.geonames.org/countries/)
+        description: Region code of the Customer's Billing Address (Use the FIPS
+          standard - http://www.geonames.org/countries/)
         type: string
       surname:
         description: Surname of the Customer's Billing Address
@@ -3527,6 +3534,9 @@ definitions:
         description: Unique identifier of the Customer
         format: int32
         type: integer
+      name:
+        description: Name of the Customer
+        type: string
       phone:
         description: Phone of the Customer
         type: string
@@ -3538,6 +3548,9 @@ definitions:
           - approved
           - pending
           - disabled
+        type: string
+      surname:
+        description: Surname of the Customer
         type: string
     type: object
   CustomerFieldsWithBillingAddressAndShippingAddressFields:
@@ -3819,7 +3832,8 @@ definitions:
         description: Shipping method name e.g. Royal Mail
         type: string
       shipping_price:
-        description: Shipping method's price (applicable if shipping_method_name is provided instead of a shipping_method_id)
+        description: Shipping method's price (applicable if shipping_method_name is
+          provided instead of a shipping_method_id)
         format: float
         type: number
       status:
@@ -3963,7 +3977,8 @@ definitions:
           - Paid
         type: string
       subtotal:
-        description: Subtotal value for the given Order. Excluding taxes, shipping and discounts
+        description: Subtotal value for the given Order. Excluding taxes, shipping and
+          discounts
         format: float
         type: number
       tax:
@@ -3971,7 +3986,8 @@ definitions:
         format: float
         type: number
       total:
-        description: Total value for the given Order. Including taxes, shipping and discounts
+        description: Total value for the given Order. Including taxes, shipping and
+          discounts
         format: float
         type: number
       tracking_company:
@@ -4482,6 +4498,22 @@ definitions:
       name:
         description: Name of the product option
         type: string
+      product_option_id:
+        description: Id of the product option
+        format: int32
+        type: integer
+      product_option_position:
+        description: position of product option
+        format: int32
+        type: integer
+      product_option_value_id:
+        description: Id of product option value
+        format: int32
+        type: integer
+      product_value_position:
+        description: position of product option value
+        format: int32
+        type: integer
       value:
         description: Value of the product option
         type: string
@@ -4505,7 +4537,8 @@ definitions:
         description: Controls the promotion's condition ('none', 'price', 'qty')
         type: string
       categories:
-        description: Products Categories where the promotion will be applied (requires 'discount_target' param - 'categories')
+        description: Products Categories where the promotion will be applied (requires
+          'discount_target' param - 'categories')
         items:
           $ref: "#/definitions/Id"
         type: array
@@ -4513,11 +4546,13 @@ definitions:
         description: Code of the promotion
         type: string
       condition_price:
-        description: Minimum order amount to validate the promotion (requires 'buys_at_least' param - 'price')
+        description: Minimum order amount to validate the promotion (requires
+          'buys_at_least' param - 'price')
         format: float
         type: number
       condition_qty:
-        description: Minimum quantity of ordered itens to validate the promotion (requires 'buys_at_least' param - 'qty')
+        description: Minimum quantity of ordered itens to validate the promotion
+          (requires 'buys_at_least' param - 'qty')
         format: int32
         type: integer
       cumulative:
@@ -4525,23 +4560,27 @@ definitions:
         description: True if the promotion can be acumulated with others
         type: boolean
       customer_categories:
-        description: Customer Categories to whom the promotion will be applied (requires 'customers' param - 'categories')
+        description: Customer Categories to whom the promotion will be applied (requires
+          'customers' param - 'categories')
         items:
           $ref: "#/definitions/Id"
         type: array
       customers:
-        description: Controls to which customers the promotion will be applied ('all', 'loggedin', 'categories', 'guests')
+        description: Controls to which customers the promotion will be applied ('all',
+          'loggedin', 'categories', 'guests')
         type: string
       discount_amount_fix:
         description: Fixed discount amount of the promotion (requires 'type' param - 'fix')
         format: float
         type: number
       discount_amount_percent:
-        description: Percentual discount amount of the promotion (requires 'type' param - 'percentage')
+        description: Percentual discount amount of the promotion (requires 'type' param
+          - 'percentage')
         format: float
         type: number
       discount_target:
-        description: Where the promotion will be applied ('order', 'shipping', 'categories', 'buy_x_get_y)
+        description: Where the promotion will be applied ('order', 'shipping',
+          'categories', 'buy_x_get_y)
         type: string
       enabled:
         default: true
@@ -4551,27 +4590,32 @@ definitions:
         description: Expiration date of the promotion (requires 'lasts' param - 'date')
         type: string
       lasts:
-        description: Controls when the promotion will expire ('none', 'date', 'max_times_used')
+        description: Controls when the promotion will expire ('none', 'date',
+          'max_times_used')
         type: string
       max_times_used:
-        description: Maximum amount a promotion can be used (requires 'lasts' param - 'max_times_used')
+        description: Maximum amount a promotion can be used (requires 'lasts' param -
+          'max_times_used')
         format: int32
         type: integer
       name:
         description: Name of the product
         type: string
       products:
-        description: Products where the promotion will be applied (requires 'discount_target' param - 'categories' or 'buy_x_get_y')
+        description: Products where the promotion will be applied (requires
+          'discount_target' param - 'categories' or 'buy_x_get_y')
         items:
           $ref: "#/definitions/Id"
         type: array
       products_x:
-        description: Products required to apply the promotion (requires 'discount_target' param - 'buy_x_get_y')
+        description: Products required to apply the promotion (requires
+          'discount_target' param - 'buy_x_get_y')
         items:
           $ref: "#/definitions/Id"
         type: array
       quantity_x:
-        description: Number of sets of products_x needed to be able to apply the promotion (requires 'discount_target' param - 'buy_x_get_y')
+        description: Number of sets of products_x needed to be able to apply the
+          promotion (requires 'discount_target' param - 'buy_x_get_y')
         format: int32
         type: integer
       type:
@@ -4584,7 +4628,8 @@ definitions:
         description: Creation date of the promotion (requires 'lasts' param - 'date')
         type: string
       categories:
-        description: Products Categories where the promotion will be applied (requires 'discount_target' param - 'categories')
+        description: Products Categories where the promotion will be applied (requires
+          'discount_target' param - 'categories')
         items:
           $ref: "#/definitions/Id"
         type: array
@@ -4604,7 +4649,8 @@ definitions:
         description: True if the promotion can be acumulated with others
         type: boolean
       customer_categories:
-        description: Customer Categories to whom the promotion will be applied (requires 'customers' param - 'categories')
+        description: Customer Categories to whom the promotion will be applied (requires
+          'customers' param - 'categories')
         items:
           $ref: "#/definitions/Id"
         type: array
@@ -4617,7 +4663,8 @@ definitions:
         format: float
         type: number
       discount_target:
-        description: Where the promotion will be applied ('order', 'shipping', 'categories', 'buy_x_get_y)
+        description: Where the promotion will be applied ('order', 'shipping',
+          'categories', 'buy_x_get_y)
         type: string
       enabled:
         default: true
@@ -4631,27 +4678,32 @@ definitions:
         format: int32
         type: integer
       lasts:
-        description: Controls when the promotion will expire ('none', 'date', 'max_times_used')
+        description: Controls when the promotion will expire ('none', 'date',
+          'max_times_used')
         type: string
       max_times_used:
-        description: Maximum amount a promotion can be used (requires 'lasts' param - 'max_times_used')
+        description: Maximum amount a promotion can be used (requires 'lasts' param -
+          'max_times_used')
         format: int32
         type: integer
       name:
         description: Name of the product
         type: string
       products:
-        description: Products where the promotion will be applied (requires 'discount_target' param - 'categories' or 'buy_x_get_y')
+        description: Products where the promotion will be applied (requires
+          'discount_target' param - 'categories' or 'buy_x_get_y')
         items:
           $ref: "#/definitions/Id"
         type: array
       products_x:
-        description: Products required to apply the promotion (requires 'discount_target' param - 'buy_x_get_y')
+        description: Products required to apply the promotion (requires
+          'discount_target' param - 'buy_x_get_y')
         items:
           $ref: "#/definitions/Id"
         type: array
       quantity_x:
-        description: Number of sets of products_x needed to be able to apply the promotion (requires 'discount_target' param - 'buy_x_get_y')
+        description: Number of sets of products_x needed to be able to apply the
+          promotion (requires 'discount_target' param - 'buy_x_get_y')
         format: int32
         type: integer
       status:
@@ -4689,7 +4741,8 @@ definitions:
         description: Postal code of the Customer's Shipping Address
         type: string
       region:
-        description: Region code of the Customer's Shipping Address (Use the FIPS standard - http://www.geonames.org/countries/)
+        description: Region code of the Customer's Shipping Address (Use the FIPS
+          standard - http://www.geonames.org/countries/)
         type: string
       surname:
         description: Surname of the Customer's Shipping Address

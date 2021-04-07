@@ -4,7 +4,15 @@ servers:
 info:
   contact:
     email: support@byautomata.io
-  description: This document provides the documentation for the Market Intelligence API by Automata. Get your API Key at https://apis.byautomata.io and check out our <a href='https://www.getpostman.com/collections/d182a1c78d4491d55e19'>Postman Collection</a>.<br><br>The root API endpoint is https://api.byautomata.io. Please refer to the code samples for examples of how to call the Market Intelligence API. The ContentPro endpoints (/contentpro-search and /contentpro-similar-text) are not included in the standard Market Intelligence API plans. Please contact support@byautomata.io for access.
+  description: This document provides the documentation for the Market
+    Intelligence API by Automata. Get your API Key at https://apis.byautomata.io
+    and check out our <a
+    href='https://www.getpostman.com/collections/d182a1c78d4491d55e19'>Postman
+    Collection</a>.<br><br>The root API endpoint is https://api.byautomata.io.
+    Please refer to the code samples for examples of how to call the Market
+    Intelligence API. The ContentPro endpoints (/contentpro-search and
+    /contentpro-similar-text) are not included in the standard Market
+    Intelligence API plans. Please contact support@byautomata.io for access.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -26,14 +34,18 @@ paths:
     get:
       deprecated: false
       parameters:
-        - description: We provide information about related companies and articles based on the search terms you provide. Separate search terms with commas. Ex. https://api.byautomata.io/contentpro-search?terms=cloud+computing,enterprise,security
+        - description: We provide information about related companies and articles based
+            on the search terms you provide. Separate search terms with commas.
+            Ex.
+            https://api.byautomata.io/contentpro-search?terms=cloud+computing,enterprise,security
           in: query
           name: terms
           required: true
           schema:
             properties:
               link:
-                description: Comma separated list of search terms. Ex. terms=cloud+computing,enterprise,security
+                description: Comma separated list of search terms. Ex.
+                  terms=cloud+computing,enterprise,security
                 type: string
             required:
               - terms
@@ -64,11 +76,14 @@ paths:
                 type: object
           description: A successful operation
         "400":
-          description: Your request was not valid. Please refer to the API documentation https://api-specs.byautomata.io.
+          description: Your request was not valid. Please refer to the API documentation
+            https://api-specs.byautomata.io.
         "403":
-          description: Invalid API Key. Please refer to the API documentation https://api-specs.byautomata.io.
+          description: Invalid API Key. Please refer to the API documentation
+            https://api-specs.byautomata.io.
         "501":
-          description: There was a server error. Please try again later or contact support@byautomata.io
+          description: There was a server error. Please try again later or contact
+            support@byautomata.io
       summary: Send search terms to receive the most relevant articles and companies.
       tags:
         - contentpro-search
@@ -133,7 +148,9 @@ paths:
             });
         - lang: cURL
           source: >-
-            curl --location --request GET 'https://api.byautomata.io/contentpro-search?terms=cloud+computing,enterprise,security' \
+            curl --location --request GET
+            'https://api.byautomata.io/contentpro-search?terms=cloud+computing,enterprise,security'
+            \
 
             --header 'x-api-key: api-key'
         - lang: Shell
@@ -157,7 +174,8 @@ paths:
               required:
                 - text
               type: object
-        description: We'll provide information about related companies and articles based on the text you provide.
+        description: We'll provide information about related companies and articles
+          based on the text you provide.
         required: true
       responses:
         "200":
@@ -185,12 +203,16 @@ paths:
                 type: object
           description: A successful operation
         "400":
-          description: Your request was not valid. Please refer to the API documentation https://api-specs.byautomata.io.
+          description: Your request was not valid. Please refer to the API documentation
+            https://api-specs.byautomata.io.
         "403":
-          description: Invalid API Key. Please refer to the API documentation https://api-specs.byautomata.io.
+          description: Invalid API Key. Please refer to the API documentation
+            https://api-specs.byautomata.io.
         "501":
-          description: There was a server error. Please try again later or contact support@byautomata.io
-      summary: The /contentpro-similar-text endpoint accepts and arbitrary piece of text and returns similar articles and blogs written by companies.
+          description: There was a server error. Please try again later or contact
+            support@byautomata.io
+      summary: The /contentpro-similar-text endpoint accepts and arbitrary piece of
+        text and returns similar articles and blogs written by companies.
       tags:
         - contentpro-similar-text
       x-code-samples:
@@ -237,9 +259,8 @@ paths:
 
             echo $response;
         - lang: NodeJs
-          source: >-
+          source: |-
             var request = require('request');
-
             var options = {
               'method': 'POST',
               'url': 'https://api.byautomata.io/contentpro-similar-text',
@@ -247,18 +268,18 @@ paths:
                 'x-api-key': 'api_key'
               }
             };
-
             request(options, function (error, response) {
               if (error) throw new Error(error);
               console.log(response.body);
             });
         - lang: cURL
           source: >-
-            curl --location --request POST 'https://api.byautomata.io/contentpro-similar-text' \
+            curl --location --request POST
+            'https://api.byautomata.io/contentpro-similar-text' \
 
             --header 'x-api-key: api-key'
         - lang: Shell
-          source: >-
+          source: |-
             wget --no-check-certificate --quiet \
               --method POST \
               --timeout=0 \
@@ -268,19 +289,23 @@ paths:
     get:
       deprecated: false
       parameters:
-        - description: We provide information about related companies based on the search terms you provide. Separate search terms with commas. Ex. https://api.byautomata.io/search?link=cloud+computing,enterprise,security
+        - description: We provide information about related companies based on the search
+            terms you provide. Separate search terms with commas. Ex.
+            https://api.byautomata.io/search?link=cloud+computing,enterprise,security
           in: query
           name: terms
           required: true
           schema:
             properties:
               link:
-                description: Comma separated list of search terms. Ex. terms=cloud+computing,enterprise,security
+                description: Comma separated list of search terms. Ex.
+                  terms=cloud+computing,enterprise,security
                 type: string
             required:
               - terms
             type: string
-        - description: Page number of search results. Ex. https://api.byautomata.io/search?page=0&link=cloud+computing,enterprise,security
+        - description: Page number of search results. Ex.
+            https://api.byautomata.io/search?page=0&link=cloud+computing,enterprise,security
           in: query
           name: page
           required: false
@@ -288,7 +313,8 @@ paths:
             default: "0"
             properties:
               link:
-                description: Results are returned in batches of approximately 15 companies. Use the page parameter to page through results.
+                description: Results are returned in batches of approximately 15 companies. Use
+                  the page parameter to page through results.
                 type: string
             required:
               - page
@@ -312,12 +338,16 @@ paths:
                 type: object
           description: A successful operation
         "400":
-          description: Your request was not valid. Please refer to the API documentation https://api-specs.byautomata.io.
+          description: Your request was not valid. Please refer to the API documentation
+            https://api-specs.byautomata.io.
         "403":
-          description: Invalid API Key. Please refer to the API documentation https://api-specs.byautomata.io.
+          description: Invalid API Key. Please refer to the API documentation
+            https://api-specs.byautomata.io.
         "501":
-          description: There was a server error. Please try again later or contact support@byautomata.io
-      summary: Send search terms to receive the most relevant companies along with text snippets.
+          description: There was a server error. Please try again later or contact
+            support@byautomata.io
+      summary: Send search terms to receive the most relevant companies along with
+        text snippets.
       tags:
         - search
       x-code-samples:
@@ -381,7 +411,9 @@ paths:
             });
         - lang: cURL
           source: >-
-            curl --location --request GET 'https://api.byautomata.io/search?terms=cloud+computing,enterprise,security' \
+            curl --location --request GET
+            'https://api.byautomata.io/search?terms=cloud+computing,enterprise,security'
+            \
 
             --header 'x-api-key: api-key'
         - lang: Shell
@@ -395,7 +427,10 @@ paths:
     get:
       deprecated: false
       parameters:
-        - description: We'll provide information about related companies based on the site you provide. If a LinkedIn page is sent, we will try to identify the company related to the page. Ex. https://api.byautomata.io/similar?link=ibm.com
+        - description: We'll provide information about related companies based on the site
+            you provide. If a LinkedIn page is sent, we will try to identify the
+            company related to the page. Ex.
+            https://api.byautomata.io/similar?link=ibm.com
           in: query
           name: link
           required: true
@@ -407,7 +442,8 @@ paths:
             required:
               - link
             type: string
-        - description: Page number of search results. Ex. https://api.byautomata.io/similar?link=ibm.com&page=1
+        - description: Page number of search results. Ex.
+            https://api.byautomata.io/similar?link=ibm.com&page=1
           in: query
           name: page
           required: false
@@ -415,7 +451,8 @@ paths:
             default: "0"
             properties:
               link:
-                description: Results are returned in batches of approximately 10 companies. Use the page parameter to page through results.
+                description: Results are returned in batches of approximately 10 companies. Use
+                  the page parameter to page through results.
                 type: string
             required:
               - page
@@ -441,11 +478,14 @@ paths:
                 type: object
           description: A successful operation
         "400":
-          description: Your request was not valid. Please refer to the API documentation https://api-specs.byautomata.io.
+          description: Your request was not valid. Please refer to the API documentation
+            https://api-specs.byautomata.io.
         "403":
-          description: Invalid API Key. Please refer to the API documentation https://api-specs.byautomata.io.
+          description: Invalid API Key. Please refer to the API documentation
+            https://api-specs.byautomata.io.
         "501":
-          description: There was a server error. Please try again later or contact support@byautomata.io
+          description: There was a server error. Please try again later or contact
+            support@byautomata.io
       summary: Send a company website to receive a list of companies related to them.
       tags:
         - similar
@@ -468,9 +508,8 @@ paths:
 
             print(response.text.encode('utf8'))
         - lang: PHP
-          source: >-
+          source: |-
             $curl = curl_init();
-
 
             curl_setopt_array($curl, array(
               CURLOPT_URL => "https://api.byautomata.io/similar?link=ibm.com",
@@ -486,16 +525,12 @@ paths:
               ),
             ));
 
-
             $response = curl_exec($curl);
-
             curl_close($curl);
-
             echo $response;
         - lang: NodeJs
-          source: >-
+          source: |-
             var request = require('request');
-
             var options = {
               'method': 'GET',
               'url': 'https://api.byautomata.io/similar?link=ibm.com',
@@ -503,18 +538,18 @@ paths:
                 'x-api-key': 'api_key'
               }
             };
-
             request(options, function (error, response) {
               if (error) throw new Error(error);
               console.log(response.body);
             });
         - lang: cURL
           source: >-
-            curl --location --request GET 'https://api.byautomata.io/similar?link=ibm.com' \
+            curl --location --request GET
+            'https://api.byautomata.io/similar?link=ibm.com' \
 
             --header 'x-api-key: api-key'
         - lang: Shell
-          source: >-
+          source: |-
             wget --no-check-certificate --quiet \
               --method GET \
               --timeout=0 \
@@ -647,7 +682,11 @@ components:
       type: object
   securitySchemes:
     api_key:
-      description: All Automata API endpoints require an API key distributed by Automata. Retrieve an API key at https://apis.byautomata.io for the /similar and /search endpoints. The ContentPro API endpoints are not included in the standard Market Intelligence API plans. Contact support@byautomata.io for access.
+      description: All Automata API endpoints require an API key distributed by
+        Automata. Retrieve an API key at https://apis.byautomata.io for the
+        /similar and /search endpoints. The ContentPro API endpoints are not
+        included in the standard Market Intelligence API plans. Contact
+        support@byautomata.io for access.
       in: header
       name: x-api-key
       type: apiKey

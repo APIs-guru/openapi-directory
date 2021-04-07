@@ -2,13 +2,10 @@ swagger: "2.0"
 host: api.postmarkapp.com
 basePath: /
 info:
-  description: >
+  description: |
     Postmark makes sending and receiving email
-
     incredibly easy. The Account-level API allows users to
-
     configure all Servers, Domains, and Sender Signatures associated
-
     with an Account.
   title: Postmark Account-level API
   version: 0.9.0
@@ -28,7 +25,8 @@ produces:
   - application/json
 responses:
   "422":
-    description: An error was generated due to incorrect use of the API. See the Message associated with this response for more information.
+    description: An error was generated due to incorrect use of the API. See the
+      Message associated with this response for more information.
     schema:
       $ref: "#/definitions/StandardPostmarkResponse"
   "500":
@@ -38,7 +36,8 @@ paths:
     get:
       operationId: listDomains
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -71,7 +70,8 @@ paths:
     post:
       operationId: createDomain
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -96,7 +96,8 @@ paths:
     delete:
       operationId: deleteDomain
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -121,7 +122,8 @@ paths:
     get:
       operationId: getDomain
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -146,7 +148,8 @@ paths:
     put:
       operationId: editDomain
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -175,7 +178,8 @@ paths:
   "/domains/{domainid}/rotatedkim":
     post:
       description: >
-        Creates a new DKIM key to replace your current key. Until the DNS entries are confirmed,
+        Creates a new DKIM key to replace your current key. Until the DNS
+        entries are confirmed,
 
         the new values will be in the `DKIMPendingHost` and `DKIMPendingTextValue` fields.
 
@@ -186,12 +190,14 @@ paths:
         with the new DKIM key.
       operationId: rotateDKIMKeyForDomain
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
           type: string
-        - description: The ID for the Sender Signature for which a new DKIM Key should be generated.
+        - description: The ID for the Sender Signature for which a new DKIM Key should be
+            generated.
           in: path
           name: domainid
           required: true
@@ -212,7 +218,8 @@ paths:
     put:
       operationId: requestDkimVerificationForDomain
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -238,12 +245,14 @@ paths:
     put:
       operationId: requestReturnPathVerificationForDomain
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
           type: string
-        - description: The ID for the Domain for which Return-Path DNS records should be verified.
+        - description: The ID for the Domain for which Return-Path DNS records should be
+            verified.
           in: path
           name: domainid
           required: true
@@ -264,7 +273,8 @@ paths:
     post:
       operationId: requestSPFVerificationForDomain
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -290,7 +300,8 @@ paths:
     get:
       operationId: listSenderSignatures
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -323,7 +334,8 @@ paths:
     post:
       operationId: createSenderSignature
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -348,12 +360,14 @@ paths:
     delete:
       operationId: deleteSenderSignature
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
           type: string
-        - description: The ID for the Sender Signature that should be deleted by the request.
+        - description: The ID for the Sender Signature that should be deleted by the
+            request.
           in: path
           name: signatureid
           required: true
@@ -373,7 +387,8 @@ paths:
     get:
       operationId: getSenderSignature
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -398,12 +413,14 @@ paths:
     put:
       operationId: editSenderSignature
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
           type: string
-        - description: The ID for the Sender Signature that should be modified by the request.
+        - description: The ID for the Sender Signature that should be modified by the
+            request.
           in: path
           name: signatureid
           required: true
@@ -427,7 +444,8 @@ paths:
   "/senders/{signatureid}/requestnewdkim":
     post:
       description: >
-        Requests a new DKIM key to be created. Until the DNS entries are confirmed,
+        Requests a new DKIM key to be created. Until the DNS entries are
+        confirmed,
 
         the new values will be in the `DKIMPendingHost` and `DKIMPendingTextValue` fields.
 
@@ -438,12 +456,14 @@ paths:
         with the new DKIM key.
       operationId: requestNewDKIMKeyForSenderSignature
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
           type: string
-        - description: The ID for the Sender Signature for which a new DKIM Key should be generated.
+        - description: The ID for the Sender Signature for which a new DKIM Key should be
+            generated.
           in: path
           name: signatureid
           required: true
@@ -464,12 +484,14 @@ paths:
     post:
       operationId: resendSenderSignatureConfirmationEmail
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
           type: string
-        - description: The ID for the Sender Signature that should have its confirmation email resent.
+        - description: The ID for the Sender Signature that should have its confirmation
+            email resent.
           in: path
           name: signatureid
           required: true
@@ -490,12 +512,14 @@ paths:
     post:
       operationId: requestSPFVerificationForSenderSignature
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
           type: string
-        - description: The ID for the Sender Signature for which SPF DNS records should be verified.
+        - description: The ID for the Sender Signature for which SPF DNS records should be
+            verified.
           in: path
           name: signatureid
           required: true
@@ -516,7 +540,8 @@ paths:
     get:
       operationId: listServers
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -550,7 +575,8 @@ paths:
     post:
       operationId: createServer
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -575,7 +601,8 @@ paths:
     delete:
       operationId: deleteServer
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -598,7 +625,8 @@ paths:
     get:
       operationId: getServerInformation
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -623,7 +651,8 @@ paths:
     put:
       operationId: editServerInformation
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true
@@ -653,7 +682,8 @@ paths:
     put:
       operationId: pushTemplates
       parameters:
-        - description: The token associated with the Account on which this request will operate.
+        - description: The token associated with the Account on which this request will
+            operate.
           in: header
           name: X-Postmark-Account-Token
           required: true

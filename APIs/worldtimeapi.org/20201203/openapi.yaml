@@ -20,7 +20,8 @@ paths:
           $ref: "#/components/responses/SuccessfulDateTimeJsonResponse"
         default:
           $ref: "#/components/responses/ErrorJsonResponse"
-      summary: 'request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.'
+      summary: 'request the current time based on the ip of the request. note: this is
+        a "best guess" obtained from open-source data.'
   /ip.txt:
     get:
       responses:
@@ -28,7 +29,8 @@ paths:
           $ref: "#/components/responses/SuccessfulDateTimeTextResponse"
         default:
           $ref: "#/components/responses/ErrorTextResponse"
-      summary: 'request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.'
+      summary: 'request the current time based on the ip of the request. note: this is
+        a "best guess" obtained from open-source data.'
   "/ip/{ipv4}":
     get:
       parameters:
@@ -42,7 +44,8 @@ paths:
           $ref: "#/components/responses/SuccessfulDateTimeJsonResponse"
         default:
           $ref: "#/components/responses/ErrorJsonResponse"
-      summary: 'request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.'
+      summary: 'request the current time based on the ip of the request. note: this is
+        a "best guess" obtained from open-source data.'
   "/ip/{ipv4}.txt":
     get:
       parameters:
@@ -56,7 +59,8 @@ paths:
           $ref: "#/components/responses/SuccessfulDateTimeTextResponse"
         default:
           $ref: "#/components/responses/ErrorTextResponse"
-      summary: 'request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.'
+      summary: 'request the current time based on the ip of the request. note: this is
+        a "best guess" obtained from open-source data.'
   /timezone:
     get:
       responses:
@@ -243,16 +247,21 @@ components:
           description: flag indicating whether the local time is in daylight savings
           type: boolean
         dst_from:
-          description: an ISO8601-valid string representing the datetime when daylight savings started for this timezone
+          description: an ISO8601-valid string representing the datetime when daylight
+            savings started for this timezone
           type: string
         dst_offset:
-          description: the difference in seconds between the current local time and daylight saving time for the location
+          description: the difference in seconds between the current local time and
+            daylight saving time for the location
           type: integer
         dst_until:
-          description: an ISO8601-valid string representing the datetime when daylight savings will end for this timezone
+          description: an ISO8601-valid string representing the datetime when daylight
+            savings will end for this timezone
           type: string
         raw_offset:
-          description: the difference in seconds between the current local time and the time in UTC, excluding any daylight saving difference (see dst_offset)
+          description: the difference in seconds between the current local time and the
+            time in UTC, excluding any daylight saving difference (see
+            dst_offset)
           type: integer
         timezone:
           description: timezone in `Area/Location` or `Area/Location/Region` format
@@ -283,7 +292,8 @@ components:
         - utc_offset
         - week_number
     DateTimeTextResponse:
-      description: "time zone details, as per the DateTimeJsonResponse response, in the format `key: value`, one item per line"
+      description: "time zone details, as per the DateTimeJsonResponse response, in
+        the format `key: value`, one item per line"
       type: string
     ErrorJsonResponse:
       properties:

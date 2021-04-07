@@ -6,7 +6,13 @@ info:
     email: devrel@vonage.com
     name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: "The Number Insight API delivers real-time intelligence about the validity, reachability and roaming status of a phone number and tells you how to format the number correctly in your application. There are three levels of Number Insight API available: [Basic, Standard and Advanced](https://developer.nexmo.com/number-insight/overview#basic-standard-and-advanced-apis). The advanced API is available asynchronously as well as synchronously."
+  description: "The Number Insight API delivers real-time intelligence about the
+    validity, reachability and roaming status of a phone number and tells you
+    how to format the number correctly in your application. There are three
+    levels of Number Insight API available: [Basic, Standard and
+    Advanced](https://developer.nexmo.com/number-insight/overview#basic-standar\
+    d-and-advanced-apis). The advanced API is available asynchronously as well
+    as synchronously."
   license:
     name: The MIT License (MIT)
     url: https://opensource.org/licenses/MIT
@@ -47,7 +53,11 @@ paths:
                   description: OK
               summary: Asynchronous response
       description: >
-        Provides [advanced number insight](/number-insight/overview#basic-standard-and-advanced-apis) number information **asynchronously** using the URL specified in the `callback` parameter.  recommends asynchronous use of the Number Insight Advanced API, to avoid timeouts.
+        Provides [advanced number
+        insight](/number-insight/overview#basic-standard-and-advanced-apis)
+        number information **asynchronously** using the URL specified in the
+        `callback` parameter.  recommends asynchronous use of the Number Insight
+        Advanced API, to avoid timeouts.
 
 
         Note that this endpoint also supports `POST` requests.
@@ -74,7 +84,10 @@ paths:
   "/advanced/{format}":
     get:
       description: >
-        Provides [advanced number insight](/number-insight/overview#basic-standard-and-advanced-apis) information about a number synchronously, in the same way that the basic and standard endpoints do.
+        Provides [advanced number
+        insight](/number-insight/overview#basic-standard-and-advanced-apis)
+        information about a number synchronously, in the same way that the basic
+        and standard endpoints do.
 
 
         Vonage recommends accessing the Advanced API **asynchronously** using the `/advanced/async` endpoint, to avoid timeouts.
@@ -103,7 +116,9 @@ paths:
   "/basic/{format}":
     get:
       description: >
-        Provides [basic number insight](/number-insight/overview#basic-standard-and-advanced-apis) information about a number.
+        Provides [basic number
+        insight](/number-insight/overview#basic-standard-and-advanced-apis)
+        information about a number.
 
 
         Note that this endpoint also supports `POST` requests.
@@ -127,7 +142,9 @@ paths:
   "/standard/{format}":
     get:
       description: >
-        Provides [standard number insight](/number-insight/overview#basic-standard-and-advanced-apis) information about a number.
+        Provides [standard number
+        insight](/number-insight/overview#basic-standard-and-advanced-apis)
+        information about a number.
 
 
         Note that this endpoint also supports `POST` requests.
@@ -161,7 +178,10 @@ components:
         format: uriref
         type: string
     cnam:
-      description: Indicates if the name of the person who owns the phone number should be looked up and returned in the response. Set to true to receive phone number owner name in the response. This features is available for US numbers only and incurs an additional charge.
+      description: Indicates if the name of the person who owns the phone number
+        should be looked up and returned in the response. Set to true to receive
+        phone number owner name in the response. This features is available for
+        US numbers only and incurs an additional charge.
       example: true
       in: query
       name: cnam
@@ -169,7 +189,11 @@ components:
         default: false
         type: boolean
     country:
-      description: If a number does not have a country code or is uncertain, set the two-character country code. This code must be in ISO 3166-1 alpha-2 format and in upper case. For example, GB or US. If you set country and number is already in [E.164](https://en.wikipedia.org/wiki/E.164) format, country must match the country code in number.
+      description: If a number does not have a country code or is uncertain, set the
+        two-character country code. This code must be in ISO 3166-1 alpha-2
+        format and in upper case. For example, GB or US. If you set country and
+        number is already in [E.164](https://en.wikipedia.org/wiki/E.164)
+        format, country must match the country code in number.
       example: GB
       in: query
       name: country
@@ -189,14 +213,16 @@ components:
         type: string
     ip:
       deprecated: true
-      description: "This parameter is deprecated as we are no longer able to retrieve reliable IP data globally from carriers. "
+      description: "This parameter is deprecated as we are no longer able to retrieve
+        reliable IP data globally from carriers. "
       example: 123.0.0.255
       in: query
       name: ip
       schema:
         type: string
     number:
-      description: A single phone number that you need insight about in national or international format.
+      description: A single phone number that you need insight about in national or
+        international format.
       example: "447700900000"
       in: query
       name: number
@@ -235,11 +261,17 @@ components:
       description: Information about the network `number` is currently connected to.
       properties:
         caller_name:
-          description: Full name of the person or business who owns the phone number. `unknown` if this information is not available. This parameter is only present if `cnam` had a value of `true` within the request.
+          description: Full name of the person or business who owns the phone number.
+            `unknown` if this information is not available. This parameter is
+            only present if `cnam` had a value of `true` within the request.
           example: John Smith
           type: string
         caller_type:
-          description: The value will be `business` if the owner of a phone number is a business. If the owner is an individual the value will be `consumer`. The value will be `unknown` if this information is not available. This parameter is only present if `cnam` had a value of `true` within the request.
+          description: The value will be `business` if the owner of a phone number is a
+            business. If the owner is an individual the value will be
+            `consumer`. The value will be `unknown` if this information is not
+            available. This parameter is only present if `cnam` had a value of
+            `true` within the request.
           enum:
             - business
             - consumer
@@ -247,11 +279,15 @@ components:
           example: consumer
           type: string
         first_name:
-          description: First name of the person who owns the phone number if the owner is an individual. This parameter is only present if `cnam` had a value of `true` within the request.
+          description: First name of the person who owns the phone number if the owner is
+            an individual. This parameter is only present if `cnam` had a value
+            of `true` within the request.
           example: John
           type: string
         last_name:
-          description: Last name of the person who owns the phone number if the owner is an individual. This parameter is only present if `cnam` had a value of `true` within the request.
+          description: Last name of the person who owns the phone number if the owner is
+            an individual. This parameter is only present if `cnam` had a value
+            of `true` within the request.
           example: Smith
           type: string
       type: object
@@ -259,7 +295,8 @@ components:
       description: Information about the network `number` is currently connected to.
       properties:
         country:
-          description: The country that `number` is associated with. This is in ISO 3166-1 alpha-2   format.
+          description: The country that `number` is associated with. This is in ISO 3166-1
+            alpha-2   format.
           example: GB
           type: string
           xml:
@@ -271,7 +308,12 @@ components:
           xml:
             attribute: true
         network_code:
-          description: The [https://en.wikipedia.org/wiki/Mobile_country_code](https://en.wikipedia.org/wiki/Mobile_country_code) for the carrier`number` is associated with. Unreal numbers are marked as`unknown` and the request is rejected altogether if the number is impossible according to the [E.164](https://en.wikipedia.org/wiki/E.164) guidelines.
+          description: The
+            [https://en.wikipedia.org/wiki/Mobile_country_code](https://en.wikipedia.org/wiki/Mobile_country_code)
+            for the carrier`number` is associated with. Unreal numbers are
+            marked as`unknown` and the request is rejected altogether if the
+            number is impossible according to the
+            [E.164](https://en.wikipedia.org/wiki/E.164) guidelines.
           example: "12345"
           type: string
           xml:
@@ -296,7 +338,8 @@ components:
       description: Information about the network `number` was initially connected to.
       properties:
         country:
-          description: The country that `number` is associated with. This is in ISO 3166-1 alpha-2   format.
+          description: The country that `number` is associated with. This is in ISO 3166-1
+            alpha-2   format.
           example: GB
           type: string
           xml:
@@ -308,7 +351,12 @@ components:
           xml:
             attribute: true
         network_code:
-          description: The [https://en.wikipedia.org/wiki/Mobile_country_code](https://en.wikipedia.org/wiki/Mobile_country_code) for the carrier`number` is associated with. Unreal numbers are marked as`unknown` and the request is rejected altogether if the number is impossible according to the [E.164](https://en.wikipedia.org/wiki/E.164) guidelines.
+          description: The
+            [https://en.wikipedia.org/wiki/Mobile_country_code](https://en.wikipedia.org/wiki/Mobile_country_code)
+            for the carrier`number` is associated with. Unreal numbers are
+            marked as`unknown` and the request is rejected altogether if the
+            number is impossible according to the
+            [E.164](https://en.wikipedia.org/wiki/E.164) guidelines.
           example: "12345"
           type: string
           xml:
@@ -332,7 +380,8 @@ components:
     niResponseAsync:
       properties:
         error_text:
-          description: "The status description of your request. Note: This field is equivalent to `status_message` field in the other endpoints"
+          description: "The status description of your request. Note: This field is
+            equivalent to `status_message` field in the other endpoints"
           example: Success
           type: string
         number:
@@ -346,14 +395,19 @@ components:
           xml:
             name: remainingBalance
         request_id:
-          description: The unique identifier for your request. This is a alphanumeric string up to 40 characters.
+          description: The unique identifier for your request. This is a alphanumeric
+            string up to 40 characters.
           example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
           maxLength: 40
           type: string
           xml:
             name: requestId
         request_price:
-          description: If there is an internal lookup error, the `refund_price` will reflect the lookup price. If `cnam` is requested for a non-US number the `refund_price` will reflect the `cnam` price. If both of these conditions occur, `refund_price` is the sum of the lookup price and `cnam` price.
+          description: If there is an internal lookup error, the `refund_price` will
+            reflect the lookup price. If `cnam` is requested for a non-US number
+            the `refund_price` will reflect the `cnam` price. If both of these
+            conditions occur, `refund_price` is the sum of the lookup price and
+            `cnam` price.
           example: "0.01500000"
           type: string
           xml:
@@ -369,12 +423,14 @@ components:
         caller_identity:
           $ref: "#/components/schemas/niCallerIdentity"
         country_code:
-          description: Two character country code for `number`. This is in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
+          description: Two character country code for `number`. This is in [ISO 3166-1
+            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
           example: GB
           pattern: "[A-Z]{2}"
           type: string
         country_code_iso3:
-          description: Three character country code for `number`. This is in [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format.
+          description: Three character country code for `number`. This is in [ISO 3166-1
+            alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format.
           example: GBR
           pattern: "[A-Z]{3}"
           type: string
@@ -394,7 +450,8 @@ components:
           type: string
         lookup_outcome:
           description: >
-            Shows if all information about a phone number has been returned. Possible values:
+            Shows if all information about a phone number has been returned.
+            Possible values:
 
 
             Code | Text
@@ -417,13 +474,16 @@ components:
           example: Success
           type: string
         national_format_number:
-          description: The `number` in your request in the format used by the country the number belongs to.
+          description: The `number` in your request in the format used by the country the
+            number belongs to.
           example: 07700 900000
           type: string
         original_carrier:
           $ref: "#/components/schemas/niInitialCarrierProperties"
         ported:
-          description: If the user has changed carrier for `number`. The assumed status means that the information supplier has replied to the request but has not said explicitly that the number is ported.
+          description: If the user has changed carrier for `number`. The assumed status
+            means that the information supplier has replied to the request but
+            has not said explicitly that the number is ported.
           enum:
             - unknown
             - ported
@@ -444,7 +504,11 @@ components:
           example: reachable
           type: string
         refund_price:
-          description: If there is an internal lookup error, the `refund_price` will reflect the lookup price. If `cnam` is requested for a non-US number the `refund_price` will reflect the `cnam` price. If both of these conditions occur, `refund_price` is the sum of the lookup price and `cnam` price.
+          description: If there is an internal lookup error, the `refund_price` will
+            reflect the lookup price. If `cnam` is requested for a non-US number
+            the `refund_price` will reflect the `cnam` price. If both of these
+            conditions occur, `refund_price` is the sum of the lookup price and
+            `cnam` price.
           example: "0.01500000"
           type: string
         remaining_balance:
@@ -452,7 +516,8 @@ components:
           example: "1.23456789"
           type: string
         request_id:
-          description: The unique identifier for your request. This is a alphanumeric string up to 40 characters.
+          description: The unique identifier for your request. This is a alphanumeric
+            string up to 40 characters.
           example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
           maxLength: 40
           type: string
@@ -469,7 +534,12 @@ components:
           example: Success
           type: string
         valid_number:
-          description: Does `number` exist. `unknown` means the number could not be validated. `valid` means the number is valid. `not_valid` means the number is not valid. `inferred_not_valid` means that the number could not be determined as valid or invalid via an external system and the best guess is that the number is invalid. This is applicable to mobile numbers only.
+          description: Does `number` exist. `unknown` means the number could not be
+            validated. `valid` means the number is valid. `not_valid` means the
+            number is not valid. `inferred_not_valid` means that the number
+            could not be determined as valid or invalid via an external system
+            and the best guess is that the number is invalid. This is applicable
+            to mobile numbers only.
           enum:
             - unknown
             - valid
@@ -492,12 +562,14 @@ components:
     niResponseJsonBasic:
       properties:
         country_code:
-          description: Two character country code for `number`. This is in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
+          description: Two character country code for `number`. This is in [ISO 3166-1
+            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
           example: GB
           pattern: "[A-Z]{2}"
           type: string
         country_code_iso3:
-          description: Three character country code for `number`. This is in [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format.
+          description: Three character country code for `number`. This is in [ISO 3166-1
+            alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format.
           example: GBR
           pattern: "[A-Z]{3}"
           type: string
@@ -514,11 +586,13 @@ components:
           example: "447700900000"
           type: string
         national_format_number:
-          description: The `number` in your request in the format used by the country the number belongs to.
+          description: The `number` in your request in the format used by the country the
+            number belongs to.
           example: 07700 900000
           type: string
         request_id:
-          description: The unique identifier for your request. This is a alphanumeric string up to 40 characters.
+          description: The unique identifier for your request. This is a alphanumeric
+            string up to 40 characters.
           example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
           maxLength: 40
           type: string
@@ -536,11 +610,18 @@ components:
             caller_identity:
               $ref: "#/components/schemas/niCallerIdentity"
             caller_name:
-              description: Full name of the person or business who owns the phone number. `unknown` if this information is not available. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: Full name of the person or business who owns the phone number.
+                `unknown` if this information is not available. This parameter
+                is only present if `cnam` had a value of `true` within the
+                request.
               example: John Smith
               type: string
             caller_type:
-              description: The value will be `business` if the owner of a phone number is a business. If the owner is an individual the value will be `consumer`. The value will be `unknown` if this information is not available. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: The value will be `business` if the owner of a phone number is a
+                business. If the owner is an individual the value will be
+                `consumer`. The value will be `unknown` if this information is
+                not available. This parameter is only present if `cnam` had a
+                value of `true` within the request.
               enum:
                 - business
                 - consumer
@@ -550,17 +631,23 @@ components:
             current_carrier:
               $ref: "#/components/schemas/niCurrentCarrierProperties"
             first_name:
-              description: First name of the person who owns the phone number if the owner is an individual. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: First name of the person who owns the phone number if the owner is
+                an individual. This parameter is only present if `cnam` had a
+                value of `true` within the request.
               example: John
               type: string
             last_name:
-              description: Last name of the person who owns the phone number if the owner is an individual. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: Last name of the person who owns the phone number if the owner is
+                an individual. This parameter is only present if `cnam` had a
+                value of `true` within the request.
               example: Smith
               type: string
             original_carrier:
               $ref: "#/components/schemas/niInitialCarrierProperties"
             ported:
-              description: If the user has changed carrier for `number`. The assumed status means that the information supplier has replied to the request but has not said explicitly that the number is ported.
+              description: If the user has changed carrier for `number`. The assumed status
+                means that the information supplier has replied to the request
+                but has not said explicitly that the number is ported.
               enum:
                 - unknown
                 - ported
@@ -570,7 +657,11 @@ components:
               example: not_ported
               type: string
             refund_price:
-              description: If there is an internal lookup error, the `refund_price` will reflect the lookup price. If `cnam` is requested for a non-US number the `refund_price` will reflect the `cnam` price. If both of these conditions occur, `refund_price` is the sum of the lookup price and `cnam` price.
+              description: If there is an internal lookup error, the `refund_price` will
+                reflect the lookup price. If `cnam` is requested for a non-US
+                number the `refund_price` will reflect the `cnam` price. If both
+                of these conditions occur, `refund_price` is the sum of the
+                lookup price and `cnam` price.
               example: "0.01500000"
               type: string
             remaining_balance:
@@ -588,16 +679,24 @@ components:
       description: Advanced
       properties:
         caller_identity:
-          description: Contains details of the number owner, if `cnam` was set to `true` in the request.
+          description: Contains details of the number owner, if `cnam` was set to `true`
+            in the request.
           properties:
             caller-name:
-              description: Full name of the person or business who owns the phone number. `unknown` if this information is not available. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: Full name of the person or business who owns the phone number.
+                `unknown` if this information is not available. This parameter
+                is only present if `cnam` had a value of `true` within the
+                request.
               example: John Smith
               type: string
               xml:
                 attribute: true
             caller-type:
-              description: The value will be `business` if the owner of a phone number is a business. If the owner is an individual the value will be `consumer`. The value will be `unknown` if this information is not available. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: The value will be `business` if the owner of a phone number is a
+                business. If the owner is an individual the value will be
+                `consumer`. The value will be `unknown` if this information is
+                not available. This parameter is only present if `cnam` had a
+                value of `true` within the request.
               enum:
                 - business
                 - consumer
@@ -607,23 +706,33 @@ components:
               xml:
                 attribute: true
             first-name:
-              description: First name of the person who owns the phone number if the owner is an individual. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: First name of the person who owns the phone number if the owner is
+                an individual. This parameter is only present if `cnam` had a
+                value of `true` within the request.
               example: John
               type: string
               xml:
                 attribute: true
             last-name:
-              description: Last name of the person who owns the phone number if the owner is an individual. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: Last name of the person who owns the phone number if the owner is
+                an individual. This parameter is only present if `cnam` had a
+                value of `true` within the request.
               example: Smith
               type: string
               xml:
                 attribute: true
         caller_name:
-          description: Full name of the person or business who owns the phone number. `unknown` if this information is not available. This parameter is only present if `cnam` had a value of `true` within the request.
+          description: Full name of the person or business who owns the phone number.
+            `unknown` if this information is not available. This parameter is
+            only present if `cnam` had a value of `true` within the request.
           example: John Smith
           type: string
         caller_type:
-          description: The value will be `business` if the owner of a phone number is a business. If the owner is an individual the value will be `consumer`. The value will be `unknown` if this information is not available. This parameter is only present if `cnam` had a value of `true` within the request.
+          description: The value will be `business` if the owner of a phone number is a
+            business. If the owner is an individual the value will be
+            `consumer`. The value will be `unknown` if this information is not
+            available. This parameter is only present if `cnam` had a value of
+            `true` within the request.
           enum:
             - business
             - consumer
@@ -650,7 +759,9 @@ components:
           type: object
           x-nexmo-developer-collection-description-shown: true
         firs_name:
-          description: First name of the person who owns the phone number if the owner is an individual. This parameter is only present if `cnam` had a value of `true` within the request.
+          description: First name of the person who owns the phone number if the owner is
+            an individual. This parameter is only present if `cnam` had a value
+            of `true` within the request.
           example: John
           type: string
         international_format_number:
@@ -662,21 +773,28 @@ components:
           example: unknown
           type: string
         last_name:
-          description: Last name of the person who owns the phone number if the owner is an individual. This parameter is only present if `cnam` had a value of `true` within the request.
+          description: Last name of the person who owns the phone number if the owner is
+            an individual. This parameter is only present if `cnam` had a value
+            of `true` within the request.
           example: Smith
           type: string
         local_number:
-          description: An object containing the `number` in your request in the format used by the country the number belongs to.
+          description: An object containing the `number` in your request in the format
+            used by the country the number belongs to.
           properties:
             country_code:
-              description: Two character country code for `number`. This is in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
+              description: Two character country code for `number`. This is in [ISO 3166-1
+                alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+                format.
               example: GB
               pattern: "[A-Z]{2}"
               type: string
               xml:
                 attribute: true
             country_code_iso3:
-              description: Three character country code for `number`. This is in [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format.
+              description: Three character country code for `number`. This is in [ISO 3166-1
+                alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
+                format.
               example: GBR
               pattern: "[A-Z]{3}"
               type: string
@@ -695,7 +813,8 @@ components:
               xml:
                 attribute: true
             number:
-              description: The `number` in your request in the format used by the country the number belongs to.
+              description: The `number` in your request in the format used by the country the
+                number belongs to.
               example: 07700 900000
               type: string
               xml:
@@ -703,11 +822,13 @@ components:
           type: object
           x-nexmo-developer-collection-description-shown: true
         lookup_outcome:
-          description: An object indicating whether all information about a phone number has been returned.
+          description: An object indicating whether all information about a phone number
+            has been returned.
           properties:
             code:
               description: >
-                Shows if all information about a phone number has been returned. Possible values:
+                Shows if all information about a phone number has been returned.
+                Possible values:
 
 
                 Code | Text
@@ -737,10 +858,14 @@ components:
         original_carrier:
           $ref: "#/components/schemas/niInitialCarrierProperties"
         ported:
-          description: If the user has changed carrier for `number`. The assumed status means that the information supplier has replied to the request but has not said explicitly that the number is ported.
+          description: If the user has changed carrier for `number`. The assumed status
+            means that the information supplier has replied to the request but
+            has not said explicitly that the number is ported.
           properties:
             ported_message:
-              description: If the user has changed carrier for `number`. The assumed status means that the information supplier has replied to the request but has not said explicitly that the number is ported.
+              description: If the user has changed carrier for `number`. The assumed status
+                means that the information supplier has replied to the request
+                but has not said explicitly that the number is ported.
               enum:
                 - unknown
                 - ported
@@ -767,20 +892,30 @@ components:
           example: "1.23456789"
           type: string
         request_id:
-          description: The unique identifier for your request. This is a alphanumeric string up to 40 characters.
+          description: The unique identifier for your request. This is a alphanumeric
+            string up to 40 characters.
           example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
           maxLength: 40
           type: string
           xml:
             name: request_id
         request_price:
-          description: If there is an internal lookup error, the `refund_price` will reflect the lookup price. If `cnam` is requested for a non-US number the `refund_price` will reflect the `cnam` price. If both of these conditions occur, `refund_price` is the sum of the lookup price and `cnam` price.
+          description: If there is an internal lookup error, the `refund_price` will
+            reflect the lookup price. If `cnam` is requested for a non-US number
+            the `refund_price` will reflect the `cnam` price. If both of these
+            conditions occur, `refund_price` is the sum of the lookup price and
+            `cnam` price.
           example: "0.01500000"
           type: string
         roaming:
           $ref: "#/components/schemas/niRoaming"
         valid_number:
-          description: Does `number` exist. `unknown` means the number could not be validated. `valid` means the number is valid. `not_valid` means the number is not valid. `inferred_not_valid` means that the number could not be determined as valid or invalid via an external system and the best guess is that the number is invalid. This is applicable to mobile numbers only.
+          description: Does `number` exist. `unknown` means the number could not be
+            validated. `valid` means the number is valid. `not_valid` means the
+            number is not valid. `inferred_not_valid` means that the number
+            could not be determined as valid or invalid via an external system
+            and the best guess is that the number is invalid. This is applicable
+            to mobile numbers only.
           enum:
             - unknown
             - valid
@@ -815,17 +950,22 @@ components:
           example: "447700900000"
           type: string
         local_number:
-          description: An object containing the `number` in your request in the format used by the country the number belongs to.
+          description: An object containing the `number` in your request in the format
+            used by the country the number belongs to.
           properties:
             country_code:
-              description: Two character country code for `number`. This is in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
+              description: Two character country code for `number`. This is in [ISO 3166-1
+                alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+                format.
               example: GB
               pattern: "[A-Z]{2}"
               type: string
               xml:
                 attribute: true
             country_code_iso3:
-              description: Three character country code for `number`. This is in [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format.
+              description: Three character country code for `number`. This is in [ISO 3166-1
+                alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
+                format.
               example: GBR
               pattern: "[A-Z]{3}"
               type: string
@@ -844,14 +984,16 @@ components:
               xml:
                 attribute: true
             number:
-              description: The `number` in your request in the format used by the country the number belongs to.
+              description: The `number` in your request in the format used by the country the
+                number belongs to.
               example: 07700 900000
               type: string
               xml:
                 x-text: true
           type: object
         request_id:
-          description: The unique identifier for your request. This is a alphanumeric string up to 40 characters.
+          description: The unique identifier for your request. This is a alphanumeric
+            string up to 40 characters.
           example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
           maxLength: 40
           type: string
@@ -864,16 +1006,24 @@ components:
       description: Standard
       properties:
         caller_identity:
-          description: Contains details of the number owner, if `cnam` was set to `true` in the request.
+          description: Contains details of the number owner, if `cnam` was set to `true`
+            in the request.
           properties:
             caller-name:
-              description: Full name of the person or business who owns the phone number. `unknown` if this information is not available. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: Full name of the person or business who owns the phone number.
+                `unknown` if this information is not available. This parameter
+                is only present if `cnam` had a value of `true` within the
+                request.
               example: John Smith
               type: string
               xml:
                 attribute: true
             caller-type:
-              description: The value will be `business` if the owner of a phone number is a business. If the owner is an individual the value will be `consumer`. The value will be `unknown` if this information is not available. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: The value will be `business` if the owner of a phone number is a
+                business. If the owner is an individual the value will be
+                `consumer`. The value will be `unknown` if this information is
+                not available. This parameter is only present if `cnam` had a
+                value of `true` within the request.
               enum:
                 - business
                 - consumer
@@ -883,11 +1033,18 @@ components:
               xml:
                 attribute: true
             caller_name:
-              description: Full name of the person or business who owns the phone number. `unknown` if this information is not available. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: Full name of the person or business who owns the phone number.
+                `unknown` if this information is not available. This parameter
+                is only present if `cnam` had a value of `true` within the
+                request.
               example: John Smith
               type: string
             caller_type:
-              description: The value will be `business` if the owner of a phone number is a business. If the owner is an individual the value will be `consumer`. The value will be `unknown` if this information is not available. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: The value will be `business` if the owner of a phone number is a
+                business. If the owner is an individual the value will be
+                `consumer`. The value will be `unknown` if this information is
+                not available. This parameter is only present if `cnam` had a
+                value of `true` within the request.
               enum:
                 - business
                 - consumer
@@ -895,23 +1052,31 @@ components:
               example: consumer
               type: string
             firs_name:
-              description: First name of the person who owns the phone number if the owner is an individual. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: First name of the person who owns the phone number if the owner is
+                an individual. This parameter is only present if `cnam` had a
+                value of `true` within the request.
               example: John
               type: string
             first-name:
-              description: First name of the person who owns the phone number if the owner is an individual. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: First name of the person who owns the phone number if the owner is
+                an individual. This parameter is only present if `cnam` had a
+                value of `true` within the request.
               example: John
               type: string
               xml:
                 attribute: true
             last-name:
-              description: Last name of the person who owns the phone number if the owner is an individual. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: Last name of the person who owns the phone number if the owner is
+                an individual. This parameter is only present if `cnam` had a
+                value of `true` within the request.
               example: Smith
               type: string
               xml:
                 attribute: true
             last_name:
-              description: Last name of the person who owns the phone number if the owner is an individual. This parameter is only present if `cnam` had a value of `true` within the request.
+              description: Last name of the person who owns the phone number if the owner is
+                an individual. This parameter is only present if `cnam` had a
+                value of `true` within the request.
               example: Smith
               type: string
           type: object
@@ -939,17 +1104,22 @@ components:
           example: "447700900000"
           type: string
         local_number:
-          description: An object containing the `number` in your request in the format used by the country the number belongs to.
+          description: An object containing the `number` in your request in the format
+            used by the country the number belongs to.
           properties:
             country_code:
-              description: Two character country code for `number`. This is in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
+              description: Two character country code for `number`. This is in [ISO 3166-1
+                alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+                format.
               example: GB
               pattern: "[A-Z]{2}"
               type: string
               xml:
                 attribute: true
             country_code_iso3:
-              description: Three character country code for `number`. This is in [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format.
+              description: Three character country code for `number`. This is in [ISO 3166-1
+                alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
+                format.
               example: GBR
               pattern: "[A-Z]{3}"
               type: string
@@ -968,7 +1138,8 @@ components:
               xml:
                 attribute: true
             number:
-              description: The `number` in your request in the format used by the country the number belongs to.
+              description: The `number` in your request in the format used by the country the
+                number belongs to.
               example: 07700 900000
               type: string
               xml:
@@ -977,10 +1148,14 @@ components:
         original_carrier:
           $ref: "#/components/schemas/niInitialCarrierProperties"
         ported:
-          description: If the user has changed carrier for number. The assumed status means that the information supplier has replied to the request but has not said explicitly that the number is ported
+          description: If the user has changed carrier for number. The assumed status
+            means that the information supplier has replied to the request but
+            has not said explicitly that the number is ported
           properties:
             ported_message:
-              description: If the user has changed carrier for `number`. The assumed status means that the information supplier has replied to the request but has not said explicitly that the number is ported.
+              description: If the user has changed carrier for `number`. The assumed status
+                means that the information supplier has replied to the request
+                but has not said explicitly that the number is ported.
               enum:
                 - unknown
                 - ported
@@ -996,18 +1171,24 @@ components:
           example: "1.23456789"
           type: string
         request_id:
-          description: The unique identifier for your request. This is a alphanumeric string up to 40 characters.
+          description: The unique identifier for your request. This is a alphanumeric
+            string up to 40 characters.
           example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
           maxLength: 40
           type: string
           xml:
             name: request_id
         request_price:
-          description: If there is an internal lookup error, the `refund_price` will reflect the lookup price. If `cnam` is requested for a non-US number the `refund_price` will reflect the `cnam` price. If both of these conditions occur, `refund_price` is the sum of the lookup price and `cnam` price.
+          description: If there is an internal lookup error, the `refund_price` will
+            reflect the lookup price. If `cnam` is requested for a non-US number
+            the `refund_price` will reflect the `cnam` price. If both of these
+            conditions occur, `refund_price` is the sum of the lookup price and
+            `cnam` price.
           example: "0.01500000"
           type: string
         roaming:
-          description: Information about the roaming status for number. This is applicable to mobile numbers only.
+          description: Information about the roaming status for number. This is applicable
+            to mobile numbers only.
           properties:
             status:
               enum:
@@ -1022,22 +1203,27 @@ components:
       xml:
         name: lookup
     niRoaming:
-      description: Information about the roaming status for `number`. This is applicable to mobile numbers only.
+      description: Information about the roaming status for `number`. This is
+        applicable to mobile numbers only.
       properties:
         roaming_country_code:
-          description: If `number` is `roaming`, this is the [code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the country `number` is roaming in.
+          description: If `number` is `roaming`, this is the
+            [code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the
+            country `number` is roaming in.
           example: US
           type: string
           xml:
             attribute: true
         roaming_network_code:
-          description: If `number` is `roaming`, this is the id of the carrier network `number` is roaming in.
+          description: If `number` is `roaming`, this is the id of the carrier network
+            `number` is roaming in.
           example: "12345"
           type: string
           xml:
             attribute: true
         roaming_network_name:
-          description: If `number` is `roaming`, this is the name of the carrier network `number` is roaming in.
+          description: If `number` is `roaming`, this is the name of the carrier network
+            `number` is roaming in.
           example: Acme Inc
           type: string
           xml:
@@ -1092,12 +1278,14 @@ components:
       type: integer
   securitySchemes:
     apiKey:
-      description: You can find your API key in your [account overview](https://dashboard.nexmo.com/account-overview)
+      description: You can find your API key in your [account
+        overview](https://dashboard.nexmo.com/account-overview)
       in: query
       name: api_key
       type: apiKey
     apiSecret:
-      description: You can find your API secret in your [account overview](https://dashboard.nexmo.com/account-overview)
+      description: You can find your API secret in your [account
+        overview](https://dashboard.nexmo.com/account-overview)
       in: query
       name: api_secret
       type: apiKey

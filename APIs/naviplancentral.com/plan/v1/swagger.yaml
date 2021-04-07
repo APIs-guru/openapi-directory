@@ -117,7 +117,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: This operation retrieves an object containing all assumptions for the specified plan.
+      description: This operation retrieves an object containing all assumptions for
+        the specified plan.
       operationId: Assumptions_GetByPlanid
       parameters:
         - description: Id of the plan to retrieve data from (e.g. 1001-11-3).
@@ -148,7 +149,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: This operation retrieves a list of all of the business entities in the plan.
+      description: This operation retrieves a list of all of the business entities in
+        the plan.
       operationId: BusinessEntities_GetByPlanid
       parameters:
         - description: Id of the plan to retrieve data from (e.g. 1001-11-3).
@@ -247,7 +249,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: This operation retrieves a list of all of the defined benefit pensions in the plan.
+      description: This operation retrieves a list of all of the defined benefit
+        pensions in the plan.
       operationId: DefinedBenefitPensions_GetByPlanid
       parameters:
         - description: Id of the plan to retrieve data from (e.g. 1001-11-3).
@@ -331,7 +334,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: This operation retrieves an object containing all familymembers for the specified plan.
+      description: This operation retrieves an object containing all familymembers for
+        the specified plan.
       operationId: Family_GetByPlanid
       parameters:
         - description: Id of the plan to retrieve data from (e.g. 1001-11-3).
@@ -371,7 +375,8 @@ paths:
           name: id
           required: true
           type: integer
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -388,7 +393,8 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsEducationGoalAdjustmentsModel"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsEducationGoalA\
+              djustmentsModel"
         "400":
           description: Invalid request
         "401":
@@ -406,7 +412,8 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: This function returns the posted object and the adjusted calculation values
+      description: This function returns the posted object and the adjusted
+        calculation values
       operationId: GoalAdjustments_PostEducationByIdGoaladjustmentsPlanid
       parameters:
         - description: The id of the goal to retrieve adjustments for.
@@ -420,7 +427,8 @@ paths:
           name: goalAdjustments
           required: true
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsGoalAdjustmentsModelAdvicentDomainLogicGoalWhatIfEducationGoalAdjustments"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsGoalAdjustment\
+              sModelAdvicentDomainLogicGoalWhatIfEducationGoalAdjustments"
         - description: Id of the Plan to retrieve or update data for (e.g. 1001-11-3).
           in: query
           name: planId
@@ -433,7 +441,9 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsCoverageProjectionsResultModelAdvicentDomainLogicGoalWhatIfEducationGoalAdjustments"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsCoverageProjec\
+              tionsResultModelAdvicentDomainLogicGoalWhatIfEducationGoalAdjustm\
+              ents"
         "400":
           description: Invalid request
         "401":
@@ -451,7 +461,8 @@ paths:
       deprecated: false
       operationId: GoalAdjustments_GetGoalSuccessRatesByClientidPlanid
       parameters:
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -468,7 +479,8 @@ paths:
         "200":
           description: Goal Success Rates successfully retrieved.
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsGoalSuccessRateResultsModel"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsGoalSuccessRat\
+              eResultsModel"
         "400":
           description: Invalid request
         "401":
@@ -493,7 +505,8 @@ paths:
           name: id
           required: true
           type: integer
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -510,7 +523,8 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsMajorPurchaseGoalAdjustmentsModel"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsMajorPurchaseG\
+              oalAdjustmentsModel"
         "400":
           description: Invalid request
         "401":
@@ -528,7 +542,8 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: This function returns the posted object and the adjusted calculation values
+      description: This function returns the posted object and the adjusted
+        calculation values
       operationId: GoalAdjustments_PostMajorPurchaseByIdGoaladjustmentsPlanid
       parameters:
         - description: The id of the goal to retrieve adjustments for.
@@ -542,7 +557,8 @@ paths:
           name: goalAdjustments
           required: true
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsGoalAdjustmentsModelAdvicentDomainLogicGoalWhatIfMajorPurchaseGoalAdjustments"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsGoalAdjustment\
+              sModelAdvicentDomainLogicGoalWhatIfMajorPurchaseGoalAdjustments"
         - description: Id of the Plan to retrieve or update data for (e.g. 1001-11-3).
           in: query
           name: planId
@@ -555,7 +571,9 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsCoverageProjectionsResultModelAdvicentDomainLogicGoalWhatIfMajorPurchaseGoalAdjustments"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsCoverageProjec\
+              tionsResultModelAdvicentDomainLogicGoalWhatIfMajorPurchaseGoalAdj\
+              ustments"
         "400":
           description: Invalid request
         "401":
@@ -574,7 +592,8 @@ paths:
       description: This function returns a list of adjustment restrictions for all goals.
       operationId: GoalAdjustments_GetGoalAdjustmentRestrictionsByClientidPlanid
       parameters:
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -591,7 +610,8 @@ paths:
         "200":
           description: Restrictions successfully retrieved.
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsRestrictionsResultModel"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsRestrictionsRe\
+              sultModel"
         "400":
           description: Invalid request
         "401":
@@ -607,10 +627,12 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: This function retrieves a goal and the adjustments made to it for a particular client
+      description: This function retrieves a goal and the adjustments made to it for a
+        particular client
       operationId: GoalAdjustments_GetRetirementByClientidPlanid
       parameters:
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -627,7 +649,8 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsRetirementGoalAdjustmentsModel"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsRetirementGoal\
+              AdjustmentsModel"
         "400":
           description: Invalid request
         "401":
@@ -645,7 +668,8 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: This function returns the posted object and the adjusted calculation values
+      description: This function returns the posted object and the adjusted
+        calculation values
       operationId: GoalAdjustments_PostRetirementByGoaladjustmentsPlanid
       parameters:
         - description: The adjusted values for this goal
@@ -653,7 +677,8 @@ paths:
           name: goalAdjustments
           required: true
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsGoalAdjustmentsModelAdvicentDomainLogicGoalWhatIfRetirementGoalAdjustments"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsGoalAdjustment\
+              sModelAdvicentDomainLogicGoalWhatIfRetirementGoalAdjustments"
         - description: Id of the Plan to retrieve or update data for (e.g. 1001-11-3).
           in: query
           name: planId
@@ -666,7 +691,9 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsCoverageProjectionsResultModelAdvicentDomainLogicGoalWhatIfRetirementGoalAdjustments"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsCoverageProjec\
+              tionsResultModelAdvicentDomainLogicGoalWhatIfRetirementGoalAdjust\
+              ments"
         "400":
           description: Invalid request
         "401":
@@ -690,7 +717,8 @@ paths:
           name: id
           required: true
           type: integer
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -707,7 +735,8 @@ paths:
         "200":
           description: What are my options results successfully retrieved.
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsWhatAreMyOptionsModel"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsWhatAreMyOptio\
+              nsModel"
         "400":
           description: Invalid request
         "401":
@@ -791,7 +820,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: This operation retrieves a list of all of the holding companies in the plan.
+      description: This operation retrieves a list of all of the holding companies in
+        the plan.
       operationId: HoldingCompanies_GetByPlanid
       parameters:
         - description: Id of the plan to retrieve data from (e.g. 1001-11-3).
@@ -859,7 +889,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: This operation retrieves a list of households the current user has access to or one household specified by a householdId parameter
+      description: This operation retrieves a list of households the current user has
+        access to or one household specified by a householdId parameter
       operationId: Households_GetByHouseholdid
       parameters:
         - description: The Id of the specific household to retrieve
@@ -955,7 +986,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: This operation retrieves a list of all of the lifestyle assets in the plan.
+      description: This operation retrieves a list of all of the lifestyle assets in
+        the plan.
       operationId: LifestyleAssets_GetByPlanid
       parameters:
         - description: Id of the plan to retrieve data from (e.g. 1001-11-3).
@@ -1025,7 +1057,8 @@ paths:
       deprecated: false
       operationId: LivePlan_GetGoalsByClientidPlanid
       parameters:
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -1058,10 +1091,12 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: This function retrieves a list of funding accounts for the goals in the plan
+      description: This function retrieves a list of funding accounts for the goals in
+        the plan
       operationId: LivePlan_GetGoalFundingListByClientidPlanid
       parameters:
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -1103,7 +1138,8 @@ paths:
           name: id
           required: true
           type: integer
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -1120,7 +1156,8 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsWhatAreMyOptionsModel"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsWhatAreMyOptio\
+              nsModel"
         "400":
           description: Invalid request
         "401":
@@ -1138,7 +1175,8 @@ paths:
       deprecated: false
       operationId: LivePlan_GetAccountsByClientidPlanid
       parameters:
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -1173,7 +1211,8 @@ paths:
       deprecated: false
       operationId: LivePlan_GetLiabilitiesByClientidPlanid
       parameters:
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -1208,7 +1247,8 @@ paths:
       deprecated: false
       operationId: LivePlan_GetLifestyleAssetsByClientidPlanid
       parameters:
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -1225,7 +1265,8 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiNetWorthModelsLifestyleAssetBaseModel"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiNetWorthModelsLifestyleAssetBaseMod\
+              el"
         "400":
           description: Invalid request
         "401":
@@ -1243,7 +1284,8 @@ paths:
       deprecated: false
       operationId: LivePlan_GetRealEstateAssetsByClientidPlanid
       parameters:
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -1278,7 +1320,8 @@ paths:
       deprecated: false
       operationId: LivePlan_GetProjectedNetWorthByClientidPlanid
       parameters:
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -1295,7 +1338,8 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiProjectionsModelsNetWorthProjectionsModel"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiProjectionsModelsNetWorthProjection\
+              sModel"
         "400":
           description: Invalid request
         "401":
@@ -1318,7 +1362,8 @@ paths:
           name: id
           required: true
           type: integer
-        - description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        - description: Id of the client user for the plan. Required if current session
+            user is an advisor. Ignored for client user sessions.
           in: query
           name: clientId
           required: false
@@ -1335,7 +1380,8 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/AdvicentNaviPlanRestApiProjectionsModelsNeedsVsAbilitiesProjectionsModel"
+            $ref: "#/definitions/AdvicentNaviPlanRestApiProjectionsModelsNeedsVsAbilitiesPr\
+              ojectionsModel"
         "400":
           description: Invalid request
         "401":
@@ -1351,7 +1397,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This operation retrieves an object containing net worth values for specific dates within the plan:\r
+      description: "This operation retrieves an object containing net worth values for
+        specific dates within the plan:\r
 
         \              * Plan Start Date\r
 
@@ -1502,7 +1549,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This operation retrieves the data statuses of the published plan if on demand updates\r
+      description: "This operation retrieves the data statuses of the published plan
+        if on demand updates\r
 
         \            are enabled"
       operationId: PlanStatuses_GetByPlanid
@@ -1533,7 +1581,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: This operation retrieves a list of all of the portfolio accounts in the plan.
+      description: This operation retrieves a list of all of the portfolio accounts in
+        the plan.
       operationId: PortfolioAccounts_GetByPlanid
       parameters:
         - description: Id of the plan to retrieve data from (e.g. 1001-11-3).
@@ -1601,7 +1650,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This operation retrieves an object containing annual summary information \r
+      description: "This operation retrieves an object containing annual summary
+        information \r
 
         \              for each year of the projected plan."
       operationId: ProjectedAnnualSummary_GetByPlanid
@@ -1634,9 +1684,11 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This operation retrieves an object containing annual summary information \r
+      description: "This operation retrieves an object containing annual summary
+        information \r
 
-        \              for a single specified year of the projected plan."
+        \              for a single specified year of the projected
+        plan."
       operationId: ProjectedAnnualSummary_GetByIdPlanid
       parameters:
         - description: Index into the list of annual projections
@@ -1673,7 +1725,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This operation retrieves an object containing cash flow information \r
+      description: "This operation retrieves an object containing cash flow
+        information \r
 
         \              for each year of the projected plan."
       operationId: ProjectedCashFlow_GetByPlanid
@@ -1706,9 +1759,11 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This operation retrieves an object containing cash flow information \r
+      description: "This operation retrieves an object containing cash flow
+        information \r
 
-        \              for a single specified year of the projected plan."
+        \              for a single specified year of the projected
+        plan."
       operationId: ProjectedCashFlow_GetByIdPlanid
       parameters:
         - description: Index into the list of annual projections
@@ -1745,7 +1800,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: This operation retrieves the assets funding each goal throughout the plan years
+      description: This operation retrieves the assets funding each goal throughout
+        the plan years
       operationId: ProjectedGoals_GetAssetsFundingGoalsByPlanid
       parameters:
         - description: Id of the plan to retrieve data from (e.g. 1001-11-3).
@@ -1776,7 +1832,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This operation retrieves a needs and abilities data for all goals throughout\r
+      description: "This operation retrieves a needs and abilities data for all goals
+        throughout\r
 
         \              the plan years."
       operationId: ProjectedGoals_GetNeedsVsAbilitiesByPlanid
@@ -1809,9 +1866,11 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This operation retrieves an object containing net worth information \r
+      description: "This operation retrieves an object containing net worth
+        information \r
 
-        \              for each year of the projected plan. These are EOY numbers."
+        \              for each year of the projected plan. These are
+        EOY numbers."
       operationId: ProjectedNetWorth_GetByPlanid
       parameters:
         - description: Id of the plan to retrieve data from (e.g. 1001-11-3).
@@ -1842,9 +1901,11 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This operation retrieves an object containing net worth information \r
+      description: "This operation retrieves an object containing net worth
+        information \r
 
-        \              for a single specified year of the projected plan. These are EOY numbers."
+        \              for a single specified year of the projected
+        plan. These are EOY numbers."
       operationId: ProjectedNetWorth_GetByIdPlanid
       parameters:
         - description: Index into the list of annual projections
@@ -1881,7 +1942,8 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: This operation retrieves a list of all of the restricted stocks in the plan.
+      description: This operation retrieves a list of all of the restricted stocks in
+        the plan.
       operationId: RestrictedStocks_GetByPlanid
       parameters:
         - description: Id of the plan to retrieve data from (e.g. 1001-11-3).
@@ -2228,21 +2290,24 @@ definitions:
   AdvicentNaviPlanRestApiGoalAdjustmentsModelsCoverageProjectionsResultModelAdvicentDomainLogicGoalWhatIfEducationGoalAdjustments:
     properties:
       goalAdjustments:
-        $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsGoalAdjustmentsResultAdvicentDomainLogicGoalWhatIfEducationGoalAdjustments"
+        $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsGoalAdjustmentsResul\
+          tAdvicentDomainLogicGoalWhatIfEducationGoalAdjustments"
       projectedResults:
         $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsCoverageProjections"
     type: object
   AdvicentNaviPlanRestApiGoalAdjustmentsModelsCoverageProjectionsResultModelAdvicentDomainLogicGoalWhatIfMajorPurchaseGoalAdjustments:
     properties:
       goalAdjustments:
-        $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsGoalAdjustmentsResultAdvicentDomainLogicGoalWhatIfMajorPurchaseGoalAdjustments"
+        $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsGoalAdjustmentsResul\
+          tAdvicentDomainLogicGoalWhatIfMajorPurchaseGoalAdjustments"
       projectedResults:
         $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsCoverageProjections"
     type: object
   AdvicentNaviPlanRestApiGoalAdjustmentsModelsCoverageProjectionsResultModelAdvicentDomainLogicGoalWhatIfRetirementGoalAdjustments:
     properties:
       goalAdjustments:
-        $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsGoalAdjustmentsResultAdvicentDomainLogicGoalWhatIfRetirementGoalAdjustments"
+        $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsGoalAdjustmentsResul\
+          tAdvicentDomainLogicGoalWhatIfRetirementGoalAdjustments"
       projectedResults:
         $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsCoverageProjections"
     type: object
@@ -2289,7 +2354,8 @@ definitions:
     properties:
       goalSuccessRateResults:
         items:
-          $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsGoalSuccessRateModel"
+          $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsGoalSuccessRat\
+            eModel"
         type: array
     type: object
   AdvicentNaviPlanRestApiGoalAdjustmentsModelsMajorPurchaseGoalAdjustmentsModel:
@@ -2317,7 +2383,8 @@ definitions:
     properties:
       educationRestrictions:
         items:
-          $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsRestrictionsEducationRestriction"
+          $ref: "#/definitions/AdvicentNaviPlanRestApiGoalAdjustmentsModelsRestrictionsEd\
+            ucationRestriction"
         type: array
     type: object
   AdvicentNaviPlanRestApiGoalAdjustmentsModelsRetirementGoalAdjustmentsModel:
@@ -2593,7 +2660,8 @@ definitions:
         type: number
       projections:
         items:
-          $ref: "#/definitions/AdvicentNaviPlanRestApiProjectionsModelsNeedsVsAbilitiesProjectionsYear"
+          $ref: "#/definitions/AdvicentNaviPlanRestApiProjectionsModelsNeedsVsAbilitiesPr\
+            ojectionsYear"
         type: array
     type: object
   AdvicentNaviPlanRestApiProjectionsModelsNeedsVsAbilitiesProjectionsYear:
@@ -2612,7 +2680,8 @@ definitions:
     properties:
       netWorthProjections:
         items:
-          $ref: "#/definitions/AdvicentNaviPlanRestApiProjectionsModelsNetWorthProjectionsYearModel"
+          $ref: "#/definitions/AdvicentNaviPlanRestApiProjectionsModelsNetWorthProjection\
+            sYearModel"
         type: array
     type: object
   AdvicentNaviPlanRestApiProjectionsModelsNetWorthProjectionsYearModel:
@@ -2793,7 +2862,8 @@ definitions:
     description: Parameters to select a plan from a client file
     properties:
       clientId:
-        description: Id of the client user for the plan. Required if current session user is an advisor. Ignored for client user sessions.
+        description: Id of the client user for the plan. Required if current session
+          user is an advisor. Ignored for client user sessions.
         type: string
       planId:
         description: Id of the Plan to retrieve or update data for (e.g. 1001-11-3).

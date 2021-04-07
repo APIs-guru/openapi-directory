@@ -7,7 +7,11 @@ info:
   contact:
     email: info@infiniteloop.ie
     x-twitter: webtropy
-  description: Car Registration API, An API that retrieves car information from its numberplate in many countries worldwide, uncluding the USA, UK, India, Australia and most of Europe. A username and password is required to access the API, which can be obtained from www.carregistrationapi.com - Use https://www.regcheck.org.uk/api/json.aspx/ as the root of all API calls.
+  description: Car Registration API, An API that retrieves car information from
+    its numberplate in many countries worldwide, uncluding the USA, UK, India,
+    Australia and most of Europe. A username and password is required to access
+    the API, which can be obtained from www.carregistrationapi.com - Use
+    https://www.regcheck.org.uk/api/json.aspx/ as the root of all API calls.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -23,7 +27,7 @@ info:
 paths:
   /Check:
     get:
-      description: >
+      description: |
         Gets details of a UK Vehicle
       operationId: Check
       parameters:

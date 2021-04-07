@@ -6,7 +6,10 @@ info:
     name: Contact Us
     url: https://developer.tomtom.com/contact-us
     x-twitter: TomTom
-  description: Search API is a RESTful API that allows developers to run a single line fuzzy search for addresses and POIs. Search API returns the latitude/longitude of a specific address, cross street, geographic feature, or point of interest (POI).
+  description: Search API is a RESTful API that allows developers to run a single
+    line fuzzy search for addresses and POIs. Search API returns the
+    latitude/longitude of a specific address, cross street, geographic feature,
+    or point of interest (POI).
   title: Search
   version: 1.0.0
   x-apisguru-categories:
@@ -37,7 +40,8 @@ paths:
             enum:
               - json
             type: string
-        - description: Comma separated list of geometry UUIDs, previously retrieved from an Search API request.
+        - description: Comma separated list of geometry UUIDs, previously retrieved from
+            an Search API request.
           example: 00004631-3400-3c00-0000-0000673c4d2e,00004631-3400-3c00-0000-0000673c42fe
           in: query
           name: geometries
@@ -75,11 +79,13 @@ paths:
             type: integer
       responses:
         "200":
-          description: "OK: additional data were retrieved and the body of the response contains requested data."
+          description: "OK: additional data were retrieved and the body of the response
+            contains requested data."
         "400":
-          description: "Bad request: one or more parameters(i.e. geometries, ext) were incorrectly specified."
+          description: "Bad request: one or more parameters(i.e. geometries, ext) were
+            incorrectly specified."
         "403":
-          description: >-
+          description: |-
             Permission, capacity, or authentication issues:
               - Forbidden
               - Not authorized
@@ -88,7 +94,8 @@ paths:
               - Account over rate limit
               - Rate limit exceeded
         "404":
-          description: "Not Found: the requested resource could not be found, but it may be available again in the future."
+          description: "Not Found: the requested resource could not be found, but it may
+            be available again in the future."
         "405":
           description: "Method Not Allowed: the client used a HTTP method other than GET."
         "408":
@@ -96,13 +103,15 @@ paths:
         "414":
           description: Requested uri is too long.
         "500":
-          description: An error occurred while processing the request. Please try again later.
+          description: An error occurred while processing the request. Please try again
+            later.
         "502":
           description: Internal network connectivity issue.
         "503":
           description: Service currently unavailable.
         "504":
-          description: Internal network connectivity issue or a request that has taken too long to complete.
+          description: Internal network connectivity issue or a request that has taken too
+            long to complete.
         "596":
           description: Service not found.
       summary: Additional Data
@@ -235,15 +244,26 @@ paths:
       parameters:
         - $ref: "#/components/parameters/versionNumber"
         - $ref: "#/components/parameters/ext"
-        - description: List of geometries to filter by. Available types are CIRCLE (with the radius expressed in meters) and POLYGON.
-          example: '[{"type":"CIRCLE", "position":"40.80558, -73.96548", "radius":100}, {"type":"POLYGON", "vertices":["37.7524152343544, -122.43576049804686", "37.70660472542312, -122.43301391601562", "37.712059855877314, -122.36434936523438", "37.75350561243041, -122.37396240234374"]}]'
+        - description: List of geometries to filter by. Available types are CIRCLE (with
+            the radius expressed in meters) and POLYGON.
+          example: '[{"type":"CIRCLE", "position":"40.80558, -73.96548", "radius":100},
+            {"type":"POLYGON", "vertices":["37.7524152343544,
+            -122.43576049804686", "37.70660472542312, -122.43301391601562",
+            "37.712059855877314, -122.36434936523438", "37.75350561243041,
+            -122.37396240234374"]}]'
           in: query
           name: geometryList
           required: true
           schema:
             type: string
-        - description: List of POIs to filter. The only required attribute of a POI is position, everything else is optional and will be echoed back when passed in.
-          example: '[{"poi":{"name":"S Restaurant Toms"},"address":{"freeformAddress":"2880 Broadway, New York, NY 10025"},"position":{"lat":40.80558,"lon":-73.96548}},{"poi":{"name":"Yasha Raman Corporation"},"address":{"freeformAddress":"940 Amsterdam Ave, New York, NY 10025"},"position":{"lat":40.80076,"lon":-73.96556}}]'
+        - description: List of POIs to filter. The only required attribute of a POI is
+            position, everything else is optional and will be echoed back when
+            passed in.
+          example: '[{"poi":{"name":"S Restaurant
+            Toms"},"address":{"freeformAddress":"2880 Broadway, New York, NY
+            10025"},"position":{"lat":40.80558,"lon":-73.96548}},{"poi":{"name":"Yasha
+            Raman Corporation"},"address":{"freeformAddress":"940 Amsterdam Ave,
+            New York, NY 10025"},"position":{"lat":40.80076,"lon":-73.96556}}]'
           in: query
           name: poiList
           required: true
@@ -361,8 +381,14 @@ paths:
           schema:
             type: string
         - $ref: "#/components/parameters/ext"
-        - description: List of geometries to filter by. Available types are CIRCLE (with the radius expressed in meters) and POLYGON.
-          example: '[{"type":"POLYGON", "vertices":["37.7524152343544, -122.43576049804686", "37.70660472542312, -122.43301391601562", "37.712059855877314, -122.36434936523438", "37.75350561243041, -122.37396240234374"]}, {"type":"CIRCLE", "position":"37.71205, -121.36434", "radius":6000}, {"type":"CIRCLE", "position":"37.31205, -121.36434", "radius":1000}]'
+        - description: List of geometries to filter by. Available types are CIRCLE (with
+            the radius expressed in meters) and POLYGON.
+          example: '[{"type":"POLYGON", "vertices":["37.7524152343544,
+            -122.43576049804686", "37.70660472542312, -122.43301391601562",
+            "37.712059855877314, -122.36434936523438", "37.75350561243041,
+            -122.37396240234374"]}, {"type":"CIRCLE", "position":"37.71205,
+            -121.36434", "radius":6000}, {"type":"CIRCLE", "position":"37.31205,
+            -121.36434", "radius":1000}]'
           in: query
           name: geometryList
           schema:
@@ -483,7 +509,8 @@ paths:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/ofs"
         - $ref: "#/components/parameters/countrySet"
-        - description: If radius and position are set, the results will be constrained to the defined area. The radius parameter is specified in meters.
+        - description: If radius and position are set, the results will be constrained to
+            the defined area. The radius parameter is specified in meters.
           in: query
           name: radius
           schema:
@@ -491,14 +518,16 @@ paths:
             maximum: 50000
             type: integer
         - deprecated: true
-          description: Top left position of the bounding box. This is specified as a comma separated string composed of lat., lon.
+          description: Top left position of the bounding box. This is specified as a comma
+            separated string composed of lat., lon.
           example: 37.553,-122.453
           in: query
           name: topLeft
           schema:
             type: string
         - deprecated: true
-          description: Bottom right position of the bounding box. This is specified as a comma separated string composed of lat., lon.
+          description: Bottom right position of the bounding box. This is specified as a
+            comma separated string composed of lat., lon.
           example: 37.4,-122.55
           in: query
           name: btmRight
@@ -581,19 +610,23 @@ paths:
             minimum: 0
             type: integer
         - deprecated: true
-          description: If the "spatialKeys" flag is set, the response will also contain a proprietary geospatial keys for a specified location.
+          description: If the "spatialKeys" flag is set, the response will also contain a
+            proprietary geospatial keys for a specified location.
           in: query
           name: spatialKeys
           schema:
             default: false
             type: boolean
-        - description: The directional heading in degrees, usually similar to the course along a road segment. Entered in degrees, measured clockwise from north (so north is 0, east is 90, etc.)
+        - description: The directional heading in degrees, usually similar to the course
+            along a road segment. Entered in degrees, measured clockwise from
+            north (so north is 0, east is 90, etc.)
           in: query
           name: heading
           schema:
             format: float
             type: number
-        - description: The maximum distance in meters from the specified position for the reverse geocoder to consider.
+        - description: The maximum distance in meters from the specified position for the
+            reverse geocoder to consider.
           in: query
           name: radius
           schema:
@@ -623,7 +656,8 @@ paths:
         - $ref: "#/components/parameters/position"
         - $ref: "#/components/parameters/ext"
         - deprecated: true
-          description: If the "spatialKeys" flag is set, the response will also contain a proprietary geospatial keys for a specified location.
+          description: If the "spatialKeys" flag is set, the response will also contain a
+            proprietary geospatial keys for a specified location.
           in: query
           name: spatialKeys
           schema:
@@ -635,30 +669,39 @@ paths:
           schema:
             default: false
             type: boolean
-        - description: The directional heading in degrees, usually similar to the course along a road segment. Entered in degrees, measured clockwise from north (so north is 0, east is 90, etc.)
+        - description: The directional heading in degrees, usually similar to the course
+            along a road segment. Entered in degrees, measured clockwise from
+            north (so north is 0, east is 90, etc.)
           in: query
           name: heading
           schema:
             format: float
             type: number
-        - description: The maximum distance in meters from the specified position for the reverse geocoder to consider.
+        - description: The maximum distance in meters from the specified position for the
+            reverse geocoder to consider.
           in: query
           name: radius
           schema:
             default: 10000
             type: integer
-        - description: If a number is sent in along with the request, the response may include the side of the street (Left/Right) and an offset position for that number.
+        - description: If a number is sent in along with the request, the response may
+            include the side of the street (Left/Right) and an offset position
+            for that number.
           in: query
           name: number
           schema:
             type: string
-        - description: Enables return of the road use array for reverse geocodes at street level.
+        - description: Enables return of the road use array for reverse geocodes at street
+            level.
           in: query
           name: returnRoadUse
           schema:
             default: false
             type: boolean
-        - description: 'Restricts reverse geocodes to a certain type of road use. The road use array for reverse geocodes can be one or more of: ["LimitedAccess", "Arterial", "Terminal", "Ramp", "Rotary", "LocalStreet"].'
+        - description: 'Restricts reverse geocodes to a certain type of road use. The road
+            use array for reverse geocodes can be one or more of:
+            ["LimitedAccess", "Arterial", "Terminal", "Ramp", "Rotary",
+            "LocalStreet"].'
           in: query
           name: roadUse
           schema:
@@ -691,7 +734,9 @@ paths:
       parameters:
         - $ref: "#/components/parameters/versionNumber"
         - $ref: "#/components/parameters/position"
-        - description: The directional heading in degrees, usually similar to the course along a road segment. Entered in degrees, measured clockwise from north (so north is 0, east is 90, etc.)
+        - description: The directional heading in degrees, usually similar to the course
+            along a road segment. Entered in degrees, measured clockwise from
+            north (so north is 0, east is 90, etc.)
           example: -15.6
           in: path
           name: heading
@@ -700,8 +745,12 @@ paths:
             format: float
             type: number
         - $ref: "#/components/parameters/ext"
-        - description: List of POIs to filter. The only required attribute of a POI is position, everything else is optional and will be echoed back when passed in.
-          example: '[{"poi":{"name":"Cleaire Advanced Emission Controls"},"address":{"freeformAddress":"7220 Trade St, San Diego, CA 92121"},"position":{"lat":"37.83274","lon":"-122.27631"}}]'
+        - description: List of POIs to filter. The only required attribute of a POI is
+            position, everything else is optional and will be echoed back when
+            passed in.
+          example: '[{"poi":{"name":"Cleaire Advanced Emission
+            Controls"},"address":{"freeformAddress":"7220 Trade St, San Diego,
+            CA 92121"},"position":{"lat":"37.83274","lon":"-122.27631"}}]'
           in: query
           name: poiList
           required: true
@@ -729,7 +778,9 @@ paths:
       parameters:
         - $ref: "#/components/parameters/versionNumber"
         - $ref: "#/components/parameters/position"
-        - description: The directional heading in degrees, usually similar to the course along a road segment. Entered in degrees, measured clockwise from north (so north is 0, east is 90, etc.)
+        - description: The directional heading in degrees, usually similar to the course
+            along a road segment. Entered in degrees, measured clockwise from
+            north (so north is 0, east is 90, etc.)
           example: 90
           in: path
           name: heading
@@ -814,7 +865,9 @@ paths:
           schema:
             type: string
         - $ref: "#/components/parameters/position"
-        - description: The directional heading in degrees, usually similar to the course along a road segment. Entered in degrees, measured clockwise from north (so north is 0, east is 90, etc.)
+        - description: The directional heading in degrees, usually similar to the course
+            along a road segment. Entered in degrees, measured clockwise from
+            north (so north is 0, east is 90, etc.)
           example: 90
           in: path
           name: heading
@@ -825,7 +878,9 @@ paths:
         - $ref: "#/components/parameters/ext"
         - $ref: "#/components/parameters/typeahead"
         - $ref: "#/components/parameters/limit"
-        - description: Multiplies the limit by N to gather more candidate POIs, which will then be sorted by drive distance, returning only the top candidates according to the limit.
+        - description: Multiplies the limit by N to gather more candidate POIs, which will
+            then be sorted by drive distance, returning only the top candidates
+            according to the limit.
           in: query
           name: multiplier
           schema:
@@ -1045,7 +1100,8 @@ paths:
 components:
   parameters:
     btmRight:
-      description: Bottom right position of the bounding box. This is specified as a comma separated string composed of lat., lon.
+      description: Bottom right position of the bounding box. This is specified as a
+        comma separated string composed of lat., lon.
       example: 37.4,-122.55
       in: query
       name: btmRight
@@ -1066,7 +1122,8 @@ components:
       schema:
         type: string
     countrySet:
-      description: Comma separated string of country codes. This will limit the search to the specified countries.
+      description: Comma separated string of country codes. This will limit the search
+        to the specified countries.
       example: FR
       in: query
       name: countrySet
@@ -1105,7 +1162,8 @@ components:
         type: string
     extendedPostalCodesFor:
       description: >-
-        Indexes for which extended postal codes should be included in the results. Available indexes are:
+        Indexes for which extended postal codes should be included in the
+        results. Available indexes are:
           - <b>Addr</b> = Address ranges
           - <b>Geo</b> = Geographies
           - <b>PAD</b> = Point Addresses
@@ -1118,7 +1176,8 @@ components:
         type: string
     idxSet:
       description: >-
-        A comma separated list of indexes which should be utilized for the search. Item order does not matter. Available indexes are:
+        A comma separated list of indexes which should be utilized for the
+        search. Item order does not matter. Available indexes are:
           - <b>Addr</b> = Address range interpolation (when there is no PAD)
           - <b>Geo</b> = Geographies
           - <b>PAD</b> = Point Addresses
@@ -1131,7 +1190,10 @@ components:
       schema:
         type: string
     language:
-      description: Language in which search results should be returned. Should be one of <a href="/search-api/search-api-documentation/supported-languages">supported IETF language tags</a>, case insensitive.
+      description: Language in which search results should be returned. Should be one
+        of <a
+        href="/search-api/search-api-documentation/supported-languages">supported
+        IETF language tags</a>, case insensitive.
       in: query
       name: language
       schema:
@@ -1220,13 +1282,16 @@ components:
       schema:
         type: string
     radius:
-      description: If radius <b>and</b> position are set, the results will be constrained to the defined area. The radius parameter is specified in meters.
+      description: If radius <b>and</b> position are set, the results will be
+        constrained to the defined area. The radius parameter is specified in
+        meters.
       in: query
       name: radius
       schema:
         type: integer
     routingTimeout:
-      description: Only return results that arrive from routing engine within this time limit.
+      description: Only return results that arrive from routing engine within this
+        time limit.
       in: query
       name: routingTimeout
       schema:
@@ -1234,7 +1299,8 @@ components:
         type: integer
     storeResult:
       deprecated: true
-      description: If the "storeResult" flag is set, the query will be interpreted as a stored geocode and will be billed according to the terms of use.
+      description: If the "storeResult" flag is set, the query will be interpreted as
+        a stored geocode and will be billed according to the terms of use.
       in: query
       name: storeResult
       schema:
@@ -1253,14 +1319,16 @@ components:
       schema:
         type: string
     topLeft:
-      description: Top left position of the bounding box. This is specified as a comma separated string composed of lat., lon.
+      description: Top left position of the bounding box. This is specified as a comma
+        separated string composed of lat., lon.
       example: 37.553,-122.453
       in: query
       name: topLeft
       schema:
         type: string
     typeahead:
-      description: If the "typeahead" flag is set, the query will be interpreted as a partial input and the search will enter <b>predictive</b> mode.
+      description: If the "typeahead" flag is set, the query will be interpreted as a
+        partial input and the search will enter <b>predictive</b> mode.
       in: query
       name: typeahead
       schema:
@@ -1295,16 +1363,18 @@ components:
     "400":
       description: "Bad Request: one or more parameters were incorrectly specified."
     "403":
-      description: >-
+      description: |-
         Forbidden: possible causes include:
           - Service requires SSL
           - Not authorized
           - Rate or volume limit exceeded
           - Unknown referer
     "405":
-      description: "Method Not Allowed: the HTTP method (GET, POST, etc) is not supported for this request."
+      description: "Method Not Allowed: the HTTP method (GET, POST, etc) is not
+        supported for this request."
     "404596":
-      description: "Not Found: the HTTP request method (GET, POST, etc) or path is incorrect."
+      description: "Not Found: the HTTP request method (GET, POST, etc) or path is
+        incorrect."
     5xx:
       description: An error occurred while processing the request. Please try again later.
   securitySchemes:

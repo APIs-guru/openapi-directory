@@ -9,7 +9,20 @@ info:
   contact:
     name: eBay Inc,
     x-twitter: ebay
-  description: The <b>Negotiations API</b> gives sellers the ability to proactively send discount offers to buyers who have shown an "interest" in their listings.  <br><br>By sending buyers discount offers on listings where they have shown an interest, sellers can increase the velocity of their sales.  <br><br>There are various ways for a buyer to show <i>interest </i> in a listing. For example, if a buyer adds the listing to their <b>Watch</b> list, or if they add the listing to their shopping cart and later abandon the cart, they are deemed to have shown an interest in the listing.  <br><br>In the offers that sellers send, they can discount their listings by either a percentage off the listing price, or they can set a new discounted price that is lower than the original listing price.  <br><br>For details about how seller offers work, see <a href="/api-docs/sell/static/marketing/offers-to-buyers.html" title="Selling Integration Guide">Sending offers to buyers</a>.
+  description: The <b>Negotiations API</b> gives sellers the ability to
+    proactively send discount offers to buyers who have shown an "interest" in
+    their listings.  <br><br>By sending buyers discount offers on listings where
+    they have shown an interest, sellers can increase the velocity of their
+    sales.  <br><br>There are various ways for a buyer to show <i>interest </i>
+    in a listing. For example, if a buyer adds the listing to their <b>Watch</b>
+    list, or if they add the listing to their shopping cart and later abandon
+    the cart, they are deemed to have shown an interest in the
+    listing.  <br><br>In the offers that sellers send, they can discount their
+    listings by either a percentage off the listing price, or they can set a new
+    discounted price that is lower than the original listing price.  <br><br>For
+    details about how seller offers work, see <a
+    href="/api-docs/sell/static/marketing/offers-to-buyers.html" title="Selling
+    Integration Guide">Sending offers to buyers</a>.
   license:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
@@ -29,22 +42,42 @@ info:
 paths:
   /find_eligible_items:
     get:
-      description: This method evaluates a seller's current listings and returns the set of IDs that are eligible for a seller-initiated discount offer to a buyer. A listing ID is returned only when one or more buyers have shown an &quot;interest&quot; in the listing. If any buyers have shown interest in a listing, the seller can initiate a &quot;negotiation&quot; with them by calling sendOfferToInterestedBuyers, which sends all interested buyers a message that offers the listing at a discount. For details about how to create seller offers to buyers, see Sending offers to buyers.
+      description: This method evaluates a seller's current listings and returns the
+        set of IDs that are eligible for a seller-initiated discount offer to a
+        buyer. A listing ID is returned only when one or more buyers have shown
+        an &quot;interest&quot; in the listing. If any buyers have shown
+        interest in a listing, the seller can initiate a &quot;negotiation&quot;
+        with them by calling sendOfferToInterestedBuyers, which sends all
+        interested buyers a message that offers the listing at a discount. For
+        details about how to create seller offers to buyers, see Sending offers
+        to buyers.
       operationId: findEligibleItems
       parameters:
-        - description: "This query parameter specifies the maximum number of items to return from the result set on a page in the paginated response. Minimum: 1 &nbsp; &nbsp;Maximum: 200 Default: 10"
+        - description: "This query parameter specifies the maximum number of items to
+            return from the result set on a page in the paginated response.
+            Minimum: 1 &nbsp; &nbsp;Maximum: 200 Default: 10"
           in: query
           name: limit
           required: false
           schema:
             type: string
-        - description: "This query parameter specifies the number of results to skip in the result set before returning the first result in the paginated response. Combine offset with the limit query parameter to control the items returned in the response. For example, if you supply an offset of 0 and a limit of 10, the first page of the response contains the first 10 results from the complete list of items retrieved by the call. If offset is 10 and limit is 20, the first page of the response contains items 11-30 from the complete result set. Default: 0"
+        - description: "This query parameter specifies the number of results to skip in
+            the result set before returning the first result in the paginated
+            response. Combine offset with the limit query parameter to control
+            the items returned in the response. For example, if you supply an
+            offset of 0 and a limit of 10, the first page of the response
+            contains the first 10 results from the complete list of items
+            retrieved by the call. If offset is 10 and limit is 20, the first
+            page of the response contains items 11-30 from the complete result
+            set. Default: 0"
           in: query
           name: offset
           required: false
           schema:
             type: string
-        - description: The eBay marketplace on which you want to search for eligible listings. For a complete list of supported marketplaces, see Negotiation API requirements and restrictions.
+        - description: The eBay marketplace on which you want to search for eligible
+            listings. For a complete list of supported marketplaces, see
+            Negotiation API requirements and restrictions.
           in: header
           name: X-EBAY-C-MARKETPLACE-ID
           required: true
@@ -69,7 +102,8 @@ paths:
                 domain: API_NEGOTIATION
               "150002":
                 category: REQUEST
-                description: "The marketplace value {marketplaceId} is not supported. The supported values are: {marketplaceIds}"
+                description: "The marketplace value {marketplaceId} is not supported. The
+                  supported values are: {marketplaceIds}"
                 domain: API_NEGOTIATION
               "150003":
                 category: REQUEST
@@ -85,7 +119,9 @@ paths:
             errors:
               "150000":
                 category: APPLICATION
-                description: Internal error. Please try the call again after a minute or two. If the error persists, contact eBay developer support for assistance.
+                description: Internal error. Please try the call again after a minute or two. If
+                  the error persists, contact eBay developer support for
+                  assistance.
                 domain: API_NEGOTIATION
       security:
         - api_auth:
@@ -95,10 +131,21 @@ paths:
         - offer
   /send_offer_to_interested_buyers:
     post:
-      description: This method sends eligible buyers offers to purchase items in a listing at a discount. When a buyer has shown interest in a listing, they become &quot;eligible&quot; to receive a seller-initiated offer to purchase the item(s). Sellers use findEligibleItems to get the set of listings that have interested buyers. If a listing has interested buyers, sellers can use this method (sendOfferToInterestedBuyers) to send an offer to the buyers who are interested in the listing. The offer gives buyers the ability to purchase the associated listings at a discounted price. For details about how to create seller offers to buyers, see Sending offers to buyers.
+      description: This method sends eligible buyers offers to purchase items in a
+        listing at a discount. When a buyer has shown interest in a listing,
+        they become &quot;eligible&quot; to receive a seller-initiated offer to
+        purchase the item(s). Sellers use findEligibleItems to get the set of
+        listings that have interested buyers. If a listing has interested
+        buyers, sellers can use this method (sendOfferToInterestedBuyers) to
+        send an offer to the buyers who are interested in the listing. The offer
+        gives buyers the ability to purchase the associated listings at a
+        discounted price. For details about how to create seller offers to
+        buyers, see Sending offers to buyers.
       operationId: sendOfferToInterestedBuyers
       parameters:
-        - description: The eBay marketplace on which your listings with &quot;eligible&quot; buyers appear. For a complete list of supported marketplaces, see Negotiation API requirements and restrictions.
+        - description: The eBay marketplace on which your listings with
+            &quot;eligible&quot; buyers appear. For a complete list of supported
+            marketplaces, see Negotiation API requirements and restrictions.
           in: header
           name: X-EBAY-C-MARKETPLACE-ID
           required: true
@@ -129,7 +176,8 @@ paths:
                 domain: API_NEGOTIATION
               "150002":
                 category: REQUEST
-                description: "The marketplace value {marketplaceId} is not supported. The supported values are: {marketplaceIds}"
+                description: "The marketplace value {marketplaceId} is not supported. The
+                  supported values are: {marketplaceIds}"
                 domain: API_NEGOTIATION
               "150005":
                 category: REQUEST
@@ -141,11 +189,13 @@ paths:
                 domain: API_NEGOTIATION
               "150007":
                 category: REQUEST
-                description: Both offer price and discount percentage cannot be present in the request.
+                description: Both offer price and discount percentage cannot be present in the
+                  request.
                 domain: API_NEGOTIATION
               "150008":
                 category: REQUEST
-                description: Price must be at least {minPercentageDifference} less than your Buy It Now price.
+                description: Price must be at least {minPercentageDifference} less than your Buy
+                  It Now price.
                 domain: API_NEGOTIATION
               "150009":
                 category: REQUEST
@@ -153,7 +203,8 @@ paths:
                 domain: API_NEGOTIATION
               "150027":
                 category: REQUEST
-                description: Offer is invalid. Please specify a valid duration of {durationValue} {durationUnit}
+                description: Offer is invalid. Please specify a valid duration of
+                  {durationValue} {durationUnit}
                 domain: API_NEGOTIATION
         "409":
           description: Conflict
@@ -161,11 +212,13 @@ paths:
             errors:
               "150010":
                 category: BUSINESS
-                description: Invalid message. Message cannot contain HTML or blocked words and cannot exceed maximum character limit of 2000.
+                description: Invalid message. Message cannot contain HTML or blocked words and
+                  cannot exceed maximum character limit of 2000.
                 domain: API_NEGOTIATION
               "150011":
                 category: BUSINESS
-                description: Invalid listingId {listingId}. The listing for this offer has ended.
+                description: Invalid listingId {listingId}. The listing for this offer has
+                  ended.
                 domain: API_NEGOTIATION
               "150012":
                 category: BUSINESS
@@ -177,15 +230,18 @@ paths:
                 domain: API_NEGOTIATION
               "150014":
                 category: BUSINESS
-                description: Current available quantity for this listing {listingId} is less than the offer quantity.
+                description: Current available quantity for this listing {listingId} is less
+                  than the offer quantity.
                 domain: API_NEGOTIATION
               "150015":
                 category: BUSINESS
-                description: Invalid price for listing {listingId}. Minimum offer price of {minPrice} not met.
+                description: Invalid price for listing {listingId}. Minimum offer price of
+                  {minPrice} not met.
                 domain: API_NEGOTIATION
               "150016":
                 category: BUSINESS
-                description: Invalid price for listing {listingId}. Price value exceeds the listing price.
+                description: Invalid price for listing {listingId}. Price value exceeds the
+                  listing price.
                 domain: API_NEGOTIATION
               "150017":
                 category: BUSINESS
@@ -193,11 +249,13 @@ paths:
                 domain: API_NEGOTIATION
               "150018":
                 category: BUSINESS
-                description: Offer is invalid. A best offer currently exists on the listing {listingId}.
+                description: Offer is invalid. A best offer currently exists on the listing
+                  {listingId}.
                 domain: API_NEGOTIATION
               "150019":
                 category: BUSINESS
-                description: Offer is invalid. Listing {listingId} currently has a seller-initiated negotiation.
+                description: Offer is invalid. Listing {listingId} currently has a
+                  seller-initiated negotiation.
                 domain: API_NEGOTIATION
               "150020":
                 category: BUSINESS
@@ -213,7 +271,8 @@ paths:
                 domain: API_NEGOTIATION
               "150023":
                 category: BUSINESS
-                description: Offer is invalid. Seller has exceeded their seller-initiated offer limit.
+                description: Offer is invalid. Seller has exceeded their seller-initiated offer
+                  limit.
                 domain: API_NEGOTIATION
               "150024":
                 category: BUSINESS
@@ -225,7 +284,8 @@ paths:
                 domain: API_NEGOTIATION
               "150026":
                 category: BUSINESS
-                description: Listing ID {listingId} is invalid, sellers cannot initiate an offer to a buyer for a Motors listing.
+                description: Listing ID {listingId} is invalid, sellers cannot initiate an offer
+                  to a buyer for a Motors listing.
                 domain: API_NEGOTIATION
         "500":
           description: Internal Server Error
@@ -233,7 +293,9 @@ paths:
             errors:
               "150000":
                 category: APPLICATION
-                description: Internal error. Please try the call again after a minute or two. If the error persists, contact eBay developer support for assistance.
+                description: Internal error. Please try the call again after a minute or two. If
+                  the error persists, contact eBay developer support for
+                  assistance.
                 domain: API_NEGOTIATION
       security:
         - api_auth:
@@ -243,38 +305,72 @@ paths:
 components:
   schemas:
     Amount:
-      description: A complex type that describes the value of a monetary amount as represented by a global currency.
+      description: A complex type that describes the value of a monetary amount as
+        represented by a global currency.
       properties:
         currency:
-          description: "The base currency applied to the value field to establish a monetary amount. The currency is represented as a 3-letter ISO4217 currency code. For example, the code for the Canadian Dollar is CAD. Default: The default currency of the eBay marketplace that hosts the listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/bas:CurrencyCodeEnum'>eBay API documentation</a>"
+          description: "The base currency applied to the value field to establish a
+            monetary amount. The currency is represented as a 3-letter ISO4217
+            currency code. For example, the code for the Canadian Dollar is CAD.
+            Default: The default currency of the eBay marketplace that hosts the
+            listing. For implementation help, refer to <a
+            href='https://developer.ebay.com/api-docs/sell/negotiation/types/ba\
+            s:CurrencyCodeEnum'>eBay API documentation</a>"
           type: string
         value:
           description: The monetary amount in the specified currency.
           type: string
       type: object
     CreateOffersRequest:
-      description: This complex type contains the fields needed to create an offer to a buyer that is initiated by the seller.
+      description: This complex type contains the fields needed to create an offer to
+        a buyer that is initiated by the seller.
       properties:
         allowCounterOffer:
-          description: "If set to true, the buyer is allowed to make a counter-offer to the seller's offer. Note: Currently, you must set this field to false; counter-offers are not supported in this release. Default: false"
+          description: "If set to true, the buyer is allowed to make a counter-offer to
+            the seller's offer. Note: Currently, you must set this field to
+            false; counter-offers are not supported in this release. Default:
+            false"
           type: boolean
         message:
-          description: "A seller-defined message related to the offer being made. This message is sent to the list of &quot;interested&quot; buyers. To increase the conversion rate of the offers a seller makes to buyers, eBay recommends you always add a customized message to your offers. Maximum length: 2,000 characters"
+          description: "A seller-defined message related to the offer being made. This
+            message is sent to the list of &quot;interested&quot; buyers. To
+            increase the conversion rate of the offers a seller makes to buyers,
+            eBay recommends you always add a customized message to your offers.
+            Maximum length: 2,000 characters"
           type: string
         offerDuration:
           $ref: "#/components/schemas/TimeDuration"
-          description: "The length of time the offer is valid from when it is created. The duration of the offer begins at the date and time denoted by creationDate. When the span of time specified by offerDuration passes beyond the creationDate, the offer expires. Note: offerDuration currently defaults to 2 days and you cannot set it to any other value (if specified, the unit and value fields in TimeDuration must be set to DAY and 2, respectively). Default: 2 Days"
+          description: "The length of time the offer is valid from when it is created. The
+            duration of the offer begins at the date and time denoted by
+            creationDate. When the span of time specified by offerDuration
+            passes beyond the creationDate, the offer expires. Note:
+            offerDuration currently defaults to 2 days and you cannot set it to
+            any other value (if specified, the unit and value fields in
+            TimeDuration must be set to DAY and 2, respectively). Default: 2
+            Days"
         offeredItems:
-          description: An array of objects where each object contains the details of an offer and the ID of the listing on which the offer is being made. Note that the service does not currently support the creation of multiple offers with a single call to sendOfferToInterestedBuyer. With this, each request can target only one listing at a time and you must populate this array with a single element that contains the details of one offer.
+          description: An array of objects where each object contains the details of an
+            offer and the ID of the listing on which the offer is being made.
+            Note that the service does not currently support the creation of
+            multiple offers with a single call to sendOfferToInterestedBuyer.
+            With this, each request can target only one listing at a time and
+            you must populate this array with a single element that contains the
+            details of one offer.
           items:
             $ref: "#/components/schemas/OfferedItem"
           type: array
       type: object
     EligibleItem:
-      description: "A listing that is eligible for a seller-initiated offer to a buyer. Listings are identified by a listingId value that is generated and assigned by eBay when a seller lists an item using the Trading API. Note: The Negotiation API does not currently support listings that are managed with the Inventory API."
+      description: "A listing that is eligible for a seller-initiated offer to a
+        buyer. Listings are identified by a listingId value that is generated
+        and assigned by eBay when a seller lists an item using the Trading API.
+        Note: The Negotiation API does not currently support listings that are
+        managed with the Inventory API."
       properties:
         listingId:
-          description: The unique eBay-assigned ID for an eBay listing. A listingId is assigned by eBay when a seller creates a listing with the Trading API.
+          description: The unique eBay-assigned ID for an eBay listing. A listingId is
+            assigned by eBay when a seller creates a listing with the Trading
+            API.
           type: string
       type: object
     Error:
@@ -284,7 +380,8 @@ components:
           description: Identifies the type of erro.
           type: string
         domain:
-          description: Name for the primary system where the error occurred. This is relevant for application errors.
+          description: Name for the primary system where the error occurred. This is
+            relevant for application errors.
           type: string
         errorId:
           description: A unique number to identify the error.
@@ -299,7 +396,8 @@ components:
           description: A more detailed explanation of the error.
           type: string
         message:
-          description: Information on how to correct the problem, in the end user's terms and language where applicable.
+          description: Information on how to correct the problem, in the end user's terms
+            and language where applicable.
           type: string
         outputRefIds:
           description: An array of request elements most closely associated to the error.
@@ -307,12 +405,15 @@ components:
             type: string
           type: array
         parameters:
-          description: An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned.
+          description: An array of name/value pairs that describe details the error
+            condition. These are useful when multiple errors are returned.
           items:
             $ref: "#/components/schemas/ErrorParameter"
           type: array
         subdomain:
-          description: "Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc."
+          description: "Further helps indicate which subsystem the error is coming from.
+            System subcategories include: Initialization, Serialization,
+            Security, Monitoring, Rate Limiting, etc."
           type: string
       type: object
     ErrorParameter:
@@ -325,40 +426,59 @@ components:
           type: string
       type: object
     Offer:
-      description: A complex type that defines an offer that a seller makes to eligible buyers.
+      description: A complex type that defines an offer that a seller makes to
+        eligible buyers.
       properties:
         allowCounterOffer:
-          description: If set to true, the buyer is allowed to make a counter-offer to the seller's offer.
+          description: If set to true, the buyer is allowed to make a counter-offer to the
+            seller's offer.
           type: boolean
         buyer:
           $ref: "#/components/schemas/User"
           description: The buyer who has been sent the offer.
         creationDate:
-          description: "The date and time when the seller's offer was created. The returned timestamp is formatted as an ISO 8601 string, which is based on the 24-hour Coordinated Universal Time (UTC) clock. Format: [YYYY]-[MM]-[DD]T[hh]:[mm]:[ss].[sss]Z Example: 2018-08-20T07:09:00.000Z"
+          description: "The date and time when the seller's offer was created. The
+            returned timestamp is formatted as an ISO 8601 string, which is
+            based on the 24-hour Coordinated Universal Time (UTC) clock. Format:
+            [YYYY]-[MM]-[DD]T[hh]:[mm]:[ss].[sss]Z Example:
+            2018-08-20T07:09:00.000Z"
           type: string
         initiatedBy:
           description: The eBay UserName of the user (seller) who initiated the offer.
           type: string
         lastModifiedDate:
-          description: The date and time when the offer was last modified. The returned timestamp is formatted as an ISO 8601 string.
+          description: The date and time when the offer was last modified. The returned
+            timestamp is formatted as an ISO 8601 string.
           type: string
         message:
-          description: A seller-defined message related to the offer being made. This message is sent to the list of &quot;interested&quot; buyers along with the offer message from eBay.
+          description: A seller-defined message related to the offer being made. This
+            message is sent to the list of &quot;interested&quot; buyers along
+            with the offer message from eBay.
           type: string
         offerDuration:
           $ref: "#/components/schemas/TimeDuration"
-          description: The length of time that the offer is valid. The duration of the offer begins at the date and time denoted by creationDate. When the span of time specified by offerDuration passes beyond the creationDate, the offer expires.
+          description: The length of time that the offer is valid. The duration of the
+            offer begins at the date and time denoted by creationDate. When the
+            span of time specified by offerDuration passes beyond the
+            creationDate, the offer expires.
         offerId:
           description: A unique eBay-assigned identifier for the offer.
           type: string
         offerStatus:
-          description: The current state, or status, of an offer. Status states include PENDING, COUNTERED, ACCEPTED, and DECLINED. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/api:OfferStatusEnum'>eBay API documentation</a>
+          description: The current state, or status, of an offer. Status states include
+            PENDING, COUNTERED, ACCEPTED, and DECLINED. For implementation help,
+            refer to <a
+            href='https://developer.ebay.com/api-docs/sell/negotiation/types/api:OfferStatusEnum'>eBay
+            API documentation</a>
           type: string
         offerType:
-          description: The type of offer being made. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/api:OfferTypeEnum'>eBay API documentation</a>
+          description: The type of offer being made. For implementation help, refer to <a
+            href='https://developer.ebay.com/api-docs/sell/negotiation/types/api:OfferTypeEnum'>eBay
+            API documentation</a>
           type: string
         offeredItems:
-          description: The list of items associated with the offer. Currently, the offer list is restricted to a single offer.
+          description: The list of items associated with the offer. Currently, the offer
+            list is restricted to a single offer.
           items:
             $ref: "#/components/schemas/OfferedItem"
           type: array
@@ -367,27 +487,49 @@ components:
           type: string
       type: object
     OfferedItem:
-      description: A complex type that defines the offer being made to an &quot;interested&quot; buyer.
+      description: A complex type that defines the offer being made to an
+        &quot;interested&quot; buyer.
       properties:
         discountPercentage:
-          description: "This value denotes the percentage that the listing in the offer will be discounted from its original listed price. The seller can specify either the exact price of the discounted items with the price field or they can use this field to specify the percentage that the listing will be discounted, but not both. Minimum: 5 Required if you do not specify a price value."
+          description: "This value denotes the percentage that the listing in the offer
+            will be discounted from its original listed price. The seller can
+            specify either the exact price of the discounted items with the
+            price field or they can use this field to specify the percentage
+            that the listing will be discounted, but not both. Minimum: 5
+            Required if you do not specify a price value."
           type: string
         listingId:
-          description: This value is a unique eBay-assigned ID that identifies the listing to which the offer pertains. A listingId value is generated by eBay when you list an item with the Trading API.
+          description: This value is a unique eBay-assigned ID that identifies the listing
+            to which the offer pertains. A listingId value is generated by eBay
+            when you list an item with the Trading API.
           type: string
         price:
           $ref: "#/components/schemas/Amount"
-          description: This value denotes the final discounted price of the listing in the offer being made to the buyer. This value must be lower than the original price of the item as stated in the original listing. The seller can use either this field to specify the exact discounted price of the listing or they can use the discountPercentage field to specify the percentage that the listing will be discounted, but not both. Required if you do not specify a discountPercentage value.
+          description: This value denotes the final discounted price of the listing in the
+            offer being made to the buyer. This value must be lower than the
+            original price of the item as stated in the original listing. The
+            seller can use either this field to specify the exact discounted
+            price of the listing or they can use the discountPercentage field to
+            specify the percentage that the listing will be discounted, but not
+            both. Required if you do not specify a discountPercentage value.
         quantity:
-          description: "This integer value indicates the number of items in the eBay listing for which the offer is being made. The offer being made by the seller is an &quot;all or nothing&quot; offer, meaning the buyer must purchase the indicated quantity of items in order to receive the discount on the transaction. Default: 1"
+          description: "This integer value indicates the number of items in the eBay
+            listing for which the offer is being made. The offer being made by
+            the seller is an &quot;all or nothing&quot; offer, meaning the buyer
+            must purchase the indicated quantity of items in order to receive
+            the discount on the transaction. Default: 1"
           format: int32
           type: integer
       type: object
     PagedEligibleItemCollection:
-      description: This complex type defines a collection of listings that are eligible for an offer to a buyer.
+      description: This complex type defines a collection of listings that are
+        eligible for an offer to a buyer.
       properties:
         eligibleItems:
-          description: A list of items that are eligible for a seller-initiated offer to a buyer. Each element in the list contains the listing ID of a listed item. These IDs represent the listings for which buyers have shown an interest.
+          description: A list of items that are eligible for a seller-initiated offer to a
+            buyer. Each element in the list contains the listing ID of a listed
+            item. These IDs represent the listings for which buyers have shown
+            an interest.
           items:
             $ref: "#/components/schemas/EligibleItem"
           type: array
@@ -395,21 +537,32 @@ components:
           description: The URI of the current page of results from the result set.
           type: string
         limit:
-          description: The number of items returned on a single page from the result set. This value can be set in the request with the limit query parameter.
+          description: The number of items returned on a single page from the result set.
+            This value can be set in the request with the limit query parameter.
           format: int32
           type: integer
         next:
-          description: "The URI for the following page of results. This value is returned only if there is an additional page of results to display from the result set. Max length: 2048"
+          description: "The URI for the following page of results. This value is returned
+            only if there is an additional page of results to display from the
+            result set. Max length: 2048"
           type: string
         offset:
-          description: "The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the offset query parameter. Note: The items in a paginated result set use a zero-based list where the first item in the list has an offset of 0."
+          description: "The number of results skipped in the result set before listing the
+            first returned result. This value can be set in the request with the
+            offset query parameter. Note: The items in a paginated result set
+            use a zero-based list where the first item in the list has an offset
+            of 0."
           format: int32
           type: integer
         prev:
-          description: "The URI for the preceding page of results. This value is returned only if there is a previous page of results to display from the result set. Max length: 2048"
+          description: "The URI for the preceding page of results. This value is returned
+            only if there is a previous page of results to display from the
+            result set. Max length: 2048"
           type: string
         total:
-          description: The total number of items retrieved in the result set. If no items match the search criteria, the server returns the HTTP status code 204 No Content.
+          description: The total number of items retrieved in the result set. If no items
+            match the search criteria, the server returns the HTTP status code
+            204 No Content.
           format: int32
           type: integer
       type: object
@@ -417,19 +570,29 @@ components:
       description: The response object returned from a SendOfferToInterestedBuyers request.
       properties:
         offers:
-          description: The offers container returns a list of the offers sent to buyers who have shown an interest in listings included in the offer.
+          description: The offers container returns a list of the offers sent to buyers
+            who have shown an interest in listings included in the offer.
           items:
             $ref: "#/components/schemas/Offer"
           type: array
       type: object
     TimeDuration:
-      description: A complex type that specifies a period of time using a specified time-measurement unit.
+      description: A complex type that specifies a period of time using a specified
+        time-measurement unit.
       properties:
         unit:
-          description: A time-measurement unit that specifies a singular period of time. A span of time is defined when you apply the value specified in the value field to the value specified for unit. Time-measurement units can be YEAR, MONTH, DAY, and so on. See TimeDurationUnitEnum for a complete list of possible time-measurement units. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/bas:TimeDurationUnitEnum'>eBay API documentation</a>
+          description: A time-measurement unit that specifies a singular period of time. A
+            span of time is defined when you apply the value specified in the
+            value field to the value specified for unit. Time-measurement units
+            can be YEAR, MONTH, DAY, and so on. See TimeDurationUnitEnum for a
+            complete list of possible time-measurement units. For implementation
+            help, refer to <a
+            href='https://developer.ebay.com/api-docs/sell/negotiation/types/bas:TimeDurationUnitEnum'>eBay
+            API documentation</a>
           type: string
         value:
-          description: An integer that represents an amount of time, as measured by the time-measurement unit specified in the unit field.
+          description: An integer that represents an amount of time, as measured by the
+            time-measurement unit specified in the unit field.
           format: int32
           type: integer
       type: object
@@ -437,12 +600,14 @@ components:
       description: This complex type identifies an eBay user.
       properties:
         maskedUsername:
-          description: The masked user name is a user name that has certain characters hidden for privacy of the user.
+          description: The masked user name is a user name that has certain characters
+            hidden for privacy of the user.
           type: string
       type: object
   securitySchemes:
     api_auth:
-      description: The security definitions for this API. Please check individual operations for applicable scopes.
+      description: The security definitions for this API. Please check individual
+        operations for applicable scopes.
       flows:
         authorizationCode:
           authorizationUrl: https://auth.ebay.com/oauth2/authorize

@@ -74,7 +74,8 @@ security:
   - Basic: []
 tags:
   - description: >-
-      With these endpoints you can control how your existing Feature Flags and Settings should serve their values. 
+      With these endpoints you can control how your existing Feature
+      Flags and Settings should serve their values. 
 
       You can turn Feature Flags on or off, update Setting values and also add, remove or change the order of Percentage and Targeting Rules.
 
@@ -88,7 +89,8 @@ tags:
       from the [Feature Flag & Setting](#tag/Feature-Flags-and-Settings) endpoints.
     name: Feature Flag & Setting values using SDK Key
   - description: >-
-      With these endpoints you can control how your existing Feature Flags and Settings should serve their values. 
+      With these endpoints you can control how your existing Feature
+      Flags and Settings should serve their values. 
 
       You can turn Feature Flags on or off, update Setting values and also add, remove or reorder Percentage and Targeting Rules.
 
@@ -103,7 +105,8 @@ tags:
       `environmentId` which can be obtained from the [List Environments](#operation/get-environments) endpoint.
     name: Feature Flag & Setting values
   - description: >-
-      With these endpoints you can manage your Feature Flags or Settings within a Config. 
+      With these endpoints you can manage your Feature Flags or Settings
+      within a Config. 
 
       However you can't use them for manipulating the values of your Feature Flags and Settings,
 
@@ -127,7 +130,8 @@ tags:
       <a href="https://configcat.com/docs/main-concepts/#setting" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Settings.
     name: Feature Flags & Settings
   - description: >-
-      With these endpoints you can get useful information about your Organizations.
+      With these endpoints you can get useful information about your
+      Organizations.
 
       This also can be used to manage your [Products](#tag/Products).
 
@@ -165,14 +169,17 @@ tags:
       <a href="https://configcat.com/docs/main-concepts/#config" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Configs.
     name: Configs
   - description: >-
-      With these endpoints you can update existing Environments or add new ones into your selected [Product](#tag/Products). 
+      With these endpoints you can update existing Environments or add
+      new ones into your selected [Product](#tag/Products). 
 
 
       <a href="https://configcat.com/docs/main-concepts/#environment" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Environments.
     name: Environments
   - description: With these endpoints you can manage your SDK Keys.
     name: SDK Keys
-  - description: With these endpoints you can manage Tags. Tags are stored under a Product. You can  and add a Tag to a Feature Flag or Setting using the [Update Flag](#operation/update-setting) endpoint.
+  - description: With these endpoints you can manage Tags. Tags are stored under a
+      Product. You can  and add a Tag to a Feature Flag or Setting using the
+      [Update Flag](#operation/update-setting) endpoint.
     name: Tags
   - description: Access audit log entries.
     name: Audit logs
@@ -197,18 +204,19 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Delete Config
       tags:
         - Configs
     get:
-      description: >-
+      description: |-
         This endpoint returns the metadata of a Config
-
         identified by the `configId`.
       operationId: get-config
       parameters:
@@ -232,11 +240,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get Config
       tags:
         - Configs
@@ -276,17 +286,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Update Config
       tags:
         - Configs
   "/v1/configs/{configId}/environments/{environmentId}":
     get:
-      description: This endpoint returns the SDK Key for your Config in a specified Environment.
+      description: This endpoint returns the SDK Key for your Config in a specified
+        Environment.
       operationId: get-sdk-keys
       parameters:
         - description: The identifier of the Config.
@@ -316,18 +329,21 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get SDK Key
       tags:
         - SDK Keys
   "/v1/configs/{configId}/settings":
     get:
       description: >-
-        This endpoint returns the list of the Feature Flags and Settings defined in a 
+        This endpoint returns the list of the Feature Flags and Settings
+        defined in a 
 
         specified Config, identified by the `configId` parameter.
       operationId: get-settings
@@ -356,17 +372,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Flags
       tags:
         - Feature Flags & Settings
     post:
       description: >-
-        This endpoint creates a new Feature Flag or Setting in a specified Config
+        This endpoint creates a new Feature Flag or Setting in a specified
+        Config
 
         identified by the `configId` parameter.
 
@@ -406,17 +425,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Create Flag
       tags:
         - Feature Flags & Settings
   "/v1/environments/{environmentId}":
     delete:
-      description: This endpoint removes an Environment identified by the `environmentId` parameter.
+      description: This endpoint removes an Environment identified by the
+        `environmentId` parameter.
       operationId: delete-environment
       parameters:
         - description: The identifier of the Environment.
@@ -432,18 +454,19 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Delete Environment
       tags:
         - Environments
     get:
-      description: >-
+      description: |-
         This endpoint returns the metadata of an Environment 
-
         identified by the `environmentId`.
       operationId: get-environment
       parameters:
@@ -467,16 +490,19 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get Environment
       tags:
         - Environments
     put:
-      description: This endpoint updates an Environment identified by the `environmentId` parameter.
+      description: This endpoint updates an Environment identified by the
+        `environmentId` parameter.
       operationId: update-environment
       parameters:
         - description: The identifier of the Environment.
@@ -511,11 +537,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Update Environment
       tags:
         - Environments
@@ -563,11 +591,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Delete Integration link
       tags:
         - Integration links
@@ -625,11 +655,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Add or update Integration link
       tags:
         - Integration links
@@ -684,11 +716,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get value
       tags:
         - Feature Flag & Setting values
@@ -782,7 +816,8 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+        - description: The reason note for the Audit Log if the Product's "Config changes
+            require a reason" preference is turned on.
           in: query
           name: reason
           schema:
@@ -823,7 +858,8 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -871,7 +907,8 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -919,7 +956,8 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -967,7 +1005,8 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -998,17 +1037,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Update value
       tags:
         - Feature Flag & Setting values
     put:
       description: >-
-        This endpoint replaces the whole value of a Feature Flag or Setting in a specified Environment.
+        This endpoint replaces the whole value of a Feature Flag or Setting
+        in a specified Environment.
 
 
         Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
@@ -1079,7 +1121,8 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+        - description: The reason note for the Audit Log if the Product's "Config changes
+            require a reason" preference is turned on.
           in: query
           name: reason
           schema:
@@ -1090,7 +1133,8 @@ paths:
           application/*+json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its
+                  percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -1107,7 +1151,8 @@ paths:
           application/json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its
+                  percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -1124,7 +1169,8 @@ paths:
           text/json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its
+                  percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -1152,11 +1198,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Replace value
       tags:
         - Feature Flag & Setting values
@@ -1190,11 +1238,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get Integration link
       tags:
         - Integration links
@@ -1213,15 +1263,18 @@ paths:
                 $ref: "#/components/schemas/MeModel"
           description: ""
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get authenticated user details
       tags:
         - Me
   /v1/organizations:
     get:
-      description: This endpoint returns the list of the Organizations that belongs to the user.
+      description: This endpoint returns the list of the Organizations that belongs to
+        the user.
       operationId: get-organizations
       responses:
         "200":
@@ -1238,17 +1291,18 @@ paths:
                 type: array
           description: ""
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Organizations
       tags:
         - Organizations
   "/v1/organizations/{organizationId}/members":
     get:
-      description: >-
+      description: |-
         This endpoint returns the list of Members that belongs 
-
         to the given Organization, identified by the `organizationId` parameter.
       operationId: get-organization-members
       parameters:
@@ -1276,19 +1330,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Organization Members
       tags:
         - Members
   "/v1/organizations/{organizationId}/members/{userId}":
     delete:
-      description: >-
+      description: |-
         This endpoint removes a Member identified by the `userId` from the 
-
         given Organization identified by the `organizationId` parameter.
       operationId: delete-organization-member
       parameters:
@@ -1311,11 +1366,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Delete Member from Organization
       tags:
         - Members
@@ -1359,17 +1416,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Create Product
       tags:
         - Products
   "/v1/permissions/{permissionGroupId}":
     delete:
-      description: This endpoint removes a Permission Group identified by the `permissionGroupId` parameter.
+      description: This endpoint removes a Permission Group identified by the
+        `permissionGroupId` parameter.
       operationId: delete-permission-group
       parameters:
         - description: The identifier of the Permission Group.
@@ -1385,18 +1445,19 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Delete Permission Group
       tags:
         - Permission Groups
     get:
-      description: >-
+      description: |-
         This endpoint returns the metadata of a Permission Group 
-
         identified by the `permissionGroupId`.
       operationId: get-permission-group
       parameters:
@@ -1420,16 +1481,19 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get Permission Group
       tags:
         - Permission Groups
     put:
-      description: This endpoint updates a Permission Group identified by the `permissionGroupId` parameter.
+      description: This endpoint updates a Permission Group identified by the
+        `permissionGroupId` parameter.
       operationId: update-permission-group
       parameters:
         - description: The identifier of the Permission Group.
@@ -1464,11 +1528,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Update Permission Group
       tags:
         - Permission Groups
@@ -1491,9 +1557,11 @@ paths:
                 type: array
           description: ""
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Products
       tags:
         - Products
@@ -1515,18 +1583,19 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Delete Product
       tags:
         - Products
     get:
-      description: >-
+      description: |-
         This endpoint returns the metadata of a Product 
-
         identified by the `productId`.
       operationId: get-product
       parameters:
@@ -1550,11 +1619,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get Product
       tags:
         - Products
@@ -1594,19 +1665,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Update Product
       tags:
         - Products
   "/v1/products/{productId}/auditlogs":
     get:
-      description: >-
+      description: |-
         This endpoint returns the list of Audit logs for a given Product 
-
         and the result can be optionally filtered by Config and/or Environment.
       operationId: get-auditlogs
       parameters:
@@ -1669,18 +1741,21 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Audit logs
       tags:
         - Audit logs
   "/v1/products/{productId}/configs":
     get:
       description: >-
-        This endpoint returns the list of the Configs that belongs to the given Product identified by the
+        This endpoint returns the list of the Configs that belongs to the
+        given Product identified by the
 
         `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
       operationId: get-configs
@@ -1709,11 +1784,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Configs
       tags:
         - Configs
@@ -1756,18 +1833,21 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Create Config
       tags:
         - Configs
   "/v1/products/{productId}/environments":
     get:
       description: >-
-        This endpoint returns the list of the Environments that belongs to the given Product identified by the
+        This endpoint returns the list of the Environments that belongs to
+        the given Product identified by the
 
         `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
       operationId: get-environments
@@ -1796,11 +1876,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Environments
       tags:
         - Environments
@@ -1843,19 +1925,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Create Environment
       tags:
         - Environments
   "/v1/products/{productId}/members":
     get:
-      description: >-
+      description: |-
         This endpoint returns the list of Members that belongs 
-
         to the given Product, identified by the `productId` parameter.
       operationId: get-product-members
       parameters:
@@ -1883,17 +1966,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Product Members
       tags:
         - Members
   "/v1/products/{productId}/members/invite":
     post:
-      description: This endpoint invites a Member into the given Product identified by the `productId` parameter.
+      description: This endpoint invites a Member into the given Product identified by
+        the `productId` parameter.
       operationId: invite-member
       parameters:
         - description: The identifier of the Product.
@@ -1921,19 +2007,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Invite Member
       tags:
         - Members
   "/v1/products/{productId}/members/{userId}":
     delete:
-      description: >-
+      description: |-
         This endpoint removes a Member identified by the `userId` from the 
-
         given Product identified by the `productId` parameter.
       operationId: delete-product-member
       parameters:
@@ -1956,18 +2043,21 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Delete Member from Product
       tags:
         - Members
   "/v1/products/{productId}/permissions":
     get:
       description: >-
-        This endpoint returns the list of the Permission Groups that belongs to the given Product identified by the
+        This endpoint returns the list of the Permission Groups that
+        belongs to the given Product identified by the
 
         `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
       operationId: get-permission-groups
@@ -1996,17 +2086,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Permission Groups
       tags:
         - Permission Groups
     post:
       description: >-
-        This endpoint creates a new Permission Group in a specified Product 
+        This endpoint creates a new Permission Group in a specified
+        Product 
 
         identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
       operationId: create-permission-group
@@ -2043,19 +2136,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Create Permission Group
       tags:
         - Permission Groups
   "/v1/products/{productId}/tags":
     get:
-      description: >-
+      description: |-
         This endpoint returns the list of the Tags in a 
-
         specified Product, identified by the `productId` parameter.
       operationId: get-tags
       parameters:
@@ -2081,9 +2175,11 @@ paths:
                 type: array
           description: ""
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Tags
       tags:
         - Tags
@@ -2126,18 +2222,21 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Create Tag
       tags:
         - Tags
   "/v1/settings/{settingId}":
     delete:
       description: >-
-        This endpoint removes a Feature Flag or Setting from a specified Config, 
+        This endpoint removes a Feature Flag or Setting from a specified
+        Config, 
 
         identified by the `configId` parameter.
       operationId: delete-setting
@@ -2155,17 +2254,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Delete Flag
       tags:
         - Feature Flags & Settings
     get:
       description: >-
-        This endpoint returns the metadata attributes of a Feature Flag or Setting 
+        This endpoint returns the metadata attributes of a Feature Flag or
+        Setting 
 
         identified by the `settingId` parameter.
       operationId: get-setting
@@ -2190,11 +2292,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get Flag
       tags:
         - Feature Flags & Settings
@@ -2327,11 +2431,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Update Flag
       tags:
         - Feature Flags & Settings
@@ -2384,11 +2490,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get value
       tags:
         - Feature Flag & Setting values using SDK Key
@@ -2476,7 +2584,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+        - description: The reason note for the Audit Log if the Product's "Config changes
+            require a reason" preference is turned on.
           in: query
           name: reason
           schema:
@@ -2523,7 +2632,8 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -2571,7 +2681,8 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -2619,7 +2730,8 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -2667,7 +2779,8 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -2698,11 +2811,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Update value
       tags:
         - Feature Flag & Setting values using SDK Key
@@ -2773,7 +2888,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+        - description: The reason note for the Audit Log if the Product's "Config changes
+            require a reason" preference is turned on.
           in: query
           name: reason
           schema:
@@ -2790,7 +2906,8 @@ paths:
           application/*+json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its
+                  percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -2807,7 +2924,8 @@ paths:
           application/json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its
+                  percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -2824,7 +2942,8 @@ paths:
           text/json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its
+                  percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -2852,17 +2971,21 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Replace value
       tags:
         - Feature Flag & Setting values using SDK Key
   "/v1/tags/{tagId}":
     delete:
-      description: This endpoint deletes a Tag identified by the `tagId` parameter. To remove a Tag from a Feature Flag or Setting use the [Update Flag](#operation/update-setting) endpoint.
+      description: This endpoint deletes a Tag identified by the `tagId` parameter. To
+        remove a Tag from a Feature Flag or Setting use the [Update
+        Flag](#operation/update-setting) endpoint.
       operationId: delete-tag
       parameters:
         - description: The identifier of the Tag.
@@ -2878,18 +3001,19 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Delete Tag
       tags:
         - Tags
     get:
-      description: >-
+      description: |-
         This endpoint returns the metadata of a Tag 
-
         identified by the `tagId`.
       operationId: get-tag
       parameters:
@@ -2913,11 +3037,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get Tag
       tags:
         - Tags
@@ -2957,19 +3083,20 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Update Tag
       tags:
         - Tags
   "/v1/tags/{tagId}/settings":
     get:
-      description: >-
+      description: |-
         This endpoint returns the list of the Settings that 
-
         has the specified Tag, identified by the `tagId` parameter.
       operationId: get-settings-by-tag
       parameters:
@@ -2997,11 +3124,13 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Settings by Tag
       tags:
         - Tags
@@ -3614,7 +3743,8 @@ components:
           type: integer
         value:
           additionalProperties: false
-          description: The value to serve when the user falls in the percentage rule. It must respect the setting type.
+          description: The value to serve when the user falls in the percentage rule. It
+            must respect the setting type.
           nullable: true
           type: object
       required:
@@ -3658,7 +3788,8 @@ components:
           type: string
         value:
           additionalProperties: false
-          description: The value to serve when the comparison matches. It must respect the setting type.
+          description: The value to serve when the comparison matches. It must respect the
+            setting type.
           nullable: true
           type: object
       required:
@@ -4372,7 +4503,8 @@ components:
   securitySchemes:
     Basic:
       description: >-
-        To authenticate with the API you have to fill the `Authorization` HTTP request header with your Public API credentials.
+        To authenticate with the API you have to fill the `Authorization`
+        HTTP request header with your Public API credentials.
 
 
         You can create your credentials on the <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">Public API credentials management page</a>.

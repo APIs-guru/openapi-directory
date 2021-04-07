@@ -5,13 +5,10 @@ info:
   contact:
     name: API Specification and Support
     url: https://github.com/up-banking/api
-  description: >
+  description: |
     The Up API gives you programmatic access to your balances and
-
     transaction data. You can request past transactions or set up
-
     webhooks to receive real-time events when new transactions hit your
-
     account. It’s new, it’s exciting and it’s just the beginning.
   title: Up API
   version: v1
@@ -25,84 +22,58 @@ info:
 security:
   - bearer_auth: []
 tags:
-  - description: >
+  - description: |
       Accounts represent the underlying store used to track balances
-
       and the transactions that have occurred to modify those balances
-
       over time. Up currently has two types of account: `SAVER`—used to
-
       earn interest and to hit savings goals, and `TRANSACTIONAL`—used
-
       for everyday spending.
     name: Accounts
-  - description: >
+  - description: |
       Categories enable understanding where your money goes by driving
-
       powerful insights in Up. All categories in Up are pre-defined
-
       and are automatically assigned to new purchases in most cases. A
-
       parent-child relationship is used to represent categories,
-
       however parent categories cannot be directly assigned to
-
       transactions.
     name: Categories
-  - description: >
+  - description: |
       Tags are custom labels that can be associated with transactions
-
       on Up. Within the Up application, tags provide additional insight
-
       into spending. For example, you could have a "Take Away" tag that
-
       you apply to purchases from food delivery services. The Up API
-
       allows you to manage the tags associated with transactions. Each
-
       transaction may have up to 6 tags.
 
-
       Tags are identified by their labels, which are unique strings,
-
       so the tag "Holiday" has also the `id` `"Holiday"`.
     name: Tags
-  - description: >
+  - description: |
       Transactions represent the movement of money into and out of an
-
       account. They have many characteristics that vary depending on
-
       the kind of transaction. Transactions may be temporarily `HELD`
-
       (pending) or `SETTLED`, typically depending on which payment
-
       method was used at the point of sale.
     name: Transactions
-  - description: >
+  - description: |
       Some endpoints exist not to expose data, but to test the API
-
       itself. Currently there is only one endpoint in this group: ping!
     name: Utility endpoints
-  - description: >
+  - description: |
       Webhooks provide a mechanism for a configured URL to receive
-
       events when transaction activity occurs on Up. You can think of
-
       webhooks as being like push notifications for your server-side
-
       application.
     name: Webhooks
 paths:
   /accounts:
     get:
-      description: >
+      description: |
         Retrieve a paginated list of all accounts for the currently
-
         authenticated user. The returned list is paginated and can be scrolled
-
         by following the `prev` and `next` links where present.
       parameters:
-        - description: >
+        - description: |
             The number of records to return in each page.
           example: 30
           in: query
@@ -154,22 +125,16 @@ paths:
         - Accounts
   "/accounts/{accountId}/transactions":
     get:
-      description: >
+      description: |
         Retrieve a list of all transactions for a specific account. The returned
-
         list is [paginated](#pagination) and can be scrolled by following the
-
         `next` and `prev` links where present. To narrow the results to a
-
         specific date range pass one or both of `filter[since]` and
-
         `filter[until]` in the query string. These filter parameters
-
         **should not** be used for pagination. Results are ordered newest first
-
         to oldest last.
       parameters:
-        - description: >
+        - description: |
             The unique identifier for the account.
           example: 86150b64-feaa-4186-a7e4-e84eae764602
           in: path
@@ -177,7 +142,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >
+        - description: |
             The number of records to return in each page.
           example: 30
           in: query
@@ -185,11 +150,9 @@ paths:
           required: false
           schema:
             type: integer
-        - description: >
+        - description: |
             The transaction status for which to return records. This
-
             can be used to filter `HELD` transactions from those
-
             that are `SETTLED`.
           example: HELD
           in: query
@@ -197,11 +160,9 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/TransactionStatusEnum"
-        - description: >
+        - description: |
             The start date-time from which to return records,
-
             formatted according to rfc-3339. Not to be used for
-
             pagination purposes.
           example: 2020-01-01T01:02:03+10:00
           in: query
@@ -210,11 +171,9 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: >
+        - description: |
             The end date-time up to which to return records,
-
             formatted according to rfc-3339. Not to be used for
-
             pagination purposes.
           example: 2020-02-01T01:02:03+10:00
           in: query
@@ -223,13 +182,10 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: >
+        - description: |
             The category identifier for which to filter transactions.
-
             Both parent and child categories can be filtered through
-
             this parameter. Providing an invalid category identifier
-
             results in a `404` response.
           example: good-life
           in: query
@@ -237,11 +193,9 @@ paths:
           required: false
           schema:
             type: string
-        - description: >
+        - description: |
             A transaction tag to filter for which to return records.
-
             If the tag does not exist, zero records are returned and
-
             a success response is given.
           example: Holiday
           in: query
@@ -334,10 +288,10 @@ paths:
         - Transactions
   "/accounts/{id}":
     get:
-      description: >
+      description: |
         Retrieve a specific account by providing its unique identifier.
       parameters:
-        - description: >
+        - description: |
             The unique identifier for the account.
           example: 9842e43e-a1f9-4460-a252-364c86df2d3e
           in: path
@@ -385,16 +339,13 @@ paths:
         - Accounts
   /categories:
     get:
-      description: >
+      description: |
         Retrieve a list of all categories and their ancestry. The returned list
-
         is not paginated.
       parameters:
-        - description: >
+        - description: |
             The unique identifier of a parent category for which to
-
             return only its children. Providing an invalid category
-
             identifier results in a `404` response.
           example: good-life
           in: query
@@ -460,10 +411,10 @@ paths:
         - Categories
   "/categories/{id}":
     get:
-      description: >
+      description: |
         Retrieve a specific category by providing its unique identifier.
       parameters:
-        - description: >
+        - description: |
             The unique identifier for the category.
           example: restaurants-and-cafes
           in: path
@@ -511,18 +462,14 @@ paths:
         - Categories
   /tags:
     get:
-      description: >
+      description: |
         Retrieve a list of all tags currently in use. The returned list is
-
         [paginated](#pagination) and can be scrolled by following the `next`
-
         and `prev` links where present. Results are ordered lexicographically.
-
         The `transactions` relationship for each tag exposes a link
-
         to get the transactions with the given tag.
       parameters:
-        - description: >
+        - description: |
             The number of records to return in each page.
           example: 50
           in: query
@@ -570,7 +517,8 @@ paths:
   /transactions:
     get:
       description: >
-        Retrieve a list of all transactions across all accounts for the currently
+        Retrieve a list of all transactions across all accounts for the
+        currently
 
         authenticated user. The returned list is [paginated](#pagination) and can
 
@@ -584,7 +532,7 @@ paths:
 
         newest first to oldest last.
       parameters:
-        - description: >
+        - description: |
             The number of records to return in each page.
           example: 30
           in: query
@@ -592,11 +540,9 @@ paths:
           required: false
           schema:
             type: integer
-        - description: >
+        - description: |
             The transaction status for which to return records. This
-
             can be used to filter `HELD` transactions from those
-
             that are `SETTLED`.
           example: HELD
           in: query
@@ -604,11 +550,9 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/TransactionStatusEnum"
-        - description: >
+        - description: |
             The start date-time from which to return records,
-
             formatted according to rfc-3339. Not to be used for
-
             pagination purposes.
           example: 2020-01-01T01:02:03+10:00
           in: query
@@ -617,11 +561,9 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: >
+        - description: |
             The end date-time up to which to return records,
-
             formatted according to rfc-3339. Not to be used for
-
             pagination purposes.
           example: 2020-02-01T01:02:03+10:00
           in: query
@@ -630,13 +572,10 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: >
+        - description: |
             The category identifier for which to filter transactions.
-
             Both parent and child categories can be filtered through
-
             this parameter. Providing an invalid category identifier
-
             results in a `404` response.
           example: good-life
           in: query
@@ -644,11 +583,9 @@ paths:
           required: false
           schema:
             type: string
-        - description: >
+        - description: |
             A transaction tag to filter for which to return records.
-
             If the tag does not exist, zero records are returned and
-
             a success response is given.
           example: Holiday
           in: query
@@ -730,10 +667,10 @@ paths:
         - Transactions
   "/transactions/{id}":
     get:
-      description: >
+      description: |
         Retrieve a specific transaction by providing its unique identifier.
       parameters:
-        - description: >
+        - description: |
             The unique identifier for the transaction.
           example: 8e1da97e-6490-42eb-9c18-d8fdd94cfddc
           in: path
@@ -819,7 +756,8 @@ paths:
   "/transactions/{transactionId}/relationships/tags":
     delete:
       description: >
-        Disassociates one or more tags from a specific transaction. Tags that are
+        Disassociates one or more tags from a specific transaction. Tags
+        that are
 
         not associated are silently ignored. An HTTP `204` is returned on
 
@@ -829,7 +767,7 @@ paths:
 
         from `/transactions/{id}`.
       parameters:
-        - description: >
+        - description: |
             The unique identifier for the transaction.
           example: d8c190d6-be35-4d64-b2c4-e1aa0c09a0e0
           in: path
@@ -866,20 +804,15 @@ paths:
       tags:
         - Tags
     post:
-      description: >
+      description: |
         Associates one or more tags with a specific transaction. No more than 6
-
         tags may be present on any single transaction. Duplicate tags are
-
         silently ignored. An HTTP `204` is returned on success. The associated
-
         tags, along with this request URL, are also exposed via the `tags`
-
         relationship on the transaction resource returned from
-
         `/transactions/{id}`.
       parameters:
-        - description: >
+        - description: |
             The unique identifier for the transaction.
           example: d024c1b8-bc6a-4785-afc6-cd332d2a2efb
           in: path
@@ -917,13 +850,10 @@ paths:
         - Tags
   /util/ping:
     get:
-      description: >
+      description: |
         Make a basic ping request to the API. This is useful to verify that
-
         authentication is functioning correctly. On authentication success an
-
         HTTP `200` status is returned. On failure an HTTP `401` error response
-
         is returned.
       responses:
         "200":
@@ -960,7 +890,9 @@ paths:
               queryParameters: {}
             response:
               errors:
-                - detail: The request was not authenticated because no valid credential was found in the Authorization header, or the Authorization header was not present.
+                - detail: The request was not authenticated because no valid credential was found
+                    in the Authorization header, or the Authorization header was
+                    not present.
                   status: "401"
                   title: Not Authorized
             type: exampleRequestResponse
@@ -969,16 +901,13 @@ paths:
         - Utility endpoints
   /webhooks:
     get:
-      description: >
+      description: |
         Retrieve a list of configured webhooks. The returned list is
-
         [paginated](#pagination) and can be scrolled by following the `next`
-
         and `prev` links where present. Results are ordered oldest first to
-
         newest last.
       parameters:
-        - description: >
+        - description: |
             The number of records to return in each page.
           example: 30
           in: query
@@ -1030,7 +959,8 @@ paths:
           "{webhookURL}":
             post:
               description: >
-                Once you have created a webhook in the Up API, events are sent to the
+                Once you have created a webhook in the Up API, events are sent to
+                the
 
                 webhook’s configured URL as JSON-encoded `POST` requests. The webhook
 
@@ -1374,12 +1304,11 @@ paths:
         - Webhooks
   "/webhooks/{id}":
     delete:
-      description: >
+      description: |
         Delete a specific webhook by providing its unique identifier. Once
-
         deleted, webhook events will no longer be sent to the configured URL.
       parameters:
-        - description: >
+        - description: |
             The unique identifier for the webhook.
           example: 81f485ae-0e10-493d-95f3-a9c1dd4b6b6a
           in: path
@@ -1406,10 +1335,10 @@ paths:
       tags:
         - Webhooks
     get:
-      description: >
+      description: |
         Retrieve a specific webhook by providing its unique identifier.
       parameters:
-        - description: >
+        - description: |
             The unique identifier for the webhook.
           example: bc11e3ed-362e-43ab-b141-ef4f6251faa5
           in: path
@@ -1453,20 +1382,15 @@ paths:
         - Webhooks
   "/webhooks/{webhookId}/logs":
     get:
-      description: >
+      description: |
         Retrieve a list of delivery logs for a webhook by providing its unique
-
         identifier. This is useful for analysis and debugging purposes. The
-
         returned list is [paginated](#pagination) and can be scrolled by
-
         following the `next` and `prev` links where present. Results are ordered
-
         newest first to oldest last. Logs may be automatically purged after a
-
         period of time.
       parameters:
-        - description: >
+        - description: |
             The unique identifier for the webhook.
           example: 49733526-b90d-436a-8a75-9715a1d7cc5b
           in: path
@@ -1474,7 +1398,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >
+        - description: |
             The number of records to return in each page.
           example: 30
           in: query
@@ -1527,13 +1451,14 @@ paths:
   "/webhooks/{webhookId}/ping":
     post:
       description: >
-        Send a `PING` event to a webhook by providing its unique identifier.
+        Send a `PING` event to a webhook by providing its unique
+        identifier.
 
         This is useful for testing and debugging purposes. The event is delivered
 
         asynchronously and its data is returned in the response to this request.
       parameters:
-        - description: >
+        - description: |
             The unique identifier for the webhook.
           example: 6ef4bb23-53f1-4a3d-aa5c-a6e9121c5da3
           in: path
@@ -1578,7 +1503,7 @@ paths:
 components:
   schemas:
     AccountResource:
-      description: >
+      description: |
         Provides information about an Up bank account.
       properties:
         attributes:
@@ -1586,22 +1511,23 @@ components:
             accountType:
               allOf:
                 - $ref: "#/components/schemas/AccountTypeEnum"
-              description: >
+              description: |
                 The bank account type of this account.
             balance:
               allOf:
                 - $ref: "#/components/schemas/MoneyObject"
               description: >
-                The available balance of the account, taking into account any amounts
+                The available balance of the account, taking into account any
+                amounts
 
                 that are currently on hold.
             createdAt:
-              description: >
+              description: |
                 The date-time at which this account was first opened.
               format: date-time
               type: string
             displayName:
-              description: >
+              description: |
                 The name associated with the account in the Up application.
               type: string
           required:
@@ -1611,13 +1537,13 @@ components:
             - createdAt
           type: object
         id:
-          description: >
+          description: |
             The unique identifier for this account.
           type: string
         links:
           properties:
             self:
-              description: >
+              description: |
                 The canonical link to this resource within the API.
               type: string
           required:
@@ -1651,25 +1577,25 @@ components:
       type: object
     AccountTypeEnum:
       description: >
-        Specifies the type of bank account. Currently returned values are `SAVER`
+        Specifies the type of bank account. Currently returned values are
+        `SAVER`
 
         and `TRANSACTIONAL`.
       enum:
         - SAVER
         - TRANSACTIONAL
     CashbackObject:
-      description: >
+      description: |
         Provides information about an instant reimbursement in the form of
-
         cashback.
       properties:
         amount:
           allOf:
             - $ref: "#/components/schemas/MoneyObject"
-          description: >
+          description: |
             The total amount of cashback paid, represented as a positive value.
         description:
-          description: >
+          description: |
             A brief description of why this cashback was paid.
           type: string
       required:
@@ -1677,13 +1603,13 @@ components:
         - amount
       type: object
     CategoryResource:
-      description: >
+      description: |
         Provides information about a category and its ancestry.
       properties:
         attributes:
           properties:
             name:
-              description: >
+              description: |
                 The name of this category as seen in the Up application.
               type: string
           required:
@@ -1691,14 +1617,15 @@ components:
           type: object
         id:
           description: >
-            The unique identifier for this category. This is a human-readable but
+            The unique identifier for this category. This is a human-readable
+            but
 
             URL-safe value.
           type: string
         links:
           properties:
             self:
-              description: >
+              description: |
                 The canonical link to this resource within the API.
               type: string
           required:
@@ -1712,7 +1639,7 @@ components:
                   items:
                     properties:
                       id:
-                        description: >
+                        description: |
                           The unique identifier of the resource within its type.
                         type: string
                       type:
@@ -1741,7 +1668,7 @@ components:
                   nullable: true
                   properties:
                     id:
-                      description: >
+                      description: |
                         The unique identifier of the resource within its type.
                       type: string
                     type:
@@ -1777,38 +1704,38 @@ components:
         - relationships
       type: object
     CreateWebhookRequest:
-      description: >
+      description: |
         Request to create a new webhook. This currently only requires a `url`
-
         attribute.
       properties:
         data:
           allOf:
             - $ref: "#/components/schemas/WebhookInputResource"
-          description: >
+          description: |
             The webhook resource to create.
       required:
         - data
       type: object
     CreateWebhookResponse:
-      description: >
+      description: |
         Successful response after creating a webhook.
       properties:
         data:
           allOf:
             - $ref: "#/components/schemas/WebhookResource"
-          description: >
+          description: |
             The webhook that was created.
       required:
         - data
       type: object
     ErrorObject:
-      description: >
+      description: |
         Provides information about an error processing a request.
       properties:
         detail:
           description: >
-            A detailed description of this error. This should be considered unique
+            A detailed description of this error. This should be considered
+            unique
 
             to individual occurrences of an error and subject to change. It is
 
@@ -1816,22 +1743,21 @@ components:
           type: string
         source:
           description: >
-            If applicable, location in the request that this error relates to. This
+            If applicable, location in the request that this error relates to.
+            This
 
             may be a parameter in the query string, or a an attribute in the
 
             request body.
           properties:
             parameter:
-              description: >
+              description: |
                 If this error relates to a query parameter, the name of the
-
                 parameter.
               type: string
             pointer:
-              description: >
+              description: |
                 If this error relates to an attribute in the request body, a
-
                 rfc-6901 JSON pointer to the attribute.
               type: string
           type: object
@@ -1857,11 +1783,11 @@ components:
         - detail
       type: object
     ErrorResponse:
-      description: >
+      description: |
         Generic error response that returns one or more errors.
       properties:
         errors:
-          description: >
+          description: |
             The list of errors returned in this response.
           items:
             $ref: "#/components/schemas/ErrorObject"
@@ -1870,65 +1796,63 @@ components:
         - errors
       type: object
     GetAccountResponse:
-      description: >
+      description: |
         Successful response to get a single account.
       properties:
         data:
           allOf:
             - $ref: "#/components/schemas/AccountResource"
-          description: >
+          description: |
             The account returned in this response.
       required:
         - data
       type: object
     GetCategoryResponse:
-      description: >
+      description: |
         Successful response to get a single category and its ancestry.
       properties:
         data:
           allOf:
             - $ref: "#/components/schemas/CategoryResource"
-          description: >
+          description: |
             The category returned in this response.
       required:
         - data
       type: object
     GetTransactionResponse:
-      description: >
+      description: |
         Successful response to get a single transaction.
       properties:
         data:
           allOf:
             - $ref: "#/components/schemas/TransactionResource"
-          description: >
+          description: |
             The transaction returned in this response.
       required:
         - data
       type: object
     GetWebhookResponse:
-      description: >
+      description: |
         Successful response to get a single webhook.
       properties:
         data:
           allOf:
             - $ref: "#/components/schemas/WebhookResource"
-          description: >
+          description: |
             The webhook returned in this response.
       required:
         - data
       type: object
     HoldInfoObject:
-      description: >
+      description: |
         Provides information about the amount at which a transaction was in the
-
         `HELD` status.
       properties:
         amount:
           allOf:
             - $ref: "#/components/schemas/MoneyObject"
-          description: >
+          description: |
             The amount of this transaction while in the `HELD` status, in
-
             Australian dollars.
         foreignAmount:
           allOf:
@@ -1946,14 +1870,15 @@ components:
       type: object
     ListAccountsResponse:
       description: >
-        Successful response to get all accounts. This returns a paginated list of
+        Successful response to get all accounts. This returns a paginated
+        list of
 
         accounts, which can be scrolled by following the `prev` and `next` links
 
         if present.
       properties:
         data:
-          description: >
+          description: |
             The list of accounts returned in this response.
           items:
             $ref: "#/components/schemas/AccountResource"
@@ -1969,7 +1894,8 @@ components:
               type: string
             prev:
               description: >
-                The link to the previous page in the results. If this value is `null`
+                The link to the previous page in the results. If this value is
+                `null`
 
                 there is no previous page.
               nullable: true
@@ -1983,13 +1909,12 @@ components:
         - links
       type: object
     ListCategoriesResponse:
-      description: >
+      description: |
         Successful response to get all categories and their ancestry. The
-
         returned list is not paginated.
       properties:
         data:
-          description: >
+          description: |
             The list of categories returned in this response.
           items:
             $ref: "#/components/schemas/CategoryResource"
@@ -1998,15 +1923,13 @@ components:
         - data
       type: object
     ListTagsResponse:
-      description: >
+      description: |
         Successful response to get all tags. This returns a paginated list of
-
         tags, which can be scrolled by following the `prev` and `next` links if
-
         present.
       properties:
         data:
-          description: >
+          description: |
             The list of tags returned in this response.
           items:
             $ref: "#/components/schemas/TagResource"
@@ -2022,7 +1945,8 @@ components:
               type: string
             prev:
               description: >
-                The link to the previous page in the results. If this value is `null`
+                The link to the previous page in the results. If this value is
+                `null`
 
                 there is no previous page.
               nullable: true
@@ -2036,15 +1960,13 @@ components:
         - links
       type: object
     ListTransactionsResponse:
-      description: >
+      description: |
         Successful response to get all transactions. This returns a paginated
-
         list of transactions, which can be scrolled by following the `prev` and
-
         `next` links if present.
       properties:
         data:
-          description: >
+          description: |
             The list of transactions returned in this response.
           items:
             $ref: "#/components/schemas/TransactionResource"
@@ -2060,7 +1982,8 @@ components:
               type: string
             prev:
               description: >
-                The link to the previous page in the results. If this value is `null`
+                The link to the previous page in the results. If this value is
+                `null`
 
                 there is no previous page.
               nullable: true
@@ -2075,14 +1998,15 @@ components:
       type: object
     ListWebhookDeliveryLogsResponse:
       description: >
-        Successful response to get all delivery logs for a webhook. This returns
+        Successful response to get all delivery logs for a webhook. This
+        returns
 
         a paginated list of delivery logs, which can be scrolled by following the
 
         `next` and `prev` links if present.
       properties:
         data:
-          description: >
+          description: |
             The list of delivery logs returned in this response.
           items:
             $ref: "#/components/schemas/WebhookDeliveryLogResource"
@@ -2098,7 +2022,8 @@ components:
               type: string
             prev:
               description: >
-                The link to the previous page in the results. If this value is `null`
+                The link to the previous page in the results. If this value is
+                `null`
 
                 there is no previous page.
               nullable: true
@@ -2113,14 +2038,15 @@ components:
       type: object
     ListWebhooksResponse:
       description: >
-        Successful response to get all webhooks. This returns a paginated list of
+        Successful response to get all webhooks. This returns a paginated
+        list of
 
         webhooks, which can be scrolled by following the `prev` and `next` links
 
         if present.
       properties:
         data:
-          description: >
+          description: |
             The list of webhooks returned in this response.
           items:
             $ref: "#/components/schemas/WebhookResource"
@@ -2136,7 +2062,8 @@ components:
               type: string
             prev:
               description: >
-                The link to the previous page in the results. If this value is `null`
+                The link to the previous page in the results. If this value is
+                `null`
 
                 there is no previous page.
               nullable: true
@@ -2150,16 +2077,17 @@ components:
         - links
       type: object
     MoneyObject:
-      description: >
+      description: |
         Provides information about a value of money.
       properties:
         currencyCode:
-          description: >
+          description: |
             The ISO 4217 currency code.
           type: string
         value:
           description: >
-            The amount of money, formatted as a string in the relevant currency.
+            The amount of money, formatted as a string in the relevant
+            currency.
 
             For example, for an Australian dollar value of $10.56, this field will
 
@@ -2167,7 +2095,8 @@ components:
           type: string
         valueInBaseUnits:
           description: >
-            The amount of money in the smallest denomination for the currency, as a
+            The amount of money in the smallest denomination for the currency,
+            as a
 
             64-bit integer.  For example, for an Australian dollar value of $10.56,
 
@@ -2179,17 +2108,17 @@ components:
         - valueInBaseUnits
       type: object
     PingResponse:
-      description: >
+      description: |
         Basic ping response to verify authentication.
       properties:
         meta:
           properties:
             id:
-              description: >
+              description: |
                 The unique identifier of the authenticated customer.
               type: string
             statusEmoji:
-              description: >
+              description: |
                 A cute emoji that represents the response status.
               type: string
           required:
@@ -2201,7 +2130,8 @@ components:
       type: object
     RoundUpObject:
       description: >
-        Provides information about how a Round Up was applied, such as whether or
+        Provides information about how a Round Up was applied, such as
+        whether or
 
         not a boost was included in the Round Up.
       properties:
@@ -2209,7 +2139,8 @@ components:
           allOf:
             - $ref: "#/components/schemas/MoneyObject"
           description: >
-            The total amount of this Round Up, including any boosts, represented as
+            The total amount of this Round Up, including any boosts,
+            represented as
 
             a negative value.
         boostPortion:
@@ -2227,7 +2158,7 @@ components:
         - boostPortion
       type: object
     TagInputResourceIdentifier:
-      description: >
+      description: |
         Uniquely identifies a single tag in the API.
       properties:
         id:
@@ -2242,7 +2173,7 @@ components:
         - id
       type: object
     TagResource:
-      description: >
+      description: |
         Provides information about a tag.
       properties:
         id:
@@ -2298,7 +2229,7 @@ components:
                 form of cashback, details of the reimbursement.
               nullable: true
             createdAt:
-              description: >
+              description: |
                 The date-time at which this transaction was first encountered.
               format: date-time
               type: string
@@ -2326,7 +2257,8 @@ components:
               allOf:
                 - $ref: "#/components/schemas/HoldInfoObject"
               description: >
-                If this transaction is currently in the `HELD` status, or was ever in
+                If this transaction is currently in the `HELD` status, or was ever
+                in
 
                 the `HELD` status, the `amount` and `foreignAmount` of the
 
@@ -2334,14 +2266,16 @@ components:
               nullable: true
             message:
               description: >
-                Attached message for this transaction, such as a payment message, or a
+                Attached message for this transaction, such as a payment message,
+                or a
 
                 transfer note.
               nullable: true
               type: string
             rawText:
               description: >
-                The original, unprocessed text of the transaction. This is often not
+                The original, unprocessed text of the transaction. This is often
+                not
 
                 a perfect indicator of the actual merchant, but it is useful for
 
@@ -2367,9 +2301,8 @@ components:
             status:
               allOf:
                 - $ref: "#/components/schemas/TransactionStatusEnum"
-              description: >
+              description: |
                 The current processing status of this transaction, according to
-
                 whether or not this transaction has settled or is still held.
           required:
             - status
@@ -2385,13 +2318,13 @@ components:
             - createdAt
           type: object
         id:
-          description: >
+          description: |
             The unique identifier for this transaction.
           type: string
         links:
           properties:
             self:
-              description: >
+              description: |
                 The canonical link to this resource within the API.
               type: string
           required:
@@ -2404,7 +2337,7 @@ components:
                 data:
                   properties:
                     id:
-                      description: >
+                      description: |
                         The unique identifier of the resource within its type.
                       type: string
                     type:
@@ -2432,7 +2365,7 @@ components:
                   nullable: true
                   properties:
                     id:
-                      description: >
+                      description: |
                         The unique identifier of the resource within its type.
                       type: string
                     type:
@@ -2460,7 +2393,7 @@ components:
                   nullable: true
                   properties:
                     id:
-                      description: >
+                      description: |
                         The unique identifier of the resource within its type.
                       type: string
                     type:
@@ -2489,7 +2422,8 @@ components:
                     properties:
                       id:
                         description: >
-                          The label of the tag, which also acts as the tag’s unique identifier.
+                          The label of the tag, which also acts as the tag’s unique
+                          identifier.
                         type: string
                       type:
                         description: "The type of this resource: `tags`"
@@ -2503,7 +2437,8 @@ components:
                   properties:
                     self:
                       description: >
-                        The link to retrieve or modify linkage between this resources and the
+                        The link to retrieve or modify linkage between this resources and
+                        the
 
                         related resource(s) in this relationship.
                       type: string
@@ -2541,11 +2476,11 @@ components:
         - HELD
         - SETTLED
     UpdateTransactionTagsRequest:
-      description: >
+      description: |
         Request to add or remove tags associated with a transaction.
       properties:
         data:
-          description: >
+          description: |
             The tags to add to or remove from the transaction.
           items:
             $ref: "#/components/schemas/TagInputResourceIdentifier"
@@ -2554,29 +2489,28 @@ components:
         - data
       type: object
     WebhookDeliveryLogResource:
-      description: >
+      description: |
         Provides historical webhook event delivery information for analysis and
-
         debugging purposes.
       properties:
         attributes:
           properties:
             createdAt:
-              description: >
+              description: |
                 The date-time at which this log entry was created.
               format: date-time
               type: string
             deliveryStatus:
               allOf:
                 - $ref: "#/components/schemas/WebhookDeliveryStatusEnum"
-              description: >
+              description: |
                 The success or failure status of this delivery attempt.
             request:
-              description: >
+              description: |
                 Information about the request that was sent to the webhook URL.
               properties:
                 body:
-                  description: >
+                  description: |
                     The payload that was sent in the request body.
                   type: string
               required:
@@ -2584,15 +2518,16 @@ components:
               type: object
             response:
               description: >
-                Information about the response that was received from the webhook URL.
+                Information about the response that was received from the webhook
+                URL.
               nullable: true
               properties:
                 body:
-                  description: >
+                  description: |
                     The payload that was received in the response body.
                   type: string
                 statusCode:
-                  description: >
+                  description: |
                     The HTTP status code received in the response.
                   type: integer
               required:
@@ -2606,7 +2541,7 @@ components:
             - createdAt
           type: object
         id:
-          description: >
+          description: |
             The unique identifier for this log entry.
           type: string
         relationships:
@@ -2616,7 +2551,7 @@ components:
                 data:
                   properties:
                     id:
-                      description: >
+                      description: |
                         The unique identifier of the resource within its type.
                       type: string
                     type:
@@ -2642,18 +2577,14 @@ components:
         - relationships
       type: object
     WebhookDeliveryStatusEnum:
-      description: >
+      description: |
         Specifies the nature of the success or failure of a webhook delivery
-
         attempt to the subscribed webhook URL. The currently returned values are
-
         described below:
-
 
         - **`DELIVERED`**: The event was delivered to the webhook URL
           successfully and a `200` response was received.
         - **`UNDELIVERABLE`**: The webhook URL was not reachable, or timed out.
-
         - **`BAD_RESPONSE_CODE`**: The event was delivered to the webhook URL
           but a non-`200` response was received.
       enum:
@@ -2661,29 +2592,27 @@ components:
         - UNDELIVERABLE
         - BAD_RESPONSE_CODE
     WebhookEventCallback:
-      description: >
+      description: |
         Asynchronous callback request used for webhook event delivery.
       properties:
         data:
           allOf:
             - $ref: "#/components/schemas/WebhookEventResource"
-          description: >
+          description: |
             The webhook event data sent to the subscribed webhook.
       required:
         - data
       type: object
     WebhookEventResource:
-      description: >
+      description: |
         Provides the event data used in asynchronous webhook event callbacks to
-
         subscribed endpoints. Webhooks events have defined `eventType`s and may
-
         optionally relate to other resources within the Up API.
       properties:
         attributes:
           properties:
             createdAt:
-              description: >
+              description: |
                 The date-time at which this event was generated.
               format: date-time
               type: string
@@ -2691,7 +2620,8 @@ components:
               allOf:
                 - $ref: "#/components/schemas/WebhookEventTypeEnum"
               description: >
-                The type of this event. This can be used to determine what action to
+                The type of this event. This can be used to determine what action
+                to
 
                 take in response to the event.
           required:
@@ -2700,7 +2630,8 @@ components:
           type: object
         id:
           description: >
-            The unique identifier for this event. This will remain constant across
+            The unique identifier for this event. This will remain constant
+            across
 
             delivery retries.
           type: string
@@ -2711,7 +2642,7 @@ components:
                 data:
                   properties:
                     id:
-                      description: >
+                      description: |
                         The unique identifier of the resource within its type.
                       type: string
                     type:
@@ -2738,7 +2669,7 @@ components:
                 data:
                   properties:
                     id:
-                      description: >
+                      description: |
                         The unique identifier of the resource within its type.
                       type: string
                     type:
@@ -2774,7 +2705,8 @@ components:
       type: object
     WebhookEventTypeEnum:
       description: >
-        Specifies the type of a webhook event. This can be used to determine what
+        Specifies the type of a webhook event. This can be used to
+        determine what
 
         action to take in response to the event, such as which relationships to
 
@@ -2785,21 +2717,21 @@ components:
         - TRANSACTION_DELETED
         - PING
     WebhookInputResource:
-      description: >
+      description: |
         Represents a webhook specified as request input.
       properties:
         attributes:
           properties:
             description:
-              description: >
+              description: |
                 An optional description for this webhook, up to 64 characters in
-
                 length.
               nullable: true
               type: string
             url:
               description: >
-                The URL that this webhook should post events to. This must be a valid
+                The URL that this webhook should post events to. This must be a
+                valid
 
                 HTTP or HTTPS URL that does not exceed 300 characters in length.
               format: uri
@@ -2811,19 +2743,20 @@ components:
         - attributes
       type: object
     WebhookResource:
-      description: >
+      description: |
         Provides information about a webhook.
       properties:
         attributes:
           properties:
             createdAt:
-              description: >
+              description: |
                 The date-time at which this webhook was created.
               format: date-time
               type: string
             description:
               description: >
-                An optional description that was provided at the time the webhook was
+                An optional description that was provided at the time the webhook
+                was
 
                 created.
               nullable: true
@@ -2854,7 +2787,7 @@ components:
                 details.
               type: string
             url:
-              description: >
+              description: |
                 The URL that this webhook is configured to `POST` events to.
               type: string
           required:
@@ -2863,13 +2796,13 @@ components:
             - createdAt
           type: object
         id:
-          description: >
+          description: |
             The unique identifier for this webhook.
           type: string
         links:
           properties:
             self:
-              description: >
+              description: |
                 The canonical link to this resource within the API.
               type: string
           required:

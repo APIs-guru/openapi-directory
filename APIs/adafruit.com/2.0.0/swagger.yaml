@@ -175,7 +175,11 @@ produces:
   - text/csv
 securityDefinitions:
   HeaderKey:
-    description: The AIO Key is used to restrict or grant access to your data. The key is unique, and you can generate a key per feed, and control it in many different ways. The easiest process is to just use your automatically generated master key. You can access this key right from the right-hand side of your dashboard or from an individual feed page.
+    description: The AIO Key is used to restrict or grant access to your data. The
+      key is unique, and you can generate a key per feed, and control it in many
+      different ways. The easiest process is to just use your automatically
+      generated master key. You can access this key right from the right-hand
+      side of your dashboard or from an individual feed page.
     in: header
     name: X-AIO-Key
     type: apiKey
@@ -185,7 +189,11 @@ securityDefinitions:
     name: X-AIO-Signature
     type: apiKey
   QueryKey:
-    description: The AIO Key is used to restrict or grant access to your data. The key is unique, and you can generate a key per feed, and control it in many different ways. The easiest process is to just use your automatically generated master key. You can access this key right from the right-hand side of your dashboard or from an individual feed page.
+    description: The AIO Key is used to restrict or grant access to your data. The
+      key is unique, and you can generate a key per feed, and control it in many
+      different ways. The easiest process is to just use your automatically
+      generated master key. You can access this key right from the right-hand
+      side of your dashboard or from an individual feed page.
     in: query
     name: X-AIO-Key
     type: apiKey
@@ -254,7 +262,9 @@ parameters:
     required: true
     type: string
   Data:
-    description: "Data record including a `value` field (required) and optionally including: `lat`, `lon`, `ele` (latitude, longitude, and elevation values), and `created_at` (a date/time string)."
+    description: "Data record including a `value` field (required) and optionally
+      including: `lat`, `lon`, `ele` (latitude, longitude, and elevation
+      values), and `created_at` (a date/time string)."
     in: body
     name: datum
     required: true
@@ -275,7 +285,9 @@ parameters:
           type: string
       type: object
   DataCollection:
-    description: "A collection of data records including `value` (required) and optionally including: `lat`, `lon`, `ele` (latitude, longitude, and elevation values), and `created_at` (a date/time string)."
+    description: "A collection of data records including `value` (required) and
+      optionally including: `lat`, `lon`, `ele` (latitude, longitude, and
+      elevation values), and `created_at` (a date/time string)."
     in: body
     name: data
     required: true
@@ -298,7 +310,9 @@ parameters:
         type: object
       type: array
   DataInclude:
-    description: "List of Data record fields to include in response as comma separated list. Acceptable values are: `value`, `lat`, `lon`, `ele`, `id`, and `created_at`. "
+    description: "List of Data record fields to include in response as comma
+      separated list. Acceptable values are: `value`, `lat`, `lon`, `ele`, `id`,
+      and `created_at`. "
     in: query
     name: include
     type: string
@@ -356,7 +370,8 @@ parameters:
     schema:
       properties:
         created_at:
-          description: Optional created_at timestamp which will be applied to all feed values created.
+          description: Optional created_at timestamp which will be applied to all feed
+            values created.
           type: string
         feeds:
           description: An array of feed data records with `key` and `value` properties.
@@ -529,7 +544,8 @@ paths:
         - Data
       x-code-samples:
         - lang: curl
-          source: curl -F 'value=65.5' https://io.adafruit.com/api/v2/webhooks/feed/12345thistoken
+          source: curl -F 'value=65.5'
+            https://io.adafruit.com/api/v2/webhooks/feed/12345thistoken
       x-swagger-router-action: create
       x-swagger-router-controller: WebhookReceivers
   /webhooks/feed/:token/raw:
@@ -537,7 +553,11 @@ paths:
       consumes:
         - application/json
         - application/x-www-form-urlencoded
-      description: The raw data webhook receiver accepts POST requests and stores the raw request body on your feed. This is useful when you don't have control of the webhook sender. If feed history is turned on, payloads will be truncated at 1024 bytes. If feed history is turned off, payloads will be truncated at 100KB.
+      description: The raw data webhook receiver accepts POST requests and stores the
+        raw request body on your feed. This is useful when you don't have
+        control of the webhook sender. If feed history is turned on, payloads
+        will be truncated at 1024 bytes. If feed history is turned off, payloads
+        will be truncated at 100KB.
       operationId: createRawWebhookFeedData
       responses:
         "200":
@@ -558,7 +578,7 @@ paths:
         - Data
       x-code-samples:
         - lang: curl
-          source: >-
+          source: |-
             curl --header 'Content-Type: application/json' \
               --request POST \
               --data '{"some json": "goes here", "id": 12345}' \
@@ -606,7 +626,8 @@ paths:
               description: The created_at value for the newest record returned.
               type: string
             X-Pagination-Limit:
-              description: The limit this request is using, either your given value or the default (1000).
+              description: The limit this request is using, either your given value or the
+                default (1000).
               type: integer
             X-Pagination-Start:
               description: The created_at value for the oldest record returned.
@@ -660,7 +681,7 @@ paths:
       x-swagger-router-controller: Activities
   "/{username}/dashboards":
     get:
-      description: >
+      description: |
         The Dashboards endpoint returns information about the user's dashboards.
       operationId: allDashboards
       parameters:
@@ -714,7 +735,7 @@ paths:
       x-swagger-router-controller: Dashboards
   "/{username}/dashboards/{dashboard_id}/blocks":
     get:
-      description: >
+      description: |
         The Blocks endpoint returns information about the user's blocks.
       operationId: allBlocks
       parameters:
@@ -984,7 +1005,9 @@ paths:
       x-swagger-router-controller: Dashboards
   "/{username}/feeds":
     get:
-      description: The Feeds endpoint returns information about the user's feeds. The response includes the latest value of each feed, and other metadata about each feed.
+      description: The Feeds endpoint returns information about the user's feeds. The
+        response includes the latest value of each feed, and other metadata
+        about each feed.
       operationId: allFeeds
       parameters:
         - $ref: "#/parameters/UsernamePath"
@@ -1161,7 +1184,8 @@ paths:
               description: The created_at value for the newest record returned.
               type: string
             X-Pagination-Limit:
-              description: The limit this request is using, either your given value or the default (1000).
+              description: The limit this request is using, either your given value or the
+                default (1000).
               type: integer
             X-Pagination-Start:
               description: The created_at value for the oldest record returned.
@@ -1215,16 +1239,15 @@ paths:
         - Data
       x-code-samples:
         - lang: curl
-          source: >-
+          source: |-
             curl -F 'value=65.5' -H 'X-AIO-Key: io_key_12345' \
               https://io.adafruit.com/api/v2/io_username/feeds/io-feed-key/data
         - lang: Ruby
-          source: >-
+          source: |-
             api = Adafruit::IO::Client.new(
               key: ENV['IO_KEY'],
               username: ENV['IO_USERNAME']
             )
-
             api.send_data('io-feed-key', 65.5)
       x-swagger-router-action: create
       x-swagger-router-controller: Data
@@ -1261,7 +1284,10 @@ paths:
   "/{username}/feeds/{feed_key}/data/chart":
     get:
       description: >-
-        The Chart API is what we use on io.adafruit.com to populate charts over varying timespans with a consistent number of data points. The maximum number of points returned is 480. This API works by aggregating slices of time into a single value by averaging.
+        The Chart API is what we use on io.adafruit.com to populate charts
+        over varying timespans with a consistent number of data points. The
+        maximum number of points returned is 480. This API works by aggregating
+        slices of time into a single value by averaging.
 
 
         All time-based parameters are optional, if none are given it will default to 1 hour at the finest-grained resolution possible.
@@ -1271,7 +1297,12 @@ paths:
         - $ref: "#/parameters/FeedPath"
         - $ref: "#/parameters/StartTime"
         - $ref: "#/parameters/EndTime"
-        - description: "A resolution size in minutes. By giving a resolution value you will get back grouped data points aggregated over resolution-sized intervals. NOTE: time span is preferred over resolution, so if you request a span of time that includes more than max limit points you may get a larger resolution than you requested. Valid resolutions are 1, 5, 10, 30, 60, and 120."
+        - description: "A resolution size in minutes. By giving a resolution value you
+            will get back grouped data points aggregated over resolution-sized
+            intervals. NOTE: time span is preferred over resolution, so if you
+            request a span of time that includes more than max limit points you
+            may get a larger resolution than you requested. Valid resolutions
+            are 1, 5, 10, 30, 60, and 120."
           format: int32
           in: query
           name: resolution
@@ -1283,7 +1314,8 @@ paths:
           type: integer
       responses:
         "200":
-          description: A JSON record containing chart data and the parameters used to generate it.
+          description: A JSON record containing chart data and the parameters used to
+            generate it.
           schema:
             properties:
               columns:
@@ -1329,7 +1361,8 @@ paths:
       consumes:
         - application/json
         - application/x-www-form-urlencoded
-      description: Get the oldest data point in the feed. This request sets the queue pointer to the beginning of the feed.
+      description: Get the oldest data point in the feed. This request sets the queue
+        pointer to the beginning of the feed.
       operationId: firstData
       parameters:
         - $ref: "#/parameters/UsernamePath"
@@ -1358,7 +1391,8 @@ paths:
       consumes:
         - application/json
         - application/x-www-form-urlencoded
-      description: Get the most recent data point in the feed. This request sets the queue pointer to the end of the feed.
+      description: Get the most recent data point in the feed. This request sets the
+        queue pointer to the end of the feed.
       operationId: lastData
       parameters:
         - $ref: "#/parameters/UsernamePath"
@@ -1387,7 +1421,8 @@ paths:
       consumes:
         - application/json
         - application/x-www-form-urlencoded
-      description: Get the next newest data point in the feed. If queue processing hasn't been started, the first data point in the feed will be returned.
+      description: Get the next newest data point in the feed. If queue processing
+        hasn't been started, the first data point in the feed will be returned.
       operationId: nextData
       parameters:
         - $ref: "#/parameters/UsernamePath"
@@ -1416,7 +1451,8 @@ paths:
       consumes:
         - application/json
         - application/x-www-form-urlencoded
-      description: "Get the previously processed data point in the feed. NOTE: this method doesn't move the processing queue pointer."
+      description: "Get the previously processed data point in the feed. NOTE: this
+        method doesn't move the processing queue pointer."
       operationId: previousData
       parameters:
         - $ref: "#/parameters/UsernamePath"
@@ -1445,7 +1481,8 @@ paths:
       consumes:
         - application/json
         - application/x-www-form-urlencoded
-      description: "Get the most recent data point in the feed in an MQTT compatible CSV format: `value,lat,lon,ele`"
+      description: "Get the most recent data point in the feed in an MQTT compatible
+        CSV format: `value,lat,lon,ele`"
       operationId: retainData
       parameters:
         - $ref: "#/parameters/UsernamePath"
@@ -1454,7 +1491,8 @@ paths:
         - text/csv
       responses:
         "200":
-          description: CSV string in `value,lat,lon,ele` format. The lat, lon, and ele values are left blank if they are not set.
+          description: CSV string in `value,lat,lon,ele` format. The lat, lon, and ele
+            values are left blank if they are not set.
           schema:
             type: string
         "401":
@@ -1608,7 +1646,9 @@ paths:
   "/{username}/groups":
     get:
       description: >
-        The Groups endpoint returns information about the user's groups. The response includes the latest value of each feed in the group, and other metadata about the group.
+        The Groups endpoint returns information about the user's groups.
+        The response includes the latest value of each feed in the group, and
+        other metadata about the group.
       operationId: allGroups
       parameters:
         - $ref: "#/parameters/UsernamePath"
@@ -1822,7 +1862,9 @@ paths:
       x-swagger-router-controller: Data
   "/{username}/groups/{group_key}/feeds":
     get:
-      description: The Group Feeds endpoint returns information about the user's feeds. The response includes the latest value of each feed, and other metadata about each feed, but only for feeds within the given group.
+      description: The Group Feeds endpoint returns information about the user's
+        feeds. The response includes the latest value of each feed, and other
+        metadata about each feed, but only for feeds within the given group.
       operationId: allGroupFeeds
       parameters:
         - $ref: "#/parameters/GroupPath"
@@ -1972,7 +2014,8 @@ paths:
           description: Not Found
         "500":
           description: Server Error
-      summary: Create multiple new Data records in a feed belonging to a particular group
+      summary: Create multiple new Data records in a feed belonging to a particular
+        group
       tags:
         - Data
       x-swagger-router-action: group_feed_batch
@@ -2036,7 +2079,7 @@ paths:
       x-swagger-router-controller: Users
   "/{username}/tokens":
     get:
-      description: >
+      description: |
         The Tokens endpoint returns information about the user's tokens.
       operationId: allTokens
       parameters:
@@ -2195,7 +2238,7 @@ paths:
       x-swagger-router-controller: Tokens
   "/{username}/triggers":
     get:
-      description: >
+      description: |
         The Triggers endpoint returns information about the user's triggers.
       operationId: allTriggers
       parameters:
@@ -2355,7 +2398,8 @@ paths:
   "/{username}/{type}/{type_id}/acl":
     get:
       description: >
-        The Permissions endpoint returns information about the user's permissions.
+        The Permissions endpoint returns information about the user's
+        permissions.
       operationId: allPermissions
       parameters:
         - $ref: "#/parameters/UsernamePath"

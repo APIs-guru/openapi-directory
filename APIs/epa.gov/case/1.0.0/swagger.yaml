@@ -6,47 +6,76 @@ basePath: /echo
 info:
   contact:
     name: US EPA, OECA Integration, Targeting and Access Branch
-  description: "Enforcement and Compliance History Online (ECHO) is a tool developed and maintained by EPA's Office of Enforcement and Compliance Assurance for public use. ECHO provides integrated compliance and enforcement information for over 1 million regulated facilities nationwide.
+  description: "Enforcement and Compliance History Online (ECHO) is a tool
+    developed and maintained by EPA's Office of Enforcement and Compliance
+    Assurance for public use. ECHO provides integrated compliance and
+    enforcement information for over 1 million regulated facilities nationwide.
 
-    \ CASE Rest Services provide multiple service endpoints, each with specific capabilities, to search and retrieve data on civil cases entered into the\ 
+    \ CASE Rest Services provide multiple service endpoints, each with
+    specific capabilities, to search and retrieve data on civil cases entered
+    into the\ 
 
-    Integrated Compliance Information System (ICIS) and criminal cases entered into the Summary of Criminal Prosecutions database. \ 
+    Integrated Compliance Information System (ICIS) and criminal cases
+    entered into the Summary of Criminal Prosecutions database. \ 
 
-    See Enforcement Case Search Help (https://echo.epa.gov/help/enforcement-case-search-help) for additional information on searching civil and criminal cases.\ 
-
-    \\
-
-    The get_cases, get_map, get_qid, and get_download end points are meant to be used together, while the enhanced get_case_info end point is self contained..  \ 
-
-    The recommended use scenario for get_cases, get_qid, get_map, and get_downoad is:
-
-    \\
-
-    \ <b>1)</b>  Use get_cases to validate passed query parameters, obtain summary statistics and to obtain a query_id (QID).  QIDs are time sensitive and will be valid for approximately 30 minutes.
-
-    \ <b>2)</b>  Use get_qid, with the returned QID, to paginate through arrays of case results.
-
-    \ <b>3)</b>  Use get_map, with the returned QID, to zoom in/out and pan on the clustered and individual facility coordinates, related to the returned cases, that meet the QID query criteria.
-
-    \ <b>4)</b>  Use get_download, with the returned QID, to generate a Comma Separated Value (CSV) file of facility information that meets the QID query criteria.
+    See Enforcement Case Search Help
+    (https://echo.epa.gov/help/enforcement-case-search-help) for additional
+    information on searching civil and criminal cases.\ 
 
     \\
 
-    In addition to the service endpoints listed above there are two detailed case report services, one for civil cases (get_case_report) and one for criminal cases (get_crcase_report).\ 
+    The get_cases, get_map, get_qid, and get_download end points are meant
+    to be used together, while the enhanced get_case_info end point is self
+    contained..  \ 
 
-    See the Civil Enforcement Case Report Help (https://echo.epa.gov/help/reports/enforcement-case-report-help) and the Criminal Case Report Help (https://echo.epa.gov/help/reports/criminal-case-report-help) for additional information\ 
+    The recommended use scenario for get_cases, get_qid, get_map, and
+    get_downoad is:
+
+    \\
+
+    \ <b>1)</b>  Use get_cases to validate passed query parameters, obtain
+    summary statistics and to obtain a query_id (QID).  QIDs are time sensitive
+    and will be valid for approximately 30 minutes.
+
+    \ <b>2)</b>  Use get_qid, with the returned QID, to paginate through
+    arrays of case results.
+
+    \ <b>3)</b>  Use get_map, with the returned QID, to zoom in/out and pan
+    on the clustered and individual facility coordinates, related to the
+    returned cases, that meet the QID query criteria.
+
+    \ <b>4)</b>  Use get_download, with the returned QID, to generate a
+    Comma Separated Value (CSV) file of facility information that meets the QID
+    query criteria.
+
+    \\
+
+    In addition to the service endpoints listed above there are two detailed
+    case report services, one for civil cases (get_case_report) and one for
+    criminal cases (get_crcase_report).\ 
+
+    See the Civil Enforcement Case Report Help
+    (https://echo.epa.gov/help/reports/enforcement-case-report-help) and the
+    Criminal Case Report Help
+    (https://echo.epa.gov/help/reports/criminal-case-report-help) for additional
+    information\ 
 
     on then data returned from these two services.  \ 
 
     \\
 
-    Additional ECHO Resources:   <a href=\"https://echo.epa.gov/tools/web-services\">Web Services</a>, <a href=\"https://echo.epa.gov/resources/echo-data/about-the-data\">About ECHO's Data</a>, <a href=\"https://echo.epa.gov/tools/data-downloads\">Data Downloads</a>
+    Additional ECHO Resources:   <a
+    href=\"https://echo.epa.gov/tools/web-services\">Web Services</a>, <a
+    href=\"https://echo.epa.gov/resources/echo-data/about-the-data\">About
+    ECHO's Data</a>, <a href=\"https://echo.epa.gov/tools/data-downloads\">Data
+    Downloads</a>
 
     \ "
   license:
     name: This page was built with the Swagger API.
     url: https://swagger.io
-  title: U.S. EPA Enforcement and Compliance History Online (ECHO) - Enforcement Case Search
+  title: U.S. EPA Enforcement and Compliance History Online (ECHO) - Enforcement
+    Case Search
   version: 1.0.0
   x-apisguru-categories:
     - open_data
@@ -66,37 +95,48 @@ produces:
   - application/xml
 parameters:
   f.c1_lat:
-    description: Latitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: Latitude of 1st corner of box that bounds the resulting facilities.
+      The latitude and longitude of both corners of the bounding box must be
+      provided.
     in: formData
     name: c1_lat
     required: false
     type: number
   f.c1_long:
-    description: Longitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: Longitude of 1st corner of box that bounds the resulting
+      facilities. The latitude and longitude of both corners of the bounding box
+      must be provided.
     in: formData
     name: c1_long
     required: false
     type: number
   f.c2_lat:
-    description: Latitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: Latitude of 2nd corner of box that bounds the resulting facilities.
+      The latitude and longitude of both corners of the bounding box must be
+      provided.
     in: formData
     name: c2_lat
     required: false
     type: number
   f.c2_long:
-    description: Longitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: Longitude of 2nd corner of box that bounds the resulting
+      facilities. The latitude and longitude of both corners of the bounding box
+      must be provided.
     in: formData
     name: c2_long
     required: false
     type: number
   f.callback:
-    description: JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
+    description: JSONP Callback.  For use with JSONP and GEOJSONP output
+      only.  Enter a name of the function in which to wrap the JSON response.
     in: formData
     name: callback
     required: false
     type: string
   f.descending:
-    description: Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.
+    description: Output Sort Column Descending Flag.  Enter Y to column identified
+      in the newsort parameter descending.  Enter N to use ascending sort order.
+      Used only when newsort parameter is populated.
     enum:
       - Y
       - N
@@ -105,7 +145,9 @@ parameters:
     required: false
     type: string
   f.maplist:
-    description: Map List Flag.  Provide a Y to return mappable coordinates representing the full geographic extent of the queryset (all facilities that met the selection criteria).
+    description: Map List Flag.  Provide a Y to return mappable coordinates
+      representing the full geographic extent of the queryset (all facilities
+      that met the selection criteria).
     enum:
       - Y
       - N
@@ -115,56 +157,70 @@ parameters:
     type: string
   f.mapset:
     default: "1400"
-    description: Identifies the maxium number of case facilities to return from the case_rest_services.get_case_info query.
+    description: Identifies the maxium number of case facilities to return from the
+      case_rest_services.get_case_info query.
     in: formData
     name: mapset
     required: false
     type: string
   f.newsort:
-    description: Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column.
+    description: Output Sort Column.  Enter the number of the column on which the
+      data will be sorted. If unpopulated results will sort on the first column.
     in: formData
     name: newsort
     required: false
     type: number
   f.p_activity_contact:
-    description: Activity Contact Last Name Filter.  Enter a single last name or partial last name to filter results.  Use "%" as a wild-card for advanced searching.
+    description: Activity Contact Last Name Filter.  Enter a single last name or
+      partial last name to filter results.  Use "%" as a wild-card for advanced
+      searching.
     in: formData
     name: p_activity_contact
     required: false
     type: string
   f.p_activity_number:
-    description: Case Activity Number Filter.  Enter a single case activity number to filter results.
+    description: Case Activity Number Filter.  Enter a single case activity number
+      to filter results.
     in: formData
     name: p_activity_number
     required: false
     type: string
   f.p_c1lat:
-    description: In decimal degrees.  Latitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: In decimal degrees.  Latitude of 1st corner of box that bounds the
+      resulting facilities. The latitude and longitude of both corners of the
+      bounding box must be provided.
     in: formData
     name: p_c1lat
     required: false
     type: number
   f.p_c1lon:
-    description: In decimal degrees.  Longitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: In decimal degrees.  Longitude of 1st corner of box that bounds the
+      resulting facilities. The latitude and longitude of both corners of the
+      bounding box must be provided.
     in: formData
     name: p_c1lon
     required: false
     type: number
   f.p_c2lat:
-    description: In decimal degrees.  Latitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: In decimal degrees.  Latitude of 2nd corner of box that bounds the
+      resulting facilities. The latitude and longitude of both corners of the
+      bounding box must be provided.
     in: formData
     name: p_c2lat
     required: false
     type: number
   f.p_c2lon:
-    description: In decimal degrees.  Longitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: In decimal degrees.  Longitude of 2nd corner of box that bounds the
+      resulting facilities. The latitude and longitude of both corners of the
+      bounding box must be provided.
     in: formData
     name: p_c2lon
     required: false
     type: number
   f.p_case_category:
     description: >-
-      Case Category Filter.  Enter one or more case category codes to filter results.   Provide multiple values as a comma-delimited list.
+      Case Category Filter.  Enter one or more case category codes to
+      filter results.   Provide multiple values as a comma-delimited list.
 
       - AFR = Administrative - Formal
 
@@ -176,11 +232,9 @@ parameters:
     required: false
     type: string
   f.p_case_lead:
-    description: >-
+    description: |-
       Case Lead Limiter.  Enter E or S to limit results.
-
       - E = EPA is the case lead.
-
       - S = The state is the case lead.
     enum:
       - E
@@ -190,31 +244,38 @@ parameters:
     required: false
     type: string
   f.p_case_number:
-    description: Case Number Filter.  Enter one or more case numbers to restrict results.  Provide multiple values as a comma-delimited list.
+    description: Case Number Filter.  Enter one or more case numbers to restrict
+      results.  Provide multiple values as a comma-delimited list.
     in: formData
     name: p_case_number
     required: false
     type: string
   f.p_case_sens_flg:
-    description: Case Sensitive Data Flag.  Enter a Y or N to include or exclude cases with sensitive data.
+    description: Case Sensitive Data Flag.  Enter a Y or N to include or exclude
+      cases with sensitive data.
     in: formData
     name: p_case_sens_flg
     required: false
     type: string
   f.p_case_status:
-    description: Case Status Code Filter.  Enter one or more case status codes to limit results.  Provide multiple values as a comma-delimited list.
+    description: Case Status Code Filter.  Enter one or more case status codes to
+      limit results.  Provide multiple values as a comma-delimited list.
     in: formData
     name: p_case_status
     required: false
     type: string
   f.p_case_summary:
-    description: Case Summary Search Limiter.  Enter a single case summary to limit results.  This parameter accepts partial codes and allows for advanced search modifiers.
+    description: Case Summary Search Limiter.  Enter a single case summary to limit
+      results.  This parameter accepts partial codes and allows for advanced
+      search modifiers.
     in: formData
     name: p_case_summary
     required: false
     type: string
   f.p_case_summary_type:
-    description: Identifies how the the search terms enterened in p_case_summary are searched.  Valid values are ALL (Default), WITHIN, and CONTAINS.  Must be used with p_case_summary.
+    description: Identifies how the the search terms enterened in p_case_summary are
+      searched.  Valid values are ALL (Default), WITHIN, and CONTAINS.  Must be
+      used with p_case_summary.
     enum:
       - ALL
       - CONTAINS
@@ -224,13 +285,10 @@ parameters:
     required: false
     type: string
   f.p_civil_criminal_indicator:
-    description: >-
+    description: |-
       Civil/Criminal Case Limiter.  Provide a keyword to limit results.
-
       - ANY = return both civil and criminal cases.
-
       - CI = return only civil cases.
-
       - CR = return only criminal cases.
     enum:
       - CI
@@ -242,7 +300,8 @@ parameters:
     type: string
   f.p_comp_act_val:
     description: >-
-      Compliance Action Cost Limiter. Enter a keyword value to limit results to cases with given compliance cost amounts.
+      Compliance Action Cost Limiter. Enter a keyword value to limit
+      results to cases with given compliance cost amounts.
 
       - ANY = Cases with any compliance cost amount greater than zero.
 
@@ -261,14 +320,17 @@ parameters:
     required: false
     type: string
   f.p_complying_actions:
-    description: Complying Actions Type Code Limiter.  Enter one or more complying action codes to restrict results.  Provide multiple values as a comma-delimited list.
+    description: Complying Actions Type Code Limiter.  Enter one or more complying
+      action codes to restrict results.  Provide multiple values as a
+      comma-delimited list.
     in: formData
     name: p_complying_actions
     required: false
     type: string
   f.p_cost_recovery:
     description: >-
-      Cost Recovery Awarded Amount Limiter.  Enter a keyword value to limit results to cases with given cost recovery amounts.
+      Cost Recovery Awarded Amount Limiter.  Enter a keyword value to
+      limit results to cases with given cost recovery amounts.
 
       - ANY = Cases with any cost recovery amount greater than zero.
 
@@ -285,67 +347,82 @@ parameters:
     required: false
     type: string
   f.p_cp_citation:
-    description: Law Section Code Filter Alternative. Enter a single law section code to limit results.  This parameter accepts partial codes and allows for advanced search modifiers.
+    description: Law Section Code Filter Alternative. Enter a single law section
+      code to limit results.  This parameter accepts partial codes and allows
+      for advanced search modifiers.
     in: formData
     name: p_cp_citation
     required: false
     type: string
   f.p_district:
-    description: Case Location Court District Limiter.  Enter a single state court district code to limit results.
+    description: Case Location Court District Limiter.  Enter a single state court
+      district code to limit results.
     in: formData
     name: p_district
     required: false
     type: string
   f.p_docket_number:
-    description: DOJ Docket Number Filter.  Enter a single docket number or partial docket number to restrict results.  Use "%" as a wildcard for more complex filtering.
+    description: DOJ Docket Number Filter.  Enter a single docket number or partial
+      docket number to restrict results.  Use "%" as a wildcard for more complex
+      filtering.
     in: formData
     name: p_docket_number
     required: false
     type: string
   f.p_enf_program:
-    description: "Enforcement Program Code Limiter.  Enter one or more enforcement program codes to limit results.  Provide multiple values as a comma-delimited list.  "
+    description: "Enforcement Program Code Limiter.  Enter one or more enforcement
+      program codes to limit results.  Provide multiple values as a
+      comma-delimited list.  "
     in: formData
     name: p_enf_program
     required: false
     type: string
   f.p_enf_type:
-    description: Case Enforcement Type Filter. Enter one or more case enforcement type codes to limit results.  Provide multiple values as a comma-delimited list.
+    description: Case Enforcement Type Filter. Enter one or more case enforcement
+      type codes to limit results.  Provide multiple values as a comma-delimited
+      list.
     in: formData
     name: p_enf_type
     required: false
     type: string
   f.p_entered_date:
-    description: Settlement Entered Date Limiter.  Enter a single settlement entered date in MM/DD/YYYY format to limit results.
+    description: Settlement Entered Date Limiter.  Enter a single settlement entered
+      date in MM/DD/YYYY format to limit results.
     in: formData
     name: p_entered_date
     required: false
     type: string
   f.p_fac_city:
-    description: Case Facility City Limiter.  Enter a single complete city name to filter cases by facility location city.
+    description: Case Facility City Limiter.  Enter a single complete city name to
+      filter cases by facility location city.
     in: formData
     name: p_fac_city
     required: false
     type: string
   f.p_fac_county:
-    description: Case Facility County Limiter.  Enter a single complete county name to filter cases by facility location county name.
+    description: Case Facility County Limiter.  Enter a single complete county name
+      to filter cases by facility location county name.
     in: formData
     name: p_fac_county
     required: false
     type: string
   f.p_fac_zip:
-    description: Case Facility ZIP Code Limiter.  Enter a single 5-digit zip code to filter cases by facility location zip code.
+    description: Case Facility ZIP Code Limiter.  Enter a single 5-digit zip code to
+      filter cases by facility location zip code.
     in: formData
     name: p_fac_zip
     required: false
     type: string
   f.p_facility_id:
-    description: Case Facility Registration Identifier Limiter.  Enter a single complete facility identifier to limit results.
+    description: Case Facility Registration Identifier Limiter.  Enter a single
+      complete facility identifier to limit results.
     in: formData
     name: p_facility_id
     required: false
     type: string
   f.p_fed_case:
-    description: Federal Facility Involvement Flag.  Enter a Y or N to include or exclude cases involving federal facilities.
+    description: Federal Facility Involvement Flag.  Enter a Y or N to include or
+      exclude cases involving federal facilities.
     enum:
       - Y
       - N
@@ -354,14 +431,16 @@ parameters:
     required: false
     type: string
   f.p_fed_indicator:
-    description: Federal Facility/Cross Media Flag.  Enter Y or N to limit results to cases with federal facility cross media.
+    description: Federal Facility/Cross Media Flag.  Enter Y or N to limit results
+      to cases with federal facility cross media.
     in: formData
     name: p_fed_indicator
     required: false
     type: string
   f.p_fed_penalty:
     description: >-
-      Federal Penalty Assessed Amount Filter.  Provide one of the following keywords to restrict results.
+      Federal Penalty Assessed Amount Filter.  Provide one of the
+      following keywords to restrict results.
 
       - ANY = cases with any penalty amount.
 
@@ -393,7 +472,8 @@ parameters:
     type: string
   f.p_fntype:
     description: >-
-      Controls type of text search performed on facility name with parameter p_fn.
+      Controls type of text search performed on facility name with
+      parameter p_fn.
 
       - EXACT = Find facilities having the exact provided name(s).
 
@@ -412,7 +492,10 @@ parameters:
     required: false
     type: string
   f.p_from_date:
-    description: Administrative or Judicial Milestone Date Range Start Limiter.  Enter a date value in MM/DD/YYYY format to limit milestone results.  Parameter p_to_date must also be populated when using this parameter option.
+    description: Administrative or Judicial Milestone Date Range Start
+      Limiter.  Enter a date value in MM/DD/YYYY format to limit milestone
+      results.  Parameter p_to_date must also be populated when using this
+      parameter option.
     in: formData
     name: p_from_date
     required: false
@@ -429,25 +512,31 @@ parameters:
     required: false
     type: string
   f.p_lodged_date:
-    description: Settlement Lodged Date Limiter.  Enter a single settlement lodged date in MM/DD/YYYY format to limit results.
+    description: Settlement Lodged Date Limiter.  Enter a single settlement lodged
+      date in MM/DD/YYYY format to limit results.
     in: formData
     name: p_lodged_date
     required: false
     type: string
   f.p_milestone:
-    description: Administrative or Judicial Milestone Filter.  Enter one or milestone values to restrict results.  Provide multiple values as a comma-delimited list.
+    description: Administrative or Judicial Milestone Filter.  Enter one or
+      milestone values to restrict results.  Provide multiple values as a
+      comma-delimited list.
     in: formData
     name: p_milestone
     required: false
     type: string
   f.p_milestone_fy:
-    description: Administrative or Judicial Milestone Fiscal Year Limiter.  Enter a single fiscal year value to limit milestone searches to a given fiscal year.
+    description: Administrative or Judicial Milestone Fiscal Year Limiter.  Enter a
+      single fiscal year value to limit milestone searches to a given fiscal
+      year.
     in: formData
     name: p_milestone_fy
     required: false
     type: string
   f.p_multimedia:
-    description: Enforcement Multimedia Case Flag.  Enter Y or N to include or exclude multimedia cases.
+    description: Enforcement Multimedia Case Flag.  Enter Y or N to include or
+      exclude multimedia cases.
     enum:
       - Y
       - N
@@ -456,13 +545,17 @@ parameters:
     required: false
     type: string
   f.p_naics:
-    description: North American Industry Classification System Filter. Enter two to six digits to filter results to facilities having matching NAICS codes.  Digits less than six will match to all codes beginning with the provided values.
+    description: North American Industry Classification System Filter. Enter two to
+      six digits to filter results to facilities having matching NAICS
+      codes.  Digits less than six will match to all codes beginning with the
+      provided values.
     in: formData
     name: p_naics
     required: false
     type: string
   f.p_naics_frs_flg:
-    description: Case Location Extended FRS NAICS Search Flag.  Enter Y to expand NAICS search to include Federal Registry Service datasets.
+    description: Case Location Extended FRS NAICS Search Flag.  Enter Y to expand
+      NAICS search to include Federal Registry Service datasets.
     enum:
       - Y
       - N
@@ -471,7 +564,8 @@ parameters:
     required: false
     type: string
   f.p_naics_primary_flg:
-    description: Case Location Primary NAICS Flag.  Enter Y to limit NAICS search results to primary NAICS codes only.
+    description: Case Location Primary NAICS Flag.  Enter Y to limit NAICS search
+      results to primary NAICS codes only.
     enum:
       - Y
       - N
@@ -480,7 +574,9 @@ parameters:
     required: false
     type: string
   f.p_name:
-    description: Case Name Filter.  Enter one or more case names to restrict results.  Provide multiple values as a comma-delimited list.  When using this parameter the p_name_type parameter is required.
+    description: Case Name Filter.  Enter one or more case names to restrict
+      results.  Provide multiple values as a comma-delimited list.  When using
+      this parameter the p_name_type parameter is required.
     in: formData
     name: p_name
     required: false
@@ -492,13 +588,15 @@ parameters:
     required: false
     type: string
   f.p_ocmap_fy:
-    description: Fiscal Year to select cases that are displayed in the Office of Complicance Fiscal Year Map Services
+    description: Fiscal Year to select cases that are displayed in the Office of
+      Complicance Fiscal Year Map Services
     in: formData
     name: p_ocmap_fy
     required: false
     type: string
   f.p_oeca_core:
-    description: OECA Core Program Flag.  Enter Y or N to include or exclude core program cases.
+    description: OECA Core Program Flag.  Enter Y or N to include or exclude core
+      program cases.
     enum:
       - Y
       - N
@@ -507,19 +605,24 @@ parameters:
     required: false
     type: string
   f.p_pretty_print:
-    description: Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.
+    description: Optional flag to request GeoJSON formatted results to be pretty
+      printed.  Only provide a numeric value when the output needs to be human
+      readable as pretty printing has a performance cost.
     in: formData
     name: p_pretty_print
     required: false
     type: number
   f.p_priority_area:
-    description: Case Priority Area Filter.  Enter one or more case priority areas to limit results.  Provide multiple values as a comma-delimited list.
+    description: Case Priority Area Filter.  Enter one or more case priority areas
+      to limit results.  Provide multiple values as a comma-delimited list.
     in: formData
     name: p_priority_area
     required: false
     type: string
   f.p_priority_area_desc:
-    description: Case Priority Area Description Filter.  Enter a single case priority area description or partial case priority area description to limit results.  Use "%" as a wild-card match for more complex searches.
+    description: Case Priority Area Description Filter.  Enter a single case
+      priority area description or partial case priority area description to
+      limit results.  Use "%" as a wild-card match for more complex searches.
     in: formData
     name: p_priority_area_desc
     required: false
@@ -531,7 +634,8 @@ parameters:
     required: false
     type: string
   f.p_rank_order:
-    description: Law Status Rank Order Limiter.  Enter a single integer rank order to limit results.
+    description: Law Status Rank Order Limiter.  Enter a single integer rank order
+      to limit results.
     enum:
       - "1"
       - "0"
@@ -540,7 +644,8 @@ parameters:
     required: false
     type: string
   f.p_region:
-    description: EPA Region Filter. Provide a single value of 01 thru 10 to restrict results to a single EPA region.
+    description: EPA Region Filter. Provide a single value of 01 thru 10 to restrict
+      results to a single EPA region.
     enum:
       - "01"
       - "02"
@@ -557,26 +662,31 @@ parameters:
     required: false
     type: string
   f.p_role:
-    description: Activity Contact Role Code Filter.  Enter a single role code to restrict results.
+    description: Activity Contact Role Code Filter.  Enter a single role code to
+      restrict results.
     in: formData
     name: p_role
     required: false
     type: string
   f.p_section:
-    description: Law Section Code Filter. Enter one or more law section codes to limit results.  Provide multiple values as a comma-delimited list.
+    description: Law Section Code Filter. Enter one or more law section codes to
+      limit results.  Provide multiple values as a comma-delimited list.
     in: formData
     name: p_section
     required: false
     type: string
   f.p_sep_cats:
-    description: Supplemental Environmental Projects Activity Category Code Limiter.  Provide one or more SEP activity category codes to limit results.  Provide multiple values as a comma-delimited list.
+    description: Supplemental Environmental Projects Activity Category Code
+      Limiter.  Provide one or more SEP activity category codes to limit
+      results.  Provide multiple values as a comma-delimited list.
     in: formData
     name: p_sep_cats
     required: false
     type: string
   f.p_sep_val:
     description: >-
-      Supplemental Environmental Projects Activity Value Limiter.  Provide a keyword to limit results.
+      Supplemental Environmental Projects Activity Value
+      Limiter.  Provide a keyword to limit results.
 
       - ANY = return cases with any SEP activity amount.
 
@@ -604,14 +714,16 @@ parameters:
     required: false
     type: string
   f.p_sic:
-    description: Standard Industrial Classification (SIC) Code Filter.  Enter a single 4-digit SIC Code to filter results.
+    description: Standard Industrial Classification (SIC) Code Filter.  Enter a
+      single 4-digit SIC Code to filter results.
     in: formData
     name: p_sic
     required: false
     type: string
   f.p_sic_ao_naics:
     description: >-
-      Case Location SIC/NAICS And/Or Modifier.  Enter either AND or OR to govern the search logic of SIC and NAICS codes.
+      Case Location SIC/NAICS And/Or Modifier.  Enter either AND or OR to
+      govern the search logic of SIC and NAICS codes.
 
       - AND = Search will return results having both the provided SIC code(s) and provided NAICS code(s).
 
@@ -624,7 +736,8 @@ parameters:
     required: false
     type: string
   f.p_sic_frs_flg:
-    description: Case Location Extended FRS SIC Search Flag.  Enter Y to expand SIC search to include Federal Registry Service datasets.
+    description: Case Location Extended FRS SIC Search Flag.  Enter Y to expand SIC
+      search to include Federal Registry Service datasets.
     enum:
       - Y
       - N
@@ -633,7 +746,8 @@ parameters:
     required: false
     type: string
   f.p_sic_primary_flg:
-    description: Case Location Primary SIC Flag.  Enter Y to limit SIC search results to primary SIC codes only.
+    description: Case Location Primary SIC Flag.  Enter Y to limit SIC search
+      results to primary SIC codes only.
     enum:
       - Y
       - N
@@ -642,20 +756,25 @@ parameters:
     required: false
     type: string
   f.p_state:
-    description: Case Location State Filter.  Enter one or more state USPS postal codes to filter results.  Provide multiple values as a comma-delimited list.
+    description: Case Location State Filter.  Enter one or more state USPS postal
+      codes to filter results.  Provide multiple values as a comma-delimited
+      list.
     in: formData
     name: p_state
     required: false
     type: string
   f.p_to_date:
-    description: Administrative or Judicial Milestone Date Range End Limiter.  Enter a date value in MM/DD/YYYY format to limit milestone results.  Parameter p_from_date must also be populated when using this parameter option.
+    description: Administrative or Judicial Milestone Date Range End Limiter.  Enter
+      a date value in MM/DD/YYYY format to limit milestone results.  Parameter
+      p_from_date must also be populated when using this parameter option.
     in: formData
     name: p_to_date
     required: false
     type: string
   f.p_total_comp_act_val:
     description: >-
-      Total Compliance Action Amount Limiter.  Enter a keyword value to limit results to cases with given total compliance action amounts.
+      Total Compliance Action Amount Limiter.  Enter a keyword value to
+      limit results to cases with given total compliance action amounts.
 
       - ANY = Cases with any total compliance action amount greater than zero.
 
@@ -668,7 +787,8 @@ parameters:
     type: string
   f.p_total_cost_recovery:
     description: >-
-      Total Cost Recovery Amount Limiter.  Enter a keyword value to limit results to cases with given cost recovery amounts.
+      Total Cost Recovery Amount Limiter.  Enter a keyword value to limit
+      results to cases with given cost recovery amounts.
 
       - ANY = Cases with any cost recovery amount greater than zero.
 
@@ -681,7 +801,8 @@ parameters:
     type: string
   f.p_total_fed_penalty:
     description: >-
-      Total Federal Penalty Limiter.  Enter a keyword value to limit results to cases with given total federal penalties.
+      Total Federal Penalty Limiter.  Enter a keyword value to limit
+      results to cases with given total federal penalties.
 
       - ANY = Cases with any federal penalty greater than zero.
 
@@ -694,7 +815,8 @@ parameters:
     type: string
   f.p_total_sep_val:
     description: >-
-      Supplemental Environmental Projects Total Value Limiter.  Provide a keyword to limit results.
+      Supplemental Environmental Projects Total Value Limiter.  Provide a
+      keyword to limit results.
 
       - ANY = return cases with any SEP total amount.
 
@@ -714,7 +836,8 @@ parameters:
     required: false
     type: string
   f.p_tribal:
-    description: Case Location Tribal Land Flag.  Enter Y or N to include or disallow cases on tribal land.
+    description: Case Location Tribal Land Flag.  Enter Y or N to include or
+      disallow cases on tribal land.
     enum:
       - Y
       - N
@@ -723,7 +846,8 @@ parameters:
     required: false
     type: string
   f.p_usmex:
-    description: US-Mexico Border Flag.  Enter Y/N to restrict searches to facilities located within 100KM of the border.
+    description: US-Mexico Border Flag.  Enter Y/N to restrict searches to
+      facilities located within 100KM of the border.
     enum:
       - Y
       - N
@@ -732,26 +856,32 @@ parameters:
     required: false
     type: string
   f.p_violation:
-    description: Violation Type Code Filter.  Enter one or more violation type codes to limit results.  Provide multiple values as a comma-delimited list.
+    description: Violation Type Code Filter.  Enter one or more violation type codes
+      to limit results.  Provide multiple values as a comma-delimited list.
     in: formData
     name: p_violation
     required: false
     type: string
   f.p_voluntary:
-    description: Voluntary Self Disclosure Flag.  Enter Y or N to include or exclude cases results having voluntary disclosure.
+    description: Voluntary Self Disclosure Flag.  Enter Y or N to include or exclude
+      cases results having voluntary disclosure.
     in: formData
     name: p_voluntary
     required: false
     type: string
   f.pageno:
     default: 1
-    description: Indicates the number of the page to display. It is used only when the results are paginated.
+    description: Indicates the number of the page to display. It is used only when
+      the results are paginated.
     in: formData
     name: pageno
     required: false
     type: number
   f.qcolumns:
-    description: Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
+    description: Used to customize service output.  A list of comma-separated column
+      IDs of output objects that will be returned in the service query object or
+      download.  Use the metadata service endpoint for a complete list of Ids
+      and definitions.
     in: formData
     name: qcolumns
     required: false
@@ -763,13 +893,15 @@ parameters:
     required: true
     type: string
   f.queryset:
-    description: Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000.
+    description: Query Limiter.  Enter a value to limit the number of records
+      returned for each query. Value cannot exceed 70,000.
     in: formData
     name: queryset
     required: false
     type: number
   f.responseset:
-    description: Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000.
+    description: Response Set Limiter. Enter a value to limit the number of records
+      per page. Value cannot exceed 1,000.
     in: formData
     name: responseset
     required: false
@@ -811,37 +943,48 @@ parameters:
     required: false
     type: string
   q.c1_lat:
-    description: Latitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: Latitude of 1st corner of box that bounds the resulting facilities.
+      The latitude and longitude of both corners of the bounding box must be
+      provided.
     in: query
     name: c1_lat
     required: false
     type: number
   q.c1_long:
-    description: Longitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: Longitude of 1st corner of box that bounds the resulting
+      facilities. The latitude and longitude of both corners of the bounding box
+      must be provided.
     in: query
     name: c1_long
     required: false
     type: number
   q.c2_lat:
-    description: Latitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: Latitude of 2nd corner of box that bounds the resulting facilities.
+      The latitude and longitude of both corners of the bounding box must be
+      provided.
     in: query
     name: c2_lat
     required: false
     type: number
   q.c2_long:
-    description: Longitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: Longitude of 2nd corner of box that bounds the resulting
+      facilities. The latitude and longitude of both corners of the bounding box
+      must be provided.
     in: query
     name: c2_long
     required: false
     type: number
   q.callback:
-    description: JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
+    description: JSONP Callback.  For use with JSONP and GEOJSONP output
+      only.  Enter a name of the function in which to wrap the JSON response.
     in: query
     name: callback
     required: false
     type: string
   q.descending:
-    description: Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.
+    description: Output Sort Column Descending Flag.  Enter Y to column identified
+      in the newsort parameter descending.  Enter N to use ascending sort order.
+      Used only when newsort parameter is populated.
     enum:
       - Y
       - N
@@ -850,7 +993,9 @@ parameters:
     required: false
     type: string
   q.maplist:
-    description: Map List Flag.  Provide a Y to return mappable coordinates representing the full geographic extent of the queryset (all facilities that met the selection criteria).
+    description: Map List Flag.  Provide a Y to return mappable coordinates
+      representing the full geographic extent of the queryset (all facilities
+      that met the selection criteria).
     enum:
       - Y
       - N
@@ -860,56 +1005,70 @@ parameters:
     type: string
   q.mapset:
     default: "1400"
-    description: Identifies the maxium number of case facilities to return from the case_rest_services.get_case_info query.
+    description: Identifies the maxium number of case facilities to return from the
+      case_rest_services.get_case_info query.
     in: query
     name: mapset
     required: false
     type: string
   q.newsort:
-    description: Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column.
+    description: Output Sort Column.  Enter the number of the column on which the
+      data will be sorted. If unpopulated results will sort on the first column.
     in: query
     name: newsort
     required: false
     type: number
   q.p_activity_contact:
-    description: Activity Contact Last Name Filter.  Enter a single last name or partial last name to filter results.  Use "%" as a wild-card for advanced searching.
+    description: Activity Contact Last Name Filter.  Enter a single last name or
+      partial last name to filter results.  Use "%" as a wild-card for advanced
+      searching.
     in: query
     name: p_activity_contact
     required: false
     type: string
   q.p_activity_number:
-    description: Case Activity Number Filter.  Enter a single case activity number to filter results.
+    description: Case Activity Number Filter.  Enter a single case activity number
+      to filter results.
     in: query
     name: p_activity_number
     required: false
     type: string
   q.p_c1lat:
-    description: In decimal degrees.  Latitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: In decimal degrees.  Latitude of 1st corner of box that bounds the
+      resulting facilities. The latitude and longitude of both corners of the
+      bounding box must be provided.
     in: query
     name: p_c1lat
     required: false
     type: number
   q.p_c1lon:
-    description: In decimal degrees.  Longitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: In decimal degrees.  Longitude of 1st corner of box that bounds the
+      resulting facilities. The latitude and longitude of both corners of the
+      bounding box must be provided.
     in: query
     name: p_c1lon
     required: false
     type: number
   q.p_c2lat:
-    description: In decimal degrees.  Latitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: In decimal degrees.  Latitude of 2nd corner of box that bounds the
+      resulting facilities. The latitude and longitude of both corners of the
+      bounding box must be provided.
     in: query
     name: p_c2lat
     required: false
     type: number
   q.p_c2lon:
-    description: In decimal degrees.  Longitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.
+    description: In decimal degrees.  Longitude of 2nd corner of box that bounds the
+      resulting facilities. The latitude and longitude of both corners of the
+      bounding box must be provided.
     in: query
     name: p_c2lon
     required: false
     type: number
   q.p_case_category:
     description: >-
-      Case Category Filter.  Enter one or more case category codes to filter results.   Provide multiple values as a comma-delimited list.
+      Case Category Filter.  Enter one or more case category codes to
+      filter results.   Provide multiple values as a comma-delimited list.
 
       - AFR = Administrative - Formal
 
@@ -921,11 +1080,9 @@ parameters:
     required: false
     type: string
   q.p_case_lead:
-    description: >-
+    description: |-
       Case Lead Limiter.  Enter E or S to limit results.
-
       - E = EPA is the case lead.
-
       - S = The state is the case lead.
     enum:
       - E
@@ -935,31 +1092,38 @@ parameters:
     required: false
     type: string
   q.p_case_number:
-    description: Case Number Filter.  Enter one or more case numbers to restrict results.  Provide multiple values as a comma-delimited list.
+    description: Case Number Filter.  Enter one or more case numbers to restrict
+      results.  Provide multiple values as a comma-delimited list.
     in: query
     name: p_case_number
     required: false
     type: string
   q.p_case_sens_flg:
-    description: Case Sensitive Data Flag.  Enter a Y or N to include or exclude cases with sensitive data.
+    description: Case Sensitive Data Flag.  Enter a Y or N to include or exclude
+      cases with sensitive data.
     in: query
     name: p_case_sens_flg
     required: false
     type: string
   q.p_case_status:
-    description: Case Status Code Filter.  Enter one or more case status codes to limit results.  Provide multiple values as a comma-delimited list.
+    description: Case Status Code Filter.  Enter one or more case status codes to
+      limit results.  Provide multiple values as a comma-delimited list.
     in: query
     name: p_case_status
     required: false
     type: string
   q.p_case_summary:
-    description: Case Summary Search Limiter.  Enter a single case summary to limit results.  This parameter accepts partial codes and allows for advanced search modifiers.
+    description: Case Summary Search Limiter.  Enter a single case summary to limit
+      results.  This parameter accepts partial codes and allows for advanced
+      search modifiers.
     in: query
     name: p_case_summary
     required: false
     type: string
   q.p_case_summary_type:
-    description: Identifies how the the search terms enterened in p_case_summary are searched.  Valid values are ALL (Default), WITHIN, and CONTAINS.  Must be used with p_case_summary.
+    description: Identifies how the the search terms enterened in p_case_summary are
+      searched.  Valid values are ALL (Default), WITHIN, and CONTAINS.  Must be
+      used with p_case_summary.
     enum:
       - ALL
       - CONTAINS
@@ -969,13 +1133,10 @@ parameters:
     required: false
     type: string
   q.p_civil_criminal_indicator:
-    description: >-
+    description: |-
       Civil/Criminal Case Limiter.  Provide a keyword to limit results.
-
       - ANY = return both civil and criminal cases.
-
       - CI = return only civil cases.
-
       - CR = return only criminal cases.
     enum:
       - CI
@@ -987,7 +1148,8 @@ parameters:
     type: string
   q.p_comp_act_val:
     description: >-
-      Compliance Action Cost Limiter. Enter a keyword value to limit results to cases with given compliance cost amounts.
+      Compliance Action Cost Limiter. Enter a keyword value to limit
+      results to cases with given compliance cost amounts.
 
       - ANY = Cases with any compliance cost amount greater than zero.
 
@@ -1006,14 +1168,17 @@ parameters:
     required: false
     type: string
   q.p_complying_actions:
-    description: Complying Actions Type Code Limiter.  Enter one or more complying action codes to restrict results.  Provide multiple values as a comma-delimited list.
+    description: Complying Actions Type Code Limiter.  Enter one or more complying
+      action codes to restrict results.  Provide multiple values as a
+      comma-delimited list.
     in: query
     name: p_complying_actions
     required: false
     type: string
   q.p_cost_recovery:
     description: >-
-      Cost Recovery Awarded Amount Limiter.  Enter a keyword value to limit results to cases with given cost recovery amounts.
+      Cost Recovery Awarded Amount Limiter.  Enter a keyword value to
+      limit results to cases with given cost recovery amounts.
 
       - ANY = Cases with any cost recovery amount greater than zero.
 
@@ -1030,67 +1195,82 @@ parameters:
     required: false
     type: string
   q.p_cp_citation:
-    description: Law Section Code Filter Alternative. Enter a single law section code to limit results.  This parameter accepts partial codes and allows for advanced search modifiers.
+    description: Law Section Code Filter Alternative. Enter a single law section
+      code to limit results.  This parameter accepts partial codes and allows
+      for advanced search modifiers.
     in: query
     name: p_cp_citation
     required: false
     type: string
   q.p_district:
-    description: Case Location Court District Limiter.  Enter a single state court district code to limit results.
+    description: Case Location Court District Limiter.  Enter a single state court
+      district code to limit results.
     in: query
     name: p_district
     required: false
     type: string
   q.p_docket_number:
-    description: DOJ Docket Number Filter.  Enter a single docket number or partial docket number to restrict results.  Use "%" as a wildcard for more complex filtering.
+    description: DOJ Docket Number Filter.  Enter a single docket number or partial
+      docket number to restrict results.  Use "%" as a wildcard for more complex
+      filtering.
     in: query
     name: p_docket_number
     required: false
     type: string
   q.p_enf_program:
-    description: "Enforcement Program Code Limiter.  Enter one or more enforcement program codes to limit results.  Provide multiple values as a comma-delimited list.  "
+    description: "Enforcement Program Code Limiter.  Enter one or more enforcement
+      program codes to limit results.  Provide multiple values as a
+      comma-delimited list.  "
     in: query
     name: p_enf_program
     required: false
     type: string
   q.p_enf_type:
-    description: Case Enforcement Type Filter. Enter one or more case enforcement type codes to limit results.  Provide multiple values as a comma-delimited list.
+    description: Case Enforcement Type Filter. Enter one or more case enforcement
+      type codes to limit results.  Provide multiple values as a comma-delimited
+      list.
     in: query
     name: p_enf_type
     required: false
     type: string
   q.p_entered_date:
-    description: Settlement Entered Date Limiter.  Enter a single settlement entered date in MM/DD/YYYY format to limit results.
+    description: Settlement Entered Date Limiter.  Enter a single settlement entered
+      date in MM/DD/YYYY format to limit results.
     in: query
     name: p_entered_date
     required: false
     type: string
   q.p_fac_city:
-    description: Case Facility City Limiter.  Enter a single complete city name to filter cases by facility location city.
+    description: Case Facility City Limiter.  Enter a single complete city name to
+      filter cases by facility location city.
     in: query
     name: p_fac_city
     required: false
     type: string
   q.p_fac_county:
-    description: Case Facility County Limiter.  Enter a single complete county name to filter cases by facility location county name.
+    description: Case Facility County Limiter.  Enter a single complete county name
+      to filter cases by facility location county name.
     in: query
     name: p_fac_county
     required: false
     type: string
   q.p_fac_zip:
-    description: Case Facility ZIP Code Limiter.  Enter a single 5-digit zip code to filter cases by facility location zip code.
+    description: Case Facility ZIP Code Limiter.  Enter a single 5-digit zip code to
+      filter cases by facility location zip code.
     in: query
     name: p_fac_zip
     required: false
     type: string
   q.p_facility_id:
-    description: Case Facility Registration Identifier Limiter.  Enter a single complete facility identifier to limit results.
+    description: Case Facility Registration Identifier Limiter.  Enter a single
+      complete facility identifier to limit results.
     in: query
     name: p_facility_id
     required: false
     type: string
   q.p_fed_case:
-    description: Federal Facility Involvement Flag.  Enter a Y or N to include or exclude cases involving federal facilities.
+    description: Federal Facility Involvement Flag.  Enter a Y or N to include or
+      exclude cases involving federal facilities.
     enum:
       - Y
       - N
@@ -1099,14 +1279,16 @@ parameters:
     required: false
     type: string
   q.p_fed_indicator:
-    description: Federal Facility/Cross Media Flag.  Enter Y or N to limit results to cases with federal facility cross media.
+    description: Federal Facility/Cross Media Flag.  Enter Y or N to limit results
+      to cases with federal facility cross media.
     in: query
     name: p_fed_indicator
     required: false
     type: string
   q.p_fed_penalty:
     description: >-
-      Federal Penalty Assessed Amount Filter.  Provide one of the following keywords to restrict results.
+      Federal Penalty Assessed Amount Filter.  Provide one of the
+      following keywords to restrict results.
 
       - ANY = cases with any penalty amount.
 
@@ -1138,7 +1320,8 @@ parameters:
     type: string
   q.p_fntype:
     description: >-
-      Controls type of text search performed on facility name with parameter p_fn.
+      Controls type of text search performed on facility name with
+      parameter p_fn.
 
       - EXACT = Find facilities having the exact provided name(s).
 
@@ -1157,7 +1340,10 @@ parameters:
     required: false
     type: string
   q.p_from_date:
-    description: Administrative or Judicial Milestone Date Range Start Limiter.  Enter a date value in MM/DD/YYYY format to limit milestone results.  Parameter p_to_date must also be populated when using this parameter option.
+    description: Administrative or Judicial Milestone Date Range Start
+      Limiter.  Enter a date value in MM/DD/YYYY format to limit milestone
+      results.  Parameter p_to_date must also be populated when using this
+      parameter option.
     in: query
     name: p_from_date
     required: false
@@ -1174,25 +1360,31 @@ parameters:
     required: false
     type: string
   q.p_lodged_date:
-    description: Settlement Lodged Date Limiter.  Enter a single settlement lodged date in MM/DD/YYYY format to limit results.
+    description: Settlement Lodged Date Limiter.  Enter a single settlement lodged
+      date in MM/DD/YYYY format to limit results.
     in: query
     name: p_lodged_date
     required: false
     type: string
   q.p_milestone:
-    description: Administrative or Judicial Milestone Filter.  Enter one or milestone values to restrict results.  Provide multiple values as a comma-delimited list.
+    description: Administrative or Judicial Milestone Filter.  Enter one or
+      milestone values to restrict results.  Provide multiple values as a
+      comma-delimited list.
     in: query
     name: p_milestone
     required: false
     type: string
   q.p_milestone_fy:
-    description: Administrative or Judicial Milestone Fiscal Year Limiter.  Enter a single fiscal year value to limit milestone searches to a given fiscal year.
+    description: Administrative or Judicial Milestone Fiscal Year Limiter.  Enter a
+      single fiscal year value to limit milestone searches to a given fiscal
+      year.
     in: query
     name: p_milestone_fy
     required: false
     type: string
   q.p_multimedia:
-    description: Enforcement Multimedia Case Flag.  Enter Y or N to include or exclude multimedia cases.
+    description: Enforcement Multimedia Case Flag.  Enter Y or N to include or
+      exclude multimedia cases.
     enum:
       - Y
       - N
@@ -1201,13 +1393,17 @@ parameters:
     required: false
     type: string
   q.p_naics:
-    description: North American Industry Classification System Filter. Enter two to six digits to filter results to facilities having matching NAICS codes.  Digits less than six will match to all codes beginning with the provided values.
+    description: North American Industry Classification System Filter. Enter two to
+      six digits to filter results to facilities having matching NAICS
+      codes.  Digits less than six will match to all codes beginning with the
+      provided values.
     in: query
     name: p_naics
     required: false
     type: string
   q.p_naics_frs_flg:
-    description: Case Location Extended FRS NAICS Search Flag.  Enter Y to expand NAICS search to include Federal Registry Service datasets.
+    description: Case Location Extended FRS NAICS Search Flag.  Enter Y to expand
+      NAICS search to include Federal Registry Service datasets.
     enum:
       - Y
       - N
@@ -1216,7 +1412,8 @@ parameters:
     required: false
     type: string
   q.p_naics_primary_flg:
-    description: Case Location Primary NAICS Flag.  Enter Y to limit NAICS search results to primary NAICS codes only.
+    description: Case Location Primary NAICS Flag.  Enter Y to limit NAICS search
+      results to primary NAICS codes only.
     enum:
       - Y
       - N
@@ -1225,7 +1422,9 @@ parameters:
     required: false
     type: string
   q.p_name:
-    description: Case Name Filter.  Enter one or more case names to restrict results.  Provide multiple values as a comma-delimited list.  When using this parameter the p_name_type parameter is required.
+    description: Case Name Filter.  Enter one or more case names to restrict
+      results.  Provide multiple values as a comma-delimited list.  When using
+      this parameter the p_name_type parameter is required.
     in: query
     name: p_name
     required: false
@@ -1237,13 +1436,15 @@ parameters:
     required: false
     type: string
   q.p_ocmap_fy:
-    description: Fiscal Year to select cases that are displayed in the Office of Complicance Fiscal Year Map Services
+    description: Fiscal Year to select cases that are displayed in the Office of
+      Complicance Fiscal Year Map Services
     in: query
     name: p_ocmap_fy
     required: false
     type: string
   q.p_oeca_core:
-    description: OECA Core Program Flag.  Enter Y or N to include or exclude core program cases.
+    description: OECA Core Program Flag.  Enter Y or N to include or exclude core
+      program cases.
     enum:
       - Y
       - N
@@ -1252,19 +1453,24 @@ parameters:
     required: false
     type: string
   q.p_pretty_print:
-    description: Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.
+    description: Optional flag to request GeoJSON formatted results to be pretty
+      printed.  Only provide a numeric value when the output needs to be human
+      readable as pretty printing has a performance cost.
     in: query
     name: p_pretty_print
     required: false
     type: number
   q.p_priority_area:
-    description: Case Priority Area Filter.  Enter one or more case priority areas to limit results.  Provide multiple values as a comma-delimited list.
+    description: Case Priority Area Filter.  Enter one or more case priority areas
+      to limit results.  Provide multiple values as a comma-delimited list.
     in: query
     name: p_priority_area
     required: false
     type: string
   q.p_priority_area_desc:
-    description: Case Priority Area Description Filter.  Enter a single case priority area description or partial case priority area description to limit results.  Use "%" as a wild-card match for more complex searches.
+    description: Case Priority Area Description Filter.  Enter a single case
+      priority area description or partial case priority area description to
+      limit results.  Use "%" as a wild-card match for more complex searches.
     in: query
     name: p_priority_area_desc
     required: false
@@ -1276,7 +1482,8 @@ parameters:
     required: false
     type: string
   q.p_rank_order:
-    description: Law Status Rank Order Limiter.  Enter a single integer rank order to limit results.
+    description: Law Status Rank Order Limiter.  Enter a single integer rank order
+      to limit results.
     enum:
       - "1"
       - "0"
@@ -1285,7 +1492,8 @@ parameters:
     required: false
     type: string
   q.p_region:
-    description: EPA Region Filter. Provide a single value of 01 thru 10 to restrict results to a single EPA region.
+    description: EPA Region Filter. Provide a single value of 01 thru 10 to restrict
+      results to a single EPA region.
     enum:
       - "01"
       - "02"
@@ -1302,26 +1510,31 @@ parameters:
     required: false
     type: string
   q.p_role:
-    description: Activity Contact Role Code Filter.  Enter a single role code to restrict results.
+    description: Activity Contact Role Code Filter.  Enter a single role code to
+      restrict results.
     in: query
     name: p_role
     required: false
     type: string
   q.p_section:
-    description: Law Section Code Filter. Enter one or more law section codes to limit results.  Provide multiple values as a comma-delimited list.
+    description: Law Section Code Filter. Enter one or more law section codes to
+      limit results.  Provide multiple values as a comma-delimited list.
     in: query
     name: p_section
     required: false
     type: string
   q.p_sep_cats:
-    description: Supplemental Environmental Projects Activity Category Code Limiter.  Provide one or more SEP activity category codes to limit results.  Provide multiple values as a comma-delimited list.
+    description: Supplemental Environmental Projects Activity Category Code
+      Limiter.  Provide one or more SEP activity category codes to limit
+      results.  Provide multiple values as a comma-delimited list.
     in: query
     name: p_sep_cats
     required: false
     type: string
   q.p_sep_val:
     description: >-
-      Supplemental Environmental Projects Activity Value Limiter.  Provide a keyword to limit results.
+      Supplemental Environmental Projects Activity Value
+      Limiter.  Provide a keyword to limit results.
 
       - ANY = return cases with any SEP activity amount.
 
@@ -1349,14 +1562,16 @@ parameters:
     required: false
     type: string
   q.p_sic:
-    description: Standard Industrial Classification (SIC) Code Filter.  Enter a single 4-digit SIC Code to filter results.
+    description: Standard Industrial Classification (SIC) Code Filter.  Enter a
+      single 4-digit SIC Code to filter results.
     in: query
     name: p_sic
     required: false
     type: string
   q.p_sic_ao_naics:
     description: >-
-      Case Location SIC/NAICS And/Or Modifier.  Enter either AND or OR to govern the search logic of SIC and NAICS codes.
+      Case Location SIC/NAICS And/Or Modifier.  Enter either AND or OR to
+      govern the search logic of SIC and NAICS codes.
 
       - AND = Search will return results having both the provided SIC code(s) and provided NAICS code(s).
 
@@ -1369,7 +1584,8 @@ parameters:
     required: false
     type: string
   q.p_sic_frs_flg:
-    description: Case Location Extended FRS SIC Search Flag.  Enter Y to expand SIC search to include Federal Registry Service datasets.
+    description: Case Location Extended FRS SIC Search Flag.  Enter Y to expand SIC
+      search to include Federal Registry Service datasets.
     enum:
       - Y
       - N
@@ -1378,7 +1594,8 @@ parameters:
     required: false
     type: string
   q.p_sic_primary_flg:
-    description: Case Location Primary SIC Flag.  Enter Y to limit SIC search results to primary SIC codes only.
+    description: Case Location Primary SIC Flag.  Enter Y to limit SIC search
+      results to primary SIC codes only.
     enum:
       - Y
       - N
@@ -1387,20 +1604,25 @@ parameters:
     required: false
     type: string
   q.p_state:
-    description: Case Location State Filter.  Enter one or more state USPS postal codes to filter results.  Provide multiple values as a comma-delimited list.
+    description: Case Location State Filter.  Enter one or more state USPS postal
+      codes to filter results.  Provide multiple values as a comma-delimited
+      list.
     in: query
     name: p_state
     required: false
     type: string
   q.p_to_date:
-    description: Administrative or Judicial Milestone Date Range End Limiter.  Enter a date value in MM/DD/YYYY format to limit milestone results.  Parameter p_from_date must also be populated when using this parameter option.
+    description: Administrative or Judicial Milestone Date Range End Limiter.  Enter
+      a date value in MM/DD/YYYY format to limit milestone results.  Parameter
+      p_from_date must also be populated when using this parameter option.
     in: query
     name: p_to_date
     required: false
     type: string
   q.p_total_comp_act_val:
     description: >-
-      Total Compliance Action Amount Limiter.  Enter a keyword value to limit results to cases with given total compliance action amounts.
+      Total Compliance Action Amount Limiter.  Enter a keyword value to
+      limit results to cases with given total compliance action amounts.
 
       - ANY = Cases with any total compliance action amount greater than zero.
 
@@ -1413,7 +1635,8 @@ parameters:
     type: string
   q.p_total_cost_recovery:
     description: >-
-      Total Cost Recovery Amount Limiter.  Enter a keyword value to limit results to cases with given cost recovery amounts.
+      Total Cost Recovery Amount Limiter.  Enter a keyword value to limit
+      results to cases with given cost recovery amounts.
 
       - ANY = Cases with any cost recovery amount greater than zero.
 
@@ -1426,7 +1649,8 @@ parameters:
     type: string
   q.p_total_fed_penalty:
     description: >-
-      Total Federal Penalty Limiter.  Enter a keyword value to limit results to cases with given total federal penalties.
+      Total Federal Penalty Limiter.  Enter a keyword value to limit
+      results to cases with given total federal penalties.
 
       - ANY = Cases with any federal penalty greater than zero.
 
@@ -1439,7 +1663,8 @@ parameters:
     type: string
   q.p_total_sep_val:
     description: >-
-      Supplemental Environmental Projects Total Value Limiter.  Provide a keyword to limit results.
+      Supplemental Environmental Projects Total Value Limiter.  Provide a
+      keyword to limit results.
 
       - ANY = return cases with any SEP total amount.
 
@@ -1459,7 +1684,8 @@ parameters:
     required: false
     type: string
   q.p_tribal:
-    description: Case Location Tribal Land Flag.  Enter Y or N to include or disallow cases on tribal land.
+    description: Case Location Tribal Land Flag.  Enter Y or N to include or
+      disallow cases on tribal land.
     enum:
       - Y
       - N
@@ -1468,7 +1694,8 @@ parameters:
     required: false
     type: string
   q.p_usmex:
-    description: US-Mexico Border Flag.  Enter Y/N to restrict searches to facilities located within 100KM of the border.
+    description: US-Mexico Border Flag.  Enter Y/N to restrict searches to
+      facilities located within 100KM of the border.
     enum:
       - Y
       - N
@@ -1477,26 +1704,32 @@ parameters:
     required: false
     type: string
   q.p_violation:
-    description: Violation Type Code Filter.  Enter one or more violation type codes to limit results.  Provide multiple values as a comma-delimited list.
+    description: Violation Type Code Filter.  Enter one or more violation type codes
+      to limit results.  Provide multiple values as a comma-delimited list.
     in: query
     name: p_violation
     required: false
     type: string
   q.p_voluntary:
-    description: Voluntary Self Disclosure Flag.  Enter Y or N to include or exclude cases results having voluntary disclosure.
+    description: Voluntary Self Disclosure Flag.  Enter Y or N to include or exclude
+      cases results having voluntary disclosure.
     in: query
     name: p_voluntary
     required: false
     type: string
   q.pageno:
     default: 1
-    description: Indicates the number of the page to display. It is used only when the results are paginated.
+    description: Indicates the number of the page to display. It is used only when
+      the results are paginated.
     in: query
     name: pageno
     required: false
     type: number
   q.qcolumns:
-    description: Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
+    description: Used to customize service output.  A list of comma-separated column
+      IDs of output objects that will be returned in the service query object or
+      download.  Use the metadata service endpoint for a complete list of Ids
+      and definitions.
     in: query
     name: qcolumns
     required: false
@@ -1508,13 +1741,15 @@ parameters:
     required: true
     type: string
   q.queryset:
-    description: Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000.
+    description: Query Limiter.  Enter a value to limit the number of records
+      returned for each query. Value cannot exceed 70,000.
     in: query
     name: queryset
     required: false
     type: number
   q.responseset:
-    description: Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000.
+    description: Response Set Limiter. Enter a value to limit the number of records
+      per page. Value cannot exceed 1,000.
     in: query
     name: responseset
     required: false
@@ -1558,7 +1793,9 @@ parameters:
 paths:
   /case_rest_services.get_case_info:
     get:
-      description: The get_case_info service end point searches for civil enforcement and criminal cases based on the provided selection criteria and returns either individual cases or clusters of case facility locations.
+      description: The get_case_info service end point searches for civil enforcement
+        and criminal cases based on the provided selection criteria and returns
+        either individual cases or clusters of case facility locations.
       parameters:
         - description: >-
             Output Format Flag.  Enter one of the following keywords:
@@ -1668,7 +1905,9 @@ paths:
       tags:
         - Case Enforcement
     post:
-      description: The get_case_info service end point searches for civil enforcement and criminal cases based on the provided selection criteria and returns either individual cases or clusters of case facility locations.
+      description: The get_case_info service end point searches for civil enforcement
+        and criminal cases based on the provided selection criteria and returns
+        either individual cases or clusters of case facility locations.
       parameters:
         - description: >-
             Output Format Flag.  Enter one of the following keywords:
@@ -1779,9 +2018,11 @@ paths:
         - Case Enforcement
   /case_rest_services.get_case_report:
     get:
-      description: The get_case_report service endpoint returns a complex object of civil enforcement case details based on the provided case id.
+      description: The get_case_report service endpoint returns a complex object of
+        civil enforcement case details based on the provided case id.
       parameters:
-        - description: Case Number. Enter the case number identifier to retrieve the case report.
+        - description: Case Number. Enter the case number identifier to retrieve the case
+            report.
           in: query
           name: p_id
           required: false
@@ -1805,7 +2046,8 @@ paths:
         - $ref: "#/parameters/q.callback"
       responses:
         "200":
-          description: Returns a complex object containing detailed case information for the provided Case Identifier.
+          description: Returns a complex object containing detailed case information for
+            the provided Case Identifier.
           schema:
             description: Service call container.
             properties:
@@ -1820,9 +2062,11 @@ paths:
       tags:
         - Case Enforcement
     post:
-      description: The get_case_report service endpoint returns a complex object of civil enforcement case details based on the provided case id.
+      description: The get_case_report service endpoint returns a complex object of
+        civil enforcement case details based on the provided case id.
       parameters:
-        - description: Case Number. Enter the case number identifier to retrieve the case report.
+        - description: Case Number. Enter the case number identifier to retrieve the case
+            report.
           in: formData
           name: p_id
           required: false
@@ -1846,7 +2090,8 @@ paths:
         - $ref: "#/parameters/f.callback"
       responses:
         "200":
-          description: Returns a complex object containing detailed case information for the provided Case Identifier.
+          description: Returns a complex object containing detailed case information for
+            the provided Case Identifier.
           schema:
             description: Service call container.
             properties:
@@ -1862,7 +2107,8 @@ paths:
         - Case Enforcement
   /case_rest_services.get_cases:
     get:
-      description: The get_cases service end point searches for civil enforcement and criminal cases based on the provided selection criteria.
+      description: The get_cases service end point searches for civil enforcement and
+        criminal cases based on the provided selection criteria.
       parameters:
         - description: >-
             Output Format Flag.  Enter one of the following keywords:
@@ -1972,7 +2218,8 @@ paths:
       tags:
         - Case Enforcement
     post:
-      description: The get_cases service end point searches for civil enforcement and criminal cases based on the provided selection criteria.
+      description: The get_cases service end point searches for civil enforcement and
+        criminal cases based on the provided selection criteria.
       parameters:
         - description: >-
             Output Format Flag.  Enter one of the following keywords:
@@ -2164,9 +2411,11 @@ paths:
         - Case Enforcement
   /case_rest_services.get_crcase_report:
     get:
-      description: The get_crcase_report service end point returns a complex object of criminal case detials based on the provided criminal case id.
+      description: The get_crcase_report service end point returns a complex object of
+        criminal case detials based on the provided criminal case id.
       parameters:
-        - description: Prosecution Summary Identifier. Enter the numeric prosecution summary identifier to retrieve the criminal case report.
+        - description: Prosecution Summary Identifier. Enter the numeric prosecution
+            summary identifier to retrieve the criminal case report.
           in: query
           name: p_id
           required: false
@@ -2191,7 +2440,8 @@ paths:
         - $ref: "#/parameters/q.mapset"
       responses:
         "200":
-          description: Returns a complex object containing detailed criminal case information for the provided Case Identifier.
+          description: Returns a complex object containing detailed criminal case
+            information for the provided Case Identifier.
           schema:
             description: Service call container.
             properties:
@@ -2206,9 +2456,11 @@ paths:
       tags:
         - Case Enforcement
     post:
-      description: The get_crcase_report service end point returns a complex object of criminal case detials based on the provided criminal case id.
+      description: The get_crcase_report service end point returns a complex object of
+        criminal case detials based on the provided criminal case id.
       parameters:
-        - description: Prosecution Summary Identifier. Enter the numeric prosecution summary identifier to retrieve the criminal case report.
+        - description: Prosecution Summary Identifier. Enter the numeric prosecution
+            summary identifier to retrieve the criminal case report.
           in: formData
           name: p_id
           required: false
@@ -2232,7 +2484,8 @@ paths:
         - $ref: "#/parameters/f.callback"
       responses:
         "200":
-          description: Returns a complex object containing detailed criminal case information for the provided Case Identifier.
+          description: Returns a complex object containing detailed criminal case
+            information for the provided Case Identifier.
           schema:
             description: Service call container.
             properties:
@@ -2248,7 +2501,8 @@ paths:
         - Case Enforcement
   /case_rest_services.get_download:
     get:
-      description: Based on the QID obtained from a get_cases query, return a comma separated value (CSV) file of the cases found.
+      description: Based on the QID obtained from a get_cases query, return a comma
+        separated value (CSV) file of the cases found.
       parameters:
         - description: >-
             Output Format Flag.  Enter one of the following keywords:
@@ -2269,7 +2523,8 @@ paths:
       tags:
         - Case Enforcement
     post:
-      description: Based on the QID obtained from a get_cases query, return a comma separated value (CSV) file of the cases found.
+      description: Based on the QID obtained from a get_cases query, return a comma
+        separated value (CSV) file of the cases found.
       parameters:
         - description: >-
             Output Format Flag.  Enter one of the following keywords:
@@ -2372,7 +2627,11 @@ paths:
         - Case Enforcement
   /case_rest_services.get_map:
     get:
-      description: The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_cases query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.
+      description: The purpose of the GET_MAP service is to display facility
+        coordinates and facility clusters related to a get_cases query.
+        Currently, the maximum number of coordinates returned is 500. GET_MAP
+        performs automatic clustering at the state, county, and zip code levels
+        to maximize the number of coordinates returned.
       parameters:
         - description: >-
             Output Format Flag.  Enter one of the following keywords:
@@ -2399,7 +2658,9 @@ paths:
         - $ref: "#/parameters/q.c2_long"
       responses:
         "200":
-          description: Results are either an array of State, County, Zip Code facility cluster map coordinates or individual facility coordinates.  Coordinates provided are in WGS84.
+          description: Results are either an array of State, County, Zip Code facility
+            cluster map coordinates or individual facility
+            coordinates.  Coordinates provided are in WGS84.
           schema:
             description: Service call container.
             properties:
@@ -2414,7 +2675,11 @@ paths:
       tags:
         - Case Enforcement
     post:
-      description: The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_cases query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.
+      description: The purpose of the GET_MAP service is to display facility
+        coordinates and facility clusters related to a get_cases query.
+        Currently, the maximum number of coordinates returned is 500. GET_MAP
+        performs automatic clustering at the state, county, and zip code levels
+        to maximize the number of coordinates returned.
       parameters:
         - description: >-
             Output Format Flag.  Enter one of the following keywords:
@@ -2442,7 +2707,9 @@ paths:
         - $ref: "#/parameters/f.mapset"
       responses:
         "200":
-          description: Results are either an array of State, County, Zip Code facility cluster map coordinates or individual facility coordinates.  Coordinates provided are in WGS84.
+          description: Results are either an array of State, County, Zip Code facility
+            cluster map coordinates or individual facility
+            coordinates.  Coordinates provided are in WGS84.
           schema:
             description: Service call container.
             properties:
@@ -2458,7 +2725,11 @@ paths:
         - Case Enforcement
   /case_rest_services.get_qid:
     get:
-      description: "GET_QID is passed with a query ID corresponding to a previously run get_cases query. It then returns a CASES object containing all matching cases. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. "
+      description: "GET_QID is passed with a query ID corresponding to a previously
+        run get_cases query. It then returns a CASES object containing all
+        matching cases. The main purpose of GET_QID is for large querysets that
+        contain multiple pages (responsesets) of output. GET_QID allows for
+        pagination and for the selection and sorting of columns. "
       parameters:
         - description: >-
             Output Format Flag.  Enter one of the following keywords:
@@ -2484,7 +2755,8 @@ paths:
         - $ref: "#/parameters/q.qcolumns"
       responses:
         "200":
-          description: Results are an array (page)  of Cases from ICIS with the number of cases equal to the responseset (page size).
+          description: Results are an array (page)  of Cases from ICIS with the number of
+            cases equal to the responseset (page size).
           schema:
             description: Service call container.
             properties:
@@ -2499,7 +2771,11 @@ paths:
       tags:
         - Case Enforcement
     post:
-      description: "GET_QID is passed with a query ID corresponding to a previously run get_cases query. It then returns a CASES object containing all matching cases. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. "
+      description: "GET_QID is passed with a query ID corresponding to a previously
+        run get_cases query. It then returns a CASES object containing all
+        matching cases. The main purpose of GET_QID is for large querysets that
+        contain multiple pages (responsesets) of output. GET_QID allows for
+        pagination and for the selection and sorting of columns. "
       parameters:
         - description: >-
             Output Format Flag.  Enter one of the following keywords:
@@ -2525,7 +2801,8 @@ paths:
         - $ref: "#/parameters/f.qcolumns"
       responses:
         "200":
-          description: Results are an array (page)  of Cases from ICIS with the number of cases equal to the responseset (page size).
+          description: Results are an array (page)  of Cases from ICIS with the number of
+            cases equal to the responseset (page size).
           schema:
             description: Service call container.
             properties:
@@ -2541,7 +2818,8 @@ paths:
         - Case Enforcement
   /case_rest_services.metadata:
     get:
-      description: Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_cases endpoint.
+      description: Returns the JSON Object Name and ColumnId for usage with the
+        qcolumns parameter for get_cases endpoint.
       parameters:
         - description: >-
             Output Format Flag.  Enter one of the following keywords:
@@ -2577,7 +2855,8 @@ paths:
       tags:
         - Metadata
     post:
-      description: Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_cases endpoint.
+      description: Returns the JSON Object Name and ColumnId for usage with the
+        qcolumns parameter for get_cases endpoint.
       parameters:
         - description: >-
             Output Format Flag.  Enter one of the following keywords:
@@ -2640,7 +2919,9 @@ paths:
         - $ref: "#/parameters/q.sort_order"
       responses:
         "200":
-          description: Returns an array of icis_inspection_types codes and their description. If search term or search code is  not provided, all values are returned.
+          description: Returns an array of icis_inspection_types codes and their
+            description. If search term or search code is  not provided, all
+            values are returned.
           schema:
             description: Root Object
             properties:
@@ -2681,7 +2962,9 @@ paths:
         - $ref: "#/parameters/f.sort_order"
       responses:
         "200":
-          description: Returns an array of icis_inspection_types codes and their description. If search term or search code is  not provided, all values are returned.
+          description: Returns an array of icis_inspection_types codes and their
+            description. If search term or search code is  not provided, all
+            values are returned.
           schema:
             description: Root Object
             properties:
@@ -2697,26 +2980,35 @@ paths:
         - Lookups
 definitions:
   crs0_Cases:
-    description: A summary of the violation(s), environmental problem(s), and a description of the cause of action.
+    description: A summary of the violation(s), environmental problem(s), and a
+      description of the cause of action.
     properties:
       ActivityId:
-        description: The unique, system-generated identifier for an activity performed at or related to a particular site or Facility.
+        description: The unique, system-generated identifier for an activity performed
+          at or related to a particular site or Facility.
         example: ???
         title: Activity ID
         type: string
       CaaFlag:
-        description: A flag indicating that the Primary Law cited for the case was the Clean Air Act.
+        description: A flag indicating that the Primary Law cited for the case was the
+          Clean Air Act.
         example: "1"
         title: CAA Flag
         type: string
       CaseCategoryCode:
-        description: "A three-character code that identifies the type of ICIS activity, which includes general categories such as information requests, inspections, compliance determinations, and enforcement.  Activities selected for the ECHO data download are restricted to two subcategories of enforcement:  administrative – formal (AFR), and judicial activities (JDC)."
+        description: "A three-character code that identifies the type of ICIS activity,
+          which includes general categories such as information requests,
+          inspections, compliance determinations, and enforcement.  Activities
+          selected for the ECHO data download are restricted to two
+          subcategories of enforcement:  administrative – formal (AFR), and
+          judicial activities (JDC)."
         example: AIF
         title: Case Category Code
         type: string
       CaseCategoryDesc:
         description: >-
-          Identifies the type of action based on the enforcement authority used.  
+          Identifies the type of action based on the enforcement authority
+          used.  
 
 
           Administrative Formal Cases are non-judicial enforcement actions taken by EPA or a state under its own authority, without involving a judicial court process. An administrative action by EPA or a state agency may be in the form of:
@@ -2735,14 +3027,26 @@ definitions:
         type: string
       CaseName:
         description: >-
-          A unique number identifying the enforcement action. For EPA civil cases, these numbers begin with either the two digit EPA Region Code, "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or Western Field Office CAA Mobile Source Program cases); followed by the fiscal year in which the action was initiated. After the fiscal year there is a sequence number. State NPDES civil cases start with the two character post abbreviation, followed by a sequence number.
+          A unique number identifying the enforcement action. For EPA civil
+          cases, these numbers begin with either the two digit EPA Region Code,
+          "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or
+          Western Field Office CAA Mobile Source Program cases); followed by the
+          fiscal year in which the action was initiated. After the fiscal year
+          there is a sequence number. State NPDES civil cases start with the two
+          character post abbreviation, followed by a sequence number.
 
           For criminal cases, the ID was generated in ECHO based on the following format: CR [prosecution_summary_id]. The source of the Prosecution Summary ID is the Summary of Criminal Prosecutions database.
         example: Baltes Real Estate Company
         title: Case Name
         type: string
       CaseNumber:
-        description: A unique number identifying the enforcement action. For EPA civil cases, these numbers begin with either the two digit EPA Region Code, "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or Western Field Office CAA Mobile Source Program cases); followed by the fiscal year in which the action was initiated. After the fiscal year there is a sequence number. State NPDES civil cases start with the two character post abbreviation, followed by a sequence number.
+        description: A unique number identifying the enforcement action. For EPA civil
+          cases, these numbers begin with either the two digit EPA Region Code,
+          "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or
+          Western Field Office CAA Mobile Source Program cases); followed by the
+          fiscal year in which the action was initiated. After the fiscal year
+          there is a sequence number. State NPDES civil cases start with the two
+          character post abbreviation, followed by a sequence number.
         example: 05-200021274
         title: Case Number
         type: string
@@ -2757,7 +3061,8 @@ definitions:
         title: Case Status Description
         type: string
       CerclaFlag:
-        description: A flag indicating that the Primary Law cited for the case was the Comprehensive Environmental Response, Compensation, and Liability Act.
+        description: A flag indicating that the Primary Law cited for the case was the
+          Comprehensive Environmental Response, Compensation, and Liability Act.
         example: "1"
         title: CERCLA Flag
         type: string
@@ -2767,34 +3072,52 @@ definitions:
         title: Civil/Criminal Indicator
         type: string
       CostRecovery:
-        description: For civil enforcement actions, cost recovery awarded is the amount of cost recovery ordered or agreed to be repaid by the responsible party of parties.
+        description: For civil enforcement actions, cost recovery awarded is the amount
+          of cost recovery ordered or agreed to be repaid by the responsible
+          party of parties.
         example: "0"
         title: Cost Recovery Amount
         type: string
       CourtDocketNumber:
         type: string
       CwaFlag:
-        description: A flag indicating that the Primary Law cited for the case was the Clean Water Act.
+        description: A flag indicating that the Primary Law cited for the case was the
+          Clean Water Act.
         example: "1"
         title: CWA Flag
         type: string
       DOJDocketNmbr:
-        description: The docket number assigned by the Department of Justice to EPA's Enforcement Action.  This number will identify cases in the Federal Register and in DOJ press releases when a settlement is lodged and entered.
+        description: The docket number assigned by the Department of Justice to EPA's
+          Enforcement Action.  This number will identify cases in the Federal
+          Register and in DOJ press releases when a settlement is lodged and
+          entered.
         example: Achieved
         title: DOJ Docket Number
         type: string
       DateClosed:
-        description: The date the actions requested in the final order have been completed by the recipient; or the termination date of the final order (if such a date is specified) has passed; or the enforcement action has been withdrawn or dismissed; or the enforcement action has been superseded by, or combined into, another related enforcement action addressing the same violations.
+        description: The date the actions requested in the final order have been
+          completed by the recipient; or the termination date of the final order
+          (if such a date is specified) has passed; or the enforcement action
+          has been withdrawn or dismissed; or the enforcement action has been
+          superseded by, or combined into, another related enforcement action
+          addressing the same violations.
         example: 07/21/2011
         title: Date Closed
         type: string
       DateFiled:
-        description: The filed/issued date can have different meanings depending on the Case Category. The date the judicial complaint is filed in U.S. District Court by the U.S. Attorney. The date that an administrative order is issued or the administrative complaint is filed.
+        description: The filed/issued date can have different meanings depending on the
+          Case Category. The date the judicial complaint is filed in U.S.
+          District Court by the U.S. Attorney. The date that an administrative
+          order is issued or the administrative complaint is filed.
         example: 01/19/2005
         title: Date Filed
         type: string
       DateLodged:
-        description: The date a proposed consent decree is given to the Clerk of the Court for lodging in the District Court.  Upon lodging a consent decree, a notice is published in the Federal Register indicating nature of the proposed settlement and the acceptance period for public comments.
+        description: The date a proposed consent decree is given to the Clerk of the
+          Court for lodging in the District Court.  Upon lodging a consent
+          decree, a notice is published in the Federal Register indicating
+          nature of the proposed settlement and the acceptance period for public
+          comments.
         example: 04/28/2009
         title: Date Lodged
         type: string
@@ -2804,22 +3127,32 @@ definitions:
         title: Enforcement Outcome
         type: string
       EpcraFlag:
-        description: A flag indicating that the Primary Law cited for the case was the Emergency Planning and Community Right to Know Act.
+        description: A flag indicating that the Primary Law cited for the case was the
+          Emergency Planning and Community Right to Know Act.
         example: "1"
         title: EPCRA Flag
         type: string
       FedPenalty:
-        description: For civil judicial Enforcement Actions, this amount is the Federal penalty assessed against the defendant(s) as specified in the final entered Consent Decree or Court Order.  For administrative Enforcement Actions, it is the penalty assessed in the Consent/Final Order.  It does not include the amount of the penalty mitigated due to a SEP or the amount shared with the state or local entities.  Interest payments associated with a penalty paid over time are not to be included in this amount.  It is the total Federal amount for each Final Order.
+        description: For civil judicial Enforcement Actions, this amount is the Federal
+          penalty assessed against the defendant(s) as specified in the final
+          entered Consent Decree or Court Order.  For administrative Enforcement
+          Actions, it is the penalty assessed in the Consent/Final Order.  It
+          does not include the amount of the penalty mitigated due to a SEP or
+          the amount shared with the state or local entities.  Interest payments
+          associated with a penalty paid over time are not to be included in
+          this amount.  It is the total Federal amount for each Final Order.
         example: $3,000.00
         title: Federal Penalty
         type: string
       FederalFlag:
-        description: A flag indicating that the  case is related to a Federally Owned facility.
+        description: A flag indicating that the  case is related to a Federally Owned
+          facility.
         example: "1"
         title: Federal Flag
         type: string
       FifraFlag:
-        description: A flag indicating that the Primary Law cited for the case was the Federal Insecticide, Fungicide, and Rodenticide Act.
+        description: A flag indicating that the Primary Law cited for the case was the
+          Federal Insecticide, Fungicide, and Rodenticide Act.
         example: "1"
         title: FIFRA Flag
         type: string
@@ -2834,22 +3167,37 @@ definitions:
         title: Max Score
         type: string
       PrimaryLaw:
-        description: Identifies the primary statute/law violated and cited in the enforcement action. Many of EPA's judicial actions are based on incidents that are violations of more than one statute. One law entered into the ICIS record is designated the primary law, which is considered the law that is most seriously violated and/or for which the most significant relief is sought.
+        description: Identifies the primary statute/law violated and cited in the
+          enforcement action. Many of EPA's judicial actions are based on
+          incidents that are violations of more than one statute. One law
+          entered into the ICIS record is designated the primary law, which is
+          considered the law that is most seriously violated and/or for which
+          the most significant relief is sought.
         example: TSCA
         title: Primary Law Cited
         type: string
       PrimaryNAICSCode:
-        description: A 6-digit code to classify industrial establishments, as identified in FRS. North American Industry Classification System (NAICS) has replaced the U.S. Standard Industrial Classification (SIC) system. For detailed information about NAICS, please refer to the U.S. Census Bureau NAICS webpage.
+        description: A 6-digit code to classify industrial establishments, as identified
+          in FRS. North American Industry Classification System (NAICS) has
+          replaced the U.S. Standard Industrial Classification (SIC) system. For
+          detailed information about NAICS, please refer to the U.S. Census
+          Bureau NAICS webpage.
         example: "237310"
         title: Primary NAICS Code
         type: string
       PrimarySICCode:
-        description: The Standard Industrial Classification (SIC) system code of the facility, as identified in FRS. SIC codes were established by the Census Bureau to identify processes, products and services. The SIC code describes the primary activity of the facility. The first two digits in the code define a major business sector; the last two digits denote a facility's specialty within the major sector.
+        description: The Standard Industrial Classification (SIC) system code of the
+          facility, as identified in FRS. SIC codes were established by the
+          Census Bureau to identify processes, products and services. The SIC
+          code describes the primary activity of the facility. The first two
+          digits in the code define a major business sector; the last two digits
+          denote a facility's specialty within the major sector.
         example: "1220"
         title: Primary SIC Code
         type: string
       PrimarySection:
-        description: Identifies the primary section violated and cited in the enforcement action.
+        description: Identifies the primary section violated and cited in the
+          enforcement action.
         example: "409"
         title: Primary Section Cited
         type: string
@@ -2858,13 +3206,19 @@ definitions:
         title: Prosecution Summary ID
         type: string
       RcraFlag:
-        description: A flag indicating that the Primary Law cited for the case was the Resource Conservation and Recovery Act.
+        description: A flag indicating that the Primary Law cited for the case was the
+          Resource Conservation and Recovery Act.
         example: "1"
         title: RCRA Flag
         type: string
       SEPCategories:
         description: >-
-          For civil enforcement actions, as part of a settlement, a defendant may voluntarily agree to undertake an environmentally beneficial project (Supplement Environmental Project) related to the violation in exchange for mitigation of the penalty to be paid.  It may not include activities a defendant must take to return to compliance with the law. The EPA has set out eight categories that can be acceptable SEPs:
+          For civil enforcement actions, as part of a settlement, a defendant
+          may voluntarily agree to undertake an environmentally beneficial
+          project (Supplement Environmental Project) related to the violation in
+          exchange for mitigation of the penalty to be paid.  It may not include
+          activities a defendant must take to return to compliance with the law.
+          The EPA has set out eight categories that can be acceptable SEPs:
 
           - Public Health
 
@@ -2887,36 +3241,51 @@ definitions:
         title: Supplemental Environmental Projects Categories
         type: string
       SEPCost:
-        description: The total value of all SEPs for all settlements at the enforcement case.
+        description: The total value of all SEPs for all settlements at the enforcement
+          case.
         example: $4,100.00
         title: Supplemental Environmental Projects Cost
         type: string
       SEPTexts:
-        description: A description of the SEP. These actions do not include activities a violator must take to return to compliance with the law.
+        description: A description of the SEP. These actions do not include activities a
+          violator must take to return to compliance with the law.
         example: "0"
         title: Supplemental Environmental Projects Texts
         type: string
       SdwaFlag:
-        description: A flag indicating that the Primary Law cited for the case was the Safe Drinking Water Act.
+        description: A flag indicating that the Primary Law cited for the case was the
+          Safe Drinking Water Act.
         example: "1"
         title: SDWA Flag
         type: string
       SettlementCnt:
-        description: For civil enforcement actions, the number of settlements associated with the case. Most enforcement actions tend to follow a one-case, one-settlement scenario. However, and in particular with judicial actions involving multiple defendants, more than one settlement may result.
+        description: For civil enforcement actions, the number of settlements associated
+          with the case. Most enforcement actions tend to follow a one-case,
+          one-settlement scenario. However, and in particular with judicial
+          actions involving multiple defendants, more than one settlement may
+          result.
         example: "1"
         title: Settlement Count
         type: string
       SettlementDate:
-        description: For federal judicial actions, this is the date the settlement document is signed by the presiding judge and entered by the Clerk of the Court. At that point, the settlement becomes a binding court order. For administrative actions, this is the date that the final order is signed and issued by the enforcement authority.
+        description: For federal judicial actions, this is the date the settlement
+          document is signed by the presiding judge and entered by the Clerk of
+          the Court. At that point, the settlement becomes a binding court
+          order. For administrative actions, this is the date that the final
+          order is signed and issued by the enforcement authority.
         example: 05/5/2005
         title: Settlement Date
         type: string
       StateLocPenaltyAmt:
-        description: The total State or Local Penalty amount collected pursuant to a Final Order.
+        description: The total State or Local Penalty amount collected pursuant to a
+          Final Order.
         title: State Local Penalty Amount
         type: string
       TotalCompActionAmt:
-        description: For civil enforcement actions, the value of the costs incurred by the defendant/respondent to attain compliance with the law and restore the environment. This value does not include penalties, cost recovery, or costs associated with SEPs.
+        description: For civil enforcement actions, the value of the costs incurred by
+          the defendant/respondent to attain compliance with the law and restore
+          the environment. This value does not include penalties, cost recovery,
+          or costs associated with SEPs.
         example: "279450"
         title: Total Compliance Action Amount
         type: string
@@ -2976,22 +3345,28 @@ definitions:
     description: Cluster Data Complex Object
     properties:
       AFRRows:
-        description: Displays the number of Administrative Formal cases within the search results.
+        description: Displays the number of Administrative Formal cases within the
+          search results.
         example: "5"
         title: Administrative Formal Actions Row Count
         type: string
       CAARows:
-        description: The number of facilities or cases within the result set that have Clean Air Act (CAA) permits.
+        description: The number of facilities or cases within the result set that have
+          Clean Air Act (CAA) permits.
         example: "50"
         title: Clean Air Act Count
         type: string
       CERCLARows:
-        description: The number of cases within the results set that relate to the Comprehensive Environmental Response, Compensation, and Liability Act (CERCLA).
+        description: The number of cases within the results set that relate to the
+          Comprehensive Environmental Response, Compensation, and Liability Act
+          (CERCLA).
         example: "50"
-        title: Comprehensive Environmental Response, Compensation, and Liability Act Count
+        title: Comprehensive Environmental Response, Compensation, and Liability Act
+          Count
         type: string
       CWARows:
-        description: The number of facilities or cases within the results set that have Clean Water Act (CWA) permits.
+        description: The number of facilities or cases within the results set that have
+          Clean Water Act (CWA) permits.
         example: "50"
         title: Clean Water Act Count
         type: string
@@ -3004,49 +3379,60 @@ definitions:
         title: Cluster Icon
         type: string
       ClusterLatitude:
-        description: The latitude in decimal degrees expressed using the NAD83 horizontal datum.
+        description: The latitude in decimal degrees expressed using the NAD83
+          horizontal datum.
         example: "38.904149"
         title: Cluster Latitude
         type: string
       ClusterLongitude:
-        description: The longitude in decimal degrees expressed using the NAD83 horizontal datum.
+        description: The longitude in decimal degrees expressed using the NAD83
+          horizontal datum.
         example: "-77.017094"
         title: Cluster Longitude
         type: string
       ClusterName:
-        description: "THe name or the identifier of the geographic area used for clustering.  Examples:  Alaska, Fairfax County, 22314"
+        description: "THe name or the identifier of the geographic area used for
+          clustering.  Examples:  Alaska, Fairfax County, 22314"
         title: Cluster Name
         type: string
       ClusterType:
-        description: "The representative geographic area used for clustering.  Examples:  State, County, Zip Code"
+        description: "The representative geographic area used for
+          clustering.  Examples:  State, County, Zip Code"
         title: Cluster Type
         type: string
       ClusterValue:
-        description: "The value, internal to the database report object, that represents this cluster, like a state abbreviation, zip code, or county FIPS code.  Examples: AK, 22314, 50011"
+        description: "The value, internal to the database report object, that represents
+          this cluster, like a state abbreviation, zip code, or county FIPS
+          code.  Examples: AK, 22314, 50011"
         title: Cluster Value
         type: string
       CriminalRows:
-        description: Displays the number of criminal enforcement cases within the search results.
+        description: Displays the number of criminal enforcement cases within the search
+          results.
         example: "0"
         title: Count of Criminal Cases
         type: string
       EPCRARows:
-        description: The number of cases within the results set that relate to the Emergency Planning and Community Right to Know Act (EPCRA).
+        description: The number of cases within the results set that relate to the
+          Emergency Planning and Community Right to Know Act (EPCRA).
         example: "50"
         title: Emergency Planning and Community Right to Know Act Count
         type: string
       FIFRARows:
-        description: The number of cases within the result set that relate to the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).
+        description: The number of cases within the result set that relate to the
+          Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).
         example: "50"
         title: Federal Insecticide, Fungicide, and Rodenticide Act Count
         type: string
       FedPenRows:
-        description: Displays the number of cases with federal penalty assessed greater than $0.
+        description: Displays the number of cases with federal penalty assessed greater
+          than $0.
         example: "3"
         title: Federal Penalty Rows
         type: string
       FederalRows:
-        description: The number of facilities or cases within the result set that have a relationship to a Federal facility.
+        description: The number of facilities or cases within the result set that have a
+          relationship to a Federal facility.
         example: "50"
         title: Federal Related Facility Count
         type: string
@@ -3061,12 +3447,14 @@ definitions:
         title: Object Identifier
         type: string
       RCRARows:
-        description: The number of facilities or cases within the results set that have Resource Conservation and Recovery Action (RCRA) permits.
+        description: The number of facilities or cases within the results set that have
+          Resource Conservation and Recovery Action (RCRA) permits.
         example: "50"
         title: Resource Conservation & Recovery Act Count
         type: string
       SDWARows:
-        description: The number of facilities or cases within the results set that have Safe Drinking Water Act (SDWA) permits.
+        description: The number of facilities or cases within the results set that have
+          Safe Drinking Water Act (SDWA) permits.
         example: "50"
         title: Safe Drinking Water Act Count
         type: string
@@ -3076,7 +3464,8 @@ definitions:
         title: Number of Cases found with SEP data
         type: string
       TSCARows:
-        description: The number of cases within the result set that relate to the Toxic Substances Control Act (TSCA).
+        description: The number of cases within the result set that relate to the Toxic
+          Substances Control Act (TSCA).
         example: "50"
         title: Toxic Substances Control Act Count
         type: string
@@ -3133,12 +3522,14 @@ definitions:
         title: Longitude
         type: string
       NAME:
-        description: For DFR, this is the Facility name. The name corresponds to the TYPE value
+        description: For DFR, this is the Facility name. The name corresponds to the
+          TYPE value
         example: VIRGINIA CONCRETE ALEXANDRIA PLANT
         title: Name
         type: string
       PUV:
-        description: Pop up value. Combine with PopUpBaseURL to give the popup for the facility
+        description: Pop up value. Combine with PopUpBaseURL to give the popup for the
+          facility
         example: "110001891506"
         title: Popup Value
         type: string
@@ -3197,22 +3588,28 @@ definitions:
     description: Results Object
     properties:
       AFRRows:
-        description: Displays the number of Administrative Formal cases within the search results.
+        description: Displays the number of Administrative Formal cases within the
+          search results.
         example: "5"
         title: Administrative Formal Actions Row Count
         type: string
       CERCLARows:
-        description: The number of cases within the results set that relate to the Comprehensive Environmental Response, Compensation, and Liability Act (CERCLA).
+        description: The number of cases within the results set that relate to the
+          Comprehensive Environmental Response, Compensation, and Liability Act
+          (CERCLA).
         example: "50"
-        title: Comprehensive Environmental Response, Compensation, and Liability Act Count
+        title: Comprehensive Environmental Response, Compensation, and Liability Act
+          Count
         type: string
       CWARows:
-        description: The number of facilities or cases within the results set that have Clean Water Act (CWA) permits.
+        description: The number of facilities or cases within the results set that have
+          Clean Water Act (CWA) permits.
         example: "50"
         title: Clean Water Act Count
         type: string
       Cases:
-        description: A summary of the violation(s), environmental problem(s), and a description of the cause of action.
+        description: A summary of the violation(s), environmental problem(s), and a
+          description of the cause of action.
         items:
           $ref: "#/definitions/crs0_Cases"
         title: Cases
@@ -3228,27 +3625,32 @@ definitions:
         title: Cluster Records
         type: string
       CriminalRows:
-        description: Displays the number of criminal enforcement cases within the search results.
+        description: Displays the number of criminal enforcement cases within the search
+          results.
         example: "0"
         title: Count of Criminal Cases
         type: string
       EPCRARows:
-        description: The number of cases within the results set that relate to the Emergency Planning and Community Right to Know Act (EPCRA).
+        description: The number of cases within the results set that relate to the
+          Emergency Planning and Community Right to Know Act (EPCRA).
         example: "50"
         title: Emergency Planning and Community Right to Know Act Count
         type: string
       FIFRARows:
-        description: The number of cases within the result set that relate to the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).
+        description: The number of cases within the result set that relate to the
+          Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).
         example: "50"
         title: Federal Insecticide, Fungicide, and Rodenticide Act Count
         type: string
       FedPenRows:
-        description: Displays the number of cases with federal penalty assessed greater than $0.
+        description: Displays the number of cases with federal penalty assessed greater
+          than $0.
         example: "3"
         title: Federal Penalty Rows
         type: string
       FederalRows:
-        description: The number of facilities or cases within the result set that have a relationship to a Federal facility.
+        description: The number of facilities or cases within the result set that have a
+          relationship to a Federal facility.
         example: "50"
         title: Federal Related Facility Count
         type: string
@@ -3263,7 +3665,8 @@ definitions:
         title: Map Locations
         type: string
       Message:
-        description: Field to record messages (typically performance-related) about packet processing
+        description: Field to record messages (typically performance-related) about
+          packet processing
         example: Success
         title: Message
         type: string
@@ -3282,12 +3685,14 @@ definitions:
         title: Query Row Count
         type: string
       RCRARows:
-        description: The number of facilities or cases within the results set that have Resource Conservation and Recovery Action (RCRA) permits.
+        description: The number of facilities or cases within the results set that have
+          Resource Conservation and Recovery Action (RCRA) permits.
         example: "50"
         title: Resource Conservation & Recovery Act Count
         type: string
       SDWARows:
-        description: The number of facilities or cases within the results set that have Safe Drinking Water Act (SDWA) permits.
+        description: The number of facilities or cases within the results set that have
+          Safe Drinking Water Act (SDWA) permits.
         example: "50"
         title: Safe Drinking Water Act Count
         type: string
@@ -3297,7 +3702,8 @@ definitions:
         title: Number of Cases found with SEP data
         type: string
       TSCARows:
-        description: The number of cases within the result set that relate to the Toxic Substances Control Act (TSCA).
+        description: The number of cases within the result set that relate to the Toxic
+          Substances Control Act (TSCA).
         example: "50"
         title: Toxic Substances Control Act Count
         type: string
@@ -3324,7 +3730,13 @@ definitions:
     description: Case Number
     properties:
       CaseNumber:
-        description: A unique number identifying the enforcement action. For EPA civil cases, these numbers begin with either the two digit EPA Region Code, "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or Western Field Office CAA Mobile Source Program cases); followed by the fiscal year in which the action was initiated. After the fiscal year there is a sequence number. State NPDES civil cases start with the two character post abbreviation, followed by a sequence number.
+        description: A unique number identifying the enforcement action. For EPA civil
+          cases, these numbers begin with either the two digit EPA Region Code,
+          "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or
+          Western Field Office CAA Mobile Source Program cases); followed by the
+          fiscal year in which the action was initiated. After the fiscal year
+          there is a sequence number. State NPDES civil cases start with the two
+          character post abbreviation, followed by a sequence number.
         example: 05-200021274
         title: Case Number
         type: string
@@ -3357,7 +3769,9 @@ definitions:
     description: Registry ID
     properties:
       RegistryID:
-        description: An internal 12-digit Facility Registry Service (FRS) tracking number used to tie all facility data together in EPA regulatory program databases.
+        description: An internal 12-digit Facility Registry Service (FRS) tracking
+          number used to tie all facility data together in EPA regulatory
+          program databases.
         example: "110020837601"
         title: FRS ID
         type: string
@@ -3390,7 +3804,13 @@ definitions:
     description: Case Related Uploaded Documents
     properties:
       CaseNumber:
-        description: A unique number identifying the enforcement action. For EPA civil cases, these numbers begin with either the two digit EPA Region Code, "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or Western Field Office CAA Mobile Source Program cases); followed by the fiscal year in which the action was initiated. After the fiscal year there is a sequence number. State NPDES civil cases start with the two character post abbreviation, followed by a sequence number.
+        description: A unique number identifying the enforcement action. For EPA civil
+          cases, these numbers begin with either the two digit EPA Region Code,
+          "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or
+          Western Field Office CAA Mobile Source Program cases); followed by the
+          fiscal year in which the action was initiated. After the fiscal year
+          there is a sequence number. State NPDES civil cases start with the two
+          character post abbreviation, followed by a sequence number.
         example: 05-200021274
         title: Case Number
         type: string
@@ -3421,22 +3841,37 @@ definitions:
     xml:
       name: CAEDDocument
   crs1_CaseInformation:
-    description: The basic information section contains information that identifies the action and some key descriptive variables, such as case status and case type.
+    description: The basic information section contains information that identifies
+      the action and some key descriptive variables, such as case status and
+      case type.
     properties:
       Branch:
-        description: The Branch or Unit of the Office of Regional Counsel assigned for the case.
+        description: The Branch or Unit of the Office of Regional Counsel assigned for
+          the case.
         title: Branch
         type: string
       CaseName:
         description: >-
-          A unique number identifying the enforcement action. For EPA civil cases, these numbers begin with either the two digit EPA Region Code, "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or Western Field Office CAA Mobile Source Program cases); followed by the fiscal year in which the action was initiated. After the fiscal year there is a sequence number. State NPDES civil cases start with the two character post abbreviation, followed by a sequence number.
+          A unique number identifying the enforcement action. For EPA civil
+          cases, these numbers begin with either the two digit EPA Region Code,
+          "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or
+          Western Field Office CAA Mobile Source Program cases); followed by the
+          fiscal year in which the action was initiated. After the fiscal year
+          there is a sequence number. State NPDES civil cases start with the two
+          character post abbreviation, followed by a sequence number.
 
           For criminal cases, the ID was generated in ECHO based on the following format: CR [prosecution_summary_id]. The source of the Prosecution Summary ID is the Summary of Criminal Prosecutions database.
         example: Baltes Real Estate Company
         title: Case Name
         type: string
       CaseNumber:
-        description: A unique number identifying the enforcement action. For EPA civil cases, these numbers begin with either the two digit EPA Region Code, "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or Western Field Office CAA Mobile Source Program cases); followed by the fiscal year in which the action was initiated. After the fiscal year there is a sequence number. State NPDES civil cases start with the two character post abbreviation, followed by a sequence number.
+        description: A unique number identifying the enforcement action. For EPA civil
+          cases, these numbers begin with either the two digit EPA Region Code,
+          "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or
+          Western Field Office CAA Mobile Source Program cases); followed by the
+          fiscal year in which the action was initiated. After the fiscal year
+          there is a sequence number. State NPDES civil cases start with the two
+          character post abbreviation, followed by a sequence number.
         example: 05-200021274
         title: Case Number
         type: string
@@ -3451,20 +3886,27 @@ definitions:
         title: Case Status Date
         type: string
       CaseSummary:
-        description: The summary of the violation environmental problem and a description of the cause of action (basis of legal action).  The summary could be extracted from the referral transmission memo or letter or it could be required as the first section of a revised standardized referral document.
+        description: The summary of the violation environmental problem and a
+          description of the cause of action (basis of legal action).  The
+          summary could be extracted from the referral transmission memo or
+          letter or it could be required as the first section of a revised
+          standardized referral document.
         title: Case Summary
         type: string
       CaseType:
-        description: The unique code that identifies a type of compliance event or enforcement action.
+        description: The unique code that identifies a type of compliance event or
+          enforcement action.
         example: AFR
         title: Case Type
         type: string
       DOJDocketNumber:
-        description: The docket number assigned by the Department of Justice to EPA's Enforcement Action.
+        description: The docket number assigned by the Department of Justice to EPA's
+          Enforcement Action.
         title: DOJ Docket Number
         type: string
       EnforcementOutcome:
-        description: A description of the mechanism by which the Enforcement Action is resolved.
+        description: A description of the mechanism by which the Enforcement Action is
+          resolved.
         example: Source Agrees
         title: Enforcement Outcome
         type: string
@@ -3489,7 +3931,9 @@ definitions:
         title: Multimedia Action Flag
         type: string
       RegionalDocketNumber:
-        description: The number the Clerk of the Court assigns to a case that is filed or to a consent decree when it is lodged.  For administrative cases, it is the number assigned to the case by the Regional Hearing Clerk.
+        description: The number the Clerk of the Court assigns to a case that is filed
+          or to a consent decree when it is lodged.  For administrative cases,
+          it is the number assigned to the case by the Regional Hearing Clerk.
         example: III-88-40-DC
         title: Regional Docket Number
         type: string
@@ -3498,32 +3942,51 @@ definitions:
         title: Relief Sought
         type: string
       ResultVolDisclosure:
-        description: A flag that indicates the Enforcement Action was the result of a self disclosure.
+        description: A flag that indicates the Enforcement Action was the result of a
+          self disclosure.
         example: No
         title: Result of Voluntary Disclosure Flag
         type: string
       TotalComplianceActionCost:
-        description: The estimated dollar value of injunctive relief and other physical/nonphysical costs of returning to compliance, from all settlements at a case. Injunctive relief represents the actions a defendant is ordered to undertake to achieve and maintain compliance, such as installing a new pollution control device to reduce air pollution, or preventing emissions of a pollutant in the first place.
+        description: The estimated dollar value of injunctive relief and other
+          physical/nonphysical costs of returning to compliance, from all
+          settlements at a case. Injunctive relief represents the actions a
+          defendant is ordered to undertake to achieve and maintain compliance,
+          such as installing a new pollution control device to reduce air
+          pollution, or preventing emissions of a pollutant in the first place.
         example: $288
         title: Total Compliance Action Cost
         type: string
       TotalCostRecovery:
-        description: The amount of the cost recovery ordered or agreed to be repaid by the responsible parties, cost recovery whole dollar amount awarded by the Court and due the the Superfund. For administrative cases, it is the cost recovery whole dollar amount of the Final Order.
+        description: The amount of the cost recovery ordered or agreed to be repaid by
+          the responsible parties, cost recovery whole dollar amount awarded by
+          the Court and due the the Superfund. For administrative cases, it is
+          the cost recovery whole dollar amount of the Final Order.
         example: $6,598
         title: Total Cost Recovery
         type: string
       TotalFederalPenalty:
-        description: For civil judicial enforcement actions, this amount is the federal penalty assessed against the defendant(s)� as specified in the final entered Consent Decree or Court Order. For administrative enforcement actions, it is the penalty assessed in the Consent/Final Order. It does not include the amount of the penalty mitigated due to a SEP or the amount shared with the state or local entities. Interest payments associated with a penalty paid over time are not included in this amount.
+        description: For civil judicial enforcement actions, this amount is the federal
+          penalty assessed against the defendant(s)� as specified in the final
+          entered Consent Decree or Court Order. For administrative enforcement
+          actions, it is the penalty assessed in the Consent/Final Order. It
+          does not include the amount of the penalty mitigated due to a SEP or
+          the amount shared with the state or local entities. Interest payments
+          associated with a penalty paid over time are not included in this
+          amount.
         example: $13,210
         title: Total Federal Penalty
         type: string
       TotalSEPCost:
-        description: The total value of all SEPs for all settlements at the enforcement case.
+        description: The total value of all SEPs for all settlements at the enforcement
+          case.
         example: $4,100.00
         title: Total Supplemental Environmental Projects Cost
         type: string
       TotalStatePenalty:
-        description: The total dollar penalty amount from all settlements to be paid to a state or local enforcement authority that is party to a concluded enforcement action.
+        description: The total dollar penalty amount from all settlements to be paid to
+          a state or local enforcement authority that is party to a concluded
+          enforcement action.
         title: Total State Penalty
         type: string
       Violations:
@@ -3564,7 +4027,8 @@ definitions:
         title: Actual Date
         type: string
       Event:
-        description: Identifies a major judicial or administrative enforcement action milestone.
+        description: Identifies a major judicial or administrative enforcement action
+          milestone.
         example: Enforcement Action Data Entered
         title: Event
         type: string
@@ -3575,10 +4039,13 @@ definitions:
     xml:
       name: CaseMilestone
   crs1_Citations:
-    description: The corresponding regulation in the Code of Federal Regulations (CFR) or U.S. Code (U.S.C.) associated with the enforcement action.
+    description: The corresponding regulation in the Code of Federal Regulations
+      (CFR) or U.S. Code (U.S.C.) associated with the enforcement action.
     properties:
       Programs:
-        description: A description of the EPA program(s) under which an enforcement action has been taken, and which correspond to the cited statutes and sections.
+        description: A description of the EPA program(s) under which an enforcement
+          action has been taken, and which correspond to the cited statutes and
+          sections.
         example: Imminent & Substantial Endangerment Order
         title: Programs
         type: string
@@ -3600,23 +4067,31 @@ definitions:
     xml:
       name: Citation
   crs1_ComplianceSchedules:
-    description: This section provides compliance schedule milestone activity information for a subset of EPA judicial consent decrees with compliance schedules.
+    description: This section provides compliance schedule milestone activity
+      information for a subset of EPA judicial consent decrees with compliance
+      schedules.
     properties:
       ActualDate:
-        description: The actual date on which the Compliance Schedule event was completed/achieved.
+        description: The actual date on which the Compliance Schedule event was
+          completed/achieved.
         example: 08/12/1988
         type: string
       EventAmount:
-        description: The dollar amount of a scheduled payment initiated through a penalty action or a cost recovery pursuant to a Final Order.
+        description: The dollar amount of a scheduled payment initiated through a
+          penalty action or a cost recovery pursuant to a Final Order.
         example: $100.00
         title: Event Amount
         type: string
       FacilityFRSID:
-        description: The number assigned by the Facility Linkage Application that is used to associate facility records from multiple environmental database systems that are known or believed to represent the same facility.
+        description: The number assigned by the Facility Linkage Application that is
+          used to associate facility records from multiple environmental
+          database systems that are known or believed to represent the same
+          facility.
         title: Facility FRS ID
         type: string
       ScheduleCommentText:
-        description: The free-text field used to store descriptive Compliance Schedule information.
+        description: The free-text field used to store descriptive Compliance Schedule
+          information.
         title: Schedule Comment Text
         type: string
       ScheduleDate:
@@ -3624,11 +4099,13 @@ definitions:
         title: Schedule Date
         type: string
       ScheduleEventDescription:
-        description: The description of the particular event with which the permittee is scheduled to comply.
+        description: The description of the particular event with which the permittee is
+          scheduled to comply.
         title: Schedule Event Description
         type: string
       ScheduleNumber:
-        description: A two-digit number which in combination with the Schedule Type and NPDES ID uniquely identifies a Compliance Schedule.
+        description: A two-digit number which in combination with the Schedule Type and
+          NPDES ID uniquely identifies a Compliance Schedule.
         title: Schedule Number
         type: string
     required:
@@ -3643,25 +4120,34 @@ definitions:
     xml:
       name: ComplianceSchedule
   crs1_ComplyingActions:
-    description: For civil enforcement actions, the value of the costs incurred by the defendant/respondent to attain compliance with the law and restore the environment. This value does not include penalties, cost recovery, or costs associated with SEPs.
+    description: For civil enforcement actions, the value of the costs incurred by
+      the defendant/respondent to attain compliance with the law and restore the
+      environment. This value does not include penalties, cost recovery, or
+      costs associated with SEPs.
     properties:
       ComplyingActionCategory:
-        description: The category (i.e., Direct Environmental Reduction, Preventative, or Facility Management or Information Practice) to which a Complying Action belongs.
+        description: The category (i.e., Direct Environmental Reduction, Preventative,
+          or Facility Management or Information Practice) to which a Complying
+          Action belongs.
         example: Direct Environmental Reduction
         title: Complying Action Category
         type: string
       ComplyingActionDescription:
-        description: A text description of the type of the requirements obliging the defendant/respondent to take or refrain from certain actions.
+        description: A text description of the type of the requirements obliging the
+          defendant/respondent to take or refrain from certain actions.
         example: Migrated Industrial/Municipal Process Change (Includes Flow Reduction)
         title: Complying Action Description
         type: string
       ComplyingActionId:
-        description: The unique identifier for an enforceable requirement obliging the defendant/respondent to take or refrain from certain specified actions.
+        description: The unique identifier for an enforceable requirement obliging the
+          defendant/respondent to take or refrain from certain specified
+          actions.
         example: "2600823911"
         title: Complying Action ID
         type: string
       ComplyingActionType:
-        description: A code that uniquely identifies the requirements obliging the defendant/respondent to take or refrain from certain actions.
+        description: A code that uniquely identifies the requirements obliging the
+          defendant/respondent to take or refrain from certain actions.
         example: IPC
         title: Complying Action Type
         type: string
@@ -3674,20 +4160,24 @@ definitions:
     xml:
       name: ComplyingAction
   crs1_Defendants:
-    description: This section lists each defendant's name and whether the defendant was named in the complaint and/or in the settlement.
+    description: This section lists each defendant's name and whether the defendant
+      was named in the complaint and/or in the settlement.
     properties:
       DefendantName:
-        description: The name of the defendant, or respondent associated with the Enforcement Action.
+        description: The name of the defendant, or respondent associated with the
+          Enforcement Action.
         example: AMERICAN CYANAMID COMPANY
         title: Defendant Name
         type: string
       NamedInComplaint:
-        description: A flag that indicates whether the Defendant or Respondent was named in the filed complaint.
+        description: A flag that indicates whether the Defendant or Respondent was named
+          in the filed complaint.
         example: Y
         title: Named In Complaint Flag
         type: string
       NamedInSettlement:
-        description: A flag that indicates whether the Defendant or Respondent was named in the Final Order.
+        description: A flag that indicates whether the Defendant or Respondent was named
+          in the Final Order.
         example: N
         title: Named in Settlement Flag
         type: string
@@ -3699,7 +4189,9 @@ definitions:
     xml:
       name: Defendant
   crs1_EnforcementConclusions:
-    description: This section contains information about the conclusion(s) of the civil enforcement case, where it resulted in an order, consent decree, or other enforceable settlement.
+    description: This section contains information about the conclusion(s) of the
+      civil enforcement case, where it resulted in an order, consent decree, or
+      other enforceable settlement.
     properties:
       ActualTerminationDate:
         description: The date on which the Final Order was terminated.
@@ -3707,7 +4199,8 @@ definitions:
         title: Actual Termination Date
         type: string
       ComplianceActionCost:
-        description: The total value of all SEPs for all settlements at the enforcement case.
+        description: The total value of all SEPs for all settlements at the enforcement
+          case.
         example: $279,450
         title: Compliance Action Cost
         type: string
@@ -3728,37 +4221,56 @@ definitions:
           name: ComplyingActions
           wrapped: true
       CostRecovery:
-        description: For civil enforcement actions, cost recovery awarded is the amount of cost recovery ordered or agreed to be repaid by the responsible party of parties.
+        description: For civil enforcement actions, cost recovery awarded is the amount
+          of cost recovery ordered or agreed to be repaid by the responsible
+          party of parties.
         example: "0"
         title: Cost Recovery Amount
         type: string
       EnforcementActionClosedDate:
-        description: The date the actions requested in the final order have been completed by the recipient; or the termination date of the final order (if such a date is specified) has passed; or the enforcement action has been withdrawn or dismissed; or the enforcement action has been superseded by, or combined into, another related enforcement action addressing the same violations.
+        description: The date the actions requested in the final order have been
+          completed by the recipient; or the termination date of the final order
+          (if such a date is specified) has passed; or the enforcement action
+          has been withdrawn or dismissed; or the enforcement action has been
+          superseded by, or combined into, another related enforcement action
+          addressing the same violations.
         example: 07/21/2011
         title: Enforcement Action Closed Date
         type: string
       EnforcementConclusionId:
-        description: The system-generated unique identifier of the Final Order to which the Compliance Action belongs.
+        description: The system-generated unique identifier of the Final Order to which
+          the Compliance Action belongs.
         example: "2600006100"
         title: Enforcement Conclusion ID
         type: string
       EnforcementConclusionName:
-        description: The name of a Final Order associated with an Enforcement Action as assigned by the Lead EPA Attorney for federal actions.
+        description: The name of a Final Order associated with an Enforcement Action as
+          assigned by the Lead EPA Attorney for federal actions.
         example: 4 J International
         title: Enforcement Conclusion Name
         type: string
       EnforcementConclusionType:
-        description: A description of the enforcement instrument used by EPA to settle the case.
+        description: A description of the enforcement instrument used by EPA to settle
+          the case.
         example: Administrative Penalty Order With or Without Injunctive Relief
         title: Enforcement Conclusion Type
         type: string
       FacilitiesInSettlement:
-        description: The unique identification number assigned to a facility in the Facility Registry Service (FRS), for each facility included in the settlement.
+        description: The unique identification number assigned to a facility in the
+          Facility Registry Service (FRS), for each facility included in the
+          settlement.
         example: "110001928317"
         title: Facilities in Settlement
         type: string
       FederalPenalty:
-        description: For civil judicial Enforcement Actions, this amount is the Federal penalty assessed against the defendant(s) as specified in the final entered Consent Decree or Court Order.  For administrative Enforcement Actions, it is the penalty assessed in the Consent/Final Order.  It does not include the amount of the penalty mitigated due to a SEP or the amount shared with the state or local entities.  Interest payments associated with a penalty paid over time are not to be included in this amount.  It is the total Federal amount for each Final Order.
+        description: For civil judicial Enforcement Actions, this amount is the Federal
+          penalty assessed against the defendant(s) as specified in the final
+          entered Consent Decree or Court Order.  For administrative Enforcement
+          Actions, it is the penalty assessed in the Consent/Final Order.  It
+          does not include the amount of the penalty mitigated due to a SEP or
+          the amount shared with the state or local entities.  Interest payments
+          associated with a penalty paid over time are not to be included in
+          this amount.  It is the total Federal amount for each Final Order.
         example: $65,000.00
         title: Federal Penalty
         type: string
@@ -3779,21 +4291,29 @@ definitions:
           name: PollutantReductions
           wrapped: true
       SEPCost:
-        description: The total value of all SEPs for all settlements at the enforcement case.
+        description: The total value of all SEPs for all settlements at the enforcement
+          case.
         example: $4,100.00
         title: Supplemental Environmental Projects Cost
         type: string
       SettlementEnteredDate:
-        description: The civil case date the Final Order is signed by the presiding Judge and entered by the Clerk of the Court; it is the date the Clerk stamps on the document.  For an Administrative Formal EA, this is the Final Order Issued Date; for a Judicial EA, this is the Final Order Entered Date.
+        description: The civil case date the Final Order is signed by the presiding
+          Judge and entered by the Clerk of the Court; it is the date the Clerk
+          stamps on the document.  For an Administrative Formal EA, this is the
+          Final Order Issued Date; for a Judicial EA, this is the Final Order
+          Entered Date.
         example: 07/09/2011
         title: Settlement Entered Date
         type: string
       SettlementLodgedDate:
-        description: The date the settlement document is given to the Clerk of the Court for lodging in the District Court; it is the date the Clerk stamps on the document. (Federal Judicial EAs only).
+        description: The date the settlement document is given to the Clerk of the Court
+          for lodging in the District Court; it is the date the Clerk stamps on
+          the document. (Federal Judicial EAs only).
         title: Settlement Lodged Date
         type: string
       StatePenalty:
-        description: The dollar penalty amount to be paid to a state or local enforcement authority that is party to a concluded enforcement action.
+        description: The dollar penalty amount to be paid to a state or local
+          enforcement authority that is party to a concluded enforcement action.
         example: $43,000.00
         title: State Penalty
         type: string
@@ -3828,15 +4348,19 @@ definitions:
     xml:
       name: EnforcementConclusion
   crs1_Facilities:
-    description: This section provides detailed facility and address information on all of the facilities associated with the civil enforcement case.
+    description: This section provides detailed facility and address information on
+      all of the facilities associated with the civil enforcement case.
     properties:
       FRSNumber:
-        description: The identification number assigned to a facility in the�Facility Registry Service (FRS)�to uniquely identify a facility site.
+        description: The identification number assigned to a facility in the�Facility
+          Registry Service (FRS)�to uniquely identify a facility site.
         example: "110007875353"
         title: FRS Number
         type: string
       FacilityAddress:
-        description: The address that describes the physical (geographic) location of the front door or main entrance of a Facility site, including urban-style street address or rural address.
+        description: The address that describes the physical (geographic) location of
+          the front door or main entrance of a Facility site, including
+          urban-style street address or rural address.
         example: WEST 19TH STREET
         title: Facility Address
         type: string
@@ -3861,7 +4385,9 @@ definitions:
         title: Facility Zipcode
         type: string
       NAICSCodes:
-        description: A 6-digit code to classify industrial establishments. For detailed information about NAICS, please refer to the U.S. Census Bureau�NAICS�webpage.
+        description: A 6-digit code to classify industrial establishments. For detailed
+          information about NAICS, please refer to the U.S. Census
+          Bureau�NAICS�webpage.
         title: NAICS Codes
         type: string
       SICCodes:
@@ -3882,7 +4408,9 @@ definitions:
     xml:
       name: Facility
   crs1_FinalOrderStatuses:
-    description: This section provides the compliance status for a subset of EPA judicial consent decrees with compliance schedules requiring more than three years to complete.
+    description: This section provides the compliance status for a subset of EPA
+      judicial consent decrees with compliance schedules requiring more than
+      three years to complete.
     properties:
       FiscalYear:
         description: The fiscal year in which the activity occurred.
@@ -3923,7 +4451,9 @@ definitions:
         title: Law
         type: string
       Programs:
-        description: A description of the EPA program(s) under which an enforcement action has been taken, and which correspond to the cited statutes and sections.
+        description: A description of the EPA program(s) under which an enforcement
+          action has been taken, and which correspond to the cited statutes and
+          sections.
         example: Imminent & Substantial Endangerment Order
         title: Programs
         type: string
@@ -3940,39 +4470,51 @@ definitions:
     xml:
       name: LawAndSections
   crs1_PollutantReductions:
-    description: This section provides information relating complying actions and SEPs to their estimated or actual environmental impact on pollutant reduction.
+    description: This section provides information relating complying actions and
+      SEPs to their estimated or actual environmental impact on pollutant
+      reduction.
     properties:
       AnnualAmount:
-        description: The amount of reduction or elimination of each pollutant or waste in pounds, kilograms, or liquid measure that resulted from the SEP or Complying Actions.
+        description: The amount of reduction or elimination of each pollutant or waste
+          in pounds, kilograms, or liquid measure that resulted from the SEP or
+          Complying Actions.
         example: 61,802
         type: string
       ComplyingActionId:
-        description: The unique identifier for an enforceable requirement obliging the defendant/respondent to take or refrain from certain specified actions.
+        description: The unique identifier for an enforceable requirement obliging the
+          defendant/respondent to take or refrain from certain specified
+          actions.
         example: "2600823911"
         title: Complying Action ID
         type: string
       EnvironmentalImpactId:
-        description: The system-generated unique identifier of the Environmental Impact record.
+        description: The system-generated unique identifier of the Environmental Impact
+          record.
         example: "2600004336"
         title: Environmental Impact ID
         type: string
       Media:
-        description: The name/description of the media where the pollutants or waste were emitted/discharged.
+        description: The name/description of the media where the pollutants or waste
+          were emitted/discharged.
         example: Air
         title: Pollutant Media
         type: string
       Pollutant:
-        description: The name that EPA has selected as its preferred name for a substance (also known as registry name). If the registry name is not available, use the systematic name instead.
+        description: The name that EPA has selected as its preferred name for a
+          substance (also known as registry name). If the registry name is not
+          available, use the systematic name instead.
         example: Carbon monoxide
         title: Pollutant
         type: string
       SEPId:
-        description: The system-generated unique identifier of the SEP record affiliated with the Environmental Impact.
+        description: The system-generated unique identifier of the SEP record affiliated
+          with the Environmental Impact.
         example: "12345"
         title: Supplemental Environmental Projects ID
         type: string
       SEPorComp:
-        description: A flag that indicates whether the quantitative environmental impact pertains to a SEP or Complying Action.
+        description: A flag that indicates whether the quantitative environmental impact
+          pertains to a SEP or Complying Action.
         example: C
         title: SEP or Complying Action Flag
         type: string
@@ -3994,14 +4536,18 @@ definitions:
     xml:
       name: PollutantReduction
   crs1_Pollutants:
-    description: The common name identifying the pollutant, waste material, substance, or chemical reduced.
+    description: The common name identifying the pollutant, waste material,
+      substance, or chemical reduced.
     properties:
       ChemicalAbstractNumber:
-        description: This is the unique number assigned to a chemical substance by the Chemical Abstracts Service.
+        description: This is the unique number assigned to a chemical substance by the
+          Chemical Abstracts Service.
         title: Chemical Abstract Number
         type: string
       PollutantName:
-        description: The name designating the waste material substance or chemical involved at the facility that has a Quantitative Environmental Impact addressed in the SEP or Complying Actions.
+        description: The name designating the waste material substance or chemical
+          involved at the facility that has a Quantitative Environmental Impact
+          addressed in the SEP or Complying Actions.
         example: NONE
         title: Pollutant Name
         type: string
@@ -4015,7 +4561,8 @@ definitions:
     description: Crosswalk between programs and facilities (identified by FRS ID).
     properties:
       FRSNumber:
-        description: The identification number assigned to a facility in the�Facility Registry Service (FRS)�to uniquely identify a facility site.
+        description: The identification number assigned to a facility in the�Facility
+          Registry Service (FRS)�to uniquely identify a facility site.
         example: "110007875353"
         title: FRS Number
         type: string
@@ -4037,7 +4584,9 @@ definitions:
     xml:
       name: ProgramLink
   crs1_RelatedActivities:
-    description: This section provides an Activity Type description and date for other ICIS activities (e.g., inspections, or compliance assistance) that are linked to the enforcement action.
+    description: This section provides an Activity Type description and date for
+      other ICIS activities (e.g., inspections, or compliance assistance) that
+      are linked to the enforcement action.
     properties:
       ActualDate:
         description: The actual date on which the event was completed/achieved.
@@ -4045,7 +4594,8 @@ definitions:
         title: Actual Date
         type: string
       Description:
-        description: A description of the category of Supplemental Environment Project (SEP) for a settlement.
+        description: A description of the category of Supplemental Environment Project
+          (SEP) for a settlement.
         title: Description
         type: string
     required:
@@ -4117,7 +4667,8 @@ definitions:
           name: LawsAndSections
           wrapped: true
       Message:
-        description: Field to record messages (typically performance-related) about packet processing
+        description: Field to record messages (typically performance-related) about
+          packet processing
         example: Success
         title: Message
         type: string
@@ -4138,7 +4689,9 @@ definitions:
           name: ProgramLinks
           wrapped: true
       RelatedActivities:
-        description: This section provides an Activity Type description and date for other ICIS activities (e.g., inspections, or compliance assistance) that are linked to the enforcement action.
+        description: This section provides an Activity Type description and date for
+          other ICIS activities (e.g., inspections, or compliance assistance)
+          that are linked to the enforcement action.
         items:
           $ref: "#/definitions/crs1_RelatedActivities"
         title: Related Activities
@@ -4161,23 +4714,36 @@ definitions:
       - CAEDDocuments
     type: object
   crs1_SupplementalEnvironmentalProjects:
-    description: As part of a settlement, a defendant may voluntarily agree to undertake an environmentally beneficial project (Supplement Environmental Project) related to the violation in exchange for mitigation of the penalty to be paid. It does not include activities a defendant must take to return to compliance with the law. A single settlement may have multiple SEPs.
+    description: As part of a settlement, a defendant may voluntarily agree to
+      undertake an environmentally beneficial project (Supplement Environmental
+      Project) related to the violation in exchange for mitigation of the
+      penalty to be paid. It does not include activities a defendant must take
+      to return to compliance with the law. A single settlement may have
+      multiple SEPs.
     properties:
       Category:
-        description: A code that uniquely identifies a category of Supplemental Environment Project (SEP) for a settlement (e.g., Assessments and Audits, Environmental Compliance Promotion, Emergency Planning and Preparedness, Environmental Restoration).
+        description: A code that uniquely identifies a category of Supplemental
+          Environment Project (SEP) for a settlement (e.g., Assessments and
+          Audits, Environmental Compliance Promotion, Emergency Planning and
+          Preparedness, Environmental Restoration).
         title: Category
         type: string
       Description:
-        description: A description of the category of Supplemental Environment Project (SEP) for a settlement.
+        description: A description of the category of Supplemental Environment Project
+          (SEP) for a settlement.
         title: Description
         type: string
       SEPAmount:
-        description: The cost applied to the type(s) of environmentally beneficial projects which a defendant/respondent agree to undertake in settlement of an enforcement action, but which the defendant/respondent is not otherwise legally required to perform.
+        description: The cost applied to the type(s) of environmentally beneficial
+          projects which a defendant/respondent agree to undertake in settlement
+          of an enforcement action, but which the defendant/respondent is not
+          otherwise legally required to perform.
         example: $4,100.00
         title: Supplemental Environmental Projects Amount
         type: string
       SEPId:
-        description: The system-generated unique identifier of the SEP record affiliated with the Environmental Impact.
+        description: The system-generated unique identifier of the SEP record affiliated
+          with the Environmental Impact.
         example: "12345"
         title: Supplemental Environmental Projects ID
         type: string
@@ -4198,27 +4764,34 @@ definitions:
     description: The data returned by the service call.
     properties:
       AFRRows:
-        description: Displays the number of Administrative Formal cases within the search results.
+        description: Displays the number of Administrative Formal cases within the
+          search results.
         example: "5"
         title: Administrative Formal Actions Row Count
         type: string
       CAARows:
-        description: The number of facilities or cases within the result set that have Clean Air Act (CAA) permits.
+        description: The number of facilities or cases within the result set that have
+          Clean Air Act (CAA) permits.
         example: "50"
         title: Clean Air Act Count
         type: string
       CERCLARows:
-        description: The number of cases within the results set that relate to the Comprehensive Environmental Response, Compensation, and Liability Act (CERCLA).
+        description: The number of cases within the results set that relate to the
+          Comprehensive Environmental Response, Compensation, and Liability Act
+          (CERCLA).
         example: "50"
-        title: Comprehensive Environmental Response, Compensation, and Liability Act Count
+        title: Comprehensive Environmental Response, Compensation, and Liability Act
+          Count
         type: string
       CWARows:
-        description: The number of facilities or cases within the results set that have Clean Water Act (CWA) permits.
+        description: The number of facilities or cases within the results set that have
+          Clean Water Act (CWA) permits.
         example: "50"
         title: Clean Water Act Count
         type: string
       Cases:
-        description: A summary of the violation(s), environmental problem(s), and a description of the cause of action.
+        description: A summary of the violation(s), environmental problem(s), and a
+          description of the cause of action.
         items:
           $ref: "#/definitions/crs0_Cases"
         title: Cases
@@ -4227,27 +4800,32 @@ definitions:
           name: Cases
           wrapped: true
       CriminalRows:
-        description: Displays the number of criminal enforcement cases within the search results.
+        description: Displays the number of criminal enforcement cases within the search
+          results.
         example: "0"
         title: Count of Criminal Cases
         type: string
       EPCRARows:
-        description: The number of cases within the results set that relate to the Emergency Planning and Community Right to Know Act (EPCRA).
+        description: The number of cases within the results set that relate to the
+          Emergency Planning and Community Right to Know Act (EPCRA).
         example: "50"
         title: Emergency Planning and Community Right to Know Act Count
         type: string
       FIFRARows:
-        description: The number of cases within the result set that relate to the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).
+        description: The number of cases within the result set that relate to the
+          Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).
         example: "50"
         title: Federal Insecticide, Fungicide, and Rodenticide Act Count
         type: string
       FedPenRows:
-        description: Displays the number of cases with federal penalty assessed greater than $0.
+        description: Displays the number of cases with federal penalty assessed greater
+          than $0.
         example: "3"
         title: Federal Penalty Rows
         type: string
       FederalRows:
-        description: The number of facilities or cases within the result set that have a relationship to a Federal facility.
+        description: The number of facilities or cases within the result set that have a
+          relationship to a Federal facility.
         example: "50"
         title: Federal Related Facility Count
         type: string
@@ -4259,7 +4837,8 @@ definitions:
       MapOutput:
         $ref: "#/definitions/crs0_MapOutput"
       Message:
-        description: Field to record messages (typically performance-related) about packet processing
+        description: Field to record messages (typically performance-related) about
+          packet processing
         example: Success
         title: Message
         type: string
@@ -4279,12 +4858,14 @@ definitions:
         title: Query Row Count
         type: string
       RCRARows:
-        description: The number of facilities or cases within the results set that have Resource Conservation and Recovery Action (RCRA) permits.
+        description: The number of facilities or cases within the results set that have
+          Resource Conservation and Recovery Action (RCRA) permits.
         example: "50"
         title: Resource Conservation & Recovery Act Count
         type: string
       SDWARows:
-        description: The number of facilities or cases within the results set that have Safe Drinking Water Act (SDWA) permits.
+        description: The number of facilities or cases within the results set that have
+          Safe Drinking Water Act (SDWA) permits.
         example: "50"
         title: Safe Drinking Water Act Count
         type: string
@@ -4294,7 +4875,8 @@ definitions:
         title: Number of Cases found with SEP data
         type: string
       TSCARows:
-        description: The number of cases within the result set that relate to the Toxic Substances Control Act (TSCA).
+        description: The number of cases within the result set that relate to the Toxic
+          Substances Control Act (TSCA).
         example: "50"
         title: Toxic Substances Control Act Count
         type: string
@@ -4319,30 +4901,41 @@ definitions:
       - PageNo
     type: object
   crs3_CRDefendants:
-    description: Provides identifying information about the defendants and courts involved in the criminal enforcement case.
+    description: Provides identifying information about the defendants and courts
+      involved in the criminal enforcement case.
     properties:
       DefendantType:
-        description: The role of each defendant in the criminal enforcement case, either Principal Defendant or Defendant. Multiple defendants (up to fourteen) may be associated with one case, but only one is designated as principal.
+        description: The role of each defendant in the criminal enforcement case, either
+          Principal Defendant or Defendant. Multiple defendants (up to fourteen)
+          may be associated with one case, but only one is designated as
+          principal.
         example: Principal Defendant
         title: Defendent Type
         type: string
       District:
-        description: The United States district courts are the trial courts of the federal court system.
+        description: The United States district courts are the trial courts of the
+          federal court system.
         example: S.D.
         title: Court District
         type: string
       DocketNumber:
-        description: The number the Clerk of the Court assigned to the case that is filed or to a consent decree when it is lodged. For administrative cases, this number is assigned to the case by the Regional Hearing Clerk.
+        description: The number the Clerk of the Court assigned to the case that is
+          filed or to a consent decree when it is lodged. For administrative
+          cases, this number is assigned to the case by the Regional Hearing
+          Clerk.
         example: 04-20324-CR-FOOO
         title: Court Docket Number
         type: string
       Name:
-        description: The name of the case assigned to the enforcement action by the lead attorney. Generally, the primary defendant's name is used as the case name. For civil CERCLA cases, the facility/site name may be used.
+        description: The name of the case assigned to the enforcement action by the lead
+          attorney. Generally, the primary defendant's name is used as the case
+          name. For civil CERCLA cases, the facility/site name may be used.
         example: George D. Smith
         title: Name
         type: string
       State:
-        description: The two letter abbreviation that represents the state or state equivalent for the U.S.
+        description: The two letter abbreviation that represents the state or state
+          equivalent for the U.S.
         example: FL
         title: State
         type: string
@@ -4356,10 +4949,15 @@ definitions:
     xml:
       name: CRDefendants
   crs3_CRDetails:
-    description: A list of the violation(s), environmental problem(s), and a description of the cause of action organized by date of occurrence. The case details walk through each step of the case activities and displayed the date on which each occurred.
+    description: A list of the violation(s), environmental problem(s), and a
+      description of the cause of action organized by date of occurrence. The
+      case details walk through each step of the case activities and displayed
+      the date on which each occurred.
     properties:
       DetailCitations:
-        description: The corresponding regulation in the Code of Federal Regulations (CFR) or U.S. Code (U.S.C.) associated with the enforcement action case detail.
+        description: The corresponding regulation in the Code of Federal Regulations
+          (CFR) or U.S. Code (U.S.C.) associated with the enforcement action
+          case detail.
         title: Detail Citations
         type: string
       DetailDate:
@@ -4379,19 +4977,30 @@ definitions:
     xml:
       name: CRDetails
   crs3_CaseInformation:
-    description: The basic information section contains information that identifies the action and some key descriptive variables, such as case status and case type.
+    description: The basic information section contains information that identifies
+      the action and some key descriptive variables, such as case status and
+      case type.
     properties:
       CaseIdentifier:
-        description: A unique number identifying the enforcement action. For EPA civil cases, these numbers begin with either the two digit EPA Region Code, "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or Western Field Office CAA Mobile Source Program cases); followed by the fiscal year in which the action was initiated.
+        description: A unique number identifying the enforcement action. For EPA civil
+          cases, these numbers begin with either the two digit EPA Region Code,
+          "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or
+          Western Field Office CAA Mobile Source Program cases); followed by the
+          fiscal year in which the action was initiated.
         example: "1000"
         title: Case Identifier
         type: string
       CaseSummary:
-        description: The summary of the violation environmental problem and a description of the cause of action (basis of legal action).  The summary could be extracted from the referral transmission memo or letter or it could be required as the first section of a revised standardized referral document.
+        description: The summary of the violation environmental problem and a
+          description of the cause of action (basis of legal action).  The
+          summary could be extracted from the referral transmission memo or
+          letter or it could be required as the first section of a revised
+          standardized referral document.
         title: Case Summary
         type: string
       Citations:
-        description: The corresponding regulation in the Code of Federal Regulations (CFR) or U.S. Code (U.S.C.) associated with the enforcement action.
+        description: The corresponding regulation in the Code of Federal Regulations
+          (CFR) or U.S. Code (U.S.C.) associated with the enforcement action.
         title: Citations
         type: string
       FiscalYear:
@@ -4414,14 +5023,21 @@ definitions:
     xml:
       name: CRCaseInformation
   crs3_Locations:
-    description: This section provides geographic locational information for the criminal activity.
+    description: This section provides geographic locational information for the
+      criminal activity.
     properties:
       City:
-        description: The name of the city, town, village or other locality, when identifiable, within whose boundaries (the majority of) the facility site is located. This is not always the same as the city used for USPS mail delivery.
+        description: The name of the city, town, village or other locality, when
+          identifiable, within whose boundaries (the majority of) the facility
+          site is located. This is not always the same as the city used for USPS
+          mail delivery.
         title: City
         type: string
       County:
-        description: The name of the county, when identifiable, within whose boundaries (the majority of) the criminal activity was located. The county was derived in ECHO based on the latitude and longitude provided in the Summary of Criminal Prosecutions database.
+        description: The name of the county, when identifiable, within whose boundaries
+          (the majority of) the criminal activity was located. The county was
+          derived in ECHO based on the latitude and longitude provided in the
+          Summary of Criminal Prosecutions database.
         title: County
         type: string
       EPARegion:
@@ -4430,19 +5046,22 @@ definitions:
         title: EPA Region
         type: string
       Latitude:
-        description: The latitude of the facility or permit holder as maintained in each data system.
+        description: The latitude of the facility or permit holder as maintained in each
+          data system.
         example: "34.606651"
         format: double
         title: Latitude
         type: string
       Longitude:
-        description: The longitude of the facility or permit holder as maintained in each data system
+        description: The longitude of the facility or permit holder as maintained in
+          each data system
         example: "-86.982419"
         format: double
         title: Longitude
         type: string
       State:
-        description: The two letter abbreviation that represents the state or state equivalent for the U.S.
+        description: The two letter abbreviation that represents the state or state
+          equivalent for the U.S.
         example: FL
         title: State
         type: string
@@ -4492,7 +5111,8 @@ definitions:
           name: Locations
           wrapped: true
       Message:
-        description: Field to record messages (typically performance-related) about packet processing
+        description: Field to record messages (typically performance-related) about
+          packet processing
         example: Success
         title: Message
         type: string
@@ -4507,7 +5127,8 @@ definitions:
     description: The data returned by the service call.
     properties:
       Cases:
-        description: A summary of the violation(s), environmental problem(s), and a description of the cause of action.
+        description: A summary of the violation(s), environmental problem(s), and a
+          description of the cause of action.
         items:
           $ref: "#/definitions/crs0_Cases"
         title: Cases
@@ -4516,7 +5137,8 @@ definitions:
           name: Cases
           wrapped: true
       Message:
-        description: Field to record messages (typically performance-related) about packet processing
+        description: Field to record messages (typically performance-related) about
+          packet processing
         example: Success
         title: Message
         type: string
@@ -4546,7 +5168,8 @@ definitions:
     description: Results Object
     properties:
       Message:
-        description: Field to record messages (typically performance-related) about packet processing
+        description: Field to record messages (typically performance-related) about
+          packet processing
         example: Success
         title: Message
         type: string
@@ -4581,7 +5204,8 @@ definitions:
         title: Data Type
         type: string
       Description:
-        description: A description of the category of Supplemental Environment Project (SEP) for a settlement.
+        description: A description of the category of Supplemental Environment Project
+          (SEP) for a settlement.
         title: Description
         type: string
       ObjectName:
@@ -4646,7 +5270,8 @@ definitions:
           name: LuValues
           wrapped: true
       Message:
-        description: Field to record messages (typically performance-related) about packet processing
+        description: Field to record messages (typically performance-related) about
+          packet processing
         example: Success
         title: Message
         type: string

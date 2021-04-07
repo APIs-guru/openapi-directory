@@ -47,7 +47,8 @@ tags: []
 paths:
   /api/get_profile:
     get:
-      description: "get_profile Private API: Request confirmed profile data for your unique member ID"
+      description: "get_profile Private API: Request confirmed profile data for your
+        unique member ID"
       operationId: getProfile
       parameters:
         - description: This is your unique username or member ID
@@ -69,7 +70,8 @@ paths:
   /api/request_token:
     get:
       description: >-
-        request_token Private API: Request a Proof token to let the member confirm in a popup interface
+        request_token Private API: Request a Proof token to let the member
+        confirm in a popup interface
 
                 {"id":"qjgblv72bzzio","type":"Proof","active":true,"name":"New Proof"}
 

@@ -90,7 +90,8 @@ paths:
           name: userId
           schema:
             type: integer
-        - description: Standard users can use this only with _deviceId_s, they have access to
+        - description: Standard users can use this only with _deviceId_s, they have access
+            to
           in: query
           name: deviceId
           schema:
@@ -258,7 +259,8 @@ paths:
       x-codegen-request-body-name: body
   /commands:
     get:
-      description: Without params, it returns a list of Saved Commands the user has access to
+      description: Without params, it returns a list of Saved Commands the user has
+        access to
       parameters:
         - description: Can only be used by admins or managers to fetch all entities
           in: query
@@ -270,7 +272,8 @@ paths:
           name: userId
           schema:
             type: integer
-        - description: Standard users can use this only with _deviceId_s, they have access to
+        - description: Standard users can use this only with _deviceId_s, they have access
+            to
           in: query
           name: deviceId
           schema:
@@ -316,9 +319,11 @@ paths:
       x-codegen-request-body-name: body
   /commands/send:
     get:
-      description: Return a list of saved commands linked to Device and its groups, filtered by current Device protocol support
+      description: Return a list of saved commands linked to Device and its groups,
+        filtered by current Device protocol support
       parameters:
-        - description: Standard users can use this only with _deviceId_s, they have access to
+        - description: Standard users can use this only with _deviceId_s, they have access
+            to
           in: query
           name: deviceId
           schema:
@@ -361,7 +366,8 @@ paths:
           description: Command queued
         "400":
           content: {}
-          description: Could happen when the user doesn't have permission or an incorrect command _type_ for the device
+          description: Could happen when the user doesn't have permission or an incorrect
+            command _type_ for the device
       summary: Dispatch commands to device
       tags:
         - Commands
@@ -369,7 +375,8 @@ paths:
   /commands/types:
     get:
       parameters:
-        - description: Internal device identifier. Only works if device has already reported some locations
+        - description: Internal device identifier. Only works if device has already
+            reported some locations
           in: query
           name: deviceId
           schema:
@@ -379,7 +386,8 @@ paths:
           name: protocol
           schema:
             type: string
-        - description: When `true` return SMS commands. If not specified or `false` return data commands
+        - description: When `true` return SMS commands. If not specified or `false` return
+            data commands
           in: query
           name: textChannel
           schema:
@@ -395,8 +403,10 @@ paths:
           description: OK
         "400":
           content: {}
-          description: Could happen when trying to fetch from a device the user does not have permission
-      summary: Fetch a list of available Commands for the Device or all possible Commands if Device ommited
+          description: Could happen when trying to fetch from a device the user does not
+            have permission
+      summary: Fetch a list of available Commands for the Device or all possible
+        Commands if Device ommited
       tags:
         - Commands
   "/commands/{id}":
@@ -452,12 +462,14 @@ paths:
           name: userId
           schema:
             type: integer
-        - description: To fetch one or more devices. Multiple params can be passed like `id=31&id=42`
+        - description: To fetch one or more devices. Multiple params can be passed like
+            `id=31&id=42`
           in: query
           name: id
           schema:
             type: integer
-        - description: To fetch one or more devices. Multiple params can be passed like `uniqueId=333331&uniqieId=44442`
+        - description: To fetch one or more devices. Multiple params can be passed like
+            `uniqueId=333331&uniqieId=44442`
           in: query
           name: uniqueId
           schema:
@@ -570,7 +582,8 @@ paths:
           name: userId
           schema:
             type: integer
-        - description: Standard users can use this only with _deviceId_s, they have access to
+        - description: Standard users can use this only with _deviceId_s, they have access
+            to
           in: query
           name: deviceId
           schema:
@@ -684,7 +697,8 @@ paths:
           name: userId
           schema:
             type: integer
-        - description: Standard users can use this only with _deviceId_s, they have access to
+        - description: Standard users can use this only with _deviceId_s, they have access
+            to
           in: query
           name: deviceId
           schema:
@@ -867,7 +881,8 @@ paths:
           name: userId
           schema:
             type: integer
-        - description: Standard users can use this only with _deviceId_s, they have access to
+        - description: Standard users can use this only with _deviceId_s, they have access
+            to
           in: query
           name: deviceId
           schema:
@@ -964,7 +979,8 @@ paths:
           name: userId
           schema:
             type: integer
-        - description: Standard users can use this only with _deviceId_s, they have access to
+        - description: Standard users can use this only with _deviceId_s, they have access
+            to
           in: query
           name: deviceId
           schema:
@@ -1112,9 +1128,14 @@ paths:
       x-codegen-request-body-name: body
   /positions:
     get:
-      description: We strongly recommend using [Traccar WebSocket API](https://www.traccar.org/traccar-api/) instead of periodically polling positions endpoint. Without any params, it returns a list of last known positions for all the user's Devices. _from_ and _to_ fields are not required with _id_.
+      description: We strongly recommend using [Traccar WebSocket
+        API](https://www.traccar.org/traccar-api/) instead of periodically
+        polling positions endpoint. Without any params, it returns a list of
+        last known positions for all the user's Devices. _from_ and _to_ fields
+        are not required with _id_.
       parameters:
-        - description: _deviceId_ is optional, but requires the _from_ and _to_ parameters when used
+        - description: _deviceId_ is optional, but requires the _from_ and _to_ parameters
+            when used
           in: query
           name: deviceId
           schema:
@@ -1131,7 +1152,8 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: To fetch one or more positions. Multiple params can be passed like `id=31&id=42`
+        - description: To fetch one or more positions. Multiple params can be passed like
+            `id=31&id=42`
           in: query
           name: id
           schema:
@@ -1266,7 +1288,8 @@ paths:
                   $ref: "#/components/schemas/Position"
                 type: array
           description: OK
-      summary: Fetch a list of Positions within the time period for the Devices or Groups
+      summary: Fetch a list of Positions within the time period for the Devices or
+        Groups
       tags:
         - Reports
   /reports/stops:
@@ -1317,7 +1340,8 @@ paths:
                   $ref: "#/components/schemas/ReportStops"
                 type: array
           description: OK
-      summary: Fetch a list of ReportStops within the time period for the Devices or Groups
+      summary: Fetch a list of ReportStops within the time period for the Devices or
+        Groups
       tags:
         - Reports
   /reports/summary:
@@ -1368,7 +1392,8 @@ paths:
                   $ref: "#/components/schemas/ReportSummary"
                 type: array
           description: OK
-      summary: Fetch a list of ReportSummary within the time period for the Devices or Groups
+      summary: Fetch a list of ReportSummary within the time period for the Devices or
+        Groups
       tags:
         - Reports
   /reports/trips:
@@ -1419,7 +1444,8 @@ paths:
                   $ref: "#/components/schemas/ReportTrips"
                 type: array
           description: OK
-      summary: Fetch a list of ReportTrips within the time period for the Devices or Groups
+      summary: Fetch a list of ReportTrips within the time period for the Devices or
+        Groups
       tags:
         - Reports
   /server:
@@ -1952,16 +1978,20 @@ components:
           type: string
       type: object
     Permission:
-      description: "This is a permission map that contain two object indexes. It is used to link/unlink objects. Order is important. Example: { deviceId:8, geofenceId: 16 }"
+      description: "This is a permission map that contain two object indexes. It is
+        used to link/unlink objects. Order is important. Example: { deviceId:8,
+        geofenceId: 16 }"
       properties:
         attributeId:
           description: Computed Attribute Id, can be second parameter only
           type: integer
         calendarId:
-          description: Calendar Id, can be second parameter only and only in combination with userId
+          description: Calendar Id, can be second parameter only and only in combination
+            with userId
           type: integer
         deviceId:
-          description: Device Id, can be first parameter or second only in combination with userId
+          description: Device Id, can be first parameter or second only in combination
+            with userId
           type: integer
         driverId:
           description: Driver Id, can be second parameter only
@@ -1970,10 +2000,12 @@ components:
           description: Geofence Id, can be second parameter only
           type: integer
         groupId:
-          description: Group Id, can be first parameter or second only in combination with userId
+          description: Group Id, can be first parameter or second only in combination with
+            userId
           type: integer
         managedUserId:
-          description: User Id, can be second parameter only and only in combination with userId
+          description: User Id, can be second parameter only and only in combination with
+            userId
           type: integer
         userId:
           description: User Id, can be only first parameter

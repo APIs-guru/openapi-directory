@@ -4,7 +4,8 @@ schemes:
 host: www.versioneye.com
 basePath: /api/v2
 info:
-  description: VersionEye is a cross-platform search engine for free/libre/open source software libraries.
+  description: VersionEye is a cross-platform search engine for free/libre/open
+    source software libraries.
   title: Available API endpoints
   version: "2.0"
   x-apisguru-categories:
@@ -99,7 +100,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: "This endpoint is registered as service hook on GitHub. It triggers a project re-parse on each git push. "
+      description: "This endpoint is registered as service hook on GitHub. It triggers
+        a project re-parse on each git push. "
       operationId: postGithubHookProjectId
       parameters:
         - description: Project ID
@@ -244,7 +246,8 @@ paths:
         - github
   /me:
     get:
-      description: On Swagger, you can create session by adding additional parameter :api_key.
+      description: On Swagger, you can create session by adding additional parameter
+        :api_key.
       operationId: getMe
       responses:
         "200":
@@ -344,7 +347,8 @@ paths:
           name: project_version
           required: false
           type: string
-        - description: Post processing filter. Possible values are 'ALL', 'duplicates_only', 'show_duplicates'
+        - description: Post processing filter. Possible values are 'ALL',
+            'duplicates_only', 'show_duplicates'
           in: query
           name: post_filter
           required: false
@@ -407,7 +411,8 @@ paths:
           name: f1_project_version
           required: false
           type: string
-        - description: Inventory1, post processing filter. Possible values are 'ALL', 'duplicates_only', 'show_duplicates'
+        - description: Inventory1, post processing filter. Possible values are 'ALL',
+            'duplicates_only', 'show_duplicates'
           in: formData
           name: f1_post_filter
           required: false
@@ -427,7 +432,8 @@ paths:
           name: f2_project_version
           required: false
           type: string
-        - description: Inventory2, post processing filter. Possible values are 'ALL', 'duplicates_only', 'show_duplicates'
+        - description: Inventory2, post processing filter. Possible values are 'ALL',
+            'duplicates_only', 'show_duplicates'
           in: formData
           name: f2_post_filter
           required: false
@@ -889,12 +895,14 @@ paths:
           name: orga_name
           required: false
           type: string
-        - description: The name of the team in the organisation this project should be assigned to.
+        - description: The name of the team in the organisation this project should be
+            assigned to.
           in: formData
           name: team_name
           required: false
           type: string
-        - description: If 'true' this project will not show up in the UI and gets removed later.
+        - description: If 'true' this project will not show up in the UI and gets removed
+            later.
           in: formData
           name: temp
           required: false
@@ -1189,7 +1197,8 @@ paths:
         - services
   /sessions:
     delete:
-      description: Close current session. It's very handy method when you re-generated your current API-key.
+      description: Close current session. It's very handy method when you re-generated
+        your current API-key.
       operationId: deleteSessions
       responses:
         "204":
@@ -1198,12 +1207,10 @@ paths:
       tags:
         - sessions
     get:
-      description: >-
+      description: |-
         
         If current user has active session, then this
-
         method will return 200 with short user profile.
-
         For othercase, it will return error message with status code 401.
       operationId: getSessions
       responses:

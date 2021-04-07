@@ -344,7 +344,8 @@ info:
   x-providerName: combell.com
 tags:
   - name: Accounts
-  - description: "Manage the dns records for a domain name.<p>The interface allows you to manage following records: A, CNAME, MX, SRV, ALIAS and TXT."
+  - description: "Manage the dns records for a domain name.<p>The interface allows
+      you to manage following records: A, CNAME, MX, SRV, ALIAS and TXT."
     name: DNS records
   - description: Manage your domains.
     name: Domains
@@ -359,7 +360,8 @@ tags:
   - name: Provisioning jobs
   - name: Servicepacks
   - name: SSH
-  - description: Create new SSL certificates. In the provisioning documentation you can find more info on the flow that should be followed.
+  - description: Create new SSL certificates. In the provisioning documentation you
+      can find more info on the flow that should be followed.
     name: SSL certificate requests
   - description: Manage your SSL certificates.
     name: SSL certificates
@@ -377,14 +379,17 @@ paths:
             description: The number of items to skip in the resultset.
             format: int32
             type: integer
-        - description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+        - description: The number of items to return in the resultset. The returned count
+            can be equal or less than this number.
           in: query
           name: take
           schema:
-            description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+            description: The number of items to return in the resultset. The returned count
+              can be equal or less than this number.
             format: int32
             type: integer
-        - description: Filters the list, returning only accounts containing the specified asset type.
+        - description: Filters the list, returning only accounts containing the specified
+            asset type.
           in: query
           name: asset_type
           schema:
@@ -411,7 +416,9 @@ paths:
               schema:
                 type: integer
             X-Paging-Take:
-              description: The number of items in the current take. The number might differ from the requested take. It represents the actual number of items returned in the response.
+              description: The number of items in the current take. The number might differ
+                from the requested take. It represents the actual number of
+                items returned in the response.
               schema:
                 type: integer
             X-Paging-TotalResults:
@@ -422,7 +429,8 @@ paths:
       tags:
         - Accounts
     post:
-      description: The creation of an account requires some background processing. There is no instant feedback of the creation status.
+      description: The creation of an account requires some background processing.
+        There is no instant feedback of the creation status.
       operationId: CreateAccount
       requestBody:
         content:
@@ -487,32 +495,40 @@ paths:
             description: The number of items to skip in the resultset.
             format: int32
             type: integer
-        - description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+        - description: The number of items to return in the resultset. The returned count
+            can be equal or less than this number.
           in: query
           name: take
           schema:
-            description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+            description: The number of items to return in the resultset. The returned count
+              can be equal or less than this number.
             format: int32
             type: integer
-        - description: Filters records matching the type. Most other filters only apply when this filter is specified.
+        - description: Filters records matching the type. Most other filters only apply
+            when this filter is specified.
           in: query
           name: type
           schema:
-            description: Filters records matching the type. Most other filters only apply when this filter is specified.
+            description: Filters records matching the type. Most other filters only apply
+              when this filter is specified.
             nullable: true
             type: string
-        - description: Filters records matching the record name. This filter only applies to lookups of A, CNAME, TXT, ALIAS and TLSA records.
+        - description: Filters records matching the record name. This filter only applies
+            to lookups of A, CNAME, TXT, ALIAS and TLSA records.
           in: query
           name: record_name
           schema:
-            description: Filters records matching the record name. This filter only applies to lookups of A, CNAME, TXT, ALIAS and TLSA records.
+            description: Filters records matching the record name. This filter only applies
+              to lookups of A, CNAME, TXT, ALIAS and TLSA records.
             nullable: true
             type: string
-        - description: Filters records for the service. This filter only applies to lookups of SRV records.
+        - description: Filters records for the service. This filter only applies to
+            lookups of SRV records.
           in: query
           name: service
           schema:
-            description: Filters records for the service. This filter only applies to lookups of SRV records.
+            description: Filters records for the service. This filter only applies to
+              lookups of SRV records.
             nullable: true
             type: string
         - in: path
@@ -535,7 +551,9 @@ paths:
               schema:
                 type: integer
             X-Paging-Take:
-              description: The number of items in the current take. The number might differ from the requested take. It represents the actual number of items returned in the response.
+              description: The number of items in the current take. The number might differ
+                from the requested take. It represents the actual number of
+                items returned in the response.
               schema:
                 type: integer
             X-Paging-TotalResults:
@@ -694,11 +712,13 @@ paths:
             description: The number of items to skip in the resultset.
             format: int32
             type: integer
-        - description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+        - description: The number of items to return in the resultset. The returned count
+            can be equal or less than this number.
           in: query
           name: take
           schema:
-            description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+            description: The number of items to return in the resultset. The returned count
+              can be equal or less than this number.
             format: int32
             type: integer
       responses:
@@ -716,7 +736,9 @@ paths:
               schema:
                 type: integer
             X-Paging-Take:
-              description: The number of items in the current take. The number might differ from the requested take. It represents the actual number of items returned in the response.
+              description: The number of items in the current take. The number might differ
+                from the requested take. It represents the actual number of
+                items returned in the response.
               schema:
                 type: integer
             X-Paging-TotalResults:
@@ -728,7 +750,8 @@ paths:
         - Domains
   /domains/registrations:
     post:
-      description: Registers an available domain.<br />Domain names with extension '.ca' are only available for registrants with country code 'CA'.
+      description: Registers an available domain.<br />Domain names with extension
+        '.ca' are only available for registrants with country code 'CA'.
       requestBody:
         content:
           application/json:
@@ -796,7 +819,9 @@ paths:
         - Domains
   "/domains/{domainName}/renew":
     put:
-      description: "Allowed if can_toggle_renew is true on the domain detail:<br /><ul><li>If there are no unpaid invoices for the domain name anymore.</li><li>If the renewal won't start within 1 month.</li></ul>\r
+      description: "Allowed if can_toggle_renew is true on the domain detail:<br
+        /><ul><li>If there are no unpaid invoices for the domain name
+        anymore.</li><li>If the renewal won't start within 1 month.</li></ul>\r
 
         Allowed if the requesting user has the finance role."
       operationId: ConfigureDomain
@@ -836,11 +861,13 @@ paths:
             description: The number of items to skip in the resultset.
             format: int32
             type: integer
-        - description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+        - description: The number of items to return in the resultset. The returned count
+            can be equal or less than this number.
           in: query
           name: take
           schema:
-            description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+            description: The number of items to return in the resultset. The returned count
+              can be equal or less than this number.
             format: int32
             type: integer
       responses:
@@ -858,7 +885,9 @@ paths:
               schema:
                 type: integer
             X-Paging-Take:
-              description: The number of items in the current take. The number might differ from the requested take. It represents the actual number of items returned in the response.
+              description: The number of items in the current take. The number might differ
+                from the requested take. It represents the actual number of
+                items returned in the response.
               schema:
                 type: integer
             X-Paging-TotalResults:
@@ -1297,14 +1326,16 @@ paths:
             type: string
         - description: "Site name where HTTP/2 should be configured.<br />\r
 
-            For HTTP/2 to work correctly, the site must have ssl enabled."
+            For HTTP/2 to work correctly, the site must have ssl
+            enabled."
           in: query
           name: site_name
           required: true
           schema:
             description: "Site name where HTTP/2 should be configured.<br />\r
 
-              For HTTP/2 to work correctly, the site must have ssl enabled."
+              For HTTP/2 to work correctly, the site must have ssl
+              enabled."
             type: string
         - in: path
           name: domainName
@@ -1984,12 +2015,14 @@ paths:
           schema:
             description: Mail zone domain name.
             type: string
-        - description: E-mail address to which all e-mails are sent to inexistent mailboxes or aliases.
+        - description: E-mail address to which all e-mails are sent to inexistent
+            mailboxes or aliases.
           in: query
           name: email_address
           required: true
           schema:
-            description: E-mail address to which all e-mails are sent to inexistent mailboxes or aliases.
+            description: E-mail address to which all e-mails are sent to inexistent
+              mailboxes or aliases.
             type: string
         - in: path
           name: domainName
@@ -2128,11 +2161,13 @@ paths:
             description: The number of items to skip in the resultset.
             format: int32
             type: integer
-        - description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+        - description: The number of items to return in the resultset. The returned count
+            can be equal or less than this number.
           in: query
           name: take
           schema:
-            description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+            description: The number of items to return in the resultset. The returned count
+              can be equal or less than this number.
             format: int32
             type: integer
       responses:
@@ -2150,7 +2185,9 @@ paths:
               schema:
                 type: integer
             X-Paging-Take:
-              description: The number of items in the current take. The number might differ from the requested take. It represents the actual number of items returned in the response.
+              description: The number of items in the current take. The number might differ
+                from the requested take. It represents the actual number of
+                items returned in the response.
               schema:
                 type: integer
             X-Paging-TotalResults:
@@ -2256,7 +2293,8 @@ paths:
       tags:
         - MySql databases
     post:
-      description: The creation of a new mysql user will result in a user with read_only rights.
+      description: The creation of a new mysql user will result in a user with
+        read_only rights.
       operationId: CreateMySqlUser
       parameters:
         - description: Name of the database.
@@ -2408,9 +2446,11 @@ paths:
         - MySql databases
   "/provisioningjobs/{jobId}":
     get:
-      description: "Provisioning failures may occur. Contact support in the event of a failure or wait for error resolution.<br />\r
+      description: "Provisioning failures may occur. Contact support in the event of a
+        failure or wait for error resolution.<br />\r
 
-        Do NOT retry provisioning until the job reports finished or cancelled."
+        Do NOT retry provisioning until the job reports finished or
+        cancelled."
       parameters:
         - in: query
           name: job_id
@@ -2470,11 +2510,13 @@ paths:
             description: The number of items to skip in the resultset.
             format: int32
             type: integer
-        - description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+        - description: The number of items to return in the resultset. The returned count
+            can be equal or less than this number.
           in: query
           name: take
           schema:
-            description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+            description: The number of items to return in the resultset. The returned count
+              can be equal or less than this number.
             format: int32
             type: integer
       responses:
@@ -2492,7 +2534,9 @@ paths:
               schema:
                 type: integer
             X-Paging-Take:
-              description: The number of items in the current take. The number might differ from the requested take. It represents the actual number of items returned in the response.
+              description: The number of items in the current take. The number might differ
+                from the requested take. It represents the actual number of
+                items returned in the response.
               schema:
                 type: integer
             X-Paging-TotalResults:
@@ -2513,11 +2557,13 @@ paths:
             description: The number of items to skip in the resultset.
             format: int32
             type: integer
-        - description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+        - description: The number of items to return in the resultset. The returned count
+            can be equal or less than this number.
           in: query
           name: take
           schema:
-            description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+            description: The number of items to return in the resultset. The returned count
+              can be equal or less than this number.
             format: int32
             type: integer
       responses:
@@ -2535,7 +2581,9 @@ paths:
               schema:
                 type: integer
             X-Paging-Take:
-              description: The number of items in the current take. The number might differ from the requested take. It represents the actual number of items returned in the response.
+              description: The number of items in the current take. The number might differ
+                from the requested take. It represents the actual number of
+                items returned in the response.
               schema:
                 type: integer
             X-Paging-TotalResults:
@@ -2546,11 +2594,14 @@ paths:
       tags:
         - SSL certificate requests
     post:
-      description: "Executing this method causes the purchase of a paying product.<br />\r
+      description: "Executing this method causes the purchase of a paying product.<br
+        />\r
 
-        Log on to our website to see your current (renewal) prices or contact our Sales department.<br />\r
+        Log on to our website to see your current (renewal) prices or
+        contact our Sales department.<br />\r
 
-        Please note that promotional pricing does not apply for purchases made through our API."
+        Please note that promotional pricing does not apply for
+        purchases made through our API."
       operationId: AddSslCertificateRequest
       requestBody:
         content:
@@ -2592,7 +2643,8 @@ paths:
           description: Redirect
           headers:
             Location:
-              description: The location referring to a resource that replaced the original resource.
+              description: The location referring to a resource that replaced the original
+                resource.
               schema:
                 type: string
         "410":
@@ -2618,7 +2670,8 @@ paths:
           description: Redirect
           headers:
             Location:
-              description: The location referring to a resource that replaced the original resource.
+              description: The location referring to a resource that replaced the original
+                resource.
               schema:
                 type: string
         "410":
@@ -2637,11 +2690,13 @@ paths:
             description: The number of items to skip in the resultset.
             format: int32
             type: integer
-        - description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+        - description: The number of items to return in the resultset. The returned count
+            can be equal or less than this number.
           in: query
           name: take
           schema:
-            description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+            description: The number of items to return in the resultset. The returned count
+              can be equal or less than this number.
             format: int32
             type: integer
       responses:
@@ -2659,7 +2714,9 @@ paths:
               schema:
                 type: integer
             X-Paging-Take:
-              description: The number of items in the current take. The number might differ from the requested take. It represents the actual number of items returned in the response.
+              description: The number of items in the current take. The number might differ
+                from the requested take. It represents the actual number of
+                items returned in the response.
               schema:
                 type: integer
             X-Paging-TotalResults:
@@ -2697,7 +2754,8 @@ paths:
         - SSL certificates
   "/sslcertificates/{sha1Fingerprint}/download":
     get:
-      description: Returns the certifcate as binary data with the content-type and the filename information in the response headers.
+      description: Returns the certifcate as binary data with the content-type and the
+        filename information in the response headers.
       operationId: DownloadCertificate
       parameters:
         - description: The SHA-1 fingerprint of the certificate.
@@ -2709,7 +2767,9 @@ paths:
             type: string
         - description: "The file format of the returned file stream:\r
 
-            <ul><li>PFX: Also known as PKCS #12, is a single, password protected certificate archive that contains the entire certificate chain plus the matching private key.</li></ul>"
+            <ul><li>PFX: Also known as PKCS #12, is a single,
+            password protected certificate archive that contains the entire
+            certificate chain plus the matching private key.</li></ul>"
           in: query
           name: file_format
           required: true
@@ -2751,11 +2811,13 @@ paths:
             description: The number of items to skip in the resultset.
             format: int32
             type: integer
-        - description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+        - description: The number of items to return in the resultset. The returned count
+            can be equal or less than this number.
           in: query
           name: take
           schema:
-            description: The number of items to return in the resultset. The returned count can be equal or less than this number.
+            description: The number of items to return in the resultset. The returned count
+              can be equal or less than this number.
             format: int32
             type: integer
       responses:
@@ -2773,7 +2835,9 @@ paths:
               schema:
                 type: integer
             X-Paging-Take:
-              description: The number of items in the current take. The number might differ from the requested take. It represents the actual number of items returned in the response.
+              description: The number of items in the current take. The number might differ
+                from the requested take. It represents the actual number of
+                items returned in the response.
               schema:
                 type: integer
             X-Paging-TotalResults:
@@ -2866,9 +2930,11 @@ components:
           description: Subsite domain name (e.g. alias.be or subsite.site.be).
           type: string
         path:
-          description: "Folder location for the subsite (when empty we use /subsites/site (e.g. /subsites/subsite.site.be)<br />\r
+          description: "Folder location for the subsite (when empty we use /subsites/site
+            (e.g. /subsites/subsite.site.be)<br />\r
 
-            The path MUST pre-exist on the server. It WILL NOT be created automatically."
+            The path MUST pre-exist on the server. It WILL NOT be
+            created automatically."
           type: string
       type: object
     AdditionalValidationAttribute:
@@ -2988,7 +3054,8 @@ components:
       additionalProperties: false
       properties:
         validation_errors:
-          description: A list of validation errors that occurred when processing the request.
+          description: A list of validation errors that occurred when processing the
+            request.
           items:
             $ref: "#/components/schemas/ValidationErrorMessage"
           type: array
@@ -2997,7 +3064,8 @@ components:
       additionalProperties: false
       properties:
         email_addresses:
-          description: E-mail addresses to which all e-mails are sent to inexistent mailboxes or aliases
+          description: E-mail addresses to which all e-mails are sent to inexistent
+            mailboxes or aliases
           items:
             type: string
           type: array
@@ -3020,9 +3088,15 @@ components:
         ftp_password:
           description: "Ftp password for the account.<br />\r
 
-            Applies only if the servicepack contains hosting.<br />\r
+            Applies only if the servicepack contains hosting.<br
+            />\r
 
-            Passwords have to adhere to following rules:<br /><ul><li>Between 8-20 characters.</li><li>Must be a mix of letters and digits.</li><li>Must contain at least one digit (0-9).</li><li>Must contain at least one letter (a-z).</li><li>Cannot contain spaces.</li><li>Cannot contain characters: * € $ & + } { ' \" \\ </li></ul>"
+            Passwords have to adhere to following rules:<br
+            /><ul><li>Between 8-20 characters.</li><li>Must be a mix of letters
+            and digits.</li><li>Must contain at least one digit
+            (0-9).</li><li>Must contain at least one letter
+            (a-z).</li><li>Cannot contain spaces.</li><li>Cannot contain
+            characters: * € $ & + } { ' \" \\ </li></ul>"
           type: string
         identifier:
           description: "An identifier for the account.<br />\r
@@ -3050,7 +3124,8 @@ components:
       additionalProperties: false
       properties:
         email_address:
-          description: E-mail address to which all e-mails are sent to inexistent mailboxes or aliases
+          description: E-mail address to which all e-mails are sent to inexistent
+            mailboxes or aliases
           type: string
       type: object
     CreateMailboxRequest:
@@ -3066,7 +3141,12 @@ components:
         password:
           description: "The password for the mailbox.<br />\r
 
-            Passwords have to adhere to following rules:<br /><ul><li>Between 8-20 characters.</li><li>Must be a mix of letters and digits.</li><li>Must contain at least one digit (0-9).</li><li>Must contain at least one letter (a-z).</li><li>Cannot contain spaces.</li><li>Cannot contain characters: * € $ & + } { ' \" \\ </li></ul>"
+            Passwords have to adhere to following rules:<br
+            /><ul><li>Between 8-20 characters.</li><li>Must be a mix of letters
+            and digits.</li><li>Must contain at least one digit
+            (0-9).</li><li>Must contain at least one letter
+            (a-z).</li><li>Cannot contain spaces.</li><li>Cannot contain
+            characters: * € $ & + } { ' \" \\ </li></ul>"
           type: string
       type: object
     CreateMySqlDatabase:
@@ -3077,14 +3157,21 @@ components:
           format: int32
           type: integer
         database_name:
-          description: "The name for the database. This will be prefixed during provisioning.\r
+          description: "The name for the database. This will be prefixed during
+            provisioning.\r
 
-            The provided name during creation will be different from the provisioned database name."
+            The provided name during creation will be different from
+            the provisioned database name."
           type: string
         password:
           description: "The password for the database user.<br />\r
 
-            Passwords have to adhere to following rules:<br /><ul><li>Between 8-20 characters.</li><li>Must be a mix of letters and digits.</li><li>Must contain at least one digit (0-9).</li><li>Must contain at least one letter (a-z).</li><li>Cannot contain spaces.</li><li>Cannot contain characters: * € $ & + } { ' \" \\ </li></ul>"
+            Passwords have to adhere to following rules:<br
+            /><ul><li>Between 8-20 characters.</li><li>Must be a mix of letters
+            and digits.</li><li>Must contain at least one digit
+            (0-9).</li><li>Must contain at least one letter
+            (a-z).</li><li>Cannot contain spaces.</li><li>Cannot contain
+            characters: * € $ & + } { ' \" \\ </li></ul>"
           type: string
       type: object
     CreateMySqlUser:
@@ -3093,12 +3180,20 @@ components:
         name:
           description: "User name<br />\r
 
-            User names have to adhere to following rules:<br /><ul><li>Between 2-14 characters.</li><li>Must be a mix of letters and/or digits.</li><li>Must be lower cased.</li><li>Cannot contain spaces.</li></ul>"
+            User names have to adhere to following rules:<br
+            /><ul><li>Between 2-14 characters.</li><li>Must be a mix of letters
+            and/or digits.</li><li>Must be lower cased.</li><li>Cannot contain
+            spaces.</li></ul>"
           type: string
         password:
           description: "The password for the database user.<br />\r
 
-            Passwords have to adhere to following rules:<br /><ul><li>Between 8-20 characters.</li><li>Must be a mix of letters and digits.</li><li>Must contain at least one digit (0-9).</li><li>Must contain at least one letter (a-z).</li><li>Cannot contain spaces.</li><li>Cannot contain characters: * € $ & + } { ' \" \\ </li></ul>"
+            Passwords have to adhere to following rules:<br
+            /><ul><li>Between 8-20 characters.</li><li>Must be a mix of letters
+            and digits.</li><li>Must contain at least one digit
+            (0-9).</li><li>Must contain at least one letter
+            (a-z).</li><li>Cannot contain spaces.</li><li>Cannot contain
+            characters: * € $ & + } { ' \" \\ </li></ul>"
           type: string
       type: object
     CreateSmtpDomainRequest:
@@ -3112,9 +3207,27 @@ components:
       additionalProperties: false
       properties:
         additional_validation_attributes:
-          description: "List of additional validation attributes for the certificate when choosing organization or extended validation.\r
+          description: "List of additional validation attributes for the certificate when
+            choosing organization or extended validation.\r
 
-            <table><tr><th>Name</th><th>Info</th><th>Required</th></tr><tr><td>Firstname</td><td>Firstname of the technical contact</td><td>Yes</td></tr><tr><td>Lastname</td><td>Lastname of the technical contact</td><td>Yes</td></tr><tr><td>Phone</td><td>Phone of the technical contact</td><td>Yes</td></tr><tr><td>EmailAddress</td><td>Email address of the technical contact</td><td>Yes</td></tr><tr><td>Street</td><td>Address street of the organization</td><td>Yes</td></tr><tr><td>Number</td><td>Address house number of the organization</td><td>Yes</td></tr><tr><td>PostalCode</td><td>Address postal code of the organization</td><td>Yes</td></tr><tr><td>VatCountryCode</td><td>VAT country code of the organization, ISO 3166-1 alpha-2 country code</td><td>Yes</td></tr><tr><td>OrganizationNumber</td><td>Business number of the organization</td><td>No</td></tr></table>"
+            <table><tr><th>Name</th><th>Info</th><th>Required</th><\
+            /tr><tr><td>Firstname</td><td>Firstname of the technical
+            contact</td><td>Yes</td></tr><tr><td>Lastname</td><td>Lastname of
+            the technical
+            contact</td><td>Yes</td></tr><tr><td>Phone</td><td>Phone of the
+            technical
+            contact</td><td>Yes</td></tr><tr><td>EmailAddress</td><td>Email
+            address of the technical
+            contact</td><td>Yes</td></tr><tr><td>Street</td><td>Address street
+            of the
+            organization</td><td>Yes</td></tr><tr><td>Number</td><td>Address
+            house number of the
+            organization</td><td>Yes</td></tr><tr><td>PostalCode</td><td>Address
+            postal code of the
+            organization</td><td>Yes</td></tr><tr><td>VatCountryCode</td><td>VAT
+            country code of the organization, ISO 3166-1 alpha-2 country
+            code</td><td>Yes</td></tr><tr><td>OrganizationNumber</td><td>Busine\
+            ss number of the organization</td><td>No</td></tr></table>"
           items:
             $ref: "#/components/schemas/AdditionalValidationAttribute"
           type: array
@@ -3123,9 +3236,21 @@ components:
         csr:
           description: "The certificate signing request data.<br />\r
 
-            The certificate signing request subject should contain following attributes:<br /><table><tr><th>Name</th><th>Code</th><th>Format</th></tr><tr><td>CommonName</td><td>CN</td><td>Valid domain name, for example site.be, alias.site.be or *.site.be</td></tr><tr><td>Country</td><td>C</td><td>ISO 3166-1 alpha-2 country code</td></tr><tr><td>State</td><td>ST</td><td></td></tr><tr><td>Locality</td><td>L</td><td></td></tr><tr><td>Organization</td><td>O</td><td></td></tr><tr><td>OrganizationUnit</td><td>OU</td><td></td></tr><tr><td>EmailAddress</td><td>E</td><td>Valid email address</td></tr></table>\r
+            The certificate signing request subject should contain
+            following attributes:<br
+            /><table><tr><th>Name</th><th>Code</th><th>Format</th></tr><tr><td>\
+            CommonName</td><td>CN</td><td>Valid domain name, for example
+            site.be, alias.site.be or
+            *.site.be</td></tr><tr><td>Country</td><td>C</td><td>ISO 3166-1
+            alpha-2 country
+            code</td></tr><tr><td>State</td><td>ST</td><td></td></tr><tr><td>Lo\
+            cality</td><td>L</td><td></td></tr><tr><td>Organization</td><td>O</\
+            td><td></td></tr><tr><td>OrganizationUnit</td><td>OU</td><td></td><\
+            /tr><tr><td>EmailAddress</td><td>E</td><td>Valid email
+            address</td></tr></table>\r
 
-            The certificate signing request should also contain all the additional aliases and domains (SAN's) for the certificate."
+            The certificate signing request should also contain all
+            the additional aliases and domains (SAN's) for the certificate."
           type: string
         validation_level:
           $ref: "#/components/schemas/SslCertificateValidationLevel"
@@ -3136,9 +3261,45 @@ components:
         content:
           description: "Variable data depending on the record type.\r
 
-            <ul><li>A: the IPv4 address.</li><li>CNAME: canonical name of an alias.</li><li>MX: fully qualified domain name of a mail host.</li><li>SRV: does not apply. Data for the SRV records can be found in specific properties.</li><li>TXT: free form text data.</li><li>ALIAS: canonical name of an alias.</li><li>TLSA: format should match specific values for usage, selector, matching type and data: \"{usage} {selector} {matching_type} {data}\"\r
+            <ul><li>A: the IPv4 address.</li><li>CNAME: canonical
+            name of an alias.</li><li>MX: fully qualified domain name of a mail
+            host.</li><li>SRV: does not apply. Data for the SRV records can be
+            found in specific properties.</li><li>TXT: free form text
+            data.</li><li>ALIAS: canonical name of an alias.</li><li>TLSA:
+            format should match specific values for usage, selector, matching
+            type and data: \"{usage} {selector} {matching_type} {data}\"\r
 
-            \        <ul><li>The usage. The first field after the TLSA text in the DNS RR, specifies how to verify the certificate.<br /><ul><li>A value of 0 is for what is commonly called CA constraint (and PKIX-TA). The certificate provided when establishing TLS must be issued by the listed root-CA or one of its intermediate CAs, with a valid certification path to a root-CA already trusted by the application doing the verification.</li><li>A value of 1 is for what is commonly called Service certificate constraint (and PKIX-EE). The certificate used must match the TLSA record exactly, and it must also pass PKIX certification path validation to a trusted root-CA.</li><li>A value of 2 is for what is commonly called Trust Anchor Assertion (and DANE-TA). The certificate used has a valid certification path pointing back to the certificate mention in this record, but there is no need for it to pass the PKIX certification path validation to a trusted root-CA.</li><li>A value of 3 is for what is commonly called Domain issued certificate (and DANE-EE). The services uses a self-signed certificate. It is not signed by anyone else, and is exactly this record.</li></ul></li><li>The selector. When connecting to the service and a certificate is received, the selector field specifies which parts of it should be checked.<br /><ul><li>A value of 0 means to select the entire certificate for matching.</li><li>A value of 1 means to select just the public key for certificate matching. Matching the public key is often sufficient, as this is likely to be unique.</li></ul></li><li>The matching type.<br /><ul><li>A type of 0 means the entire information selected is present in the certificate association data.</li><li>A type of 1 means to do a SHA-256 hash of the selected data.</li><li>A type of 2 means to do a SHA-512 hash of the selected data.</li></ul></li><li>The actual data to be matched given the settings of the other fields. This is a long text string of hexadecimal data.</li></ul></li></ul>"
+            \        <ul><li>The usage. The first field after the
+            TLSA text in the DNS RR, specifies how to verify the certificate.<br
+            /><ul><li>A value of 0 is for what is commonly called CA constraint
+            (and PKIX-TA). The certificate provided when establishing TLS must
+            be issued by the listed root-CA or one of its intermediate CAs, with
+            a valid certification path to a root-CA already trusted by the
+            application doing the verification.</li><li>A value of 1 is for what
+            is commonly called Service certificate constraint (and PKIX-EE). The
+            certificate used must match the TLSA record exactly, and it must
+            also pass PKIX certification path validation to a trusted
+            root-CA.</li><li>A value of 2 is for what is commonly called Trust
+            Anchor Assertion (and DANE-TA). The certificate used has a valid
+            certification path pointing back to the certificate mention in this
+            record, but there is no need for it to pass the PKIX certification
+            path validation to a trusted root-CA.</li><li>A value of 3 is for
+            what is commonly called Domain issued certificate (and DANE-EE). The
+            services uses a self-signed certificate. It is not signed by anyone
+            else, and is exactly this record.</li></ul></li><li>The selector.
+            When connecting to the service and a certificate is received, the
+            selector field specifies which parts of it should be checked.<br
+            /><ul><li>A value of 0 means to select the entire certificate for
+            matching.</li><li>A value of 1 means to select just the public key
+            for certificate matching. Matching the public key is often
+            sufficient, as this is likely to be unique.</li></ul></li><li>The
+            matching type.<br /><ul><li>A type of 0 means the entire information
+            selected is present in the certificate association data.</li><li>A
+            type of 1 means to do a SHA-256 hash of the selected data.</li><li>A
+            type of 2 means to do a SHA-512 hash of the selected
+            data.</li></ul></li><li>The actual data to be matched given the
+            settings of the other fields. This is a long text string of
+            hexadecimal data.</li></ul></li></ul>"
           type: string
         id:
           description: "The id of the record\r
@@ -3150,7 +3311,8 @@ components:
 
             The value MUST be a positive integer.<br />\r
 
-            Editing the value is not possible. You should add a new SRV record and delete the existing record."
+            Editing the value is not possible. You should add a new
+            SRV record and delete the existing record."
           format: int32
           type: integer
         priority:
@@ -3159,45 +3321,57 @@ components:
 
             A lower value means more preferred.<br />\r
 
-            The value MUST be a positive integer less or equal to 9999."
+            The value MUST be a positive integer less or equal to
+            9999."
           format: int32
           type: integer
         protocol:
           default: TCP
-          description: "Used for the creation of SRV records. Possible options: TCP, UDP, ...<br />\r
+          description: "Used for the creation of SRV records. Possible options: TCP, UDP,
+            ...<br />\r
 
-            Editing the value is not possible. You should add a new SRV record and delete the existing record."
+            Editing the value is not possible. You should add a new
+            SRV record and delete the existing record."
           type: string
         record_name:
           description: "The name of the record.<br />\r
 
-            This is the host name, alias defined by the record.<br />\r
+            This is the host name, alias defined by the record.<br
+            />\r
 
-            An empty record or '@' is equal to the domain name.<br />\r
+            An empty record or '@' is equal to the domain name.<br
+            />\r
 
-            Applies to A, MX, CNAME, TXT, ALIAS and TLSA records.<br />\r
+            Applies to A, MX, CNAME, TXT, ALIAS and TLSA records.<br
+            />\r
 
-            When type is TLSA the recommended value format is port number, protocol and host: _25._tcp.<br />\r
+            When type is TLSA the recommended value format is port
+            number, protocol and host: _25._tcp.<br />\r
 
             Does not apply for SRV records."
           type: string
         service:
           description: "The symbolic name of the desired service for SRV records.<br />\r
 
-            Editing the value is not possible. You should add a new SRV record and can delete the existing record."
+            Editing the value is not possible. You should add a new
+            SRV record and can delete the existing record."
           type: string
         target:
-          description: "The canonical hostname of the machine providing the service for SRV records.<br />\r
+          description: "The canonical hostname of the machine providing the service for
+            SRV records.<br />\r
 
-            Editing the value is not possible. You should add a new SRV record and delete the existing record."
+            Editing the value is not possible. You should add a new
+            SRV record and delete the existing record."
           type: string
         ttl:
           default: 3600
           description: "Time to live of the record in seconds.<br />\r
 
-            It defines the time frame that clients can cache the information.<br />\r
+            It defines the time frame that clients can cache the
+            information.<br />\r
 
-            The value MUST be between 60 and 86400. The default value is 3600 (= 1 hour)."
+            The value MUST be between 60 and 86400. The default
+            value is 3600 (= 1 hour)."
           format: int32
           type: integer
         type:
@@ -3224,7 +3398,8 @@ components:
         will_renew:
           description: "Indication of renewal.<br />\r
 
-            No value indicates that the renewal state could not be determined at the moment."
+            No value indicates that the renewal state could not be
+            determined at the moment."
           type: boolean
       type: object
     DomainDetail:
@@ -3250,7 +3425,8 @@ components:
         will_renew:
           description: "Indication of renewal.<br />\r
 
-            No value indicates that the renewal state could not be determined at the moment."
+            No value indicates that the renewal state could not be
+            determined at the moment."
           type: boolean
       type: object
     EditDomainWillRenewRequest:
@@ -3367,7 +3543,8 @@ components:
         mysql_database_names:
           description: "A list of mysql databases linked to the hosting account.<br />\r
 
-            Details of the database can be read using the mysql database detail."
+            Details of the database can be read using the mysql
+            database detail."
           items:
             type: string
           type: array
@@ -3415,7 +3592,8 @@ components:
           description: Indicates whether http/2 protocol is enabled for the website.
           type: boolean
         https_redirect_enabled:
-          description: Indicates whether automatic https redirection is enabled for the website.
+          description: Indicates whether automatic https redirection is enabled for the
+            website.
           type: boolean
         name:
           description: The name of the website.
@@ -3433,7 +3611,8 @@ components:
         aliases:
           description: "List of aliases on the mail zone<br />\r
 
-            An alias is an e-mail address (alias) that automatically forwards received e-mails to another e-mail address (destination)."
+            An alias is an e-mail address (alias) that automatically
+            forwards received e-mails to another e-mail address (destination)."
           items:
             $ref: "#/components/schemas/Alias"
           type: array
@@ -3454,9 +3633,11 @@ components:
         smtp_domains:
           description: "List of extra smtp domains on the mail zone<br />\r
 
-            SMTP domain names allow you to link multiple domain names to a single e-mail address.<br />\r
+            SMTP domain names allow you to link multiple domain
+            names to a single e-mail address.<br />\r
 
-            E-mails sent to an SMTP domain will be caught by the respective e-mail address on the main domain name."
+            E-mails sent to an SMTP domain will be caught by the
+            respective e-mail address on the main domain name."
           items:
             $ref: "#/components/schemas/SmtpDomain"
           type: array
@@ -3600,10 +3781,12 @@ components:
         domain_name:
           description: "The domain name to register.<br />\r
 
-            Only pass the domain part and the tld.<br /><i>For abc.com, abc is the domain part, com is the tld.</i>"
+            Only pass the domain part and the tld.<br /><i>For
+            abc.com, abc is the domain part, com is the tld.</i>"
           type: string
         name_servers:
-          description: List of name servers. When empty, the registation will be done on default name servers.
+          description: List of name servers. When empty, the registation will be done on
+            default name servers.
           items:
             type: string
           type: array
@@ -3622,7 +3805,8 @@ components:
         company_name:
           description: "Company name of the registrant.<br />\r
 
-            The registrant is a company if not empty, otherwise the registrant is an individual when validating extra fields."
+            The registrant is a company if not empty, otherwise the
+            registrant is an individual when validating extra fields."
           type: string
         country_code:
           description: "Country code of the registrant.\r
@@ -3674,7 +3858,8 @@ components:
         company_name:
           description: "Company name of the registrant.<br />\r
 
-            The registrant is a company if not empty, otherwise the registrant is an individual when validating extra fields."
+            The registrant is a company if not empty, otherwise the
+            registrant is an individual when validating extra fields."
           type: string
         country_code:
           description: "Country code of the registrant.\r
@@ -3692,7 +3877,21 @@ components:
         extra_fields:
           description: "List of registrant extra fields for the domain name.\r
 
-            <table><tr><th>Extension</th><th>Registrant specifics</th><th>Required extra field(s)</th></tr><tr><td>.dk</td><td>is a company</td><td>CompanyNumber</td></tr><tr><td>.es</td><td>is a company</td><td>CompanyNumber</td></tr><tr><td>.es</td><td>is an individual</td><td>PassportNumber</td></tr><tr><td>.fr</td><td>is a company</td><td>CompanyNumber</td></tr><tr><td>.it</td><td>is an individual and has country code 'IT'</td><td>CodiceFiscal</td></tr><tr><td>.it</td><td>is an individual and has not country code 'IT'</td><td>PassportNumber</td></tr><tr><td>.nu</td><td>is a company</td><td>CompanyNumber</td></tr><tr><td>.nu</td><td>is an individual</td><td>PassportNumber</td></tr><tr><td>.se</td><td>is a company</td><td>CompanyNumber</td></tr><tr><td>.se</td><td>is an individual</td><td>PassportNumber</td></tr></table>"
+            <table><tr><th>Extension</th><th>Registrant
+            specifics</th><th>Required extra
+            field(s)</th></tr><tr><td>.dk</td><td>is a
+            company</td><td>CompanyNumber</td></tr><tr><td>.es</td><td>is a
+            company</td><td>CompanyNumber</td></tr><tr><td>.es</td><td>is an
+            individual</td><td>PassportNumber</td></tr><tr><td>.fr</td><td>is a
+            company</td><td>CompanyNumber</td></tr><tr><td>.it</td><td>is an
+            individual and has country code
+            'IT'</td><td>CodiceFiscal</td></tr><tr><td>.it</td><td>is an
+            individual and has not country code
+            'IT'</td><td>PassportNumber</td></tr><tr><td>.nu</td><td>is a
+            company</td><td>CompanyNumber</td></tr><tr><td>.nu</td><td>is an
+            individual</td><td>PassportNumber</td></tr><tr><td>.se</td><td>is a
+            company</td><td>CompanyNumber</td></tr><tr><td>.se</td><td>is an
+            individual</td><td>PassportNumber</td></tr></table>"
           items:
             $ref: "#/components/schemas/ExtraField"
           type: array
@@ -3727,7 +3926,14 @@ components:
         cron_expression:
           description: "Cron expression of scheduled task.<br />\r
 
-            5-digit expressions (*/5 * * * *) are required in the following sequence:<br /><ul><li>Minute (0 - 59, also */5, */10, */15 and */30 as every 5 minutes, every 10 minutes, every quarter or every half-hour are allowed)</li><li>Hour (0 - 23, also * as every hour is allowed)</li><li>Day of the month (1 - 31, also * as every day is allowed)</li><li>Month (1 - 12 as January to December, also * as every month is allowed)</li><li>Day of the week (1 - 7 as Monday to Sunday, also * as every day is allowed)</li></ul>"
+            5-digit expressions (*/5 * * * *) are required in the
+            following sequence:<br /><ul><li>Minute (0 - 59, also */5, */10,
+            */15 and */30 as every 5 minutes, every 10 minutes, every quarter or
+            every half-hour are allowed)</li><li>Hour (0 - 23, also * as every
+            hour is allowed)</li><li>Day of the month (1 - 31, also * as every
+            day is allowed)</li><li>Month (1 - 12 as January to December, also *
+            as every month is allowed)</li><li>Day of the week (1 - 7 as Monday
+            to Sunday, also * as every day is allowed)</li></ul>"
           type: string
         enabled:
           description: Enabled.
@@ -3735,7 +3941,8 @@ components:
         id:
           description: "The id of the scheduled task.<br />\r
 
-            This value is ignored for creation of new scheduled tasks."
+            This value is ignored for creation of new scheduled
+            tasks."
           type: string
         script_location:
           description: Absolute path from this linux hosting to execute.
@@ -3836,7 +4043,8 @@ components:
         sha1_fingerprint:
           description: "The SHA-1 fingerprint of the certificate.<br />\r
 
-            The fingerprint is a cryptographic hash which is a short unique identification of the certificate."
+            The fingerprint is a cryptographic hash which is a short
+            unique identification of the certificate."
           type: string
         type:
           $ref: "#/components/schemas/SslCertificateType"
@@ -3856,7 +4064,8 @@ components:
         sha1_fingerprint:
           description: "The SHA-1 fingerprint of the certificate.<br />\r
 
-            The fingerprint is a cryptographic hash which is a short unique identification of the certificate."
+            The fingerprint is a cryptographic hash which is a short
+            unique identification of the certificate."
           type: string
         subject_alt_names:
           description: The list of all supported dns names in the certificate.
@@ -3871,7 +4080,9 @@ components:
     SslCertificateFileFormat:
       description: "The file format of the returned file stream:\r
 
-        <ul><li>PFX: Also known as PKCS #12, is a single, password protected certificate archive that contains the entire certificate chain plus the matching private key.</li></ul>"
+        <ul><li>PFX: Also known as PKCS #12, is a single, password
+        protected certificate archive that contains the entire certificate chain
+        plus the matching private key.</li></ul>"
       enum:
         - pfx
       type: string
@@ -3918,7 +4129,8 @@ components:
         validation_level:
           $ref: "#/components/schemas/SslCertificateValidationLevel"
         validations:
-          description: The list of dns names to be validated with the information related to domain verification.
+          description: The list of dns names to be validated with the information related
+            to domain verification.
           items:
             $ref: "#/components/schemas/SslCertificateRequestValidation"
           type: array
@@ -3929,13 +4141,16 @@ components:
       additionalProperties: false
       properties:
         auto_validated:
-          description: Returns true if no user interaction is required and the domain validation will be verified automatic.
+          description: Returns true if no user interaction is required and the domain
+            validation will be verified automatic.
           type: boolean
         cname_validation_content:
-          description: The value-part (Point To) of the CNAME-record that must be created as part of domain verification.
+          description: The value-part (Point To) of the CNAME-record that must be created
+            as part of domain verification.
           type: string
         cname_validation_name:
-          description: The host-part (Name) of the CNAME-record that must be created as part of domain verification.
+          description: The host-part (Name) of the CNAME-record that must be created as
+            part of domain verification.
           type: string
         dns_name:
           description: A domain name of the certificate.
@@ -3946,15 +4161,18 @@ components:
             type: string
           type: array
         file_validation_content:
-          description: The content your verification file must contain, consisting of three lines of plain-text.
+          description: The content your verification file must contain, consisting of
+            three lines of plain-text.
           items:
             type: string
           type: array
         file_validation_url_http:
-          description: The URL (http format) your verification file must be uploaded to as part of domain verification.
+          description: The URL (http format) your verification file must be uploaded to as
+            part of domain verification.
           type: string
         file_validation_url_https:
-          description: The URL (https format) your verification file must be uploaded to as part of domain verification.
+          description: The URL (https format) your verification file must be uploaded to
+            as part of domain verification.
           type: string
         type:
           $ref: "#/components/schemas/SslCertificateRequestValidationType"
@@ -3969,7 +4187,9 @@ components:
     SslCertificateType:
       description: "The type of the certificate:\r
 
-        <ul><li>Standard: Certificate for a single domain.</li><li>Multi domain: Certificate for multiple (sub)domains belonging to the same owner.</li><li>Wildcard: Certificate for all the subdomains.</li></ul>"
+        <ul><li>Standard: Certificate for a single domain.</li><li>Multi
+        domain: Certificate for multiple (sub)domains belonging to the same
+        owner.</li><li>Wildcard: Certificate for all the subdomains.</li></ul>"
       enum:
         - standard
         - multi_domain
@@ -3978,7 +4198,11 @@ components:
     SslCertificateValidationLevel:
       description: "The validation level of the certificate:\r
 
-        <ul><li>Domain validated: Basic check of the identity of the owner of the domain name.</li><li>Organization validated: Company details are verified and integrated in the certificate.</li><li>Extended validated: A thorough verification of your domain name and company details.</li></ul>"
+        <ul><li>Domain validated: Basic check of the identity of the
+        owner of the domain name.</li><li>Organization validated: Company
+        details are verified and integrated in the certificate.</li><li>Extended
+        validated: A thorough verification of your domain name and company
+        details.</li></ul>"
       enum:
         - domain_validated
         - organization_validated
@@ -4027,7 +4251,12 @@ components:
         password:
           description: "The password for the database user.<br />\r
 
-            Passwords have to adhere to following rules:<br /><ul><li>Between 8-20 characters.</li><li>Must be a mix of letters and digits.</li><li>Must contain at least one digit (0-9).</li><li>Must contain at least one letter (a-z).</li><li>Cannot contain spaces.</li><li>Cannot contain characters: * € $ & + } { ' \" \\ </li></ul>"
+            Passwords have to adhere to following rules:<br
+            /><ul><li>Between 8-20 characters.</li><li>Must be a mix of letters
+            and digits.</li><li>Must contain at least one digit
+            (0-9).</li><li>Must contain at least one letter
+            (a-z).</li><li>Cannot contain spaces.</li><li>Cannot contain
+            characters: * € $ & + } { ' \" \\ </li></ul>"
           type: string
       type: object
     UpdatePhpAPcuRequest:
@@ -4062,7 +4291,12 @@ components:
         password:
           description: "The password for the database user.<br />\r
 
-            Passwords have to adhere to following rules:<br /><ul><li>Between 8-20 characters.</li><li>Must be a mix of letters and digits.</li><li>Must contain at least one digit (0-9).</li><li>Must contain at least one letter (a-z).</li><li>Cannot contain spaces.</li><li>Cannot contain characters: * € $ & + } { ' \" \\ </li></ul>"
+            Passwords have to adhere to following rules:<br
+            /><ul><li>Between 8-20 characters.</li><li>Must be a mix of letters
+            and digits.</li><li>Must contain at least one digit
+            (0-9).</li><li>Must contain at least one letter
+            (a-z).</li><li>Cannot contain spaces.</li><li>Cannot contain
+            characters: * € $ & + } { ' \" \\ </li></ul>"
           type: string
       type: object
     UpdateUserStatusRequest:

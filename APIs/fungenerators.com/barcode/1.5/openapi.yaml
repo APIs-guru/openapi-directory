@@ -7,7 +7,11 @@ info:
     name: Fun Generators
     url: http://fungenerators.com/api/barcode/
   description: >
-    Generate Barcode images for a given barcode number. You can decode Barcode images and get the barcodes in a numberic form as well. Many industry standard barcode types are supported. The best and complete Barcode API on the cloud. [Click here to subscribe](http://fungenerators.com/api/barcode/) 
+    Generate Barcode images for a given barcode number. You can decode
+    Barcode images and get the barcodes in a numberic form as well. Many
+    industry standard barcode types are supported. The best and complete Barcode
+    API on the cloud. [Click here to
+    subscribe](http://fungenerators.com/api/barcode/) 
   termsOfService: https://fungenerators.com/terms
   title: Barcode API
   version: "1.5"
@@ -47,7 +51,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "success": {
                         "total": 1
@@ -66,7 +70,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -87,7 +91,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "success": {"total":28},
                       "contents": 
@@ -116,7 +120,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -139,7 +143,8 @@ paths:
           schema:
             format: string
             type: string
-        - description: Barcode format default C39. Valid values are the keys to those returned from /barcode/encode/types.
+        - description: Barcode format default C39. Valid values are the keys to those
+            returned from /barcode/encode/types.
           in: query
           name: barcodeformat
           required: false
@@ -173,7 +178,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "success": {
                             "total": 1
@@ -192,7 +197,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -213,7 +218,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "success": {"total":28},
                       "contents": {"types":
@@ -255,7 +260,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,

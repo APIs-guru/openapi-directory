@@ -20,18 +20,14 @@ info:
 paths:
   "/api/v1/cinema-detail/search/{cinema_name}":
     get:
-      description: >-
+      description: |-
         Return cinema details search result
-
 
         ### Response Class (Status 200)
 
-
         * __{cinema_name}__: Used as a key word to search cinemas,
 
-
         For more details on how cinemas are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/cinema-list/-updated_date
       operationId: cinema-detail_search_read
       parameters:
@@ -186,18 +182,14 @@ paths:
         - cinema-shedule-showtime
   "/api/v1/cinema/search/{id}":
     get:
-      description: >-
+      description: |-
         Return cinema search result
-
 
         ### Response Class (Status 200)
 
-
         * __{id}__: Used as a key to search cinemas,
 
-
         For more details on how cinemas are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/cinema-list/-updated_date
       operationId: cinema_search_read
       parameters:
@@ -246,23 +238,16 @@ paths:
         - company-credits
   "/api/v1/company-credits/searchall/{param}":
     get:
-      description: >-
+      description: |-
         Return company credits search result
 
-
         ### Response Class (Status 200)
-
         __{param}__ argument can be
-
         * company name
-
         * movie title or
-
         * company credit description (such as production, cinematography, etc)
 
-
         For more details on how company credits are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/company-list/company_name
       operationId: company-credits_searchall_read
       parameters:
@@ -280,18 +265,14 @@ paths:
         - company-credits
   "/api/v1/company/search/{company_name}":
     get:
-      description: >-
+      description: |-
         Return company search result
-
 
         ### Response Class (Status 200)
 
-
         * __{company_name}__: Used as a key word to search companies,
 
-
         For more details on how companies are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/company-list/-updated_date
       operationId: company_search_read
       parameters:
@@ -338,20 +319,15 @@ paths:
         - filmography-type
   "/api/v1/filmography/search/{movie_title}":
     get:
-      description: >-
+      description: |-
         Return filmography search result
-
 
         ### Response Class (Status 200)
 
-
         * __{movie_title}__: Used as a key word to search movies
-
         * You can use both Amharic or English charset/font to search
 
-
         For more details on how filmographies are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/movie-list/-updated_date
       operationId: filmography_search_read
       parameters:
@@ -369,27 +345,18 @@ paths:
         - filmography
   "/api/v1/filmography/searchall/{param}":
     get:
-      description: >-
+      description: |-
         Return filmography search result
 
-
         ### Response Class (Status 200)
-
         __{param}__ argument can be
-
         * artist first name
-
         * artist last name
-
         * artist username
-
         * movie title or
-
         * filmography description (such as director, actor, producer, etc)
 
-
         For more details on how filmographies are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/movie-list/-updated_date
       operationId: filmography_searchall_read
       parameters:
@@ -407,18 +374,14 @@ paths:
         - filmography
   "/api/v1/genre-type/search/{genre_description}":
     get:
-      description: >-
+      description: |-
         Return genre type search result
-
 
         ### Response Class (Status 200)
 
-
         * __{genre_description}__: Used as a key word to search genre types
 
-
         For more details on how genre types are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/movie-list/-updated_date
       operationId: genre-type_search_read
       parameters:
@@ -436,20 +399,15 @@ paths:
         - genre-type
   "/api/v1/genre/search/{movie_title}":
     get:
-      description: >-
+      description: |-
         Return movie genre search result
-
 
         ### Response Class (Status 200)
 
-
         * __{movie_title}__: Used as a key word to search movie genres
-
         * You can use both Amharic or English charset/font to search
 
-
         For more details on how movies are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/movie-list/-updated_date
       operationId: genre_search_read
       parameters:
@@ -467,18 +425,14 @@ paths:
         - genre
   "/api/v1/genre/searchall/{movie_genre_type}":
     get:
-      description: >-
+      description: |-
         Return movie genre search result
-
 
         ### Response Class (Status 200)
 
-
         * __{movie_genre_type}__: Used as a key word to search movie genres
 
-
         For more details on how movies are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/movie-list/-updated_date
       operationId: genre_searchall_read
       parameters:
@@ -496,18 +450,14 @@ paths:
         - genre
   "/api/v1/job/search/{job_title}":
     get:
-      description: >-
+      description: |-
         Return job details search result
-
 
         ### Response Class (Status 200)
 
-
         * __{job_title}__: Used as a key word to search jobs,
 
-
         For more details on how job are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/job-list/-updated_date
       operationId: job_search_read
       parameters:
@@ -525,18 +475,14 @@ paths:
         - job
   "/api/v1/job/searchall/{company_name}":
     get:
-      description: >-
+      description: |-
         Return job details search result
-
 
         ### Response Class (Status 200)
 
-
         * __{company_name}__: Used as a key word to search jobs,
 
-
         For more details on how job are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/job-list/-updated_date
       operationId: job_searchall_read
       parameters:
@@ -554,20 +500,15 @@ paths:
         - job
   "/api/v1/media/search/{movie_title}":
     get:
-      description: >-
+      description: |-
         Return movie media search result
-
 
         ### Response Class (Status 200)
 
-
         * __{movie_title}__: Used as a key word to search media for movies
-
         * You can use both Amharic or English charset/font to search
 
-
         For more details on how media is listed [see here][ref].
-
         [ref]: https://etmdb.com/en/movie-list/-updated_date
       operationId: media_search_read
       parameters:
@@ -585,23 +526,16 @@ paths:
         - media
   "/api/v1/media/searchall/{user}":
     get:
-      description: >-
+      description: |-
         Return cast media search result
 
-
         ### Response Class (Status 200)
-
         __{user}__ argument can be
-
         * artist first name
-
         * artist last name
-
         * artist username
 
-
         For more details on how cast media is listed [see here][ref].
-
         [ref]: https://etmdb.com/en/cast-list/-updated_date
       operationId: media_searchall_read
       parameters:
@@ -619,20 +553,15 @@ paths:
         - media
   "/api/v1/movie-cast/search/{movie_title}":
     get:
-      description: >-
+      description: |-
         Return movie cast search result
-
 
         ### Response Class (Status 200)
 
-
         * __{movie_title}__: Used as a key word to search movie cast
-
         * You can use both Amharic or English charset/font to search
 
-
         For more details on how movie casts are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/movie-list/-updated_date
       operationId: movie-cast_search_read
       parameters:
@@ -650,27 +579,18 @@ paths:
         - movie-cast
   "/api/v1/movie-cast/searchall/{param}":
     get:
-      description: >-
+      description: |-
         Return movie cast search result
 
-
         ### Response Class (Status 200)
-
         __{param}__ argument can be
-
         * artist first name
-
         * artist last name
-
         * artist username
-
         * movie title or
-
         * character name
 
-
         For more details on how movie casts are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/movie-list/-updated_date
       operationId: movie-cast_searchall_read
       parameters:
@@ -688,20 +608,15 @@ paths:
         - movie-cast
   "/api/v1/movie/search/{movie_title}":
     get:
-      description: >-
+      description: |-
         Return movie search result
-
 
         ### Response Class (Status 200)
 
-
         * __{movie_title}__: Used as a key word to search movies
-
         * You can use both Amharic or English charset/font to search
 
-
         For more details on how movies are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/movie-list/-updated_date
       operationId: movie_search_read
       parameters:
@@ -719,18 +634,14 @@ paths:
         - movie
   "/api/v1/news/search/{title}":
     get:
-      description: >-
+      description: |-
         Return news or article search result
-
 
         ### Response Class (Status 200)
 
-
         * __{title}__: Used as a key word to search news and articles,
 
-
         For more details on how news & articles are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/news-list/-updated_date
       operationId: news_search_read
       parameters:
@@ -748,23 +659,16 @@ paths:
         - news
   "/api/v1/people/search/{user}":
     get:
-      description: >-
+      description: |-
         Return cast search result
 
-
         ### Response Class (Status 200)
-
         __{param}__ argument can be
-
         * artist first name
-
         * artist last name
-
         * artist username
 
-
         For more details on how cast are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/cast-list/-updated_date
       operationId: people_search_read
       parameters:
@@ -814,20 +718,15 @@ paths:
         - showtime
   "/api/v1/watchlist/search/{movie_title}":
     get:
-      description: >-
+      description: |-
         Return watchlist search result
-
 
         ### Response Class (Status 200)
 
-
         * __{movie_title}__: Used as a key word to search movies on watchlist
-
         * You can use both Amharic or English charset/font to search
 
-
         For more details on how watchlist are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/movies/watchlist/id
       operationId: watchlist_search_read
       parameters:
@@ -845,25 +744,17 @@ paths:
         - watchlist
   "/api/v1/watchlist/searchall/{param}":
     get:
-      description: >-
+      description: |-
         Return watchlist search result
 
-
         ### Response Class (Status 200)
-
         __{param}__ argument can be
-
         * artist first name
-
         * artist last name
-
         * artist username
-
         * movie title or
 
-
         For more details on how watchlist are listed [see here][ref].
-
         [ref]: https://etmdb.com/en/movies/watchlist/id
       operationId: watchlist_searchall_read
       parameters:

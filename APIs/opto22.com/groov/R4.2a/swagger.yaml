@@ -8,12 +8,10 @@ info:
     name: Opto 22
     url: http://developer.opto22.com
     x-twitter: opto22
-  description: >
+  description: |
     #### Revised: 2019-11-21
 
-
     ### Overview
-
     groov View Public API revision 1.
   title: groov View Public API
   version: R4.2a
@@ -59,7 +57,8 @@ paths:
         - info
   /v1/data-store/devices:
     get:
-      description: List devices available in the data store. Authorized for admins and editors.
+      description: List devices available in the data store. Authorized for admins and
+        editors.
       operationId: listDevices
       responses:
         "200":
@@ -105,7 +104,8 @@ paths:
             $ref: "#/definitions/tagReference"
           type: array
     post:
-      description: Read selected tags from the data store. Authorized for admins and editors.
+      description: Read selected tags from the data store. Authorized for admins and
+        editors.
       operationId: batchReadTags
       responses:
         "200":
@@ -120,7 +120,8 @@ paths:
         - data-store
   "/v1/data-store/read/{id}":
     get:
-      description: Read the current value of a single tag. Authorized for admins and editors.
+      description: Read the current value of a single tag. Authorized for admins and
+        editors.
       operationId: readTag
       responses:
         "200":
@@ -154,7 +155,8 @@ paths:
         type: number
   /v1/data-store/tags:
     get:
-      description: List all data store tags defined in the project. Authorized for admins and editors.
+      description: List all data store tags defined in the project. Authorized for
+        admins and editors.
       operationId: listAllTags
       responses:
         "200":
@@ -201,7 +203,8 @@ paths:
         - data-store
   /v1/logging/groovLogs.json:
     get:
-      description: Downloads the complete groov View log in JSON format. Added in groov View R4.2a.
+      description: Downloads the complete groov View log in JSON format. Added in
+        groov View R4.2a.
       operationId: downloadLogJson
       parameters:
         - default: INFO
@@ -218,7 +221,8 @@ paths:
           required: false
           type: string
         - default: 0
-          description: The earliest time to include in the log. Value is milliseconds since January 1, 1970 UTC.
+          description: The earliest time to include in the log. Value is milliseconds
+            since January 1, 1970 UTC.
           format: int64
           in: query
           name: last-timestamp
@@ -257,7 +261,8 @@ paths:
           required: false
           type: string
         - default: 0
-          description: The earliest time to include in the log. Value is milliseconds since January 1, 1970 UTC.
+          description: The earliest time to include in the log. Value is milliseconds
+            since January 1, 1970 UTC.
           format: int64
           in: query
           name: last-timestamp
@@ -279,7 +284,8 @@ paths:
         - logging
   /whoami:
     get:
-      description: Get information about the user you are authenticated as. Authorized for admins, editors, operators, and kiosk.
+      description: Get information about the user you are authenticated as. Authorized
+        for admins, editors, operators, and kiosk.
       operationId: whoAmI
       responses:
         "200":
@@ -411,13 +417,15 @@ definitions:
         description: The groov box type (GROOV-AT1, GROOV-AR1, or GRV-EPIC-PR1)
         type: string
       groovNodeRedVersion:
-        description: The node red version number if running on a GROOV-AR1 which has node red installed
+        description: The node red version number if running on a GROOV-AR1 which has
+          node red installed
         type: string
       isGroovBox:
         description: True if running on a groov hardware box
         type: boolean
       isGroovBoxSetup:
-        description: True if running on a groov hardware box which has been setup or true if running on groov Server for Windows
+        description: True if running on a groov hardware box which has been setup or
+          true if running on groov Server for Windows
         type: boolean
       isLicenseValid:
         description: True if a license is installed, valid, and not expired

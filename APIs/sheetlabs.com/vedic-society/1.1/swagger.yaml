@@ -118,7 +118,8 @@ paths:
   /description:
     get:
       parameters:
-        - description: The string you are looking for in the word meaning, for example, chariot. Wildcards are allowed, for example, char\*.
+        - description: The string you are looking for in the word meaning, for example,
+            chariot. Wildcards are allowed, for example, char\*.
           in: query
           name: description
           required: true
@@ -132,7 +133,8 @@ paths:
   /word:
     get:
       parameters:
-        - description: The Sanskrit word transliterated into English, for example, rajan. Wildcards are allowed, for example, \*aj\*.
+        - description: The Sanskrit word transliterated into English, for example, rajan.
+            Wildcards are allowed, for example, \*aj\*.
           in: query
           name: word
           required: true

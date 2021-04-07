@@ -4,7 +4,7 @@ servers:
 info:
   contact:
     x-twitter: internetarchive
-  description: >
+  description: |
     API for Internet Archive's Search-related services
   title: Search Services
   version: 1.0.0
@@ -40,7 +40,7 @@ paths:
           description: Fields that can be requested
   /search/v1/organic:
     get:
-      description: >
+      description: |
         Return relevance-based results from search queries
       parameters:
         - $ref: "#/components/parameters/query"
@@ -69,7 +69,7 @@ paths:
           description: Unexpected error
   /search/v1/scrape:
     get:
-      description: >
+      description: |
         Scrape search results from Internet Archive, allowing a scrolling cursor
       parameters:
         - $ref: "#/components/parameters/query"
@@ -101,7 +101,10 @@ paths:
 components:
   parameters:
     callback:
-      description: Specifies a JavaScript function func, for a JSON-P response. When provided, results are wrapped as `callback(data)`, and the returned MIME type is application/javascript. This causes the caller to automatically run the func with the JSON results as its argument.
+      description: Specifies a JavaScript function func, for a JSON-P response. When
+        provided, results are wrapped as `callback(data)`, and the returned MIME
+        type is application/javascript. This causes the caller to automatically
+        run the func with the JSON results as its argument.
       in: query
       name: callback
       required: false

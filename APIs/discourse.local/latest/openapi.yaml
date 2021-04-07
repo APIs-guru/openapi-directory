@@ -4,7 +4,8 @@ servers:
 x-hasEquivalentPaths: true
 info:
   description: >
-    This page contains the documentation on how to use Discourse through API calls.
+    This page contains the documentation on how to use Discourse
+    through API calls.
 
 
     > Note: This documentation is not complete, so for missing parts you may have to
@@ -318,7 +319,9 @@ paths:
                       type: integer
                   type: object
                 type: array
-          description: '"List of backups response. NOTE: Backups link urls cannot be called directly." "Please create a PUT request to download a backup."'
+          description: '"List of backups response. NOTE: Backups link urls cannot be
+            called directly." "Please create a PUT request to download a
+            backup."'
       tags:
         - Backups
     post:
@@ -366,7 +369,8 @@ paths:
         - Backups
   "/admin/backups/{filename}":
     put:
-      description: Download a backup. Sends an email to the account specified by your api_username with a link and token to download the backup.
+      description: Download a backup. Sends an email to the account specified by your
+        api_username with a link and token to download the backup.
       parameters:
         - example: discourse-2018-02-22-075414-v20180127005644.tar.gz
           in: path
@@ -1042,7 +1046,10 @@ paths:
             schema:
               properties:
                 add_rel_nofollow_to_user_content:
-                  description: "'Add rel nofollow to all submitted user content, except for internal links (including parent domains). If you change this, you must rebake all posts with: \"rake posts:rebake\"'"
+                  description: "'Add rel nofollow to all submitted user content, except for
+                    internal links (including parent domains). If you change
+                    this, you must rebake all posts with: \"rake
+                    posts:rebake\"'"
                   example: true
                   type: boolean
               required:
@@ -1062,7 +1069,8 @@ paths:
             schema:
               properties:
                 alert_admins_if_errors_per_hour:
-                  description: '"Number of errors per hour in order to trigger an admin alert. A value of 0 disables this feature. NOTE: requires restart."'
+                  description: '"Number of errors per hour in order to trigger an admin alert. A
+                    value of 0 disables this feature. NOTE: requires restart."'
                   example: 0
                   type: integer
               required:
@@ -1082,7 +1090,8 @@ paths:
             schema:
               properties:
                 alert_admins_if_errors_per_minute:
-                  description: '"Number of errors per minute in order to trigger an admin alert. A value of 0 disables this feature. NOTE: requires restart."'
+                  description: '"Number of errors per minute in order to trigger an admin alert. A
+                    value of 0 disables this feature. NOTE: requires restart."'
                   example: 0
                   type: integer
               required:
@@ -1122,7 +1131,8 @@ paths:
             schema:
               properties:
                 allow_animated_avatars:
-                  description: '"Allow users to use animated gif profile pictures. WARNING: run the avatars:refresh rake task after changing this setting."'
+                  description: '"Allow users to use animated gif profile pictures. WARNING: run
+                    the avatars:refresh rake task after changing this setting."'
                   example: false
                   type: boolean
               required:
@@ -1216,7 +1226,8 @@ paths:
             schema:
               properties:
                 allow_index_in_robots_txt:
-                  description: '"Specify in robots.txt that this site is allowed to be indexed by web search engines."'
+                  description: '"Specify in robots.txt that this site is allowed to be indexed by
+                    web search engines."'
                   example: true
                   type: boolean
               required:
@@ -1294,7 +1305,8 @@ paths:
             schema:
               properties:
                 allow_restore:
-                  description: '"Allow restore, which can replace ALL site data! Leave false unless you plan to restore a backup"'
+                  description: '"Allow restore, which can replace ALL site data! Leave false
+                    unless you plan to restore a backup"'
                   example: false
                   type: boolean
               required:
@@ -1486,7 +1498,8 @@ paths:
             schema:
               properties:
                 alternative_reply_by_email_addresses:
-                  description: List of alternative templates for reply by email incoming email addresses.
+                  description: List of alternative templates for reply by email incoming email
+                    addresses.
                   example: "%{reply_key}@reply.example.com|replies+%{reply_key}@example.com"
                   type: string
               required:
@@ -1506,7 +1519,8 @@ paths:
             schema:
               properties:
                 always_show_trimmed_content:
-                  description: "Always show trimmed part of incoming emails. WARNING: might reveal email addresses."
+                  description: "Always show trimmed part of incoming emails. WARNING: might reveal
+                    email addresses."
                   example: false
                   type: boolean
               required:
@@ -1666,7 +1680,8 @@ paths:
             schema:
               properties:
                 attachment_content_type_blacklist:
-                  description: Pipe delimited list of keywords used to blacklist attachments based on the content type.
+                  description: Pipe delimited list of keywords used to blacklist attachments based
+                    on the content type.
                   example: pkcs7|x-vcard
                   type: string
               required:
@@ -1686,7 +1701,8 @@ paths:
             schema:
               properties:
                 attachment_filename_blacklist:
-                  description: Pipe delimited list of keywords used to blacklist attachments based on the filename.
+                  description: Pipe delimited list of keywords used to blacklist attachments based
+                    on the filename.
                   example: smime.p7s|signature.asc
                   type: string
               required:
@@ -1706,7 +1722,8 @@ paths:
             schema:
               properties:
                 authorized_extensions:
-                  description: A pipe delimited list of file extensions allowed for upload (use "*" to enable all file types)
+                  description: A pipe delimited list of file extensions allowed for upload (use
+                    "*" to enable all file types)
                   example: jpg|jpeg|png|gif
                   type: string
               required:
@@ -1746,7 +1763,8 @@ paths:
             schema:
               properties:
                 auto_block_fast_typers_on_first_post:
-                  description: '"Automatically block users that do not meet min_first_post_typing_time"'
+                  description: '"Automatically block users that do not meet
+                    min_first_post_typing_time"'
                   example: true
                   type: boolean
               required:
@@ -1766,7 +1784,11 @@ paths:
             schema:
               properties:
                 auto_block_first_post_regex:
-                  description: '"Case insensitive regex that if passed will cause first post by user to be blocked and sent to approval queue. Example: raging|a[bc]a , will cause all posts containing raging or aba or aca to be blocked on first. Only applies to first post."'
+                  description: '"Case insensitive regex that if passed will cause first post by
+                    user to be blocked and sent to approval queue. Example:
+                    raging|a[bc]a , will cause all posts containing raging or
+                    aba or aca to be blocked on first. Only applies to first
+                    post."'
                   example: ""
                   type: string
               required:
@@ -1822,7 +1844,8 @@ paths:
             schema:
               properties:
                 auto_generated_whitelist:
-                  description: List of email addresses that won't be checked for auto-generated content.
+                  description: List of email addresses that won't be checked for auto-generated
+                    content.
                   example: foo@bar.com|discourse@bar.com
                   type: string
               required:
@@ -1900,7 +1923,8 @@ paths:
             schema:
               properties:
                 automatically_download_gravatars:
-                  description: '"Download Gravatars for users upon account creation or email change."'
+                  description: '"Download Gravatars for users upon account creation or email
+                    change."'
                   example: true
                   type: boolean
               required:
@@ -1960,7 +1984,8 @@ paths:
             schema:
               properties:
                 background_polling_interval:
-                  description: '"How often should the clients poll in milliseconds (when the window is in the background)"'
+                  description: '"How often should the clients poll in milliseconds (when the
+                    window is in the background)"'
                   example: 60000
                   type: integer
               required:
@@ -2020,7 +2045,8 @@ paths:
             schema:
               properties:
                 backup_with_uploads:
-                  description: '"Include uploads in scheduled backups. Disabling this will only backup the database."'
+                  description: '"Include uploads in scheduled backups. Disabling this will only
+                    backup the database."'
                   example: true
                   type: boolean
               required:
@@ -2096,7 +2122,8 @@ paths:
             schema:
               properties:
                 bootstrap_mode_min_users:
-                  description: '"Minimum number of users required to disable bootstrap mode (set to 0 to disable)"'
+                  description: '"Minimum number of users required to disable bootstrap mode (set
+                    to 0 to disable)"'
                   example: 50
                   type: integer
               required:
@@ -2272,7 +2299,9 @@ paths:
             schema:
               properties:
                 clean_up_uploads:
-                  description: '"Remove orphan unreferenced uploads to prevent illegal hosting. WARNING: you may want to back up of your /uploads directory before enabling this setting."'
+                  description: '"Remove orphan unreferenced uploads to prevent illegal hosting.
+                    WARNING: you may want to back up of your /uploads directory
+                    before enabling this setting."'
                   example: true
                   type: boolean
               required:
@@ -2313,7 +2342,8 @@ paths:
             schema:
               properties:
                 cold_age_days_high:
-                  description: '"After this many days of conversation, the last activity date is strongly dimmed."'
+                  description: '"After this many days of conversation, the last activity date is
+                    strongly dimmed."'
                   example: 180
                   type: integer
               required:
@@ -2333,7 +2363,8 @@ paths:
             schema:
               properties:
                 cold_age_days_low:
-                  description: '"After this many days of conversation, the last activity date is slightly dimmed."'
+                  description: '"After this many days of conversation, the last activity date is
+                    slightly dimmed."'
                   example: 14
                   type: integer
               required:
@@ -2353,7 +2384,8 @@ paths:
             schema:
               properties:
                 cold_age_days_medium:
-                  description: '"After this many days of conversation, the last activity date is moderately dimmed."'
+                  description: '"After this many days of conversation, the last activity date is
+                    moderately dimmed."'
                   example: 90
                   type: integer
               required:
@@ -2474,7 +2506,8 @@ paths:
             schema:
               properties:
                 convert_pasted_images_quality:
-                  description: '"Quality of the converted JPG file (1 is lowest quality, 100 is best quality)."'
+                  description: '"Quality of the converted JPG file (1 is lowest quality, 100 is
+                    best quality)."'
                   example: 95
                   type: integer
               required:
@@ -2514,7 +2547,8 @@ paths:
             schema:
               properties:
                 cooldown_minutes_after_hiding_posts:
-                  description: '"Number of minutes a user must wait before they can edit a post hidden via community flagging"'
+                  description: '"Number of minutes a user must wait before they can edit a post
+                    hidden via community flagging"'
                   example: 10
                   type: integer
               required:
@@ -2534,7 +2568,9 @@ paths:
             schema:
               properties:
                 cors_origins:
-                  description: '"Allowed origins for cross-origin requests (CORS). Each origin must include http:// or https://. The DISCOURSE_ENABLE_CORS env variable must be set to true to enable CORS."'
+                  description: '"Allowed origins for cross-origin requests (CORS). Each origin
+                    must include http:// or https://. The DISCOURSE_ENABLE_CORS
+                    env variable must be set to true to enable CORS."'
                   example: ""
                   type: string
               required:
@@ -2554,7 +2590,8 @@ paths:
             schema:
               properties:
                 crawl_images:
-                  description: Retrieve images from remote URLs to insert the correct width and height dimensions.
+                  description: Retrieve images from remote URLs to insert the correct width and
+                    height dimensions.
                   example: true
                   type: boolean
               required:
@@ -2574,7 +2611,8 @@ paths:
             schema:
               properties:
                 create_thumbnails:
-                  description: '"Create thumbnails and lightbox images that are too large to fit in a post"'
+                  description: '"Create thumbnails and lightbox images that are too large to fit
+                    in a post"'
                   example: true
                   type: boolean
               required:
@@ -2594,7 +2632,8 @@ paths:
             schema:
               properties:
                 daily_performance_report:
-                  description: '"Analyze NGINX logs daily and post a Staff Only topic with details"'
+                  description: '"Analyze NGINX logs daily and post a Staff Only topic with
+                    details"'
                   example: false
                   type: boolean
               required:
@@ -2614,7 +2653,8 @@ paths:
             schema:
               properties:
                 default_avatars:
-                  description: '"URLs to avatars that will be used by default for new users until they change them."'
+                  description: '"URLs to avatars that will be used by default for new users until
+                    they change them."'
                   example: ""
                   type: string
               required:
@@ -2634,7 +2674,8 @@ paths:
             schema:
               properties:
                 default_categories_muted:
-                  description: "\"Pipe delimited category id's. List of categories that are muted by default.\""
+                  description: "\"Pipe delimited category id's. List of categories that are muted
+                    by default.\""
                   example: ""
                   type: string
               required:
@@ -2654,7 +2695,8 @@ paths:
             schema:
               properties:
                 default_categories_tracking:
-                  description: "\"Pipe delimited category id's. List of categories that are tracked by default.\""
+                  description: "\"Pipe delimited category id's. List of categories that are
+                    tracked by default.\""
                   example: ""
                   type: string
               required:
@@ -2674,7 +2716,8 @@ paths:
             schema:
               properties:
                 default_categories_watching:
-                  description: "\"Pipe delimited category id's. List of categories that are watched by default.\""
+                  description: "\"Pipe delimited category id's. List of categories that are
+                    watched by default.\""
                   example: 4|1
                   type: string
               required:
@@ -2694,7 +2737,8 @@ paths:
             schema:
               properties:
                 default_categories_watching_first_post:
-                  description: "\"Pipe delimited category id's. List of categories in which first post in each new topic will be watched by default.\""
+                  description: "\"Pipe delimited category id's. List of categories in which first
+                    post in each new topic will be watched by default.\""
                   example: ""
                   type: string
               required:
@@ -2732,7 +2776,8 @@ paths:
             schema:
               properties:
                 default_email_always:
-                  description: '"Send an email notification even when the user is active by default."'
+                  description: '"Send an email notification even when the user is active by
+                    default."'
                   example: false
                   type: boolean
               required:
@@ -2772,7 +2817,8 @@ paths:
             schema:
               properties:
                 default_email_direct:
-                  description: '"Send an email when someone quotes/replies to/mentions or invites the user by default."'
+                  description: '"Send an email when someone quotes/replies to/mentions or invites
+                    the user by default."'
                   example: true
                   type: boolean
               required:
@@ -2832,7 +2878,8 @@ paths:
             schema:
               properties:
                 default_email_mailing_list_mode_frequency:
-                  description: '"Users who enable mailing list mode will receive emails this often by default."'
+                  description: '"Users who enable mailing list mode will receive emails this often
+                    by default."'
                   enum:
                     - 0
                     - 1
@@ -2896,7 +2943,8 @@ paths:
             schema:
               properties:
                 default_include_tl0_in_digests:
-                  description: '"Include posts from new users in summary emails by default. Users can change this in their preferences."'
+                  description: '"Include posts from new users in summary emails by default. Users
+                    can change this in their preferences."'
                   example: false
                   type: boolean
               required:
@@ -3118,7 +3166,8 @@ paths:
             schema:
               properties:
                 default_other_notification_level_when_replying:
-                  description: '"Global default notification level when the user replies to a topic."'
+                  description: '"Global default notification level when the user replies to a
+                    topic."'
                   example: 2
                   type: integer
               required:
@@ -3138,7 +3187,8 @@ paths:
             schema:
               properties:
                 default_topics_automatic_unpin:
-                  description: '"Automatically unpin topics when the user reaches the bottom by default."'
+                  description: '"Automatically unpin topics when the user reaches the bottom by
+                    default."'
                   example: true
                   type: boolean
               required:
@@ -3158,7 +3208,8 @@ paths:
             schema:
               properties:
                 default_trust_level:
-                  description: '"Default trust level (0-4) for all new users. WARNING! Changing this will put you at serious risk for spam."'
+                  description: '"Default trust level (0-4) for all new users. WARNING! Changing
+                    this will put you at serious risk for spam."'
                   enum:
                     - 0
                     - 1
@@ -3337,7 +3388,8 @@ paths:
             schema:
               properties:
                 details_enabled:
-                  description: "'Enable the details plugin. If you change this, you must rebake all posts with: \"rake posts:rebake\".'"
+                  description: "'Enable the details plugin. If you change this, you must rebake
+                    all posts with: \"rake posts:rebake\".'"
                   example: true
                   type: boolean
               required:
@@ -3529,7 +3581,8 @@ paths:
             schema:
               properties:
                 disable_edit_notifications:
-                  description: "\"Disables edit notifications by the system user when 'download_remote_images_to_local' is active.\""
+                  description: "\"Disables edit notifications by the system user when
+                    'download_remote_images_to_local' is active.\""
                   example: false
                   type: boolean
               required:
@@ -3593,7 +3646,8 @@ paths:
             schema:
               properties:
                 disabled_image_download_domains:
-                  description: Remote images will never be downloaded from these domains. Pipe-delimited list.
+                  description: Remote images will never be downloaded from these domains.
+                    Pipe-delimited list.
                   example: ""
                   type: string
               required:
@@ -3653,7 +3707,8 @@ paths:
             schema:
               properties:
                 discourse_narrative_bot_ignored_usernames:
-                  description: Usernames that the Discourse Narrative Bot should ignore. Pipe delimited.
+                  description: Usernames that the Discourse Narrative Bot should ignore. Pipe
+                    delimited.
                   example: discourse|steve
                   type: boolean
               required:
@@ -3673,7 +3728,8 @@ paths:
             schema:
               properties:
                 discourse_narrative_bot_welcome_post_delay:
-                  description: Wait (n) seconds before sending the Discourse Narrative Bot welcome post.
+                  description: Wait (n) seconds before sending the Discourse Narrative Bot welcome
+                    post.
                   example: 0
                   type: integer
               required:
@@ -3693,7 +3749,8 @@ paths:
             schema:
               properties:
                 discourse_narrative_bot_welcome_post_delay:
-                  description: Type of welcome post that the Discourse Narrative Bot should send out
+                  description: Type of welcome post that the Discourse Narrative Bot should send
+                    out
                   enum:
                     - new_user_track
                     - welcome_message
@@ -3754,7 +3811,8 @@ paths:
             schema:
               properties:
                 dominating_topic_minimum_percent:
-                  description: '"What percentage of posts a user has to make in a topic before being reminded about overly dominating a topic."'
+                  description: '"What percentage of posts a user has to make in a topic before
+                    being reminded about overly dominating a topic."'
                   example: 20
                   type: integer
               required:
@@ -3774,7 +3832,8 @@ paths:
             schema:
               properties:
                 download_remote_images_max_days_old:
-                  description: Don't download remote images for posts that are more than n days old.
+                  description: Don't download remote images for posts that are more than n days
+                    old.
                   example: 30
                   type: integer
               required:
@@ -3794,7 +3853,8 @@ paths:
             schema:
               properties:
                 download_remote_images_threshold:
-                  description: Minimum disk space necessary to download remote images locally (in percent)
+                  description: Minimum disk space necessary to download remote images locally (in
+                    percent)
                   example: 10
                   type: integer
               required:
@@ -3814,7 +3874,8 @@ paths:
             schema:
               properties:
                 max_image_width:
-                  description: Convert remote images to local images by downloading them; this prevents broken images.
+                  description: Convert remote images to local images by downloading them; this
+                    prevents broken images.
                   example: true
                   type: boolean
               required:
@@ -3870,7 +3931,8 @@ paths:
             schema:
               properties:
                 educate_until_posts:
-                  description: '"When the user starts typing their first (n) new posts, show the pop-up new user education panel in the composer."'
+                  description: '"When the user starts typing their first (n) new posts, show the
+                    pop-up new user education panel in the composer."'
                   example: 2
                   type: integer
               required:
@@ -4006,7 +4068,9 @@ paths:
             schema:
               properties:
                 email_in:
-                  description: "'Allow users to post new topics via email (requires pop3 polling). Configure the addresses in the \"Settings\" tab of each category.'"
+                  description: "'Allow users to post new topics via email (requires pop3 polling).
+                    Configure the addresses in the \"Settings\" tab of each
+                    category.'"
                   type: boolean
               required:
                 - email_in
@@ -4025,7 +4089,8 @@ paths:
             schema:
               properties:
                 email_in_min_trust:
-                  description: The minimum trust level a user needs to have to be allowed to post new topics via email.
+                  description: The minimum trust level a user needs to have to be allowed to post
+                    new topics via email.
                   enum:
                     - 0
                     - 1
@@ -4071,7 +4136,8 @@ paths:
             schema:
               properties:
                 email_prefix:
-                  description: "\"The [label] used in the subject of emails. It will default to 'title' if not set.\""
+                  description: "\"The [label] used in the subject of emails. It will default to
+                    'title' if not set.\""
                   type: string
               required:
                 - email_prefix
@@ -4090,7 +4156,10 @@ paths:
             schema:
               properties:
                 email_site_title:
-                  description: The title of the site used as the sender of emails from the site. Default to 'title' if not set. If your 'title' contains characters that are not allowed in email sender strings, use this setting.
+                  description: The title of the site used as the sender of emails from the site.
+                    Default to 'title' if not set. If your 'title' contains
+                    characters that are not allowed in email sender strings, use
+                    this setting.
                   type: string
               required:
                 - email_site_title
@@ -4243,7 +4312,10 @@ paths:
             schema:
               properties:
                 enable_escaped_fragments:
-                  description: "\"Fall back to Google's Ajax-Crawling API if no webcrawler is detected. See https://developers.google.com/webmasters/ajax-crawling/docs/learn-more\""
+                  description: "\"Fall back to Google's Ajax-Crawling API if no webcrawler is
+                    detected. See
+                    https://developers.google.com/webmasters/ajax-crawling/docs\
+                    /learn-more\""
                   example: true
                   type: boolean
               required:
@@ -4281,7 +4353,8 @@ paths:
             schema:
               properties:
                 enable_flash_video_onebox:
-                  description: '"Enable embedding of swf and flv (Adobe Flash) links in oneboxes. WARNING: may introduce security risks."'
+                  description: '"Enable embedding of swf and flv (Adobe Flash) links in oneboxes.
+                    WARNING: may introduce security risks."'
                   example: false
                   type: boolean
               required:
@@ -4449,7 +4522,8 @@ paths:
             schema:
               properties:
                 enable_noscript_support:
-                  description: '"Enable standard webcrawler search engine support via the noscript tag"'
+                  description: '"Enable standard webcrawler search engine support via the noscript
+                    tag"'
                   example: true
                   type: boolean
               required:
@@ -4487,7 +4561,8 @@ paths:
             schema:
               properties:
                 enable_s3_backups:
-                  description: '"Upload backups to S3 when complete. IMPORTANT: requires valid S3 credentials entered in Files settings."'
+                  description: '"Upload backups to S3 when complete. IMPORTANT: requires valid S3
+                    credentials entered in Files settings."'
                   example: false
                   type: boolean
               required:
@@ -4507,7 +4582,8 @@ paths:
             schema:
               properties:
                 enable_s3_uploads:
-                  description: '"Place uploads on Amazon S3 storage. IMPORTANT: requires valid S3 credentials (both access key id & secret access key)."'
+                  description: '"Place uploads on Amazon S3 storage. IMPORTANT: requires valid S3
+                    credentials (both access key id & secret access key)."'
                   example: false
                   type: boolean
               required:
@@ -4730,7 +4806,8 @@ paths:
             schema:
               properties:
                 external_system_avatars_url:
-                  description: '"URL of the external system avatars service. Allowed substitutions are {username} {first_letter} {color} {size}"'
+                  description: '"URL of the external system avatars service. Allowed substitutions
+                    are {username} {first_letter} {color} {size}"'
                   example: /letter_avatar_proxy/v2/letter/{first_letter}/{color}/{size}.png
                   type: string
               required:
@@ -4804,7 +4881,8 @@ paths:
             schema:
               properties:
                 faq_url:
-                  description: '"If you have a FAQ hosted elsewhere that you want to use, provide the full URL here."'
+                  description: '"If you have a FAQ hosted elsewhere that you want to use, provide
+                    the full URL here."'
                   example: ""
                   type: string
               required:
@@ -4878,7 +4956,9 @@ paths:
             schema:
               properties:
                 flag_sockpuppets:
-                  description: '"If a new user replies to a topic from the same IP address as the new user who started the topic, flag both of their posts as potential spam."'
+                  description: '"If a new user replies to a topic from the same IP address as the
+                    new user who started the topic, flag both of their posts as
+                    potential spam."'
                   example: false
                   type: boolean
               required:
@@ -4898,7 +4978,8 @@ paths:
             schema:
               properties:
                 flags_required_to_hide_post:
-                  description: '"Number of flags that cause a post to be automatically hidden and message sent to the user (0 for never)"'
+                  description: '"Number of flags that cause a post to be automatically hidden and
+                    message sent to the user (0 for never)"'
                   example: 3
                   type: integer
               required:
@@ -4938,7 +5019,8 @@ paths:
             schema:
               properties:
                 force_hostname:
-                  description: '"DEVELOPER ONLY! WARNING! Specify a hostname in the URL. Leave blank for default."'
+                  description: '"DEVELOPER ONLY! WARNING! Specify a hostname in the URL. Leave
+                    blank for default."'
                   example: ""
                   type: string
               required:
@@ -4958,7 +5040,11 @@ paths:
             schema:
               properties:
                 force_https:
-                  description: '"Force your site to use HTTPS only. WARNING: do NOT enable this until you verify HTTPS is fully set up and working absolutely everywhere! Did you check your CDN, all social logins, and any external logos / dependencies to make sure they are all HTTPS compatible, too?"'
+                  description: '"Force your site to use HTTPS only. WARNING: do NOT enable this
+                    until you verify HTTPS is fully set up and working
+                    absolutely everywhere! Did you check your CDN, all social
+                    logins, and any external logos / dependencies to make sure
+                    they are all HTTPS compatible, too?"'
                   example: false
                   type: boolean
               required:
@@ -5122,7 +5208,8 @@ paths:
             schema:
               properties:
                 global_notice:
-                  description: '"Display an URGENT, EMERGENCY global banner notice to all visitors, change to blank to hide it (HTML allowed)."'
+                  description: '"Display an URGENT, EMERGENCY global banner notice to all
+                    visitors, change to blank to hide it (HTML allowed)."'
                   example: ""
                   type: string
               required:
@@ -5252,7 +5339,8 @@ paths:
             schema:
               properties:
                 history_hours_high:
-                  description: '"A post edited within this many hours has the edit indicator strongly highlighted."'
+                  description: '"A post edited within this many hours has the edit indicator
+                    strongly highlighted."'
                   example: 48
                   type: integer
               required:
@@ -5272,7 +5360,8 @@ paths:
             schema:
               properties:
                 history_hours_low:
-                  description: '"A post edited within this many hours has the edit indicator slightly highlighted"'
+                  description: '"A post edited within this many hours has the edit indicator
+                    slightly highlighted"'
                   example: 12
                   type: integer
               required:
@@ -5292,7 +5381,8 @@ paths:
             schema:
               properties:
                 history_hours_medium:
-                  description: '"A post edited within this many hours has the edit indicator moderately highlighted."'
+                  description: '"A post edited within this many hours has the edit indicator
+                    moderately highlighted."'
                   example: 24
                   type: integer
               required:
@@ -5332,7 +5422,8 @@ paths:
             schema:
               properties:
                 incoming_email_prefer_html:
-                  description: Use the HTML instead of the text for incoming email. May cause unexpected formatting issues!
+                  description: Use the HTML instead of the text for incoming email. May cause
+                    unexpected formatting issues!
                   type: boolean
               required:
                 - incoming_email_prefer_html
@@ -5459,7 +5550,8 @@ paths:
             schema:
               properties:
                 levenshtein_distance_spammer_emails:
-                  description: '"When matching spammer emails, number of characters difference that will still allow a fuzzy match."'
+                  description: '"When matching spammer emails, number of characters difference
+                    that will still allow a fuzzy match."'
                   example: 2
                   type: integer
               required:
@@ -5606,7 +5698,9 @@ paths:
             schema:
               properties:
                 long_polling_base_url:
-                  description: '"Base URL used for long polling (when a CDN is serving dynamic content, be sure to set this to origin pull) eg: http://origin.site.com"'
+                  description: '"Base URL used for long polling (when a CDN is serving dynamic
+                    content, be sure to set this to origin pull) eg:
+                    http://origin.site.com"'
                   example: /
                   type: string
               required:
@@ -5626,7 +5720,9 @@ paths:
             schema:
               properties:
                 long_polling_interval:
-                  description: '"Amount of time the server should wait before responding to clients when there is no data to send (logged on users only)"'
+                  description: '"Amount of time the server should wait before responding to
+                    clients when there is no data to send (logged on users
+                    only)"'
                   example: 25000
                   type: integer
               required:
@@ -5745,7 +5841,8 @@ paths:
             schema:
               properties:
                 max_image_size_kb:
-                  description: The maximum attachment upload size in kB. This must be configured in nginx {client_max_body_size} / apache or proxy as well.
+                  description: The maximum attachment upload size in kB. This must be configured
+                    in nginx {client_max_body_size} / apache or proxy as well.
                   example: 3072
                   type: integer
               required:
@@ -5805,7 +5902,8 @@ paths:
             schema:
               properties:
                 max_emails_per_day_per_user:
-                  description: Maximum number of emails to send users per day. 0 to disable the limit
+                  description: Maximum number of emails to send users per day. 0 to disable the
+                    limit
                   example: 100
                   type: integer
               required:
@@ -5885,7 +5983,8 @@ paths:
             schema:
               properties:
                 max_image_size_kb:
-                  description: The maximum image upload size in kB. This must be configured in nginx {client_max_body_size} / apache or proxy as well.
+                  description: The maximum image upload size in kB. This must be configured in
+                    nginx {client_max_body_size} / apache or proxy as well.
                   example: 3072
                   type: integer
               required:
@@ -5983,7 +6082,9 @@ paths:
             schema:
               properties:
                 max_new_accounts_per_registration_ip:
-                  description: '"If there are already (n) trust level 0 accounts from this IP (and none is a staff member or at TL2 or higher), stop accepting new signups from that IP."'
+                  description: '"If there are already (n) trust level 0 accounts from this IP (and
+                    none is a staff member or at TL2 or higher), stop accepting
+                    new signups from that IP."'
                   example: 3
                   type: integer
               required:
@@ -6003,7 +6104,8 @@ paths:
             schema:
               properties:
                 max_oneboxes_per_post:
-                  description: '"Enable embedding of swf and flv (Adobe Flash) links in oneboxes. WARNING: may introduce security risks."'
+                  description: '"Enable embedding of swf and flv (Adobe Flash) links in oneboxes.
+                    WARNING: may introduce security risks."'
                   example: 50
                   type: integer
               required:
@@ -6081,7 +6183,8 @@ paths:
             schema:
               properties:
                 max_replies_in_first_day:
-                  description: '"The maximum number of replies a user is allowed to create in the 24 hour period after creating their first post"'
+                  description: '"The maximum number of replies a user is allowed to create in the
+                    24 hour period after creating their first post"'
                   example: 10
                   type: integer
               required:
@@ -6119,7 +6222,8 @@ paths:
             schema:
               properties:
                 max_similar_results:
-                  description: '"How many similar topics to show above the editor when composing a new topic. Comparison is based on title and body."'
+                  description: '"How many similar topics to show above the editor when composing a
+                    new topic. Comparison is based on title and body."'
                   example: 5
                   type: integer
               required:
@@ -6179,7 +6283,8 @@ paths:
             schema:
               properties:
                 max_tags_in_filter_list:
-                  description: '"Maximum number of tags to show in the filter dropdown. The most used tags will be shown."'
+                  description: '"Maximum number of tags to show in the filter dropdown. The most
+                    used tags will be shown."'
                   example: 30
                   type: integer
               required:
@@ -6257,7 +6362,8 @@ paths:
             schema:
               properties:
                 max_topics_in_first_day:
-                  description: '"The maximum number of topics a user is allowed to create in the 24 hour period after creating their first post"'
+                  description: '"The maximum number of topics a user is allowed to create in the
+                    24 hour period after creating their first post"'
                   example: 3
                   type: integer
               required:
@@ -6373,7 +6479,8 @@ paths:
             schema:
               properties:
                 maximum_backups:
-                  description: '"The maximum amount of backups to keep on disk. Older backups are automatically deleted"'
+                  description: '"The maximum amount of backups to keep on disk. Older backups are
+                    automatically deleted"'
                   example: 5
                   type: integer
               required:
@@ -6411,7 +6518,8 @@ paths:
             schema:
               properties:
                 maximum_staged_users_per_email:
-                  description: Maximum number of staged users created when processing an incoming email.
+                  description: Maximum number of staged users created when processing an incoming
+                    email.
                   example: 10
                   type: integer
               required:
@@ -6449,7 +6557,8 @@ paths:
             schema:
               properties:
                 min_ban_entries_for_roll_up:
-                  description: '"When clicking the Roll up button, will create a new subnet ban entry if there are at least (N) entries."'
+                  description: '"When clicking the Roll up button, will create a new subnet ban
+                    entry if there are at least (N) entries."'
                   example: 5
                   type: integer
               required:
@@ -6505,7 +6614,10 @@ paths:
             schema:
               properties:
                 min_first_post_typing_time:
-                  description: '"Minimum amount of time in milliseconds a user must type during first post, if threshold is not met post will automatically enter the needs approval queue. Set to 0 to disable (not recommended)"'
+                  description: '"Minimum amount of time in milliseconds a user must type during
+                    first post, if threshold is not met post will automatically
+                    enter the needs approval queue. Set to 0 to disable (not
+                    recommended)"'
                   example: 3000
                   type: integer
               required:
@@ -6699,7 +6811,8 @@ paths:
             schema:
               properties:
                 min_trust_to_allow_self_wiki:
-                  description: "\"The minimum trust level required to make user's own post wiki.\""
+                  description: "\"The minimum trust level required to make user's own post
+                    wiki.\""
                   enum:
                     - 0
                     - 1
@@ -6829,7 +6942,8 @@ paths:
             schema:
               properties:
                 min_trust_to_send_messages:
-                  description: '"The minimum trust level required to create new private messages."'
+                  description: '"The minimum trust level required to create new private
+                    messages."'
                   enum:
                     - 0
                     - 1
@@ -6873,7 +6987,8 @@ paths:
             schema:
               properties:
                 minimum_topics_similar:
-                  description: '"How many topics need to exist before similar topics are presented when composing new topics."'
+                  description: '"How many topics need to exist before similar topics are presented
+                    when composing new topics."'
                   example: 50
                   type: integer
               required:
@@ -6949,7 +7064,8 @@ paths:
             schema:
               properties:
                 new_version_emails:
-                  description: '"Send an email to the contact_email address when a new version of Discourse is available."'
+                  description: '"Send an email to the contact_email address when a new version of
+                    Discourse is available."'
                   example: true
                   type: boolean
               required:
@@ -7059,7 +7175,9 @@ paths:
             schema:
               properties:
                 newuser_spam_host_threshold:
-                  description: '"How many times a new user can post a link to the same host within their `newuser_spam_host_threshold` posts before being considered spam."'
+                  description: '"How many times a new user can post a link to the same host within
+                    their `newuser_spam_host_threshold` posts before being
+                    considered spam."'
                   example: 3
                   type: integer
               required:
@@ -7097,7 +7215,9 @@ paths:
             schema:
               properties:
                 notify_about_flags_after:
-                  description: "\"If there are flags that haven't been handled after this many hours, send an email to the contact_email. Set to 0 to disable.\""
+                  description: "\"If there are flags that haven't been handled after this many
+                    hours, send an email to the contact_email. Set to 0 to
+                    disable.\""
                   example: 48
                   type: integer
               required:
@@ -7135,7 +7255,8 @@ paths:
             schema:
               properties:
                 notify_mods_when_user_blocked:
-                  description: '"If a user is automatically blocked, send a message to all moderators."'
+                  description: '"If a user is automatically blocked, send a message to all
+                    moderators."'
                   example: false
                   type: boolean
               required:
@@ -7155,7 +7276,8 @@ paths:
             schema:
               properties:
                 num_flaggers_to_close_topic:
-                  description: '"Minimum number of unique flaggers that is required to automatically pause a topic for intervention"'
+                  description: '"Minimum number of unique flaggers that is required to
+                    automatically pause a topic for intervention"'
                   example: 5
                   type: integer
               required:
@@ -7175,7 +7297,8 @@ paths:
             schema:
               properties:
                 num_flags_to_close_topic:
-                  description: '"Minimum number of active flags that is required to automatically pause a topic for intervention"'
+                  description: '"Minimum number of active flags that is required to automatically
+                    pause a topic for intervention"'
                   example: 12
                   type: integer
               required:
@@ -7195,7 +7318,9 @@ paths:
             schema:
               properties:
                 num_spam_flags_to_block_new_user:
-                  description: "\"If a new user's posts get this many spam flags from num_users_to_block_new_user different users, hide all their posts and prevent future posting. 0 to disable.\""
+                  description: "\"If a new user's posts get this many spam flags from
+                    num_users_to_block_new_user different users, hide all their
+                    posts and prevent future posting. 0 to disable.\""
                   example: 3
                   type: integer
               required:
@@ -7215,7 +7340,10 @@ paths:
             schema:
               properties:
                 num_tl3_flags_to_block_new_user:
-                  description: "\"If a new user's posts get this many flags from num_tl3_users_to_block_new_user different trust level 3 users, hide all their posts and prevent future posting. 0 to disable.\""
+                  description: "\"If a new user's posts get this many flags from
+                    num_tl3_users_to_block_new_user different trust level 3
+                    users, hide all their posts and prevent future posting. 0 to
+                    disable.\""
                   example: 4
                   type: integer
               required:
@@ -7235,7 +7363,9 @@ paths:
             schema:
               properties:
                 num_tl3_users_to_block_new_user:
-                  description: "\"If a new user's posts get num_tl3_flags_to_block_new_user flags from this many different trust level 3 users, hide all their posts and prevent future posting. 0 to disable.\""
+                  description: "\"If a new user's posts get num_tl3_flags_to_block_new_user flags
+                    from this many different trust level 3 users, hide all their
+                    posts and prevent future posting. 0 to disable.\""
                   example: 2
                   type: integer
               required:
@@ -7255,7 +7385,9 @@ paths:
             schema:
               properties:
                 num_users_to_block_new_user:
-                  description: "\"If a new user's posts get num_spam_flags_to_block_new_user spam flags from this many different users, hide all their posts and prevent future posting. 0 to disable.\""
+                  description: "\"If a new user's posts get num_spam_flags_to_block_new_user spam
+                    flags from this many different users, hide all their posts
+                    and prevent future posting. 0 to disable.\""
                   example: 3
                   type: integer
               required:
@@ -7313,7 +7445,10 @@ paths:
             schema:
               properties:
                 permalink_normalizations:
-                  description: '"Apply the following regex before matching permalinks, for example: /(topic.*)\?.*/\1 will strip query strings from topic routes. Format is regex+string use \1 etc. to access captures"'
+                  description: '"Apply the following regex before matching permalinks, for
+                    example: /(topic.*)\?.*/\1 will strip query strings from
+                    topic routes. Format is regex+string use \1 etc. to access
+                    captures"'
                   example: ""
                   type: string
               required:
@@ -7333,7 +7468,8 @@ paths:
             schema:
               properties:
                 poll_edit_window_mins:
-                  description: Number of minutes after post creation during which polls can be edited.
+                  description: Number of minutes after post creation during which polls can be
+                    edited.
                   example: 5
                   type: integer
               required:
@@ -7393,7 +7529,8 @@ paths:
             schema:
               properties:
                 polling_interval:
-                  description: '"When not long polling, how often should logged on clients poll in milliseconds"'
+                  description: '"When not long polling, how often should logged on clients poll in
+                    milliseconds"'
                   example: 3000
                   type: integer
               required:
@@ -7491,7 +7628,8 @@ paths:
             schema:
               properties:
                 pop3_polling_period_mins:
-                  description: '"The period in minutes between checking the POP3 account for email. NOTE: requires restart."'
+                  description: '"The period in minutes between checking the POP3 account for
+                    email. NOTE: requires restart."'
                   example: 5
                   type: integer
               required:
@@ -7570,7 +7708,8 @@ paths:
             schema:
               properties:
                 port:
-                  description: '"DEVELOPER ONLY! WARNING! Use this HTTP port rather than the default of port 80. Leave blank for default of 80."'
+                  description: '"DEVELOPER ONLY! WARNING! Use this HTTP port rather than the
+                    default of port 80. Leave blank for default of 80."'
                   example: 3000
                   type: integer
               required:
@@ -7723,7 +7862,9 @@ paths:
             schema:
               properties:
                 prevent_anons_from_downloading_files:
-                  description: '"Prevent anonymous users from downloading attachments. WARNING: this will prevent any non-image site assets posted as attachments from working."'
+                  description: '"Prevent anonymous users from downloading attachments. WARNING:
+                    this will prevent any non-image site assets posted as
+                    attachments from working."'
                   example: false
                   type: boolean
               required:
@@ -7743,7 +7884,8 @@ paths:
             schema:
               properties:
                 previous_visit_timeout_hours:
-                  description: "\"How long a visit lasts before we consider it the 'previous' visit, in hours\""
+                  description: "\"How long a visit lasts before we consider it the 'previous'
+                    visit, in hours\""
                   example: 1
                   type: integer
               required:
@@ -7781,7 +7923,8 @@ paths:
             schema:
               properties:
                 privacy_policy_url:
-                  description: '"If you have a Privacy Policy document hosted elsewhere that you want to use, provide the full URL here."'
+                  description: '"If you have a Privacy Policy document hosted elsewhere that you
+                    want to use, provide the full URL here."'
                   example: ""
                   type: string
               required:
@@ -7875,7 +8018,8 @@ paths:
             schema:
               properties:
                 port:
-                  description: '"DEVELOPER ONLY! WARNING! By default, queue jobs in sidekiq. If disabled, your site will be broken."'
+                  description: '"DEVELOPER ONLY! WARNING! By default, queue jobs in sidekiq. If
+                    disabled, your site will be broken."'
                   example: true
                   type: boolean
               required:
@@ -7895,7 +8039,8 @@ paths:
             schema:
               properties:
                 rate_limit_create_post:
-                  description: '"After posting, users must wait (n) seconds before creating another post."'
+                  description: '"After posting, users must wait (n) seconds before creating
+                    another post."'
                   example: 5
                   type: integer
               required:
@@ -7915,7 +8060,8 @@ paths:
             schema:
               properties:
                 rate_limit_create_topic:
-                  description: '"After creating a topic, users must wait (n) seconds before creating another topic."'
+                  description: '"After creating a topic, users must wait (n) seconds before
+                    creating another topic."'
                   example: 16
                   type: integer
               required:
@@ -7935,7 +8081,8 @@ paths:
             schema:
               properties:
                 rate_limit_new_user_create_post:
-                  description: '"After posting, new users must wait (n) seconds before creating another post."'
+                  description: '"After posting, new users must wait (n) seconds before creating
+                    another post."'
                   example: 30
                   type: integer
               required:
@@ -7955,7 +8102,8 @@ paths:
             schema:
               properties:
                 rate_limit_new_user_create_topic:
-                  description: '"After creating a topic, new users must wait (n) seconds before creating another topic."'
+                  description: '"After creating a topic, new users must wait (n) seconds before
+                    creating another topic."'
                   example: 120
                   type: integer
               required:
@@ -8071,7 +8219,8 @@ paths:
             schema:
               properties:
                 remove_muted_tags_from_latest:
-                  description: "\"Don't show topics tagged with muted tags in the latest topic list.\""
+                  description: "\"Don't show topics tagged with muted tags in the latest topic
+                    list.\""
                   example: false
                   type: boolean
               required:
@@ -8190,7 +8339,8 @@ paths:
             schema:
               properties:
                 s3_backup_bucket:
-                  description: '"The remote bucket to hold backups. WARNING: Make sure it is a private bucket."'
+                  description: '"The remote bucket to hold backups. WARNING: Make sure it is a
+                    private bucket."'
                   example: ""
                   type: string
               required:
@@ -8210,7 +8360,9 @@ paths:
             schema:
               properties:
                 s3_cdn_url:
-                  description: '"The CDN URL to use for all s3 assets (for example: https://cdn.somewhere.com). WARNING: after changing this setting you must rebake all old posts."'
+                  description: '"The CDN URL to use for all s3 assets (for example:
+                    https://cdn.somewhere.com). WARNING: after changing this
+                    setting you must rebake all old posts."'
                   example: ""
                   type: string
               required:
@@ -8284,7 +8436,8 @@ paths:
             schema:
               properties:
                 s3_secret_access_key:
-                  description: '"The Amazon S3 secret access key that will be used to upload images."'
+                  description: '"The Amazon S3 secret access key that will be used to upload
+                    images."'
                   example: ""
                   type: string
               required:
@@ -8304,7 +8457,8 @@ paths:
             schema:
               properties:
                 s3_upload_bucket:
-                  description: '"The Amazon S3 bucket name that files will be uploaded into. WARNING: must be lowercase, no periods, no underscores."'
+                  description: '"The Amazon S3 bucket name that files will be uploaded into.
+                    WARNING: must be lowercase, no periods, no underscores."'
                   example: ""
                   type: string
               required:
@@ -8324,7 +8478,9 @@ paths:
             schema:
               properties:
                 s3_use_iam_profile:
-                  description: "'Use AWS EC2 IAM role to retrieve keys. NOTE: enabling will override \"s3 access key id\" and \"s3 secret access key\" settings.'"
+                  description: "'Use AWS EC2 IAM role to retrieve keys. NOTE: enabling will
+                    override \"s3 access key id\" and \"s3 secret access key\"
+                    settings.'"
                   example: false
                   type: boolean
               required:
@@ -8344,7 +8500,8 @@ paths:
             schema:
               properties:
                 search_prefer_recent_posts:
-                  description: '"If searching your large forum is slow, this option tries an index of more recent posts first"'
+                  description: '"If searching your large forum is slow, this option tries an index
+                    of more recent posts first"'
                   example: false
                   type: boolean
               required:
@@ -8384,7 +8541,8 @@ paths:
             schema:
               properties:
                 search_tokenize_chinese_japanese_korean:
-                  description: '"Force search to tokenize Chinese/Japanese/Korean even on non CJK sites"'
+                  description: '"Force search to tokenize Chinese/Japanese/Korean even on non CJK
+                    sites"'
                   example: false
                   type: boolean
               required:
@@ -8424,7 +8582,8 @@ paths:
             schema:
               properties:
                 sequential_replies_threshold:
-                  description: '"Number of posts a user has to make in a row in a topic before being reminded about too many sequential replies."'
+                  description: '"Number of posts a user has to make in a row in a topic before
+                    being reminded about too many sequential replies."'
                   example: 2
                   type: integer
               required:
@@ -8500,7 +8659,8 @@ paths:
             schema:
               properties:
                 show_create_topics_notice:
-                  description: '"If the site has fewer than 5 public topics, show a notice asking admins to create some topics."'
+                  description: '"If the site has fewer than 5 public topics, show a notice asking
+                    admins to create some topics."'
                   example: true
                   type: boolean
               required:
@@ -8685,7 +8845,8 @@ paths:
             schema:
               properties:
                 slug_generation_method:
-                  description: "\"Choose a slug generation method. 'encoded' will generate percent encoding string. 'none' will disable slug at all.\""
+                  description: "\"Choose a slug generation method. 'encoded' will generate percent
+                    encoding string. 'none' will disable slug at all.\""
                   enum:
                     - ascii
                     - enocded
@@ -9005,7 +9166,8 @@ paths:
             schema:
               properties:
                 summary_likes_required:
-                  description: "\"Minimum likes in a topic before 'Summarize This Topic' is enabled\""
+                  description: "\"Minimum likes in a topic before 'Summarize This Topic' is
+                    enabled\""
                   example: 1
                   type: integer
               required:
@@ -9045,7 +9207,8 @@ paths:
             schema:
               properties:
                 summary_percent_filter:
-                  description: "\"When a user clicks 'Summarize This Topic', show the top % of posts\""
+                  description: "\"When a user clicks 'Summarize This Topic', show the top % of
+                    posts\""
                   example: 20
                   type: integer
               required:
@@ -9065,7 +9228,8 @@ paths:
             schema:
               properties:
                 summary_posts_required:
-                  description: "\"Minimum posts in a topic before 'Summarize This Topic' is enabled\""
+                  description: "\"Minimum posts in a topic before 'Summarize This Topic' is
+                    enabled\""
                   example: 50
                   type: integer
               required:
@@ -9085,7 +9249,8 @@ paths:
             schema:
               properties:
                 summary_score_threshold:
-                  description: "\"The minimum score required for a post to be included in 'Summarize This Topic'\""
+                  description: "\"The minimum score required for a post to be included in
+                    'Summarize This Topic'\""
                   example: 15
                   type: integer
               required:
@@ -9243,7 +9408,8 @@ paths:
             schema:
               properties:
                 tags_sort_alphabetically:
-                  description: '"Show tags in alphabetical order. Default is to show in order of popularity."'
+                  description: '"Show tags in alphabetical order. Default is to show in order of
+                    popularity."'
                   example: false
                   type: boolean
               required:
@@ -9353,7 +9519,8 @@ paths:
             schema:
               properties:
                 tl1_requires_read_posts:
-                  description: '"How many posts a new user must read before promotion to trust level 1."'
+                  description: '"How many posts a new user must read before promotion to trust
+                    level 1."'
                   example: 30
                   type: integer
               required:
@@ -9373,7 +9540,8 @@ paths:
             schema:
               properties:
                 tl1_requires_time_spent_mins:
-                  description: '"How many minutes a new user must read posts before promotion to trust level 1."'
+                  description: '"How many minutes a new user must read posts before promotion to
+                    trust level 1."'
                   example: 10
                   type: integer
               required:
@@ -9393,7 +9561,8 @@ paths:
             schema:
               properties:
                 tl1_requires_topics_entered:
-                  description: '"How many topics a new user must enter before promotion to trust level 1."'
+                  description: '"How many topics a new user must enter before promotion to trust
+                    level 1."'
                   example: 5
                   type: integer
               required:
@@ -9413,7 +9582,8 @@ paths:
             schema:
               properties:
                 tl2_additional_likes_per_day_multiplier:
-                  description: '"Increase limit of likes per day for tl2 (member) by multiplying with this number"'
+                  description: '"Increase limit of likes per day for tl2 (member) by multiplying
+                    with this number"'
                   example: 1.5
                   type: number
               required:
@@ -9433,7 +9603,8 @@ paths:
             schema:
               properties:
                 tl2_requires_days_visited:
-                  description: '"How many days a user must visit the site before promotion to trust level 2."'
+                  description: '"How many days a user must visit the site before promotion to
+                    trust level 2."'
                   example: 15
                   type: integer
               required:
@@ -9453,7 +9624,8 @@ paths:
             schema:
               properties:
                 tl2_requires_likes_given:
-                  description: '"How many likes a user must cast before promotion to trust level 2."'
+                  description: '"How many likes a user must cast before promotion to trust level
+                    2."'
                   example: 1
                   type: integer
               required:
@@ -9473,7 +9645,8 @@ paths:
             schema:
               properties:
                 tl2_requires_likes_received:
-                  description: '"How many likes a user must receive before promotion to trust level 2."'
+                  description: '"How many likes a user must receive before promotion to trust
+                    level 2."'
                   example: 1
                   type: integer
               required:
@@ -9493,7 +9666,8 @@ paths:
             schema:
               properties:
                 tl2_requires_read_posts:
-                  description: '"How many posts a user must read before promotion to trust level 2."'
+                  description: '"How many posts a user must read before promotion to trust level
+                    2."'
                   example: 100
                   type: integer
               required:
@@ -9513,7 +9687,8 @@ paths:
             schema:
               properties:
                 tl2_requires_time_spent_mins:
-                  description: '"How many minutes a user must read posts before promotion to trust level 2."'
+                  description: '"How many minutes a user must read posts before promotion to trust
+                    level 2."'
                   example: 60
                   type: integer
               required:
@@ -9533,7 +9708,8 @@ paths:
             schema:
               properties:
                 tl2_requires_topic_reply_count:
-                  description: '"How many topics user must reply to before promotion to trust level 2."'
+                  description: '"How many topics user must reply to before promotion to trust
+                    level 2."'
                   example: 3
                   type: integer
               required:
@@ -9553,7 +9729,8 @@ paths:
             schema:
               properties:
                 tl2_requires_topics_entered:
-                  description: '"How many topics a user must enter before promotion to trust level 2."'
+                  description: '"How many topics a user must enter before promotion to trust level
+                    2."'
                   example: 20
                   type: integer
               required:
@@ -9573,7 +9750,8 @@ paths:
             schema:
               properties:
                 tl3_additional_likes_per_day_multiplier:
-                  description: '"Increase limit of likes per day for tl3 (regular) by multiplying with this number"'
+                  description: '"Increase limit of likes per day for tl3 (regular) by multiplying
+                    with this number"'
                   example: 2
                   type: number
               required:
@@ -9593,7 +9771,8 @@ paths:
             schema:
               properties:
                 tl3_links_no_follow:
-                  description: '"Do not remove rel=nofollow from links posted by trust level 3 users."'
+                  description: '"Do not remove rel=nofollow from links posted by trust level 3
+                    users."'
                   example: false
                   type: boolean
               required:
@@ -9613,7 +9792,8 @@ paths:
             schema:
               properties:
                 tl3_promotion_min_duration:
-                  description: '"The minimum number of days that a promotion to trust level 3 lasts before a user can be demoted back to trust level 2."'
+                  description: '"The minimum number of days that a promotion to trust level 3
+                    lasts before a user can be demoted back to trust level 2."'
                   example: 14
                   type: integer
               required:
@@ -9633,7 +9813,10 @@ paths:
             schema:
               properties:
                 tl3_requires_days_visited:
-                  description: '"Minimum number of days that a user needs to have visited the site in the last (tl3 time period) days to qualify for promotion to trust level 3. Set higher than tl3 time period to disable promotions to tl3. (0 or higher)"'
+                  description: '"Minimum number of days that a user needs to have visited the site
+                    in the last (tl3 time period) days to qualify for promotion
+                    to trust level 3. Set higher than tl3 time period to disable
+                    promotions to tl3. (0 or higher)"'
                   example: 50
                   type: integer
               required:
@@ -9653,7 +9836,9 @@ paths:
             schema:
               properties:
                 tl3_requires_likes_given:
-                  description: '"The minimum number of likes that must be given in the last (tl3 time period) days to qualify for promotion to trust level 3."'
+                  description: '"The minimum number of likes that must be given in the last (tl3
+                    time period) days to qualify for promotion to trust level
+                    3."'
                   example: 30
                   type: integer
               required:
@@ -9673,7 +9858,9 @@ paths:
             schema:
               properties:
                 tl3_requires_likes_received:
-                  description: '"The minimum number of likes that must be received in the last (tl3 time period) days to qualify for promotion to trust level 3."'
+                  description: '"The minimum number of likes that must be received in the last
+                    (tl3 time period) days to qualify for promotion to trust
+                    level 3."'
                   example: 20
                   type: integer
               required:
@@ -9693,7 +9880,10 @@ paths:
             schema:
               properties:
                 tl3_requires_max_flagged:
-                  description: "\"User must not have had more than x posts flagged by x different users in the last (tl3 time period) days to qualify for promotion to trust level 3, where x is this setting's value. (0 or higher)\""
+                  description: "\"User must not have had more than x posts flagged by x different
+                    users in the last (tl3 time period) days to qualify for
+                    promotion to trust level 3, where x is this setting's value.
+                    (0 or higher)\""
                   example: 5
                   type: integer
               required:
@@ -9713,7 +9903,9 @@ paths:
             schema:
               properties:
                 tl3_requires_posts_read:
-                  description: '"The percentage of posts created in the last (tl3 time period) days that a user needs to have viewed to qualify for promotion to trust level 3. (0 to 100)"'
+                  description: '"The percentage of posts created in the last (tl3 time period)
+                    days that a user needs to have viewed to qualify for
+                    promotion to trust level 3. (0 to 100)"'
                   example: 25
                   type: integer
               required:
@@ -9733,7 +9925,8 @@ paths:
             schema:
               properties:
                 tl3_requires_posts_read_all_time:
-                  description: '"The minimum total number of posts a user must have read to qualify for trust level 3."'
+                  description: '"The minimum total number of posts a user must have read to
+                    qualify for trust level 3."'
                   example: 500
                   type: integer
               required:
@@ -9753,7 +9946,8 @@ paths:
             schema:
               properties:
                 tl3_requires_posts_read_cap:
-                  description: '"The maximum required number of posts read in the last (tl3 time period) days."'
+                  description: '"The maximum required number of posts read in the last (tl3 time
+                    period) days."'
                   example: 20000
                   type: integer
               required:
@@ -9773,7 +9967,9 @@ paths:
             schema:
               properties:
                 tl3_requires_topics_replied_to:
-                  description: '"Minimum number of topics a user needs to have replied to in the last (tl3 time period) days to qualify for promotion to trust level 3. (0 or higher)"'
+                  description: '"Minimum number of topics a user needs to have replied to in the
+                    last (tl3 time period) days to qualify for promotion to
+                    trust level 3. (0 or higher)"'
                   example: 10
                   type: integer
               required:
@@ -9793,7 +9989,9 @@ paths:
             schema:
               properties:
                 tl3_requires_topics_viewed:
-                  description: '"The percentage of topics created in the last (tl3 time period) days that a user needs to have viewed to qualify for promotion to trust level 3. (0 to 100)"'
+                  description: '"The percentage of topics created in the last (tl3 time period)
+                    days that a user needs to have viewed to qualify for
+                    promotion to trust level 3. (0 to 100)"'
                   example: 25
                   type: integer
               required:
@@ -9813,7 +10011,8 @@ paths:
             schema:
               properties:
                 tl3_requires_viewed_all_time:
-                  description: '"The minimum total number of topics a user must have viewed to qualify for trust level 3."'
+                  description: '"The minimum total number of topics a user must have viewed to
+                    qualify for trust level 3."'
                   example: 200
                   type: integer
               required:
@@ -9833,7 +10032,8 @@ paths:
             schema:
               properties:
                 tl3_requires_topics_viewed_cap:
-                  description: '"The maximum required number of topics viewed in the last (tl3 time period) days."'
+                  description: '"The maximum required number of topics viewed in the last (tl3
+                    time period) days."'
                   example: 500
                   type: integer
               required:
@@ -9873,7 +10073,8 @@ paths:
             schema:
               properties:
                 tl4_additional_likes_per_day_multiplier:
-                  description: '"Increase limit of likes per day for tl4 (leader) by multiplying with this number"'
+                  description: '"Increase limit of likes per day for tl4 (leader) by multiplying
+                    with this number"'
                   example: 3
                   type: number
               required:
@@ -9922,7 +10123,10 @@ paths:
             schema:
               properties:
                 top_topics_formula_first_post_likes_multiplier:
-                  description: '"value of first post likes multiplier (n) in top topics formula: `log(views_count) * 2 + op_likes_count * (n) + LEAST(likes_count / posts_count, 3) + 10 + log(posts_count)`"'
+                  description: '"value of first post likes multiplier (n) in top topics formula:
+                    `log(views_count) * 2 + op_likes_count * (n) +
+                    LEAST(likes_count / posts_count, 3) + 10 +
+                    log(posts_count)`"'
                   example: 0.5
                   type: number
               required:
@@ -9942,7 +10146,10 @@ paths:
             schema:
               properties:
                 top_topics_formula_least_likes_per_post_multiplier:
-                  description: '"value of least likes per post multiplier (n) in top topics formula: `log(views_count) * 2 + op_likes_count * 0.5 + LEAST(likes_count / posts_count, (n)) + 10 + log(posts_count)`"'
+                  description: '"value of least likes per post multiplier (n) in top topics
+                    formula: `log(views_count) * 2 + op_likes_count * 0.5 +
+                    LEAST(likes_count / posts_count, (n)) + 10 +
+                    log(posts_count)`"'
                   example: 3
                   type: number
               required:
@@ -9962,7 +10169,10 @@ paths:
             schema:
               properties:
                 top_topics_formula_log_views_multiplier:
-                  description: '"value of log views multiplier (n) in top topics formula: `log(views_count) * (n) + op_likes_count * 0.5 + LEAST(likes_count / posts_count, 3) + 10 + log(posts_count)`"'
+                  description: '"value of log views multiplier (n) in top topics formula:
+                    `log(views_count) * (n) + op_likes_count * 0.5 +
+                    LEAST(likes_count / posts_count, 3) + 10 +
+                    log(posts_count)`"'
                   example: 2
                   type: number
               required:
@@ -10020,7 +10230,8 @@ paths:
             schema:
               properties:
                 topic_post_like_heat_high:
-                  description: '"After the likes:post ratio exceeds this ratio, the post count field is strongly highlighted."'
+                  description: '"After the likes:post ratio exceeds this ratio, the post count
+                    field is strongly highlighted."'
                   example: 2
                   type: number
               required:
@@ -10040,7 +10251,8 @@ paths:
             schema:
               properties:
                 topic_post_like_heat_low:
-                  description: '"After the likes:post ratio exceeds this ratio, the post count field is slightly highlighted."'
+                  description: '"After the likes:post ratio exceeds this ratio, the post count
+                    field is slightly highlighted."'
                   example: 0.5
                   type: number
               required:
@@ -10060,7 +10272,8 @@ paths:
             schema:
               properties:
                 topic_post_like_heat_medium:
-                  description: '"After the likes:post ratio exceeds this ratio, the post count field is moderately highlighted."'
+                  description: '"After the likes:post ratio exceeds this ratio, the post count
+                    field is moderately highlighted."'
                   example: 1
                   type: number
               required:
@@ -10140,7 +10353,8 @@ paths:
             schema:
               properties:
                 topic_views_heat_medium:
-                  description: '"After this many views, the views field is moderately highlighted."'
+                  description: '"After this many views, the views field is moderately
+                    highlighted."'
                   example: 2000
                   type: integer
               required:
@@ -10160,7 +10374,8 @@ paths:
             schema:
               properties:
                 tos_url:
-                  description: '"If you have a Terms of Service document hosted elsewhere that you want to use, provide the full URL here."'
+                  description: '"If you have a Terms of Service document hosted elsewhere that you
+                    want to use, provide the full URL here."'
                   example: ""
                   type: string
               required:
@@ -10270,7 +10485,8 @@ paths:
             schema:
               properties:
                 unique_posts_min:
-                  description: '"How many minutes before a user can make a post with the same content again"'
+                  description: '"How many minutes before a user can make a post with the same
+                    content again"'
                   example: 5
                   type: integer
               required:
@@ -10290,7 +10506,8 @@ paths:
             schema:
               properties:
                 unsubscribe_via_email:
-                  description: Allow users to unsubscribe from emails by sending an email with 'unsubscribe' in the subject or body
+                  description: Allow users to unsubscribe from emails by sending an email with
+                    'unsubscribe' in the subject or body
                   example: true
                   type: boolean
               required:
@@ -10310,7 +10527,8 @@ paths:
             schema:
               properties:
                 unsubscribe_via_email_footer:
-                  description: "Attach an unsubcribe via email mailto: link to the footer of sent email"
+                  description: "Attach an unsubcribe via email mailto: link to the footer of sent
+                    email"
                   example: false
                   type: boolean
               required:
@@ -10330,7 +10548,8 @@ paths:
             schema:
               properties:
                 use_admin_ip_whitelist:
-                  description: '"Admins can only log in if they are at an IP address defined in the Screened IPs list (Admin > Logs > Screened Ips)."'
+                  description: '"Admins can only log in if they are at an IP address defined in
+                    the Screened IPs list (Admin > Logs > Screened Ips)."'
                   example: false
                   type: boolean
               required:
@@ -10388,7 +10607,8 @@ paths:
             schema:
               properties:
                 vacuum_db_days:
-                  description: '"Run VACUUM ANALYZE to reclaim DB space after migrations (set to 0 to disable)"'
+                  description: '"Run VACUUM ANALYZE to reclaim DB space after migrations (set to 0
+                    to disable)"'
                   example: 90
                   type: integer
               required:
@@ -10446,7 +10666,8 @@ paths:
             schema:
               properties:
                 version_checks:
-                  description: '"Ping the Discourse Hub for version updates and show new version messages on the /admin dashboard"'
+                  description: '"Ping the Discourse Hub for version updates and show new version
+                    messages on the /admin dashboard"'
                   example: true
                   type: boolean
               required:
@@ -10484,7 +10705,9 @@ paths:
             schema:
               properties:
                 white_listed_spam_host_domains:
-                  description: '"A list of domains excluded from spam host testing. New users will never be restricted from creating posts with links to these domains."'
+                  description: '"A list of domains excluded from spam host testing. New users will
+                    never be restricted from creating posts with links to these
+                    domains."'
                   example: ""
                   type: string
               required:
@@ -10672,7 +10895,8 @@ paths:
                     example: false
                     type: boolean
                   message:
-                    example: You either don't have permission to delete this user or they have existing posts
+                    example: You either don't have permission to delete this user or they have
+                      existing posts
                     type: string
                 type: object
           description: Could not delete user response
@@ -10945,7 +11169,8 @@ paths:
         - Admin
   "/admin/users/{id}/anonymize":
     put:
-      description: Anonymize a user's account by changing their username and email address to random values. This is non-reversable
+      description: Anonymize a user's account by changing their username and email
+        address to random values. This is non-reversable
       parameters:
         - in: path
           name: id
@@ -11284,7 +11509,8 @@ paths:
         - Categories
   /categories.json:
     get:
-      description: The Categories endpoint returns a list of all the categories for your discourse site that you have access to.
+      description: The Categories endpoint returns a list of all the categories for
+        your discourse site that you have access to.
       parameters: []
       responses:
         "200":
@@ -11814,7 +12040,8 @@ paths:
         - Groups
   "/groups/{group_id}/members.json":
     delete:
-      description: You may use one of the following request body params to specify the user(s) to remove.
+      description: You may use one of the following request body params to specify the
+        user(s) to remove.
       parameters:
         - in: path
           name: group_id
@@ -14166,7 +14393,8 @@ paths:
     put:
       description: Update a single topic
       parameters:
-        - description: "ProTip: You can just use a `-` instead of the actual slug and the topic will be found by the id."
+        - description: "ProTip: You can just use a `-` instead of the actual slug and the
+            topic will be found by the id."
           example: "-"
           in: path
           name: slug
@@ -15164,7 +15392,8 @@ paths:
     get:
       description: Get user by identity provider external ID
       parameters:
-        - description: "Authentication provider name. Can be found in the provider's callback URL: `/auth/{provider}/callback`"
+        - description: "Authentication provider name. Can be found in the provider's
+            callback URL: `/auth/{provider}/callback`"
           in: path
           name: provider
           required: true
@@ -15353,7 +15582,8 @@ paths:
                   example: true
                   type: boolean
                 type:
-                  description: a lowercase string with numbers but no spaces. Set to 'avatar' if uploading an avatar
+                  description: a lowercase string with numbers but no spaces. Set to 'avatar' if
+                    uploading an avatar
                   enum:
                     - avatar
                     - profile_background

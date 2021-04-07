@@ -30,9 +30,12 @@ paths:
   /v1/companies:
     get:
       description: >
-        Get a list of the traded companies that polygon.io streams. Company includes some details about the company which we hope to add more to soon.
+        Get a list of the traded companies that polygon.io streams. Company
+        includes some details about the company which we hope to add more to
+        soon.
       parameters:
-        - description: Which field to sort by. For desc place a `-` in front of the field name. eg `?sort=-marketcap`
+        - description: Which field to sort by. For desc place a `-` in front of the field
+            name. eg `?sort=-marketcap`
           in: query
           name: sort
           required: false
@@ -64,7 +67,7 @@ paths:
         - Stocks
   /v1/currencies:
     get:
-      description: >
+      description: |
         Get a list of the currencies that polygon.io streams.
       responses:
         "200":
@@ -82,7 +85,7 @@ paths:
         - Currencies
   "/v1/historic/agg/{size}/{symbol}/{date}":
     get:
-      description: >
+      description: |
         Get historic aggregations for a symbol.
       parameters:
         - description: Size of the aggregation. `second` or `minute`
@@ -148,7 +151,9 @@ paths:
   "/v1/historic/forex/{from}/{to}/{date}":
     get:
       description: >
-        Get historic ticks for a currency pair. Example for **USD/JPY** the from would be **USD** and to would be **JPY**. The date formatted like **2017-6-22**
+        Get historic ticks for a currency pair. Example for **USD/JPY** the
+        from would be **USD** and to would be **JPY**. The date formatted like
+        **2017-6-22**
       parameters:
         - description: From Symbol of the currency pair
           in: path
@@ -209,7 +214,7 @@ paths:
         - Currencies
   "/v1/historic/quotes/{symbol}/{date}":
     get:
-      description: >
+      description: |
         Get historic quotes for a symbol.
       parameters:
         - description: Symbol of the company to retrieve
@@ -266,7 +271,7 @@ paths:
         - Stocks
   "/v1/historic/trades/{symbol}/{date}":
     get:
-      description: >
+      description: |
         Get historic trades for a symbol.
       parameters:
         - description: Symbol of the company to retrieve
@@ -323,7 +328,7 @@ paths:
         - Stocks
   "/v1/last/currencies/{from}/{to}":
     get:
-      description: >
+      description: |
         Get Last Trade Tick for a Currency Pair.
       parameters:
         - description: From Symbol of the pair
@@ -359,7 +364,7 @@ paths:
         - Currencies
   "/v1/last/stocks/{symbol}":
     get:
-      description: >
+      description: |
         Get the last trade for a given stock.
       parameters:
         - description: Symbol of the stock to get
@@ -390,7 +395,7 @@ paths:
         - Stocks
   "/v1/last_quote/currencies/{from}/{to}":
     get:
-      description: >
+      description: |
         Get Last Quote Tick for a Currency Pair.
       parameters:
         - description: From Symbol of the pair
@@ -426,7 +431,7 @@ paths:
         - Currencies
   "/v1/last_quote/stocks/{symbol}":
     get:
-      description: >
+      description: |
         Get the last quote tick for a given stock.
       parameters:
         - description: Symbol of the stock to get

@@ -109,7 +109,8 @@ parameters:
     name: Accept-Language
     type: string
   If-None-Match:
-    description: ETag from a previous request. A 304 will be returned if this matches the current ETag
+    description: ETag from a previous request. A 304 will be returned if this
+      matches the current ETag
     in: header
     name: If-None-Match
     type: string
@@ -175,23 +176,17 @@ parameters:
 paths:
   /alliances/:
     get:
-      description: >-
+      description: |-
         List all active player alliances
 
-
         ---
-
         Alternate route: `/dev/alliances/`
-
 
         Alternate route: `/legacy/alliances/`
 
-
         Alternate route: `/v1/alliances/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_alliances
       parameters:
@@ -289,20 +284,15 @@ paths:
       x-cached-seconds: 3600
   "/alliances/{alliance_id}/":
     get:
-      description: >-
+      description: |-
         Public information about an alliance
 
-
         ---
-
         Alternate route: `/dev/alliances/{alliance_id}/`
-
 
         Alternate route: `/v3/alliances/{alliance_id}/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_alliances_alliance_id
       parameters:
@@ -357,7 +347,8 @@ paths:
                 title: get_alliances_alliance_id_executor_corporation_id
                 type: integer
               faction_id:
-                description: Faction ID this alliance is fighting for, if this alliance is enlisted in factional warfare
+                description: Faction ID this alliance is fighting for, if this alliance is
+                  enlisted in factional warfare
                 format: int32
                 title: get_alliances_alliance_id_faction_id
                 type: integer
@@ -450,20 +441,15 @@ paths:
       x-cached-seconds: 3600
   "/alliances/{alliance_id}/contacts/":
     get:
-      description: >-
+      description: |-
         Return contacts of an alliance
 
-
         ---
-
         Alternate route: `/dev/alliances/{alliance_id}/contacts/`
-
 
         Alternate route: `/v2/alliances/{alliance_id}/contacts/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_alliances_alliance_id_contacts
       parameters:
@@ -617,23 +603,17 @@ paths:
       x-cached-seconds: 300
   "/alliances/{alliance_id}/contacts/labels/":
     get:
-      description: >-
+      description: |-
         Return custom labels for an alliance's contacts
 
-
         ---
-
         Alternate route: `/dev/alliances/{alliance_id}/contacts/labels/`
-
 
         Alternate route: `/legacy/alliances/{alliance_id}/contacts/labels/`
 
-
         Alternate route: `/v1/alliances/{alliance_id}/contacts/labels/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_alliances_alliance_id_contacts_labels
       parameters:
@@ -760,23 +740,17 @@ paths:
       x-cached-seconds: 300
   "/alliances/{alliance_id}/corporations/":
     get:
-      description: >-
+      description: |-
         List all current member corporations of an alliance
 
-
         ---
-
         Alternate route: `/dev/alliances/{alliance_id}/corporations/`
-
 
         Alternate route: `/legacy/alliances/{alliance_id}/corporations/`
 
-
         Alternate route: `/v1/alliances/{alliance_id}/corporations/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_alliances_alliance_id_corporations
       parameters:
@@ -874,23 +848,17 @@ paths:
       x-cached-seconds: 3600
   "/alliances/{alliance_id}/icons/":
     get:
-      description: >-
+      description: |-
         Get the icon urls for a alliance
 
-
         ---
-
         Alternate route: `/dev/alliances/{alliance_id}/icons/`
-
 
         Alternate route: `/legacy/alliances/{alliance_id}/icons/`
 
-
         Alternate route: `/v1/alliances/{alliance_id}/icons/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_alliances_alliance_id_icons
       parameters:
@@ -1003,27 +971,22 @@ paths:
         - v1
   /characters/affiliation/:
     post:
-      description: >-
+      description: |-
         Bulk lookup of character IDs to corporation, alliance and faction
 
-
         ---
-
         Alternate route: `/dev/characters/affiliation/`
-
 
         Alternate route: `/legacy/characters/affiliation/`
 
-
         Alternate route: `/v1/characters/affiliation/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: post_characters_affiliation
       parameters:
-        - description: The character IDs to fetch affiliations for. All characters must exist, or none will be returned
+        - description: The character IDs to fetch affiliations for. All characters must
+            exist, or none will be returned
           in: body
           name: characters
           required: true
@@ -1140,20 +1103,15 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/":
     get:
-      description: >-
+      description: |-
         Public information about a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/`
-
 
         Alternate route: `/v4/characters/{character_id}/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id
       parameters:
@@ -1219,7 +1177,8 @@ paths:
                 title: get_characters_character_id_description
                 type: string
               faction_id:
-                description: ID of the faction the character is fighting for, if the character is enlisted in Factional Warfare
+                description: ID of the faction the character is fighting for, if the character
+                  is enlisted in Factional Warfare
                 format: int32
                 title: get_characters_character_id_faction_id
                 type: integer
@@ -1329,7 +1288,10 @@ paths:
   "/characters/{character_id}/agents_research/":
     get:
       description: >-
-        Return a list of agents research information for a character. The formula for finding the current research points with an agent is: currentPoints = remainderPoints + pointsPerDay * days(currentTime - researchStartDate)
+        Return a list of agents research information for a character. The
+        formula for finding the current research points with an agent is:
+        currentPoints = remainderPoints + pointsPerDay * days(currentTime -
+        researchStartDate)
 
 
         ---
@@ -1493,20 +1455,15 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/assets/":
     get:
-      description: >-
+      description: |-
         Return a list of the characters assets
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/assets/`
-
 
         Alternate route: `/v3/characters/{character_id}/assets/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_assets
       parameters:
@@ -1761,7 +1718,9 @@ paths:
   "/characters/{character_id}/assets/locations/":
     post:
       description: >
-        Return locations for a set of item ids, which you can get from character assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0)
+        Return locations for a set of item ids, which you can get from
+        character assets endpoint. Coordinates for items in hangars or stations
+        are set to (0,0,0)
 
 
         ---
@@ -1904,7 +1863,9 @@ paths:
   "/characters/{character_id}/assets/names/":
     post:
       description: >
-        Return names for a set of item ids, which you can get from character assets endpoint. Typically used for items that can customize names, like containers or ships.
+        Return names for a set of item ids, which you can get from
+        character assets endpoint. Typically used for items that can customize
+        names, like containers or ships.
 
 
         ---
@@ -2027,23 +1988,17 @@ paths:
         - v1
   "/characters/{character_id}/attributes/":
     get:
-      description: >-
+      description: |-
         Return attributes of a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/attributes/`
-
 
         Alternate route: `/legacy/characters/{character_id}/attributes/`
 
-
         Alternate route: `/v1/characters/{character_id}/attributes/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_attributes
       parameters:
@@ -2078,7 +2033,8 @@ paths:
             description: 200 ok object
             properties:
               accrued_remap_cooldown_date:
-                description: Neural remapping cooldown after a character uses remap accrued over time
+                description: Neural remapping cooldown after a character uses remap accrued over
+                  time
                 format: date-time
                 title: get_characters_character_id_attributes_accrued_remap_cooldown_date
                 type: string
@@ -2202,20 +2158,15 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/blueprints/":
     get:
-      description: >-
+      description: |-
         Return a list of blueprints the character owns
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/blueprints/`
-
 
         Alternate route: `/v2/characters/{character_id}/blueprints/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_blueprints
       parameters:
@@ -2347,7 +2298,11 @@ paths:
                   title: get_characters_character_id_blueprints_location_flag
                   type: string
                 location_id:
-                  description: References a solar system, station or item_id if this blueprint is located within a container. If the return value is an item_id, then the Character AssetList API must be queried to find the container using the given item_id to determine the correct location of the Blueprint.
+                  description: References a solar system, station or item_id if this blueprint is
+                    located within a container. If the return value is an
+                    item_id, then the Character AssetList API must be queried to
+                    find the container using the given item_id to determine the
+                    correct location of the Blueprint.
                   format: int64
                   title: get_characters_character_id_blueprints_location_id
                   type: integer
@@ -2359,13 +2314,17 @@ paths:
                   title: get_characters_character_id_blueprints_material_efficiency
                   type: integer
                 quantity:
-                  description: A range of numbers with a minimum of -2 and no maximum value where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (e.g. no activities performed on them yet).
+                  description: A range of numbers with a minimum of -2 and no maximum value where
+                    -1 is an original and -2 is a copy. It can be a positive
+                    integer if it is a stack of blueprint originals fresh from
+                    the market (e.g. no activities performed on them yet).
                   format: int32
                   minimum: -2
                   title: get_characters_character_id_blueprints_quantity
                   type: integer
                 runs:
-                  description: Number of runs remaining if the blueprint is a copy, -1 if it is an original.
+                  description: Number of runs remaining if the blueprint is a copy, -1 if it is an
+                    original.
                   format: int32
                   minimum: -1
                   title: get_characters_character_id_blueprints_runs
@@ -2472,20 +2431,15 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/bookmarks/":
     get:
-      description: >-
+      description: |-
         A list of your character's personal bookmarks
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/bookmarks/`
-
 
         Alternate route: `/v2/characters/{character_id}/bookmarks/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_bookmarks
       parameters:
@@ -2549,7 +2503,8 @@ paths:
                   title: get_characters_character_id_bookmarks_bookmark_id
                   type: integer
                 coordinates:
-                  description: Optional object that is returned if a bookmark was made on a planet or a random location in space.
+                  description: Optional object that is returned if a bookmark was made on a planet
+                    or a random location in space.
                   properties:
                     x:
                       description: x number
@@ -2588,7 +2543,8 @@ paths:
                   title: get_characters_character_id_bookmarks_folder_id
                   type: integer
                 item:
-                  description: Optional object that is returned if a bookmark was made on a particular item.
+                  description: Optional object that is returned if a bookmark was made on a
+                    particular item.
                   properties:
                     item_id:
                       description: item_id integer
@@ -2706,20 +2662,15 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/bookmarks/folders/":
     get:
-      description: >-
+      description: |-
         A list of your character's personal bookmark folders
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/bookmarks/folders/`
-
 
         Alternate route: `/v2/characters/{character_id}/bookmarks/folders/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_bookmarks_folders
       parameters:
@@ -2852,7 +2803,10 @@ paths:
   "/characters/{character_id}/calendar/":
     get:
       description: >-
-        Get 50 event summaries from the calendar. If no from_event ID is given, the resource will return the next 50 chronological event summaries from now. If a from_event ID is specified, it will return the next 50 chronological event summaries from after that event
+        Get 50 event summaries from the calendar. If no from_event ID is
+        given, the resource will return the next 50 chronological event
+        summaries from now. If a from_event ID is specified, it will return the
+        next 50 chronological event summaries from after that event
 
 
         ---
@@ -3019,20 +2973,15 @@ paths:
       x-cached-seconds: 5
   "/characters/{character_id}/calendar/{event_id}/":
     get:
-      description: >-
+      description: |-
         Get all the information for a specific event
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/calendar/{event_id}/`
-
 
         Alternate route: `/v3/characters/{character_id}/calendar/{event_id}/`
 
-
         ---
-
         This route is cached for up to 5 seconds
       operationId: get_characters_character_id_calendar_event_id
       parameters:
@@ -3059,7 +3008,11 @@ paths:
               owner_name: EVE System
               owner_type: eve_server
               response: Undecided
-              text: "o7: The EVE Online Show features latest developer news, fast paced action, community overviews and a lot more with CCP Guard and CCP Mimic. Join the thrilling o7 live broadcast at 20:00 EVE time (=UTC) on <a href=\"http://www.twitch.tv/ccp\">EVE TV</a>. Don't miss it!"
+              text: "o7: The EVE Online Show features latest developer news, fast paced
+                action, community overviews and a lot more with CCP Guard and
+                CCP Mimic. Join the thrilling o7 live broadcast at 20:00 EVE
+                time (=UTC) on <a href=\"http://www.twitch.tv/ccp\">EVE TV</a>.
+                Don't miss it!"
               title: o7 The EVE Online Show
           headers:
             Cache-Control:
@@ -3230,14 +3183,11 @@ paths:
         - v3
       x-cached-seconds: 5
     put:
-      description: >
+      description: |
         Set your response status to an event
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/calendar/{event_id}/`
-
 
         Alternate route: `/v3/characters/{character_id}/calendar/{event_id}/`
       operationId: put_characters_character_id_calendar_event_id
@@ -3500,20 +3450,15 @@ paths:
       x-cached-seconds: 600
   "/characters/{character_id}/clones/":
     get:
-      description: >-
+      description: |-
         A list of the character's clones
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/clones/`
-
 
         Alternate route: `/v3/characters/{character_id}/clones/`
 
-
         ---
-
         This route is cached for up to 120 seconds
       operationId: get_characters_character_id_clones
       parameters:
@@ -3704,14 +3649,11 @@ paths:
       x-cached-seconds: 120
   "/characters/{character_id}/contacts/":
     delete:
-      description: >
+      description: |
         Bulk delete contacts
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/contacts/`
-
 
         Alternate route: `/v2/characters/{character_id}/contacts/`
       operationId: delete_characters_character_id_contacts
@@ -3791,20 +3733,15 @@ paths:
         - dev
         - v2
     get:
-      description: >-
+      description: |-
         Return contacts of a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/contacts/`
-
 
         Alternate route: `/v2/characters/{character_id}/contacts/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_characters_character_id_contacts
       parameters:
@@ -3861,7 +3798,8 @@ paths:
                   title: get_characters_character_id_contacts_contact_type
                   type: string
                 is_blocked:
-                  description: Whether this contact is in the blocked list. Note a missing value denotes unknown, not true or false
+                  description: Whether this contact is in the blocked list. Note a missing value
+                    denotes unknown, not true or false
                   title: get_characters_character_id_contacts_is_blocked
                   type: boolean
                 is_watched:
@@ -3967,14 +3905,11 @@ paths:
         - v2
       x-cached-seconds: 300
     post:
-      description: >
+      description: |
         Bulk add contacts with same settings
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/contacts/`
-
 
         Alternate route: `/v2/characters/{character_id}/contacts/`
       operationId: post_characters_character_id_contacts
@@ -4015,7 +3950,8 @@ paths:
           type: number
         - $ref: "#/parameters/token"
         - default: false
-          description: Whether the contact should be watched, note this is only effective on characters
+          description: Whether the contact should be watched, note this is only effective
+            on characters
           in: query
           name: watched
           required: false
@@ -4110,14 +4046,11 @@ paths:
         - dev
         - v2
     put:
-      description: >
+      description: |
         Bulk edit contacts with same settings
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/contacts/`
-
 
         Alternate route: `/v2/characters/{character_id}/contacts/`
       operationId: put_characters_character_id_contacts
@@ -4158,7 +4091,8 @@ paths:
           type: number
         - $ref: "#/parameters/token"
         - default: false
-          description: Whether the contact should be watched, note this is only effective on characters
+          description: Whether the contact should be watched, note this is only effective
+            on characters
           in: query
           name: watched
           required: false
@@ -4226,23 +4160,17 @@ paths:
         - v2
   "/characters/{character_id}/contacts/labels/":
     get:
-      description: >-
+      description: |-
         Return custom labels for a character's contacts
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/contacts/labels/`
-
 
         Alternate route: `/legacy/characters/{character_id}/contacts/labels/`
 
-
         Alternate route: `/v1/characters/{character_id}/contacts/labels/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_characters_character_id_contacts_labels
       parameters:
@@ -4370,7 +4298,9 @@ paths:
   "/characters/{character_id}/contracts/":
     get:
       description: >-
-        Returns contracts available to a character, only if the character is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is "in_progress".
+        Returns contracts available to a character, only if the character
+        is issuer, acceptor or assignee. Only returns contracts no older than 30
+        days, or if the status is "in_progress".
 
 
         ---
@@ -4448,7 +4378,8 @@ paths:
                   title: get_characters_character_id_contracts_acceptor_id
                   type: integer
                 assignee_id:
-                  description: ID to whom the contract is assigned, can be corporation or character ID
+                  description: ID to whom the contract is assigned, can be corporation or
+                    character ID
                   format: int32
                   title: get_characters_character_id_contracts_assignee_id
                   type: integer
@@ -4507,7 +4438,8 @@ paths:
                   title: get_characters_character_id_contracts_end_location_id
                   type: integer
                 for_corporation:
-                  description: true if the contract was issued on behalf of the issuer's corporation
+                  description: true if the contract was issued on behalf of the issuer's
+                    corporation
                   title: get_characters_character_id_contracts_for_corporation
                   type: boolean
                 issuer_corporation_id:
@@ -4900,7 +4832,9 @@ paths:
               description: 200 ok object
               properties:
                 is_included:
-                  description: true if the contract issuer has submitted this item with the contract, false if the isser is asking for this item in the contract
+                  description: true if the contract issuer has submitted this item with the
+                    contract, false if the isser is asking for this item in the
+                    contract
                   title: get_characters_character_id_contracts_contract_id_items_is_included
                   type: boolean
                 is_singleton:
@@ -4913,7 +4847,9 @@ paths:
                   title: get_characters_character_id_contracts_contract_id_items_quantity
                   type: integer
                 raw_quantity:
-                  description: -1 indicates that the item is a singleton (non-stackable). If the item happens to be a Blueprint, -1 is an Original and -2 is a Blueprint Copy
+                  description: -1 indicates that the item is a singleton (non-stackable). If the
+                    item happens to be a Blueprint, -1 is an Original and -2 is
+                    a Blueprint Copy
                   format: int32
                   title: get_characters_character_id_contracts_contract_id_items_raw_quantity
                   type: integer
@@ -5029,23 +4965,17 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/corporationhistory/":
     get:
-      description: >-
+      description: |-
         Get a list of all the corporations a character has been a member of
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/corporationhistory/`
-
 
         Alternate route: `/legacy/characters/{character_id}/corporationhistory/`
 
-
         Alternate route: `/v1/characters/{character_id}/corporationhistory/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_corporationhistory
       parameters:
@@ -5092,7 +5022,8 @@ paths:
                   title: get_characters_character_id_corporationhistory_is_deleted
                   type: boolean
                 record_id:
-                  description: An incrementing ID that can be used to canonically establish order of records in cases where dates may be ambiguous
+                  description: An incrementing ID that can be used to canonically establish order
+                    of records in cases where dates may be ambiguous
                   format: int32
                   title: get_characters_character_id_corporationhistory_record_id
                   type: integer
@@ -5171,7 +5102,8 @@ paths:
   "/characters/{character_id}/cspa/":
     post:
       description: >
-        Takes a source character ID in the url and a set of target character ID's in the body, returns a CSPA charge cost
+        Takes a source character ID in the url and a set of target
+        character ID's in the body, returns a CSPA charge cost
 
 
         ---
@@ -5203,7 +5135,8 @@ paths:
         - $ref: "#/parameters/token"
       responses:
         "201":
-          description: Aggregate cost of sending a mail from the source character to the target characters, in ISK
+          description: Aggregate cost of sending a mail from the source character to the
+            target characters, in ISK
           examples:
             application/json: 2950
           schema:
@@ -5271,23 +5204,17 @@ paths:
         - v4
   "/characters/{character_id}/fatigue/":
     get:
-      description: >-
+      description: |-
         Return a character's jump activation and fatigue information
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/fatigue/`
-
 
         Alternate route: `/legacy/characters/{character_id}/fatigue/`
 
-
         Alternate route: `/v1/characters/{character_id}/fatigue/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_characters_character_id_fatigue
       parameters:
@@ -5413,23 +5340,17 @@ paths:
       x-cached-seconds: 300
   "/characters/{character_id}/fittings/":
     get:
-      description: >-
+      description: |-
         Return fittings of a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/fittings/`
-
 
         Alternate route: `/legacy/characters/{character_id}/fittings/`
 
-
         Alternate route: `/v1/characters/{character_id}/fittings/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_characters_character_id_fittings
       parameters:
@@ -5602,17 +5523,13 @@ paths:
         - v1
       x-cached-seconds: 300
     post:
-      description: >
+      description: |
         Save a new fitting for a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/fittings/`
 
-
         Alternate route: `/legacy/characters/{character_id}/fittings/`
-
 
         Alternate route: `/v1/characters/{character_id}/fittings/`
       operationId: post_characters_character_id_fittings
@@ -5848,23 +5765,17 @@ paths:
         - v1
   "/characters/{character_id}/fleet/":
     get:
-      description: >-
+      description: |-
         Return the fleet ID the character is in, if any.
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/fleet/`
-
 
         Alternate route: `/legacy/characters/{character_id}/fleet/`
 
-
         Alternate route: `/v1/characters/{character_id}/fleet/`
 
-
         ---
-
         This route is cached for up to 60 seconds
       operationId: get_characters_character_id_fleet
       parameters:
@@ -5912,12 +5823,14 @@ paths:
                 title: get_characters_character_id_fleet_role
                 type: string
               squad_id:
-                description: ID of the squad the member is in. If not applicable, will be set to -1
+                description: ID of the squad the member is in. If not applicable, will be set to
+                  -1
                 format: int64
                 title: get_characters_character_id_fleet_squad_id
                 type: integer
               wing_id:
-                description: ID of the wing the member is in. If not applicable, will be set to -1
+                description: ID of the wing the member is in. If not applicable, will be set to
+                  -1
                 format: int64
                 title: get_characters_character_id_fleet_wing_id
                 type: integer
@@ -6019,23 +5932,17 @@ paths:
       x-cached-seconds: 60
   "/characters/{character_id}/fw/stats/":
     get:
-      description: >-
+      description: |-
         Statistical overview of a character involved in faction warfare
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/fw/stats/`
-
 
         Alternate route: `/legacy/characters/{character_id}/fw/stats/`
 
-
         Alternate route: `/v1/characters/{character_id}/fw/stats/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_characters_character_id_fw_stats
       parameters:
@@ -6082,12 +5989,15 @@ paths:
                 title: get_characters_character_id_fw_stats_current_rank
                 type: integer
               enlisted_on:
-                description: The enlistment date of the given character into faction warfare. Will not be included if character is not enlisted in faction warfare
+                description: The enlistment date of the given character into faction warfare.
+                  Will not be included if character is not enlisted in faction
+                  warfare
                 format: date-time
                 title: get_characters_character_id_fw_stats_enlisted_on
                 type: string
               faction_id:
-                description: The faction the given character is enlisted to fight for. Will not be included if character is not enlisted in faction warfare
+                description: The faction the given character is enlisted to fight for. Will not
+                  be included if character is not enlisted in faction warfare
                 format: int32
                 title: get_characters_character_id_fw_stats_faction_id
                 type: integer
@@ -6102,17 +6012,20 @@ paths:
                 description: Summary of kills done by the given character against enemy factions
                 properties:
                   last_week:
-                    description: Last week's total number of kills by a given character against enemy factions
+                    description: Last week's total number of kills by a given character against
+                      enemy factions
                     format: int32
                     title: get_characters_character_id_fw_stats_last_week
                     type: integer
                   total:
-                    description: Total number of kills by a given character against enemy factions since the character enlisted
+                    description: Total number of kills by a given character against enemy factions
+                      since the character enlisted
                     format: int32
                     title: get_characters_character_id_fw_stats_total
                     type: integer
                   yesterday:
-                    description: Yesterday's total number of kills by a given character against enemy factions
+                    description: Yesterday's total number of kills by a given character against
+                      enemy factions
                     format: int32
                     title: get_characters_character_id_fw_stats_yesterday
                     type: integer
@@ -6123,7 +6036,8 @@ paths:
                 title: get_characters_character_id_fw_stats_kills
                 type: object
               victory_points:
-                description: Summary of victory points gained by the given character for the enlisted faction
+                description: Summary of victory points gained by the given character for the
+                  enlisted faction
                 properties:
                   last_week:
                     description: Last week's victory points gained by the given character
@@ -6227,23 +6141,17 @@ paths:
         - v1
   "/characters/{character_id}/implants/":
     get:
-      description: >-
+      description: |-
         Return implants on the active clone of a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/implants/`
-
 
         Alternate route: `/legacy/characters/{character_id}/implants/`
 
-
         Alternate route: `/v1/characters/{character_id}/implants/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_characters_character_id_implants
       parameters:
@@ -6359,30 +6267,25 @@ paths:
       x-cached-seconds: 300
   "/characters/{character_id}/industry/jobs/":
     get:
-      description: >-
+      description: |-
         List industry jobs placed by a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/industry/jobs/`
-
 
         Alternate route: `/legacy/characters/{character_id}/industry/jobs/`
 
-
         Alternate route: `/v1/characters/{character_id}/industry/jobs/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_characters_character_id_industry_jobs
       parameters:
         - $ref: "#/parameters/character_id"
         - $ref: "#/parameters/datasource"
         - $ref: "#/parameters/If-None-Match"
-        - description: Whether to retrieve completed character industry jobs. Only includes jobs from the past 90 days
+        - description: Whether to retrieve completed character industry jobs. Only
+            includes jobs from the past 90 days
           in: query
           name: include_completed
           required: false
@@ -6438,7 +6341,9 @@ paths:
                   title: get_characters_character_id_industry_jobs_blueprint_id
                   type: integer
                 blueprint_location_id:
-                  description: Location ID of the location from which the blueprint was installed. Normally a station ID, but can also be an asset (e.g. container) or corporation facility
+                  description: Location ID of the location from which the blueprint was installed.
+                    Normally a station ID, but can also be an asset (e.g.
+                    container) or corporation facility
                   format: int64
                   title: get_characters_character_id_industry_jobs_blueprint_location_id
                   type: integer
@@ -6493,12 +6398,15 @@ paths:
                   title: get_characters_character_id_industry_jobs_licensed_runs
                   type: integer
                 output_location_id:
-                  description: Location ID of the location to which the output of the job will be delivered. Normally a station ID, but can also be a corporation facility
+                  description: Location ID of the location to which the output of the job will be
+                    delivered. Normally a station ID, but can also be a
+                    corporation facility
                   format: int64
                   title: get_characters_character_id_industry_jobs_output_location_id
                   type: integer
                 pause_date:
-                  description: Date and time when this job was paused (i.e. time when the facility where this job was installed went offline)
+                  description: Date and time when this job was paused (i.e. time when the facility
+                    where this job was installed went offline)
                   format: date-time
                   title: get_characters_character_id_industry_jobs_pause_date
                   type: string
@@ -6513,7 +6421,8 @@ paths:
                   title: get_characters_character_id_industry_jobs_product_type_id
                   type: integer
                 runs:
-                  description: Number of runs for a manufacturing job, or number of copies to make for a blueprint copy
+                  description: Number of runs for a manufacturing job, or number of copies to make
+                    for a blueprint copy
                   format: int32
                   title: get_characters_character_id_industry_jobs_runs
                   type: integer
@@ -6539,7 +6448,8 @@ paths:
                   title: get_characters_character_id_industry_jobs_status
                   type: string
                 successful_runs:
-                  description: Number of successful runs for this job. Equal to runs unless this is an invention job
+                  description: Number of successful runs for this job. Equal to runs unless this
+                    is an invention job
                   format: int32
                   title: get_characters_character_id_industry_jobs_successful_runs
                   type: integer
@@ -6640,23 +6550,17 @@ paths:
       x-cached-seconds: 300
   "/characters/{character_id}/killmails/recent/":
     get:
-      description: >-
+      description: |-
         Return a list of a character's kills and losses going back 90 days
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/killmails/recent/`
-
 
         Alternate route: `/legacy/characters/{character_id}/killmails/recent/`
 
-
         Alternate route: `/v1/characters/{character_id}/killmails/recent/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_characters_character_id_killmails_recent
       parameters:
@@ -6792,7 +6696,9 @@ paths:
   "/characters/{character_id}/location/":
     get:
       description: >-
-        Information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable
+        Information about the characters current location. Returns the
+        current solar system id, and also the current station or structure ID if
+        applicable
 
 
         ---
@@ -6817,7 +6723,9 @@ paths:
         - $ref: "#/parameters/token"
       responses:
         "200":
-          description: Information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable
+          description: Information about the characters current location. Returns the
+            current solar system id, and also the current station or structure
+            ID if applicable
           examples:
             application/json:
               solar_system_id: 30002505
@@ -6935,7 +6843,8 @@ paths:
   "/characters/{character_id}/loyalty/points/":
     get:
       description: >-
-        Return a list of loyalty points for all corporations the character has worked for
+        Return a list of loyalty points for all corporations the character
+        has worked for
 
 
         ---
@@ -7079,7 +6988,9 @@ paths:
   "/characters/{character_id}/mail/":
     get:
       description: >-
-        Return the 50 most recent mail headers belonging to the character that match the query criteria. Queries can be filtered by label, and last_mail_id can be used to paginate backwards
+        Return the 50 most recent mail headers belonging to the character
+        that match the query criteria. Queries can be filtered by label, and
+        last_mail_id can be used to paginate backwards
 
 
         ---
@@ -7297,17 +7208,13 @@ paths:
         - v1
       x-cached-seconds: 30
     post:
-      description: >
+      description: |
         Create and send a new mail
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/mail/`
 
-
         Alternate route: `/legacy/characters/{character_id}/mail/`
-
 
         Alternate route: `/v1/characters/{character_id}/mail/`
       operationId: post_characters_character_id_mail
@@ -7432,7 +7339,8 @@ paths:
           schema:
             $ref: "#/definitions/gateway_timeout"
         "520":
-          description: Internal error thrown from the EVE server. Most of the time this means you have hit an EVE server rate limit
+          description: Internal error thrown from the EVE server. Most of the time this
+            means you have hit an EVE server rate limit
           examples:
             application/json:
               error: Error 520 message
@@ -7458,7 +7366,8 @@ paths:
   "/characters/{character_id}/mail/labels/":
     get:
       description: >-
-        Return a list of the users mail labels, unread counts for each label and a total unread count.
+        Return a list of the users mail labels, unread counts for each
+        label and a total unread count.
 
 
         ---
@@ -7643,17 +7552,13 @@ paths:
         - v3
       x-cached-seconds: 30
     post:
-      description: >
+      description: |
         Create a mail label
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/mail/labels/`
 
-
         Alternate route: `/legacy/characters/{character_id}/mail/labels/`
-
 
         Alternate route: `/v2/characters/{character_id}/mail/labels/`
       operationId: post_characters_character_id_mail_labels
@@ -7875,23 +7780,17 @@ paths:
         - v1
   "/characters/{character_id}/mail/lists/":
     get:
-      description: >-
+      description: |-
         Return all mailing lists that the character is subscribed to
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/mail/lists/`
-
 
         Alternate route: `/legacy/characters/{character_id}/mail/lists/`
 
-
         Alternate route: `/v1/characters/{character_id}/mail/lists/`
 
-
         ---
-
         This route is cached for up to 120 seconds
       operationId: get_characters_character_id_mail_lists
       parameters:
@@ -8018,17 +7917,13 @@ paths:
       x-cached-seconds: 120
   "/characters/{character_id}/mail/{mail_id}/":
     delete:
-      description: >
+      description: |
         Delete a mail
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/mail/{mail_id}/`
 
-
         Alternate route: `/legacy/characters/{character_id}/mail/{mail_id}/`
-
 
         Alternate route: `/v1/characters/{character_id}/mail/{mail_id}/`
       operationId: delete_characters_character_id_mail_mail_id
@@ -8105,23 +8000,17 @@ paths:
         - legacy
         - v1
     get:
-      description: >-
+      description: |-
         Return the contents of an EVE mail
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/mail/{mail_id}/`
-
 
         Alternate route: `/legacy/characters/{character_id}/mail/{mail_id}/`
 
-
         Alternate route: `/v1/characters/{character_id}/mail/{mail_id}/`
 
-
         ---
-
         This route is cached for up to 30 seconds
       operationId: get_characters_character_id_mail_mail_id
       parameters:
@@ -8319,17 +8208,13 @@ paths:
         - v1
       x-cached-seconds: 30
     put:
-      description: >
+      description: |
         Update metadata about a mail
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/mail/{mail_id}/`
 
-
         Alternate route: `/legacy/characters/{character_id}/mail/{mail_id}/`
-
 
         Alternate route: `/v1/characters/{character_id}/mail/{mail_id}/`
       operationId: put_characters_character_id_mail_mail_id
@@ -8432,23 +8317,17 @@ paths:
         - v1
   "/characters/{character_id}/medals/":
     get:
-      description: >-
+      description: |-
         Return a list of medals the character has
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/medals/`
-
 
         Alternate route: `/legacy/characters/{character_id}/medals/`
 
-
         Alternate route: `/v1/characters/{character_id}/medals/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_medals
       parameters:
@@ -8665,24 +8544,18 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/mining/":
     get:
-      description: >-
+      description: |-
         Paginated record of all mining done by a character for the past 30 days
 
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/mining/`
-
 
         Alternate route: `/legacy/characters/{character_id}/mining/`
 
-
         Alternate route: `/v1/characters/{character_id}/mining/`
 
-
         ---
-
         This route is cached for up to 600 seconds
       operationId: get_characters_character_id_mining
       parameters:
@@ -8834,20 +8707,15 @@ paths:
       x-cached-seconds: 600
   "/characters/{character_id}/notifications/":
     get:
-      description: >-
+      description: |-
         Return character notifications
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/notifications/`
-
 
         Alternate route: `/v4/characters/{character_id}/notifications/`
 
-
         ---
-
         This route is cached for up to 600 seconds
       operationId: get_characters_character_id_notifications
       parameters:
@@ -9195,7 +9063,8 @@ paths:
   "/characters/{character_id}/notifications/contacts/":
     get:
       description: >-
-        Return notifications about having been added to someone's contact list
+        Return notifications about having been added to someone's contact
+        list
 
 
         ---
@@ -9266,7 +9135,10 @@ paths:
                   title: get_characters_character_id_notifications_contacts_sender_character_id
                   type: integer
                 standing_level:
-                  description: "A number representing the standing level the receiver has been added at by the sender. The standing levels are as follows: -10 -> Terrible | -5 -> Bad |  0 -> Neutral |  5 -> Good |  10 -> Excellent"
+                  description: "A number representing the standing level the receiver has been
+                    added at by the sender. The standing levels are as follows:
+                    -10 -> Terrible | -5 -> Bad |  0 -> Neutral |  5 -> Good
+                    |  10 -> Excellent"
                   format: float
                   title: get_characters_character_id_notifications_contacts_standing_level
                   type: number
@@ -9358,20 +9230,15 @@ paths:
       x-cached-seconds: 600
   "/characters/{character_id}/online/":
     get:
-      description: >-
+      description: |-
         Checks if the character is currently online
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/online/`
-
 
         Alternate route: `/v2/characters/{character_id}/online/`
 
-
         ---
-
         This route is cached for up to 60 seconds
       operationId: get_characters_character_id_online
       parameters:
@@ -9503,23 +9370,17 @@ paths:
       x-cached-seconds: 60
   "/characters/{character_id}/opportunities/":
     get:
-      description: >-
+      description: |-
         Return a list of tasks finished by a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/opportunities/`
-
 
         Alternate route: `/legacy/characters/{character_id}/opportunities/`
 
-
         Alternate route: `/v1/characters/{character_id}/opportunities/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_opportunities
       parameters:
@@ -9647,20 +9508,15 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/orders/":
     get:
-      description: >-
+      description: |-
         List open market orders placed by a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/orders/`
-
 
         Alternate route: `/v2/characters/{character_id}/orders/`
 
-
         ---
-
         This route is cached for up to 1200 seconds
       operationId: get_characters_character_id_orders
       parameters:
@@ -9706,7 +9562,8 @@ paths:
               description: 200 ok object
               properties:
                 duration:
-                  description: Number of days for which order is valid (starting from the issued date). An order expires at time issued + duration
+                  description: Number of days for which order is valid (starting from the issued
+                    date). An order expires at time issued + duration
                   format: int32
                   title: get_characters_character_id_orders_duration
                   type: integer
@@ -9720,7 +9577,8 @@ paths:
                   title: get_characters_character_id_orders_is_buy_order
                   type: boolean
                 is_corporation:
-                  description: Signifies whether the buy/sell order was placed on behalf of a corporation.
+                  description: Signifies whether the buy/sell order was placed on behalf of a
+                    corporation.
                   title: get_characters_character_id_orders_is_corporation
                   type: boolean
                 issued:
@@ -9734,7 +9592,8 @@ paths:
                   title: get_characters_character_id_orders_location_id
                   type: integer
                 min_volume:
-                  description: For buy orders, the minimum quantity that will be accepted in a matching sell order
+                  description: For buy orders, the minimum quantity that will be accepted in a
+                    matching sell order
                   format: int32
                   title: get_characters_character_id_orders_min_volume
                   type: integer
@@ -9879,7 +9738,8 @@ paths:
   "/characters/{character_id}/orders/history/":
     get:
       description: >-
-        List cancelled and expired market orders placed by a character up to 90 days in the past.
+        List cancelled and expired market orders placed by a character up
+        to 90 days in the past.
 
 
         ---
@@ -9947,7 +9807,8 @@ paths:
               description: 200 ok object
               properties:
                 duration:
-                  description: Number of days the order was valid for (starting from the issued date). An order expires at time issued + duration
+                  description: Number of days the order was valid for (starting from the issued
+                    date). An order expires at time issued + duration
                   format: int32
                   title: get_characters_character_id_orders_history_duration
                   type: integer
@@ -9961,7 +9822,8 @@ paths:
                   title: get_characters_character_id_orders_history_is_buy_order
                   type: boolean
                 is_corporation:
-                  description: Signifies whether the buy/sell order was placed on behalf of a corporation.
+                  description: Signifies whether the buy/sell order was placed on behalf of a
+                    corporation.
                   title: get_characters_character_id_orders_history_is_corporation
                   type: boolean
                 issued:
@@ -9975,7 +9837,8 @@ paths:
                   title: get_characters_character_id_orders_history_location_id
                   type: integer
                 min_volume:
-                  description: For buy orders, the minimum quantity that will be accepted in a matching sell order
+                  description: For buy orders, the minimum quantity that will be accepted in a
+                    matching sell order
                   format: int32
                   title: get_characters_character_id_orders_history_min_volume
                   type: integer
@@ -10128,23 +9991,17 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/planets/":
     get:
-      description: >-
+      description: |-
         Returns a list of all planetary colonies owned by a character.
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/planets/`
-
 
         Alternate route: `/legacy/characters/{character_id}/planets/`
 
-
         Alternate route: `/v1/characters/{character_id}/planets/`
 
-
         ---
-
         This route is cached for up to 600 seconds
       operationId: get_characters_character_id_planets
       parameters:
@@ -10326,7 +10183,10 @@ paths:
   "/characters/{character_id}/planets/{planet_id}/":
     get:
       description: >-
-        Returns full details on the layout of a single planetary colony, including links, pins and routes. Note: Planetary information is only recalculated when the colony is viewed through the client. Information will not update until this criteria is met.
+        Returns full details on the layout of a single planetary colony,
+        including links, pins and routes. Note: Planetary information is only
+        recalculated when the colony is viewed through the client. Information
+        will not update until this criteria is met.
 
 
         ---
@@ -10718,20 +10578,15 @@ paths:
       x-cached-seconds: 600
   "/characters/{character_id}/portrait/":
     get:
-      description: >-
+      description: |-
         Get portrait urls for a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/portrait/`
-
 
         Alternate route: `/v2/characters/{character_id}/portrait/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_characters_character_id_portrait
       parameters:
@@ -10853,20 +10708,15 @@ paths:
         - v2
   "/characters/{character_id}/roles/":
     get:
-      description: >-
+      description: |-
         Returns a character's corporation roles
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/roles/`
-
 
         Alternate route: `/v2/characters/{character_id}/roles/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_roles
       parameters:
@@ -11220,20 +11070,15 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/search/":
     get:
-      description: >-
+      description: |-
         Search for entities that match a given sub-string.
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/search/`
-
 
         Alternate route: `/v3/characters/{character_id}/search/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_search
       parameters:
@@ -11505,23 +11350,17 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/ship/":
     get:
-      description: >-
+      description: |-
         Get the current ship type, name and id
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/ship/`
-
 
         Alternate route: `/legacy/characters/{character_id}/ship/`
 
-
         Alternate route: `/v1/characters/{character_id}/ship/`
 
-
         ---
-
         This route is cached for up to 5 seconds
       operationId: get_characters_character_id_ship
       parameters:
@@ -11554,7 +11393,10 @@ paths:
             description: 200 ok object
             properties:
               ship_item_id:
-                description: Item id's are unique to a ship and persist until it is repackaged. This value can be used to track repeated uses of a ship, or detect when a pilot changes into a different instance of the same ship type.
+                description: Item id's are unique to a ship and persist until it is repackaged.
+                  This value can be used to track repeated uses of a ship, or
+                  detect when a pilot changes into a different instance of the
+                  same ship type.
                 format: int64
                 title: get_characters_character_id_ship_ship_item_id
                 type: integer
@@ -11650,23 +11492,17 @@ paths:
       x-cached-seconds: 5
   "/characters/{character_id}/skillqueue/":
     get:
-      description: >-
+      description: |-
         List the configured skill queue for the given character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/skillqueue/`
-
 
         Alternate route: `/legacy/characters/{character_id}/skillqueue/`
 
-
         Alternate route: `/v2/characters/{character_id}/skillqueue/`
 
-
         ---
-
         This route is cached for up to 120 seconds
       operationId: get_characters_character_id_skillqueue
       parameters:
@@ -11730,7 +11566,9 @@ paths:
                   title: get_characters_character_id_skillqueue_level_end_sp
                   type: integer
                 level_start_sp:
-                  description: Amount of SP that was in the skill when it started training it's current level. Used to calculate % of current level complete.
+                  description: Amount of SP that was in the skill when it started training it's
+                    current level. Used to calculate % of current level
+                    complete.
                   format: int32
                   title: get_characters_character_id_skillqueue_level_start_sp
                   type: integer
@@ -11840,20 +11678,15 @@ paths:
       x-cached-seconds: 120
   "/characters/{character_id}/skills/":
     get:
-      description: >-
+      description: |-
         List all trained skills for the given character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/skills/`
-
 
         Alternate route: `/v4/characters/{character_id}/skills/`
 
-
         ---
-
         This route is cached for up to 120 seconds
       operationId: get_characters_character_id_skills
       parameters:
@@ -12018,23 +11851,17 @@ paths:
       x-cached-seconds: 120
   "/characters/{character_id}/standings/":
     get:
-      description: >-
+      description: |-
         Return character standings from agents, NPC corporations, and factions
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/standings/`
-
 
         Alternate route: `/legacy/characters/{character_id}/standings/`
 
-
         Alternate route: `/v1/characters/{character_id}/standings/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_standings
       parameters:
@@ -12178,20 +12005,15 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/stats/":
     get:
-      description: >-
+      description: |-
         Returns aggregate yearly stats for a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/stats/`
-
 
         Alternate route: `/v2/characters/{character_id}/stats/`
 
-
         ---
-
         This route is cached for up to 86400 seconds
       operationId: get_characters_character_id_stats
       parameters:
@@ -13839,23 +13661,17 @@ paths:
       x-cached-seconds: 86400
   "/characters/{character_id}/titles/":
     get:
-      description: >-
+      description: |-
         Returns a character's titles
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/titles/`
-
 
         Alternate route: `/legacy/characters/{character_id}/titles/`
 
-
         Alternate route: `/v1/characters/{character_id}/titles/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_titles
       parameters:
@@ -13979,23 +13795,17 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/wallet/":
     get:
-      description: >-
+      description: |-
         Returns a character's wallet balance
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/wallet/`
-
 
         Alternate route: `/legacy/characters/{character_id}/wallet/`
 
-
         Alternate route: `/v1/characters/{character_id}/wallet/`
 
-
         ---
-
         This route is cached for up to 120 seconds
       operationId: get_characters_character_id_wallet
       parameters:
@@ -14174,7 +13984,9 @@ paths:
               description: 200 ok object
               properties:
                 amount:
-                  description: The amount of ISK given or taken from the wallet as a result of the given transaction. Positive when ISK is deposited into the wallet and negative when ISK is withdrawn
+                  description: The amount of ISK given or taken from the wallet as a result of the
+                    given transaction. Positive when ISK is deposited into the
+                    wallet and negative when ISK is withdrawn
                   format: double
                   title: get_characters_character_id_wallet_journal_amount
                   type: number
@@ -14184,7 +13996,10 @@ paths:
                   title: get_characters_character_id_wallet_journal_balance
                   type: number
                 context_id:
-                  description: An ID that gives extra context to the particular transaction. Because of legacy reasons the context is completely different per ref_type and means different things. It is also possible to not have a context_id
+                  description: An ID that gives extra context to the particular transaction.
+                    Because of legacy reasons the context is completely
+                    different per ref_type and means different things. It is
+                    also possible to not have a context_id
                   format: int64
                   title: get_characters_character_id_wallet_journal_context_id
                   type: integer
@@ -14215,7 +14030,12 @@ paths:
                   title: get_characters_character_id_wallet_journal_description
                   type: string
                 first_party_id:
-                  description: The id of the first party involved in the transaction. This attribute has no consistency and is different or non existant for particular ref_types. The description attribute will help make sense of what this attribute means. For more info about the given ID it can be dropped into the /universe/names/ ESI route to determine its type and name
+                  description: The id of the first party involved in the transaction. This
+                    attribute has no consistency and is different or non
+                    existant for particular ref_types. The description attribute
+                    will help make sense of what this attribute means. For more
+                    info about the given ID it can be dropped into the
+                    /universe/names/ ESI route to determine its type and name
                   format: int32
                   title: get_characters_character_id_wallet_journal_first_party_id
                   type: integer
@@ -14225,11 +14045,18 @@ paths:
                   title: get_characters_character_id_wallet_journal_id
                   type: integer
                 reason:
-                  description: The user stated reason for the transaction. Only applies to some ref_types
+                  description: The user stated reason for the transaction. Only applies to some
+                    ref_types
                   title: get_characters_character_id_wallet_journal_reason
                   type: string
                 ref_type:
-                  description: '"The transaction type for the given. transaction. Different transaction types will populate different attributes. Note: If you have an existing XML API application that is using ref_types, you will need to know which string ESI ref_type maps to which integer. You can look at the following file to see string->int mappings: https://github.com/ccpgames/eve-glue/blob/master/eve_glue/wallet_journal_ref.py"'
+                  description: '"The transaction type for the given. transaction. Different
+                    transaction types will populate different attributes. Note:
+                    If you have an existing XML API application that is using
+                    ref_types, you will need to know which string ESI ref_type
+                    maps to which integer. You can look at the following file to
+                    see string->int mappings:
+                    https://github.com/ccpgames/eve-glue/blob/master/eve_glue/wallet_journal_ref.py"'
                   enum:
                     - acceleration_gate_fee
                     - advertisement_listing_fee
@@ -14351,7 +14178,12 @@ paths:
                   title: get_characters_character_id_wallet_journal_ref_type
                   type: string
                 second_party_id:
-                  description: The id of the second party involved in the transaction. This attribute has no consistency and is different or non existant for particular ref_types. The description attribute will help make sense of what this attribute means. For more info about the given ID it can be dropped into the /universe/names/ ESI route to determine its type and name
+                  description: The id of the second party involved in the transaction. This
+                    attribute has no consistency and is different or non
+                    existant for particular ref_types. The description attribute
+                    will help make sense of what this attribute means. For more
+                    info about the given ID it can be dropped into the
+                    /universe/names/ ESI route to determine its type and name
                   format: int32
                   title: get_characters_character_id_wallet_journal_second_party_id
                   type: integer
@@ -14361,7 +14193,8 @@ paths:
                   title: get_characters_character_id_wallet_journal_tax
                   type: number
                 tax_receiver_id:
-                  description: The corporation ID receiving any tax paid. Only applies to tax related transactions
+                  description: The corporation ID receiving any tax paid. Only applies to tax
+                    related transactions
                   format: int32
                   title: get_characters_character_id_wallet_journal_tax_receiver_id
                   type: integer
@@ -14655,23 +14488,17 @@ paths:
       x-cached-seconds: 3600
   "/contracts/public/bids/{contract_id}/":
     get:
-      description: >-
+      description: |-
         Lists bids on a public auction contract
 
-
         ---
-
         Alternate route: `/dev/contracts/public/bids/{contract_id}/`
-
 
         Alternate route: `/legacy/contracts/public/bids/{contract_id}/`
 
-
         Alternate route: `/v1/contracts/public/bids/{contract_id}/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_contracts_public_bids_contract_id
       parameters:
@@ -14842,23 +14669,17 @@ paths:
       x-cached-seconds: 300
   "/contracts/public/items/{contract_id}/":
     get:
-      description: >-
+      description: |-
         Lists items of a public contract
 
-
         ---
-
         Alternate route: `/dev/contracts/public/items/{contract_id}/`
-
 
         Alternate route: `/legacy/contracts/public/items/{contract_id}/`
 
-
         Alternate route: `/v1/contracts/public/items/{contract_id}/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_contracts_public_items_contract_id
       parameters:
@@ -14909,11 +14730,14 @@ paths:
                   title: get_contracts_public_items_contract_id_is_blueprint_copy
                   type: boolean
                 is_included:
-                  description: true if the contract issuer has submitted this item with the contract, false if the isser is asking for this item in the contract
+                  description: true if the contract issuer has submitted this item with the
+                    contract, false if the isser is asking for this item in the
+                    contract
                   title: get_contracts_public_items_contract_id_is_included
                   type: boolean
                 item_id:
-                  description: Unique ID for the item being sold. Not present if item is being requested by contract rather than sold with contract
+                  description: Unique ID for the item being sold. Not present if item is being
+                    requested by contract rather than sold with contract
                   format: int64
                   title: get_contracts_public_items_contract_id_item_id
                   type: integer
@@ -14935,7 +14759,8 @@ paths:
                   title: get_contracts_public_items_contract_id_record_id
                   type: integer
                 runs:
-                  description: Number of runs remaining if the blueprint is a copy, -1 if it is an original
+                  description: Number of runs remaining if the blueprint is a copy, -1 if it is an
+                    original
                   format: int32
                   minimum: -1
                   title: get_contracts_public_items_contract_id_runs
@@ -15065,23 +14890,17 @@ paths:
       x-cached-seconds: 3600
   "/contracts/public/{region_id}/":
     get:
-      description: >-
+      description: |-
         Returns a paginated list of all public contracts in the given region
 
-
         ---
-
         Alternate route: `/dev/contracts/public/{region_id}/`
-
 
         Alternate route: `/legacy/contracts/public/{region_id}/`
 
-
         Alternate route: `/v1/contracts/public/{region_id}/`
 
-
         ---
-
         This route is cached for up to 1800 seconds
       operationId: get_contracts_public_region_id
       parameters:
@@ -15172,7 +14991,8 @@ paths:
                   title: get_contracts_public_region_id_end_location_id
                   type: integer
                 for_corporation:
-                  description: true if the contract was issued on behalf of the issuer's corporation
+                  description: true if the contract was issued on behalf of the issuer's
+                    corporation
                   title: get_contracts_public_region_id_for_corporation
                   type: boolean
                 issuer_corporation_id:
@@ -15306,7 +15126,8 @@ paths:
   "/corporation/{corporation_id}/mining/extractions/":
     get:
       description: >
-        Extraction timers for all moon chunks being extracted by refineries belonging to a corporation.
+        Extraction timers for all moon chunks being extracted by refineries
+        belonging to a corporation.
 
 
 
@@ -15371,12 +15192,13 @@ paths:
               properties:
                 chunk_arrival_time:
                   description: >
-                    The time at which the chunk being extracted will arrive and can be fractured by the moon mining drill.
+                    The time at which the chunk being extracted will arrive and can be
+                    fractured by the moon mining drill.
                   format: date-time
                   title: get_corporation_corporation_id_mining_extractions_chunk_arrival_time
                   type: string
                 extraction_start_time:
-                  description: >
+                  description: |
                     The time at which the current extraction was initiated.
                   format: date-time
                   title: get_corporation_corporation_id_mining_extractions_extraction_start_time
@@ -15388,7 +15210,8 @@ paths:
                   type: integer
                 natural_decay_time:
                   description: >
-                    The time at which the chunk being extracted will naturally fracture if it is not first fractured by the moon mining drill.
+                    The time at which the chunk being extracted will naturally fracture
+                    if it is not first fractured by the moon mining drill.
                   format: date-time
                   title: get_corporation_corporation_id_mining_extractions_natural_decay_time
                   type: string
@@ -15488,7 +15311,8 @@ paths:
   "/corporation/{corporation_id}/mining/observers/":
     get:
       description: >
-        Paginated list of all entities capable of observing and recording mining for a corporation
+        Paginated list of all entities capable of observing and recording
+        mining for a corporation
 
 
 
@@ -15725,7 +15549,7 @@ paths:
               description: 200 ok object
               properties:
                 character_id:
-                  description: >
+                  description: |
                     The character that did the mining
                   format: int32
                   title: get_corporation_corporation_id_mining_observers_observer_id_character_id
@@ -15841,23 +15665,17 @@ paths:
         - Accountant
   /corporations/npccorps/:
     get:
-      description: >-
+      description: |-
         Get a list of npc corporations
 
-
         ---
-
         Alternate route: `/dev/corporations/npccorps/`
-
 
         Alternate route: `/legacy/corporations/npccorps/`
 
-
         Alternate route: `/v1/corporations/npccorps/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_corporations_npccorps
       parameters:
@@ -15953,20 +15771,15 @@ paths:
         - v1
   "/corporations/{corporation_id}/":
     get:
-      description: >-
+      description: |-
         Public information about a corporation
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/`
-
 
         Alternate route: `/v4/corporations/{corporation_id}/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_corporations_corporation_id
       parameters:
@@ -16153,20 +15966,15 @@ paths:
       x-cached-seconds: 3600
   "/corporations/{corporation_id}/alliancehistory/":
     get:
-      description: >-
+      description: |-
         Get a list of all the alliances a corporation has been a member of
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/alliancehistory/`
-
 
         Alternate route: `/v2/corporations/{corporation_id}/alliancehistory/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_corporations_corporation_id_alliancehistory
       parameters:
@@ -16212,7 +16020,8 @@ paths:
                   title: get_corporations_corporation_id_alliancehistory_is_deleted
                   type: boolean
                 record_id:
-                  description: An incrementing ID that can be used to canonically establish order of records in cases where dates may be ambiguous
+                  description: An incrementing ID that can be used to canonically establish order
+                    of records in cases where dates may be ambiguous
                   format: int32
                   title: get_corporations_corporation_id_alliancehistory_record_id
                   type: integer
@@ -16288,25 +16097,18 @@ paths:
       x-cached-seconds: 3600
   "/corporations/{corporation_id}/assets/":
     get:
-      description: >
+      description: |
         Return a list of the corporation assets
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/assets/`
-
 
         Alternate route: `/v3/corporations/{corporation_id}/assets/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_assets
       parameters:
@@ -16599,7 +16401,9 @@ paths:
   "/corporations/{corporation_id}/assets/locations/":
     post:
       description: >
-        Return locations for a set of item ids, which you can get from corporation assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0)
+        Return locations for a set of item ids, which you can get from
+        corporation assets endpoint. Coordinates for items in hangars or
+        stations are set to (0,0,0)
 
 
         ---
@@ -16764,7 +16568,9 @@ paths:
   "/corporations/{corporation_id}/assets/names/":
     post:
       description: >
-        Return names for a set of item ids, which you can get from corporation assets endpoint. Only valid for items that can customize names, like containers or ships
+        Return names for a set of item ids, which you can get from
+        corporation assets endpoint. Only valid for items that can customize
+        names, like containers or ships
 
 
         ---
@@ -16909,25 +16715,18 @@ paths:
         - Director
   "/corporations/{corporation_id}/blueprints/":
     get:
-      description: >
+      description: |
         Returns a list of blueprints the corporation owns
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/blueprints/`
-
 
         Alternate route: `/v2/corporations/{corporation_id}/blueprints/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_blueprints
       parameters:
@@ -17098,7 +16897,8 @@ paths:
                   title: get_corporations_corporation_id_blueprints_location_flag
                   type: string
                 location_id:
-                  description: References a solar system, station or item_id if this blueprint is located within a container.
+                  description: References a solar system, station or item_id if this blueprint is
+                    located within a container.
                   format: int64
                   title: get_corporations_corporation_id_blueprints_location_id
                   type: integer
@@ -17110,13 +16910,17 @@ paths:
                   title: get_corporations_corporation_id_blueprints_material_efficiency
                   type: integer
                 quantity:
-                  description: A range of numbers with a minimum of -2 and no maximum value where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (e.g. no activities performed on them yet).
+                  description: A range of numbers with a minimum of -2 and no maximum value where
+                    -1 is an original and -2 is a copy. It can be a positive
+                    integer if it is a stack of blueprint originals fresh from
+                    the market (e.g. no activities performed on them yet).
                   format: int32
                   minimum: -2
                   title: get_corporations_corporation_id_blueprints_quantity
                   type: integer
                 runs:
-                  description: Number of runs remaining if the blueprint is a copy, -1 if it is an original.
+                  description: Number of runs remaining if the blueprint is a copy, -1 if it is an
+                    original.
                   format: int32
                   minimum: -1
                   title: get_corporations_corporation_id_blueprints_runs
@@ -17225,23 +17029,17 @@ paths:
         - Director
   "/corporations/{corporation_id}/bookmarks/":
     get:
-      description: >-
+      description: |-
         A list of your corporation's bookmarks
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/bookmarks/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/bookmarks/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/bookmarks/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_corporations_corporation_id_bookmarks
       parameters:
@@ -17305,7 +17103,8 @@ paths:
                   title: get_corporations_corporation_id_bookmarks_bookmark_id
                   type: integer
                 coordinates:
-                  description: Optional object that is returned if a bookmark was made on a planet or a random location in space.
+                  description: Optional object that is returned if a bookmark was made on a planet
+                    or a random location in space.
                   properties:
                     x:
                       description: x number
@@ -17344,7 +17143,8 @@ paths:
                   title: get_corporations_corporation_id_bookmarks_folder_id
                   type: integer
                 item:
-                  description: Optional object that is returned if a bookmark was made on a particular item.
+                  description: Optional object that is returned if a bookmark was made on a
+                    particular item.
                   properties:
                     item_id:
                       description: item_id integer
@@ -17617,20 +17417,15 @@ paths:
       x-cached-seconds: 3600
   "/corporations/{corporation_id}/contacts/":
     get:
-      description: >-
+      description: |-
         Return contacts of a corporation
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/contacts/`
-
 
         Alternate route: `/v2/corporations/{corporation_id}/contacts/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_corporations_corporation_id_contacts
       parameters:
@@ -17935,7 +17730,8 @@ paths:
   "/corporations/{corporation_id}/containers/logs/":
     get:
       description: >
-        Returns logs recorded in the past seven days from all audit log secure containers (ALSC) owned by a given corporation
+        Returns logs recorded in the past seven days from all audit log
+        secure containers (ALSC) owned by a given corporation
 
 
         ---
@@ -18186,7 +17982,8 @@ paths:
                   title: get_corporations_corporation_id_containers_logs_old_config_bitmask
                   type: integer
                 password_type:
-                  description: Type of password set if action is of type SetPassword or EnterPassword
+                  description: Type of password set if action is of type SetPassword or
+                    EnterPassword
                   enum:
                     - config
                     - general
@@ -18294,7 +18091,9 @@ paths:
   "/corporations/{corporation_id}/contracts/":
     get:
       description: >-
-        Returns contracts available to a corporation, only if the corporation is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is "in_progress".
+        Returns contracts available to a corporation, only if the
+        corporation is issuer, acceptor or assignee. Only returns contracts no
+        older than 30 days, or if the status is "in_progress".
 
 
         ---
@@ -18370,7 +18169,8 @@ paths:
                   title: get_corporations_corporation_id_contracts_acceptor_id
                   type: integer
                 assignee_id:
-                  description: ID to whom the contract is assigned, can be corporation or character ID
+                  description: ID to whom the contract is assigned, can be corporation or
+                    character ID
                   format: int32
                   title: get_corporations_corporation_id_contracts_assignee_id
                   type: integer
@@ -18429,7 +18229,8 @@ paths:
                   title: get_corporations_corporation_id_contracts_end_location_id
                   type: integer
                 for_corporation:
-                  description: true if the contract was issued on behalf of the issuer's corporation
+                  description: true if the contract was issued on behalf of the issuer's
+                    corporation
                   title: get_corporations_corporation_id_contracts_for_corporation
                   type: boolean
                 issuer_corporation_id:
@@ -18830,7 +18631,9 @@ paths:
               description: 200 ok object
               properties:
                 is_included:
-                  description: true if the contract issuer has submitted this item with the contract, false if the isser is asking for this item in the contract
+                  description: true if the contract issuer has submitted this item with the
+                    contract, false if the isser is asking for this item in the
+                    contract
                   title: get_corporations_corporation_id_contracts_contract_id_items_is_included
                   type: boolean
                 is_singleton:
@@ -18843,7 +18646,9 @@ paths:
                   title: get_corporations_corporation_id_contracts_contract_id_items_quantity
                   type: integer
                 raw_quantity:
-                  description: -1 indicates that the item is a singleton (non-stackable). If the item happens to be a Blueprint, -1 is an Original and -2 is a Blueprint Copy
+                  description: -1 indicates that the item is a singleton (non-stackable). If the
+                    item happens to be a Blueprint, -1 is an Original and -2 is
+                    a Blueprint Copy
                   format: int32
                   title: get_corporations_corporation_id_contracts_contract_id_items_raw_quantity
                   type: integer
@@ -18947,7 +18752,8 @@ paths:
           schema:
             $ref: "#/definitions/gateway_timeout"
         "520":
-          description: Internal error thrown from the EVE server. Most of the time this means you have hit an EVE server rate limit
+          description: Internal error thrown from the EVE server. Most of the time this
+            means you have hit an EVE server rate limit
           examples:
             application/json:
               error: Error 520 message
@@ -19050,7 +18856,8 @@ paths:
                   title: get_corporations_corporation_id_customs_offices_alliance_tax_rate
                   type: number
                 allow_access_with_standings:
-                  description: standing_level and any standing related tax rate only present when this is true
+                  description: standing_level and any standing related tax rate only present when
+                    this is true
                   title: get_corporations_corporation_id_customs_offices_allow_access_with_standings
                   type: boolean
                 allow_alliance_access:
@@ -19068,7 +18875,9 @@ paths:
                   title: get_corporations_corporation_id_customs_offices_corporation_tax_rate
                   type: number
                 excellent_standing_tax_rate:
-                  description: Tax rate for entities with excellent level of standing, only present if this level is allowed, same for all other standing related tax rates
+                  description: Tax rate for entities with excellent level of standing, only
+                    present if this level is allowed, same for all other
+                    standing related tax rates
                   format: float
                   title: get_corporations_corporation_id_customs_offices_excellent_standing_tax_rate
                   type: number
@@ -19095,14 +18904,17 @@ paths:
                   title: get_corporations_corporation_id_customs_offices_reinforce_exit_end
                   type: integer
                 reinforce_exit_start:
-                  description: Together with reinforce_exit_end, marks a 2-hour period where this customs office could exit reinforcement mode during the day after initial attack
+                  description: Together with reinforce_exit_end, marks a 2-hour period where this
+                    customs office could exit reinforcement mode during the day
+                    after initial attack
                   format: int32
                   maximum: 23
                   minimum: 0
                   title: get_corporations_corporation_id_customs_offices_reinforce_exit_start
                   type: integer
                 standing_level:
-                  description: Access is allowed only for entities with this level of standing or better
+                  description: Access is allowed only for entities with this level of standing or
+                    better
                   enum:
                     - bad
                     - excellent
@@ -19213,7 +19025,8 @@ paths:
   "/corporations/{corporation_id}/divisions/":
     get:
       description: >
-        Return corporation hangar and wallet division names, only show if a division is not using the default name
+        Return corporation hangar and wallet division names, only show if a
+        division is not using the default name
 
 
         ---
@@ -19393,28 +19206,20 @@ paths:
         - Director
   "/corporations/{corporation_id}/facilities/":
     get:
-      description: >
+      description: |
         Return a corporation's facilities
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/facilities/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/facilities/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/facilities/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Factory_Manager
       operationId: get_corporations_corporation_id_facilities
       parameters:
@@ -19551,23 +19356,17 @@ paths:
         - Factory_Manager
   "/corporations/{corporation_id}/fw/stats/":
     get:
-      description: >-
+      description: |-
         Statistics about a corporation involved in faction warfare
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/fw/stats/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/fw/stats/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/fw/stats/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_corporations_corporation_id_fw_stats
       parameters:
@@ -19608,30 +19407,38 @@ paths:
             description: 200 ok object
             properties:
               enlisted_on:
-                description: The enlistment date of the given corporation into faction warfare. Will not be included if corporation is not enlisted in faction warfare
+                description: The enlistment date of the given corporation into faction warfare.
+                  Will not be included if corporation is not enlisted in faction
+                  warfare
                 format: date-time
                 title: get_corporations_corporation_id_fw_stats_enlisted_on
                 type: string
               faction_id:
-                description: The faction the given corporation is enlisted to fight for. Will not be included if corporation is not enlisted in faction warfare
+                description: The faction the given corporation is enlisted to fight for. Will
+                  not be included if corporation is not enlisted in faction
+                  warfare
                 format: int32
                 title: get_corporations_corporation_id_fw_stats_faction_id
                 type: integer
               kills:
-                description: Summary of kills done by the given corporation against enemy factions
+                description: Summary of kills done by the given corporation against enemy
+                  factions
                 properties:
                   last_week:
-                    description: Last week's total number of kills by members of the given corporation against enemy factions
+                    description: Last week's total number of kills by members of the given
+                      corporation against enemy factions
                     format: int32
                     title: get_corporations_corporation_id_fw_stats_last_week
                     type: integer
                   total:
-                    description: Total number of kills by members of the given corporation against enemy factions since the corporation enlisted
+                    description: Total number of kills by members of the given corporation against
+                      enemy factions since the corporation enlisted
                     format: int32
                     title: get_corporations_corporation_id_fw_stats_total
                     type: integer
                   yesterday:
-                    description: Yesterday's total number of kills by members of the given corporation against enemy factions
+                    description: Yesterday's total number of kills by members of the given
+                      corporation against enemy factions
                     format: int32
                     title: get_corporations_corporation_id_fw_stats_yesterday
                     type: integer
@@ -19642,15 +19449,18 @@ paths:
                 title: get_corporations_corporation_id_fw_stats_kills
                 type: object
               pilots:
-                description: How many pilots the enlisted corporation has. Will not be included if corporation is not enlisted in faction warfare
+                description: How many pilots the enlisted corporation has. Will not be included
+                  if corporation is not enlisted in faction warfare
                 format: int32
                 title: get_corporations_corporation_id_fw_stats_pilots
                 type: integer
               victory_points:
-                description: Summary of victory points gained by the given corporation for the enlisted faction
+                description: Summary of victory points gained by the given corporation for the
+                  enlisted faction
                 properties:
                   last_week:
-                    description: Last week's victory points gained by members of the given corporation
+                    description: Last week's victory points gained by members of the given
+                      corporation
                     format: int32
                     title: get_corporations_corporation_id_fw_stats_victory_points_last_week
                     type: integer
@@ -19660,7 +19470,8 @@ paths:
                     title: get_corporations_corporation_id_fw_stats_victory_points_total
                     type: integer
                   yesterday:
-                    description: Yesterday's victory points gained by members of the given corporation
+                    description: Yesterday's victory points gained by members of the given
+                      corporation
                     format: int32
                     title: get_corporations_corporation_id_fw_stats_victory_points_yesterday
                     type: integer
@@ -19752,23 +19563,17 @@ paths:
       x-required-roles: []
   "/corporations/{corporation_id}/icons/":
     get:
-      description: >-
+      description: |-
         Get the icon urls for a corporation
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/icons/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/icons/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/icons/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_corporations_corporation_id_icons
       parameters:
@@ -19887,28 +19692,20 @@ paths:
       x-cached-seconds: 3600
   "/corporations/{corporation_id}/industry/jobs/":
     get:
-      description: >
+      description: |
         List industry jobs run by a corporation
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/industry/jobs/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/industry/jobs/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/industry/jobs/`
 
-
         ---
-
         This route is cached for up to 300 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Factory_Manager
       operationId: get_corporations_corporation_id_industry_jobs
       parameters:
@@ -19916,7 +19713,8 @@ paths:
         - $ref: "#/parameters/datasource"
         - $ref: "#/parameters/If-None-Match"
         - default: false
-          description: Whether to retrieve completed corporation industry jobs. Only includes jobs from the past 90 days
+          description: Whether to retrieve completed corporation industry jobs. Only
+            includes jobs from the past 90 days
           in: query
           name: include_completed
           required: false
@@ -19978,7 +19776,9 @@ paths:
                   title: get_corporations_corporation_id_industry_jobs_blueprint_id
                   type: integer
                 blueprint_location_id:
-                  description: Location ID of the location from which the blueprint was installed. Normally a station ID, but can also be an asset (e.g. container) or corporation facility
+                  description: Location ID of the location from which the blueprint was installed.
+                    Normally a station ID, but can also be an asset (e.g.
+                    container) or corporation facility
                   format: int64
                   title: get_corporations_corporation_id_industry_jobs_blueprint_location_id
                   type: integer
@@ -20038,12 +19838,15 @@ paths:
                   title: get_corporations_corporation_id_industry_jobs_location_id
                   type: integer
                 output_location_id:
-                  description: Location ID of the location to which the output of the job will be delivered. Normally a station ID, but can also be a corporation facility
+                  description: Location ID of the location to which the output of the job will be
+                    delivered. Normally a station ID, but can also be a
+                    corporation facility
                   format: int64
                   title: get_corporations_corporation_id_industry_jobs_output_location_id
                   type: integer
                 pause_date:
-                  description: Date and time when this job was paused (i.e. time when the facility where this job was installed went offline)
+                  description: Date and time when this job was paused (i.e. time when the facility
+                    where this job was installed went offline)
                   format: date-time
                   title: get_corporations_corporation_id_industry_jobs_pause_date
                   type: string
@@ -20058,7 +19861,8 @@ paths:
                   title: get_corporations_corporation_id_industry_jobs_product_type_id
                   type: integer
                 runs:
-                  description: Number of runs for a manufacturing job, or number of copies to make for a blueprint copy
+                  description: Number of runs for a manufacturing job, or number of copies to make
+                    for a blueprint copy
                   format: int32
                   title: get_corporations_corporation_id_industry_jobs_runs
                   type: integer
@@ -20079,7 +19883,8 @@ paths:
                   title: get_corporations_corporation_id_industry_jobs_status
                   type: string
                 successful_runs:
-                  description: Number of successful runs for this job. Equal to runs unless this is an invention job
+                  description: Number of successful runs for this job. Equal to runs unless this
+                    is an invention job
                   format: int32
                   title: get_corporations_corporation_id_industry_jobs_successful_runs
                   type: integer
@@ -20340,23 +20145,17 @@ paths:
         - Director
   "/corporations/{corporation_id}/medals/":
     get:
-      description: >-
+      description: |-
         Returns a corporation's medals
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/medals/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/medals/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/medals/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_corporations_corporation_id_medals
       parameters:
@@ -20512,28 +20311,20 @@ paths:
       x-required-roles: []
   "/corporations/{corporation_id}/medals/issued/":
     get:
-      description: >
+      description: |
         Returns medals issued by a corporation
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/medals/issued/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/medals/issued/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/medals/issued/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_medals_issued
       parameters:
@@ -20700,7 +20491,8 @@ paths:
   "/corporations/{corporation_id}/members/":
     get:
       description: >-
-        Return the current member list of a corporation, the token's character need to be a member of the corporation.
+        Return the current member list of a corporation, the token's
+        character need to be a member of the corporation.
 
 
         ---
@@ -20826,28 +20618,20 @@ paths:
       x-cached-seconds: 3600
   "/corporations/{corporation_id}/members/limit/":
     get:
-      description: >
+      description: |
         Return a corporation's member limit, not including CEO himself
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/members/limit/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/members/limit/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/members/limit/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_members_limit
       parameters:
@@ -20957,28 +20741,20 @@ paths:
         - Director
   "/corporations/{corporation_id}/members/titles/":
     get:
-      description: >
+      description: |
         Returns a corporation's members' titles
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/members/titles/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/members/titles/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/members/titles/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_members_titles
       parameters:
@@ -21114,7 +20890,8 @@ paths:
   "/corporations/{corporation_id}/membertracking/":
     get:
       description: >
-        Returns additional information about a corporation's members which helps tracking their activities
+        Returns additional information about a corporation's members which
+        helps tracking their activities
 
 
         ---
@@ -21369,7 +21146,8 @@ paths:
               description: 200 ok object
               properties:
                 duration:
-                  description: Number of days for which order is valid (starting from the issued date). An order expires at time issued + duration
+                  description: Number of days for which order is valid (starting from the issued
+                    date). An order expires at time issued + duration
                   format: int32
                   title: get_corporations_corporation_id_orders_duration
                   type: integer
@@ -21398,7 +21176,8 @@ paths:
                   title: get_corporations_corporation_id_orders_location_id
                   type: integer
                 min_volume:
-                  description: For buy orders, the minimum quantity that will be accepted in a matching sell order
+                  description: For buy orders, the minimum quantity that will be accepted in a
+                    matching sell order
                   format: int32
                   title: get_corporations_corporation_id_orders_min_volume
                   type: integer
@@ -21554,7 +21333,8 @@ paths:
   "/corporations/{corporation_id}/orders/history/":
     get:
       description: >
-        List cancelled and expired market orders placed on behalf of a corporation up to 90 days in the past.
+        List cancelled and expired market orders placed on behalf of a
+        corporation up to 90 days in the past.
 
 
         ---
@@ -21625,7 +21405,8 @@ paths:
               description: 200 ok object
               properties:
                 duration:
-                  description: Number of days the order was valid for (starting from the issued date). An order expires at time issued + duration
+                  description: Number of days the order was valid for (starting from the issued
+                    date). An order expires at time issued + duration
                   format: int32
                   title: get_corporations_corporation_id_orders_history_duration
                   type: integer
@@ -21654,7 +21435,8 @@ paths:
                   title: get_corporations_corporation_id_orders_history_location_id
                   type: integer
                 min_volume:
-                  description: For buy orders, the minimum quantity that will be accepted in a matching sell order
+                  description: For buy orders, the minimum quantity that will be accepted in a
+                    matching sell order
                   format: int32
                   title: get_corporations_corporation_id_orders_history_min_volume
                   type: integer
@@ -21817,7 +21599,8 @@ paths:
   "/corporations/{corporation_id}/roles/":
     get:
       description: >-
-        Return the roles of all members if the character has the personnel manager role or any grantable role.
+        Return the roles of all members if the character has the personnel
+        manager role or any grantable role.
 
 
         ---
@@ -22444,28 +22227,20 @@ paths:
       x-cached-seconds: 3600
   "/corporations/{corporation_id}/roles/history/":
     get:
-      description: >
+      description: |
         Return how roles have changed for a coporation's members, up to a month
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/roles/history/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/roles/history/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/roles/history/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_roles_history
       parameters:
@@ -22751,28 +22526,20 @@ paths:
         - Director
   "/corporations/{corporation_id}/shareholders/":
     get:
-      description: >
+      description: |
         Return the current shareholders of a corporation.
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/shareholders/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/shareholders/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/shareholders/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_shareholders
       parameters:
@@ -22926,23 +22693,17 @@ paths:
         - Director
   "/corporations/{corporation_id}/standings/":
     get:
-      description: >-
+      description: |-
         Return corporation standings from agents, NPC corporations, and factions
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/standings/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/standings/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/standings/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_corporations_corporation_id_standings
       parameters:
@@ -23093,28 +22854,20 @@ paths:
       x-required-roles: []
   "/corporations/{corporation_id}/starbases/":
     get:
-      description: >
+      description: |
         Returns list of corporation starbases (POSes)
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/starbases/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/starbases/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/starbases/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_starbases
       parameters:
@@ -23155,7 +22908,8 @@ paths:
               description: 200 ok object
               properties:
                 moon_id:
-                  description: The moon this starbase (POS) is anchored on, unanchored POSes do not have this information
+                  description: The moon this starbase (POS) is anchored on, unanchored POSes do
+                    not have this information
                   format: int32
                   title: get_corporations_corporation_id_starbases_moon_id
                   type: integer
@@ -23165,7 +22919,8 @@ paths:
                   title: get_corporations_corporation_id_starbases_onlined_since
                   type: string
                 reinforced_until:
-                  description: When the POS will be out of reinforcement, for starbases (POSes) in reinforced state
+                  description: When the POS will be out of reinforcement, for starbases (POSes) in
+                    reinforced state
                   format: date-time
                   title: get_corporations_corporation_id_starbases_reinforced_until
                   type: string
@@ -23185,7 +22940,8 @@ paths:
                   title: get_corporations_corporation_id_starbases_state
                   type: string
                 system_id:
-                  description: The solar system this starbase (POS) is in, unanchored POSes have this information
+                  description: The solar system this starbase (POS) is in, unanchored POSes have
+                    this information
                   format: int32
                   title: get_corporations_corporation_id_starbases_system_id
                   type: integer
@@ -23195,7 +22951,8 @@ paths:
                   title: get_corporations_corporation_id_starbases_type_id
                   type: integer
                 unanchor_at:
-                  description: When the POS started unanchoring, for starbases (POSes) in unanchoring state
+                  description: When the POS started unanchoring, for starbases (POSes) in
+                    unanchoring state
                   format: date-time
                   title: get_corporations_corporation_id_starbases_unanchor_at
                   type: string
@@ -23386,12 +23143,14 @@ paths:
                 title: get_corporations_corporation_id_starbases_starbase_id_attack_if_other_security_status_dropping
                 type: boolean
               attack_security_status_threshold:
-                description: Starbase (POS) will attack if target's security standing is lower than this value
+                description: Starbase (POS) will attack if target's security standing is lower
+                  than this value
                 format: float
                 title: get_corporations_corporation_id_starbases_starbase_id_attack_security_status_threshold
                 type: number
               attack_standing_threshold:
-                description: Starbase (POS) will attack if target's standing is lower than this value
+                description: Starbase (POS) will attack if target's standing is lower than this
+                  value
                 format: float
                 title: get_corporations_corporation_id_starbases_starbase_id_attack_standing_threshold
                 type: number
@@ -23405,7 +23164,10 @@ paths:
                 title: get_corporations_corporation_id_starbases_starbase_id_fuel_bay_take
                 type: string
               fuel_bay_view:
-                description: Who can view the starbase (POS)'s fule bay. Characters either need to have required role or belong to the starbase (POS) owner's corporation or alliance, as described by the enum, all other access settings follows the same scheme
+                description: Who can view the starbase (POS)'s fule bay. Characters either need
+                  to have required role or belong to the starbase (POS) owner's
+                  corporation or alliance, as described by the enum, all other
+                  access settings follows the same scheme
                 enum:
                   - alliance_member
                   - config_starbase_equipment_role
@@ -23414,7 +23176,8 @@ paths:
                 title: get_corporations_corporation_id_starbases_starbase_id_fuel_bay_view
                 type: string
               fuels:
-                description: Fuel blocks and other things that will be consumed when operating a starbase (POS)
+                description: Fuel blocks and other things that will be consumed when operating a
+                  starbase (POS)
                 items:
                   description: fuel object
                   properties:
@@ -23464,7 +23227,8 @@ paths:
                 title: get_corporations_corporation_id_starbases_starbase_id_unanchor
                 type: string
               use_alliance_standings:
-                description: True if the starbase (POS) is using alliance standings, otherwise using corporation's
+                description: True if the starbase (POS) is using alliance standings, otherwise
+                  using corporation's
                 title: get_corporations_corporation_id_starbases_starbase_id_use_alliance_standings
                 type: boolean
             required:
@@ -23561,7 +23325,13 @@ paths:
   "/corporations/{corporation_id}/structures/":
     get:
       description: >-
-        Get a list of corporation structures. This route's version includes the changes to structures detailed in this blog: https://www.eveonline.com/article/upwell-2.0-structures-changes-coming-on-february-13th Note: this route will not return any flex structures owned by a corporation, use the v3 route to have those included in the response. A list of FLEX structures can be found here: https://support.eveonline.com/hc/en-us/articles/213021829-Upwell-Structures
+        Get a list of corporation structures. This route's version includes
+        the changes to structures detailed in this blog:
+        https://www.eveonline.com/article/upwell-2.0-structures-changes-coming-on-february-13th
+        Note: this route will not return any flex structures owned by a
+        corporation, use the v3 route to have those included in the response. A
+        list of FLEX structures can be found here:
+        https://support.eveonline.com/hc/en-us/articles/213021829-Upwell-Structures
 
 
         ---
@@ -23654,19 +23424,23 @@ paths:
                   title: get_corporations_corporation_id_structures_fuel_expires
                   type: string
                 next_reinforce_apply:
-                  description: The date and time when the structure's newly requested reinforcement times (e.g. next_reinforce_hour and next_reinforce_day) will take effect
+                  description: The date and time when the structure's newly requested
+                    reinforcement times (e.g. next_reinforce_hour and
+                    next_reinforce_day) will take effect
                   format: date-time
                   title: get_corporations_corporation_id_structures_next_reinforce_apply
                   type: string
                 next_reinforce_hour:
-                  description: The requested change to reinforce_hour that will take effect at the time shown by next_reinforce_apply
+                  description: The requested change to reinforce_hour that will take effect at the
+                    time shown by next_reinforce_apply
                   format: int32
                   maximum: 23
                   minimum: 0
                   title: get_corporations_corporation_id_structures_next_reinforce_hour
                   type: integer
                 next_reinforce_weekday:
-                  description: The requested change to reinforce_weekday that will take effect at the time shown by next_reinforce_apply
+                  description: The requested change to reinforce_weekday that will take effect at
+                    the time shown by next_reinforce_apply
                   format: int32
                   maximum: 6
                   minimum: 0
@@ -23678,14 +23452,20 @@ paths:
                   title: get_corporations_corporation_id_structures_profile_id
                   type: integer
                 reinforce_hour:
-                  description: The hour of day that determines the four hour window when the structure will randomly exit its reinforcement periods and become vulnerable to attack against its armor and/or hull. The structure will become vulnerable at a random time that is +/- 2 hours centered on the value of this property
+                  description: The hour of day that determines the four hour window when the
+                    structure will randomly exit its reinforcement periods and
+                    become vulnerable to attack against its armor and/or hull.
+                    The structure will become vulnerable at a random time that
+                    is +/- 2 hours centered on the value of this property
                   format: int32
                   maximum: 23
                   minimum: 0
                   title: get_corporations_corporation_id_structures_reinforce_hour
                   type: integer
                 reinforce_weekday:
-                  description: The day of the week when the structure exits its final reinforcement period and becomes vulnerable to attack against its hull. Monday is 0 and Sunday is 6
+                  description: The day of the week when the structure exits its final
+                    reinforcement period and becomes vulnerable to attack
+                    against its hull. Monday is 0 and Sunday is 6
                   format: int32
                   maximum: 6
                   minimum: 0
@@ -23854,28 +23634,20 @@ paths:
         - Station_Manager
   "/corporations/{corporation_id}/titles/":
     get:
-      description: >
+      description: |
         Returns a corporation's titles
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/titles/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/titles/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/titles/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_titles
       parameters:
@@ -24659,7 +24431,10 @@ paths:
   "/corporations/{corporation_id}/wallets/{division}/journal/":
     get:
       description: >-
-        Retrieve the given corporation's wallet journal for the given division going 30 days back. Note: any journal records having to do with the new navigation structures from the release of Onslaught will not show up in this version. To see those, use the v4 version of this route.
+        Retrieve the given corporation's wallet journal for the given
+        division going 30 days back. Note: any journal records having to do with
+        the new navigation structures from the release of Onslaught will not
+        show up in this version. To see those, use the v4 version of this route.
 
 
         ---
@@ -24714,7 +24489,8 @@ paths:
                 context_id: 2112625428
                 context_id_type: character_id
                 date: 2016-10-24T09:00:00Z
-                description: CCP Zoetrope transferred cash from C C P's corporate account to CCP SnowedIn's account
+                description: CCP Zoetrope transferred cash from C C P's corporate account to CCP
+                  SnowedIn's account
                 first_party_id: 109299958
                 id: 1234567890
                 ref_type: corporation_account_withdrawal
@@ -24743,7 +24519,9 @@ paths:
               description: 200 ok object
               properties:
                 amount:
-                  description: The amount of ISK given or taken from the wallet as a result of the given transaction. Positive when ISK is deposited into the wallet and negative when ISK is withdrawn
+                  description: The amount of ISK given or taken from the wallet as a result of the
+                    given transaction. Positive when ISK is deposited into the
+                    wallet and negative when ISK is withdrawn
                   format: double
                   title: get_corporations_corporation_id_wallets_division_journal_amount
                   type: number
@@ -24753,7 +24531,10 @@ paths:
                   title: get_corporations_corporation_id_wallets_division_journal_balance
                   type: number
                 context_id:
-                  description: An ID that gives extra context to the particular transaction. Because of legacy reasons the context is completely different per ref_type and means different things. It is also possible to not have a context_id
+                  description: An ID that gives extra context to the particular transaction.
+                    Because of legacy reasons the context is completely
+                    different per ref_type and means different things. It is
+                    also possible to not have a context_id
                   format: int64
                   title: get_corporations_corporation_id_wallets_division_journal_context_id
                   type: integer
@@ -24784,7 +24565,12 @@ paths:
                   title: get_corporations_corporation_id_wallets_division_journal_description
                   type: string
                 first_party_id:
-                  description: The id of the first party involved in the transaction. This attribute has no consistency and is different or non existant for particular ref_types. The description attribute will help make sense of what this attribute means. For more info about the given ID it can be dropped into the /universe/names/ ESI route to determine its type and name
+                  description: The id of the first party involved in the transaction. This
+                    attribute has no consistency and is different or non
+                    existant for particular ref_types. The description attribute
+                    will help make sense of what this attribute means. For more
+                    info about the given ID it can be dropped into the
+                    /universe/names/ ESI route to determine its type and name
                   format: int32
                   title: get_corporations_corporation_id_wallets_division_journal_first_party_id
                   type: integer
@@ -24794,11 +24580,18 @@ paths:
                   title: get_corporations_corporation_id_wallets_division_journal_id
                   type: integer
                 reason:
-                  description: The user stated reason for the transaction. Only applies to some ref_types
+                  description: The user stated reason for the transaction. Only applies to some
+                    ref_types
                   title: get_corporations_corporation_id_wallets_division_journal_reason
                   type: string
                 ref_type:
-                  description: '"The transaction type for the given. transaction. Different transaction types will populate different attributes. Note: If you have an existing XML API application that is using ref_types, you will need to know which string ESI ref_type maps to which integer. You can look at the following file to see string->int mappings: https://github.com/ccpgames/eve-glue/blob/master/eve_glue/wallet_journal_ref.py"'
+                  description: '"The transaction type for the given. transaction. Different
+                    transaction types will populate different attributes. Note:
+                    If you have an existing XML API application that is using
+                    ref_types, you will need to know which string ESI ref_type
+                    maps to which integer. You can look at the following file to
+                    see string->int mappings:
+                    https://github.com/ccpgames/eve-glue/blob/master/eve_glue/wallet_journal_ref.py"'
                   enum:
                     - acceleration_gate_fee
                     - advertisement_listing_fee
@@ -24920,7 +24713,12 @@ paths:
                   title: get_corporations_corporation_id_wallets_division_journal_ref_type
                   type: string
                 second_party_id:
-                  description: The id of the second party involved in the transaction. This attribute has no consistency and is different or non existant for particular ref_types. The description attribute will help make sense of what this attribute means. For more info about the given ID it can be dropped into the /universe/names/ ESI route to determine its type and name
+                  description: The id of the second party involved in the transaction. This
+                    attribute has no consistency and is different or non
+                    existant for particular ref_types. The description attribute
+                    will help make sense of what this attribute means. For more
+                    info about the given ID it can be dropped into the
+                    /universe/names/ ESI route to determine its type and name
                   format: int32
                   title: get_corporations_corporation_id_wallets_division_journal_second_party_id
                   type: integer
@@ -24930,7 +24728,8 @@ paths:
                   title: get_corporations_corporation_id_wallets_division_journal_tax
                   type: number
                 tax_receiver_id:
-                  description: The corporation ID receiving any tax paid. Only applies to tax related transactions
+                  description: The corporation ID receiving any tax paid. Only applies to tax
+                    related transactions
                   format: int32
                   title: get_corporations_corporation_id_wallets_division_journal_tax_receiver_id
                   type: integer
@@ -25058,7 +24857,8 @@ paths:
           name: division
           required: true
           type: integer
-        - description: Only show journal entries happened before the transaction referenced by this id
+        - description: Only show journal entries happened before the transaction
+            referenced by this id
           format: int64
           in: query
           name: from_id
@@ -25237,23 +25037,17 @@ paths:
         - Junior_Accountant
   /dogma/attributes/:
     get:
-      description: >-
+      description: |-
         Get a list of dogma attribute ids
 
-
         ---
-
         Alternate route: `/dev/dogma/attributes/`
-
 
         Alternate route: `/legacy/dogma/attributes/`
 
-
         Alternate route: `/v1/dogma/attributes/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_dogma_attributes
       parameters:
@@ -25349,23 +25143,17 @@ paths:
         - v1
   "/dogma/attributes/{attribute_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a dogma attribute
 
-
         ---
-
         Alternate route: `/dev/dogma/attributes/{attribute_id}/`
-
 
         Alternate route: `/legacy/dogma/attributes/{attribute_id}/`
 
-
         Alternate route: `/v1/dogma/attributes/{attribute_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_dogma_attributes_attribute_id
       parameters:
@@ -25529,7 +25317,8 @@ paths:
   "/dogma/dynamic/items/{type_id}/{item_id}/":
     get:
       description: >-
-        Returns info about a dynamic item resulting from mutation with a mutaplasmid.
+        Returns info about a dynamic item resulting from mutation with a
+        mutaplasmid.
 
 
         ---
@@ -25648,7 +25437,8 @@ paths:
                 title: get_dogma_dynamic_items_type_id_item_id_mutator_type_id
                 type: integer
               source_type_id:
-                description: The type ID of the source item the mutator was applied to create the dynamic item.
+                description: The type ID of the source item the mutator was applied to create
+                  the dynamic item.
                 format: int32
                 title: get_dogma_dynamic_items_type_id_item_id_source_type_id
                 type: integer
@@ -25733,23 +25523,17 @@ paths:
         - v1
   /dogma/effects/:
     get:
-      description: >-
+      description: |-
         Get a list of dogma effect ids
 
-
         ---
-
         Alternate route: `/dev/dogma/effects/`
-
 
         Alternate route: `/legacy/dogma/effects/`
 
-
         Alternate route: `/v1/dogma/effects/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_dogma_effects
       parameters:
@@ -25845,20 +25629,15 @@ paths:
         - v1
   "/dogma/effects/{effect_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a dogma effect
 
-
         ---
-
         Alternate route: `/dev/dogma/effects/{effect_id}/`
-
 
         Alternate route: `/v2/dogma/effects/{effect_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_dogma_effects_effect_id
       parameters:
@@ -26106,23 +25885,17 @@ paths:
         - v2
   "/fleets/{fleet_id}/":
     get:
-      description: >-
+      description: |-
         Return details about a fleet
 
-
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/`
-
 
         Alternate route: `/legacy/fleets/{fleet_id}/`
 
-
         Alternate route: `/v1/fleets/{fleet_id}/`
 
-
         ---
-
         This route is cached for up to 5 seconds
       operationId: get_fleets_fleet_id
       parameters:
@@ -26273,17 +26046,13 @@ paths:
         - v1
       x-cached-seconds: 5
     put:
-      description: >
+      description: |
         Update settings about a fleet
 
-
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/`
 
-
         Alternate route: `/legacy/fleets/{fleet_id}/`
-
 
         Alternate route: `/v1/fleets/{fleet_id}/`
       operationId: put_fleets_fleet_id
@@ -26391,23 +26160,17 @@ paths:
         - v1
   "/fleets/{fleet_id}/members/":
     get:
-      description: >-
+      description: |-
         Return information about fleet members
 
-
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/members/`
-
 
         Alternate route: `/legacy/fleets/{fleet_id}/members/`
 
-
         Alternate route: `/v1/fleets/{fleet_id}/members/`
 
-
         ---
-
         This route is cached for up to 5 seconds
       operationId: get_fleets_fleet_id_members
       parameters:
@@ -26499,7 +26262,8 @@ paths:
                   title: get_fleets_fleet_id_members_solar_system_id
                   type: integer
                 squad_id:
-                  description: ID of the squad the member is in. If not applicable, will be set to -1
+                  description: ID of the squad the member is in. If not applicable, will be set to
+                    -1
                   format: int64
                   title: get_fleets_fleet_id_members_squad_id
                   type: integer
@@ -26513,7 +26277,8 @@ paths:
                   title: get_fleets_fleet_id_members_takes_fleet_warp
                   type: boolean
                 wing_id:
-                  description: ID of the wing the member is in. If not applicable, will be set to -1
+                  description: ID of the wing the member is in. If not applicable, will be set to
+                    -1
                   format: int64
                   title: get_fleets_fleet_id_members_wing_id
                   type: integer
@@ -26623,7 +26388,8 @@ paths:
       x-cached-seconds: 5
     post:
       description: >
-        Invite a character into the fleet. If a character has a CSPA charge set it is not possible to invite them to the fleet using ESI
+        Invite a character into the fleet. If a character has a CSPA charge
+        set it is not possible to invite them to the fleet using ESI
 
 
         ---
@@ -26657,7 +26423,16 @@ paths:
                 title: post_fleets_fleet_id_members_character_id
                 type: integer
               role:
-                description: If a character is invited with the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified. If a character is invited with the `wing_commander` role, only `wing_id` should be specified. If a character is invited with the `squad_commander` role, both `wing_id` and `squad_id` should be specified. If a character is invited with the `squad_member` role, `wing_id` and `squad_id` should either both be specified or not specified at all. If they aren’t specified, the invited character will join any squad with available positions.
+                description: If a character is invited with the `fleet_commander` role, neither
+                  `wing_id` or `squad_id` should be specified. If a character is
+                  invited with the `wing_commander` role, only `wing_id` should
+                  be specified. If a character is invited with the
+                  `squad_commander` role, both `wing_id` and `squad_id` should
+                  be specified. If a character is invited with the
+                  `squad_member` role, `wing_id` and `squad_id` should either
+                  both be specified or not specified at all. If they aren’t
+                  specified, the invited character will join any squad with
+                  available positions.
                 enum:
                   - fleet_commander
                   - wing_commander
@@ -26775,17 +26550,13 @@ paths:
         - v1
   "/fleets/{fleet_id}/members/{member_id}/":
     delete:
-      description: >
+      description: |
         Kick a fleet member
 
-
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/members/{member_id}/`
 
-
         Alternate route: `/legacy/fleets/{fleet_id}/members/{member_id}/`
-
 
         Alternate route: `/v1/fleets/{fleet_id}/members/{member_id}/`
       operationId: delete_fleets_fleet_id_members_member_id
@@ -26881,17 +26652,13 @@ paths:
         - legacy
         - v1
     put:
-      description: >
+      description: |
         Move a fleet member around
 
-
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/members/{member_id}/`
 
-
         Alternate route: `/legacy/fleets/{fleet_id}/members/{member_id}/`
-
 
         Alternate route: `/v1/fleets/{fleet_id}/members/{member_id}/`
       operationId: put_fleets_fleet_id_members_member_id
@@ -26917,7 +26684,13 @@ paths:
             description: movement object
             properties:
               role:
-                description: If a character is moved to the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified. If a character is moved to the `wing_commander` role, only `wing_id` should be specified. If a character is moved to the `squad_commander` role, both `wing_id` and `squad_id` should be specified. If a character is moved to the `squad_member` role, both `wing_id` and `squad_id` should be specified.
+                description: If a character is moved to the `fleet_commander` role, neither
+                  `wing_id` or `squad_id` should be specified. If a character is
+                  moved to the `wing_commander` role, only `wing_id` should be
+                  specified. If a character is moved to the `squad_commander`
+                  role, both `wing_id` and `squad_id` should be specified. If a
+                  character is moved to the `squad_member` role, both `wing_id`
+                  and `squad_id` should be specified.
                 enum:
                   - fleet_commander
                   - wing_commander
@@ -27034,17 +26807,13 @@ paths:
         - v1
   "/fleets/{fleet_id}/squads/{squad_id}/":
     delete:
-      description: >
+      description: |
         Delete a fleet squad, only empty squads can be deleted
 
-
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/squads/{squad_id}/`
 
-
         Alternate route: `/legacy/fleets/{fleet_id}/squads/{squad_id}/`
-
 
         Alternate route: `/v1/fleets/{fleet_id}/squads/{squad_id}/`
       operationId: delete_fleets_fleet_id_squads_squad_id
@@ -27140,17 +26909,13 @@ paths:
         - legacy
         - v1
     put:
-      description: >
+      description: |
         Rename a fleet squad
 
-
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/squads/{squad_id}/`
 
-
         Alternate route: `/legacy/fleets/{fleet_id}/squads/{squad_id}/`
-
 
         Alternate route: `/v1/fleets/{fleet_id}/squads/{squad_id}/`
       operationId: put_fleets_fleet_id_squads_squad_id
@@ -27263,23 +27028,17 @@ paths:
         - v1
   "/fleets/{fleet_id}/wings/":
     get:
-      description: >-
+      description: |-
         Return information about wings in a fleet
 
-
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/wings/`
-
 
         Alternate route: `/legacy/fleets/{fleet_id}/wings/`
 
-
         Alternate route: `/v1/fleets/{fleet_id}/wings/`
 
-
         ---
-
         This route is cached for up to 5 seconds
       operationId: get_fleets_fleet_id_wings
       parameters:
@@ -27462,17 +27221,13 @@ paths:
         - v1
       x-cached-seconds: 5
     post:
-      description: >
+      description: |
         Create a new wing in a fleet
 
-
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/wings/`
 
-
         Alternate route: `/legacy/fleets/{fleet_id}/wings/`
-
 
         Alternate route: `/v1/fleets/{fleet_id}/wings/`
       operationId: post_fleets_fleet_id_wings
@@ -27579,7 +27334,8 @@ paths:
   "/fleets/{fleet_id}/wings/{wing_id}/":
     delete:
       description: >
-        Delete a fleet wing, only empty wings can be deleted. The wing may contain squads, but the squads must be empty
+        Delete a fleet wing, only empty wings can be deleted. The wing may
+        contain squads, but the squads must be empty
 
 
         ---
@@ -27684,17 +27440,13 @@ paths:
         - legacy
         - v1
     put:
-      description: >
+      description: |
         Rename a fleet wing
 
-
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/wings/{wing_id}/`
 
-
         Alternate route: `/legacy/fleets/{fleet_id}/wings/{wing_id}/`
-
 
         Alternate route: `/v1/fleets/{fleet_id}/wings/{wing_id}/`
       operationId: put_fleets_fleet_id_wings_wing_id
@@ -27807,17 +27559,13 @@ paths:
         - v1
   "/fleets/{fleet_id}/wings/{wing_id}/squads/":
     post:
-      description: >
+      description: |
         Create a new squad in a fleet
 
-
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/wings/{wing_id}/squads/`
 
-
         Alternate route: `/legacy/fleets/{fleet_id}/wings/{wing_id}/squads/`
-
 
         Alternate route: `/v1/fleets/{fleet_id}/wings/{wing_id}/squads/`
       operationId: post_fleets_fleet_id_wings_wing_id_squads
@@ -27930,7 +27678,8 @@ paths:
   /fw/leaderboards/:
     get:
       description: >-
-        Top 4 leaderboard of factions for kills and victory points separated by total, last week and yesterday
+        Top 4 leaderboard of factions for kills and victory points
+        separated by total, last week and yesterday
 
 
         ---
@@ -27953,7 +27702,8 @@ paths:
         - $ref: "#/parameters/If-None-Match"
       responses:
         "200":
-          description: Corporation leaderboard of kills and victory points within faction warfare
+          description: Corporation leaderboard of kills and victory points within faction
+            warfare
           examples:
             application/json:
               kills:
@@ -28005,10 +27755,13 @@ paths:
             description: 200 ok object
             properties:
               kills:
-                description: Top 4 rankings of factions by number of kills from yesterday, last week and in total
+                description: Top 4 rankings of factions by number of kills from yesterday, last
+                  week and in total
                 properties:
                   active_total:
-                    description: Top 4 ranking of factions active in faction warfare by total kills. A faction is considered "active" if they have participated in faction warfare in the past 14 days
+                    description: Top 4 ranking of factions active in faction warfare by total kills.
+                      A faction is considered "active" if they have participated
+                      in faction warfare in the past 14 days
                     items:
                       description: active_total object
                       properties:
@@ -28074,10 +27827,13 @@ paths:
                 title: get_fw_leaderboards_kills
                 type: object
               victory_points:
-                description: Top 4 rankings of factions by victory points from yesterday, last week and in total
+                description: Top 4 rankings of factions by victory points from yesterday, last
+                  week and in total
                 properties:
                   active_total:
-                    description: Top 4 ranking of factions active in faction warfare by total victory points. A faction is considered "active" if they have participated in faction warfare in the past 14 days
+                    description: Top 4 ranking of factions active in faction warfare by total
+                      victory points. A faction is considered "active" if they
+                      have participated in faction warfare in the past 14 days
                     items:
                       description: active_total object
                       properties:
@@ -28207,7 +27963,8 @@ paths:
   /fw/leaderboards/characters/:
     get:
       description: >-
-        Top 100 leaderboard of pilots for kills and victory points separated by total, last week and yesterday
+        Top 100 leaderboard of pilots for kills and victory points
+        separated by total, last week and yesterday
 
 
         ---
@@ -28230,7 +27987,8 @@ paths:
         - $ref: "#/parameters/If-None-Match"
       responses:
         "200":
-          description: Character leaderboard of kills and victory points within faction warfare
+          description: Character leaderboard of kills and victory points within faction
+            warfare
           examples:
             application/json:
               kills:
@@ -28282,10 +28040,13 @@ paths:
             description: 200 ok object
             properties:
               kills:
-                description: Top 100 rankings of pilots by number of kills from yesterday, last week and in total
+                description: Top 100 rankings of pilots by number of kills from yesterday, last
+                  week and in total
                 properties:
                   active_total:
-                    description: Top 100 ranking of pilots active in faction warfare by total kills. A pilot is considered "active" if they have participated in faction warfare in the past 14 days
+                    description: Top 100 ranking of pilots active in faction warfare by total kills.
+                      A pilot is considered "active" if they have participated
+                      in faction warfare in the past 14 days
                     items:
                       description: active_total object
                       properties:
@@ -28351,10 +28112,13 @@ paths:
                 title: get_fw_leaderboards_characters_kills
                 type: object
               victory_points:
-                description: Top 100 rankings of pilots by victory points from yesterday, last week and in total
+                description: Top 100 rankings of pilots by victory points from yesterday, last
+                  week and in total
                 properties:
                   active_total:
-                    description: Top 100 ranking of pilots active in faction warfare by total victory points. A pilot is considered "active" if they have participated in faction warfare in the past 14 days
+                    description: Top 100 ranking of pilots active in faction warfare by total
+                      victory points. A pilot is considered "active" if they
+                      have participated in faction warfare in the past 14 days
                     items:
                       description: active_total object
                       properties:
@@ -28484,7 +28248,8 @@ paths:
   /fw/leaderboards/corporations/:
     get:
       description: >-
-        Top 10 leaderboard of corporations for kills and victory points separated by total, last week and yesterday
+        Top 10 leaderboard of corporations for kills and victory points
+        separated by total, last week and yesterday
 
 
         ---
@@ -28507,7 +28272,8 @@ paths:
         - $ref: "#/parameters/If-None-Match"
       responses:
         "200":
-          description: Corporation leaderboard of kills and victory points within faction warfare
+          description: Corporation leaderboard of kills and victory points within faction
+            warfare
           examples:
             application/json:
               kills:
@@ -28559,10 +28325,13 @@ paths:
             description: 200 ok object
             properties:
               kills:
-                description: Top 10 rankings of corporations by number of kills from yesterday, last week and in total
+                description: Top 10 rankings of corporations by number of kills from yesterday,
+                  last week and in total
                 properties:
                   active_total:
-                    description: Top 10 ranking of corporations active in faction warfare by total kills. A corporation is considered "active" if they have participated in faction warfare in the past 14 days
+                    description: Top 10 ranking of corporations active in faction warfare by total
+                      kills. A corporation is considered "active" if they have
+                      participated in faction warfare in the past 14 days
                     items:
                       description: active_total object
                       properties:
@@ -28628,10 +28397,14 @@ paths:
                 title: get_fw_leaderboards_corporations_kills
                 type: object
               victory_points:
-                description: Top 10 rankings of corporations by victory points from yesterday, last week and in total
+                description: Top 10 rankings of corporations by victory points from yesterday,
+                  last week and in total
                 properties:
                   active_total:
-                    description: Top 10 ranking of corporations active in faction warfare by total victory points. A corporation is considered "active" if they have participated in faction warfare in the past 14 days
+                    description: Top 10 ranking of corporations active in faction warfare by total
+                      victory points. A corporation is considered "active" if
+                      they have participated in faction warfare in the past 14
+                      days
                     items:
                       description: active_total object
                       properties:
@@ -28760,23 +28533,17 @@ paths:
         - v1
   /fw/stats/:
     get:
-      description: >-
+      description: |-
         Statistical overviews of factions involved in faction warfare
 
-
         ---
-
         Alternate route: `/dev/fw/stats/`
-
 
         Alternate route: `/legacy/fw/stats/`
 
-
         Alternate route: `/v1/fw/stats/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_fw_stats
       parameters:
@@ -28830,7 +28597,8 @@ paths:
                       title: get_fw_stats_last_week
                       type: integer
                     total:
-                      description: Total number of kills against enemy factions since faction warfare began
+                      description: Total number of kills against enemy factions since faction warfare
+                        began
                       format: int32
                       title: get_fw_stats_total
                       type: integer
@@ -28949,20 +28717,15 @@ paths:
         - v1
   /fw/systems/:
     get:
-      description: >-
+      description: |-
         An overview of the current ownership of faction warfare solar systems
 
-
         ---
-
         Alternate route: `/dev/fw/systems/`
-
 
         Alternate route: `/v2/fw/systems/`
 
-
         ---
-
         This route is cached for up to 1800 seconds
       operationId: get_fw_systems
       parameters:
@@ -29102,23 +28865,17 @@ paths:
       x-cached-seconds: 1800
   /fw/wars/:
     get:
-      description: >-
+      description: |-
         Data about which NPC factions are at war
 
-
         ---
-
         Alternate route: `/dev/fw/wars/`
-
 
         Alternate route: `/legacy/fw/wars/`
 
-
         Alternate route: `/v1/fw/wars/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_fw_wars
       parameters:
@@ -29226,23 +28983,17 @@ paths:
         - v1
   /incursions/:
     get:
-      description: >-
+      description: |-
         Return a list of current incursions
 
-
         ---
-
         Alternate route: `/dev/incursions/`
-
 
         Alternate route: `/legacy/incursions/`
 
-
         Alternate route: `/v1/incursions/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_incursions
       parameters:
@@ -29301,7 +29052,8 @@ paths:
                   title: get_incursions_has_boss
                   type: boolean
                 infested_solar_systems:
-                  description: A list of infested solar system ids that are a part of this incursion
+                  description: A list of infested solar system ids that are a part of this
+                    incursion
                   items:
                     description: infested_solar_system integer
                     format: int32
@@ -29406,23 +29158,17 @@ paths:
       x-cached-seconds: 300
   /industry/facilities/:
     get:
-      description: >-
+      description: |-
         Return a list of industry facilities
 
-
         ---
-
         Alternate route: `/dev/industry/facilities/`
-
 
         Alternate route: `/legacy/industry/facilities/`
 
-
         Alternate route: `/v1/industry/facilities/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_industry_facilities
       parameters:
@@ -29558,23 +29304,17 @@ paths:
       x-cached-seconds: 3600
   /industry/systems/:
     get:
-      description: >-
+      description: |-
         Return cost indices for solar systems
 
-
         ---
-
         Alternate route: `/dev/industry/systems/`
-
 
         Alternate route: `/legacy/industry/systems/`
 
-
         Alternate route: `/v1/industry/systems/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_industry_systems
       parameters:
@@ -29713,23 +29453,17 @@ paths:
       x-cached-seconds: 3600
   /insurance/prices/:
     get:
-      description: >-
+      description: |-
         Return available insurance levels for all ship types
 
-
         ---
-
         Alternate route: `/dev/insurance/prices/`
-
 
         Alternate route: `/legacy/insurance/prices/`
 
-
         Alternate route: `/v1/insurance/prices/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_insurance_prices
       parameters:
@@ -29876,23 +29610,17 @@ paths:
       x-cached-seconds: 3600
   "/killmails/{killmail_id}/{killmail_hash}/":
     get:
-      description: >-
+      description: |-
         Return a single killmail from its ID and hash
 
-
         ---
-
         Alternate route: `/dev/killmails/{killmail_id}/{killmail_hash}/`
-
 
         Alternate route: `/legacy/killmails/{killmail_id}/{killmail_hash}/`
 
-
         Alternate route: `/v1/killmails/{killmail_id}/{killmail_hash}/`
 
-
         ---
-
         This route is cached for up to 1209600 seconds
       operationId: get_killmails_killmail_id_killmail_hash
       parameters:
@@ -29988,24 +29716,24 @@ paths:
                       title: get_killmails_killmail_id_killmail_hash_faction_id
                       type: integer
                     final_blow:
-                      description: >
+                      description: |
                         Was the attacker the one to achieve the final blow
                       title: get_killmails_killmail_id_killmail_hash_final_blow
                       type: boolean
                     security_status:
-                      description: >
+                      description: |
                         Security status for the attacker
                       format: float
                       title: get_killmails_killmail_id_killmail_hash_security_status
                       type: number
                     ship_type_id:
-                      description: >
+                      description: |
                         What ship was the attacker flying
                       format: int32
                       title: get_killmails_killmail_id_killmail_hash_ship_type_id
                       type: integer
                     weapon_type_id:
-                      description: >
+                      description: |
                         What weapon was used by the attacker for the kill
                       format: int32
                       title: get_killmails_killmail_id_killmail_hash_weapon_type_id
@@ -30025,7 +29753,7 @@ paths:
                 title: get_killmails_killmail_id_killmail_hash_killmail_id
                 type: integer
               killmail_time:
-                description: >
+                description: |
                   Time that the victim was killed and the killmail generated
                 format: date-time
                 title: get_killmails_killmail_id_killmail_hash_killmail_time
@@ -30036,7 +29764,7 @@ paths:
                 title: get_killmails_killmail_id_killmail_hash_moon_id
                 type: integer
               solar_system_id:
-                description: >
+                description: |
                   Solar system that the kill took place in
                 format: int32
                 title: get_killmails_killmail_id_killmail_hash_solar_system_id
@@ -30060,7 +29788,7 @@ paths:
                     title: get_killmails_killmail_id_killmail_hash_victim_corporation_id
                     type: integer
                   damage_taken:
-                    description: >
+                    description: |
                       How much total damage was taken by the victim
                     format: int32
                     title: get_killmails_killmail_id_killmail_hash_damage_taken
@@ -30076,7 +29804,7 @@ paths:
                       description: item object
                       properties:
                         flag:
-                          description: >
+                          description: |
                             Flag for the location of the item
                           format: int32
                           title: get_killmails_killmail_id_killmail_hash_flag
@@ -30126,13 +29854,13 @@ paths:
                           title: get_killmails_killmail_id_killmail_hash_item_items
                           type: array
                         quantity_destroyed:
-                          description: >
+                          description: |
                             How many of the item were destroyed if any
                           format: int64
                           title: get_killmails_killmail_id_killmail_hash_quantity_destroyed
                           type: integer
                         quantity_dropped:
-                          description: >
+                          description: |
                             How many of the item were dropped if any
                           format: int64
                           title: get_killmails_killmail_id_killmail_hash_quantity_dropped
@@ -30177,7 +29905,7 @@ paths:
                     title: get_killmails_killmail_id_killmail_hash_position
                     type: object
                   ship_type_id:
-                    description: >
+                    description: |
                       The ship that the victim was piloting and was destroyed
                     format: int32
                     title: get_killmails_killmail_id_killmail_hash_victim_ship_type_id
@@ -30275,23 +30003,17 @@ paths:
       x-cached-seconds: 1209600
   "/loyalty/stores/{corporation_id}/offers/":
     get:
-      description: >-
+      description: |-
         Return a list of offers from a specific corporation's loyalty store
 
-
         ---
-
         Alternate route: `/dev/loyalty/stores/{corporation_id}/offers/`
-
 
         Alternate route: `/legacy/loyalty/stores/{corporation_id}/offers/`
 
-
         Alternate route: `/v1/loyalty/stores/{corporation_id}/offers/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_loyalty_stores_corporation_id_offers
       parameters:
@@ -30474,23 +30196,17 @@ paths:
         - v1
   /markets/groups/:
     get:
-      description: >-
+      description: |-
         Get a list of item groups
 
-
         ---
-
         Alternate route: `/dev/markets/groups/`
-
 
         Alternate route: `/legacy/markets/groups/`
 
-
         Alternate route: `/v1/markets/groups/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_markets_groups
       parameters:
@@ -30586,23 +30302,17 @@ paths:
         - v1
   "/markets/groups/{market_group_id}/":
     get:
-      description: >-
+      description: |-
         Get information on an item group
 
-
         ---
-
         Alternate route: `/dev/markets/groups/{market_group_id}/`
-
 
         Alternate route: `/legacy/markets/groups/{market_group_id}/`
 
-
         Alternate route: `/v1/markets/groups/{market_group_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_markets_groups_market_group_id
       parameters:
@@ -30762,23 +30472,17 @@ paths:
         - v1
   /markets/prices/:
     get:
-      description: >-
+      description: |-
         Return a list of prices
 
-
         ---
-
         Alternate route: `/dev/markets/prices/`
-
 
         Alternate route: `/legacy/markets/prices/`
 
-
         Alternate route: `/v1/markets/prices/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_markets_prices
       parameters:
@@ -30892,23 +30596,17 @@ paths:
       x-cached-seconds: 3600
   "/markets/structures/{structure_id}/":
     get:
-      description: >-
+      description: |-
         Return all orders in a structure
 
-
         ---
-
         Alternate route: `/dev/markets/structures/{structure_id}/`
-
 
         Alternate route: `/legacy/markets/structures/{structure_id}/`
 
-
         Alternate route: `/v1/markets/structures/{structure_id}/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_markets_structures_structure_id
       parameters:
@@ -31122,7 +30820,8 @@ paths:
   "/markets/{region_id}/history/":
     get:
       description: >-
-        Return a list of historical market statistics for the specified type in a region
+        Return a list of historical market statistics for the specified
+        type in a region
 
 
         ---
@@ -31327,30 +31026,25 @@ paths:
         - v1
   "/markets/{region_id}/orders/":
     get:
-      description: >-
+      description: |-
         Return a list of orders in a region
 
-
         ---
-
         Alternate route: `/dev/markets/{region_id}/orders/`
-
 
         Alternate route: `/legacy/markets/{region_id}/orders/`
 
-
         Alternate route: `/v1/markets/{region_id}/orders/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_markets_region_id_orders
       parameters:
         - $ref: "#/parameters/datasource"
         - $ref: "#/parameters/If-None-Match"
         - default: all
-          description: Filter buy/sell orders, return all orders by default. If you query without type_id, we always return both buy and sell orders
+          description: Filter buy/sell orders, return all orders by default. If you query
+            without type_id, we always return both buy and sell orders
           enum:
             - buy
             - sell
@@ -31590,7 +31284,8 @@ paths:
   "/markets/{region_id}/types/":
     get:
       description: >-
-        Return a list of type IDs that have active orders in the region, for efficient market indexing.
+        Return a list of type IDs that have active orders in the region,
+        for efficient market indexing.
 
 
         ---
@@ -31714,23 +31409,17 @@ paths:
       x-cached-seconds: 600
   /opportunities/groups/:
     get:
-      description: >-
+      description: |-
         Return a list of opportunities groups
 
-
         ---
-
         Alternate route: `/dev/opportunities/groups/`
-
 
         Alternate route: `/legacy/opportunities/groups/`
 
-
         Alternate route: `/v1/opportunities/groups/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_opportunities_groups
       parameters:
@@ -31827,23 +31516,17 @@ paths:
         - v1
   "/opportunities/groups/{group_id}/":
     get:
-      description: >-
+      description: |-
         Return information of an opportunities group
 
-
         ---
-
         Alternate route: `/dev/opportunities/groups/{group_id}/`
-
 
         Alternate route: `/legacy/opportunities/groups/{group_id}/`
 
-
         Alternate route: `/v1/opportunities/groups/{group_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_opportunities_groups_group_id
       parameters:
@@ -31897,7 +31580,8 @@ paths:
             description: 200 ok object
             properties:
               connected_groups:
-                description: The groups that are connected to this group on the opportunities map
+                description: The groups that are connected to this group on the opportunities
+                  map
                 items:
                   description: connected_group integer
                   format: int32
@@ -32001,23 +31685,17 @@ paths:
         - v1
   /opportunities/tasks/:
     get:
-      description: >-
+      description: |-
         Return a list of opportunities tasks
 
-
         ---
-
         Alternate route: `/dev/opportunities/tasks/`
-
 
         Alternate route: `/legacy/opportunities/tasks/`
 
-
         Alternate route: `/v1/opportunities/tasks/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_opportunities_tasks
       parameters:
@@ -32114,23 +31792,17 @@ paths:
         - v1
   "/opportunities/tasks/{task_id}/":
     get:
-      description: >-
+      description: |-
         Return information of an opportunities task
 
-
         ---
-
         Alternate route: `/dev/opportunities/tasks/{task_id}/`
-
 
         Alternate route: `/legacy/opportunities/tasks/{task_id}/`
 
-
         Alternate route: `/v1/opportunities/tasks/{task_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_opportunities_tasks_task_id
       parameters:
@@ -32250,23 +31922,17 @@ paths:
         - v1
   "/route/{origin}/{destination}/":
     get:
-      description: >-
+      description: |-
         Get the systems between origin and destination
 
-
         ---
-
         Alternate route: `/dev/route/{origin}/{destination}/`
-
 
         Alternate route: `/legacy/route/{origin}/{destination}/`
 
-
         Alternate route: `/v1/route/{origin}/{destination}/`
 
-
         ---
-
         This route is cached for up to 86400 seconds
       operationId: get_route_origin_destination
       parameters:
@@ -32423,20 +32089,15 @@ paths:
       x-cached-seconds: 86400
   /search/:
     get:
-      description: >-
+      description: |-
         Search for entities that match a given sub-string.
 
-
         ---
-
         Alternate route: `/dev/search/`
-
 
         Alternate route: `/v2/search/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_search
       parameters:
@@ -32678,23 +32339,17 @@ paths:
       x-cached-seconds: 3600
   /sovereignty/campaigns/:
     get:
-      description: >-
+      description: |-
         Shows sovereignty data for campaigns.
 
-
         ---
-
         Alternate route: `/dev/sovereignty/campaigns/`
-
 
         Alternate route: `/legacy/sovereignty/campaigns/`
 
-
         Alternate route: `/v1/sovereignty/campaigns/`
 
-
         ---
-
         This route is cached for up to 5 seconds
       operationId: get_sovereignty_campaigns
       parameters:
@@ -32744,13 +32399,13 @@ paths:
                   title: get_sovereignty_campaigns_campaign_id
                   type: integer
                 constellation_id:
-                  description: >
+                  description: |
                     The constellation in which the campaign will take place.
                   format: int32
                   title: get_sovereignty_campaigns_constellation_id
                   type: integer
                 defender_id:
-                  description: >
+                  description: |
                     Defending alliance, only present in Defense Events
                   format: int32
                   title: get_sovereignty_campaigns_defender_id
@@ -32763,7 +32418,9 @@ paths:
                   type: number
                 event_type:
                   description: >
-                    Type of event this campaign is for. tcu_defense, ihub_defense and station_defense are referred to as "Defense Events", station_freeport as "Freeport Events".
+                    Type of event this campaign is for. tcu_defense, ihub_defense and
+                    station_defense are referred to as "Defense Events",
+                    station_freeport as "Freeport Events".
                   enum:
                     - tcu_defense
                     - ihub_defense
@@ -32773,7 +32430,8 @@ paths:
                   type: string
                 participants:
                   description: >
-                    Alliance participating and their respective scores, only present in Freeport Events.
+                    Alliance participating and their respective scores, only present in
+                    Freeport Events.
                   items:
                     description: participant object
                     properties:
@@ -32796,19 +32454,19 @@ paths:
                   title: get_sovereignty_campaigns_participants
                   type: array
                 solar_system_id:
-                  description: >
+                  description: |
                     The solar system the structure is located in.
                   format: int32
                   title: get_sovereignty_campaigns_solar_system_id
                   type: integer
                 start_time:
-                  description: >
+                  description: |
                     Time the event is scheduled to start.
                   format: date-time
                   title: get_sovereignty_campaigns_start_time
                   type: string
                 structure_id:
-                  description: >
+                  description: |
                     The structure item ID that is related to this campaign.
                   format: int64
                   title: get_sovereignty_campaigns_structure_id
@@ -32885,23 +32543,17 @@ paths:
       x-cached-seconds: 5
   /sovereignty/map/:
     get:
-      description: >-
+      description: |-
         Shows sovereignty information for solar systems
 
-
         ---
-
         Alternate route: `/dev/sovereignty/map/`
-
 
         Alternate route: `/legacy/sovereignty/map/`
 
-
         Alternate route: `/v1/sovereignty/map/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_sovereignty_map
       parameters:
@@ -33019,23 +32671,17 @@ paths:
       x-cached-seconds: 3600
   /sovereignty/structures/:
     get:
-      description: >-
+      description: |-
         Shows sovereignty data for structures.
 
-
         ---
-
         Alternate route: `/dev/sovereignty/structures/`
-
 
         Alternate route: `/legacy/sovereignty/structures/`
 
-
         Alternate route: `/v1/sovereignty/structures/`
 
-
         ---
-
         This route is cached for up to 120 seconds
       operationId: get_sovereignty_structures
       parameters:
@@ -33072,13 +32718,13 @@ paths:
               description: 200 ok object
               properties:
                 alliance_id:
-                  description: >
+                  description: |
                     The alliance that owns the structure.
                   format: int32
                   title: get_sovereignty_structures_alliance_id
                   type: integer
                 solar_system_id:
-                  description: >
+                  description: |
                     Solar system in which the structure is located.
                   format: int32
                   title: get_sovereignty_structures_solar_system_id
@@ -33089,26 +32735,40 @@ paths:
                   title: get_sovereignty_structures_structure_id
                   type: integer
                 structure_type_id:
-                  description: >
+                  description: |
                     A reference to the type of structure this is.
                   format: int32
                   title: get_sovereignty_structures_structure_type_id
                   type: integer
                 vulnerability_occupancy_level:
                   description: >
-                    The occupancy level for the next or current vulnerability window. This takes into account all development indexes and capital system bonuses. Also known as Activity Defense Multiplier from in the client. It increases the time that attackers must spend using their entosis links on the structure.
+                    The occupancy level for the next or current vulnerability window.
+                    This takes into account all development indexes and capital
+                    system bonuses. Also known as Activity Defense Multiplier
+                    from in the client. It increases the time that attackers
+                    must spend using their entosis links on the structure.
                   format: float
                   title: get_sovereignty_structures_vulnerability_occupancy_level
                   type: number
                 vulnerable_end_time:
                   description: >
-                    The time at which the next or current vulnerability window ends. At the end of a vulnerability window the next window is recalculated and locked in along with the vulnerabilityOccupancyLevel. If the structure is not in 100% entosis control of the defender, it will go in to 'overtime' and stay vulnerable for as long as that situation persists. Only once the defenders have 100% entosis control and has the vulnerableEndTime passed does the vulnerability interval expire and a new one is calculated.
+                    The time at which the next or current vulnerability window ends. At
+                    the end of a vulnerability window the next window is
+                    recalculated and locked in along with the
+                    vulnerabilityOccupancyLevel. If the structure is not in 100%
+                    entosis control of the defender, it will go in to 'overtime'
+                    and stay vulnerable for as long as that situation persists.
+                    Only once the defenders have 100% entosis control and has
+                    the vulnerableEndTime passed does the vulnerability interval
+                    expire and a new one is calculated.
                   format: date-time
                   title: get_sovereignty_structures_vulnerable_end_time
                   type: string
                 vulnerable_start_time:
                   description: >
-                    The next time at which the structure will become vulnerable. Or the start time of the current window if current time is between this and vulnerableEndTime.
+                    The next time at which the structure will become vulnerable. Or the
+                    start time of the current window if current time is between
+                    this and vulnerableEndTime.
                   format: date-time
                   title: get_sovereignty_structures_vulnerable_start_time
                   type: string
@@ -33182,23 +32842,17 @@ paths:
       x-cached-seconds: 120
   /status/:
     get:
-      description: >-
+      description: |-
         EVE Server status
 
-
         ---
-
         Alternate route: `/dev/status/`
-
 
         Alternate route: `/legacy/status/`
 
-
         Alternate route: `/v1/status/`
 
-
         ---
-
         This route is cached for up to 30 seconds
       operationId: get_status
       parameters:
@@ -33311,20 +32965,18 @@ paths:
       x-cached-seconds: 30
   /ui/autopilot/waypoint/:
     post:
-      description: >
+      description: |
         Set a solar system as autopilot waypoint
 
-
         ---
-
         Alternate route: `/dev/ui/autopilot/waypoint/`
-
 
         Alternate route: `/v2/ui/autopilot/waypoint/`
       operationId: post_ui_autopilot_waypoint
       parameters:
         - default: false
-          description: Whether this solar system should be added to the beginning of all waypoints
+          description: Whether this solar system should be added to the beginning of all
+            waypoints
           in: query
           name: add_to_beginning
           required: true
@@ -33336,7 +32988,8 @@ paths:
           required: true
           type: boolean
         - $ref: "#/parameters/datasource"
-        - description: The destination to travel to, can be solar system, station or structure's id
+        - description: The destination to travel to, can be solar system, station or
+            structure's id
           format: int64
           in: query
           name: destination_id
@@ -33406,17 +33059,13 @@ paths:
         - v2
   /ui/openwindow/contract/:
     post:
-      description: >
+      description: |
         Open the contract window inside the client
 
-
         ---
-
         Alternate route: `/dev/ui/openwindow/contract/`
 
-
         Alternate route: `/legacy/ui/openwindow/contract/`
-
 
         Alternate route: `/v1/ui/openwindow/contract/`
       operationId: post_ui_openwindow_contract
@@ -33494,7 +33143,8 @@ paths:
   /ui/openwindow/information/:
     post:
       description: >
-        Open the information window for a character, corporation or alliance inside the client
+        Open the information window for a character, corporation or
+        alliance inside the client
 
 
         ---
@@ -33580,17 +33230,13 @@ paths:
         - v1
   /ui/openwindow/marketdetails/:
     post:
-      description: >
+      description: |
         Open the market details window for a specific typeID inside the client
 
-
         ---
-
         Alternate route: `/dev/ui/openwindow/marketdetails/`
 
-
         Alternate route: `/legacy/ui/openwindow/marketdetails/`
-
 
         Alternate route: `/v1/ui/openwindow/marketdetails/`
       operationId: post_ui_openwindow_marketdetails
@@ -33668,7 +33314,8 @@ paths:
   /ui/openwindow/newmail/:
     post:
       description: >
-        Open the New Mail window, according to settings from the request if applicable
+        Open the New Mail window, according to settings from the request if
+        applicable
 
 
         ---
@@ -33717,7 +33364,10 @@ paths:
                 title: post_ui_openwindow_newmail_to_corp_or_alliance_id
                 type: integer
               to_mailing_list_id:
-                description: Corporations, alliances and mailing lists are all types of mailing groups. You may only send to one mailing group, at a time, so you may fill out either this field or the to_corp_or_alliance_ids field
+                description: Corporations, alliances and mailing lists are all types of mailing
+                  groups. You may only send to one mailing group, at a time, so
+                  you may fill out either this field or the
+                  to_corp_or_alliance_ids field
                 format: int32
                 title: post_ui_openwindow_newmail_to_mailing_list_id
                 type: integer
@@ -33806,23 +33456,17 @@ paths:
         - v1
   /universe/ancestries/:
     get:
-      description: >-
+      description: |-
         Get all character ancestries
 
-
         ---
-
         Alternate route: `/dev/universe/ancestries/`
-
 
         Alternate route: `/legacy/universe/ancestries/`
 
-
         Alternate route: `/v1/universe/ancestries/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_ancestries
       parameters:
@@ -33964,23 +33608,17 @@ paths:
         - v1
   "/universe/asteroid_belts/{asteroid_belt_id}/":
     get:
-      description: >-
+      description: |-
         Get information on an asteroid belt
 
-
         ---
-
         Alternate route: `/dev/universe/asteroid_belts/{asteroid_belt_id}/`
-
 
         Alternate route: `/legacy/universe/asteroid_belts/{asteroid_belt_id}/`
 
-
         Alternate route: `/v1/universe/asteroid_belts/{asteroid_belt_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_asteroid_belts_asteroid_belt_id
       parameters:
@@ -34131,23 +33769,17 @@ paths:
         - v1
   /universe/bloodlines/:
     get:
-      description: >-
+      description: |-
         Get a list of bloodlines
 
-
         ---
-
         Alternate route: `/dev/universe/bloodlines/`
-
 
         Alternate route: `/legacy/universe/bloodlines/`
 
-
         Alternate route: `/v1/universe/bloodlines/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_bloodlines
       parameters:
@@ -34328,23 +33960,17 @@ paths:
         - v1
   /universe/categories/:
     get:
-      description: >-
+      description: |-
         Get a list of item categories
 
-
         ---
-
         Alternate route: `/dev/universe/categories/`
-
 
         Alternate route: `/legacy/universe/categories/`
 
-
         Alternate route: `/v1/universe/categories/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_categories
       parameters:
@@ -34440,23 +34066,17 @@ paths:
         - v1
   "/universe/categories/{category_id}/":
     get:
-      description: >-
+      description: |-
         Get information of an item category
 
-
         ---
-
         Alternate route: `/dev/universe/categories/{category_id}/`
-
 
         Alternate route: `/legacy/universe/categories/{category_id}/`
 
-
         Alternate route: `/v1/universe/categories/{category_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_categories_category_id
       parameters:
@@ -34611,23 +34231,17 @@ paths:
         - v1
   /universe/constellations/:
     get:
-      description: >-
+      description: |-
         Get a list of constellations
 
-
         ---
-
         Alternate route: `/dev/universe/constellations/`
-
 
         Alternate route: `/legacy/universe/constellations/`
 
-
         Alternate route: `/v1/universe/constellations/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_constellations
       parameters:
@@ -34722,23 +34336,17 @@ paths:
         - v1
   "/universe/constellations/{constellation_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a constellation
 
-
         ---
-
         Alternate route: `/dev/universe/constellations/{constellation_id}/`
-
 
         Alternate route: `/legacy/universe/constellations/{constellation_id}/`
 
-
         Alternate route: `/v1/universe/constellations/{constellation_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_constellations_constellation_id
       parameters:
@@ -34922,20 +34530,15 @@ paths:
         - v1
   /universe/factions/:
     get:
-      description: >-
+      description: |-
         Get a list of factions
 
-
         ---
-
         Alternate route: `/dev/universe/factions/`
-
 
         Alternate route: `/v2/universe/factions/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_factions
       parameters:
@@ -35103,23 +34706,17 @@ paths:
         - v2
   /universe/graphics/:
     get:
-      description: >-
+      description: |-
         Get a list of graphics
 
-
         ---
-
         Alternate route: `/dev/universe/graphics/`
-
 
         Alternate route: `/legacy/universe/graphics/`
 
-
         Alternate route: `/v1/universe/graphics/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_graphics
       parameters:
@@ -35214,23 +34811,17 @@ paths:
         - v1
   "/universe/graphics/{graphic_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a graphic
 
-
         ---
-
         Alternate route: `/dev/universe/graphics/{graphic_id}/`
-
 
         Alternate route: `/legacy/universe/graphics/{graphic_id}/`
 
-
         Alternate route: `/v1/universe/graphics/{graphic_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_graphics_graphic_id
       parameters:
@@ -35375,23 +34966,17 @@ paths:
         - v1
   /universe/groups/:
     get:
-      description: >-
+      description: |-
         Get a list of item groups
 
-
         ---
-
         Alternate route: `/dev/universe/groups/`
-
 
         Alternate route: `/legacy/universe/groups/`
 
-
         Alternate route: `/v1/universe/groups/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_groups
       parameters:
@@ -35493,23 +35078,17 @@ paths:
         - v1
   "/universe/groups/{group_id}/":
     get:
-      description: >-
+      description: |-
         Get information on an item group
 
-
         ---
-
         Alternate route: `/dev/universe/groups/{group_id}/`
-
 
         Alternate route: `/legacy/universe/groups/{group_id}/`
 
-
         Alternate route: `/v1/universe/groups/{group_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_groups_group_id
       parameters:
@@ -35672,7 +35251,10 @@ paths:
   /universe/ids/:
     post:
       description: >
-        Resolve a set of names to IDs in the following categories: agents, alliances, characters, constellations, corporations factions, inventory_types, regions, stations, and systems. Only exact matches will be returned. All names searched for are cached for 12 hours
+        Resolve a set of names to IDs in the following categories: agents,
+        alliances, characters, constellations, corporations factions,
+        inventory_types, regions, stations, and systems. Only exact matches will
+        be returned. All names searched for are cached for 12 hours
 
 
         ---
@@ -35710,7 +35292,9 @@ paths:
             uniqueItems: true
       responses:
         "200":
-          description: List of id/name associations for a set of names divided by category. Any name passed in that did not have a match will be ommitted
+          description: List of id/name associations for a set of names divided by
+            category. Any name passed in that did not have a match will be
+            ommitted
           examples:
             application/json:
               characters:
@@ -35971,23 +35555,17 @@ paths:
         - v1
   "/universe/moons/{moon_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a moon
 
-
         ---
-
         Alternate route: `/dev/universe/moons/{moon_id}/`
-
 
         Alternate route: `/legacy/universe/moons/{moon_id}/`
 
-
         Alternate route: `/v1/universe/moons/{moon_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_moons_moon_id
       parameters:
@@ -36146,7 +35724,9 @@ paths:
   /universe/names/:
     post:
       description: >
-        Resolve a set of IDs to names and categories. Supported ID's for resolving are: Characters, Corporations, Alliances, Stations, Solar Systems, Constellations, Regions, Types
+        Resolve a set of IDs to names and categories. Supported ID's for
+        resolving are: Characters, Corporations, Alliances, Stations, Solar
+        Systems, Constellations, Regions, Types
 
 
         ---
@@ -36179,7 +35759,8 @@ paths:
             uniqueItems: true
       responses:
         "200":
-          description: List of id/name associations for a set of ID's. All ID's must resolve to a name, or nothing will be returned
+          description: List of id/name associations for a set of ID's. All ID's must
+            resolve to a name, or nothing will be returned
           examples:
             application/json:
               - category: character
@@ -36281,23 +35862,17 @@ paths:
         - v2
   "/universe/planets/{planet_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a planet
 
-
         ---
-
         Alternate route: `/dev/universe/planets/{planet_id}/`
-
 
         Alternate route: `/legacy/universe/planets/{planet_id}/`
 
-
         Alternate route: `/v1/universe/planets/{planet_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_planets_planet_id
       parameters:
@@ -36462,23 +36037,17 @@ paths:
         - v1
   /universe/races/:
     get:
-      description: >-
+      description: |-
         Get a list of character races
 
-
         ---
-
         Alternate route: `/dev/universe/races/`
-
 
         Alternate route: `/legacy/universe/races/`
 
-
         Alternate route: `/v1/universe/races/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_races
       parameters:
@@ -36610,23 +36179,17 @@ paths:
         - v1
   /universe/regions/:
     get:
-      description: >-
+      description: |-
         Get a list of regions
 
-
         ---
-
         Alternate route: `/dev/universe/regions/`
-
 
         Alternate route: `/legacy/universe/regions/`
 
-
         Alternate route: `/v1/universe/regions/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_regions
       parameters:
@@ -36721,23 +36284,17 @@ paths:
         - v1
   "/universe/regions/{region_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a region
 
-
         ---
-
         Alternate route: `/dev/universe/regions/{region_id}/`
-
 
         Alternate route: `/legacy/universe/regions/{region_id}/`
 
-
         Alternate route: `/v1/universe/regions/{region_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_regions_region_id
       parameters:
@@ -36890,23 +36447,17 @@ paths:
         - v1
   "/universe/schematics/{schematic_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a planetary factory schematic
 
-
         ---
-
         Alternate route: `/dev/universe/schematics/{schematic_id}/`
-
 
         Alternate route: `/legacy/universe/schematics/{schematic_id}/`
 
-
         Alternate route: `/v1/universe/schematics/{schematic_id}/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_universe_schematics_schematic_id
       parameters:
@@ -37029,23 +36580,17 @@ paths:
       x-cached-seconds: 3600
   "/universe/stargates/{stargate_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a stargate
 
-
         ---
-
         Alternate route: `/dev/universe/stargates/{stargate_id}/`
-
 
         Alternate route: `/legacy/universe/stargates/{stargate_id}/`
 
-
         Alternate route: `/v1/universe/stargates/{stargate_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_stargates_stargate_id
       parameters:
@@ -37232,23 +36777,17 @@ paths:
         - v1
   "/universe/stars/{star_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a star
 
-
         ---
-
         Alternate route: `/dev/universe/stars/{star_id}/`
-
 
         Alternate route: `/legacy/universe/stars/{star_id}/`
 
-
         Alternate route: `/v1/universe/stars/{star_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_stars_star_id
       parameters:
@@ -37487,20 +37026,15 @@ paths:
         - v1
   "/universe/stations/{station_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a station
 
-
         ---
-
         Alternate route: `/dev/universe/stations/{station_id}/`
-
 
         Alternate route: `/v2/universe/stations/{station_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_stations_station_id
       parameters:
@@ -37755,23 +37289,17 @@ paths:
         - v2
   /universe/structures/:
     get:
-      description: >-
+      description: |-
         List all public structures
 
-
         ---
-
         Alternate route: `/dev/universe/structures/`
-
 
         Alternate route: `/legacy/universe/structures/`
 
-
         Alternate route: `/v1/universe/structures/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_universe_structures
       parameters:
@@ -37878,7 +37406,8 @@ paths:
   "/universe/structures/{structure_id}/":
     get:
       description: >-
-        Returns information on requested structure if you are on the ACL. Otherwise, returns "Forbidden" for all inputs.
+        Returns information on requested structure if you are on the ACL.
+        Otherwise, returns "Forbidden" for all inputs.
 
 
         ---
@@ -37938,7 +37467,8 @@ paths:
                 type: integer
               position:
                 description: >
-                  Coordinates of the structure in Cartesian space relative to the Sun, in metres.
+                  Coordinates of the structure in Cartesian space relative to the
+                  Sun, in metres.
                 properties:
                   x:
                     description: x number
@@ -38068,7 +37598,9 @@ paths:
   /universe/system_jumps/:
     get:
       description: >-
-        Get the number of jumps in solar systems within the last hour ending at the timestamp of the Last-Modified header, excluding wormhole space. Only systems with jumps will be listed
+        Get the number of jumps in solar systems within the last hour
+        ending at the timestamp of the Last-Modified header, excluding wormhole
+        space. Only systems with jumps will be listed
 
 
         ---
@@ -38193,7 +37725,9 @@ paths:
   /universe/system_kills/:
     get:
       description: >-
-        Get the number of ship, pod and NPC kills per solar system within the last hour ending at the timestamp of the Last-Modified header, excluding wormhole space. Only systems with kills will be listed
+        Get the number of ship, pod and NPC kills per solar system within
+        the last hour ending at the timestamp of the Last-Modified header,
+        excluding wormhole space. Only systems with kills will be listed
 
 
         ---
@@ -38327,23 +37861,17 @@ paths:
       x-cached-seconds: 3600
   /universe/systems/:
     get:
-      description: >-
+      description: |-
         Get a list of solar systems
 
-
         ---
-
         Alternate route: `/dev/universe/systems/`
-
 
         Alternate route: `/legacy/universe/systems/`
 
-
         Alternate route: `/v1/universe/systems/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_systems
       parameters:
@@ -38438,20 +37966,15 @@ paths:
         - v1
   "/universe/systems/{system_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a solar system.
 
-
         ---
-
         Alternate route: `/dev/universe/systems/{system_id}/`
-
 
         Alternate route: `/v4/universe/systems/{system_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_systems_system_id
       parameters:
@@ -38702,23 +38225,17 @@ paths:
         - v4
   /universe/types/:
     get:
-      description: >-
+      description: |-
         Get a list of type ids
 
-
         ---
-
         Alternate route: `/dev/universe/types/`
-
 
         Alternate route: `/legacy/universe/types/`
 
-
         Alternate route: `/v1/universe/types/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_types
       parameters:
@@ -38820,20 +38337,15 @@ paths:
         - v1
   "/universe/types/{type_id}/":
     get:
-      description: >-
+      description: |-
         Get information on a type
 
-
         ---
-
         Alternate route: `/dev/universe/types/{type_id}/`
-
 
         Alternate route: `/v3/universe/types/{type_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_universe_types_type_id
       parameters:
@@ -39075,23 +38587,17 @@ paths:
         - v3
   /wars/:
     get:
-      description: >-
+      description: |-
         Return a list of wars
 
-
         ---
-
         Alternate route: `/dev/wars/`
-
 
         Alternate route: `/legacy/wars/`
 
-
         Alternate route: `/v1/wars/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_wars
       parameters:
@@ -39194,23 +38700,17 @@ paths:
       x-cached-seconds: 3600
   "/wars/{war_id}/":
     get:
-      description: >-
+      description: |-
         Return details about a war
 
-
         ---
-
         Alternate route: `/dev/wars/{war_id}/`
-
 
         Alternate route: `/legacy/wars/{war_id}/`
 
-
         Alternate route: `/v1/wars/{war_id}/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_wars_war_id
       parameters:
@@ -39257,7 +38757,8 @@ paths:
             description: 200 ok object
             properties:
               aggressor:
-                description: The aggressor corporation or alliance that declared this war, only contains either corporation_id or alliance_id
+                description: The aggressor corporation or alliance that declared this war, only
+                  contains either corporation_id or alliance_id
                 properties:
                   alliance_id:
                     description: Alliance ID if and only if the aggressor is an alliance
@@ -39285,7 +38786,8 @@ paths:
                 title: get_wars_war_id_aggressor
                 type: object
               allies:
-                description: allied corporations or alliances, each object contains either corporation_id or alliance_id
+                description: allied corporations or alliances, each object contains either
+                  corporation_id or alliance_id
                 items:
                   description: ally object
                   properties:
@@ -39310,7 +38812,8 @@ paths:
                 title: get_wars_war_id_declared
                 type: string
               defender:
-                description: The defending corporation or alliance that declared this war, only contains either corporation_id or alliance_id
+                description: The defending corporation or alliance that declared this war, only
+                  contains either corporation_id or alliance_id
                 properties:
                   alliance_id:
                     description: Alliance ID if and only if the defender is an alliance
@@ -39356,7 +38859,8 @@ paths:
                 title: get_wars_war_id_open_for_allies
                 type: boolean
               retracted:
-                description: Time the war was retracted but both sides could still shoot each other
+                description: Time the war was retracted but both sides could still shoot each
+                  other
                 format: date-time
                 title: get_wars_war_id_retracted
                 type: string
@@ -39448,23 +38952,17 @@ paths:
       x-cached-seconds: 3600
   "/wars/{war_id}/killmails/":
     get:
-      description: >-
+      description: |-
         Return a list of kills related to a war
 
-
         ---
-
         Alternate route: `/dev/wars/{war_id}/killmails/`
-
 
         Alternate route: `/legacy/wars/{war_id}/killmails/`
 
-
         Alternate route: `/v1/wars/{war_id}/killmails/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_wars_war_id_killmails
       parameters:

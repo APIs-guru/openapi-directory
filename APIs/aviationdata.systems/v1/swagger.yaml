@@ -27,7 +27,8 @@ securityDefinitions:
 paths:
   "/v1/airport/autocomplete/{airport_name}":
     get:
-      description: "Required parameters: airport_name, airport_service_type. Optional parameter: country code (ISO 3166-1)."
+      description: "Required parameters: airport_name, airport_service_type. Optional
+        parameter: country code (ISO 3166-1)."
       operationId: AutoCompleteAirportName_AirportNameSearch
       parameters:
         - description: "Required: The airports name"
@@ -44,7 +45,8 @@ paths:
           name: airport_service_type
           required: true
           type: string
-        - description: "Optional: Country code (ISO 3166-1). This can be found via /countries"
+        - description: "Optional: Country code (ISO 3166-1). This can be found via
+            /countries"
           in: query
           name: optional_country_code
           required: false
@@ -53,7 +55,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/AirportsAPI.Controllers.AutoCompleteAirportNameController.Response"
+            $ref: "#/definitions/AirportsAPI.Controllers.AutoCompleteAirportNameController.\
+              Response"
       summary: Autocomplete airport names. Returns a maximum of 10 airport names.
       tags:
         - AutoCompleteAirportName
@@ -95,7 +98,8 @@ paths:
         - AirportDetails
   "/v1/airport/nearest/{result_count}/{latitude}/{longitude}":
     get:
-      description: "Required parameters: result_count, latitude, longitude, airport_service_type"
+      description: "Required parameters: result_count, latitude, longitude,
+        airport_service_type"
       operationId: NearestAirports_NearestAirportList
       parameters:
         - description: "Required: Number of airports to return. Min: 1 Max: 20"
@@ -147,8 +151,10 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/AirportsAPI.Controllers.CountryAirportListController.AirportListResponse"
-      summary: Country airports. Returns a list of airports for a country code(ISO 3166-1 alpha-2 code)
+            $ref: "#/definitions/AirportsAPI.Controllers.CountryAirportListController.Airpo\
+              rtListResponse"
+      summary: Country airports. Returns a list of airports for a country code(ISO
+        3166-1 alpha-2 code)
       tags:
         - CountryAirportList
   /v1/country_list:
@@ -158,7 +164,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/AirportsAPI.Controllers.CountryListController.CountryListResponse"
+            $ref: "#/definitions/AirportsAPI.Controllers.CountryListController.CountryListR\
+              esponse"
       summary: Country list. Returns a list of countries where airport data is available
       tags:
         - CountryList

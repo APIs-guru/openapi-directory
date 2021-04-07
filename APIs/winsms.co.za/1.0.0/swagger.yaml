@@ -57,14 +57,17 @@ paths:
           schema:
             properties:
               creditBalance:
-                description: The current remaining credit balance for the account. Contains a single decimal place
+                description: The current remaining credit balance for the account. Contains a
+                  single decimal place
                 format: double
                 type: number
               statusCode:
-                description: The http status code returned - reflected in the body for convenience
+                description: The http status code returned - reflected in the body for
+                  convenience
                 type: integer
               timeStamp:
-                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                description: The date/time the request was processed, in the format
+                  YYYYMMDDhhmmssSSS
                 type: string
               version:
                 description: The current version of the API of the endpoint that was called
@@ -75,7 +78,8 @@ paths:
           description: Unauthorized
           examples:
             application/json:
-              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION' request header to your WinSMS API Key
+              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION'
+                request header to your WinSMS API Key
               statusCode: 401
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -85,7 +89,8 @@ paths:
           description: Not found
           examples:
             application/json:
-              errorMessage: The resource requested does not exist. Please verify the path, spelling, and capitalisation
+              errorMessage: The resource requested does not exist. Please verify the path,
+                spelling, and capitalisation
               statusCode: 404
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -137,7 +142,8 @@ paths:
         Account numbers should be submitted as integers. Do not add the 'W' prefix.
       operationId: transferCredits
       parameters:
-        - description: The details of the credit transfer. Sender account number, recipient account number, and number of credits to transfer.
+        - description: The details of the credit transfer. Sender account number,
+            recipient account number, and number of credits to transfer.
           in: body
           name: creditTransferDetails
           required: true
@@ -148,15 +154,18 @@ paths:
               transferQuantity: 100
             properties:
               receivingAccountNumber:
-                description: The WinSMS account number of the account to which credits will be added.
+                description: The WinSMS account number of the account to which credits will be
+                  added.
                 example: 10345
                 type: integer
               sendingAccountNumber:
-                description: The WinSMS account number of the account from which credits will be deducted.
+                description: The WinSMS account number of the account from which credits will be
+                  deducted.
                 example: 7564
                 type: integer
               transferQuantity:
-                description: The number of credits to transfer from the sending account to the receiving account.
+                description: The number of credits to transfer from the sending account to the
+                  receiving account.
                 example: 100
                 type: integer
             required:
@@ -178,13 +187,17 @@ paths:
               version: "1.0"
             properties:
               statusCode:
-                description: The http status code returned - reflected in the body for convenience
+                description: The http status code returned - reflected in the body for
+                  convenience
                 type: integer
               timeStamp:
-                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                description: The date/time the request was processed, in the format
+                  YYYYMMDDhhmmssSSS
                 type: string
               transferSuccessful:
-                description: A boolean value indictating whether the credits were successfully transfered from the sending account into the receiving account.
+                description: A boolean value indictating whether the credits were successfully
+                  transfered from the sending account into the receiving
+                  account.
                 type: boolean
               version:
                 description: The current version of the API of the endpoint that was called
@@ -205,7 +218,8 @@ paths:
           description: Unauthorized
           examples:
             application/json:
-              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION' request header to your WinSMS API Key
+              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION'
+                request header to your WinSMS API Key
               statusCode: 401
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -215,7 +229,8 @@ paths:
           description: Not found
           examples:
             application/json:
-              errorMessage: The resource requested does not exist. Please verify the path, spelling, and capitalisation
+              errorMessage: The resource requested does not exist. Please verify the path,
+                spelling, and capitalisation
               statusCode: 404
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -235,7 +250,8 @@ paths:
           description: Payload Too Large
           examples:
             application/json:
-              errorMessage: "Request POST data is: 205kb. The maximum POST size allowed is 200kb."
+              errorMessage: "Request POST data is: 205kb. The maximum POST size allowed is
+                200kb."
               statusCode: 413
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -245,7 +261,8 @@ paths:
           description: Unsupported Media Type
           examples:
             application/json:
-              errorMessage: Request content-type should be set to 'application/json', not 'text/plain'.
+              errorMessage: Request content-type should be set to 'application/json', not
+                'text/plain'.
               statusCode: 415
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -277,7 +294,8 @@ paths:
   /shortcode/incoming:
     get:
       description: >
-        ***Only available to users with a [WinSMS Short/Long Code](https://support.winsms.co.za/winsms-long-short-code-system/).***
+        ***Only available to users with a [WinSMS Short/Long
+        Code](https://support.winsms.co.za/winsms-long-short-code-system/).***
 
         Get a list of all incoming short/long code messages received by the account.
 
@@ -287,7 +305,8 @@ paths:
       parameters:
         - default: 0
           description: >
-            ***Optional*** - The number of items to skip before starting to return results. Default 0. Minimum 0.
+            ***Optional*** - The number of items to skip before starting to
+            return results. Default 0. Minimum 0.
           in: query
           minimum: 0
           name: offset
@@ -295,7 +314,8 @@ paths:
           type: integer
         - default: 100
           description: >
-            ***Optional*** - The number of items to return. Default 100. Minimum 1. Maximum 1000.
+            ***Optional*** - The number of items to return. Default 100.
+            Minimum 1. Maximum 1000.
           in: query
           maximum: 1000
           minimum: 1
@@ -327,19 +347,27 @@ paths:
             properties:
               resultsLimit:
                 description: >
-                  The number of items returned in the results. This is the value specified in the ***limit*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 100.
+                  The number of items returned in the results. This is the value
+                  specified in the ***limit*** parameter sent to the endpoint.
+                  If the parameter was not specified, this defaults to 100.
                 type: integer
               resultsOffset:
                 description: >
-                  The number of items skipped before the results were returned. This is the value specified in the ***offset*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 0.
+                  The number of items skipped before the results were returned. This
+                  is the value specified in the ***offset*** parameter sent to
+                  the endpoint. If the parameter was not specified, this
+                  defaults to 0.
                 type: integer
               resultsTotalAvailable:
                 description: >
-                  The total number of results available for retrieval. The ***offset*** and ***limit*** properties specify which of the total available results have been returned.
+                  The total number of results available for retrieval. The
+                  ***offset*** and ***limit*** properties specify which of the
+                  total available results have been returned.
                 type: integer
               shortcodeMessages:
                 description: >
-                  An array of ***shortcodeMessage*** objects containing properties of each incoming shortcode message received by WinSMS.
+                  An array of ***shortcodeMessage*** objects containing properties of
+                  each incoming shortcode message received by WinSMS.
                 items:
                   example:
                     incomingApiMessageId: 58324
@@ -356,11 +384,13 @@ paths:
                       example: Hello, I'm responding to your advert.
                       type: string
                     mobileNumber:
-                      description: The mobile number that sent the SMS message, displayed using the international E164 (without the plus) format
+                      description: The mobile number that sent the SMS message, displayed using the
+                        international E164 (without the plus) format
                       example: "27444444444"
                       type: string
                     receiveTime:
-                      description: The date and time the message was received by WinSMS, in the format YYYYMMDDHHmm.
+                      description: The date and time the message was received by WinSMS, in the format
+                        YYYYMMDDHHmm.
                       example: "201707270952"
                       type: string
                   title: shortcodeMessage
@@ -369,10 +399,12 @@ paths:
                 minItems: 1
                 type: array
               statusCode:
-                description: The http status code returned - reflected in the body for convenience
+                description: The http status code returned - reflected in the body for
+                  convenience
                 type: integer
               timeStamp:
-                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                description: The date/time the request was processed, in the format
+                  YYYYMMDDhhmmssSSS
                 type: string
               version:
                 description: The current version of the API of the endpoint that was called
@@ -383,7 +415,8 @@ paths:
           description: Unauthorized
           examples:
             application/json:
-              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION' request header to your WinSMS API Key
+              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION'
+                request header to your WinSMS API Key
               statusCode: 401
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -393,7 +426,8 @@ paths:
           description: Not found
           examples:
             application/json:
-              errorMessage: The resource requested does not exist. Please verify the path, spelling, and capitalisation
+              errorMessage: The resource requested does not exist. Please verify the path,
+                spelling, and capitalisation
               statusCode: 404
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -429,7 +463,7 @@ paths:
               version: "1.0"
           schema:
             $ref: "#/definitions/errorDetails"
-      summary: >
+      summary: |
         Get a list of incoming short/long code messages
       tags:
         - shortcode
@@ -444,7 +478,8 @@ paths:
       parameters:
         - default: 0
           description: >
-            ***Optional*** - The number of items to skip before starting to return results. Default 0. Minimum 0.
+            ***Optional*** - The number of items to skip before starting to
+            return results. Default 0. Minimum 0.
           in: query
           minimum: 0
           name: offset
@@ -452,7 +487,8 @@ paths:
           type: integer
         - default: 100
           description: >
-            ***Optional*** - The number of items to return. Default 100. Minimum 1. Maximum 1000.
+            ***Optional*** - The number of items to return. Default 100.
+            Minimum 1. Maximum 1000.
           in: query
           maximum: 1000
           minimum: 1
@@ -486,7 +522,8 @@ paths:
             properties:
               incomingMessages:
                 description: >
-                  An array of ***incomingMessage*** objects containing properties of each incoming message.
+                  An array of ***incomingMessage*** objects containing properties of
+                  each incoming message.
                 items:
                   example:
                     incomingApiMessageId: 58324
@@ -501,23 +538,26 @@ paths:
                       example: 58324
                       type: number
                     messageText:
-                      description: >
+                      description: |
                         The text of the incoming SMS message.
                       example: Hello, I'm responding to your SMS invitation
                       type: string
                     mobileNumber:
                       description: >
-                        The mobile number that sent the SMS message, displayed using the international E164 (without the plus) format
+                        The mobile number that sent the SMS message, displayed using the
+                        international E164 (without the plus) format
                       example: "27444444444"
                       type: string
                     outgoingApiMessageId:
                       description: >
-                        The API message id of the most recent message sent to the mobile number that responded.
+                        The API message id of the most recent message sent to the mobile
+                        number that responded.
                       example: 2316
                       type: number
                     receiveTime:
                       description: >
-                        The date and time the message was received by WinSMS, in the format YYYYMMDDHHmm.
+                        The date and time the message was received by WinSMS, in the format
+                        YYYYMMDDHHmm.
                       example: "201707270952"
                       type: string
                   title: incomingMessage
@@ -527,21 +567,30 @@ paths:
                 type: array
               resultsLimit:
                 description: >
-                  The number of items returned in the results. This is the value specified in the ***limit*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 100.
+                  The number of items returned in the results. This is the value
+                  specified in the ***limit*** parameter sent to the endpoint.
+                  If the parameter was not specified, this defaults to 100.
                 type: integer
               resultsOffset:
                 description: >
-                  The number of items skipped before the results were returned. This is the value specified in the ***offset*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 0.
+                  The number of items skipped before the results were returned. This
+                  is the value specified in the ***offset*** parameter sent to
+                  the endpoint. If the parameter was not specified, this
+                  defaults to 0.
                 type: integer
               resultsTotalAvailable:
                 description: >
-                  The total number of results available for retrieval. The ***offset*** and ***limit*** properties specify which of the total available results have been returned.
+                  The total number of results available for retrieval. The
+                  ***offset*** and ***limit*** properties specify which of the
+                  total available results have been returned.
                 type: integer
               statusCode:
-                description: The http status code returned - reflected in the body for convenience
+                description: The http status code returned - reflected in the body for
+                  convenience
                 type: integer
               timeStamp:
-                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                description: The date/time the request was processed, in the format
+                  YYYYMMDDhhmmssSSS
                 type: string
               version:
                 description: The current version of the API of the endpoint that was called
@@ -552,7 +601,8 @@ paths:
           description: Unauthorized
           examples:
             application/json:
-              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION' request header to your WinSMS API Key
+              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION'
+                request header to your WinSMS API Key
               statusCode: 401
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -562,7 +612,8 @@ paths:
           description: Not found
           examples:
             application/json:
-              errorMessage: The resource requested does not exist. Please verify the path, spelling, and capitalisation
+              errorMessage: The resource requested does not exist. Please verify the path,
+                spelling, and capitalisation
               statusCode: 404
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -603,7 +654,8 @@ paths:
         - sms
   /sms/incoming/optout:
     get:
-      description: Get a list of all opt-out SMS messages received by the account, as well as all manually added opt-out numbers.<br>
+      description: Get a list of all opt-out SMS messages received by the account, as
+        well as all manually added opt-out numbers.<br>
       operationId: getOptoutMessages
       produces:
         - application/json
@@ -618,7 +670,8 @@ paths:
                   mobileNumber: "27444444444"
                   receiveTime: "201707252208"
                 - incomingApiMessageId:
-                    $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                    $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipien\
+                      ts/2/apiMessageId"
                   messageText: "* MANUALLY ADDED BY USER *"
                   mobileNumber: "27555555555"
                   receiveTime: "201707270952"
@@ -628,7 +681,8 @@ paths:
             properties:
               incomingOptoutMessages:
                 description: >
-                  An array of ***incomingOptoutMessage*** objects containing properties of each opt-out message received.
+                  An array of ***incomingOptoutMessage*** objects containing
+                  properties of each opt-out message received.
                 items:
                   example:
                     incomingApiMessageId: 58324
@@ -638,32 +692,37 @@ paths:
                   properties:
                     incomingApiMessageId:
                       description: >
-                        The unique API message id assigned to this incoming opt-out message.
+                        The unique API message id assigned to this incoming opt-out
+                        message.
                       example: 58324
                       type: number
                     messageText:
-                      description: >
+                      description: |
                         The text of the opt-out SMS message.
                       example: STOP
                       type: string
                     mobileNumber:
                       description: >
-                        The mobile number that sent the opt-out SMS message, displayed using the international E164 (without the plus) format
+                        The mobile number that sent the opt-out SMS message, displayed
+                        using the international E164 (without the plus) format
                       example: "27444444444"
                       type: string
                     receiveTime:
                       description: >
-                        The date and time the message was received by WinSMS, in the format YYYYMMDDHHmm.
+                        The date and time the message was received by WinSMS, in the format
+                        YYYYMMDDHHmm.
                       example: "201707270952"
                       type: string
                   title: incomingOptoutMessage
                   type: object
                 type: array
               statusCode:
-                description: The http status code returned - reflected in the body for convenience
+                description: The http status code returned - reflected in the body for
+                  convenience
                 type: integer
               timeStamp:
-                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                description: The date/time the request was processed, in the format
+                  YYYYMMDDhhmmssSSS
                 type: string
               version:
                 description: The current version of the API of the endpoint that was called
@@ -674,7 +733,8 @@ paths:
           description: Unauthorized
           examples:
             application/json:
-              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION' request header to your WinSMS API Key
+              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION'
+                request header to your WinSMS API Key
               statusCode: 401
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -684,7 +744,8 @@ paths:
           description: Not found
           examples:
             application/json:
-              errorMessage: The resource requested does not exist. Please verify the path, spelling, and capitalisation
+              errorMessage: The resource requested does not exist. Please verify the path,
+                spelling, and capitalisation
               statusCode: 404
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -716,14 +777,16 @@ paths:
   /sms/outgoing/send:
     post:
       description: >
-        Submit 1 or more SMS messages to be sent by WinSMS. Maximum 1000 recipients per request.
+        Submit 1 or more SMS messages to be sent by WinSMS. Maximum 1000
+        recipients per request.
 
 
         The SMS message text can be a maximum of 918 characters long. If you are submitting a message longer than 160 characters, you should change the value of ***maxSegments***.
       operationId: smsSend
       parameters:
         - description: >
-            The message, recipients and delivery options of an SMS message to be sent.
+            The message, recipients and delivery options of an SMS message to
+            be sent.
           in: body
           name: newMessageDetails
           required: true
@@ -742,7 +805,9 @@ paths:
               maxSegments:
                 default: 1
                 description: >
-                  ***Optional*** - The maximum [GSM Encoded segment count]("https://support.winsms.co.za/rest/GSM") that the message is allowed to utilise.
+                  ***Optional*** - The maximum [GSM Encoded segment
+                  count]("https://support.winsms.co.za/rest/GSM") that the
+                  message is allowed to utilise.
 
 
                   This defaults to 1, allowing for a maximum GSM Encoded message length of 160 characters.
@@ -769,14 +834,17 @@ paths:
                   properties:
                     clientMessageId:
                       description: >
-                        ***Optional*** - A parameter to identify an individual SMS message recipient on your system. The clientMessageId parameter is NOT saved by the WinSMS API. 
+                        ***Optional*** - A parameter to identify an individual SMS message
+                        recipient on your system. The clientMessageId parameter
+                        is NOT saved by the WinSMS API. 
 
 
                         The value of the clientMessageId parameter is returned in the ***submittedRecipientResult*** object of the response, allowing you to match a sent message to a returned message result status.
                       example: clientId-3023
                       type: string
                     mobileNumber:
-                      description: A recipient mobile number, using the international E164 (without the plus) format.
+                      description: A recipient mobile number, using the international E164 (without
+                        the plus) format.
                       example: "27444444444"
                       type: string
                   required:
@@ -788,7 +856,9 @@ paths:
                 type: array
               scheduledTime:
                 description: >
-                  ***Optional*** - The date and time that an SMS should be delivered. If not specified, or is set for a date/time prior to the current date/time, the SMS message will be sent immediately.
+                  ***Optional*** - The date and time that an SMS should be delivered.
+                  If not specified, or is set for a date/time prior to the
+                  current date/time, the SMS message will be sent immediately.
 
 
                   If specified, this value should have the format YYYYMMDDHHmm.
@@ -819,7 +889,8 @@ paths:
                   accepted: true
                   apiMessageId: 2317
                   clientMessageId:
-                    $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                    $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipien\
+                      ts/2/apiMessageId"
                   creditCost: 1
                   mobileNumber: "27555555555"
                   newCreditBalance: 187.6
@@ -832,7 +903,8 @@ paths:
                   mobileNumber: "276666666666"
                   newCreditBalance: 187.6
                   scheduledTime:
-                    $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                    $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipien\
+                      ts/2/apiMessageId"
               statusCode: 200
               timeStamp: "20170117054658978"
               version: "1.0"
@@ -852,7 +924,10 @@ paths:
                   properties:
                     acceptError:
                       description: >-
-                        If the ***accepted*** value is **false**, this will contain the reason that delivery to the recipient was declined by the API. If the recipient was accepted, this value will be blank. Possible values-
+                        If the ***accepted*** value is **false**, this will contain the
+                        reason that delivery to the recipient was declined by
+                        the API. If the recipient was accepted, this value will
+                        be blank. Possible values-
 
                         | Value | Description |
 
@@ -879,22 +954,32 @@ paths:
                       type: string
                     accepted:
                       description: >
-                        A boolean value indicating whether the API accepted the recipient for SMS delivery. This will be **false** If you have insufficient credits or the recipient mobile number supplied is not valid.
+                        A boolean value indicating whether the API accepted the recipient
+                        for SMS delivery. This will be **false** If you have
+                        insufficient credits or the recipient mobile number
+                        supplied is not valid.
                       example: true
                       type: boolean
                     apiMessageId:
                       description: >
-                        The WinSMS Message Id assigned to the specific message recipient. This Id can be used to obtain the status of the message, and to delete the message if it was scheduled. If the API did not accept the recipient for delivery, the value will be **null**.
+                        The WinSMS Message Id assigned to the specific message recipient.
+                        This Id can be used to obtain the status of the message,
+                        and to delete the message if it was scheduled. If the
+                        API did not accept the recipient for delivery, the value
+                        will be **null**.
                       example: 2316
                       type: integer
                     clientMessageId:
                       description: >
-                        If the optional ***clientMessageId*** value was specified in the recipient object for the recipient, it will be returned here. If not, ***clientMessageId*** will be **null**.
+                        If the optional ***clientMessageId*** value was specified in the
+                        recipient object for the recipient, it will be returned
+                        here. If not, ***clientMessageId*** will be **null**.
                       example: clientId-3023
                       type: string
                     creditCost:
                       description: >
-                        The number of credits deducted from your account for the SMS to this recipient.
+                        The number of credits deducted from your account for the SMS to
+                        this recipient.
 
 
                         The credit cost is based on the destination country of the recipient and the length (number of segments) of the message.
@@ -909,18 +994,21 @@ paths:
                       type: number
                     mobileNumber:
                       description: >
-                        The mobile number specified as the ***mobileNumber*** value of the recipient object of the request.
+                        The mobile number specified as the ***mobileNumber*** value of the
+                        recipient object of the request.
                       example: "27824444444"
                       type: string
                     newCreditBalance:
                       description: >
-                        The number of WinSMS credits remaining in your account after processing this recipient.
+                        The number of WinSMS credits remaining in your account after
+                        processing this recipient.
                       example: 188.6
                       format: double
                       type: number
                     scheduledTime:
                       description: >
-                        The date and time that the message was scheduled for delivery to the recipient.
+                        The date and time that the message was scheduled for delivery to
+                        the recipient.
 
 
                         If no ***scheduledTime*** value was specified in the request, or the recipient was not accepted for delivery, this value will be **null**.
@@ -932,10 +1020,12 @@ paths:
                 minItems: 1
                 type: array
               statusCode:
-                description: The http status code returned - reflected in the body for convenience
+                description: The http status code returned - reflected in the body for
+                  convenience
                 type: integer
               timeStamp:
-                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                description: The date/time the request was processed, in the format
+                  YYYYMMDDhhmmssSSS
                 type: string
               version:
                 description: The current version of the API of the endpoint that was called
@@ -956,7 +1046,8 @@ paths:
           description: Unauthorized
           examples:
             application/json:
-              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION' request header to your WinSMS API Key
+              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION'
+                request header to your WinSMS API Key
               statusCode: 401
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -966,7 +1057,8 @@ paths:
           description: Not found
           examples:
             application/json:
-              errorMessage: The resource requested does not exist. Please verify the path, spelling, and capitalisation
+              errorMessage: The resource requested does not exist. Please verify the path,
+                spelling, and capitalisation
               statusCode: 404
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -986,7 +1078,8 @@ paths:
           description: Payload Too Large
           examples:
             application/json:
-              errorMessage: "Request POST data is: 205kb. The maximum POST size allowed is 200kb."
+              errorMessage: "Request POST data is: 205kb. The maximum POST size allowed is
+                200kb."
               statusCode: 413
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -996,7 +1089,8 @@ paths:
           description: Unsupported Media Type
           examples:
             application/json:
-              errorMessage: Request content-type should be set to 'application/json', not 'text/plain'.
+              errorMessage: Request content-type should be set to 'application/json', not
+                'text/plain'.
               statusCode: 415
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1028,14 +1122,16 @@ paths:
   /sms/outgoing/sendmulti:
     post:
       description: >
-        Submit multiple different SMS messages to be sent to multiple recipients. Maximum 1000 recipients across all messages.
+        Submit multiple different SMS messages to be sent to multiple
+        recipients. Maximum 1000 recipients across all messages.
 
 
         Each SMS message text can be a maximum of 918 characters long. If you are submitting a message longer than 160 characters, you should change the value of ***maxSegments***.
       operationId: smsSendBatch
       parameters:
         - description: >
-            The messages, recipients and delivery options of multiple SMS messages to be sent.
+            The messages, recipients and delivery options of multiple SMS
+            messages to be sent.
           in: body
           name: multiMessageDetails
           required: true
@@ -1065,7 +1161,9 @@ paths:
                     maxSegments:
                       default: 1
                       description: >
-                        ***Optional*** - The maximum [GSM Encoded segment count]("https://support.winsms.co.za/rest/GSM") that the message is allowed to utilise.
+                        ***Optional*** - The maximum [GSM Encoded segment
+                        count]("https://support.winsms.co.za/rest/GSM") that the
+                        message is allowed to utilise.
 
 
                         This defaults to 1, allowing for a maximum GSM Encoded message length of 160 characters.
@@ -1092,14 +1190,17 @@ paths:
                         properties:
                           clientMessageId:
                             description: >
-                              ***Optional*** - A parameter to identify an individual SMS message recipient on your system. The clientMessageId parameter is NOT saved by the WinSMS API. 
+                              ***Optional*** - A parameter to identify an individual SMS message
+                              recipient on your system. The clientMessageId
+                              parameter is NOT saved by the WinSMS API. 
 
 
                               The value of the clientMessageId parameter is returned in the ***submittedRecipientResult*** object of the response, allowing you to match a sent message to a returned message result status.
                             example: clientId-3023
                             type: string
                           mobileNumber:
-                            description: A recipient mobile number, using the international E164 (without the plus) format.
+                            description: A recipient mobile number, using the international E164 (without
+                              the plus) format.
                             example: "27444444444"
                             type: string
                         required:
@@ -1111,7 +1212,10 @@ paths:
                       type: array
                     scheduledTime:
                       description: >
-                        ***Optional*** - The date and time that an SMS should be delivered. If not specified, or is set for a date/time prior to the current date/time, the SMS message will be sent immediately.
+                        ***Optional*** - The date and time that an SMS should be delivered.
+                        If not specified, or is set for a date/time prior to the
+                        current date/time, the SMS message will be sent
+                        immediately.
 
 
                         If specified, this value should have the format YYYYMMDDHHmm.
@@ -1147,7 +1251,8 @@ paths:
                       accepted: true
                       apiMessageId: 2317
                       clientMessageId:
-                        $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                        $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipien\
+                          ts/2/apiMessageId"
                       creditCost: 1
                       mobileNumber: "27555555555"
                       newCreditBalance: 187.6
@@ -1155,13 +1260,15 @@ paths:
                     - acceptError: BADDEST
                       accepted: false
                       apiMessageId:
-                        $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                        $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipien\
+                          ts/2/apiMessageId"
                       clientMessageId: clientId-3024
                       creditCost: 0
                       mobileNumber: "276666666666"
                       newCreditBalance: 187.6
                       scheduledTime:
-                        $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                        $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipien\
+                          ts/2/apiMessageId"
                 - message: TelAmeriCorp flash sale - call now for details
                   recipients:
                     - acceptError: ""
@@ -1176,7 +1283,8 @@ paths:
                       accepted: true
                       apiMessageId: 2319
                       clientMessageId:
-                        $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                        $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipien\
+                          ts/2/apiMessageId"
                       creditCost: 1
                       mobileNumber: "27222222222"
                       newCreditBalance: 185.6
@@ -1190,7 +1298,7 @@ paths:
                 items:
                   properties:
                     message:
-                      description: >
+                      description: |
                         The message text that was sent.
                       type: string
                     recipients:
@@ -1208,7 +1316,10 @@ paths:
                         properties:
                           acceptError:
                             description: >
-                              If the ***accepted*** value is **false**, this will contain the reason that delivery to the recipient was declined by the API. If the recipient was accepted, this value will be blank. Possible values-
+                              If the ***accepted*** value is **false**, this will contain the
+                              reason that delivery to the recipient was declined
+                              by the API. If the recipient was accepted, this
+                              value will be blank. Possible values-
                                 | Value | Description |
                                 |-------|-------------|
                                 |INSUFFICIENT&nbsp;CREDITS | The User Account has insufficient credits to send the message |
@@ -1223,22 +1334,33 @@ paths:
                             type: string
                           accepted:
                             description: >
-                              A boolean value indicating whether the API accepted the recipient for SMS delivery. This will be **false** If you have insufficient credits or the recipient mobile number supplied is not valid.
+                              A boolean value indicating whether the API accepted the recipient
+                              for SMS delivery. This will be **false** If you
+                              have insufficient credits or the recipient mobile
+                              number supplied is not valid.
                             example: true
                             type: boolean
                           apiMessageId:
                             description: >
-                              The WinSMS Message Id assigned to the specific message recipient. This Id can be used to obtain the status of the message, and to delete the message if it was scheduled. If the API did not accept the recipient for delivery, the value will be **null**.
+                              The WinSMS Message Id assigned to the specific message recipient.
+                              This Id can be used to obtain the status of the
+                              message, and to delete the message if it was
+                              scheduled. If the API did not accept the recipient
+                              for delivery, the value will be **null**.
                             example: 2316
                             type: integer
                           clientMessageId:
                             description: >
-                              If the optional ***clientMessageId*** value was specified in the recipient object for the recipient, it will be returned here. If not, ***clientMessageId*** will be **null**.
+                              If the optional ***clientMessageId*** value was specified in the
+                              recipient object for the recipient, it will be
+                              returned here. If not, ***clientMessageId*** will
+                              be **null**.
                             example: clientId-3023
                             type: string
                           creditCost:
                             description: >
-                              The number of credits deducted from your account for the SMS to this recipient.
+                              The number of credits deducted from your account for the SMS to
+                              this recipient.
 
 
                               The credit cost is based on the destination country of the recipient and the length (number of segments) of the message.
@@ -1253,18 +1375,21 @@ paths:
                             type: number
                           mobileNumber:
                             description: >
-                              The mobile number specified as the ***mobileNumber*** value of the recipient object of the request.
+                              The mobile number specified as the ***mobileNumber*** value of the
+                              recipient object of the request.
                             example: "27824444444"
                             type: string
                           newCreditBalance:
                             description: >
-                              The number of WinSMS credits remaining in your account after processing this recipient.
+                              The number of WinSMS credits remaining in your account after
+                              processing this recipient.
                             example: 188.6
                             format: double
                             type: number
                           scheduledTime:
                             description: >
-                              The date and time that the message was scheduled for delivery to the recipient.
+                              The date and time that the message was scheduled for delivery to
+                              the recipient.
 
 
                               If no ***scheduledTime*** value was specified in the request, or the recipient was not accepted for delivery, this value will be **null**.
@@ -1279,10 +1404,12 @@ paths:
                   type: object
                 type: array
               statusCode:
-                description: The http status code returned - reflected in the body for convenience
+                description: The http status code returned - reflected in the body for
+                  convenience
                 type: integer
               timeStamp:
-                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                description: The date/time the request was processed, in the format
+                  YYYYMMDDhhmmssSSS
                 type: string
               version:
                 description: The current version of the API of the endpoint that was called
@@ -1303,7 +1430,8 @@ paths:
           description: Unauthorized
           examples:
             application/json:
-              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION' request header to your WinSMS API Key
+              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION'
+                request header to your WinSMS API Key
               statusCode: 401
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1313,7 +1441,8 @@ paths:
           description: Not found
           examples:
             application/json:
-              errorMessage: The resource requested does not exist. Please verify the path, spelling, and capitalisation
+              errorMessage: The resource requested does not exist. Please verify the path,
+                spelling, and capitalisation
               statusCode: 404
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1333,7 +1462,8 @@ paths:
           description: Payload Too Large
           examples:
             application/json:
-              errorMessage: "Request POST data is: 205kb. The maximum POST size allowed is 200kb."
+              errorMessage: "Request POST data is: 205kb. The maximum POST size allowed is
+                200kb."
               statusCode: 413
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1343,7 +1473,8 @@ paths:
           description: Unsupported Media Type
           examples:
             application/json:
-              errorMessage: Request content-type should be set to 'application/json', not 'text/plain'.
+              errorMessage: Request content-type should be set to 'application/json', not
+                'text/plain'.
               statusCode: 415
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1353,7 +1484,8 @@ paths:
           description: Unprocessable Entity
           examples:
             application/json:
-              errorMessage: There is an error in the 'recipients' array of one or more messageDetails objects.
+              errorMessage: There is an error in the 'recipients' array of one or more
+                messageDetails objects.
               statusCode: 422
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1382,7 +1514,8 @@ paths:
       operationId: smsStatus
       parameters:
         - description: >
-            An array of WinSMS API Ids received after submitting messages to the ***/sms/outgoing/send*** endpoint.
+            An array of WinSMS API Ids received after submitting messages to
+            the ***/sms/outgoing/send*** endpoint.
 
 
             A maximum of 1000 API Ids can be supplied in a single request.
@@ -1424,7 +1557,8 @@ paths:
             properties:
               messageStatuses:
                 description: >
-                  An array of ***messageStatus*** objects detailing the delivery status of each message
+                  An array of ***messageStatus*** objects detailing the delivery
+                  status of each message
                 items:
                   example:
                     apiMessageId: 2316
@@ -1440,7 +1574,8 @@ paths:
                       type: integer
                     creditCost:
                       description: >
-                        The number of credits deducted from your account for the SMS to this recipient.
+                        The number of credits deducted from your account for the SMS to
+                        this recipient.
 
 
 
@@ -1449,16 +1584,19 @@ paths:
                       format: double
                       type: number
                     mobileNumber:
-                      description: The mobile number of the recipient of the SMS message, using the international E164 (without the plus) format
+                      description: The mobile number of the recipient of the SMS message, using the
+                        international E164 (without the plus) format
                       example: "27824444444"
                       type: string
                     statusDelivered:
-                      description: A boolean value indicating whether an SMS message was successfully delivered to the recipient's mobile number
+                      description: A boolean value indicating whether an SMS message was successfully
+                        delivered to the recipient's mobile number
                       example: true
                       type: boolean
                     statusErrorCode:
                       description: >
-                        If the SMS message was successfully delivered, this value will be blank.
+                        If the SMS message was successfully delivered, this value will be
+                        blank.
 
                         If the ***statusDelivered*** value is false, this will contain a string indicating the current status of the SMS message. Possible values-
 
@@ -1479,7 +1617,8 @@ paths:
                       type: string
                     statusTime:
                       description: >
-                        The date and time of the last status update for this message, in the format YYYYMMDDHHmm.
+                        The date and time of the last status update for this message, in
+                        the format YYYYMMDDHHmm.
 
 
                         If the message was delivered (**statusDelivered = true**) then this is a final status time. If the message is still awaiting delivery, this time might change when updates are received.
@@ -1491,10 +1630,12 @@ paths:
                 minItems: 1
                 type: array
               statusCode:
-                description: The http status code returned - reflected in the body for convenience
+                description: The http status code returned - reflected in the body for
+                  convenience
                 type: integer
               timeStamp:
-                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                description: The date/time the request was processed, in the format
+                  YYYYMMDDhhmmssSSS
                 type: string
               version:
                 description: The current version of the API of the endpoint that was called
@@ -1515,7 +1656,8 @@ paths:
           description: Unauthorized
           examples:
             application/json:
-              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION' request header to your WinSMS API Key
+              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION'
+                request header to your WinSMS API Key
               statusCode: 401
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1525,7 +1667,8 @@ paths:
           description: Not found
           examples:
             application/json:
-              errorMessage: The resource requested does not exist. Please verify the path, spelling, and capitalisation
+              errorMessage: The resource requested does not exist. Please verify the path,
+                spelling, and capitalisation
               statusCode: 404
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1545,7 +1688,8 @@ paths:
           description: Payload Too Large
           examples:
             application/json:
-              errorMessage: "Request POST data is: 205kb. The maximum POST size allowed is 200kb."
+              errorMessage: "Request POST data is: 205kb. The maximum POST size allowed is
+                200kb."
               statusCode: 413
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1555,7 +1699,8 @@ paths:
           description: Unsupported Media Type
           examples:
             application/json:
-              errorMessage: Request content-type should be set to 'application/json', not 'text/plain'.
+              errorMessage: Request content-type should be set to 'application/json', not
+                'text/plain'.
               statusCode: 415
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1587,7 +1732,8 @@ paths:
   /sms/scheduled:
     get:
       description: >
-        Get a list of all scheduled SMS messages that have not yet been sent.
+        Get a list of all scheduled SMS messages that have not yet been
+        sent.
 
 
         Only the first 100 scheduled messages will be returned if no ***offset*** and ***limit*** parameters are specified.
@@ -1595,7 +1741,8 @@ paths:
       parameters:
         - default: 0
           description: >
-            ***Optional*** - The number of items to skip before starting to return results. Default 0. Minimum 0.
+            ***Optional*** - The number of items to skip before starting to
+            return results. Default 0. Minimum 0.
           in: query
           minimum: 0
           name: offset
@@ -1603,7 +1750,8 @@ paths:
           type: integer
         - default: 100
           description: >
-            ***Optional*** - The number of items to return. Default 100. Minimum 1. Maximum 1000.
+            ***Optional*** - The number of items to return. Default 100.
+            Minimum 1. Maximum 1000.
           in: query
           maximum: 1000
           minimum: 1
@@ -1637,19 +1785,27 @@ paths:
             properties:
               resultsLimit:
                 description: >
-                  The number of items returned in the results. This is the value specified in the ***limit*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 100.
+                  The number of items returned in the results. This is the value
+                  specified in the ***limit*** parameter sent to the endpoint.
+                  If the parameter was not specified, this defaults to 100.
                 type: integer
               resultsOffset:
                 description: >
-                  The number of items skipped before the results were returned. This is the value specified in the ***offset*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 0.
+                  The number of items skipped before the results were returned. This
+                  is the value specified in the ***offset*** parameter sent to
+                  the endpoint. If the parameter was not specified, this
+                  defaults to 0.
                 type: integer
               resultsTotalAvailable:
                 description: >
-                  The total number of results available for retrieval. The ***offset*** and ***limit*** properties specify which of the total available results have been returned.
+                  The total number of results available for retrieval. The
+                  ***offset*** and ***limit*** properties specify which of the
+                  total available results have been returned.
                 type: integer
               scheduledMessages:
                 description: >
-                  An array of ***scheduledMessage*** objects containing properties of each unsent scheduled message.
+                  An array of ***scheduledMessage*** objects containing properties of
+                  each unsent scheduled message.
                 items:
                   example:
                     apiMessageId: 2316
@@ -1664,7 +1820,8 @@ paths:
                       type: integer
                     creditCost:
                       description: >
-                        The number of credits deducted from your account for the SMS to this recipient.
+                        The number of credits deducted from your account for the SMS to
+                        this recipient.
 
 
                         This is the number of credits that will be refunded if you delete this scheduled message.
@@ -1672,15 +1829,18 @@ paths:
                       format: double
                       type: number
                     mobileNumber:
-                      description: The mobile number of the recipient of the SMS message, using the international E164 (without the plus) format
+                      description: The mobile number of the recipient of the SMS message, using the
+                        international E164 (without the plus) format
                       example: "27824444444"
                       type: string
                     scheduledSendTime:
-                      description: The date and time the message is scheduled to be delivered to the recipient, in the format YYYYMMDDHHmm.
+                      description: The date and time the message is scheduled to be delivered to the
+                        recipient, in the format YYYYMMDDHHmm.
                       example: "201812250930"
                       type: string
                     submitTime:
-                      description: The date and time the message was originally submitted for scheduled delivery, in the format YYYYMMDDHHmm.
+                      description: The date and time the message was originally submitted for
+                        scheduled delivery, in the format YYYYMMDDHHmm.
                       example: "201712251431"
                       type: string
                   title: scheduledMessage
@@ -1689,10 +1849,12 @@ paths:
                 minItems: 1
                 type: array
               statusCode:
-                description: The http status code returned - reflected in the body for convenience
+                description: The http status code returned - reflected in the body for
+                  convenience
                 type: integer
               timeStamp:
-                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                description: The date/time the request was processed, in the format
+                  YYYYMMDDhhmmssSSS
                 type: string
               version:
                 description: The current version of the API of the endpoint that was called
@@ -1703,7 +1865,8 @@ paths:
           description: Unauthorized
           examples:
             application/json:
-              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION' request header to your WinSMS API Key
+              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION'
+                request header to your WinSMS API Key
               statusCode: 401
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1713,7 +1876,8 @@ paths:
           description: Not found
           examples:
             application/json:
-              errorMessage: The resource requested does not exist. Please verify the path, spelling, and capitalisation
+              errorMessage: The resource requested does not exist. Please verify the path,
+                spelling, and capitalisation
               statusCode: 404
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1755,14 +1919,17 @@ paths:
   /sms/scheduled/delete:
     post:
       description: >
-        Delete a list of previously scheduled SMS messages that have not yet been sent.
+        Delete a list of previously scheduled SMS messages that have not
+        yet been sent.
 
 
         Credits originally deducted for each SMS message will be refunded to your account upon successful deletion.
       operationId: deleteScheduledMessages
       parameters:
         - description: >
-            An array of WinSMS API Ids received after submitting scheduled messages to the ***/sms/outgoing/send*** endpoint.<br> A maximum of 1000 API Ids can be supplied in a single request.
+            An array of WinSMS API Ids received after submitting scheduled
+            messages to the ***/sms/outgoing/send*** endpoint.<br> A maximum of
+            1000 API Ids can be supplied in a single request.
           in: body
           name: messageDeleteRequest
           required: true
@@ -1799,7 +1966,8 @@ paths:
             properties:
               deletedMessageStatuses:
                 description: >
-                  An array of ***deletedMessageStatus*** objects detailing the deleted status of each message requested for deletion.
+                  An array of ***deletedMessageStatus*** objects detailing the
+                  deleted status of each message requested for deletion.
                 items:
                   example:
                     apiMessageId: 2316
@@ -1809,13 +1977,14 @@ paths:
                     mobileNumber: "27444444444"
                   properties:
                     apiMessageId:
-                      description: >
+                      description: |
                         The WinSMS API Message Id identifying the SMS message.
                       example: 2316
                       type: integer
                     creditCost:
                       description: >
-                        The number of credits refunded to your account after deleting the scheduled message.
+                        The number of credits refunded to your account after deleting the
+                        scheduled message.
 
 
                         If the deletion was unsuccessful, this value will be 0.
@@ -1824,17 +1993,22 @@ paths:
                       type: number
                     deleteError:
                       description: >
-                        If the ***deleted*** value is false, this will contain an error code indicating the reason for the failure. If the scheduled SMS message was successfully deleted, this value will be blank.
+                        If the ***deleted*** value is false, this will contain an error
+                        code indicating the reason for the failure. If the
+                        scheduled SMS message was successfully deleted, this
+                        value will be blank.
                       example: NOTFOUND
                       type: string
                     deleted:
                       description: >
-                        A boolean value indicating whether a scheduled SMS message was successfully deleted
+                        A boolean value indicating whether a scheduled SMS message was
+                        successfully deleted
                       example: true
                       type: boolean
                     mobileNumber:
                       description: >
-                        The mobile number of the recipient of the SMS message, using the international E164 (without the plus) format
+                        The mobile number of the recipient of the SMS message, using the
+                        international E164 (without the plus) format
                       example: "27824444444"
                       type: string
                   title: deletedMessageStatus
@@ -1843,10 +2017,12 @@ paths:
                 minItems: 1
                 type: array
               statusCode:
-                description: The http status code returned - reflected in the body for convenience
+                description: The http status code returned - reflected in the body for
+                  convenience
                 type: integer
               timeStamp:
-                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                description: The date/time the request was processed, in the format
+                  YYYYMMDDhhmmssSSS
                 type: string
               version:
                 description: The current version of the API of the endpoint that was called
@@ -1867,7 +2043,8 @@ paths:
           description: Unauthorized
           examples:
             application/json:
-              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION' request header to your WinSMS API Key
+              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION'
+                request header to your WinSMS API Key
               statusCode: 401
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1877,7 +2054,8 @@ paths:
           description: Not found
           examples:
             application/json:
-              errorMessage: The resource requested does not exist. Please verify the path, spelling, and capitalisation
+              errorMessage: The resource requested does not exist. Please verify the path,
+                spelling, and capitalisation
               statusCode: 404
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1897,7 +2075,8 @@ paths:
           description: Payload Too Large
           examples:
             application/json:
-              errorMessage: "Request POST data is: 205kb. The maximum POST size allowed is 200kb."
+              errorMessage: "Request POST data is: 205kb. The maximum POST size allowed is
+                200kb."
               statusCode: 413
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1907,7 +2086,8 @@ paths:
           description: Unsupported Media Type
           examples:
             application/json:
-              errorMessage: Request content-type should be set to 'application/json', not 'text/plain'.
+              errorMessage: Request content-type should be set to 'application/json', not
+                'text/plain'.
               statusCode: 415
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -1963,11 +2143,13 @@ paths:
               version: "1.0"
             properties:
               statusCode:
-                description: The http status code returned - reflected in the body for convenience
+                description: The http status code returned - reflected in the body for
+                  convenience
                 type: integer
               subAccounts:
                 description: >
-                  An array of ***subAccount*** objects containing properties of each Sub Account owned by the Main Account.
+                  An array of ***subAccount*** objects containing properties of each
+                  Sub Account owned by the Main Account.
                 items:
                   example:
                     accountNumber: 58324
@@ -1978,11 +2160,13 @@ paths:
                   properties:
                     accountNumber:
                       description: >
-                        The WinSMS account number of the Sub Account. This is supplied as an integer, without the leading 'W' displayed in the WinSMS Client Zone.
+                        The WinSMS account number of the Sub Account. This is supplied as
+                        an integer, without the leading 'W' displayed in the
+                        WinSMS Client Zone.
                       example: 58324
                       type: integer
                     creditBalance:
-                      description: >
+                      description: |
                         The remaining credit balance for the Sub Account.
                       example: 201.4
                       type: number
@@ -2005,7 +2189,8 @@ paths:
                   type: object
                 type: array
               timeStamp:
-                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                description: The date/time the request was processed, in the format
+                  YYYYMMDDhhmmssSSS
                 type: string
               version:
                 description: The current version of the API of the endpoint that was called
@@ -2016,7 +2201,8 @@ paths:
           description: Unauthorized
           examples:
             application/json:
-              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION' request header to your WinSMS API Key
+              errorMessage: The 'AUTHORIZATION' header was not found. Set the 'AUTHORIZATION'
+                request header to your WinSMS API Key
               statusCode: 401
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -2026,7 +2212,8 @@ paths:
           description: Not found
           examples:
             application/json:
-              errorMessage: The resource requested does not exist. Please verify the path, spelling, and capitalisation
+              errorMessage: The resource requested does not exist. Please verify the path,
+                spelling, and capitalisation
               statusCode: 404
               timeStamp: "20170120152253514"
               version: "1.0"
@@ -2059,25 +2246,28 @@ definitions:
   errorDetails:
     example:
       errorMessage: >
-        The resource requested does not exist. Please verify the path, spelling, and capitalisation
+        The resource requested does not exist. Please verify the path,
+        spelling, and capitalisation
       statusCode: 404
       timeStamp: "20170120152253514"
       version: "1.0"
     properties:
       errorMessage:
         description: >
-          A plain text description of the error that occurred, and possible solutions if available. 
+          A plain text description of the error that occurred, and possible
+          solutions if available. 
         type: string
       statusCode:
-        description: >
+        description: |
           The http status code returned - reflected in the body for convenience
         type: integer
       timeStamp:
         description: >
-          The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+          The date/time the request was processed, in the format
+          YYYYMMDDhhmmssSSS
         type: string
       version:
-        description: >
+        description: |
           The current version of the API of the endpoint that was called
         type: string
     title: errorDetails

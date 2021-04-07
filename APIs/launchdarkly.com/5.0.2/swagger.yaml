@@ -39,7 +39,8 @@ security:
   - Token: []
 parameters:
   After:
-    description: A timestamp filter, expressed as a Unix epoch time in milliseconds. All entries returned will have occurred after this timestamp.
+    description: A timestamp filter, expressed as a Unix epoch time in milliseconds.
+      All entries returned will have occurred after this timestamp.
     format: int64
     in: query
     name: after
@@ -73,7 +74,8 @@ parameters:
           description: comment will be included in audit log item for change.
           type: string
         description:
-          description: A name that describes the changes you would like to apply to a feature flag configuration
+          description: A name that describes the changes you would like to apply to a
+            feature flag configuration
           type: string
         instructions:
           $ref: "#/definitions/SemanticPatchInstruction"
@@ -112,26 +114,33 @@ parameters:
         - kind
       type: object
   ArchivedQuery:
-    description: When set to 1, only archived flags will be included in the list of flags returned.  By default, archived flags are not included in the list of flags.
+    description: When set to 1, only archived flags will be included in the list of
+      flags returned.  By default, archived flags are not included in the list
+      of flags.
     in: query
     name: archived
     required: false
     type: boolean
   AuditLimit:
-    description: A limit on the number of audit log entries to be returned, between 1 and 20.
+    description: A limit on the number of audit log entries to be returned, between
+      1 and 20.
     in: query
     name: limit
     required: false
     type: number
   Before:
-    description: A timestamp filter, expressed as a Unix epoch time in milliseconds. All entries returned will have before this timestamp.
+    description: A timestamp filter, expressed as a Unix epoch time in milliseconds.
+      All entries returned will have before this timestamp.
     format: int64
     in: query
     name: before
     required: false
     type: integer
   CloneFlagKeyQuery:
-    description: The key of the feature flag to be cloned. The key identifies the flag in your code.  For example, setting clone=flagKey will copy the full targeting configuration for all environments (including on/off state) from the original flag to the new flag.
+    description: The key of the feature flag to be cloned. The key identifies the
+      flag in your code.  For example, setting clone=flagKey will copy the full
+      targeting configuration for all environments (including on/off state) from
+      the original flag to the new flag.
     in: query
     name: clone
     required: false
@@ -190,7 +199,8 @@ parameters:
             topic: test
           type: object
         kind:
-          description: The data export destination type. Available choices are kinesis, google-pubsub, mparticle, or segment.
+          description: The data export destination type. Available choices are kinesis,
+            google-pubsub, mparticle, or segment.
           enum:
             - google-pubsub
             - kinesis
@@ -212,14 +222,18 @@ parameters:
         - config
       type: object
   EnvironmentKey:
-    description: The environment key, used to tie together flag configuration and users under one environment so they can be managed together.
+    description: The environment key, used to tie together flag configuration and
+      users under one environment so they can be managed together.
     in: path
     name: environmentKey
     required: true
     type: string
   EnvironmentKeyQuery:
     collectionFormat: multi
-    description: By default, each feature will include configurations for each environment. You can filter environments with the env query parameter. For example, setting env=["production"] will restrict the returned configurations to just your production environment.
+    description: By default, each feature will include configurations for each
+      environment. You can filter environments with the env query parameter. For
+      example, setting env=["production"] will restrict the returned
+      configurations to just your production environment.
     in: query
     items:
       type: string
@@ -227,7 +241,9 @@ parameters:
     required: false
     type: array
   EnvironmentMobileKeyExpiry:
-    description: The expiry parameter is deprecated for this endpoint, so the old mobile key will always expire immediately. This parameter will be removed in an upcoming major API client version.
+    description: The expiry parameter is deprecated for this endpoint, so the old
+      mobile key will always expire immediately. This parameter will be removed
+      in an upcoming major API client version.
     format: int64
     in: query
     name: expiry
@@ -241,7 +257,9 @@ parameters:
     schema:
       $ref: "#/definitions/EnvironmentPost"
   EnvironmentSDKKeyExpiry:
-    description: An expiration time for the old environment SDK key, expressed as a Unix epoch time in milliseconds. By default, the key will expire immediately.
+    description: An expiration time for the old environment SDK key, expressed as a
+      Unix epoch time in milliseconds. By default, the key will expire
+      immediately.
     format: int64
     in: query
     name: expiry
@@ -313,14 +331,16 @@ parameters:
           example: This flag controls whether test feature is turned on or not.
           type: string
         includeInSnippet:
-          description: Whether or not this flag should be made available to the client-side JavaScript SDK.
+          description: Whether or not this flag should be made available to the
+            client-side JavaScript SDK.
           type: boolean
         key:
           description: A unique key that will be used to reference the flag in your code.
           example: new-test-flag
           type: string
         name:
-          description: A human-friendly name for the feature flag. Remember to note if this flag is intended to be temporary or permanent.
+          description: A human-friendly name for the feature flag. Remember to note if
+            this flag is intended to be temporary or permanent.
           example: new test flag
           type: string
         tags:
@@ -349,14 +369,16 @@ parameters:
     required: false
     type: string
   FlagConfigScheduledChangesConflictsBody:
-    description: Used to determine if a semantic patch will result in conflicts with scheduled changes on a feature flag.
+    description: Used to determine if a semantic patch will result in conflicts with
+      scheduled changes on a feature flag.
     in: body
     name: flagConfigScheduledChangesConflictsBody
     required: true
     schema:
       properties:
         executionDate:
-          description: A unix epoch time in milliseconds specifying the date the scheduled changes will be applied
+          description: A unix epoch time in milliseconds specifying the date the scheduled
+            changes will be applied
           type: integer
         instructions:
           $ref: "#/definitions/SemanticPatchInstruction"
@@ -385,7 +407,8 @@ parameters:
           description: Used to describe the scheduled changes.
           type: string
         executionDate:
-          description: A unix epoch time in milliseconds specifying the date the scheduled changes will be applied
+          description: A unix epoch time in milliseconds specifying the date the scheduled
+            changes will be applied
           type: integer
         instructions:
           $ref: "#/definitions/SemanticPatchInstruction"
@@ -501,13 +524,18 @@ parameters:
     required: false
     type: integer
   OffsetQuery:
-    description: Where to start in the list. This is for use with pagination. For example, an offset of 10 would skip the first 10 items and then return the next limit items.
+    description: Where to start in the list. This is for use with pagination. For
+      example, an offset of 10 would skip the first 10 items and then return the
+      next limit items.
     in: query
     name: offset
     required: false
     type: number
   PatchOnly:
-    description: Requires a JSON Patch representation of the desired changes to the project. 'http://jsonpatch.com/' Feature flag patches also support JSON Merge Patch format. 'https://tools.ietf.org/html/rfc7386' The addition of comments is also supported.
+    description: Requires a JSON Patch representation of the desired changes to the
+      project. 'http://jsonpatch.com/' Feature flag patches also support JSON
+      Merge Patch format. 'https://tools.ietf.org/html/rfc7386' The addition of
+      comments is also supported.
     in: body
     name: PatchOnly
     required: true
@@ -516,7 +544,8 @@ parameters:
         $ref: "#/definitions/PatchOperation"
       type: array
   PatchRequest:
-    description: Requires a JSON Patch representation of the desired changes to the project. 'http://jsonpatch.com/'
+    description: Requires a JSON Patch representation of the desired changes to the
+      project. 'http://jsonpatch.com/'
     in: body
     name: patchDelta
     required: true
@@ -525,7 +554,11 @@ parameters:
         $ref: "#/definitions/PatchOperation"
       type: array
   PatchWithComment:
-    description: Requires a JSON Patch representation of the desired changes to the project, and an optional comment. 'http://jsonpatch.com/' Feature flag patches also support JSON Merge Patch format. 'https://tools.ietf.org/html/rfc7386' The addition of comments is also supported.
+    description: Requires a JSON Patch representation of the desired changes to the
+      project, and an optional comment. 'http://jsonpatch.com/' Feature flag
+      patches also support JSON Merge Patch format.
+      'https://tools.ietf.org/html/rfc7386' The addition of comments is also
+      supported.
     in: body
     name: patchComment
     required: true
@@ -540,7 +573,8 @@ parameters:
           type: array
       type: object
   ProjectKey:
-    description: The project key, used to tie the flags together under one project so they can be managed together.
+    description: The project key, used to tie the flags together under one project
+      so they can be managed together.
     in: path
     name: projectKey
     required: true
@@ -580,7 +614,9 @@ parameters:
         - key
       type: object
   Q:
-    description: Text to search for. You can search for the full or partial name of the resource involved or full or partial email address of the member who made the change.
+    description: Text to search for. You can search for the full or partial name of
+      the resource involved or full or partial email address of the member who
+      made the change.
     in: query
     name: q
     required: false
@@ -614,7 +650,9 @@ parameters:
           type: array
       type: object
   RelayProxyConfigsExpiry:
-    description: An expiration time for the old relay proxy configuration key, expressed as a Unix epoch time in milliseconds. By default, the relay proxy configuration will expire immediately
+    description: An expiration time for the old relay proxy configuration key,
+      expressed as a Unix epoch time in milliseconds. By default, the relay
+      proxy configuration will expire immediately
     format: int64
     in: query
     name: expiry
@@ -639,7 +677,10 @@ parameters:
     required: false
     type: string
   SemanticPatchWithComment:
-    description: Requires a Semantic Patch representation of the desired changes to the resource. 'https://apidocs.launchdarkly.com/reference#updates-via-semantic-patches'. The addition of comments is also supported.
+    description: Requires a Semantic Patch representation of the desired changes to
+      the resource.
+      'https://apidocs.launchdarkly.com/reference#updates-via-semantic-patches'.
+      The addition of comments is also supported.
     in: body
     name: SemanticPatchWithComment
     required: true
@@ -648,13 +689,15 @@ parameters:
         $ref: "#/definitions/SemanticPatchOperation"
       type: object
   SortQuery:
-    description: A comma-separated list of fields to sort by. A field prefixed by a - will be sorted in descending order.
+    description: A comma-separated list of fields to sort by. A field prefixed by a
+      - will be sorted in descending order.
     in: query
     name: sort
     required: false
     type: string
   Spec:
-    description: A resource specifier, allowing you to filter audit log listings by resource.
+    description: A resource specifier, allowing you to filter audit log listings by
+      resource.
     in: query
     name: spec
     required: false
@@ -666,7 +709,9 @@ parameters:
     required: true
     type: string
   SummaryQuery:
-    description: By default in api version >= 1, flags will _not_ include their list of prerequisites, targets or rules.  Set summary=0 to include these fields for each flag returned.
+    description: By default in api version >= 1, flags will _not_ include their list
+      of prerequisites, targets or rules.  Set summary=0 to include these fields
+      for each flag returned.
     in: query
     name: summary
     required: false
@@ -678,7 +723,8 @@ parameters:
     required: false
     type: string
   TokenExpiry:
-    description: An expiration time for the old token key, expressed as a Unix epoch time in milliseconds. By default, the token will expire immediately.
+    description: An expiration time for the old token key, expressed as a Unix epoch
+      time in milliseconds. By default, the token will expire immediately.
     format: int64
     in: query
     name: expiry
@@ -691,7 +737,8 @@ parameters:
     required: true
     type: string
   TokenShowAllQuery:
-    description: If set to true, and the authentication access token has the "Admin" role, personal access tokens for all members will be retrieved.
+    description: If set to true, and the authentication access token has the "Admin"
+      role, personal access tokens for all members will be retrieved.
     in: query
     name: showAll
     required: false
@@ -704,7 +751,8 @@ parameters:
     schema:
       properties:
         customRoleIds:
-          description: A list of custom role IDs to use as access limits for the access token
+          description: A list of custom role IDs to use as access limits for the access
+            token
           items:
             example: []
             type: string
@@ -725,11 +773,13 @@ parameters:
           example: writer
           type: string
         serviceToken:
-          description: Whether the token will be a service token https://docs.launchdarkly.com/home/account-security/api-access-tokens#service-tokens
+          description: Whether the token will be a service token
+            https://docs.launchdarkly.com/home/account-security/api-access-tokens#service-tokens
           type: boolean
       type: object
   UnboundedSegmentTargetsPostRequest:
-    description: Add or remove user targets to the included or excluded lists on an unbounded segment
+    description: Add or remove user targets to the included or excluded lists on an
+      unbounded segment
     in: body
     name: unboundedSegmentTargetsBody
     required: true
@@ -764,7 +814,8 @@ parameters:
           example: Users in this segment will have access to beta features.
           type: string
         key:
-          description: A unique key that will be used to reference the user segment in feature flags.
+          description: A unique key that will be used to reference the user segment in
+            feature flags.
           example: new-segment
           type: string
         name:
@@ -778,7 +829,9 @@ parameters:
             type: string
           type: array
         unbounded:
-          description: Controls whether this segment can support unlimited numbers of users. Requires the beta API and additional setup. Include/exclude lists in this payload are not used in unbounded segments.
+          description: Controls whether this segment can support unlimited numbers of
+            users. Requires the beta API and additional setup. Include/exclude
+            lists in this payload are not used in unbounded segments.
           example: false
           type: boolean
       required:
@@ -793,7 +846,8 @@ parameters:
       properties:
         setting:
           description: >
-            The variation value to set for the user. Must match the variation type of the flag.
+            The variation value to set for the user. Must match the variation
+            type of the flag.
           type: boolean
       type: object
   WebhookPostRequest:
@@ -812,11 +866,13 @@ parameters:
           example: true
           type: boolean
         secret:
-          description: If sign is true, and the secret attribute is omitted, LaunchDarkly will automatically generate a secret for you.
+          description: If sign is true, and the secret attribute is omitted, LaunchDarkly
+            will automatically generate a secret for you.
           example: <password>
           type: string
         sign:
-          description: If sign is false, the webhook will not include a signature header, and the secret can be omitted.
+          description: If sign is false, the webhook will not include a signature header,
+            and the secret can be omitted.
           type: boolean
         statements:
           items:
@@ -839,7 +895,8 @@ parameters:
       type: object
 responses:
   BetaApi403:
-    description: This is a beta API, you must pass beta in the LD-API-Version header to use it.
+    description: This is a beta API, you must pass beta in the LD-API-Version header
+      to use it.
     schema:
       $ref: "#/definitions/UsageError"
   CustomRole2xx:
@@ -907,7 +964,8 @@ responses:
 paths:
   /:
     get:
-      description: You can issue a GET request to the root resource to find all of the resource categories supported by the API.
+      description: You can issue a GET request to the root resource to find all of the
+        resource categories supported by the API.
       operationId: getRoot
       responses:
         "200":
@@ -1000,7 +1058,8 @@ paths:
           $ref: "#/responses/Standard400"
         "404":
           $ref: "#/responses/Standard404"
-      summary: Reset a relay proxy configuration's secret key with an optional expiry time for the old key.
+      summary: Reset a relay proxy configuration's secret key with an optional expiry
+        time for the old key.
       tags:
         - Relay proxy configurations
   /auditlog:
@@ -1021,7 +1080,9 @@ paths:
           $ref: "#/responses/Standard400"
         "401":
           $ref: "#/responses/Standard401"
-      summary: Get a list of all audit log entries. The query parameters allow you to restrict the returned results by date ranges, resource specifiers, or a full-text search query.
+      summary: Get a list of all audit log entries. The query parameters allow you to
+        restrict the returned results by date ranges, resource specifiers, or a
+        full-text search query.
       tags:
         - Audit log
   "/auditlog/{resourceId}":
@@ -1158,7 +1219,9 @@ paths:
             $ref: "#/definitions/FeatureFlagStatuses"
         "401":
           $ref: "#/responses/Standard401"
-      summary: Get a list of statuses for all feature flags. The status includes the last time the feature flag was requested, as well as the state of the flag.
+      summary: Get a list of statuses for all feature flags. The status includes the
+        last time the feature flag was requested, as well as the state of the
+        flag.
       tags:
         - Feature flags
   "/flag-statuses/{projectKey}/{environmentKey}/{featureFlagKey}":
@@ -1234,7 +1297,8 @@ paths:
           $ref: "#/responses/Standard401"
         "404":
           $ref: "#/responses/Standard404"
-      summary: Delete a feature flag in all environments. Be careful-- only delete feature flags that are no longer being used by your application.
+      summary: Delete a feature flag in all environments. Be careful-- only delete
+        feature flags that are no longer being used by your application.
       tags:
         - Feature flags
     get:
@@ -1295,7 +1359,8 @@ paths:
           $ref: "#/responses/Standard401"
         "409":
           $ref: "#/responses/Standard409"
-      summary: Copies the feature flag configuration from one environment to the same feature flag in another environment.
+      summary: Copies the feature flag configuration from one environment to the same
+        feature flag in another environment.
       tags:
         - Feature flags
   "/flags/{projectKey}/{featureFlagKey}/expiring-user-targets/{environmentKey}":
@@ -1348,7 +1413,8 @@ paths:
             $ref: "#/definitions/Integrations"
         "403":
           $ref: "#/responses/BetaApi403"
-      summary: Get a list of all configured audit log event integrations associated with this account.
+      summary: Get a list of all configured audit log event integrations associated
+        with this account.
       tags:
         - Integrations
   "/integrations/{integrationKey}":
@@ -1578,7 +1644,9 @@ paths:
           $ref: "#/responses/Standard401"
         "404":
           $ref: "#/responses/Standard404"
-      summary: Delete a project by key. Caution-- deleting a project will delete all associated environments and feature flags. You cannot delete the last project in an account.
+      summary: Delete a project by key. Caution-- deleting a project will delete all
+        associated environments and feature flags. You cannot delete the last
+        project in an account.
       tags:
         - Projects
     get:
@@ -1629,7 +1697,8 @@ paths:
           $ref: "#/responses/Standard401"
         "409":
           $ref: "#/responses/Standard409"
-      summary: Create a new environment in a specified project with a given name, key, and swatch color.
+      summary: Create a new environment in a specified project with a given name, key,
+        and swatch color.
       tags:
         - Environments
   "/projects/{projectKey}/environments/{environmentKey}":
@@ -1697,7 +1766,8 @@ paths:
           $ref: "#/responses/Standard404"
         "409":
           $ref: "#/responses/Standard409"
-      summary: Reset an environment's SDK key with an optional expiry time for the old key.
+      summary: Reset an environment's SDK key with an optional expiry time for the old
+        key.
       tags:
         - Environments
   "/projects/{projectKey}/environments/{environmentKey}/mobileKey":
@@ -1714,7 +1784,9 @@ paths:
           $ref: "#/responses/Standard404"
         "409":
           $ref: "#/responses/Standard409"
-      summary: Reset an environment's mobile key. The optional expiry for the old key is deprecated for this endpoint, so the old key will always expire immediately.
+      summary: Reset an environment's mobile key. The optional expiry for the old key
+        is deprecated for this endpoint, so the old key will always expire
+        immediately.
       tags:
         - Environments
   "/projects/{projectKey}/flags/{featureFlagKey}/environments/{environmentKey}/approval-requests":
@@ -1893,7 +1965,9 @@ paths:
           $ref: "#/responses/Standard401"
         "404":
           $ref: "#/responses/Standard404"
-      summary: Lists conflicts between the given instructions and any existing scheduled changes for the feature flag. The actual HTTP verb should be REPORT, not POST.
+      summary: Lists conflicts between the given instructions and any existing
+        scheduled changes for the feature flag. The actual HTTP verb should be
+        REPORT, not POST.
       tags:
         - Feature flags
   "/projects/{projectKey}/flags/{featureFlagKey}/environments/{environmentKey}/scheduled-changes/{scheduledChangeId}":
@@ -2275,7 +2349,8 @@ paths:
           $ref: "#/responses/Standard400"
         "401":
           $ref: "#/responses/Standard401"
-      summary: Reset an access token's secret key with an optional expiry time for the old key.
+      summary: Reset an access token's secret key with an optional expiry time for the
+        old key.
       tags:
         - Access tokens
   /usage:
@@ -2426,7 +2501,8 @@ paths:
           $ref: "#/responses/BetaApi403"
         "404":
           $ref: "#/responses/StreamUsage404"
-      summary: Get a stream timeseries data by source and show all sdk version associated.
+      summary: Get a stream timeseries data by source and show all sdk version
+        associated.
       tags:
         - Customer Metrics
   "/user-search/{projectKey}/{environmentKey}":
@@ -2446,7 +2522,9 @@ paths:
             $ref: "#/definitions/Users"
         "401":
           $ref: "#/responses/Standard401"
-      summary: Search users in LaunchDarkly based on their last active date, or a search query. It should not be used to enumerate all users in LaunchDarkly-- use the List users API resource.
+      summary: Search users in LaunchDarkly based on their last active date, or a
+        search query. It should not be used to enumerate all users in
+        LaunchDarkly-- use the List users API resource.
       tags:
         - Users
   "/users/{projectKey}/{environmentKey}":
@@ -2465,7 +2543,11 @@ paths:
             $ref: "#/definitions/Users"
         "401":
           $ref: "#/responses/Standard401"
-      summary: List all users in the environment. Includes the total count of users. In each page, there will be up to 'limit' users returned (default 20). This is useful for exporting all users in the system for further analysis. Paginated collections will include a next link containing a URL with the next set of elements in the collection.
+      summary: List all users in the environment. Includes the total count of users.
+        In each page, there will be up to 'limit' users returned (default 20).
+        This is useful for exporting all users in the system for further
+        analysis. Paginated collections will include a next link containing a
+        URL with the next set of elements in the collection.
       tags:
         - Users
   "/users/{projectKey}/{environmentKey}/{userKey}":
@@ -2559,7 +2641,8 @@ paths:
           $ref: "#/responses/Standard401"
         "404":
           $ref: "#/responses/Standard404"
-      summary: Specifically enable or disable a feature flag for a user based on their key.
+      summary: Specifically enable or disable a feature flag for a user based on their
+        key.
       tags:
         - User settings
   "/users/{projectKey}/{userKey}/expiring-user-targets/{environmentKey}":
@@ -2599,7 +2682,8 @@ paths:
           $ref: "#/responses/Standard404"
         "409":
           $ref: "#/responses/Standard409"
-      summary: Update, add, or delete expiring user targets for a single user on all flags
+      summary: Update, add, or delete expiring user targets for a single user on all
+        flags
       tags:
         - User settings
   /webhooks:
@@ -2692,10 +2776,12 @@ definitions:
         description: The id of the member that applied the approval request
         type: string
       appliedDate:
-        description: A unix epoch time in milliseconds specifying the date the approval request was applied
+        description: A unix epoch time in milliseconds specifying the date the approval
+          request was applied
         type: integer
       creationDate:
-        description: A unix epoch time in milliseconds specifying the date the approval request was requested
+        description: A unix epoch time in milliseconds specifying the date the approval
+          request was requested
         type: integer
       instructions:
         $ref: "#/definitions/SemanticPatchInstruction"
@@ -2733,7 +2819,8 @@ definitions:
       _id:
         $ref: "#/definitions/Id"
       creationDate:
-        description: A unix epoch time in milliseconds specifying the date the approval request was reviewed
+        description: A unix epoch time in milliseconds specifying the date the approval
+          request was reviewed
         type: integer
       kind:
         $ref: "#/definitions/ApprovalRequestReviewStatus"
@@ -2815,7 +2902,8 @@ definitions:
             type: array
         type: object
       title:
-        example: "[Reese Applebaum](mailto:refapp@launchdarkly.com) changed the name of [Testing](https://app.launchdarkly.com/settings#/projects)"
+        example: "[Reese Applebaum](mailto:refapp@launchdarkly.com) changed the name of
+          [Testing](https://app.launchdarkly.com/settings#/projects)"
         type: string
       titleVerb:
         example: changed the name of
@@ -2842,10 +2930,12 @@ definitions:
   ClientSideAvailability:
     properties:
       usingEnvironmentId:
-        description: When set to true, this flag will be available to SDKs using the client-side id.
+        description: When set to true, this flag will be available to SDKs using the
+          client-side id.
         type: boolean
       usingMobileKey:
-        description: When set to true, this flag will be available to SDKS using a mobile key.
+        description: When set to true, this flag will be available to SDKS using a
+          mobile key.
         type: boolean
     type: object
   CopyActions:
@@ -2923,7 +3013,8 @@ definitions:
         description: The index of the variation to be served when a flag is off.
         type: integer
       onVariation:
-        description: The index of the variation to be served when a flag's targeting is on (default variation).
+        description: The index of the variation to be served when a flag's targeting is
+          on (default variation).
         type: integer
     required:
       - onVariation
@@ -2944,7 +3035,8 @@ definitions:
           topic: test
         type: object
       kind:
-        description: Destination type ("google-pubsub", "kinesis", "mparticle", or "segment")
+        description: Destination type ("google-pubsub", "kinesis", "mparticle", or
+          "segment")
         enum:
           - google-pubsub
           - kinesis
@@ -3026,21 +3118,26 @@ definitions:
         example: XXX
         type: string
       approvalSettings:
-        description: Approval settings for an environment. Only appears if the approvals feature is enabled.
+        description: Approval settings for an environment. Only appears if the approvals
+          feature is enabled.
         properties:
           canApplyDeclinedChanges:
-            description: Whether changes can be applied as long as minNumApprovals is met, regardless of if any reviewers have declined a request.
+            description: Whether changes can be applied as long as minNumApprovals is met,
+              regardless of if any reviewers have declined a request.
             type: boolean
           canReviewOwnRequest:
-            description: Whether requesters can approve or decline their own request. They may always comment.
+            description: Whether requesters can approve or decline their own request. They
+              may always comment.
             type: boolean
           minNumApprovals:
-            description: The number of approvals required before an approval request can be applied.
+            description: The number of approvals required before an approval request can be
+              applied.
             example: 2
             format: int64
             type: integer
           required:
-            description: Whether any changes to flags in this environment will require approval.
+            description: Whether any changes to flags in this environment will require
+              approval.
             type: boolean
           serviceKind:
             description: The approvals system used.
@@ -3054,7 +3151,8 @@ definitions:
         example: "417505"
         type: string
       confirmChanges:
-        description: Determines if this environment requires confirmation for flag and segment changes.
+        description: Determines if this environment requires confirmation for flag and
+          segment changes.
         example: false
         type: boolean
       defaultTrackEvents:
@@ -3078,7 +3176,8 @@ definitions:
         example: Production
         type: string
       requireComments:
-        description: Determines if this environment requires comments for flag and segment changes.
+        description: Determines if this environment requires comments for flag and
+          segment changes.
         example: false
         type: boolean
       secureMode:
@@ -3098,7 +3197,8 @@ definitions:
         example: "417505"
         type: string
       confirmChanges:
-        description: Determines if this environment requires confirmation for flag and segment changes.
+        description: Determines if this environment requires confirmation for flag and
+          segment changes.
         example: false
         type: boolean
       defaultTrackEvents:
@@ -3118,7 +3218,8 @@ definitions:
         example: Development
         type: string
       requireComments:
-        description: Determines if this environment requires comments for flag and segment changes.
+        description: Determines if this environment requires comments for flag and
+          segment changes.
         example: false
         type: boolean
       secureMode:
@@ -3173,14 +3274,16 @@ definitions:
         example: false
         type: boolean
       archivedDate:
-        description: A unix epoch time in milliseconds specifying the archived time of this flag.
+        description: A unix epoch time in milliseconds specifying the archived time of
+          this flag.
         example: 1443652232590
         format: int64
         type: integer
       clientSideAvailability:
         $ref: "#/definitions/ClientSideAvailability"
       creationDate:
-        description: A unix epoch time in milliseconds specifying the creation time of this flag.
+        description: A unix epoch time in milliseconds specifying the creation time of
+          this flag.
         example: 1443652232590
         format: int64
         type: integer
@@ -3294,7 +3397,8 @@ definitions:
         example: false
         type: boolean
       trackEventsFallthrough:
-        description: Set to true to send detailed event information when targeting is enabled but no individual targeting rule is matched.
+        description: Set to true to send detailed event information when targeting is
+          enabled but no individual targeting rule is matched.
         example: true
         type: boolean
       version:
@@ -3304,7 +3408,8 @@ definitions:
   FeatureFlagCopyObject:
     properties:
       currentVersion:
-        description: If the latest version of the flag matches provided version it will copy, otherwise it will return a conflict.
+        description: If the latest version of the flag matches provided version it will
+          copy, otherwise it will return a conflict.
         example: 65
         type: integer
       key:
@@ -3321,7 +3426,8 @@ definitions:
       _version:
         type: integer
       executionDate:
-        description: A unix epoch time in milliseconds specifying the date the scheduled changes will be applied
+        description: A unix epoch time in milliseconds specifying the date the scheduled
+          changes will be applied
         type: integer
       instructions:
         $ref: "#/definitions/SemanticPatchInstruction"
@@ -3345,7 +3451,8 @@ definitions:
                 $ref: "#/definitions/ScheduledChangesFeatureFlagConflict"
               type: array
             kind:
-              description: The name of the modification you would like to perform on a resource.
+              description: The name of the modification you would like to perform on a
+                resource.
               example: removeUserTargets
               type: string
         type: array
@@ -3483,7 +3590,8 @@ definitions:
             example: 2
             type: integer
           lastSuccess:
-            description: A unix epoch time in milliseconds specifying the last time this integration was successfully used.
+            description: A unix epoch time in milliseconds specifying the last time this
+              integration was successfully used.
             example: 1443652232590
             format: int64
             type: integer
@@ -3586,14 +3694,17 @@ definitions:
       _id:
         $ref: "#/definitions/Id"
       _lastSeen:
-        description: A unix epoch time in milliseconds specifying the last time this member was active in LaunchDarkly.
+        description: A unix epoch time in milliseconds specifying the last time this
+          member was active in LaunchDarkly.
         example: 1469326565348
         format: int64
         type: integer
       _lastSeenMetadata:
         properties:
           tokenId:
-            description: If the last time this member accessed LaunchDarkly was using the REST API, this value will be set to the ID of the personal access token used.
+            description: If the last time this member accessed LaunchDarkly was using the
+              REST API, this value will be set to the ID of the personal access
+              token used.
             example: 5fd2a1ee05600316d5cb3e96
             type: string
         type: object
@@ -3661,14 +3772,16 @@ definitions:
         example: deny
         type: string
       notActions:
-        description: Targeted actions will be those actions NOT in this list. The "actions" field must be empty to use this field.
+        description: Targeted actions will be those actions NOT in this list. The
+          "actions" field must be empty to use this field.
         items:
           description: An action to perform on a resource.
           example: updateOn
           type: string
         type: array
       notResources:
-        description: Targeted resource will be those resources NOT in this list. The "resources`" field must be empty to use this field.
+        description: Targeted resource will be those resources NOT in this list. The
+          "resources`" field must be empty to use this field.
         items:
           description: A resource specifier string
           example: proj/*:env/*:flag/my-flag
@@ -3731,20 +3844,24 @@ definitions:
       _id:
         $ref: "#/definitions/Id"
       creationDate:
-        description: A unix epoch time in milliseconds specifying the creation time of this relay proxy configuration
+        description: A unix epoch time in milliseconds specifying the creation time of
+          this relay proxy configuration
         example: 1443652232590
         format: int64
         type: integer
       displayKey:
-        description: The last 4 digits of the unique secret key for this relay proxy configuration
+        description: The last 4 digits of the unique secret key for this relay proxy
+          configuration
         example: 66eo
         type: string
       fullKey:
-        description: Full secret key. Only included if creating or resetting the relay proxy configuration
+        description: Full secret key. Only included if creating or resetting the relay
+          proxy configuration
         example: rel-8a3a773d-b75e-48eb-a850-492cda9266eo
         type: string
       lastModified:
-        description: A unix epoch time in milliseconds specifying the last time this relay proxy configuration was modified
+        description: A unix epoch time in milliseconds specifying the last time this
+          relay proxy configuration was modified
         example: 1469326565348
         format: int64
         type: integer
@@ -3855,14 +3972,16 @@ definitions:
           - deny
         type: string
       notActions:
-        description: Targeted actions will be those actions NOT in this list. The "actions" field must be empty to use this field.
+        description: Targeted actions will be those actions NOT in this list. The
+          "actions" field must be empty to use this field.
         items:
           description: An action to perform on a resource.
           example: updateOn
           type: string
         type: array
       notResources:
-        description: Targeted resource will be those resources NOT in this list. The "resources`" field must be empty to use this field.
+        description: Targeted resource will be those resources NOT in this list. The
+          "resources`" field must be empty to use this field.
         items:
           description: A resource specifier string
           example: proj/*:env/*:flag/my-flag
@@ -3995,7 +4114,8 @@ definitions:
         format: int64
         type: integer
       time:
-        description: A unix epoch time in milliseconds specifying the creation time of this flag.
+        description: A unix epoch time in milliseconds specifying the creation time of
+          this flag.
         example: 1551740400000
         format: int64
         type: integer
@@ -4024,7 +4144,8 @@ definitions:
       _member:
         $ref: "#/definitions/Member"
       creationDate:
-        description: A unix epoch time in milliseconds specifying the creation time of this access token.
+        description: A unix epoch time in milliseconds specifying the creation time of
+          this access token.
         example: 1443652232590
         format: int64
         type: integer
@@ -4041,12 +4162,15 @@ definitions:
           $ref: "#/definitions/Statement"
         type: array
       lastModified:
-        description: A unix epoch time in milliseconds specifying the last time this access token was modified.
+        description: A unix epoch time in milliseconds specifying the last time this
+          access token was modified.
         example: 1469326565348
         format: int64
         type: integer
       lastUsed:
-        description: A unix epoch time in milliseconds specifying the last time this access token was used to authorize access to the LaunchDarkly REST API.
+        description: A unix epoch time in milliseconds specifying the last time this
+          access token was used to authorize access to the LaunchDarkly REST
+          API.
         example: 1469326565348
         format: int64
         type: integer
@@ -4063,10 +4187,13 @@ definitions:
         example: writer
         type: string
       serviceToken:
-        description: Whether the token will be a service token https://docs.launchdarkly.com/home/account-security/api-access-tokens#service-tokens
+        description: Whether the token will be a service token
+          https://docs.launchdarkly.com/home/account-security/api-access-tokens#service-tokens
         type: boolean
       token:
-        description: The last 4 digits of the unique secret key for this access token. If creating or resetting the token, this will be the full token secret.
+        description: The last 4 digits of the unique secret key for this access token.
+          If creating or resetting the token, this will be the full token
+          secret.
         example: "3243"
         type: string
     type: object
@@ -4107,7 +4234,8 @@ definitions:
   UsageError:
     properties:
       message:
-        example: This is a beta API, you must pass beta in the LD-API-Version header to use it.
+        example: This is a beta API, you must pass beta in the LD-API-Version header to
+          use it.
         type: string
     type: object
   UsageLinks:
@@ -4156,11 +4284,17 @@ definitions:
       _links:
         $ref: "#/definitions/Links"
       _value:
-        description: The most important attribute in the response. The _value is the current setting for the user. For a boolean feature toggle, this will be true, false, or null if there is no defined fallthrough value.
+        description: The most important attribute in the response. The _value is the
+          current setting for the user. For a boolean feature toggle, this will
+          be true, false, or null if there is no defined fallthrough value.
         example: true
         type: boolean
       setting:
-        description: The setting attribute indicates whether you've explicitly targeted this user to receive a particular variation. For example, if you have explicitly turned off a feature toggle for a user, setting will be false. A setting of null means that you haven't assigned that user to a specific variation.
+        description: The setting attribute indicates whether you've explicitly targeted
+          this user to receive a particular variation. For example, if you have
+          explicitly turned off a feature toggle for a user, setting will be
+          false. A setting of null means that you haven't assigned that user to
+          a specific variation.
         example: null
         type: boolean
     type: object
@@ -4216,7 +4350,8 @@ definitions:
       _links:
         $ref: "#/definitions/Links"
       creationDate:
-        description: A unix epoch time in milliseconds specifying the creation time of this flag.
+        description: A unix epoch time in milliseconds specifying the creation time of
+          this flag.
         example: 1443652232590
         format: int64
         type: integer
@@ -4225,7 +4360,8 @@ definitions:
         example: Users in this segment can access beta features.
         type: string
       excluded:
-        description: An array of user keys that should not be included in this segment, unless they are also listed in "included".
+        description: An array of user keys that should not be included in this segment,
+          unless they are also listed in "included".
         items:
           type: string
         type: array
@@ -4256,7 +4392,9 @@ definitions:
           type: string
         type: array
       unbounded:
-        description: Controls whether this segment can support unlimited numbers of users. Requires the beta API and additional setup. Include/exclude lists in this payload are not used in unbounded segments.
+        description: Controls whether this segment can support unlimited numbers of
+          users. Requires the beta API and additional setup. Include/exclude
+          lists in this payload are not used in unbounded segments.
         example: false
         type: boolean
       version:
@@ -4333,7 +4471,8 @@ definitions:
         format: int64
         type: integer
       targetType:
-        description: either the included or excluded variation that the user is targeted on a segment
+        description: either the included or excluded variation that the user is targeted
+          on a segment
         type: string
       userKey:
         description: Unique identifier for the user
@@ -4404,7 +4543,9 @@ definitions:
         example: true
         type: boolean
       secret:
-        description: If defined, the webhooks post request will include a X-LD-Signature header whose value will contain an HMAC SHA256 hex digest of the webhook payload, using the secret as the key.
+        description: If defined, the webhooks post request will include a X-LD-Signature
+          header whose value will contain an HMAC SHA256 hex digest of the
+          webhook payload, using the secret as the key.
         example: frobozz
         type: string
       statements:

@@ -8,7 +8,12 @@ info:
     email: developer-support@logmein.com
     name: Developer Support
     url: https://goto-developer.logmein.com
-  description: The GoToWebinar API provides seamless integration of webinar registrant and attendee data into your existing infrastructure or third-party applications. The ability to register participants, as well as pull lists of registrants and attendees for a webinar, allows organizers to manage the flow of information between their primary applications without manual intervention.
+  description: The GoToWebinar API provides seamless integration of webinar
+    registrant and attendee data into your existing infrastructure or
+    third-party applications. The ability to register participants, as well as
+    pull lists of registrants and attendees for a webinar, allows organizers to
+    manage the flow of information between their primary applications without
+    manual intervention.
   termsOfService: https://goto-developer.logmein.com/terms-use
   title: GoToWebinar
   version: 1.0.0
@@ -94,18 +99,24 @@ tags:
 paths:
   "/accounts/{accountKey}/webinars":
     get:
-      description: Retrieves the list of webinars for an account within a given date range. __*Page*__ and __*size*__ parameters are optional. Default __*page*__ is 0 and default __*size*__ is 20. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.
+      description: Retrieves the list of webinars for an account within a given date
+        range. __*Page*__ and __*size*__ parameters are optional. Default
+        __*page*__ is 0 and default __*size*__ is 20. For technical reasons,
+        this call cannot be executed from this documentation. Please use the
+        curl command to execute it.
       operationId: getAllAccountWebinars
       parameters:
         - $ref: "#/parameters/Authorization"
         - $ref: "#/parameters/accountKey"
-        - description: A required start of datetime range in ISO8601 UTC format, e.g. 2015-07-13T10:00:00Z
+        - description: A required start of datetime range in ISO8601 UTC format, e.g.
+            2015-07-13T10:00:00Z
           format: date-time
           in: query
           name: fromTime
           required: true
           type: string
-        - description: A required end of datetime range in ISO8601 UTC format, e.g. 2015-07-13T22:00:00Z
+        - description: A required end of datetime range in ISO8601 UTC format, e.g.
+            2015-07-13T22:00:00Z
           format: date-time
           in: query
           name: toTime
@@ -139,18 +150,22 @@ paths:
         - Webinars
   "/organizers/{organizerKey}/historicalWebinars":
     get:
-      description: Returns details for completed webinars for the specified organizer and completed webinars of other organizers where the specified organizer is a co-organizer.
+      description: Returns details for completed webinars for the specified organizer
+        and completed webinars of other organizers where the specified organizer
+        is a co-organizer.
       operationId: getHistoricalWebinars
       parameters:
         - $ref: "#/parameters/Authorization"
         - $ref: "#/parameters/organizerKey"
-        - description: A required start of datetime range in ISO8601 UTC format, e.g. 2015-07-13T10:00:00Z
+        - description: A required start of datetime range in ISO8601 UTC format, e.g.
+            2015-07-13T10:00:00Z
           format: date-time
           in: query
           name: fromTime
           required: true
           type: string
-        - description: A required end of datetime range in ISO8601 UTC format, e.g. 2015-07-13T22:00:00Z
+        - description: A required end of datetime range in ISO8601 UTC format, e.g.
+            2015-07-13T22:00:00Z
           format: date-time
           in: query
           name: toTime
@@ -177,13 +192,15 @@ paths:
       parameters:
         - $ref: "#/parameters/Authorization"
         - $ref: "#/parameters/organizerKey"
-        - description: A required start of datetime range in ISO8601 UTC format, e.g. 2015-07-13T10:00:00Z
+        - description: A required start of datetime range in ISO8601 UTC format, e.g.
+            2015-07-13T10:00:00Z
           format: date-time
           in: query
           name: fromTime
           required: true
           type: string
-        - description: A required end of datetime range in ISO8601 UTC format, e.g. 2015-07-13T22:00:00Z
+        - description: A required end of datetime range in ISO8601 UTC format, e.g.
+            2015-07-13T22:00:00Z
           format: date-time
           in: query
           name: toTime
@@ -205,7 +222,9 @@ paths:
         - Sessions
   "/organizers/{organizerKey}/upcomingWebinars":
     get:
-      description: Returns webinars scheduled for the future for the specified organizer and webinars of other organizers where the specified organizer is a co-organizer.
+      description: Returns webinars scheduled for the future for the specified
+        organizer and webinars of other organizers where the specified organizer
+        is a co-organizer.
       operationId: getUpcomingWebinars
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -246,7 +265,26 @@ paths:
       tags:
         - Webinars
     post:
-      description: 'Creates a single session webinar, a sequence of webinars or a series of webinars depending on the type field in the body: "single_session" creates a single webinar session, "sequence" creates a webinar with multiple meeting times where attendees are expected to be the same for all sessions, and "series" creates a webinar with multiple meetings times where attendees choose only one to attend. The default, if no type is declared, is single_session. A sequence webinar requires a "recurrenceStart" object consisting of a "startTime" and "endTime" key for the first webinar of the sequence, a "recurrencePattern" of "daily", "weekly", "monthly", and a "recurrenceEnd" which is the last date of the sequence (for example, 2016-12-01). A series webinar requires a "times" array with a discrete "startTime" and "endTime" for each webinar in the series. The call requires a webinar subject and description. The "isPasswordProtected" sets whether the webinar requires a password for attendees to join. If set to True, the organizer must go to Registration Settings at My Webinars (https://global.gotowebinar.com/webinars.tmpl) and add the password to the webinar, and send the password to the registrants. The response provides a numeric webinarKey in string format for the new webinar. Once a webinar has been created with this method, you can accept registrations.'
+      description: 'Creates a single session webinar, a sequence of webinars or a
+        series of webinars depending on the type field in the body:
+        "single_session" creates a single webinar session, "sequence" creates a
+        webinar with multiple meeting times where attendees are expected to be
+        the same for all sessions, and "series" creates a webinar with multiple
+        meetings times where attendees choose only one to attend. The default,
+        if no type is declared, is single_session. A sequence webinar requires a
+        "recurrenceStart" object consisting of a "startTime" and "endTime" key
+        for the first webinar of the sequence, a "recurrencePattern" of "daily",
+        "weekly", "monthly", and a "recurrenceEnd" which is the last date of the
+        sequence (for example, 2016-12-01). A series webinar requires a "times"
+        array with a discrete "startTime" and "endTime" for each webinar in the
+        series. The call requires a webinar subject and description. The
+        "isPasswordProtected" sets whether the webinar requires a password for
+        attendees to join. If set to True, the organizer must go to Registration
+        Settings at My Webinars (https://global.gotowebinar.com/webinars.tmpl)
+        and add the password to the webinar, and send the password to the
+        registrants. The response provides a numeric webinarKey in string format
+        for the new webinar. Once a webinar has been created with this method,
+        you can accept registrations.'
       operationId: createWebinar
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -271,13 +309,18 @@ paths:
         - Webinars
   "/organizers/{organizerKey}/webinars/{webinarKey}":
     delete:
-      description: Cancels a specific webinar. If the webinar is a series or sequence, this call deletes all scheduled sessions. To send cancellation emails to registrants set sendCancellationEmails=true in the request. When the cancellation emails are sent, the default generated message is used in the cancellation email body.
+      description: Cancels a specific webinar. If the webinar is a series or sequence,
+        this call deletes all scheduled sessions. To send cancellation emails to
+        registrants set sendCancellationEmails=true in the request. When the
+        cancellation emails are sent, the default generated message is used in
+        the cancellation email body.
       operationId: cancelWebinar
       parameters:
         - $ref: "#/parameters/Authorization"
         - $ref: "#/parameters/organizerKey"
         - $ref: "#/parameters/webinarKey"
-        - description: Indicates whether cancellation notice emails should be sent. The default value is false
+        - description: Indicates whether cancellation notice emails should be sent. The
+            default value is false
           in: query
           name: sendCancellationEmails
           required: false
@@ -297,7 +340,12 @@ paths:
       tags:
         - Webinars
     get:
-      description: Retrieve information on a specific webinar. If the type of the webinar is 'sequence', a sequence of future times will be provided. Webinars of type 'series' are treated the same as normal webinars - each session in the webinar series has a different webinarKey. If an organizer cancels a webinar, then a request to get that webinar would return a '404 Not Found' error.
+      description: Retrieve information on a specific webinar. If the type of the
+        webinar is 'sequence', a sequence of future times will be provided.
+        Webinars of type 'series' are treated the same as normal webinars - each
+        session in the webinar series has a different webinarKey. If an
+        organizer cancels a webinar, then a request to get that webinar would
+        return a '404 Not Found' error.
       operationId: getWebinar
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -318,7 +366,11 @@ paths:
       tags:
         - Webinars
     put:
-      description: Updates a webinar. The call requires at least one of the parameters in the request body. The request completely replaces the existing session, series, or sequence and so must include the full definition of each as for the Create call. Set notifyParticipants=true to send update emails to registrants.
+      description: Updates a webinar. The call requires at least one of the parameters
+        in the request body. The request completely replaces the existing
+        session, series, or sequence and so must include the full definition of
+        each as for the Create call. Set notifyParticipants=true to send update
+        emails to registrants.
       operationId: updateWebinar
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -339,7 +391,8 @@ paths:
         "202":
           description: Accepted
         "400":
-          description: Bad Request (times not valid, webinar in progress, webinar ended, etc.)
+          description: Bad Request (times not valid, webinar in progress, webinar ended,
+            etc.)
         "403":
           description: Forbidden
       summary: Update webinar
@@ -423,7 +476,11 @@ paths:
         - Webinars
   "/organizers/{organizerKey}/webinars/{webinarKey}/coorganizers":
     get:
-      description: Returns the co-organizers for the specified webinar. The original organizer who created the webinar is filtered out of the list. If the webinar has no co-organizers, an empty array is returned. Co-organizers that do not have a GoToWebinar account are returned as external co-organizers. For those organizers no surname is returned.
+      description: Returns the co-organizers for the specified webinar. The original
+        organizer who created the webinar is filtered out of the list. If the
+        webinar has no co-organizers, an empty array is returned. Co-organizers
+        that do not have a GoToWebinar account are returned as external
+        co-organizers. For those organizers no surname is returned.
       operationId: getCoorganizers
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -446,7 +503,14 @@ paths:
       tags:
         - Co-organizers
     post:
-      description: Creates co-organizers for the specified webinar. For co-organizers that have a GoToWebinar account you have to set the parameter 'external' to 'false'. In this case you have to pass the parameter 'organizerKey' only. For co-organizers that have no GoToWebinar account you have to set the parameter 'external' to 'true'. In this case you have to pass the parameters 'givenName' and 'email'. Since there is no parameter for 'surname' you should pass first and last name to the parameter 'givenName'.
+      description: Creates co-organizers for the specified webinar. For co-organizers
+        that have a GoToWebinar account you have to set the parameter 'external'
+        to 'false'. In this case you have to pass the parameter 'organizerKey'
+        only. For co-organizers that have no GoToWebinar account you have to set
+        the parameter 'external' to 'true'. In this case you have to pass the
+        parameters 'givenName' and 'email'. Since there is no parameter for
+        'surname' you should pass first and last name to the parameter
+        'givenName'.
       operationId: createCoorganizers
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -478,14 +542,17 @@ paths:
         - Co-organizers
   "/organizers/{organizerKey}/webinars/{webinarKey}/coorganizers/{coorganizerKey}":
     delete:
-      description: Deletes an internal co-organizer specified by the coorganizerKey (memberKey).
+      description: Deletes an internal co-organizer specified by the coorganizerKey
+        (memberKey).
       operationId: deleteCoorganizer
       parameters:
         - $ref: "#/parameters/Authorization"
         - $ref: "#/parameters/organizerKey"
         - $ref: "#/parameters/webinarKey"
         - $ref: "#/parameters/coorganizerKey"
-        - description: By default only internal co-organizers (with a GoToWebinar account) can be deleted. If you want to use this call for external co-organizers you have to set this parameter to 'true'.
+        - description: By default only internal co-organizers (with a GoToWebinar account)
+            can be deleted. If you want to use this call for external
+            co-organizers you have to set this parameter to 'true'.
           in: query
           name: external
           required: false
@@ -511,7 +578,10 @@ paths:
         - $ref: "#/parameters/organizerKey"
         - $ref: "#/parameters/webinarKey"
         - $ref: "#/parameters/coorganizerKey"
-        - description: By default only internal co-organizers (with a GoToWebinar account) will retrieve the resent invitation email. If you want to use this call for external co-organizers you have to set this parameter to 'true'.
+        - description: By default only internal co-organizers (with a GoToWebinar account)
+            will retrieve the resent invitation email. If you want to use this
+            call for external co-organizers you have to set this parameter to
+            'true'.
           in: query
           name: external
           required: false
@@ -676,7 +746,13 @@ paths:
         - Webinars
   "/organizers/{organizerKey}/webinars/{webinarKey}/registrants":
     get:
-      description: Retrieve registration details for all registrants of a specific webinar. Registrant details will not include all fields captured when creating the registrant. To see all data, use the API call 'Get Registrant'. Registrants can have one of the following states; <br>WAITING - registrant registered and is awaiting approval (where organizer has required approval), <br>APPROVED - registrant registered and is approved, and <br>DENIED - registrant registered and was denied.
+      description: Retrieve registration details for all registrants of a specific
+        webinar. Registrant details will not include all fields captured when
+        creating the registrant. To see all data, use the API call 'Get
+        Registrant'. Registrants can have one of the following states;
+        <br>WAITING - registrant registered and is awaiting approval (where
+        organizer has required approval), <br>APPROVED - registrant registered
+        and is approved, and <br>DENIED - registrant registered and was denied.
       operationId: getAllRegistrantsForWebinar
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -699,23 +775,43 @@ paths:
       tags:
         - Registrants
     post:
-      description: "Register an attendee for a scheduled webinar. The response contains the registrantKey and join URL for the registrant. An email will be sent to the registrant unless the organizer turns off the confirmation email setting from the GoToWebinar website. Please note that you must provide all required fields including custom fields defined during the webinar creation. Use the API call 'Get registration fields' to get a list of all fields, if they are required, and their possible values. At this time there are two versions of the 'Create Registrant' call. The first version only accepts firstName, lastName, and email and ignores all other fields. If you have custom fields or want to capture additional information this version won't work for you. The second version allows you to pass all required and optional fields, including custom fields defined when creating the webinar. To use the second version you must pass the header value 'Accept: application/vnd.citrix.g2wapi-v1.1+json' instead of 'Accept: application/json'. Leaving this header out results in the first version of the API call."
+      description: "Register an attendee for a scheduled webinar. The response
+        contains the registrantKey and join URL for the registrant. An email
+        will be sent to the registrant unless the organizer turns off the
+        confirmation email setting from the GoToWebinar website. Please note
+        that you must provide all required fields including custom fields
+        defined during the webinar creation. Use the API call 'Get registration
+        fields' to get a list of all fields, if they are required, and their
+        possible values. At this time there are two versions of the 'Create
+        Registrant' call. The first version only accepts firstName, lastName,
+        and email and ignores all other fields. If you have custom fields or
+        want to capture additional information this version won't work for you.
+        The second version allows you to pass all required and optional fields,
+        including custom fields defined when creating the webinar. To use the
+        second version you must pass the header value 'Accept:
+        application/vnd.citrix.g2wapi-v1.1+json' instead of 'Accept:
+        application/json'. Leaving this header out results in the first version
+        of the API call."
       operationId: createRegistrant
       parameters:
         - $ref: "#/parameters/Authorization"
         - $ref: "#/parameters/organizerKey"
         - $ref: "#/parameters/webinarKey"
-        - description: Set to 'application/vnd.citrix.g2wapi-v1.1+json' to make a registration using fields (custom or default) additional to the basic ones.
+        - description: Set to 'application/vnd.citrix.g2wapi-v1.1+json' to make a
+            registration using fields (custom or default) additional to the
+            basic ones.
           in: header
           name: Accept
           required: false
           type: string
-        - description: Indicates whether the confirmation email should be resent when a registrant is re-registered. The default value is false.
+        - description: Indicates whether the confirmation email should be resent when a
+            registrant is re-registered. The default value is false.
           in: query
           name: resendConfirmation
           required: false
           type: boolean
-        - description: The registrant details. To get all possible values run the API call 'Get registration fields' which is also part of this documentation.
+        - description: The registrant details. To get all possible values run the API call
+            'Get registration fields' which is also part of this documentation.
           in: body
           name: body
           required: true
@@ -739,7 +835,8 @@ paths:
         - Registrants
   "/organizers/{organizerKey}/webinars/{webinarKey}/registrants/fields":
     get:
-      description: Retrieve required, optional registration, and custom questions for a specified webinar.
+      description: Retrieve required, optional registration, and custom questions for
+        a specified webinar.
       operationId: getRegistrationFields
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -761,7 +858,8 @@ paths:
         - Registrants
   "/organizers/{organizerKey}/webinars/{webinarKey}/registrants/{registrantKey}":
     delete:
-      description: Removes a webinar registrant from current registrations for the specified webinar. The webinar must be a scheduled, future webinar.
+      description: Removes a webinar registrant from current registrations for the
+        specified webinar. The webinar must be a scheduled, future webinar.
       operationId: deleteRegistrant
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -828,7 +926,12 @@ paths:
         - Sessions
   "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}":
     get:
-      description: Retrieves attendance details for a specific webinar session that has ended. If attendees attended the session ('registrantsAttended'), specific attendance details, such as attendenceTime for a registrant, will also be retrieved. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.
+      description: Retrieves attendance details for a specific webinar session that
+        has ended. If attendees attended the session ('registrantsAttended'),
+        specific attendance details, such as attendenceTime for a registrant,
+        will also be retrieved. For technical reasons, this call cannot be
+        executed from this documentation. Please use the curl command to execute
+        it.
       operationId: getWebinarSession
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -853,7 +956,9 @@ paths:
         - Sessions
   "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees":
     get:
-      description: Retrieve details for all attendees of a specific webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.
+      description: Retrieve details for all attendees of a specific webinar session.
+        For technical reasons, this call cannot be executed from this
+        documentation. Please use the curl command to execute it.
       operationId: getAttendees
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -878,7 +983,10 @@ paths:
         - Attendees
   "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}":
     get:
-      description: Retrieve registration details for a particular attendee of a specific webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.
+      description: Retrieve registration details for a particular attendee of a
+        specific webinar session. For technical reasons, this call cannot be
+        executed from this documentation. Please use the curl command to execute
+        it.
       operationId: getAttendee
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -902,7 +1010,9 @@ paths:
         - Attendees
   "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}/polls":
     get:
-      description: Get poll answers from a particular attendee of a specific webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.
+      description: Get poll answers from a particular attendee of a specific webinar
+        session. For technical reasons, this call cannot be executed from this
+        documentation. Please use the curl command to execute it.
       operationId: getAttendeePollAnswers
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -928,7 +1038,9 @@ paths:
         - Attendees
   "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}/questions":
     get:
-      description: Get questions asked by an attendee during a webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.
+      description: Get questions asked by an attendee during a webinar session. For
+        technical reasons, this call cannot be executed from this documentation.
+        Please use the curl command to execute it.
       operationId: getAttendeeQuestions
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -954,7 +1066,9 @@ paths:
         - Attendees
   "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}/surveys":
     get:
-      description: Retrieve survey answers from a particular attendee during a webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.
+      description: Retrieve survey answers from a particular attendee during a webinar
+        session. For technical reasons, this call cannot be executed from this
+        documentation. Please use the curl command to execute it.
       operationId: getAttendeeSurveyAnswers
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -980,7 +1094,9 @@ paths:
         - Attendees
   "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/performance":
     get:
-      description: Get performance details for a session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.
+      description: Get performance details for a session. For technical reasons, this
+        call cannot be executed from this documentation. Please use the curl
+        command to execute it.
       operationId: getPerformance
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -1003,7 +1119,10 @@ paths:
         - Sessions
   "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/polls":
     get:
-      description: Retrieve all collated attendee questions and answers for polls from a specific webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.
+      description: Retrieve all collated attendee questions and answers for polls from
+        a specific webinar session. For technical reasons, this call cannot be
+        executed from this documentation. Please use the curl command to execute
+        it.
       operationId: getPolls
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -1028,7 +1147,9 @@ paths:
         - Sessions
   "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/questions":
     get:
-      description: Retrieve questions and answers for a past webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.
+      description: Retrieve questions and answers for a past webinar session. For
+        technical reasons, this call cannot be executed from this documentation.
+        Please use the curl command to execute it.
       operationId: getQuestions
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -1053,7 +1174,9 @@ paths:
         - Sessions
   "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/surveys":
     get:
-      description: Retrieve surveys for a past webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.
+      description: Retrieve surveys for a past webinar session. For technical reasons,
+        this call cannot be executed from this documentation. Please use the
+        curl command to execute it.
       operationId: getSurveys
       parameters:
         - $ref: "#/parameters/Authorization"
@@ -1169,10 +1292,12 @@ definitions:
       - _embedded
       - page
   AnswerToAttendeeQuestion:
-    description: Describes an answer to a question asked by an attendee during a webinar session.
+    description: Describes an answer to a question asked by an attendee during a
+      webinar session.
     properties:
       answer:
-        description: An answer given to a question asked by an attendee during a webinar session
+        description: An answer given to a question asked by an attendee during a webinar
+          session
         type: string
       answeredBy:
         description: The key of the organizer that answered the attendee's question
@@ -1202,15 +1327,18 @@ definitions:
         format: float
         type: number
       averageAttentiveness:
-        description: Average based on the focus of the attendees Viewer during the webinar session
+        description: Average based on the focus of the attendees Viewer during the
+          webinar session
         format: float
         type: number
       averageInterestRating:
-        description: Numerical value 1-100 (100 being most interested) indicating the average interest rating of the webinar attendees
+        description: Numerical value 1-100 (100 being most interested) indicating the
+          average interest rating of the webinar attendees
         format: float
         type: number
       percentageAttendance:
-        description: The percentage of registrants that actually attended the webinar session
+        description: The percentage of registrants that actually attended the webinar
+          session
         format: float
         type: number
       registrantCount:
@@ -1261,10 +1389,12 @@ definitions:
       - attendance
       - sessionKey
   AttendeeQuestion:
-    description: Describes the question asked by an attendee during a webinar session; includes the answers given to it.
+    description: Describes the question asked by an attendee during a webinar
+      session; includes the answers given to it.
     properties:
       answers:
-        description: Answer to a question of an attendee and key of the organizer that answered
+        description: Answer to a question of an attendee and key of the organizer that
+          answered
         items:
           $ref: "#/definitions/AnswerToAttendeeQuestion"
         type: array
@@ -1284,7 +1414,18 @@ definitions:
       confCallNumbers:
         additionalProperties:
           $ref: "#/definitions/CallNumbers"
-        description: "The conference call numbers and access codes per country. This will be returned only, if 'type' is not set to 'Private'. Example for this object: \"confCallNumbers\":{\"CA\":{\"accessCodes\":{\"attendee\":\"159-309-045\",\"organizer\":\"791-426-085\",\"panelist\":\"690-270-339\"},\"tollFree\":\"1 888 455 4198\"},\"FI\":{\"accessCodes\":{\"attendee\":\"159-309-045\",\"organizer\":\"791-426-085\",\"panelist\":\"690-270-339\"},\"toll\":\"+358 (0) 338 79 4198\"},\"US\":{\"accessCodes\":{\"attendee\":\"159-309-045\",\"organizer\":\"791-426-085\",\"panelist\":\"690-270-339\"},\"toll\":\"+1 (805) 879-4198\",\"tollFree\":\"1 888 455 4198\"}}"
+        description: "The conference call numbers and access codes per country. This
+          will be returned only, if 'type' is not set to 'Private'. Example for
+          this object:
+          \"confCallNumbers\":{\"CA\":{\"accessCodes\":{\"attendee\":\"159-309-\
+          045\",\"organizer\":\"791-426-085\",\"panelist\":\"690-270-339\"},\"t\
+          ollFree\":\"1 888 455
+          4198\"},\"FI\":{\"accessCodes\":{\"attendee\":\"159-309-045\",\"organ\
+          izer\":\"791-426-085\",\"panelist\":\"690-270-339\"},\"toll\":\"+358
+          (0) 338 79
+          4198\"},\"US\":{\"accessCodes\":{\"attendee\":\"159-309-045\",\"organ\
+          izer\":\"791-426-085\",\"panelist\":\"690-270-339\"},\"toll\":\"+1
+          (805) 879-4198\",\"tollFree\":\"1 888 455 4198\"}}"
         type: object
       privateInfo:
         $ref: "#/definitions/PrivateInfo"
@@ -1292,7 +1433,9 @@ definitions:
         type: object
       type:
         $ref: "#/definitions/AudioType"
-        description: Indicates how to connect to the webinar's audio conference. The value of this field determines if other fields appear in the response or not
+        description: Indicates how to connect to the webinar's audio conference. The
+          value of this field determines if other fields appear in the response
+          or not
     required:
       - type
   AudioType:
@@ -1312,7 +1455,8 @@ definitions:
         type: object
       pstnInfo:
         $ref: "#/definitions/PstnInfoUpdate"
-        description: Defines via two-letter Alpha-2-code which toll and toll-free PSTN numbers are available per country
+        description: Defines via two-letter Alpha-2-code which toll and toll-free PSTN
+          numbers are available per country
         type: object
       type:
         $ref: "#/definitions/AudioType"
@@ -1335,13 +1479,16 @@ definitions:
       - accessCodes
       - toll
   Coorganizer:
-    description: Describes a webinar co-organizer. A co-organizer without a GoToWebinar account is marked as external and is returned without a surname
+    description: Describes a webinar co-organizer. A co-organizer without a
+      GoToWebinar account is marked as external and is returned without a
+      surname
     properties:
       email:
         description: The co-organizer's email address
         type: string
       external:
-        description: If the co-organizer has no GoToWebinar account, this value is set to 'true'
+        description: If the co-organizer has no GoToWebinar account, this value is set
+          to 'true'
         type: boolean
       givenName:
         description: The co-organizer's given name
@@ -1350,10 +1497,12 @@ definitions:
         description: The co-organizer's join link
         type: string
       memberKey:
-        description: The co-organizer's organizer key. A new member key is created for external co-organizers
+        description: The co-organizer's organizer key. A new member key is created for
+          external co-organizers
         type: string
       surname:
-        description: The co-organizer's surname. For external co-organizers this parameter is not returned
+        description: The co-organizer's surname. For external co-organizers this
+          parameter is not returned
         type: string
     required:
       - joinLink
@@ -1366,16 +1515,20 @@ definitions:
     description: "Details used for creating a co-organizer for a webinar. "
     properties:
       email:
-        description: The co-organizer's email address. This parameter has to be passed only, if 'external' is set to 'true'
+        description: The co-organizer's email address. This parameter has to be passed
+          only, if 'external' is set to 'true'
         type: string
       external:
-        description: If the co-organizer has no GoToWebinar account, this value has to be set to 'true'
+        description: If the co-organizer has no GoToWebinar account, this value has to
+          be set to 'true'
         type: boolean
       givenName:
-        description: The co-organizer's given name. This parameter has to be passed only, if 'external' is set to 'true'
+        description: The co-organizer's given name. This parameter has to be passed
+          only, if 'external' is set to 'true'
         type: string
       organizerKey:
-        description: The co-organizer's organizer key. This parameter has to be passed only, if 'external' is set to 'false'
+        description: The co-organizer's organizer key. This parameter has to be passed
+          only, if 'external' is set to 'false'
         type: string
     required:
       - external
@@ -1420,7 +1573,8 @@ definitions:
       - answer
       - question
   DateTimeRange:
-    description: A pair of DateTime values, the first of which serves as a start time and the second as an end time of an interval.
+    description: A pair of DateTime values, the first of which serves as a start
+      time and the second as an end time of an interval.
     properties:
       endTime:
         description: The ending time of an interval, e.g. 2015-07-13T22:00:00Z
@@ -1476,13 +1630,15 @@ definitions:
         description: The panelist's email address
         type: string
       firstName:
-        description: DEPRECATED. The fields 'firstName' and 'lastName' are replaced by the field 'name'
+        description: DEPRECATED. The fields 'firstName' and 'lastName' are replaced by
+          the field 'name'
         type: string
       joinLink:
         description: The co-organizer's join link
         type: string
       lastName:
-        description: DEPRECATED. The fields 'firstName' and 'lastName' are replaced by the field 'name'
+        description: DEPRECATED. The fields 'firstName' and 'lastName' are replaced by
+          the field 'name'
         type: string
       name:
         description: The panelist's name
@@ -1511,7 +1667,8 @@ definitions:
       - email
       - name
   Poll:
-    description: A poll or survey launched by an organizer during or after a webinar session; includes the responses given to it by the attendees.
+    description: A poll or survey launched by an organizer during or after a webinar
+      session; includes the responses given to it by the attendees.
     properties:
       numberOfResponses:
         description: The total number of responses received for this poll or survey
@@ -1530,7 +1687,8 @@ definitions:
       - question
       - numberOfResponses
   PollAnswer:
-    description: Describes the answer given by a webinar attendee to a poll or survey launched by an organizer.
+    description: Describes the answer given by a webinar attendee to a poll or
+      survey launched by an organizer.
     properties:
       answer:
         description: The answer given to the poll or survey question
@@ -1542,7 +1700,8 @@ definitions:
       - answer
       - question
   PollResponse:
-    description: One of the potential responses/options to a poll or survey launched by an organizer during a webinar session.
+    description: One of the potential responses/options to a poll or survey launched
+      by an organizer during a webinar session.
     properties:
       percentage:
         description: The percentage of responses that favored this particular option
@@ -1614,15 +1773,22 @@ definitions:
     required:
       - attendee
   PstnInfoUpdate:
-    description: Defines the audio/conferencing settings for the specified webinar. It required to pass 'tollFreeCountries' or 'tollCountries' or both.
+    description: Defines the audio/conferencing settings for the specified webinar.
+      It required to pass 'tollFreeCountries' or 'tollCountries' or both.
     properties:
       tollCountries:
-        description: Defines in which countries toll PSTN numbers are available. Possible values are AT, AU, BE, CA, CH, DE, DK, ES, FI, FR, GB, IE, IT, NL, NO, NZ, SE, US
+        description: Defines in which countries toll PSTN numbers are available.
+          Possible values are AT, AU, BE, CA, CH, DE, DK, ES, FI, FR, GB, IE,
+          IT, NL, NO, NZ, SE, US
         items:
           $ref: "#/definitions/TollCountries"
         type: array
       tollFreeCountries:
-        description: Defines in which countries toll free PSTN numbers are available. Possible values are AE, AR, AT, AU, BE, BG, BH, BR, BY, CA, CH, CL, CN, CO, CZ, DE, DK, ES, FI, FR, GB, GR, HK, HU, ID, IE, IL, IN, IS, IT, JP, KR, LU, MX, MY, NL, NO, NZ, PA, PE, PH, PL, PT, RO, RU, SA, SE, SG, TH, TR, TW, UA, US, UY, VN, ZA
+        description: Defines in which countries toll free PSTN numbers are available.
+          Possible values are AE, AR, AT, AU, BE, BG, BH, BR, BY, CA, CH, CL,
+          CN, CO, CZ, DE, DK, ES, FI, FR, GB, GR, HK, HU, ID, IE, IL, IN, IS,
+          IT, JP, KR, LU, MX, MY, NL, NO, NZ, PA, PE, PH, PL, PT, RO, RU, SA,
+          SE, SG, TH, TR, TW, UA, US, UY, VN, ZA
         items:
           $ref: "#/definitions/TollFreeCountries"
         type: array
@@ -1733,7 +1899,8 @@ definitions:
         description: The time frame within which the product will be purchased
         type: string
       questionsAndComments:
-        description: Any questions or comments the registrant made at the time of registration
+        description: Any questions or comments the registrant made at the time of
+          registration
         type: string
       registrantKey:
         description: The registrant's key
@@ -1749,7 +1916,8 @@ definitions:
           $ref: "#/definitions/CustomAnswers"
         type: array
       source:
-        description: The source that led to the registration. This can be any string like 'Newsletter 123' or 'Marketing campaign ABC'
+        description: The source that led to the registration. This can be any string
+          like 'Newsletter 123' or 'Marketing campaign ABC'
         type: string
       state:
         description: The registrant's state (US only)
@@ -1765,12 +1933,14 @@ definitions:
         description: The time zone where the webinar will take place
         type: string
       type:
-        description: The type is REGULAR for 'One session' and 'Sequence' webinars. For webinar series this parameter is not passed
+        description: The type is REGULAR for 'One session' and 'Sequence' webinars. For
+          webinar series this parameter is not passed
         enum:
           - REGULAR
         type: string
       unsubscribed:
-        description: Indicates whether the registrant opted-out from receiving other emails from this webinar's organizer
+        description: Indicates whether the registrant opted-out from receiving other
+          emails from this webinar's organizer
         type: boolean
       zipCode:
         description: The registrant's zip (post) code
@@ -1785,7 +1955,8 @@ definitions:
       - joinUrl
       - timeZone
   RegistrantFields:
-    description: Detailed description of a all fields to register a registrant for a webinar.
+    description: Detailed description of a all fields to register a registrant for a
+      webinar.
     properties:
       address:
         description: The registrant's address
@@ -1827,7 +1998,8 @@ definitions:
         description: The time frame within which the product will be purchased
         type: string
       questionsAndComments:
-        description: Any questions or comments the registrant made at the time of registration
+        description: Any questions or comments the registrant made at the time of
+          registration
         type: string
       responses:
         description: Set the answers of all questions
@@ -1835,7 +2007,8 @@ definitions:
           $ref: "#/definitions/RegistrantQAResponse"
         type: array
       source:
-        description: The source that led to the registration. This can be any string like 'Newsletter 123' or 'Marketing campaign ABC'
+        description: The source that led to the registration. This can be any string
+          like 'Newsletter 123' or 'Marketing campaign ABC'
         type: string
       state:
         description: The registrant's state (US only)
@@ -1848,7 +2021,14 @@ definitions:
       - lastName
       - email
   RegistrantQAResponse:
-    description: "Describes a completed registration question for a webinar registrant. If you use 'Multiple choice' questions the response contains the numeric answerKey, otherwise the answer text. Example:<br>{<br>  \"firstName\": \"First\",<br>  \"lastName\": \"Last\",<br>  \"email\": \"First.Last@example.com\",<br>  \"responses\": [{<br>      \"questionKey\": 17023549,<br>      \"responseText\": \"This is a short answer\"},{<br>      \"questionKey\": 17023550,<br>      \"answerKey\": 17023553}  ]<br>}"
+    description: "Describes a completed registration question for a webinar
+      registrant. If you use 'Multiple choice' questions the response contains
+      the numeric answerKey, otherwise the answer text.
+      Example:<br>{<br>  \"firstName\": \"First\",<br>  \"lastName\":
+      \"Last\",<br>  \"email\": \"First.Last@example.com\",<br>  \"responses\":
+      [{<br>      \"questionKey\": 17023549,<br>      \"responseText\": \"This
+      is a short answer\"},{<br>      \"questionKey\":
+      17023550,<br>      \"answerKey\": 17023553}  ]<br>}"
     properties:
       answerKey:
         description: The numeric key of the answer to a multiple-choice question.
@@ -1902,12 +2082,14 @@ definitions:
     description: The fields to be completed on the webinar registration form.
     properties:
       fields:
-        description: The default fields the organizer has selected for the webinar registration form
+        description: The default fields the organizer has selected for the webinar
+          registration form
         items:
           $ref: "#/definitions/RegistrationField"
         type: array
       questions:
-        description: Custom fields created by the organizer for the webinar registration form
+        description: Custom fields created by the organizer for the webinar registration
+          form
         items:
           $ref: "#/definitions/RegistrationQuestion"
         type: array
@@ -1937,7 +2119,8 @@ definitions:
         description: Indicates whether the custom registration field is compulsory
         type: boolean
       type:
-        description: Indicates whether the custom registration field requires a single short answer or whether it is a multiple choice question
+        description: Indicates whether the custom registration field requires a single
+          short answer or whether it is a multiple choice question
         enum:
           - multipleChoice
           - shortAnswer
@@ -2241,16 +2424,34 @@ definitions:
         description: The name/subject of the webinar (128 characters maximum)
         type: string
       timeZone:
-        description: The time zone where the webinar is taking place (must be a valid time zone ID, see https://goto-developer.logmein.com/time-zones). If this parameter is not passed, the timezone of the organizer's profile will be used
+        description: The time zone where the webinar is taking place (must be a valid
+          time zone ID, see https://goto-developer.logmein.com/time-zones). If
+          this parameter is not passed, the timezone of the organizer's profile
+          will be used
         type: string
       times:
-        description: Array with startTime and endTime for webinar. Since this call creates single session webinars, the array can only contain a single pair of startTime and endTime
+        description: Array with startTime and endTime for webinar. Since this call
+          creates single session webinars, the array can only contain a single
+          pair of startTime and endTime
         items:
           $ref: "#/definitions/DateTimeRange"
         type: array
       type:
         default: single_session
-        description: 'Specifies the webinar type. The default type value is "single_session", which is used to create a single webinar session. The possible values are "single_session", "series", "sequence". If type is set to "single_session", a single webinar session is created. If type is set to "series", a webinar series is created. In this case 2 or more timeframes must be specified for each webinar. Example: "times": [{"startTime": "...", "endTime": "..."},{"startTime": "...", "endTime": "..."},{"startTime": "...", "endTime": "..."}. If type is set to "sequence" a sequence of webinars is created. The times object in the body must be replaced by the "recurrenceStart" object. Example: "recurrenceStart": {"startTime":"2012-06-12T16:00:00Z", "endTime": "2012-06-12T17:00:00Z" }.  The "recurrenceEnd" and "recurrencePattern" body parameter must be specified. Example: , "recurrenceEnd": "2012-07-10", "recurrencePattern": "daily".'
+        description: 'Specifies the webinar type. The default type value is
+          "single_session", which is used to create a single webinar session.
+          The possible values are "single_session", "series", "sequence". If
+          type is set to "single_session", a single webinar session is created.
+          If type is set to "series", a webinar series is created. In this case
+          2 or more timeframes must be specified for each webinar. Example:
+          "times": [{"startTime": "...", "endTime": "..."},{"startTime": "...",
+          "endTime": "..."},{"startTime": "...", "endTime": "..."}. If type is
+          set to "sequence" a sequence of webinars is created. The times object
+          in the body must be replaced by the "recurrenceStart" object. Example:
+          "recurrenceStart": {"startTime":"2012-06-12T16:00:00Z", "endTime":
+          "2012-06-12T17:00:00Z" }.  The "recurrenceEnd" and "recurrencePattern"
+          body parameter must be specified. Example: , "recurrenceEnd":
+          "2012-07-10", "recurrencePattern": "daily".'
         type: string
     required:
       - subject
@@ -2275,7 +2476,10 @@ definitions:
         description: The name/subject of the webinar (128 characters maximum)
         type: string
       timeZone:
-        description: The time zone where the webinar is taking place (must be a valid time zone ID, see https://goto-developer.logmein.com/time-zones). If this parameter is not passed, the timezone of the organizer's profile will be used
+        description: The time zone where the webinar is taking place (must be a valid
+          time zone ID, see https://goto-developer.logmein.com/time-zones). If
+          this parameter is not passed, the timezone of the organizer's profile
+          will be used
         type: string
       times:
         description: Array with start and end time(s) for webinar

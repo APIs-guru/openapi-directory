@@ -31,11 +31,9 @@ security:
 paths:
   "/map/{versionNumber}/copyrights.{format}":
     get:
-      description: >-
+      description: |-
         The Copyrights API returns copyright information for
-
         the Maps API Raster Tile Service in JSON, JSONP, or XML format.
-
         This call returns copyright information for the whole world.
       parameters:
         - description: Version of the service to call. The current version is 1
@@ -69,7 +67,7 @@ paths:
         "304":
           description: <b>Not Modified</b>
         "400":
-          description: >-
+          description: |-
             <b>Malformed request</b>: malformed syntax. Possible causes include:
               - requested syntax is not available
         "403":
@@ -78,7 +76,8 @@ paths:
           description: "<b>Gone</b>: Request for unsupported format"
         "500":
           description: >-
-            <b>Internal Server Error</b>: There is a problem with the TomTom Copyrights
+            <b>Internal Server Error</b>: There is a problem with the TomTom
+            Copyrights
 
             API service
       summary: Copyrights whole world
@@ -119,7 +118,7 @@ paths:
         "304":
           description: <b>Not Modified</b>
         "400":
-          description: >-
+          description: |-
             <b>Malformed request</b>: malformed syntax. Possible causes include:
               - requested syntax is not available
         "403":
@@ -128,7 +127,8 @@ paths:
           description: "<b>Gone</b>: Request for unsupported format"
         "500":
           description: >-
-            <b>Internal Server Error</b>: There is a problem with the TomTom Copyrights
+            <b>Internal Server Error</b>: There is a problem with the TomTom
+            Copyrights
 
             API service
       summary: Captions
@@ -136,11 +136,9 @@ paths:
         - Copyrights
   "/map/{versionNumber}/copyrights/{minLon}/{minLat}/{maxLon}/{maxLat}.{format}":
     get:
-      description: >-
+      description: |-
         The Copyrights API returns copyright information for
-
         the Maps API Raster Tile Service in JSON, JSONP, or XML format.
-
         This call returns copyright information for a specific bounding box.
       parameters:
         - description: Version of the service to call. The current version is 1
@@ -162,28 +160,32 @@ paths:
               - jsonp
               - xml
             type: string
-        - description: Minimum longitude coordinate of bounding box defined in terms of latitude/longitude.
+        - description: Minimum longitude coordinate of bounding box defined in terms of
+            latitude/longitude.
           example: -179.1506
           in: path
           name: minLon
           required: true
           schema:
             type: number
-        - description: Minimum latitude coordinate of bounding box defined in terms of latitude/longitude.
+        - description: Minimum latitude coordinate of bounding box defined in terms of
+            latitude/longitude.
           example: 18.9117
           in: path
           name: minLat
           required: true
           schema:
             type: number
-        - description: Maximum longitude coordinate of bounding box defined in terms of latitude/longitude.
+        - description: Maximum longitude coordinate of bounding box defined in terms of
+            latitude/longitude.
           example: -66.9406
           in: path
           name: maxLon
           required: true
           schema:
             type: number
-        - description: Maximum latitude coordinate of bounding box defined in terms of latitude/longitude.
+        - description: Maximum latitude coordinate of bounding box defined in terms of
+            latitude/longitude.
           example: 71.441
           in: path
           name: maxLat
@@ -202,12 +204,13 @@ paths:
         "304":
           description: <b>Not Modified</b>
         "400":
-          description: >-
+          description: |-
             <b>Malformed request</b>: malformed syntax. Possible causes include:
               - requested syntax is not available
         "401":
           description: >-
-            <b>Bad request</b>: Parameters out of range. Possible causes include:
+            <b>Bad request</b>: Parameters out of range. Possible causes
+            include:
               - minLon n is out of range [-180,180]: the requested minimum longitude coordinate is out of possible range
               - minLat n is out of range [-90,90]: the requested minimum latitude coordinate is out of possible range
               - maxLon n is out of range [-180,180]: the requested maximum longitude coordinate is out of possible range
@@ -218,7 +221,8 @@ paths:
           description: "<b>Gone</b>: Request for unsupported format"
         "500":
           description: >-
-            <b>Internal Server Error</b>: There is a problem with the TomTom Copyrights
+            <b>Internal Server Error</b>: There is a problem with the TomTom
+            Copyrights
 
             API service
       summary: Copyrights bounding box
@@ -226,11 +230,9 @@ paths:
         - Copyrights
   "/map/{versionNumber}/copyrights/{zoom}/{X}/{Y}.{format}":
     get:
-      description: >-
+      description: |-
         The Copyrights API returns copyright information for
-
         the Maps API Raster Tile Service in JSON, JSONP, or XML format.
-
         This call returns copyright information for the a specific map tile.
       parameters:
         - description: Version of the service to call. The current version is 1
@@ -252,9 +254,8 @@ paths:
               - jsonp
               - xml
             type: string
-        - description: >-
+        - description: |-
             Zoom level of tile to be rendered. Only used for tile-level
-
             copyright calls.
           example: 0
           in: path
@@ -282,9 +283,8 @@ paths:
               - 17
               - 18
             type: integer
-        - description: >-
+        - description: |-
             X coordinate of the tile on zoom grid. Only used for tile-level
-
             copyright calls.
           example: 0
           in: path
@@ -292,9 +292,8 @@ paths:
           required: true
           schema:
             type: integer
-        - description: >-
+        - description: |-
             Y coordinate of the tile on zoom grid. Only used for tile-level
-
             copyright calls.
           example: 0
           in: path
@@ -314,12 +313,13 @@ paths:
         "304":
           description: <b>Not Modified</b>
         "400":
-          description: >-
+          description: |-
             <b>Malformed request</b>: malformed syntax. Possible causes include:
               - requested syntax is not available
         "401":
           description: >-
-            <b>Bad request</b>: Parameters out of range. Possible causes include:
+            <b>Bad request</b>: Parameters out of range. Possible causes
+            include:
               - zoom n is out of range 0 <= zoom < 19: the requested zoom level is out of the possible range
               - x n is out of range [0,m]: the requested x coordinate is out of the possible range (the value of m will vary depending on zoom level)
               - y n is out of range [0,m]: the requested y coordinate is out of the possible range (the value of m will vary depending on zoom level)
@@ -329,7 +329,8 @@ paths:
           description: "<b>Gone</b>: Request for unsupported format"
         "500":
           description: >-
-            <b>Internal Server Error</b>: There is a problem with the TomTom Copyrights
+            <b>Internal Server Error</b>: There is a problem with the TomTom
+            Copyrights
 
             API service
       summary: Copyrights tile
@@ -337,11 +338,9 @@ paths:
         - Copyrights
   "/map/{versionNumber}/staticimage":
     get:
-      description: >-
+      description: |-
         The Static Image service renders a rectangular raster image
-
         in the style, size, and zoom level specified. The image can be requested
-
         using either a center point plus width and height or a bounding box.
       parameters:
         - description: Version of the service to call. The current version is 1.
@@ -436,7 +435,8 @@ paths:
           schema:
             pattern: ^-*\d+\.*\d*, *-*\d+\.*\d*$
             type: string
-        - description: Width of the resulting image in pixels. Width must be a positive integer between 1 and 8192.
+        - description: Width of the resulting image in pixels. Width must be a positive
+            integer between 1 and 8192.
           example: 512
           in: query
           name: width
@@ -446,7 +446,8 @@ paths:
             maximum: 8192
             minimum: 1
             type: integer
-        - description: Height of the resulting image in pixels. Height must be a positive integer between 1 and 8192.
+        - description: Height of the resulting image in pixels. Height must be a positive
+            integer between 1 and 8192.
           example: 512
           in: query
           name: height
@@ -457,7 +458,8 @@ paths:
             minimum: 1
             type: integer
         - description: >-
-            Bounding box for the image, using EPSG:3857 projection (functionally equivalent to EPSG:900910).
+            Bounding box for the image, using EPSG:3857 projection
+            (functionally equivalent to EPSG:900910).
 
             Values <strong>must</strong> be in the order of minLon, minLat, maxLon, maxLat.
 
@@ -470,7 +472,10 @@ paths:
           schema:
             pattern: ^(-*\d+\.*\d*,){3}(-*\d+\.*\d*)$
             type: string
-        - description: Geopolitical view. Determines rendering of disputed areas. See the <a href="/maps-api/maps-api-documentation-raster/raster-tile">documentation</a> for an explanation of how this works in live services.
+        - description: Geopolitical view. Determines rendering of disputed areas. See the
+            <a
+            href="/maps-api/maps-api-documentation-raster/raster-tile">documentation</a>
+            for an explanation of how this works in live services.
           example: Unified
           in: query
           name: view
@@ -485,7 +490,8 @@ paths:
           description: <b>OK</b>
         "400":
           description: >-
-            <b>Bad Request</b>: Received by the interface, but there is an error
+            <b>Bad Request</b>: Received by the interface, but there is an
+            error
 
             in the request, such as:
               - one or more of the required parameters is missing
@@ -504,9 +510,8 @@ paths:
               - supplied API key is not valid for the request
               - the requested view is not available in the country where the request was sent from
         "500":
-          description: >-
+          description: |-
             <b>Internal Server Error</b>: There is a problem with the Static Map
-
             Service.
         "503":
           description: <b>Service currently unavailable.</b>
@@ -515,7 +520,8 @@ paths:
         - Raster
   "/map/{versionNumber}/tile/{layer}/{style}/{zoom}/{X}/{Y}.pbf":
     get:
-      description: The Maps API Vector Service delivers vector tiles, which are representations of square sections of map data.
+      description: The Maps API Vector Service delivers vector tiles, which are
+        representations of square sections of map data.
       parameters:
         - description: Version of the service to call. The current version is 1
           in: path
@@ -590,7 +596,10 @@ paths:
           required: true
           schema:
             type: integer
-        - description: Geopolitical view. Determines rendering of disputed areas. See the <a href="/maps-api/maps-api-documentation-vector/tile">documentation</a> for an explanation of how this works in live services.
+        - description: Geopolitical view. Determines rendering of disputed areas. See the
+            <a
+            href="/maps-api/maps-api-documentation-vector/tile">documentation</a>
+            for an explanation of how this works in live services.
           example: Unified
           in: query
           name: view
@@ -601,7 +610,11 @@ paths:
               - IL
               - IN
             type: string
-        - description: "Language to be used for labels in the response. The default is NGT: Neutral Ground Truth, which uses each place's local official language and script (where available). See the <a href=\"/maps-api/maps-api-documentation-vector/tile\">documentation</a> for a full list of options."
+        - description: "Language to be used for labels in the response. The default is
+            NGT: Neutral Ground Truth, which uses each place's local official
+            language and script (where available). See the <a
+            href=\"/maps-api/maps-api-documentation-vector/tile\">documentation\
+            </a> for a full list of options."
           in: query
           name: language
           schema:
@@ -619,14 +632,13 @@ paths:
               - y n is out of range [0,m]: the requested y coordinate is out of the possible range (the value of m will vary depending on zoom level)
               - the requested view is not supported
         "403":
-          description: >-
+          description: |-
             <b>Forbidden</b>: 
               - the supplied API key is not valid for this request
               - the requested view is not available in your country
         "500":
-          description: >-
+          description: |-
             <b>Internal Server Error</b>: There is a problem with the TomTom
-
             Maps API Vector Tile service
         "503":
           description: <b>Service currently unavailable</b>.
@@ -635,7 +647,8 @@ paths:
         - Vector
   "/map/{versionNumber}/tile/{layer}/{style}/{zoom}/{X}/{Y}.{format}":
     get:
-      description: The Maps API Raster Service delivers raster tiles, which are representations of square sections of map data.
+      description: The Maps API Raster Service delivers raster tiles, which are
+        representations of square sections of map data.
       parameters:
         - description: Version of the service to call. The current version is 1.
           in: path
@@ -645,7 +658,9 @@ paths:
             enum:
               - 1
             type: integer
-        - description: Layer of tile to be rendered. <em>Hybrid</em> and <em>labels</em> are intended for layering with other data and are only available in <em>png</em> format.
+        - description: Layer of tile to be rendered. <em>Hybrid</em> and <em>labels</em>
+            are intended for layering with other data and are only available in
+            <em>png</em> format.
           example: basic
           in: path
           name: layer
@@ -721,7 +736,8 @@ paths:
               - jpg
               - png
             type: string
-        - description: Tile dimensions in pixels. <em>512</em> is only available for the <em>main</em> style and <em>basic</em> or <em>labels</em> layers.
+        - description: Tile dimensions in pixels. <em>512</em> is only available for the
+            <em>main</em> style and <em>basic</em> or <em>labels</em> layers.
           in: query
           name: tileSize
           required: false
@@ -731,7 +747,10 @@ paths:
               - 256
               - 512
             type: integer
-        - description: Geopolitical view. Determines rendering of disputed areas. See the <a href="/maps-sdk-web/functional-examples#geopolitical-views">documentation</a> for an explanation of how this works in live services.
+        - description: Geopolitical view. Determines rendering of disputed areas. See the
+            <a
+            href="/maps-sdk-web/functional-examples#geopolitical-views">documentation</a>
+            for an explanation of how this works in live services.
           example: Unified
           in: query
           name: view
@@ -762,20 +781,17 @@ paths:
         "410":
           description: "<b>Gone</b>: Request for unsupported format"
         "500":
-          description: >-
+          description: |-
             <b>Internal Server Error</b>: There is a problem with the TomTom
-
             Maps API Raster Tile service
       summary: Tile
       tags:
         - Raster
   "/map/{versionNumber}/wms/":
     get:
-      description: >-
+      description: |-
         The GetMap call implements the Web Map Service 1.1.1 standard
-
         to access TomTom raster map tiles. This service is described
-
         in the response to the GetCapabilities API call.
       operationId: GetMap
       parameters:
@@ -795,11 +811,9 @@ paths:
             enum:
               - GetMap
             type: string
-        - description: >-
+        - description: |-
             Projection used in describing the <b>bbox</b> EPSG:3857 is
-
             recommended, particularly at higher zoom levels. (Note that
-
             EPSG:3857 is functionally equivalent to EPSG:900913/EPSG:3785)
           example: EPSG:4326
           in: query
@@ -810,9 +824,8 @@ paths:
               - EPSG:3857
               - EPSG:4326
             type: string
-        - description: >-
+        - description: |-
             Bounding box in the projection stated in <b>srs</b>
-
             (minLon,minLat,maxLon,maxLat)
           example: -0.489,51.28,0.236,51.686
           in: query
@@ -854,11 +867,9 @@ paths:
               - basic
             type: string
         - allowEmptyValue: true
-          description: >-
+          description: |-
             Map styles to be returned. Currently, no styles are available. This
-
             parameter is present for forward compatibility; it must be used and
-
             left blank.
           in: query
           name: styles
@@ -888,13 +899,15 @@ paths:
           description: <b>OK</b>
         "202":
           description: >-
-            <b>Accepted</b>: Received by the interface, but there is a WMS exception in
+            <b>Accepted</b>: Received by the interface, but there is a WMS
+            exception in
 
             processing it. Possible causes include:
               - one or more required parameters is missing
               - unsupported or unrecognized parameter value
               - malformed bounding box requested
               - invalid map dimensions requested
+
 
 
 
@@ -921,9 +934,8 @@ paths:
         "401":
           description: "<b>Unauthorized</b>: Supplied API key is not valid for the request"
         "500":
-          description: >-
+          description: |-
             <b>Internal Server Error</b>: There is a problem with the TomTom WMS
-
             service
       summary: GetMap
       tags:
@@ -931,7 +943,8 @@ paths:
   "/map/{versionNumber}/wms//":
     get:
       description: >-
-        The GetCapabilities call is part of TomTom's implementation of version 1.1.1
+        The GetCapabilities call is part of TomTom's implementation of
+        version 1.1.1
 
         the Web Map Service (WMS). It provides descriptions of the other calls
 
@@ -972,13 +985,15 @@ paths:
           description: <b>OK</b>
         "202":
           description: >-
-            <b>Accepted</b>: Received by the interface, but there is a WMS exception in
+            <b>Accepted</b>: Received by the interface, but there is a WMS
+            exception in
 
             processing it. Possible causes include:
               - one or more required parameters is missing
               - unsupported or unrecognized parameter value
               - malformed bounding box requested
               - invalid map dimensions requested
+
 
 
 
@@ -1005,9 +1020,8 @@ paths:
         "401":
           description: "<b>Unauthorized</b>: Supplied API key is not valid for the request"
         "500":
-          description: >-
+          description: |-
             <b>Internal Server Error</b>: There is a problem with the TomTom WMS
-
             service
       summary: GetCapabilities
       tags:
@@ -1056,7 +1070,8 @@ paths:
         "401":
           description: "<b>Unauthorized</b>: Supplied API key is not valid for this request"
         "500":
-          description: "<b>Internal Server Error</b>: There is a problem with the TomTom WMTS service"
+          description: "<b>Internal Server Error</b>: There is a problem with the TomTom
+            WMTS service"
       security: []
       summary: WMTS
       tags:

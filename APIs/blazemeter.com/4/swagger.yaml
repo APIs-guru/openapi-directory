@@ -61,7 +61,8 @@ paths:
     post:
       operationId: panic_terminate
       parameters:
-        - description: <section class="body-param"><strong>session_ids</strong> (required)<br/></section>
+        - description: <section class="body-param"><strong>session_ids</strong>
+            (required)<br/></section>
           in: body
           name: blazemeter\Routing\v4\UserModel5
           required: false
@@ -98,7 +99,8 @@ paths:
           description: RestException
       security:
         - apiKey: []
-      summary: List organization multi-tests&nbsp; <i class="fa fa-lg fa-unlock-alt"></i>
+      summary: List organization multi-tests&nbsp; <i class="fa fa-lg
+        fa-unlock-alt"></i>
       tags:
         - user
   /user/invites:
@@ -159,7 +161,9 @@ paths:
   /user/password:
     patch:
       parameters:
-        - description: <section class="body-param"><strong>currentPassword</strong> (required)<br/><strong>newPassword</strong> (required)<br/></section>
+        - description: <section class="body-param"><strong>currentPassword</strong>
+            (required)<br/><strong>newPassword</strong>
+            (required)<br/></section>
           in: body
           name: blazemeter\Routing\v4\UserModel1
           required: true
@@ -179,7 +183,9 @@ paths:
         - user
     post:
       parameters:
-        - description: <section class="body-param"><strong>currentPassword</strong> (required)<br/><strong>newPassword</strong> (required)<br/></section>
+        - description: <section class="body-param"><strong>currentPassword</strong>
+            (required)<br/><strong>newPassword</strong>
+            (required)<br/></section>
           in: body
           name: blazemeter\Routing\v4\UserModel3
           required: true
@@ -199,7 +205,9 @@ paths:
         - user
     put:
       parameters:
-        - description: <section class="body-param"><strong>currentPassword</strong> (required)<br/><strong>newPassword</strong> (required)<br/></section>
+        - description: <section class="body-param"><strong>currentPassword</strong>
+            (required)<br/><strong>newPassword</strong>
+            (required)<br/></section>
           in: body
           name: blazemeter\Routing\v4\UserModel2
           required: true
@@ -269,7 +277,10 @@ paths:
     post:
       operationId: register
       parameters:
-        - description: <section class="body-param"><strong>firstName</strong> (required)<br/><strong>lastName</strong> (required)<br/><strong>email</strong> (required)<br/><strong>password</strong> (required)<br/></section>
+        - description: <section class="body-param"><strong>firstName</strong>
+            (required)<br/><strong>lastName</strong>
+            (required)<br/><strong>email</strong>
+            (required)<br/><strong>password</strong> (required)<br/></section>
           in: body
           name: blazemeter\Routing\v4\UserModel4
           required: true

@@ -92,54 +92,74 @@ externalDocs:
   url: https://docs.joinpeertube.org/api-rest-reference.html
 tags:
   - description: >
-      Accounts encompass remote accounts discovered across the federation, and correspond to the main Actor, along with video channels a user can create, which are also Actors.
+      Accounts encompass remote accounts discovered across the
+      federation, and correspond to the main Actor, along with video channels a
+      user can create, which are also Actors.
 
       When a comment is posted, it is done with your Account's Actor.
     name: Accounts
   - description: >
-      Using some features of PeerTube require authentication, for which User provide different levels of permission as well as associated user information. Each user has a corresponding local Account for federation.
+      Using some features of PeerTube require authentication, for which
+      User provide different levels of permission as well as associated user
+      information. Each user has a corresponding local Account for federation.
     name: Users
-  - description: >
+  - description: |
       Operations related to your own User, when logged-in.
     name: My User
   - description: >
-      Operations related to your subscriptions to video channels, their new videos, and how to keep up to date with their latest publications!
+      Operations related to your subscriptions to video channels, their
+      new videos, and how to keep up to date with their latest publications!
     name: My Subscriptions
-  - description: >
+  - description: |
       Operations related to your watch history.
     name: My History
   - description: >
-      Notifications following new videos, follows or reports. They allow you to keep track of the interactions and overall important information that concerns you. You MAY set per-notification type delivery preference, to receive the info either by mail, by in-browser notification or both.
+      Notifications following new videos, follows or reports. They allow
+      you to keep track of the interactions and overall important information
+      that concerns you. You MAY set per-notification type delivery preference,
+      to receive the info either by mail, by in-browser notification or both.
     name: My Notifications
   - description: >
-      Each server exposes public information regarding supported videos and options.
+      Each server exposes public information regarding supported videos
+      and options.
     name: Config
   - description: >
-      Jobs are long-running tasks enqueued and processed by the instance itself. No additional worker registration is currently available.
+      Jobs are long-running tasks enqueued and processed by the instance
+      itself. No additional worker registration is currently available.
     name: Job
   - description: >
-      Managing servers which the instance interacts with is crucial to the concept of federation in PeerTube and external video indexation. The PeerTube server then deals with inter-server ActivityPub operations and propagates information across its social graph by posting activities to actors' inbox endpoints.
+      Managing servers which the instance interacts with is crucial to
+      the concept of federation in PeerTube and external video indexation. The
+      PeerTube server then deals with inter-server ActivityPub operations and
+      propagates information across its social graph by posting activities to
+      actors' inbox endpoints.
     externalDocs:
       url: https://docs.joinpeertube.org/admin-following-instances?id=instances-follows
     name: Instance Follows
   - description: >
-      Redundancy is part of the inter-server solidarity that PeerTube fosters. Manage the list of instances you wish to help by seeding their videos according to the policy of video selection of your choice. Note that you have a similar functionality to mirror individual videos, see `Video Mirroring`.
+      Redundancy is part of the inter-server solidarity that PeerTube
+      fosters. Manage the list of instances you wish to help by seeding their
+      videos according to the policy of video selection of your choice. Note
+      that you have a similar functionality to mirror individual videos, see
+      `Video Mirroring`.
     externalDocs:
       url: https://docs.joinpeertube.org/admin-following-instances?id=instances-redundancy
     name: Instance Redundancy
   - description: >
-      Managing plugins installed from a local path or from NPM, or search for new ones.
+      Managing plugins installed from a local path or from NPM, or search
+      for new ones.
     externalDocs:
       url: https://docs.joinpeertube.org/api-plugins
     name: Plugins
   - description: >
       Abuses deal with reports of local or remote videos/comments/accounts alike.
     name: Abuses
-  - description: >
+  - description: |
       Operations dealing with listing, uploading, fetching or modifying videos.
     name: Video
   - description: >
-      The search helps to find _videos_ or _channels_ from within the instance and beyond.
+      The search helps to find _videos_ or _channels_ from within the
+      instance and beyond.
 
       Videos from other instances federated by the instance (that is, instances
 
@@ -153,21 +173,25 @@ tags:
       videos and channels not could be not federated by the instance.
     name: Search
   - description: >
-      Operations dealing with comments to a video. Comments are organized in threads.
+      Operations dealing with comments to a video. Comments are organized
+      in threads.
     name: Video Comments
   - description: >
-      Operations dealing with playlists of videos. Playlists are bound to users and/or channels.
+      Operations dealing with playlists of videos. Playlists are bound to
+      users and/or channels.
     name: Video Playlists
   - description: >
-      Operations dealing with the creation, modification and listing of videos within a channel.
+      Operations dealing with the creation, modification and listing of
+      videos within a channel.
     name: Video Channels
   - description: >
-      Operations dealing with blocking videos (removing them from view and preventing interactions).
+      Operations dealing with blocking videos (removing them from view
+      and preventing interactions).
     name: Video Blocks
-  - description: >
+  - description: |
       Like/dislike a video.
     name: Video Rates
-  - description: >
+  - description: |
       Server syndication feeds
     name: Feeds
 paths:
@@ -184,7 +208,8 @@ paths:
           name: predefinedReason
           schema:
             $ref: "#/components/schemas/PredefinedAbuseReasons"
-        - description: plain search that will match with video titles, reporter names and more
+        - description: plain search that will match with video titles, reporter names and
+            more
           in: query
           name: search
           schema:
@@ -467,7 +492,8 @@ paths:
     get:
       parameters:
         - $ref: "#/components/parameters/name"
-        - description: include view statistics for the last 30 days (only if authentified as the account user)
+        - description: include view statistics for the last 30 days (only if authentified
+            as the account user)
           in: query
           name: withStats
           schema:
@@ -516,18 +542,16 @@ paths:
         - Video
       x-code-samples:
         - lang: JavaScript
-          source: >
+          source: |
             fetch('https://peertube2.cpy.re/api/v1/accounts/{name}/videos')
-
             .then(function(response) {
               return response.json()
             }).then(function(data) {
               console.log(data)
             })
         - lang: Shell
-          source: >
+          source: |
             ## DEPENDENCIES: jq
-
             curl -s https://peertube2.cpy.re/api/v1/accounts/{name}/videos | jq
         - lang: Ruby
           source: >
@@ -746,7 +770,8 @@ paths:
   "/feeds/video-comments.{format}":
     get:
       parameters:
-        - description: format expected (we focus on making `rss` the most featureful ; it serves [Media RSS](https://www.rssboard.org/media-rss))
+        - description: format expected (we focus on making `rss` the most featureful ; it
+            serves [Media RSS](https://www.rssboard.org/media-rss))
           in: path
           name: format
           required: true
@@ -810,7 +835,7 @@ paths:
                 default: max-age=900
                 type: string
         "400":
-          description: >
+          description: |
             Arises when:
               - videoId filter is mixed with a channel filter
           x-summary: field inconsistencies
@@ -831,7 +856,8 @@ paths:
   "/feeds/videos.{format}":
     get:
       parameters:
-        - description: format expected (we focus on making `rss` the most featureful ; it serves [Media RSS](https://www.rssboard.org/media-rss))
+        - description: format expected (we focus on making `rss` the most featureful ; it
+            serves [Media RSS](https://www.rssboard.org/media-rss))
           in: path
           name: format
           required: true
@@ -1299,7 +1325,10 @@ paths:
           $ref: "#/components/callbacks/searchIndex"
       parameters:
         - description: >
-            String to search. If the user can make a remote URI search, and the string is an URI then the PeerTube instance will fetch the remote object and add it to its database. Then, you can use the REST API to fetch the complete channel information and interact with it.
+            String to search. If the user can make a remote URI search, and the
+            string is an URI then the PeerTube instance will fetch the remote
+            object and add it to its database. Then, you can use the REST API to
+            fetch the complete channel information and interact with it.
           in: query
           name: search
           required: true
@@ -1331,7 +1360,10 @@ paths:
       parameters:
         - allowEmptyValue: false
           description: >
-            String to search. If the user can make a remote URI search, and the string is an URI then the PeerTube instance will fetch the remote object and add it to its database. Then, you can use the REST API to fetch the complete video information and interact with it.
+            String to search. If the user can make a remote URI search, and the
+            string is an URI then the PeerTube instance will fetch the remote
+            object and add it to its database. Then, you can use the REST API to
+            fetch the complete video information and interact with it.
           in: query
           name: search
           required: true
@@ -2289,7 +2321,8 @@ paths:
       tags:
         - Video Playlists
     put:
-      description: If the video playlist is set as public, the playlist must have a assigned channel.
+      description: If the video playlist is set as public, the playlist must have a
+        assigned channel.
       parameters:
         - $ref: "#/components/parameters/idOrUUID"
       requestBody:
@@ -2388,7 +2421,8 @@ paths:
             schema:
               properties:
                 insertAfterPosition:
-                  description: New position for the block to reorder, to add the block before the first element
+                  description: New position for the block to reorder, to add the block before the
+                    first element
                   minimum: 0
                   type: integer
                 reorderLength:
@@ -2475,11 +2509,9 @@ paths:
   /videos/blacklist:
     get:
       parameters:
-        - description: >
+        - description: |
             list only blocks that match this type:
-
             - `1`: manual block
-
             - `2`: automatic block that needs review
           in: query
           name: type
@@ -2537,7 +2569,8 @@ paths:
         - Video
   /videos/imports:
     post:
-      description: Import a torrent or magnetURI or HTTP resource (if enabled by the instance administrator)
+      description: Import a torrent or magnetURI or HTTP resource (if enabled by the
+        instance administrator)
       requestBody:
         content:
           multipart/form-data:
@@ -2728,7 +2761,8 @@ paths:
                   example: Please support my work on <insert crowdfunding plateform>! <3
                   type: string
                 tags:
-                  description: Live video/replay tags (maximum 5 tags each between 2 and 30 characters)
+                  description: Live video/replay tags (maximum 5 tags each between 2 and 30
+                    characters)
                   items:
                     maxLength: 30
                     minLength: 2
@@ -2752,7 +2786,8 @@ paths:
                 $ref: "#/components/schemas/VideoUploadResponse"
           description: successful operation
         "403":
-          description: Live is not enabled, allow replay is not enabled, or max instance/user live videos limit is exceeded
+          description: Live is not enabled, allow replay is not enabled, or max
+            instance/user live videos limit is exceeded
       security:
         - OAuth2: []
       summary: Create a live
@@ -2790,7 +2825,8 @@ paths:
         "400":
           description: Bad parameters or trying to update a live that has already started
         "403":
-          description: Trying to save replay of the live but saving replay is not enabled on the instance
+          description: Trying to save replay of the live but saving replay is not enabled
+            on the instance
       security:
         - OAuth2: []
       summary: Update a live information
@@ -2867,7 +2903,9 @@ paths:
               thumbnailfile:
                 contentType: image/jpeg
               videofile:
-                contentType: video/mp4, video/webm, video/ogg, video/avi, video/quicktime, video/x-msvideo, video/x-flv, video/x-matroska, application/octet-stream
+                contentType: video/mp4, video/webm, video/ogg, video/avi, video/quicktime,
+                  video/x-msvideo, video/x-flv, video/x-matroska,
+                  application/octet-stream
             schema:
               properties:
                 category:
@@ -2955,7 +2993,8 @@ paths:
         "408":
           description: upload has timed out
         "413":
-          description: video file too large, due to quota or max body size limit set by the reverse-proxy
+          description: video file too large, due to quota or max body size limit set by
+            the reverse-proxy
           headers:
             X-File-Maximum-Size:
               description: Maximum file size for the video
@@ -3411,7 +3450,8 @@ components:
                   schema:
                     $ref: "#/components/schemas/VideoListResponse"
               description: successful operation
-          summary: third-party search index MAY be used instead of the local index, if enabled by the instance admin. see `searchTarget`
+          summary: third-party search index MAY be used instead of the local index, if
+            enabled by the instance admin. see `searchTarget`
   parameters:
     abuseId:
       description: Abuse id
@@ -3462,7 +3502,8 @@ components:
       schema:
         type: string
     categoryOneOf:
-      description: category id of the video (see [/videos/categories](#tag/Video/paths/~1videos~1categories/get))
+      description: category id of the video (see
+        [/videos/categories](#tag/Video/paths/~1videos~1categories/get))
       explode: false
       in: query
       name: categoryOneOf
@@ -3566,7 +3607,9 @@ components:
           - video-live-ending
         type: string
     languageOneOf:
-      description: language id of the video (see [/videos/languages](#tag/Video/paths/~1videos~1languages/get)). Use `_unknown` to filter on videos that don't have a video language
+      description: language id of the video (see
+        [/videos/languages](#tag/Video/paths/~1videos~1languages/get)). Use
+        `_unknown` to filter on videos that don't have a video language
       explode: false
       in: query
       name: languageOneOf
@@ -3579,7 +3622,8 @@ components:
             type: array
       style: form
     licenceOneOf:
-      description: licence id of the video (see [/videos/licences](#tag/Video/paths/~1videos~1licences/get))
+      description: licence id of the video (see
+        [/videos/licences](#tag/Video/paths/~1videos~1licences/get))
       explode: false
       in: query
       name: licenceOneOf
@@ -3625,7 +3669,8 @@ components:
       schema:
         type: integer
     search:
-      description: Plain text search, applied to various parts of the model depending on endpoint
+      description: Plain text search, applied to various parts of the model depending
+        on endpoint
       in: query
       name: search
       required: false
@@ -3633,7 +3678,8 @@ components:
         type: string
     searchTarget:
       description: >
-        If the administrator enabled search index support, you can override the default search target.
+        If the administrator enabled search index support, you can override
+        the default search target.
 
 
         **Warning**: If you choose to make an index search, PeerTube will get results from a third party service. It means the instance may not yet know the objects you fetched. If you want to load video/channel information:
@@ -3950,7 +3996,8 @@ components:
           format: email
           type: string
         password:
-          description: The user password. If the smtp server is configured, you can leave empty and an email will be sent
+          description: The user password. If the smtp server is configured, you can leave
+            empty and an email will be sent
           format: password
           maxLength: 255
           minLength: 6
@@ -4050,7 +4097,8 @@ components:
         id:
           type: integer
         score:
-          description: score reflecting the reachability of the actor, with steps of `10` and a base score of `1000`.
+          description: score reflecting the reachability of the actor, with steps of `10`
+            and a base score of `1000`.
           type: number
         state:
           enum:
@@ -4243,35 +4291,21 @@ components:
         read:
           type: boolean
         type:
-          description: >
+          description: |
             Notification type, following the `UserNotificationType` enum:
-
             - `1` NEW_VIDEO_FROM_SUBSCRIPTION
-
             - `2` NEW_COMMENT_ON_MY_VIDEO
-
             - `3` NEW_ABUSE_FOR_MODERATORS
-
             - `4` BLACKLIST_ON_MY_VIDEO
-
             - `5` UNBLACKLIST_ON_MY_VIDEO
-
             - `6` MY_VIDEO_PUBLISHED
-
             - `7` MY_VIDEO_IMPORT_SUCCESS
-
             - `8` MY_VIDEO_IMPORT_ERROR
-
             - `9` NEW_USER_REGISTRATION
-
             - `10` NEW_FOLLOW
-
             - `11` COMMENT_MENTION
-
             - `12` VIDEO_AUTO_BLACKLIST_FOR_MODERATORS
-
             - `13` NEW_INSTANCE_FOLLOWER
-
             - `14` AUTO_INSTANCE_FOLLOWING
           type: integer
         updatedAt:
@@ -4334,13 +4368,10 @@ components:
           example: 1
           type: integer
     NotificationSettingValue:
-      description: >
+      description: |
         Notification type
-
         - `0` NONE
-
         - `1` WEB
-
         - `2` EMAIL
       enum:
         - 0
@@ -4385,9 +4416,8 @@ components:
           additionalProperties: true
           type: object
         type:
-          description: >
+          description: |
             - `1`: PLUGIN
-
             - `2`: THEME
           enum:
             - 1
@@ -5121,7 +5151,8 @@ components:
         name:
           type: string
         support:
-          description: A text shown by default on all videos of this channel, to tell the audience how to support it
+          description: A text shown by default on all videos of this channel, to tell the
+            audience how to support it
           example: Please support my work on <insert crowdfunding plateform>! <3
           type: string
       required:
@@ -5155,7 +5186,8 @@ components:
         displayName:
           type: string
         support:
-          description: A text shown by default on all videos of this channel, to tell the audience how to support it
+          description: A text shown by default on all videos of this channel, to tell the
+            audience how to support it
           example: Please support my work on <insert crowdfunding plateform>! <3
           type: string
     VideoComment:
@@ -5242,7 +5274,9 @@ components:
             downloadEnabled:
               type: boolean
             files:
-              description: WebTorrent/raw video files. Can be empty if WebTorrent is disabled on the server. In this case, video files will be in the "streamingPlaylists[].files" property
+              description: WebTorrent/raw video files. Can be empty if WebTorrent is disabled
+                on the server. In this case, video files will be in the
+                "streamingPlaylists[].files" property
               items:
                 $ref: "#/components/schemas/VideoFile"
               type: array
@@ -5416,7 +5450,8 @@ components:
         label:
           type: string
     VideoPrivacySet:
-      description: The video privacy (Public = `1`, Unlisted = `2`, Private = `3`, Internal = `4`)
+      description: The video privacy (Public = `1`, Unlisted = `2`, Private = `3`,
+        Internal = `4`)
       enum:
         - 1
         - 2
@@ -5479,7 +5514,8 @@ components:
     VideoStateConstant:
       properties:
         id:
-          description: The video state (Published = `1`, to transcode = `2`, to import = `3`)
+          description: The video state (Published = `1`, to transcode = `2`, to import =
+            `3`)
           enum:
             - 1
             - 2
@@ -5490,7 +5526,9 @@ components:
     VideoStreamingPlaylists:
       properties:
         files:
-          description: Video files associated to this playlist. The difference with the root "files" property is that these files are fragmented, so they can be used in this streaming playlist (HLS etc)
+          description: Video files associated to this playlist. The difference with the
+            root "files" property is that these files are fragmented, so they
+            can be used in this streaming playlist (HLS etc)
           items:
             $ref: "#/components/schemas/VideoFile"
           type: array
@@ -5569,7 +5607,9 @@ components:
             description: video category (MRSS)
             type: integer
           media:community:
-            description: see [media:community](https://www.rssboard.org/media-rss#media-community) (MRSS)
+            description: see
+              [media:community](https://www.rssboard.org/media-rss#media-community)
+              (MRSS)
             properties:
               media:statistics:
                 properties:
@@ -5591,7 +5631,11 @@ components:
                   attribute: true
             type: object
           media:group:
-            description: list of streamable files for the video. see [media:peerLink](https://www.rssboard.org/media-rss#media-peerlink) and [media:content](https://www.rssboard.org/media-rss#media-content) or  (MRSS)
+            description: list of streamable files for the video. see
+              [media:peerLink](https://www.rssboard.org/media-rss#media-peerlink)
+              and
+              [media:content](https://www.rssboard.org/media-rss#media-content)
+              or  (MRSS)
             items:
               anyOf:
                 - $ref: "#/components/schemas/MRSSPeerLink"
@@ -5607,7 +5651,8 @@ components:
                   attribute: true
             type: object
           media:rating:
-            description: see [media:rating](https://www.rssboard.org/media-rss#media-rating) (MRSS)
+            description: see [media:rating](https://www.rssboard.org/media-rss#media-rating)
+              (MRSS)
             enum:
               - nonadult
               - adult
@@ -5629,7 +5674,8 @@ components:
                   attribute: true
             type: object
           media:title:
-            description: see [media:title](https://www.rssboard.org/media-rss#media-title) (MRSS). We only use `plain` titles.
+            description: see [media:title](https://www.rssboard.org/media-rss#media-title)
+              (MRSS). We only use `plain` titles.
             type: string
           pubDate:
             description: video publication date

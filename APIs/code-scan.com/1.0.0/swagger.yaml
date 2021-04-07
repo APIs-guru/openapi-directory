@@ -31,7 +31,9 @@ produces:
   - application/json
 securityDefinitions:
   codescan_auth:
-    description: CodeScan uses Basic Authentication. The username should be your Subscription Id and the Password your api_key available on the subscription page.
+    description: CodeScan uses Basic Authentication. The username should be your
+      Subscription Id and the Password your api_key available on the
+      subscription page.
     type: basic
 paths:
   /job:
@@ -108,7 +110,8 @@ definitions:
         description: List of usernames to email the report to
         type: string
       finished:
-        description: If the job has finished, then the datetime that the job finished processing
+        description: If the job has finished, then the datetime that the job finished
+          processing
         format: dateTime
         type: string
       jobId:
@@ -121,7 +124,8 @@ definitions:
         description: The projectKey that this job is running
         type: string
       started:
-        description: If the job has started, then the datetime that the job started processing
+        description: If the job has started, then the datetime that the job started
+          processing
         format: dateTime
         type: string
       status:
@@ -143,7 +147,8 @@ definitions:
         description: When set to preview, analysis is not added to the database
         type: string
       commitOverride:
-        description: When the project is based on git, the git commit that this job should run. Leave blank to use the project's default
+        description: When the project is based on git, the git commit that this job
+          should run. Leave blank to use the project's default
         type: string
       emailReportTo:
         description: List of usernames to email the report to
@@ -155,7 +160,8 @@ definitions:
         description: The key of the project to start
         type: string
       version:
-        description: Use this as the analysis' version. On success the Project's default version will be set to this
+        description: Use this as the analysis' version. On success the Project's default
+          version will be set to this
         type: string
     required:
       - projectKey

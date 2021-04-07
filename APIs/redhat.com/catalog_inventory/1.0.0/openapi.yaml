@@ -1300,7 +1300,8 @@ components:
       additionalProperties: false
       properties:
         service_parameters:
-          description: The provider specific parameters needed to compute list of used service inventories
+          description: The provider specific parameters needed to compute list of used
+            service inventories
           type: object
       type: object
     CheckAvailabilityTask:
@@ -1347,7 +1348,8 @@ components:
       properties:
         operationName:
           default: ""
-          description: If the Query contains several named operations, the operationName controls which one should be executed
+          description: If the Query contains several named operations, the operationName
+            controls which one should be executed
           type: string
         query:
           default: "{}"
@@ -1384,7 +1386,8 @@ components:
       additionalProperties: false
       properties:
         provider_control_parameters:
-          description: The provider specific parameters needed to provision this service. This might include namespaces, special keys
+          description: The provider specific parameters needed to provision this service.
+            This might include namespaces, special keys
           type: object
         service_parameters:
           description: JSON object with provisioning parameters
@@ -1396,7 +1399,8 @@ components:
       additionalProperties: false
       properties:
         provider_control_parameters:
-          description: The provider specific parameters needed to provision this service. This might include namespaces, special keys
+          description: The provider specific parameters needed to provision this service.
+            This might include namespaces, special keys
           type: object
         service_parameters:
           description: JSON object with provisioning parameters
@@ -1744,7 +1748,8 @@ components:
           readOnly: true
           type: string
         long_description:
-          example: This template provides a standalone MariaDB server with a database created...
+          example: This template provides a standalone MariaDB server with a database
+            created...
           readOnly: true
           title: Long Description
           type: string

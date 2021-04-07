@@ -669,7 +669,11 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Proteins collected from Uniprot for selective tax ids  HUMAN(9606), MOUSE(10090), RAT(10116), BOVINE(9913), ESCHERICHIA_COLI(83333), SUS_SCROFA(9823), MYCOBACTERIUM_TUBERCULOSIS(83332), ORYCTOLAGUS_CUNICULUS(9986), SACCHAROMYCES_CEREVISIAE(559292), CVHSA(694009) & SARS2(2697049)
+      summary: Proteins collected from Uniprot for selective tax ids  HUMAN(9606),
+        MOUSE(10090), RAT(10116), BOVINE(9913), ESCHERICHIA_COLI(83333),
+        SUS_SCROFA(9823), MYCOBACTERIUM_TUBERCULOSIS(83332),
+        ORYCTOLAGUS_CUNICULUS(9986), SACCHAROMYCES_CEREVISIAE(559292),
+        CVHSA(694009) & SARS2(2697049)
       tags:
         - Proteins
   /pubchem/bioassays:
@@ -776,7 +780,8 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Get pubchem bioassays associated to particular substance ids (sid) & outcome
+      summary: Get pubchem bioassays associated to particular substance ids (sid) &
+        outcome
       tags:
         - PubChem Bioassay Sids
   /pubchem/compounds:

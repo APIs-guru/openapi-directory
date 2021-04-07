@@ -4,7 +4,9 @@ schemes:
 host: api2.lotadata.com
 basePath: /v2
 info:
-  description: Access the most exhaustive, accurate and up-to-date collection of global and hyper-local geocoded events and activities across a wide range of categories and genres
+  description: Access the most exhaustive, accurate and up-to-date collection of
+    global and hyper-local geocoded events and activities across a wide range of
+    categories and genres
   title: LotaData
   version: 2.0.0
   x-apisguru-categories:
@@ -118,7 +120,8 @@ paths:
           name: limit
           type: integer
         - default: context
-          description: Return results starting at specified offset (summary, context, detail)
+          description: Return results starting at specified offset (summary, context,
+            detail)
           enum:
             - summary
             - detail
@@ -137,7 +140,8 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/Error"
-      summary: Find event occurrences in the area. Returns results at specific place and time, event groups are expanded for every occurrence.
+      summary: Find event occurrences in the area. Returns results at specific place
+        and time, event groups are expanded for every occurrence.
       tags:
         - Events
   "/events/{id}":
@@ -280,7 +284,8 @@ paths:
           name: limit
           type: integer
         - default: context
-          description: Return results starting at specified offset (summary, context, detail)
+          description: Return results starting at specified offset (summary, context,
+            detail)
           enum:
             - summary
             - detail
@@ -347,7 +352,8 @@ definitions:
       region:
         type: string
       street:
-        description: Street portion of the address, may sometimes be a common name of the place
+        description: Street portion of the address, may sometimes be a common name of
+          the place
         type: string
       unit:
         type: string
@@ -403,7 +409,8 @@ definitions:
         description: Unique event id
         type: string
       "@type":
-        description: Type of occurrence. You will usually see Organized as the type for most events. While Virtual events will get their own Virtual type.
+        description: Type of occurrence. You will usually see Organized as the type for
+          most events. While Virtual events will get their own Virtual type.
         enum:
           - Organized
           - Screening
@@ -457,7 +464,8 @@ definitions:
           $ref: "#/definitions/FeatureReference"
         type: array
       genre:
-        description: applicable Genres. (Tier 2 taxonomy). May include related genres from categories, not deemed as primary
+        description: applicable Genres. (Tier 2 taxonomy). May include related genres
+          from categories, not deemed as primary
         items:
           $ref: "#/definitions/FeatureReference"
         type: array
@@ -520,7 +528,9 @@ definitions:
           $ref: "#/definitions/FeatureReference"
         type: array
   EventsQuery:
-    description: Specific filters understood and executed for this query. If your parameter is not visible here, then consult the documentation for correct usage.
+    description: Specific filters understood and executed for this query. If your
+      parameter is not visible here, then consult the documentation for correct
+      usage.
     properties:
       activity:
         description: required activity types
@@ -552,7 +562,8 @@ definitions:
         description: Feature id
         type: string
       "@type":
-        description: Type of specific feature or Taxonomy node such as EventCategory, SportsTeam, Persona.
+        description: Type of specific feature or Taxonomy node such as EventCategory,
+          SportsTeam, Persona.
         type: string
       name:
         description: Display name of the feature
@@ -623,7 +634,9 @@ definitions:
       "@id":
         type: string
       "@type":
-        description: Type of place where Place is a physical address, LocalBusiness is any type of comercial property, AdministrativeArea is a political or colloquial area, and Virtual is out of this world
+        description: Type of place where Place is a physical address, LocalBusiness is
+          any type of comercial property, AdministrativeArea is a political or
+          colloquial area, and Virtual is out of this world
         enum:
           - Place
           - LocalBusiness
@@ -653,7 +666,9 @@ definitions:
           $ref: "#/definitions/FeatureReference"
         type: array
   PlacesQuery:
-    description: Specific filters understood and executed for this query. If your parameter is not visible here, then consult the documentation for correct usage.
+    description: Specific filters understood and executed for this query. If your
+      parameter is not visible here, then consult the documentation for correct
+      usage.
     properties:
       address:
         $ref: "#/definitions/Address"
@@ -677,7 +692,8 @@ definitions:
       stats:
         $ref: "#/definitions/SearchStatsMetaResult"
   SearchStatsMetaResult:
-    description: Shows invocation details about the query. Running query again, could produce different results
+    description: Shows invocation details about the query. Running query again,
+      could produce different results
     properties:
       count:
         description: Total matches for the query
@@ -736,7 +752,8 @@ definitions:
   Timeframe:
     properties:
       closes:
-        description: Close time for all days mentioned in the dayOfWeek. If close time is less than open, then it is following day.
+        description: Close time for all days mentioned in the dayOfWeek. If close time
+          is less than open, then it is following day.
         format: date-time
         type: string
       dayOfWeek:

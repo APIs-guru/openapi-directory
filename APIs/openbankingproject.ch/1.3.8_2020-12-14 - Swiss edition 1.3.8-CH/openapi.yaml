@@ -106,34 +106,38 @@ info:
       version: "3.0"
   x-providerName: openbankingproject.ch
 externalDocs:
-  description: >
+  description: |
     Full Documentation of NextGen Access to Account Interoperability Framework
-
     (General Introduction Paper, Operational Rules, Implementation Guidelines)
   url: https://github.com/openbankingproject-ch/obp-apis
 security:
   - {}
 tags:
   - description: >
-      The component for Payment Initiation Service (PIS) offers the following services:
+      The component for Payment Initiation Service (PIS) offers the
+      following services:
         * Initiation and update of a payment request
         * Status information of a payment
     name: Payment Initiation Service (PIS)
   - description: >
-      Confirmation of Funds Service (PIIS) returns a confirmation of funds request at the ASPSP.
+      Confirmation of Funds Service (PIIS) returns a confirmation of
+      funds request at the ASPSP.
     name: Confirmation of Funds Service (PIIS)
   - description: >
-      The Account Information Service (AIS) offers the following services:
+      The Account Information Service (AIS) offers the following
+      services:
         * Transaction reports for a given account or card account including balances if applicable
         * Balances of a given account or card account
         * A list of available accounts or card account
         * Account details of a given account or card account or of the list of all accessible accounts or card account  relative to a granted consent
     name: Account Information Service (AIS)
   - description: >
-      Signing basket methods are used for authorising several transactions and resp. or consents with one SCA operation.
+      Signing basket methods are used for authorising several
+      transactions and resp. or consents with one SCA operation.
     name: Signing Baskets Service (SBS)
   - description: >
-      Processes on starting authorisations, update PSU identification or PSU authentication data and explicit 
+      Processes on starting authorisations, update PSU identification or
+      PSU authentication data and explicit 
 
       authorisation of transactions by using SCA are very similar in PIS and AIS and signing baskets services. 
 
@@ -149,7 +153,8 @@ paths:
   /v1/accounts:
     get:
       description: >
-        Read the identifiers of the available payment account together with 
+        Read the identifiers of the available payment account together
+        with 
 
         booking balance information, depending on the consent granted.
 
@@ -371,7 +376,8 @@ paths:
   "/v1/accounts/{account-id}/transactions":
     get:
       description: >
-        Read transaction reports or transaction lists of a given account ddressed by "account-id", depending on the steering parameter
+        Read transaction reports or transaction lists of a given account
+        ddressed by "account-id", depending on the steering parameter
 
         "bookingStatus" together with balances.
 
@@ -439,7 +445,8 @@ paths:
   "/v1/accounts/{account-id}/transactions/{transactionId}":
     get:
       description: >
-        Reads transaction details from a given transaction addressed by "transactionId" on a given account addressed by "account-id".
+        Reads transaction details from a given transaction addressed by
+        "transactionId" on a given account addressed by "account-id".
 
         This call is only available on transactions as reported in a JSON format.
 
@@ -502,7 +509,8 @@ paths:
   /v1/consents:
     post:
       description: >
-        This method create a consent resource, defining access rights to dedicated accounts of 
+        This method create a consent resource, defining access rights to
+        dedicated accounts of 
 
         a given PSU-ID. These accounts are addressed explicitly in the method as 
 
@@ -709,7 +717,8 @@ paths:
   "/v1/consents/{consentId}/authorisations":
     get:
       description: >
-        Return a list of all authorisation subresources IDs which have been created.
+        Return a list of all authorisation subresources IDs which have been
+        created.
 
 
         This function returns an array of hyperlinks to all generated authorisation sub-resources.
@@ -765,7 +774,8 @@ paths:
         - Account Information Service (AIS)
     post:
       description: >
-        Create an authorisation sub-resource and start the authorisation process of a consent.
+        Create an authorisation sub-resource and start the authorisation
+        process of a consent.
 
         The message might in addition transmit authentication and authorisation related data.
 
@@ -879,7 +889,8 @@ paths:
   "/v1/consents/{consentId}/authorisations/{authorisationId}":
     get:
       description: >
-        This method returns the SCA status of a consent initiation's authorisation sub-resource.
+        This method returns the SCA status of a consent initiation's
+        authorisation sub-resource.
       operationId: getConsentScaStatus
       parameters:
         - $ref: "#/components/parameters/consentId_PATH"
@@ -1114,7 +1125,10 @@ paths:
   /v1/funds-confirmations:
     post:
       description: >-
-        Creates a confirmation of funds request at the ASPSP. Checks whether a specific amount is available at point of time of the request on an account linked to a given tuple card issuer(TPP)/card number, or addressed by IBAN and TPP respectively.
+        Creates a confirmation of funds request at the ASPSP. Checks
+        whether a specific amount is available at point of time of the request
+        on an account linked to a given tuple card issuer(TPP)/card number, or
+        addressed by IBAN and TPP respectively.
 
         If the related extended services are used a conditional Consent-ID is contained in the header. This field is contained but commented out in this specification.
       operationId: checkAvailabilityOfFunds
@@ -1162,7 +1176,8 @@ paths:
   /v1/signing-baskets:
     post:
       description: >
-        Create a signing basket resource for authorising several transactions with one SCA method. 
+        Create a signing basket resource for authorising several
+        transactions with one SCA method. 
 
         The resource identifications of these transactions are contained in the payload of this access method
       operationId: createSigningBasket
@@ -1230,7 +1245,8 @@ paths:
   "/v1/signing-baskets/{basketId}":
     delete:
       description: >
-        Delete the signing basket structure as long as no (partial) authorisation has yet been applied.
+        Delete the signing basket structure as long as no (partial)
+        authorisation has yet been applied.
 
         The undlerying transactions are not affected by this deletion.
 
@@ -1344,7 +1360,8 @@ paths:
   "/v1/signing-baskets/{basketId}/authorisations":
     get:
       description: >
-        Read a list of all authorisation subresources IDs which have been created.
+        Read a list of all authorisation subresources IDs which have been
+        created.
 
 
         This function returns an array of hyperlinks to all generated authorisation sub-resources.
@@ -1401,7 +1418,8 @@ paths:
         - Common Services
     post:
       description: >
-        Create an authorisation sub-resource and start the authorisation process of a signing basket.
+        Create an authorisation sub-resource and start the authorisation
+        process of a signing basket.
 
         The message might in addition transmit authentication and authorisation related data.
 
@@ -1517,7 +1535,8 @@ paths:
   "/v1/signing-baskets/{basketId}/authorisations/{authorisationId}":
     get:
       description: >
-        This method returns the SCA status of a signing basket's authorisation sub-resource.
+        This method returns the SCA status of a signing basket's
+        authorisation sub-resource.
       operationId: getSigningBasketScaStatus
       parameters:
         - $ref: "#/components/parameters/basketId_PATH"
@@ -1572,7 +1591,8 @@ paths:
         - Common Services
     put:
       description: >
-        This method update PSU data on the signing basket resource if needed. 
+        This method update PSU data on the signing basket resource if
+        needed. 
 
         It may authorise a igning basket within the embedded SCA approach where needed.
 
@@ -1698,7 +1718,7 @@ paths:
         - Common Services
   "/v1/signing-baskets/{basketId}/status":
     get:
-      description: >
+      description: |
         Returns the status of a signing basket object.
       operationId: getSigningBasketStatus
       parameters:
@@ -2019,7 +2039,8 @@ paths:
   "/v1/{payment-service}/{payment-product}/{paymentId}/authorisations":
     get:
       description: >
-        Read a list of all authorisation subresources IDs which have been created.
+        Read a list of all authorisation subresources IDs which have been
+        created.
 
 
         This function returns an array of hyperlinks to all generated authorisation sub-resources.
@@ -2078,7 +2099,8 @@ paths:
         - Common Services
     post:
       description: >
-        Create an authorisation sub-resource and start the authorisation process.
+        Create an authorisation sub-resource and start the authorisation
+        process.
 
         The message might in addition transmit authentication and authorisation related data.
 
@@ -2196,7 +2218,8 @@ paths:
   "/v1/{payment-service}/{payment-product}/{paymentId}/authorisations/{authorisationId}":
     get:
       description: >
-        This method returns the SCA status of a payment initiation's authorisation sub-resource.
+        This method returns the SCA status of a payment initiation's
+        authorisation sub-resource.
       operationId: getPaymentInitiationScaStatus
       parameters:
         - $ref: "#/components/parameters/paymentService"
@@ -2253,7 +2276,8 @@ paths:
         - Common Services
     put:
       description: >
-        This methods updates PSU data on the authorisation resource if needed.
+        This methods updates PSU data on the authorisation resource if
+        needed.
 
         It may authorise a payment within the Embedded SCA Approach where needed.
 
@@ -2381,7 +2405,7 @@ paths:
         - Common Services
   "/v1/{payment-service}/{payment-product}/{paymentId}/cancellation-authorisations":
     get:
-      description: >
+      description: |
         Retrieve a list of all created cancellation authorisation sub-resources.
       operationId: getPaymentInitiationCancellationAuthorisationInformation
       parameters:
@@ -2432,12 +2456,14 @@ paths:
       security:
         - {}
         - BearerAuthOAuth: []
-      summary: Will deliver an array of resource identifications to all generated cancellation authorisation sub-resources
+      summary: Will deliver an array of resource identifications to all generated
+        cancellation authorisation sub-resources
       tags:
         - Payment Initiation Service (PIS)
     post:
       description: >
-        Creates an authorisation sub-resource and start the authorisation process of the cancellation of the addressed payment.
+        Creates an authorisation sub-resource and start the authorisation
+        process of the cancellation of the addressed payment.
 
         The message might in addition transmit authentication and authorisation related data.
 
@@ -2547,14 +2573,16 @@ paths:
       security:
         - {}
         - BearerAuthOAuth: []
-      summary: Start the authorisation process for the cancellation of the addressed payment
+      summary: Start the authorisation process for the cancellation of the addressed
+        payment
       tags:
         - Payment Initiation Service (PIS)
         - Common Services
   "/v1/{payment-service}/{payment-product}/{paymentId}/cancellation-authorisations/{authorisationId}":
     get:
       description: >
-        This method returns the SCA status of a payment initiation's authorisation sub-resource.
+        This method returns the SCA status of a payment initiation's
+        authorisation sub-resource.
       operationId: getPaymentCancellationScaStatus
       parameters:
         - $ref: "#/components/parameters/paymentService"
@@ -2611,7 +2639,8 @@ paths:
         - Common Services
     put:
       description: >
-        This method updates PSU data on the cancellation authorisation resource if needed. 
+        This method updates PSU data on the cancellation authorisation
+        resource if needed. 
 
         It may authorise a cancellation of the payment within the Embedded SCA Approach where needed.
 
@@ -2827,7 +2856,8 @@ components:
           product: Girokonto
           resourceId: 3dc3d5b3-7023-4848-9853-f5400a64e80f
     accountListExample1:
-      description: Response in case of an example, where the consent has been given on two different IBANs.
+      description: Response in case of an example, where the consent has been given on
+        two different IBANs.
       summary: Account list Example 1
       value:
         accounts:
@@ -2853,7 +2883,10 @@ components:
             resourceId: 3dc3d5b3-7023-4848-9853-f5400a64e81g
     accountListExample2:
       description: >
-        Response in case of an example where consent on transactions and balances has been given to a multicurrency account which has two sub-accounts with currencies EUR and USD, and where the ASPSP is giving the data access only on sub-account level.
+        Response in case of an example where consent on transactions and
+        balances has been given to a multicurrency account which has two
+        sub-accounts with currencies EUR and USD, and where the ASPSP is giving
+        the data access only on sub-account level.
       summary: Account list Example 2
       value:
         accounts:
@@ -2881,7 +2914,8 @@ components:
             resourceId: 3dc3d5b3-7023-4848-9853-f5400a64e81g
     accountListExample3:
       description: >
-        Account list response in case of an example where consent on balances and transactions has been given to 
+        Account list response in case of an example where consent on
+        balances and transactions has been given to 
 
         a multicurrency account which has two sub-accounts with currencies EUR and USD and where the ASPSP is giving 
 
@@ -2955,7 +2989,8 @@ components:
             lastChangeDateTime: 2017-10-25T15:30:35.035Z
     balancesExample2_MulticurrencyAcount:
       description: >
-        Response in case of a multicurrency account with one account in EUR,
+        Response in case of a multicurrency account with one account in
+        EUR,
 
         one in USD, where the ASPSP has delivered a link to the balance endpoint relative to the aggregated
 
@@ -2983,7 +3018,10 @@ components:
             balanceType: expected
             lastChangeDateTime: 2017-10-24T14:30:21Z
     balancesExample3_RegularAccount:
-      description: Response in case of a regular account where the corresponding balances in the online channel is reported independently from account statements with fixed dates, i.e. always displaying running balance for current time.
+      description: Response in case of a regular account where the corresponding
+        balances in the online channel is reported independently from account
+        statements with fixed dates, i.e. always displaying running balance for
+        current time.
       value:
         balances:
           - balanceAmount:
@@ -3000,7 +3038,7 @@ components:
             balanceType: interimAvailable
             creditLimitIncluded: true
     balancesExample_CardAccount:
-      description: >
+      description: |
         Response in case of card account balance request.
       value:
         balances:
@@ -3020,7 +3058,11 @@ components:
     camt.053_simple_xml:
       description: A camt.053 message
       value: >
-        <?xml version="1.0" encoding="UTF-8"?> <Document xsi:schemaLocation="urn:iso:std:iso:20022:tech:xsd:camt.053.001.04 camt.053.001.04.xsd" xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.04" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <?xml version="1.0" encoding="UTF-8"?> <Document
+        xsi:schemaLocation="urn:iso:std:iso:20022:tech:xsd:camt.053.001.04
+        camt.053.001.04.xsd"
+        xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.04"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <BkToCstmrStmt>
             <GrpHdr>
               <MsgId>MSGID-C053.01.00.10-110725163809-01</MsgId>
@@ -3189,7 +3231,7 @@ components:
           </BkToCstmrStmt>
         </Document>
     cardAccountDetailsExample:
-      description: >
+      description: |
         Card account details example.
       summary: Card account details example 1
       value:
@@ -3218,7 +3260,7 @@ components:
           resourceId: 3d9a81b3-a47d-4130-8765-a9c0ff861b99
           status: enabled
     cardAccountListExample1:
-      description: >
+      description: |
         Card account list example.
       summary: Card account list example 1
       value:
@@ -3270,7 +3312,8 @@ components:
         consentId: 1234-wertiq-983
         consentStatus: received
     consentResponseExample1b_Redirect:
-      description: Consent request response in case of a redirect with a dedicated start of the authorisation process.
+      description: Consent request response in case of a redirect with a dedicated
+        start of the authorisation process.
       value:
         _links:
           startAuthorisation:
@@ -3278,7 +3321,8 @@ components:
         consentId: 1234-wertiq-983
         consentStatus: received
     consentResponseExample2_OAuth2:
-      description: Response in case of the OAuth2 approach with an implicit generated authorisation resource.
+      description: Response in case of the OAuth2 approach with an implicit generated
+        authorisation resource.
       value:
         _links:
           scaOAuth:
@@ -3434,7 +3478,7 @@ components:
         </Document>
     pain.002.001_SCT_singleTransaction:
       description: A pain.002.001.03 message in case of SCT
-      value: >
+      value: |
         <Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03">
           <CstmrPmtStsRpt>
             <GrpHdr>
@@ -3470,7 +3514,8 @@ components:
             href: /v1/payments/123456scheduled789/status
         transactionStatus: ACTC
     paymentInitiationExample_json_Decoupled:
-      description: Response in case of the decoupled approach with explicit start of authorisation needed
+      description: Response in case of the decoupled approach with explicit start of
+        authorisation needed
       value:
         _links:
           self:
@@ -3480,7 +3525,8 @@ components:
         paymentId: 1234-wertiq-983
         transactionStatus: RCVD
     paymentInitiationExample_json_Embedded:
-      description: Response in case of the embedded approach with explicit start of authorisation
+      description: Response in case of the embedded approach with explicit start of
+        authorisation
       value:
         _links:
           self:
@@ -3490,7 +3536,8 @@ components:
         paymentId: 1234-wertiq-983
         transactionStatus: RCVD
     paymentInitiationExample_json_OAuth2:
-      description: Response in case of an OAuth2 SCA approach approach with implicitly creating an authorisation sub-resource
+      description: Response in case of an OAuth2 SCA approach approach with implicitly
+        creating an authorisation sub-resource
       value:
         _links:
           scaOAuth:
@@ -3504,7 +3551,8 @@ components:
         paymentId: 1234-wertiq-983
         transactionStatus: RCVD
     paymentInitiationExample_json_Redirect:
-      description: Response in case of a redirect with an implicitly created authorisation sub-resource
+      description: Response in case of a redirect with an implicitly created
+        authorisation sub-resource
       value:
         _links:
           scaRedirect:
@@ -3578,7 +3626,7 @@ components:
         remittanceInformationUnstructured: Ref Number Abonnement
         startDate: 2018-03-01
     paymentInitiationStatusResponse_json_Extended:
-      value: >
+      value: |
         {
           "transactionStatus": "ACCP",
           "scaStatus": "received"
@@ -3843,7 +3891,8 @@ components:
       value:
         authenticationMethodId: myAuthenticationID
     selectPsuAuthenticationMethodResponseExample_Embedded_payments:
-      description: Response of a select PSU authentication method payment initiation request for the embedded approach
+      description: Response of a select PSU authentication method payment initiation
+        request for the embedded approach
       value:
         _links:
           authoriseTransaction:
@@ -3874,7 +3923,8 @@ components:
       value:
         scaAuthenticationData: "123456"
     transactionAuthorisationResponseExample:
-      description: Response of a Transaction Authorisation request for the embedded approach.
+      description: Response of a Transaction Authorisation request for the embedded
+        approach.
       value:
         scaStatus: finalised
     transactionDetailsExample:
@@ -3940,7 +3990,8 @@ components:
           download:
             href: www.test-api.com/xs2a/v1/accounts/12345678999/transactions/download/
     transactionsExample3_MulticurrencyAccount_json:
-      description: Response in JSON format for an access on a multicurrency account on aggregation level
+      description: Response in JSON format for an access on a multicurrency account on
+        aggregation level
       value:
         account:
           iban: DE40100100103307118608
@@ -3990,7 +4041,8 @@ components:
               transactionId: "1234570"
               valueDate: 2017-10-26
     transactionsExampleCH_MulticurrencyAccount_json:
-      description: Response in JSON format for an access on a swiss account on aggregation level
+      description: Response in JSON format for an access on a swiss account on
+        aggregation level
       value:
         account:
           iban: CH2808397020020195606
@@ -4073,14 +4125,16 @@ components:
         psuData:
           password: start12
     updatePsuAuthenticationResponseExample_Embedded_payments:
-      description: Response of an update PSU authentication for a consent request for the embedded approach.
+      description: Response of an update PSU authentication for a consent request for
+        the embedded approach.
       value:
         _links:
           authoriseTransaction:
             href: /v1/payments/1234-wertiq-983/authorisations/123auth456
         scaStatus: psuAuthenticated
     updatePsuIdentificationResponseExample_Decoupled_payments:
-      description: Response of an update PSU identification for a payment initiation request for the decoupled approach.
+      description: Response of an update PSU identification for a payment initiation
+        request for the decoupled approach.
       value:
         _links:
           scaStatus:
@@ -4139,7 +4193,8 @@ components:
         type: boolean
     ASPSP-SCA-Approach:
       description: >
-        This data element must be contained, if the SCA Approach is already fixed.
+        This data element must be contained, if the SCA Approach is already
+        fixed.
 
         Possible values are
           * EMBEDDED
@@ -4155,13 +4210,14 @@ components:
         example: EMBEDDED
         type: string
     Location:
-      description: >
+      description: |
         Location of the created resource.
       required: false
       schema:
         type: string
     X-Request-ID:
-      description: ID of the request, unique to the call, as determined by the initiating party.
+      description: ID of the request, unique to the call, as determined by the
+        initiating party.
       example: 99391c7e-ad88-49ec-a2ad-99ddcb1f7721
       required: true
       schema:
@@ -4169,7 +4225,8 @@ components:
   parameters:
     Authorization:
       description: >
-        This field  might be used in case where a consent was agreed between ASPSP and PSU through an OAuth2 based protocol,
+        This field  might be used in case where a consent was agreed
+        between ASPSP and PSU through an OAuth2 based protocol,
 
         facilitated by the TPP.
       in: header
@@ -4178,7 +4235,8 @@ components:
       schema:
         $ref: "#/components/schemas/authorization"
     Digest:
-      description: Is contained if and only if the "Signature" element is contained in the header of the request.
+      description: Is contained if and only if the "Signature" element is contained in
+        the header of the request.
       example: SHA-256=hl1/Eps8BEQW58FJhDApwJXjGY4nr1ArGDHIT25vq6A=
       in: header
       name: Digest
@@ -4187,7 +4245,8 @@ components:
         type: string
     PSU-Accept:
       description: >
-        The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available.
+        The forwarded IP Accept header fields consist of the corresponding
+        HTTP request Accept header fields between PSU and TPP, if available.
       in: header
       name: PSU-Accept
       required: false
@@ -4195,7 +4254,8 @@ components:
         type: string
     PSU-Accept-Charset:
       description: >
-        The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available.
+        The forwarded IP Accept header fields consist of the corresponding
+        HTTP request Accept header fields between PSU and TPP, if available.
       in: header
       name: PSU-Accept-Charset
       required: false
@@ -4203,7 +4263,8 @@ components:
         type: string
     PSU-Accept-Encoding:
       description: >
-        The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available.
+        The forwarded IP Accept header fields consist of the corresponding
+        HTTP request Accept header fields between PSU and TPP, if available.
       in: header
       name: PSU-Accept-Encoding
       required: false
@@ -4211,7 +4272,8 @@ components:
         type: string
     PSU-Accept-Language:
       description: >
-        The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available.
+        The forwarded IP Accept header fields consist of the corresponding
+        HTTP request Accept header fields between PSU and TPP, if available.
       in: header
       name: PSU-Accept-Language
       required: false
@@ -4219,7 +4281,8 @@ components:
         type: string
     PSU-Corporate-ID:
       description: >
-        Might be mandated in the ASPSP's documentation. Only used in a corporate context.
+        Might be mandated in the ASPSP's documentation. Only used in a
+        corporate context.
       in: header
       name: PSU-Corporate-ID
       required: false
@@ -4227,7 +4290,8 @@ components:
         type: string
     PSU-Corporate-ID-Type:
       description: >
-        Might be mandated in the ASPSP's documentation. Only used in a corporate context.
+        Might be mandated in the ASPSP's documentation. Only used in a
+        corporate context.
       in: header
       name: PSU-Corporate-ID-Type
       required: false
@@ -4235,7 +4299,8 @@ components:
         type: string
     PSU-Device-ID:
       description: >
-        UUID (Universally Unique Identifier) for a device, which is used by the PSU, if available.
+        UUID (Universally Unique Identifier) for a device, which is used by
+        the PSU, if available.
 
         UUID identifies either a device or a device dependant application installation.
 
@@ -4248,7 +4313,8 @@ components:
         type: string
     PSU-Geo-Location:
       description: >
-        The forwarded Geo Location of the corresponding http request between PSU and TPP if available.
+        The forwarded Geo Location of the corresponding http request
+        between PSU and TPP if available.
       example: GEO:52.506931;13.144558
       in: header
       name: PSU-Geo-Location
@@ -4257,19 +4323,13 @@ components:
         pattern: GEO:-?[0-9]{1,2}\.[0-9]{6};-?[0-9]{1,3}\.[0-9]{6}
         type: string
     PSU-Http-Method:
-      description: >
+      description: |
         HTTP method used at the PSU ? TPP interface, if available.
-
         Valid values are:
-
         * GET
-
         * POST
-
         * PUT
-
         * PATCH
-
         * DELETE
       in: header
       name: PSU-Http-Method
@@ -4305,7 +4365,8 @@ components:
         type: string
     PSU-ID-Type:
       description: >
-        Type of the PSU-ID, needed in scenarios where PSUs have several PSU-IDs as access possibility.
+        Type of the PSU-ID, needed in scenarios where PSUs have several
+        PSU-IDs as access possibility.
 
 
         In this case, the mean and use are then defined in the ASPSP's documentation.
@@ -4316,7 +4377,8 @@ components:
         type: string
     PSU-IP-Address_conditionalForAis:
       description: >
-        The forwarded IP Address header field consists of the corresponding HTTP request
+        The forwarded IP Address header field consists of the corresponding
+        HTTP request
 
         IP Address field between PSU and TPP.
 
@@ -4330,7 +4392,8 @@ components:
         type: string
     PSU-IP-Address_mandatory:
       description: >
-        The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP.
+        The forwarded IP Address header field consists of the corresponding
+        http request IP Address field between PSU and TPP.
 
         If not available, the TPP shall use the IP Address used by the TPP when submitting this request.
       example: 192.168.8.78
@@ -4342,7 +4405,8 @@ components:
         type: string
     PSU-IP-Address_optional:
       description: >
-        The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP.
+        The forwarded IP Address header field consists of the corresponding
+        http request IP Address field between PSU and TPP.
       example: 192.168.8.78
       in: header
       name: PSU-IP-Address
@@ -4352,7 +4416,8 @@ components:
         type: string
     PSU-IP-Port:
       description: >
-        The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available.
+        The forwarded IP Port header field consists of the corresponding
+        HTTP request IP Port field between PSU and TPP, if available.
       example: "1234"
       in: header
       name: PSU-IP-Port
@@ -4361,7 +4426,8 @@ components:
         type: string
     PSU-User-Agent:
       description: >
-        The forwarded Agent header field of the HTTP request between PSU and TPP, if available.
+        The forwarded Agent header field of the HTTP request between PSU
+        and TPP, if available.
       in: header
       name: PSU-User-Agent
       required: false
@@ -4369,9 +4435,12 @@ components:
         type: string
     Signature:
       description: >
-        A signature of the request by the TPP on application level. This might be mandated by ASPSP.
+        A signature of the request by the TPP on application level. This
+        might be mandated by ASPSP.
       example: >
-        keyId="SN=9FA1,CA=CN=D-TRUST%20CA%202-1%202015,O=D-Trust%20GmbH,C=DE",algorithm="rsa-sha256", headers="Digest X-Request-ID PSU-ID TPP-Redirect-URI Date", signature="Base64(RSA-SHA256(signing string))"
+        keyId="SN=9FA1,CA=CN=D-TRUST%20CA%202-1%202015,O=D-Trust%20GmbH,C=DE",algorithm="rsa-sha256",
+        headers="Digest X-Request-ID PSU-ID TPP-Redirect-URI Date",
+        signature="Base64(RSA-SHA256(signing string))"
       in: header
       name: Signature
       required: false
@@ -4379,7 +4448,8 @@ components:
         type: string
     TPP-Brand-Logging-Information:
       description: >
-        This header might be used by TPPs to inform the ASPSP about the brand used by the TPP towards the PSU. 
+        This header might be used by TPPs to inform the ASPSP about the
+        brand used by the TPP towards the PSU. 
 
         This information is meant for logging entries to enhance communication between ASPSP and PSU or ASPSP and TPP. 
 
@@ -4391,7 +4461,8 @@ components:
         type: string
     TPP-Explicit-Authorisation-Preferred:
       description: >
-        If it equals "true", the TPP prefers to start the authorisation process separately,
+        If it equals "true", the TPP prefers to start the authorisation
+        process separately,
 
         e.g. because of the usage of a signing basket.
 
@@ -4410,7 +4481,8 @@ components:
         type: boolean
     TPP-Nok-Redirect-URI:
       description: >
-        If this URI is contained, the TPP is asking to redirect the transaction flow to this address instead of the TPP-Redirect-URI in case
+        If this URI is contained, the TPP is asking to redirect the
+        transaction flow to this address instead of the TPP-Redirect-URI in case
 
         of a negative result of the redirect SCA method. This might be ignored by the ASPSP.
       in: header
@@ -4446,7 +4518,8 @@ components:
         type: string
     TPP-Notification-URI:
       description: >
-        URI for the Endpoint of the TPP-API to which the status of the payment initiation should be sent.
+        URI for the Endpoint of the TPP-API to which the status of the
+        payment initiation should be sent.
 
         This header field may by ignored by the ASPSP.
 
@@ -4466,7 +4539,8 @@ components:
         type: string
     TPP-Redirect-Preferred:
       description: >
-        If it equals "true", the TPP prefers a redirect over an embedded SCA approach.
+        If it equals "true", the TPP prefers a redirect over an embedded
+        SCA approach.
 
         If it equals "false", the TPP prefers not to be redirected for SCA. The ASPSP will then choose between the Embedded or the Decoupled
 
@@ -4482,7 +4556,8 @@ components:
         type: boolean
     TPP-Redirect-URI:
       description: >
-        URI of the TPP, where the transaction flow shall be redirected to after a Redirect.
+        URI of the TPP, where the transaction flow shall be redirected to
+        after a Redirect.
 
 
         Mandated for the Redirect SCA Approach, specifically
@@ -4503,7 +4578,8 @@ components:
         type: string
     TPP-Rejection-NoFunds-Preferred:
       description: >
-        If it equals "true" then the TPP prefers a rejection of the payment initiation in case the ASPSP is
+        If it equals "true" then the TPP prefers a rejection of the payment
+        initiation in case the ASPSP is
 
         providing an integrated confirmation of funds request an the result of this is that not sufficient
 
@@ -4522,9 +4598,8 @@ components:
       schema:
         type: boolean
     TPP-Signature-Certificate:
-      description: >
+      description: |
         The certificate used for signing the request, in base64 encoding.
-
         Must be contained if a signature is contained.
       in: header
       name: TPP-Signature-Certificate
@@ -4533,7 +4608,8 @@ components:
         format: byte
         type: string
     X-Request-ID:
-      description: ID of the request, unique to the call, as determined by the initiating party.
+      description: ID of the request, unique to the call, as determined by the
+        initiating party.
       example: 99391c7e-ad88-49ec-a2ad-99ddcb1f7721
       in: header
       name: X-Request-ID
@@ -4562,7 +4638,7 @@ components:
       schema:
         $ref: "#/components/schemas/authorisationId"
     basketId_PATH:
-      description: >
+      description: |
         This identification of the corresponding signing basket object.
       in: path
       name: basketId
@@ -4570,16 +4646,14 @@ components:
       schema:
         $ref: "#/components/schemas/basketId"
     bookingStatus:
-      description: >
+      description: |
         Permitted codes are 
           * "information",
           * "booked",
           * "pending", and 
           * "both"
         "booked" shall be supported by the ASPSP.
-
         To support the "pending" and "both" feature is optional for the ASPSP,
-
         Error code if not supported in the online banking frontend
       in: query
       name: bookingStatus
@@ -4593,7 +4667,8 @@ components:
         type: string
     consentId_HEADER_mandatory:
       description: >
-        This then contains the consentId of the related AIS consent, which was performed prior to this payment initiation.
+        This then contains the consentId of the related AIS consent, which
+        was performed prior to this payment initiation.
       in: header
       name: Consent-ID
       required: true
@@ -4601,7 +4676,8 @@ components:
         $ref: "#/components/schemas/consentId"
     consentId_HEADER_optional:
       description: >
-        This data element may be contained, if the payment initiation transaction is part of a session, i.e. combined AIS/PIS service.
+        This data element may be contained, if the payment initiation
+        transaction is part of a session, i.e. combined AIS/PIS service.
 
         This then contains the consentId of the related AIS consent, which was performed prior to this payment initiation.
       in: header
@@ -4611,7 +4687,8 @@ components:
         $ref: "#/components/schemas/consentId"
     consentId_PATH:
       description: >
-        ID of the corresponding consent object as returned by an account information consent request.
+        ID of the corresponding consent object as returned by an account
+        information consent request.
       in: path
       name: consentId
       required: true
@@ -4619,7 +4696,8 @@ components:
         $ref: "#/components/schemas/consentId"
     dateFrom:
       description: >
-        Conditional: Starting date (inclusive the date dateFrom) of the transaction list, mandated if no delta access is required
+        Conditional: Starting date (inclusive the date dateFrom) of the
+        transaction list, mandated if no delta access is required
 
         and if bookingStatus does not equal "information".
 
@@ -4638,7 +4716,8 @@ components:
         type: string
     dateTo:
       description: >
-        End date (inclusive the data dateTo) of the transaction list, default is "now" if not given.
+        End date (inclusive the data dateTo) of the transaction list,
+        default is "now" if not given.
 
 
         Might be ignored if a delta function is used.
@@ -4658,7 +4737,10 @@ components:
         type: string
     deltaList:
       description: >-
-        This data attribute is indicating that the AISP is in favour to get all transactions after the last report access for this PSU on the addressed account. This is another implementation of a delta access-report.
+        This data attribute is indicating that the AISP is in favour to get
+        all transactions after the last report access for this PSU on the
+        addressed account. This is another implementation of a delta
+        access-report.
 
         This delta indicator might be rejected by the ASPSP if this function is not supported.
 
@@ -4669,7 +4751,8 @@ components:
         type: boolean
     entryReferenceFrom:
       description: >
-        This data attribute is indicating that the AISP is in favour to get all transactions after
+        This data attribute is indicating that the AISP is in favour to get
+        all transactions after
 
         the transaction with identification entryReferenceFrom alternatively to the above defined period.
 
@@ -4695,7 +4778,8 @@ components:
         $ref: "#/components/schemas/paymentId"
     paymentProduct:
       description: >
-        The addressed payment product endpoint, e.g. for SEPA Credit Transfers (SCT).
+        The addressed payment product endpoint, e.g. for SEPA Credit
+        Transfers (SCT).
 
         The ASPSP will publish which of the payment products/endpoints will be supported.
 
@@ -4737,16 +4821,12 @@ components:
           - pain.001-swiss-six-credit-transfers
         type: string
     paymentService:
-      description: >
+      description: |
         Payment service:
 
-
         Possible values are:
-
         * payments
-
         * bulk-payments
-
         * periodic-payments
       in: path
       name: payment-service
@@ -4759,7 +4839,8 @@ components:
         type: string
     transactionId:
       description: >
-        This identification is given by the attribute transactionId of the corresponding entry of a transaction list.
+        This identification is given by the attribute transactionId of the
+        corresponding entry of a transaction list.
       in: path
       name: transactionId
       required: true
@@ -4767,7 +4848,8 @@ components:
         $ref: "#/components/schemas/transactionId"
     withBalanceQuery:
       description: >
-        If contained, this function reads the list of accessible payment accounts including the booking balance,
+        If contained, this function reads the list of accessible payment
+        accounts including the booking balance,
 
         if granted by the PSU in the related consent and available by the ASPSP.
 
@@ -4786,7 +4868,7 @@ components:
               $ref: "#/components/examples/confirmationOfFundsExample"
           schema:
             $ref: "#/components/schemas/confirmationOfFunds"
-      description: >
+      description: |
         Request body for a confirmation of funds request.
       required: true
     consents:
@@ -4801,38 +4883,49 @@ components:
               $ref: "#/components/examples/consentsExample_AccountList"
           schema:
             $ref: "#/components/schemas/consents"
-      description: >
+      description: |
         Request body for a consents request.
     paymentInitiation:
       content:
         application/json:
           examples:
             "Example 10: 'payments' - 'paymentInitiation_swiss-cross-border-credit-transfers_json_1'":
-              $ref: "#/components/examples/paymentInitiation_swiss-cross-border-credit-transfers_json_1"
+              $ref: "#/components/examples/paymentInitiation_swiss-cross-border-credit-transf\
+                ers_json_1"
             "Example 11: 'payments' - 'paymentInitiation_swiss-cross-border-credit-transfers_json_2'":
-              $ref: "#/components/examples/paymentInitiation_swiss-cross-border-credit-transfers_json_2"
+              $ref: "#/components/examples/paymentInitiation_swiss-cross-border-credit-transf\
+                ers_json_2"
             "Example 12 (generic NextGenPSD2): 'periodic-payments' - 'sepa-credit-transfers'":
               $ref: "#/components/examples/paymentInitiationSctBody_periodic-payments_json"
             "Example 13 (generic NextGenPSD2): 'bulk-payments' - 'sepa-credit-transfers'":
               $ref: "#/components/examples/paymentInitiationSctBody_bulk-payments_json"
             "Example 1: 'payments' - 'paymentInitiation_domestic-swiss-credit-transfers-isr_json_1'":
-              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers-isr_json_1"
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers-\
+                isr_json_1"
             "Example 2: 'payments' - 'paymentInitiation_domestic-swiss-credit-transfers-isr_json_2'":
-              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers-isr_json_2"
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers-\
+                isr_json_2"
             "Example 3: 'payments' - 'paymentInitiation_domestic-swiss-credit-transfers_json_1'":
-              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers_json_1"
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers_\
+                json_1"
             "Example 4: 'payments' - 'paymentInitiation_domestic-swiss-credit-transfers_json_2'":
-              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers_json_2"
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers_\
+                json_2"
             "Example 5: 'payments' - 'paymentInitiation_domestic-swiss-credit-transfers-qr_json_1'":
-              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers-qr_json_1"
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers-\
+                qr_json_1"
             "Example 6: 'payments' - 'paymentInitiation_domestic-swiss-foreign-credit-transfers_json_1'":
-              $ref: "#/components/examples/paymentInitiation_domestic-swiss-foreign-credit-transfers_json_1"
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-foreign-credit-tr\
+                ansfers_json_1"
             "Example 7: 'payments' - 'paymentInitiation_domestic-swiss-foreign-credit-transfers_json_2'":
-              $ref: "#/components/examples/paymentInitiation_domestic-swiss-foreign-credit-transfers_json_2"
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-foreign-credit-tr\
+                ansfers_json_2"
             "Example 8: 'payments' - 'paymentInitiation_swiss-sepa-credit-transfers_json_1'":
-              $ref: "#/components/examples/paymentInitiation_swiss-sepa-credit-transfers_json_1"
+              $ref: "#/components/examples/paymentInitiation_swiss-sepa-credit-transfers_json\
+                _1"
             "Example 9: 'payments' - 'paymentInitiation_swiss-sepa-credit-transfers_json_2'":
-              $ref: "#/components/examples/paymentInitiation_swiss-sepa-credit-transfers_json_2"
+              $ref: "#/components/examples/paymentInitiation_swiss-sepa-credit-transfers_json\
+                _2"
           schema:
             oneOf:
               - $ref: "#/components/schemas/paymentInitiation_json"
@@ -4885,7 +4978,8 @@ components:
           schema:
             $ref: "#/components/schemas/signingBasket"
       description: >
-        Request body for a confirmation of an establishing signing basket request.
+        Request body for a confirmation of an establishing signing basket
+        request.
   responses:
     BAD_REQUEST_400_AIS:
       content:
@@ -5032,7 +5126,8 @@ components:
         application/json:
           examples:
             Response in case of a redirect where an explicit authorisation start is needed:
-              $ref: "#/components/examples/paymentInitiationExample_json__RedirectExplicitAuthorisation"
+              $ref: "#/components/examples/paymentInitiationExample_json__RedirectExplicitAut\
+                horisation"
             Response in case of a redirect with an implicitly created authorisation sub-resource:
               $ref: "#/components/examples/paymentInitiationExample_json_Redirect"
             Response in case of an OAuth2 SCA approach approach with implicitly creating an authorisation sub-resource:
@@ -5404,7 +5499,8 @@ components:
               $ref: "#/components/examples/camt.053_simple_xml"
           schema:
             description: >-
-              Body of the XML response for a successful read transaction list request.
+              Body of the XML response for a successful read transaction list
+              request.
 
               The body has the structure of a either a camt.052 or camt.053 message.
 
@@ -5416,7 +5512,8 @@ components:
         text/plain:
           schema:
             description: >-
-              Body of the Text response for a successful read transaction list request.
+              Body of the Text response for a successful read transaction list
+              request.
 
               The body has the structure of a MT94x message.
 
@@ -5514,7 +5611,8 @@ components:
               $ref: "#/components/examples/confirmationOfFundsResponseExample"
           schema:
             description: >
-              Equals "true" if sufficient funds are available at the time of the request,
+              Equals "true" if sufficient funds are available at the time of the
+              request,
 
               "false" otherwise.
             properties:
@@ -5653,13 +5751,16 @@ components:
             Authorisation confirmation:
               $ref: "#/components/examples/authorisationConfirmationResponseExample"
             Select PSU authentication - payment initiation method (Embedded Approach):
-              $ref: "#/components/examples/selectPsuAuthenticationMethodResponseExample_Embedded_payments"
+              $ref: "#/components/examples/selectPsuAuthenticationMethodResponseExample_Embed\
+                ded_payments"
             Transaction authorisation (Embedded Approach):
               $ref: "#/components/examples/transactionAuthorisationResponseExample"
             Update PSU authentication - payment pnitiation (Embedded Approach):
-              $ref: "#/components/examples/updatePsuAuthenticationResponseExample_Embedded_payments"
+              $ref: "#/components/examples/updatePsuAuthenticationResponseExample_Embedded_pa\
+                yments"
             Update PSU identification - payment pnitiation (Decoupled Approach):
-              $ref: "#/components/examples/updatePsuIdentificationResponseExample_Decoupled_payments"
+              $ref: "#/components/examples/updatePsuIdentificationResponseExample_Decoupled_p\
+                ayments"
           schema:
             oneOf:
               - $ref: "#/components/schemas/updatePsuIdenticationResponse"
@@ -5912,20 +6013,21 @@ components:
       type: object
     Error400_AIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 400 for AIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode400_AIS"
@@ -5941,7 +6043,8 @@ components:
           $ref: "#/components/schemas/MessageCode400_AIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -5949,18 +6052,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -5971,7 +6071,8 @@ components:
       type: object
     Error400_NG_AIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 400.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 400.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -5982,7 +6083,8 @@ components:
       type: object
     Error400_NG_PIIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 400.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 400.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -5993,7 +6095,8 @@ components:
       type: object
     Error400_NG_PIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 400.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 400.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6004,7 +6107,8 @@ components:
       type: object
     Error400_NG_SBS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 400.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 400.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6015,20 +6119,21 @@ components:
       type: object
     Error400_PIIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 400 for PIIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode400_PIIS"
@@ -6044,7 +6149,8 @@ components:
           $ref: "#/components/schemas/MessageCode400_PIIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6052,18 +6158,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6074,20 +6177,21 @@ components:
       type: object
     Error400_PIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 400 for PIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode400_PIS"
@@ -6103,7 +6207,8 @@ components:
           $ref: "#/components/schemas/MessageCode400_PIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6111,18 +6216,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6133,20 +6235,21 @@ components:
       type: object
     Error400_SBS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 400 for signing baskets.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode400_SBS"
@@ -6162,7 +6265,8 @@ components:
           $ref: "#/components/schemas/MessageCode400_SBS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6170,18 +6274,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6192,20 +6293,21 @@ components:
       type: object
     Error401_AIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 401 for AIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode401_AIS"
@@ -6221,7 +6323,8 @@ components:
           $ref: "#/components/schemas/MessageCode401_AIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6229,18 +6332,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6251,7 +6351,8 @@ components:
       type: object
     Error401_NG_AIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 401.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 401.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6262,7 +6363,8 @@ components:
       type: object
     Error401_NG_PIIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 401.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 401.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6273,7 +6375,8 @@ components:
       type: object
     Error401_NG_PIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 401.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 401.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6284,7 +6387,8 @@ components:
       type: object
     Error401_NG_SBS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 401.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 401.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6295,20 +6399,21 @@ components:
       type: object
     Error401_PIIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 401 for PIIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode401_PIIS"
@@ -6324,7 +6429,8 @@ components:
           $ref: "#/components/schemas/MessageCode401_PIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6332,18 +6438,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6354,20 +6457,21 @@ components:
       type: object
     Error401_PIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 401 for PIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode401_PIS"
@@ -6383,7 +6487,8 @@ components:
           $ref: "#/components/schemas/MessageCode401_PIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6391,18 +6496,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6413,20 +6515,21 @@ components:
       type: object
     Error401_SBS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 401 for signing baskets.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode401_SBS"
@@ -6442,7 +6545,8 @@ components:
           $ref: "#/components/schemas/MessageCode401_SBS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6450,18 +6554,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6472,20 +6573,21 @@ components:
       type: object
     Error403_AIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 403 for AIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode403_AIS"
@@ -6501,7 +6603,8 @@ components:
           $ref: "#/components/schemas/MessageCode403_AIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6509,18 +6612,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6531,7 +6631,8 @@ components:
       type: object
     Error403_NG_AIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 403.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 403.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6542,7 +6643,8 @@ components:
       type: object
     Error403_NG_PIIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 403.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 403.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6553,7 +6655,8 @@ components:
       type: object
     Error403_NG_PIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 403.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 403.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6564,7 +6667,8 @@ components:
       type: object
     Error403_NG_SBS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 403.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 403.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6575,20 +6679,21 @@ components:
       type: object
     Error403_PIIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 403 for PIIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode403_PIIS"
@@ -6604,7 +6709,8 @@ components:
           $ref: "#/components/schemas/MessageCode403_PIIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6612,18 +6718,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6634,20 +6737,21 @@ components:
       type: object
     Error403_PIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 403 for PIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode403_PIS"
@@ -6663,7 +6767,8 @@ components:
           $ref: "#/components/schemas/MessageCode403_PIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6671,18 +6776,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6693,20 +6795,21 @@ components:
       type: object
     Error403_SBS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 403 for signing baskets.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode403_SBS"
@@ -6722,7 +6825,8 @@ components:
           $ref: "#/components/schemas/MessageCode403_SBS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6730,18 +6834,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6752,20 +6853,21 @@ components:
       type: object
     Error404_AIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 404 for AIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode404_AIS"
@@ -6781,7 +6883,8 @@ components:
           $ref: "#/components/schemas/MessageCode404_AIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6789,18 +6892,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6811,7 +6911,8 @@ components:
       type: object
     Error404_NG_AIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 404.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 404.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6822,7 +6923,8 @@ components:
       type: object
     Error404_NG_PIIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 404.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 404.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6833,7 +6935,8 @@ components:
       type: object
     Error404_NG_PIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 404.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 404.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6844,7 +6947,8 @@ components:
       type: object
     Error404_NG_SBS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 404.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 404.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -6855,20 +6959,21 @@ components:
       type: object
     Error404_PIIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 404 for PIIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode404_PIIS"
@@ -6884,7 +6989,8 @@ components:
           $ref: "#/components/schemas/MessageCode404_PIIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6892,18 +6998,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6914,20 +7017,21 @@ components:
       type: object
     Error404_PIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 404 for PIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode404_PIS"
@@ -6943,7 +7047,8 @@ components:
           $ref: "#/components/schemas/MessageCode404_PIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -6951,18 +7056,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -6973,20 +7075,21 @@ components:
       type: object
     Error404_SBS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 404 for signing baskets.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode404_SBS"
@@ -7002,7 +7105,8 @@ components:
           $ref: "#/components/schemas/MessageCode404_SBS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -7010,18 +7114,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -7032,20 +7133,21 @@ components:
       type: object
     Error405_AIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 405 for AIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode405_AIS"
@@ -7061,7 +7163,8 @@ components:
           $ref: "#/components/schemas/MessageCode405_AIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -7069,18 +7172,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -7091,7 +7191,8 @@ components:
       type: object
     Error405_NG_AIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 401.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 401.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -7102,7 +7203,8 @@ components:
       type: object
     Error405_NG_PIIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 401.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 401.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -7113,7 +7215,8 @@ components:
       type: object
     Error405_NG_PIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 401.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 401.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -7124,7 +7227,8 @@ components:
       type: object
     Error405_NG_PIS_CANC:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 401.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 401.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -7135,7 +7239,8 @@ components:
       type: object
     Error405_NG_SBS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 401.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 401.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -7146,20 +7251,21 @@ components:
       type: object
     Error405_PIIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 405 for PIIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode405_PIIS"
@@ -7175,7 +7281,8 @@ components:
           $ref: "#/components/schemas/MessageCode405_PIIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -7183,18 +7290,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -7205,20 +7309,21 @@ components:
       type: object
     Error405_PIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 405 for PIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode405_PIS"
@@ -7234,7 +7339,8 @@ components:
           $ref: "#/components/schemas/MessageCode405_PIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -7242,18 +7348,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -7264,20 +7367,21 @@ components:
       type: object
     Error405_PIS_CANC:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 405 for a pament cancelation (PIS).
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode405_PIS_CANC"
@@ -7293,7 +7397,8 @@ components:
           $ref: "#/components/schemas/MessageCode405_PIS_CANC"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -7301,18 +7406,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -7323,20 +7425,21 @@ components:
       type: object
     Error405_SBS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 405 for signing baskets.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode405_SBS"
@@ -7352,7 +7455,8 @@ components:
           $ref: "#/components/schemas/MessageCode405_SBS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -7360,18 +7464,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -7382,20 +7483,21 @@ components:
       type: object
     Error406_AIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 406 for AIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode406_AIS"
@@ -7411,7 +7513,8 @@ components:
           $ref: "#/components/schemas/MessageCode406_AIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -7419,18 +7522,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -7441,7 +7541,8 @@ components:
       type: object
     Error406_NG_AIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 406.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 406.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
@@ -7452,20 +7553,21 @@ components:
       type: object
     Error409_AIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 409 for AIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode409_AIS"
@@ -7481,7 +7583,8 @@ components:
           $ref: "#/components/schemas/MessageCode409_AIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -7489,18 +7592,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -7511,7 +7611,8 @@ components:
       type: object
     Error409_NG_AIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 409.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 409.
       example:
         - category: ERROR
           code: STATUS_INVALID
@@ -7526,7 +7627,8 @@ components:
       type: object
     Error409_NG_PIIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 409.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 409.
       example:
         - category: ERROR
           code: STATUS_INVALID
@@ -7541,7 +7643,8 @@ components:
       type: object
     Error409_NG_PIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 409.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 409.
       example:
         - category: ERROR
           code: STATUS_INVALID
@@ -7556,7 +7659,8 @@ components:
       type: object
     Error409_NG_SBS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 409.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 409.
       example:
         - category: ERROR
           code: STATUS_INVALID
@@ -7571,20 +7675,21 @@ components:
       type: object
     Error409_PIIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 409 for PIIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode409_PIIS"
@@ -7600,7 +7705,8 @@ components:
           $ref: "#/components/schemas/MessageCode409_PIIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -7608,18 +7714,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -7630,20 +7733,21 @@ components:
       type: object
     Error409_PIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 409 for PIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode409_PIS"
@@ -7659,7 +7763,8 @@ components:
           $ref: "#/components/schemas/MessageCode409_PIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -7667,18 +7772,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -7689,20 +7791,21 @@ components:
       type: object
     Error409_SBS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 409 for signing baskets.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
-            description: This is a data element to support the declaration of additional errors in the context of [RFC7807].
+            description: This is a data element to support the declaration of additional
+              errors in the context of [RFC7807].
             properties:
               code:
                 $ref: "#/components/schemas/MessageCode409_SBS"
@@ -7718,7 +7821,8 @@ components:
           $ref: "#/components/schemas/MessageCode409_SBS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -7726,18 +7830,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -7748,21 +7849,22 @@ components:
       type: object
     Error429_AIS:
       description: >
-        Standardised definition of reporting error information according to [RFC7807]
+        Standardised definition of reporting error information according to
+        [RFC7807]
 
         in case of a HTTP error code 429 for AIS.
       properties:
         _links:
           $ref: "#/components/schemas/_linksAll"
         additionalErrors:
-          description: >
+          description: |
             Array of Error Information Blocks.
-
 
             Might be used if more than one error is to be communicated
           items:
             description: >
-              This is a data element to support the declaration of additional errors in the context of [RFC7807]
+              This is a data element to support the declaration of additional
+              errors in the context of [RFC7807]
 
               in case of a HTTP error code 429 for.
             properties:
@@ -7780,7 +7882,8 @@ components:
           $ref: "#/components/schemas/MessageCode429_AIS"
         detail:
           description: >
-            Detailed human readable text specific to this instance of the error.
+            Detailed human readable text specific to this instance of the
+            error.
 
             XPath might be used to point to the issue generating the error in addition.
 
@@ -7788,18 +7891,15 @@ components:
           maxLength: 500
           type: string
         title:
-          description: >
+          description: |
             Short human readable description of error type.
-
             Could be in local language.
-
             To be provided by ASPSPs.
           maxLength: 70
           type: string
         type:
-          description: >
+          description: |
             A URI reference [RFC3986] that identifies the problem type.
-
             Remark For Future: These URI will be provided by NextGen in future.
           format: uri
           maxLength: 70
@@ -7810,7 +7910,8 @@ components:
       type: object
     Error429_NG_AIS:
       description: >
-        NextGen specific definition of reporting error information in case of a HTTP error code 429.
+        NextGen specific definition of reporting error information in case
+        of a HTTP error code 429.
       example:
         - category: ERROR
           code: ACCESS_EXCEEDED
@@ -7882,7 +7983,8 @@ components:
         - EXECUTION_DATE_INVALID
       type: string
     MessageCode400_SBS:
-      description: Message codes defined for signing baskets for HTTP Error code 400 (BAD_REQUEST).
+      description: Message codes defined for signing baskets for HTTP Error code 400
+        (BAD_REQUEST).
       enum:
         - FORMAT_ERROR
         - PARAMETER_NOT_CONSISTENT
@@ -7957,7 +8059,8 @@ components:
         - REQUIRED_KID_MISSING
       type: string
     MessageCode401_SBS:
-      description: Message codes defined for signing baskets for HTTP Error code 401 (UNAUTHORIZED).
+      description: Message codes defined for signing baskets for HTTP Error code 401
+        (UNAUTHORIZED).
       enum:
         - CERTIFICATE_INVALID
         - ROLE_INVALID
@@ -7992,7 +8095,8 @@ components:
         - RESOURCE_EXPIRED
       type: string
     MessageCode403_PIS:
-      description: Message codes defined defined for PIS for PIS for HTTP Error code 403 (FORBIDDEN).
+      description: Message codes defined defined for PIS for PIS for HTTP Error code
+        403 (FORBIDDEN).
       enum:
         - CONSENT_UNKNOWN
         - SERVICE_BLOCKED
@@ -8001,7 +8105,8 @@ components:
         - PRODUCT_INVALID
       type: string
     MessageCode403_SBS:
-      description: Message codes defined for signing baskets for HTTP Error code 403 (FORBIDDEN).
+      description: Message codes defined for signing baskets for HTTP Error code 403
+        (FORBIDDEN).
       enum:
         - CONSENT_UNKNOWN
         - SERVICE_BLOCKED
@@ -8025,33 +8130,39 @@ components:
         - PRODUCT_UNKNOWN
       type: string
     MessageCode404_SBS:
-      description: Message codes defined for signing baskets for HTTP Error code 404 (NOT FOUND).
+      description: Message codes defined for signing baskets for HTTP Error code 404
+        (NOT FOUND).
       enum:
         - RESOURCE_UNKNOWN
       type: string
     MessageCode405_AIS:
-      description: Message codes defined for AIS for HTTP Error code 405 (METHOD NOT ALLOWED).
+      description: Message codes defined for AIS for HTTP Error code 405 (METHOD NOT
+        ALLOWED).
       enum:
         - SERVICE_INVALID
       type: string
     MessageCode405_PIIS:
-      description: Message codes defined for PIIS for HTTP Error code 405 (METHOD NOT ALLOWED).
+      description: Message codes defined for PIIS for HTTP Error code 405 (METHOD NOT
+        ALLOWED).
       enum:
         - SERVICE_INVALID
       type: string
     MessageCode405_PIS:
-      description: Message codes defined for payment cancelations PIS for HTTP Error code 405 (METHOD NOT ALLOWED).
+      description: Message codes defined for payment cancelations PIS for HTTP Error
+        code 405 (METHOD NOT ALLOWED).
       enum:
         - SERVICE_INVALID
       type: string
     MessageCode405_PIS_CANC:
-      description: Message codes defined for payment cancelations PIS for HTTP Error code 405 (METHOD NOT ALLOWED).
+      description: Message codes defined for payment cancelations PIS for HTTP Error
+        code 405 (METHOD NOT ALLOWED).
       enum:
         - CANCELLATION_INVALID
         - SERVICE_INVALID
       type: string
     MessageCode405_SBS:
-      description: Message codes defined for SBS for HTTP Error code 405 (METHOD NOT ALLOWED).
+      description: Message codes defined for SBS for HTTP Error code 405 (METHOD NOT
+        ALLOWED).
       enum:
         - SERVICE_INVALID
       type: string
@@ -8076,7 +8187,8 @@ components:
         - STATUS_INVALID
       type: string
     MessageCode409_SBS:
-      description: Message codes defined for signing baskets for HTTP Error code 409 (CONFLICT).
+      description: Message codes defined for signing baskets for HTTP Error code 409
+        (CONFLICT).
       enum:
         - REFERENCE_STATUS_INVALID
         - STATUS_INVALID
@@ -8090,7 +8202,8 @@ components:
       additionalProperties:
         $ref: "#/components/schemas/hrefType"
       description: >
-        Links to the account, which can be directly used for retrieving account information from this dedicated account.
+        Links to the account, which can be directly used for retrieving
+        account information from this dedicated account.
 
 
         Links to "balances" and/or "transactions"
@@ -8123,7 +8236,7 @@ components:
     _linksAll:
       additionalProperties:
         $ref: "#/components/schemas/hrefType"
-      description: >
+      description: |
         A _link object with all availabel link types.
       properties:
         account:
@@ -8195,7 +8308,9 @@ components:
       additionalProperties:
         $ref: "#/components/schemas/hrefType"
       description: >
-        A list of hyperlinks to be recognised by the TPP. The actual hyperlinks used in the response depend on the dynamical decisions of the ASPSP when processing the request.
+        A list of hyperlinks to be recognised by the TPP. The actual
+        hyperlinks used in the response depend on the dynamical decisions of the
+        ASPSP when processing the request.
 
 
         **Remark:** All links can be relative or full links, to be decided by the ASPSP.
@@ -8426,7 +8541,8 @@ components:
       additionalProperties:
         $ref: "#/components/schemas/hrefType"
       description: >
-        A list of hyperlinks to be recognised by the TPP. The actual hyperlinks used in the response depend on the
+        A list of hyperlinks to be recognised by the TPP. The actual
+        hyperlinks used in the response depend on the
 
         dynamical decisions of the ASPSP when processing the request.
 
@@ -8470,7 +8586,8 @@ components:
       additionalProperties:
         $ref: "#/components/schemas/hrefType"
       description: >
-        A list of hyperlinks to be recognised by the TPP. The actual hyperlinks used in
+        A list of hyperlinks to be recognised by the TPP. The actual
+        hyperlinks used in
 
         the response depend on the dynamical decisions of the ASPSP when processing the request.
 
@@ -8542,7 +8659,8 @@ components:
       type: object
     _linksSigningBasket:
       description: >
-        A list of hyperlinks to be recognised by the TPP. The actual hyperlinks used in the
+        A list of hyperlinks to be recognised by the TPP. The actual
+        hyperlinks used in the
 
         response depend on the dynamical decisions of the ASPSP when processing the request.
 
@@ -8617,7 +8735,8 @@ components:
       additionalProperties:
         $ref: "#/components/schemas/hrefType"
       description: >
-        A list of hyperlinks to be recognised by the TPP. The actual hyperlinks used in the
+        A list of hyperlinks to be recognised by the TPP. The actual
+        hyperlinks used in the
 
         response depend on the dynamical decisions of the ASPSP when processing the request.
 
@@ -8692,7 +8811,8 @@ components:
       additionalProperties:
         $ref: "#/components/schemas/hrefType"
       description: >
-        A list of hyperlinks to be recognised by the TPP. Might be contained, if several authentication methods
+        A list of hyperlinks to be recognised by the TPP. Might be
+        contained, if several authentication methods
 
         are available for the PSU.
 
@@ -8735,7 +8855,9 @@ components:
       additionalProperties:
         $ref: "#/components/schemas/hrefType"
       description: >
-        A list of hyperlinks to be recognised by the TPP. The actual hyperlinks used in the response depend on the dynamical decisions of the ASPSP when processing the request.
+        A list of hyperlinks to be recognised by the TPP. The actual
+        hyperlinks used in the response depend on the dynamical decisions of the
+        ASPSP when processing the request.
 
 
         **Remark:** All links can be relative or full links, to be decided by the ASPSP.
@@ -8756,7 +8878,7 @@ components:
           $ref: "#/components/schemas/hrefType"
       type: object
     accountAccess:
-      description: >
+      description: |
         Requested access services for a consent.
       properties:
         accounts:
@@ -8825,7 +8947,8 @@ components:
           type: array
         restrictedTo:
           description: >
-            If the TPP requests access to accounts via availableAccounts (List of available accounts), global 
+            If the TPP requests access to accounts via availableAccounts (List
+            of available accounts), global 
 
             or bank driven consents, the TPP may include this element to restrict access to the referred 
 
@@ -8855,7 +8978,8 @@ components:
       type: object
     accountDetails:
       description: >
-        The ASPSP shall give at least one of the account reference identifiers:
+        The ASPSP shall give at least one of the account reference
+        identifiers:
           - iban
           - bban
           - pan
@@ -8876,7 +9000,7 @@ components:
         currency:
           $ref: "#/components/schemas/currencyCode"
         details:
-          description: >
+          description: |
             Specifications that might be provided by the ASPSP:
               - characteristics of the account
               - characteristics of the relevant card
@@ -8887,13 +9011,16 @@ components:
         iban:
           $ref: "#/components/schemas/iban"
         linkedAccounts:
-          description: Case of a set of pending card transactions, the APSP will provide the relevant cash account the card is set up on.
+          description: Case of a set of pending card transactions, the APSP will provide
+            the relevant cash account the card is set up on.
           maxLength: 70
           type: string
         msisdn:
           $ref: "#/components/schemas/msisdn"
         name:
-          description: Name of the account, as assigned by the ASPSP, in agreement with the account owner in order to provide an additional means of identification of the account.
+          description: Name of the account, as assigned by the ASPSP, in agreement with
+            the account owner in order to provide an additional means of
+            identification of the account.
           maxLength: 70
           type: string
         ownerName:
@@ -8903,12 +9030,13 @@ components:
           maxLength: 35
           type: string
         resourceId:
-          description: This shall be filled, if addressable resource are created by the ASPSP on the /accounts or /card-accounts endpoint.
+          description: This shall be filled, if addressable resource are created by the
+            ASPSP on the /accounts or /card-accounts endpoint.
           type: string
         status:
           $ref: "#/components/schemas/accountStatus"
         usage:
-          description: >
+          description: |
             Specifies the usage of the account:
               * PRIV: private personal account
               * ORGA: professional account
@@ -8921,11 +9049,12 @@ components:
         - currency
       type: object
     accountId:
-      description: This identification is denoting the addressed account, where the transaction has been performed.
+      description: This identification is denoting the addressed account, where the
+        transaction has been performed.
       example: qwer3456tzui7890
       type: string
     accountList:
-      description: >
+      description: |
         List of accounts with details.
       properties:
         accounts:
@@ -8936,7 +9065,7 @@ components:
         - accounts
       type: object
     accountReference16-CH:
-      description: >
+      description: |
         Reference to an account by either
           * IBAN, of a payment accounts, or
           * othrAccountIdentification, for payment accounts if there is no IBAN
@@ -8991,7 +9120,8 @@ components:
       type: string
     additionalInformation:
       description: >
-        Might be used by the ASPSP to transport additional transaction related information to the PSU
+        Might be used by the ASPSP to transport additional transaction
+        related information to the PSU
       example: Some additional transaction related information.
       maxLength: 500
       type: string
@@ -9014,7 +9144,8 @@ components:
       properties:
         ownerName:
           description: >
-            Is asking for account owner name of the accounts referenced within. 
+            Is asking for account owner name of the accounts referenced
+            within. 
 
             If the array is empty in the request, the TPP is asking for the account 
 
@@ -9057,7 +9188,8 @@ components:
       type: object
     additionalInformationStructured:
       description: >
-        Is used if and only if the bookingStatus entry equals "information". 
+        Is used if and only if the bookingStatus entry equals
+        "information". 
 
         Every active standing order related to the dedicated payment account result into one entry.
       properties:
@@ -9103,7 +9235,8 @@ components:
       type: object
     amountValue:
       description: >
-        The amount given with fractional digits, where fractions must be compliant to the currency definition.
+        The amount given with fractional digits, where fractions must be
+        compliant to the currency definition.
 
         Up to 14 significant figures. Negative amounts are signed by minus.
 
@@ -9123,12 +9256,13 @@ components:
       type: string
     authenticationMethodId:
       description: >
-        An identification provided by the ASPSP for the later identification of the authentication method selection.
+        An identification provided by the ASPSP for the later
+        identification of the authentication method selection.
       example: myAuthenticationID
       maxLength: 35
       type: string
     authenticationObject:
-      description: >
+      description: |
         Authentication object.
       properties:
         authenticationMethodId:
@@ -9144,13 +9278,14 @@ components:
             This version can be referred to in the ASPSP?s documentation.
           type: string
         explanation:
-          description: >
+          description: |
             Detailed information about the SCA method for the PSU.
           example: Detailed information about the SCA method for the PSU.
           type: string
         name:
           description: >
-            This is the name of the authentication method defined by the PSU in the Online Banking frontend of the ASPSP.
+            This is the name of the authentication method defined by the PSU in
+            the Online Banking frontend of the ASPSP.
 
             Alternatively this could be a description provided by the ASPSP like "SMS OTP on phone +49160 xxxxx 28".
 
@@ -9188,11 +9323,12 @@ components:
         - SMTP_OTP
       type: string
     authorisationConfirmation:
-      description: >
+      description: |
         Content of the body of an authorisation confirmation request
       properties:
         confirmationCode:
-          description: Confirmation Code as retrieved by the TPP from the redirect based SCA process.
+          description: Confirmation Code as retrieved by the TPP from the redirect based
+            SCA process.
           type: string
       required:
         - confirmationCode
@@ -9228,11 +9364,11 @@ components:
         $ref: "#/components/schemas/authorisationId"
       type: array
     authorization:
-      description: >
+      description: |
         Authorization by OAuth2 based Protocol.
       type: string
     balance:
-      description: >
+      description: |
         A single balance element.
       properties:
         balanceAmount:
@@ -9240,22 +9376,23 @@ components:
         balanceType:
           $ref: "#/components/schemas/balanceType"
         creditLimitIncluded:
-          description: >
+          description: |
             A flag indicating if the credit limit of the corresponding account
-
             is included in the calculation of the balance, where applicable.
           example: false
           type: boolean
         lastChangeDateTime:
           description: >
-            This data element might be used to indicate e.g. with the expected or booked balance that no action is known
+            This data element might be used to indicate e.g. with the expected
+            or booked balance that no action is known
 
             on the account, which is not yet booked.
           format: date-time
           type: string
         lastCommittedTransaction:
           description: >
-            "entryReference" of the last commited transaction to support the TPP in identifying whether all
+            "entryReference" of the last commited transaction to support the
+            TPP in identifying whether all
 
             PSU transactions are already known.
           maxLength: 35
@@ -9270,7 +9407,8 @@ components:
       type: object
     balanceList:
       description: >
-        A list of balances regarding this account, e.g. the current balance, the last booked balance.
+        A list of balances regarding this account, e.g. the current
+        balance, the last booked balance.
 
         The list might be restricted to the current balance.
       items:
@@ -9333,7 +9471,8 @@ components:
       type: string
     bankTransactionCode:
       description: >
-        Bank transaction code as used by the ASPSP and using the sub elements of this structured code defined by ISO 20022.
+        Bank transaction code as used by the ASPSP and using the sub
+        elements of this structured code defined by ISO 20022.
 
 
         This code type is concatenating the three ISO20022 Codes
@@ -9349,7 +9488,8 @@ components:
       type: string
     batchBookingPreferred:
       description: >
-        If this element equals 'true', the PSU prefers only one booking entry.
+        If this element equals 'true', the PSU prefers only one booking
+        entry.
 
         If this element equals 'false', the PSU prefers individual booking of all contained individual transactions.
 
@@ -9374,19 +9514,21 @@ components:
       pattern: "[a-zA-Z0-9]{1,30}"
       type: string
     bicfi:
-      description: >
+      description: |
         BICFI
       example: AAAADEBBXXX
       pattern: "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
       type: string
     bookingDate:
-      description: >
+      description: |
         The date when an entry is posted to an account on the ASPSPs books.
       format: date
       type: string
     bulkPaymentInitiationWithStatusResponse:
       description: >
-        Generic JSON response body consistion of the corresponding bulk payment initation JSON body together with an optional transaction status field.
+        Generic JSON response body consistion of the corresponding bulk
+        payment initation JSON body together with an optional transaction status
+        field.
       properties:
         acceptorTransactionDateTime:
           format: date-time
@@ -9400,7 +9542,8 @@ components:
           type: string
         payments:
           description: >
-            A list of generic JSON bodies payment initations for bulk payments via JSON.
+            A list of generic JSON bodies payment initations for bulk payments
+            via JSON.
 
 
             Note: Some fields from single payments do not occcur in a bulk payment element
@@ -9417,14 +9560,11 @@ components:
         - debtorAccount
       type: object
     bulkPaymentInitiation_json:
-      description: >
+      description: |
         Generic Body for a bulk payment initation via JSON.
 
-
         paymentInformationId is contained in code but commented since it is n.a.
-
         and not all ASPSP are able to support this field now.
-
         In a later version the field will be mandatory.
       properties:
         batchBookingPreferred:
@@ -9433,7 +9573,8 @@ components:
           $ref: "#/components/schemas/accountReference16-CH"
         payments:
           description: >
-            A list of generic JSON bodies payment initations for bulk payments via JSON.
+            A list of generic JSON bodies payment initations for bulk payments
+            via JSON.
 
 
             Note: Some fields from single payments do not occcur in a bulk payment element
@@ -9451,17 +9592,17 @@ components:
         - debtorAccount
       type: object
     camt.052:
-      description: >
+      description: |
         camt.052 XML message.
       type: string
     camt.053:
-      description: >
+      description: |
         camt.053 XML message.
       example:
         $ref: "#/components/examples/camt.053_simple_xml"
       type: string
     camt.054:
-      description: >
+      description: |
         camt.054 XML message.
       type: string
     cardAcceptorPhone:
@@ -9476,7 +9617,7 @@ components:
       pattern: \+[0-9]{1,3}\-[0-9()+\-]{1,30}
       type: string
     cardAccountDetails:
-      description: >
+      description: |
         Card account details.
       properties:
         _links:
@@ -9490,7 +9631,7 @@ components:
         debitAccounting:
           $ref: "#/components/schemas/debitAccounting"
         details:
-          description: >
+          description: |
             Specifications that might be provided by the ASPSP:
               - characteristics of the account
               - characteristics of the relevant card
@@ -9510,20 +9651,21 @@ components:
         ownerName:
           $ref: "#/components/schemas/ownerName"
         product:
-          description: >
+          description: |
             Product Name of the Bank for this account, proprietary definition.
           maxLength: 35
           type: string
         resourceId:
           description: >
-            This is the data element to be used in the path when retrieving data from a dedicated account.
+            This is the data element to be used in the path when retrieving
+            data from a dedicated account.
 
             This shall be filled, if addressable resource are created by the ASPSP on the /card-accounts endpoint.
           type: string
         status:
           $ref: "#/components/schemas/accountStatus"
         usage:
-          description: >
+          description: |
             Specifies the usage of the account:
               * PRIV: private personal account
               * ORGA: professional account
@@ -9537,7 +9679,7 @@ components:
         - currency
       type: object
     cardAccountList:
-      description: >
+      description: |
         List of card accounts with details.
       properties:
         cardAccounts:
@@ -9566,7 +9708,8 @@ components:
       type: object
     cardAccountsTransactionsResponse200:
       description: >
-        Body of the JSON response for a successful read card account transaction list request.
+        Body of the JSON response for a successful read card account
+        transaction list request.
 
         This card account report contains transactions resulting from the query parameters.
       properties:
@@ -9638,21 +9781,20 @@ components:
         $ref: "#/components/schemas/cardTransaction"
       type: array
     cashAccountType:
-      description: >
+      description: |
         ExternalCashAccountType1Code from ISO 20022.
       type: string
     challengeData:
       description: >
-        It is contained in addition to the data element 'chosenScaMethod' if challenge data is needed for SCA.
+        It is contained in addition to the data element 'chosenScaMethod'
+        if challenge data is needed for SCA.
 
         In rare cases this attribute is also used in the context of the 'startAuthorisationWithPsuAuthentication' link.
       properties:
         additionalInformation:
-          description: >
+          description: |
             Additional explanation for the PSU to explain
-
             e.g. fallback mechanism for the chosen SCA method.
-
             The TPP is obliged to show this to the PSU.
           type: string
         data:
@@ -9661,13 +9803,10 @@ components:
             type: string
           type: array
         image:
-          description: >
+          description: |
             PNG data (max. 512 kilobyte) to be displayed to the PSU,
-
             Base64 encoding, cp. [RFC4648].
-
             This attribute is used only, when PHOTO_OTP or CHIP_OTP
-
             is the selected SCA method.
           format: byte
           type: string
@@ -9675,7 +9814,8 @@ components:
           description: A link where the ASPSP will provides the challenge image for the TPP.
           type: string
         otpFormat:
-          description: The format type of the OTP to be typed in. The admitted values are "characters" or "integer".
+          description: The format type of the OTP to be typed in. The admitted values are
+            "characters" or "integer".
           enum:
             - characters
             - integer
@@ -9696,7 +9836,8 @@ components:
       $ref: "#/components/schemas/authenticationObject"
     combinedServiceIndicator:
       description: >
-        If "true" indicates that a payment initiation service will be addressed in the same "session".
+        If "true" indicates that a payment initiation service will be
+        addressed in the same "session".
       example: false
       type: boolean
     confirmationOfFunds:
@@ -9739,9 +9880,8 @@ components:
         account:
           $ref: "#/components/schemas/accountReference16-CH"
         cardNumber:
-          description: >
+          description: |
             Card Number of the card issued by the PIISP.
-
             Should be delivered if available.
           maxLength: 35
           type: string
@@ -9757,7 +9897,8 @@ components:
       type: object
     consentId:
       description: >
-        ID of the corresponding consent object as returned by an account information consent request.
+        ID of the corresponding consent object as returned by an account
+        information consent request.
       type: string
     consentIdList:
       description: A list of consentIds.
@@ -9818,7 +9959,8 @@ components:
         - partiallyAuthorised
       type: string
     consentStatusResponse-200:
-      description: Body of the JSON response for a successful get status request for a consent.
+      description: Body of the JSON response for a successful get status request for a
+        consent.
       properties:
         consentStatus:
           $ref: "#/components/schemas/consentStatus"
@@ -9828,14 +9970,15 @@ components:
         - consentStatus
       type: object
     consents:
-      description: >
+      description: |
         Content of the body of a consent request.
       properties:
         access:
           $ref: "#/components/schemas/accountAccess"
         combinedServiceIndicator:
           description: >
-            If "true" indicates that a payment initiation service will be addressed in the same "session".
+            If "true" indicates that a payment initiation service will be
+            addressed in the same "session".
           example: false
           type: boolean
         frequencyPerDay:
@@ -9918,20 +10061,17 @@ components:
       maxLength: 140
       type: string
     currencyCode:
-      description: >
+      description: |
         ISO 4217 Alpha 3 currency code.
       example: EUR
       pattern: "[A-Z]{3}"
       type: string
     dayOfExecution:
-      description: >
+      description: |
         Day of execution as string.
 
-
         This string consists of up two characters.
-
         Leading zeroes are not allowed.
-
 
         31 is ultimo of the month.
       enum:
@@ -9970,7 +10110,8 @@ components:
       type: string
     debitAccounting:
       description: >
-        If true, the amounts of debits on the reports are quoted positive with the related consequence for balances.
+        If true, the amounts of debits on the reports are quoted positive
+        with the related consequence for balances.
 
         If false, the amount of debits on the reports are quoted negative.
       type: boolean
@@ -9997,26 +10138,27 @@ components:
           $ref: "#/components/schemas/institutionalIdentification2"
       type: object
     displayName:
-      description: >
+      description: |
         Name of the account as defined by the PSU within online channels.
       maxLength: 70
       type: string
     endDate:
-      description: >
+      description: |
         The last applicable day of execution.
-
         If not given, it is an infinite standing order.
       format: date
       type: string
     entryDetails:
       description: >
-        Might be used by the ASPSP to transport details about transactions within a batch.
+        Might be used by the ASPSP to transport details about transactions
+        within a batch.
       items:
         $ref: "#/components/schemas/EntryDetailsElement"
       type: array
     entryReference:
       description: >
-        Is the identification of the transaction as used e.g. for reference for deltafunction on application level.
+        Is the identification of the transaction as used e.g. for reference
+        for deltafunction on application level.
 
         The same identification as for example used within camt.05x messages.
       maxLength: 35
@@ -10052,7 +10194,8 @@ components:
         - preceding
       type: string
     externalServiceLevel1Code:
-      description: Specifies the external service level code in the format of character string with a maximum length of 4 characters.
+      description: Specifies the external service level code in the format of
+        character string with a maximum length of 4 characters.
       enum:
         - SEPA
         - PRPT
@@ -10062,7 +10205,8 @@ components:
       type: string
     frequencyCode:
       description: >
-        The following codes from the "EventFrequency7Code" of ISO 20022 are supported:
+        The following codes from the "EventFrequency7Code" of ISO 20022 are
+        supported:
 
         - "Daily"
 
@@ -10094,7 +10238,8 @@ components:
       type: string
     frequencyPerDay:
       description: >
-        This field indicates the requested maximum frequency for an access without PSU involvement per day.
+        This field indicates the requested maximum frequency for an access
+        without PSU involvement per day.
 
         For a one-off access, this attribute is set to "1".
 
@@ -10109,7 +10254,8 @@ components:
       type: integer
     fundsAvailable:
       description: >
-        Equals true if sufficient funds are available at the time of the request, false otherwise.
+        Equals true if sufficient funds are available at the time of the
+        request, false otherwise.
 
 
         This datalemenet is allways contained in a confirmation of funds response.
@@ -10155,14 +10301,15 @@ components:
       type: object
     lastActionDate:
       description: >
-        This date is containing the date of the last action on the consent object either through
+        This date is containing the date of the last action on the consent
+        object either through
 
         the XS2A interface or the PSU/ASPSP interface having an impact on the status.
       example: 2018-07-01
       format: date
       type: string
     maskedPan:
-      description: >
+      description: |
         Masked Primary Account Number.
       example: 123456xxxxxx1234
       maxLength: 35
@@ -10207,17 +10354,16 @@ components:
       maxLength: 35
       type: string
     mt940:
-      description: >
+      description: |
         Data MT940 format in a text structure.
       type: string
     mt942:
-      description: >
+      description: |
         Data MT942 format in a text structure.
       type: string
     otherAccountIdentification1-CH:
-      description: >
+      description: |
         Other payment account Identifier.
-
         adapted from ISO pain.001.001.03.ch.02 GenericAccountIdentification1-CH
       example: 90-100100-0
       maxLength: 34
@@ -10236,7 +10382,7 @@ components:
       maxLength: 140
       type: string
     pan:
-      description: >
+      description: |
         Primary Account Number according to ISO/IEC 7812.
       example: "5409050000000000"
       maxLength: 35
@@ -10488,26 +10634,41 @@ components:
         - transactionStatus
       type: object
     paymentInitiationCrossBorder_pain.001:
-      description: >
+      description: |
         A pain.001 structure corresponding to the cross-border schema.
-
 
         For cross-border payments only community wide pain.001 schemes do exist.
       type: string
     paymentInitiationSctInst_pain.001:
-      description: >
+      description: |
         A pain.001 structure corresponding to the SCT INST schema.
       type: string
     paymentInitiationSct_pain.001:
-      description: >
+      description: |
         A pain.001 structure corresponding to the SCT schema
 
-
         urn:iso:std:iso:20022:tech:xsd:pain.001.001.03
-      example: <Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03"> <CstmrCdtTrfInitn> <GrpHdr> <MsgId>MIPI-123456789RI-123456789</MsgId> <CreDtTm>2017-02-14T20:23:34.000Z</CreDtTm> <NbOfTxs>1</NbOfTxs> <CtrlSum>123</CtrlSum> <InitgPty> <Nm>PaymentInitiator</Nm> <Id><OrgId><Othr><Id>DE10000000012</Id> <SchmeNm><Prptry>PISP</Prptry></SchmeNm></Othr></OrgId></Id> </InitgPty> </GrpHdr> <PmtInf> <PmtInfId>BIPI-123456789RI-123456789</PmtInfId> <PmtMtd>TRF</PmtMtd> <NbOfTxs>1</NbOfTxs> <CtrlSum>123</CtrlSum> <PmtTpInf><SvcLvl><Cd>SEPA</Cd></SvcLvl></PmtTpInf> <ReqdExctnDt>2017-02-15</ReqdExctnDt> <Dbtr><Nm>PSU Name</Nm></Dbtr> <DbtrAcct><Id><IBAN>DE87200500001234567890</IBAN></Id></DbtrAcct> <ChrgBr>SLEV</ChrgBr> <CdtTrfTxInf> <PmtId><EndToEndId>RI-123456789</EndToEndId></PmtId> <Amt><InstdAmt Ccy="EUR">123</InstdAmt></Amt> <Cdtr><Nm>Merchant123</Nm></Cdtr> <CdtrAcct><Id><IBAN> DE23100120020123456789</IBAN></Id></CdtrAcct> <RmtInf><Ustrd>Ref Number Merchant-123456</Ustrd></RmtInf> </CdtTrfTxInf> </PmtInf> </CstmrCdtTrfInitn> </Document>
+      example: <Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
+        <CstmrCdtTrfInitn> <GrpHdr> <MsgId>MIPI-123456789RI-123456789</MsgId>
+        <CreDtTm>2017-02-14T20:23:34.000Z</CreDtTm> <NbOfTxs>1</NbOfTxs>
+        <CtrlSum>123</CtrlSum> <InitgPty> <Nm>PaymentInitiator</Nm>
+        <Id><OrgId><Othr><Id>DE10000000012</Id>
+        <SchmeNm><Prptry>PISP</Prptry></SchmeNm></Othr></OrgId></Id> </InitgPty>
+        </GrpHdr> <PmtInf> <PmtInfId>BIPI-123456789RI-123456789</PmtInfId>
+        <PmtMtd>TRF</PmtMtd> <NbOfTxs>1</NbOfTxs> <CtrlSum>123</CtrlSum>
+        <PmtTpInf><SvcLvl><Cd>SEPA</Cd></SvcLvl></PmtTpInf>
+        <ReqdExctnDt>2017-02-15</ReqdExctnDt> <Dbtr><Nm>PSU Name</Nm></Dbtr>
+        <DbtrAcct><Id><IBAN>DE87200500001234567890</IBAN></Id></DbtrAcct>
+        <ChrgBr>SLEV</ChrgBr> <CdtTrfTxInf>
+        <PmtId><EndToEndId>RI-123456789</EndToEndId></PmtId> <Amt><InstdAmt
+        Ccy="EUR">123</InstdAmt></Amt> <Cdtr><Nm>Merchant123</Nm></Cdtr>
+        <CdtrAcct><Id><IBAN> DE23100120020123456789</IBAN></Id></CdtrAcct>
+        <RmtInf><Ustrd>Ref Number Merchant-123456</Ustrd></RmtInf>
+        </CdtTrfTxInf> </PmtInf> </CstmrCdtTrfInitn> </Document>
       type: string
     paymentInitiationStatusResponse-200_json:
-      description: Body of the response for a successful payment initiation status request in case of an JSON based endpoint.
+      description: Body of the response for a successful payment initiation status
+        request in case of an JSON based endpoint.
       properties:
         fundsAvailable:
           $ref: "#/components/schemas/fundsAvailable"
@@ -10520,7 +10681,8 @@ components:
       type: object
     paymentInitiationStatusResponse-200_xml:
       description: >
-        Body of the response for a successful payment initiation status request in case of an XML based endpoint.
+        Body of the response for a successful payment initiation status
+        request in case of an XML based endpoint.
 
 
         The status is returned as a pain.002 structure.
@@ -10533,18 +10695,19 @@ components:
       type: string
     paymentInitiationSwissSix_pain.001:
       description: >
-        A pain.001 structure corresponding to the swiss schema pain.001.001.03.ch.02.xsd
+        A pain.001 structure corresponding to the swiss schema
+        pain.001.001.03.ch.02.xsd
       type: string
     paymentInitiationTarget2_pain.001:
-      description: >
+      description: |
         A pain.001 structure corresponding to the target-2 schema.
-
 
         For TARGET-2 payments only community wide pain.001 schemes do exist.
       type: string
     paymentInitiationWithStatusResponse:
       description: >
-        Generic JSON response body consistion of the corresponding payment initation JSON body together with an optional transaction status field.
+        Generic JSON response body consistion of the corresponding payment
+        initation JSON body together with an optional transaction status field.
       properties:
         creditorAccount:
           $ref: "#/components/schemas/accountReference16-CH"
@@ -10773,14 +10936,16 @@ components:
       type: object
     periodicPaymentInitiationMultipartBody:
       description: >
-        The multipart message definition for the initiation of a periodic payment initiation 
+        The multipart message definition for the initiation of a periodic
+        payment initiation 
 
         where the information of the payment is contained in a pain.001 message (Part 1) and 
 
         the additional informations related to the periodic payment is an additional JSON message (Part 2).
       properties:
         json_standingorderType:
-          $ref: "#/components/schemas/periodicPaymentInitiation_xml-Part2-standingorderType_json"
+          $ref: "#/components/schemas/periodicPaymentInitiation_xml-Part2-standingorderTy\
+            pe_json"
         xml_sct:
           oneOf:
             - $ref: "#/components/schemas/paymentInitiationSct_pain.001"
@@ -10791,7 +10956,9 @@ components:
       type: object
     periodicPaymentInitiationWithStatusResponse:
       description: >
-        Generic JSON response body consistion of the corresponding periodic payment initation JSON body together with an optional transaction status field.
+        Generic JSON response body consistion of the corresponding periodic
+        payment initation JSON body together with an optional transaction status
+        field.
       properties:
         creditorAccount:
           $ref: "#/components/schemas/accountReference16-CH"
@@ -11024,7 +11191,8 @@ components:
       type: object
     periodicPaymentInitiation_xml-Part2-standingorderType_json:
       description: >
-        The body part 2 of a periodic payment initation request containes the execution related informations
+        The body part 2 of a periodic payment initation request containes
+        the execution related informations
 
         of the periodic payment.
       properties:
@@ -11073,7 +11241,8 @@ components:
       type: object
     proprietaryBankTransactionCode:
       description: >
-        Proprietary bank transaction code as used within a community or within an ASPSP e.g.
+        Proprietary bank transaction code as used within a community or
+        within an ASPSP e.g.
 
         for MT94x based transaction reports.
       maxLength: 35
@@ -11110,7 +11279,8 @@ components:
         - PENS
       type: string
     readAccountBalanceResponse-200:
-      description: Body of the response for a successful read balance for an account request.
+      description: Body of the response for a successful read balance for an account
+        request.
       properties:
         account:
           $ref: "#/components/schemas/accountReference16-CH"
@@ -11120,7 +11290,8 @@ components:
         - balances
       type: object
     readCardAccountBalanceResponse-200:
-      description: Body of the response for a successful read balance for a card account request.
+      description: Body of the response for a successful read balance for a card
+        account request.
       properties:
         balances:
           $ref: "#/components/schemas/balanceList"
@@ -11132,15 +11303,14 @@ components:
         - balances
       type: object
     recurringIndicator:
-      description: >
+      description: |
         "true", if the consent is for recurring access to the account data.
-
 
         "false", if the consent is for one access to the account data.
       example: false
       type: boolean
     remittanceInformationStructured:
-      description: >
+      description: |
         Structured remittance information.
       properties:
         SCORorQRRorIPI:
@@ -11167,24 +11337,24 @@ components:
         - reference
       type: object
     remittanceInformationStructuredArray:
-      description: >
+      description: |
         Array of structured remittance information.
       items:
         $ref: "#/components/schemas/remittanceInformationStructured"
       type: array
     remittanceInformationStructuredMax140:
-      description: >
+      description: |
         Structured remittance information Max
       maxLength: 140
       type: string
     remittanceInformationUnstructured:
-      description: >
+      description: |
         Unstructured remittance information.
       example: Ref Number Merchant
       maxLength: 140
       type: string
     remittanceInformationUnstructuredArray:
-      description: >
+      description: |
         Array of unstructured remittance information.
       example:
         - Ref Number Merchant
@@ -11221,14 +11391,14 @@ components:
         $ref: "#/components/schemas/reportExchangeRate"
       type: array
     scaAuthenticationData:
-      description: >
+      description: |
         SCA authentication data, depending on the chosen authentication method.
-
         If the data is binary, then it is base64 encoded.
       type: string
     scaMethods:
       description: >
-        This data element might be contained, if SCA is required and if the PSU has a choice between different
+        This data element might be contained, if SCA is required and if the
+        PSU has a choice between different
 
         authentication methods.
 
@@ -11249,7 +11419,8 @@ components:
       type: array
     scaStatus:
       description: >
-        This data element is containing information about the status of the SCA method applied.
+        This data element is containing information about the status of the
+        SCA method applied.
 
 
         The following codes are defined for this data type.
@@ -11291,7 +11462,8 @@ components:
       type: string
     scaStatusAuthorisationConfirmation:
       description: >
-        This data element is containing information about the status of the SCA method in an authorisation confirmation response. 
+        This data element is containing information about the status of the
+        SCA method in an authorisation confirmation response. 
 
 
         The following codes are defined for this data type.
@@ -11315,7 +11487,7 @@ components:
         - scaStatus
       type: object
     selectPsuAuthenticationMethod:
-      description: >
+      description: |
         Content of the body of a Select PSU authentication method request
       properties:
         authenticationMethodId:
@@ -11324,7 +11496,8 @@ components:
         - authenticationMethodId
       type: object
     selectPsuAuthenticationMethodResponse:
-      description: Body of the JSON response for a successful select PSU authentication method request.
+      description: Body of the JSON response for a successful select PSU
+        authentication method request.
       properties:
         _links:
           $ref: "#/components/schemas/_linksSelectPsuAuthenticationMethod"
@@ -11348,9 +11521,8 @@ components:
         - scaStatus
       type: object
     signingBasket:
-      description: >
+      description: |
         JSON Body of a establish signing basket request.
-
         The body shall contain at least one entry.
       properties:
         consentIds:
@@ -11360,7 +11532,8 @@ components:
       type: object
     signingBasketResponse-200:
       description: >
-        Body of the JSON response for a successful get signing basket request.
+        Body of the JSON response for a successful get signing basket
+        request.
 
           * 'payments': payment initiations which shall be authorised through this signing basket.
           * 'consents': consent objects which shall be authorised through this signing basket.
@@ -11412,7 +11585,7 @@ components:
         - transactionStatus
       type: object
     standingOrderDetails:
-      description: >
+      description: |
         Details of underlying standing orders.
       properties:
         dayOfExecution:
@@ -11429,7 +11602,8 @@ components:
           $ref: "#/components/schemas/monthsOfExecution"
         multiplicator:
           description: >
-            This is multiplying the given frequency resulting the exact frequency,
+            This is multiplying the given frequency resulting the exact
+            frequency,
 
             e.g. Frequency=weekly and multiplicator=3 means every 3 weeks.
 
@@ -11459,7 +11633,8 @@ components:
       type: object
     startDate:
       description: >
-        The first applicable day of execution starting from this date is the first payment.
+        The first applicable day of execution starting from this date is
+        the first payment.
       format: date
       type: string
     startScaprocessResponse:
@@ -11490,7 +11665,8 @@ components:
       type: string
     tppErrorDetail:
       description: >
-        Detailed human readable text specific to this instance of the error.
+        Detailed human readable text specific to this instance of the
+        error.
 
         XPath might be used to point to the issue generating the error in addition.
 
@@ -11498,11 +11674,9 @@ components:
       maxLength: 500
       type: string
     tppErrorTitle:
-      description: >
+      description: |
         Short human readable description of error type.
-
         Could be in local language.
-
         To be provided by ASPSPs.
       maxLength: 70
       type: string
@@ -11909,7 +12083,7 @@ components:
       maxLength: 500
       type: string
     transactionAuthorisation:
-      description: >
+      description: |
         Content of the body of a transaction authorisation request
       properties:
         scaAuthenticationData:
@@ -11931,7 +12105,8 @@ components:
       type: object
     transactionFeeIndicator:
       description: >
-        If equals 'true', the transaction will involve specific transaction cost as shown by the ASPSP in
+        If equals 'true', the transaction will involve specific transaction
+        cost as shown by the ASPSP in
 
         their public price list or as agreed between ASPSP and PSU.
 
@@ -11941,7 +12116,8 @@ components:
       type: boolean
     transactionId:
       description: >
-        This identification is given by the attribute transactionId of the corresponding entry of a transaction list.
+        This identification is given by the attribute transactionId of the
+        corresponding entry of a transaction list.
       example: 3dc3d5b3-7023-4848-9853-f5400a64e80f
       type: string
     transactionList:
@@ -11951,7 +12127,8 @@ components:
       type: array
     transactionStatus:
       description: >
-        The transaction status is filled with codes of the ISO 20022 data table:
+        The transaction status is filled with codes of the ISO 20022 data
+        table:
 
         - 'ACCC': 'AcceptedSettlementCompleted' -
           Settlement on the creditor's account has been completed.
@@ -12011,7 +12188,8 @@ components:
       type: string
     transactionStatus_SBS:
       description: >
-        The transaction status is filled with codes of the ISO 20022 data table.
+        The transaction status is filled with codes of the ISO 20022 data
+        table.
 
         Only the codes RCVD, PATC, ACTC, ACWC and RJCT are used:
 
@@ -12049,11 +12227,13 @@ components:
           $ref: "#/components/schemas/bankTransactionCode"
         batchIndicator:
           description: >
-            If this indicator equals true, then the related entry is a batch entry.
+            If this indicator equals true, then the related entry is a batch
+            entry.
           type: boolean
         batchNumberOfTransactions:
           description: >
-            Shall be used if and only if the batchIndicator is contained and equals true.
+            Shall be used if and only if the batchIndicator is contained and
+            equals true.
           type: integer
         bookingDate:
           $ref: "#/components/schemas/bookingDate"
@@ -12110,7 +12290,8 @@ components:
         ultimateDebtor:
           $ref: "#/components/schemas/ultimateDebtor"
         valueDate:
-          description: The Date at which assets become available to the account owner in case of a credit.
+          description: The Date at which assets become available to the account owner in
+            case of a credit.
           format: date
           type: string
       required:
@@ -12118,7 +12299,8 @@ components:
       type: object
     transactionsResponse-200_json:
       description: >
-        Body of the JSON response for a successful read transaction list request.
+        Body of the JSON response for a successful read transaction list
+        request.
 
         This account report contains transactions resulting from the query parameters.
       properties:
@@ -12151,9 +12333,8 @@ components:
       maxLength: 70
       type: string
     updatePsuAuthentication:
-      description: >
+      description: |
         Content of the body of a Update PSU authentication request
-
 
         Password subfield is used.
       properties:
@@ -12163,7 +12344,8 @@ components:
         - psuData
       type: object
     updatePsuAuthenticationResponse:
-      description: Body of the JSON response for a successful update PSU authentication request.
+      description: Body of the JSON response for a successful update PSU
+        authentication request.
       properties:
         _links:
           $ref: "#/components/schemas/_linksUpdatePsuAuthentication"
@@ -12191,7 +12373,8 @@ components:
         - scaStatus
       type: object
     updatePsuIdenticationResponse:
-      description: Body of the JSON response for a successful update PSU identification request.
+      description: Body of the JSON response for a successful update PSU
+        identification request.
       properties:
         _links:
           $ref: "#/components/schemas/_linksUpdatePsuIdentification"
@@ -12215,7 +12398,8 @@ components:
       type: object
     validUntil:
       description: >
-        This parameter is defining a valid until date (including the mentioned date) for the requested consent. 
+        This parameter is defining a valid until date (including the
+        mentioned date) for the requested consent. 
 
         The content is the local ASPSP date in ISO-Date format, e.g. 2017-10-30.
 

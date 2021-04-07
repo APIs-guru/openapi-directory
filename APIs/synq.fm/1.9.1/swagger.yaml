@@ -4,9 +4,8 @@ schemes:
 host: api.synq.fm
 basePath: /v1
 info:
-  description: >-
+  description: |-
     * [Sign up for a developer API key!](https://www.synq.fm/register)
-
     * [SYNQ API Guide](/)
   title: SYNQ Video
   version: 1.9.1
@@ -34,7 +33,9 @@ responses:
 paths:
   /video/create:
     post:
-      description: Create a new video, optionally setting some metadata fields. You may optionally set some of the metadata associated with the video. Only fields inside the "userdata" field can be set.
+      description: Create a new video, optionally setting some metadata fields. You
+        may optionally set some of the metadata associated with the video. Only
+        fields inside the "userdata" field can be set.
       operationId: create
       parameters:
         - in: formData
@@ -58,7 +59,8 @@ paths:
         - video
   /video/details:
     post:
-      description: Return details about a video. You may optionally request that only some of the metadata fields are returned.
+      description: Return details about a video. You may optionally request that only
+        some of the metadata fields are returned.
       operationId: details
       parameters:
         - in: formData
@@ -82,14 +84,18 @@ paths:
         - video
   /video/query:
     post:
-      description: Find videos matching any criteria, by running a JavaScript function over each video object. A detailed tutorial on how to use this functionality is available on the [documentation page](https://www.synq.fm/queries-video-api/).
+      description: Find videos matching any criteria, by running a JavaScript function
+        over each video object. A detailed tutorial on how to use this
+        functionality is available on the [documentation
+        page](https://www.synq.fm/queries-video-api/).
       operationId: query
       parameters:
         - in: formData
           name: api_key
           required: true
           type: string
-        - description: JavaScript code to be run over each video object, to determine what should be returend.
+        - description: JavaScript code to be run over each video object, to determine what
+            should be returend.
           in: formData
           name: filter
           required: true
@@ -98,26 +104,30 @@ paths:
         - application/json
       responses:
         "200":
-          description: An array of arbitrary elements, up to one element for each video object
+          description: An array of arbitrary elements, up to one element for each video
+            object
           schema:
             items:
               type: object
             type: array
         "400":
           $ref: "#/responses/ErrorResponse"
-      summary: Perform a JavaScript query to return video objects matching any desired criteria.
+      summary: Perform a JavaScript query to return video objects matching any desired
+        criteria.
       tags:
         - video
   /video/stream:
     post:
-      description: Returns a stream url that you can stream to from your broadcasting software, and a playback url people can use to watch the stream.
+      description: Returns a stream url that you can stream to from your broadcasting
+        software, and a playback url people can use to watch the stream.
       operationId: stream
       parameters:
         - in: formData
           name: api_key
           required: true
           type: string
-        - description: The ID of the video you want to stream to. The video needs to have been previously created.
+        - description: The ID of the video you want to stream to. The video needs to have
+            been previously created.
           in: formData
           name: video_id
           required: true
@@ -147,7 +157,8 @@ paths:
         - video
   /video/update:
     post:
-      description: Update a video's metadata through JavaScript code. Only fields inside the "userdata" object can be set.
+      description: Update a video's metadata through JavaScript code. Only fields
+        inside the "userdata" object can be set.
       operationId: update
       parameters:
         - in: formData
@@ -177,7 +188,10 @@ paths:
   /video/upload:
     post:
       description: >+
-        Return parameters needed for uploading a video file to Amazon Simple Storage Service. See http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html as well as the language-specific code-examples.
+        Return parameters needed for uploading a video file to Amazon
+        Simple Storage Service. See
+        http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html
+        as well as the language-specific code-examples.
 
         #### *Example request*
 
@@ -230,7 +244,8 @@ paths:
           name: api_key
           required: true
           type: string
-        - description: The ID of the video you are going to upload into. The video needs to have been previously created.
+        - description: The ID of the video you are going to upload into. The video needs
+            to have been previously created.
           in: formData
           name: video_id
           required: true
@@ -249,20 +264,24 @@ paths:
         - video
   /video/uploader:
     post:
-      description: Returns an embeddable url, that contains an uploader widget that allows you to easily upload any mp4. Great way to simplify the uploading process for end users.
+      description: Returns an embeddable url, that contains an uploader widget that
+        allows you to easily upload any mp4. Great way to simplify the uploading
+        process for end users.
       operationId: uploader
       parameters:
         - in: formData
           name: api_key
           required: true
           type: string
-        - description: The ID of the video you are going to upload into. The video needs to have been previously created.
+        - description: The ID of the video you are going to upload into. The video needs
+            to have been previously created.
           in: formData
           name: video_id
           required: true
           type: string
         - default: 2 hours
-          description: How long the uploader widget works for. Anything from '30 minutes' to '2 days'.
+          description: How long the uploader widget works for. Anything from '30 minutes'
+            to '2 days'.
           in: formData
           name: timeout
           required: false

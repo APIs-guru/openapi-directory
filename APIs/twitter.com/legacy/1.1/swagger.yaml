@@ -42,7 +42,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          The Yahoo! Where On Earth ID to use as the user's default trend location. Global information is
+          The Yahoo! Where On Earth ID to use as the user's default trend
+          location. Global information is
 
           available by using 1 as the WOEID. The woeid must be one of the locations returned by GET
 
@@ -55,7 +56,8 @@ paths:
         required: false
         type: string
       - description: >-
-          When set to true, t or 1, will enable sleep time for the user. Sleep time is the time when push or
+          When set to true, t or 1, will enable sleep time for the user.
+          Sleep time is the time when push or
 
           SMS notifications should not be sent to the user.
 
@@ -66,7 +68,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The hour that sleep time should begin if it is enabled. The value for this parameter should be
+          The hour that sleep time should begin if it is enabled. The value
+          for this parameter should be
 
           provided in ISO8601 format (i.e. 00-23). The time is considered to be in the same timezone as the
 
@@ -79,7 +82,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The hour that sleep time should end if it is enabled. The value for this parameter should be
+          The hour that sleep time should end if it is enabled. The value for
+          this parameter should be
 
           provided in ISO8601 format (i.e. 00-23). The time is considered to be in the same timezone as the
 
@@ -92,7 +96,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The timezone dates and times should be displayed in for the user. The timezone must be one of the
+          The timezone dates and times should be displayed in for the user.
+          The timezone must be one of the
 
           Rails TimeZone names.
 
@@ -103,7 +108,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The language which Twitter should render in for this user. The language must be specified by the
+          The language which Twitter should render in for this user. The
+          language must be specified by the
 
           appropriate two letter ISO 639-1 representation. Currently supported languages are provided by GET
 
@@ -116,9 +122,8 @@ paths:
         required: false
         type: string
     post:
-      description: >-
+      description: |-
         Updates the
-
         authenticating user's settings.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/post/account/settings
@@ -128,9 +133,8 @@ paths:
           description: Successful Response
   /account/update_delivery_device.json:
     parameters:
-      - description: >-
+      - description: |-
           Must be one of: sms, none.
-
 
           Example Values: sms
         in: query
@@ -138,7 +142,8 @@ paths:
         required: true
         type: string
       - description: >-
-          When set to either true, t or 1, each tweet will include a node called "entities,". This node
+          When set to either true, t or 1, each tweet will include a node
+          called "entities,". This node
 
           offers a variety of metadata about the tweet in a discreet structure, including: user_mentions,
 
@@ -167,9 +172,8 @@ paths:
           description: Successful Response
   /account/update_profile.json:
     parameters:
-      - description: >-
+      - description: |-
           Full name associated with the profile. Maximum of 20 characters.
-
 
           Example Values: Marcel Molina
         in: query
@@ -177,7 +181,8 @@ paths:
         required: false
         type: string
       - description: >-
-          URL associated with the profile. Will be prepended with "http://" if not present. Maximum of 100
+          URL associated with the profile. Will be prepended with "http://"
+          if not present. Maximum of 100
 
           characters.
 
@@ -188,7 +193,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The city or country describing where the user of the account is located. The contents are not
+          The city or country describing where the user of the account is
+          located. The contents are not
 
           normalized or geocoded in any way. Maximum of 30 characters.
 
@@ -199,7 +205,8 @@ paths:
         required: false
         type: string
       - description: >-
-          A description of the user owning the account. Maximum of 160 characters.
+          A description of the user owning the account. Maximum of 160
+          characters.
 
 
           Example Values: Flipped my wig at age 22 and it never grew back. Also: I work at Twitter.
@@ -207,16 +214,16 @@ paths:
         name: description
         required: false
         type: string
-      - description: >-
+      - description: |-
           The entities node will not be included when set to false.
-
 
           Example Values: false
         in: query
         name: include_entities
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
@@ -243,7 +250,8 @@ paths:
         required: true
         type: string
       - description: >-
-          Whether or not to tile the background image. If set to true, t or 1 the background image will
+          Whether or not to tile the background image. If set to true, t or 1
+          the background image will
 
           be displayed tiled. The image will not be tiled otherwise.
         in: query
@@ -251,7 +259,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Determines whether to display the profile background image or not. When set to true, t or 1 the
+          Determines whether to display the profile background image or not.
+          When set to true, t or 1 the
 
           background image will be displayed if an image is being uploaded with the request, or has been
 
@@ -264,23 +273,24 @@ paths:
         name: use
         required: false
         type: string
-      - description: >-
+      - description: |-
           The entities node will not be included when set to false.
-
 
           Example Values: false
         in: query
         name: include_entities
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
         type: string
     post:
       description: >-
-        Updates the authenticating user's profile background image. This method can also be used to enable
+        Updates the authenticating user's profile background image. This
+        method can also be used to enable
 
         or disable the profile background image. Although each parameter is marked as optional, at least one
 
@@ -319,12 +329,14 @@ paths:
         name: profile_text_color
         required: false
         type: string
-      - description: "The entities node will not be included when set to false. Example Values: false"
+      - description: "The entities node will not be included when set to false. Example
+          Values: false"
         in: query
         name: include_entities
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
@@ -354,7 +366,8 @@ paths:
         name: Content-Type
         required: true
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
@@ -420,7 +433,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          A comma-separated list of resource families you want to know the current rate limit disposition
+          A comma-separated list of resource families you want to know the
+          current rate limit disposition
 
           for. For best performance, only specify the resource families pertinent to your application.Example
 
@@ -431,16 +445,16 @@ paths:
         type: string
   /blocks/create.json:
     parameters:
-      - description: >-
+      - description: |-
           The entities node will not be included when set to false.
-
 
           Example Values: false
         in: query
         name: include_entities
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
@@ -462,16 +476,16 @@ paths:
           description: Successful Response
   /blocks/destroy.json:
     parameters:
-      - description: >-
+      - description: |-
           The entities node will not be included when set to false.
-
 
           Example Values: false
         in: query
         name: include_entities
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
@@ -491,9 +505,8 @@ paths:
           description: Successful Response
   /blocks/ids.json:
     get:
-      description: >-
+      description: |-
         Returns an array of numeric user
-
         ids the authenticating user is blocking.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/get/blocks/ids
@@ -503,7 +516,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          Many programming environments will not consume our ids due to their size. Provide this option to
+          Many programming environments will not consume our ids due to their
+          size. Provide this option to
 
           have ids returned as strings instead. Read more about Twitter IDs, JSON and Snowflake.
 
@@ -514,7 +528,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Causes the list of blocked users to be broken into pages of no more than 5000 IDs at a time. The
+          Causes the list of blocked users to be broken into pages of no more
+          than 5000 IDs at a time. The
 
           number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after
 
@@ -535,9 +550,8 @@ paths:
         type: string
   /blocks/list.json:
     get:
-      description: >-
+      description: |-
         Allows one to enable or
-
         disable retweets and device notifications from the specified user.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/get/blocks/list
@@ -546,18 +560,21 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: "The entities node will not be included when set to false. Example Values: false"
+      - description: "The entities node will not be included when set to false. Example
+          Values: false"
         in: query
         name: include_entities
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
         type: string
       - description: >-
-          Causes the list of blocked users to be broken into pages of no more than 5000 IDs at a time. The
+          Causes the list of blocked users to be broken into pages of no more
+          than 5000 IDs at a time. The
 
           number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after
 
@@ -601,7 +618,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          Specifies the number of direct messages to try and retrieve, up to a maximum of 200. The value of
+          Specifies the number of direct messages to try and retrieve, up to
+          a maximum of 200. The value of
 
           count is best thought of as a limit to the number of Tweets to return because suspended or deleted
 
@@ -614,7 +632,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Returns results with an ID greater than (that is, more recent than) the specified ID. There are
+          Returns results with an ID greater than (that is, more recent than)
+          the specified ID. There are
 
           limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has
 
@@ -626,7 +645,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Returns results with an ID less than (that is, older than) or equal to the specified ID.
+          Returns results with an ID less than (that is, older than) or equal
+          to the specified ID.
 
 
           Example Values: 54321
@@ -634,43 +654,40 @@ paths:
         name: max_id
         required: false
         type: string
-      - description: >-
+      - description: |-
           The entities node will not be included when set to false.
-
 
           Example Values: false
         in: query
         name: include_entities
         required: false
         type: string
-      - description: >-
+      - description: |-
           Specifies the page of results to retrieve.
-
 
           Example Values: 3
         in: query
         name: page
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
         type: string
   /direct_messages/destroy.json:
     parameters:
-      - description: >-
+      - description: |-
           The ID of the direct message to delete.
-
 
           Example Values: 1270516771
         in: query
         name: id
         required: true
         type: string
-      - description: >-
+      - description: |-
           The entities node will not be included when set to false.
-
 
           Example Values: false
         in: query
@@ -700,7 +717,8 @@ paths:
   /direct_messages/new.json:
     parameters:
       - description: >-
-          The text of your direct message. Be sure to URL encode as necessary, and keep the message under 140
+          The text of your direct message. Be sure to URL encode as
+          necessary, and keep the message under 140
 
           characters.
 
@@ -746,7 +764,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          Specifies the number of direct messages to try and retrieve, up to a maximum of 200. The value of
+          Specifies the number of direct messages to try and retrieve, up to
+          a maximum of 200. The value of
 
           count is best thought of as a limit to the number of Tweets to return because suspended or deleted
 
@@ -759,7 +778,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Returns results with an ID greater than (that is, more recent than) the specified ID. There are
+          Returns results with an ID greater than (that is, more recent than)
+          the specified ID. There are
 
           limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has
 
@@ -772,7 +792,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Returns results with an ID less than (that is, older than) or equal to the specified ID.
+          Returns results with an ID less than (that is, older than) or equal
+          to the specified ID.
 
 
           Example Values: 54321
@@ -780,18 +801,16 @@ paths:
         name: max_id
         required: false
         type: string
-      - description: >-
+      - description: |-
           The entities node will not be included when set to false.
-
 
           Example Values: false
         in: query
         name: include_entities
         required: false
         type: string
-      - description: >-
+      - description: |-
           Specifies the page of results to retrieve.
-
 
           Example Values: 3
         in: query
@@ -820,9 +839,8 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: >-
+      - description: |-
           The ID of the direct message.
-
 
           Example Values: 587424932
         in: query
@@ -831,18 +849,16 @@ paths:
         type: string
   /favorites/create.json:
     parameters:
-      - description: >-
+      - description: |-
           The numerical ID of the desired status.
-
 
           Example Values: 123
         in: query
         name: id
         required: true
         type: string
-      - description: >-
+      - description: |-
           The entities node will be omitted when set to false.
-
 
           Example Values: false
         in: query
@@ -871,18 +887,16 @@ paths:
           description: Successful Response
   /favorites/destroy.json:
     parameters:
-      - description: >-
+      - description: |-
           The numerical ID of the desired status.
-
 
           Example Values: 123
         in: query
         name: id
         required: true
         type: string
-      - description: >-
+      - description: |-
           The entities node will be omitted when set to false.
-
 
           Example Values: false
         in: query
@@ -911,9 +925,8 @@ paths:
           description: Successful Response
   /favorites/list.json:
     get:
-      description: >-
+      description: |-
         Returns the 20 most recent
-
         Tweets favorited by the authenticating or specified user.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/get/favorites/list
@@ -923,7 +936,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          Specifies the number of records to retrieve. Must be less than or equal to 200. Defaults to 20.
+          Specifies the number of records to retrieve. Must be less than or
+          equal to 200. Defaults to 20.
 
 
           Example Values: 5
@@ -932,7 +946,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Returns results with an ID greater than (that is, more recent than) the specified ID. There are
+          Returns results with an ID greater than (that is, more recent than)
+          the specified ID. There are
 
           limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has
 
@@ -945,7 +960,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Returns results with an ID less than (that is, older than) or equal to the specified ID.
+          Returns results with an ID less than (that is, older than) or equal
+          to the specified ID.
 
 
           Example Values: 54321
@@ -953,9 +969,8 @@ paths:
         name: max_id
         required: false
         type: string
-      - description: >-
+      - description: |-
           The entities node will be omitted when set to false.
-
 
           Example Values: false
         in: query
@@ -990,7 +1005,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          Many programming environments will not consume our Tweet ids due to their size. Provide this option
+          Many programming environments will not consume our Tweet ids due to
+          their size. Provide this option
 
           to have ids returned as strings instead. Example Values: true
         in: query
@@ -998,7 +1014,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The
+          Causes the list of connections to be broken into pages of no more
+          than 5000 IDs at a time. The
 
           number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after
 
@@ -1042,7 +1059,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          Many programming environments will not consume our Tweet ids due to their size. Provide this option
+          Many programming environments will not consume our Tweet ids due to
+          their size. Provide this option
 
           to have ids returned as strings instead. Example Values: true
         in: query
@@ -1050,7 +1068,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The
+          Causes the list of connections to be broken into pages of no more
+          than 5000 IDs at a time. The
 
           number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after
 
@@ -1137,7 +1156,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          Many programming environments will not consume our Tweet ids due to their size. Provide this option
+          Many programming environments will not consume our Tweet ids due to
+          their size. Provide this option
 
           to have ids returned as strings instead. Example Values: true
         in: query
@@ -1145,7 +1165,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The
+          Causes the list of connections to be broken into pages of no more
+          than 5000 IDs at a time. The
 
           number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after
 
@@ -1190,7 +1211,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          Many programming environments will not consume our Tweet ids due to their size. Provide this option
+          Many programming environments will not consume our Tweet ids due to
+          their size. Provide this option
 
           to have ids returned as strings instead. Example Values: true
         in: query
@@ -1198,7 +1220,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The
+          Causes the list of connections to be broken into pages of no more
+          than 5000 IDs at a time. The
 
           number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after
 
@@ -1216,9 +1239,8 @@ paths:
         type: string
   /friendships/show.json:
     get:
-      description: >-
+      description: |-
         Returns detailed information
-
         about the relationship between two arbitrary users.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/get/friendships/show
@@ -1227,36 +1249,32 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: >-
+      - description: |-
           The user_id of the subject user.
-
 
           Example Values: 3191321
         in: query
         name: source_id
         required: false
         type: string
-      - description: >-
+      - description: |-
           The screen_name of the subject user.
-
 
           Example Values: raffi
         in: query
         name: source_screen_name
         required: false
         type: string
-      - description: >-
+      - description: |-
           The user_id of the target user.
-
 
           Example Values: 20
         in: query
         name: target_id
         required: true
         type: string
-      - description: >-
+      - description: |-
           The screen_name of the target user.
-
 
           Example Values: noradio
         in: query
@@ -1265,20 +1283,21 @@ paths:
         type: string
   /friendships/update.json:
     parameters:
-      - description: "Enable/disable device notifications from the target user. Example Values: true, false"
+      - description: "Enable/disable device notifications from the target user. Example
+          Values: true, false"
         in: query
         name: device
         required: true
         type: string
-      - description: "Enable/disable retweets from the target user. Example Values: true, false"
+      - description: "Enable/disable retweets from the target user. Example Values:
+          true, false"
         in: query
         name: retweets
         required: true
         type: string
     post:
-      description: >-
+      description: |-
         Allows one to enable or
-
         disable retweets and device notifications from the specified user.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/post/friendships/update
@@ -1288,9 +1307,8 @@ paths:
           description: Successful Response
   "/geo/id/{place_id}.json":
     get:
-      description: >-
+      description: |-
         Returns all the
-
         information about a known place.Example Values: df51dec6f4ee2b2c
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/get/geo/id/%3Aplace_id
@@ -1300,7 +1318,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          A place in the world. These IDs can be retrieved from geo/reverse_geocode.
+          A place in the world. These IDs can be retrieved from
+          geo/reverse_geocode.
 
 
           Example Values: df51dec6f4ee2b2c
@@ -1311,7 +1330,8 @@ paths:
   /geo/places.json:
     parameters:
       - description: >-
-          This parameter searches for places which have this given street address. There are other
+          This parameter searches for places which have this given street
+          address. There are other
 
           well-known, and application specific attributes available. Custom attributes are also permitted.
 
@@ -1323,7 +1343,8 @@ paths:
         name: attribute:street_address
         required: false
         type: string
-      - description: If supplied, the response will use the JSONP format with a callback of the given name.
+      - description: If supplied, the response will use the JSONP format with a callback
+          of the given name.
         in: query
         name: callback
         required: false
@@ -1365,7 +1386,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          The latitude to search around. This parameter will be ignored unless it is inside the range -90.0
+          The latitude to search around. This parameter will be ignored
+          unless it is inside the range -90.0
 
           to +90.0 (North is positive) inclusive. It will also be ignored if there isn't a corresponding long
 
@@ -1378,7 +1400,8 @@ paths:
         required: true
         type: string
       - description: >-
-          The longitude to search around. The valid ranges for longitude is -180.0 to +180.0 (East is
+          The longitude to search around. The valid ranges for longitude is
+          -180.0 to +180.0 (East is
 
           positive) inclusive. This parameter will be ignored if outside that range, if it is not a number, if
 
@@ -1391,7 +1414,8 @@ paths:
         required: true
         type: string
       - description: >-
-          A hint on the "region" in which to search. If a number, then this is a radius in meters, but it can
+          A hint on the "region" in which to search. If a number, then this
+          is a radius in meters, but it can
 
           also take a string that is suffixed with ft to specify feet. If this is not passed in, then it is
 
@@ -1406,7 +1430,8 @@ paths:
         required: false
         type: string
       - description: >-
-          This is the minimal granularity of place types to return and must be one of: poi, neighborhood,
+          This is the minimal granularity of place types to return and must
+          be one of: poi, neighborhood,
 
           city, admin or country. If no granularity is provided for the request neighborhood is assumed.
 
@@ -1419,7 +1444,8 @@ paths:
         required: false
         type: string
       - description: >-
-          A hint as to the number of results to return. This does not guarantee that the number of results
+          A hint as to the number of results to return. This does not
+          guarantee that the number of results
 
           returned will equal max_results, but instead informs how many "nearby" results to return. Ideally,
 
@@ -1431,7 +1457,8 @@ paths:
         name: max_results
         required: false
         type: string
-      - description: If supplied, the response will use the JSONP format with a callback of the given name.
+      - description: If supplied, the response will use the JSONP format with a callback
+          of the given name.
         in: query
         name: callback
         required: false
@@ -1470,7 +1497,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          A hint on the "region" in which to search. If a number, then this is a radius in meters, but it can
+          A hint on the "region" in which to search. If a number, then this
+          is a radius in meters, but it can
 
           also take a string that is suffixed with ft to specify feet. If this is not passed in, then it is
 
@@ -1485,7 +1513,8 @@ paths:
         required: false
         type: string
       - description: >-
-          This is the minimal granularity of place types to return and must be one of: poi, neighborhood,
+          This is the minimal granularity of place types to return and must
+          be one of: poi, neighborhood,
 
           city, admin or country. If no granularity is provided for the request neighborhood is assumed.
 
@@ -1498,7 +1527,8 @@ paths:
         required: false
         type: string
       - description: >-
-          This is the place_id which you would like to restrict the search results to. Setting this value
+          This is the place_id which you would like to restrict the search
+          results to. Setting this value
 
           means only places within the given place_id will be found.
 
@@ -1514,7 +1544,8 @@ paths:
         required: false
         type: string
       - description: >-
-          This parameter searches for places which have this given street address. There are other
+          This parameter searches for places which have this given street
+          address. There are other
 
           well-known, and application specific attributes available. Custom attributes are also permitted.
 
@@ -1526,7 +1557,8 @@ paths:
         name: attribute:street_address
         required: false
         type: string
-      - description: If supplied, the response will use the JSONP format with a callback of the given name.
+      - description: If supplied, the response will use the JSONP format with a callback
+          of the given name.
         in: query
         name: callback
         required: false
@@ -1553,7 +1585,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          This is the place_id which you would like to restrict the search results to. Setting this value
+          This is the place_id which you would like to restrict the search
+          results to. Setting this value
 
           means only places within the given place_id will be found.
 
@@ -1569,7 +1602,8 @@ paths:
         required: false
         type: string
       - description: >-
-          This parameter searches for places which have this given street address. There are other
+          This parameter searches for places which have this given street
+          address. There are other
 
           well-known, and application specific attributes available. Custom attributes are also permitted.
 
@@ -1581,7 +1615,8 @@ paths:
         name: attribute:street_address
         required: false
         type: string
-      - description: If supplied, the response will use the JSONP format with a callback of the given name.
+      - description: If supplied, the response will use the JSONP format with a callback
+          of the given name.
         in: query
         name: callback
         required: false
@@ -1647,7 +1682,8 @@ paths:
   /lists/create.json:
     parameters:
       - description: >-
-          The name for the list.A list's name must start with a letter and can consist only of 25 or fewer
+          The name for the list.A list's name must start with a letter and
+          can consist only of 25 or fewer
 
           letters, numbers, "-", or "_" characters.
         in: query
@@ -1655,7 +1691,8 @@ paths:
         required: true
         type: string
       - description: >-
-          Whether your list is public or private. Values can be public or private. If no mode is specified
+          Whether your list is public or private. Values can be public or
+          private. If no mode is specified
 
           the list will be public.
         in: query
@@ -1680,7 +1717,8 @@ paths:
           description: Successful Response
   /lists/destroy.json:
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -1691,9 +1729,8 @@ paths:
         required: false
         type: string
     post:
-      description: >-
+      description: |-
         Deletes the specified list.
-
         The authenticated user must own the list to be able to destroy it.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/post/lists/destroy
@@ -1722,7 +1759,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          The screen name of the user for whom to return results for. Helpful for disambiguating when a valid
+          The screen name of the user for whom to return results for. Helpful
+          for disambiguating when a valid
 
           screen name is also a user ID.
 
@@ -1733,7 +1771,8 @@ paths:
         required: true
         type: string
       - description: >-
-          The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID
+          The ID of the user for whom to return results for. Helpful for
+          disambiguating when a valid user ID
 
           is also a valid screen name.
 
@@ -1763,7 +1802,8 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -1773,22 +1813,23 @@ paths:
         name: owner_id
         required: false
         type: string
-      - description: >-
+      - description: |-
           The entities node will be disincluded when set to false.
-
 
           Example Values: false
         in: query
         name: include_entities
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
         type: string
       - description: >-
-          Causes the collection of list members to be broken into "pages" of somewhat consistent size. If no
+          Causes the collection of list members to be broken into "pages" of
+          somewhat consistent size. If no
 
           cursor is provided, a value of -1 will be assumed, which is the first "page."
 
@@ -1805,7 +1846,8 @@ paths:
         type: string
   /lists/members/create.json:
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -1830,7 +1872,8 @@ paths:
           description: Successful Response
   /lists/members/create_all.json:
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -1840,12 +1883,14 @@ paths:
         name: owner_id
         required: false
         type: string
-      - description: A comma separated list of user IDs, up to 100 are allowed in a single request.
+      - description: A comma separated list of user IDs, up to 100 are allowed in a
+          single request.
         in: query
         name: user_id
         required: false
         type: string
-      - description: A comma separated list of screen names, up to 100 are allowed in a single request.
+      - description: A comma separated list of screen names, up to 100 are allowed in a
+          single request.
         in: query
         name: screen_name
         required: false
@@ -1882,7 +1927,8 @@ paths:
         required: true
         type: string
       - description: >-
-          You can identify a list by its slug instead of its numerical id. If you decide to do so, note
+          You can identify a list by its slug instead of its numerical id. If
+          you decide to do so, note
 
           that you'll also have to specify the list owner using the owner_id or owner_screen_name
 
@@ -1891,7 +1937,8 @@ paths:
         name: slug
         required: true
         type: string
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -1902,7 +1949,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The ID of the user to remove from the list. Helpful for disambiguating when a valid user ID is also
+          The ID of the user to remove from the list. Helpful for
+          disambiguating when a valid user ID is also
 
           a valid screen name.
         in: query
@@ -1910,7 +1958,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The screen name of the user for whom to remove from the list. Helpful for disambiguating when a
+          The screen name of the user for whom to remove from the list.
+          Helpful for disambiguating when a
 
           valid screen name is also a user ID.
         in: query
@@ -1932,7 +1981,8 @@ paths:
           description: Successful Response
   /lists/members/destroy_all.json:
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -1942,12 +1992,14 @@ paths:
         name: owner_id
         required: false
         type: string
-      - description: A comma separated list of screen names, up to 100 are allowed in a single request.
+      - description: A comma separated list of screen names, up to 100 are allowed in a
+          single request.
         in: query
         name: screen_name
         required: false
         type: string
-      - description: A comma separated list of user IDs, up to 100 are allowed in a single request.
+      - description: A comma separated list of user IDs, up to 100 are allowed in a
+          single request.
         in: query
         name: user_id
         required: false
@@ -1978,9 +2030,8 @@ paths:
           description: Successful Response
   /lists/members/show.json:
     get:
-      description: >-
+      description: |-
         Check if the specified
-
         user is a member of the specified list.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/get/lists/members/show
@@ -1989,7 +2040,8 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -2000,7 +2052,8 @@ paths:
         required: false
         type: string
       - description: >-
-          When set to either true, t or 1, each tweet will include a node called "entities". This node offers
+          When set to either true, t or 1, each tweet will include a node
+          called "entities". This node offers
 
           a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and
 
@@ -2011,7 +2064,8 @@ paths:
         name: include_entities
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
@@ -2032,7 +2086,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID
+          The ID of the user for whom to return results for. Helpful for
+          disambiguating when a valid user ID
 
           is also a valid screen name.
         in: query
@@ -2040,7 +2095,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The screen name of the user for whom to return results for. Helpful for disambiguating when a valid
+          The screen name of the user for whom to return results for. Helpful
+          for disambiguating when a valid
 
           screen name is also a user ID.
         in: query
@@ -2048,7 +2104,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin
+          Breaks the results into pages. A single page contains 20 lists.
+          Provide a value of -1 to begin
 
           paging. Provide values as returned in the response body's next_cursor and previous_cursor attributes
 
@@ -2058,7 +2115,8 @@ paths:
         required: false
         type: string
       - description: >-
-          When set to true, t or 1, will return just lists the authenticating user owns, and the user
+          When set to true, t or 1, will return just lists the authenticating
+          user owns, and the user
 
           represented by user_id or screen_name is a member of.
         in: query
@@ -2078,7 +2136,8 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -2103,7 +2162,8 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -2114,7 +2174,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Returns results with an ID greater than (that is, more recent than) the specified ID. There are
+          Returns results with an ID greater than (that is, more recent than)
+          the specified ID. There are
 
           limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has
 
@@ -2123,7 +2184,8 @@ paths:
         name: since_id
         required: false
         type: string
-      - description: Returns results with an ID less than (that is, older than) or equal to the specified ID.
+      - description: Returns results with an ID less than (that is, older than) or equal
+          to the specified ID.
         in: query
         name: max_id
         required: false
@@ -2134,7 +2196,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Entities are ON by default in API 1.1, each tweet includes a node called "entities". This node
+          Entities are ON by default in API 1.1, each tweet includes a node
+          called "entities". This node
 
           offers a variety of metadata about the tweet in a discreet structure, including: user_mentions,
 
@@ -2144,7 +2207,8 @@ paths:
         required: false
         type: string
       - description: >-
-          When set to either true, t or 1, the list timeline will contain native retweets (if they exist) in
+          When set to either true, t or 1, the list timeline will contain
+          native retweets (if they exist) in
 
           addition to the standard stream of tweets. The output format of retweeted tweets is identical to the
 
@@ -2168,7 +2232,8 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -2179,7 +2244,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin
+          Breaks the results into pages. A single page contains 20 lists.
+          Provide a value of -1 to begin
 
           paging. Provide values as returned in the response body's next_cursor and previous_cursor attributes
 
@@ -2189,7 +2255,8 @@ paths:
         required: false
         type: string
       - description: >-
-          When set to either true, t or 1, each tweet will include a node called "entities". This node offers
+          When set to either true, t or 1, each tweet will include a node
+          called "entities". This node offers
 
           a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and
 
@@ -2200,14 +2267,16 @@ paths:
         name: include_entities
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
         type: string
   /lists/subscribers/create.json:
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -2218,9 +2287,8 @@ paths:
         required: false
         type: string
     post:
-      description: >-
+      description: |-
         Subscribes the
-
         authenticated user to the specified list.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/post/lists/subscribers/create
@@ -2230,7 +2298,8 @@ paths:
           description: Successful Response
   /lists/subscribers/destroy.json:
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -2241,9 +2310,8 @@ paths:
         required: false
         type: string
     post:
-      description: >-
+      description: |-
         Unsubscribes the
-
         authenticated user from the specified list.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/post/lists/subscribers/destroy
@@ -2264,7 +2332,8 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -2275,7 +2344,8 @@ paths:
         required: false
         type: string
       - description: >-
-          When set to either true, t or 1, each tweet will include a node called "entities". This node offers
+          When set to either true, t or 1, each tweet will include a node
+          called "entities". This node offers
 
           a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and
 
@@ -2286,7 +2356,8 @@ paths:
         name: include_entities
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
@@ -2306,13 +2377,15 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: The amount of results to return per page. Defaults to 20. Maximum of 1,000 when using cursors.
+      - description: The amount of results to return per page. Defaults to 20. Maximum
+          of 1,000 when using cursors.
         in: query
         name: count
         required: false
         type: string
       - description: >-
-          Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin
+          Breaks the results into pages. A single page contains 20 lists.
+          Provide a value of -1 to begin
 
           paging. Provide values as returned in the response body's next_cursor and previous_cursor attributes
 
@@ -2325,7 +2398,8 @@ paths:
         type: string
   /lists/update.json:
     parameters:
-      - description: The screen name of the user who owns the list being requested by a slug.
+      - description: The screen name of the user who owns the list being requested by a
+          slug.
         in: query
         name: owner_screen_name
         required: false
@@ -2341,7 +2415,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Whether your list is public or private. Values can be public or private. If no mode is specified
+          Whether your list is public or private. Values can be public or
+          private. If no mode is specified
 
           the list will be public.
         in: query
@@ -2354,9 +2429,8 @@ paths:
         required: false
         type: string
     post:
-      description: >-
+      description: |-
         Updates the specified list. The
-
         authenticated user must own the list to be able to update it.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/post/lists/update
@@ -2384,9 +2458,8 @@ paths:
           description: Successful Response
   "/saved_searches/destroy/{id}.json":
     parameters:
-      - description: >-
+      - description: |-
           The ID of the saved search.
-
 
           Example Values: 313006
         in: path
@@ -2410,9 +2483,8 @@ paths:
           description: Successful Response
   /saved_searches/list.json:
     get:
-      description: >-
+      description: |-
         Returns the authenticated
-
         user's saved search queries.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/get/saved_searches/list
@@ -2423,9 +2495,8 @@ paths:
     parameters: []
   "/saved_searches/show/{id}.json":
     get:
-      description: >-
+      description: |-
         Returns the
-
         authenticated user's saved search queries.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/get/saved_searches/show/%3Aid
@@ -2434,9 +2505,8 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: >-
+      - description: |-
           The ID of the saved search.
-
 
           Example Values: 313006
         in: path
@@ -2473,7 +2543,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          A UTF-8, URL-encoded search query of 1,000 characters maximum, including operators. Queries may
+          A UTF-8, URL-encoded search query of 1,000 characters maximum,
+          including operators. Queries may
 
           additionally be limited by complexity.Example: @noradio.
         in: query
@@ -2481,7 +2552,8 @@ paths:
         required: true
         type: string
       - description: >-
-          Returns tweets by users located within a given radius of the given latitude/longitude. The location
+          Returns tweets by users located within a given radius of the given
+          latitude/longitude. The location
 
           is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The
 
@@ -2499,7 +2571,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Restricts tweets to the given language, given by an ISO 639-1 code. Language detection is
+          Restricts tweets to the given language, given by an ISO 639-1 code.
+          Language detection is
 
           best-effort.Example Values: eu
         in: query
@@ -2507,7 +2580,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Specify the language of the query you are sending (only ja is currently effective). This is
+          Specify the language of the query you are sending (only ja is
+          currently effective). This is
 
           intended for language-specific consumers and the default should work in the majority of
 
@@ -2517,7 +2591,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Optional. Specifies what type of search results you would prefer to receive. The current default is
+          Optional. Specifies what type of search results you would prefer to
+          receive. The current default is
 
           "mixed." Valid values include:
 
@@ -2533,7 +2608,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The number of tweets to return per page, up to a maximum of 100. Defaults to 15. This was formerly
+          The number of tweets to return per page, up to a maximum of 100.
+          Defaults to 15. This was formerly
 
           the "rpp" parameter in the old Search API. Example Values: 100
         in: query
@@ -2541,7 +2617,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Returns tweets generated before the given date. Date should be formatted as YYYY-MM-DD. Keep in
+          Returns tweets generated before the given date. Date should be
+          formatted as YYYY-MM-DD. Keep in
 
           mind that the search index may not go back as far as the date you specify here. Example Values:
 
@@ -2551,7 +2628,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Returns results with an ID greater than (that is, more recent than) the specified ID. There are
+          Returns results with an ID greater than (that is, more recent than)
+          the specified ID. There are
 
           limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has
 
@@ -2563,20 +2641,23 @@ paths:
         required: false
         type: string
       - description: >-
-          Returns results with an ID less than (that is, older than) or equal to the specified ID. Example
+          Returns results with an ID less than (that is, older than) or equal
+          to the specified ID. Example
 
           Values: 12345
         in: query
         name: max_id
         required: false
         type: string
-      - description: "The entities node will be disincluded when set to false. Example Values: false"
+      - description: "The entities node will be disincluded when set to false. Example
+          Values: false"
         in: query
         name: include_entities
         required: false
         type: string
       - description: >-
-          If supplied, the response will use the JSONP format with a callback of the given name. The
+          If supplied, the response will use the JSONP format with a callback
+          of the given name. The
 
           usefulness of this parameter is somewhat diminished by the requirement of authentication for
 
@@ -2593,7 +2674,8 @@ paths:
         required: true
         type: string
       - description: >-
-          When set to either true, t or 1, each tweet returned in a timeline will include a user object
+          When set to either true, t or 1, each tweet returned in a timeline
+          will include a user object
 
           including only the status authors numerical ID. Omit this parameter to receive the complete user
 
@@ -2635,19 +2717,22 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: Specifies the number of records to retrieve. Must be less than or equal to 200.
+      - description: Specifies the number of records to retrieve. Must be less than or
+          equal to 200.
         in: query
         name: count
         required: false
         type: integer
-      - description: Returns results with an ID less than (that is, older than) or equal to the specified ID.
+      - description: Returns results with an ID less than (that is, older than) or equal
+          to the specified ID.
         format: int64
         in: query
         name: max_id
         required: false
         type: integer
       - description: >-
-          Returns results with an ID greater than (that is, more recent than) the specified ID. There are
+          Returns results with an ID greater than (that is, more recent than)
+          the specified ID. There are
 
           limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has
 
@@ -2658,7 +2743,8 @@ paths:
         required: false
         type: integer
       - description: >-
-          When set to either true, t or 1, each tweet returned in a timeline will include a user object
+          When set to either true, t or 1, each tweet returned in a timeline
+          will include a user object
 
           including only the status authors numerical ID. Omit this parameter to receive the complete user
 
@@ -2668,7 +2754,8 @@ paths:
         required: false
         type: string
       - description: >-
-          This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies
+          This parameter will prevent replies from appearing in the returned
+          timeline. Using exclude_replies
 
           with the count parameter will mean you will receive up-to count tweets — this is because the count
 
@@ -2678,7 +2765,8 @@ paths:
         required: false
         type: string
       - description: >-
-          This parameter enhances the contributors element of the status response to include the screen_name
+          This parameter enhances the contributors element of the status
+          response to include the screen_name
 
           of the contributor. By default only the user_id of the contributor is included.
         in: query
@@ -2705,7 +2793,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          Specifies the number of tweets to try and retrieve, up to a maximum of 200. The value of count is
+          Specifies the number of tweets to try and retrieve, up to a maximum
+          of 200. The value of count is
 
           best thought of as a limit to the number of tweets to return because suspended or deleted content is
 
@@ -2717,7 +2806,8 @@ paths:
         required: false
         type: integer
       - description: >-
-          Returns results with an ID greater than (that is, more recent than) the specified ID. There are
+          Returns results with an ID greater than (that is, more recent than)
+          the specified ID. There are
 
           limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has
 
@@ -2727,14 +2817,16 @@ paths:
         name: since_id
         required: false
         type: integer
-      - description: Returns results with an ID less than (that is, older than) or equal to the specified ID.
+      - description: Returns results with an ID less than (that is, older than) or equal
+          to the specified ID.
         format: int64
         in: query
         name: max_id
         required: false
         type: integer
       - description: >-
-          When set to either true, t or 1, each tweet returned in a timeline will include a user object
+          When set to either true, t or 1, each tweet returned in a timeline
+          will include a user object
 
           including only the status authors numerical ID. Omit this parameter to receive the complete user
 
@@ -2744,7 +2836,8 @@ paths:
         required: false
         type: string
       - description: >-
-          This parameter enhances the contributors element of the status response to include the screen_name
+          This parameter enhances the contributors element of the status
+          response to include the screen_name
 
           of the contributor. By default only the user_id of the contributor is included.
         in: query
@@ -2782,7 +2875,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          The maximum width in pixels that the embed should be rendered at. This value is constrained to be
+          The maximum width in pixels that the embed should be rendered at.
+          This value is constrained to be
 
           between 250 and 550 pixels. Note that Twitter does not support the oEmbed maxheight parameter.
 
@@ -2798,7 +2892,8 @@ paths:
         required: false
         type: integer
       - description: >-
-          Specifies whether the embedded Tweet should automatically expand images which were uploaded via
+          Specifies whether the embedded Tweet should automatically expand
+          images which were uploaded via
 
           POST statuses/update_with_media. When set to either true, t or
 
@@ -2808,7 +2903,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Specifies whether the embedded Tweet should automatically show the original message in the case
+          Specifies whether the embedded Tweet should automatically show the
+          original message in the case
 
           that the embedded Tweet is a reply. When set to either true, t or 1 the original Tweet will not be
 
@@ -2836,7 +2932,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Specifies whether the embedded Tweet should be left aligned, right aligned, or centered in the
+          Specifies whether the embedded Tweet should be left aligned, right
+          aligned, or centered in the
 
           page. Valid values are left, right, center, and none. Defaults to none, meaning no alignment styles
 
@@ -2861,7 +2958,8 @@ paths:
         required: false
         type: string
       - description: >-
-          Language code for the rendered embed. This will affect the text and localization of the rendered
+          Language code for the rendered embed. This will affect the text and
+          localization of the rendered
 
           HTML. Example value: fr
         in: query
@@ -2876,7 +2974,8 @@ paths:
         required: true
         type: string
       - description: >-
-          When set to either true, t or 1, each tweet returned in a timeline will include a user object
+          When set to either true, t or 1, each tweet returned in a timeline
+          will include a user object
 
           including only the status authors numerical ID. Omit this parameter to receive the complete user
 
@@ -2886,11 +2985,9 @@ paths:
         required: false
         type: string
     post:
-      description: >-
+      description: |-
         Retweets a tweet.
-
         Returns
-
         the original tweet with retweet details embedded.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/post/statuses/retweet/:id
@@ -2900,11 +2997,9 @@ paths:
           description: Successful Response
   "/statuses/retweets/{id}.json":
     get:
-      description: >-
+      description: |-
         Returns up to 100 of
-
         the
-
         first retweets of a given tweet.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/get/statuses/retweets/:id
@@ -2918,13 +3013,15 @@ paths:
         name: id
         required: true
         type: string
-      - description: Specifies the number of records to retrieve. Must be less than or equal to 100.
+      - description: Specifies the number of records to retrieve. Must be less than or
+          equal to 100.
         in: query
         name: count
         required: false
         type: string
       - description: >-
-          When set to either true, t or 1, each tweet returned in a timeline will include a user object
+          When set to either true, t or 1, each tweet returned in a timeline
+          will include a user object
 
           including only the status authors numerical ID. Omit this parameter to receive the complete user
 
@@ -2952,7 +3049,8 @@ paths:
         required: true
         type: string
       - description: >-
-          When set to either true, t or 1, each tweet returned in a timeline will include a user object
+          When set to either true, t or 1, each tweet returned in a timeline
+          will include a user object
 
           including only the status authors numerical ID. Omit this parameter to receive the complete user
 
@@ -2962,7 +3060,8 @@ paths:
         required: false
         type: string
       - description: >-
-          When set to either true, t or 1, any Tweets returned that have been retweeted by the authenticating
+          When set to either true, t or 1, any Tweets returned that have been
+          retweeted by the authenticating
 
           user will include an additional current_user_retweet node, containing the ID of the source status
 
@@ -2978,9 +3077,11 @@ paths:
         type: string
   /statuses/update.json:
     parameters:
-      - default: "Posting from @apigee's API test console. It's like a command line for the Twitter API! #apitools"
+      - default: "Posting from @apigee's API test console. It's like a command line for
+          the Twitter API! #apitools"
         description: >-
-          The text of your status update, typically up to 140 characters. URL encode as necessary. t.co link
+          The text of your status update, typically up to 140 characters. URL
+          encode as necessary. t.co link
 
           short-url wrapping (https://dev.twitter.com/docs/tco-link-wrapper/faq) may effect character counts.
         in: query
@@ -2988,7 +3089,8 @@ paths:
         required: true
         type: string
       - description: >-
-          The ID of an existing status that the update is in reply to. Note: This parameter will be ignored
+          The ID of an existing status that the update is in reply to. Note:
+          This parameter will be ignored
 
           unless the author of the tweet this parameter references is mentioned within the status text.
 
@@ -3001,7 +3103,8 @@ paths:
         type: string
       - default: "37.426363"
         description: >-
-          The latitude of the location this tweet refers to. This parameter will be ignored unless it is
+          The latitude of the location this tweet refers to. This parameter
+          will be ignored unless it is
 
           inside the range -90.0 to +90.0 (North is positive) inclusive. It will also be ignored if there
 
@@ -3012,7 +3115,8 @@ paths:
         type: string
       - default: "-122.141114"
         description: >-
-          The longitude of the location this tweet refers to. The valid ranges for longitude is -180.0 to
+          The longitude of the location this tweet refers to. The valid
+          ranges for longitude is -180.0 to
 
           +180.0 (East is positive) inclusive. This parameter will be ignored if outside that range, if it is
 
@@ -3022,7 +3126,8 @@ paths:
         required: false
         type: string
       - description: >-
-          A place in the world. These IDs can be retrieved from GET geo/reverse_geocode
+          A place in the world. These IDs can be retrieved from GET
+          geo/reverse_geocode
 
           (https://dev.twitter.com/docs/api/1/get/geo/reverse_geocode).
         in: query
@@ -3030,7 +3135,8 @@ paths:
         required: false
         type: string
       - default: "false"
-        description: Whether or not to put a pin on the exact coordinates a tweet has been sent from.
+        description: Whether or not to put a pin on the exact coordinates a tweet has
+          been sent from.
         enum:
           - "false"
           - "true"
@@ -3040,7 +3146,8 @@ paths:
         required: false
         type: string
       - description: >-
-          When set to either true, t or 1, each tweet returned in a timeline will include a user object
+          When set to either true, t or 1, each tweet returned in a timeline
+          will include a user object
 
           including only the status authors numerical ID. Omit this parameter to receive the complete user
 
@@ -3075,7 +3182,8 @@ paths:
   /statuses/update_with_media.json:
     parameters:
       - description: >-
-          The text of your status update. URL encode as necessary. t.co link wrapping
+          The text of your status update. URL encode as necessary. t.co link
+          wrapping
 
           (https://dev.twitter.com/docs/tco-link-wrapper/faq) may affect character counts if the post contains
 
@@ -3091,7 +3199,8 @@ paths:
         required: true
         type: string
       - description: >-
-          Up to max_media_per_upload files may be specified in the request, each named media[]. Supported
+          Up to max_media_per_upload files may be specified in the request,
+          each named media[]. Supported
 
           image formats are PNG, JPG and GIF. Animated GIFs are not supported. Note: Request the GET
 
@@ -3108,7 +3217,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The ID of an existing status that the update is in reply to. Note: This parameter will be ignored
+          The ID of an existing status that the update is in reply to. Note:
+          This parameter will be ignored
 
           unless the author of the tweet this parameter references is mentioned within the status text.
 
@@ -3120,7 +3230,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The latitude of the location this tweet refers to. This parameter will be ignored unless it is
+          The latitude of the location this tweet refers to. This parameter
+          will be ignored unless it is
 
           inside the range -90.0 to +90.0 (North is positive) inclusive. It will also be ignored if there
 
@@ -3130,7 +3241,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The longitude of the location this tweet refers to. The valid ranges for longitude is -180.0 to
+          The longitude of the location this tweet refers to. The valid
+          ranges for longitude is -180.0 to
 
           +180.0 (East is positive) inclusive. This parameter will be ignored if outside that range, not a
 
@@ -3142,14 +3254,16 @@ paths:
         required: false
         type: string
       - description: >-
-          A place in the world identified by a Twitter place ID. Place IDs can be retrieved from
+          A place in the world identified by a Twitter place ID. Place IDs
+          can be retrieved from
 
           geo/reverse_geocode.
         in: query
         name: place_id
         required: false
         type: string
-      - description: Whether or not to put a pin on the exact coordinates a tweet has been sent from.
+      - description: Whether or not to put a pin on the exact coordinates a tweet has
+          been sent from.
         in: query
         name: display_coordinates
         required: false
@@ -3218,7 +3332,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          Specifies the number of tweets to try and retrieve, up to a maximum of 200. The value of count is
+          Specifies the number of tweets to try and retrieve, up to a maximum
+          of 200. The value of count is
 
           best thought of as a limit to the number of tweets to return because suspended or deleted content is
 
@@ -3230,7 +3345,8 @@ paths:
         required: false
         type: integer
       - description: >-
-          Returns results with an ID greater than (that is, more recent than) the specified ID. There are
+          Returns results with an ID greater than (that is, more recent than)
+          the specified ID. There are
 
           limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has
 
@@ -3240,14 +3356,16 @@ paths:
         name: since_id
         required: false
         type: integer
-      - description: Returns results with an ID less than (that is, older than) or equal to the specified ID.
+      - description: Returns results with an ID less than (that is, older than) or equal
+          to the specified ID.
         format: int64
         in: query
         name: max_id
         required: false
         type: integer
       - description: >-
-          When set to either true, t or 1, each tweet returned in a timeline will include a user object
+          When set to either true, t or 1, each tweet returned in a timeline
+          will include a user object
 
           including only the status authors numerical ID. Omit this parameter to receive the complete user
 
@@ -3257,7 +3375,8 @@ paths:
         required: false
         type: string
       - description: >-
-          This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies
+          This parameter will prevent replies from appearing in the returned
+          timeline. Using exclude_replies
 
           with the count parameter will mean you will receive up-to count tweets — this is because the count
 
@@ -3269,7 +3388,8 @@ paths:
         required: false
         type: boolean
       - description: >-
-          This parameter enhances the contributors element of the status response to include the screen_name
+          This parameter enhances the contributors element of the status
+          response to include the screen_name
 
           of the contributor. By default only the user_id of the contributor is included.
         in: query
@@ -3277,7 +3397,8 @@ paths:
         required: false
         type: boolean
       - description: >-
-          When set to false, the timeline will strip any native retweets (though they will still count toward
+          When set to false, the timeline will strip any native retweets
+          (though they will still count toward
 
           both the maximal length of the timeline and the slice selected by the count parameter). Note: If
 
@@ -3331,7 +3452,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          If provided with a long parameter the available trend locations will be sorted by distance, nearest
+          If provided with a long parameter the available trend locations
+          will be sorted by distance, nearest
 
           to furthest, to the co-ordinate pair. The valid ranges for longitude is -180.0 to +180.0 (West is
 
@@ -3344,7 +3466,8 @@ paths:
         required: false
         type: string
       - description: >-
-          If provided with a lat parameter the available trend locations will be sorted by distance, nearest
+          If provided with a lat parameter the available trend locations will
+          be sorted by distance, nearest
 
           to furthest, to the co-ordinate pair. The valid ranges for longitude is -180.0 to +180.0 (West is
 
@@ -3380,23 +3503,24 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          The Yahoo! Where On Earth ID of the location to return trending information for. Global information
+          The Yahoo! Where On Earth ID of the location to return trending
+          information for. Global information
 
           is available by using 1 as the WOEID.
         in: query
         name: id
         required: true
         type: string
-      - description: Setting this equal to hashtags will remove all hashtags from the trends list.
+      - description: Setting this equal to hashtags will remove all hashtags from the
+          trends list.
         in: query
         name: exclude
         required: false
         type: string
   /users/contributees.json:
     get:
-      description: >-
+      description: |-
         Returns a collection of
-
         users that the specified user can contribute to.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/get/users/contributees
@@ -3405,21 +3529,22 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: "The entities node will be disincluded when set to false. Example Values: false"
+      - description: "The entities node will be disincluded when set to false. Example
+          Values: false"
         in: query
         name: include_entities
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
         type: string
   /users/contributors.json:
     get:
-      description: >-
+      description: |-
         Returns a collection of
-
         users who can contribute to the specified account.
       externalDocs:
         url: https://dev.twitter.com/docs/api/1.1/get/users/contributors
@@ -3428,12 +3553,14 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: "The entities node will be disincluded when set to false. Example Values: false"
+      - description: "The entities node will be disincluded when set to false. Example
+          Values: false"
         in: query
         name: include_entities
         required: false
         type: string
-      - description: When set to either true, t or 1 statuses will not be included in the returned user objects.
+      - description: When set to either true, t or 1 statuses will not be included in
+          the returned user objects.
         in: query
         name: skip_status
         required: false
@@ -3462,7 +3589,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          A comma separated list of screen names, up to 100 are allowed in a single request. You are strongly
+          A comma separated list of screen names, up to 100 are allowed in a
+          single request. You are strongly
 
           encouraged to use a POST for larger (up to 100 screen names) requests.
 
@@ -3473,7 +3601,8 @@ paths:
         required: false
         type: string
       - description: >-
-          A comma separated list of user IDs, up to 100 are allowed in a single request. You are strongly
+          A comma separated list of user IDs, up to 100 are allowed in a
+          single request. You are strongly
 
           encouraged to use a POST for larger requests.
 
@@ -3484,7 +3613,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The entities node that may appear within embedded statuses will be disincluded when set to false.
+          The entities node that may appear within embedded statuses will be
+          disincluded when set to false.
 
 
           Example Values: false
@@ -3525,18 +3655,16 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: >-
+      - description: |-
           The search query to run against people search.
-
 
           Example Values: Twitter%20API
         in: query
         name: q
         required: true
         type: string
-      - description: >-
+      - description: |-
           Specifies the page of results to retrieve.
-
 
           Example Values: 3
         in: query
@@ -3544,7 +3672,8 @@ paths:
         required: false
         type: string
       - description: >-
-          The number of potential user results to retrieve per page. This value has a maximum of 20.
+          The number of potential user results to retrieve per page. This
+          value has a maximum of 20.
 
 
           Example Values: 5
@@ -3552,9 +3681,8 @@ paths:
         name: count
         required: false
         type: string
-      - description: >-
+      - description: |-
           The entities node will be disincluded when set to false.
-
 
           Example Values: false
         in: query
@@ -3580,7 +3708,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          The screen name of the user for whom to return results for. Either a id or screen_name is required
+          The screen name of the user for whom to return results for. Either
+          a id or screen_name is required
 
           for this method.
 
@@ -3591,7 +3720,8 @@ paths:
         required: true
         type: string
       - description: >-
-          The ID of the user for whom to return results for. Either an id or screen_name is required for this
+          The ID of the user for whom to return results for. Either an id or
+          screen_name is required for this
 
           method.
 
@@ -3601,9 +3731,8 @@ paths:
         name: user_id
         required: true
         type: string
-      - description: >-
+      - description: |-
           The entities node will be disincluded when set to false.
-
 
           Example Values: false
         in: query
@@ -3626,7 +3755,8 @@ paths:
           description: Successful Response
     parameters:
       - description: >-
-          Restricts the suggested categories to the requested language. The language must be specified by the
+          Restricts the suggested categories to the requested language. The
+          language must be specified by the
 
           appropriate two letter ISO 639-1 representation. Currently supported languages are provided by the
 
@@ -3654,9 +3784,8 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: >-
+      - description: |-
           The short name of list or a category
-
 
           Example Values: twitter
         in: path
@@ -3664,7 +3793,8 @@ paths:
         required: true
         type: string
       - description: >-
-          Restricts the suggested categories to the requested language. The language must be specified by the
+          Restricts the suggested categories to the requested language. The
+          language must be specified by the
 
           appropriate two letter ISO 639-1 representation. Currently supported languages are provided by the
 
@@ -3692,9 +3822,8 @@ paths:
         "200":
           description: Successful Response
     parameters:
-      - description: >-
+      - description: |-
           The short name of list or a category
-
 
           Example Values: twitter
         in: path

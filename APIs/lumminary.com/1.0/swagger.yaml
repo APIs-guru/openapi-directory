@@ -1598,7 +1598,8 @@ produces:
   - application/json
 securityDefinitions:
   Bearer:
-    description: The token resulted after authenticating to /auth/jwt. MUST be of the format(excluding quotes) 'Bearer paste_token_here'
+    description: The token resulted after authenticating to /auth/jwt. MUST be of
+      the format(excluding quotes) 'Bearer paste_token_here'
     in: header
     name: Authorization
     type: apiKey
@@ -1678,7 +1679,8 @@ paths:
           name: password
           required: true
           type: string
-        - description: "The role for which authentication will be made. Value : role_product"
+        - description: "The role for which authentication will be made. Value :
+            role_product"
           in: formData
           name: role
           required: true
@@ -1699,7 +1701,7 @@ paths:
         - Lumminary API Spec
       x-code-samples:
         - lang: PHP
-          source: >-
+          source: |-
             $apiClient->postJwtAuth(
                 "2569-7483-0660-1748" /* $username */,
                 "role_product" /* $role */,
@@ -1715,7 +1717,8 @@ paths:
   "/clients/{clientId}/datasets/{datasetId}/genes/{geneSymbol}":
     get:
       description: >-
-        Gets A gene by its symbol, which can be found by querying the reference/ resource.
+        Gets A gene by its symbol, which can be found by querying the
+        reference/ resource.
 
 
         Will return a 404 if a gene exists as a reference, but its genomic coordinates intersect no SNPs in the dataset
@@ -1738,14 +1741,14 @@ paths:
         - Lumminary API Spec
       x-code-samples:
         - lang: PHP
-          source: >-
+          source: |-
             $apiClient->getClientGene(
                 "2569-7483-0660-1748" /* $clientId */,
                 "2954-6315-6362-1234" /* $datasetId */,
                 "A1BG-AS1" /* $geneSymbol */
             );
         - lang: Python
-          source: >-
+          source: |-
             apiClient.get_client_gene(
                 "2569-7483-0660-1748", # clientId
                 "2954-6315-6362-1234", # datasetId
@@ -1791,7 +1794,7 @@ paths:
         - lang: PHP
           source: $apiClient->getClientSnpGroup();
         - lang: Python
-          source: >-
+          source: |-
             apiClient.get_client_snp_group(
                 "2569-7483-0660-1748", # clientId
                 "2954-6315-6362-1234", # datasetId
@@ -1811,7 +1814,8 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
         - multipart/form-data
-      description: SNPs that are not present in the dataset are ignored, 404 is returned only if the dataset/client does not exist
+      description: SNPs that are not present in the dataset are ignored, 404 is
+        returned only if the dataset/client does not exist
       operationId: post_client_snp_group
       parameters:
         - description: JSON-encoded list of snps to be fetched
@@ -1838,14 +1842,14 @@ paths:
         - Lumminary API Spec
       x-code-samples:
         - lang: PHP
-          source: >-
+          source: |-
             $apiClient->postClientSnpGroup(
                 "2569-7483-0660-1748" /* $clientId */,
                 "2954-6315-6362-1234" /* $datasetId */,
                 array("rs59408664", "rs2162563", "rs116957611") /* $arrSnps */
             );
         - lang: Python
-          source: >-
+          source: |-
             apiClient.post_client_snp_group(
                 "2569-7483-0660-1748", # clientId
                 "2954-6315-6362-1234", # datasetId
@@ -1877,14 +1881,14 @@ paths:
         - Lumminary API Spec
       x-code-samples:
         - lang: PHP
-          source: >-
+          source: |-
             $apiClient->getClientSnp(
                 "2569-7483-0660-1748" /* $clientId */,
                 "2954-6315-6362-1234" /* $datasetId */,
                 "rs5246234" /* $snpId */
             );
         - lang: Python
-          source: >-
+          source: |-
             apiClient.get_client_snp(
                 "2569-7483-0660-1748", # clientId
                 "2954-6315-6362-1234", # datasetId
@@ -1940,7 +1944,8 @@ paths:
     get:
       operationId: get_authorizations_queue
       parameters:
-        - description: The first sequence number from which to fetch (the sequence number of the last processed authorization)
+        - description: The first sequence number from which to fetch (the sequence number
+            of the last processed authorization)
           in: query
           name: seq_num_start
           type: string
@@ -2042,18 +2047,22 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
         - multipart/form-data
-      description: These can be log-in credentials for a website where the result is available
+      description: These can be log-in credentials for a website where the result is
+        available
       operationId: post_authorization_result_credentials
       parameters:
-        - description: Credentials for accessing the result. Includes password, username and url
+        - description: Credentials for accessing the result. Includes password, username
+            and url
           in: formData
           name: credentials_username
           type: string
-        - description: Credentials for accessing the result. Includes password, username and url
+        - description: Credentials for accessing the result. Includes password, username
+            and url
           in: formData
           name: credentials_password
           type: string
-        - description: Credentials for accessing the result. Includes password, username and url
+        - description: Credentials for accessing the result. Includes password, username
+            and url
           in: formData
           name: report_url
           type: string
@@ -2076,7 +2085,7 @@ paths:
         - Lumminary API Spec
       x-code-samples:
         - lang: PHP
-          source: >-
+          source: |-
             $apiClient->postAuthorizationResultCredentials(
                 $productId,
                 $authorizationId,
@@ -2104,11 +2113,13 @@ paths:
       description: g. a pdf report
       operationId: post_authorization_result_file
       parameters:
-        - description: A binary file (e.g. pdf) that contains the result of the authorization
+        - description: A binary file (e.g. pdf) that contains the result of the
+            authorization
           in: formData
           name: file_report
           type: file
-        - description: Optional original filename for the report. If not provided, the filename of uploaded file will be used
+        - description: Optional original filename for the report. If not provided, the
+            filename of uploaded file will be used
           in: query
           name: original_filename
           type: string
@@ -2157,25 +2168,31 @@ paths:
       responses:
         "404":
           description: Object not found
-      summary: Catch-all Authorization state, for authorizations that passed all verifications and should reach the partner Product, but cannot be fulfilled for various reasons
+      summary: Catch-all Authorization state, for authorizations that passed all
+        verifications and should reach the partner Product, but cannot be
+        fulfilled for various reasons
       tags:
         - Lumminary API Spec
       x-code-samples:
         - lang: PHP
-          source: $apiClient->postProductAuthorizationUnfulfillable($productUuid, $authorizationUuid);
+          source: $apiClient->postProductAuthorizationUnfulfillable($productUuid,
+            $authorizationUuid);
         - lang: Python
-          source: $apiClient->postProductAuthorizationUnfulfillable($productUuid, $authorizationUuid);
+          source: $apiClient->postProductAuthorizationUnfulfillable($productUuid,
+            $authorizationUuid);
   "/reference/genes/databases/{databaseName}/accessions/{accession}":
     get:
       operationId: get_gene
       parameters:
         - default: 149
-          description: The dbSNP build for which to consider snps belonging to the gene. Defaults to 149
+          description: The dbSNP build for which to consider snps belonging to the gene.
+            Defaults to 149
           in: query
           name: dbsnp_build
           type: integer
         - default: GRCH37P13
-          description: The reference genome for which gene annotations will be returned. Defaults to GRCh37p13
+          description: The reference genome for which gene annotations will be returned.
+            Defaults to GRCh37p13
           in: query
           name: reference_genome
           type: string
@@ -2268,7 +2285,8 @@ paths:
         type: string
   "/reference/genomes/{genomeBuildAccession}/chromosomes/{chromosomeAccession}":
     get:
-      description: Fetch a closed interval of nucleotides on a given chromosome. Includes start and stop positions
+      description: Fetch a closed interval of nucleotides on a given chromosome.
+        Includes start and stop positions
       operationId: get_reference_chromosome
       parameters:
         - description: Location on the chromosome
@@ -2381,13 +2399,15 @@ definitions:
         description: Identifier of the Authorization
         type: string
       client_uuid:
-        description: The UUID of the client owning the Dataset to which the product is authorized
+        description: The UUID of the client owning the Dataset to which the product is
+          authorized
         type: string
       create_timestamp:
         description: Creation timestamp for the Authorization
         type: integer
       is_active:
-        description: If false, the the authorization is revoked and data access authorizations fail
+        description: If false, the the authorization is revoked and data access
+          authorizations fail
         type: boolean
       order:
         description: Optional UUID of the Order that created the Authorization
@@ -2406,10 +2426,15 @@ definitions:
       scopes:
         $ref: "#/definitions/AccessScope"
       sequence_number:
-        description: The sequence number of the Authorization. Used as a filter when fetching new Authorizations
+        description: The sequence number of the Authorization. Used as a filter when
+          fetching new Authorizations
         type: integer
       state:
-        description: "The authorization state. One of : ['authorization_state_pending_dataset', 'authorization_state_fulfillable', 'authorization_state_result_available', 'authorization_state_not_fulfillable']"
+        description: "The authorization state. One of :
+          ['authorization_state_pending_dataset',
+          'authorization_state_fulfillable',
+          'authorization_state_result_available',
+          'authorization_state_not_fulfillable']"
         type: string
     required:
       - authorization_uuid
@@ -2458,7 +2483,8 @@ definitions:
         description: True if there is phasing information about the snp, false otherwise
         type: boolean
       reference_genome:
-        description: The ID and build number of the genome against which the SNP was built and placed
+        description: The ID and build number of the genome against which the SNP was
+          built and placed
         minLength: 1
         type: string
       snp_id:
@@ -2561,10 +2587,12 @@ definitions:
         description: The product identifier
         type: string
       redirect_uri:
-        description: A redirect url registered as a callback for the Connect with Lumminary authorization flow
+        description: A redirect url registered as a callback for the Connect with
+          Lumminary authorization flow
         type: string
       snps_authorized:
-        description: A superset of snps_min_required, containing all SNPs to which an Product has access (includes optional SNPs)
+        description: A superset of snps_min_required, containing all SNPs to which an
+          Product has access (includes optional SNPs)
         items:
           type: string
         type: array
@@ -2638,7 +2666,8 @@ definitions:
         minLength: 1
         type: string
       dbsnp_version:
-        description: The dbSNP build to which snip attributes like location and chromosome accession refer.
+        description: The dbSNP build to which snip attributes like location and
+          chromosome accession refer.
         type: integer
       location:
         description: The SNP's position on the chromosome
@@ -2649,7 +2678,8 @@ definitions:
         minLength: 1
         type: string
       reference_genome:
-        description: The ID and build number of the genome against which the SNP was built and placed
+        description: The ID and build number of the genome against which the SNP was
+          built and placed
         minLength: 1
         type: string
       snp_id:
@@ -2739,11 +2769,13 @@ definitions:
   SnpsMinRequired:
     properties:
       min_pct:
-        description: Minimum required percentage of snps that should be present in the Dataset for compatibility
+        description: Minimum required percentage of snps that should be present in the
+          Dataset for compatibility
         minimum: 0
         type: integer
       snps:
-        description: List of snps that are (possibly partially) required for the Product to be compatible with a Dataset
+        description: List of snps that are (possibly partially) required for the Product
+          to be compatible with a Dataset
         items:
           type: string
         type: array

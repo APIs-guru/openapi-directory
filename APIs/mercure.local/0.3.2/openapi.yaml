@@ -6,7 +6,9 @@ info:
     email: contact@mercure.rocks
     name: Kévin Dunglas
     url: https://mercure.rocks
-  description: "[Mercure](https://mercure.rocks) is a protocol allowing to push data updates to web browsers and other HTTP clients in a convenient, fast, reliable and battery-efficient way."
+  description: "[Mercure](https://mercure.rocks) is a protocol allowing to push
+    data updates to web browsers and other HTTP clients in a convenient, fast,
+    reliable and battery-efficient way."
   license:
     name: GNU Affero General Public License v3.0 or later
     url: https://github.com/dunglas/mercure/blob/master/LICENSE
@@ -49,7 +51,8 @@ paths:
           name: Last-Event-ID
           schema:
             type: string
-        - description: The last received event id, to retrieve missed events, takes precedence over the query parameter.
+        - description: The last received event id, to retrieve missed events, takes
+            precedence over the query parameter.
           in: header
           name: Last-Event-ID
           schema:
@@ -77,16 +80,21 @@ paths:
                   description: The content of the new version of this topic.
                   type: string
                 id:
-                  description: "The topic's revision identifier: it will be used as the SSE's `id` property."
+                  description: "The topic's revision identifier: it will be used as the SSE's `id`
+                    property."
                   type: string
                 private:
-                  description: To mark an update as private. If not provided, this update will be public.
+                  description: To mark an update as private. If not provided, this update will be
+                    public.
                   type: boolean
                 retry:
                   description: The SSE's `retry` property (the reconnection time).
                   type: integer
                 topic:
-                  description: IRIs of the updated topic. If this key is present several times, the first occurrence is considered to be the canonical URL of the topic, and other ones are considered to be alternate URLs.
+                  description: IRIs of the updated topic. If this key is present several times,
+                    the first occurrence is considered to be the canonical URL
+                    of the topic, and other ones are considered to be alternate
+                    URLs.
                   items:
                     type: string
                   type: array

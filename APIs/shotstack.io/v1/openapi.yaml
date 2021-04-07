@@ -8,7 +8,13 @@ servers:
           - v1
           - stage
 info:
-  description: The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation.
+  description: The Shotstack API is a video editing service that allows for the
+    automated creation of videos using JSON. You can configure an edit and POST
+    it to the Shotstack API which will render your video and provide a file
+    location when complete. For more details visit
+    [shotstack.io](https://shotstack.io) or checkout our [getting
+    started](https://shotstack.gitbook.io/docs/guides/getting-started)
+    documentation.
   title: Shotstack
   version: v1
   x-apisguru-categories:
@@ -186,10 +192,12 @@ components:
   responses: {}
   schemas:
     AudioAsset:
-      description: The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accessible URL to an audio resource such  as an mp3 file.
+      description: The AudioAsset is used to add sound effects and audio at specific
+        intervals on the timeline. The src must be a publicly accessible URL to
+        an audio resource such  as an mp3 file.
       properties:
         effect:
-          description: >-
+          description: |-
             The effect to apply to the audio asset <ul>
               <li>`fadeIn` - fade volume in only</li>
               <li>`fadeOut` - fade volume out only</li>
@@ -201,11 +209,14 @@ components:
             - fadeInFadeOut
           type: string
         src:
-          description: The audio source URL. The URL must be publicly accessible or include credentials.
+          description: The audio source URL. The URL must be publicly accessible or
+            include credentials.
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/sound.mp3
           type: string
         trim:
-          description: The start trim point of the audio clip, in seconds (defaults to 0). Audio will start from the in trim point. The audio will play until the file ends or the Clip length is reached.
+          description: The start trim point of the audio clip, in seconds (defaults to 0).
+            Audio will start from the in trim point. The audio will play until
+            the file ends or the Clip length is reached.
           type: number
         type:
           default: audio
@@ -213,17 +224,24 @@ components:
           type: string
         volume:
           default: 1
-          description: Set the volume for the audio clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).
+          description: Set the volume for the audio clip between 0 and 1 where 0 is muted
+            and 1 is full volume (defaults to 1).
           type: number
       required:
         - type
         - src
       type: object
     Clip:
-      description: A clip is a container for a specific type of asset, i.e. a title, image, video, audio or html. You use a Clip to define when an asset will display on the timeline, how long it will play for and transitions, filters and effects to apply to it.
+      description: A clip is a container for a specific type of asset, i.e. a title,
+        image, video, audio or html. You use a Clip to define when an asset will
+        display on the timeline, how long it will play for and transitions,
+        filters and effects to apply to it.
       properties:
         asset:
-          description: The type of asset to display for the duration of this Clip. Value must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>, <b>HtmlAsset</b>, <b>AudioAsset</b> or <b>LumaAsset</b>
+          description: The type of asset to display for the duration of this Clip. Value
+            must be one of <b>TitleAsset</b>, <b>ImageAsset</b>,
+            <b>VideoAsset</b>, <b>HtmlAsset</b>, <b>AudioAsset</b> or
+            <b>LumaAsset</b>
           oneOf:
             - $ref: "#/components/schemas/VideoAsset"
             - $ref: "#/components/schemas/ImageAsset"
@@ -232,7 +250,7 @@ components:
             - $ref: "#/components/schemas/AudioAsset"
             - $ref: "#/components/schemas/LumaAsset"
         effect:
-          description: >-
+          description: |-
             A motion effect to apply to the Clip. <ul>
               <li>`zoomIn` - slow zoom in</li>
               <li>`zoomOut` - slow zoom out</li>
@@ -250,7 +268,7 @@ components:
             - slideDown
           type: string
         filter:
-          description: >-
+          description: |-
             A filter effect to apply to the Clip. <ul>
               <li>`boost` - boost contrast and saturation</li>
               <li>`contrast` - increase contrast</li>
@@ -273,7 +291,8 @@ components:
         fit:
           default: crop
           description: >-
-            Set how the asset should be scaled to fit the viewport using one of the following options: 
+            Set how the asset should be scaled to fit the viewport using one of
+            the following options: 
               <ul>
                 <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>
                 <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>
@@ -292,7 +311,10 @@ components:
           type: number
         offset:
           $ref: "#/components/schemas/Offset"
-          description: Offset the location of the asset relative to it's position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.
+          description: Offset the location of the asset relative to it's position on the
+            viewport. The offset distance is relative to the width of the
+            viewport - for example an x offset of 0.5 will move the asset half
+            the viewport width to the right.
         opacity:
           default: 1
           description: Sets the opacity of the Clip where 1 is opaque and 0 is transparent.
@@ -300,7 +322,9 @@ components:
         position:
           default: center
           description: >-
-            Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position. <ul>
+            Place the asset in one of nine predefined positions of the
+            viewport. This is most effective for when the asset is scaled and
+            you want to position the element to a specific position. <ul>
               <li>`top` - top (center)</li>
               <li>`topRight` - top right</li>
               <li>`right` - right (center)</li>
@@ -323,7 +347,10 @@ components:
             - center
           type: string
         scale:
-          description: Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale asset to half the size of the viewport. This is useful for picture-in-picture video and  scaling images such as logos and watermarks.
+          description: Scale the asset to a fraction of the viewport size - i.e. setting
+            the scale to 0.5 will scale asset to half the size of the viewport.
+            This is useful for picture-in-picture video and  scaling images such
+            as logos and watermarks.
           example: 0
           type: number
         start:
@@ -338,7 +365,10 @@ components:
         - length
       type: object
     Crop:
-      description: Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.
+      description: Crop the sides of an asset by a relative amount. The size of the
+        crop is specified using a scale between 0 and 1, relative to the screen
+        width - i.e a left crop of 0.5 will crop half of the asset from the
+        left, a top crop  of 0.25 will crop the top by quarter of the asset.
       properties:
         bottom:
           description: Crop from the bottom of the asset
@@ -368,16 +398,23 @@ components:
           type: number
       type: object
     Edit:
-      description: An edit defines the content of the video in a timeline and the output format.
+      description: An edit defines the content of the video in a timeline and the
+        output format.
       properties:
         callback:
-          description: An optional webhook callback URL used to receive status notifications when a render completes or fails. See [webhooks](https://shotstack.gitbook.io/docs/guides/architecting-an-application/webhooks) for  more details.
+          description: An optional webhook callback URL used to receive status
+            notifications when a render completes or fails. See
+            [webhooks](https://shotstack.gitbook.io/docs/guides/architecting-an-application/webhooks)
+            for  more details.
           example: https://my-server.com/callback.php
           type: string
         disk:
           default: local
           description: >-
-            The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types) for more details. <ul>
+            The disk type to use for storing footage and assets for each
+            render. See [disk
+            types](https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types)
+            for more details. <ul>
               <li>`local` - optimised for high speed rendering with up to 512MB storage</li>
               <li>`mount` - optimised for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li>
             </ul>
@@ -394,38 +431,55 @@ components:
         - output
       type: object
     Font:
-      description: Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag. See our [custom fonts](https://shotstack.io/learn/html-custom-fonts/) getting started guide for more details.
+      description: Download a custom font to use with the HTML asset type, using the
+        font name in the CSS or font tag. See our [custom
+        fonts](https://shotstack.io/learn/html-custom-fonts/) getting started
+        guide for more details.
       properties:
         src:
-          description: The URL of the font file. The URL must be publicly accessible or include credentials.
+          description: The URL of the font file. The URL must be publicly accessible or
+            include credentials.
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf
           type: string
       required:
         - src
       type: object
     HtmlAsset:
-      description: The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.
+      description: The HtmlAsset clip type lets you create text based layout and
+        formatting using HTML and CSS. You can also set the height and width of
+        a bounding box for the HTML content to sit within. Text and elements
+        will wrap within the bounding box.
       properties:
         background:
           default: transparent
-          description: "Apply a background color behind the HTML bounding box using. Set the text color using hexadecimal  color notation. Transparency is supported by setting the first two characters of the hex string  (opposite to HTML), i.e. #80ffffff will be white with 50% transparency."
+          description: "Apply a background color behind the HTML bounding box using. Set
+            the text color using hexadecimal  color notation. Transparency is
+            supported by setting the first two characters of the hex
+            string  (opposite to HTML), i.e. #80ffffff will be white with 50%
+            transparency."
           type: string
         css:
-          description: The CSS text string to apply styling to the HTML. See list of  [support CSS properties](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).
+          description: The CSS text string to apply styling to the HTML. See list
+            of  [support CSS
+            properties](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).
           example: "p { color: #ffffff; } b { color: #ffff00; }"
           type: string
         height:
-          description: Set the width of the HTML asset bounding box in pixels. Text and elements will be masked if they exceed the  height of the bounding box.
+          description: Set the width of the HTML asset bounding box in pixels. Text and
+            elements will be masked if they exceed the  height of the bounding
+            box.
           example: 200
           type: integer
         html:
-          description: The HTML text string. See list of [supported HTML tags](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).
+          description: The HTML text string. See list of [supported HTML
+            tags](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).
           example: <p>Hello <b>World</b></p>
           type: string
         position:
           default: center
           description: >-
-            Place the HTML in one of nine predefined positions within the HTML area. <ul>
+            Place the HTML in one of nine predefined positions within the HTML
+            area. <ul>
               <li>`top` - top (center)</li>
               <li>`topRight` - top right</li>
               <li>`right` - right (center)</li>
@@ -452,7 +506,8 @@ components:
           description: The type of asset - set to `html` for HTML.
           type: string
         width:
-          description: Set the width of the HTML asset bounding box in pixels. Text will wrap to fill the bounding box.
+          description: Set the width of the HTML asset bounding box in pixels. Text will
+            wrap to fill the bounding box.
           example: 400
           type: integer
       required:
@@ -460,12 +515,15 @@ components:
         - html
       type: object
     ImageAsset:
-      description: The ImageAsset is used to create video from images. The src must be a publicly accessible URL to an image resource such as a jpg or png file.
+      description: The ImageAsset is used to create video from images. The src must be
+        a publicly accessible URL to an image resource such as a jpg or png
+        file.
       properties:
         crop:
           $ref: "#/components/schemas/Crop"
         src:
-          description: The image source URL. The URL must be publicly accessible or include credentials.
+          description: The image source URL. The URL must be publicly accessible or
+            include credentials.
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg
           type: string
         type:
@@ -477,14 +535,21 @@ components:
         - src
       type: object
     LumaAsset:
-      description: The LumaAsset is used to create luma matte transitions between other assets. A luma matte is  a grey scale animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly  accessible URL to the file.
+      description: The LumaAsset is used to create luma matte transitions between
+        other assets. A luma matte is  a grey scale animated video where the
+        black areas are transparent and the white areas solid. The luma matte
+        animation should be provided as an mp4 video file. The src must be a
+        publicly  accessible URL to the file.
       properties:
         src:
-          description: The luma matte video source URL. The URL must be publicly accessible or include credentials.
+          description: The luma matte video source URL. The URL must be publicly
+            accessible or include credentials.
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/mask.mp4
           type: string
         trim:
-          description: The start trim point of the luma video clip, in seconds (defaults to 0). Videos will start from the in trim point. The luma matte video will play until the file ends or the Clip length is reached.
+          description: The start trim point of the luma video clip, in seconds (defaults
+            to 0). Videos will start from the in trim point. The luma matte
+            video will play until the file ends or the Clip length is reached.
           type: number
         type:
           default: luma
@@ -495,11 +560,16 @@ components:
         - src
       type: object
     Offset:
-      description: Offsets the position of an asset horizontally or vertically by a relative distance.
+      description: Offsets the position of an asset horizontally or vertically by a
+        relative distance.
       properties:
         x:
           default: 0
-          description: Offset an asset on the horizontal axis (left or right), range varies from -1 to 1. Positive numbers move the asset right, negative left. For all assets except titles the distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the asset half the  screen width to the right.
+          description: Offset an asset on the horizontal axis (left or right), range
+            varies from -1 to 1. Positive numbers move the asset right, negative
+            left. For all assets except titles the distance moved is relative to
+            the width  of the viewport - i.e. an X offset of 0.5 will move the
+            asset half the  screen width to the right.
           example: 0.1
           format: float
           maximum: 1
@@ -507,7 +577,11 @@ components:
           type: number
         y:
           default: 0
-          description: Offset an asset on the vertical axis (up or down), range varies from -1 to 1. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.
+          description: Offset an asset on the vertical axis (up or down), range varies
+            from -1 to 1. Positive numbers move the asset up, negative down. For
+            all assets except titles the distance moved is relative to the
+            height  of the viewport - i.e. an Y offset of 0.5 will move the
+            asset up half the  screen height.
           example: -0.2
           format: float
           maximum: 1
@@ -519,7 +593,8 @@ components:
       properties:
         aspectRatio:
           description: >-
-            The aspect ratio (shape) of the video. Useful for social media video. Options are: <ul>
+            The aspect ratio (shape) of the video. Useful for social media
+            video. Options are: <ul>
               <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li>
               <li>`9:16` - vertical/portrait aspect ratio</li>
               <li>`1:1` - square aspect ratio</li>
@@ -533,7 +608,7 @@ components:
           example: 16:9
           type: string
         format:
-          description: >-
+          description: |-
             The output format and type of media file to generate. <ul>
               <li>`mp4` - mp4 video file</li>
               <li>`gif` - animated gif</li>
@@ -548,7 +623,11 @@ components:
         fps:
           default: 25
           description: >-
-            Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul>
+            Override the default frames per second. Useful for when the source
+            footage is recorded at 30fps, i.e. on  mobile devices. Lower frame
+            rates can be used to add cinematic quality (24fps) or to create
+            smaller file size/faster render times or animated gifs (12 or
+            15fps). Default is 25fps. <ul>
               <li>`12` - 12fps</li>
               <li>`15` - 15fps</li>
               <li>`24` - 24fps</li>
@@ -569,7 +648,7 @@ components:
         range:
           $ref: "#/components/schemas/Range"
         resolution:
-          description: >-
+          description: |-
             The output resolution of the video. <ul>
               <li>`preview` - 512px x 288px @ 15fps</li>
               <li>`mobile` - 640px x 360px @ 25fps</li>
@@ -587,7 +666,12 @@ components:
           type: string
         scaleTo:
           description: >-
-            Override the resolution and scale the video to render at a different size. When using scaleTo the video should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the video at SD and the text will be scaled to the correct size. This is useful if you want to create multiple video sizes. <ul>
+            Override the resolution and scale the video to render at a
+            different size. When using scaleTo the video should be edited at the
+            resolution dimensions, i.e. use font sizes that look best at HD,
+            then use scaleTo to output the video at SD and the text will be
+            scaled to the correct size. This is useful if you want to create
+            multiple video sizes. <ul>
               <li>`preview` - 512px x 288px @ 15fps</li>
               <li>`mobile` - 640px x 360px @ 25fps</li>
               <li>`sd` - 1024px x 576px @25fps</li>
@@ -609,10 +693,12 @@ components:
         - resolution
       type: object
     Poster:
-      description: Generate a poster image for the video at a specific point from the timeline. The poster image size will match the size of the output video.
+      description: Generate a poster image for the video at a specific point from the
+        timeline. The poster image size will match the size of the output video.
       properties:
         capture:
-          description: The point on the timeline in seconds to capture a single frame to use as the poster image.
+          description: The point on the timeline in seconds to capture a single frame to
+            use as the poster image.
           example: 1
           type: number
       required:
@@ -651,16 +737,19 @@ components:
         - id
       type: object
     Range:
-      description: Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video.
+      description: Specify a time range to render, i.e. to render only a portion of a
+        video or audio file. Omit this setting to  export the entire video.
       properties:
         length:
-          description: The length of the portion of the video to render - i.e. render 6 seconds of the video.
+          description: The length of the portion of the video to render - i.e. render 6
+            seconds of the video.
           example: 6
           format: float
           minimum: 0
           type: number
         start:
-          description: The point on the timeline, in seconds, to start the render from - i.e. start at second 3.
+          description: The point on the timeline, in seconds, to start the render from -
+            i.e. start at second 3.
           example: 3
           format: float
           minimum: 0
@@ -714,7 +803,8 @@ components:
           example: basic
           type: string
         poster:
-          description: The URL of the poster image if requested. This will only be available if status is done.
+          description: The URL of the poster image if requested. This will only be
+            available if status is done.
           example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg
           type: string
         renderTime:
@@ -722,7 +812,7 @@ components:
           example: 9433.44
           type: number
         status:
-          description: >-
+          description: |-
             The status of the render task. <ul>
               <li>`queued` - render is queued waiting to be rendered</li>
               <li>`fetching` - assets are being fetched</li>
@@ -741,7 +831,8 @@ components:
           example: done
           type: string
         thumbnail:
-          description: The URL of the thumbnail image if requested. This will only be available if status is done.
+          description: The URL of the thumbnail image if requested. This will only be
+            available if status is done.
           example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg
           type: string
         updated:
@@ -749,7 +840,8 @@ components:
           example: 2020-10-30T09:42:39.168Z
           type: string
         url:
-          description: The URL of the final video. This will only be available if status is done.
+          description: The URL of the final video. This will only be available if status
+            is done.
           example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
           type: string
       required:
@@ -761,10 +853,12 @@ components:
         - updated
       type: object
     Soundtrack:
-      description: A music or audio file in mp3 format that plays for the duration of the rendered video or the length of the audio file, which ever is shortest.
+      description: A music or audio file in mp3 format that plays for the duration of
+        the rendered video or the length of the audio file, which ever is
+        shortest.
       properties:
         effect:
-          description: >-
+          description: |-
             The effect to apply to the audio file <ul>
               <li>`fadeIn` - fade volume in only</li>
               <li>`fadeOut` - fade volume out only</li>
@@ -776,25 +870,31 @@ components:
             - fadeInFadeOut
           type: string
         src:
-          description: The URL of the mp3 audio file. The URL must be publicly accessible or include credentials.
+          description: The URL of the mp3 audio file. The URL must be publicly accessible
+            or include credentials.
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3
           type: string
         volume:
           default: 1
-          description: Set the volume for the soundtrack between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).
+          description: Set the volume for the soundtrack between 0 and 1 where 0 is muted
+            and 1 is full volume (defaults to 1).
           type: number
       required:
         - src
       type: object
     Thumbnail:
-      description: Generate a thumbnail image for the video at a specific point from the timeline.
+      description: Generate a thumbnail image for the video at a specific point from
+        the timeline.
       properties:
         capture:
-          description: The point on the timeline in seconds to capture a single frame to use as the thumbnail image.
+          description: The point on the timeline in seconds to capture a single frame to
+            use as the thumbnail image.
           example: 1
           type: number
         scale:
-          description: Scale the thumbnail size to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale  the thumbnail to half the size of the viewport.
+          description: Scale the thumbnail size to a fraction of the viewport size - i.e.
+            setting the scale to 0.5 will scale  the thumbnail to half the size
+            of the viewport.
           example: 0.3
           type: number
       required:
@@ -802,15 +902,22 @@ components:
         - scale
       type: object
     Timeline:
-      description: A timeline represents the contents of a video edit over time, in seconds. A timeline consists of layers called tracks. Tracks are composed of titles, images or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.
+      description: A timeline represents the contents of a video edit over time, in
+        seconds. A timeline consists of layers called tracks. Tracks are
+        composed of titles, images or video segments referred to as clips which
+        are placed along the track at specific starting point and lasting for a
+        specific amount of time.
       properties:
         background:
           default: "#000000"
-          description: "A hexadecimal value for the timeline background colour. Defaults to #000000 (black)."
+          description: "A hexadecimal value for the timeline background colour. Defaults
+            to #000000 (black)."
           type: string
         cache:
           default: true
-          description: Disable the caching of ingested source footage and assets. See  [caching](https://shotstack.gitbook.io/docs/guides/architecting-an-application/caching) for more details.
+          description: Disable the caching of ingested source footage and assets.
+            See  [caching](https://shotstack.gitbook.io/docs/guides/architecting-an-application/caching)
+            for more details.
           type: boolean
         fonts:
           description: An array of custom fonts to be downloaded for use by the HTML assets.
@@ -821,7 +928,11 @@ components:
           $ref: "#/components/schemas/Soundtrack"
           description: A music or audio soundtrack file in mp3 format.
         tracks:
-          description: A timeline consists of an array of tracks, each track containing clips. Tracks are layered on top of each other in the same order they are added to the array with the top most track layered over the top of those below it. Ensure that a track containing titles is the top most track so that it is displayed above videos and images.
+          description: A timeline consists of an array of tracks, each track containing
+            clips. Tracks are layered on top of each other in the same order
+            they are added to the array with the top most track layered over the
+            top of those below it. Ensure that a track containing titles is the
+            top most track so that it is displayed above videos and images.
           items:
             $ref: "#/components/schemas/Track"
           type: array
@@ -829,23 +940,33 @@ components:
         - tracks
       type: object
     TitleAsset:
-      description: The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.
+      description: The TitleAsset clip type lets you create video titles from a text
+        string and apply styling and positioning.
       properties:
         background:
-          description: "Apply a background color behind the text. Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with 50% transparency. Omit to use transparent background."
+          description: "Apply a background color behind the text. Set the text color using
+            hexadecimal color notation. Transparency is supported by setting the
+            first two characters of the hex string (opposite to HTML),  i.e.
+            #80ffffff will be white with 50% transparency. Omit to use
+            transparent background."
           example: "#000000"
           type: string
         color:
           default: "#ffffff"
-          description: "Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with  50% transparency."
+          description: "Set the text color using hexadecimal color notation. Transparency
+            is supported by setting the first two characters of the hex string
+            (opposite to HTML),  i.e. #80ffffff will be white with  50%
+            transparency."
           type: string
         offset:
           $ref: "#/components/schemas/Offset"
-          description: Offset the location of the title relative to it's position on the screen.
+          description: Offset the location of the title relative to it's position on the
+            screen.
         position:
           default: center
           description: >-
-            Place the title in one of nine predefined positions of the viewport. <ul>
+            Place the title in one of nine predefined positions of the
+            viewport. <ul>
               <li>`top` - top (center)</li>
               <li>`topRight` - top right</li>
               <li>`right` - right (center)</li>
@@ -870,7 +991,8 @@ components:
         size:
           default: medium
           description: >-
-            Set the relative size of the text using predefined sizes from xx-small to xx-large. <ul>
+            Set the relative size of the text using predefined sizes from
+            xx-small to xx-large. <ul>
               <li>`xx-small`</li>
               <li>`x-small`</li>
               <li>`small`</li>
@@ -890,7 +1012,8 @@ components:
           type: string
         style:
           description: >-
-            Uses a preset to apply font properties and styling to the title. <ul>
+            Uses a preset to apply font properties and styling to the title.
+            <ul>
               <li>`minimal`</li>
               <li>`blockbuster`</li>
               <li>`vogue`</li>
@@ -927,7 +1050,9 @@ components:
         - text
       type: object
     Track:
-      description: A track contains an array of clips. Tracks are layered on top of each other in the order in the array. The top most track will render on top of those below it.
+      description: A track contains an array of clips. Tracks are layered on top of
+        each other in the order in the array. The top most track will render on
+        top of those below it.
       properties:
         clips:
           description: An array of Clips comprising of TitleClip, ImageClip or VideoClip.
@@ -941,7 +1066,7 @@ components:
       description: In and out transitions for a clip - i.e. fade in and fade out
       properties:
         in:
-          description: >-
+          description: |-
             The transition in. Available transitions are:
               <ul>
                 <li>`fade` - fade in</li>
@@ -974,7 +1099,7 @@ components:
             - zoom
           type: string
         out:
-          description: >-
+          description: |-
             The transition out. Available transitions are:
               <ul>
                 <li>`fade` - fade out</li>
@@ -1008,16 +1133,21 @@ components:
           type: string
       type: object
     VideoAsset:
-      description: The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.
+      description: The VideoAsset is used to create video sequences from video files.
+        The src must be a publicly accessible URL to a video resource such as an
+        mp4 file.
       properties:
         crop:
           $ref: "#/components/schemas/Crop"
         src:
-          description: The video source URL. The URL must be publicly accessible or include credentials.
+          description: The video source URL. The URL must be publicly accessible or
+            include credentials.
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4
           type: string
         trim:
-          description: The start trim point of the video clip, in seconds (defaults to 0). Videos will start from the in trim point. The video will play until the file ends or the Clip length is reached.
+          description: The start trim point of the video clip, in seconds (defaults to 0).
+            Videos will start from the in trim point. The video will play until
+            the file ends or the Clip length is reached.
           example: 2
           type: number
         type:
@@ -1025,7 +1155,8 @@ components:
           description: The type of asset - set to `video` for videos.
           type: string
         volume:
-          description: Set the volume for the video clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).
+          description: Set the volume for the video clip between 0 and 1 where 0 is muted
+            and 1 is full volume (defaults to 0).
           example: 1
           type: number
       required:
@@ -1034,7 +1165,9 @@ components:
       type: object
   securitySchemes:
     DeveloperKey:
-      description: Set the **x-api-key** header with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.
+      description: Set the **x-api-key** header with your provided key for the correct
+        environment (v1 or stage). Include the header in all calls to the API
+        that are secured with a key.
       in: header
       name: x-api-key
       type: apiKey

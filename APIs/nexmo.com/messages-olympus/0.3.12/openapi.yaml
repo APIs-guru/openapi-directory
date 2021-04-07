@@ -6,7 +6,9 @@ info:
     email: devrel@vonage.com
     name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: The Messages API enables you to send messages to customers via their preferred channels (currently Facebook Messenger, WhatsApp, Viber, and SMS/MMS) using a single API. The Messages API is currently in Beta.
+  description: The Messages API enables you to send messages to customers via
+    their preferred channels (currently Facebook Messenger, WhatsApp, Viber, and
+    SMS/MMS) using a single API. The Messages API is currently in Beta.
   title: Messages API
   version: 0.3.12
   x-label: Beta
@@ -39,7 +41,9 @@ paths:
         message-status:
           "{$request.body#/callback}":
             post:
-              description: Webhooks to inform about events happening to the message at communication level (has it been delivered, rejected by the provider...).
+              description: Webhooks to inform about events happening to the message at
+                communication level (has it been delivered, rejected by the
+                provider...).
               operationId: message-status
               requestBody:
                 content:
@@ -81,7 +85,8 @@ paths:
 components:
   schemas:
     Error:
-      description: The error format is standardized to the 4xx/5xx range with a code and a human readable explanation.
+      description: The error format is standardized to the 4xx/5xx range with a code
+        and a human readable explanation.
       properties:
         detail:
           example: Your request parameters did not validate.
@@ -117,7 +122,10 @@ components:
           type: string
         number:
           description: >
-            **SMS**: The phone number of the message recipient in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
+            **SMS**: The phone number of the message recipient in the
+            [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a
+            leading + or 00 when entering a phone number, start with the country
+            code, for example, 447700900000.
 
 
             **WhatsApp**: This is your WhatsApp Business Number given to you by your Vonage Account Manager. To find out more please visit [vonage.com](https://www.vonage.com/communications-apis/messages/).
@@ -150,11 +158,14 @@ components:
         error:
           properties:
             code:
-              description: The error code. See [our errors list](/api-errors/messages-olympus) for a list of possible errors
+              description: The error code. See [our errors list](/api-errors/messages-olympus)
+                for a list of possible errors
               example: 1300
               type: integer
             reason:
-              description: Text describing the error. See [our errors list](/api-errors/messages-olympus) for a list of possible errors
+              description: Text describing the error. See [our errors
+                list](/api-errors/messages-olympus) for a list of possible
+                errors
               example: Not part of the provider network
               type: string
           type: object
@@ -165,7 +176,8 @@ components:
           example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
           type: string
         status:
-          description: The status of the message. The `read` message status is available for `messenger`, `whatsapp` and `viber`.
+          description: The status of the message. The `read` message status is available
+            for `messenger`, `whatsapp` and `viber`.
           enum:
             - submitted
             - delivered
@@ -219,7 +231,10 @@ components:
           properties:
             number:
               description: >
-                The Vonage Virtual number the message is originating from in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
+                The Vonage Virtual number the message is originating from in the
+                [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a
+                leading + or 00 when entering a phone number, start with the
+                country code, for example, 447700900000.
               example: "447700900001"
               type: string
             type:
@@ -238,7 +253,11 @@ components:
               properties:
                 text:
                   description: >
-                    Limited to 1000 characters. The Messages API automatically detects unicode characters when sending SMS and sends the message as a unicode SMS. For more information on how concatenation and encoding please visit: developer.nexmo.com/messaging/sms/guides/concatenation-and-encoding.
+                    Limited to 1000 characters. The Messages API automatically detects
+                    unicode characters when sending SMS and sends the message as
+                    a unicode SMS. For more information on how concatenation and
+                    encoding please visit:
+                    developer.nexmo.com/messaging/sms/guides/concatenation-and-encoding.
                   example: Hello From Vonage!
                   type: string
                 type:
@@ -282,7 +301,8 @@ components:
       properties:
         id:
           description: >
-            **Messenger**: The ID of the message recipient. This value should be the `from.id` value you received in the inbound messenger event.
+            **Messenger**: The ID of the message recipient. This value should
+            be the `from.id` value you received in the inbound messenger event.
           example: "0123456789012345"
           maxLength: 50
           minLength: 1
@@ -369,7 +389,8 @@ components:
                   properties:
                     url:
                       description: >
-                        The publicly accessible URL of the audio attachment. The audio file is available for 48 hours after it is created.
+                        The publicly accessible URL of the audio attachment. The audio file
+                        is available for 48 hours after it is created.
 
                         Supports .aac, .m4a, .amr, .mp3 and .opus
                       example: https://example.com/audio.mp3
@@ -406,7 +427,10 @@ components:
         from:
           properties:
             id:
-              description: This value should be the `to.id` value you received in the inbound messenger event. Can also be found using your [account dashboard](https://dashboard.nexmo.com/applications/) when trying to link external accounts to your applications.
+              description: This value should be the `to.id` value you received in the inbound
+                messenger event. Can also be found using your [account
+                dashboard](https://dashboard.nexmo.com/applications/) when
+                trying to link external accounts to your applications.
               example: "123456789987"
               type: string
             type:
@@ -422,7 +446,8 @@ components:
         to:
           properties:
             id:
-              description: The ID of the Message recipient. This value should be the `from.id` value you receive on an inbound message from messenger
+              description: The ID of the Message recipient. This value should be the `from.id`
+                value you receive on an inbound message from messenger
               example: "123456789987"
               type: string
             type:
@@ -445,7 +470,10 @@ components:
           properties:
             number:
               description: >
-                The Viber number of the message recipient in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.            
+                The Viber number of the message recipient in the
+                [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a
+                leading + or 00 when entering a phone number, start with the
+                country code, for example, 447700900000.            
               example: "447700900000"
               type: string
             type:
@@ -461,7 +489,9 @@ components:
         to:
           properties:
             id:
-              description: This is your Service Message ID given to you by Vonage Account Manager. To find out more please visit [vonage.com/products/messages](https://www.vonage.com/communications-apis/messages/).
+              description: This is your Service Message ID given to you by Vonage Account
+                Manager. To find out more please visit
+                [vonage.com/products/messages](https://www.vonage.com/communications-apis/messages/).
               example: "654321"
               type: string
             type:
@@ -490,7 +520,9 @@ components:
         from:
           properties:
             id:
-              description: This is your Service Message ID given to you by your Vonage Account Manager. To find out more please visit [vonage.com](https://www.vonage.com/communications-apis/messages/).
+              description: This is your Service Message ID given to you by your Vonage Account
+                Manager. To find out more please visit
+                [vonage.com](https://www.vonage.com/communications-apis/messages/).
               example: "654321"
               type: string
             type:
@@ -507,7 +539,10 @@ components:
           properties:
             number:
               description: >
-                The Viber number of the message recipient in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
+                The Viber number of the message recipient in the
+                [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a
+                leading + or 00 when entering a phone number, start with the
+                country code, for example, 447700900000.
               example: "447700900000"
               type: string
             type:
@@ -553,7 +588,10 @@ components:
           properties:
             number:
               description: >
-                The WhatsApp number of the message recipient in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
+                The WhatsApp number of the message recipient in the
+                [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a
+                leading + or 00 when entering a phone number, start with the
+                country code, for example, 447700900000.
               example: "447700900000"
               type: string
             type:
@@ -570,7 +608,8 @@ components:
         - to
         - from
     client_ref:
-      description: client reference up to 40 characters, the reference will be present in every message status
+      description: client reference up to 40 characters, the reference will be present
+        in every message status
       example: client-ref2
       type: string
     fileMessageFacebook:
@@ -635,7 +674,8 @@ components:
                       description: Additional text to accompany the file.
                       example: An important report
                     url:
-                      description: The publicly accessible URL of the file to be sent. Supports .pdf, .doc(x), .ppt(x), and .xls(x)
+                      description: The publicly accessible URL of the file to be sent. Supports .pdf,
+                        .doc(x), .ppt(x), and .xls(x)
                       example: https://example.com/file.pdf
                       format: url
                       type: string
@@ -678,7 +718,9 @@ components:
           description: The image content being sent to the recipient.
           properties:
             url:
-              description: The URL of the image attachment. The image file is available for 48 hours after it is created. Supported types are .jpg, .jpeg, .png, and .gif
+              description: The URL of the image attachment. The image file is available for 48
+                hours after it is created. Supported types are .jpg, .jpeg,
+                .png, and .gif
               example: https://example.com/image.jpg
               format: url
               type: string
@@ -727,7 +769,9 @@ components:
           description: Image content to be sent
           properties:
             url:
-              description: Publicly accessible URL of the image to be attached. The image file is available for 48 hours after it's created. Supports .jpg, .jpeg, and .png.
+              description: Publicly accessible URL of the image to be attached. The image file
+                is available for 48 hours after it's created. Supports .jpg,
+                .jpeg, and .png.
               example: https://example.com/image.jpg
               format: url
               type: string
@@ -770,7 +814,9 @@ components:
                       example: My Tabby cat, Oliver.
                       type: string
                     url:
-                      description: The publicly accessible URL of the image attachment. The image file is available for 48 hours after it is created. Supported types are .jpg, .jpeg, and .png
+                      description: The publicly accessible URL of the image attachment. The image file
+                        is available for 48 hours after it is created. Supported
+                        types are .jpg, .jpeg, and .png
                       example: https://example.com/cat.jpg
                       format: url
                       type: string
@@ -1051,7 +1097,14 @@ components:
     messenger:
       properties:
         category:
-          description: The use of different category tags enables the business to send messages for different use cases. For Facebook Messenger they need to comply with their [Messaging Types policy](https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types). Vonage maps our `category` to their `messaging_type`. If `message_tag` is used, then an additional `tag` for that type is mandatory. By default Vonage sends the `response` category to Facebook Messenger.
+          description: The use of different category tags enables the business to send
+            messages for different use cases. For Facebook Messenger they need
+            to comply with their [Messaging Types
+            policy](https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types).
+            Vonage maps our `category` to their `messaging_type`. If
+            `message_tag` is used, then an additional `tag` for that type is
+            mandatory. By default Vonage sends the `response` category to
+            Facebook Messenger.
           enum:
             - response
             - update
@@ -1059,7 +1112,8 @@ components:
           example: update
           type: string
         tag:
-          description: A full list of the possible tags is available on [developers.facebook.com](https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags)
+          description: A full list of the possible tags is available on
+            [developers.facebook.com](https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags)
           example: CONFIRMED_EVENT_UPDATE
           type: string
       type: object
@@ -1095,7 +1149,9 @@ components:
                 image:
                   properties:
                     url:
-                      description: The URL of the image attachment. The image file is available for 48 hours after it is created. Supported file types are .jpg, .jpeg, .png, and .gif
+                      description: The URL of the image attachment. The image file is available for 48
+                        hours after it is created. Supported file types are
+                        .jpg, .jpeg, .png, and .gif
                       example: https://example.com/image.jpg
                       format: url
                       type: string
@@ -1118,7 +1174,10 @@ components:
         to:
           properties:
             number:
-              description: The phone number of the message recipient in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
+              description: The phone number of the message recipient in the
+                [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a
+                leading + or 00 when entering a phone number, start with the
+                country code, for example, 447700900000.
               example: "447700900000"
               type: string
             type:
@@ -1195,12 +1254,19 @@ components:
             whatsapp:
               properties:
                 locale:
-                  description: The [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag) language of the template. Vonage will translate the BCP 47 format to the [WhatsApp equivalent](https://developers.facebook.com/docs/whatsapp/message-templates/creation#translations). For examples `en-GB` will be auto-translate to en_GB.
+                  description: The [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
+                    language of the template. Vonage will translate the BCP 47
+                    format to the [WhatsApp
+                    equivalent](https://developers.facebook.com/docs/whatsapp/message-templates/creation#translations).
+                    For examples `en-GB` will be auto-translate to en_GB.
                   example: en-GB
                   type: string
                 policy:
                   default: deterministic
-                  description: Policy for resolving what language template to use. Please note that WhatsApp deprecated the `fallback` policy in January of 2020, all requests carrying a `fallback` policy will be rejected with a 400 error
+                  description: Policy for resolving what language template to use. Please note
+                    that WhatsApp deprecated the `fallback` policy in January of
+                    2020, all requests carrying a `fallback` policy will be
+                    rejected with a 400 error
                   enum:
                     - deterministic
                   example: deterministic
@@ -1221,7 +1287,9 @@ components:
           description: The Template request object to be sent to WhatsApp.
           properties:
             name:
-              description: The name of the template. For WhatsApp use your WhatsApp namespace (available via Facebook Business Manager), followed by a colon `:` and the name of the template to use.
+              description: The name of the template. For WhatsApp use your WhatsApp namespace
+                (available via Facebook Business Manager), followed by a colon
+                `:` and the name of the template to use.
               example: example_namespace':'verify
               type: string
             parameters:
@@ -1319,7 +1387,8 @@ components:
     textMessageViberContent:
       properties:
         text:
-          description: Text to be sent to the user, limited to 1000 characters, including unicode.
+          description: Text to be sent to the user, limited to 1000 characters, including
+            unicode.
           example: Hello from Vonage!
           maxLength: 1000
           type: string
@@ -1376,7 +1445,10 @@ components:
       type: object
     toNumber:
       description: >
-        The phone number of the message recipient in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
+        The phone number of the message recipient in the
+        [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading
+        + or 00 when entering a phone number, start with the country code, for
+        example, 447700900000.
       example: "447700900000"
       type: string
     unsupportedMessage:
@@ -1386,7 +1458,8 @@ components:
             content:
               properties:
                 type:
-                  description: The type of message will be `unsupported` if a message is received is of an unsupported type
+                  description: The type of message will be `unsupported` if a message is received
+                    is of an unsupported type
                   enum:
                     - unsupported
                   example: unsupported
@@ -1403,20 +1476,28 @@ components:
     viber_service_msg:
       properties:
         category:
-          description: The use of different category tags enables the business to send messages for different use cases. For Viber Service Messages the first message sent from a business to a user must be personal, informative & a targeted message - not promotional. By default Vonage sends the `transaction` category to Viber Service Messages.
+          description: The use of different category tags enables the business to send
+            messages for different use cases. For Viber Service Messages the
+            first message sent from a business to a user must be personal,
+            informative & a targeted message - not promotional. By default
+            Vonage sends the `transaction` category to Viber Service Messages.
           enum:
             - transaction
             - promotion
           example: transaction
           type: string
         ttl:
-          description: Set the time-to-live of message to be delivered in seconds. i.e. if the message is not delivered in 600 seconds then delete the message.
+          description: Set the time-to-live of message to be delivered in seconds. i.e. if
+            the message is not delivered in 600 seconds then delete the message.
           example: 600
           maximum: 259200
           minimum: 30
           type: integer
         type:
-          description: Viber-specific type definition. To use "template", please contact Vonage Account Manager to setup your templates. To find out more please visit [vonage.com/products/messages](https://www.vonage.com/communications-apis/messages/).
+          description: Viber-specific type definition. To use "template", please contact
+            Vonage Account Manager to setup your templates. To find out more
+            please visit
+            [vonage.com/products/messages](https://www.vonage.com/communications-apis/messages/).
           example: template
           type: string
       type: object
@@ -1517,9 +1598,11 @@ components:
       type: http
 x-errors:
   "1000":
-    description: Throttled - You have exceeded the submission capacity allowed on this account. Please wait and retry
+    description: Throttled - You have exceeded the submission capacity allowed on
+      this account. Please wait and retry
   "1010":
-    description: Missing params - Your request is incomplete and missing some mandatory parameters.
+    description: Missing params - Your request is incomplete and missing some
+      mandatory parameters.
   "1020":
     description: Invalid params  -  The value of one or more parameters is invalid.
   "1021":
@@ -1527,80 +1610,133 @@ x-errors:
   "1022":
     description: Invalid template  -  Invalid template or template parameters
   "1030":
-    description: Internal error  -  There was an error processing your request in the Platform.
+    description: Internal error  -  There was an error processing your request in
+      the Platform.
   "1040":
-    description: Invalid message  -  The Platform was unable to process your request. For example, due to an unrecognised prefix for the phone number.
+    description: Invalid message  -  The Platform was unable to process your
+      request. For example, due to an unrecognised prefix for the phone number.
   "1050":
-    description: Number barred  -  The number you are trying to submit to is blacklisted and may not receive messages.
+    description: Number barred  -  The number you are trying to submit to is
+      blacklisted and may not receive messages.
   "1060":
-    description: Partner account barred  -  The `api_key` you supplied is for an account that has been barred from submitting messages.
+    description: Partner account barred  -  The `api_key` you supplied is for an
+      account that has been barred from submitting messages.
   "1070":
-    description: Partner quota exceeded  -  Your pre-paid account does not have sufficient credit to process this message.
+    description: Partner quota exceeded  -  Your pre-paid account does not have
+      sufficient credit to process this message.
   "1080":
-    description: Account not enabled for REST  -  This account is not provisioned for REST submission, you should use SMPP on the SMS API.
+    description: Account not enabled for REST  -  This account is not provisioned
+      for REST submission, you should use SMPP on the SMS API.
   "1090":
-    description: Message too long  -  The length of `udh` and `body` was greater than 140 octets for a binary type SMS request.
+    description: Message too long  -  The length of `udh` and `body` was greater
+      than 140 octets for a binary type SMS request.
   "1100":
-    description: Communication Failed  -  Message was not submitted because there was a communication failure.
+    description: Communication Failed  -  Message was not submitted because there
+      was a communication failure.
   "1120":
-    description: Illegal Sender Address - rejected  -  Due to local regulations, the `SenderID` you set in from in the request was not accepted. Please check the Global messaging section.
+    description: Illegal Sender Address - rejected  -  Due to local regulations, the
+      `SenderID` you set in from in the request was not accepted. Please check
+      the Global messaging section.
   "1130":
     description: Invalid TTL  -  The value of `ttl` in your request was invalid.
   "1140":
-    description: Facility not allowed  -  Your request makes use of a facility that is not enabled on your account.
+    description: Facility not allowed  -  Your request makes use of a facility that
+      is not enabled on your account.
   "1150":
-    description: Invalid Message class  -  The value of `message-`class in your request was out of range. See https://en.wikipedia.org/wiki/Data_Coding_Scheme.
+    description: Invalid Message class  -  The value of `message-`class in your
+      request was out of range. See
+      https://en.wikipedia.org/wiki/Data_Coding_Scheme.
   "1160":
-    description: Non White-listed Destination  -  The phone number you set in to is not in your pre-approved destination list. To send messages to this phone number, add it using Dashboard.
+    description: Non White-listed Destination  -  The phone number you set in to is
+      not in your pre-approved destination list. To send messages to this phone
+      number, add it using Dashboard.
   "1170":
-    description: Invalid or Missing Msisdn Param  -  The phone number you supplied in the to parameter of your request was either missing or invalid.
+    description: Invalid or Missing Msisdn Param  -  The phone number you supplied
+      in the to parameter of your request was either missing or invalid.
   "1180":
-    description: Absent Subscriber Temporary  -  This message was not delivered because to was temporarily unavailable. For example, the handset used for to was out of coverage or switched off. This is a temporary failure, retry later for a positive result.
+    description: Absent Subscriber Temporary  -  This message was not delivered
+      because to was temporarily unavailable. For example, the handset used for
+      to was out of coverage or switched off. This is a temporary failure, retry
+      later for a positive result.
   "1190":
-    description: Absent Subscriber Permanent  -  `to` is no longer active, You should remove this phone number from your database.
+    description: Absent Subscriber Permanent  -  `to` is no longer active, You
+      should remove this phone number from your database.
   "1200":
-    description: Portability Error  -  There is an issue after the user has changed carrier for to. If the user wants to receive messages from you, they need to contact their carrier directly.
+    description: Portability Error  -  There is an issue after the user has changed
+      carrier for to. If the user wants to receive messages from you, they need
+      to contact their carrier directly.
   "1210":
-    description: Anti-Spam Rejection  -  Carriers often apply restrictions that block messages following different criteria. For example on SenderID or message content.
+    description: Anti-Spam Rejection  -  Carriers often apply restrictions that
+      block messages following different criteria. For example on SenderID or
+      message content.
   "1220":
-    description: Handset Busy  -  The handset associated with to was not available when this message was sent. If status is rejected, this is a temporary failure; retry later for a positive result. If status is submitted, this message has is in the retry scheme and will be resent until it expires in 24-48 hours.
+    description: Handset Busy  -  The handset associated with to was not available
+      when this message was sent. If status is rejected, this is a temporary
+      failure; retry later for a positive result. If status is submitted, this
+      message has is in the retry scheme and will be resent until it expires in
+      24-48 hours.
   "1230":
-    description: Network Error  -  A network failure while sending your message. This is a temporary failure, retry later for a positive result.
+    description: Network Error  -  A network failure while sending your message.
+      This is a temporary failure, retry later for a positive result.
   "1240":
-    description: Illegal Number  -  You tried to send a message to a blacklisted phone number. That is, the user has already sent a STOP opt-out message and no longer wishes to receive messages from you.
+    description: Illegal Number  -  You tried to send a message to a blacklisted
+      phone number. That is, the user has already sent a STOP opt-out message
+      and no longer wishes to receive messages from you.
   "1241":
     description: Too many send requests  -  Too many send requests to phone numbers.
   "1250":
-    description: Unroutable  -  The chosen route to send your message is not available. This is because the phone number is either currently on an unsupported network or on a pre-paid or reseller account that could not receive a message sent by from. To resolve this issue either email us at support@nexmo.com or create a helpdesk ticket at https://help.nexmo.com.
+    description: Unroutable  -  The chosen route to send your message is not
+      available. This is because the phone number is either currently on an
+      unsupported network or on a pre-paid or reseller account that could not
+      receive a message sent by from. To resolve this issue either email us at
+      support@nexmo.com or create a helpdesk ticket at https://help.nexmo.com.
   "1260":
-    description: Destination unreachable  -  The message could not be delivered to the phone number. If using Viber Service Messages your account might not be enabled for this country.
+    description: Destination unreachable  -  The message could not be delivered to
+      the phone number. If using Viber Service Messages your account might not
+      be enabled for this country.
   "1270":
-    description: Subscriber Age Restriction  -  The carrier blocked this message because the content is not suitable for to based on age restrictions.
+    description: Subscriber Age Restriction  -  The carrier blocked this message
+      because the content is not suitable for to based on age restrictions.
   "1280":
-    description: Number Blocked by Carrier  -  The carrier blocked this message. This could be due to several reasons. For example, to's plan does not include SMS or the account is suspended.
+    description: Number Blocked by Carrier  -  The carrier blocked this message.
+      This could be due to several reasons. For example, to's plan does not
+      include SMS or the account is suspended.
   "1290":
-    description: Pre-Paid - Insufficient funds  -  to’s pre-paid account does not have enough credit to receive the message.
+    description: Pre-Paid - Insufficient funds  -  to’s pre-paid account does not
+      have enough credit to receive the message.
   "1300":
-    description: Not part of the provider network  -  The number or ID is not a user in the provider network.
+    description: Not part of the provider network  -  The number or ID is not a user
+      in the provider network.
   "1310":
     description: Not suitable device  -  The user's device can't receive the message.
   "1320":
     description: Message already sent  -  The message was already sent.
   "1330":
-    description: Unknown  -  An unknown error was received from the carrier who tried to send this this message. Depending on the carrier, that to is unknown. When you see this error, and status is rejected, always check if to in your request was valid.
+    description: Unknown  -  An unknown error was received from the carrier who
+      tried to send this this message. Depending on the carrier, that to is
+      unknown. When you see this error, and status is rejected, always check if
+      to in your request was valid.
   "1331":
-    description: Provider error  -  The provider is not responding or unable to process the request. Please try sending your message in a few minutes time.
+    description: Provider error  -  The provider is not responding or unable to
+      process the request. Please try sending your message in a few minutes
+      time.
   "1340":
-    description: Outside of the allowed window  -  This message is sent outside of allowed response window.
+    description: Outside of the allowed window  -  This message is sent outside of
+      allowed response window.
   "1350":
-    description: Phone matching fee not paid  -  Requires phone matching access fee to be paid by the Facebook Page.
+    description: Phone matching fee not paid  -  Requires phone matching access fee
+      to be paid by the Facebook Page.
   "1360":
-    description: TTL was activated  -  TTL was activated, no callbacks and no charge will be issued.
+    description: TTL was activated  -  TTL was activated, no callbacks and no charge
+      will be issued.
   "1370":
-    description: Expired access Token - Please reauthenticate your Facebook Page with Vonage.
+    description: Expired access Token - Please reauthenticate your Facebook Page
+      with Vonage.
   "1380":
-    description: Invalid resource - Please check that the URL your provided to your resrouce is accesible and valid.
+    description: Invalid resource - Please check that the URL your provided to your
+      resrouce is accesible and valid.
   "1381":
     description: Resource size is too large - Please try sending a smaller media file.
   "1382":
-    description: Resource type is invalid - Please check that the file you are trying to send is valid.
+    description: Resource type is invalid - Please check that the file you are
+      trying to send is valid.

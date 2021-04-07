@@ -6,7 +6,8 @@ basePath: /v2
 info:
   contact:
     x-twitter: Infermedica
-  description: Empower your healthcare services with intelligent diagnostic insights of Infermedica API.
+  description: Empower your healthcare services with intelligent diagnostic
+    insights of Infermedica API.
   title: Infermedica API
   version: v2
   x-logo:
@@ -170,7 +171,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: Suggests possible diagnoses and relevant observations based on provided patient information.
+      description: Suggests possible diagnoses and relevant observations based on
+        provided patient information.
       operationId: computeDiagnosis
       parameters:
         - in: body
@@ -416,7 +418,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: Suggests possible red flag symptoms based on provided patient information.
+      description: Suggests possible red flag symptoms based on provided patient
+        information.
       operationId: computeRedFlags
       parameters:
         - in: body
@@ -1182,7 +1185,8 @@ definitions:
           type: string
         type: array
       context:
-        description: ordered list of ids of present symptoms that were already captured and can be used as context
+        description: ordered list of ids of present symptoms that were already captured
+          and can be used as context
         items:
           type: string
         type: array
@@ -1206,7 +1210,8 @@ definitions:
           $ref: "#/definitions/ObservationMention"
         type: array
       obvious:
-        description: indicates that entire input text has been parsed successfully and unambiguously
+        description: indicates that entire input text has been parsed successfully and
+          unambiguously
         type: boolean
       tokens:
         items:

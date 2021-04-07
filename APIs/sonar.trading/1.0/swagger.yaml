@@ -6,7 +6,8 @@ basePath: /api/v1/
 info:
   contact:
     x-twitter: tradingsonar
-  description: "Currency Authority: Exchange Rate of 1453 country currencies and crypto currencies"
+  description: "Currency Authority: Exchange Rate of 1453 country currencies and
+    crypto currencies"
   title: Sonar Trading
   version: "1.0"
   x-apisguru-categories:
@@ -36,12 +37,15 @@ paths:
           name: to
           required: true
           type: string
-        - description: This parameter can be used to specify the amount you want to convert. If an amount is not specified then 1 is assumed.
+        - description: This parameter can be used to specify the amount you want to
+            convert. If an amount is not specified then 1 is assumed.
           in: query
           name: amount
           required: false
           type: string
-        - description: This parameter can be used to specify the number of decimal places included in the output. If an amount is not specified then 12 is assumed.
+        - description: This parameter can be used to specify the number of decimal places
+            included in the output. If an amount is not specified then 12 is
+            assumed.
           in: query
           name: decimal_places
           required: false
@@ -57,7 +61,9 @@ paths:
   /country/currencies:
     get:
       parameters:
-        - description: Parameter used to specify the language in which you would like the currency names to be provided. If not specified, EN is used. Now availeble only EN language.
+        - description: Parameter used to specify the language in which you would like the
+            currency names to be provided. If not specified, EN is used. Now
+            availeble only EN language.
           in: query
           name: language
           required: false
@@ -73,7 +79,9 @@ paths:
   /digital/currencies:
     get:
       parameters:
-        - description: Parameter used to specify the language in which you would like the currency names to be provided. If not specified, EN is used. Now availeble only EN language.
+        - description: Parameter used to specify the language in which you would like the
+            currency names to be provided. If not specified, EN is used. Now
+            availeble only EN language.
           in: query
           name: language
           required: false
@@ -99,17 +107,21 @@ paths:
           name: to
           required: true
           type: string
-        - description: UTC date should be in the form of YYYY-MM-DD, for example, 2018-06-20. Data available from 2018-06-19 only.
+        - description: UTC date should be in the form of YYYY-MM-DD, for example,
+            2018-06-20. Data available from 2018-06-19 only.
           in: query
           name: date
           required: true
           type: string
-        - description: This parameter can be used to specify the amount you want to convert. If an amount is not specified then 1 is assumed.
+        - description: This parameter can be used to specify the amount you want to
+            convert. If an amount is not specified then 1 is assumed.
           in: query
           name: amount
           required: false
           type: string
-        - description: This parameter can be used to specify the number of decimal places included in the output. If an amount is not specified then 4 is assumed.
+        - description: This parameter can be used to specify the number of decimal places
+            included in the output. If an amount is not specified then 4 is
+            assumed.
           in: query
           name: decimal_places
           required: false

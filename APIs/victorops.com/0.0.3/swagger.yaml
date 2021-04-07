@@ -7,7 +7,8 @@ info:
   contact:
     x-twitter: VictorOps
   description: >
-    This API allows you to interact with the VictorOps platform in various ways. Your account may be limited
+    This API allows you to interact with the VictorOps platform in
+    various ways. Your account may be limited
 
     to a total number of API calls per month. Also, some of these API calls have rate limits.
 
@@ -41,7 +42,8 @@ parameters:
     schema:
       properties:
         names:
-          description: Routing keys that maintenance mode state covers. An empty list indicates global maintenance mode
+          description: Routing keys that maintenance mode state covers. An empty list
+            indicates global maintenance mode
           items:
             type: string
           type: array
@@ -280,7 +282,8 @@ parameters:
     type: string
 responses:
   "400":
-    description: Problem with the request arguments.  The response payload may include an error message.
+    description: Problem with the request arguments.  The response payload may
+      include an error message.
   "401":
     description: Authentication parameters missing
   "403":
@@ -310,9 +313,8 @@ tags:
 paths:
   "/api-public/v1/alerts/{uuid}":
     get:
-      description: >
+      description: |
         Retrieve the details of an alert that was sent VictorOps by you.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -325,7 +327,7 @@ paths:
           type: string
       responses:
         "200":
-          description: >
+          description: |
             The alert, if found.
           schema:
             $ref: "#/definitions/GetAlertResponse"
@@ -345,7 +347,8 @@ paths:
   /api-public/v1/incidents:
     get:
       description: >
-        Get a list of the currently open, acknowledged and recently resolved incidents.
+        Get a list of the currently open, acknowledged and recently
+        resolved incidents.
 
 
         This API may be called a maximum of 60 times per minute.
@@ -354,7 +357,7 @@ paths:
         - $ref: "#/parameters/apiKey"
       responses:
         "200":
-          description: >
+          description: |
             The set of incidents.
           schema:
             $ref: "#/definitions/ActiveIncidentList"
@@ -394,7 +397,7 @@ paths:
         - $ref: "#/parameters/createIncidentPayload"
       responses:
         "200":
-          description: >
+          description: |
             Information about the incident created
           schema:
             $ref: "#/definitions/CreatedIncident"
@@ -414,7 +417,8 @@ paths:
   /api-public/v1/incidents/ack:
     patch:
       description: >
-        The incident(s) must be currently open.  The user supplied must be a valid VictorOps user and a member of your organization.
+        The incident(s) must be currently open.  The user supplied must be
+        a valid VictorOps user and a member of your organization.
 
 
         This API may be called a maximum of 60 times per minute.
@@ -443,7 +447,8 @@ paths:
   /api-public/v1/incidents/byUser/ack:
     patch:
       description: >
-        The incident(s) must be currently open.  The user supplied must be a valid VictorOps user and a member of your organization.
+        The incident(s) must be currently open.  The user supplied must be
+        a valid VictorOps user and a member of your organization.
 
 
         This API may be called a maximum of 60 times per minute.
@@ -472,7 +477,8 @@ paths:
   /api-public/v1/incidents/byUser/resolve:
     patch:
       description: >
-        The incident(s) must be currently open.  The user supplied must be a valid VictorOps user and a member of your organization.
+        The incident(s) must be currently open.  The user supplied must be
+        a valid VictorOps user and a member of your organization.
 
 
         This API may be called a maximum of 60 times per minute.
@@ -501,7 +507,8 @@ paths:
   /api-public/v1/incidents/reroute:
     post:
       description: >
-        Reroute one or more incidents to one or more users and/or escalation policies
+        Reroute one or more incidents to one or more users and/or
+        escalation policies
 
 
         This API may be called a maximum of 60 times per minute.
@@ -520,7 +527,8 @@ paths:
   /api-public/v1/incidents/resolve:
     patch:
       description: >
-        The incident(s) must be currently open.  The user supplied must be a valid VictorOps user and a member of your organization.
+        The incident(s) must be currently open.  The user supplied must be
+        a valid VictorOps user and a member of your organization.
 
 
         This API may be called a maximum of 60 times per minute.
@@ -577,7 +585,9 @@ paths:
         "403":
           $ref: "#/responses/403"
         "409":
-          description: You have an active global maintanance mode and are attempting to start a second. You may only have a single Global maintenance mode at a time
+          description: You have an active global maintanance mode and are attempting to
+            start a second. You may only have a single Global maintenance mode
+            at a time
         "420":
           description: You have reached the limit of allowed active maintenance modes
         "500":
@@ -605,9 +615,8 @@ paths:
         - Maintenance Mode
   /api-public/v1/oncall/current:
     get:
-      description: >
+      description: |
         Get all on-call users/teams for your organization.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -636,9 +645,8 @@ paths:
         - On-call
   /api-public/v1/org/routing-keys:
     get:
-      description: >-
+      description: |-
         Retrieves a list of routing keys and associated teams.
-
         This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: "#/parameters/apiId"
@@ -663,9 +671,8 @@ paths:
         - Routing Keys
   /api-public/v1/overrides:
     get:
-      description: >
+      description: |
         List all the scheduled overrides on the organization
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -692,7 +699,7 @@ paths:
         "404":
           $ref: "#/responses/404"
         "422":
-          description: >
+          description: |
             You have reached your user limit.
         "500":
           $ref: "#/responses/500"
@@ -701,7 +708,8 @@ paths:
         - Scheduled Overrides
     post:
       description: >
-        Creates a new scheduled override. Start and end dates are in ISO8601 format. E.g. `2018-09-28'T'05:00:00Z`
+        Creates a new scheduled override. Start and end dates are in
+        ISO8601 format. E.g. `2018-09-28'T'05:00:00Z`
 
 
         This API may be called a maximum of 60 times per minute.
@@ -728,7 +736,7 @@ paths:
         "404":
           $ref: "#/responses/404"
         "422":
-          description: >
+          description: |
             You have reached your user limit.
         "500":
           $ref: "#/responses/500"
@@ -737,9 +745,8 @@ paths:
         - Scheduled Overrides
   "/api-public/v1/overrides/{publicId}":
     delete:
-      description: >
+      description: |
         Deletes a scheduled override
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -762,7 +769,7 @@ paths:
         "404":
           $ref: "#/responses/404"
         "422":
-          description: >
+          description: |
             You have reached your user limit.
         "500":
           $ref: "#/responses/500"
@@ -770,9 +777,8 @@ paths:
       tags:
         - Scheduled Overrides
     get:
-      description: >
+      description: |
         Get the specified scheduled override
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -802,7 +808,7 @@ paths:
         "404":
           $ref: "#/responses/404"
         "422":
-          description: >
+          description: |
             You have reached your user limit.
         "500":
           $ref: "#/responses/500"
@@ -811,9 +817,8 @@ paths:
         - Scheduled Overrides
   "/api-public/v1/overrides/{publicId}/assignments":
     get:
-      description: >
+      description: |
         Get the specified scheduled override assignments
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -840,7 +845,7 @@ paths:
         "404":
           $ref: "#/responses/404"
         "422":
-          description: >
+          description: |
             You have reached your user limit.
         "500":
           $ref: "#/responses/500"
@@ -849,9 +854,8 @@ paths:
         - Scheduled Overrides
   "/api-public/v1/overrides/{publicId}/assignments/{policySlug}":
     delete:
-      description: >
+      description: |
         Delete the scheduled override assignment
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -869,7 +873,8 @@ paths:
           type: string
       responses:
         "200":
-          description: The assignment that was deleted for the given scheduled override and policySlug
+          description: The assignment that was deleted for the given scheduled override
+            and policySlug
           schema:
             $ref: "#/definitions/Assignment"
         "400":
@@ -881,7 +886,7 @@ paths:
         "404":
           $ref: "#/responses/404"
         "422":
-          description: >
+          description: |
             You have reached your user limit.
         "500":
           $ref: "#/responses/500"
@@ -889,9 +894,8 @@ paths:
       tags:
         - Scheduled Overrides
     get:
-      description: >
+      description: |
         Get the specified scheduled override assignments
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -921,7 +925,7 @@ paths:
         "404":
           $ref: "#/responses/404"
         "422":
-          description: >
+          description: |
             You have reached your user limit.
         "500":
           $ref: "#/responses/500"
@@ -929,9 +933,8 @@ paths:
       tags:
         - Scheduled Overrides
     put:
-      description: >
+      description: |
         Update the scheduled override assignment
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -962,7 +965,7 @@ paths:
         "404":
           $ref: "#/responses/404"
         "422":
-          description: >
+          description: |
             You have reached your user limit.
         "500":
           $ref: "#/responses/500"
@@ -971,9 +974,8 @@ paths:
         - Scheduled Overrides
   /api-public/v1/policies:
     get:
-      description: >-
+      description: |-
         Retrieves a list of escalation policy information.
-
         This API may be called a maximum of once a minute.
       parameters:
         - $ref: "#/parameters/apiId"
@@ -998,14 +1000,11 @@ paths:
         - Escalation Policies
   /api-public/v1/policies/types/contacts:
     get:
-      description: >
+      description: |
         Get the available contact types
 
-
         description: "Email Address", type: "email"
-
         description: "Phone Number", type: "phone"
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1036,18 +1035,13 @@ paths:
         - Personal Paging Policy Values
   /api-public/v1/policies/types/notifications:
     get:
-      description: >
+      description: |
         Get the available notification types
 
-
         description: "Send a push notification to all my devices", type: "push"
-
         description: "Send an email to an email address", type: "email"
-
         description: "Send an SMS to a phone number", type: "sms"
-
         description: "Make a phone call to a phone number", type: "phone"
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1078,28 +1072,18 @@ paths:
         - Personal Paging Policy Values
   /api-public/v1/policies/types/timeouts:
     get:
-      description: >
+      description: |
         Get the available timeout values
 
-
         description: "If still unacked after 1 minute", type: 1
-
         description: "If still unacked after 5 minutes", type: 5
-
         description: "If still unacked after 10 minutes", type: 10
-
         description: "If still unacked after 15 minutes", type: 15
-
         description: "If still unacked after 20 minutes", type: 20
-
         description: "If still unacked after 25 minutes", type: 25
-
         description: "If still unacked after 30 minutes", type: 30
-
         description: "If still unacked after 45 minutes", type: 45
-
         description: "If still unacked after 60 minutes", type: 60
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1131,7 +1115,8 @@ paths:
   "/api-public/v1/policies/{policy}/oncall/user":
     patch:
       description: >
-        Replaces a currently on-call user in the escalation policy with another.  In many cases, the policy slug
+        Replaces a currently on-call user in the escalation policy with
+        another.  In many cases, the policy slug
 
         will match the slug of the team that contains it.
 
@@ -1167,7 +1152,8 @@ paths:
   "/api-public/v1/profile/{username}/policies":
     get:
       description: >
-        Get all the paging policy steps for the user on the org associated with the API key
+        Get all the paging policy steps for the user on the org associated
+        with the API key
 
 
         This API may be called a maximum of 60 times per minute.
@@ -1197,9 +1183,8 @@ paths:
       tags:
         - Personal Paging Policies
     post:
-      description: >
+      description: |
         Create a paging policy step
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1230,9 +1215,8 @@ paths:
         - Personal Paging Policies
   "/api-public/v1/profile/{username}/policies/{step}":
     get:
-      description: >
+      description: |
         Get a paging policy step
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1262,9 +1246,8 @@ paths:
       tags:
         - Personal Paging Policies
     post:
-      description: >
+      description: |
         Create a rule for a paging policy step
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1295,9 +1278,8 @@ paths:
       tags:
         - Personal Paging Policies
     put:
-      description: >
+      description: |
         Update a paging policy step
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1329,9 +1311,8 @@ paths:
         - Personal Paging Policies
   "/api-public/v1/profile/{username}/policies/{step}/{rule}":
     delete:
-      description: >
+      description: |
         Delete a rule from a paging policy step
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1362,9 +1343,8 @@ paths:
       tags:
         - Personal Paging Policies
     get:
-      description: >
+      description: |
         Get a rule from a paging policy step
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1395,9 +1375,8 @@ paths:
       tags:
         - Personal Paging Policies
     put:
-      description: >
+      description: |
         Update a rule for a paging policy step
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1430,9 +1409,8 @@ paths:
         - Personal Paging Policies
   /api-public/v1/team:
     get:
-      description: >
+      description: |
         Get a list of teams for your organization.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1452,7 +1430,7 @@ paths:
         "404":
           $ref: "#/responses/team-not-found"
         "422":
-          description: >
+          description: |
             You have reached your team limit.
         "500":
           $ref: "#/responses/500"
@@ -1460,9 +1438,8 @@ paths:
       tags:
         - Teams
     post:
-      description: >
+      description: |
         Add a team to your organization.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1484,7 +1461,8 @@ paths:
           $ref: "#/responses/team-not-found"
         "422":
           description: >
-            Team name or email is unavailable, or you have reached your team limit.
+            Team name or email is unavailable, or you have reached your team
+            limit.
         "500":
           $ref: "#/responses/500"
       summary: Add a team
@@ -1492,9 +1470,8 @@ paths:
         - Teams
   "/api-public/v1/team/{team}":
     delete:
-      description: >
+      description: |
         Remove a team from your organization.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1518,16 +1495,16 @@ paths:
           $ref: "#/responses/team-not-found"
         "422":
           description: >
-            There was a problem with the delete such as the replacement team was not found.
+            There was a problem with the delete such as the replacement team
+            was not found.
         "500":
           $ref: "#/responses/500"
       summary: Remove a team
       tags:
         - Teams
     get:
-      description: >
+      description: |
         Get the information for the specified team.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1553,16 +1530,16 @@ paths:
           $ref: "#/responses/team-not-found"
         "422":
           description: >
-            Team name or email is unavailable, or you have reached your team limit.
+            Team name or email is unavailable, or you have reached your team
+            limit.
         "500":
           $ref: "#/responses/500"
       summary: Retrieve information for a team
       tags:
         - Teams
     put:
-      description: >
+      description: |
         Update the designated team
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1589,7 +1566,8 @@ paths:
           $ref: "#/responses/team-not-found"
         "422":
           description: >
-            Team name or email is unavailable, or you have reached your team limit.
+            Team name or email is unavailable, or you have reached your team
+            limit.
         "500":
           $ref: "#/responses/500"
       summary: Update a team
@@ -1597,9 +1575,8 @@ paths:
         - Teams
   "/api-public/v1/team/{team}/admins":
     get:
-      description: >
+      description: |
         Get the team admins for the specified team.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1630,9 +1607,8 @@ paths:
         - Teams
   "/api-public/v1/team/{team}/members":
     get:
-      description: >
+      description: |
         Get the members for the specified team.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1658,16 +1634,16 @@ paths:
           $ref: "#/responses/team-not-found"
         "422":
           description: >
-            Team name or email is unavailable, or you have reached your team limit.
+            Team name or email is unavailable, or you have reached your team
+            limit.
         "500":
           $ref: "#/responses/500"
       summary: Retrieve a list of members for a team
       tags:
         - Teams
     post:
-      description: >
+      description: |
         Add a team member to your team.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1694,7 +1670,8 @@ paths:
           $ref: "#/responses/team-not-found"
         "422":
           description: >
-            Team name or email is unavailable, or you have reached your team limit.
+            Team name or email is unavailable, or you have reached your team
+            limit.
         "500":
           $ref: "#/responses/500"
       summary: Add a team member
@@ -1702,9 +1679,8 @@ paths:
         - Teams
   "/api-public/v1/team/{team}/members/{user}":
     delete:
-      description: >
+      description: |
         Remove a team from your organization.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1734,7 +1710,8 @@ paths:
           $ref: "#/responses/team-not-found"
         "422":
           description: >
-            There was a problem with the delete such as the replacement team member was not found.
+            There was a problem with the delete such as the replacement team
+            member was not found.
         "500":
           $ref: "#/responses/500"
       summary: Remove a team member
@@ -1744,7 +1721,8 @@ paths:
     get:
       deprecated: true
       description: >
-        __NOTE: This call is deprecated. Please use `GET /api-public/v2/team/{team}/oncall/schedule`.__
+        __NOTE: This call is deprecated. Please use `GET
+        /api-public/v2/team/{team}/oncall/schedule`.__
 
 
         Get the on-call schedule for a team, including on-call overrides.
@@ -1784,7 +1762,8 @@ paths:
     patch:
       deprecated: true
       description: >
-        __NOTE: This API call is deprecated. Please use `PATCH /api-public/v2/policies/{policy}/oncall/user`__
+        __NOTE: This API call is deprecated. Please use `PATCH
+        /api-public/v2/policies/{policy}/oncall/user`__
 
 
         Replaces a currently on-call user on the team with another.
@@ -1820,9 +1799,8 @@ paths:
         - On-call
   "/api-public/v1/team/{team}/policies":
     get:
-      description: >
+      description: |
         Get the escalation policies for the specified team.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1835,7 +1813,8 @@ paths:
           type: string
       responses:
         "200":
-          description: The escalation policy list. This does not include details about the actual notification steps of the policy.
+          description: The escalation policy list. This does not include details about the
+            actual notification steps of the policy.
           schema:
             $ref: "#/definitions/EscalationPolicyList"
         "400":
@@ -1848,7 +1827,8 @@ paths:
           $ref: "#/responses/team-not-found"
         "422":
           description: >
-            Team name or email is unavailable, or you have reached your team limit.
+            Team name or email is unavailable, or you have reached your team
+            limit.
         "500":
           $ref: "#/responses/500"
       summary: Retrieve a list of escalation policies for a team
@@ -1857,9 +1837,8 @@ paths:
         - Teams
   /api-public/v1/user:
     get:
-      description: >
+      description: |
         Get a list of users for your organization
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1879,7 +1858,7 @@ paths:
         "404":
           $ref: "#/responses/user-not-found"
         "422":
-          description: >
+          description: |
             You have reached your user limit.
         "500":
           $ref: "#/responses/500"
@@ -1887,9 +1866,8 @@ paths:
       tags:
         - Users
     post:
-      description: >
+      description: |
         Add a user to your organization
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1911,7 +1889,8 @@ paths:
           $ref: "#/responses/user-not-found"
         "422":
           description: >
-            Username or email is unavailable, or you have reached your user limit.
+            Username or email is unavailable, or you have reached your user
+            limit.
         "500":
           $ref: "#/responses/500"
       summary: Add a user
@@ -1920,7 +1899,8 @@ paths:
   "/api-public/v1/user/{user}":
     delete:
       description: >
-        Remove a user from your organization. If no replacement is specified, an empty JSON payload ("{}") is still required.
+        Remove a user from your organization. If no replacement is
+        specified, an empty JSON payload ("{}") is still required.
 
 
         This API may be called a maximum of 60 times per minute.
@@ -1946,16 +1926,16 @@ paths:
           $ref: "#/responses/user-not-found"
         "422":
           description: >
-            There was a problem with the delete such as a replacement is required or the replacement user was not found.
+            There was a problem with the delete such as a replacement is
+            required or the replacement user was not found.
         "500":
           $ref: "#/responses/500"
       summary: Remove a user
       tags:
         - Users
     get:
-      description: >
+      description: |
         Get the information for the specified user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1981,16 +1961,16 @@ paths:
           $ref: "#/responses/user-not-found"
         "422":
           description: >
-            Username or email is unavailable, or you have reached your user limit.
+            Username or email is unavailable, or you have reached your user
+            limit.
         "500":
           $ref: "#/responses/500"
       summary: Retrieve information for a user
       tags:
         - Users
     put:
-      description: >
+      description: |
         Update the designated user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2017,7 +1997,8 @@ paths:
           $ref: "#/responses/user-not-found"
         "422":
           description: >
-            Username or email is unavailable, or you have reached your user limit.
+            Username or email is unavailable, or you have reached your user
+            limit.
         "500":
           $ref: "#/responses/500"
       summary: Update a user
@@ -2025,9 +2006,8 @@ paths:
         - Users
   "/api-public/v1/user/{user}/contact-methods":
     get:
-      description: >
+      description: |
         Get the contact methods for a user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2071,9 +2051,8 @@ paths:
         - User Contact Methods
   "/api-public/v1/user/{user}/contact-methods/devices":
     get:
-      description: >
+      description: |
         Get the contact methods for a user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2104,9 +2083,8 @@ paths:
         - User Contact Methods
   "/api-public/v1/user/{user}/contact-methods/devices/{contactId}":
     delete:
-      description: >
+      description: |
         Delete a contact device for a user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2141,9 +2119,8 @@ paths:
       tags:
         - User Contact Methods
     get:
-      description: >
+      description: |
         Get the indicated contact device for a user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2178,9 +2155,8 @@ paths:
       tags:
         - User Contact Methods
     put:
-      description: >
+      description: |
         Update a contact device for a user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2217,9 +2193,8 @@ paths:
         - User Contact Methods
   "/api-public/v1/user/{user}/contact-methods/emails":
     get:
-      description: >
+      description: |
         Get the contact emails for a user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2249,9 +2224,8 @@ paths:
       tags:
         - User Contact Methods
     post:
-      description: >
+      description: |
         Create a contact email for a user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2283,9 +2257,8 @@ paths:
         - User Contact Methods
   "/api-public/v1/user/{user}/contact-methods/emails/{contactId}":
     delete:
-      description: >
+      description: |
         Delete the indicated contact email for the user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2320,9 +2293,8 @@ paths:
       tags:
         - User Contact Methods
     get:
-      description: >
+      description: |
         Get the indicated contact email for a user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2358,9 +2330,8 @@ paths:
         - User Contact Methods
   "/api-public/v1/user/{user}/contact-methods/phones":
     get:
-      description: >
+      description: |
         Get the contact phones for a user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2390,9 +2361,8 @@ paths:
       tags:
         - User Contact Methods
     post:
-      description: >
+      description: |
         Create a contact phone for a user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2424,9 +2394,8 @@ paths:
         - User Contact Methods
   "/api-public/v1/user/{user}/contact-methods/phones/{contactId}":
     delete:
-      description: >
+      description: |
         Delete the indicated contact phone for the user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2461,9 +2430,8 @@ paths:
       tags:
         - User Contact Methods
     get:
-      description: >
+      description: |
         Get the indicated contact phone for a user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2501,7 +2469,8 @@ paths:
     get:
       deprecated: true
       description: >
-        __NOTE: This call is deprecated. Please use `GET /api-public/v2/user/{user}/oncall/schedule`.__
+        __NOTE: This call is deprecated. Please use `GET
+        /api-public/v2/user/{user}/oncall/schedule`.__
 
 
         Get the on-call schedule for a user for all teams, including on-call overrides.
@@ -2541,9 +2510,8 @@ paths:
         - On-call
   "/api-public/v1/user/{user}/policies":
     get:
-      description: >
+      description: |
         Get paging policies for a user
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2574,7 +2542,7 @@ paths:
         - User Paging Policies
   "/api-public/v1/user/{user}/teams":
     get:
-      description: >
+      description: |
         This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: "#/parameters/apiId"
@@ -2602,9 +2570,8 @@ paths:
         - Users
   "/api-public/v2/team/{team}/oncall/schedule":
     get:
-      description: >
+      description: |
         Get the on-call schedule for a team, including on-call overrides.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2639,7 +2606,8 @@ paths:
   "/api-public/v2/user/{user}/oncall/schedule":
     get:
       description: >
-        Get the on-call schedule for a user for all teams the user is on, including on-call overrides.
+        Get the on-call schedule for a user for all teams the user is on,
+        including on-call overrides.
 
 
         This API may be called a maximum of 60 times per minute.
@@ -2700,38 +2668,45 @@ paths:
         - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/limit"
-        - description: The entity ID involved  This is the unique identifier for the entity causing the incident.
+        - description: The entity ID involved  This is the unique identifier for the
+            entity causing the incident.
           in: query
           name: entityId
           required: false
           type: string
         - description: >
-            The incident number as shown in VictorOps Multiple values and ranges are allowed: 4,5,20:50
+            The incident number as shown in VictorOps Multiple values and
+            ranges are allowed: 4,5,20:50
           in: query
           name: incidentNumber
           required: false
           type: string
-        - description: Return incidents started after this timestamp Specify the timestamp in ISO8601 format
+        - description: Return incidents started after this timestamp Specify the timestamp
+            in ISO8601 format
           in: query
           name: startedAfter
           required: false
           type: string
-        - description: Find incidents started before this timestamp  Specify the timestamp in ISO8601 format
+        - description: Find incidents started before this timestamp  Specify the timestamp
+            in ISO8601 format
           in: query
           name: startedBefore
           required: false
           type: string
-        - description: The host involved in the incident Multiple values can be separated with commas.
+        - description: The host involved in the incident Multiple values can be separated
+            with commas.
           in: query
           name: host
           required: false
           type: string
-        - description: The service involved in the incident (if any) Multiple values can be separated with commas.
+        - description: The service involved in the incident (if any) Multiple values can
+            be separated with commas.
           in: query
           name: service
           required: false
           type: string
-        - description: The current phase of the incident "resolved", "triggered" or "acknowledged". Multiple values can be separated with commas.
+        - description: The current phase of the incident "resolved", "triggered" or
+            "acknowledged". Multiple values can be separated with commas.
           in: query
           name: currentPhase
           required: false
@@ -2759,7 +2734,8 @@ paths:
   "/api-reporting/v1/team/{team}/oncall/log":
     get:
       description: >
-        Returns a log of user shift changes for the specified team. This is historical
+        Returns a log of user shift changes for the specified team. This is
+        historical
 
         data, and may be up to 15 minutes behind real-time log data.
 
@@ -2773,19 +2749,25 @@ paths:
           name: team
           required: true
           type: string
-        - description: Return shift changes occurring after this timestamp. The default is the start of the day at midnight. Specify the timestamp in ISO8601 format
+        - description: Return shift changes occurring after this timestamp. The default is
+            the start of the day at midnight. Specify the timestamp in ISO8601
+            format
           format: date-time
           in: query
           name: start
           required: false
           type: string
-        - description: Return shift changes occurring before this timestamp. The default is the end of the day at 11:59:59. Specify the timestamp in ISO8601 format
+        - description: Return shift changes occurring before this timestamp. The default
+            is the end of the day at 11:59:59. Specify the timestamp in ISO8601
+            format
           format: date-time
           in: query
           name: end
           required: false
           type: string
-        - description: The VictorOps user ID. Return shift changes occurring during the interval specified for this user. Without this parameter, all relevant users (with respect to the specified interval) are returned
+        - description: The VictorOps user ID. Return shift changes occurring during the
+            interval specified for this user. Without this parameter, all
+            relevant users (with respect to the specified interval) are returned
           in: query
           name: userName
           required: false
@@ -2811,7 +2793,8 @@ paths:
   /api-reporting/v2/incidents:
     get:
       description: >
-        Retrieve incident history for your company, searching over date ranges and with filtering options.
+        Retrieve incident history for your company, searching over date
+        ranges and with filtering options.
 
 
         This API may be called a maximum of once a minute.
@@ -2832,38 +2815,46 @@ paths:
         - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/limit"
-        - description: The entity ID involved  This is the unique identifier for the entity causing the incident.
+        - description: The entity ID involved  This is the unique identifier for the
+            entity causing the incident.
           in: query
           name: entityId
           required: false
           type: string
         - description: >
-            The incident number as shown in VictorOps Multiple values and ranges are allowed: 4,5,20:50
+            The incident number as shown in VictorOps Multiple values and
+            ranges are allowed: 4,5,20:50
           in: query
           name: incidentNumber
           required: false
           type: string
-        - description: Return incidents started after this timestamp Specify the timestamp in ISO8601 format
+        - description: Return incidents started after this timestamp Specify the timestamp
+            in ISO8601 format
           in: query
           name: startedAfter
           required: false
           type: string
-        - description: Find incidents started before this timestamp  Specify the timestamp in ISO8601 format
+        - description: Find incidents started before this timestamp  Specify the timestamp
+            in ISO8601 format
           in: query
           name: startedBefore
           required: false
           type: string
-        - description: The host involved in the incident Multiple values can be separated with commas.
+        - description: The host involved in the incident Multiple values can be separated
+            with commas.
           in: query
           name: host
           required: false
           type: string
-        - description: The service involved in the incident (if any) Multiple values can be separated with commas.
+        - description: The service involved in the incident (if any) Multiple values can
+            be separated with commas.
           in: query
           name: service
           required: false
           type: string
-        - description: The current phase of the incident "resolved", "triggered" or "acknowledged". Multiple values can be separated with commas. By default, response contains only "resolved" incidents
+        - description: The current phase of the incident "resolved", "triggered" or
+            "acknowledged". Multiple values can be separated with commas. By
+            default, response contains only "resolved" incidents
           in: query
           name: currentPhase
           required: false
@@ -2936,7 +2927,8 @@ definitions:
         type: string
     type: object
   AckUser:
-    description: A JSON object with first/last name and email of the user that acknowledged the incident.
+    description: A JSON object with first/last name and email of the user that
+      acknowledged the incident.
     properties:
       email:
         type: string
@@ -2952,10 +2944,12 @@ definitions:
         description: The number of alerts received for this incident
         type: number
       currentPhase:
-        description: The current phase of the incident "resolved", "triggered" or "acknowledged".
+        description: The current phase of the incident "resolved", "triggered" or
+          "acknowledged".
         type: string
       entityId:
-        description: The unique identification of the entity being monitored that caused the incident
+        description: The unique identification of the entity being monitored that caused
+          the incident
         type: string
       host:
         description: The host on which the incident occurred
@@ -3011,7 +3005,8 @@ definitions:
         description: external friendly unique id for maintenance mode
         type: string
       isGlobal:
-        description: whether this instance is a global maintenance mode or for specific routing keys
+        description: whether this instance is a global maintenance mode or for specific
+          routing keys
         type: boolean
       startedAt:
         description: millis from epoch marking the start time
@@ -3068,7 +3063,8 @@ definitions:
         type: string
       expirationHours:
         default: 24
-        description: The validity duration for the invitatation/set password link sent to the added user.
+        description: The validity duration for the invitatation/set password link sent
+          to the added user.
         type: number
       firstName:
         type: string
@@ -3250,19 +3246,21 @@ definitions:
         description: Used within VictorOps to display a human-readable name for the entity.
         type: string
       entityId:
-        description: >
+        description: |
           Identifies the entity (host, service, etc.) this alert was about.
         type: string
       messageType:
-        description: >
+        description: |
           The type of alert; INFO, WARNING, ACKNOWLEDGEMENT, CRITICAL, RECOVERY
         type: string
       monitoringTool:
-        description: The name of the monitoring system software (eg. nagios, icinga, sensu, etc.)
+        description: The name of the monitoring system software (eg. nagios, icinga,
+          sensu, etc.)
         type: string
       raw:
         description: >
-          The full, raw alert details JSON string (i.e. parse the string into a JSON object)
+          The full, raw alert details JSON string (i.e. parse the string into
+          a JSON object)
         type: string
       stateMessage:
         description: Any additional status information from the alert item.
@@ -3289,7 +3287,8 @@ definitions:
         description: The number of alerts received for this incident
         type: number
       currentPhase:
-        description: The current phase of the incident "resolved", "triggered" or "acknowledged".
+        description: The current phase of the incident "resolved", "triggered" or
+          "acknowledged".
         type: string
       endTime:
         description: The time the incident ended
@@ -3298,7 +3297,8 @@ definitions:
         description: The display name of the entity causing the incident
         type: string
       entityId:
-        description: The unique identification of the entity being monitored that caused the incident
+        description: The unique identification of the entity being monitored that caused
+          the incident
         type: string
       entityType:
         description: The type of entity causing the incident (host/service)
@@ -3431,7 +3431,8 @@ definitions:
   MaintenanceModeTarget:
     properties:
       names:
-        description: Routing keys that maintenance mode state covers. An empty list indicates global maintenance mode
+        description: Routing keys that maintenance mode state covers. An empty list
+          indicates global maintenance mode
         items:
           type: string
         type: array

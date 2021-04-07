@@ -5,7 +5,8 @@ host: publicapi.payments.service.gov.uk
 info:
   contact:
     x-twitter: GOVUK
-  description: GOV.UK Pay API
+  description: GOV.UK Pay API (This version is no longer maintained. See
+    openapi/publicapi_spec.json for latest API specification)
   title: GOV.UK Pay API
   version: 1.0.3
   x-apisguru-categories:
@@ -30,7 +31,9 @@ tags:
 paths:
   /v1/directdebit/mandates:
     get:
-      description: "Searches for mandates with the parameters provided. The Authorisation token needs to be specified in the 'Authorization' header as 'Authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Searches for mandates with the parameters provided. The
+        Authorisation token needs to be specified in the 'Authorization' header
+        as 'Authorization: Bearer YOUR_API_KEY_HERE'"
       operationId: Search mandates
       parameters:
         - in: query
@@ -54,18 +57,21 @@ paths:
           name: name
           required: false
           type: string
-        - description: From date of mandates to be searched (this date is inclusive). Example=2015-08-13T12:35:00Z
+        - description: From date of mandates to be searched (this date is inclusive).
+            Example=2015-08-13T12:35:00Z
           in: query
           name: from_date
           required: false
           type: string
-        - description: To date of mandates to be searched (this date is exclusive). Example=2015-08-13T12:35:00Z
+        - description: To date of mandates to be searched (this date is exclusive).
+            Example=2015-08-13T12:35:00Z
           in: query
           name: to_date
           required: false
           type: string
         - default: 1
-          description: Page number requested for the search, should be a positive integer (optional, defaults to 1)
+          description: Page number requested for the search, should be a positive integer
+            (optional, defaults to 1)
           format: int32
           in: query
           minimum: 1
@@ -73,7 +79,8 @@ paths:
           required: false
           type: integer
         - default: 500
-          description: Number of results to be shown per page, should be a positive integer (optional, defaults to 500, max 500)
+          description: Number of results to be shown per page, should be a positive
+            integer (optional, defaults to 500, max 500)
           format: int32
           in: query
           maximum: 500
@@ -95,7 +102,8 @@ paths:
           schema:
             $ref: "#/definitions/MandateError"
         "422":
-          description: "Invalid parameters: from_date, to_date, state, page, display_size. See Public API documentation for the correct data formats"
+          description: "Invalid parameters: from_date, to_date, state, page, display_size.
+            See Public API documentation for the correct data formats"
           schema:
             $ref: "#/definitions/PaymentError"
         "429":
@@ -114,7 +122,9 @@ paths:
     post:
       consumes:
         - application/json
-      description: "Create a new mandate for the account associated to the Authorisation token. The Authorisation token needs to be specified in the 'Authorization' header as 'Authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Create a new mandate for the account associated to the
+        Authorisation token. The Authorisation token needs to be specified in
+        the 'Authorization' header as 'Authorization: Bearer YOUR_API_KEY_HERE'"
       operationId: Create a mandate
       parameters:
         - description: requestPayload
@@ -151,7 +161,9 @@ paths:
         - Direct Debit
   "/v1/directdebit/mandates/{mandateId}":
     get:
-      description: "Return information about the mandate. The Authorisation token needs to be specified in the 'Authorization' header as 'Authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Return information about the mandate. The Authorisation token
+        needs to be specified in the 'Authorization' header as 'Authorization:
+        Bearer YOUR_API_KEY_HERE'"
       operationId: Get a mandate
       parameters:
         - in: path
@@ -186,7 +198,9 @@ paths:
         - Direct Debit
   /v1/directdebit/payments:
     get:
-      description: "Search Direct Debit payments by reference, state, mandate id, and 'from' and 'to' dates. The Authorisation token needs to be specified in the 'Authorization' header as 'Authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Search Direct Debit payments by reference, state, mandate id, and
+        'from' and 'to' dates. The Authorisation token needs to be specified in
+        the 'Authorization' header as 'Authorization: Bearer YOUR_API_KEY_HERE'"
       operationId: Search Direct Debit payments
       parameters:
         - description: Your payment reference to search
@@ -209,24 +223,28 @@ paths:
           name: mandate_id
           required: false
           type: string
-        - description: From date of Direct Debit payments to be searched (this date is inclusive). Example=2015-08-13T12:35:00Z
+        - description: From date of Direct Debit payments to be searched (this date is
+            inclusive). Example=2015-08-13T12:35:00Z
           in: query
           name: from_date
           required: false
           type: string
-        - description: To date of Direct Debit payments to be searched (this date is exclusive). Example=2015-08-13T12:35:00Z
+        - description: To date of Direct Debit payments to be searched (this date is
+            exclusive). Example=2015-08-13T12:35:00Z
           in: query
           name: to_date
           required: false
           type: string
-        - description: Page number requested for the search, should be a positive integer (optional, defaults to 1)
+        - description: Page number requested for the search, should be a positive integer
+            (optional, defaults to 1)
           format: int32
           in: query
           minimum: 1
           name: page
           required: false
           type: integer
-        - description: Number of results to be shown per page, should be a positive integer (optional, defaults to 500, max 500)
+        - description: Number of results to be shown per page, should be a positive
+            integer (optional, defaults to 500, max 500)
           format: int32
           in: query
           maximum: 500
@@ -244,7 +262,8 @@ paths:
         "401":
           description: Credentials are required to access this resource
         "422":
-          description: Invalid parameter. See Public API documentation for the correct data formats
+          description: Invalid parameter. See Public API documentation for the correct
+            data formats
           schema:
             $ref: "#/definitions/PaymentError"
         "429":
@@ -263,7 +282,10 @@ paths:
     post:
       consumes:
         - application/json
-      description: "Create a new Direct Debit payment for the account associated to the Authorisation token. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Create a new Direct Debit payment for the account associated to
+        the Authorisation token. The Authorisation token needs to be specified
+        in the 'authorization' header as 'authorization: Bearer
+        YOUR_API_KEY_HERE'"
       operationId: Collect a Direct Debit payment
       parameters:
         - description: requestPayload
@@ -286,7 +308,8 @@ paths:
         "401":
           description: Credentials are required to access this resource
         "422":
-          description: "Invalid parameters: amount, reference, description, mandate id. See Public API documentation for the correct data formats"
+          description: "Invalid parameters: amount, reference, description, mandate id.
+            See Public API documentation for the correct data formats"
           schema:
             $ref: "#/definitions/PaymentError"
         "429":
@@ -304,7 +327,9 @@ paths:
         - Direct Debit
   "/v1/directdebit/payments/{paymentId}":
     get:
-      description: "Return information about the Direct Debit payment. The Authorisation token needs to be specified in the 'Authorization' header as 'Authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Return information about the Direct Debit payment. The
+        Authorisation token needs to be specified in the 'Authorization' header
+        as 'Authorization: Bearer YOUR_API_KEY_HERE'"
       operationId: Get a Direct Debit payment
       parameters:
         - description: Payment identifier
@@ -340,7 +365,9 @@ paths:
         - Direct Debit
   /v1/payments:
     get:
-      description: "Search payments by reference, state, 'from' and 'to' date. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Search payments by reference, state, 'from' and 'to' date. The
+        Authorisation token needs to be specified in the 'authorization' header
+        as 'authorization: Bearer YOUR_API_KEY_HERE'"
       operationId: Search payments
       parameters:
         - description: Your payment reference to search (exact match, case insensitive)
@@ -371,22 +398,26 @@ paths:
           name: card_brand
           required: false
           type: string
-        - description: From date of payments to be searched (this date is inclusive). Example=2015-08-13T12:35:00Z
+        - description: From date of payments to be searched (this date is inclusive).
+            Example=2015-08-13T12:35:00Z
           in: query
           name: from_date
           required: false
           type: string
-        - description: To date of payments to be searched (this date is exclusive). Example=2015-08-14T12:35:00Z
+        - description: To date of payments to be searched (this date is exclusive).
+            Example=2015-08-14T12:35:00Z
           in: query
           name: to_date
           required: false
           type: string
-        - description: Page number requested for the search, should be a positive integer (optional, defaults to 1)
+        - description: Page number requested for the search, should be a positive integer
+            (optional, defaults to 1)
           in: query
           name: page
           required: false
           type: string
-        - description: Number of results to be shown per page, should be a positive integer (optional, defaults to 500, max 500)
+        - description: Number of results to be shown per page, should be a positive
+            integer (optional, defaults to 500, max 500)
           in: query
           name: display_size
           required: false
@@ -406,12 +437,14 @@ paths:
           name: last_digits_card_number
           required: false
           type: string
-        - description: From settled date of payment to be searched (this date is inclusive). Example=2015-08-13
+        - description: From settled date of payment to be searched (this date is
+            inclusive). Example=2015-08-13
           in: query
           name: from_settled_date
           required: false
           type: string
-        - description: To settled date of payment to be searched (this date is inclusive). Example=2015-08-14
+        - description: To settled date of payment to be searched (this date is inclusive).
+            Example=2015-08-14
           in: query
           name: to_settled_date
           required: false
@@ -426,7 +459,8 @@ paths:
         "401":
           description: Credentials are required to access this resource
         "422":
-          description: "Invalid parameters: from_date, to_date, status, display_size. See Public API documentation for the correct data formats"
+          description: "Invalid parameters: from_date, to_date, status, display_size. See
+            Public API documentation for the correct data formats"
           schema:
             $ref: "#/definitions/PaymentError"
         "429":
@@ -445,7 +479,9 @@ paths:
     post:
       consumes:
         - application/json
-      description: "Create a new payment for the account associated to the Authorisation token. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Create a new payment for the account associated to the
+        Authorisation token. The Authorisation token needs to be specified in
+        the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'"
       operationId: Create a payment
       parameters:
         - description: requestPayload
@@ -468,7 +504,8 @@ paths:
         "401":
           description: Credentials are required to access this resource
         "422":
-          description: "Invalid attribute value: description. Must be less than or equal to 255 characters length"
+          description: "Invalid attribute value: description. Must be less than or equal
+            to 255 characters length"
           schema:
             $ref: "#/definitions/PaymentError"
         "429":
@@ -486,7 +523,9 @@ paths:
         - Card payments
   "/v1/payments/{paymentId}":
     get:
-      description: "Return information about the payment The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Return information about the payment The Authorisation token needs
+        to be specified in the 'authorization' header as 'authorization: Bearer
+        YOUR_API_KEY_HERE'"
       operationId: Get a payment
       parameters:
         - description: Payment identifier
@@ -523,7 +562,10 @@ paths:
         - Card payments
   "/v1/payments/{paymentId}/cancel":
     post:
-      description: "Cancel a payment based on the provided payment ID and the Authorisation token. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'. A payment can only be cancelled if it's in a state that isn't finished."
+      description: "Cancel a payment based on the provided payment ID and the
+        Authorisation token. The Authorisation token needs to be specified in
+        the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'.
+        A payment can only be cancelled if it's in a state that isn't finished."
       operationId: Cancel a payment
       parameters:
         - description: Payment identifier
@@ -566,7 +608,10 @@ paths:
         - Card payments
   "/v1/payments/{paymentId}/capture":
     post:
-      description: "Capture a payment based on the provided payment ID and the Authorisation token. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'. A payment can only be captured if it's in 'submitted' state"
+      description: "Capture a payment based on the provided payment ID and the
+        Authorisation token. The Authorisation token needs to be specified in
+        the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'.
+        A payment can only be captured if it's in 'submitted' state"
       operationId: Capture a payment
       parameters:
         - description: Payment identifier
@@ -609,7 +654,9 @@ paths:
         - Card payments
   "/v1/payments/{paymentId}/events":
     get:
-      description: "Return payment events information about a certain payment The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Return payment events information about a certain payment The
+        Authorisation token needs to be specified in the 'authorization' header
+        as 'authorization: Bearer YOUR_API_KEY_HERE'"
       operationId: Get events for a payment
       parameters:
         - description: Payment identifier
@@ -646,7 +693,9 @@ paths:
         - Card payments
   "/v1/payments/{paymentId}/refunds":
     get:
-      description: "Return refunds for a payment. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Return refunds for a payment. The Authorisation token needs to be
+        specified in the 'authorization' header as 'authorization: Bearer
+        YOUR_API_KEY_HERE'"
       operationId: Get all refunds for a payment
       parameters:
         - in: path
@@ -682,7 +731,9 @@ paths:
     post:
       consumes:
         - application/json
-      description: "Return issued refund information. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Return issued refund information. The Authorisation token needs to
+        be specified in the 'authorization' header as 'authorization: Bearer
+        YOUR_API_KEY_HERE'"
       operationId: Submit a refund for a payment
       parameters:
         - description: paymentId
@@ -728,7 +779,9 @@ paths:
         - Refunding card payments
   "/v1/payments/{paymentId}/refunds/{refundId}":
     get:
-      description: "Return payment refund information by Refund ID The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Return payment refund information by Refund ID The Authorisation
+        token needs to be specified in the 'authorization' header as
+        'authorization: Bearer YOUR_API_KEY_HERE'"
       operationId: Get a payment refund
       parameters:
         - in: path
@@ -767,35 +820,43 @@ paths:
         - Refunding card payments
   /v1/refunds:
     get:
-      description: "Search refunds by 'from' and 'to' date. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'"
+      description: "Search refunds by 'from' and 'to' date. The Authorisation token
+        needs to be specified in the 'authorization' header as 'authorization:
+        Bearer YOUR_API_KEY_HERE'"
       operationId: Search refunds
       parameters:
-        - description: From date of refunds to be searched (this date is inclusive). Example=2015-08-13T12:35:00Z
+        - description: From date of refunds to be searched (this date is inclusive).
+            Example=2015-08-13T12:35:00Z
           in: query
           name: from_date
           required: false
           type: string
-        - description: To date of refunds to be searched (this date is exclusive). Example=2015-08-14T12:35:00Z
+        - description: To date of refunds to be searched (this date is exclusive).
+            Example=2015-08-14T12:35:00Z
           in: query
           name: to_date
           required: false
           type: string
-        - description: From settled date of refund to be searched (this date is inclusive). Example=2015-08-13
+        - description: From settled date of refund to be searched (this date is
+            inclusive). Example=2015-08-13
           in: query
           name: from_settled_date
           required: false
           type: string
-        - description: To settled date of refund to be searched (this date is inclusive). Example=2015-08-13
+        - description: To settled date of refund to be searched (this date is inclusive).
+            Example=2015-08-13
           in: query
           name: to_settled_date
           required: false
           type: string
-        - description: Page number requested for the search, should be a positive integer (optional, defaults to 1)
+        - description: Page number requested for the search, should be a positive integer
+            (optional, defaults to 1)
           in: query
           name: page
           required: false
           type: string
-        - description: Number of results to be shown per page, should be a positive integer (optional, defaults to 500, max 500)
+        - description: Number of results to be shown per page, should be a positive
+            integer (optional, defaults to 500, max 500)
           in: query
           name: display_size
           required: false
@@ -810,7 +871,8 @@ paths:
         "401":
           description: Credentials are required to access this resource
         "422":
-          description: Invalid parameters. See Public API documentation for the correct data formats
+          description: Invalid parameters. See Public API documentation for the correct
+            data formats
           schema:
             $ref: "#/definitions/RefundError"
         "500":
@@ -921,7 +983,8 @@ definitions:
         readOnly: true
         type: string
       language:
-        description: ISO-639-1 Alpha-2 code of a supported language to use on the payment pages
+        description: ISO-639-1 Alpha-2 code of a supported language to use on the
+          payment pages
         enum:
           - en
           - cy
@@ -931,7 +994,10 @@ definitions:
       metadata:
         additionalProperties:
           type: object
-        description: "Additional metadata - up to 10 name/value pairs - on the payment. Each key must be between 1 and 30 characters long. The value, if a string, must be no greater than 50 characters long. Other permissible value types: boolean, number."
+        description: "Additional metadata - up to 10 name/value pairs - on the payment.
+          Each key must be between 1 and 30 characters long. The value, if a
+          string, must be no greater than 50 characters long. Other permissible
+          value types: boolean, number."
         example: '{"ledger_code":"123", "reconciled": true}'
         readOnly: true
         type: object
@@ -1045,7 +1111,9 @@ definitions:
         example: 2016-01-21T17:15:00Z
         type: string
       delayed_capture:
-        description: Whether to [delay capturing](https://docs.payments.service.gov.uk/optional_features/delayed_capture/) this payment.
+        description: Whether to [delay
+          capturing](https://docs.payments.service.gov.uk/optional_features/delayed_capture/)
+          this payment.
         example: false
         type: boolean
       description:
@@ -1057,7 +1125,8 @@ definitions:
         example: citizen@example.org
         type: string
       language:
-        description: Which language your users will see on the payment pages when they make a payment.
+        description: Which language your users will see on the payment pages when they
+          make a payment.
         enum:
           - en
           - cy
@@ -1066,7 +1135,9 @@ definitions:
       metadata:
         additionalProperties:
           type: string
-        description: "[Custom metadata](https://docs.payments.service.gov.uk/optional_features/custom_metadata/) you added to the payment."
+        description: "[Custom
+          metadata](https://docs.payments.service.gov.uk/optional_features/cust\
+          om_metadata/) you added to the payment."
         type: object
       moto:
         description: Mail Order / Telephone Order (MOTO) payment flag.
@@ -1090,7 +1161,8 @@ definitions:
       refund_summary:
         $ref: "#/definitions/RefundSummary"
       return_url:
-        description: An HTTPS URL on your site that your user will be sent back to once they have completed their payment attempt on GOV.UK Pay.
+        description: An HTTPS URL on your site that your user will be sent back to once
+          they have completed their payment attempt on GOV.UK Pay.
         example: https://service-name.gov.uk/transactions/12345
         type: string
       settlement_summary:
@@ -1257,7 +1329,8 @@ definitions:
         example: your email
         type: string
       fee:
-        description: processing fee taken by the GOV.UK Pay platform, in pence. Only available depending on payment service provider
+        description: processing fee taken by the GOV.UK Pay platform, in pence. Only
+          available depending on payment service provider
         example: 5
         format: int64
         readOnly: true
@@ -1278,7 +1351,8 @@ definitions:
         readOnly: true
         type: boolean
       net_amount:
-        description: amount including all surcharges and less all fees, in pence. Only available depending on payment service provider
+        description: amount including all surcharges and less all fees, in pence. Only
+          available depending on payment service provider
         example: 1195
         format: int64
         readOnly: true
@@ -1467,7 +1541,8 @@ definitions:
         example: your email
         type: string
       fee:
-        description: processing fee taken by the GOV.UK Pay platform, in pence. Only available depending on payment service provider
+        description: processing fee taken by the GOV.UK Pay platform, in pence. Only
+          available depending on payment service provider
         example: 5
         format: int64
         readOnly: true
@@ -1488,7 +1563,8 @@ definitions:
         readOnly: true
         type: boolean
       net_amount:
-        description: amount including all surcharges and less all fees, in pence. Only available depending on payment service provider
+        description: amount including all surcharges and less all fees, in pence. Only
+          available depending on payment service provider
         example: 1195
         format: int64
         readOnly: true
@@ -1533,7 +1609,8 @@ definitions:
         example: P0102
         type: string
       description:
-        example: "Invalid attribute value: amount. Must be less than or equal to 10000000"
+        example: "Invalid attribute value: amount. Must be less than or equal to
+          10000000"
         type: string
       field:
         example: amount
@@ -1692,7 +1769,8 @@ definitions:
     description: A structure representing information about a settlement
     properties:
       capture_submit_time:
-        description: Date and time capture request has been submitted. May be null if capture request was not immediately acknowledged by payment gateway.
+        description: Date and time capture request has been submitted. May be null if
+          capture request was not immediately acknowledged by payment gateway.
         example: 2016-01-21T17:15:000Z
         readOnly: true
         type: string
@@ -1711,7 +1789,8 @@ definitions:
     description: A structure representing the current state of the payment in its lifecycle.
     properties:
       code:
-        description: What went wrong with the Payment if it finished with an error - error code
+        description: What went wrong with the Payment if it finished with an error -
+          error code
         example: P010
         readOnly: true
         type: string
@@ -1720,7 +1799,8 @@ definitions:
         readOnly: true
         type: boolean
       message:
-        description: What went wrong with the Payment if it finished with an error - English message
+        description: What went wrong with the Payment if it finished with an error -
+          English message
         example: User cancelled the payment
         readOnly: true
         type: string
@@ -1829,7 +1909,8 @@ definitions:
         example: P0102
         type: string
       description:
-        example: "Invalid attribute value: amountSubmitted. Must be less than or equal to 10000000"
+        example: "Invalid attribute value: amountSubmitted. Must be less than or equal
+          to 10000000"
         type: string
       field:
         example: amount_submitted

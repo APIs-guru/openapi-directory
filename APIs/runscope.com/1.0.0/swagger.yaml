@@ -26,10 +26,14 @@ securityDefinitions:
     scopes:
       account:email: Allows you to read the email addresses of user accounts.
       api:read: Default read access.
-      bucket:auth_token: Allows you to read all bucket information, including Authenticated Buckets.
-      bucket:write: Allows you to create new buckets on behalf of the user (up to their plan limit).
-      message:write: Allows you to create new messages on behalf of the user (up to their plan limit).
-      team:read: Allows you to read team details such as lists of team members and external service integrations.
+      bucket:auth_token: Allows you to read all bucket information, including
+        Authenticated Buckets.
+      bucket:write: Allows you to create new buckets on behalf of the user (up to
+        their plan limit).
+      message:write: Allows you to create new messages on behalf of the user (up to
+        their plan limit).
+      team:read: Allows you to read team details such as lists of team members and
+        external service integrations.
       test:read: Allows you to read the details of API tests.
       test:write: Allows you to create, update and delete details of API tests.
     tokenUrl: https://www.runscope.com/signin/oauth/access_token
@@ -304,20 +308,26 @@ paths:
             $ref: "#/definitions/NewMessage"
       responses:
         "200":
-          description: The response includes a list of result objects for the message(s) submitted. It will always return an array, even if only one message was created. The order of the result objects corresponds to the order of messages submitted.
+          description: The response includes a list of result objects for the message(s)
+            submitted. It will always return an array, even if only one message
+            was created. The order of the result objects corresponds to the
+            order of messages submitted.
           schema:
             properties:
               data:
                 items:
                   properties:
                     error:
-                      description: An object representing errors for this item. Only present if status is error, otherwise this will be null.
+                      description: An object representing errors for this item. Only present if status
+                        is error, otherwise this will be null.
                       properties:
                         code:
-                          description: A numeric error code for the specific problem we encountered with this message. (error status only)
+                          description: A numeric error code for the specific problem we encountered with
+                            this message. (error status only)
                           type: integer
                         message:
-                          description: A description of the problem we encountered with this message. (error status only)
+                          description: A description of the problem we encountered with this message.
+                            (error status only)
                           type: string
                         more_info:
                           description: A link to more help about the warning. (error status only)
@@ -327,19 +337,25 @@ paths:
                       description: "One of the following: success, error, or warning."
                       type: string
                     unique_identifier:
-                      description: If the message had a unique_identifier, it will be returned in this field, to help match the responses to the messages that were submitted.
+                      description: If the message had a unique_identifier, it will be returned in this
+                        field, to help match the responses to the messages that
+                        were submitted.
                       type: string
                     uuid:
                       description: This message's Runscope-generated ID.
                       type: string
                     warning:
-                      description: An object representing warnings (non-fatal warnings) for this item. Only present if status is warning, otherwise this will be null.
+                      description: An object representing warnings (non-fatal warnings) for this item.
+                        Only present if status is warning, otherwise this will
+                        be null.
                       properties:
                         code:
-                          description: A numeric error code for the specific problem we encountered with this message. (warning status only)
+                          description: A numeric error code for the specific problem we encountered with
+                            this message. (warning status only)
                           type: integer
                         message:
-                          description: A description of the problem we encountered with this message. (warning status only)
+                          description: A description of the problem we encountered with this message.
+                            (warning status only)
                           type: string
                         more_info:
                           description: A link to more help about the warning. (warning status only)
@@ -441,7 +457,8 @@ paths:
         - runscope_auth:
             - api:read
             - test:write
-      summary: Delete a test, including all steps, schedules, test-specific environments and results.
+      summary: Delete a test, including all steps, schedules, test-specific
+        environments and results.
       tags:
         - Tests
     get:
@@ -468,7 +485,8 @@ paths:
         - $ref: "#/parameters/testId"
       responses:
         "201":
-          description: Returns 201 and the updated test's JSON description if the test is successfully updated.
+          description: Returns 201 and the updated test's JSON description if the test is
+            successfully updated.
           schema:
             $ref: "#/definitions/TestDetail"
         default:
@@ -477,7 +495,9 @@ paths:
         - runscope_auth:
             - api:read
             - test:write
-      summary: Modify a test's name, description, default environment and its steps. To modify other individual properties of a test, make requests to the steps, environments, and schedules subresources of the test.
+      summary: Modify a test's name, description, default environment and its steps.
+        To modify other individual properties of a test, make requests to the
+        steps, environments, and schedules subresources of the test.
       tags:
         - Tests
   "/buckets/{bucketKey}/tests/{testId}/environments":
@@ -500,7 +520,8 @@ paths:
         - runscope_auth:
             - api:read
             - test:read
-      summary: Return details of the test's environments (only those that belong to the specified test)
+      summary: Return details of the test's environments (only those that belong to
+        the specified test)
       tags:
         - Test Environments
     post:
@@ -550,7 +571,8 @@ paths:
         - $ref: "#/parameters/testId"
       responses:
         "200":
-          description: List of average response times and additional performance metrics belonging to this test.
+          description: List of average response times and additional performance metrics
+            belonging to this test.
           schema:
             $ref: "#/definitions/Metrics"
       security:
@@ -710,7 +732,8 @@ definitions:
   Account:
     properties:
       email:
-        description: The email address for this account. Only present if authorized with the account:email scope.
+        description: The email address for this account. Only present if authorized with
+          the account:email scope.
         type: string
       id:
         description: The unique identifier for this account.
@@ -729,7 +752,8 @@ definitions:
         description: The unique identifier for this agent.
         type: string
       name:
-        description: The name of the agent set in the configuration file or with the command line flag.
+        description: The name of the agent set in the configuration file or with the
+          command line flag.
         type: string
       version:
         description: The version for this agent.
@@ -751,7 +775,8 @@ definitions:
       collections_url:
         type: string
       default:
-        description: True if this bucket is the 'default' for a team. Default buckets cannot be deleted.
+        description: True if this bucket is the 'default' for a team. Default buckets
+          cannot be deleted.
         type: boolean
       key:
         description: The unique identifier used to address a bucket.
@@ -768,7 +793,8 @@ definitions:
       trigger_url:
         type: string
       verify_ssl:
-        description: True if this bucket is configured to verify ssl for requests made to it.
+        description: True if this bucket is configured to verify ssl for requests made
+          to it.
         type: boolean
   Environment:
     properties:
@@ -816,7 +842,8 @@ definitions:
         description: ""
         type: string
       script_library:
-        description: The list of ids for scripts, part of the script libraries, being used for this environment.
+        description: The list of ids for scripts, part of the script libraries, being
+          used for this environment.
         items:
           type: string
         type: array
@@ -887,17 +914,20 @@ definitions:
         items:
           properties:
             avg_response_time_ms:
-              description: The average response time in miliseconds for all the requests for this test in this time interval.
+              description: The average response time in miliseconds for all the requests for
+                this test in this time interval.
               type: integer
             success_ratio:
-              description: 1 if there's a successful request in this time interval, or 0 if there isn't.
+              description: 1 if there's a successful request in this time interval, or 0 if
+                there isn't.
               type: integer
             timestamp:
               description: The timestamp in Unix format for the specified timeframe.
               type: integer
         type: array
       this_time_period:
-        description: The average response time for different percentiles for the request in the requested timeframe.
+        description: The average response time for different percentiles for the request
+          in the requested timeframe.
         type: object
       timeframe:
         description: The timeframe that filters this request.
@@ -919,7 +949,8 @@ definitions:
         properties:
           body:
             description: >
-              HTTP request body (most commonly used for POST and PUT requests). If the
+              HTTP request body (most commonly used for POST and PUT requests).
+              If the
 
               request body contains binary data that cannot be included directly in the 
 
@@ -927,7 +958,8 @@ definitions:
             type: string
           body_encoding:
             description: >
-              If the request body was encoded with Base64, this field should be present and set to 
+              If the request body was encoded with Base64, this field should be
+              present and set to 
 
               "base64". If not specified, defaults to "plaintext"
             type: string
@@ -938,10 +970,12 @@ definitions:
               Values can either be represented as a string or as an array of strings.
             type: string
           headers:
-            description: JSON object of header keys and values -- with values as a string or an array of strings.
+            description: JSON object of header keys and values -- with values as a string or
+              an array of strings.
             type: string
           method:
-            description: HTTP method name (GET, POST, PUT, HEAD, OPTIONS, PATCH, DELETE, etc.)
+            description: HTTP method name (GET, POST, PUT, HEAD, OPTIONS, PATCH, DELETE,
+              etc.)
             type: string
           timestamp:
             description: Unix timestamp indicating when the request was made.
@@ -955,22 +989,26 @@ definitions:
         properties:
           body:
             description: >
-              HTTP response body. If the response body contains binary data that cannot be
+              HTTP response body. If the response body contains binary data that
+              cannot be
 
               included directly in the JSON, you should encode the content with Base64.
             type: string
           body_encoding:
             description: >
-              If the request body was encoded with Base64, this field should be present and set to 
+              If the request body was encoded with Base64, this field should be
+              present and set to 
 
               "base64". If not specified, defaults to "plaintext"
             type: string
           headers:
-            description: JSON object of header keys and values -- with values as a string or an array of strings.
+            description: JSON object of header keys and values -- with values as a string or
+              an array of strings.
             type: string
           reason:
             description: >
-              Textual description of HTTP status code. This will be set automatically if not 
+              Textual description of HTTP status code. This will be set
+              automatically if not 
 
               provided in the API call. For example, if the status code is 404, this will be 
 
@@ -1073,18 +1111,21 @@ definitions:
   TestStep:
     properties:
       step_type:
-        description: Type of test step -- request, pause, condition, ghost-inspector, or subtest.
+        description: Type of test step -- request, pause, condition, ghost-inspector, or
+          subtest.
         type: string
   TestStepRequest:
     allOf:
       - properties:
           assertions:
-            description: A list of assertions to apply to the HTTP response from this request.
+            description: A list of assertions to apply to the HTTP response from this
+              request.
             items:
               $ref: "#/definitions/Assertion"
             type: array
           auth:
-            description: An authentication object with either basic, oauth1, or client_certificate credentials for authenticating this request.
+            description: An authentication object with either basic, oauth1, or
+              client_certificate credentials for authenticating this request.
             type: object
           before_scripts:
             description: A list of pre-request scripts to run before this request.
@@ -1095,13 +1136,17 @@ definitions:
             description: A string to use as the body of the request.
             type: string
           form:
-            description: An object with keys as form post parameter names matched to their values. Values can either be a single string or an array of strings.
+            description: An object with keys as form post parameter names matched to their
+              values. Values can either be a single string or an array of
+              strings.
             type: object
           headers:
-            description: An object with keys as header names matched to their values. Values can either be a single string or an array of strings.
+            description: An object with keys as header names matched to their values. Values
+              can either be a single string or an array of strings.
             type: object
           method:
-            description: The HTTP method for this request step. E.g. GET, POST, PUT, DELETE, etc.
+            description: The HTTP method for this request step. E.g. GET, POST, PUT, DELETE,
+              etc.
             type: string
           note:
             description: A description or note for this request step.
@@ -1112,10 +1157,12 @@ definitions:
               type: string
             type: array
           url:
-            description: The URL to make a request to for this step. This may contain both query string parameters and variables.
+            description: The URL to make a request to for this step. This may contain both
+              query string parameters and variables.
             type: string
           variables:
-            description: A list of variables to extract out of the HTTP response from this request.
+            description: A list of variables to extract out of the HTTP response from this
+              request.
             items:
               $ref: "#/definitions/Variable"
             type: array

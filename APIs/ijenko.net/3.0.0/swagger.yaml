@@ -78,14 +78,18 @@ parameters:
     required: true
     type: string
   devicesSelector.Opt:
-    description: Devices selector. Device tags or device classes or device ids or '*' for any. Multiple values are separated by '|' and interpreted as « OR ».
+    description: Devices selector. Device tags or device classes or device ids or
+      '*' for any. Multiple values are separated by '|' and interpreted as « OR
+      ».
     in: query
     name: devices
     pattern: ^(?:\\*|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$
     required: false
     type: string
   devicesSelector.Req:
-    description: Devices selector. Device tags or device classes or device ids or '*' for any. Multiple values are separated by '|' and interpreted as « OR ».
+    description: Devices selector. Device tags or device classes or device ids or
+      '*' for any. Multiple values are separated by '|' and interpreted as « OR
+      ».
     in: query
     name: devices
     pattern: ^(?:\\*|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$
@@ -94,7 +98,8 @@ parameters:
   embedMetadata:
     collectionFormat: csv
     description: >
-      Request to include the given keys of metadata in the response. If a key doesn't exist on the resource it is ignored.
+      Request to include the given keys of metadata in the response. If a
+      key doesn't exist on the resource it is ignored.
 
       **Note:** This only applies to the top level resources.
     in: query
@@ -119,7 +124,9 @@ parameters:
     type: string
   functionalitiesSelector.Opt:
     description: >
-      Functionality selector: Functionality tags or functionality class (optionally, '@' followed by a endpoint in decimal) or '*' for all. Multiple values are separated by '|' and are interpreted as « OR ».
+      Functionality selector: Functionality tags or functionality class
+      (optionally, '@' followed by a endpoint in decimal) or '*' for all.
+      Multiple values are separated by '|' and are interpreted as « OR ».
     in: query
     name: functionalities
     pattern: ^(?:\\*|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$
@@ -127,7 +134,9 @@ parameters:
     type: string
   functionalitiesSelector.Req:
     description: >
-      Functionality selector: Functionality tags or functionality class (optionally, '@' followed by a endpoint in decimal) or '*' for all. Multiple values are separated by '|' and are interpreted as « OR ».
+      Functionality selector: Functionality tags or functionality class
+      (optionally, '@' followed by a endpoint in decimal) or '*' for all.
+      Multiple values are separated by '|' and are interpreted as « OR ».
     in: query
     name: functionalities
     pattern: ^(?:\\*|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$
@@ -140,7 +149,7 @@ parameters:
     required: true
     type: string
   metadataPatch:
-    description: >
+    description: |
       Modifications to apply to the metadata of the resource.
     in: body
     name: metadataPatch
@@ -166,7 +175,8 @@ parameters:
     required: true
     type: string
   span.Req:
-    description: "Timespan: H (hour), D (day), Wmo (week starting on Monday), Wsu (week starting on Sunday), M (month), Y (year)"
+    description: "Timespan: H (hour), D (day), Wmo (week starting on Monday), Wsu
+      (week starting on Sunday), M (month), Y (year)"
     enum:
       - H
       - D
@@ -179,7 +189,7 @@ parameters:
     required: true
     type: string
   tagsPatch:
-    description: >
+    description: |
       Modifications to apply to the tags list of the resource.
     in: body
     name: tagsPatch
@@ -187,7 +197,7 @@ parameters:
     schema:
       $ref: "#/definitions/TagsPatch"
   to:
-    description: >
+    description: |
       End of the interval. Default: now.
     format: date-time
     in: query
@@ -225,43 +235,49 @@ responses:
   DeleteOK:
     description: Resource successfully deleted.
   ErrorAccessAccount:
-    description: >
+    description: |
       The authentication token doesn't allow to modify the *Account*.
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorAccessBus:
     description: >
-      *Bus* doesn't exist or the requester doesn't have appropriate access to the *Place*.
+      *Bus* doesn't exist or the requester doesn't have appropriate
+      access to the *Place*.
     schema:
       $ref: "#/definitions/ErrorSubEntity"
   ErrorAccessDevice:
     description: >
-      *Device* doesn't exist or the requester doesn't have appropriate access to the *Place*.
+      *Device* doesn't exist or the requester doesn't have appropriate
+      access to the *Place*.
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorAccessFunctionality:
     description: >
-      *Functionality* doesn't exist or the requester doesn't have appropriate access to the *Place*.
+      *Functionality* doesn't exist or the requester doesn't have
+      appropriate access to the *Place*.
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorAccessNotification:
     description: >
-      *Notification* doesn't exist or the requester doesn't have appropriate access to the *Place*.
+      *Notification* doesn't exist or the requester doesn't have
+      appropriate access to the *Place*.
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorAccessPlace:
-    description: >
+    description: |
       *Place* doesn't exist or the requester doesn't have access.
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorAccessProgram:
     description: >
-      *Program* doesn't exist or the requester doesn't have appropriate access to the *Place*.
+      *Program* doesn't exist or the requester doesn't have appropriate
+      access to the *Place*.
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorAccessUser:
     description: >
-      *User* doesn't exist in this *Account* or the requester doesn't have access to a *Place* on which this *User* has access.
+      *User* doesn't exist in this *Account* or the requester doesn't
+      have access to a *Place* on which this *User* has access.
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorGatewayUnreachable:
@@ -269,7 +285,7 @@ responses:
     schema:
       $ref: "#/definitions/ErrorGatewayUnreachable"
   ErrorWriteAttribute:
-    description: >
+    description: |
       *Attribute* is not writable.
     schema:
       $ref: "#/definitions/ErrorSubEntity"
@@ -292,9 +308,8 @@ tags:
 paths:
   /account/change-password:
     post:
-      description: >
+      description: |
         Set a new password for the account.
-
 
         **Note**: requires full access to the *Account*.
       operationId: Account.changePassword
@@ -317,9 +332,8 @@ paths:
         - Account
   /account/places:
     get:
-      description: >
+      description: |
         List the *Places* of the account.
-
 
         **Note:** requires full access to the *Account*.
       operationId: Account.places
@@ -370,9 +384,8 @@ paths:
         - Account
   /account/tokens:
     get:
-      description: >
+      description: |
         List the active *Tokens* on the account.
-
 
         **Note:** requires full access to the *Account*.
       operationId: Account.tokens
@@ -394,9 +407,8 @@ paths:
     parameters: []
   "/account/tokens/{tokenId}":
     delete:
-      description: >
+      description: |
         Revoke the given *Token*.
-
 
         **Note:** requires full access to the *Account*.
       operationId: Account.revokeToken
@@ -431,9 +443,8 @@ paths:
         - Account
     parameters: []
     post:
-      description: >
+      description: |
         Add a *User*.
-
 
         **Note**: requires full access to the *Account*.
       operationId: Account.newUser
@@ -461,9 +472,8 @@ paths:
         - Account
   "/account/users/{userId}":
     delete:
-      description: >
+      description: |
         Delete a *User* from this *Account*, and revoke all his/her *Tokens*.
-
 
         **Note**: requires full access to the *Account*.
       operationId: Account.deleteUser
@@ -482,7 +492,7 @@ paths:
       operationId: Account.getUser
       responses:
         "200":
-          description: >
+          description: |
             *User* information.
           schema:
             $ref: "#/definitions/User"
@@ -494,9 +504,8 @@ paths:
     parameters:
       - $ref: "#/parameters/userId"
     patch:
-      description: >
+      description: |
         Modify a *User*.
-
 
         **Note**: requires full access to the *Account*.
       operationId: Account.patchUser
@@ -558,30 +567,20 @@ paths:
         - Account
   /auth/login:
     post:
-      description: >
+      description: |
         Get an access+refresh tokens pair from login and password information.
 
-
         The *access token* obtained with this request can then be used in
-
         an `Access-Token` HTTP header or in a `token` URL query parameter
-
         in requests that require authentication.
 
-
         The *refresh token* can be used with `/auth/refresh` when the *access
-
         token* expires to retrieve a new *access token*. The lifetime of the
-
         refresh token is the maximum lifetime of this authentication request.
 
-
         The default lifetime of the *refresh token* is defined by the `appId`
-
         used. The `ttl` input parameter allows to request a *refresh token*
-
         with a shorter lifetime.
-
 
         To implement *logout*, use `/auth/revoke`.
       operationId: AuthAccountLogin
@@ -594,7 +593,8 @@ paths:
             $ref: "#/definitions/AuthLogin"
       responses:
         "200":
-          description: Login successful. The access token is given to use the API. The refresh token must be stored in a safe place.
+          description: Login successful. The access token is given to use the API. The
+            refresh token must be stored in a safe place.
           schema:
             $ref: "#/definitions/AuthTokens"
         "401":
@@ -610,12 +610,10 @@ paths:
         - Entry points
   /auth/refresh:
     post:
-      description: >
+      description: |
         Get a new *access token* using a valid *refresh token*.
 
-
         This is a **replacement** of the *access token*: if an existing *access
-
         token* was still not expired, it is invalidated.
       operationId: AuthRefreshToken
       parameters:
@@ -664,7 +662,8 @@ paths:
             $ref: "#/definitions/AuthResetPassword"
       responses:
         "204":
-          description: As this request is not authenticated, response is always successful to not reveal (in)existence of accounts.
+          description: As this request is not authenticated, response is always successful
+            to not reveal (in)existence of accounts.
         default:
           $ref: "#/responses/DefaultError"
       security: []
@@ -674,7 +673,8 @@ paths:
   /auth/revoke:
     post:
       description: >
-        Invalidate the authentication used for the request. The access token and the refresh token will be invalid after this request.
+        Invalidate the authentication used for the request. The access
+        token and the refresh token will be invalid after this request.
 
         This request is typically called to implement logout.
       operationId: AuthRevokeToken
@@ -707,7 +707,7 @@ paths:
     parameters:
       - $ref: "#/parameters/deviceId"
     patch:
-      description: >
+      description: |
         Modify information about a *Device*: its name.
       operationId: Devices.patch
       parameters:
@@ -824,7 +824,8 @@ paths:
   "/devices/{deviceId}/run/{action}":
     post:
       description: >
-        Run an *Action* on zero, one or multiple Functionalities selected with tags.
+        Run an *Action* on zero, one or multiple Functionalities selected
+        with tags.
       operationId: Device.run
       parameters:
         - $ref: "#/parameters/deviceId"
@@ -897,7 +898,7 @@ paths:
     parameters:
       - $ref: "#/parameters/functionalityId"
     patch:
-      description: >
+      description: |
         Modify information about a *Functionality*: its name.
       operationId: Functionality.patch
       parameters:
@@ -1040,7 +1041,7 @@ paths:
         - Functionality
   "/functionalities/{functionalityId}/run/{action}":
     post:
-      description: >
+      description: |
         Run an action on the Functionality.
       operationId: Functionality.run
       parameters:
@@ -1117,7 +1118,7 @@ paths:
       tags:
         - Entry points
     patch:
-      description: >
+      description: |
         Update *User* information (locale).
       operationId: Me.patch
       parameters:
@@ -1139,7 +1140,7 @@ paths:
         - Entry points
   "/notifications/{notificationId}":
     delete:
-      description: >
+      description: |
         Delete a *Notification*.
       operationId: Notification.delete
       responses:
@@ -1153,7 +1154,7 @@ paths:
       tags:
         - Notification
     get:
-      description: >
+      description: |
         Get information about a *Notification*.
       operationId: Notifications.get
       responses:
@@ -1171,7 +1172,7 @@ paths:
     parameters:
       - $ref: "#/parameters/notificationId"
     patch:
-      description: >
+      description: |
         Modify a *Notification*.
       operationId: Notification.patch
       parameters:
@@ -1264,9 +1265,8 @@ paths:
     parameters:
       - $ref: "#/parameters/placeId"
     patch:
-      description: >
+      description: |
         Change information about a *Place*.
-
 
         **Note**: requires full access to the *Account*.
       operationId: Place.patch
@@ -1319,9 +1319,8 @@ paths:
       - $ref: "#/parameters/placeId"
   "/places/{placeId}/buses/{busId}/pairing":
     get:
-      description: >
+      description: |
         Get the state of the pairing window of the *Bus*.
-
 
         **Note**: requires full access to the *Account*.
       operationId: Place.pairing
@@ -1339,9 +1338,8 @@ paths:
       - $ref: "#/parameters/placeId"
       - $ref: "#/parameters/busId"
     put:
-      description: >
+      description: |
         Open/Close the pairing window.
-
 
         **Note**: requires full access to the *Account*.
       operationId: Place.openPairing
@@ -1387,9 +1385,8 @@ paths:
       - $ref: "#/parameters/placeId"
   "/places/{placeId}/electricity/autonomy":
     get:
-      description: >
+      description: |
         Compute the autonomy rate of the *Place* on a time period.
-
 
         `autonomy = 1 - (elec_drawn / elec_total_usage)`
       operationId: Place.Electricity.autonomy
@@ -1410,26 +1407,18 @@ paths:
       - $ref: "#/parameters/placeId"
   "/places/{placeId}/electricity/flows":
     get:
-      description: >
+      description: |
         Get the mapping of virtual electricity flows to functionalities.
 
-
         Some rules are applied to expand the virtual flows using the concrete
-
         flows available.
 
-
         The `factor` tells how each energy value coming from a functionality
-
         must be added with values from other functionality to compute the
-
         energy of the virtual flow. Factors are usually `1` or `-1`.
 
-
         The `code` property gives the result which may be partial:
-
         - If all flows are available, `200000` is returned.
-
         - If no flows are available (indicating that the place has no
           electricity functionality or that no functionality has been attached
           to a flow), the `code` is `200001`. The `missing` property contains
@@ -1472,9 +1461,8 @@ paths:
       - $ref: "#/parameters/placeId"
   "/places/{placeId}/electricity/flows/setup":
     get:
-      description: >
+      description: |
         Get the mapping of functionalities to electricity flows.
-
 
         A functionality is attached to *at most* one flow.
       operationId: Place.Electricity.getFlowsSetup
@@ -1492,9 +1480,8 @@ paths:
       - $ref: "#/parameters/placeId"
   "/places/{placeId}/electricity/self-consumption":
     get:
-      description: >
+      description: |
         Compute the self-consumption rate of the *Place* on a time period.
-
 
         `selfConsumption = 1 - (elec_feed_in / elec_total_usage)`
       operationId: Place.Electricity.selfConsumption
@@ -1642,9 +1629,8 @@ paths:
     parameters:
       - $ref: "#/parameters/placeId"
     post:
-      description: >
+      description: |
         Create a new *Program*.
-
 
         **Note**: requires full access to the *Account*.
       operationId: Place.newProgram
@@ -1673,7 +1659,8 @@ paths:
   "/places/{placeId}/run/{action}":
     post:
       description: >
-        Run an *Action* on zero, one or multiple *Functionalities* selected with tags.
+        Run an *Action* on zero, one or multiple *Functionalities* selected
+        with tags.
 
 
         *Device* and *Functionality* selection are combined with « AND ».
@@ -1703,9 +1690,8 @@ paths:
         - Action
   "/programs/{programId}":
     delete:
-      description: >
+      description: |
         Delete a *Program*.
-
 
         **Note**: requires full access to the *Account*.
       operationId: Program.delete
@@ -1720,7 +1706,7 @@ paths:
       tags:
         - Program
     get:
-      description: >
+      description: |
         Get information about a *Program*.
       operationId: Programs.get
       responses:
@@ -1738,15 +1724,11 @@ paths:
     parameters:
       - $ref: "#/parameters/programId"
     patch:
-      description: >
+      description: |
         Modify a *Program*:
-
         - name
-
         - status (enabled/disabled)
-
         - code
-
 
         **Note**: requires full access to the *Account*.
       operationId: Program.patch
@@ -1834,9 +1816,8 @@ paths:
     parameters:
       - $ref: "#/parameters/programId"
     post:
-      description: >-
+      description: |-
         Launch the *Program*.
-
         The result will be available later in the run history.
       operationId: Program.run
       responses:
@@ -2160,7 +2141,8 @@ definitions:
       metadata:
         $ref: "#/definitions/MetadataSelected"
       name:
-        description: Name of the *Device* as defined by the user. Can be used for user interfaces.
+        description: Name of the *Device* as defined by the user. Can be used for user
+          interfaces.
         minLength: 2
         type: string
       place:
@@ -2187,7 +2169,8 @@ definitions:
   DevicePatch:
     properties:
       name:
-        description: Name of the *Device* as defined by the user. Can be used for user interfaces.
+        description: Name of the *Device* as defined by the user. Can be used for user
+          interfaces.
         minLength: 2
         type: string
     type: object
@@ -2215,7 +2198,8 @@ definitions:
         format: date-time
         type: string
       message:
-        description: Message for cases where computation is not possible (codes 200001, 200002)
+        description: Message for cases where computation is not possible (codes 200001,
+          200002)
         minLength: 1
         type: string
       to:
@@ -2419,7 +2403,8 @@ definitions:
         format: date-time
         type: string
       message:
-        description: Message for cases where computation is not possible (codes 200001, 200002)
+        description: Message for cases where computation is not possible (codes 200001,
+          200002)
         minLength: 1
         type: string
       selfConsumption:
@@ -2712,7 +2697,10 @@ definitions:
     type: string
   Locale:
     description: >
-      Locale identifier (language, region). See https://tools.ietf.org/html/rfc5646 and https://www.iana.org/assignments/lang-subtags-templates/lang-subtags-templates.xhtml .
+      Locale identifier (language, region). See
+      https://tools.ietf.org/html/rfc5646 and
+      https://www.iana.org/assignments/lang-subtags-templates/lang-subtags-templates.xhtml
+      .
     example: fr-FR
     minLength: 2
     pattern: ^[a-z]{2}[A-Za-z0-9-]*$
@@ -2720,7 +2708,8 @@ definitions:
   Metadata:
     additionalProperties:
       $ref: "#/definitions/AnyJSON"
-    description: Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
+    description: Keys are limited to the same format as tags (up to 21 characters,
+      [a-z0-9], starting with [a-z]). Values can be any JSON value.
     type: object
   MetadataKey:
     maxLength: 21
@@ -2744,7 +2733,8 @@ definitions:
   MetadataSelected:
     additionalProperties:
       $ref: "#/definitions/AnyJSON"
-    description: Subset of metadata attached to the resource selected using the 'embed-metadata' parameter
+    description: Subset of metadata attached to the resource selected using the
+      'embed-metadata' parameter
     type: object
   Notification:
     properties:
@@ -3192,7 +3182,8 @@ definitions:
         uniqueItems: true
     type: object
   TimeZone:
-    description: A time zone name from the Time Zone Database at https://www.iana.org/time-zones
+    description: A time zone name from the Time Zone Database at
+      https://www.iana.org/time-zones
     example: Europe/Paris
     minLength: 2
     pattern: ^[A-Z][A-Za-z0-9-_+]+(?:/[A-Z][A-Za-z0-9-_+]+)*$
@@ -3387,11 +3378,13 @@ definitions:
       id:
         $ref: "#/definitions/TokenId"
       lastUse:
-        description: Time of last use of the token to access the API. Updated at most every 15 minutes. If absent, the token has never been used.
+        description: Time of last use of the token to access the API. Updated at most
+          every 15 minutes. If absent, the token has never been used.
         format: date-time
         type: string
       places:
-        description: List of Places to which the User has access. If absent, it means any Place of the account are allowed.
+        description: List of Places to which the User has access. If absent, it means
+          any Place of the account are allowed.
         items:
           $ref: "#/definitions/PlaceItem"
         type: array

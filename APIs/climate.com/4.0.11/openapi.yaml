@@ -227,7 +227,10 @@ paths:
   /v4/boundaries:
     post:
       description: >-
-        Upload a **Boundary** entry by passing the geometry of the boundary. This will store the boundary but will not create field in Climate FieldView and will not link to an existing field in Climate FieldView.
+        Upload a **Boundary** entry by passing the geometry of the
+        boundary. This will store the boundary but will not create field in
+        Climate FieldView and will not link to an existing field in Climate
+        FieldView.
 
         This is restricted to callers with **boundaries:write** scope.
 
@@ -364,7 +367,8 @@ paths:
         - FarmOrganizations
   /v4/fields:
     get:
-      description: Retrieve list of **Fields**. Filter the results by field name if the `fieldName` query parameter is specified.
+      description: Retrieve list of **Fields**. Filter the results by field name if
+        the `fieldName` query parameter is specified.
       operationId: fetchFields
       parameters:
         - $ref: "#/components/parameters/X-Next-Token"
@@ -430,7 +434,8 @@ paths:
         - Fields
   /v4/layers/asApplied:
     get:
-      description: Retrieve a list of application activities. The id in the response is used for  GET /v4/layers/asApplied/{activityId}/contents.
+      description: Retrieve a list of application activities. The id in the response
+        is used for  GET /v4/layers/asApplied/{activityId}/contents.
       parameters:
         - $ref: "#/components/parameters/Accept"
         - $ref: "#/components/parameters/X-Next-Token"
@@ -458,7 +463,12 @@ paths:
         - Layers
   "/v4/layers/asApplied/{activityId}/contents":
     get:
-      description: Retrieve an individual application activity by id.  Ids are retrieved via the  /layers/asApplied route. Downloads larger than `5MiB` (`5242880 bytes`) in size, must be downloaded in chunks no larger than `5MiB` (`5242880 bytes`) and no smaller than `1MiB`  (`1048576 bytes`). The last chunk could be less than `1MiB` (`1048576 bytes`). The data is compressed using .zip format.
+      description: Retrieve an individual application activity by id.  Ids are
+        retrieved via the  /layers/asApplied route. Downloads larger than `5MiB`
+        (`5242880 bytes`) in size, must be downloaded in chunks no larger than
+        `5MiB` (`5242880 bytes`) and no smaller than `1MiB`  (`1048576 bytes`).
+        The last chunk could be less than `1MiB` (`1048576 bytes`). The data is
+        compressed using .zip format.
       parameters:
         - $ref: "#/components/parameters/Accept"
         - $ref: "#/components/parameters/ApplicationActivityId"
@@ -493,7 +503,8 @@ paths:
         - Layers
   /v4/layers/asHarvested:
     get:
-      description: Retrieve a list of harvest activities. The id in the response is used for  GET /v4/layers/asHarvested/{activityId}/contents.
+      description: Retrieve a list of harvest activities. The id in the response is
+        used for  GET /v4/layers/asHarvested/{activityId}/contents.
       parameters:
         - $ref: "#/components/parameters/Accept"
         - $ref: "#/components/parameters/X-Next-Token"
@@ -521,7 +532,12 @@ paths:
         - Layers
   "/v4/layers/asHarvested/{activityId}/contents":
     get:
-      description: Retrieve an individual harvest activity by id.  Ids are retrieved via the  /layers/asHarvested route. Downloads larger than `5MiB` (`5242880 bytes`) in size, must be downloaded in chunks no larger than `5MiB` (`5242880 bytes`) and no smaller than `1MiB`  (`1048576 bytes`). The last chunk could be less than `1MiB` (`1048576 bytes`). The data is compressed using .zip format.
+      description: Retrieve an individual harvest activity by id.  Ids are retrieved
+        via the  /layers/asHarvested route. Downloads larger than `5MiB`
+        (`5242880 bytes`) in size, must be downloaded in chunks no larger than
+        `5MiB` (`5242880 bytes`) and no smaller than `1MiB`  (`1048576 bytes`).
+        The last chunk could be less than `1MiB` (`1048576 bytes`). The data is
+        compressed using .zip format.
       parameters:
         - $ref: "#/components/parameters/Accept"
         - $ref: "#/components/parameters/HarvestActivityId"
@@ -556,7 +572,8 @@ paths:
         - Layers
   /v4/layers/asPlanted:
     get:
-      description: Retrieve a list of planting activities. The id in the response is used for  GET /v4/layers/asPlanted/{activityId}/contents.
+      description: Retrieve a list of planting activities. The id in the response is
+        used for  GET /v4/layers/asPlanted/{activityId}/contents.
       parameters:
         - $ref: "#/components/parameters/Accept"
         - $ref: "#/components/parameters/X-Next-Token"
@@ -584,7 +601,12 @@ paths:
         - Layers
   "/v4/layers/asPlanted/{activityId}/contents":
     get:
-      description: Retrieve an individual planting activity by id.  Ids are retrieved via the  /layers/asPlanted route. Downloads larger than `5MiB` (`5242880 bytes`) in size, must be downloaded in chunks no larger than `5MiB` (`5242880 bytes`) and no smaller than `1MiB`  (`1048576 bytes`). The last chunk could be less than `1MiB` (`1048576 bytes`).  The data is compressed using .zip format.
+      description: Retrieve an individual planting activity by id.  Ids are retrieved
+        via the  /layers/asPlanted route. Downloads larger than `5MiB` (`5242880
+        bytes`) in size, must be downloaded in chunks no larger than `5MiB`
+        (`5242880 bytes`) and no smaller than `1MiB`  (`1048576 bytes`). The
+        last chunk could be less than `1MiB` (`1048576 bytes`).  The data is
+        compressed using .zip format.
       parameters:
         - $ref: "#/components/parameters/Accept"
         - $ref: "#/components/parameters/PlantingActivityId"
@@ -619,7 +641,8 @@ paths:
         - Layers
   /v4/layers/scoutingObservations:
     get:
-      description: Retrieve a list of scouting observations created or updated by the user identified by the Authorization header.
+      description: Retrieve a list of scouting observations created or updated by the
+        user identified by the Authorization header.
       parameters:
         - $ref: "#/components/parameters/X-Next-Token"
         - $ref: "#/components/parameters/X-Limit"
@@ -644,7 +667,8 @@ paths:
         - Layers
   "/v4/layers/scoutingObservations/{scoutingObservationId}":
     get:
-      description: Retrieve an individual scouting observation by id.  Ids are retrieved via the /layers/scoutingObservations route.
+      description: Retrieve an individual scouting observation by id.  Ids are
+        retrieved via the /layers/scoutingObservations route.
       parameters:
         - $ref: "#/components/parameters/ScoutingObservationId"
       responses:
@@ -666,7 +690,9 @@ paths:
         - Layers
   "/v4/layers/scoutingObservations/{scoutingObservationId}/attachments":
     get:
-      description: Retrieve attachments associated with a given scouting observation. Photos added to scouting notes in the FieldView app are capped to 20MB, and we won’t store photos larger than that in a scouting note.
+      description: Retrieve attachments associated with a given scouting observation.
+        Photos added to scouting notes in the FieldView app are capped to 20MB,
+        and we won’t store photos larger than that in a scouting note.
       parameters:
         - $ref: "#/components/parameters/ScoutingObservationId"
         - $ref: "#/components/parameters/X-Next-Token"
@@ -694,7 +720,12 @@ paths:
         - Layers
   "/v4/layers/scoutingObservations/{scoutingObservationId}/attachments/{attachmentId}/contents":
     get:
-      description: Photos added to scouting notes in the FieldView app are capped to `20MiB` (`20971520 bytes`), and we won’t store photos larger than that in a scouting note. Downloads larger than `5MiB` (`5242880 bytes`) in size, must be downloaded in chunks no larger than `5MiB` (`5242880 bytes`) and no smaller than `1MiB` (`1048576 bytes`). The last chunk could be less than `1MiB` (`1048576 bytes`).
+      description: Photos added to scouting notes in the FieldView app are capped to
+        `20MiB` (`20971520 bytes`), and we won’t store photos larger than that
+        in a scouting note. Downloads larger than `5MiB` (`5242880 bytes`) in
+        size, must be downloaded in chunks no larger than `5MiB` (`5242880
+        bytes`) and no smaller than `1MiB` (`1048576 bytes`). The last chunk
+        could be less than `1MiB` (`1048576 bytes`).
       parameters:
         - $ref: "#/components/parameters/Accept"
         - $ref: "#/components/parameters/ScoutingObservationId"
@@ -753,7 +784,8 @@ paths:
   /v4/uploads:
     post:
       description: >-
-        Step one in uploading a data product. The method will return an **Upload** ID which the caller will use in subsequent `PUT` requests.
+        Step one in uploading a data product. The method will return an
+        **Upload** ID which the caller will use in subsequent `PUT` requests.
 
         The following `contentTypes` may be uploaded:
             <details><summary>__image/vnd.climate.thermal.geotiff__</summary>
@@ -1086,7 +1118,12 @@ components:
       schema:
         type: string
     ContentRange:
-      description: Byte range `bytes start-end/total` (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16). e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880 bytes) in size must be downloaded in chunks no larger than 5MiB (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last chunk could be less than 1MiB (1048576 bytes).
+      description: Byte range `bytes start-end/total`
+        (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16). e.g.
+        bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880 bytes) in
+        size must be downloaded in chunks no larger than 5MiB (5242880 bytes)
+        and no smaller than 1MiB (1048576 bytes). The last chunk could be less
+        than 1MiB (1048576 bytes).
       in: header
       name: Content-Range
       required: true
@@ -1126,7 +1163,12 @@ components:
         format: uuid
         type: string
     OccurredAfter:
-      description: Optional start time by which to filter layer results. Time must be in ISO 8601 format with time zone, e.g. 2016-05-13T00:00:00Z (https://tools.ietf.org/html/rfc3339). Layers with an end time at or after (inclusive) the specified time will match this filter. If both occurredAfter and occurredBefore are populated, occurredAfter must be <= occurredBefore.
+      description: Optional start time by which to filter layer results. Time must be
+        in ISO 8601 format with time zone, e.g. 2016-05-13T00:00:00Z
+        (https://tools.ietf.org/html/rfc3339). Layers with an end time at or
+        after (inclusive) the specified time will match this filter. If both
+        occurredAfter and occurredBefore are populated, occurredAfter must be <=
+        occurredBefore.
       in: query
       name: occurredAfter
       required: false
@@ -1134,7 +1176,11 @@ components:
         format: date-time
         type: string
     OccurredBefore:
-      description: Optional end time by which to filter layer results. Time must be in ISO 8601 format with time zone, e.g. 2016-05-13T00:00:00Z (https://tools.ietf.org/html/rfc3339). Layers with a start time at or before (inclusive) the specified time. If both occurredAfter and occurredBefore are populated, occurredAfter must be <= occurredBefore.
+      description: Optional end time by which to filter layer results. Time must be in
+        ISO 8601 format with time zone, e.g. 2016-05-13T00:00:00Z
+        (https://tools.ietf.org/html/rfc3339). Layers with a start time at or
+        before (inclusive) the specified time. If both occurredAfter and
+        occurredBefore are populated, occurredAfter must be <= occurredBefore.
       in: query
       name: occurredBefore
       required: false
@@ -1149,7 +1195,9 @@ components:
       schema:
         type: string
     OptionalResourceOwnerId:
-      description: Optional unique identifier of the resource owner.  If resourceOwnerId is not specified, it defaults to the x-authenticated-user-uuid.
+      description: Optional unique identifier of the resource owner.  If
+        resourceOwnerId is not specified, it defaults to the
+        x-authenticated-user-uuid.
       in: query
       name: resourceOwnerId
       required: false
@@ -1157,7 +1205,8 @@ components:
         format: uuid
         type: string
     OptionalResourceOwnerIdList:
-      description: Optional comma-separated list of resource owner unique identifiers by which to filter results.
+      description: Optional comma-separated list of resource owner unique identifiers
+        by which to filter results.
       in: query
       name: resourceOwnerId
       required: false
@@ -1172,7 +1221,11 @@ components:
         format: uuid
         type: string
     Range:
-      description: Byte range `bytes=start-end` (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.1). e.g. bytes=0-1048576. Currently only single range value is supported. Both start and end need to be specified, end value should be greater than start and end - start should not be greater than 5MiB.
+      description: Byte range `bytes=start-end`
+        (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.1).
+        e.g. bytes=0-1048576. Currently only single range value is supported.
+        Both start and end need to be specified, end value should be greater
+        than start and end - start should not be greater than 5MiB.
       in: header
       name: Range
       required: true
@@ -1203,7 +1256,10 @@ components:
         format: uuid
         type: string
     UpdatedAfter:
-      description: Optional updated time by which to filter layer results. Time must be in ISO 8601 format with time zone, e.g. 2016-05-13T00:00:00Z (https://tools.ietf.org/html/rfc3339). Layers with a modification time at or after (inclusive) the specified time.
+      description: Optional updated time by which to filter layer results. Time must
+        be in ISO 8601 format with time zone, e.g. 2016-05-13T00:00:00Z
+        (https://tools.ietf.org/html/rfc3339). Layers with a modification time
+        at or after (inclusive) the specified time.
       in: query
       name: updatedAfter
       required: false
@@ -1219,7 +1275,8 @@ components:
         format: uuid
         type: string
     X-Limit:
-      description: Max number of results to return per batch.  Must be between 1 and 100 inclusive.  Defaults to 100.
+      description: Max number of results to return per batch.  Must be between 1 and
+        100 inclusive.  Defaults to 100.
       in: header
       name: X-Limit
       required: false
@@ -1229,14 +1286,16 @@ components:
         minimum: 1
         type: integer
     X-Next-Token:
-      description: Opaque string which allows for fetching the next batch of results.  Can be used to poll for changes.
+      description: Opaque string which allows for fetching the next batch of
+        results.  Can be used to poll for changes.
       in: header
       name: X-Next-Token
       required: false
       schema:
         type: string
     X-Recipient-Email:
-      description: Email address associated with a Climate account, used when to sending to another user.
+      description: Email address associated with a Climate account, used when to
+        sending to another user.
       in: header
       name: X-Recipient-Email
       required: false
@@ -1425,7 +1484,12 @@ components:
       description: OK
       headers:
         Content-Range:
-          description: Byte range `bytes start-end/total` (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16). e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880 bytes) in size must be downloaded in chunks no larger than 5MiB (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last chunk could be less than 1MiB (1048576 bytes).
+          description: Byte range `bytes start-end/total`
+            (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16).
+            e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880
+            bytes) in size must be downloaded in chunks no larger than 5MiB
+            (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last
+            chunk could be less than 1MiB (1048576 bytes).
           schema:
             type: string
         X-Http-Request-Id:
@@ -1440,7 +1504,12 @@ components:
       description: Partial Result
       headers:
         Content-Range:
-          description: Byte range `bytes start-end/total` (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16). e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880 bytes) in size must be downloaded in chunks no larger than 5MiB (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last chunk could be less than 1MiB (1048576 bytes).
+          description: Byte range `bytes start-end/total`
+            (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16).
+            e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880
+            bytes) in size must be downloaded in chunks no larger than 5MiB
+            (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last
+            chunk could be less than 1MiB (1048576 bytes).
           schema:
             type: string
         X-Http-Request-Id:
@@ -1547,7 +1616,12 @@ components:
       description: OK
       headers:
         Content-Range:
-          description: Byte range `bytes start-end/total` (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16). e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880 bytes) in size must be downloaded in chunks no larger than 5MiB (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last chunk could be less than 1MiB (1048576 bytes).
+          description: Byte range `bytes start-end/total`
+            (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16).
+            e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880
+            bytes) in size must be downloaded in chunks no larger than 5MiB
+            (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last
+            chunk could be less than 1MiB (1048576 bytes).
           schema:
             type: string
         X-Http-Request-Id:
@@ -1562,7 +1636,12 @@ components:
       description: Partial Result
       headers:
         Content-Range:
-          description: Byte range `bytes start-end/total` (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16). e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880 bytes) in size must be downloaded in chunks no larger than 5MiB (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last chunk could be less than 1MiB (1048576 bytes).
+          description: Byte range `bytes start-end/total`
+            (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16).
+            e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880
+            bytes) in size must be downloaded in chunks no larger than 5MiB
+            (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last
+            chunk could be less than 1MiB (1048576 bytes).
           schema:
             type: string
         X-Http-Request-Id:
@@ -1607,7 +1686,12 @@ components:
       description: OK
       headers:
         Content-Range:
-          description: Byte range `bytes start-end/total` (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16). e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880 bytes) in size must be downloaded in chunks no larger than 5MiB (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last chunk could be less than 1MiB (1048576 bytes).
+          description: Byte range `bytes start-end/total`
+            (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16).
+            e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880
+            bytes) in size must be downloaded in chunks no larger than 5MiB
+            (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last
+            chunk could be less than 1MiB (1048576 bytes).
           schema:
             type: string
         X-Http-Request-Id:
@@ -1622,7 +1706,12 @@ components:
       description: Partial Result
       headers:
         Content-Range:
-          description: Byte range `bytes start-end/total` (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16). e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880 bytes) in size must be downloaded in chunks no larger than 5MiB (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last chunk could be less than 1MiB (1048576 bytes).
+          description: Byte range `bytes start-end/total`
+            (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16).
+            e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880
+            bytes) in size must be downloaded in chunks no larger than 5MiB
+            (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last
+            chunk could be less than 1MiB (1048576 bytes).
           schema:
             type: string
         X-Http-Request-Id:
@@ -1643,7 +1732,12 @@ components:
       description: OK
       headers:
         Content-Range:
-          description: Byte range `bytes start-end/total` (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16). e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880 bytes) in size must be downloaded in chunks no larger than 5MiB (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last chunk could be less than 1MiB (1048576 bytes).
+          description: Byte range `bytes start-end/total`
+            (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16).
+            e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880
+            bytes) in size must be downloaded in chunks no larger than 5MiB
+            (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last
+            chunk could be less than 1MiB (1048576 bytes).
           schema:
             type: string
         X-Http-Request-Id:
@@ -1658,7 +1752,12 @@ components:
       description: Partial Result
       headers:
         Content-Range:
-          description: Byte range `bytes start-end/total` (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16). e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880 bytes) in size must be downloaded in chunks no larger than 5MiB (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last chunk could be less than 1MiB (1048576 bytes).
+          description: Byte range `bytes start-end/total`
+            (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16).
+            e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880
+            bytes) in size must be downloaded in chunks no larger than 5MiB
+            (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last
+            chunk could be less than 1MiB (1048576 bytes).
           schema:
             type: string
         X-Http-Request-Id:
@@ -1795,11 +1894,15 @@ components:
     ApplicationActivitySummary:
       properties:
         createdAt:
-          description: The time the application activity was created. Time in ISO 8601 format with UTC timezone, 3 fractional seconds. (https://tools.ietf.org/html/rfc3339).
+          description: The time the application activity was created. Time in ISO 8601
+            format with UTC timezone, 3 fractional seconds.
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         endTime:
-          description: The start time of the application activity. Time in ISO 8601 format with UTC timezone, 3 fractional seconds (https://tools.ietf.org/html/rfc3339).
+          description: The start time of the application activity. Time in ISO 8601 format
+            with UTC timezone, 3 fractional seconds
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         fieldIds:
@@ -1816,11 +1919,15 @@ components:
           format: int64
           type: integer
         startTime:
-          description: The start time of the application activity. Time in ISO 8601 format with UTC timezone, 3 fractional seconds (https://tools.ietf.org/html/rfc3339).
+          description: The start time of the application activity. Time in ISO 8601 format
+            with UTC timezone, 3 fractional seconds
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         updatedAt:
-          description: The time the application activity was last updated. Time in ISO 8601 format with UTC timezone, 3 fractional seconds. (https://tools.ietf.org/html/rfc3339).
+          description: The time the application activity was last updated. Time in ISO
+            8601 format with UTC timezone, 3 fractional seconds.
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
       required:
@@ -1959,7 +2066,8 @@ components:
         - name
         - type
     Field:
-      description: Logical representation of a Field with a name.  Spatial attributes of the Field are provided in the Boundary.
+      description: Logical representation of a Field with a name.  Spatial attributes
+        of the Field are provided in the Boundary.
       example:
         boundaryId: 00000000-0000-0000-0000-000000000000
         id: 00000000-0000-0000-0000-000000000000
@@ -2040,11 +2148,15 @@ components:
     HarvestActivitySummary:
       properties:
         createdAt:
-          description: The time the harvest activity was created. Time in ISO 8601 format with UTC timezone, 3 fractional seconds. (https://tools.ietf.org/html/rfc3339).
+          description: The time the harvest activity was created. Time in ISO 8601 format
+            with UTC timezone, 3 fractional seconds.
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         endTime:
-          description: The start time of the harvest activity. Time in ISO 8601 format with UTC timezone, 3 fractional seconds (https://tools.ietf.org/html/rfc3339).
+          description: The start time of the harvest activity. Time in ISO 8601 format
+            with UTC timezone, 3 fractional seconds
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         fieldIds:
@@ -2061,11 +2173,15 @@ components:
           format: int64
           type: integer
         startTime:
-          description: The start time of the harvest activity. Time in ISO 8601 format with UTC timezone, 3 fractional seconds (https://tools.ietf.org/html/rfc3339).
+          description: The start time of the harvest activity. Time in ISO 8601 format
+            with UTC timezone, 3 fractional seconds
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         updatedAt:
-          description: The time the harvest activity was last updated. Time in ISO 8601 format with UTC timezone, 3 fractional seconds. (https://tools.ietf.org/html/rfc3339).
+          description: The time the harvest activity was last updated. Time in ISO 8601
+            format with UTC timezone, 3 fractional seconds.
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
       required:
@@ -2113,11 +2229,15 @@ components:
     PlantingActivitySummary:
       properties:
         createdAt:
-          description: The time the planting activity was created. Time in ISO 8601 format with UTC timezone, 3 fractional seconds. (https://tools.ietf.org/html/rfc3339).
+          description: The time the planting activity was created. Time in ISO 8601 format
+            with UTC timezone, 3 fractional seconds.
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         endTime:
-          description: The start time of the planting activity. Time in ISO 8601 format with UTC timezone, 3 fractional seconds (https://tools.ietf.org/html/rfc3339).
+          description: The start time of the planting activity. Time in ISO 8601 format
+            with UTC timezone, 3 fractional seconds
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         fieldIds:
@@ -2134,11 +2254,15 @@ components:
           format: int64
           type: integer
         startTime:
-          description: The start time of the planting activity. Time in ISO 8601 format with UTC timezone, 3 fractional seconds (https://tools.ietf.org/html/rfc3339).
+          description: The start time of the planting activity. Time in ISO 8601 format
+            with UTC timezone, 3 fractional seconds
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         updatedAt:
-          description: The time the planting activity was last updated. Time in ISO 8601 format with UTC timezone, 3 fractional seconds. (https://tools.ietf.org/html/rfc3339).
+          description: The time the planting activity was last updated. Time in ISO 8601
+            format with UTC timezone, 3 fractional seconds.
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
       required:
@@ -2184,7 +2308,9 @@ components:
     ScoutingObservation:
       properties:
         endTime:
-          description: The start time of the scouting observation. Time in ISO 8601 format with UTC timezone, 3 fractional seconds (https://tools.ietf.org/html/rfc3339).
+          description: The start time of the scouting observation. Time in ISO 8601 format
+            with UTC timezone, 3 fractional seconds
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         fieldIds:
@@ -2200,23 +2326,15 @@ components:
           $ref: "#/components/schemas/Geometry"
           description: Where the scouting observation occurred.  GeoJson in WGS84.
         locationDisplayColor:
-          description: >
+          description: |
             Color of scouting pin assigned in the Climate FieldView app.
-
             Limited in the Ux to a set of RGB values.
-
             * #307af7
-
             * #38d753
-
             * #b037e4
-
             * #ef3e3e
-
             * #f7ec41
-
             * #ff8439
-
             * #808080
           enum:
             - "#307af7"
@@ -2231,17 +2349,21 @@ components:
           description: The text of the scouting observation. Maximum of 4000 characters.
           type: string
         startTime:
-          description: The start time of the scouting observation. Time in ISO 8601 format with UTC timezone, 3 fractional seconds (https://tools.ietf.org/html/rfc3339).
+          description: The start time of the scouting observation. Time in ISO 8601 format
+            with UTC timezone, 3 fractional seconds
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         status:
-          description: "The status of the scouting observation For example : ACTIVE, DELETED"
+          description: "The status of the scouting observation For example : ACTIVE,
+            DELETED"
           enum:
             - ACTIVE
             - DELETED
           type: string
         tags:
-          description: For example, ROCK_STONE, PONDING_WET, HAIL Maximum 20 tags allowed, 40 characters per tag.
+          description: For example, ROCK_STONE, PONDING_WET, HAIL Maximum 20 tags allowed,
+            40 characters per tag.
           items:
             $ref: "#/components/schemas/ScoutingTag"
           type: array
@@ -2252,10 +2374,14 @@ components:
             - SEASONAL
           type: string
         title:
-          description: The title or summary of the scouting observation. 40 Characters long, no emojis, and leading and trailing whitespace will be trimmed.
+          description: The title or summary of the scouting observation. 40 Characters
+            long, no emojis, and leading and trailing whitespace will be
+            trimmed.
           type: string
         updatedAt:
-          description: The time the scouting observation or any of its attachments was last updated.Time in ISO 8601 format with UTC timezone, 3 fractional seconds. (https://tools.ietf.org/html/rfc3339).
+          description: The time the scouting observation or any of its attachments was
+            last updated.Time in ISO 8601 format with UTC timezone, 3 fractional
+            seconds. (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
       required:
@@ -2292,11 +2418,9 @@ components:
             - DELETED
           type: string
         updatedAt:
-          description: >
+          description: |
             The time the attachment was last updated.
-
             Time in ISO 8601 format with UTC timezone, 3 fractional seconds.
-
             (https://tools.ietf.org/html/rfc3339)
           format: date-time
           type: string
@@ -2325,7 +2449,9 @@ components:
     ScoutingObservationSummary:
       properties:
         endTime:
-          description: The start time of the scouting observation. Time in ISO 8601 format with UTC timezone, 3 fractional seconds (https://tools.ietf.org/html/rfc3339).
+          description: The start time of the scouting observation. Time in ISO 8601 format
+            with UTC timezone, 3 fractional seconds
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         id:
@@ -2333,11 +2459,15 @@ components:
           format: uuid
           type: string
         startTime:
-          description: The start time of the scouting observation. Time in ISO 8601 format with UTC timezone, 3 fractional seconds (https://tools.ietf.org/html/rfc3339).
+          description: The start time of the scouting observation. Time in ISO 8601 format
+            with UTC timezone, 3 fractional seconds
+            (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         updatedAt:
-          description: The time the scouting observation or any of its attachments was last updated.Time in ISO 8601 format with UTC timezone, 3 fractional seconds. (https://tools.ietf.org/html/rfc3339).
+          description: The time the scouting observation or any of its attachments was
+            last updated.Time in ISO 8601 format with UTC timezone, 3 fractional
+            seconds. (https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
       required:
@@ -2366,7 +2496,8 @@ components:
       description: Client request to upload data for a user.
       properties:
         contentType:
-          description: Content type representing data being uploaded (e.g. image/vnd.climate.rgb.geotiff)
+          description: Content type representing data being uploaded (e.g.
+            image/vnd.climate.rgb.geotiff)
           enum:
             - application/vnd.climate.field.geojson
             - image/vnd.climate.thermal.geotiff
@@ -2451,7 +2582,8 @@ components:
   securitySchemes:
     api_key:
       description: >-
-        API access key used to control throttling (429 responses).  This key is typically formatted:
+        API access key used to control throttling (429 responses).  This
+        key is typically formatted:
 
         `partner-{name}-{uuid}`
       in: header
@@ -2459,7 +2591,8 @@ components:
       type: apiKey
     oauth2_authorization_code:
       description: >-
-        Log in with FieldView OAuth2 provider (Authorization Code Grant). Used to authorize the client (partner) and
+        Log in with FieldView OAuth2 provider (Authorization Code Grant).
+        Used to authorize the client (partner) and
 
         user. The *access_token* is required to be provided in the `Authorization` header on all calls to the FieldView
 

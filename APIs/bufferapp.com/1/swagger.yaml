@@ -62,7 +62,9 @@ securityDefinitions:
 paths:
   "/info/configuration{mediaTypeExtension}":
     get:
-      description: Returns an object with the current configuration that Buffer is using, including supported services, their icons and the varying limits of character and schedules.
+      description: Returns an object with the current configuration that Buffer is
+        using, including supported services, their icons and the varying limits
+        of character and schedules.
       parameters:
         - enum:
             - .json
@@ -109,51 +111,38 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
-          description: >
+          description: |
             An unknown error occurred.
   "/links/shares{mediaTypeExtension}":
     get:
-      description: Returns an object with a the numbers of shares a link has had using Buffer.
+      description: Returns an object with a the numbers of shares a link has had using
+        Buffer.
       parameters:
         - enum:
             - .json
@@ -161,7 +150,8 @@ paths:
           name: mediaTypeExtension
           required: true
           type: string
-        - description: URL-encoded URL of the page for which the number of shares is requested.
+        - description: URL-encoded URL of the page for which the number of shares is
+            requested.
           in: query
           name: url
           required: true
@@ -205,53 +195,39 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
-          description: >
+          description: |
             An unknown error occurred.
   "/profiles/{id}/schedules/update{mediaTypeExtension}":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: >
+      description: |
         "Set the posting schedules for the specified social media profile.
       parameters:
         - in: path
@@ -303,50 +279,37 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
           description: An unknown error occurred.
   "/profiles/{id}/schedules{mediaTypeExtension}":
     get:
-      description: Returns details of the posting schedules associated with a social media profile.
+      description: Returns details of the posting schedules associated with a social
+        media profile.
       parameters:
         - in: path
           name: id
@@ -397,52 +360,39 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
-          description: >
+          description: |
             An unknown error occurred.
   "/profiles/{id}/updates/pending{mediaTypeExtension}":
     get:
       description: >
-        "Returns an array of updates that are currently in the buffer for an individual social media profile.
+        "Returns an array of updates that are currently in the buffer for
+        an individual social media profile.
       parameters:
         - in: path
           name: id
@@ -454,20 +404,24 @@ paths:
           name: mediaTypeExtension
           required: true
           type: string
-        - description: Specifies the page of status updates to receive. If not specified the first page of results will be returned.
+        - description: Specifies the page of status updates to receive. If not specified
+            the first page of results will be returned.
           in: query
           name: page
           type: integer
-        - description: Specifies the number of status updates to receive. If provided, must be between 1 and 100.
+        - description: Specifies the number of status updates to receive. If provided,
+            must be between 1 and 100.
           in: query
           name: count
           type: integer
-        - description: Specifies a unix timestamp which only status updates created after this time will be retrieved.
+        - description: Specifies a unix timestamp which only status updates created after
+            this time will be retrieved.
           format: date
           in: query
           name: since
           type: string
-        - description: If utc is set times will be returned relative to UTC rather than the users associated timezone.
+        - description: If utc is set times will be returned relative to UTC rather than
+            the users associated timezone.
           in: query
           name: utc
           type: boolean
@@ -510,54 +464,41 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
-          description: >
+          description: |
             An unknown error occurred.
   "/profiles/{id}/updates/reorder{mediaTypeExtension}":
     post:
       consumes:
         - application/x-www-form-urlencoded
       description: >
-        Edit the order at which statuses for the specified social media profile will be sent out of the buffer.
+        Edit the order at which statuses for the specified social media
+        profile will be sent out of the buffer.
       parameters:
         - in: path
           name: id
@@ -608,51 +549,38 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
           description: An unknown error occurred.
   "/profiles/{id}/updates/sent{mediaTypeExtension}":
     get:
       description: >
-        Returns an array of updates that have been sent from the buffer for an individual social media profile.
+        Returns an array of updates that have been sent from the buffer for
+        an individual social media profile.
       parameters:
         - in: path
           name: id
@@ -664,20 +592,24 @@ paths:
           name: mediaTypeExtension
           required: true
           type: string
-        - description: Specifies the page of status updates to receive. If not specified the first page of results will be returned.
+        - description: Specifies the page of status updates to receive. If not specified
+            the first page of results will be returned.
           in: query
           name: page
           type: integer
-        - description: Specifies the number of status updates to receive. If provided, must be between 1 and 100.
+        - description: Specifies the number of status updates to receive. If provided,
+            must be between 1 and 100.
           in: query
           name: count
           type: integer
-        - description: Specifies a unix timestamp which only status updates created after this time will be retrieved.
+        - description: Specifies a unix timestamp which only status updates created after
+            this time will be retrieved.
           format: date
           in: query
           name: since
           type: string
-        - description: If utc is set times will be returned relative to UTC rather than the users associated timezone.
+        - description: If utc is set times will be returned relative to UTC rather than
+            the users associated timezone.
           in: query
           name: utc
           type: boolean
@@ -720,54 +652,41 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
-          description: >
+          description: |
             An unknown error occurred.
   "/profiles/{id}/updates/shuffle{mediaTypeExtension}":
     post:
       consumes:
         - application/x-www-form-urlencoded
       description: >
-        Randomize the order at which statuses for the specified social media profile will be sent out of the buffer.
+        Randomize the order at which statuses for the specified social
+        media profile will be sent out of the buffer.
       parameters:
         - in: path
           name: id
@@ -818,44 +737,30 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
           description: An unknown error occurred.
@@ -912,47 +817,33 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
-          description: >
+          description: |
             An unknown error occurred.
   "/profiles{mediaTypeExtension}":
     get:
@@ -1003,53 +894,39 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
-          description: >
+          description: |
             An unknown error occurred.
   "/updates/create{mediaTypeExtension}":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: >
+      description: |
         Create one or more new status updates.
       parameters:
         - enum:
@@ -1097,44 +974,30 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
           description: An unknown error occurred.
@@ -1191,51 +1054,38 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
           description: An unknown error occurred.
   "/updates/{id}/interactions{mediaTypeExtension}":
     get:
       description: >
-        Returns the detailed information on individual interactions with the social media update such as favorites, retweets and likes.
+        Returns the detailed information on individual interactions with
+        the social media update such as favorites, retweets and likes.
       parameters:
         - in: path
           name: id
@@ -1248,16 +1098,22 @@ paths:
           required: true
           type: string
         - description: >
-            Specifies a type of event to be retrieved, for example "retweet", "like", "comment", "mention" or "reshare". They can also be plural (e.g., "reshares"). Plurality has no effect other than visual semantics. See /info/configuration for more information on supported interaction events.
+            Specifies a type of event to be retrieved, for example "retweet",
+            "like", "comment", "mention" or "reshare". They can also be plural
+            (e.g., "reshares"). Plurality has no effect other than visual
+            semantics. See /info/configuration for more information on supported
+            interaction events.
           in: query
           name: event
           required: true
           type: string
-        - description: Specifies the page of status updates to receive. If not specified the first page of results will be returned.
+        - description: Specifies the page of status updates to receive. If not specified
+            the first page of results will be returned.
           in: query
           name: page
           type: integer
-        - description: Specifies the number of status updates to receive. If provided, must be between 1 and 100.
+        - description: Specifies the number of status updates to receive. If provided,
+            must be between 1 and 100.
           in: query
           name: count
           type: integer
@@ -1300,51 +1156,39 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
-          description: >
+          description: |
             An unknown error occurred.
   "/updates/{id}/move_to_top{mediaTypeExtension}":
     post:
-      description: Move an existing status update to the top of the queue and recalculate times for all updates in the queue. Returns the update with its new posting time.
+      description: Move an existing status update to the top of the queue and
+        recalculate times for all updates in the queue. Returns the update with
+        its new posting time.
       parameters:
         - in: path
           name: id
@@ -1395,50 +1239,37 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
           description: An unknown error occurred.
   "/updates/{id}/share{mediaTypeExtension}":
     post:
-      description: Immediately shares a single pending update and recalculates times for updates remaining in the queue.
+      description: Immediately shares a single pending update and recalculates times
+        for updates remaining in the queue.
       parameters:
         - in: path
           name: id
@@ -1489,44 +1320,30 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
           description: An unknown error occurred.
@@ -1534,7 +1351,7 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: >
+      description: |
         Edit an existing, individual status update.
       parameters:
         - in: path
@@ -1586,44 +1403,30 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
           description: An unknown error occurred.
@@ -1680,47 +1483,33 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
-          description: >
+          description: |
             An unknown error occurred.
   "/user{mediaTypeExtension}":
     get:
@@ -1771,47 +1560,33 @@ paths:
 
             1042  User did not save successfully.
         "403":
-          description: >
+          description: |
             403  Permission denied.
-
             1001  Access token required.
-
             1002  Not within application scope.
-
             1011  No authorization to access profile.
-
             1013  Profile schedule limit reached.
-
             1014  Profile limit for user has been reached.
-
             1015  Profile could not be destroyed.
-
             1021  No authorization to access update.
-
             1023  Update limit for profile has been reached.
-
             1024  Update limit for team profile has been reached.
-
             1028  Update soft limit for profile reached.
-
             1051  No authorization to access client.
         "404":
-          description: >
+          description: |
             404  Endpoint not found.
-
             1010  Profile could not be found.
-
             1020  Update could not be found.
-
             1050  Client could not be found.
         "405":
-          description: >
+          description: |
             405  Method not allowed.
         "406":
-          description: >
+          description: |
             1005  Unsupported response format.
         "500":
-          description: >
+          description: |
             An unknown error occurred.
 definitions:
   configuration:

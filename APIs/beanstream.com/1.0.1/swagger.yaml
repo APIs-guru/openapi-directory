@@ -27,7 +27,14 @@ produces:
 paths:
   /payments:
     post:
-      description: Make a payment using credit card, cash, cheque, profile, or token. Each payment type has its own json definition passed in the body. For all payments you have the standard Billing, Shipping, Comments, etc. fields that are optional. Only the amount is required along with the payment data for card, cash, cheque, profile, and token. You must change the payment_method for each payment type. Credit Card - "card", Payment Profile - "payment_profile", Legato Token - "token", Cash - "cash", Cheque - "cheque", Interac - "interac"
+      description: Make a payment using credit card, cash, cheque, profile, or token.
+        Each payment type has its own json definition passed in the body. For
+        all payments you have the standard Billing, Shipping, Comments, etc.
+        fields that are optional. Only the amount is required along with the
+        payment data for card, cash, cheque, profile, and token. You must change
+        the payment_method for each payment type. Credit Card - "card", Payment
+        Profile - "payment_profile", Legato Token - "token", Cash - "cash",
+        Cheque - "cheque", Interac - "interac"
       parameters:
         - in: body
           name: payment_request
@@ -35,7 +42,8 @@ paths:
             $ref: "#/definitions/PaymentRequest"
       responses:
         "200":
-          description: Payment response containing the payment details as well as if the payment was approved or declined.
+          description: Payment response containing the payment details as well as if the
+            payment was approved or declined.
           schema:
             $ref: "#/definitions/PaymentResponse"
         "400":
@@ -109,7 +117,9 @@ paths:
         - Payments
   "/payments/{transId}/completions":
     post:
-      description: Complete a pre-authorized payment. The amount of the transaction to complete must be less than or equal to the original pre-auth amount. Complete must be set to true.
+      description: Complete a pre-authorized payment. The amount of the transaction to
+        complete must be less than or equal to the original pre-auth amount.
+        Complete must be set to true.
       parameters:
         - description: The transaction id.
           format: double
@@ -123,7 +133,8 @@ paths:
             $ref: "#/definitions/PaymentRequest"
       responses:
         "200":
-          description: Payment response containing the payment details as well as if the transaction was approved or declined.
+          description: Payment response containing the payment details as well as if the
+            transaction was approved or declined.
           schema:
             $ref: "#/definitions/PaymentResponse"
         "400":
@@ -170,7 +181,8 @@ paths:
             $ref: "#/definitions/Return"
       responses:
         "200":
-          description: Payment response containing the payment details as well as if the transaction was approved or declined.
+          description: Payment response containing the payment details as well as if the
+            transaction was approved or declined.
           schema:
             $ref: "#/definitions/PaymentResponse"
         "400":
@@ -202,7 +214,8 @@ paths:
         - Payments
   "/payments/{transId}/void":
     post:
-      description: Void a transaction. You can void payments, returns, pre-auths, and completions. It will cancel that transaction.
+      description: Void a transaction. You can void payments, returns, pre-auths, and
+        completions. It will cancel that transaction.
       parameters:
         - description: The transaction id to void.
           format: double
@@ -217,7 +230,8 @@ paths:
             $ref: "#/definitions/Void"
       responses:
         "200":
-          description: Payment response containing the payment details as well as if the transaction was approved or declined.
+          description: Payment response containing the payment details as well as if the
+            transaction was approved or declined.
           schema:
             $ref: "#/definitions/PaymentResponse"
         "400":
@@ -249,7 +263,8 @@ paths:
         - Payments
   /profiles:
     post:
-      description: Create a new Payment Profile using either a card or a Legato token. You must supply one of them.
+      description: Create a new Payment Profile using either a card or a Legato token.
+        You must supply one of them.
       parameters:
         - in: body
           name: createProfileBody
@@ -290,7 +305,8 @@ paths:
         - Profiles
   "/profiles/{profileId}":
     delete:
-      description: Delete a Payment Profile using the profile ID, also known as the Customer Code.
+      description: Delete a Payment Profile using the profile ID, also known as the
+        Customer Code.
       parameters:
         - description: The profile id. (aka CustomerCode)
           in: path
@@ -330,7 +346,8 @@ paths:
       tags:
         - Profiles
     get:
-      description: Get a Payment Profile using the profile ID, also known as the Customer Code.
+      description: Get a Payment Profile using the profile ID, also known as the
+        Customer Code.
       parameters:
         - description: The profile id. (aka CustomerCode)
           in: path
@@ -370,7 +387,8 @@ paths:
       tags:
         - Profiles
     put:
-      description: Create a new Payment Profile using either a card or a Legato token. You must supply one of them.
+      description: Create a new Payment Profile using either a card or a Legato token.
+        You must supply one of them.
       parameters:
         - description: The profile id. (aka CustomerCode)
           in: path
@@ -456,7 +474,9 @@ paths:
       tags:
         - Profiles
     post:
-      description: Add a card to the profile. Note that there is a default limit of 1 card per profile. You can change this in your Profiles settings in the back office.
+      description: Add a card to the profile. Note that there is a default limit of 1
+        card per profile. You can change this in your Profiles settings in the
+        back office.
       parameters:
         - description: The profile id. (aka CustomerCode)
           in: path
@@ -602,7 +622,13 @@ paths:
         - Profiles
   /reports:
     post:
-      description: Query for transactions using a date range and optional search criteria. This method allows you to page your search results if you are expecting a lot of results to be returned. The page start value begins at 1. If no records are found the API will return a 404 error message. For details on the parameters and allowed values for Criteria please visit the documentation http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/
+      description: Query for transactions using a date range and optional search
+        criteria. This method allows you to page your search results if you are
+        expecting a lot of results to be returned. The page start value begins
+        at 1. If no records are found the API will return a 404 error message.
+        For details on the parameters and allowed values for Criteria please
+        visit the documentation
+        http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/
       parameters:
         - in: body
           name: search_query
@@ -642,7 +668,14 @@ paths:
         - Reporting
   /scripts/tokenization/tokens:
     post:
-      description: NOTE that the full URL for this API call is https://www.beanstream.com/scripts/tokenization/tokens. Turn a credit card into a token using this service. This helps lessen your PCI scope by not passing the credit card information to your server. Instead you turn the card number into a token in the client app, then send the token to the server. When you send the token to Beanstream to make a payment, Beanstream then looks up the card number from that token and makes the payment. Tokens can also be used to create payment profiles.
+      description: NOTE that the full URL for this API call is
+        https://www.beanstream.com/scripts/tokenization/tokens. Turn a credit
+        card into a token using this service. This helps lessen your PCI scope
+        by not passing the credit card information to your server. Instead you
+        turn the card number into a token in the client app, then send the token
+        to the server. When you send the token to Beanstream to make a payment,
+        Beanstream then looks up the card number from that token and makes the
+        payment. Tokens can also be used to create payment profiles.
       parameters:
         - in: body
           name: token_request
@@ -650,7 +683,9 @@ paths:
             $ref: "#/definitions/TokenRequest"
       responses:
         "200":
-          description: Token response object. One will always be returned even if the data or card was invalid. The validity of the card is not checked with this API call.
+          description: Token response object. One will always be returned even if the data
+            or card was invalid. The validity of the card is not checked with
+            this API call.
           schema:
             $ref: "#/definitions/TokenResponse"
       summary: Tokenize credit card
@@ -730,7 +765,8 @@ definitions:
         type: boolean
       cvd:
         default: "123"
-        description: Security code on the back of the credit card. This can be set to mandatory in the back office. digits(3 or 4)
+        description: Security code on the back of the credit card. This can be set to
+          mandatory in the back office. digits(3 or 4)
         type: string
       expiry_month:
         default: "02"
@@ -811,11 +847,14 @@ definitions:
   Criteria:
     properties:
       field:
-        description: Refer to the table on this page for the searchable fields http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/
+        description: Refer to the table on this page for the searchable fields
+          http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/
         format: integer
         type: number
       operator:
-        description: URL encoded comparators such as less than, greater than, equals... Refer to the table on this page for the full list of comparators http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/
+        description: URL encoded comparators such as less than, greater than, equals...
+          Refer to the table on this page for the full list of comparators
+          http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/
         type: string
       value:
         description: The value you want to match against.
@@ -938,7 +977,8 @@ definitions:
         type: string
       payment_profile:
         $ref: "#/definitions/ProfilePurchase"
-        description: Payment with a Payment Profile. The payment_method must be 'payment_profile'
+        description: Payment with a Payment Profile. The payment_method must be
+          'payment_profile'
       shipping:
         $ref: "#/definitions/Address"
         description: The shipping address
@@ -1003,7 +1043,8 @@ definitions:
   ProfileCards:
     properties:
       card_id:
-        description: 1-indexed card ID. Total number of cards allowed is configured in your merchant account.
+        description: 1-indexed card ID. Total number of cards allowed is configured in
+          your merchant account.
         type: string
       card_type:
         description: MC, VI etc. characters(2)
@@ -1024,7 +1065,8 @@ definitions:
     properties:
       cvd:
         default: "123"
-        description: Security code on the back of the credit card. This can be set to mandatory in the back office. digits(3)
+        description: Security code on the back of the credit card. This can be set to
+          mandatory in the back office. digits(3)
         type: string
       expiry_month:
         default: "02"
@@ -1049,7 +1091,8 @@ definitions:
   ProfileFromToken:
     properties:
       code:
-        description: The token received from the client-side tokenization service. alphanumeric(64)
+        description: The token received from the client-side tokenization service.
+          alphanumeric(64)
         type: string
       name:
         description: alphanumeric(64)
@@ -1076,7 +1119,9 @@ definitions:
   ProfilePurchase:
     properties:
       card_id:
-        description: Which credit card to use. Starts at 1 for the first card. You must configure how many cards can be stored by visiting the profile options in the back office. digits(1)
+        description: Which credit card to use. Starts at 1 for the first card. You must
+          configure how many cards can be stored by visiting the profile options
+          in the back office. digits(1)
         type: integer
       complete:
         description: Set to FALSE for pre-auth. digit(1) or boolean
@@ -1108,7 +1153,8 @@ definitions:
   Return:
     properties:
       amount:
-        description: The amount of the transaction to return. Must be less than or equal to the original purchase amount.
+        description: The amount of the transaction to return. Must be less than or equal
+          to the original purchase amount.
         format: double
         type: number
       order_number:
@@ -1124,18 +1170,23 @@ definitions:
           $ref: "#/definitions/Criteria"
         type: array
       end_date:
-        description: The end date (inclusive) '2015-04-22T10:03:19' in the timezone of your merchant account.
+        description: The end date (inclusive) '2015-04-22T10:03:19' in the timezone of
+          your merchant account.
         type: string
       end_row:
         default: 2
-        description: Used to page the results. 1-based. This should always be 1 larger than start_row.
+        description: Used to page the results. 1-based. This should always be 1 larger
+          than start_row.
         format: integer
         type: number
       name:
-        description: Only accepts 2 values. Can be either 'Search' for all fields or 'TransHistoryMinimal' for a subset of the fields returned in the results.
+        description: Only accepts 2 values. Can be either 'Search' for all fields or
+          'TransHistoryMinimal' for a subset of the fields returned in the
+          results.
         type: string
       start_date:
-        description: The start date (inclusive) '2015-04-22T10:03:19' in the timezone of your merchant account.
+        description: The start date (inclusive) '2015-04-22T10:03:19' in the timezone of
+          your merchant account.
         type: string
       start_row:
         default: 1
@@ -1273,7 +1324,8 @@ definitions:
   TokenPurchase:
     properties:
       code:
-        description: the payment token you retrieved from the Legato service. alphanumeric(36)
+        description: the payment token you retrieved from the Legato service.
+          alphanumeric(36)
         type: string
       complete:
         description: Set to FALSE for pre-auth
@@ -1287,7 +1339,8 @@ definitions:
   TokenRequest:
     properties:
       cvd:
-        description: a 3 to 4 digit representation of CVD/CDD. This is the number usually found on the back of the credit card.
+        description: a 3 to 4 digit representation of CVD/CDD. This is the number
+          usually found on the back of the credit card.
         type: string
       expiry_month:
         description: a 2 digit representation of the expiry month. For example March is 03.
@@ -1309,10 +1362,13 @@ definitions:
         description: Response code for the message. It can be ignored.
         type: string
       message:
-        description: Response message with any hints as to what might have gone wrong, if something went wrong.
+        description: Response message with any hints as to what might have gone wrong,
+          if something went wrong.
         type: string
       token:
-        description: The token representing the credit card number that you will send to Beanstream for purchases. You will always receive a token, even if the request data is wrong or the card is invalid.
+        description: The token representing the credit card number that you will send to
+          Beanstream for purchases. You will always receive a token, even if the
+          request data is wrong or the card is invalid.
         type: string
       version:
         description: Message version number. Can be ignored.
@@ -1388,7 +1444,10 @@ definitions:
   Void:
     properties:
       amount:
-        description: The amount of the transaction to void. Must be equal to the original purchase amount. You can void purchases as well as pre-auths and returns. The amount you are voiding has to match the amount of that transaction.
+        description: The amount of the transaction to void. Must be equal to the
+          original purchase amount. You can void purchases as well as pre-auths
+          and returns. The amount you are voiding has to match the amount of
+          that transaction.
         format: double
         type: number
     required:

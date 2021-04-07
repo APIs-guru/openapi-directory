@@ -6,7 +6,9 @@ info:
   contact:
     url: http://www.tvmaze.com
   description: >
-    Access to the user API is only possible for users with a [premium](http://www.tvmaze.com/premium) account. A user can only access their own user data.
+    Access to the user API is only possible for users with a
+    [premium](http://www.tvmaze.com/premium) account. A user can only access
+    their own user data.
 
 
     Authentication uses HTTP Basic. Use the TVmaze username as authentication username, and the TVmaze API key as authentication password. Your API key can be found on your [dashboard](http://www.tvmaze.com/dashboard). To try out these API calls from this page, click the "Authorize" button on top and input your credentials.
@@ -28,7 +30,8 @@ paths:
   /auth/poll:
     post:
       description: >
-        Using the token acquired in the `start` endpoint, you can start polling this endpoint once every 10 seconds.
+        Using the token acquired in the `start` endpoint, you can start
+        polling this endpoint once every 10 seconds.
 
 
         When the user has confirmed the authentication request on their end, this endpoint will return the user's API key that you can use in subsequent authenticated endpoints. Note that it'll do so only once, subsequent requests after the initial 200 response will return a 404.
@@ -70,7 +73,8 @@ paths:
   /auth/start:
     post:
       description: >
-        If you want to access the TVmaze API on behalf of a user without querying them for their password, use this endpoint.
+        If you want to access the TVmaze API on behalf of a user without
+        querying them for their password, use this endpoint.
 
 
         To get started, send a POST request containing the user's email address. The response will contain a `token`, which you can use as input to the `poll` endpoint. The user will receive an email prompting them to confirm the authentication request.
@@ -116,7 +120,8 @@ paths:
         - auth
   /auth/validate:
     get:
-      description: If the credentials supplied as HTTP basic are valid, the user's level of premium - if any - is returned.
+      description: If the credentials supplied as HTTP basic are valid, the user's
+        level of premium - if any - is returned.
       responses:
         "200":
           content:
@@ -124,7 +129,8 @@ paths:
               schema:
                 properties:
                   premium:
-                    description: The user's premium level; 1 for Bronze, 2 for Silver, 3 for Gold; or 0 for none
+                    description: The user's premium level; 1 for Bronze, 2 for Silver, 3 for Gold;
+                      or 0 for none
                     type: integer
                 type: object
           description: The supplied credentials are valid
@@ -146,7 +152,8 @@ paths:
                     description: The TVmaze episode ID
                     type: integer
                   marked_at:
-                    description: Epoch timestamp for when the user watched the episode, or 0 for unknown.
+                    description: Epoch timestamp for when the user watched the episode, or 0 for
+                      unknown.
                     type: integer
                   type:
                     $ref: "#/components/schemas/MarkType"
@@ -202,7 +209,9 @@ paths:
   /scrobble/shows:
     post:
       description: >
-        To specify a show, supply either `tvmaze_id`, `thetvdb_id` or `imdb_id`. To specify an episode, supply either both `season` and `episode`, or `airdate`.
+        To specify a show, supply either `tvmaze_id`, `thetvdb_id` or
+        `imdb_id`. To specify an episode, supply either both `season` and
+        `episode`, or `airdate`.
 
 
         This endpoint can be used by all users, even without premium.
@@ -236,7 +245,8 @@ paths:
                     description: The episode number
                     type: integer
                   marked_at:
-                    description: Epoch timestamp for when the user watched the episode, or 0 for unknown.
+                    description: Epoch timestamp for when the user watched the episode, or 0 for
+                      unknown.
                     type: integer
                   season:
                     description: The season number
@@ -264,7 +274,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/BulkResponse"
           description: None of the episodes were succesfully marked
-      summary: Mark episodes within a show as acquired or watched based on their attributes
+      summary: Mark episodes within a show as acquired or watched based on their
+        attributes
       tags:
         - scrobbling
   "/scrobble/shows/{show_id}":
@@ -963,7 +974,8 @@ components:
           readOnly: true
           type: integer
         marked_at:
-          description: Epoch timestamp for when the user watched the episode, or 0 for unknown.
+          description: Epoch timestamp for when the user watched the episode, or 0 for
+            unknown.
           type: integer
         type:
           $ref: "#/components/schemas/MarkType"

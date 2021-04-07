@@ -5,7 +5,8 @@ host: app.apacta.com
 basePath: /api/v1
 info:
   description: >-
-    API for a tool to craftsmen used to register working hours, material usage and quality assurance.    
+    API for a tool to craftsmen used to register working hours,
+    material usage and quality assurance.    
 
     # Endpoint
 
@@ -273,6 +274,7 @@ info:
 
 
 
+
       
     ```
   title: Apacta
@@ -297,7 +299,8 @@ securityDefinitions:
     name: X-Auth-Token
     type: apiKey
   api_key:
-    description: Uses the user's API token found from within the control panel in "settings" -> "additional settings"
+    description: Uses the user's API token found from within the control panel in
+      "settings" -> "additional settings"
     in: query
     name: api_token
     type: apiKey
@@ -795,7 +798,8 @@ paths:
                 maxLength: 255
                 type: string
               erp_id:
-                description: If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact
+                description: If company has integration to an ERP system, and the contacts are
+                  synchronized, this will be the ERP-systems ID of this contact
                 maxLength: 255
                 type: string
               name:
@@ -920,7 +924,8 @@ paths:
                 maxLength: 255
                 type: string
               erp_id:
-                description: If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact
+                description: If company has integration to an ERP system, and the contacts are
+                  synchronized, this will be the ERP-systems ID of this contact
                 maxLength: 255
                 type: string
               name:
@@ -1812,19 +1817,22 @@ paths:
   /forms:
     get:
       parameters:
-        - description: Used to have extended details from the forms from the `Form`'s `FormFields`
+        - description: Used to have extended details from the forms from the `Form`'s
+            `FormFields`
           enum:
             - true
             - false
           in: query
           name: extended
           type: string
-        - description: Used in conjunction with `date_to` to only show forms within these dates - format like `2016-28-05`
+        - description: Used in conjunction with `date_to` to only show forms within these
+            dates - format like `2016-28-05`
           format: Y-m-d
           in: query
           name: date_from
           type: string
-        - description: Used in conjunction with `date_from` to only show forms within these dates - format like `2016-28-30`
+        - description: Used in conjunction with `date_from` to only show forms within
+            these dates - format like `2016-28-30`
           format: Y-m-d
           in: query
           name: date_to
@@ -3272,7 +3280,8 @@ paths:
           name: project_status_id
           type: string
         - collectionFormat: csv
-          description: Used to filter on the `project_status_id` of the projects (match any of the provided values)
+          description: Used to filter on the `project_status_id` of the projects (match
+            any of the provided values)
           in: query
           items:
             format: uuid
@@ -3607,7 +3616,8 @@ paths:
         - Projects
   "/projects/{project_id}/project_files":
     get:
-      description: Returns files belonging to the project, not uploaded from wall post or form
+      description: Returns files belonging to the project, not uploaded from wall post
+        or form
       parameters:
         - in: path
           name: project_id
@@ -4087,7 +4097,8 @@ paths:
                 format: uuid
                 type: string
               sum:
-                description: Amount of seconds - should only be included when using is_all_day, otherwise will be calculated from from_time and to_time
+                description: Amount of seconds - should only be included when using is_all_day,
+                  otherwise will be calculated from from_time and to_time
                 format: int32
                 type: integer
               time_entry_type_id:
@@ -4574,7 +4585,8 @@ paths:
                 maxLength: 8
                 type: string
               receive_form_mails:
-                description: If `true` the employee will receive an email receipt of every form submitted
+                description: If `true` the employee will receive an email receipt of every form
+                  submitted
                 type: boolean
               sale_price:
                 description: The price this employee costs per hour when working
@@ -5073,7 +5085,8 @@ definitions:
         format: uuid
         type: string
       company_id:
-        description: Only filled out if this represents another company within Apacta (used for partners)
+        description: Only filled out if this represents another company within Apacta
+          (used for partners)
         format: uuid
         type: string
       created:
@@ -5094,7 +5107,8 @@ definitions:
         maxLength: 255
         type: string
       erp_id:
-        description: If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact
+        description: If company has integration to an ERP system, and the contacts are
+          synchronized, this will be the ERP-systems ID of this contact
         maxLength: 255
         type: string
       id:
@@ -5196,7 +5210,8 @@ definitions:
             description: The amount of validation errors
             type: integer
           errors:
-            description: Object that contains details information about which properties failed validation and what rules they failed.
+            description: Object that contains details information about which properties
+              failed validation and what rules they failed.
             type: object
           message:
             default: A validation error occurred
@@ -6186,7 +6201,8 @@ definitions:
         maxLength: 8
         type: string
       receive_form_mails:
-        description: If `true` the employee will receive an email receipt of every form submitted
+        description: If `true` the employee will receive an email receipt of every form
+          submitted
         type: boolean
       sale_price:
         description: The price this employee costs per hour when working

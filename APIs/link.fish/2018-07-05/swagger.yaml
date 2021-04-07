@@ -163,7 +163,8 @@ paths:
         - application/json
         - application/xml
       description: >
-        Visits the URL and checks if there are mobile apps on them and returns the found ones.
+        Visits the URL and checks if there are mobile apps on them and
+        returns the found ones.
 
 
         Will by default return the app identifiers and not the full URL to the apps. To return URLs instead set the parameter "return_urls" to true.
@@ -195,7 +196,8 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: If the page should be fully rendered with a browser to extract data. The request will then cost 5 credits instead of 1!
+          description: If the page should be fully rendered with a browser to extract
+            data. The request will then cost 5 credits instead of 1!
           in: query
           name: browser_render
           type: boolean
@@ -208,7 +210,8 @@ paths:
           schema:
             $ref: "#/definitions/Apps"
         "400":
-          description: Bad Request - Request was unacceptable. Normally because of missing required parameters or invalid data.
+          description: Bad Request - Request was unacceptable. Normally because of missing
+            required parameters or invalid data.
           schema:
             $ref: "#/definitions/ApiResponsError"
         "401":
@@ -234,9 +237,8 @@ paths:
         - REST-Endpoints
       x-code-samples:
         - lang: Node.js
-          source: >-
+          source: |-
             var rp = require('request-promise');
-
 
             var options = {
               method: 'GET',
@@ -251,7 +253,6 @@ paths:
               json: true
             };
 
-
             rp(options)
               .then(function (data) {
                 // Request succeeded
@@ -262,18 +263,20 @@ paths:
                 console.log(err.statusCode + ': ' + err.error);
               });
         - lang: Curl
-          source: >-
+          source: |-
             curl https://api.link.fish/Urls/apps \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
               -d url="https://example.com"
-      x-explorer-description: Visits the URL and checks if there are mobile apps on them and returns the found ones.
+      x-explorer-description: Visits the URL and checks if there are mobile apps on
+        them and returns the found ones.
   /Urls/browser-data:
     get:
       consumes:
         - application/json
         - application/xml
-      description: Visits the URL with a full browser and extracts the data. This request costs 5 credits.
+      description: Visits the URL with a full browser and extracts the data. This
+        request costs 5 credits.
       parameters:
         - description: The URL of the website to query
           in: query
@@ -281,7 +284,8 @@ paths:
           required: true
           type: string
         - default: normal
-          description: If the items should be return "normal" with multiple levels or "flat" with just one level and linked instead.
+          description: If the items should be return "normal" with multiple levels or
+            "flat" with just one level and linked instead.
           enum:
             - normal
             - flat
@@ -289,7 +293,10 @@ paths:
           name: item_format
           type: string
         - default: false
-          description: Some types like "PropertyValue" do save key and value in separate properties which makes the data harder to process. If this option gets set it converts them automatically into the regular key -> value format.
+          description: Some types like "PropertyValue" do save key and value in separate
+            properties which makes the data harder to process. If this option
+            gets set it converts them automatically into the regular key ->
+            value format.
           in: query
           name: simplify_special_types
           type: boolean
@@ -299,7 +306,9 @@ paths:
           name: include_raw_html
           type: boolean
         - default: none
-          description: If and what kind of screenshot should be returned. Do only request screenshot generation when really needed because it will increase the response time significantly.
+          description: If and what kind of screenshot should be returned. Do only request
+            screenshot generation when really needed because it will increase
+            the response time significantly.
           enum:
             - none
             - normal
@@ -331,7 +340,8 @@ paths:
           schema:
             $ref: "#/definitions/UrlBrowser"
         "400":
-          description: Bad Request - Request was unacceptable. Normally because of missing required parameters or invalid data.
+          description: Bad Request - Request was unacceptable. Normally because of missing
+            required parameters or invalid data.
           schema:
             $ref: "#/definitions/ApiResponsError"
         "401":
@@ -388,7 +398,7 @@ paths:
                 console.log(err.statusCode + ': ' + err.error);
               });
         - lang: Curl
-          source: >-
+          source: |-
             curl https://api.link.fish/Urls/browser-data \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
@@ -398,7 +408,8 @@ paths:
       consumes:
         - application/json
         - application/xml
-      description: Visits the URL with full browser and creates a screenshot. This request costs 5 credits.
+      description: Visits the URL with full browser and creates a screenshot. This
+        request costs 5 credits.
       parameters:
         - description: The URL of the website to create screenshot of
           in: query
@@ -406,7 +417,8 @@ paths:
           required: true
           type: string
         - default: normal
-          description: What kind of screenshot should be returned. If it should be a regular 16:9 screenshot or one with the full page height
+          description: What kind of screenshot should be returned. If it should be a
+            regular 16:9 screenshot or one with the full page height
           enum:
             - normal
             - full
@@ -435,7 +447,8 @@ paths:
         "200":
           description: OK - Successful Request
         "400":
-          description: Bad Request - Request was unacceptable. Normally because of missing required parameters or invalid data.
+          description: Bad Request - Request was unacceptable. Normally because of missing
+            required parameters or invalid data.
           schema:
             $ref: "#/definitions/ApiResponsError"
         "401":
@@ -487,7 +500,7 @@ paths:
               }
             });
         - lang: Curl
-          source: >-
+          source: |-
             curl https://api.link.fish/Urls/browser-screenshot \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
@@ -506,7 +519,8 @@ paths:
           required: true
           type: string
         - default: normal
-          description: If the items should be return "normal" with multiple levels or "flat" with just one level and linked instead.
+          description: If the items should be return "normal" with multiple levels or
+            "flat" with just one level and linked instead.
           enum:
             - normal
             - flat
@@ -514,7 +528,10 @@ paths:
           name: item_format
           type: string
         - default: false
-          description: Some types like "PropertyValue" do save key and value in separate properties which makes the data harder to process. If this option gets set it converts them automatically into the regular key -> value format.
+          description: Some types like "PropertyValue" do save key and value in separate
+            properties which makes the data harder to process. If this option
+            gets set it converts them automatically into the regular key ->
+            value format.
           in: query
           name: simplify_special_types
           type: boolean
@@ -524,7 +541,8 @@ paths:
           name: include_raw_html
           type: boolean
         - default: false
-          description: If the page should be fully rendered with a browser to extract data. The request will then cost 5 credits instead of 1!
+          description: If the page should be fully rendered with a browser to extract
+            data. The request will then cost 5 credits instead of 1!
           in: query
           name: browser_render
           type: boolean
@@ -537,7 +555,8 @@ paths:
           schema:
             $ref: "#/definitions/Url"
         "400":
-          description: Bad Request - Request was unacceptable. Normally because of missing required parameters or invalid data.
+          description: Bad Request - Request was unacceptable. Normally because of missing
+            required parameters or invalid data.
           schema:
             $ref: "#/definitions/ApiResponsError"
         "401":
@@ -563,9 +582,8 @@ paths:
         - REST-Endpoints
       x-code-samples:
         - lang: Node.js
-          source: >-
+          source: |-
             var rp = require('request-promise');
-
 
             var options = {
               method: 'GET',
@@ -580,7 +598,6 @@ paths:
               json: true
             };
 
-
             rp(options)
               .then(function (data) {
                 // Request succeeded
@@ -591,7 +608,7 @@ paths:
                 console.log(err.statusCode + ': ' + err.error);
               });
         - lang: Curl
-          source: >-
+          source: |-
             curl https://api.link.fish/Urls/data \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
@@ -617,7 +634,8 @@ paths:
           schema:
             $ref: "#/definitions/DataRaw"
         "400":
-          description: Bad Request - Request was unacceptable. Normally because of missing required parameters or invalid data.
+          description: Bad Request - Request was unacceptable. Normally because of missing
+            required parameters or invalid data.
           schema:
             $ref: "#/definitions/ApiResponsError"
         "401":
@@ -643,9 +661,8 @@ paths:
         - REST-Endpoints
       x-code-samples:
         - lang: Node.js
-          source: >-
+          source: |-
             var rp = require('request-promise');
-
 
             var options = {
               method: 'GET',
@@ -660,7 +677,6 @@ paths:
               json: true
             };
 
-
             rp(options)
               .then(function (data) {
                 // Request succeeded
@@ -671,7 +687,7 @@ paths:
                 console.log(err.statusCode + ': ' + err.error);
               });
         - lang: Curl
-          source: >-
+          source: |-
             curl https://api.link.fish/Urls/data-raw \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
@@ -694,7 +710,8 @@ paths:
           required: false
           type: string
         - default: false
-          description: If the page should be fully rendered with a browser to extract data. The request will then cost 5 credits instead of 1!
+          description: If the page should be fully rendered with a browser to extract
+            data. The request will then cost 5 credits instead of 1!
           in: query
           name: browser_render
           type: boolean
@@ -707,7 +724,8 @@ paths:
           schema:
             $ref: "#/definitions/DataTabular"
         "400":
-          description: Bad Request - Request was unacceptable. Normally because of missing required parameters or invalid data.
+          description: Bad Request - Request was unacceptable. Normally because of missing
+            required parameters or invalid data.
           schema:
             $ref: "#/definitions/ApiResponsError"
         "401":
@@ -733,9 +751,8 @@ paths:
         - REST-Endpoints
       x-code-samples:
         - lang: Node.js
-          source: >-
+          source: |-
             var rp = require('request-promise');
-
 
             var options = {
               method: 'GET',
@@ -750,7 +767,6 @@ paths:
               json: true
             };
 
-
             rp(options)
               .then(function (data) {
                 // Request succeeded
@@ -761,7 +777,7 @@ paths:
                 console.log(err.statusCode + ': ' + err.error);
               });
         - lang: Curl
-          source: >-
+          source: |-
             curl https://api.link.fish/Urls/data-tabular \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
@@ -772,7 +788,8 @@ paths:
         - application/json
         - application/xml
       description: >-
-        Visits the URL and checks if there are Geo Coordinates on them and returns the found ones.
+        Visits the URL and checks if there are Geo Coordinates on them and
+        returns the found ones.
 
 
         Properties only get set when a value for both latitude and longitude have been found. That means that if no geo coordinates have been found only the property "url" will be set.
@@ -783,7 +800,8 @@ paths:
           required: true
           type: string
         - default: false
-          description: If the page should be fully rendered with a browser to extract data. The request will then cost 5 credits instead of 1!
+          description: If the page should be fully rendered with a browser to extract
+            data. The request will then cost 5 credits instead of 1!
           in: query
           name: browser_render
           type: boolean
@@ -796,7 +814,8 @@ paths:
           schema:
             $ref: "#/definitions/GeoCoordinates"
         "400":
-          description: Bad Request - Request was unacceptable. Normally because of missing required parameters or invalid data.
+          description: Bad Request - Request was unacceptable. Normally because of missing
+            required parameters or invalid data.
           schema:
             $ref: "#/definitions/ApiResponsError"
         "401":
@@ -822,9 +841,8 @@ paths:
         - REST-Endpoints
       x-code-samples:
         - lang: Node.js
-          source: >-
+          source: |-
             var rp = require('request-promise');
-
 
             var options = {
               method: 'GET',
@@ -839,7 +857,6 @@ paths:
               json: true
             };
 
-
             rp(options)
               .then(function (data) {
                 // Request succeeded
@@ -850,19 +867,21 @@ paths:
                 console.log(err.statusCode + ': ' + err.error);
               });
         - lang: Curl
-          source: >-
+          source: |-
             curl https://api.link.fish/Urls/geo-coordinates \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
               -d url="https://example.com"
-      x-explorer-description: Visits the URL and checks if there are Geo Coordinates on them and returns the found ones.
+      x-explorer-description: Visits the URL and checks if there are Geo Coordinates
+        on them and returns the found ones.
   /Urls/social-media:
     get:
       consumes:
         - application/json
         - application/xml
       description: >
-        Visits the URL and checks if there are any social media accounts and returns the found ones.
+        Visits the URL and checks if there are any social media accounts
+        and returns the found ones.
 
 
         Will by default return the account identifiers and not the full URL to the profiles. To return URLs instead set the parameter "return_urls" to true.
@@ -906,7 +925,8 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: If the page should be fully rendered with a browser to extract data. The request will then cost 5 credits instead of 1!
+          description: If the page should be fully rendered with a browser to extract
+            data. The request will then cost 5 credits instead of 1!
           in: query
           name: browser_render
           type: boolean
@@ -919,7 +939,8 @@ paths:
           schema:
             $ref: "#/definitions/SocialMedia"
         "400":
-          description: Bad Request - Request was unacceptable. Normally because of missing required parameters or invalid data.
+          description: Bad Request - Request was unacceptable. Normally because of missing
+            required parameters or invalid data.
           schema:
             $ref: "#/definitions/ApiResponsError"
         "401":
@@ -945,9 +966,8 @@ paths:
         - REST-Endpoints
       x-code-samples:
         - lang: Node.js
-          source: >-
+          source: |-
             var rp = require('request-promise');
-
 
             var options = {
               method: 'GET',
@@ -962,7 +982,6 @@ paths:
               json: true
             };
 
-
             rp(options)
               .then(function (data) {
                 // Request succeeded
@@ -973,12 +992,13 @@ paths:
                 console.log(err.statusCode + ': ' + err.error);
               });
         - lang: Curl
-          source: >-
+          source: |-
             curl https://api.link.fish/Urls/social-media \
               -X GET \
               -u "{EMAIL}:{API-TOKEN}" \
               -d url="https://example.com"
-      x-explorer-description: l Visits the URL and checks if there are any social media accounts and returns the found ones.
+      x-explorer-description: l Visits the URL and checks if there are any social
+        media accounts and returns the found ones.
 definitions:
   ApiResponsError:
     discriminator: type
@@ -1004,7 +1024,8 @@ definitions:
         example: "1234567890"
         type: string
       url:
-        description: The url of the website. Can be different to requested one if there were redirects
+        description: The url of the website. Can be different to requested one if there
+          were redirects
         example: http://example.com/product_1.html
         type: string
     required:
@@ -1026,7 +1047,8 @@ definitions:
         example: "200"
         type: string
       url:
-        description: The url of the website. Can be different to requested one if there were redirects
+        description: The url of the website. Can be different to requested one if there
+          were redirects
         example: http://example.com/data.xml
         type: string
     required:
@@ -1055,7 +1077,8 @@ definitions:
         example: "200"
         type: string
       url:
-        description: The url of the website. Can be different to requested one if there were redirects
+        description: The url of the website. Can be different to requested one if there
+          were redirects
         example: http://example.com
         type: string
     required:
@@ -1074,7 +1097,8 @@ definitions:
         example: 13.38
         type: number
       url:
-        description: The url of the website. Can be different to requested one if there were redirects
+        description: The url of the website. Can be different to requested one if there
+          were redirects
         example: http://example.com/product_1.html
         type: string
     required:
@@ -1101,7 +1125,8 @@ definitions:
         example: linkfish_
         type: string
       url:
-        description: The url of the website. Can be different to requested one if there were redirects
+        description: The url of the website. Can be different to requested one if there
+          were redirects
         example: http://example.com/product_1.html
         type: string
     required:
@@ -1122,7 +1147,8 @@ definitions:
                 example: US
                 type: string
               language:
-                description: The language of website. Recognized by header information if supplied or text analysis.
+                description: The language of website. Recognized by header information if
+                  supplied or text analysis.
                 example: en
                 type: string
             type: object
@@ -1134,7 +1160,8 @@ definitions:
       items:
         description: The found data items on the website.
         items:
-          description: The properties depend on the type of the item. The field "@type" exists for all.
+          description: The properties depend on the type of the item. The field "@type"
+            exists for all.
           properties:
             "@type":
               description: The item type
@@ -1151,7 +1178,8 @@ definitions:
         example: Product 1 - Online Shop - example.com
         type: string
       url:
-        description: The url of the website. Can be different to requested one if there were redirects
+        description: The url of the website. Can be different to requested one if there
+          were redirects
         example: http://example.com/product_1.html
         type: string
     required:
@@ -1172,7 +1200,8 @@ definitions:
                 example: US
                 type: string
               language:
-                description: The language of website. Recognized by header information if supplied or text analysis.
+                description: The language of website. Recognized by header information if
+                  supplied or text analysis.
                 example: en
                 type: string
             type: object
@@ -1184,7 +1213,8 @@ definitions:
       items:
         description: The found data items on the website.
         items:
-          description: The properties depend on the type of the item. The field "@type" exists for all.
+          description: The properties depend on the type of the item. The field "@type"
+            exists for all.
           properties:
             "@type":
               description: The item type
@@ -1206,7 +1236,8 @@ definitions:
         example: Product 1 - Online Shop - example.com
         type: string
       url:
-        description: The url of the website. Can be different to requested one if there were redirects
+        description: The url of the website. Can be different to requested one if there
+          were redirects
         example: http://example.com/product_1.html
         type: string
     required:

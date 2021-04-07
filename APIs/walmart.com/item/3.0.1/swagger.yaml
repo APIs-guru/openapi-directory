@@ -7,7 +7,9 @@ info:
   contact:
     name: partnerapis@walmartlabs.com
     x-twitter: Walmart
-  description: Please make sure you use the correct version of the APIs for your use case. To find out the appropriate version, go to the API Docs  drop down on the menu.
+  description: Please make sure you use the correct version of the APIs for your
+    use case. To find out the appropriate version, go to the API Docs  drop down
+    on the menu.
   title: Item API
   version: 3.0.1
   x-apisguru-categories:
@@ -28,7 +30,8 @@ paths:
     get:
       consumes:
         - application/xml
-      description: You can display the status of an item within a feed. Use the feed ID returned from the upload an item API.
+      description: You can display the status of an item within a feed. Use the feed
+        ID returned from the upload an item API.
       operationId: v2getFeedItemStatus
       parameters:
         - description: The feed ID.
@@ -37,19 +40,25 @@ paths:
           required: false
           type: string
         - default: "false"
-          description: Includes the status details for each item in the feed. Do not set this parameter to true as discrepancies may appear between the header and the item details (the item details may be incorrect). Instead, use the Get a feedItems status.
+          description: Includes the status details for each item in the feed. Do not set
+            this parameter to true as discrepancies may appear between the
+            header and the item details (the item details may be incorrect).
+            Instead, use the Get a feedItems status.
           in: query
           name: includeDetails
           required: false
           type: string
         - default: "0"
-          description: The object response to start with, where 0 is the first entity that can be requested. It can only be used when includeDetails is set to true.
+          description: The object response to start with, where 0 is the first entity that
+            can be requested. It can only be used when includeDetails is set to
+            true.
           in: query
           name: offset
           required: false
           type: string
         - default: "50"
-          description: The number of items to be returned. Cannot be more than 50 items. Use it only when the includeDetails is set to true.
+          description: The number of items to be returned. Cannot be more than 50 items.
+            Use it only when the includeDetails is set to true.
           in: query
           name: limit
           required: false
@@ -102,7 +111,9 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: You can upload an item feed. If the feed successfully processed, it returns a feed ID. Use the returned feed ID to retrieve a feed status. You need your Consumer ID and the Private Key to upload an item.
+      description: You can upload an item feed. If the feed successfully processed, it
+        returns a feed ID. Use the returned feed ID to retrieve a feed status.
+        You need your Consumer ID and the Private Key to upload an item.
       operationId: v2doPostMultiPart
       parameters:
         - default: item
@@ -167,7 +178,8 @@ paths:
     get:
       consumes:
         - application/xml
-      description: You can display the status of all items within a feed. Use the feed ID returned from the upload an item API.
+      description: You can display the status of all items within a feed. Use the feed
+        ID returned from the upload an item API.
       operationId: v2getAllItemsStatus
       parameters:
         - description: The feed ID
@@ -176,19 +188,23 @@ paths:
           required: true
           type: string
         - default: "false"
-          description: Includes details of each entity in the feed. Do not set this parameter to true.
+          description: Includes details of each entity in the feed. Do not set this
+            parameter to true.
           in: query
           name: includeDetails
           required: false
           type: string
         - default: "0"
-          description: The object response to start with, where 0 is the first entity that can be requested. It can only be used when includeDetails is set to true.
+          description: The object response to start with, where 0 is the first entity that
+            can be requested. It can only be used when includeDetails is set to
+            true.
           in: query
           name: offset
           required: false
           type: string
         - default: "50"
-          description: The number of entities to be returned. It cannot be more than 50 entities. Use it only when the includeDetails is set to true.
+          description: The number of entities to be returned. It cannot be more than 50
+            entities. Use it only when the includeDetails is set to true.
           in: query
           name: limit
           required: false
@@ -242,7 +258,8 @@ paths:
     get:
       consumes:
         - application/xml
-      description: You can display the status of an item within a feed. Use the feed ID returned from the upload an item API.
+      description: You can display the status of an item within a feed. Use the feed
+        ID returned from the upload an item API.
       operationId: v3getFeedItemStatus
       parameters:
         - description: The feed ID.
@@ -251,19 +268,25 @@ paths:
           required: false
           type: string
         - default: "false"
-          description: Includes the status details for each item in the feed. Do not set this parameter to true as discrepancies may appear between the header and the item details (the item details may be incorrect). Instead, use the Get a feedItems status.
+          description: Includes the status details for each item in the feed. Do not set
+            this parameter to true as discrepancies may appear between the
+            header and the item details (the item details may be incorrect).
+            Instead, use the Get a feedItems status.
           in: query
           name: includeDetails
           required: false
           type: string
         - default: "0"
-          description: The object response to start with, where 0 is the first entity that can be requested. It can only be used when includeDetails is set to true.
+          description: The object response to start with, where 0 is the first entity that
+            can be requested. It can only be used when includeDetails is set to
+            true.
           in: query
           name: offset
           required: false
           type: string
         - default: "50"
-          description: The number of items to be returned. Cannot be more than 50 items. Use it only when the includeDetails is set to true.
+          description: The number of items to be returned. Cannot be more than 50 items.
+            Use it only when the includeDetails is set to true.
           in: query
           name: limit
           required: false
@@ -316,7 +339,9 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: You can upload an item feed. If the feed successfully processed, it returns a feed ID. Use the returned feed ID to retrieve a feed status. You need your Consumer ID and the Private Key to upload an item.
+      description: You can upload an item feed. If the feed successfully processed, it
+        returns a feed ID. Use the returned feed ID to retrieve a feed status.
+        You need your Consumer ID and the Private Key to upload an item.
       operationId: v3doPostMultiPart
       parameters:
         - default: item
@@ -383,7 +408,8 @@ paths:
     get:
       consumes:
         - application/xml
-      description: You can display the status of all items within a feed. Use the feed ID returned from the upload an item API.
+      description: You can display the status of all items within a feed. Use the feed
+        ID returned from the upload an item API.
       operationId: v3getAllItemsStatus
       parameters:
         - description: The feed ID
@@ -392,19 +418,23 @@ paths:
           required: true
           type: string
         - default: "false"
-          description: Includes details of each entity in the feed. Do not set this parameter to true.
+          description: Includes details of each entity in the feed. Do not set this
+            parameter to true.
           in: query
           name: includeDetails
           required: false
           type: string
         - default: "0"
-          description: The object response to start with, where 0 is the first entity that can be requested. It can only be used when includeDetails is set to true.
+          description: The object response to start with, where 0 is the first entity that
+            can be requested. It can only be used when includeDetails is set to
+            true.
           in: query
           name: offset
           required: false
           type: string
         - default: "50"
-          description: The number of entities to be returned. It cannot be more than 50 entities. Use it only when the includeDetails is set to true.
+          description: The number of entities to be returned. It cannot be more than 50
+            entities. Use it only when the includeDetails is set to true.
           in: query
           name: limit
           required: false

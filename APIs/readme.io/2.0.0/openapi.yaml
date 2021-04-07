@@ -2,7 +2,8 @@ openapi: 3.0.2
 servers:
   - url: https://dash.readme.io/api/v1
 info:
-  description: Create beautiful product and API documentation with our developer friendly platform.
+  description: Create beautiful product and API documentation with our developer
+    friendly platform.
   title: API Endpoints
   version: 2.0.0
   x-apisguru-categories:
@@ -46,7 +47,9 @@ paths:
       tags:
         - API Specification
     post:
-      description: Upload an API specification to ReadMe. Or, to use a newer solution see https://docs.readme.com/guides/docs/automatically-sync-api-specification-with-github
+      description: Upload an API specification to ReadMe. Or, to use a newer solution
+        see
+        https://docs.readme.com/guides/docs/automatically-sync-api-specification-with-github
       operationId: uploadAPISpecification
       parameters:
         - $ref: "#/components/parameters/x-readme-version"
@@ -75,7 +78,8 @@ paths:
       description: Delete an API specification in ReadMe
       operationId: deleteAPISpecification
       parameters:
-        - description: ID of the API specification. The unique ID for each API can be found by navigating to your **API Definitions** page.
+        - description: ID of the API specification. The unique ID for each API can be
+            found by navigating to your **API Definitions** page.
           in: path
           name: id
           required: true
@@ -94,7 +98,8 @@ paths:
       description: Update an API specification in ReadMe
       operationId: updateAPISpecification
       parameters:
-        - description: ID of the API specification. The unique ID for each API can be found by navigating to your **API Definitions** page.
+        - description: ID of the API specification. The unique ID for each API can be
+            found by navigating to your **API Definitions** page.
           in: path
           name: id
           required: true
@@ -127,7 +132,9 @@ paths:
       description: Returns the category with this slug
       operationId: getCategory
       parameters:
-        - description: Slug of category. Slugs must be all lowercase, and replace spaces with hyphens. For example, for the the category "Getting Started", enter the slug "getting-started"
+        - description: Slug of category. Slugs must be all lowercase, and replace spaces
+            with hyphens. For example, for the the category "Getting Started",
+            enter the slug "getting-started"
           example: getting-started
           in: path
           name: slug
@@ -150,7 +157,9 @@ paths:
       description: Returns the docs and children docs within this category
       operationId: getCategoryDocs
       parameters:
-        - description: Slug of category. Slugs must be all lowercase, and replace spaces with hyphens. For example, for the the category "Getting Started", enter the slug "getting-started"
+        - description: Slug of category. Slugs must be all lowercase, and replace spaces
+            with hyphens. For example, for the the category "Getting Started",
+            enter the slug "getting-started"
           example: getting-started
           in: path
           name: slug
@@ -434,7 +443,9 @@ paths:
       description: Delete the doc with this slug
       operationId: deleteDoc
       parameters:
-        - description: Slug of doc. must be lowercase, and replace spaces with hyphens. For example, for the page titled "New Features", enter the slug "new-features"
+        - description: Slug of doc. must be lowercase, and replace spaces with hyphens.
+            For example, for the page titled "New Features", enter the slug
+            "new-features"
           example: new-features
           in: path
           name: slug
@@ -456,7 +467,9 @@ paths:
       description: Returns the doc with this slug
       operationId: getDoc
       parameters:
-        - description: Slug of doc. must be lowercase, and replace spaces with hyphens. For example, for the page titled "New Features", enter the slug "new-features"
+        - description: Slug of doc. must be lowercase, and replace spaces with hyphens.
+            For example, for the page titled "New Features", enter the slug
+            "new-features"
           example: new-features
           in: path
           name: slug
@@ -478,7 +491,9 @@ paths:
       description: Update a doc with this slug
       operationId: updateDoc
       parameters:
-        - description: Slug of doc. must be lowercase, and replace spaces with hyphens. For example, for the page titled "New Features", enter the slug "new-features"
+        - description: Slug of doc. must be lowercase, and replace spaces with hyphens.
+            For example, for the page titled "New Features", enter the slug
+            "new-features"
           example: new-features
           in: path
           name: slug
@@ -520,7 +535,9 @@ paths:
   /swagger:
     post:
       deprecated: true
-      description: DEPRECATED. Instead use https://docs.readme.com/developers/reference/api-specification#uploadapispecification to upload a Swagger file to ReadMe
+      description: DEPRECATED. Instead use
+        https://docs.readme.com/developers/reference/api-specification#uploadapispecification
+        to upload a Swagger file to ReadMe
       operationId: uploadSwagger
       requestBody:
         content:
@@ -545,7 +562,9 @@ paths:
   "/swagger/{id}":
     delete:
       deprecated: true
-      description: DEPRECATED. Instead, use https://docs.readme.com/developers/reference/api-specification#deleteapispecification to delete a Swagger file in ReadMe
+      description: DEPRECATED. Instead, use
+        https://docs.readme.com/developers/reference/api-specification#deleteapispecification
+        to delete a Swagger file in ReadMe
       operationId: deleteSwagger
       parameters:
         - description: ID of swagger the file
@@ -565,7 +584,9 @@ paths:
         - Swagger
     put:
       deprecated: true
-      description: DEPRECATED. Instead, use https://docs.readme.com/developers/reference/api-specification#updateapispecification to update a Swagger file.
+      description: DEPRECATED. Instead, use
+        https://docs.readme.com/developers/reference/api-specification#updateapispecification
+        to update a Swagger file.
       operationId: updateSwagger
       parameters:
         - description: ID of the Swagger file
@@ -620,9 +641,11 @@ paths:
         required: true
       responses:
         "200":
-          description: The model was successfully created and associated with the target project
+          description: The model was successfully created and associated with the target
+            project
         "400":
-          description: That version already exists in the project, or there are validation errors with the request
+          description: That version already exists in the project, or there are validation
+            errors with the request
         "404":
           description: Could not find target fork in database
       security:
@@ -719,7 +742,9 @@ components:
       schema:
         type: string
     x-readme-version:
-      description: Version number of your docs project, for example, v3.0. To see all valid versions for your docs project call https://docs.readme.com/developers/reference/version#getversions.
+      description: Version number of your docs project, for example, v3.0. To see all
+        valid versions for your docs project call
+        https://docs.readme.com/developers/reference/version#getversions.
       example: v3.0
       in: header
       name: x-readme-version
@@ -763,11 +788,13 @@ components:
           description: Visibility of the custom page
           type: boolean
         html:
-          description: Body formatted in HTML (sanitized, only displayed if `htmlmode` is **true**).
+          description: Body formatted in HTML (sanitized, only displayed if `htmlmode` is
+            **true**).
           type: string
         htmlmode:
           default: false
-          description: "**true** if `html` should be displayed, **false** if `body` should be displayed."
+          description: "**true** if `html` should be displayed, **false** if `body` should
+            be displayed."
           type: boolean
         title:
           description: Title of the custom page
@@ -778,23 +805,31 @@ components:
     Doc:
       properties:
         body:
-          description: Body content of the page, formatted in ReadMe or Github flavored Markdown. Accepts long page content, for example, greater than 100k characters
+          description: Body content of the page, formatted in ReadMe or Github flavored
+            Markdown. Accepts long page content, for example, greater than 100k
+            characters
           type: string
         category:
-          description: "Category ID of the page, which you can get through https://docs.readme.com/developers/reference/categories#getcategory "
+          description: "Category ID of the page, which you can get through
+            https://docs.readme.com/developers/reference/categories#getcategory
+            "
           type: string
         hidden:
           default: true
           description: Visibility of the page
           type: boolean
         parentDoc:
-          description: For a subpage, specify the parent doc ID, which you can get through https://docs.readme.com/developers/reference/docs#getdoc
+          description: For a subpage, specify the parent doc ID, which you can get through
+            https://docs.readme.com/developers/reference/docs#getdoc
           type: string
         title:
           description: Title of the page
           type: string
         type:
-          description: Type of the page. The available types all show up under the /docs/ URL path of your docs project (also known as the "guides" section). Can be "basic" (most common), "error" (page desribing an API error), or "link" (page that redirects to an external link)
+          description: Type of the page. The available types all show up under the /docs/
+            URL path of your docs project (also known as the "guides" section).
+            Can be "basic" (most common), "error" (page desribing an API error),
+            or "link" (page that redirects to an external link)
           enum:
             - basic
             - error

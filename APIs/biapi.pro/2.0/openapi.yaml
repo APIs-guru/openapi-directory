@@ -1942,14 +1942,17 @@ paths:
         - Banks
   /admin/jwt:
     post:
-      description: This endpoint generates a new jwt manage token. It requires an admin manage token to be used<br><br>
+      description: This endpoint generates a new jwt manage token. It requires an
+        admin manage token to be used<br><br>
       requestBody:
         content:
           multipart/form-data:
             schema:
               properties:
                 duration:
-                  description: "number of minute before the token expiration (0 for token that won't expire unless the client application is deleted) (default: 1)"
+                  description: "number of minute before the token expiration (0 for token that
+                    won't expire unless the client application is deleted)
+                    (default: 1)"
                   type: integer
                 scope:
                   description: "scope requested for the token (default: config)"
@@ -1983,7 +1986,10 @@ paths:
         - Authentication
   /auth/init:
     post:
-      description: "This endpoint creates a new temporary token related to a new anonymous user.<br><br>It will expire 30 minutes after.<br><br>Note: if you supply client_id and client_secret, or if you call this endpoint with the manage_token, the token will be permanent.<br><br>"
+      description: "This endpoint creates a new temporary token related to a new
+        anonymous user.<br><br>It will expire 30 minutes after.<br><br>Note: if
+        you supply client_id and client_secret, or if you call this endpoint
+        with the manage_token, the token will be permanent.<br><br>"
       requestBody:
         content:
           multipart/form-data:
@@ -2033,7 +2039,10 @@ paths:
         - Authentication
   /auth/jwt:
     post:
-      description: This endpoint generates a new jwt token for the user. This token will last the time in minutes given by the config key auth.default_token_expire (permanent if this the parameter expire=False is given)<br><br>
+      description: This endpoint generates a new jwt token for the user. This token
+        will last the time in minutes given by the config key
+        auth.default_token_expire (permanent if this the parameter expire=False
+        is given)<br><br>
       requestBody:
         content:
           multipart/form-data:
@@ -2046,10 +2055,13 @@ paths:
                   description: secret for the client
                   type: string
                 expire:
-                  description: "if set to True, the token will expire n minutes after its creation, n being the value of configuration key auth.default_token_expire (default: True)"
+                  description: "if set to True, the token will expire n minutes after its
+                    creation, n being the value of configuration key
+                    auth.default_token_expire (default: True)"
                   type: boolean
                 id_user:
-                  description: user for whom the token has to be generated. If not supplied, a user will be created
+                  description: user for whom the token has to be generated. If not supplied, a
+                    user will be created
                   type: integer
                 scope:
                   description: scope requested for the token
@@ -2157,7 +2169,8 @@ paths:
         - Authentication
         - PFM
     post:
-      description: Request a new user token by giving an username and a password. Or a manage payment token by giving a client<br><br><br><br>
+      description: Request a new user token by giving an username and a password. Or a
+        manage payment token by giving a client<br><br><br><br>
       requestBody:
         content:
           multipart/form-data:
@@ -2167,7 +2180,8 @@ paths:
                   description: application name
                   type: string
                 grant_type:
-                  description: "password when requesting a user token and client_credentials for a payment manage token (default: password)"
+                  description: "password when requesting a user token and client_credentials for a
+                    payment manage token (default: password)"
                   type: string
                 password:
                   description: password
@@ -2224,7 +2238,9 @@ paths:
         - PFM
   /auth/token/access:
     post:
-      description: In order to register a new user with the OAuth 2 process, the client has to call this endpoint to request a granted access_token with the received temporary code.<br><br>
+      description: In order to register a new user with the OAuth 2 process, the
+        client has to call this endpoint to request a granted access_token with
+        the received temporary code.<br><br>
       requestBody:
         content:
           multipart/form-data:
@@ -2280,7 +2296,14 @@ paths:
         - Authentication
   /auth/token/code:
     get:
-      description: This endpoint generates a new temporary token for the user.<br><br>In case the access_token is used by a trusted device, and you want to let another one (for example a web browser) access to user resources, use this service to create a token which will expire in 30 minutes.<br><br>Additionally, you can also generate a temporary single-use token by specifying 'type=singleAccess' as query parameter. A single-use token can only be used once no matter the endpoint being accessed.<br><br>
+      description: This endpoint generates a new temporary token for the
+        user.<br><br>In case the access_token is used by a trusted device, and
+        you want to let another one (for example a web browser) access to user
+        resources, use this service to create a token which will expire in 30
+        minutes.<br><br>Additionally, you can also generate a temporary
+        single-use token by specifying 'type=singleAccess' as query parameter. A
+        single-use token can only be used once no matter the endpoint being
+        accessed.<br><br>
       responses:
         "200":
           content:
@@ -2477,7 +2500,8 @@ paths:
         - Providers
   "/banks/{id_connector}/connections":
     get:
-      description: By default, it selects a set of 3 connections with the 'diversity' method<br><br>
+      description: By default, it selects a set of 3 connections with the 'diversity'
+        method<br><br>
       parameters:
         - description: ""
           in: path
@@ -2485,7 +2509,8 @@ paths:
           required: true
           schema:
             type: integer
-        - description: methode of selection use between 'diversity' (default), 'cover' and 'type_select'
+        - description: methode of selection use between 'diversity' (default), 'cover' and
+            'type_select'
           in: query
           name: method
           required: false
@@ -2497,7 +2522,8 @@ paths:
           required: false
           schema:
             type: integer
-        - description: for 'type_select' method. Specific account type id (weboob_type_id) to select
+        - description: for 'type_select' method. Specific account type id (weboob_type_id)
+            to select
           in: query
           name: type
           required: false
@@ -2543,13 +2569,15 @@ paths:
                   - connections
                 type: object
           description: connections
-      summary: Get a subset of id_connection for a given bank. Different selection methode are possible
+      summary: Get a subset of id_connection for a given bank. Different selection
+        methode are possible
       tags:
         - Banks
         - Connections
   "/banks/{id_connector}/logos":
     get:
-      description: This endpoint returns all links to files associated with this connector.<br><br>
+      description: This endpoint returns all links to files associated with this
+        connector.<br><br>
       parameters:
         - description: ""
           in: path
@@ -2585,7 +2613,8 @@ paths:
         - Providers
   "/banks/{id_connector}/logos/main":
     get:
-      description: This endpoint returns all links to files associated with this connector.<br><br>
+      description: This endpoint returns all links to files associated with this
+        connector.<br><br>
       parameters:
         - description: ""
           in: path
@@ -2621,7 +2650,8 @@ paths:
         - Providers
   "/banks/{id_connector}/logos/thumbnail":
     get:
-      description: This endpoint returns all links to files associated with this connector.<br><br>
+      description: This endpoint returns all links to files associated with this
+        connector.<br><br>
       parameters:
         - description: ""
           in: path
@@ -2798,7 +2828,12 @@ paths:
         - Banks
   /categories/keywords:
     post:
-      description: "If the keyword already exists the keyword is not added. Used for the categorization of transactions.<br><br>Form params: - id_category (integer): a reference towards the category associated with the keyword - keyword (string): the searched keyword - income (bool): 1 if the associated category represents an income else 0 - priority (integer): sets the priority for the keyword, used when categorizing<br><br>"
+      description: "If the keyword already exists the keyword is not added. Used for
+        the categorization of transactions.<br><br>Form params: - id_category
+        (integer): a reference towards the category associated with the keyword
+        - keyword (string): the searched keyword - income (bool): 1 if the
+        associated category represents an income else 0 - priority (integer):
+        sets the priority for the keyword, used when categorizing<br><br>"
       parameters:
         - in: query
           name: expand
@@ -2842,7 +2877,11 @@ paths:
         - Banks
   /categorize:
     post:
-      description: "It requires an array of transaction dictionaries. Any fields of transactions that are not required will be kept in the response. The response contains the list of transactions with two more fields: id_category and state (it indicates how the transaction has been categorized)<br><br>"
+      description: "It requires an array of transaction dictionaries. Any fields of
+        transactions that are not required will be kept in the response. The
+        response contains the list of transactions with two more fields:
+        id_category and state (it indicates how the transaction has been
+        categorized)<br><br>"
       requestBody:
         content:
           multipart/form-data:
@@ -2970,7 +3009,8 @@ paths:
                   description: custom config about the client
                   type: string
                 generate_keys:
-                  description: "if True, generate a rsa pair of keys so the client can be used to generate jwt user tokens (default: False)"
+                  description: "if True, generate a rsa pair of keys so the client can be used to
+                    generate jwt user tokens (default: False)"
                   type: boolean
                 name:
                   description: name of client
@@ -3015,7 +3055,8 @@ paths:
       tags:
         - Administration
     get:
-      description: If you use the manage_token or a configuration token, you will get also the client secret.<br><br>
+      description: If you use the manage_token or a configuration token, you will get
+        also the client secret.<br><br>
       parameters:
         - description: ""
           in: path
@@ -3070,7 +3111,9 @@ paths:
                   description: text to display as a description for providers
                   type: string
                 generate_keys:
-                  description: "set a rsa key pair for the client, which make it possible to generate a jwt user token using this client. No effect if the client already has a set of keys(default: False)"
+                  description: "set a rsa key pair for the client, which make it possible to
+                    generate a jwt user token using this client. No effect if
+                    the client already has a set of keys(default: False)"
                   type: boolean
                 name:
                   description: name of client
@@ -3091,7 +3134,8 @@ paths:
                   description: reset the secret
                   type: boolean
                 update_config:
-                  description: "update the custom information about the client instead of replacing the existing one (default: True)"
+                  description: "update the custom information about the client instead of
+                    replacing the existing one (default: True)"
                   type: boolean
               type: object
       responses:
@@ -3170,7 +3214,8 @@ paths:
       tags:
         - Administration
     post:
-      description: 'Request: { "connection.disable_new": "0", "search": "connection.disable_new" }<br><br>'
+      description: 'Request: { "connection.disable_new": "0", "search":
+        "connection.disable_new" }<br><br>'
       parameters:
         - description: limit the results to keys matching the given value
           in: query
@@ -3424,7 +3469,8 @@ paths:
         - Providers
   "/connections/{id_connection}/sources/{id_source}":
     delete:
-      description: This will make it so the specified source will not be synchronized anymore.<br><br>
+      description: This will make it so the specified source will not be synchronized
+        anymore.<br><br>
       parameters:
         - description: ""
           in: path
@@ -3456,7 +3502,8 @@ paths:
         - Banks
         - Providers
     post:
-      description: This endpoint is used to enable a source or force a synchronization on it.<br><br>
+      description: This endpoint is used to enable a source or force a synchronization
+        on it.<br><br>
       parameters:
         - description: ""
           in: path
@@ -3470,7 +3517,8 @@ paths:
           required: true
           schema:
             type: integer
-        - description: do the synchronization in background (to use with the sysynchronizenc parameter)
+        - description: do the synchronization in background (to use with the
+            sysynchronizenc parameter)
           in: query
           name: background
           required: false
@@ -3482,7 +3530,8 @@ paths:
           schema:
             type: string
       requestBody:
-        $ref: "#/components/requestBodies/postConnections_idConnection_sources_idSource_"
+        $ref: "#/components/requestBodies/postConnections_idConnection_sources_idSource\
+          _"
       responses:
         "200":
           content:
@@ -3496,7 +3545,8 @@ paths:
         - Banks
         - Providers
     put:
-      description: This endpoint is used to enable a source or force a synchronization on it.<br><br>
+      description: This endpoint is used to enable a source or force a synchronization
+        on it.<br><br>
       parameters:
         - description: ""
           in: path
@@ -3510,7 +3560,8 @@ paths:
           required: true
           schema:
             type: integer
-        - description: do the synchronization in background (to use with the synchronize parameter)
+        - description: do the synchronization in background (to use with the synchronize
+            parameter)
           in: query
           name: background
           required: false
@@ -3650,7 +3701,8 @@ paths:
         - Banks
   /connectors/status:
     get:
-      description: By default, provide all available connectors status.<br><br>The result is a json where the keys are the uuid of the connectors<br><br>
+      description: By default, provide all available connectors status.<br><br>The
+        result is a json where the keys are the uuid of the connectors<br><br>
       responses:
         "200":
           description: standard HTTP response
@@ -3710,7 +3762,8 @@ paths:
                   description: to enable  or disable connector (bank or provider)
                   type: boolean
                 id_categories:
-                  description: one or several comma separated categories to map to the given connector (or null to map no category)
+                  description: one or several comma separated categories to map to the given
+                    connector (or null to map no category)
                   type: string
                 sync_frequency:
                   description: Allows you to overload global sync_frequency param
@@ -3775,14 +3828,15 @@ paths:
             sync_frequency:
               examples:
                 response:
-                  ? value
+                  value: null
           description: Successful PUT on Connector resource
       summary: Edit the provided connector
       tags:
         - Banks
   "/connectors/{id_connector}/logos":
     get:
-      description: This endpoint returns all links to files associated with this connector.<br><br>
+      description: This endpoint returns all links to files associated with this
+        connector.<br><br>
       parameters:
         - description: ""
           in: path
@@ -3817,7 +3871,12 @@ paths:
         - Banks
         - Providers
     post:
-      description: "This endpoint creates a connector logo. You can either pass a file to as a parameter to insert and link it with the connector or pass an id_file to link a connector with an existing file. Will fail if the file is already linked with that connector.<br><br>Form params: - id_file (integer): The id of the file to link with that connector. - img (string): Path to the image to link with that connector.<br><br>"
+      description: "This endpoint creates a connector logo. You can either pass a file
+        to as a parameter to insert and link it with the connector or pass an
+        id_file to link a connector with an existing file. Will fail if the file
+        is already linked with that connector.<br><br>Form params: - id_file
+        (integer): The id of the file to link with that connector. - img
+        (string): Path to the image to link with that connector.<br><br>"
       parameters:
         - description: ""
           in: path
@@ -3842,7 +3901,10 @@ paths:
         - Banks
         - Providers
     put:
-      description: "This endpoint creates or update a connector logo. This logo is a mapping between a file (/file route) and a connector (/connectors route) or a provider (/providers route).<br><br>Form params: - id_file (integer): The id of the file to link with that connector.<br><br>"
+      description: "This endpoint creates or update a connector logo. This logo is a
+        mapping between a file (/file route) and a connector (/connectors route)
+        or a provider (/providers route).<br><br>Form params: - id_file
+        (integer): The id of the file to link with that connector.<br><br>"
       parameters:
         - description: ""
           in: path
@@ -3868,7 +3930,8 @@ paths:
         - Providers
   "/connectors/{id_connector}/logos/main":
     get:
-      description: This endpoint returns all links to files associated with this connector.<br><br>
+      description: This endpoint returns all links to files associated with this
+        connector.<br><br>
       parameters:
         - description: ""
           in: path
@@ -3904,7 +3967,8 @@ paths:
         - Providers
   "/connectors/{id_connector}/logos/thumbnail":
     get:
-      description: This endpoint returns all links to files associated with this connector.<br><br>
+      description: This endpoint returns all links to files associated with this
+        connector.<br><br>
       parameters:
         - description: ""
           in: path
@@ -3971,7 +4035,10 @@ paths:
         - Banks
         - Providers
     put:
-      description: "This endpoint creates or update a connector logo. This logo is a mapping between a file (/file route) and a connector (/connectors route) or a provider (/providers route).<br><br>Form params: - id_file (integer): The id of the file to link with that connector.<br><br>"
+      description: "This endpoint creates or update a connector logo. This logo is a
+        mapping between a file (/file route) and a connector (/connectors route)
+        or a provider (/providers route).<br><br>Form params: - id_file
+        (integer): The id of the file to link with that connector.<br><br>"
       parameters:
         - description: ""
           in: path
@@ -4145,7 +4212,8 @@ paths:
                   description: to enable or disable connector source
                   type: boolean
                 unavailable:
-                  description: to enable or disable the source (can only be edited by BI employees)
+                  description: to enable or disable the source (can only be edited by BI
+                    employees)
                   format: date-time
                   type: string
               type: object
@@ -4163,7 +4231,8 @@ paths:
         - Providers
   /incidents:
     get:
-      description: By default, provide all incidents. Results are paginated. Some filters can be set via query parameters.<br><br>
+      description: By default, provide all incidents. Results are paginated. Some
+        filters can be set via query parameters.<br><br>
       parameters:
         - description: comma separated list, filter incidents in the given states.
           in: query
@@ -4215,7 +4284,9 @@ paths:
         - Timeline
   /invoicing:
     get:
-      description: You can get all the invoicing data or just specific ones by using the available parameters.<br><br>If no parameters are specified, no invoicing data is returned.<br><br>
+      description: You can get all the invoicing data or just specific ones by using
+        the available parameters.<br><br>If no parameters are specified, no
+        invoicing data is returned.<br><br>
       parameters:
         - description: minimal date
           in: query
@@ -4406,7 +4477,8 @@ paths:
     get:
       description: ""
       parameters:
-        - description: "number on days on which stats on synchronization have to be done per worker (Default: 1)"
+        - description: "number on days on which stats on synchronization have to be done
+            per worker (Default: 1)"
           in: query
           name: period
           required: false
@@ -4493,7 +4565,8 @@ paths:
         - Connections
   "/providers/{id_connector}/logos":
     get:
-      description: This endpoint returns all links to files associated with this connector.<br><br>
+      description: This endpoint returns all links to files associated with this
+        connector.<br><br>
       parameters:
         - description: ""
           in: path
@@ -4529,7 +4602,8 @@ paths:
         - Providers
   "/providers/{id_connector}/logos/main":
     get:
-      description: This endpoint returns all links to files associated with this connector.<br><br>
+      description: This endpoint returns all links to files associated with this
+        connector.<br><br>
       parameters:
         - description: ""
           in: path
@@ -4565,7 +4639,8 @@ paths:
         - Providers
   "/providers/{id_connector}/logos/thumbnail":
     get:
-      description: This endpoint returns all links to files associated with this connector.<br><br>
+      description: This endpoint returns all links to files associated with this
+        connector.<br><br>
       parameters:
         - description: ""
           in: path
@@ -4794,7 +4869,9 @@ paths:
         - Banks
   "/psd2registrations/{id_psd2registration}/logs":
     get:
-      description: Get logs of psd2 registration. By default, it selects logs for the last month. You can use "min_date" and "max_date" to change boundary dates.<br><br>
+      description: Get logs of psd2 registration. By default, it selects logs for the
+        last month. You can use "min_date" and "max_date" to change boundary
+        dates.<br><br>
       parameters:
         - description: ""
           in: path
@@ -4884,7 +4961,8 @@ paths:
     get:
       description: ""
       parameters:
-        - description: searches a user by mail (if it contains no '@', '@biapi.pro' will be added at the end)
+        - description: searches a user by mail (if it contains no '@', '@biapi.pro' will
+            be added at the end)
           in: query
           name: search
           required: false
@@ -5097,7 +5175,9 @@ paths:
       tags:
         - Banks
     post:
-      description: "Form params : - next_date (date) required: Date of transaction - mean_amount (decimal) required: Mean Amount - wording (string) required: name of transaction - id_account (id) required: related account<br><br>"
+      description: "Form params : - next_date (date) required: Date of transaction -
+        mean_amount (decimal) required: Mean Amount - wording (string) required:
+        name of transaction - id_account (id) required: related account<br><br>"
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -5164,7 +5244,10 @@ paths:
       tags:
         - Banks
     put:
-      description: "Form params : - next_date (date): Date of transaction - mean_amount (decimal): Mean Amount - wording (string): name of transaction - id_account (id): related account - id_category (id): related category - enabled (bool): is enabled<br><br>"
+      description: "Form params : - next_date (date): Date of transaction -
+        mean_amount (decimal): Mean Amount - wording (string): name of
+        transaction - id_account (id): related account - id_category (id):
+        related category - enabled (bool): is enabled<br><br>"
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -5317,7 +5400,8 @@ paths:
                   description: ID of the parent category to be displayed.
                   type: integer
                 income:
-                  description: Is an income category. If null, this is both an income and an expense category.
+                  description: Is an income category. If null, this is both an income and an
+                    expense category.
                   type: boolean
                 name:
                   description: Name of the category.
@@ -5422,7 +5506,8 @@ paths:
       responses:
         "200":
           description: standard HTTP response
-      summary: Delete the given user configurations. deletions on keys prefixed by 'biapi.' (except callback_url) are ignored
+      summary: Delete the given user configurations. deletions on keys prefixed by
+        'biapi.' (except callback_url) are ignored
       tags:
         - Users management
     get:
@@ -5462,7 +5547,8 @@ paths:
       responses:
         "200":
           description: standard HTTP response
-      summary: Change configuration of a user. modifications on keys prefixed by 'biapi.' (except callback_url) are ignored
+      summary: Change configuration of a user. modifications on keys prefixed by
+        'biapi.' (except callback_url) are ignored
       tags:
         - Users management
   "/users/{id_user}/connections":
@@ -5529,7 +5615,9 @@ paths:
         - Banks
         - Providers
     post:
-      description: Create a new connection to a given bank or provider. You have to give all needed parameters (use /banks/ID/fields or /providers/ID/fields to get them).<br><br>
+      description: Create a new connection to a given bank or provider. You have to
+        give all needed parameters (use /banks/ID/fields or /providers/ID/fields
+        to get them).<br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -5537,7 +5625,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: optional comma-separated list of sources to use for the connection synchronization
+        - description: optional comma-separated list of sources to use for the connection
+            synchronization
           in: query
           name: source
           required: false
@@ -5574,7 +5663,8 @@ paths:
         - Providers
   "/users/{id_user}/connections/{id_connection}":
     delete:
-      description: This endpoint deletes a connection and all related accounts and transactions.<br><br>
+      description: This endpoint deletes a connection and all related accounts and
+        transactions.<br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -5606,7 +5696,15 @@ paths:
         - Banks
         - Providers
     post:
-      description: Give new parameters to change on the configuration of this connection (for example "password").<br><br>It tests connection to website, and if it fails, a 400 response is given with the error code "wrongpass" or "websiteUnavailable".<br><br>You can also supply meta-parameters on connection, like 'active' or 'expire'.<br><br>It's possible to execute the update/synchronization in the background with a query parameter. If done in background this endpoint will respond with data that is not yet updated. To obtain updated data, polling is required as the the data will be filled in the background.<br><br>
+      description: Give new parameters to change on the configuration of this
+        connection (for example "password").<br><br>It tests connection to
+        website, and if it fails, a 400 response is given with the error code
+        "wrongpass" or "websiteUnavailable".<br><br>You can also supply
+        meta-parameters on connection, like 'active' or 'expire'.<br><br>It's
+        possible to execute the update/synchronization in the background with a
+        query parameter. If done in background this endpoint will respond with
+        data that is not yet updated. To obtain updated data, polling is
+        required as the the data will be filled in the background.<br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -5626,7 +5724,8 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: Whether the connection synchronization is asked by the PSU or not (default is true)
+        - description: Whether the connection synchronization is asked by the PSU or not
+            (default is true)
           in: query
           name: psu_requested
           required: false
@@ -5678,7 +5777,8 @@ paths:
         - Banks
         - Providers
     put:
-      description: We suggest to pass parameter expand=accounts[transactions] to get all *new* and *updated* transactions.<br><br>
+      description: We suggest to pass parameter expand=accounts[transactions] to get
+        all *new* and *updated* transactions.<br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -5705,7 +5805,8 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: Whether the connection synchronization is asked by the PSU or not (default is true)
+        - description: Whether the connection synchronization is asked by the PSU or not
+            (default is true)
           in: query
           name: psu_requested
           required: false
@@ -6018,7 +6119,8 @@ paths:
         - Banks
   "/users/{id_user}/connections/{id_connection}/accounts/{id_account}/delta":
     get:
-      description: Get account delta between sums of transactions and difference of account balance for the given period.<br><br>
+      description: Get account delta between sums of transactions and difference of
+        account balance for the given period.<br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -6066,7 +6168,9 @@ paths:
         - Banks
   "/users/{id_user}/connections/{id_connection}/accounts/{id_account}/logs":
     get:
-      description: Get logs of account. By default, it selects logs for the last month. You can use "min_date" and "max_date" to change boundary dates.<br><br>
+      description: Get logs of account. By default, it selects logs for the last
+        month. You can use "min_date" and "max_date" to change boundary
+        dates.<br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -6222,7 +6326,9 @@ paths:
       tags:
         - Banks
     get:
-      description: Get list of transactions.<br><br>By default, it selects transactions for the last month. You can use "min_date" and "max_date" to change boundary dates.<br><br>
+      description: Get list of transactions.<br><br>By default, it selects
+        transactions for the last month. You can use "min_date" and "max_date"
+        to change boundary dates.<br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -6351,7 +6457,9 @@ paths:
       tags:
         - Banks
     post:
-      description: Create transactions for the supplied account or the account whose id is given with form parameters. It requires an array of transaction dictionaries.<br><br><br><br>
+      description: Create transactions for the supplied account or the account whose
+        id is given with form parameters. It requires an array of transaction
+        dictionaries.<br><br><br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -6382,7 +6490,8 @@ paths:
             schema:
               properties:
                 active:
-                  description: "1 if the transaction should be taken into account by pfm services (default: 1)"
+                  description: "1 if the transaction should be taken into account by pfm services
+                    (default: 1)"
                   type: boolean
                 coming:
                   description: "1 if the transaction has already been debited (default: 0)"
@@ -6392,11 +6501,13 @@ paths:
                   format: date
                   type: string
                 date_scraped:
-                  description: "date on which the transaction has been found for the first time. YYYY-MM-DD HH:MM:SS(default: now)"
+                  description: "date on which the transaction has been found for the first time.
+                    YYYY-MM-DD HH:MM:SS(default: now)"
                   format: date-time
                   type: string
                 id_account:
-                  description: account of the transaction. If not supplied, it has to be given in the route
+                  description: account of the transaction. If not supplied, it has to be given in
+                    the route
                   type: integer
                 original_wording:
                   description: label of the transaction
@@ -6469,7 +6580,8 @@ paths:
             schema:
               properties:
                 active:
-                  description: if false, transaction isn't considered in analyzisis endpoints (like /balances)
+                  description: if false, transaction isn't considered in analyzisis endpoints
+                    (like /balances)
                   type: boolean
                 application_date:
                   description: change application date of the transaction
@@ -6777,7 +6889,9 @@ paths:
       tags:
         - Banks
     post:
-      description: "Form params : - next_date (date) required: Date of transaction - mean_amount (decimal) required: Mean Amount - wording (string) required: name of transaction - id_account (id) required: related account<br><br>"
+      description: "Form params : - next_date (date) required: Date of transaction -
+        mean_amount (decimal) required: Mean Amount - wording (string) required:
+        name of transaction - id_account (id) required: related account<br><br>"
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -6856,7 +6970,10 @@ paths:
       tags:
         - Banks
     put:
-      description: "Form params : - next_date (date): Date of transaction - mean_amount (decimal): Mean Amount - wording (string): name of transaction - id_account (id): related account - id_category (id): related category - enabled (bool): is enabled<br><br>"
+      description: "Form params : - next_date (date): Date of transaction -
+        mean_amount (decimal): Mean Amount - wording (string): name of
+        transaction - id_account (id): related account - id_category (id):
+        related category - enabled (bool): is enabled<br><br>"
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -7108,7 +7225,8 @@ paths:
         - Providers
   "/users/{id_user}/connections/{id_connection}/sources/{id_source}":
     delete:
-      description: This will make it so the specified source will not be synchronized anymore.<br><br>
+      description: This will make it so the specified source will not be synchronized
+        anymore.<br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -7146,7 +7264,8 @@ paths:
         - Banks
         - Providers
     post:
-      description: This endpoint is used to enable a source or force a synchronization on it.<br><br>
+      description: This endpoint is used to enable a source or force a synchronization
+        on it.<br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -7166,7 +7285,8 @@ paths:
           required: true
           schema:
             type: integer
-        - description: do the synchronization in background (to use with the sysynchronizenc parameter)
+        - description: do the synchronization in background (to use with the
+            sysynchronizenc parameter)
           in: query
           name: background
           required: false
@@ -7178,7 +7298,8 @@ paths:
           schema:
             type: string
       requestBody:
-        $ref: "#/components/requestBodies/postConnections_idConnection_sources_idSource_"
+        $ref: "#/components/requestBodies/postConnections_idConnection_sources_idSource\
+          _"
       responses:
         "200":
           content:
@@ -7192,7 +7313,8 @@ paths:
         - Banks
         - Providers
     put:
-      description: This endpoint is used to enable a source or force a synchronization on it.<br><br>
+      description: This endpoint is used to enable a source or force a synchronization
+        on it.<br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -7212,7 +7334,8 @@ paths:
           required: true
           schema:
             type: integer
-        - description: do the synchronization in background (to use with the synchronize parameter)
+        - description: do the synchronization in background (to use with the synchronize
+            parameter)
           in: query
           name: background
           required: false
@@ -7279,7 +7402,9 @@ paths:
       tags:
         - Banks
     post:
-      description: "Form params : - next_date (date) required: Date of transaction - mean_amount (decimal) required: Mean Amount - wording (string) required: name of transaction - id_account (id) required: related account<br><br>"
+      description: "Form params : - next_date (date) required: Date of transaction -
+        mean_amount (decimal) required: Mean Amount - wording (string) required:
+        name of transaction - id_account (id) required: related account<br><br>"
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -7346,7 +7471,10 @@ paths:
       tags:
         - Banks
     put:
-      description: "Form params : - next_date (date): Date of transaction - mean_amount (decimal): Mean Amount - wording (string): name of transaction - id_account (id): related account - id_category (id): related category - enabled (bool): is enabled<br><br>"
+      description: "Form params : - next_date (date): Date of transaction -
+        mean_amount (decimal): Mean Amount - wording (string): name of
+        transaction - id_account (id): related account - id_category (id):
+        related category - enabled (bool): is enabled<br><br>"
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -7672,7 +7800,9 @@ paths:
       tags:
         - Banks
     post:
-      description: "Form params : - next_date (date) required: Date of transaction - mean_amount (decimal) required: Mean Amount - wording (string) required: name of transaction - id_account (id) required: related account<br><br>"
+      description: "Form params : - next_date (date) required: Date of transaction -
+        mean_amount (decimal) required: Mean Amount - wording (string) required:
+        name of transaction - id_account (id) required: related account<br><br>"
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -7727,7 +7857,10 @@ paths:
       tags:
         - Banks
     put:
-      description: "Form params : - next_date (date): Date of transaction - mean_amount (decimal): Mean Amount - wording (string): name of transaction - id_account (id): related account - id_category (id): related category - enabled (bool): is enabled<br><br>"
+      description: "Form params : - next_date (date): Date of transaction -
+        mean_amount (decimal): Mean Amount - wording (string): name of
+        transaction - id_account (id): related account - id_category (id):
+        related category - enabled (bool): is enabled<br><br>"
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -7758,7 +7891,9 @@ paths:
         - Banks
   /webauth:
     get:
-      description: "The route encapsulate 2 functionalities: 1. Create or update a connection through oAuth2 session.<br><br>2. Execute a transfer through OAuth2 session."
+      description: "The route encapsulate 2 functionalities: 1. Create or update a
+        connection through oAuth2 session.<br><br>2. Execute a transfer through
+        OAuth2 session."
       requestBody:
         content:
           multipart/form-data:
@@ -7857,7 +7992,8 @@ paths:
                   description: The user ID to associate with the webhook
                   type: integer
                 params:
-                  description: "The webhook parameters as an object with three keys: type, key and value"
+                  description: "The webhook parameters as an object with three keys: type, key and
+                    value"
                   type: string
                 url:
                   description: The webhook callback url
@@ -7934,13 +8070,15 @@ paths:
             schema:
               properties:
                 config:
-                  description: The authentication process configuration. A dict contains either the certificate
+                  description: The authentication process configuration. A dict contains either
+                    the certificate
                   type: string
                 name:
                   description: The name of the authentication process to differentiate
                   type: string
                 type:
-                  description: The type of the authentication process (oauth, certificate, token, etc...)
+                  description: The type of the authentication process (oauth, certificate, token,
+                    etc...)
                   type: integer
               required:
                 - type
@@ -8002,13 +8140,15 @@ paths:
             schema:
               properties:
                 config:
-                  description: The authentication process configuration. A dict containing either the certificate
+                  description: The authentication process configuration. A dict containing either
+                    the certificate
                   type: string
                 name:
                   description: The name of the authentication process to differentiate
                   type: string
                 type:
-                  description: The type of the authentication process (oauth, certificate, token, etc...)
+                  description: The type of the authentication process (oauth, certificate, token,
+                    etc...)
                   type: integer
               required:
                 - type
@@ -8045,13 +8185,15 @@ paths:
             schema:
               properties:
                 config:
-                  description: The authentication process configuration. A dict containt either the certificate
+                  description: The authentication process configuration. A dict containt either
+                    the certificate
                   type: string
                 name:
                   description: The name of the authentication process to differentiate
                   type: string
                 type:
-                  description: The type of the authentication process (oauth, certificate, token, etc...)
+                  description: The type of the authentication process (oauth, certificate, token,
+                    etc...)
                   type: integer
               required:
                 - type
@@ -8201,11 +8343,14 @@ paths:
                   - webhooks
                 type: object
           description: webhooks
-      summary: retrieve the list of the value to add in webhooks when sending the requested webhook
+      summary: retrieve the list of the value to add in webhooks when sending the
+        requested webhook
       tags:
         - Administration
     post:
-      description: For each parameter, a value will be added in the webhook data. Use the key to set the name of the field. The values that can be added are to be found in the user configuration.<br><br>
+      description: For each parameter, a value will be added in the webhook data. Use
+        the key to set the name of the field. The values that can be added are
+        to be found in the user configuration.<br><br>
       parameters:
         - description: ""
           in: path
@@ -8290,7 +8435,9 @@ paths:
       tags:
         - Administration
     post:
-      description: For each parameter, a value will be added in the webhook data. Use the key to set the name of the field. The values that can be added are to be found in the user configuration.<br><br>
+      description: For each parameter, a value will be added in the webhook data. Use
+        the key to set the name of the field. The values that can be added are
+        to be found in the user configuration.<br><br>
       parameters:
         - description: ""
           in: path
@@ -8316,12 +8463,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/Webhook"
           description: Successful POST on Webhook resource
-      summary: upate the requested field to store in user config when calling the endpoint
+      summary: upate the requested field to store in user config when calling the
+        endpoint
       tags:
         - Administration
   "/webhooks/{id_webhook}/logs":
     get:
-      description: Get logs of the webhooks.<br><br>By default, it selects logs for the last month. You can use "min_date" and "max_date" to change boundary dates.<br><br>
+      description: Get logs of the webhooks.<br><br>By default, it selects logs for
+        the last month. You can use "min_date" and "max_date" to change boundary
+        dates.<br><br>
       parameters:
         - description: ""
           in: path
@@ -8397,7 +8547,8 @@ components:
                 description: to enable or disable connector source
                 type: boolean
               synchronize:
-                description: whether to force a synchronization on the source if it's not disabled
+                description: whether to force a synchronization on the source if it's not
+                  disabled
                 type: boolean
             type: object
     postWebhooks_idWebhook_:
@@ -8436,7 +8587,8 @@ components:
                 description: whether to force the synchronization on the source if it's in error
                 type: boolean
               synchronize:
-                description: whether to force a synchronization on the source if it's not disabled
+                description: whether to force a synchronization on the source if it's not
+                  disabled
                 type: boolean
             type: object
   schemas:
@@ -8469,8 +8621,8 @@ components:
         coming: 0
         company_name: ""
         currency: ""
-        deleted: 2021-03-26 15:03:49.507220
-        disabled: 2021-03-26 15:03:49.507322
+        deleted: 2021-04-06 18:29:53.499836
+        disabled: 2021-04-06 18:29:53.499922
         display: true
         error: ""
         iban: ""
@@ -8480,10 +8632,10 @@ components:
         id_source: 0
         id_type: 0
         id_user: 0
-        last_update: 2021-03-26 15:03:49.507112
+        last_update: 2021-04-06 18:29:53.499760
         name: ""
         number: ""
-        opening_date: 2021-03-26
+        opening_date: 2021-04-06
         original_name: ""
         ownership: ""
         usage: ""
@@ -8513,7 +8665,8 @@ components:
           format: date-time
           type: string
         disabled:
-          description: This account has been deleted by user and will not be synchronized anymore
+          description: This account has been deleted by user and will not be synchronized
+            anymore
           format: date-time
           type: string
         display:
@@ -8565,7 +8718,8 @@ components:
           description: Relationship between the credentials owner and the account
           type: string
         usage:
-          description: Account usage (if not set by the user, displays the value of original_usage)
+          description: Account usage (if not set by the user, displays the value of
+            original_usage)
           type: string
         webid:
           description: Account webid
@@ -8587,7 +8741,7 @@ components:
         id_account: 0
         id_connection_log: 0
         id_connector: 0
-        timestamp: <function datetime.now at 0x7fb822af1a60>
+        timestamp: <function datetime.now at 0x7fcc5def2f28>
       properties:
         balance:
           description: Balanced recorded
@@ -8617,7 +8771,7 @@ components:
           description: provider id
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7fb822af1a60>
+          default: <function datetime.now at 0x7fcc5def2f28>
           description: Timestamp of log
           format: date-time
           type: string
@@ -8682,7 +8836,7 @@ components:
         id_investment: 0
         id_transaction: 0
         id_user: 0
-        timestamp: <function datetime.now at 0x7fb822954840>
+        timestamp: <function datetime.now at 0x7fcc5dd1a840>
         type: ""
         value: 0
       properties:
@@ -8701,7 +8855,7 @@ components:
           description: ID of the related user
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7fb822954840>
+          default: <function datetime.now at 0x7fcc5dd1a840>
           description: Date of the alerts emission
           format: date-time
           type: string
@@ -8761,7 +8915,8 @@ components:
           description: ID of the logo
           type: integer
         id_parent_category:
-          description: ID of the parent category. If this is a parent category, it will be equal to its own ID
+          description: ID of the parent category. If this is a parent category, it will be
+            equal to its own ID
           type: integer
         id_parent_category_in_menu:
           description: ID of the parent category to be displayed
@@ -8770,7 +8925,8 @@ components:
           description: If not null, this category is specific to a user
           type: integer
         income:
-          description: Is an income category. If null, this is both an income and an expense category
+          description: Is an income category. If null, this is both an income and an
+            expense category
           type: boolean
         name:
           description: Name of the category
@@ -8791,7 +8947,7 @@ components:
       type: object
     Certificate:
       example:
-        created: 2021-03-26 15:03:49.267907
+        created: 2021-04-06 18:29:53.382202
         id: 0
         id_private_key_file: 0
         id_public_key_file: 0
@@ -8861,7 +9017,7 @@ components:
         id: 0
         new_value: ""
         previous_value: ""
-        timestamp: <function datetime.now at 0x7fb82283fe18>
+        timestamp: <function datetime.now at 0x7fcc5dbcc048>
         type: ""
       properties:
         id:
@@ -8873,7 +9029,7 @@ components:
         previous_value:
           type: string
         timestamp:
-          default: <function datetime.now at 0x7fb82283fe18>
+          default: <function datetime.now at 0x7fcc5dbcc048>
           description: Timestamp of when the configuration key was changed
           format: date-time
           type: string
@@ -8889,20 +9045,20 @@ components:
     Connection:
       example:
         active: true
-        created: <function datetime.now at 0x7fb822b418c8>
+        created: <function datetime.now at 0x7fcc5df296a8>
         id: 0
         id_connector: 0
         id_user: 0
-        last_push: 2021-03-26 15:03:49.227949
-        last_update: 2021-03-26 15:03:49.227668
-        next_try: 2021-03-26 15:03:49.228019
+        last_push: 2021-04-06 18:29:53.363889
+        last_update: 2021-04-06 18:29:53.363737
+        next_try: 2021-04-06 18:29:53.363931
       properties:
         active:
           default: true
           description: This connection is active and will be automatically synced
           type: boolean
         created:
-          default: <function datetime.now at 0x7fb822b418c8>
+          default: <function datetime.now at 0x7fcc5df296a8>
           description: Creation date
           format: date-time
           type: string
@@ -8944,11 +9100,11 @@ components:
         id_user: 0
         login: ""
         nb_accounts: 0
-        next_try: 2021-03-26 15:03:49.236183
+        next_try: 2021-04-06 18:29:53.369101
         session_folder_id: ""
-        start: 2021-03-26 15:03:49.237602
+        start: 2021-04-06 18:29:53.369935
         statut: 0
-        timestamp: <function datetime.now at 0x7fb822b41378>
+        timestamp: <function datetime.now at 0x7fcc5df0bf28>
         worker: ""
       properties:
         error:
@@ -8961,7 +9117,8 @@ components:
           description: MD5 hash of the exception backtrace
           type: string
         fields:
-          description: Fields for connection in additionalInformationNeeded state with background option
+          description: Fields for connection in additionalInformationNeeded state with
+            background option
           type: string
         id:
           description: ID of the log
@@ -8999,7 +9156,7 @@ components:
           description: Status of user (1 = charged user)
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7fb822b41378>
+          default: <function datetime.now at 0x7fcc5df0bf28>
           description: Timestamp of log, when the synchronization has finished
           format: date-time
           type: string
@@ -9013,16 +9170,16 @@ components:
       type: object
     ConnectionSource:
       example:
-        access_expire: 2021-03-26 15:03:49.250631
-        created: <function datetime.now at 0x7fb822b41c80>
-        disabled: 2021-03-26 15:03:49.250220
-        expire: 2021-03-26 15:03:49.250754
+        access_expire: 2021-04-06 18:29:53.374970
+        created: <function datetime.now at 0x7fcc5ded9e18>
+        disabled: 2021-04-06 18:29:53.374810
+        expire: 2021-04-06 18:29:53.375012
         id: 0
         id_connection: 0
         id_connector_source: 0
-        last_update: 2021-03-26 15:03:49.250093
+        last_update: 2021-04-06 18:29:53.374750
         name: ""
-        next_try: 2021-03-26 15:03:49.251128
+        next_try: 2021-04-06 18:29:53.375250
         state: ""
       properties:
         access_expire:
@@ -9030,7 +9187,7 @@ components:
           format: date-time
           type: string
         created:
-          default: <function datetime.now at 0x7fb822b41c80>
+          default: <function datetime.now at 0x7fcc5ded9e18>
           description: Creation date of the connection source
           format: date-time
           type: string
@@ -9039,7 +9196,8 @@ components:
           format: date-time
           type: string
         expire:
-          description: Expiration of the connection source. Used to purge the connection in case completion was not finished
+          description: Expiration of the connection source. Used to purge the connection
+            in case completion was not finished
           format: date-time
           type: string
         id:
@@ -9185,7 +9343,7 @@ components:
     ConnectorSource:
       example:
         auth_mechanism: ""
-        disabled: 2021-03-26 15:03:49.229441
+        disabled: 2021-04-06 18:29:53.364987
         fallback: ""
         id: 0
         id_connector: 0
@@ -9268,7 +9426,7 @@ components:
     Currency:
       example:
         crypto: false
-        datetime: 2021-03-26 15:03:49.291332
+        datetime: 2021-04-06 18:29:53.396944
         id: ""
         marketcap: 0
         precision: 2
@@ -9311,7 +9469,7 @@ components:
         debug: false
         id: 0
         id_token: 0
-        last_update: <function datetime.now at 0x7fb822954a60>
+        last_update: <function datetime.now at 0x7fcc5dce1510>
         notification_token: ""
         type: ""
         version: ""
@@ -9324,7 +9482,7 @@ components:
         id_token:
           type: integer
         last_update:
-          default: <function datetime.now at 0x7fb822954a60>
+          default: <function datetime.now at 0x7fcc5dce1510>
           format: date-time
           type: string
         notification_token:
@@ -9345,8 +9503,8 @@ components:
     Document:
       example:
         currency: ""
-        date: 2021-03-26 15:03:49.317714
-        duedate: 2021-03-26
+        date: 2021-04-06 18:29:53.408197
+        duedate: 2021-04-06
         has_file_on_website: true
         id: 0
         id_category: 0
@@ -9357,11 +9515,11 @@ components:
         id_user: 0
         income: true
         issuer: ""
-        last_update: 2021-03-26 15:03:49.320066
+        last_update: 2021-04-06 18:29:53.409192
         name: ""
         number: ""
         readonly: true
-        timestamp: <function datetime.now at 0x7fb8220e9e18>
+        timestamp: <function datetime.now at 0x7fcc5d4df400>
         total_amount: 0
         untaxed_amount: 0
         vat: 0
@@ -9411,7 +9569,7 @@ components:
           default: true
           type: boolean
         timestamp:
-          default: <function datetime.now at 0x7fb8220e9e18>
+          default: <function datetime.now at 0x7fcc5d4df400>
           format: date-time
           type: string
         total_amount:
@@ -9584,7 +9742,7 @@ components:
       example:
         code: ""
         code_type: ""
-        deleted: 2021-03-26 15:03:49.444020
+        deleted: 2021-04-06 18:29:53.470402
         description: ""
         diff: 0
         diff_percent: 0
@@ -9592,7 +9750,7 @@ components:
         id_account: 0
         id_security: 0
         label: ""
-        last_update: 2021-03-26 15:03:49.443882
+        last_update: 2021-04-06 18:29:53.470354
         original_currency: ""
         original_diff: 0
         original_unitprice: 0
@@ -9600,13 +9758,13 @@ components:
         original_valuation: 0
         portfolio_share: 0
         prev_diff: 0
-        prev_vdate: 2021-03-26
+        prev_vdate: 2021-04-06
         quantity: 0
         source: ""
         unitprice: 0
         unitvalue: 0
         valuation: 0
-        vdate: 2021-03-26
+        vdate: 2021-04-06
       properties:
         code:
           description: Investment code
@@ -9717,7 +9875,7 @@ components:
         original_currency: ""
         original_unitvalue: 0
         unitvalue: 0
-        vdate: 2021-03-26
+        vdate: 2021-04-06
       properties:
         id:
           description: ID of the value
@@ -9774,13 +9932,13 @@ components:
     LockedUser:
       example:
         id_user: 0
-        timestamp: <function datetime.now at 0x7fb8228c92f0>
+        timestamp: <function datetime.now at 0x7fcc5dcafea0>
         worker: ""
       properties:
         id_user:
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7fb8228c92f0>
+          default: <function datetime.now at 0x7fcc5dcafea0>
           format: date-time
           type: string
         worker:
@@ -9793,14 +9951,14 @@ components:
       example:
         amount: 0
         code: ""
-        created: 2021-03-26 15:03:49.435302
-        date: 2021-03-26
-        deleted: 2021-03-26 15:03:49.435450
-        execution_date: 2021-03-26
+        created: 2021-04-06 18:29:53.466994
+        date: 2021-04-06
+        deleted: 2021-04-06 18:29:53.467087
+        execution_date: 2021-04-06
         id: 0
         id_account: 0
         label: ""
-        last_update: 2021-03-26 15:03:49.435119
+        last_update: 2021-04-06 18:29:53.466887
         ordervalue: 0
         payment_method: ""
         quantity: 0
@@ -9808,7 +9966,7 @@ components:
         stock_market: ""
         unitprice: 0
         unitvalue: 0
-        validity_date: 2021-03-26
+        validity_date: 2021-04-06
         webid: ""
       properties:
         amount:
@@ -9850,7 +10008,8 @@ components:
           type: string
         ordervalue:
           default: 0
-          description: Limit value or trigger value, only relevant if the order type is LIMIT or TRIGGER
+          description: Limit value or trigger value, only relevant if the order type is
+            LIMIT or TRIGGER
           format: float
           type: number
         payment_method:
@@ -9910,7 +10069,7 @@ components:
         error_code: ""
         error_description: ""
         id: 0
-        register_date: 2021-03-26 15:03:49.204448
+        register_date: 2021-04-06 18:29:53.349760
         state: ""
         validate_uri: ""
       properties:
@@ -9946,7 +10105,7 @@ components:
         id_file: 0
         id_payment: 0
         state: ""
-        timestamp: <function datetime.now at 0x7fb8219e9d08>
+        timestamp: <function datetime.now at 0x7fcc5d04ad08>
       properties:
         error_code:
           description: In case of error, the error code
@@ -9966,7 +10125,7 @@ components:
           description: State of the payment
           type: string
         timestamp:
-          default: <function datetime.now at 0x7fb8219e9d08>
+          default: <function datetime.now at 0x7fcc5d04ad08>
           description: Timestamp of the log
           format: date-time
           type: string
@@ -9976,14 +10135,14 @@ components:
       type: object
     Pocket:
       example:
-        availability_date: 2021-03-26
+        availability_date: 2021-04-06
         condition: inconnu
-        deleted: 2021-03-26 15:03:49.366467
+        deleted: 2021-04-06 18:29:53.431639
         id: 0
         id_account: 0
         id_investment: 0
         label: ""
-        last_update: 2021-03-26 15:03:49.366344
+        last_update: 2021-04-06 18:29:53.431590
         quantity: 0
         value: 0
       properties:
@@ -10097,7 +10256,7 @@ components:
              - the list of PSD2 API to create (needed when a new connector is added)
              - the list of broken connectors
       example:
-        created_at: 2021-03-26 15:03:49.788889
+        created_at: 2021-04-06 18:29:53.640222
         error_message: ""
         id: 0
         id_psd2registration: 0
@@ -10129,18 +10288,18 @@ components:
         bank_name: ""
         category: ""
         currency: ""
-        deleted: 2021-03-26 15:03:49.447244
-        enabled_at: 2021-03-26 15:03:49.447500
+        deleted: 2021-04-06 18:29:53.471611
+        enabled_at: 2021-04-06 18:29:53.471736
         error: ""
-        expire: 2021-03-26 15:03:49.447375
+        expire: 2021-04-06 18:29:53.471658
         iban: ""
         id: 0
         id_account: 0
         id_target_account: 0
         label: ""
-        last_update: 2021-03-26 15:03:49.446956
+        last_update: 2021-04-06 18:29:53.471523
         state: ""
-        time_scraped: 2021-03-26 15:03:49.447102
+        time_scraped: 2021-04-06 18:29:53.471567
         webid: ""
       properties:
         add_verified:
@@ -10216,13 +10375,14 @@ components:
         id_recipient: 0
         request_data: ""
         step: ""
-        timestamp: <function datetime.now at 0x7fb822ac5400>
+        timestamp: <function datetime.now at 0x7fcc5de7f0d0>
       properties:
         error:
           description: Error message during recipient addition, if any
           type: string
         fields:
-          description: Fields for recipient in additionalInformationNeeded state with background option
+          description: Fields for recipient in additionalInformationNeeded state with
+            background option
           type: string
         id:
           description: ID of the transfer log entry
@@ -10237,10 +10397,11 @@ components:
           description: Data stored related to user who has requested the recipient addition
           type: string
         step:
-          description: Step of recipient addition, (add_recipient, asking_field, recipient addition validated, creation, storing_files)
+          description: Step of recipient addition, (add_recipient, asking_field, recipient
+            addition validated, creation, storing_files)
           type: string
         timestamp:
-          default: <function datetime.now at 0x7fb822ac5400>
+          default: <function datetime.now at 0x7fcc5de7f0d0>
           description: Timestamp of the log
           format: date-time
           type: string
@@ -10253,7 +10414,7 @@ components:
         code: ""
         id: 0
         id_type: 0
-        last_update: 2021-03-26 15:03:49.200213
+        last_update: 2021-04-06 18:29:53.347649
         name: ""
       properties:
         code:
@@ -10278,26 +10439,27 @@ components:
       type: object
     Subscription:
       example:
-        deleted: 2021-03-26 15:03:49.494147
-        disabled: 2021-03-26 15:03:49.494239
+        deleted: 2021-04-06 18:29:53.492958
+        disabled: 2021-04-06 18:29:53.493047
         error: ""
         id: 0
         id_connection: 0
         id_source: 0
         id_user: 0
         label: ""
-        last_update: 2021-03-26 15:03:49.494017
+        last_update: 2021-04-06 18:29:53.492873
         number: ""
-        renewdate: 2021-03-26
+        renewdate: 2021-04-06
         subscriber: ""
-        validity: 2021-03-26
+        validity: 2021-04-06
       properties:
         deleted:
           description: This subscription is not found on the website anymore
           format: date-time
           type: string
         disabled:
-          description: This subscription has been deleted by user and will not be synchronized anymore
+          description: This subscription has been deleted by user and will not be
+            synchronized anymore
           format: date-time
           type: string
         error:
@@ -10350,7 +10512,7 @@ components:
         id_source: 0
         id_subscription: 0
         nb_docs: 0
-        timestamp: <function datetime.now at 0x7fb8227c4a60>
+        timestamp: <function datetime.now at 0x7fcc5dbb0bf8>
       properties:
         error:
           description: If fail, contains the error code
@@ -10374,7 +10536,7 @@ components:
           description: Number of docs on the subscription
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7fb8227c4a60>
+          default: <function datetime.now at 0x7fcc5dbb0bf8>
           description: Timestamp of log
           format: date-time
           type: string
@@ -10385,8 +10547,8 @@ components:
       type: object
     TermsOfService:
       example:
-        created: 2021-03-26 15:03:49.577789
-        deleted: 2021-03-26 15:03:49.577908
+        created: 2021-04-06 18:29:53.538433
+        deleted: 2021-04-06 18:29:53.538483
         id: 0
         version: ""
       properties:
@@ -10408,8 +10570,8 @@ components:
     Transaction:
       example:
         active: true
-        application_date: 2021-03-26
-        bdate: 2021-03-26
+        application_date: 2021-04-06
+        bdate: 2021-04-06
         card: ""
         coming: false
         comment: ""
@@ -10417,23 +10579,23 @@ components:
         commission_currency: ""
         counterparty: ""
         country: ""
-        date: 2021-03-26
-        date_scraped: 2021-03-26 15:03:49.357085
-        deleted: 2021-03-26 15:03:49.359757
+        date: 2021-04-06
+        date_scraped: 2021-04-06 18:29:53.427233
+        deleted: 2021-04-06 18:29:53.428556
         gross_value: 0
         id: 0
         id_account: 0
         id_category: 0
         id_cluster: 0
-        last_update: 2021-03-26 15:03:49.359644
+        last_update: 2021-04-06 18:29:53.428507
         nature: inconnu
         original_currency: ""
         original_gross_value: 0
         original_value: 0
-        rdate: 2021-03-26
+        rdate: 2021-04-06
         state: new
         value: 0
-        vdate: 2021-03-26
+        vdate: 2021-04-06
         webid: ""
         wording: ""
       properties:
@@ -10442,7 +10604,8 @@ components:
           description: If false, PFM services will ignore this transaction
           type: boolean
         application_date:
-          description: Date considered by PFM services. It is used to change the month of a transaction, for example.
+          description: Date considered by PFM services. It is used to change the month of
+            a transaction, for example.
           format: date
           type: string
         bdate:
@@ -10596,7 +10759,7 @@ components:
         id_category: 0
         mean_amount: 0
         median_increment: 0
-        next_date: 2021-03-26
+        next_date: 2021-04-06
         wording: ""
       properties:
         created_by:
@@ -10638,7 +10801,7 @@ components:
         beneficiary_type: recipient
         currency: ""
         error: ""
-        exec_date: 2021-03-26
+        exec_date: 2021-04-06
         fees: 0
         id: 0
         id_account: 0
@@ -10647,7 +10810,7 @@ components:
         id_user: 0
         label: ""
         recipient_iban: ""
-        register_date: 2021-03-26 15:03:49.370103
+        register_date: 2021-04-06 18:29:53.433465
         state: ""
         validate_mechanism: ""
         webid: ""
@@ -10664,14 +10827,17 @@ components:
           format: float
           type: number
         beneficiary_label:
-          description: Label of the beneficiary (needed for transfer to other beneficiary type than 'recipient')
+          description: Label of the beneficiary (needed for transfer to other beneficiary
+            type than 'recipient')
           type: string
         beneficiary_number:
-          description: "Beneficiary bank identifier value like recipient webid, iban: EX6713281847025300290000062 or phone_number: 06XXXXXX"
+          description: "Beneficiary bank identifier value like recipient webid, iban:
+            EX6713281847025300290000062 or phone_number: 06XXXXXX"
           type: string
         beneficiary_type:
           default: recipient
-          description: "Type of beneficiary number, for example: 'recipient' (in bank recipient list), 'iban' or 'phone_number'"
+          description: "Type of beneficiary number, for example: 'recipient' (in bank
+            recipient list), 'iban' or 'phone_number'"
           type: string
         currency:
           description: Currency of the object
@@ -10713,10 +10879,12 @@ components:
           format: date-time
           type: string
         state:
-          description: State of the transfer (created, scheduled, validating, pending, coming, done, canceled, transactionNotFound, deleted, error, bug)
+          description: State of the transfer (created, scheduled, validating, pending,
+            coming, done, canceled, transactionNotFound, deleted, error, bug)
           type: string
         validate_mechanism:
-          description: Authentication method used to validate transfer (credentials or webauth)
+          description: Authentication method used to validate transfer (credentials or
+            webauth)
           type: string
         webid:
           description: WebID of the transfer
@@ -10737,13 +10905,14 @@ components:
         id_transfer: 0
         request_data: ""
         state: ""
-        timestamp: <function datetime.now at 0x7fb822a98a60>
+        timestamp: <function datetime.now at 0x7fcc5de7f8c8>
       properties:
         error:
           description: Error message during transfer, if any
           type: string
         fields:
-          description: Fields for transfer in additionalInformationNeeded state with background option
+          description: Fields for transfer in additionalInformationNeeded state with
+            background option
           type: string
         id:
           description: ID of the transfer log entry
@@ -10758,10 +10927,11 @@ components:
           description: Data stored related to user who has requested the transfer
           type: string
         state:
-          description: State of the transfer (created, scheduled, validating, pending, done, canceled, error, bug)
+          description: State of the transfer (created, scheduled, validating, pending,
+            done, canceled, error, bug)
           type: string
         timestamp:
-          default: <function datetime.now at 0x7fb822a98a60>
+          default: <function datetime.now at 0x7fcc5de7f8c8>
           description: Timestamp of the log
           format: date-time
           type: string
@@ -10773,7 +10943,7 @@ components:
       example:
         id: 0
         platform: ""
-        signin: <function datetime.now at 0x7fb822888f28>
+        signin: <function datetime.now at 0x7fcc5dc6be18>
       properties:
         id:
           type: integer
@@ -10791,7 +10961,7 @@ components:
             - refresh_token
           type: string
         signin:
-          default: <function datetime.now at 0x7fb822888f28>
+          default: <function datetime.now at 0x7fcc5dc6be18>
           format: date-time
           type: string
       required:
@@ -10800,7 +10970,7 @@ components:
         - platform
       type: object
     UserAlert:
-      description: >-
+      description: |-
         /!\ Careful we use default value from database if present
 
             For more information see AlertsPlugin.init
@@ -10871,14 +11041,14 @@ components:
       type: object
     Webhook:
       example:
-        created: 2021-03-26 15:03:49.773250
-        deleted: 2021-03-26 15:03:49.773503
+        created: 2021-04-06 18:29:53.633365
+        deleted: 2021-04-06 18:29:53.633472
         id: 0
         id_auth: 0
         id_event: 0
         id_service: 0
         id_user: 0
-        updated: 2021-03-26 15:03:49.773388
+        updated: 2021-04-06 18:29:53.633426
         url: ""
       properties:
         add_to_data:
@@ -10924,14 +11094,14 @@ components:
       type: object
     WebhookData:
       example:
-        created: 2021-03-26 15:03:49.777844
+        created: 2021-04-06 18:29:53.635461
         id: 0
         id_resource: 0
         id_service: 0
         id_user: 0
         id_webhook: 0
         mimetype: ""
-        success: 2021-03-26 15:03:49.777959
+        success: 2021-04-06 18:29:53.635528
       properties:
         created:
           description: Timestamp when the hook data was generated
@@ -10944,7 +11114,8 @@ components:
           description: ID of the webhook data
           type: integer
         id_resource:
-          description: a changing ID used to filter webhookdata depending on the event triggered
+          description: a changing ID used to filter webhookdata depending on the event
+            triggered
           type: integer
         id_service:
           description: ID of the recipient service
@@ -10972,10 +11143,10 @@ components:
         id_service: 0
         id_user: 0
         id_webhook_data: 0
-        next_try: 2021-03-26 15:03:49.779753
+        next_try: 2021-04-06 18:29:53.636351
         response_code: 0
-        response_date: 2021-03-26 15:03:49.779112
-        timestamp: 2021-03-26 15:03:49.779006
+        response_date: 2021-04-06 18:29:53.636035
+        timestamp: 2021-04-06 18:29:53.635982
       properties:
         id:
           description: ID of the log

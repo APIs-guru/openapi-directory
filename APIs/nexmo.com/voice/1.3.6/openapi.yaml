@@ -6,7 +6,10 @@ info:
     email: devrel@vonage.com
     name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: The Voice API lets you create outbound calls, control in-progress calls and get information about historical calls. More information about the Voice API can be found at <https://developer.nexmo.com/voice/voice-api/overview>.
+  description: The Voice API lets you create outbound calls, control in-progress
+    calls and get information about historical calls. More information about the
+    Voice API can be found at
+    <https://developer.nexmo.com/voice/voice-api/overview>.
   title: Voice API
   version: 1.3.6
   x-origin:
@@ -334,7 +337,8 @@ components:
               type: string
             answer_url:
               description: >
-                The webhook endpoint where you provide the [Nexmo Call Control Object](/voice/voice-api/ncco-reference) that governs this call.
+                The webhook endpoint where you provide the [Nexmo Call Control
+                Object](/voice/voice-api/ncco-reference) that governs this call.
               example:
                 - https://example.com/answer
               items:
@@ -374,12 +378,16 @@ components:
           $ref: "#/components/schemas/EndpointPhoneFrom"
         length_timer:
           default: 7200
-          description: Set the number of seconds that elapse before Vonage hangs up after the call state changes to answered.
+          description: Set the number of seconds that elapse before Vonage hangs up after
+            the call state changes to answered.
           maximum: 7200
           minimum: 1
           type: integer
         machine_detection:
-          description: Configure the behavior when Vonage detects that the call is answered by voicemail. If `continue`, Vonage sends an HTTP request to `event_url` with the Call event machine. If `hangup`, Vonage ends the call.
+          description: Configure the behavior when Vonage detects that the call is
+            answered by voicemail. If `continue`, Vonage sends an HTTP request
+            to `event_url` with the Call event machine. If `hangup`, Vonage ends
+            the call.
           enum:
             - continue
             - hangup
@@ -387,7 +395,8 @@ components:
           type: string
         ringing_timer:
           default: 60
-          description: Set the number of seconds that elapse before Vonage hangs up after the call state changes to ‘ringing’.
+          description: Set the number of seconds that elapse before Vonage hangs up after
+            the call state changes to ‘ringing’.
           maximum: 120
           minimum: 1
           type: integer
@@ -411,7 +420,8 @@ components:
         - properties:
             ncco:
               description: >
-                The [Nexmo Call Control Object](/voice/voice-api/ncco-reference) to use for this call.
+                The [Nexmo Call Control Object](/voice/voice-api/ncco-reference) to
+                use for this call.
               example:
                 - action: talk
                   text: Hello World
@@ -479,7 +489,9 @@ components:
       description: Connect to a Phone (PSTN) number
       properties:
         dtmfAnswer:
-          description: Provide [DTMF digits](https://developer.nexmo.com/voice/voice-api/guides/dtmf) to send when the call is answered
+          description: Provide [DTMF
+            digits](https://developer.nexmo.com/voice/voice-api/guides/dtmf) to
+            send when the call is answered
           example: p*123#
           type: string
         number:
@@ -585,7 +597,9 @@ components:
     GetCallsResponse:
       properties:
         _embedded:
-          description: A list of call objects. See the [get details of a specific call](#getCall) response fields for a description of the nested objects
+          description: A list of call objects. See the [get details of a specific
+            call](#getCall) response fields for a description of the nested
+            objects
           properties:
             calls:
               items:
@@ -625,7 +639,8 @@ components:
       properties:
         level:
           default: "0"
-          description: Set the audio level of the stream in the range `-1 >= level <= 1` with a precision of 0.1. The default value is 0.
+          description: Set the audio level of the stream in the range `-1 >= level <= 1`
+            with a precision of 0.1. The default value is 0.
           example: "0.4"
           type: string
         loop:
@@ -657,7 +672,8 @@ components:
           $ref: "#/components/schemas/language"
         level:
           default: "0"
-          description: The volume level that the speech is played. This can be any value between `-1` to `1` in `0.1` increments, with `0` being the default.
+          description: The volume level that the speech is played. This can be any value
+            between `-1` to `1` in `0.1` increments, with `0` being the default.
           example: "0.4"
           type: string
         loop:
@@ -764,7 +780,9 @@ components:
         destination:
           properties:
             ncco:
-              description: Refer to the [NCCO Guide](https://developer.nexmo.com/voice/voice-api/ncco-reference) for a description of possible NCCO parameters.
+              description: Refer to the [NCCO
+                Guide](https://developer.nexmo.com/voice/voice-api/ncco-reference)
+                for a description of possible NCCO parameters.
               example:
                 - action: talk
                   text: Hello World
@@ -818,12 +836,15 @@ components:
       example: outbound
       type: string
     duration:
-      description: The time elapsed for the call to take place in seconds. This is only sent if `status` is `completed`.
+      description: The time elapsed for the call to take place in seconds. This is
+        only sent if `status` is `completed`.
       example: "60"
       title: "The Duration of the call "
       type: string
     end_time:
-      description: "The time the call started in the following format: `YYYY-MM-DD HH:MM:SS`. For xample, `2020-01-01 12:00:00`. This is only sent if `status` is `completed`."
+      description: "The time the call started in the following format: `YYYY-MM-DD
+        HH:MM:SS`. For xample, `2020-01-01 12:00:00`. This is only sent if
+        `status` is `completed`."
       example: 2020-01-01 12:00:00
       format: timestamp
       title: "The End Time of the call "
@@ -892,28 +913,35 @@ components:
         - yue-CN
       type: string
     network:
-      description: The Mobile Country Code Mobile Network Code ([MCCMNC](https://en.wikipedia.org/wiki/Mobile_country_code)) for the carrier network used to make this call.
+      description: The Mobile Country Code Mobile Network Code
+        ([MCCMNC](https://en.wikipedia.org/wiki/Mobile_country_code)) for the
+        carrier network used to make this call.
       example: "65512"
       title: "The Network ID of the destination "
       type: string
     price:
-      description: The total price charged for this call. This is only sent if `status` is `completed`.
+      description: The total price charged for this call. This is only sent if
+        `status` is `completed`.
       example: "23.40"
       title: "The total price of the call "
       type: string
     rate:
-      description: The price per minute for this call. This is only sent if `status` is `completed`.
+      description: The price per minute for this call. This is only sent if `status`
+        is `completed`.
       example: "0.39"
       title: The Price per minute of the called destination
       type: string
     start_time:
-      description: "The time the call started in the following format: `YYYY-MM-DD HH:MM:SS`. For example, `2020-01-01 12:00:00`. This is only sent if `status` is `completed`."
+      description: "The time the call started in the following format: `YYYY-MM-DD
+        HH:MM:SS`. For example, `2020-01-01 12:00:00`. This is only sent if
+        `status` is `completed`."
       example: 2020-01-01 12:00:00
       format: timestamp
       title: "The Start Time of the call "
       type: string
     status:
-      description: The status of the call. [See possible values](https://developer.nexmo.com/voice/voice-api/guides/call-flow#event-objects)
+      description: The status of the call. [See possible
+        values](https://developer.nexmo.com/voice/voice-api/guides/call-flow#event-objects)
       example: started
       title: The State of the call
       type: string
@@ -934,7 +962,9 @@ components:
           type: string
       type: object
     uuid:
-      description: The unique identifier for this call leg. The UUID is created when your call request is accepted by Vonage. You use the UUID in all requests for individual live calls
+      description: The unique identifier for this call leg. The UUID is created when
+        your call request is accepted by Vonage. You use the UUID in all
+        requests for individual live calls
       example: 63f61863-4a51-4f6b-86e1-46edebcf9356
       format: uuid
       title: The UUID of the Call Leg

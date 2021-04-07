@@ -5,7 +5,9 @@ info:
   contact:
     name: Vonage.com
     url: https://developer.nexmo.com
-  description: "Enables users to manage their Vonage API Account by programmable means. More information is available here: <https://developer.nexmo.com/account/overview>."
+  description: "Enables users to manage their Vonage API Account by programmable
+    means. More information is available here:
+    <https://developer.nexmo.com/account/overview>."
   title: Account API
   version: 1.0.3
   x-origin:
@@ -15,12 +17,17 @@ info:
   x-providerName: nexmo.com
   x-serviceName: account
 tags:
-  - description: This section shows how you can query the current balance of your account, and if you have auto-reload enabled how to trigger a top-up to your account without waiting for the next balance check.
+  - description: This section shows how you can query the current balance of your
+      account, and if you have auto-reload enabled how to trigger a top-up to
+      your account without waiting for the next balance check.
     name: Balance
   - description: Manage the settings on your account
     name: Configuration
   - description: >-
-      Many of the Vonage APIs are accessed using an API key and secret. It is recommended that you change or "rotate" your secrets from time to time for security purposes. This section provides the API interface for achieving this.
+      Many of the Vonage APIs are accessed using an API key and secret.
+      It is recommended that you change or "rotate" your secrets from time to
+      time for security purposes. This section provides the API interface for
+      achieving this.
 
       Note: to work on secrets for your secondary accounts, you may authenticate with your primary credentials and supply the secondary API keys as URL parameters to these API endpoints.
     name: Secret Management
@@ -43,7 +50,8 @@ paths:
                 $ref: "#/components/schemas/accountBalance"
             application/xml:
               example: >-
-                <?xml version="1.0" encoding="UTF-8" standalone="yes"?> <accountBalance>
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <accountBalance>
                   <value>10.17127500</value>
                   <autoReload>false</autoReload>
                 </accountBalance>
@@ -58,7 +66,8 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/ErrorAuthenticationFailedAccountBalance"
-          description: Not Authorised. You must supply your `api_key` and `api_secret` as query parameters to this request
+          description: Not Authorised. You must supply your `api_key` and `api_secret` as
+            query parameters to this request
       summary: Get Account Balance
       tags:
         - Balance
@@ -98,7 +107,8 @@ paths:
                 $ref: "#/components/schemas/accountSettings"
             application/xml:
               example: >-
-                <?xml version="1.0" encoding="UTF-8" standalone="yes"?> <account-settings>
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <account-settings>
                   <mo-callback-url>https://example.com/webhooks/inbound-sms</mo-callback-url>
                   <dr-callback-url>https://example.com/webhooks/delivery-receipt</dr-callback-url>
                   <max-outbound-request>30</max-outbound-request>
@@ -107,9 +117,11 @@ paths:
                 </account-settings>
               schema:
                 $ref: "#/components/schemas/accountSettings"
-          description: OK. Settings were updated if supplied, the details of the current settings are included in the response.
+          description: OK. Settings were updated if supplied, the details of the current
+            settings are included in the response.
         "401":
-          description: Not Authorised. You must supply your `api_key` and `api_secret` as query parameters to this request
+          description: Not Authorised. You must supply your `api_key` and `api_secret` as
+            query parameters to this request
       summary: Change Account Settings
       tags:
         - Configuration
@@ -118,7 +130,10 @@ paths:
   /account/top-up:
     post:
       description: >-
-        You can top up your account using this API when you have enabled auto-reload in the dashboard. The amount added by the top-up operation will be the same amount as was added in the payment when auto-reload was enabled.
+        You can top up your account using this API when you have enabled
+        auto-reload in the dashboard. The amount added by the top-up operation
+        will be the same amount as was added in the payment when auto-reload was
+        enabled.
 
         Your account balance is checked every 5-10 minutes and if it falls below the threshold and auto-reload is enabled, then it will be topped up automatically. Use this endpoint  if you need to top up at times when your credit may be exhausted more quickly than the auto-reload may occur.
       externalDocs:
@@ -260,7 +275,8 @@ paths:
                     example: bf0ca0bf927b3b52e3cb03217e1a1ddf
                     type: string
                   invalid_parameters:
-                    description: Array of the parameters that are considered invalid, and explanations of why
+                    description: Array of the parameters that are considered invalid, and
+                      explanations of why
                     items:
                       properties:
                         name:
@@ -281,7 +297,9 @@ paths:
                     description: URL for further information
                     example: https://developer.nexmo.com/api-errors/account/secret-management#validation
                     type: string
-          description: Bad request. This usually indicates valid data but can also occur when a user has exceeded the allowed number of secrets on their account.
+          description: Bad request. This usually indicates valid data but can also occur
+            when a user has exceeded the allowed number of secrets on their
+            account.
         "401":
           $ref: "#/components/responses/BadCredentialsError"
         "404":
@@ -313,7 +331,8 @@ paths:
                 properties:
                   detail:
                     description: More detail regarding this error
-                    example: Can not delete the last secret. The account must always have at least 1 secret active at any time
+                    example: Can not delete the last secret. The account must always have at least 1
+                      secret active at any time
                     type: string
                   instance:
                     description: Internal Trace ID
@@ -327,7 +346,8 @@ paths:
                     description: URL for further information
                     example: https://developer.nexmo.com/api-errors/account/secret-management#delete-last-secret
                     type: string
-          description: Operation forbidden by permissions or because this is the only API secret and you are required to have at least one.
+          description: Operation forbidden by permissions or because this is the only API
+            secret and you are required to have at least one.
         "404":
           content:
             application/json:
@@ -389,7 +409,8 @@ components:
       schema:
         type: string
     api_key_for_auth:
-      description: Your Vonage API key. You can find this in the [dashboard](https://dashboard.nexmo.com)
+      description: Your Vonage API key. You can find this in the
+        [dashboard](https://dashboard.nexmo.com)
       in: query
       name: api_key
       required: true
@@ -397,7 +418,8 @@ components:
         example: abcd1234
         type: string
     api_secret_for_auth:
-      description: Your Vonage API secret. You can find this in the [dashboard](https://dashboard.nexmo.com)
+      description: Your Vonage API secret. You can find this in the
+        [dashboard](https://dashboard.nexmo.com)
       in: query
       name: api_secret
       required: true
@@ -420,7 +442,8 @@ components:
             properties:
               detail:
                 description: More detail regarding this error, including the expected value
-                example: 'Invalid credentials format. Expected: "Authorization: (Base64(UTF-8(apiKey:secret)))"'
+                example: 'Invalid credentials format. Expected: "Authorization:
+                  (Base64(UTF-8(apiKey:secret)))"'
                 type: string
               instance:
                 description: Internal Trace ID
@@ -563,7 +586,8 @@ components:
       properties:
         drCallBackUrl:
           description: >-
-            The webhook URL that Vonage makes a request to when a delivery receipt is available  for an SMS sent by one of your Vonage numbers.
+            The webhook URL that Vonage makes a request to when a delivery
+            receipt is available  for an SMS sent by one of your Vonage numbers.
 
             Send an empty string to unset this value.
           example: https://example.com/webhooks/delivery-receipt
@@ -571,7 +595,9 @@ components:
           type: string
         moCallBackUrl:
           description: >-
-            The default webhook URL for inbound SMS. If an SMS is received at a Vonage number  that does not have its own inbound SMS webhook configured, Vonage makes a request here.
+            The default webhook URL for inbound SMS. If an SMS is received at a
+            Vonage number  that does not have its own inbound SMS webhook
+            configured, Vonage makes a request here.
 
             Send an empty string to unset this value.
           example: https://example.com/webhooks/inbound-sms
@@ -581,18 +607,13 @@ components:
     createSecretRequest:
       properties:
         secret:
-          description: >
+          description: |
             The new secret must follow these rules:
 
-
             * minimum 8 characters
-
             * maximum 25 characters
-
             * minimum 1 lower case character
-
             * minimum 1 upper case character
-
             * minimum 1 digit
           example: example-4PI-secret
           type: string
@@ -635,7 +656,8 @@ components:
     topupRequest:
       properties:
         trx:
-          description: The transaction reference of the transaction when balance was added and auto-reload was enabled on your account.
+          description: The transaction reference of the transaction when balance was added
+            and auto-reload was enabled on your account.
           example: 8ef2447e69604f642ae59363aa5f781b
           type: string
       required:
@@ -644,7 +666,12 @@ components:
   securitySchemes:
     basicAuth:
       description: >-
-        Provide an `Authorization` header, with a value of "Basic" followed by the result of base64-encoding your Vonage API key and secret separated by a colon. You can find your API key and secret on the [dashboard](https://dashboard.nexmo.com) and more information is available [on the developer portal](https://developer.nexmo.com/concepts/guides/authentication#header-based-api-key-and-secret-authentication).
+        Provide an `Authorization` header, with a value of "Basic" followed
+        by the result of base64-encoding your Vonage API key and secret
+        separated by a colon. You can find your API key and secret on the
+        [dashboard](https://dashboard.nexmo.com) and more information is
+        available [on the developer
+        portal](https://developer.nexmo.com/concepts/guides/authentication#header-based-api-key-and-secret-authentication).
 
         If your API key were aaa012 and your API secret were abc123456789 then your HTTP header would be: `Authorization: Basic YWFhMDEyOmFiYzEyMzQ1Njc4OQ==`
       scheme: basic
@@ -658,15 +685,10 @@ x-errors:
     link:
       text: View API reference
       url: /api/account/api-secret-management#createSecret
-    resolution: >
+    resolution: |
       Modify your request to provide a valid payload.
-
       * Minimum 8 characters
-
       * Maximum 25 characters
-
       * Minimum 1 lower case character
-
       * Minimum 1 upper case character
-
       * Minimum 1 digit

@@ -10,7 +10,9 @@ info:
     name: DBOpenData
     url: https://developer.deutschebahn.com/store/
   description: >-
-    A RESTful webservice to request a railway journey - FREE plan with restricted access (max. 10 requests per minute). Please ignore the message in the API Console about the access token.
+    A RESTful webservice to request a railway journey - FREE plan with
+    restricted access (max. 10 requests per minute). Please ignore the message
+    in the API Console about the access token.
 
 
     Register to use an less restricted version, which requires an access token.
@@ -46,7 +48,8 @@ paths:
           name: id
           required: true
           type: string
-        - description: "Date and time in ISO-8601 format, yyyy-mm-ddThh:mm:ss, example: 2017-04-01 or 2017-04-01T10:30"
+        - description: "Date and time in ISO-8601 format, yyyy-mm-ddThh:mm:ss, example:
+            2017-04-01 or 2017-04-01T10:30"
           in: query
           name: date
           required: true
@@ -82,7 +85,8 @@ paths:
           name: id
           required: true
           type: string
-        - description: "Date and time in ISO-8601 format, yyyy-mm-ddThh:mm:ss, example: 2017-04-01 or 2017-04-01T10:30"
+        - description: "Date and time in ISO-8601 format, yyyy-mm-ddThh:mm:ss, example:
+            2017-04-01 or 2017-04-01T10:30"
           in: query
           name: date
           required: true
@@ -111,9 +115,11 @@ paths:
       x-throttling-tier: 10_per_minute
   "/journeyDetails/{id}":
     get:
-      description: Retrieve details of a journey. The id of journey should come from an arrival board or a departure board.
+      description: Retrieve details of a journey. The id of journey should come from
+        an arrival board or a departure board.
       parameters:
-        - description: Id of a journey. Use attribute 'detailsId' from the result of  'arrivalBoard' or 'departureBoard'
+        - description: Id of a journey. Use attribute 'detailsId' from the result
+            of  'arrivalBoard' or 'departureBoard'
           in: path
           name: id
           required: true

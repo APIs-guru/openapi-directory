@@ -69,7 +69,8 @@ paths:
             $ref: "#/definitions/UserAuthentication"
       responses:
         "200":
-          description: Contains user data including authentication token for subsequent requests
+          description: Contains user data including authentication token for subsequent
+            requests
           schema:
             $ref: "#/definitions/UserFullProfile"
       summary: Sign in user
@@ -91,7 +92,9 @@ paths:
     post:
       description: Invite user to collaborate on map.
       parameters:
-        - description: Supply map_id and either a comma separated list of user_ids or emails. Optionally you can provide a 'is_admin' parameter with 'true' or 'false' to give the invited users admin privileges.
+        - description: Supply map_id and either a comma separated list of user_ids or
+            emails. Optionally you can provide a 'is_admin' parameter with
+            'true' or 'false' to give the invited users admin privileges.
           in: body
           name: body
           schema:
@@ -206,7 +209,16 @@ paths:
           name: timeframe_end
           required: false
           type: string
-        - description: "To refine your event index request to contain only events within                                                             a geographical box pass the followng bounds parameters.                                                             F. e. to get events within 'Hamburg, St. Pauli':                                                             bounds[sw_lat]=53.54831449741324                                                             bounds[sw_lon]=9.943227767944336                                                             bounds[ne_lat]=53.5571103674878                                                             bounds[ne_lon]=9.9776029586792"
+        - description: "To refine your event index request to contain only events
+            within                                                             a
+            geographical box pass the followng bounds
+            parameters.                                                             \
+            F. e. to get events within 'Hamburg, St.
+            Pauli':                                                             \
+            bounds[sw_lat]=53.54831449741324                                                             \
+            bounds[sw_lon]=9.943227767944336                                                             \
+            bounds[ne_lat]=53.5571103674878                                                             \
+            bounds[ne_lon]=9.9776029586792"
           in: query
           name: bounds
           required: false
@@ -290,7 +302,8 @@ paths:
       tags:
         - Maps
     post:
-      description: Create map. Wrap map parameters in [map]. To add a map header picture pass a base64 encoded string to [map][picture].
+      description: Create map. Wrap map parameters in [map]. To add a map header
+        picture pass a base64 encoded string to [map][picture].
       parameters:
         - description: map attributes
           in: body
@@ -368,7 +381,8 @@ paths:
       tags:
         - Maps
     patch:
-      description: Update map. Wrap map parameters in [map]. To update the map header picture pass a base64 encoded string to [map][picture].
+      description: Update map. Wrap map parameters in [map]. To update the map header
+        picture pass a base64 encoded string to [map][picture].
       parameters:
         - description: map id
           in: path
@@ -589,7 +603,8 @@ paths:
       tags:
         - Spots
     post:
-      description: Create spot. Wrap parameters in [spot]. To add a spot picture pass a base64 encoded string to [spot][picture].
+      description: Create spot. Wrap parameters in [spot]. To add a spot picture pass
+        a base64 encoded string to [spot][picture].
       parameters:
         - description: Id of map
           in: path
@@ -737,7 +752,9 @@ paths:
         - Respots
   "/share/map/{id}":
     get:
-      description: Get secret access token of an uebermap with access set to 'Secret link'. Pass the 'token' on every request you make to access this uebermap and its resources. F.e. token=1-x_gqu7eLBe3uKoAGAGXy
+      description: Get secret access token of an uebermap with access set to 'Secret
+        link'. Pass the 'token' on every request you make to access this
+        uebermap and its resources. F.e. token=1-x_gqu7eLBe3uKoAGAGXy
       parameters:
         - description: Id of map
           in: path
@@ -823,7 +840,8 @@ paths:
       tags:
         - Spots
     patch:
-      description: Update spot. Wrap parameters in [spot]. To update the spot picture pass a base64 encoded string to [spot][picture].
+      description: Update spot. Wrap parameters in [spot]. To update the spot picture
+        pass a base64 encoded string to [spot][picture].
       parameters:
         - description: spot id
           in: path
@@ -945,7 +963,16 @@ paths:
           name: timeframe_end
           required: false
           type: string
-        - description: "To refine your event index request to contain only events within                                                             a geographical box pass the followng bounds parameters.                                                             F. e. to get events within 'Hamburg, St. Pauli':                                                             bounds[sw_lat]=53.54831449741324                                                             bounds[sw_lon]=9.943227767944336                                                             bounds[ne_lat]=53.5571103674878                                                             bounds[ne_lon]=9.9776029586792"
+        - description: "To refine your event index request to contain only events
+            within                                                             a
+            geographical box pass the followng bounds
+            parameters.                                                             \
+            F. e. to get events within 'Hamburg, St.
+            Pauli':                                                             \
+            bounds[sw_lat]=53.54831449741324                                                             \
+            bounds[sw_lon]=9.943227767944336                                                             \
+            bounds[ne_lat]=53.5571103674878                                                             \
+            bounds[ne_lon]=9.9776029586792"
           in: query
           name: bounds
           required: false
@@ -1364,7 +1391,8 @@ definitions:
         format: date-time
         type: string
       description:
-        example: A collection of restaurants, cafes, clubs and random spots that I recommend in Berlin
+        example: A collection of restaurants, cafes, clubs and random spots that I
+          recommend in Berlin
         type: string
       id:
         example: 18234843
@@ -1413,7 +1441,8 @@ definitions:
   MapEditable:
     properties:
       description:
-        example: A collection of restaurants, cafes, clubs and random spots that I recommend in Berlin
+        example: A collection of restaurants, cafes, clubs and random spots that I
+          recommend in Berlin
         type: string
       map_settings:
         $ref: "#/definitions/MapSettings"
@@ -1482,7 +1511,8 @@ definitions:
         format: date-time
         type: string
       description:
-        example: A collection of restaurants, cafes, clubs and random spots that I recommend in Berlin
+        example: A collection of restaurants, cafes, clubs and random spots that I
+          recommend in Berlin
         type: string
       id:
         example: 18234843
@@ -1517,7 +1547,8 @@ definitions:
         format: date-time
         type: string
       description:
-        example: A collection of restaurants, cafes, clubs and random spots that I recommend in Berlin
+        example: A collection of restaurants, cafes, clubs and random spots that I
+          recommend in Berlin
         type: string
       id:
         example: 18234843
@@ -1573,7 +1604,8 @@ definitions:
         format: date-time
         type: string
       description:
-        example: Landed here by accident but look how wonderful this place is in the photos attached
+        example: Landed here by accident but look how wonderful this place is in the
+          photos attached
         type: string
       id:
         example: 5932234
@@ -1621,7 +1653,8 @@ definitions:
   SpotEditable:
     properties:
       description:
-        example: Landed here by accident but look how wonderful this place is in the photos attached
+        example: Landed here by accident but look how wonderful this place is in the
+          photos attached
         type: string
       lat:
         example: 53.112385

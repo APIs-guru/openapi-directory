@@ -207,7 +207,10 @@ paths:
               examples:
                 response:
                   value:
-                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 37 in '{ \"submission_ids\": [\"123\", \"345\"], metadata: { \"user_id\": \"This PDF is great!\" }}"
+                    error: "There was a problem with the JSON you submitted: unexpected character at
+                      line 1, column 37 in '{ \"submission_ids\": [\"123\",
+                      \"345\"], metadata: { \"user_id\": \"This PDF is great!\"
+                      }}"
                     status: error
               schema:
                 $ref: "#/components/schemas/error"
@@ -229,7 +232,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - "source_pdfs: Could not find Submission with ID: MISSING_ID"
+                      - "source_pdfs: Could not find Submission with ID:
+                        MISSING_ID"
                     status: error
               schema:
                 $ref: "#/components/schemas/invalid_request"
@@ -747,7 +751,10 @@ paths:
               examples:
                 response:
                   value:
-                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 34 in '{ \"source_pdfs\": [\"123\", \"345\"], metadata: { \"user_id\": \"This PDF is great!\" }}"
+                    error: "There was a problem with the JSON you submitted: unexpected character at
+                      line 1, column 34 in '{ \"source_pdfs\": [\"123\",
+                      \"345\"], metadata: { \"user_id\": \"This PDF is great!\"
+                      }}"
                     status: error
               schema:
                 $ref: "#/components/schemas/error"
@@ -769,11 +776,16 @@ paths:
                 response:
                   value:
                     errors:
-                      - "source_pdfs: Could not find Submission with ID: MISSING_SUBMISSION_ID"
-                      - "source_pdfs: Template document is not processed: tpl_000000000000000001 (state: pending)"
-                      - "source_pdfs: Could not find Template with ID: MISSING_TEMPLATE_ID"
-                      - "source_pdfs: Could not find Custom File with ID: MISSING_CUSTOM_FILE_ID"
-                      - "source_pdfs: Could not find Combined Submission with ID: MISSING_COMBINED_SUBMISSION_ID"
+                      - "source_pdfs: Could not find Submission with ID:
+                        MISSING_SUBMISSION_ID"
+                      - "source_pdfs: Template document is not processed:
+                        tpl_000000000000000001 (state: pending)"
+                      - "source_pdfs: Could not find Template with ID:
+                        MISSING_TEMPLATE_ID"
+                      - "source_pdfs: Could not find Custom File with ID:
+                        MISSING_CUSTOM_FILE_ID"
+                      - "source_pdfs: Could not find Combined Submission with
+                        ID: MISSING_COMBINED_SUBMISSION_ID"
                     status: error
               schema:
                 $ref: "#/components/schemas/invalid_request"
@@ -899,7 +911,8 @@ paths:
                     order: 1
                     sort_order: 0
                     state: pending
-                    user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36
+                    user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36
+                      (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36
                     viewed_at:
                       $ref: "#/components/examples/example1/value"
               schema:
@@ -1040,7 +1053,8 @@ paths:
                       order: 1
                       sort_order: 0
                       state: pending
-                      user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36
+                      user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36
+                        (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36
                       viewed_at:
                         $ref: "#/components/examples/example1/value"
                     status: success
@@ -1091,7 +1105,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - Data requests cannot be updated after they have been completed.
+                      - Data requests cannot be updated after they have been
+                        completed.
                     status: error
               schema:
                 $ref: "#/components/schemas/invalid_request"
@@ -1595,7 +1610,8 @@ paths:
                     submissions:
                       - status: valid_but_not_saved
                       - errors:
-                          - The root object did not contain a required property of 'title'
+                          - The root object did not contain a required property
+                            of 'title'
                         status: error
                         submission:
                           actions: []
@@ -1610,7 +1626,8 @@ paths:
                             $ref: "#/components/examples/example1/value"
                           id: sub_000000000000000001
                           json_schema_errors:
-                            - The root object did not contain a required property of 'title'
+                            - The root object did not contain a required
+                              property of 'title'
                           metadata:
                             submission_number: 2
                           pdf_hash:
@@ -1856,7 +1873,9 @@ paths:
               examples:
                 response:
                   value:
-                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 24 in '{ \"title\": \"Test PDF\", description: \"This PDF is great!\" }"
+                    error: "There was a problem with the JSON you submitted: unexpected character at
+                      line 1, column 24 in '{ \"title\": \"Test PDF\",
+                      description: \"This PDF is great!\" }"
                     status: error
               schema:
                 $ref: "#/components/schemas/error"
@@ -3237,20 +3256,38 @@ paths:
                 response:
                   value:
                     errors:
-                      - The property '#/fields/0' did not contain a required property of 'page'
-                      - The property '#/fields/1/page' did not have a minimum value of 1, inclusively
-                      - The property '#/fields/5' contains additional properties ["unknown_property"] outside of the schema when none are allowed
-                      - "The property '#/fields/6/displayType' value \"unknown display type\" did not match one of the following values: text, check, qrcode, barcode, image, shape"
-                      - "The property '#/fields/6/type' value \"unknown type\" did not match one of the following values: string, number, boolean, date, address, country, email, url, image, signature, barcode, combined"
-                      - The property '#/fields/6' did not contain a required property of 'page'
-                      - "The property '#/fields/7/width' of type string did not match the following type: number"
-                      - The property '#/fields/8/height' did not have a minimum value of 0, inclusively
-                      - The property '#/fields/8/width' did not have a minimum value of 0, inclusively
-                      - The property '#/fields/8/x' did not have a minimum value of 0, inclusively
-                      - The property '#/fields/8/y' did not have a minimum value of 0, inclusively
-                      - The property '#/fields/2/id' value "1" is already taken by another field
-                      - The property '#/fields/2/page' value "5" did not have a maximum value of 3, inclusively (Template has 3 pages)
-                      - The property '#/fields/3/page' value "4" did not have a maximum value of 3, inclusively (Template has 3 pages)
+                      - The property '#/fields/0' did not contain a required
+                        property of 'page'
+                      - The property '#/fields/1/page' did not have a minimum
+                        value of 1, inclusively
+                      - The property '#/fields/5' contains additional properties
+                        ["unknown_property"] outside of the schema when none are
+                        allowed
+                      - "The property '#/fields/6/displayType' value \"unknown
+                        display type\" did not match one of the following
+                        values: text, check, qrcode, barcode, image, shape"
+                      - "The property '#/fields/6/type' value \"unknown type\"
+                        did not match one of the following values: string,
+                        number, boolean, date, address, country, email, url,
+                        image, signature, barcode, combined"
+                      - The property '#/fields/6' did not contain a required
+                        property of 'page'
+                      - "The property '#/fields/7/width' of type string did not
+                        match the following type: number"
+                      - The property '#/fields/8/height' did not have a minimum
+                        value of 0, inclusively
+                      - The property '#/fields/8/width' did not have a minimum
+                        value of 0, inclusively
+                      - The property '#/fields/8/x' did not have a minimum value
+                        of 0, inclusively
+                      - The property '#/fields/8/y' did not have a minimum value
+                        of 0, inclusively
+                      - The property '#/fields/2/id' value "1" is already taken
+                        by another field
+                      - The property '#/fields/2/page' value "5" did not have a
+                        maximum value of 3, inclusively (Template has 3 pages)
+                      - The property '#/fields/3/page' value "4" did not have a
+                        maximum value of 3, inclusively (Template has 3 pages)
                     status: error
               schema:
                 properties:
@@ -3837,7 +3874,9 @@ paths:
               examples:
                 response:
                   value:
-                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 24 in '{ \"title\": \"Test PDF\", description: \"This PDF is great!\" }"
+                    error: "There was a problem with the JSON you submitted: unexpected character at
+                      line 1, column 24 in '{ \"title\": \"Test PDF\",
+                      description: \"This PDF is great!\" }"
                     status: error
               schema:
                 $ref: "#/components/schemas/error"
@@ -3860,7 +3899,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - The root object did not contain a required property of 'description'
+                      - The root object did not contain a required property of
+                        'description'
                     status: error
                     submission:
                       actions: []
@@ -3876,7 +3916,8 @@ paths:
                         $ref: "#/components/examples/example1/value"
                       id: sub_000000000000000001
                       json_schema_errors:
-                        - The root object did not contain a required property of 'description'
+                        - The root object did not contain a required property of
+                          'description'
                       metadata:
                         bar: baz
                         foo: 123
@@ -4091,7 +4132,9 @@ paths:
               examples:
                 response:
                   value:
-                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 24 in '{ \"title\": \"Test PDF\", description: \"This PDF is great!\" }"
+                    error: "There was a problem with the JSON you submitted: unexpected character at
+                      line 1, column 24 in '{ \"title\": \"Test PDF\",
+                      description: \"This PDF is great!\" }"
                     status: error
               schema:
                 $ref: "#/components/schemas/error"
@@ -4113,7 +4156,8 @@ paths:
                 response:
                   value:
                     - errors:
-                        - The root object did not contain a required property of 'description'
+                        - The root object did not contain a required property of
+                          'description'
                       status: error
                       submission:
                         actions: []
@@ -4129,7 +4173,8 @@ paths:
                           $ref: "#/components/examples/example1/value"
                         id: sub_000000000000000001
                         json_schema_errors:
-                          - The root object did not contain a required property of 'description'
+                          - The root object did not contain a required property
+                            of 'description'
                         metadata:
                           submission_number: 1
                         pdf_hash:
@@ -4143,7 +4188,8 @@ paths:
                         test: false
                         truncated_text: {}
                     - errors:
-                        - The root object did not contain a required property of 'title'
+                        - The root object did not contain a required property of
+                          'title'
                       status: error
                       submission:
                         actions: []
@@ -4159,7 +4205,8 @@ paths:
                           $ref: "#/components/examples/example1/value"
                         id: sub_000000000000000002
                         json_schema_errors:
-                          - The root object did not contain a required property of 'title'
+                          - The root object did not contain a required property
+                            of 'title'
                         metadata:
                           submission_number: 2
                         pdf_hash:
@@ -4681,7 +4728,7 @@ paths:
 components:
   examples:
     example1:
-      ? value
+      value: null
   schemas:
     authentication_error:
       properties:

@@ -1,7 +1,9 @@
 openapi: 3.0.2
 info:
   description: >-
-    <div style="">This API provides access to our Automotive Data. Use of this API is subject to our <a href="https://autodealerdata.com/tos">Terms of Service</a></div>
+    <div style="">This API provides access to our Automotive Data. Use
+    of this API is subject to our <a href="https://autodealerdata.com/tos">Terms
+    of Service</a></div>
 
     &nbsp;
 
@@ -52,7 +54,8 @@ paths:
   /daysSupply:
     get:
       description: >-
-        Average, median, standard deviation, population variance, and whole region average of the 
+        Average, median, standard deviation, population variance, and whole
+        region average of the 
 
         days of supply left on dealer lots for a given brand and region. The average, median, stdDev, and pVar fields are calculated on
 
@@ -105,7 +108,8 @@ paths:
   /daysToSell:
     get:
       description: >-
-        Average, median, standard deviation, population variance, and whole region average of the 
+        Average, median, standard deviation, population variance, and whole
+        region average of the 
 
         number of days a vehicle spends on dealer lots for a given brand and region. The average, median, stdDev, and pVar fields are calculated on
 
@@ -190,7 +194,8 @@ paths:
   /getDealers:
     get:
       description: >-
-        Premium. Dealership information in a given zip code using the first 4 digits. Returns name, address, state, zipCode, and IDs.
+        Premium. Dealership information in a given zip code using the first
+        4 digits. Returns name, address, state, zipCode, and IDs.
 
         For example a call with the zip code 92701 would return dealers with zip codes in the range [92700, 92709]
       operationId: getDealers_getDealers_get
@@ -228,7 +233,9 @@ paths:
   /getDealersByID:
     get:
       description: >-
-        Premium. Dealership information using the internal ID. Returns name, address, state, zipCode, and ID for a single dealer in the same format as the /getDealers endpoint.
+        Premium. Dealership information using the internal ID. Returns
+        name, address, state, zipCode, and ID for a single dealer in the same
+        format as the /getDealers endpoint.
 
         Dealer IDs are generally retrieved via the /getDealers or /getDealersByRegion endpoints.
       operationId: getDealers_getDealersByID_get
@@ -265,7 +272,9 @@ paths:
         - Pro Plan Or Greater
   /getDealersByRegion:
     get:
-      description: Premium. Dealership information in a given region. Returns name, address, state, zipCode, and IDs. Results are paginated with up to 30 results per page.
+      description: Premium. Dealership information in a given region. Returns name,
+        address, state, zipCode, and IDs. Results are paginated with up to 30
+        results per page.
       operationId: getDealers_getDealersByRegion_get
       parameters:
         - in: query
@@ -309,7 +318,8 @@ paths:
   /getInactiveModels:
     get:
       description: >-
-        Get all model names including discontinued models. Because these models are no longer built, or have very poor market performance
+        Get all model names including discontinued models. Because these
+        models are no longer built, or have very poor market performance
 
         they are not incuded in the normal getModels endpoint. Many users itterate through the model names with our new vehicle sales
 
@@ -355,7 +365,8 @@ paths:
   /getModels:
     get:
       description: >-
-        Get brand model names for currently active models. This endpoint does not return model names that have been discontinued or have 
+        Get brand model names for currently active models. This endpoint
+        does not return model names that have been discontinued or have 
 
         sold less than 10 vehicles in the last month and a half.
 
@@ -396,7 +407,8 @@ paths:
         - Standard Plan Or Greater
   /getRegionBrandMarketShare:
     get:
-      description: Market share of a given brand in a given region by number of vehicles sold over the last 45 days.
+      description: Market share of a given brand in a given region by number of
+        vehicles sold over the last 45 days.
       operationId: getRegionBrandMarketShare_getRegionBrandMarketShare_get
       parameters:
         - in: query
@@ -437,7 +449,8 @@ paths:
         - Ultra Plan Or Greater
   /getRegionMarketShare:
     get:
-      description: Market share of a all brands in a given region by number of vehicles sold over the last 45 days.
+      description: Market share of a all brands in a given region by number of
+        vehicles sold over the last 45 days.
       operationId: getRegionMarketShare_getRegionMarketShare_get
       parameters:
         - in: query
@@ -474,7 +487,8 @@ paths:
   /getRegions:
     get:
       description: >-
-        Get region names. These names are used as arguments for other endpoints. The names are generally not case sensitive
+        Get region names. These names are used as arguments for other
+        endpoints. The names are generally not case sensitive
 
         when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
       operationId: getRegions_getRegions_get
@@ -504,7 +518,8 @@ paths:
         - Standard Plan Or Greater
   /getSubUserKeys:
     get:
-      description: Get a list of your issued SubUser API Keys. Includes active and revoked keys.
+      description: Get a list of your issued SubUser API Keys. Includes active and
+        revoked keys.
       operationId: getSubUserKeys_getSubUserKeys_get
       parameters:
         - in: query
@@ -637,7 +652,9 @@ paths:
   /listPrice:
     get:
       description: >-
-        Average, median, standard deviation, and population variance of the ask price of new vehicles over the last 15 days for a given brand and region.
+        Average, median, standard deviation, and population variance of the
+        ask price of new vehicles over the last 15 days for a given brand and
+        region.
 
 
         The available brand and region names can be retrieved from their respective endpoints.
@@ -682,7 +699,8 @@ paths:
   /listings:
     get:
       description: >-
-        Returns a dealer's listings over the last 45 days by dealer ID. The ID can be found by calling the /getDealers endpoint. 
+        Returns a dealer's listings over the last 45 days by dealer ID. The
+        ID can be found by calling the /getDealers endpoint. 
 
         Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
 
@@ -801,7 +819,9 @@ paths:
   /listingsByRegionAndDate:
     get:
       description: >-
-        Returns listings active in a region in the given date range [startdate, endDate), or in other words dates that satisfy startDate <= X < endDate. Maximum range is 45 days 
+        Returns listings active in a region in the given date range
+        [startdate, endDate), or in other words dates that satisfy startDate <=
+        X < endDate. Maximum range is 45 days 
 
         Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
 
@@ -874,7 +894,9 @@ paths:
   /makeSubUserKey:
     post:
       description: >-
-        This endpoint is only fully available to users with a paid plan. Users on Basic or Trial plans may only create keys valid on the "localhost" domain.
+        This endpoint is only fully available to users with a paid plan.
+        Users on Basic or Trial plans may only create keys valid on the
+        "localhost" domain.
 
         This endpoint creates an API key that can be embedded in frontend applications such as web pages that allow your users to directly make API calls. 
 
@@ -925,13 +947,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/HTTPValidationError"
           description: Validation Error
-      summary: Generate a Sub User Key that can be used by your users to make API calls in frontend applications.
+      summary: Generate a Sub User Key that can be used by your users to make API
+        calls in frontend applications.
       tags:
         - Authentication
   /modelYearDist:
     get:
       description: >-
-        Market share of used vehicles over the last 45 days by model and year. All values are relative to vehicles of the same model.
+        Market share of used vehicles over the last 45 days by model and
+        year. All values are relative to vehicles of the same model.
 
         For example: a percentOfMarket value of 25, year of 2017, and modelName of Camry means that 25% of used Camrys on the market 
 
@@ -983,7 +1007,8 @@ paths:
   /regionDailySales:
     get:
       description: >-
-        Get regional sales by brand and day. Most recent data is typically only 2 days old for this endpoint.
+        Get regional sales by brand and day. Most recent data is typically
+        only 2 days old for this endpoint.
             
         The Day field is in YYYY-MM-DD format. For example if you wanted sales data from April 5th of 2020 the day field would be '2020-04-05'
 
@@ -1036,7 +1061,8 @@ paths:
   /regionSales:
     get:
       description: >-
-        Premium. Get regional sales by brand and month, broken down by day. Most recent data is typically only 2 days old for this endpoint.
+        Premium. Get regional sales by brand and month, broken down by day.
+        Most recent data is typically only 2 days old for this endpoint.
             
         The month field is in YYYY-MM-DD format. For example if you wanted sales data from April of 2020 the month field would be '2020-04-01'
 
@@ -1089,7 +1115,8 @@ paths:
         - Ultra Plan Or Greater
   /revokeSubUserKey:
     put:
-      description: Revoke a SubUser API Key with the given UUID. This action can not be undone.
+      description: Revoke a SubUser API Key with the given UUID. This action can not
+        be undone.
       operationId: revokeSubUserKey_revokeSubUserKey_put
       parameters:
         - in: query
@@ -1129,7 +1156,9 @@ paths:
   /salePrice:
     get:
       description: >-
-        Average, median, standard deviation, and population variance of the sale price of new vehicles over the last 15 days for a given brand and region.
+        Average, median, standard deviation, and population variance of the
+        sale price of new vehicles over the last 15 days for a given brand and
+        region.
 
 
         The available brand and region names can be retrieved from their respective endpoints.
@@ -1174,7 +1203,8 @@ paths:
   /salePriceHistogram:
     get:
       description: >-
-        Histogram of the sale price of vehicles over the last 45 days for a given model and region. 
+        Histogram of the sale price of vehicles over the last 45 days for a
+        given model and region. 
 
         Price buckets are grouped in units of $1000
 
@@ -1226,7 +1256,9 @@ paths:
   /similarSalePrice:
     get:
       description: >-
-        Premium. Provides the average, stdDev, and count, of the sale price and mileage of similar new and used vehicles in a given region based off the provided VIN. 
+        Premium. Provides the average, stdDev, and count, of the sale price
+        and mileage of similar new and used vehicles in a given region based off
+        the provided VIN. 
 
         Optionally restricts report to vehicles of the same model year and goes back up to 120 days.
       operationId: getMarket3_similarSalePrice_get
@@ -1332,7 +1364,9 @@ paths:
   /vehicleHistory:
     get:
       description: >-
-        Premium. Provides a simple report detailing a vechicle's sales history at dealerships. Data includes the name of the dealership, dates it was for sale,
+        Premium. Provides a simple report detailing a vechicle's sales
+        history at dealerships. Data includes the name of the dealership, dates
+        it was for sale,
 
         price, new/used condition, mileage, dealership state, and dealership zip code. The data for this endpoint is generally refreshed weekly.
       operationId: getHistory2_vehicleHistory_get
@@ -1370,7 +1404,8 @@ paths:
   /vinDecode:
     get:
       description: >-
-        Decodes the provided North American vin and provides recall information if available. 
+        Decodes the provided North American vin and provides recall
+        information if available. 
 
         We require at least the first 12 out of 17 characters in the vin to attempt a decode. The vin is not case sensitive.
 

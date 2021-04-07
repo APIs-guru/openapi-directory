@@ -6,33 +6,21 @@ info:
     email: apicurio@lists.jboss.org
     name: Apicurio
     url: https://github.com/apicurio/apicurio-registry
-  description: >
+  description: |
     Apicurio Registry is a datastore for standard event schemas and API designs. Apicurio Registry enables developers to manage and share the structure of their data using a REST interface. For example, client applications can dynamically push or pull the latest updates to or from the registry without needing to redeploy. Apicurio Registry also enables developers to create rules that govern how registry content can evolve over time. For example, this includes rules for content validation and version compatibility.
-
 
     The Apicurio Registry REST API enables client applications to manage the artifacts in the registry. This API provides create, read, update, and delete operations for schema and API artifacts, rules, versions, and metadata. 
 
-
     The supported artifact types include:
-
     - Apache Avro schema
-
     - AsyncAPI specification
-
     - Google protocol buffers
-
     - GraphQL schema
-
     - JSON Schema
-
     - Kafka Connect schema
-
     - OpenAPI specification
-
     - Web Services Description Language
-
     - XML Schema Definition
-
 
 
     **Important**: The Apicurio Registry REST API is available from `http://MY-REGISTRY-URL/api` by default. Therefore you must prefix all API operation paths with `/api` in this case. For example: `/api/ids/{globalId}`.
@@ -51,45 +39,32 @@ info:
   x-providerName: apicurio.local
   x-serviceName: registry
 tags:
-  - description: >-
+  - description: |-
       The primary way to interact with the Apicurio Registry API is to add, update, 
-
       or delete artifacts. This section includes all of these primary operations.
     name: Artifacts
-  - description: >-
+  - description: |-
       Sometimes the metadata for an artifact is important. For example, metadata includes 
-
       when the artifact was created, last updated, and so on. This section contains 
-
       operations to access (and in some cases change) an artifact's metadata.
     name: Metadata
-  - description: >-
+  - description: |-
       Whenever an artifact's content is updated, the old versions of the artifact's content
-
       are not lost.  All versions can be listed and accessed if necessary.  This section 
-
       describes the operations used to list and access all versions of an artifact's content
-
       and metadata.
     name: Versions
-  - description: >-
+  - description: |-
       Rules can be configured on a per-artifact basis, allowing for different approaches
-
       to content evolution for each artifact.  These rules will override any global rules
-
       that have been configured.  This section contains the operations used to manage a
-
       single artifact's rules.
     name: Artifact rules
-  - description: >-
+  - description: |-
       Global rules can be configured in the registry to govern how artifact content can 
-
       evolve over time (as artifact content is **updated**). Global rules will be applied 
-
       whenever an artifact is added to the registry, and also whenever an artifact's 
-
       content is updated (only if that artifact doesn't have its own specific rules 
-
       configured). This section describes the operations used to manage the global rules.
     name: Global rules
   - description: "The search API is used to browse or find artifacts in the registry. This section describes the operations for searching for artifacts and versions. "
@@ -101,9 +76,8 @@ tags:
 paths:
   /admin/loggers:
     get:
-      description: >-
+      description: |-
         List all of the configured logging levels.  These override the default
-
         logging configuration.
       operationId: listLogConfigurations
       responses:
@@ -131,9 +105,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/NamedLogConfiguration"
-          description: >-
+          description: |-
             The default logger configuration (now that the configuration for this logger has been removed, the 
-
             default configuration is applied).
         "500":
           $ref: "#/components/responses/ServerError"
@@ -187,12 +160,10 @@ paths:
     summary: Manage logger settings/configurations.
   /admin/rules:
     delete:
-      description: >
+      description: |
         Deletes all globally configured rules.
 
-
         This operation can fail for the following reasons:
-
 
         * A server error occurred (HTTP error `500`)
       operationId: deleteAllGlobalRules
@@ -206,12 +177,10 @@ paths:
         - Global rules
         - Admin
     get:
-      description: >
+      description: |
         Gets a list of all the currently configured global rules (if any).
 
-
         This operation can fail for the following reasons:
-
 
         * A server error occurred (HTTP error `500`)
       operationId: listGlobalRules
@@ -231,17 +200,13 @@ paths:
         - Global rules
         - Admin
     post:
-      description: >
+      description: |
         Adds a rule to the list of globally configured rules.
-
 
         This operation can fail for the following reasons:
 
-
         * The rule type is unknown (HTTP error `400`)
-
         * The rule already exists (HTTP error `409`)
-
         * A server error occurred (HTTP error `500`)
       operationId: createGlobalRule
       requestBody:
@@ -266,21 +231,15 @@ paths:
     summary: Manage the global rules that apply to all artifacts if not otherwise configured.
   "/admin/rules/{rule}":
     delete:
-      description: >
+      description: |
         Deletes a single global rule.  If this is the only rule configured, this is the same
-
         as deleting **all** rules.
-
 
         This operation can fail for the following reasons:
 
-
         * Invalid rule name/type (HTTP error `400`)
-
         * No rule with name/type `rule` exists (HTTP error `404`)
-
         * Rule cannot be deleted (HTTP error `409`)
-
         * A server error occurred (HTTP error `500`)
       operationId: deleteGlobalRule
       responses:
@@ -295,17 +254,13 @@ paths:
         - Global rules
         - Admin
     get:
-      description: >
+      description: |
         Returns information about the named globally configured rule.
-
 
         This operation can fail for the following reasons:
 
-
         * Invalid rule name/type (HTTP error `400`)
-
         * No rule with name/type `rule` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: getGlobalRuleConfig
       responses:
@@ -331,17 +286,13 @@ paths:
         schema:
           $ref: "#/components/schemas/RuleType"
     put:
-      description: >
+      description: |
         Updates the configuration for a globally configured rule.
-
 
         This operation can fail for the following reasons:
 
-
         * Invalid rule name/type (HTTP error `400`)
-
         * No rule with name/type `rule` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: updateGlobalRuleConfig
       requestBody:
@@ -397,12 +348,10 @@ paths:
           name: order
           schema:
             $ref: "#/components/schemas/SortOrder"
-        - description: >
+        - description: |
             The field to sort by.  Can be one of:
 
-
             * `name`
-
             * `createdOn`
           in: query
           name: orderby
@@ -428,121 +377,71 @@ paths:
         schema:
           $ref: "#/components/schemas/GroupId"
     post:
-      description: >
+      description: |
         Creates a new artifact by posting the artifact content.  The body of the request should
-
         be the raw content of the artifact.  This is typically in JSON format for *most* of the 
-
         supported types, but may be in another format for a few (for example, `PROTOBUF`).
 
-
         The registry attempts to figure out what kind of artifact is being added from the
-
         following supported list:
 
-
         * Avro (`AVRO`)
-
         * Protobuf (`PROTOBUF`)
-
         * JSON Schema (`JSON`)
-
         * Kafka Connect (`KCONNECT`)
-
         * OpenAPI (`OPENAPI`)
-
         * AsyncAPI (`ASYNCAPI`)
-
         * GraphQL (`GRAPHQL`)
-
         * Web Services Description Language (`WSDL`)
-
         * XML Schema (`XSD`)
 
-
         Alternatively, you can specify the artifact type using the `X-Registry-ArtifactType` 
-
         HTTP request header, or include a hint in the request's `Content-Type`.  For example:
 
-
         ```
-
         Content-Type: application/json; artifactType=AVRO
-
         ```
-
 
         An artifact is created using the content provided in the body of the request.  This
-
         content is created under a unique artifact ID that can be provided in the request
-
         using the `X-Registry-ArtifactId` request header.  If not provided in the request,
-
         the server generates a unique ID for the artifact.  It is typically recommended
-
         that callers provide the ID, because this is typically a meaningful identifier, 
-
         and for most use cases should be supplied by the caller.
 
-
         If an artifact with the provided artifact ID already exists, the default behavior
-
         is for the server to reject the content with a 409 error.  However, the caller can
-
         supply the `ifExists` query parameter to alter this default behavior. The `ifExists`
-
         query parameter can have one of the following values:
 
-
         * `FAIL` (*default*) - server rejects the content with a 409 error
-
         * `UPDATE` - server updates the existing artifact and returns the new metadata
-
         * `RETURN` - server does not create or add content to the server, but instead 
-
         returns the metadata for the existing artifact
-
         * `RETURN_OR_UPDATE` - server returns an existing **version** that matches the 
-
         provided content if such a version exists, otherwise a new version is created
-
 
         This operation may fail for one of the following reasons:
 
-
         * An invalid `ArtifactType` was indicated (HTTP error `400`)
-
         * No `ArtifactType` was indicated and the server could not determine one from the content (HTTP error `400`)
-
         * Provided content (request body) was empty (HTTP error `400`)
-
         * An artifact with the provided ID already exists (HTTP error `409`)
-
         * The content violates one of the configured global rules (HTTP error `409`)
-
         * A server error occurred (HTTP error `500`)
       operationId: createArtifact
       parameters:
-        - description: >-
+        - description: |-
             Specifies the type of the artifact being added. Possible values include:
 
-
             * Avro (`AVRO`)
-
             * Protobuf (`PROTOBUF`)
-
             * JSON Schema (`JSON`)
-
             * Kafka Connect (`KCONNECT`)
-
             * OpenAPI (`OPENAPI`)
-
             * AsyncAPI (`ASYNCAPI`)
-
             * GraphQL (`GRAPHQL`)
-
             * Web Services Description Language (`WSDL`)
-
             * XML Schema (`XSD`)
           in: header
           name: X-Registry-ArtifactType
@@ -553,11 +452,9 @@ paths:
           name: X-Registry-ArtifactId
           schema:
             type: string
-        - description: >-
+        - description: |-
             Specifies the version number of this initial version of the artifact content.  This would typically
-
             be a simple integer or a SemVer value.  If not provided, the server will assign a version number
-
             automatically (starting with version `1`).
           in: header
           name: X-Registry-Version
@@ -611,28 +508,18 @@ paths:
                                   type: array
                             description: All widgets
                         summary: Get widgets
-        description: >
+        description: |
           The content of the artifact being created. This is often, but not always, JSON data
-
           representing one of the supported artifact types:
 
-
           * Avro (`AVRO`)
-
           * Protobuf (`PROTOBUF`)
-
           * JSON Schema (`JSON`)
-
           * Kafka Connect (`KCONNECT`)
-
           * OpenAPI (`OPENAPI`)
-
           * AsyncAPI (`ASYNCAPI`)
-
           * GraphQL (`GRAPHQL`)
-
           * Web Services Description Language (`WSDL`)
-
           * XML Schema (`XSD`)
         required: true
       responses:
@@ -655,14 +542,11 @@ paths:
     summary: Manage the collection of artifacts within a single group in the registry.
   "/groups/{groupId}/artifacts/{artifactId}":
     delete:
-      description: >-
+      description: |-
         Deletes an artifact completely, resulting in all versions of the artifact also being
-
         deleted.  This may fail for one of the following reasons:
 
-
         * No artifact with the `artifactId` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: deleteArtifact
       responses:
@@ -676,19 +560,14 @@ paths:
       tags:
         - Artifacts
     get:
-      description: >
+      description: |
         Returns the latest version of the artifact in its raw form.  The `Content-Type` of the
-
         response depends on the artifact type.  In most cases, this is `application/json`, but 
-
         for some types it may be different (for example, `PROTOBUF`).
-
 
         This operation may fail for one of the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: getLatestArtifact
       responses:
@@ -707,11 +586,10 @@ paths:
             application/x-protobuf:
               examples:
                 Protobuf Example:
-                  value: >-
+                  value: |-
                     message SearchResponse {
                       repeated Result result = 1;
                     }
-
 
                     message Result {
                       required string url = 1;
@@ -721,11 +599,10 @@ paths:
             application/x-protobuffer:
               examples:
                 Protobuffer Example:
-                  value: >-
+                  value: |-
                     message SearchResponse {
                       repeated Result result = 1;
                     }
-
 
                     message Result {
                       required string url = 1;
@@ -754,40 +631,27 @@ paths:
         schema:
           $ref: "#/components/schemas/ArtifactId"
     put:
-      description: >-
+      description: |-
         Updates an artifact by uploading new content.  The body of the request should
-
         be the raw content of the artifact.  This is typically in JSON format for *most*
-
         of the supported types, but may be in another format for a few (for example, `PROTOBUF`).
-
         The type of the content should be compatible with the artifact's type (it would be
-
         an error to update an `AVRO` artifact with new `OPENAPI` content, for example).
-
 
         The update could fail for a number of reasons including:
 
-
         * Provided content (request body) was empty (HTTP error `400`)
-
         * No artifact with the `artifactId` exists (HTTP error `404`)
-
         * The new content violates one of the rules configured for the artifact (HTTP error `409`)
-
         * A server error occurred (HTTP error `500`)
 
-
         When successful, this creates a new version of the artifact, making it the most recent
-
         (and therefore official) version of the artifact.
       operationId: updateArtifact
       parameters:
-        - description: >-
+        - description: |-
             Specifies the version number of this new version of the artifact content.  This would typically
-
             be a simple integer or a SemVer value.  If not provided, the server will assign a version number
-
             automatically.
           in: header
           name: X-Registry-Version
@@ -831,28 +695,18 @@ paths:
                                   type: array
                             description: All widgets
                         summary: Get widgets
-        description: >
+        description: |
           The new content of the artifact being updated. This is often, but not always, JSON data
-
           representing one of the supported artifact types:
 
-
           * Avro (`AVRO`)
-
           * Protobuf (`PROTOBUF`)
-
           * JSON Schema (`JSON`)
-
           * Kafka Connect (`KCONNECT`)
-
           * OpenAPI (`OPENAPI`)
-
           * AsyncAPI (`ASYNCAPI`)
-
           * GraphQL (`GRAPHQL`)
-
           * Web Services Description Language (`WSDL`)
-
           * XML Schema (`XSD`)
         required: true
       responses:
@@ -875,17 +729,13 @@ paths:
     summary: Manage a single artifact.
   "/groups/{groupId}/artifacts/{artifactId}/meta":
     get:
-      description: >-
+      description: |-
         Gets the metadata for an artifact in the registry.  The returned metadata includes
-
         both generated (read-only) and editable metadata (such as name and description).
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: getArtifactMetaData
       responses:
@@ -916,23 +766,16 @@ paths:
         schema:
           $ref: "#/components/schemas/ArtifactId"
     post:
-      description: >
+      description: |
         Gets the metadata for an artifact that matches the raw content.  Searches the registry
-
         for a version of the given artifact matching the content provided in the body of the
-
         POST.
-
 
         This operation can fail for the following reasons:
 
-
         * Provided content (request body) was empty (HTTP error `400`)
-
         * No artifact with the `artifactId` exists (HTTP error `404`)
-
         * No artifact version matching the provided content exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: getArtifactVersionMetaDataByContent
       parameters:
@@ -996,17 +839,13 @@ paths:
       tags:
         - Metadata
     put:
-      description: >-
+      description: |-
         Updates the editable parts of the artifact's metadata.  Not all metadata fields can
-
         be updated.  For example, `createdOn` and `createdBy` are both read-only properties.
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with the `artifactId` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: updateArtifactMetaData
       requestBody:
@@ -1029,17 +868,13 @@ paths:
     summary: Manage the metadata of a single artifact.
   "/groups/{groupId}/artifacts/{artifactId}/rules":
     delete:
-      description: >-
+      description: |-
         Deletes all of the rules configured for the artifact.  After this is done, the global
-
         rules apply to the artifact again.
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: deleteArtifactRules
       responses:
@@ -1053,21 +888,15 @@ paths:
       tags:
         - Artifact rules
     get:
-      description: >-
+      description: |-
         Returns a list of all rules configured for the artifact.  The set of rules determines
-
         how the content of an artifact can evolve over time.  If no rules are configured for
-
         an artifact, the set of globally configured rules are used.  If no global rules 
-
         are defined, there are no restrictions on content evolution.
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: listArtifactRules
       responses:
@@ -1100,19 +929,14 @@ paths:
         schema:
           $ref: "#/components/schemas/ArtifactId"
     post:
-      description: >-
+      description: |-
         Adds a rule to the list of rules that get applied to the artifact when adding new
-
         versions.  All configured rules must pass to successfully add a new artifact version.
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * Rule (named in the request body) is unknown (HTTP error `400`)
-
         * A server error occurred (HTTP error `500`)
       operationId: createArtifactRule
       requestBody:
@@ -1136,25 +960,17 @@ paths:
     summary: Manage the rules for a single artifact.
   "/groups/{groupId}/artifacts/{artifactId}/rules/{rule}":
     delete:
-      description: >-
+      description: |-
         Deletes a rule from the artifact.  This results in the rule no longer applying for
-
         this artifact.  If this is the only rule configured for the artifact, this is the 
-
         same as deleting **all** rules, and the globally configured rules now apply to
-
         this artifact.
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * No rule with this name/type is configured for this artifact (HTTP error `404`)
-
         * Invalid rule type (HTTP error `400`)
-
         * A server error occurred (HTTP error `500`)
       operationId: deleteArtifactRule
       responses:
@@ -1168,21 +984,15 @@ paths:
       tags:
         - Artifact rules
     get:
-      description: >-
+      description: |-
         Returns information about a single rule configured for an artifact.  This is useful
-
         when you want to know what the current configuration settings are for a specific rule.
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * No rule with this name/type is configured for this artifact (HTTP error `404`)
-
         * Invalid rule type (HTTP error `400`)
-
         * A server error occurred (HTTP error `500`)
       operationId: getArtifactRuleConfig
       responses:
@@ -1222,23 +1032,16 @@ paths:
             - COMPATIBILITY
           type: string
     put:
-      description: >
+      description: |
         Updates the configuration of a single rule for the artifact.  The configuration data
-
         is specific to each rule type, so the configuration of the `COMPATIBILITY` rule 
-
         is in a different format from the configuration of the `VALIDITY` rule.
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * No rule with this name/type is configured for this artifact (HTTP error `404`)
-
         * Invalid rule type (HTTP error `400`)
-
         * A server error occurred (HTTP error `500`)
       operationId: updateArtifactRuleConfig
       requestBody:
@@ -1277,19 +1080,14 @@ paths:
         schema:
           $ref: "#/components/schemas/ArtifactId"
     put:
-      description: >
+      description: |
         Updates the state of the artifact.  For example, you can use this to mark the latest
-
         version of an artifact as `DEPRECATED`.  The operation changes the state of the latest 
-
         version of the artifact.  If multiple versions exist, only the most recent is changed.
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: updateArtifactState
       requestBody:
@@ -1326,75 +1124,49 @@ paths:
         schema:
           $ref: "#/components/schemas/ArtifactId"
     put:
-      description: >-
+      description: |-
         Tests whether an update to the artifact's content *would* succeed for the provided content.
-
         Ultimately, this applies any rules configured for the artifact against the given content
-
         to determine whether the rules would pass or fail, but without actually updating the artifact
-
         content.
 
-
         The body of the request should be the raw content of the artifact.  This is typically in 
-
         JSON format for *most* of the supported types, but may be in another format for a few 
-
         (for example, `PROTOBUF`).
-
 
         The update could fail for a number of reasons including:
 
-
         * Provided content (request body) was empty (HTTP error `400`)
-
         * No artifact with the `artifactId` exists (HTTP error `404`)
-
         * The new content violates one of the rules configured for the artifact (HTTP error `409`)
-
         * The provided artifact type is not recognized (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
 
-
         When successful, this operation simply returns a *No Content* response.  This response
-
         indicates that the content is valid against the configured content rules for the 
-
         artifact (or the global rules if no artifact rules are enabled).
       operationId: testUpdateArtifact
       requestBody:
         content:
           "*/*": {}
-        description: >
+        description: |
           The content of the artifact being tested. This is often, but not always, JSON data
-
           representing one of the supported artifact types:
 
-
           * Avro (`AVRO`)
-
           * Protobuf (`PROTOBUF`)
-
           * JSON Schema (`JSON`)
-
           * Kafka Connect (`KCONNECT`)
-
           * OpenAPI (`OPENAPI`)
-
           * AsyncAPI (`ASYNCAPI`)
-
           * GraphQL (`GRAPHQL`)
-
           * Web Services Description Language (`WSDL`)
-
           * XML Schema (`XSD`)
         required: true
       responses:
         "204":
-          description: >-
+          description: |-
             When successful, returns "No Content" to indicate that the rules passed, and the
-
             content was not updated.
         "404":
           $ref: "#/components/responses/NotFound"
@@ -1408,15 +1180,12 @@ paths:
     summary: Test whether content would pass update rules.
   "/groups/{groupId}/artifacts/{artifactId}/versions":
     get:
-      description: >
+      description: |
         Returns a list of all versions of the artifact.  The result set is paged.
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: listArtifactVersions
       parameters:
@@ -1467,38 +1236,26 @@ paths:
         schema:
           $ref: "#/components/schemas/ArtifactId"
     post:
-      description: >
+      description: |
         Creates a new version of the artifact by uploading new content.  The configured rules for
-
         the artifact are applied, and if they all pass, the new content is added as the most recent 
-
         version of the artifact.  If any of the rules fail, an error is returned.
 
-
         The body of the request should be the raw content of the new artifact version, and the type
-
         of that content should match the artifact's type (for example if the artifact type is `AVRO`
-
         then the content of the request should be an Apache Avro document).
-
 
         This operation can fail for the following reasons:
 
-
         * Provided content (request body) was empty (HTTP error `400`)
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * The new content violates one of the rules configured for the artifact (HTTP error `409`)
-
         * A server error occurred (HTTP error `500`)
       operationId: createArtifactVersion
       parameters:
-        - description: >-
+        - description: |-
             Specifies the version number of this new version of the artifact content.  This would typically
-
             be a simple integer or a SemVer value.  It must be unique within the artifact.  If this is not
-
             provided, the server will generate a new, unique version number for this new updated content.
           in: header
           name: X-Registry-Version
@@ -1542,28 +1299,18 @@ paths:
                                   type: array
                             description: All widgets
                         summary: Get widgets
-        description: >
+        description: |
           The content of the artifact version being created. This is often, but not always, JSON data
-
           representing one of the supported artifact types:
 
-
           * Avro (`AVRO`)
-
           * Protobuf (`PROTOBUF`)
-
           * JSON Schema (`JSON`)
-
           * Kafka Connect (`KCONNECT`)
-
           * OpenAPI (`OPENAPI`)
-
           * AsyncAPI (`ASYNCAPI`)
-
           * GraphQL (`GRAPHQL`)
-
           * Web Services Description Language (`WSDL`)
-
           * XML Schema (`XSD`)
         required: true
       responses:
@@ -1586,23 +1333,16 @@ paths:
     summary: Manage all the versions of an artifact in the registry.
   "/groups/{groupId}/artifacts/{artifactId}/versions/{version}":
     get:
-      description: >
+      description: |
         Retrieves a single version of the artifact content.  Both the `artifactId` and the
-
         unique `version` number must be provided.  The `Content-Type` of the response depends 
-
         on the artifact type.  In most cases, this is `application/json`, but for some types 
-
         it may be different (for example, `PROTOBUF`).
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * No version with this `version` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: getArtifactVersion
       responses:
@@ -1621,11 +1361,10 @@ paths:
             application/x-protobuf:
               examples:
                 Protobuf Example:
-                  value: >-
+                  value: |-
                     message SearchResponse {
                       repeated Result result = 1;
                     }
-
 
                     message Result {
                       required string url = 1;
@@ -1635,11 +1374,10 @@ paths:
             application/x-protobuffer:
               examples:
                 Protobuffer Example:
-                  value: >-
+                  value: |-
                     message SearchResponse {
                       repeated Result result = 1;
                     }
-
 
                     message Result {
                       required string url = 1;
@@ -1676,19 +1414,14 @@ paths:
     summary: Manage a single version of a single artifact in the registry.
   "/groups/{groupId}/artifacts/{artifactId}/versions/{version}/meta":
     delete:
-      description: >
+      description: |
         Deletes the user-editable metadata properties of the artifact version.  Any properties
-
         that are not user-editable are preserved.
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * No version with this `version` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: deleteArtifactVersionMetaData
       responses:
@@ -1702,21 +1435,15 @@ paths:
       tags:
         - Metadata
     get:
-      description: >
+      description: |
         Retrieves the metadata for a single version of the artifact.  The version metadata is 
-
         a subset of the artifact metadata and only includes the metadata that is specific to
-
         the version (for example, this doesn't include `modifiedOn`).
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * No version with this `version` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: getArtifactVersionMetaData
       responses:
@@ -1753,21 +1480,15 @@ paths:
         schema:
           $ref: "#/components/schemas/Version"
     put:
-      description: >
+      description: |
         Updates the user-editable portion of the artifact version's metadata.  Only some of 
-
         the metadata fields are editable by the user.  For example, `description` is editable, 
-
         but `createdOn` is not.
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * No version with this `version` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: updateArtifactVersionMetaData
       requestBody:
@@ -1808,19 +1529,14 @@ paths:
         schema:
           $ref: "#/components/schemas/Version"
     put:
-      description: >
+      description: |
         Updates the state of a specific version of an artifact.  For example, you can use 
-
         this operation to disable a specific version.
-
 
         This operation can fail for the following reasons:
 
-
         * No artifact with this `artifactId` exists (HTTP error `404`)
-
         * No version with this `version` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: updateArtifactVersionState
       requestBody:
@@ -1844,19 +1560,14 @@ paths:
     summary: Manage the state of a specific artifact version.
   "/ids/contentHashes/{contentHash}/":
     get:
-      description: >
+      description: |
         Gets the content for an artifact version in the registry using the 
-
         SHA-256 hash of the content.  This content hash may be shared by multiple artifact
-
         versions in the case where the artifact versions have identical content.
-
 
         This operation may fail for one of the following reasons:
 
-
         * No content with this `contentHash` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: getContentByHash
       responses:
@@ -1874,11 +1585,10 @@ paths:
             application/x-protobuf:
               examples:
                 Protobuf Example:
-                  value: >-
+                  value: |-
                     message SearchResponse {
                       repeated Result result = 1;
                     }
-
 
                     message Result {
                       required string url = 1;
@@ -1888,11 +1598,10 @@ paths:
             application/x-protobuffer:
               examples:
                 Protobuffer Example:
-                  value: >-
+                  value: |-
                     message SearchResponse {
                       repeated Result result = 1;
                     }
-
 
                     message Result {
                       required string url = 1;
@@ -1913,19 +1622,14 @@ paths:
     summary: Access artifact content utilizing the SHA-256 hash of the content.
   "/ids/contentIds/{contentId}/":
     get:
-      description: >
+      description: |
         Gets the content for an artifact version in the registry using the unique content
-
         identifier for that content.  This content ID may be shared by multiple artifact
-
         versions in the case where the artifact versions are identical.
-
 
         This operation may fail for one of the following reasons:
 
-
         * No content with this `contentId` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: getContentById
       responses:
@@ -1943,11 +1647,10 @@ paths:
             application/x-protobuf:
               examples:
                 Protobuf Example:
-                  value: >-
+                  value: |-
                     message SearchResponse {
                       repeated Result result = 1;
                     }
-
 
                     message Result {
                       required string url = 1;
@@ -1957,11 +1660,10 @@ paths:
             application/x-protobuffer:
               examples:
                 Protobuffer Example:
-                  value: >-
+                  value: |-
                     message SearchResponse {
                       repeated Result result = 1;
                     }
-
 
                     message Result {
                       required string url = 1;
@@ -1983,17 +1685,13 @@ paths:
     summary: Access artifact content utilizing the unique content identifier for that content.
   "/ids/globalIds/{globalId}":
     get:
-      description: >
+      description: |
         Gets the content for an artifact version in the registry using its globally unique
-
         identifier.
-
 
         This operation may fail for one of the following reasons:
 
-
         * No artifact version with this `globalId` exists (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
       operationId: getContentByGlobalId
       responses:
@@ -2011,11 +1709,10 @@ paths:
             application/x-protobuf:
               examples:
                 Protobuf Example:
-                  value: >-
+                  value: |-
                     message SearchResponse {
                       repeated Result result = 1;
                     }
-
 
                     message Result {
                       required string url = 1;
@@ -2025,11 +1722,10 @@ paths:
             application/x-protobuffer:
               examples:
                 Protobuffer Example:
-                  value: >-
+                  value: |-
                     message SearchResponse {
                       repeated Result result = 1;
                     }
-
 
                     message Result {
                       required string url = 1;
@@ -2051,7 +1747,7 @@ paths:
     summary: Access artifact content utilizing an artifact version's globally unique identifier.
   /search/artifacts:
     get:
-      description: >
+      description: |
         Returns a paginated list of all artifacts that match the provided filter criteria.
       operationId: searchArtifacts
       parameters:
@@ -2079,20 +1775,17 @@ paths:
           name: order
           schema:
             $ref: "#/components/schemas/SortOrder"
-        - description: >
+        - description: |
             The field to sort by.  Can be one of:
 
-
             * `name`
-
             * `createdOn`
           in: query
           name: orderby
           schema:
             $ref: "#/components/schemas/SortBy"
-        - description: >-
+        - description: |-
             Filter by label.  Include one or more label to only return artifacts containing all of the
-
             specified labels.
           in: query
           name: labels
@@ -2100,11 +1793,9 @@ paths:
             items:
               type: string
             type: array
-        - description: >-
+        - description: |-
             Filter by one or more name/value property.  Separate each name/value pair using a colon.  For
-
             example `properties=foo:bar` will return only artifacts with a custom property named `foo`
-
             and value `bar`.
           in: query
           name: properties
@@ -2128,9 +1819,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ArtifactSearchResults"
-          description: >-
+          description: |-
             On a successful response, returns a result set of artifacts - one for each artifact
-
             in the registry that matches the criteria.
         "500":
           $ref: "#/components/responses/ServerError"
@@ -2139,9 +1829,8 @@ paths:
         - Search
         - Artifacts
     post:
-      description: >
+      description: |
         Returns a paginated list of all artifacts with at least one version that matches the
-
         posted content.
       operationId: searchArtifactsByContent
       parameters:
@@ -2177,12 +1866,10 @@ paths:
               - asc
               - desc
             type: string
-        - description: >
+        - description: |
             The field to sort by.  Can be one of:
 
-
             * `name`
-
             * `createdOn`
           in: query
           name: orderby
@@ -2202,9 +1889,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ArtifactSearchResults"
-          description: >-
+          description: |-
             On a successful response, returns a result set of artifacts - one for each artifact
-
             in the registry that matches the criteria.
         "500":
           $ref: "#/components/responses/ServerError"
@@ -2215,9 +1901,8 @@ paths:
     summary: Search for artifacts in the registry.
   /system/info:
     get:
-      description: >-
+      description: |-
         This operation retrieves information about the running registry system, such as the version
-
         of the software and when it was built.
       operationId: getSystemInfo
       responses:
@@ -2384,9 +2069,8 @@ components:
             $ref: "#/components/schemas/SearchedArtifact"
           type: array
         count:
-          description: >-
+          description: |-
             The total number of artifacts that matched the query that produced the result set (may be 
-
             more than the number of artifacts in the result set).
           type: integer
       required:
@@ -2394,16 +2078,12 @@ components:
         - artifacts
       type: object
     ArtifactState:
-      description: >
+      description: |
         Describes the state of an artifact or artifact version.  The following states
-
         are possible:
 
-
         * ENABLED
-
         * DISABLED
-
         * DEPRECATED
       enum:
         - ENABLED
@@ -2454,9 +2134,8 @@ components:
       title: Root Type for EditableArtifactMetaData
       type: object
     Error:
-      description: >-
+      description: |-
         All error responses, whether `4xx` or `5xx` will include one of these as the response
-
         body.
       example:
         error_code: 500
@@ -2579,9 +2258,8 @@ components:
             - causes
           type: object
         - $ref: "#/components/schemas/Error"
-      description: >-
+      description: |-
         All error responses, whether `4xx` or `5xx` will include one of these as the response
-
         body.
       example:
         causes:
@@ -2760,11 +2438,9 @@ components:
       title: Root Type for UpdateState
       type: object
     Version:
-      description: >-
+      description: |-
         A single version of an artifact.  Can be provided by the client when creating a new version,
-
         or it can be server-generated.  The value can be any string unique to the artifact, but it is
-
         recommended to use a simple integer or a semver value.
       example: '"3.1.6"'
       type: string
@@ -2841,9 +2517,8 @@ components:
       description: Describes the response received when searching for artifacts.
       properties:
         count:
-          description: >-
+          description: |-
             The total number of versions that matched the query (may be more than the number of versions
-
             returned in the result set).
           type: integer
         versions:

@@ -7,7 +7,9 @@ info:
   contact:
     name: partnerapis@walmartlabs.com
     x-twitter: Walmart
-  description: Please make sure you use the correct version of the APIs for your use case. To find out the appropriate version, go to the API Docs  drop down on the menu.
+  description: Please make sure you use the correct version of the APIs for your
+    use case. To find out the appropriate version, go to the API Docs  drop down
+    on the menu.
   title: Inventory
   version: 3.0.1
   x-apisguru-categories:
@@ -30,7 +32,10 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: You can upload an inventory feed. If the feed successfully processed, it returns a feed ID. Use the returned feed ID to retrieve a feed status. You need Your Consumer ID and the private key to upload the feed
+      description: You can upload an inventory feed. If the feed successfully
+        processed, it returns a feed ID. Use the returned feed ID to retrieve a
+        feed status. You need Your Consumer ID and the private key to upload the
+        feed
       parameters:
         - default: inventory
           description: Feed Type
@@ -95,7 +100,8 @@ paths:
         - application/xml
       description: This endpoint retrieves inventory for a given item.
       parameters:
-        - description: The SKU (seller-provided product identifier) of the item whose inventory we are retrieving
+        - description: The SKU (seller-provided product identifier) of the item whose
+            inventory we are retrieving
           in: query
           name: sku
           required: true
@@ -153,7 +159,10 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: You can upload an inventory feed. If the feed successfully processed, it returns a feed ID. Use the returned feed ID to retrieve a feed status. You need Your Consumer ID and the private key to upload the feed
+      description: You can upload an inventory feed. If the feed successfully
+        processed, it returns a feed ID. Use the returned feed ID to retrieve a
+        feed status. You need Your Consumer ID and the private key to upload the
+        feed
       parameters:
         - default: inventory
           description: Feed Type
@@ -223,7 +232,8 @@ paths:
         - application/xml
       description: This endpoint retrieves inventory for a given item.
       parameters:
-        - description: The SKU (seller-provided product identifier) of the item whose inventory we are retrieving
+        - description: The SKU (seller-provided product identifier) of the item whose
+            inventory we are retrieving
           in: query
           name: sku
           required: true

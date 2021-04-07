@@ -26,13 +26,10 @@ paths:
       summary: Favico
   /ping:
     get:
-      description: >-
+      description: |-
         Sanity check.
-
         This will let the user know that the service is operational.
-
         And this path operation will:
-
         * show a lifesign
       operationId: pong_ping_get
       responses:
@@ -90,7 +87,8 @@ paths:
             description: Define sort order.
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -101,7 +99,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -113,7 +112,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -124,7 +124,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -140,7 +141,8 @@ paths:
 
             \        Limit results by a certain city or cities.
 
-            \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+            \        (ex. ?city=Chicago or
+            ?city=Chicago&city=Boston)
 
             \        "
           in: query
@@ -151,7 +153,8 @@ paths:
 
               \        Limit results by a certain city or cities.
 
-              \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+              \        (ex. ?city=Chicago or
+              ?city=Chicago&city=Boston)
 
               \        "
             items:
@@ -232,7 +235,8 @@ paths:
             description: Define sort order.
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -243,7 +247,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -255,7 +260,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -266,7 +272,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -353,7 +360,8 @@ paths:
             description: Define sort order.
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -364,7 +372,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -497,7 +506,8 @@ paths:
             type: integer
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -508,7 +518,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -520,7 +531,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -531,7 +543,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -547,7 +560,8 @@ paths:
 
             \        Limit results by a certain city or cities.
 
-            \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+            \        (ex. ?city=Chicago or
+            ?city=Chicago&city=Boston)
 
             \        "
           in: query
@@ -558,7 +572,8 @@ paths:
 
               \        Limit results by a certain city or cities.
 
-              \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+              \        (ex. ?city=Chicago or
+              ?city=Chicago&city=Boston)
 
               \        "
             items:
@@ -598,12 +613,14 @@ paths:
             description: Location is mobile
             title: Ismobile
             type: boolean
-        - description: Data is the product of a previous analysis/aggregation and not raw measurements
+        - description: Data is the product of a previous analysis/aggregation and not raw
+            measurements
           in: query
           name: isAnalysis
           required: false
           schema:
-            description: Data is the product of a previous analysis/aggregation and not raw measurements
+            description: Data is the product of a previous analysis/aggregation and not raw
+              measurements
             title: Isanalysis
             type: boolean
         - description: Name of the data source
@@ -779,7 +796,8 @@ paths:
             type: integer
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -790,7 +808,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -802,7 +821,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -813,7 +833,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -829,7 +850,8 @@ paths:
 
             \        Limit results by a certain city or cities.
 
-            \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+            \        (ex. ?city=Chicago or
+            ?city=Chicago&city=Boston)
 
             \        "
           in: query
@@ -840,7 +862,8 @@ paths:
 
               \        Limit results by a certain city or cities.
 
-              \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+              \        (ex. ?city=Chicago or
+              ?city=Chicago&city=Boston)
 
               \        "
             items:
@@ -874,12 +897,14 @@ paths:
             description: Location is mobile
             title: Ismobile
             type: boolean
-        - description: Data is the product of a previous analysis/aggregation and not raw measurements
+        - description: Data is the product of a previous analysis/aggregation and not raw
+            measurements
           in: query
           name: isAnalysis
           required: false
           schema:
-            description: Data is the product of a previous analysis/aggregation and not raw measurements
+            description: Data is the product of a previous analysis/aggregation and not raw
+              measurements
             title: Isanalysis
             type: boolean
         - description: Name of the data source
@@ -1049,7 +1074,8 @@ paths:
             type: integer
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -1060,7 +1086,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -1072,7 +1099,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -1083,7 +1111,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -1099,7 +1128,8 @@ paths:
 
             \        Limit results by a certain city or cities.
 
-            \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+            \        (ex. ?city=Chicago or
+            ?city=Chicago&city=Boston)
 
             \        "
           in: query
@@ -1110,7 +1140,8 @@ paths:
 
               \        Limit results by a certain city or cities.
 
-              \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+              \        (ex. ?city=Chicago or
+              ?city=Chicago&city=Boston)
 
               \        "
             items:
@@ -1150,12 +1181,14 @@ paths:
             description: Location is mobile
             title: Ismobile
             type: boolean
-        - description: Data is the product of a previous analysis/aggregation and not raw measurements
+        - description: Data is the product of a previous analysis/aggregation and not raw
+            measurements
           in: query
           name: isAnalysis
           required: false
           schema:
-            description: Data is the product of a previous analysis/aggregation and not raw measurements
+            description: Data is the product of a previous analysis/aggregation and not raw
+              measurements
             title: Isanalysis
             type: boolean
         - description: Name of the data source
@@ -1331,7 +1364,8 @@ paths:
             type: integer
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -1342,7 +1376,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -1354,7 +1389,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -1365,7 +1401,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -1381,7 +1418,8 @@ paths:
 
             \        Limit results by a certain city or cities.
 
-            \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+            \        (ex. ?city=Chicago or
+            ?city=Chicago&city=Boston)
 
             \        "
           in: query
@@ -1392,7 +1430,8 @@ paths:
 
               \        Limit results by a certain city or cities.
 
-              \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+              \        (ex. ?city=Chicago or
+              ?city=Chicago&city=Boston)
 
               \        "
             items:
@@ -1426,12 +1465,14 @@ paths:
             description: Location is mobile
             title: Ismobile
             type: boolean
-        - description: Data is the product of a previous analysis/aggregation and not raw measurements
+        - description: Data is the product of a previous analysis/aggregation and not raw
+            measurements
           in: query
           name: isAnalysis
           required: false
           schema:
-            description: Data is the product of a previous analysis/aggregation and not raw measurements
+            description: Data is the product of a previous analysis/aggregation and not raw
+              measurements
             title: Isanalysis
             type: boolean
         - description: Name of the data source
@@ -1533,7 +1574,7 @@ paths:
                 type: string
               - format: date
                 type: string
-            default: 2021-03-29T10:15:00+00:00
+            default: 2021-04-07T10:01:00+00:00
             title: Date To
         - description: Change the number of results returned.
           in: query
@@ -1627,7 +1668,8 @@ paths:
             type: integer
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -1638,7 +1680,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -1650,7 +1693,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -1661,7 +1705,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -1677,7 +1722,8 @@ paths:
 
             \        Limit results by a certain city or cities.
 
-            \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+            \        (ex. ?city=Chicago or
+            ?city=Chicago&city=Boston)
 
             \        "
           in: query
@@ -1688,7 +1734,8 @@ paths:
 
               \        Limit results by a certain city or cities.
 
-              \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+              \        (ex. ?city=Chicago or
+              ?city=Chicago&city=Boston)
 
               \        "
             items:
@@ -1974,7 +2021,7 @@ paths:
                 type: string
               - format: date
                 type: string
-            default: 2021-03-29T10:15:00+00:00
+            default: 2021-04-07T10:01:00+00:00
             title: Date To
         - in: query
           name: parameter_id
@@ -2024,7 +2071,8 @@ paths:
             type: array
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -2035,7 +2083,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -2047,7 +2096,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -2058,7 +2108,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -2201,7 +2252,8 @@ paths:
             description: Define sort order.
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -2212,7 +2264,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -2224,7 +2277,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -2235,7 +2289,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -2251,7 +2306,8 @@ paths:
 
             \        Limit results by a certain city or cities.
 
-            \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+            \        (ex. ?city=Chicago or
+            ?city=Chicago&city=Boston)
 
             \        "
           in: query
@@ -2262,7 +2318,8 @@ paths:
 
               \        Limit results by a certain city or cities.
 
-              \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+              \        (ex. ?city=Chicago or
+              ?city=Chicago&city=Boston)
 
               \        "
             items:
@@ -2343,7 +2400,8 @@ paths:
             description: Define sort order.
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -2354,7 +2412,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -2366,7 +2425,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -2377,7 +2437,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -2464,7 +2525,8 @@ paths:
             description: Define sort order.
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -2475,7 +2537,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -2608,7 +2671,8 @@ paths:
             type: integer
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -2619,7 +2683,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -2631,7 +2696,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -2642,7 +2708,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -2658,7 +2725,8 @@ paths:
 
             \        Limit results by a certain city or cities.
 
-            \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+            \        (ex. ?city=Chicago or
+            ?city=Chicago&city=Boston)
 
             \        "
           in: query
@@ -2669,7 +2737,8 @@ paths:
 
               \        Limit results by a certain city or cities.
 
-              \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+              \        (ex. ?city=Chicago or
+              ?city=Chicago&city=Boston)
 
               \        "
             items:
@@ -2709,12 +2778,14 @@ paths:
             description: Location is mobile
             title: Ismobile
             type: boolean
-        - description: Data is the product of a previous analysis/aggregation and not raw measurements
+        - description: Data is the product of a previous analysis/aggregation and not raw
+            measurements
           in: query
           name: isAnalysis
           required: false
           schema:
-            description: Data is the product of a previous analysis/aggregation and not raw measurements
+            description: Data is the product of a previous analysis/aggregation and not raw
+              measurements
             title: Isanalysis
             type: boolean
         - description: Name of the data source
@@ -2890,7 +2961,8 @@ paths:
             type: integer
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -2901,7 +2973,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -2913,7 +2986,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -2924,7 +2998,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -2940,7 +3015,8 @@ paths:
 
             \        Limit results by a certain city or cities.
 
-            \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+            \        (ex. ?city=Chicago or
+            ?city=Chicago&city=Boston)
 
             \        "
           in: query
@@ -2951,7 +3027,8 @@ paths:
 
               \        Limit results by a certain city or cities.
 
-              \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+              \        (ex. ?city=Chicago or
+              ?city=Chicago&city=Boston)
 
               \        "
             items:
@@ -2985,12 +3062,14 @@ paths:
             description: Location is mobile
             title: Ismobile
             type: boolean
-        - description: Data is the product of a previous analysis/aggregation and not raw measurements
+        - description: Data is the product of a previous analysis/aggregation and not raw
+            measurements
           in: query
           name: isAnalysis
           required: false
           schema:
-            description: Data is the product of a previous analysis/aggregation and not raw measurements
+            description: Data is the product of a previous analysis/aggregation and not raw
+              measurements
             title: Isanalysis
             type: boolean
         - description: Name of the data source
@@ -3160,7 +3239,8 @@ paths:
             type: integer
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -3171,7 +3251,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -3183,7 +3264,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -3194,7 +3276,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -3210,7 +3293,8 @@ paths:
 
             \        Limit results by a certain city or cities.
 
-            \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+            \        (ex. ?city=Chicago or
+            ?city=Chicago&city=Boston)
 
             \        "
           in: query
@@ -3221,7 +3305,8 @@ paths:
 
               \        Limit results by a certain city or cities.
 
-              \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+              \        (ex. ?city=Chicago or
+              ?city=Chicago&city=Boston)
 
               \        "
             items:
@@ -3261,12 +3346,14 @@ paths:
             description: Location is mobile
             title: Ismobile
             type: boolean
-        - description: Data is the product of a previous analysis/aggregation and not raw measurements
+        - description: Data is the product of a previous analysis/aggregation and not raw
+            measurements
           in: query
           name: isAnalysis
           required: false
           schema:
-            description: Data is the product of a previous analysis/aggregation and not raw measurements
+            description: Data is the product of a previous analysis/aggregation and not raw
+              measurements
             title: Isanalysis
             type: boolean
         - description: Name of the data source
@@ -3790,7 +3877,8 @@ paths:
             type: integer
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -3801,7 +3889,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -3813,7 +3902,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -3824,7 +3914,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -3840,7 +3931,8 @@ paths:
 
             \        Limit results by a certain city or cities.
 
-            \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+            \        (ex. ?city=Chicago or
+            ?city=Chicago&city=Boston)
 
             \        "
           in: query
@@ -3851,7 +3943,8 @@ paths:
 
               \        Limit results by a certain city or cities.
 
-              \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+              \        (ex. ?city=Chicago or
+              ?city=Chicago&city=Boston)
 
               \        "
             items:
@@ -3885,12 +3978,14 @@ paths:
             description: Location is mobile
             title: Ismobile
             type: boolean
-        - description: Data is the product of a previous analysis/aggregation and not raw measurements
+        - description: Data is the product of a previous analysis/aggregation and not raw
+            measurements
           in: query
           name: isAnalysis
           required: false
           schema:
-            description: Data is the product of a previous analysis/aggregation and not raw measurements
+            description: Data is the product of a previous analysis/aggregation and not raw
+              measurements
             title: Isanalysis
             type: boolean
         - description: Name of the data source
@@ -4005,7 +4100,7 @@ paths:
                 type: string
               - format: date
                 type: string
-            default: 2021-03-29T10:15:00+00:00
+            default: 2021-04-07T10:01:00+00:00
             title: Date To
         - description: Change the number of results returned.
           in: query
@@ -4099,7 +4194,8 @@ paths:
             type: integer
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -4110,7 +4206,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -4122,7 +4219,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -4133,7 +4231,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -4149,7 +4248,8 @@ paths:
 
             \        Limit results by a certain city or cities.
 
-            \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+            \        (ex. ?city=Chicago or
+            ?city=Chicago&city=Boston)
 
             \        "
           in: query
@@ -4160,7 +4260,8 @@ paths:
 
               \        Limit results by a certain city or cities.
 
-              \        (ex. ?city=Chicago or ?city=Chicago&city=Boston)
+              \        (ex. ?city=Chicago or
+              ?city=Chicago&city=Boston)
 
               \        "
             items:
@@ -4366,7 +4467,8 @@ paths:
       parameters:
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -4377,7 +4479,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -4389,7 +4492,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -4400,7 +4504,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -4567,7 +4672,8 @@ paths:
             type: integer
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. /US)
 
@@ -4578,7 +4684,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. /US)
 
@@ -4590,7 +4697,8 @@ paths:
             type: string
         - description: "
 
-            \        Limit results by a certain country using two letter country code.
+            \        Limit results by a certain country using two
+            letter country code.
 
             \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -4601,7 +4709,8 @@ paths:
           schema:
             description: "
 
-              \        Limit results by a certain country using two letter country code.
+              \        Limit results by a certain country using
+              two letter country code.
 
               \        (ex. ?country=US or ?country=US&country=MX)
 
@@ -5368,9 +5477,8 @@ components:
       title: Temporal
       type: string
     TileJSON:
-      description: >-
+      description: |-
         TileJSON model.
-
         Based on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0
       properties:
         attribution:

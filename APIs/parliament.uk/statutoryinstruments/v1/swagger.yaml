@@ -4,7 +4,8 @@ info:
     email: softwareengineering@parliament.uk
     name: UK Parliament
     url: ""
-  description: An API exposing details of the various types of Statutory Instruments laid before Parliament.
+  description: An API exposing details of the various types of Statutory
+    Instruments laid before Parliament.
   title: Statutory Instruments API
   version: v1
   x-apisguru-categories:
@@ -120,12 +121,14 @@ paths:
           name: Name
           required: false
           type: string
-        - description: Proposed negative statutory instruments recommended for procedure change
+        - description: Proposed negative statutory instruments recommended for procedure
+            change
           in: query
           name: RecommendedForProcedureChange
           required: false
           type: boolean
-        - description: Proposed negative statutory instruments with the department ID specified
+        - description: Proposed negative statutory instruments with the department ID
+            specified
           format: int32
           in: query
           maximum: 2147483647
@@ -133,7 +136,8 @@ paths:
           name: DepartmentId
           required: false
           type: integer
-        - description: Proposed negative statutory instruments with the laying body ID specified
+        - description: Proposed negative statutory instruments with the laying body ID
+            specified
           in: query
           name: LayingBodyId
           pattern: ^[a-zA-Z0-9]{8}$
@@ -200,7 +204,8 @@ paths:
       consumes: []
       operationId: GetBusinessItemsByProposedNegativeStatutoryInstrumentId
       parameters:
-        - description: Business items belonging to proposed negative statutory instrument with the ID specified
+        - description: Business items belonging to proposed negative statutory instrument
+            with the ID specified
           in: path
           name: id
           required: true
@@ -218,7 +223,8 @@ paths:
           description: Bad Request
         "404":
           description: Not Found
-      summary: Returns business items belonging to a proposed negative statutory instrument.
+      summary: Returns business items belonging to a proposed negative statutory
+        instrument.
       tags:
         - ProposedNegativeStatutoryInstrument
   /api/StatutoryInstrument:
@@ -231,7 +237,8 @@ paths:
           name: Name
           required: false
           type: string
-        - description: Statutory instruments where the statutory instrument type is the type provided
+        - description: Statutory instruments where the statutory instrument type is the
+            type provided
           enum:
             - DraftAffirmative
             - DraftNegative
@@ -256,7 +263,8 @@ paths:
           name: ConcernsRaisedByCommittee
           required: false
           type: boolean
-        - description: Statutory instruments where the parliamentary process is concluded or notconcluded
+        - description: Statutory instruments where the parliamentary process is concluded
+            or notconcluded
           enum:
             - NotConcluded
             - Concluded
@@ -339,7 +347,8 @@ paths:
       consumes: []
       operationId: GetBusinessItemsByStatutoryInstrumentId
       parameters:
-        - description: Business items belonging to statutory instrument with the ID specified
+        - description: Business items belonging to statutory instrument with the ID
+            specified
           in: path
           name: id
           required: true

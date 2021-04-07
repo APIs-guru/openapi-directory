@@ -26,7 +26,8 @@ paths:
       description: Get forecast and realtime information for known points<br/>None
       operationId: compareStation
       parameters:
-        - description: "Weather station to compare, values: cnareanl|rcnp | cmsap|boyaenderrocat|areopuertopalma | EWXXX"
+        - description: "Weather station to compare, values: cnareanl|rcnp |
+            cmsap|boyaenderrocat|areopuertopalma | EWXXX"
           in: path
           name: stationName
           required: true
@@ -158,27 +159,32 @@ paths:
           required: false
           schema:
             type: string
-        - description: optional number of days in string. Will be added to init forecast date
+        - description: optional number of days in string. Will be added to init forecast
+            date
           in: query
           name: days
           required: false
           schema:
             format: int32
             type: integer
-        - description: optional number of hours in string. Will be added to init forecast date
+        - description: optional number of hours in string. Will be added to init forecast
+            date
           in: query
           name: hours
           required: false
           schema:
             format: int32
             type: integer
-        - description: " Comma separated values for the weather parameteres temperature,rain,wind_u,wind_v,gust,pressure,cloud,humidity&wave=height,direction,period"
+        - description: " Comma separated values for the weather parameteres
+            temperature,rain,wind_u,wind_v,gust,pressure,cloud,humidity&wave=he\
+            ight,direction,period"
           in: query
           name: weather
           required: true
           schema:
             type: string
-        - description: " Comma separated values for the wave parameteres height,direction,period"
+        - description: " Comma separated values for the wave parameteres
+            height,direction,period"
           in: query
           name: wave
           required: false
@@ -228,27 +234,32 @@ paths:
           required: false
           schema:
             type: string
-        - description: optional number of days in string. Will be added to init forecast date
+        - description: optional number of days in string. Will be added to init forecast
+            date
           in: query
           name: days
           required: false
           schema:
             format: int32
             type: integer
-        - description: optional number of hours in string. Will be added to init forecast date
+        - description: optional number of hours in string. Will be added to init forecast
+            date
           in: query
           name: hours
           required: false
           schema:
             format: int32
             type: integer
-        - description: " Comma separated values for the weather parameteres temperature,rain,wind_u,wind_v,gust,pressure,cloud,humidity&wave=height,direction,period"
+        - description: " Comma separated values for the weather parameteres
+            temperature,rain,wind_u,wind_v,gust,pressure,cloud,humidity&wave=he\
+            ight,direction,period"
           in: query
           name: weather
           required: true
           schema:
             type: string
-        - description: " Comma separated values for the wave parameteres height,direction,period"
+        - description: " Comma separated values for the wave parameteres
+            height,direction,period"
           in: query
           name: wave
           required: false
@@ -301,7 +312,8 @@ paths:
           schema:
             default: cnarenal
             type: string
-        - description: Period of time to get the data latestdata|latesthour|latestday|dailylog
+        - description: Period of time to get the data
+            latestdata|latesthour|latestday|dailylog
           in: query
           name: period
           required: true

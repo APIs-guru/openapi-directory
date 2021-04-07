@@ -22,7 +22,9 @@ info:
 paths:
   "/cargo/getRoute/{origin}-{destination}/{fromDate}/{productCode}":
     get:
-      description: Retrieve a list of all possible flights (both direct and connecting) between two airports on a given date. Routes are available for today and up to days in the future.
+      description: Retrieve a list of all possible flights (both direct and
+        connecting) between two airports on a given date. Routes are available
+        for today and up to days in the future.
       operationId: CargoGetRouteFromDateProductCodeByOriginAndDestinationGet
       parameters:
         - description: "Departure Airport : 3-letter IATA airport code, e.g. FRA."
@@ -37,7 +39,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Departure date in the local time of the departure airport. Based on LAT (Latest Acceptance Time). format : yyyy-MM-dd eg : 2017-07-15"
+        - description: "Departure date in the local time of the departure airport. Based
+            on LAT (Latest Acceptance Time). format : yyyy-MM-dd eg :
+            2017-07-15"
           in: path
           name: fromDate
           required: true
@@ -67,7 +71,8 @@ paths:
               - ZXF
               - ZXR
             type: string
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
@@ -93,22 +98,26 @@ paths:
       x-unitTests: []
   "/cargo/shipmentTracking/{aWBPrefix}-{aWBNumber}":
     get:
-      description: With this tracking service you can easily retrieve your shipment or flight status information.
+      description: With this tracking service you can easily retrieve your shipment or
+        flight status information.
       operationId: CargoShipmentTrackingByAWBPrefixAndAWBNumberGet
       parameters:
-        - description: 'aWBPrefix : Represents the airline that is the owner of this AWB, i.e. "020" = Lufthansa Cargo, format : [0-9]{3} e.g. 020'
+        - description: 'aWBPrefix : Represents the airline that is the owner of this AWB,
+            i.e. "020" = Lufthansa Cargo, format : [0-9]{3} e.g. 020'
           in: path
           name: aWBPrefix
           required: true
           schema:
             type: string
-        - description: "aWBNumber : The Air Waybill Number , format : [0-9]{8} e.g. 08002050"
+        - description: "aWBNumber : The Air Waybill Number , format : [0-9]{8} e.g.
+            08002050"
           in: path
           name: aWBNumber
           required: true
           schema:
             type: string
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
@@ -143,19 +152,22 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
           schema:
             type: string
-        - description: "Cabin class: 'M', 'E', 'C', 'F' (Acceptable values are: \"\", \"M\", \"E\", \"C\", \"F\")"
+        - description: "Cabin class: 'M', 'E', 'C', 'F' (Acceptable values are: \"\",
+            \"M\", \"E\", \"C\", \"F\")"
           in: query
           name: cabinClass
           required: false
           schema:
             type: string
-        - description: "Frequent flyer level ('FTL', 'SGC', 'SEN', 'HON') (Acceptable values are: \"\", \"FTL\", \"SGC\", \"SEN\", \"HON\")"
+        - description: "Frequent flyer level ('FTL', 'SGC', 'SEN', 'HON') (Acceptable
+            values are: \"\", \"FTL\", \"SGC\", \"SEN\", \"HON\")"
           in: query
           name: tierCode
           required: false
@@ -214,13 +226,15 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Cabin class: 'M', 'E', 'C', 'F'. Some flights have fewer classes (Acceptable values are: \"M\", \"E\", \"C\", \"F\")"
+        - description: "Cabin class: 'M', 'E', 'C', 'F'. Some flights have fewer classes
+            (Acceptable values are: \"M\", \"E\", \"C\", \"F\")"
           in: path
           name: cabinClass
           required: true
           schema:
             type: string
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
@@ -246,7 +260,8 @@ paths:
       x-unitTests: []
   "/operations/flightstatus/arrivals/{airportCode}/{fromDateTime}":
     get:
-      description: Status of all arrivals at a given airport up to 4 hours from the provided date time.
+      description: Status of all arrivals at a given airport up to 4 hours from the
+        provided date time.
       operationId: OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGet
       parameters:
         - description: 3-letter IATA aiport code (e.g. 'ZRH')
@@ -255,19 +270,22 @@ paths:
           required: true
           schema:
             type: string
-        - description: Start of time range in local time of arrival airport (YYYY-MM-DDTHH:mm)
+        - description: Start of time range in local time of arrival airport
+            (YYYY-MM-DDTHH:mm)
           in: path
           name: fromDateTime
           required: true
           schema:
             type: string
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
           schema:
             type: string
-        - description: Number of records returned per request. Defaults to 20, maximum is 100 (if a value bigger than 100 is given, 100 will be taken)
+        - description: Number of records returned per request. Defaults to 20, maximum is
+            100 (if a value bigger than 100 is given, 100 will be taken)
           in: query
           name: limit
           required: false
@@ -299,7 +317,8 @@ paths:
       x-unitTests: []
   "/operations/flightstatus/departures/{airportCode}/{fromDateTime}":
     get:
-      description: Status of all departures from a given airport up to 4 hours from the provided date time.
+      description: Status of all departures from a given airport up to 4 hours from
+        the provided date time.
       operationId: OperationsFlightstatusDeparturesByAirportCodeAndFromDateTimeGet
       parameters:
         - description: Departure airport. 3-letter IATA airport code (e.g. 'HAM')
@@ -308,19 +327,22 @@ paths:
           required: true
           schema:
             type: string
-        - description: Start of time range in local time of departure airport (YYYY-MM-DDTHH:mm)
+        - description: Start of time range in local time of departure airport
+            (YYYY-MM-DDTHH:mm)
           in: path
           name: fromDateTime
           required: true
           schema:
             type: string
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
           schema:
             type: string
-        - description: Number of records returned per request. Defaults to 20, maximum is 100 (if a value bigger than 100 is given, 100 will be taken)
+        - description: Number of records returned per request. Defaults to 20, maximum is
+            100 (if a value bigger than 100 is given, 100 will be taken)
           in: query
           name: limit
           required: false
@@ -373,13 +395,15 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
           schema:
             type: string
-        - description: Number of records returned per request. Defaults to 20, maximum is 100 (if a value bigger than 100 is given, 100 will be taken)
+        - description: Number of records returned per request. Defaults to 20, maximum is
+            100 (if a value bigger than 100 is given, 100 will be taken)
           in: query
           name: limit
           required: false
@@ -420,19 +444,22 @@ paths:
           required: true
           schema:
             type: string
-        - description: The departure date (YYYY-MM-DD) in the local time of the departure airport
+        - description: The departure date (YYYY-MM-DD) in the local time of the departure
+            airport
           in: path
           name: date
           required: true
           schema:
             type: string
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
           schema:
             type: string
-        - description: Number of records returned per request. Defaults to 20, maximum is 100 (if a value bigger than 100 is given, 100 will be taken)
+        - description: Number of records returned per request. Defaults to 20, maximum is
+            100 (if a value bigger than 100 is given, 100 will be taken)
           in: query
           name: limit
           required: false
@@ -479,13 +506,15 @@ paths:
           required: true
           schema:
             type: string
-        - description: Local departure date and optionally departure time (YYYY-MM-DD or YYYY-MM-DDTHH:mm). When not provided, time is assumed to be 00:01
+        - description: Local departure date and optionally departure time (YYYY-MM-DD or
+            YYYY-MM-DDTHH:mm). When not provided, time is assumed to be 00:01
           in: path
           name: fromDateTime
           required: true
           schema:
             type: string
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
@@ -497,7 +526,8 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: Number of records returned per request. Defaults to 20, maximum is 100 (if a value bigger than 100 is given, 100 will be taken)
+        - description: Number of records returned per request. Defaults to 20, maximum is
+            100 (if a value bigger than 100 is given, 100 will be taken)
           in: query
           name: limit
           required: false
@@ -532,7 +562,8 @@ paths:
       description: List all aircraft types or one specific aircraft type.
       operationId: ReferencesAircraftByAircraftCodeGet
       parameters:
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
@@ -545,7 +576,8 @@ paths:
           schema:
             default: 33P
             type: string
-        - description: Number of records returned per request. Defaults to 20, maximum is 100 (if a value bigger than 100 is given, 100 will be taken)
+        - description: Number of records returned per request. Defaults to 20, maximum is
+            100 (if a value bigger than 100 is given, 100 will be taken)
           in: query
           name: limit
           required: false
@@ -582,7 +614,8 @@ paths:
       description: List all airlines or one specific airline.
       operationId: ReferencesAirlinesByAirlineCodeGet
       parameters:
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
@@ -595,7 +628,8 @@ paths:
           schema:
             default: LH
             type: string
-        - description: Number of records returned per request. Defaults to 20, maximum is 100 (if a value bigger than 100 is given, 100 will be taken)
+        - description: Number of records returned per request. Defaults to 20, maximum is
+            100 (if a value bigger than 100 is given, 100 will be taken)
           in: query
           name: limit
           required: false
@@ -629,7 +663,8 @@ paths:
       x-unitTests: []
   "/references/airports/nearest/{latitude},{longitude}":
     get:
-      description: List the 5 closest airports to the given latitude and longitude, irrespective of the radius of the reference point.
+      description: List the 5 closest airports to the given latitude and longitude,
+        irrespective of the radius of the reference point.
       operationId: ReferencesAirportsNearestByLatitudeAndLongitudeGet
       parameters:
         - description: Latitude in decimal format to at most 3 decimal places
@@ -646,7 +681,8 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
@@ -678,10 +714,13 @@ paths:
       x-unitTests: []
   "/references/airports/{airportCode}":
     get:
-      description: List all airports or one specific airport. All airports response is very large. It is possible to request the response in a specific language.
+      description: List all airports or one specific airport. All airports response is
+        very large. It is possible to request the response in a specific
+        language.
       operationId: ReferencesAirportsByAirportCodeGet
       parameters:
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
@@ -700,7 +739,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Number of records returned per request. Defaults to 20, maximum is 100 (if a value bigger than 100 is given, 100 will be taken)
+        - description: Number of records returned per request. Defaults to 20, maximum is
+            100 (if a value bigger than 100 is given, 100 will be taken)
           in: query
           name: limit
           required: false
@@ -714,7 +754,8 @@ paths:
           schema:
             default: "0"
             type: string
-        - description: Restrict the results to locations with flights operated by LH (false=0, true=1)
+        - description: Restrict the results to locations with flights operated by LH
+            (false=0, true=1)
           in: query
           name: LHoperated
           required: false
@@ -740,10 +781,12 @@ paths:
       x-unitTests: []
   "/references/cities/{cityCode}":
     get:
-      description: List all cities or one specific city. It is possible to request the response in a specific language.
+      description: List all cities or one specific city. It is possible to request the
+        response in a specific language.
       operationId: ReferencesCitiesByCityCodeGet
       parameters:
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
@@ -762,7 +805,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Number of records returned per request. Defaults to 20, maximum is 100 (if a value bigger than 100 is given, 100 will be taken)
+        - description: Number of records returned per request. Defaults to 20, maximum is
+            100 (if a value bigger than 100 is given, 100 will be taken)
           in: query
           name: limit
           required: false
@@ -796,10 +840,12 @@ paths:
       x-unitTests: []
   "/references/countries/{countryCode}":
     get:
-      description: List all countries or one specific country. It is possible to request the response in a specific language.
+      description: List all countries or one specific country. It is possible to
+        request the response in a specific language.
       operationId: ReferencesCountriesByCountryCodeGet
       parameters:
-        - description: 'http header: application/json or application/xml (Acceptable values are: "application/json", "application/xml")'
+        - description: 'http header: application/json or application/xml (Acceptable
+            values are: "application/json", "application/xml")'
           in: header
           name: Accept
           required: true
@@ -818,7 +864,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Number of records returned per request. Defaults to 20, maximum is 100 (if a value bigger than 100 is given, 100 will be taken)
+        - description: Number of records returned per request. Defaults to 20, maximum is
+            100 (if a value bigger than 100 is given, 100 will be taken)
           in: query
           name: limit
           required: false
@@ -877,7 +924,8 @@ components:
               type: array
           type: object
         Position:
-          description: Physical location of an airport. This data section is optional and therefore not always present.
+          description: Physical location of an airport. This data section is optional and
+            therefore not always present.
           properties:
             Coordinate:
               $ref: "#/components/schemas/Coordinate"
@@ -923,11 +971,13 @@ components:
       description: Container for coordinates.
       properties:
         Latitude:
-          description: "Decimal latitude. Range: -90 (South Pole) to +90 (North Pole), e.g. “51.540”."
+          description: "Decimal latitude. Range: -90 (South Pole) to +90 (North Pole),
+            e.g. “51.540”."
           format: float
           type: number
         Longitude:
-          description: "Decimal longitude. Range: -180 (West of Prime Meridian) to +180 (East of Prime Meridian)."
+          description: "Decimal longitude. Range: -180 (West of Prime Meridian) to +180
+            (East of Prime Meridian)."
           format: float
           type: number
       type: object
@@ -937,7 +987,9 @@ components:
           description: Link to actual a resource.
           type: string
         "@Rel":
-          description: Specifying kind of link such as ‘self’ (link that returned this response), ‘alternate’ (link that points to another resource) or ‘related’ (link that points to related resource).
+          description: Specifying kind of link such as ‘self’ (link that returned this
+            response), ‘alternate’ (link that points to another resource) or
+            ‘related’ (link that points to related resource).
           type: string
       type: object
     Name:

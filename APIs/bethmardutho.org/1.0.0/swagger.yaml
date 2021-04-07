@@ -8,7 +8,8 @@ info:
   contact:
     email: sedra@bethmardutho.org
   description: >-
-    The SEDRA API is documented in **OpenAPI format** and uses [ReDoc](https://github.com/Rebilly/ReDoc) for documentation.
+    The SEDRA API is documented in **OpenAPI format** and uses
+    [ReDoc](https://github.com/Rebilly/ReDoc) for documentation.
 
     # Introduction
 
@@ -94,9 +95,11 @@ paths:
                   - interjection
                 type: string
               etymologies:
-                $ref: "#/paths/~1word~1%7Bid%7D/get/responses/200/schema/items/properties/glosses"
+                $ref: "#/paths/~1word~1%7Bid%7D/get/responses/200/schema/items/properties/gloss\
+                  es"
               glosses:
-                $ref: "#/paths/~1word~1%7Bid%7D/get/responses/200/schema/items/properties/glosses"
+                $ref: "#/paths/~1word~1%7Bid%7D/get/responses/200/schema/items/properties/gloss\
+                  es"
               kaylo:
                 $ref: "#/paths/~1word~1%7Bid%7D/get/responses/200/schema/items/properties/kaylo"
               lexeme:
@@ -119,9 +122,17 @@ paths:
         - API
   "/word/{id}":
     get:
-      description: Returns an array of linguistic information for every word that matches the Syriac word. Adjustment is made if the Syriac word is consonantal, partially, or fully vocalized.
+      description: Returns an array of linguistic information for every word that
+        matches the Syriac word. Adjustment is made if the Syriac word is
+        consonantal, partially, or fully vocalized.
       parameters:
-        - description: The id parameters must contain either the Id of a word from the Sedra database or a Syriac word in the unicode character set. When the id parameter is a Syriac word it may be consonantal, partially vocalized, or fully vocalized. Fully vocalized Syriac words will have less false positive results than partially vocalized or consonantal Syriac words. When id is the Id of a word from the SEDRA database then that word will be the only word in the result.
+        - description: The id parameters must contain either the Id of a word from the
+            Sedra database or a Syriac word in the unicode character set. When
+            the id parameter is a Syriac word it may be consonantal, partially
+            vocalized, or fully vocalized. Fully vocalized Syriac words will
+            have less false positive results than partially vocalized or
+            consonantal Syriac words. When id is the Id of a word from the SEDRA
+            database then that word will be the only word in the result.
           in: path
           name: id
           required: true
@@ -136,7 +147,8 @@ paths:
                   description: Eastern vocalized form of this Syriac word.
                   type: string
                 gender:
-                  description: The gender of a Syriac adjective, noun, numeral, pronoun, suffix, or verb.
+                  description: The gender of a Syriac adjective, noun, numeral, pronoun, suffix,
+                    or verb.
                   enum:
                     - common
                     - feminine
@@ -147,7 +159,8 @@ paths:
                     items:
                       type: string
                     type: array
-                  description: A hashmap with language name as a key and and array of text strings in that language
+                  description: A hashmap with language name as a key and and array of text strings
+                    in that language
                   type: object
                 hasSeyame:
                   description: Indicator to the presence of a Seyame in this word.
@@ -216,11 +229,14 @@ paths:
                     - construct
                   type: string
                 suffixGender:
-                  $ref: "#/paths/~1word~1%7Bid%7D/get/responses/200/schema/items/properties/gender"
+                  $ref: "#/paths/~1word~1%7Bid%7D/get/responses/200/schema/items/properties/gende\
+                    r"
                 suffixNumber:
-                  $ref: "#/paths/~1word~1%7Bid%7D/get/responses/200/schema/items/properties/number"
+                  $ref: "#/paths/~1word~1%7Bid%7D/get/responses/200/schema/items/properties/numbe\
+                    r"
                 suffixPerson:
-                  $ref: "#/paths/~1word~1%7Bid%7D/get/responses/200/schema/items/properties/person"
+                  $ref: "#/paths/~1word~1%7Bid%7D/get/responses/200/schema/items/properties/perso\
+                    n"
                 suffixType:
                   description: The type of suffix attached to the Syriac word.
                   enum:

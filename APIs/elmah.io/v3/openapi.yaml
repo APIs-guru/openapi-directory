@@ -2,7 +2,15 @@ openapi: 3.0.0
 info:
   contact:
     x-twitter: elmah_io
-  description: This is the public REST API for elmah.io. All of the integrations communicates with elmah.io through this API.<br/><br/>For additional help getting started with the API, visit the following help articles:<br/><ul><li>[Using the REST API](https://docs.elmah.io/using-the-rest-api/)</li><li>[Where is my API key?](https://docs.elmah.io/where-is-my-api-key/)</li><li>[Where is my log ID?](https://docs.elmah.io/where-is-my-log-id/)</li><li>[How to configure API key permissions](https://docs.elmah.io/how-to-configure-api-key-permissions/)</li></ul>
+  description: This is the public REST API for elmah.io. All of the integrations
+    communicates with elmah.io through this API.<br/><br/>For additional help
+    getting started with the API, visit the following help
+    articles:<br/><ul><li>[Using the REST
+    API](https://docs.elmah.io/using-the-rest-api/)</li><li>[Where is my API
+    key?](https://docs.elmah.io/where-is-my-api-key/)</li><li>[Where is my log
+    ID?](https://docs.elmah.io/where-is-my-log-id/)</li><li>[How to configure
+    API key
+    permissions](https://docs.elmah.io/how-to-configure-api-key-permissions/)</li></ul>
   title: elmah.io API
   version: v3
   x-apisguru-categories:
@@ -42,9 +50,11 @@ paths:
         "401":
           description: API key not valid or no access to resource.
         "402":
-          description: Tried to call the deployment API without deployment tracking enabled or trial expired.
+          description: Tried to call the deployment API without deployment tracking
+            enabled or trial expired.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Fetch a list of deployments.
       tags:
         - Deployments
@@ -83,15 +93,18 @@ paths:
         "401":
           description: API key not valid or no access to resource.
         "402":
-          description: Tried to call the deployment API without deployment tracking enabled or trial expired.
+          description: Tried to call the deployment API without deployment tracking
+            enabled or trial expired.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Create a new deployment.
       tags:
         - Deployments
   "/v3/deployments/{id}":
     delete:
-      description: This endpoint doesn't clear the version number of messages already annotated with this deployment version.
+      description: This endpoint doesn't clear the version number of messages already
+        annotated with this deployment version.
       operationId: Deployments_Delete
       parameters:
         - description: The ID of the deployment to delete.
@@ -108,11 +121,13 @@ paths:
         "401":
           description: API key not valid or no access to resource.
         "402":
-          description: Tried to call the deployment API without deployment tracking enabled or trial expired.
+          description: Tried to call the deployment API without deployment tracking
+            enabled or trial expired.
         "404":
           description: Deployment with specified id not found.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Delete a deployment by its ID.
       tags:
         - Deployments
@@ -145,7 +160,8 @@ paths:
         "402":
           description: Deployment with specified id not found.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Fetch a deployment by its ID.
       tags:
         - Deployments
@@ -188,11 +204,13 @@ paths:
         "401":
           description: API key not valid or no access to resource.
         "402":
-          description: Tried to call the heartbeats API without heartbeats enabled or trial expired.
+          description: Tried to call the heartbeats API without heartbeats enabled or
+            trial expired.
         "404":
           description: The specified log or heartbeat was not found.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Create a new heartbeat.
       tags:
         - Heartbeats
@@ -223,7 +241,8 @@ paths:
         "402":
           description: Tried to call the logs API but the trial expired.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Fetch a list of logs.
       tags:
         - Logs
@@ -264,7 +283,8 @@ paths:
         "402":
           description: Tried to call the logs API but the trial expired.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Create a new log.
       tags:
         - Logs
@@ -298,7 +318,8 @@ paths:
         "404":
           description: Log not found.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Fetch a log by its ID.
       tags:
         - Logs
@@ -339,7 +360,8 @@ paths:
         "404":
           description: Log not found.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Deletes a list of messages by logid and query.
       tags:
         - Messages
@@ -383,7 +405,8 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: Include headers like server variables and cookies in the result (slower).
+        - description: Include headers like server variables and cookies in the result
+            (slower).
           in: query
           name: includeHeaders
           schema:
@@ -409,7 +432,8 @@ paths:
         "402":
           description: Tried to call the logs API but the trial expired.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Fetch messages from a log.
       tags:
         - Messages
@@ -463,7 +487,8 @@ paths:
         "413":
           description: Message too large. Messages must not exceed 256 kb.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Create a new message.
       tags:
         - Messages
@@ -522,7 +547,8 @@ paths:
                 items:
                   $ref: "#/components/schemas/CreateBulkMessageResult"
                 type: array
-          description: Zero or more messages where successfully created. Check the response body for details.
+          description: Zero or more messages where successfully created. Check the
+            response body for details.
         "400":
           description: Something wrong with the query parameters.
         "401":
@@ -532,7 +558,8 @@ paths:
         "404":
           description: Log not found.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Create one or more new messages.
       tags:
         - Messages
@@ -564,7 +591,8 @@ paths:
         "404":
           description: Log or message not found.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Delete a message by its ID.
       tags:
         - Messages
@@ -605,7 +633,8 @@ paths:
         "404":
           description: Message not found.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Fetch a message by its ID.
       tags:
         - Messages
@@ -643,7 +672,8 @@ paths:
         "404":
           description: Message not found.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Fix a message by its ID.
       tags:
         - Messages
@@ -675,7 +705,8 @@ paths:
         "404":
           description: Message not found.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
       summary: Hide a message by its ID.
       tags:
         - Messages
@@ -706,8 +737,10 @@ paths:
         "402":
           description: Tried to call the uptime checks API but the trial expired.
         "429":
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
-      summary: Fetch a list of uptime checks. Currently in closed beta. Get in contact to get access to this endpoint.
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
+      summary: Fetch a list of uptime checks. Currently in closed beta. Get in contact
+        to get access to this endpoint.
       tags:
         - UptimeChecks
 components:
@@ -719,43 +752,54 @@ components:
           format: uri
           type: string
         statusCode:
-          description: "Status code of the individual messages as if it were being created through the non-bulk endpoint.\r
+          description: "Status code of the individual messages as if it were being created
+            through the non-bulk endpoint.\r
 
-            If a message was succesfully created, the status code will be 201 and location will contain an URL.\r
+            If a message was succesfully created, the status code
+            will be 201 and location will contain an URL.\r
 
-            If a message was ignored, the status code will be 200 and the location will be empty."
+            If a message was ignored, the status code will be 200
+            and the location will be empty."
           format: int32
           type: integer
       type: object
     CreateDeployment:
       properties:
         created:
-          description: When was this deployment created in UTC. Defaults to current time if not specified.
+          description: When was this deployment created in UTC. Defaults to current time
+            if not specified.
           format: date-time
           type: string
         description:
-          description: Optional description of this deployment. Can be markdown or clear text.
+          description: Optional description of this deployment. Can be markdown or clear
+            text.
           type: string
         logId:
-          description: "As default, deployments are attached all logs of the organization. If you want a deployment to\r
+          description: "As default, deployments are attached all logs of the organization.
+            If you want a deployment to\r
 
-            attach to a single log only, set this to the ID of that log."
+            attach to a single log only, set this to the ID of that
+            log."
           type: string
         userEmail:
-          description: "The email of the person responsible for creating this deployment. This can be the email taken from\r
+          description: "The email of the person responsible for creating this deployment.
+            This can be the email taken from\r
 
             your deployment server (like VSTS or Octopus)."
           format: email
           type: string
         userName:
-          description: "The name of the person responsible for creating this deployment. This can be the name taken from\r
+          description: "The name of the person responsible for creating this deployment.
+            This can be the name taken from\r
 
             your deployment server (like VSTS or Octopus)."
           type: string
         version:
-          description: "The version number of this deployment. The value of version can be a SemVer compliant string or any other\r
+          description: "The version number of this deployment. The value of version can be
+            a SemVer compliant string or any other\r
 
-            syntax that you are using as your version numbering scheme."
+            syntax that you are using as your version numbering
+            scheme."
           type: string
       required:
         - version
@@ -770,26 +814,37 @@ components:
     CreateHeartbeat:
       properties:
         application:
-          description: "Optional string to identify which application logged this message. You can use this if you have multiple applications and services logging to the same log.\r
+          description: "Optional string to identify which application logged this message.
+            You can use this if you have multiple applications and services
+            logging to the same log.\r
 
-            If not set, the application name \"Heartbeats\" will be set on all log messages generated from this heartbeat."
+            If not set, the application name \"Heartbeats\" will be
+            set on all log messages generated from this heartbeat."
           type: string
         reason:
-          description: If result is "Degraded" or "Unhealthy" you can use this property to specify why.
+          description: If result is "Degraded" or "Unhealthy" you can use this property to
+            specify why.
           type: string
         result:
-          description: The result of this heartbeat. Can be "Healthy, "Degraded", or "Unhealthy". Defaults to "Healthy"
+          description: The result of this heartbeat. Can be "Healthy, "Degraded", or
+            "Unhealthy". Defaults to "Healthy"
           type: string
         took:
-          description: "Optional long for specifying how many milliseconds it took to execute the task resulting in this heartbeat. This can be used to get a better overview\r
+          description: "Optional long for specifying how many milliseconds it took to
+            execute the task resulting in this heartbeat. This can be used to
+            get a better overview\r
 
-            of how long a scheduled task or service is running or to figure out if the grace period should be increased."
+            of how long a scheduled task or service is running or to
+            figure out if the grace period should be increased."
           format: int64
           type: integer
         version:
-          description: "Optional string to identify which version of your application logged this message. If not specified, any errors, warnings, or information messages will get\r
+          description: "Optional string to identify which version of your application
+            logged this message. If not specified, any errors, warnings, or
+            information messages will get\r
 
-            the newest version number created through deployment tracking as with normal log messages."
+            the newest version number created through deployment
+            tracking as with normal log messages."
           type: string
       type: object
     CreateLog:
@@ -810,36 +865,50 @@ components:
     CreateMessage:
       properties:
         application:
-          description: Used to identify which application logged this message. You can use this if you have multiple applications and services logging to the same log
+          description: Used to identify which application logged this message. You can use
+            this if you have multiple applications and services logging to the
+            same log
           type: string
         cookies:
-          description: A key/value pair of cookies. This property only makes sense for logging messages related to web requests.
+          description: A key/value pair of cookies. This property only makes sense for
+            logging messages related to web requests.
           items:
             $ref: "#/components/schemas/Item"
           type: array
         correlationId:
-          description: "CorrelationId can be used to group similar log messages together into a single discoverable batch. A correlation ID could be a session ID from ASP.NET Core,\r
+          description: "CorrelationId can be used to group similar log messages together
+            into a single discoverable batch. A correlation ID could be a
+            session ID from ASP.NET Core,\r
 
-            a unique string spanning multiple microsservices handling the same request, or similar."
+            a unique string spanning multiple microsservices
+            handling the same request, or similar."
           type: string
         data:
-          description: "A key/value pair of user-defined fields and their values. When logging an exception, the Data dictionary of\r
+          description: "A key/value pair of user-defined fields and their values. When
+            logging an exception, the Data dictionary of\r
 
-            the exception is copied to this property. You can add additional key/value pairs, by modifying the Data\r
+            the exception is copied to this property. You can add
+            additional key/value pairs, by modifying the Data\r
 
-            dictionary on the exception or by supplying additional key/values to this API."
+            dictionary on the exception or by supplying additional
+            key/values to this API."
           items:
             $ref: "#/components/schemas/Item"
           type: array
         dateTime:
-          description: The date and time in UTC of the message. If you don't provide us with a value in dateTime, we will set the current date and time in UTC.
+          description: The date and time in UTC of the message. If you don't provide us
+            with a value in dateTime, we will set the current date and time in
+            UTC.
           format: date-time
           type: string
         detail:
-          description: A longer description of the message. For errors this could be a stacktrace, but it's really up to you what to log in there.
+          description: A longer description of the message. For errors this could be a
+            stacktrace, but it's really up to you what to log in there.
           type: string
         form:
-          description: A key/value pair of form fields and their values. This property makes sense if logging message related to users inputting data in a form.
+          description: A key/value pair of form fields and their values. This property
+            makes sense if logging message related to users inputting data in a
+            form.
           items:
             $ref: "#/components/schemas/Item"
           type: array
@@ -847,53 +916,75 @@ components:
           description: The hostname of the server logging the message.
           type: string
         method:
-          description: If message relates to a HTTP request, you may send the HTTP method of that request. If you don't provide us with a method, we will try to find a key named REQUEST_METHOD in serverVariables.
+          description: If message relates to a HTTP request, you may send the HTTP method
+            of that request. If you don't provide us with a method, we will try
+            to find a key named REQUEST_METHOD in serverVariables.
           type: string
         queryString:
-          description: A key/value pair of query string parameters. This property makes sense if logging message related to a HTTP request.
+          description: A key/value pair of query string parameters. This property makes
+            sense if logging message related to a HTTP request.
           items:
             $ref: "#/components/schemas/Item"
           type: array
         serverVariables:
-          description: A key/value pair of server values. Server variables are typically related to handling requests in a webserver but could be used for other types of information as well.
+          description: A key/value pair of server values. Server variables are typically
+            related to handling requests in a webserver but could be used for
+            other types of information as well.
           items:
             $ref: "#/components/schemas/Item"
           type: array
         severity:
-          description: "An enum value representing the severity of this message. The following values are allowed: Verbose, Debug, Information, Warning, Error, Fatal"
+          description: "An enum value representing the severity of this message. The
+            following values are allowed: Verbose, Debug, Information, Warning,
+            Error, Fatal"
           type: string
         source:
-          description: The source of the code logging the message. This could be the assembly name.
+          description: The source of the code logging the message. This could be the
+            assembly name.
           type: string
         statusCode:
-          description: "If the message logged relates to a HTTP status code, you can put the code in this property. This would probably only be relevant for errors,\r
+          description: "If the message logged relates to a HTTP status code, you can put
+            the code in this property. This would probably only be relevant for
+            errors,\r
 
-            but could be used for logging successful status codes as well."
+            but could be used for logging successful status codes as
+            well."
           format: int32
           type: integer
         title:
           description: The textual title or headline of the message to log.
           type: string
         titleTemplate:
-          description: "The title template of the message to log. This property can be used from logging frameworks that supports\r
+          description: "The title template of the message to log. This property can be
+            used from logging frameworks that supports\r
 
-            structured logging like: \"{user} says {quote}\". In the example, titleTemplate will be this string and title\r
+            structured logging like: \"{user} says {quote}\". In the
+            example, titleTemplate will be this string and title\r
 
-            will be \"Gilfoyle says It's not magic. It's talent and sweat\"."
+            will be \"Gilfoyle says It's not magic. It's talent and
+            sweat\"."
           type: string
         type:
-          description: The type of message. If logging an error, the type of the exception would go into type but you can put anything in there, that makes sense for your domain.
+          description: The type of message. If logging an error, the type of the exception
+            would go into type but you can put anything in there, that makes
+            sense for your domain.
           type: string
         url:
-          description: If message relates to a HTTP request, you may send the URL of that request. If you don't provide us with an URL, we will try to find a key named URL in serverVariables.
+          description: If message relates to a HTTP request, you may send the URL of that
+            request. If you don't provide us with an URL, we will try to find a
+            key named URL in serverVariables.
           type: string
         user:
-          description: An identification of the user triggering this message. You can put the users email address or your user key into this property.
+          description: An identification of the user triggering this message. You can put
+            the users email address or your user key into this property.
           type: string
         version:
-          description: "Versions can be used to distinguish messages from different versions of your software. The value of version can be a SemVer compliant string or any other\r
+          description: "Versions can be used to distinguish messages from different
+            versions of your software. The value of version can be a SemVer
+            compliant string or any other\r
 
-            syntax that you are using as your version numbering scheme."
+            syntax that you are using as your version numbering
+            scheme."
           type: string
       type: object
     CreateMessageResult:
@@ -910,9 +1001,11 @@ components:
           format: date-time
           type: string
         createdBy:
-          description: "The elmah.io id of the user creating this deployment. Since deployments are created on a subscription,\r
+          description: "The elmah.io id of the user creating this deployment. Since
+            deployments are created on a subscription,\r
 
-            the CreatedBy will contain the id of the user with the subscription."
+            the CreatedBy will contain the id of the user with the
+            subscription."
           type: string
         description:
           description: Sescription of this deployment in markdown or clear text.
@@ -921,9 +1014,11 @@ components:
           description: The ID of this deployment.
           type: string
         logId:
-          description: "If the deployment is attached a single log, this property is set to the ID of that log.\r
+          description: "If the deployment is attached a single log, this property is set
+            to the ID of that log.\r
 
-            If null, the deployment is attached all logs on the organization."
+            If null, the deployment is attached all logs on the
+            organization."
           type: string
         userEmail:
           description: The email of the person responsible for creating this deployment.
@@ -932,9 +1027,11 @@ components:
           description: The name of the person responsible for creating this deployment.
           type: string
         version:
-          description: "The version number of this deployment. The value of version can be a SemVer compliant string or any other\r
+          description: "The version number of this deployment. The value of version can be
+            a SemVer compliant string or any other\r
 
-            syntax that you are using as your version numbering scheme."
+            syntax that you are using as your version numbering
+            scheme."
           type: string
       type: object
     Item:
@@ -950,14 +1047,18 @@ components:
     Log:
       properties:
         color:
-          description: "Color of the log. The color will always be one of the following (green being the default):\r
+          description: "Color of the log. The color will always be one of the following
+            (green being the default):\r
 
-            green, lightgreen, lime, yellow, orange, deeporange, red, pink, purple, deeppurple, blue, lightblue"
+            green, lightgreen, lime, yellow, orange, deeporange,
+            red, pink, purple, deeppurple, blue, lightblue"
           type: string
         environmentName:
-          description: "Environment name this log is in or \"Other\" if not in an environment.\r
+          description: "Environment name this log is in or \"Other\" if not in an
+            environment.\r
 
-            \"Other\" is chosen over null to mimic the experience in the elmah.io UI."
+            \"Other\" is chosen over null to mimic the experience in
+            the elmah.io UI."
           type: string
         id:
           description: ID of the log.
@@ -969,36 +1070,50 @@ components:
     Message:
       properties:
         application:
-          description: Used to identify which application logged this message. You can use this if you have multiple applications and services logging to the same log
+          description: Used to identify which application logged this message. You can use
+            this if you have multiple applications and services logging to the
+            same log
           type: string
         cookies:
-          description: A key/value pair of cookies. This property only makes sense for logging messages related to web requests.
+          description: A key/value pair of cookies. This property only makes sense for
+            logging messages related to web requests.
           items:
             $ref: "#/components/schemas/Item"
           type: array
         correlationId:
-          description: "CorrelationId can be used to group similar log messages together into a single discoverable batch. A correlation ID could be a session ID from ASP.NET Core,\r
+          description: "CorrelationId can be used to group similar log messages together
+            into a single discoverable batch. A correlation ID could be a
+            session ID from ASP.NET Core,\r
 
-            a unique string spanning multiple microsservices handling the same request, or similar."
+            a unique string spanning multiple microsservices
+            handling the same request, or similar."
           type: string
         data:
-          description: "A key/value pair of user-defined fields and their values. When logging an exception, the Data dictionary of\r
+          description: "A key/value pair of user-defined fields and their values. When
+            logging an exception, the Data dictionary of\r
 
-            the exception is copied to this property. You can add additional key/value pairs, by modifying the Data\r
+            the exception is copied to this property. You can add
+            additional key/value pairs, by modifying the Data\r
 
-            dictionary on the exception or by supplying additional key/values to this API."
+            dictionary on the exception or by supplying additional
+            key/values to this API."
           items:
             $ref: "#/components/schemas/Item"
           type: array
         dateTime:
-          description: The date and time in UTC of the message. If you don't provide us with a value in dateTime, we will set the current date and time in UTC.
+          description: The date and time in UTC of the message. If you don't provide us
+            with a value in dateTime, we will set the current date and time in
+            UTC.
           format: date-time
           type: string
         detail:
-          description: A longer description of the message. For errors this could be a stacktrace, but it's really up to you what to log in there.
+          description: A longer description of the message. For errors this could be a
+            stacktrace, but it's really up to you what to log in there.
           type: string
         form:
-          description: A key/value pair of form fields and their values. This property makes sense if logging message related to users inputting data in a form.
+          description: A key/value pair of form fields and their values. This property
+            makes sense if logging message related to users inputting data in a
+            form.
           items:
             $ref: "#/components/schemas/Item"
           type: array
@@ -1009,88 +1124,124 @@ components:
           description: The ID of this message.
           type: string
         method:
-          description: If message relates to a HTTP request, you may send the HTTP method of that request. If you don't provide us with a method, we will try to find a key named REQUEST_METHOD in serverVariables.
+          description: If message relates to a HTTP request, you may send the HTTP method
+            of that request. If you don't provide us with a method, we will try
+            to find a key named REQUEST_METHOD in serverVariables.
           type: string
         queryString:
-          description: A key/value pair of query string parameters. This property makes sense if logging message related to a HTTP request.
+          description: A key/value pair of query string parameters. This property makes
+            sense if logging message related to a HTTP request.
           items:
             $ref: "#/components/schemas/Item"
           type: array
         serverVariables:
-          description: A key/value pair of server values. Server variables are typically related to handling requests in a webserver but could be used for other types of information as well.
+          description: A key/value pair of server values. Server variables are typically
+            related to handling requests in a webserver but could be used for
+            other types of information as well.
           items:
             $ref: "#/components/schemas/Item"
           type: array
         severity:
-          description: "An enum value representing the severity of this message. The following values are allowed: Verbose, Debug, Information, Warning, Error, Fatal"
+          description: "An enum value representing the severity of this message. The
+            following values are allowed: Verbose, Debug, Information, Warning,
+            Error, Fatal"
           type: string
         source:
-          description: The source of the code logging the message. This could be the assembly name.
+          description: The source of the code logging the message. This could be the
+            assembly name.
           type: string
         statusCode:
-          description: "If the message logged relates to a HTTP status code, you can put the code in this property. This would probably only be relevant for errors,\r
+          description: "If the message logged relates to a HTTP status code, you can put
+            the code in this property. This would probably only be relevant for
+            errors,\r
 
-            but could be used for logging successful status codes as well."
+            but could be used for logging successful status codes as
+            well."
           format: int32
           type: integer
         title:
           description: The textual title or headline of the message to log.
           type: string
         titleTemplate:
-          description: "The title template of the message to log. This property can be used from logging frameworks that supports\r
+          description: "The title template of the message to log. This property can be
+            used from logging frameworks that supports\r
 
-            structured logging like: \"{user} says {quote}\". In the example, titleTemplate will be this string and title\r
+            structured logging like: \"{user} says {quote}\". In the
+            example, titleTemplate will be this string and title\r
 
-            will be \"Gilfoyle says It's not magic. It's talent and sweat\"."
+            will be \"Gilfoyle says It's not magic. It's talent and
+            sweat\"."
           type: string
         type:
-          description: The type of message. If logging an error, the type of the exception would go into type but you can put anything in there, that makes sense for your domain.
+          description: The type of message. If logging an error, the type of the exception
+            would go into type but you can put anything in there, that makes
+            sense for your domain.
           type: string
         url:
-          description: If message relates to a HTTP request, you may send the URL of that request. If you don't provide us with an URL, we will try to find a key named URL in serverVariables.
+          description: If message relates to a HTTP request, you may send the URL of that
+            request. If you don't provide us with an URL, we will try to find a
+            key named URL in serverVariables.
           type: string
         user:
-          description: An identification of the user triggering this message. You can put the users email address or your user key into this property.
+          description: An identification of the user triggering this message. You can put
+            the users email address or your user key into this property.
           type: string
         version:
-          description: "Versions can be used to distinguish messages from different versions of your software. The value of version can be a SemVer compliant string or any other\r
+          description: "Versions can be used to distinguish messages from different
+            versions of your software. The value of version can be a SemVer
+            compliant string or any other\r
 
-            syntax that you are using as your version numbering scheme."
+            syntax that you are using as your version numbering
+            scheme."
           type: string
       type: object
     MessageOverview:
       properties:
         application:
-          description: Used to identify which application logged this message. You can use this if you have multiple applications and services logging to the same log
+          description: Used to identify which application logged this message. You can use
+            this if you have multiple applications and services logging to the
+            same log
           type: string
         cookies:
-          description: A key/value pair of cookies. This property only makes sense for logging messages related to web requests.
+          description: A key/value pair of cookies. This property only makes sense for
+            logging messages related to web requests.
           items:
             $ref: "#/components/schemas/Item"
           type: array
         correlationId:
-          description: "CorrelationId can be used to group similar log messages together into a single discoverable batch. A correlation ID could be a session ID from ASP.NET Core,\r
+          description: "CorrelationId can be used to group similar log messages together
+            into a single discoverable batch. A correlation ID could be a
+            session ID from ASP.NET Core,\r
 
-            a unique string spanning multiple microsservices handling the same request, or similar."
+            a unique string spanning multiple microsservices
+            handling the same request, or similar."
           type: string
         data:
-          description: "A key/value pair of user-defined fields and their values. When logging an exception, the Data dictionary of\r
+          description: "A key/value pair of user-defined fields and their values. When
+            logging an exception, the Data dictionary of\r
 
-            the exception is copied to this property. You can add additional key/value pairs, by modifying the Data\r
+            the exception is copied to this property. You can add
+            additional key/value pairs, by modifying the Data\r
 
-            dictionary on the exception or by supplying additional key/values to this API."
+            dictionary on the exception or by supplying additional
+            key/values to this API."
           items:
             $ref: "#/components/schemas/Item"
           type: array
         dateTime:
-          description: The date and time in UTC of the message. If you don't provide us with a value in dateTime, we will set the current date and time in UTC.
+          description: The date and time in UTC of the message. If you don't provide us
+            with a value in dateTime, we will set the current date and time in
+            UTC.
           format: date-time
           type: string
         detail:
-          description: A longer description of the message. For errors this could be a stacktrace, but it's really up to you what to log in there.
+          description: A longer description of the message. For errors this could be a
+            stacktrace, but it's really up to you what to log in there.
           type: string
         form:
-          description: A key/value pair of form fields and their values. This property makes sense if logging message related to users inputting data in a form.
+          description: A key/value pair of form fields and their values. This property
+            makes sense if logging message related to users inputting data in a
+            form.
           items:
             $ref: "#/components/schemas/Item"
           type: array
@@ -1101,53 +1252,75 @@ components:
           description: The ID of this message.
           type: string
         method:
-          description: If message relates to a HTTP request, you may send the HTTP method of that request. If you don't provide us with a method, we will try to find a key named REQUEST_METHOD in serverVariables.
+          description: If message relates to a HTTP request, you may send the HTTP method
+            of that request. If you don't provide us with a method, we will try
+            to find a key named REQUEST_METHOD in serverVariables.
           type: string
         queryString:
-          description: A key/value pair of query string parameters. This property makes sense if logging message related to a HTTP request.
+          description: A key/value pair of query string parameters. This property makes
+            sense if logging message related to a HTTP request.
           items:
             $ref: "#/components/schemas/Item"
           type: array
         serverVariables:
-          description: A key/value pair of server values. Server variables are typically related to handling requests in a webserver but could be used for other types of information as well.
+          description: A key/value pair of server values. Server variables are typically
+            related to handling requests in a webserver but could be used for
+            other types of information as well.
           items:
             $ref: "#/components/schemas/Item"
           type: array
         severity:
-          description: "An enum value representing the severity of this message. The following values are allowed: Verbose, Debug, Information, Warning, Error, Fatal"
+          description: "An enum value representing the severity of this message. The
+            following values are allowed: Verbose, Debug, Information, Warning,
+            Error, Fatal"
           type: string
         source:
-          description: The source of the code logging the message. This could be the assembly name.
+          description: The source of the code logging the message. This could be the
+            assembly name.
           type: string
         statusCode:
-          description: "If the message logged relates to a HTTP status code, you can put the code in this property. This would probably only be relevant for errors,\r
+          description: "If the message logged relates to a HTTP status code, you can put
+            the code in this property. This would probably only be relevant for
+            errors,\r
 
-            but could be used for logging successful status codes as well."
+            but could be used for logging successful status codes as
+            well."
           format: int32
           type: integer
         title:
           description: The textual title or headline of the message to log.
           type: string
         titleTemplate:
-          description: "The title template of the message to log. This property can be used from logging frameworks that supports\r
+          description: "The title template of the message to log. This property can be
+            used from logging frameworks that supports\r
 
-            structured logging like: \"{user} says {quote}\". In the example, titleTemplate will be this string and title\r
+            structured logging like: \"{user} says {quote}\". In the
+            example, titleTemplate will be this string and title\r
 
-            will be \"Gilfoyle says It's not magic. It's talent and sweat\"."
+            will be \"Gilfoyle says It's not magic. It's talent and
+            sweat\"."
           type: string
         type:
-          description: The type of message. If logging an error, the type of the exception would go into type but you can put anything in there, that makes sense for your domain.
+          description: The type of message. If logging an error, the type of the exception
+            would go into type but you can put anything in there, that makes
+            sense for your domain.
           type: string
         url:
-          description: If message relates to a HTTP request, you may send the URL of that request. If you don't provide us with an URL, we will try to find a key named URL in serverVariables.
+          description: If message relates to a HTTP request, you may send the URL of that
+            request. If you don't provide us with an URL, we will try to find a
+            key named URL in serverVariables.
           type: string
         user:
-          description: An identification of the user triggering this message. You can put the users email address or your user key into this property.
+          description: An identification of the user triggering this message. You can put
+            the users email address or your user key into this property.
           type: string
         version:
-          description: "Versions can be used to distinguish messages from different versions of your software. The value of version can be a SemVer compliant string or any other\r
+          description: "Versions can be used to distinguish messages from different
+            versions of your software. The value of version can be a SemVer
+            compliant string or any other\r
 
-            syntax that you are using as your version numbering scheme."
+            syntax that you are using as your version numbering
+            scheme."
           type: string
       type: object
     MessagesResult:
@@ -1193,7 +1366,13 @@ components:
       type: object
   securitySchemes:
     api_key:
-      description: All requests on the elmah.io API needs to include an API key. The API key can be provided as part of the query string or as a request header. The name of the API key needs to be <code>api_key</code>.<br/><br/>Additional resources:<br/><ul><li>[Where is my API key?](https://docs.elmah.io/where-is-my-api-key/)</li><li>[How to configure API key permissions](https://docs.elmah.io/how-to-configure-api-key-permissions/)</li></ul>
+      description: All requests on the elmah.io API needs to include an API key. The
+        API key can be provided as part of the query string or as a request
+        header. The name of the API key needs to be
+        <code>api_key</code>.<br/><br/>Additional resources:<br/><ul><li>[Where
+        is my API key?](https://docs.elmah.io/where-is-my-api-key/)</li><li>[How
+        to configure API key
+        permissions](https://docs.elmah.io/how-to-configure-api-key-permissions/)</li></ul>
       in: query
       name: api_key
       type: apiKey

@@ -26,14 +26,11 @@ info:
 paths:
   /key:
     delete:
-      description: >
+      description: |
         Revoke an Authentiq ID using email & phone.
 
-
         If called with `email` and `phone` only, a verification code 
-
         will be sent by email. Do a second call adding `code` to 
-
         complete the revocation.
       operationId: key_revoke_nosecret
       parameters:
@@ -90,12 +87,10 @@ paths:
         - key
         - delete
     post:
-      description: >
+      description: |
         Register a new ID `JWT(sub, devtoken)`
 
-
         v5: `JWT(sub, pk, devtoken, ...)`
-
 
         See: https://github.com/skion/authentiq/wiki/JWT-Examples
       operationId: key_register
@@ -167,7 +162,7 @@ paths:
         - key
         - delete
     get:
-      description: >
+      description: |
         Get public details of an Authentiq ID.
       operationId: key_retrieve
       parameters:
@@ -207,7 +202,7 @@ paths:
         - key
         - get
     head:
-      description: >
+      description: |
         HEAD info on Authentiq ID
       parameters:
         - $ref: "#/components/parameters/PK"
@@ -232,16 +227,12 @@ paths:
         - key
         - head
     post:
-      description: >
+      description: |
         update properties of an Authentiq ID.
-
         (not operational in v4; use PUT for now)
 
-
         v5: POST issuer-signed email & phone scopes in
-
         a self-signed JWT
-
 
         See: https://github.com/skion/authentiq/wiki/JWT-Examples
       operationId: key_update
@@ -272,17 +263,13 @@ paths:
         - key
         - post
     put:
-      description: >
+      description: |
         Update Authentiq ID by replacing the object.
-
 
         v4: `JWT(sub,email,phone)` to bind email/phone hash; 
 
-
         v5: POST issuer-signed email & phone scopes
-
         and PUT to update registration `JWT(sub, pk, devtoken, ...)`
-
 
         See: https://github.com/skion/authentiq/wiki/JWT-Examples
       operationId: key_bind
@@ -320,9 +307,8 @@ paths:
         - put
   /login:
     post:
-      description: >
+      description: |
         push sign-in request
-
         See: https://github.com/skion/authentiq/wiki/JWT-Examples
       operationId: push_login_request
       parameters:
@@ -355,7 +341,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: Unauthorized for this callback audience `aud-error` or JWT should be self-signed `auth-error`
+          description: Unauthorized for this callback audience `aud-error` or JWT should
+            be self-signed `auth-error`
         default:
           $ref: "#/components/responses/ErrorResponse"
       tags:
@@ -363,9 +350,8 @@ paths:
         - post
   /scope:
     post:
-      description: >
+      description: |
         scope verification request
-
         See: https://github.com/skion/authentiq/wiki/JWT-Examples
       operationId: sign_request
       parameters:
@@ -545,9 +531,8 @@ paths:
         - scope
         - post
     put:
-      description: >
+      description: |
         authority updates a JWT with its signature
-
         See: https://github.com/skion/authentiq/wiki/JWT-Examples
       operationId: sign_update
       parameters:
@@ -616,7 +601,7 @@ components:
       description: Error response
   schemas:
     AuthentiqID:
-      description: >
+      description: |
         Authentiq ID in JWT format, self-signed.
       properties:
         devtoken:
@@ -628,7 +613,7 @@ components:
       required:
         - sub
     Claims:
-      description: >
+      description: |
         Claim in JWT format, self- or issuer-signed. 
       properties:
         email:
@@ -663,7 +648,7 @@ components:
       required:
         - error
     PushToken:
-      description: >
+      description: |
         PushToken in JWT format, self-signed. 
       properties:
         aud:

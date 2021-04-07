@@ -457,7 +457,8 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/TenancyModelResults"
-      summary: Search all properties available for rent given a range of search criteria.
+      summary: Search all properties available for rent given a range of search
+        criteria.
       tags:
         - LettingsController
   "/v2/tier1/{shortName}/lettings/advertisedbetweendates":
@@ -537,7 +538,8 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/TenancyModelResults"
-      summary: Search all properties available for rent given a range of search criteria and dates.
+      summary: Search all properties available for rent given a range of search
+        criteria and dates.
       tags:
         - LettingsController
   "/v2/tier1/{shortName}/lettings/tenancies":
@@ -611,7 +613,8 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Object"
-      summary: Downloads the brochure relating to the latest advertised rental of a property
+      summary: Downloads the brochure relating to the latest advertised rental of a
+        property
       tags:
         - LettingsController
   "/v2/tier1/{shortName}/photo/photos":
@@ -818,7 +821,8 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/PhotoModelResults"
-      summary: A collection showing all the photos linked to a specific block, property or room
+      summary: A collection showing all the photos linked to a specific block,
+        property or room
       tags:
         - PropertyController
   "/v2/tier1/{shortName}/property/properties/{propertyID}/rooms":
@@ -888,7 +892,8 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/TenancyModelResults"
-      summary: A collection of all tenancies associated with this block, property or room
+      summary: A collection of all tenancies associated with this block, property or
+        room
       tags:
         - PropertyController
   "/v2/tier1/{shortName}/property/structures/{propertyStructureID}/reports/eer":
@@ -1044,7 +1049,8 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Object"
-      summary: Downloads the energy efficiency report (EER) graph for a sales instruction
+      summary: Downloads the energy efficiency report (EER) graph for a sales
+        instruction
       tags:
         - SalesController
   "/v2/tier1/{shortName}/sales/reports/eir/{salesInstructionID}":
@@ -1067,7 +1073,8 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Object"
-      summary: Downloads the energy efficiency report (EIR) graph for a sales instruction
+      summary: Downloads the energy efficiency report (EIR) graph for a sales
+        instruction
       tags:
         - SalesController
   "/v2/tier1/{shortName}/sales/salesfeaturetypes":
@@ -1456,7 +1463,8 @@ definitions:
         description: Branch address line 4.
         type: string
       CompanyName:
-        description: The relevant company name, if not the one specified on the branch then the one on company.
+        description: The relevant company name, if not the one specified on the branch
+          then the one on company.
         type: string
       County:
         description: County
@@ -1522,7 +1530,8 @@ definitions:
         type: string
     type: object
   CountyModel:
-    description: Stores the information about a single property County. A County can have a number of areas linked to it.
+    description: Stores the information about a single property County. A County can
+      have a number of areas linked to it.
     properties:
       ETag:
         description: A unique identifier defining the object and change revision.
@@ -1548,7 +1557,8 @@ definitions:
         type: array
     type: object
   DiaryAllocationModel:
-    description: "Represents a single diary allocation, capable of holding a number\r
+    description: "Represents a single diary allocation, capable of holding a
+      number\r
 
       \            of appointments associated with a member of staff."
     properties:
@@ -1620,7 +1630,8 @@ definitions:
         format: date-time
         type: string
       RemindBefore:
-        description: The number of minutes before the appointment start date/time to remind the staff member. -1 means don't remind.
+        description: The number of minutes before the appointment start date/time to
+          remind the staff member. -1 means don't remind.
         enum:
           - Min
           - Min2
@@ -1788,7 +1799,8 @@ definitions:
         type: array
     type: object
   PropertyModel:
-    description: Stores the 'Sales' type fields for property ownable as a stepping stone to a full on BO when we finally get the go ahead to write sales!!
+    description: Stores the 'Sales' type fields for property ownable as a stepping
+      stone to a full on BO when we finally get the go ahead to write sales!!
     properties:
       Area:
         description: The area the property is located in.
@@ -1803,7 +1815,8 @@ definitions:
         description: A unique identifier defining the object and change revision.
         type: string
       FullAddress:
-        description: The full address of a block, property or room, formatted with line breaks such that it may be used on a letter directly.
+        description: The full address of a block, property or room, formatted with line
+          breaks such that it may be used on a letter directly.
         type: string
       GlobalReference:
         description: The global reference to this block, property or room
@@ -1886,7 +1899,8 @@ definitions:
         description: A unique identifier defining the object and change revision.
         type: string
       FullAddress:
-        description: The full address of a block, property or room, formatted with line breaks such that it may be used on a letter directly.
+        description: The full address of a block, property or room, formatted with line
+          breaks such that it may be used on a letter directly.
         type: string
       GlobalReference:
         description: The global reference to this block, property or room
@@ -2440,15 +2454,20 @@ definitions:
         type: array
     type: object
   TenancyModel:
-    description: "Represents a single tenancy on a property structure. This class may\r
+    description: "Represents a single tenancy on a property structure. This class
+      may\r
 
-      \            be considered to be the context of the tenancy strategy pattern. The\r
+      \            be considered to be the context of the tenancy strategy
+      pattern. The\r
 
-      \            strategy is the tenancy service, that dictates the algorithm applied\r
+      \            strategy is the tenancy service, that dictates the
+      algorithm applied\r
 
-      \            to the tenancy. This class therefore holds the raw data of a tenancy,\r
+      \            to the tenancy. This class therefore holds the raw data
+      of a tenancy,\r
 
-      \            and ignores any tenancy service (fully managed, let only) parameters."
+      \            and ignores any tenancy service (fully managed, let
+      only) parameters."
     properties:
       AdvertiseFrom:
         description: The date to advertise this tenancy from.
@@ -2484,11 +2503,14 @@ definitions:
         description: Is this property a student property.
         type: boolean
       IsTenancyAdvertised:
-        description: "Gets a value indicating whether this tenancy is being advertised. Note\r
+        description: "Gets a value indicating whether this tenancy is being advertised.
+          Note\r
 
-          \            that this will only return true while the tenancy has a valid advertise\r
+          \            that this will only return true while the
+          tenancy has a valid advertise\r
 
-          \            date. It will not return true in the proposed phase."
+          \            date. It will not return true in the proposed
+          phase."
         type: boolean
       IsTenancyProposed:
         description: Is the tenancy a proposed tenancy?

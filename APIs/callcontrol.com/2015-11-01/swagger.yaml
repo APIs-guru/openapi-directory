@@ -7,7 +7,11 @@ info:
     email: info@kedlin.com
     name: Call Control
     url: https://www.callcontrol.com/documentation
-  description: API for blocking phone calls with Call Control. Data is from crowdsourced community blacklist from 12+ million users and government agencies (FTC, FCC, IRS) Try with api_key 'demo', hit explore above, and then try phone numbers 18008472911,13157244022,17275567300,18008276655,12061231234.
+  description: API for blocking phone calls with Call Control. Data is from
+    crowdsourced community blacklist from 12+ million users and government
+    agencies (FTC, FCC, IRS) Try with api_key 'demo', hit explore above, and
+    then try phone numbers
+    18008472911,13157244022,17275567300,18008276655,12061231234.
   title: Call Control API
   version: 2015-11-01
   x-apisguru-categories:
@@ -31,9 +35,12 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This is the main funciton to get data out of the call control reporting system<br />\r
+      description: "This is the main funciton to get data out of the call control
+        reporting system<br />\r
 
-        \            Try with api_key 'demo' and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)"
+        \            Try with api_key 'demo' and phone numbers
+        18008472911, 13157244022, 17275567300, 18008276655, and 12061231234
+        (last one not spam)"
       operationId: Complaints_Complaints
       parameters:
         - description: phone number to search
@@ -49,7 +56,11 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Complaints"
-      summary: "Complaints: Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints."
+      summary: "Complaints: Free service (with registration), providing community and
+        government complaint lookup by phone number for up to 2,000 queries per
+        month.  Details include number complaint rates from (FTC, FCC, IRS,
+        Indiana Attorney  General) and key entity tag extractions from
+        complaints."
       tags:
         - Complaints
   "/api/2015-11-01/Enterprise/GetUser/{phoneNumber}":
@@ -75,16 +86,20 @@ paths:
           description: Bad request (invalid phone number)
       summary: "Enterprise  GET: GetUser\r
 
-        Returns the current information from the user;  try 12066194123 as demo"
+        Returns the current information from the user;  try 12066194123
+        as demo"
       tags:
         - EnterpriseApi
   "/api/2015-11-01/Enterprise/ShouldBlock/{phoneNumber}/{userPhoneNumber}":
     get:
       consumes: []
       deprecated: false
-      description: "This returns information required to perform basic call blocking behaviors\r
+      description: "This returns information required to perform basic call blocking
+        behaviors\r
 
-        \            Try with api_key 'demo' and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)"
+        \            Try with api_key 'demo' and phone numbers
+        18008472911, 13157244022, 17275567300, 18008276655, and 12061231234
+        (last one not spam)"
       operationId: EnterpriseApi_ShouldBlock
       parameters:
         - description: phone number to search
@@ -126,7 +141,9 @@ paths:
       parameters:
         - description: "[FromBody] User \r
 
-            \            <remarks>This returns information required to perform basic call blocking behaviors.  The demo key will return ok, but will not save the data.<br /></remarks>"
+            \            <remarks>This returns information required
+            to perform basic call blocking behaviors.  The demo key will return
+            ok, but will not save the data.<br /></remarks>"
           in: body
           name: user
           required: true
@@ -152,9 +169,11 @@ paths:
 
         QuietHourList (list of quiet hour objects)\r
 
-        UseCommunityBlacklist (enable / disable community blacklist) default true\r
+        UseCommunityBlacklist (enable / disable community blacklist)
+        default true\r
 
-        BreakThroughQhWithMultipleCalls (break through quiet hours with two calls in 3 minutes)\r
+        BreakThroughQhWithMultipleCalls (break through quiet hours with
+        two calls in 3 minutes)\r
 
         WhiteListBreaksQh (break through quiet hours for whitelist)"
       tags:
@@ -165,9 +184,12 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: "This returns information required to perform basic call blocking behaviors<br />\r
+      description: "This returns information required to perform basic call blocking
+        behaviors<br />\r
 
-        \            Try with api_key 'demo' and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)"
+        \            Try with api_key 'demo' and phone numbers
+        18008472911, 13157244022, 17275567300, 18008276655, and 12061231234
+        (last one not spam)"
       operationId: Reputation_Report
       parameters:
         - description: "[FromBody] Call Report\r
@@ -192,16 +214,20 @@ paths:
       responses:
         "400":
           description: Bad request (eg. invalid phone nubmer)
-      summary: "Report: report spam calls received to better tune our algorithms based upon spam calls you receive"
+      summary: "Report: report spam calls received to better tune our algorithms based
+        upon spam calls you receive"
       tags:
         - Reputation
   "/api/2015-11-01/Reputation/{phoneNumber}":
     get:
       consumes: []
       deprecated: false
-      description: "This returns information required to perform basic call blocking behaviors<br />\r
+      description: "This returns information required to perform basic call blocking
+        behaviors<br />\r
 
-        \            Try with api_key 'demo' and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)"
+        \            Try with api_key 'demo' and phone numbers
+        18008472911, 13157244022, 17275567300, 18008276655, and 12061231234
+        (last one not spam)"
       operationId: Reputation_Reputation
       parameters:
         - description: phone number to search
@@ -221,7 +247,8 @@ paths:
           description: Bad request (invalid phone number)
       summary: "Reputation:\r
 
-        Premium service which returns a reputation informaiton of a phone number via API."
+        Premium service which returns a reputation informaiton of a
+        phone number via API."
       tags:
         - Reputation
 definitions:
@@ -332,9 +359,11 @@ definitions:
         type: boolean
     type: object
   Complaints:
-    description: "Free service (with registration) which serves Government Do Not Call data via API \r
+    description: "Free service (with registration) which serves Government Do Not
+      Call data via API \r
 
-      Search via phone number returns available data, reported name, total complaints"
+      Search via phone number returns available data, reported name, total
+      complaints"
     properties:
       ComplaintsByEntity:
         additionalProperties:

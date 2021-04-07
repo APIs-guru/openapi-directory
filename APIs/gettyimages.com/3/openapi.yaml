@@ -18,11 +18,19 @@ paths:
   /v3/affiliates/search/images:
     get:
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - in: query
           name: phrase
@@ -45,11 +53,19 @@ paths:
   /v3/affiliates/search/videos:
     get:
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - in: query
           name: phrase
@@ -68,11 +84,19 @@ paths:
   /v3/artists/images:
     get:
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: Name of artist for desired images
           in: query
@@ -81,12 +105,16 @@ paths:
             description: Name of artist for desired images
             nullable: true
             type: string
-        - description: Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.
+        - description: Comma separated list of fields. Allows restricting which fields are
+            returned. If no fields are selected, the summary_set of fields are
+            returned.
           explode: false
           in: query
           name: fields
           schema:
-            description: Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.
+            description: Comma separated list of fields. Allows restricting which fields are
+              returned. If no fields are selected, the summary_set of fields are
+              returned.
             items:
               $ref: "#/components/schemas/ArtistsImageSearchFieldValues"
             nullable: true
@@ -100,12 +128,14 @@ paths:
             description: Identifies page to return. Default page is 1.
             format: int32
             type: integer
-        - description: Specifies page size. Default page_size is 10, maximum page_size is 100.
+        - description: Specifies page size. Default page_size is 10, maximum page_size is
+            100.
           in: query
           name: page_size
           schema:
             default: 10
-            description: Specifies page size. Default page_size is 10, maximum page_size is 100.
+            description: Specifies page size. Default page_size is 10, maximum page_size is
+              100.
             format: int32
             type: integer
       responses:
@@ -121,11 +151,19 @@ paths:
   /v3/artists/videos:
     get:
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: Name of artist for desired images
           in: query
@@ -134,12 +172,16 @@ paths:
             description: Name of artist for desired images
             nullable: true
             type: string
-        - description: Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.
+        - description: Comma separated list of fields. Allows restricting which fields are
+            returned. If no fields are selected, the summary_set of fields are
+            returned.
           explode: false
           in: query
           name: fields
           schema:
-            description: Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.
+            description: Comma separated list of fields. Allows restricting which fields are
+              returned. If no fields are selected, the summary_set of fields are
+              returned.
             items:
               $ref: "#/components/schemas/ArtistsVideoSearchFieldValues"
             nullable: true
@@ -153,12 +195,14 @@ paths:
             description: Identifies page to return. Default page is 1.
             format: int32
             type: integer
-        - description: Specifies page size. Default page_size is 10, maximum page_size is 100.
+        - description: Specifies page size. Default page_size is 10, maximum page_size is
+            100.
           in: query
           name: page_size
           schema:
             default: 10
-            description: Specifies page size. Default page_size is 10, maximum page_size is 100.
+            description: Specifies page size. Default page_size is 10, maximum page_size is
+              100.
             format: int32
             type: integer
       responses:
@@ -173,33 +217,33 @@ paths:
         - Artists
   /v3/asset-changes/change-sets:
     put:
-      description: >
+      description: |
         # Asset Changes
-
 
         Get notifications about new, updated or deleted assets.
 
-
         ##  Quickstart
-
 
         You'll need an API key and an access token to use this resource. 
 
-
         Notifications older than 60 days will be removed from partner channels.
       parameters:
-        - description: Specifies the id of the channel for the asset data. Valid channel ids can be found in the results of the Get Partner Channel query.
+        - description: Specifies the id of the channel for the asset data. Valid channel
+            ids can be found in the results of the Get Partner Channel query.
           in: query
           name: channel_id
           schema:
-            description: Specifies the id of the channel for the asset data. Valid channel ids can be found in the results of the Get Partner Channel query.
+            description: Specifies the id of the channel for the asset data. Valid channel
+              ids can be found in the results of the Get Partner Channel query.
             format: int32
             type: integer
-        - description: Specifies the number of assets to return. The default is 10; maximum is 500.
+        - description: Specifies the number of assets to return. The default is 10;
+            maximum is 500.
           in: query
           name: batch_size
           schema:
-            description: Specifies the number of assets to return. The default is 10; maximum is 500.
+            description: Specifies the number of assets to return. The default is 10;
+              maximum is 500.
             format: int32
             nullable: true
             type: integer
@@ -239,12 +283,14 @@ paths:
 
         You'll need an API key and an access token to use this resource.
       parameters:
-        - description: Specify the change-set-id associated with a transaction resource whose receipt you want to confirm.
+        - description: Specify the change-set-id associated with a transaction resource
+            whose receipt you want to confirm.
           in: path
           name: change-set-id
           required: true
           schema:
-            description: Specify the change-set-id associated with a transaction resource whose receipt you want to confirm.
+            description: Specify the change-set-id associated with a transaction resource
+              whose receipt you want to confirm.
             format: int64
             type: integer
       responses:
@@ -295,11 +341,19 @@ paths:
   "/v3/asset-licensing/{assetId}":
     post:
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: Getty Images assetId - examples 520621493, 112301284
           in: path
@@ -323,9 +377,12 @@ paths:
           text/json:
             schema:
               $ref: "#/components/schemas/AcquireAssetLicensesRequest"
-        description: "Structure that specifies an array of LicenseTypes (Multiseat, Unlimited, Resale, Indemnification) to acquire,\r
+        description: "Structure that specifies an array of LicenseTypes (Multiseat,
+          Unlimited, Resale, Indemnification) to acquire,\r
 
-          \            and whether or not to use Team Credits. Authenticated User must have access to Team Credits if UseTeamCredits is set to \"true\"."
+          \            and whether or not to use Team Credits.
+          Authenticated User must have access to Team Credits if UseTeamCredits
+          is set to \"true\"."
       responses:
         "200":
           content:
@@ -341,7 +398,8 @@ paths:
           description: NotEnoughCreditsForPurchase
         "404":
           description: StandardLicenseNotFound
-      summary: Endpoint for acquiring extended licenses with iStock credits for an asset.
+      summary: Endpoint for acquiring extended licenses with iStock credits for an
+        asset.
       tags:
         - AssetLicensing
   /v3/boards:
@@ -360,7 +418,8 @@ paths:
           name: board_relationship
           schema:
             $ref: "#/components/schemas/BoardRelationship"
-        - description: Sort the list of boards by last update date or name. Defaults to date_last_updated_descending.
+        - description: Sort the list of boards by last update date or name. Defaults to
+            date_last_updated_descending.
           in: query
           name: sort_order
           schema:
@@ -393,7 +452,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BoardInfo"
-        description: Specify a name and description of the board to create (name is required).
+        description: Specify a name and description of the board to create (name is
+          required).
       responses:
         "201":
           content:
@@ -608,12 +668,14 @@ paths:
             description: Specify the board to add an asset to.
             nullable: true
             type: string
-        - description: Specify the asset to add to the board. If it is already in the board's asset collection, no action is taken.
+        - description: Specify the asset to add to the board. If it is already in the
+            board's asset collection, no action is taken.
           in: path
           name: asset_id
           required: true
           schema:
-            description: Specify the asset to add to the board. If it is already in the board's asset collection, no action is taken.
+            description: Specify the asset to add to the board. If it is already in the
+              board's asset collection, no action is taken.
             nullable: true
             type: string
       responses:
@@ -729,16 +791,27 @@ paths:
   /v3/collections:
     get:
       description: >
-        Use this endpoint to retrieve collections associated with your Getty Images account. To browse available collections see our [Image collections page]( http://www.gettyimages.com/creative-images/collections).
+        Use this endpoint to retrieve collections associated with your
+        Getty Images account. To browse available collections see our [Image
+        collections page](
+        http://www.gettyimages.com/creative-images/collections).
 
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
       responses:
         "200":
@@ -755,16 +828,25 @@ paths:
   /v3/countries:
     get:
       description: >
-        Returns a list of country objects that contains country name, two letter ISO abbreviation and three letter ISO abbreviation.
+        Returns a list of country objects that contains country name, two
+        letter ISO abbreviation and three letter ISO abbreviation.
 
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
       responses:
         "200":
@@ -788,11 +870,19 @@ paths:
         	
         Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
       responses:
         "200":
@@ -811,12 +901,12 @@ paths:
   /v3/downloads:
     get:
       description: >
-        Returns information about a customer's previously downloaded assets.
+        Returns information about a customer's previously downloaded
+        assets.
 
 
         You'll need an API key and access token to use this resource.
          
-
 
         	
         This endpoint requires being a Getty Images customer to limit your results to only assets that you have a license to use, 
@@ -825,56 +915,85 @@ paths:
 
         Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: "If specified, selects assets downloaded on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD). \r
+        - description: "If specified, selects assets downloaded on or after this date.
+            Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD). \r
 
-            Any hour, minute, second values in the request are not used, unless useTimePart parameter is included.\r
+            Any hour, minute, second values in the request are not
+            used, unless useTimePart parameter is included.\r
 
-            Date/times in the response are UTC. Default is 30 days prior to date_to"
+            Date/times in the response are UTC. Default is 30 days
+            prior to date_to"
           in: query
           name: date_from
           schema:
-            description: "If specified, selects assets downloaded on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD). \r
+            description: "If specified, selects assets downloaded on or after this date.
+              Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
+              \r
 
-              Any hour, minute, second values in the request are not used, unless useTimePart parameter is included.\r
+              Any hour, minute, second values in the request are
+              not used, unless useTimePart parameter is included.\r
 
-              Date/times in the response are UTC. Default is 30 days prior to date_to"
+              Date/times in the response are UTC. Default is 30
+              days prior to date_to"
             format: date-time
             nullable: true
             type: string
-        - description: "If specified, selects assets downloaded on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD)\r
+        - description: "If specified, selects assets downloaded on or before this date.
+            Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD)\r
 
-            Any hour, minute, second values in the request are not used, unless useTimePart parameter is included.\r
+            Any hour, minute, second values in the request are not
+            used, unless useTimePart parameter is included.\r
 
-            Date/times in the response are UTC. Default is current date or 30 days after specified start date, whichever one is earlier."
+            Date/times in the response are UTC. Default is current
+            date or 30 days after specified start date, whichever one is
+            earlier."
           in: query
           name: date_to
           schema:
-            description: "If specified, selects assets downloaded on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD)\r
+            description: "If specified, selects assets downloaded on or before this date.
+              Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD)\r
 
-              Any hour, minute, second values in the request are not used, unless useTimePart parameter is included.\r
+              Any hour, minute, second values in the request are
+              not used, unless useTimePart parameter is included.\r
 
-              Date/times in the response are UTC. Default is current date or 30 days after specified start date, whichever one is earlier."
+              Date/times in the response are UTC. Default is
+              current date or 30 days after specified start date, whichever one
+              is earlier."
             format: date-time
             nullable: true
             type: string
-        - description: "If specified, time values provided with date_to or date_from will be used. Time values should be appended to the date value in ISO 8601 format\r
+        - description: "If specified, time values provided with date_to or date_from will
+            be used. Time values should be appended to the date value in ISO
+            8601 format\r
 
-            i.e.: 2019-09-19T19:30:37 or 2019-09-19 19:30:37.  Time zone can be specified as optional.\r
+            i.e.: 2019-09-19T19:30:37 or 2019-09-19 19:30:37.  Time
+            zone can be specified as optional.\r
 
             Default value is false"
           in: query
           name: use_time
           schema:
             default: false
-            description: "If specified, time values provided with date_to or date_from will be used. Time values should be appended to the date value in ISO 8601 format\r
+            description: "If specified, time values provided with date_to or date_from will
+              be used. Time values should be appended to the date value in ISO
+              8601 format\r
 
-              i.e.: 2019-09-19T19:30:37 or 2019-09-19 19:30:37.  Time zone can be specified as optional.\r
+              i.e.: 2019-09-19T19:30:37 or 2019-09-19
+              19:30:37.  Time zone can be specified as optional.\r
 
               Default value is false"
             type: boolean
@@ -898,12 +1017,18 @@ paths:
           name: product_type
           schema:
             $ref: "#/components/schemas/ProductTypeRequest"
-        - description: If specified, returns the list of previously downloaded images for all users in your company. Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false.
+        - description: If specified, returns the list of previously downloaded images for
+            all users in your company. Your account must be enabled for this
+            functionality. Contact your Getty Images account rep for more
+            information. Default is false.
           in: query
           name: company_downloads
           schema:
             default: false
-            description: If specified, returns the list of previously downloaded images for all users in your company. Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false.
+            description: If specified, returns the list of previously downloaded images for
+              all users in your company. Your account must be enabled for this
+              functionality. Contact your Getty Images account rep for more
+              information. Default is false.
             type: boolean
       responses:
         "200":
@@ -924,7 +1049,8 @@ paths:
   "/v3/downloads/images/{id}":
     post:
       description: >+
-        Use this endpoint to generate download URLs and related data for images you are authorized to download.
+        Use this endpoint to generate download URLs and related data for
+        images you are authorized to download.
 
 
         Most product offerings have enforced periodic download limits such as monthly, weekly, and daily. When this operation executes, the count of allowed downloads is decremented by one for the product offering. Once the download limit is reached for a given product offering, no further downloads may be requested for that product offering until the next download period.
@@ -1016,11 +1142,19 @@ paths:
         The `content-disposition` header must be parsed to get a usable filename.
 
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: "<remarks>\r
 
@@ -1040,11 +1174,15 @@ paths:
             type: string
         - description: "<remarks>\r
 
-            \                    Specifies whether to auto-download the image. If true is specified, a 303 SeeOther status is returned with a\r
+            \                    Specifies whether to auto-download
+            the image. If true is specified, a 303 SeeOther status is returned
+            with a\r
 
-            \                    Location header set to the location of the image.\r
+            \                    Location header set to the location
+            of the image.\r
 
-            \                    If false is specified, the download URI will be returned in the response message.\r
+            \                    If false is specified, the download
+            URI will be returned in the response message.\r
 
             \                </remarks>"
           in: query
@@ -1053,11 +1191,15 @@ paths:
             default: true
             description: "<remarks>\r
 
-              \                    Specifies whether to auto-download the image. If true is specified, a 303 SeeOther status is returned with a\r
+              \                    Specifies whether to
+              auto-download the image. If true is specified, a 303 SeeOther
+              status is returned with a\r
 
-              \                    Location header set to the location of the image.\r
+              \                    Location header set to the
+              location of the image.\r
 
-              \                    If false is specified, the download URI will be returned in the response message.\r
+              \                    If false is specified, the
+              download URI will be returned in the response message.\r
 
               \                </remarks>"
             type: boolean
@@ -1067,11 +1209,14 @@ paths:
             $ref: "#/components/schemas/DownloadFileType"
         - description: "<remarks>\r
 
-            \                    Specifies the pixel height of the particular image to download.\r
+            \                    Specifies the pixel height of the
+            particular image to download.\r
 
-            \                    Available heights can be found in the images/{ids} response for the specific image.\r
+            \                    Available heights can be found in
+            the images/{ids} response for the specific image.\r
 
-            \                    If left blank, it will return the largest available size.\r
+            \                    If left blank, it will return the
+            largest available size.\r
 
             \                </remarks>"
           in: query
@@ -1079,18 +1224,22 @@ paths:
           schema:
             description: "<remarks>\r
 
-              \                    Specifies the pixel height of the particular image to download.\r
+              \                    Specifies the pixel height of
+              the particular image to download.\r
 
-              \                    Available heights can be found in the images/{ids} response for the specific image.\r
+              \                    Available heights can be found
+              in the images/{ids} response for the specific image.\r
 
-              \                    If left blank, it will return the largest available size.\r
+              \                    If left blank, it will return
+              the largest available size.\r
 
               \                </remarks>"
             nullable: true
             type: string
         - description: "<remarks>\r
 
-            \                    Identifier of the instance for the selected product offering type.\r
+            \                    Identifier of the instance for the
+            selected product offering type.\r
 
             \                </remarks>"
           in: query
@@ -1098,7 +1247,8 @@ paths:
           schema:
             description: "<remarks>\r
 
-              \                    Identifier of the instance for the selected product offering type.\r
+              \                    Identifier of the instance for
+              the selected product offering type.\r
 
               \                </remarks>"
             format: int32
@@ -1108,12 +1258,16 @@ paths:
           name: product_type
           schema:
             $ref: "#/components/schemas/ProductTypeRequest"
-        - description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
+        - description: Specifies whether to download the image with iStock Team Credits.
+            Only applicable to iStock API keys authenticated with a user that
+            has Team Credits. Blank is the same as False.
           in: query
           name: use_team_credits
           schema:
             default: false
-            description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
+            description: Specifies whether to download the image with iStock Team Credits.
+              Only applicable to iStock API keys authenticated with a user that
+              has Team Credits. Blank is the same as False.
             nullable: true
             type: boolean
       requestBody:
@@ -1132,9 +1286,11 @@ paths:
               $ref: "#/components/schemas/PremiumAccessDownloadData"
         description: "<remarks>\r
 
-          \                    Additional information required from specific customers when downloading. \r
+          \                    Additional information required from
+          specific customers when downloading. \r
 
-          \                    Only users who have been set up with a project code by Getty Images Sales need to use this field.\r
+          \                    Only users who have been set up with a
+          project code by Getty Images Sales need to use this field.\r
 
           \                </remarks>"
       responses:
@@ -1154,7 +1310,8 @@ paths:
   "/v3/downloads/videos/{id}":
     post:
       description: >
-        Use this endpoint to generate download URLs and related data for videos you are authorized to download.
+        Use this endpoint to generate download URLs and related data for
+        videos you are authorized to download.
 
 
         Most product offerings have enforced periodic download limits such as monthly, weekly, and daily. When this operation executes, the count of allowed downloads is decremented by one for the product offering. Once the download limit is reached for a given product offering, no further downloads may be requested for that product offering until the next download period.
@@ -1246,11 +1403,19 @@ paths:
 
         The `content-disposition` header must be parsed to get a usable filename.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: "<remarks>\r
 
@@ -1270,11 +1435,15 @@ paths:
             type: string
         - description: "<remarks>\r
 
-            \                    Specifies whether to auto-download the video. If true is specified, a 303 SeeOther status is returned with a\r
+            \                    Specifies whether to auto-download
+            the video. If true is specified, a 303 SeeOther status is returned
+            with a\r
 
-            \                    Location header set to the location of the video.\r
+            \                    Location header set to the location
+            of the video.\r
 
-            \                    If false is specified, the download URI will be returned in the response message.\r
+            \                    If false is specified, the download
+            URI will be returned in the response message.\r
 
             \                </remarks>"
           in: query
@@ -1283,11 +1452,15 @@ paths:
             default: false
             description: "<remarks>\r
 
-              \                    Specifies whether to auto-download the video. If true is specified, a 303 SeeOther status is returned with a\r
+              \                    Specifies whether to
+              auto-download the video. If true is specified, a 303 SeeOther
+              status is returned with a\r
 
-              \                    Location header set to the location of the video.\r
+              \                    Location header set to the
+              location of the video.\r
 
-              \                    If false is specified, the download URI will be returned in the response message.\r
+              \                    If false is specified, the
+              download URI will be returned in the response message.\r
 
               \                </remarks>"
             type: boolean
@@ -1300,7 +1473,8 @@ paths:
             type: string
         - description: "<remarks>\r
 
-            \                    Identifier of the instance for the selected product offering type.\r
+            \                    Identifier of the instance for the
+            selected product offering type.\r
 
             \                </remarks>"
           in: query
@@ -1308,17 +1482,22 @@ paths:
           schema:
             description: "<remarks>\r
 
-              \                    Identifier of the instance for the selected product offering type.\r
+              \                    Identifier of the instance for
+              the selected product offering type.\r
 
               \                </remarks>"
             format: int32
             nullable: true
             type: integer
-        - description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
+        - description: Specifies whether to download the image with iStock Team Credits.
+            Only applicable to iStock API keys authenticated with a user that
+            has Team Credits. Blank is the same as False.
           in: query
           name: use_team_credits
           schema:
-            description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
+            description: Specifies whether to download the image with iStock Team Credits.
+              Only applicable to iStock API keys authenticated with a user that
+              has Team Credits. Blank is the same as False.
             nullable: true
             type: boolean
       requestBody:
@@ -1337,9 +1516,11 @@ paths:
               $ref: "#/components/schemas/PremiumAccessDownloadData"
         description: "<remarks>\r
 
-          \                    Additional information required from specific customers when downloading. \r
+          \                    Additional information required from
+          specific customers when downloading. \r
 
-          \                    Only users who have been set up with a project code by Getty Images Sales need to use this field.\r
+          \                    Only users who have been set up with a
+          project code by Getty Images Sales need to use this field.\r
 
           \                </remarks>"
       responses:
@@ -1359,7 +1540,8 @@ paths:
   /v3/events:
     get:
       description: >
-        This endpoint returns the detailed event metadata for all specified events. Getty Images news, sports and entertainment photographers and
+        This endpoint returns the detailed event metadata for all specified
+        events. Getty Images news, sports and entertainment photographers and
 
         videographers cover editorially relevant events occurring around the world.  All images or video clips produced in association with 
 
@@ -1374,11 +1556,19 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: A comma separated list of event ids.
           explode: false
@@ -1418,7 +1608,8 @@ paths:
   "/v3/events/{id}":
     get:
       description: >
-        This endpoint returns the detailed event metadata for a specified event. Getty Images news, sports and entertainment 
+        This endpoint returns the detailed event metadata for a specified
+        event. Getty Images news, sports and entertainment 
 
         photographers and videographers cover editorially relevant events occurring around the world.  
 
@@ -1435,11 +1626,19 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: An event id.
           in: path
@@ -1475,7 +1674,8 @@ paths:
   /v3/images:
     get:
       description: >
-        This endpoint returns the detailed image metadata for all specified images.
+        This endpoint returns the detailed image metadata for all specified
+        images.
 
 
         You'll need an API key and access token to use this resource.
@@ -1600,29 +1800,41 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: Specifies one or more image ids to return. Use comma delimiter when requesting multiple ids.
+        - description: Specifies one or more image ids to return. Use comma delimiter when
+            requesting multiple ids.
           explode: false
           in: query
           name: ids
           schema:
-            description: Specifies one or more image ids to return. Use comma delimiter when requesting multiple ids.
+            description: Specifies one or more image ids to return. Use comma delimiter when
+              requesting multiple ids.
             items:
               type: string
             nullable: true
             type: array
           style: form
-        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes
+            returned by 'download_sizes' field are estimates."
           explode: false
           in: query
           name: fields
           schema:
-            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes
+              returned by 'download_sizes' field are estimates."
             items:
               $ref: "#/components/schemas/ImageDetailFieldValues"
             nullable: true
@@ -1651,7 +1863,8 @@ paths:
   "/v3/images/{id}":
     get:
       description: >
-        This endpoint returns the detailed image metadata for a specified image.
+        This endpoint returns the detailed image metadata for a specified
+        image.
 
 
         You'll need an API key and access token to use this resource. 
@@ -1779,26 +1992,38 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: An image id. For more than one image please use the /v3/images endpoint.
+        - description: An image id. For more than one image please use the /v3/images
+            endpoint.
           in: path
           name: id
           required: true
           schema:
-            description: An image id. For more than one image please use the /v3/images endpoint.
+            description: An image id. For more than one image please use the /v3/images
+              endpoint.
             nullable: true
             type: string
-        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes
+            returned by 'download_sizes' field are estimates."
           explode: false
           in: query
           name: fields
           schema:
-            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes
+              returned by 'download_sizes' field are estimates."
             items:
               $ref: "#/components/schemas/ImageDetailFieldValues"
             nullable: true
@@ -1828,11 +2053,19 @@ paths:
     get:
       description: ""
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: An image id.
           in: path
@@ -1842,15 +2075,21 @@ paths:
             description: An image id.
             nullable: true
             type: string
-        - description: "If specified, returns the list of previously downloaded images for all users in your company.\r
+        - description: "If specified, returns the list of previously downloaded images for
+            all users in your company.\r
 
-            \            Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false."
+            \            Your account must be enabled for this
+            functionality. Contact your Getty Images account rep for more
+            information. Default is false."
           in: query
           name: company_downloads
           schema:
-            description: "If specified, returns the list of previously downloaded images for all users in your company.\r
+            description: "If specified, returns the list of previously downloaded images for
+              all users in your company.\r
 
-              \            Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false."
+              \            Your account must be enabled for this
+              functionality. Contact your Getty Images account rep for more
+              information. Default is false."
             type: boolean
       responses:
         "200":
@@ -1869,13 +2108,17 @@ paths:
           description: ImageNotFound
         "500":
           description: InvalidIStockCollection
-      summary: Returns information about a customer's download history for a specific asset
+      summary: Returns information about a customer's download history for a specific
+        asset
       tags:
         - Images
   "/v3/images/{id}/same-series":
     get:
       description: >-
-        This endpoint will provide the list of images, if any exist, from the same series as the specified creative asset id. These images are typically from the same photo shoot. This functionality will not work for editorial assets.
+        This endpoint will provide the list of images, if any exist, from
+        the same series as the specified creative asset id. These images are
+        typically from the same photo shoot. This functionality will not work
+        for editorial assets.
 
 
         You'll need an API key and access token to use this resource.
@@ -2003,11 +2246,19 @@ paths:
 
         ```
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: Identifies an existing image
           in: path
@@ -2067,7 +2318,8 @@ paths:
   "/v3/images/{id}/similar":
     get:
       description: >-
-        This endpoint will provide a list of images that are similar to the specified asset id.
+        This endpoint will provide a list of images that are similar to the
+        specified asset id.
 
 
         You'll need an API key and access token to use this resource.
@@ -2195,11 +2447,19 @@ paths:
 
         ```
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: Identifies an existing image
           in: path
@@ -2258,19 +2518,25 @@ paths:
         - Images
   "/v3/orders/{id}":
     get:
-      description: >-
+      description: |-
         This endpoint returns detailed order metadata for a specified order.
-
         Use of this endpoint requires configuration changes to your API key. 
-
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: An order id.
           in: path
@@ -2299,25 +2565,36 @@ paths:
   /v3/products:
     get:
       description: >
-        This endpoint returns all products available to the username used during authentication. As such, this endpoint requires the use of
+        This endpoint returns all products available to the username used
+        during authentication. As such, this endpoint requires the use of
 
         a fully authorized access_token. The product data can then be used as search filters, restricting results to images from a specific product.
 
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: Comma separated list of fields. Allows product download requirements to be returned.
+        - description: Comma separated list of fields. Allows product download
+            requirements to be returned.
           explode: false
           in: query
           name: fields
           schema:
-            description: Comma separated list of fields. Allows product download requirements to be returned.
+            description: Comma separated list of fields. Allows product download
+              requirements to be returned.
             items:
               $ref: "#/components/schemas/ProductFieldValues"
             nullable: true
@@ -2342,7 +2619,8 @@ paths:
   /v3/purchased-assets:
     get:
       description: >
-        This endpoint returns a list of all assets purchased on gettyimages.com by the username used for authentication. 
+        This endpoint returns a list of all assets purchased on
+        gettyimages.com by the username used for authentication. 
 
         Use of this endpoint requires configuration changes to your API key. Please contact your sales representative
 
@@ -2351,17 +2629,27 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: If specified, retrieves previous purchases on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
+        - description: If specified, retrieves previous purchases on or before this date.
+            Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
           in: query
           name: date_to
           schema:
-            description: If specified, retrieves previous purchases on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
+            description: If specified, retrieves previous purchases on or before this date.
+              Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
             format: date-time
             nullable: true
             type: string
@@ -2381,20 +2669,28 @@ paths:
             description: Specifies page size. Default is 75, maximum page_size is 100.
             format: int32
             type: integer
-        - description: If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
+        - description: If specified, retrieves previous purchases on or after this date.
+            Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
           in: query
           name: date_from
           schema:
-            description: If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
+            description: If specified, retrieves previous purchases on or after this date.
+              Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
             format: date-time
             nullable: true
             type: string
-        - description: If specified, returns the list of previously purchased assets for all users in your company. Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false.
+        - description: If specified, returns the list of previously purchased assets for
+            all users in your company. Your account must be enabled for this
+            functionality. Contact your Getty Images account rep for more
+            information. Default is false.
           in: query
           name: company_purchases
           schema:
             default: false
-            description: If specified, returns the list of previously purchased assets for all users in your company. Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false.
+            description: If specified, returns the list of previously purchased assets for
+              all users in your company. Your account must be enabled for this
+              functionality. Contact your Getty Images account rep for more
+              information. Default is false.
             type: boolean
       responses:
         "200":
@@ -2415,7 +2711,16 @@ paths:
   /v3/search/events:
     get:
       description: >
-        Use this endpoint to search Getty Images news, sports and entertainment events. Getty Images photographers and videographers cover editorially relevant events occurring around the world.  All images or video clips produced in association with an event, are assigned the same EventID. EventIDs are part of the meta-data returned in Search Results. Only content produced under a Getty Images brand name (Getty Images News, Getty Images Sports, Getty Images Entertainment, Film Magic, Wire Image) will be consistently assigned an EventID. The Event framework may also be used to group similar content, such as "Hats from the Royal Wedding" or "Odd-ballOffbeat images of the week".   
+        Use this endpoint to search Getty Images news, sports and
+        entertainment events. Getty Images photographers and videographers cover
+        editorially relevant events occurring around the world.  All images or
+        video clips produced in association with an event, are assigned the same
+        EventID. EventIDs are part of the meta-data returned in Search Results.
+        Only content produced under a Getty Images brand name (Getty Images
+        News, Getty Images Sports, Getty Images Entertainment, Film Magic, Wire
+        Image) will be consistently assigned an EventID. The Event framework may
+        also be used to group similar content, such as "Hats from the Royal
+        Wedding" or "Odd-ballOffbeat images of the week".   
 
 
         You'll need an API key and access token to use this resource.
@@ -2426,35 +2731,53 @@ paths:
 
         You can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Use of this parameter requires configuration changes to your API
+            key. Please contact your sales representative to learn more.
           in: header
           name: GI-Country-Code
           schema:
-            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+            description: Use of this parameter requires configuration changes to your API
+              key. Please contact your sales representative to learn more.
             type: string
         - in: query
           name: editorial_segment
           schema:
             $ref: "#/components/schemas/EditorialSegmentContract"
-        - description: Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31). Defaults to UTC unless otherwise specified.
+        - description: Filters to events that start on or after this date. Use ISO 8601
+            format (e.g., 1999-12-31). Defaults to UTC unless otherwise
+            specified.
           in: query
           name: date_from
           schema:
-            description: Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31). Defaults to UTC unless otherwise specified.
+            description: Filters to events that start on or after this date. Use ISO 8601
+              format (e.g., 1999-12-31). Defaults to UTC unless otherwise
+              specified.
             format: date-time
             nullable: true
             type: string
-        - description: Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31). Defaults to UTC unless otherwise specified.
+        - description: Filters to events that start on or before this date. Use ISO 8601
+            format (e.g., 1999-12-31). Defaults to UTC unless otherwise
+            specified.
           in: query
           name: date_to
           schema:
-            description: Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31). Defaults to UTC unless otherwise specified.
+            description: Filters to events that start on or before this date. Use ISO 8601
+              format (e.g., 1999-12-31). Defaults to UTC unless otherwise
+              specified.
             format: date-time
             nullable: true
             type: string
@@ -2463,18 +2786,21 @@ paths:
           in: query
           name: fields
           schema:
-            description: Specifies fields to return. Default set is 'id','name','start_date'.
+            description: Specifies fields to return. Default set is
+              'id','name','start_date'.
             items:
               $ref: "#/components/schemas/EventFieldValues"
             nullable: true
             type: array
           style: form
-        - description: Request results starting at a page number (default is 1, maximum is 50).
+        - description: Request results starting at a page number (default is 1, maximum is
+            50).
           in: query
           name: page
           schema:
             default: 1
-            description: Request results starting at a page number (default is 1, maximum is 50).
+            description: Request results starting at a page number (default is 1, maximum is
+              50).
             format: int32
             type: integer
         - description: Request number of images to return in each page.
@@ -2512,7 +2838,15 @@ paths:
   /v3/search/images:
     get:
       description: >
-        Use this endpoint to search over a blend of our contemporary stock photos, illustrations, archival images, editorial photos, illustrations and archival images. Because this draws from such a large diversity of content, the results will not be as relevant as when the more specific Creative or Editorial endpoints are used. Additionally, the response time for this endpoint is slower compared to that for Creative and Editorial-specific endpoints. For these reasons, it is highly recommended that those endpoints are used instead of this blended endpoint.
+        Use this endpoint to search over a blend of our contemporary stock
+        photos, illustrations, archival images, editorial photos, illustrations
+        and archival images. Because this draws from such a large diversity of
+        content, the results will not be as relevant as when the more specific
+        Creative or Editorial endpoints are used. Additionally, the response
+        time for this endpoint is slower compared to that for Creative and
+        Editorial-specific endpoints. For these reasons, it is highly
+        recommended that those endpoints are used instead of this blended
+        endpoint.
 
 
         You'll need an API key and access token to use this resource.
@@ -2652,17 +2986,27 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Use of this parameter requires configuration changes to your API
+            key. Please contact your sales representative to learn more.
           in: header
           name: GI-Country-Code
           schema:
-            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+            description: Use of this parameter requires configuration changes to your API
+              key. Please contact your sales representative to learn more.
             type: string
         - description: Filter based on the age of individuals in an image.
           explode: false
@@ -2675,19 +3019,23 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Search for images by specific artists (free-text, comma-separated list of artists).
+        - description: Search for images by specific artists (free-text, comma-separated
+            list of artists).
           in: query
           name: artists
           schema:
-            description: Search for images by specific artists (free-text, comma-separated list of artists).
+            description: Search for images by specific artists (free-text, comma-separated
+              list of artists).
             nullable: true
             type: string
-        - description: Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.
+        - description: Filter by collection codes (comma-separated list). Include or
+            exclude based on collections_filter_type.
           explode: false
           in: query
           name: collection_codes
           schema:
-            description: Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.
+            description: Filter by collection codes (comma-separated list). Include or
+              exclude based on collections_filter_type.
             items:
               type: string
             nullable: true
@@ -2697,11 +3045,15 @@ paths:
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
-        - description: "Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244). Note: when specified, results will not contain editorial images."
+        - description: "Filter based on predominant color in an image. Use 6 character
+            hexidecimal format (e.g., #002244). Note: when specified, results
+            will not contain editorial images."
           in: query
           name: color
           schema:
-            description: "Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244). Note: when specified, results will not contain editorial images."
+            description: "Filter based on predominant color in an image. Use 6 character
+              hexidecimal format (e.g., #002244). Note: when specified, results
+              will not contain editorial images."
             nullable: true
             type: string
         - description: Filter based on image composition.
@@ -2717,25 +3069,39 @@ paths:
           style: form
         - description: "Filters based on which product the asset will download against.\r
 
-            \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+            \                    Allowed values are easyaccess,
+            editorialsubscription, imagepack, premiumaccess and
+            royaltyfreesubscription.\r
 
-            \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+            \                    If you have more than one instance
+            of a product, you may also include the ID of the product instance
+            you wish to filter on. \r
 
-            \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+            \                    For example, some users may have
+            more than one premiumaccess product, so the download_product value
+            would be premiumaccess:1234. \r
 
-            \                    Product ID can be obtained from the GET /products response."
+            \                    Product ID can be obtained from the
+            GET /products response."
           in: query
           name: download_product
           schema:
             description: "Filters based on which product the asset will download against.\r
 
-              \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+              \                    Allowed values are easyaccess,
+              editorialsubscription, imagepack, premiumaccess and
+              royaltyfreesubscription.\r
 
-              \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+              \                    If you have more than one
+              instance of a product, you may also include the ID of the product
+              instance you wish to filter on. \r
 
-              \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+              \                    For example, some users may
+              have more than one premiumaccess product, so the download_product
+              value would be premiumaccess:1234. \r
 
-              \                    Product ID can be obtained from the GET /products response."
+              \                    Product ID can be obtained from
+              the GET /products response."
             nullable: true
             type: string
         - description: Restrict search results to embeddable images. The default is false.
@@ -2756,12 +3122,14 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Filter search results based on the ethnicity of individuals in an image.
+        - description: Filter search results based on the ethnicity of individuals in an
+            image.
           explode: false
           in: query
           name: ethnicity
           schema:
-            description: Filter search results based on the ethnicity of individuals in an image.
+            description: Filter search results based on the ethnicity of individuals in an
+              image.
             items:
               $ref: "#/components/schemas/EthnicityFilterType"
             nullable: true
@@ -2810,19 +3178,27 @@ paths:
           name: graphical_styles_filter_type
           schema:
             $ref: "#/components/schemas/GraphicalStylesFilterType"
-        - description: Specifies whether or not to include related searches in the response. The default is false.
+        - description: Specifies whether or not to include related searches in the
+            response. The default is false.
           in: query
           name: include_related_searches
           schema:
             default: false
-            description: Specifies whether or not to include related searches in the response. The default is false.
+            description: Specifies whether or not to include related searches in the
+              response. The default is false.
             type: boolean
-        - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
+        - description: Return only images tagged with specific keyword(s). Specify using a
+            comma-separated list of keyword Ids. If keyword Ids and phrase are
+            both specified, only those images matching the query phrase which
+            also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
           schema:
-            description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
+            description: Return only images tagged with specific keyword(s). Specify using a
+              comma-separated list of keyword Ids. If keyword Ids and phrase are
+              both specified, only those images matching the query phrase which
+              also contain the requested keyword(s) are returned.
             items:
               format: int32
               type: integer
@@ -2882,12 +3258,14 @@ paths:
           name: sort_order
           schema:
             $ref: "#/components/schemas/BlendedImageSortOrder"
-        - description: Return only images associated with specific people (using a comma-delimited list).
+        - description: Return only images associated with specific people (using a
+            comma-delimited list).
           explode: false
           in: query
           name: specific_people
           schema:
-            description: Return only images associated with specific people (using a comma-delimited list).
+            description: Return only images associated with specific people (using a
+              comma-delimited list).
             items:
               type: string
             nullable: true
@@ -2912,7 +3290,8 @@ paths:
   /v3/search/images/creative:
     get:
       description: >
-        Use this endpoint to search our contemporary stock photos, illustrations and archival images.
+        Use this endpoint to search our contemporary stock photos,
+        illustrations and archival images.
 
 
         You'll need an API key and access token to use this resource.
@@ -3044,17 +3423,27 @@ paths:
 
         ```
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Use of this parameter requires configuration changes to your API
+            key. Please contact your sales representative to learn more.
           in: header
           name: GI-Country-Code
           schema:
-            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+            description: Use of this parameter requires configuration changes to your API
+              key. Please contact your sales representative to learn more.
             type: string
         - description: Filter based on the age of individuals in an image.
           explode: false
@@ -3067,19 +3456,23 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Search for images by specific artists (free-text, comma-separated list of artists).
+        - description: Search for images by specific artists (free-text, comma-separated
+            list of artists).
           in: query
           name: artists
           schema:
-            description: Search for images by specific artists (free-text, comma-separated list of artists).
+            description: Search for images by specific artists (free-text, comma-separated
+              list of artists).
             nullable: true
             type: string
-        - description: Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.
+        - description: Filter by collection codes (comma-separated list). Include or
+            exclude based on collections_filter_type.
           explode: false
           in: query
           name: collection_codes
           schema:
-            description: Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.
+            description: Filter by collection codes (comma-separated list). Include or
+              exclude based on collections_filter_type.
             items:
               type: string
             nullable: true
@@ -3089,11 +3482,13 @@ paths:
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
-        - description: "Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244)."
+        - description: "Filter based on predominant color in an image. Use 6 character
+            hexidecimal format (e.g., #002244)."
           in: query
           name: color
           schema:
-            description: "Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244)."
+            description: "Filter based on predominant color in an image. Use 6 character
+              hexidecimal format (e.g., #002244)."
             nullable: true
             type: string
         - description: Filter based on image composition.
@@ -3109,25 +3504,39 @@ paths:
           style: form
         - description: "Filters based on which product the asset will download against.\r
 
-            \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+            \                    Allowed values are easyaccess,
+            editorialsubscription, imagepack, premiumaccess and
+            royaltyfreesubscription.\r
 
-            \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+            \                    If you have more than one instance
+            of a product, you may also include the ID of the product instance
+            you wish to filter on. \r
 
-            \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+            \                    For example, some users may have
+            more than one premiumaccess product, so the download_product value
+            would be premiumaccess:1234. \r
 
-            \                    Product ID can be obtained from the GET /products response."
+            \                    Product ID can be obtained from the
+            GET /products response."
           in: query
           name: download_product
           schema:
             description: "Filters based on which product the asset will download against.\r
 
-              \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+              \                    Allowed values are easyaccess,
+              editorialsubscription, imagepack, premiumaccess and
+              royaltyfreesubscription.\r
 
-              \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+              \                    If you have more than one
+              instance of a product, you may also include the ID of the product
+              instance you wish to filter on. \r
 
-              \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+              \                    For example, some users may
+              have more than one premiumaccess product, so the download_product
+              value would be premiumaccess:1234. \r
 
-              \                    Product ID can be obtained from the GET /products response."
+              \                    Product ID can be obtained from
+              the GET /products response."
             nullable: true
             type: string
         - description: Restrict search results to embeddable images. The default is false.
@@ -3136,12 +3545,14 @@ paths:
           schema:
             description: Restrict search results to embeddable images. The default is false.
             type: boolean
-        - description: Filter search results based on the ethnicity of individuals in an image.
+        - description: Filter search results based on the ethnicity of individuals in an
+            image.
           explode: false
           in: query
           name: ethnicity
           schema:
-            description: Filter search results based on the ethnicity of individuals in an image.
+            description: Filter search results based on the ethnicity of individuals in an
+              image.
             items:
               $ref: "#/components/schemas/EthnicityFilterType"
             nullable: true
@@ -3153,11 +3564,13 @@ paths:
           schema:
             description: Excludes images containing nudity. The default is false.
             type: boolean
-        - description: Exclude images that are only available for editorial (non-commercial) use. Default value is false.
+        - description: Exclude images that are only available for editorial
+            (non-commercial) use. Default value is false.
           in: query
           name: exclude_editorial_use_only
           schema:
-            description: Exclude images that are only available for editorial (non-commercial) use. Default value is false.
+            description: Exclude images that are only available for editorial
+              (non-commercial) use. Default value is false.
             nullable: true
             type: boolean
         - description: Specifies fields to return. Defaults to 'summary_set'.
@@ -3197,19 +3610,27 @@ paths:
           name: graphical_styles_filter_type
           schema:
             $ref: "#/components/schemas/GraphicalStylesFilterType"
-        - description: Specifies whether or not to include related searches in the response. The default is false.
+        - description: Specifies whether or not to include related searches in the
+            response. The default is false.
           in: query
           name: include_related_searches
           schema:
             default: false
-            description: Specifies whether or not to include related searches in the response. The default is false.
+            description: Specifies whether or not to include related searches in the
+              response. The default is false.
             type: boolean
-        - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
+        - description: Return only images tagged with specific keyword(s). Specify using a
+            comma-separated list of keyword Ids. If keyword Ids and phrase are
+            both specified, only those images matching the query phrase which
+            also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
           schema:
-            description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
+            description: Return only images tagged with specific keyword(s). Specify using a
+              comma-separated list of keyword Ids. If keyword Ids and phrase are
+              both specified, only those images matching the query phrase which
+              also contain the requested keyword(s) are returned.
             items:
               format: int32
               type: integer
@@ -3270,33 +3691,41 @@ paths:
           name: sort_order
           schema:
             $ref: "#/components/schemas/CreativeImageSortOrder"
-        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+        - description: "Specifies the facets to return in the response. Facets provide
+            additional search parameters to refine your results.\r
 
-            \                   The include_facets parameter must be set to \"true\" for facets to be returned."
+            \                   The include_facets parameter must be
+            set to \"true\" for facets to be returned."
           explode: false
           in: query
           name: facet_fields
           schema:
-            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+            description: "Specifies the facets to return in the response. Facets provide
+              additional search parameters to refine your results.\r
 
-              \                   The include_facets parameter must be set to \"true\" for facets to be returned."
+              \                   The include_facets parameter
+              must be set to \"true\" for facets to be returned."
             items:
               $ref: "#/components/schemas/CreateImageSearchFacetsFields"
             nullable: true
             type: array
           style: form
-        - description: Specifies whether or not to include facets in the result set. Default is "false".
+        - description: Specifies whether or not to include facets in the result set.
+            Default is "false".
           in: query
           name: include_facets
           schema:
-            description: Specifies whether or not to include facets in the result set. Default is "false".
+            description: Specifies whether or not to include facets in the result set.
+              Default is "false".
             nullable: true
             type: boolean
-        - description: Specifies the maximum number of facets to return per type. Default is 300.
+        - description: Specifies the maximum number of facets to return per type. Default
+            is 300.
           in: query
           name: facet_max_count
           schema:
-            description: Specifies the maximum number of facets to return per type. Default is 300.
+            description: Specifies the maximum number of facets to return per type. Default
+              is 300.
             format: int32
             type: integer
       responses:
@@ -3320,7 +3749,9 @@ paths:
   /v3/search/images/creative/by-image:
     get:
       description: >
-        Allows searching for similar creative images by passing the URL to an existing image. All responses will have the exclude_nudity filter automatically applied.
+        Allows searching for similar creative images by passing the URL to
+        an existing image. All responses will have the exclude_nudity filter
+        automatically applied.
 
 
         Before calling the search by image endpoint, an image must be uploaded to a specific AWS S3 bucket. The bucket name is `search-by-image.s3.amazonaws.com`.
@@ -3344,17 +3775,27 @@ paths:
 
         <!-- Subsequent searches for the same image can be executed using the `image_fingerprint` that is returned by the initial search. -->
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Use of this parameter requires configuration changes to your API
+            key. Please contact your sales representative to learn more.
           in: header
           name: GI-Country-Code
           schema:
-            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+            description: Use of this parameter requires configuration changes to your API
+              key. Please contact your sales representative to learn more.
             type: string
         - description: Specifies the location of the image to use in the search.
           in: query
@@ -3390,26 +3831,38 @@ paths:
           style: form
         - description: "Filter images to those from one of your product types. \r
 
-            \                    Allowed values are easyaccess, imagepack, premiumaccess and royaltyfreesubscription. \r
+            \                    Allowed values are easyaccess,
+            imagepack, premiumaccess and royaltyfreesubscription. \r
 
-            \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+            \                    If you have more than one instance
+            of a product, you may also include the ID of the product instance
+            you wish to filter on. \r
 
-            \                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r
+            \                    For example, some users may have
+            more than one premiumaccess product, so the product_types value
+            would be premiumaccess:1234. \r
 
-            \                    Product ID can be obtained from the GET /products response."
+            \                    Product ID can be obtained from the
+            GET /products response."
           explode: false
           in: query
           name: product_types
           schema:
             description: "Filter images to those from one of your product types. \r
 
-              \                    Allowed values are easyaccess, imagepack, premiumaccess and royaltyfreesubscription. \r
+              \                    Allowed values are easyaccess,
+              imagepack, premiumaccess and royaltyfreesubscription. \r
 
-              \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+              \                    If you have more than one
+              instance of a product, you may also include the ID of the product
+              instance you wish to filter on. \r
 
-              \                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r
+              \                    For example, some users may
+              have more than one premiumaccess product, so the product_types
+              value would be premiumaccess:1234. \r
 
-              \                    Product ID can be obtained from the GET /products response."
+              \                    Product ID can be obtained from
+              the GET /products response."
             items:
               type: string
             nullable: true
@@ -3431,33 +3884,41 @@ paths:
             description: Request number of images to return in each page.
             format: int32
             type: integer
-        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+        - description: "Specifies the facets to return in the response. Facets provide
+            additional search parameters to refine your results.\r
 
-            \                    The include_facets parameter must be set to \"true\" for facets to be returned."
+            \                    The include_facets parameter must
+            be set to \"true\" for facets to be returned."
           explode: false
           in: query
           name: facet_fields
           schema:
-            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+            description: "Specifies the facets to return in the response. Facets provide
+              additional search parameters to refine your results.\r
 
-              \                    The include_facets parameter must be set to \"true\" for facets to be returned."
+              \                    The include_facets parameter
+              must be set to \"true\" for facets to be returned."
             items:
               $ref: "#/components/schemas/CreateImageSearchFacetsFields"
             nullable: true
             type: array
           style: form
-        - description: Specifies the maximum number of facets to return per type. Default is 300.
+        - description: Specifies the maximum number of facets to return per type. Default
+            is 300.
           in: query
           name: facet_max_count
           schema:
-            description: Specifies the maximum number of facets to return per type. Default is 300.
+            description: Specifies the maximum number of facets to return per type. Default
+              is 300.
             format: int32
             type: integer
-        - description: Specifies whether or not to include facets in the result set. Default is "false".
+        - description: Specifies whether or not to include facets in the result set.
+            Default is "false".
           in: query
           name: include_facets
           schema:
-            description: Specifies whether or not to include facets in the result set. Default is "false".
+            description: Specifies whether or not to include facets in the result set.
+              Default is "false".
             nullable: true
             type: boolean
       responses:
@@ -3481,7 +3942,11 @@ paths:
   /v3/search/images/editorial:
     get:
       description: >
-        Use this endpoint to search our editorial stock photos, illustrations and archival images.  Editorial images represent newsworthy events or illustrate matters of general interest, such as news, sport and entertainment and are generally intended for editorial use.
+        Use this endpoint to search our editorial stock photos,
+        illustrations and archival images.  Editorial images represent
+        newsworthy events or illustrate matters of general interest, such as
+        news, sport and entertainment and are generally intended for editorial
+        use.
 
 
         You'll need an API key and access token to use this resource.
@@ -3615,17 +4080,27 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Use of this parameter requires configuration changes to your API
+            key. Please contact your sales representative to learn more.
           in: header
           name: GI-Country-Code
           schema:
-            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+            description: Use of this parameter requires configuration changes to your API
+              key. Please contact your sales representative to learn more.
             type: string
         - description: Filter based on the age of individuals in an image.
           explode: false
@@ -3638,19 +4113,23 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Search for images by specific artists (free-text, comma-separated list of artists).
+        - description: Search for images by specific artists (free-text, comma-separated
+            list of artists).
           in: query
           name: artists
           schema:
-            description: Search for images by specific artists (free-text, comma-separated list of artists).
+            description: Search for images by specific artists (free-text, comma-separated
+              list of artists).
             nullable: true
             type: string
-        - description: Filter by collections (comma-separated list of collection codes). Include or exclude based on collections_filter_type.
+        - description: Filter by collections (comma-separated list of collection codes).
+            Include or exclude based on collections_filter_type.
           explode: false
           in: query
           name: collection_codes
           schema:
-            description: Filter by collections (comma-separated list of collection codes). Include or exclude based on collections_filter_type.
+            description: Filter by collections (comma-separated list of collection codes).
+              Include or exclude based on collections_filter_type.
             items:
               type: string
             nullable: true
@@ -3673,25 +4152,39 @@ paths:
           style: form
         - description: "Filters based on which product the asset will download against.\r
 
-            \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+            \                    Allowed values are easyaccess,
+            editorialsubscription, imagepack, premiumaccess and
+            royaltyfreesubscription.\r
 
-            \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+            \                    If you have more than one instance
+            of a product, you may also include the ID of the product instance
+            you wish to filter on. \r
 
-            \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+            \                    For example, some users may have
+            more than one premiumaccess product, so the download_product value
+            would be premiumaccess:1234. \r
 
-            \                    Product ID can be obtained from the GET /products response."
+            \                    Product ID can be obtained from the
+            GET /products response."
           in: query
           name: download_product
           schema:
             description: "Filters based on which product the asset will download against.\r
 
-              \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+              \                    Allowed values are easyaccess,
+              editorialsubscription, imagepack, premiumaccess and
+              royaltyfreesubscription.\r
 
-              \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+              \                    If you have more than one
+              instance of a product, you may also include the ID of the product
+              instance you wish to filter on. \r
 
-              \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+              \                    For example, some users may
+              have more than one premiumaccess product, so the download_product
+              value would be premiumaccess:1234. \r
 
-              \                    Product ID can be obtained from the GET /products response."
+              \                    Product ID can be obtained from
+              the GET /products response."
             nullable: true
             type: string
         - description: Return only events with a matching editorial segment.
@@ -3722,19 +4215,23 @@ paths:
           schema:
             description: Restrict search results to embeddable images. The default is false.
             type: boolean
-        - description: Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
+        - description: Return only images that are created on or after this date. Use ISO
+            8601 format (e.g., 1999-12-31).
           in: query
           name: date_from
           schema:
-            description: Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
+            description: Return only images that are created on or after this date. Use ISO
+              8601 format (e.g., 1999-12-31).
             format: date-time
             nullable: true
             type: string
-        - description: Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
+        - description: Return only images that are created on or before this date. Use ISO
+            8601 format (e.g., 1999-12-31).
           in: query
           name: date_to
           schema:
-            description: Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
+            description: Return only images that are created on or before this date. Use ISO
+              8601 format (e.g., 1999-12-31).
             format: date-time
             nullable: true
             type: string
@@ -3750,12 +4247,14 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Filter search results based on the ethnicity of individuals in an image.
+        - description: Filter search results based on the ethnicity of individuals in an
+            image.
           explode: false
           in: query
           name: ethnicity
           schema:
-            description: Filter search results based on the ethnicity of individuals in an image.
+            description: Filter search results based on the ethnicity of individuals in an
+              image.
             items:
               $ref: "#/components/schemas/EthnicityFilterType"
             nullable: true
@@ -3798,19 +4297,27 @@ paths:
           name: graphical_styles_filter_type
           schema:
             $ref: "#/components/schemas/GraphicalStylesFilterType"
-        - description: Specifies whether or not to include related searches in the response. The default is false.
+        - description: Specifies whether or not to include related searches in the
+            response. The default is false.
           in: query
           name: include_related_searches
           schema:
             default: false
-            description: Specifies whether or not to include related searches in the response. The default is false.
+            description: Specifies whether or not to include related searches in the
+              response. The default is false.
             type: boolean
-        - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
+        - description: Return only images tagged with specific keyword(s). Specify using a
+            comma-separated list of keyword Ids. If keyword Ids and phrase are
+            both specified, only those images matching the query phrase which
+            also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
           schema:
-            description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
+            description: Return only images tagged with specific keyword(s). Specify using a
+              comma-separated list of keyword Ids. If keyword Ids and phrase are
+              both specified, only those images matching the query phrase which
+              also contain the requested keyword(s) are returned.
             items:
               format: int32
               type: integer
@@ -3870,52 +4377,64 @@ paths:
           name: sort_order
           schema:
             $ref: "#/components/schemas/SortOrder"
-        - description: Return only images associated with specific people (using a comma-delimited list).
+        - description: Return only images associated with specific people (using a
+            comma-delimited list).
           explode: false
           in: query
           name: specific_people
           schema:
-            description: Return only images associated with specific people (using a comma-delimited list).
+            description: Return only images associated with specific people (using a
+              comma-delimited list).
             items:
               type: string
             nullable: true
             type: array
           style: form
-        - description: Filter search results based on minimum quality ranking. Possible values 1, 2, 3 with 1 being best.
+        - description: Filter search results based on minimum quality ranking. Possible
+            values 1, 2, 3 with 1 being best.
           in: query
           name: minimum_quality_rank
           schema:
-            description: Filter search results based on minimum quality ranking. Possible values 1, 2, 3 with 1 being best.
+            description: Filter search results based on minimum quality ranking. Possible
+              values 1, 2, 3 with 1 being best.
             format: int32
             nullable: true
             type: integer
-        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+        - description: "Specifies the facets to return in the response. Facets provide
+            additional search parameters to refine your results.\r
 
-            \                   The include_facets parameter must be set to \"true\" for facets to be returned."
+            \                   The include_facets parameter must be
+            set to \"true\" for facets to be returned."
           explode: false
           in: query
           name: facet_fields
           schema:
-            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+            description: "Specifies the facets to return in the response. Facets provide
+              additional search parameters to refine your results.\r
 
-              \                   The include_facets parameter must be set to \"true\" for facets to be returned."
+              \                   The include_facets parameter
+              must be set to \"true\" for facets to be returned."
             items:
               $ref: "#/components/schemas/EditorialImageSearchFacetsFields"
             nullable: true
             type: array
           style: form
-        - description: Specifies whether or not to include facets in the result set. Default is "false".
+        - description: Specifies whether or not to include facets in the result set.
+            Default is "false".
           in: query
           name: include_facets
           schema:
-            description: Specifies whether or not to include facets in the result set. Default is "false".
+            description: Specifies whether or not to include facets in the result set.
+              Default is "false".
             nullable: true
             type: boolean
-        - description: Specifies the maximum number of facets to return per type. Default is 300.
+        - description: Specifies the maximum number of facets to return per type. Default
+            is 300.
           in: query
           name: facet_max_count
           schema:
-            description: Specifies the maximum number of facets to return per type. Default is 300.
+            description: Specifies the maximum number of facets to return per type. Default
+              is 300.
             format: int32
             type: integer
       responses:
@@ -3937,7 +4456,8 @@ paths:
   /v3/search/videos/creative:
     get:
       description: >-
-        Use this endpoint to search premium stock video, from archival film to contemporary 4K and HD footage.
+        Use this endpoint to search premium stock video, from archival film
+        to contemporary 4K and HD footage.
 
 
         You'll need an API key and access token to use this resource.
@@ -4080,17 +4600,27 @@ paths:
 
         ```
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Use of this parameter requires configuration changes to your API
+            key. Please contact your sales representative to learn more.
           in: header
           name: GI-Country-Code
           schema:
-            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+            description: Use of this parameter requires configuration changes to your API
+              key. Please contact your sales representative to learn more.
             type: string
         - description: Provides filtering according to the age of individuals in a video.
           explode: false
@@ -4103,11 +4633,13 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Search for images by specific artists (free-text, comma-separated list of artists).
+        - description: Search for images by specific artists (free-text, comma-separated
+            list of artists).
           in: query
           name: artists
           schema:
-            description: Search for images by specific artists (free-text, comma-separated list of artists).
+            description: Search for images by specific artists (free-text, comma-separated
+              list of artists).
             nullable: true
             type: string
         - description: Provides filtering by collection code.
@@ -4138,32 +4670,48 @@ paths:
           style: form
         - description: "Filters based on which product the asset will download against.\r
 
-            \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+            \                    Allowed values are easyaccess,
+            editorialsubscription, imagepack, premiumaccess and
+            royaltyfreesubscription.\r
 
-            \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+            \                    If you have more than one instance
+            of a product, you may also include the ID of the product instance
+            you wish to filter on. \r
 
-            \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+            \                    For example, some users may have
+            more than one premiumaccess product, so the download_product value
+            would be premiumaccess:1234. \r
 
-            \                    Product ID can be obtained from the GET /products response."
+            \                    Product ID can be obtained from the
+            GET /products response."
           in: query
           name: download_product
           schema:
             description: "Filters based on which product the asset will download against.\r
 
-              \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+              \                    Allowed values are easyaccess,
+              editorialsubscription, imagepack, premiumaccess and
+              royaltyfreesubscription.\r
 
-              \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+              \                    If you have more than one
+              instance of a product, you may also include the ID of the product
+              instance you wish to filter on. \r
 
-              \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+              \                    For example, some users may
+              have more than one premiumaccess product, so the download_product
+              value would be premiumaccess:1234. \r
 
-              \                    Product ID can be obtained from the GET /products response."
+              \                    Product ID can be obtained from
+              the GET /products response."
             nullable: true
             type: string
-        - description: Exclude videos that are only available for editorial (non-commercial) use. Default value is false.
+        - description: Exclude videos that are only available for editorial
+            (non-commercial) use. Default value is false.
           in: query
           name: exclude_editorial_use_only
           schema:
-            description: Exclude videos that are only available for editorial (non-commercial) use. Default value is false.
+            description: Exclude videos that are only available for editorial
+              (non-commercial) use. Default value is false.
             nullable: true
             type: boolean
         - in: query
@@ -4203,19 +4751,27 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Specifies whether or not to include related searches in the response. The default is false.
+        - description: Specifies whether or not to include related searches in the
+            response. The default is false.
           in: query
           name: include_related_searches
           schema:
             default: false
-            description: Specifies whether or not to include related searches in the response. The default is false.
+            description: Specifies whether or not to include related searches in the
+              response. The default is false.
             type: boolean
-        - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
+        - description: Return only images tagged with specific keyword(s). Specify using a
+            comma-separated list of keyword Ids. If keyword Ids and phrase are
+            both specified, only those images matching the query phrase which
+            also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
           schema:
-            description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
+            description: Return only images tagged with specific keyword(s). Specify using a
+              comma-separated list of keyword Ids. If keyword Ids and phrase are
+              both specified, only those images matching the query phrase which
+              also contain the requested keyword(s) are returned.
             items:
               format: int32
               type: integer
@@ -4281,33 +4837,41 @@ paths:
           name: release_status
           schema:
             $ref: "#/components/schemas/ReleaseStatus"
-        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+        - description: "Specifies the facets to return in the response. Facets provide
+            additional search parameters to refine your results.\r
 
-            \                   The include_facets parameter must be set to \"true\" for facets to be returned."
+            \                   The include_facets parameter must be
+            set to \"true\" for facets to be returned."
           explode: false
           in: query
           name: facet_fields
           schema:
-            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+            description: "Specifies the facets to return in the response. Facets provide
+              additional search parameters to refine your results.\r
 
-              \                   The include_facets parameter must be set to \"true\" for facets to be returned."
+              \                   The include_facets parameter
+              must be set to \"true\" for facets to be returned."
             items:
               $ref: "#/components/schemas/CreateVideoSearchFacetsFields"
             nullable: true
             type: array
           style: form
-        - description: Specifies the maximum number of facets to return per type. Default is 300.
+        - description: Specifies the maximum number of facets to return per type. Default
+            is 300.
           in: query
           name: facet_max_count
           schema:
-            description: Specifies the maximum number of facets to return per type. Default is 300.
+            description: Specifies the maximum number of facets to return per type. Default
+              is 300.
             format: int32
             type: integer
-        - description: Specifies whether or not to include facets in the result set. Default is "false".
+        - description: Specifies whether or not to include facets in the result set.
+            Default is "false".
           in: query
           name: include_facets
           schema:
-            description: Specifies whether or not to include facets in the result set. Default is "false".
+            description: Specifies whether or not to include facets in the result set.
+              Default is "false".
             nullable: true
             type: boolean
         - description: Filter based on viewpoint.
@@ -4342,7 +4906,8 @@ paths:
   /v3/search/videos/editorial:
     get:
       description: >
-        Use this endpoint to search current and archival video clips of celebrities, newsmakers, and events.
+        Use this endpoint to search current and archival video clips of
+        celebrities, newsmakers, and events.
 
 
         You'll need an API key and access token to use this resource.
@@ -4477,17 +5042,27 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Use of this parameter requires configuration changes to your API
+            key. Please contact your sales representative to learn more.
           in: header
           name: GI-Country-Code
           schema:
-            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+            description: Use of this parameter requires configuration changes to your API
+              key. Please contact your sales representative to learn more.
             type: string
         - description: Provides filtering according to the age of individuals in a video.
           explode: false
@@ -4500,11 +5075,13 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Search for images by specific artists (free-text, comma-separated list of artists).
+        - description: Search for images by specific artists (free-text, comma-separated
+            list of artists).
           in: query
           name: artists
           schema:
-            description: Search for images by specific artists (free-text, comma-separated list of artists).
+            description: Search for images by specific artists (free-text, comma-separated
+              list of artists).
             nullable: true
             type: string
         - description: Provides filtering by collection code.
@@ -4535,25 +5112,39 @@ paths:
           style: form
         - description: "Filters based on which product the asset will download against.\r
 
-            \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+            \                    Allowed values are easyaccess,
+            editorialsubscription, imagepack, premiumaccess and
+            royaltyfreesubscription.\r
 
-            \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+            \                    If you have more than one instance
+            of a product, you may also include the ID of the product instance
+            you wish to filter on. \r
 
-            \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+            \                    For example, some users may have
+            more than one premiumaccess product, so the download_product value
+            would be premiumaccess:1234. \r
 
-            \                    Product ID can be obtained from the GET /products response."
+            \                    Product ID can be obtained from the
+            GET /products response."
           in: query
           name: download_product
           schema:
             description: "Filters based on which product the asset will download against.\r
 
-              \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+              \                    Allowed values are easyaccess,
+              editorialsubscription, imagepack, premiumaccess and
+              royaltyfreesubscription.\r
 
-              \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+              \                    If you have more than one
+              instance of a product, you may also include the ID of the product
+              instance you wish to filter on. \r
 
-              \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+              \                    For example, some users may
+              have more than one premiumaccess product, so the download_product
+              value would be premiumaccess:1234. \r
 
-              \                    Product ID can be obtained from the GET /products response."
+              \                    Product ID can be obtained from
+              the GET /products response."
             nullable: true
             type: string
         - description: Allows filtering by types of video.
@@ -4626,19 +5217,27 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Specifies whether or not to include related searches in the response. The default is false.
+        - description: Specifies whether or not to include related searches in the
+            response. The default is false.
           in: query
           name: include_related_searches
           schema:
             default: false
-            description: Specifies whether or not to include related searches in the response. The default is false.
+            description: Specifies whether or not to include related searches in the
+              response. The default is false.
             type: boolean
-        - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
+        - description: Return only images tagged with specific keyword(s). Specify using a
+            comma-separated list of keyword Ids. If keyword Ids and phrase are
+            both specified, only those images matching the query phrase which
+            also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
           schema:
-            description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
+            description: Return only images tagged with specific keyword(s). Specify using a
+              comma-separated list of keyword Ids. If keyword Ids and phrase are
+              both specified, only those images matching the query phrase which
+              also contain the requested keyword(s) are returned.
             items:
               format: int32
               type: integer
@@ -4693,33 +5292,41 @@ paths:
           name: release_status
           schema:
             $ref: "#/components/schemas/ReleaseStatus"
-        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+        - description: "Specifies the facets to return in the response. Facets provide
+            additional search parameters to refine your results.\r
 
-            \                   The include_facets parameter must be set to \"true\" for facets to be returned."
+            \                   The include_facets parameter must be
+            set to \"true\" for facets to be returned."
           explode: false
           in: query
           name: facet_fields
           schema:
-            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+            description: "Specifies the facets to return in the response. Facets provide
+              additional search parameters to refine your results.\r
 
-              \                   The include_facets parameter must be set to \"true\" for facets to be returned."
+              \                   The include_facets parameter
+              must be set to \"true\" for facets to be returned."
             items:
               $ref: "#/components/schemas/EditorialVideoSearchFacetsFields"
             nullable: true
             type: array
           style: form
-        - description: Specifies whether or not to include facets in the result set. Default is "false".
+        - description: Specifies whether or not to include facets in the result set.
+            Default is "false".
           in: query
           name: include_facets
           schema:
-            description: Specifies whether or not to include facets in the result set. Default is "false".
+            description: Specifies whether or not to include facets in the result set.
+              Default is "false".
             nullable: true
             type: boolean
-        - description: Specifies the maximum number of facets to return per type. Default is 300.
+        - description: Specifies the maximum number of facets to return per type. Default
+            is 300.
           in: query
           name: facet_max_count
           schema:
-            description: Specifies the maximum number of facets to return per type. Default is 300.
+            description: Specifies the maximum number of facets to return per type. Default
+              is 300.
             format: int32
             type: integer
         - description: Filter based on viewpoint.
@@ -4781,11 +5388,14 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/report_usage_batch_request"
-        description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r
+        description: "Specifies up to 1000 sets of asset Id, usage count, and date of
+          use to submit usages for. \r
 
-          \            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r
+          \            Note that all asset Ids specified must be valid
+          or the operation will fail causing no usages to be recorded. \r
 
-          \            All dates must be on or before this date and the format should be ISO 8601 (ex: YYYY-MM-DD), time is not needed."
+          \            All dates must be on or before this date and
+          the format should be ISO 8601 (ex: YYYY-MM-DD), time is not needed."
       responses:
         "201":
           content:
@@ -4794,9 +5404,12 @@ paths:
                 $ref: "#/components/schemas/report_usage_batch_response"
           description: Success - All usages reported were successfully recorded.
         "400":
-          description: InvalidRequest - The content of the request was invalid. Most commonly this is due to either too many assets specified, no assets or invalid JSON.
+          description: InvalidRequest - The content of the request was invalid. Most
+            commonly this is due to either too many assets specified, no assets
+            or invalid JSON.
         "401":
-          description: AuthorizationTokenRequired - Authorization token was missing or not valid.
+          description: AuthorizationTokenRequired - Authorization token was missing or not
+            valid.
         "403":
           description: UnauthorizedToReportUsage
         "409":
@@ -4807,7 +5420,8 @@ paths:
   /v3/videos:
     get:
       description: >
-        Use this endpoint to return detailed video metadata for all the specified video ids.
+        Use this endpoint to return detailed video metadata for all the
+        specified video ids.
 
 
         You'll need an API key and access token to use this resource.
@@ -4943,18 +5557,28 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: Specifies one or more video ids to return. Use comma delimiter when requesting multiple ids.
+        - description: Specifies one or more video ids to return. Use comma delimiter when
+            requesting multiple ids.
           explode: false
           in: query
           name: ids
           schema:
-            description: Specifies one or more video ids to return. Use comma delimiter when requesting multiple ids.
+            description: Specifies one or more video ids to return. Use comma delimiter when
+              requesting multiple ids.
             items:
               type: string
             nullable: true
@@ -4990,7 +5614,8 @@ paths:
   "/v3/videos/{id}":
     get:
       description: >
-        Use this endpoint to return detailed video metadata for the specified video id.
+        Use this endpoint to return detailed video metadata for the
+        specified video id.
 
 
         You'll need an API key and access token to use this resource.
@@ -5126,18 +5751,28 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
-        - description: A video id. For more than one video please use the /v3/video endpoint.
+        - description: A video id. For more than one video please use the /v3/video
+            endpoint.
           in: path
           name: id
           required: true
           schema:
-            description: A video id. For more than one video please use the /v3/video endpoint.
+            description: A video id. For more than one video please use the /v3/video
+              endpoint.
             nullable: true
             type: string
         - description: comma delimited list of fields to retrieve for the video
@@ -5171,11 +5806,19 @@ paths:
     get:
       description: ""
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: An image id.
           in: path
@@ -5185,15 +5828,21 @@ paths:
             description: An image id.
             nullable: true
             type: string
-        - description: "If specified, returns the list of previously downloaded images for all users in your company.\r
+        - description: "If specified, returns the list of previously downloaded images for
+            all users in your company.\r
 
-            \            Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false."
+            \            Your account must be enabled for this
+            functionality. Contact your Getty Images account rep for more
+            information. Default is false."
           in: query
           name: company_downloads
           schema:
-            description: "If specified, returns the list of previously downloaded images for all users in your company.\r
+            description: "If specified, returns the list of previously downloaded images for
+              all users in your company.\r
 
-              \            Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false."
+              \            Your account must be enabled for this
+              functionality. Contact your Getty Images account rep for more
+              information. Default is false."
             type: boolean
       responses:
         "200":
@@ -5212,13 +5861,17 @@ paths:
           description: VideosNotFound
         "500":
           description: InvalidIStockCollection
-      summary: Returns information about a customer's download history for a specific asset
+      summary: Returns information about a customer's download history for a specific
+        asset
       tags:
         - Videos
   "/v3/videos/{id}/same-series":
     get:
       description: >-
-        This endpoint will provide the list of videos, if any exist, from the same series as the specified creative asset id. These images are typically from the same photo shoot. This functionality will not work for editorial assets.
+        This endpoint will provide the list of videos, if any exist, from
+        the same series as the specified creative asset id. These images are
+        typically from the same photo shoot. This functionality will not work
+        for editorial assets.
 
 
         You'll need an API key and access token to use this resource.
@@ -5343,11 +5996,19 @@ paths:
 
         ```
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: Identifies an existing video
           in: path
@@ -5403,7 +6064,8 @@ paths:
   "/v3/videos/{id}/similar":
     get:
       description: >-
-        This endpoint will provide a list of videos that are similar to the specified asset id.
+        This endpoint will provide a list of videos that are similar to the
+        specified asset id.
 
 
         You'll need an API key and access token to use this resource.
@@ -5528,11 +6190,19 @@ paths:
 
         ```
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr."
             type: string
         - description: A video id.
           in: path
@@ -5895,7 +6565,9 @@ components:
       additionalProperties: false
       properties:
         change_set_id:
-          description: Contains the identifier for the change-set resource. Passed into ConfirmAssetChanges requests to confirm receipt of the asset changes in the response.
+          description: Contains the identifier for the change-set resource. Passed into
+            ConfirmAssetChanges requests to confirm receipt of the asset changes
+            in the response.
           nullable: true
           type: string
         changed_assets:
@@ -6112,7 +6784,8 @@ components:
           format: date-time
           type: string
         asset_lifecycle:
-          description: Contains the type of change this asset change is. (i.e. "New," "Updated" or "Deleted")
+          description: Contains the type of change this asset change is. (i.e. "New,"
+            "Updated" or "Deleted")
           nullable: true
           type: string
         asset_type:
@@ -6124,7 +6797,8 @@ components:
           nullable: true
           type: string
         uri:
-          description: Contains the asset download URL for assets with an AssetLifecycle of "New."
+          description: Contains the asset download URL for assets with an AssetLifecycle
+            of "New."
           nullable: true
           type: string
       type: object
@@ -8126,7 +8800,8 @@ components:
           format: int32
           type: integer
         usage_date:
-          description: Identifies the date the asset was used, in ISO 8601 format (e.g., YYYY-MM-DD), time is not needed.
+          description: Identifies the date the asset was used, in ISO 8601 format (e.g.,
+            YYYY-MM-DD), time is not needed.
           format: date-time
           type: string
       type: object
@@ -8135,7 +8810,8 @@ components:
       description: Specifies the request information for the Batch Usages endpoint.
       properties:
         asset_usages:
-          description: Identifies the list of asset id, usage count and date of usage combinations to record.
+          description: Identifies the list of asset id, usage count and date of usage
+            combinations to record.
           items:
             $ref: "#/components/schemas/asset_usage"
           nullable: true
@@ -8146,13 +8822,15 @@ components:
       description: Specifies the response from the Batch Usages endpoint.
       properties:
         invalid_assets:
-          description: Identifies a list of asset ids submitted that did not match known Getty asset ids.
+          description: Identifies a list of asset ids submitted that did not match known
+            Getty asset ids.
           items:
             type: string
           nullable: true
           type: array
         total_asset_usages_processed:
-          description: Specifies the number of asset usage records that were successfully recorded.
+          description: Specifies the number of asset usage records that were successfully
+            recorded.
           format: int32
           nullable: true
           type: integer

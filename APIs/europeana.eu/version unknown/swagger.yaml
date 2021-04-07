@@ -4,7 +4,11 @@ basePath: /api
 info:
   contact:
     name: https://pro.europeana.eu/page/intro#general
-  description: This Swagger API console provides an overview of the Europeana Search & Record API. You can build and test anything from the simplest search to a complex query using facetList such as dates, geotags and permissions. For more help and information, head to our comprehensive <a href="https://pro.europeana.eu/page/intro">online documentation</a>.
+  description: This Swagger API console provides an overview of the Europeana
+    Search & Record API. You can build and test anything from the simplest
+    search to a complex query using facetList such as dates, geotags and
+    permissions. For more help and information, head to our comprehensive <a
+    href="https://pro.europeana.eu/page/intro">online documentation</a>.
   license:
     name: API terms of use
     url: https://www.europeana.eu/en/rights/api-terms-of-use
@@ -948,7 +952,7 @@ paths:
   "/v2/record/{collectionId}/{recordId}.jsonld":
     get:
       deprecated: false
-      operationId: getSingleRecordJsonLD_3
+      operationId: getSingleRecordJsonLD
       parameters:
         - description: callback
           in: query
@@ -1026,7 +1030,7 @@ paths:
   "/v2/record/{collectionId}/{recordId}.schema.jsonld":
     get:
       deprecated: false
-      operationId: getSingleRecordSchemaOrg_3
+      operationId: getSingleRecordSchemaOrg
       parameters:
         - description: callback
           in: query

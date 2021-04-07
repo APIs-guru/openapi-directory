@@ -20,7 +20,12 @@ tags:
 paths:
   /v1/certificates:
     post:
-      description: "<p>Creating a certificate order can be a long running asynchronous operation in the PKI workflow. The PKI API supports 2 options for getting the completion stateful actions for this asynchronous operations: 1) by polling operations -- see /v1/certificates/{certificateId}/actions 2) via WebHook style callback -- see '/v1/certificates/{certificateId}/callback'.</p>"
+      description: "<p>Creating a certificate order can be a long running asynchronous
+        operation in the PKI workflow. The PKI API supports 2 options for
+        getting the completion stateful actions for this asynchronous
+        operations: 1) by polling operations -- see
+        /v1/certificates/{certificateId}/actions 2) via WebHook style callback
+        -- see '/v1/certificates/{certificateId}/callback'.</p>"
       operationId: certificate_create
       parameters:
         - description: Setting locale for communications such as emails and error messages
@@ -145,7 +150,9 @@ paths:
         - v1
   "/v1/certificates/{certificateId}":
     get:
-      description: Once the certificate order has been created, this method can be used to check the status of the certificate. This method can also be used to retrieve details of the certificate.
+      description: Once the certificate order has been created, this method can be
+        used to check the status of the certificate. This method can also be
+        used to retrieve details of the certificate.
       operationId: certificate_get
       parameters:
         - description: Certificate id to lookup
@@ -196,7 +203,8 @@ paths:
         - v1
   "/v1/certificates/{certificateId}/actions":
     get:
-      description: This method is used to retrieve all stateful actions relating to a certificate lifecycle.
+      description: This method is used to retrieve all stateful actions relating to a
+        certificate lifecycle.
       operationId: certificate_action_retrieve
       parameters:
         - description: Certificate id to register for callback
@@ -293,7 +301,8 @@ paths:
       tags:
         - v1
     get:
-      description: This method is used to retrieve the registered callback url for a certificate.
+      description: This method is used to retrieve the registered callback url for a
+        certificate.
       operationId: certificate_callback_get
       parameters:
         - description: Certificate id to register for stateful action callback
@@ -343,7 +352,12 @@ paths:
       tags:
         - v1
     put:
-      description: This method is used to register/replace url for callbacks for stateful actions relating to a certificate lifecycle. The callback url is a Webhook style pattern and will receive POST http requests with json body defined in the CertificateAction model definition for each certificate action.  Only one callback URL is allowed to be registered for each certificateId, so it will replace a previous registration.
+      description: This method is used to register/replace url for callbacks for
+        stateful actions relating to a certificate lifecycle. The callback url
+        is a Webhook style pattern and will receive POST http requests with json
+        body defined in the CertificateAction model definition for each
+        certificate action.  Only one callback URL is allowed to be registered
+        for each certificateId, so it will replace a previous registration.
       operationId: certificate_callback_replace
       parameters:
         - description: Certificate id to register/replace for callback
@@ -538,7 +552,8 @@ paths:
         - v1
   "/v1/certificates/{certificateId}/email/resend/{emailAddress}":
     post:
-      description: This method adds an alternate email address to a certificate order and re-sends all existing request emails to that address.
+      description: This method adds an alternate email address to a certificate order
+        and re-sends all existing request emails to that address.
       operationId: certificate_alternate_email_address
       parameters:
         - description: Certificate id to resend emails
@@ -583,7 +598,8 @@ paths:
         - v1
   "/v1/certificates/{certificateId}/email/{emailId}/resend":
     post:
-      description: This method can be used to resend emails by providing the certificate id and the email id
+      description: This method can be used to resend emails by providing the
+        certificate id and the email id
       operationId: certificate_resend_email
       parameters:
         - description: Certificate id to resend email
@@ -624,7 +640,8 @@ paths:
         - v1
   "/v1/certificates/{certificateId}/email/{emailId}/resend/{emailAddress}":
     post:
-      description: This method can be used to resend emails by providing the certificate id, the email id, and the recipient email address
+      description: This method can be used to resend emails by providing the
+        certificate id, the email id, and the recipient email address
       operationId: certificate_resend_email_address
       parameters:
         - description: Certificate id to resend emails
@@ -671,7 +688,17 @@ paths:
         - v1
   "/v1/certificates/{certificateId}/reissue":
     post:
-      description: <p>Rekeying is the process by which the private and public key is changed for a certificate. It is a simplified reissue,where only the CSR is changed. Reissuing is the process by which domain names are added or removed from a certificate.Once a request is validated and approved, the certificate will be reissued with the new common name and sans specified. Unlimited reissues are available during the lifetime of the certificate.New names added to a certificate that do not share the base domain of the common name may take additional time to validate. If this API call is made before a previous pending reissue has been validated and issued, the previous reissue request is automatically rejected and replaced with the current request.</p>
+      description: <p>Rekeying is the process by which the private and public key is
+        changed for a certificate. It is a simplified reissue,where only the CSR
+        is changed. Reissuing is the process by which domain names are added or
+        removed from a certificate.Once a request is validated and approved, the
+        certificate will be reissued with the new common name and sans
+        specified. Unlimited reissues are available during the lifetime of the
+        certificate.New names added to a certificate that do not share the base
+        domain of the common name may take additional time to validate. If this
+        API call is made before a previous pending reissue has been validated
+        and issued, the previous reissue request is automatically rejected and
+        replaced with the current request.</p>
       operationId: certificate_reissue
       parameters:
         - description: Certificate id to reissue
@@ -737,7 +764,16 @@ paths:
         - v1
   "/v1/certificates/{certificateId}/renew":
     post:
-      description: Renewal is the process by which the validity of a certificate is extended. Renewal is only available 60 days prior to expiration of the previous certificate and 30 days after the expiration of the previous certificate. The renewal supports modifying a set of the original certificate order information. Once a request is validated and approved, the certificate will be issued with extended validity. Since subject alternative names can be removed during a renewal, we require that you provide the subject alternative names you expect in the renewed certificate. New names added to a certificate that do not share the base domain of the common name may take additional time to validate. </p>
+      description: Renewal is the process by which the validity of a certificate is
+        extended. Renewal is only available 60 days prior to expiration of the
+        previous certificate and 30 days after the expiration of the previous
+        certificate. The renewal supports modifying a set of the original
+        certificate order information. Once a request is validated and approved,
+        the certificate will be issued with extended validity. Since subject
+        alternative names can be removed during a renewal, we require that you
+        provide the subject alternative names you expect in the renewed
+        certificate. New names added to a certificate that do not share the base
+        domain of the common name may take additional time to validate. </p>
       operationId: certificate_renew
       parameters:
         - description: Certificate id to renew
@@ -803,7 +839,8 @@ paths:
         - v1
   "/v1/certificates/{certificateId}/revoke":
     post:
-      description: Use revoke call to revoke an active certificate, if the certificate has not been issued a 404 response will be returned.
+      description: Use revoke call to revoke an active certificate, if the certificate
+        has not been issued a 404 response will be returned.
       operationId: certificate_revoke
       parameters:
         - description: Certificate id to revoke
@@ -863,7 +900,16 @@ paths:
         - v1
   "/v1/certificates/{certificateId}/siteSeal":
     get:
-      description: <p>This method is used to obtain the site seal information for an issued certificate. A site seal is a graphic that the certificate purchaser can embed on their web site to show their visitors information about their SSL certificate. If a web site visitor clicks on the site seal image, a pop-up page is displayed that contains detailed information about the SSL certificate. The site seal token is used to link the site seal graphic image to the appropriate certificate details pop-up page display when a user clicks on the site seal. The site seal images are expected to be static images and hosted on the reseller's website, to minimize delays for customer page load times.</p>
+      description: <p>This method is used to obtain the site seal information for an
+        issued certificate. A site seal is a graphic that the certificate
+        purchaser can embed on their web site to show their visitors information
+        about their SSL certificate. If a web site visitor clicks on the site
+        seal image, a pop-up page is displayed that contains detailed
+        information about the SSL certificate. The site seal token is used to
+        link the site seal graphic image to the appropriate certificate details
+        pop-up page display when a user clicks on the site seal. The site seal
+        images are expected to be static images and hosted on the reseller's
+        website, to minimize delays for customer page load times.</p>
       operationId: certificate_siteseal_get
       parameters:
         - description: Certificate id
@@ -872,7 +918,10 @@ paths:
           required: true
           schema:
             type: string
-        - description: This value represents the visual theme of the seal. If seal doesn't exist, default values are used if params not present. If seal does exist, default values will not be used to update unless params present.
+        - description: This value represents the visual theme of the seal. If seal doesn't
+            exist, default values are used if params not present. If seal does
+            exist, default values will not be used to update unless params
+            present.
           in: query
           name: theme
           required: false
@@ -882,7 +931,10 @@ paths:
               - DARK
               - LIGHT
             type: string
-        - description: Determine locale for text displayed in seal image and verification page. If seal doesn't exist, default values are used if params not present. If seal does exist, default values will not be used to update unless params present.
+        - description: Determine locale for text displayed in seal image and verification
+            page. If seal doesn't exist, default values are used if params not
+            present. If seal does exist, default values will not be used to
+            update unless params present.
           in: query
           name: locale
           required: false
@@ -943,7 +995,11 @@ paths:
         - v1
   "/v1/certificates/{certificateId}/verifyDomainControl":
     post:
-      description: Domain control is a means for verifying the domain included in the certificate order. This resource is useful for resellers that control the domains for their customers, and can expedite the verification process. See https://www.godaddy.com/help/verifying-your-domain-ownership-for-ssl-certificate-requests-html-or-dns-7452
+      description: Domain control is a means for verifying the domain included in the
+        certificate order. This resource is useful for resellers that control
+        the domains for their customers, and can expedite the verification
+        process. See
+        https://www.godaddy.com/help/verifying-your-domain-ownership-for-ssl-certificate-requests-html-or-dns-7452
       operationId: certificate_verifydomaincontrol
       parameters:
         - description: Certificate id to lookup
@@ -984,7 +1040,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: Domain control was not successful <br> Certificate state does not allow domain control
+          description: Domain control was not successful <br> Certificate state does not
+            allow domain control
         "500":
           content:
             application/json:
@@ -996,7 +1053,10 @@ paths:
         - v1
   /v2/certificates:
     get:
-      description: Once the certificate order has been created, this method can be used to check the status of the certificate. This method can also be used to retrieve details of the certificates associated to an entitlement.
+      description: Once the certificate order has been created, this method can be
+        used to check the status of the certificate. This method can also be
+        used to retrieve details of the certificates associated to an
+        entitlement.
       operationId: certificate_get_entitlement
       parameters:
         - description: Entitlement id to lookup
@@ -1118,7 +1178,11 @@ paths:
         - v1
   "/v2/customers/{customerId}/certificates":
     get:
-      description: This method can be used to retrieve a list of certificates for a specified customer. <ul><li>**shopperId** is **not the same** as **customerId**.  **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
+      description: This method can be used to retrieve a list of certificates for a
+        specified customer. <ul><li>**shopperId** is **not the same** as
+        **customerId**.  **shopperId** is a number of max length 10 digits
+        (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:*
+        295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
       operationId: getCustomerCertificatesByCustomerId
       parameters:
         - $ref: "#/components/parameters/customerId"
@@ -1146,7 +1210,12 @@ paths:
         - v2
   "/v2/customers/{customerId}/certificates/acme/externalAccountBinding":
     get:
-      description: Use this endpoint to retrieve a key identifier and Hash-based Message Authentication Code (HMAC) key for Automated Certificate Management Environment (ACME) External Account Binding (EAB). These credentials can be used with an ACME client that supports EAB (ex. CertBot) to automate the issuance request and deployment of DV SSL certificates
+      description: Use this endpoint to retrieve a key identifier and Hash-based
+        Message Authentication Code (HMAC) key for Automated Certificate
+        Management Environment (ACME) External Account Binding (EAB). These
+        credentials can be used with an ACME client that supports EAB (ex.
+        CertBot) to automate the issuance request and deployment of DV SSL
+        certificates
       operationId: getAcmeExternalAccountBinding
       parameters:
         - $ref: "#/components/parameters/customerId"
@@ -1156,7 +1225,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ExternalAccountBinding"
-          description: Acme key identifier and HMAC key for the external account binding. Directory URI is also provided for making ACME requests.
+          description: Acme key identifier and HMAC key for the external account binding.
+            Directory URI is also provided for making ACME requests.
         "401":
           $ref: "#/components/responses/401"
         "403":
@@ -1174,7 +1244,12 @@ paths:
         - v2
   "/v2/customers/{customerId}/certificates/{certificateId}":
     get:
-      description: Once the certificate order has been created, this method can be used to check the status of the certificate. This method can also be used to retrieve details of the certificate. <ul><li>**shopperId** is **not the same** as **customerId**. **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
+      description: Once the certificate order has been created, this method can be
+        used to check the status of the certificate. This method can also be
+        used to retrieve details of the certificate. <ul><li>**shopperId** is
+        **not the same** as **customerId**. **shopperId** is a number of max
+        length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4
+        (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
       operationId: getCertificateDetailByCertIdentifier
       parameters:
         - $ref: "#/components/parameters/customerId"
@@ -1203,7 +1278,11 @@ paths:
         - v2
   "/v2/customers/{customerId}/certificates/{certificateId}/domainVerifications":
     get:
-      description: This method can be used to retrieve the domain verification status for a certificate request.<ul><li>**shopperId** is **not the same** as **customerId**.  **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>"
+      description: This method can be used to retrieve the domain verification status
+        for a certificate request.<ul><li>**shopperId** is **not the same** as
+        **customerId**.  **shopperId** is a number of max length 10 digits
+        (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:*
+        295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>"
       operationId: getDomainInformationByCertificateId
       parameters:
         - $ref: "#/components/parameters/customerId"
@@ -1234,7 +1313,12 @@ paths:
         - v2
   "/v2/customers/{customerId}/certificates/{certificateId}/domainVerifications/{domain}":
     get:
-      description: Retrieve detailed information for supplied domain, including domain verification details and Certificate Authority Authorization (CAA) verification details. <ul><li>**shopperId** is **not the same** as **customerId**.  **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
+      description: Retrieve detailed information for supplied domain, including domain
+        verification details and Certificate Authority Authorization (CAA)
+        verification details. <ul><li>**shopperId** is **not the same** as
+        **customerId**.  **shopperId** is a number of max length 10 digits
+        (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:*
+        295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
       operationId: getDomainDetailsByDomain
       parameters:
         - $ref: "#/components/parameters/customerId"
@@ -1246,7 +1330,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DomainVerificationDetail"
-          description: Retrieve detailed information for supplied domain, including domain verification details and Certificate Authority Authorization (CAA) verification details.
+          description: Retrieve detailed information for supplied domain, including domain
+            verification details and Certificate Authority Authorization (CAA)
+            verification details.
         "401":
           $ref: "#/components/responses/401"
         "403":
@@ -1361,7 +1447,8 @@ components:
     Certificate:
       properties:
         certificateId:
-          description: The unique identifier of the certificate request. Only present if no errors returned
+          description: The unique identifier of the certificate request. Only present if
+            no errors returned
           type: string
         commonName:
           description: Common name of certificate
@@ -1413,10 +1500,12 @@ components:
           description: Serial number of certificate (if issued or revoked)
           type: string
         serialNumberHex:
-          description: Hexadecmial format for Serial number of certificate(if issued or revoked)
+          description: Hexadecmial format for Serial number of certificate(if issued or
+            revoked)
           type: string
         slotSize:
-          description: "Number of subject alternative names(SAN) to be included in certificate "
+          description: "Number of subject alternative names(SAN) to be included in
+            certificate "
           enum:
             - FIVE
             - TEN
@@ -1794,10 +1883,12 @@ components:
     CertificateCreate:
       properties:
         callbackUrl:
-          description: Required if client would like to receive stateful actions via callback during certificate lifecyle
+          description: Required if client would like to receive stateful actions via
+            callback during certificate lifecyle
           type: string
         commonName:
-          description: Name to be secured in certificate. If provided, CN field in CSR will be ignored.
+          description: Name to be secured in certificate. If provided, CN field in CSR
+            will be ignored.
           type: string
         contact:
           $ref: "#/components/schemas/CertificateContact"
@@ -1829,7 +1920,9 @@ components:
           type: string
         rootType:
           default: STARFIELD_SHA_2
-          description: Root Type. Depending on certificate expiration date, SHA_1 not be allowed. Will default to SHA_2 if expiration date exceeds sha1 allowed date
+          description: Root Type. Depending on certificate expiration date, SHA_1 not be
+            allowed. Will default to SHA_2 if expiration date exceeds sha1
+            allowed date
           enum:
             - GODADDY_SHA_1
             - GODADDY_SHA_2
@@ -1837,7 +1930,8 @@ components:
             - STARFIELD_SHA_2
           type: string
         slotSize:
-          description: "Number of subject alternative names(SAN) to be included in certificate "
+          description: "Number of subject alternative names(SAN) to be included in
+            certificate "
           enum:
             - FIVE
             - TEN
@@ -1849,7 +1943,8 @@ components:
             - ONE_HUNDRED
           type: string
         subjectAlternativeNames:
-          description: Subject Alternative names. Collection of subjectAlternativeNames to be included in certificate.
+          description: Subject Alternative names. Collection of subjectAlternativeNames to
+            be included in certificate.
           items:
             type: string
           type: array
@@ -1862,7 +1957,8 @@ components:
     CertificateDetailV2:
       properties:
         certificateId:
-          description: The unique identifier of the certificate request. Only present if no errors returned
+          description: The unique identifier of the certificate request. Only present if
+            no errors returned
           type: string
         commonName:
           description: Common name of certificate
@@ -1916,11 +2012,13 @@ components:
           description: Serial number of certificate (if issued or revoked)
           type: string
         serialNumberHex:
-          description: Hexadecmial format for Serial number of certificate(if issued or revoked)
+          description: Hexadecmial format for Serial number of certificate(if issued or
+            revoked)
           type: string
         slotSize:
           description: >
-            Number of subject alternative names (SAN) to be included in certificate (if UCC): 
+            Number of subject alternative names (SAN) to be included in
+            certificate (if UCC): 
               * `FIVE` - Five slot UCC request
               * `TEN` - Ten slot UCC request
               * `FIFTEEN` - Fifteen slot UCC request
@@ -1961,7 +2059,8 @@ components:
             - EXPIRED
           type: string
         subjectAlternativeNames:
-          description: Subject Alternative names. Collection of subjectAlternativeNames to be included in certificate.
+          description: Subject Alternative names. Collection of subjectAlternativeNames to
+            be included in certificate.
           items:
             format: domain
             type: string
@@ -2047,7 +2146,8 @@ components:
     CertificateIdentifier:
       properties:
         certificateId:
-          description: The unique identifier of the certificate request. Only present if verified.
+          description: The unique identifier of the certificate request. Only present if
+            verified.
           type: string
       required:
         - certificateId
@@ -2101,7 +2201,8 @@ components:
     CertificateReissue:
       properties:
         callbackUrl:
-          description: Required if client would like to receive stateful action via callback during certificate lifecyle
+          description: Required if client would like to receive stateful action via
+            callback during certificate lifecyle
           type: string
         commonName:
           default: Existing common name
@@ -2113,12 +2214,16 @@ components:
           type: string
         delayExistingRevoke:
           default: 72
-          description: In hours, time to delay revoking existing certificate after issuance of new certificate. If revokeExistingCertOnIssuance is enabled, this value will be ignored
+          description: In hours, time to delay revoking existing certificate after
+            issuance of new certificate. If revokeExistingCertOnIssuance is
+            enabled, this value will be ignored
           maximum: 168
           type: integer
         rootType:
           default: GODADDY_SHA_1
-          description: Root Type. Depending on certificate expiration date, SHA_1 not be allowed. Will default to SHA_2 if expiration date exceeds sha1 allowed date
+          description: Root Type. Depending on certificate expiration date, SHA_1 not be
+            allowed. Will default to SHA_2 if expiration date exceeds sha1
+            allowed date
           enum:
             - GODADDY_SHA_1
             - GODADDY_SHA_2
@@ -2126,7 +2231,8 @@ components:
             - STARFIELD_SHA_2
           type: string
         subjectAlternativeNames:
-          description: Only used for UCC products. An array of subject alternative names to include in certificate.
+          description: Only used for UCC products. An array of subject alternative names
+            to include in certificate.
           items:
             type: string
           type: array
@@ -2134,7 +2240,8 @@ components:
     CertificateRenew:
       properties:
         callbackUrl:
-          description: Required if client would like to receive stateful actions via callback during certificate lifecyle
+          description: Required if client would like to receive stateful actions via
+            callback during certificate lifecyle
           type: string
         commonName:
           default: Existing common name
@@ -2146,11 +2253,14 @@ components:
           type: string
         period:
           default: 0
-          description: Number of years for certificate validity period, if different from previous certificate
+          description: Number of years for certificate validity period, if different from
+            previous certificate
           type: integer
         rootType:
           default: GODADDY_SHA_1
-          description: Root Type. Depending on certificate expiration date, SHA_1 not be allowed. Will default to SHA_2 if expiration date exceeds sha1 allowed date
+          description: Root Type. Depending on certificate expiration date, SHA_1 not be
+            allowed. Will default to SHA_2 if expiration date exceeds sha1
+            allowed date
           enum:
             - GODADDY_SHA_1
             - GODADDY_SHA_2
@@ -2158,7 +2268,10 @@ components:
             - STARFIELD_SHA_2
           type: string
         subjectAlternativeNames:
-          description: Only used for UCC products. An array of subject alternative names to include in certificate. Not including a subject alternative name that was in the previous certificate will remove it from the renewed certificate.
+          description: Only used for UCC products. An array of subject alternative names
+            to include in certificate. Not including a subject alternative name
+            that was in the previous certificate will remove it from the renewed
+            certificate.
           items:
             type: string
           type: array
@@ -2205,7 +2318,8 @@ components:
           format: domain
           type: string
         completedAt:
-          description: The date the certificate request completed processing (if issued or revoked).
+          description: The date the certificate request completed processing (if issued or
+            revoked).
           format: iso-datetime
           type: string
         createdAt:
@@ -2227,7 +2341,8 @@ components:
           type: string
         slotSize:
           description: >
-            Number of subject alternative names (SAN) to be included in certificate (if UCC): 
+            Number of subject alternative names (SAN) to be included in
+            certificate (if UCC): 
               * `FIVE` - Five slot UCC request
               * `TEN` - Ten slot UCC request
               * `FIFTEEN` - Fifteen slot UCC request
@@ -2270,7 +2385,8 @@ components:
             - UNUSED
           type: string
         subjectAlternativeNames:
-          description: Subject Alternative names (if UCC). Collection of subjectAlternativeNames to be included in certificate.
+          description: Subject Alternative names (if UCC). Collection of
+            subjectAlternativeNames to be included in certificate.
           format: domain
           items:
             type: string
@@ -2322,7 +2438,8 @@ components:
         - properties:
             certificateAuthorityAuthorization:
               description: >
-                Contains information about the last Certificate Authority Authorization (CAA) Lookup details for the specified domain.
+                Contains information about the last Certificate Authority
+                Authorization (CAA) Lookup details for the specified domain.
 
 
                 In order for a domain to be eligible to be included in the certificate, the entire domain hierarchy must be scanned for DNS CAA records, as outlined by RFC 6844.
@@ -2338,15 +2455,26 @@ components:
                   format: iso-datetime
                   type: string
                 queryPaths:
-                  description: Details all the individual DNS paths that were scanned for CAA records for this domain, as detailed by RFC 6844. This element not only contains the parts determined from parsing the domain, but also any CNAME or DNAME targets specified by any of those individual parts.
+                  description: Details all the individual DNS paths that were scanned for CAA
+                    records for this domain, as detailed by RFC 6844. This
+                    element not only contains the parts determined from parsing
+                    the domain, but also any CNAME or DNAME targets specified by
+                    any of those individual parts.
                   items:
                     type: string
                   type: array
                 recommendations:
-                  description: Returns a list of fix recommendations if the query was unsuccessful, or if the domain was dropped from the certificate request, so that a subsequent certificate request with the specified domain will successfully pass its CAA scan.
+                  description: Returns a list of fix recommendations if the query was
+                    unsuccessful, or if the domain was dropped from the
+                    certificate request, so that a subsequent certificate
+                    request with the specified domain will successfully pass its
+                    CAA scan.
                   items:
                     description: >
-                      * `ADD_CA_TO_CAA` - The system found a CAA record in the domain hierarchy, but it did not find our CA in the record's values. Add `godaddy.com` or `starfieldtech.com` to the CAA record's values.
+                      * `ADD_CA_TO_CAA` - The system found a CAA record in the domain
+                      hierarchy, but it did not find our CA in the record's
+                      values. Add `godaddy.com` or `starfieldtech.com` to the
+                      CAA record's values.
 
                       * `CREATE_TARGET_DOMAIN_CAA` - Create a CAA record on the specified domain with `godaddy.com` or `starfieldtech.com` as the value. If the system finds a CAA record in the specified domain, it will stop scanning the domain hierarchy, thereby preventing potentially problematic parent domain paths from being scanned.
 
@@ -2405,10 +2533,13 @@ components:
           format: domain
           type: string
         domainEntityId:
-          description: A unique identifier that can be leveraged for retrieving domain verification related information. Primarily used when troubleshooting a request
+          description: A unique identifier that can be leveraged for retrieving domain
+            verification related information. Primarily used when
+            troubleshooting a request
           type: integer
         modifiedAt:
-          description: Timestamp indicating when the domain verification process was last updated
+          description: Timestamp indicating when the domain verification process was last
+            updated
           format: iso-datetime
           type: string
         status:
@@ -2492,7 +2623,8 @@ components:
     Error:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the specific error within client code
+          description: Short identifier for the error, suitable for indicating the
+            specific error within client code
           format: constant
           type: string
         fields:
@@ -2508,14 +2640,16 @@ components:
     ErrorField:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the specific error within client code
+          description: Short identifier for the error, suitable for indicating the
+            specific error within client code
           format: constant
           type: string
         message:
           description: Description of the problem with the contents of the field
           type: string
         path:
-          description: JSONPath referring to the field within the submitted data containing an error
+          description: JSONPath referring to the field within the submitted data
+            containing an error
           format: json-path
           type: string
       required:

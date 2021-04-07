@@ -3,7 +3,9 @@ servers:
   - url: //cfportal.contract-p.fit/api
 x-hasEquivalentPaths: true
 info:
-  description: "This describes the Contract.fit product API. If you don't have authorization keys yet, please request them there: https://contract.fit/contact-us"
+  description: "This describes the Contract.fit product API. If you don't have
+    authorization keys yet, please request them there:
+    https://contract.fit/contact-us"
   title: Contract.fit API
   version: "1.0"
   x-apisguru-categories:
@@ -101,7 +103,8 @@ paths:
       tags:
         - documents
     parameters:
-      - description: The number of the page, starting from 0. A range of pages, separated by ":" is also allowed to return a zip file.
+      - description: The number of the page, starting from 0. A range of pages,
+          separated by ":" is also allowed to return a zip file.
         in: path
         name: page_range
         required: true
@@ -145,7 +148,9 @@ paths:
                   format: binary
                   type: string
                 hints:
-                  description: 'Additional hints as a dictionary. Example: {"VAT_number":{"blacklist":"XXXX.XXX.XXX", "whitelist": ["YYYY.YYY.YYY", "ZZZZ.ZZZ.ZZZ"]}}'
+                  description: 'Additional hints as a dictionary. Example:
+                    {"VAT_number":{"blacklist":"XXXX.XXX.XXX", "whitelist":
+                    ["YYYY.YYY.YYY", "ZZZZ.ZZZ.ZZZ"]}}'
                   type: string
                 key_value_flag:
                   default: false

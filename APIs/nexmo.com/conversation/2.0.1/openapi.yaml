@@ -6,7 +6,11 @@ info:
     email: devrel@vonage.com
     name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: The Conversation API enables you to build conversation features where communication can take place across multiple mediums including IP Messaging, PSTN Voice, SMS and WebRTC Audio and Video. The context of the conversations is maintained though each communication event taking place within a conversation, no matter the medium.
+  description: The Conversation API enables you to build conversation features
+    where communication can take place across multiple mediums including IP
+    Messaging, PSTN Voice, SMS and WebRTC Audio and Video. The context of the
+    conversations is maintained though each communication event taking place
+    within a conversation, no matter the medium.
   title: Conversation API
   version: 2.0.1
   x-label: Beta
@@ -19,15 +23,26 @@ info:
 security:
   - bearerAuth: []
 tags:
-  - description: A conversation is a shared core component that Vonage APIs rely on. Conversations happen over multiple mediums and and can have associated Users through Memberships.
+  - description: A conversation is a shared core component that Vonage APIs rely on.
+      Conversations happen over multiple mediums and and can have associated
+      Users through Memberships.
     name: conversation
-  - description: The concept of a user exists in Vonage APIs, you can associate one with a user in your own application if you choose. A user can have multiple memberships to conversations and can communicate with other users through various different mediums.
+  - description: The concept of a user exists in Vonage APIs, you can associate one
+      with a user in your own application if you choose. A user can have
+      multiple memberships to conversations and can communicate with other users
+      through various different mediums.
     name: user
-  - description: Memberships connect users with conversations. Each membership has one conversation and one user however a user can have many memberships to conversations just as conversations can have many members.
+  - description: Memberships connect users with conversations. Each membership has
+      one conversation and one user however a user can have many memberships to
+      conversations just as conversations can have many members.
     name: member
-  - description: "Events are actions that occur within a conversation. Examples of this includes: Text events from members, or invite events from users"
+  - description: "Events are actions that occur within a conversation. Examples of
+      this includes: Text events from members, or invite events from users"
     name: event
-  - description: A leg can be a video call, IP call, or PSTN call that users participate in using multiple platforms. With this endpoint you can retrieve the details about all of the legs that took place in your application.
+  - description: A leg can be a video call, IP call, or PSTN call that users
+      participate in using multiple platforms. With this endpoint you can
+      retrieve the details about all of the legs that took place in your
+      application.
     name: leg
   - description: Rtc actions. Any rtc action related (like starting a new rtc connection).
     name: rtc
@@ -36,7 +51,11 @@ paths:
     get:
       deprecated: true
       description: >
-        <div class="Vlt-callout Vlt-callout--warning"> <i></i> <div class="Vlt-callout__content"> <p><strong>This API endpoint is deprecated. Please use <a href="/api/conversation.v2#get-conversations">/v0.2/conversations</a></strong>.<br />This endpoint will return a maximum of 100 items.</p> </div> </div>
+        <div class="Vlt-callout Vlt-callout--warning"> <i></i> <div
+        class="Vlt-callout__content"> <p><strong>This API endpoint is
+        deprecated. Please use <a
+        href="/api/conversation.v2#get-conversations">/v0.2/conversations</a></strong>.<br
+        />This endpoint will return a maximum of 100 items.</p> </div> </div>
 
         List all conversations associated with your application.  This endpoint required an admin JWT. To find all conversations for the currently logged in user, see [GET /users/:id/conversations](#getuserConversations)
       operationId: listConversations
@@ -53,7 +72,9 @@ paths:
               schema:
                 properties:
                   _embedded:
-                    description: A list of conversation objects. See the [get details of a specific conversation](#retrieveConversation) response fields for a description of the nested objects
+                    description: A list of conversation objects. See the [get details of a specific
+                      conversation](#retrieveConversation) response fields for a
+                      description of the nested objects
                     properties:
                       conversations:
                         items:
@@ -167,7 +188,8 @@ paths:
                         type: boolean
                     type: object
                   sequence_number:
-                    description: The last Event ID in this conversation. This ID can be used to [retrieve a specific event](#getEvent)
+                    description: The last Event ID in this conversation. This ID can be used to
+                      [retrieve a specific event](#getEvent)
                     example: "1"
                     type: string
                   timestamp:
@@ -197,7 +219,11 @@ paths:
     get:
       deprecated: true
       description: >
-        <div class="Vlt-callout Vlt-callout--warning"> <i></i> <div class="Vlt-callout__content"> <p><strong>This API endpoint is deprecated. Please use <a href="/api/conversation.v2#get-events">/v0.2/events</a></strong><br />This endpoint will return a maximum of 100 items.</p> </div> </div>
+        <div class="Vlt-callout Vlt-callout--warning"> <i></i> <div
+        class="Vlt-callout__content"> <p><strong>This API endpoint is
+        deprecated. Please use <a
+        href="/api/conversation.v2#get-events">/v0.2/events</a></strong><br
+        />This endpoint will return a maximum of 100 items.</p> </div> </div>
       operationId: getEvents
       responses:
         "200":
@@ -279,7 +305,11 @@ paths:
     get:
       deprecated: true
       description: >
-        <div class="Vlt-callout Vlt-callout--warning"> <i></i> <div class="Vlt-callout__content"> <p><strong>This API endpoint is deprecated. Please use <a href="/api/conversation.v2#get-members">/v0.2/members</a></strong><br />This endpoint will return a maximum of 100 items.</p> </div> </div>
+        <div class="Vlt-callout Vlt-callout--warning"> <i></i> <div
+        class="Vlt-callout__content"> <p><strong>This API endpoint is
+        deprecated. Please use <a
+        href="/api/conversation.v2#get-members">/v0.2/members</a></strong><br
+        />This endpoint will return a maximum of 100 items.</p> </div> </div>
       operationId: getMembers
       responses:
         "200":
@@ -431,7 +461,8 @@ paths:
       tags:
         - conversation
     servers:
-      - description: Override base path for the PUT /conversations/{conversation_id}/record operation
+      - description: Override base path for the PUT
+          /conversations/{conversation_id}/record operation
         url: https://api.nexmo.com/v1
   /legs:
     get:
@@ -469,7 +500,9 @@ paths:
                   record_index: 0
                 properties:
                   _embedded:
-                    description: A list of conversation objects. See the [get details of a specific conversation](#retrieveConversation) response fields for a description of the nested objects
+                    description: A list of conversation objects. See the [get details of a specific
+                      conversation](#retrieveConversation) response fields for a
+                      description of the nested objects
                     properties:
                       legs:
                         items:
@@ -547,7 +580,11 @@ paths:
     get:
       deprecated: true
       description: >
-        <div class="Vlt-callout Vlt-callout--warning"> <i></i> <div class="Vlt-callout__content"> <strong>This API endpoint is deprecated. Please use <a href="/api/conversation.v2#get-users">/v0.2/users</a><br />This endpoint will return a maximum of 100 items.</strong> </div> </div>
+        <div class="Vlt-callout Vlt-callout--warning"> <i></i> <div
+        class="Vlt-callout__content"> <strong>This API endpoint is deprecated.
+        Please use <a href="/api/conversation.v2#get-users">/v0.2/users</a><br
+        />This endpoint will return a maximum of 100 items.</strong> </div>
+        </div>
       operationId: getUsers
       responses:
         "200":
@@ -681,7 +718,8 @@ paths:
                     name:
                       $ref: "#/components/schemas/name_conversation"
                     sequence_number:
-                      description: the id of the last event of the conversation (event's id is an incremental number
+                      description: the id of the last event of the conversation (event's id is an
+                        incremental number
                       example: "123"
                       format: url
                       type: integer
@@ -859,7 +897,8 @@ components:
           type: object
       type: object
     _links_conversations_list:
-      description: A series of links between resources in this API in the http://stateless.co/hal_specification.html.
+      description: A series of links between resources in this API in the
+        http://stateless.co/hal_specification.html.
       properties:
         self:
           properties:
@@ -879,7 +918,9 @@ components:
       example: start
       type: string
     channel:
-      description: A user who joins a conversation as a member can have one channel per membership type. Channels can be `app`, `phone`, `sip`, `websocket`, or `vbc`
+      description: A user who joins a conversation as a member can have one channel
+        per membership type. Channels can be `app`, `phone`, `sip`, `websocket`,
+        or `vbc`
       properties:
         from:
           oneOf:
@@ -902,7 +943,9 @@ components:
         leg_id:
           $ref: "#/components/schemas/leg_id"
         leg_ids:
-          description: Leg ids associated with this Channel. The first item in the array represents the main active Leg. The second item, if exists, represents a screen-share Leg.
+          description: Leg ids associated with this Channel. The first item in the array
+            represents the main active Leg. The second item, if exists,
+            represents a screen-share Leg.
           items:
             properties:
               leg_id:
@@ -927,7 +970,9 @@ components:
             - description: Connect to a Phone (PSTN) number
               properties:
                 dtmfAnswer:
-                  description: Provide [DTMF digits](https://developer.nexmo.com/voice/voice-api/guides/dtmf) to send when the call is answered
+                  description: Provide [DTMF
+                    digits](https://developer.nexmo.com/voice/voice-api/guides/dtmf)
+                    to send when the call is answered
                   example: p*123#
                   type: string
                 number:
@@ -1027,7 +1072,8 @@ components:
       description: Conversation properties
       properties:
         ttl:
-          description: Time to leave. After how many seconds an empty conversation is deleted.
+          description: Time to leave. After how many seconds an empty conversation is
+            deleted.
           example: 60
           type: number
       type: object
@@ -1145,7 +1191,8 @@ components:
         joined:
           properties:
             isSystem:
-              description: "`true` if the user was invited by an admin JWT. `user_id` and `member_id` will not exist if `true`"
+              description: "`true` if the user was invited by an admin JWT. `user_id` and
+                `member_id` will not exist if `true`"
               type: boolean
             member_id:
               $ref: "#/components/schemas/member_id"
@@ -1154,7 +1201,8 @@ components:
           type: object
       type: object
     knocker_id:
-      description: Knocker ID. A knocker is a pre-member of a conversation who does not exist yet
+      description: Knocker ID. A knocker is a pre-member of a conversation who does
+        not exist yet
       example: a972836a-450f-35fa-156c-52a2ab5b7d25
       type: string
     leg_id:
@@ -1192,7 +1240,8 @@ components:
       example: MEM-63f61863-4a51-4f6b-86e1-46edebio0391
       type: string
     member_state:
-      description: The state that the member is in. Possible values are `invited`, `joined`, `left`, or `unknown`
+      description: The state that the member is in. Possible values are `invited`,
+        `joined`, `left`, or `unknown`
       enum:
         - invited
         - joined
@@ -1221,13 +1270,17 @@ components:
       type: number
     record_index:
       default: 0
-      description: Return `page_size` amount of conversations from this index in the response. That is, if your request returns 300 conversations, set `record_index` to 5 in order to return conversations 50 to 59. The default value is 0. That is, the first `page_size` calls.
+      description: Return `page_size` amount of conversations from this index in the
+        response. That is, if your request returns 300 conversations, set
+        `record_index` to 5 in order to return conversations 50 to 59. The
+        default value is 0. That is, the first `page_size` calls.
       example: 0
       minimum: 0
       type: number
     split:
       default: conversation
-      description: Record the sent and received audio in separate channels of a stereo recording
+      description: Record the sent and received audio in separate channels of a stereo
+        recording
       example: conversation
       type: string
     timestamp:

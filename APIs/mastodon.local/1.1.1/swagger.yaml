@@ -111,12 +111,14 @@ paths:
           name: note
           required: false
           type: string
-        - description: A base64 encoded image to display as the user's avatar (e.g. `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAADrCAYAAAA...`)
+        - description: A base64 encoded image to display as the user's avatar (e.g.
+            `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAADrCAYAAAA...`)
           in: query
           name: avatar
           required: false
           type: string
-        - description: A base64 encoded image to display as the user's header image (e.g. `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAADrCAYAAAA...`)
+        - description: A base64 encoded image to display as the user's header image (e.g.
+            `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAADrCAYAAAA...`)
           in: query
           name: header
           required: false
@@ -195,7 +197,8 @@ definitions:
         description: The ID of the account
         type: integer
       locked:
-        description: Boolean for when the account cannot be followed without waiting for approval first
+        description: Boolean for when the account cannot be followed without waiting for
+          approval first
         type: boolean
       note:
         description: Biography of user
@@ -234,7 +237,8 @@ definitions:
         description: For remote images, the remote URL of the original image
         type: string
       text_url:
-        description: Shorter URL for the image, for insertion into text (only present on local images)
+        description: Shorter URL for the image, for insertion into text (only present on
+          local images)
         type: string
       type:
         description: Attachment type

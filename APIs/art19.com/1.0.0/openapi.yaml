@@ -7,7 +7,8 @@ info:
     name: ART19 Engineering Team
     x-twitter: art19co
   description: >
-    The ART19 Content API conforms to the [JSON:API specification](http://jsonapi.org).
+    The ART19 Content API conforms to the [JSON:API
+    specification](http://jsonapi.org).
 
 
     API requests **MUST** use the HTTP Accept header:
@@ -129,7 +130,8 @@ paths:
   /classification_inclusions:
     get:
       description: >
-        Classification Inclusions connect classifications with entities like series, episodes, or campaigns, amongst others.
+        Classification Inclusions connect classifications with entities
+        like series, episodes, or campaigns, amongst others.
 
 
         In order to retrieve a set of classification inclusions, at least one of the following filter parameters must
@@ -146,7 +148,8 @@ paths:
         - `classification_id` and `classified_type`
       parameters:
         - description: >
-            The list of IDs to filter by. Repeat this parameter for each ID you want to include in the filter.
+            The list of IDs to filter by. Repeat this parameter for each ID you
+            want to include in the filter.
 
             The brackets *MUST* be percent-encoded, per the requirements in
 
@@ -162,14 +165,15 @@ paths:
             type: array
             uniqueItems: true
         - description: >+
-            Select which page number to receive results for. Pages are numbered starting at 1.
+            Select which page number to receive results for. Pages are numbered
+            starting at 1.
 
           in: query
           name: page[number]
           schema:
             minimum: 1
             type: integer
-        - description: >+
+        - description: |+
             Indicate how many records to return per page. The maximum is 100.
 
           in: query
@@ -178,7 +182,8 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: Limit the result to classification inclusions linked to a classification with this ID.
+        - description: Limit the result to classification inclusions linked to a
+            classification with this ID.
           example: a90609c0-9f0c-48fd-8a41-83eb8414bedb
           in: query
           name: classification_id
@@ -186,7 +191,8 @@ paths:
             format: uuid
             type: string
         - description: >
-            The type of classification that the classification inclusions are linked to.
+            The type of classification that the classification inclusions are
+            linked to.
 
             Depending on the permissions of your credential, only a subset of these types are usable.
           in: query
@@ -200,7 +206,8 @@ paths:
               - MediaRating
             type: string
         - description: >
-            Limit the result to classification inclusions linked to a resource with this ID.
+            Limit the result to classification inclusions linked to a resource
+            with this ID.
 
             You will have to use this filter together with either `classified_type` or `classification_type`.
           example: fee1976e-f1bc-48a9-9ee8-58800f4d3462
@@ -209,7 +216,8 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Limit the result to classification inclusions linked to this type of entity.
+        - description: Limit the result to classification inclusions linked to this type
+            of entity.
           in: query
           name: classified_type
           schema:
@@ -219,7 +227,8 @@ paths:
               - Episode
             type: string
         - description: >
-            Limit the result to classification inclusions linked to a classification containing
+            Limit the result to classification inclusions linked to a
+            classification containing
 
             the parameter value disregarding case.
           in: query
@@ -227,7 +236,8 @@ paths:
           schema:
             type: string
         - description: >
-            Specify how to sort the result. Please refer to either the top section or the
+            Specify how to sort the result. Please refer to either the top
+            section or the
 
             [JSON:API specification](https://jsonapi.org/format/#fetching-sorting) on how sorting works in general.
           explode: false
@@ -235,11 +245,11 @@ paths:
           name: sort
           schema:
             default: created_at
-            enum:
-              - classification_value
-              - created_at
-              - position
             items:
+              enum:
+                - classification_value
+                - created_at
+                - position
               type: string
             type: array
           style: form
@@ -258,6 +268,65 @@ paths:
                 type: object
           description: Success
         "400":
+          content:
+            application/vnd.api+json:
+              schema:
+                properties:
+                  errors:
+                    description: >
+                      An error object describing the problem. Please check out the
+
+                      [JSON:API Error document reference](https://jsonapi.org/format/#error-objects) for a full
+
+                      description of the returned object.
+                    items:
+                      properties:
+                        code:
+                          description: An application-specific error code, expressed as a string value
+                          type: string
+                        detail:
+                          description: >
+                            A human-readable explanation specific to this occurrence of the
+                            problem. Like title, this field’s value can be
+                            localized.
+                          example: Required query parameter “series_id” is missing
+                          type: string
+                        source:
+                          description: >
+                            An object containing references to the source of the error,
+                            optionally including any of the following members.
+                          nullable: true
+                          properties:
+                            parameter:
+                              description: A string indicating which URI query parameter caused the error.
+                              example: series_id
+                              type: string
+                            pointer:
+                              description: >
+                                A JSON Pointer [RFC6901](https://tools.ietf.org/html/rfc6901) to
+                                the associated entity in the request document
+                                (e.g. `/data` for a primary data object, or
+                                `/data/attributes/title` for a specific
+                                attribute).
+                              example: /data/attributes/name
+                              type: string
+                          type: object
+                        status:
+                          description: "The HTTP status code applicable to this problem, expressed as a
+                            string value: 400"
+                          example: "400"
+                          type: string
+                        title:
+                          description: >
+                            A short, human-readable summary of the problem that SHOULD NOT
+                            change from occurrence to occurrence of the
+
+                            problem, except for purposes of localization.
+                          example: Bad Request
+                          type: string
+                      type: object
+                    type: array
+                type: object
           description: >
             Bad Request
 
@@ -285,7 +354,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="7f990b9f-6a0a-43ca-87d1-1b1ec6551a8a"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="5f626dd3-375a-4c66-b04f-8f39858f4e6e"'
               },
               params: {
                 # add filters if desired
@@ -310,7 +379,7 @@ paths:
               const response = await fetch('https://art19.com/classification_inclusions?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="6258b178-6656-4faf-a4a1-ab47c6367ede"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="6cd910f5-84d2-4a80-b184-b3d8151b3714"'
                 }
               });
 
@@ -349,7 +418,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="a666ac05-cad0-4e0a-ad5f-bde42b8112d4"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="d134c684-9c4d-4673-8a0c-2235fe565e4a"'
               ));
 
               // Execute the request and grab all status information
@@ -377,15 +446,17 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/classification_inclusions?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
+            curl
+            'https://art19.com/classification_inclusions?page%5Bnumber%5D=1&page%5Bsize%5D=25'
+            \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="cfb5cc3e-9cf8-4ccc-9853-4b267841984f"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="fb037d04-19f3-4901-b31e-f5af71a3a8cc"' \
               --compressed
   "/classification_inclusions/{id}":
     get:
       parameters:
         - description: The ID of the classification inclusion resource to load.
-          example: 810fdbbc-9154-4fed-b043-45cff9767e5b
+          example: 8bb43d87-b1d2-4d35-99ee-dfceba6d8902
           in: path
           name: id
           required: true
@@ -422,11 +493,11 @@ paths:
           lang: ruby
           source: >
             response = Typhoeus.get(
-              "https://art19.com/classification_inclusions/6a18cd4c-2692-444d-9eb9-e61e58dc80da",
+              "https://art19.com/classification_inclusions/2bb5fa72-b91b-4230-9edc-aa16caa9a618",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="67d2534a-0470-4788-8cd8-5477d827f2da"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="f018e032-aa1b-411c-9767-6a33d1ea7a22"'
               },
               timeout: 10
             )
@@ -444,10 +515,10 @@ paths:
           lang: javascript
           source: >
             try {
-              const response = await fetch('https://art19.com/classification_inclusions/6a18cd4c-2692-444d-9eb9-e61e58dc80da', {
+              const response = await fetch('https://art19.com/classification_inclusions/2bb5fa72-b91b-4230-9edc-aa16caa9a618', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="03eeb17e-1c54-45bb-8de9-a6f447e1a4e7"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="224d375b-c58e-4172-866a-b2f8d3b51a00"'
                 }
               });
 
@@ -472,13 +543,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/classification_inclusions/6a18cd4c-2692-444d-9eb9-e61e58dc80da');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/classification_inclusions/2bb5fa72-b91b-4230-9edc-aa16caa9a618');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="f36695ea-1014-4faf-8753-4ff540426fdf"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="e6b25279-c993-4d6c-b010-b504dcf5e040"'
               ));
 
               // Execute the request and grab all status information
@@ -506,15 +577,18 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/classification_inclusions/6a18cd4c-2692-444d-9eb9-e61e58dc80da' \
+            curl
+            'https://art19.com/classification_inclusions/2bb5fa72-b91b-4230-9edc-aa16caa9a618'
+            \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="273be550-6c99-4e56-8384-49a58e9a1045"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="37d0b5be-25a2-430a-8443-9d2f90ae73d4"' \
               --compressed
   /classifications:
     get:
       parameters:
         - description: >
-            The list of IDs to filter by. Repeat this parameter for each ID you want to include in the filter.
+            The list of IDs to filter by. Repeat this parameter for each ID you
+            want to include in the filter.
 
             The brackets *MUST* be percent-encoded, per the requirements in
 
@@ -530,14 +604,15 @@ paths:
             type: array
             uniqueItems: true
         - description: >+
-            Select which page number to receive results for. Pages are numbered starting at 1.
+            Select which page number to receive results for. Pages are numbered
+            starting at 1.
 
           in: query
           name: page[number]
           schema:
             minimum: 1
             type: integer
-        - description: >+
+        - description: |+
             Indicate how many records to return per page. The maximum is 100.
 
           in: query
@@ -547,7 +622,8 @@ paths:
             minimum: 1
             type: integer
         - description: >
-            Limit the result to classifications of this type. The possible values for types
+            Limit the result to classifications of this type. The possible
+            values for types
 
             depends on the privileges of the provided credential.
           example: Genre
@@ -562,7 +638,8 @@ paths:
               - MediaRating
             type: string
         - description: >
-            Limit the result to classifications with a value containing the parameter value
+            Limit the result to classifications with a value containing the
+            parameter value
 
             disregarding case.
           in: query
@@ -570,7 +647,8 @@ paths:
           schema:
             type: string
         - description: >
-            If this parameter is provided and not empty, limit the result to classifications
+            If this parameter is provided and not empty, limit the result to
+            classifications
 
             of type `Geography` representing countries. The credential must have at least one
 
@@ -581,7 +659,8 @@ paths:
           schema:
             type: string
         - description: >
-            Specify how to sort the result. Please refer to either the top section or the
+            Specify how to sort the result. Please refer to either the top
+            section or the
 
             [JSON:API specification](https://jsonapi.org/format/#fetching-sorting) on how sorting works in general.
           explode: false
@@ -589,11 +668,11 @@ paths:
           name: sort
           schema:
             default: value
-            enum:
-              - created_at
-              - updated_at
-              - value
             items:
+              enum:
+                - created_at
+                - updated_at
+                - value
               type: string
             type: array
           style: form
@@ -612,6 +691,65 @@ paths:
                 type: object
           description: Success
         "400":
+          content:
+            application/vnd.api+json:
+              schema:
+                properties:
+                  errors:
+                    description: >
+                      An error object describing the problem. Please check out the
+
+                      [JSON:API Error document reference](https://jsonapi.org/format/#error-objects) for a full
+
+                      description of the returned object.
+                    items:
+                      properties:
+                        code:
+                          description: An application-specific error code, expressed as a string value
+                          type: string
+                        detail:
+                          description: >
+                            A human-readable explanation specific to this occurrence of the
+                            problem. Like title, this field’s value can be
+                            localized.
+                          example: Required query parameter “series_id” is missing
+                          type: string
+                        source:
+                          description: >
+                            An object containing references to the source of the error,
+                            optionally including any of the following members.
+                          nullable: true
+                          properties:
+                            parameter:
+                              description: A string indicating which URI query parameter caused the error.
+                              example: series_id
+                              type: string
+                            pointer:
+                              description: >
+                                A JSON Pointer [RFC6901](https://tools.ietf.org/html/rfc6901) to
+                                the associated entity in the request document
+                                (e.g. `/data` for a primary data object, or
+                                `/data/attributes/title` for a specific
+                                attribute).
+                              example: /data/attributes/name
+                              type: string
+                          type: object
+                        status:
+                          description: "The HTTP status code applicable to this problem, expressed as a
+                            string value: 400"
+                          example: "400"
+                          type: string
+                        title:
+                          description: >
+                            A short, human-readable summary of the problem that SHOULD NOT
+                            change from occurrence to occurrence of the
+
+                            problem, except for purposes of localization.
+                          example: Bad Request
+                          type: string
+                      type: object
+                    type: array
+                type: object
           description: >
             Bad Request
 
@@ -639,7 +777,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="d197806a-962e-4c31-b257-8f472cfab87e"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="e9048b4e-fb16-4322-9d15-5e41d58a50d8"'
               },
               params: {
                 # add filters if desired
@@ -664,7 +802,7 @@ paths:
               const response = await fetch('https://art19.com/classifications?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="3ae83e90-6a2b-4a96-9553-35755c20339b"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="3ab0d091-d1f4-4b96-b875-0c9acda2f7c4"'
                 }
               });
 
@@ -703,7 +841,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="b6c4b4c7-484b-4973-97e7-c851f2665b3f"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="a40beacc-fd88-4ad6-81da-a712da343c06"'
               ));
 
               // Execute the request and grab all status information
@@ -731,15 +869,17 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/classifications?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
+            curl
+            'https://art19.com/classifications?page%5Bnumber%5D=1&page%5Bsize%5D=25'
+            \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="3be016e5-a43f-43a6-ad7e-1b2c0ca6a4b6"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="3ecd0184-8472-45fd-acdd-9049e43e293a"' \
               --compressed
   "/classifications/{id}":
     get:
       parameters:
         - description: The ID of the classification resource to load.
-          example: 65f728f5-dee1-4990-8580-395034c95c51
+          example: e3303428-d3ab-4024-b37b-2c77ae1a6d0e
           in: path
           name: id
           required: true
@@ -776,11 +916,11 @@ paths:
           lang: ruby
           source: >
             response = Typhoeus.get(
-              "https://art19.com/classifications/9a0ee48e-20e1-4494-b525-500daa71cecf",
+              "https://art19.com/classifications/d085ad89-148a-4623-bd16-4392ba25d7ed",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="f6f9754d-3573-4854-9c8f-20be9da7ea27"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="82c1aa07-6de0-4f82-9568-b3d4baed6cba"'
               },
               timeout: 10
             )
@@ -798,10 +938,10 @@ paths:
           lang: javascript
           source: >
             try {
-              const response = await fetch('https://art19.com/classifications/9a0ee48e-20e1-4494-b525-500daa71cecf', {
+              const response = await fetch('https://art19.com/classifications/d085ad89-148a-4623-bd16-4392ba25d7ed', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="d226f894-14e1-44de-9c3e-d98d2911330c"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="4900721d-bab2-46ed-abe1-7674093755a2"'
                 }
               });
 
@@ -826,13 +966,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/classifications/9a0ee48e-20e1-4494-b525-500daa71cecf');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/classifications/d085ad89-148a-4623-bd16-4392ba25d7ed');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="3fc05163-4330-423f-9726-b3c2e807dbcc"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="569552d1-7f14-41fc-b812-6066168cca5b"'
               ));
 
               // Execute the request and grab all status information
@@ -860,15 +1000,18 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/classifications/9a0ee48e-20e1-4494-b525-500daa71cecf' \
+            curl
+            'https://art19.com/classifications/d085ad89-148a-4623-bd16-4392ba25d7ed'
+            \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="22d6807d-6c21-42c3-be20-5172c62bfd79"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="ad83c373-37b7-4fbd-96e9-2a465d5dcd57"' \
               --compressed
   /credits:
     get:
       parameters:
         - description: >
-            The list of IDs to filter by. Repeat this parameter for each ID you want to include in the filter.
+            The list of IDs to filter by. Repeat this parameter for each ID you
+            want to include in the filter.
 
             The brackets *MUST* be percent-encoded, per the requirements in
 
@@ -884,14 +1027,15 @@ paths:
             type: array
             uniqueItems: true
         - description: >+
-            Select which page number to receive results for. Pages are numbered starting at 1.
+            Select which page number to receive results for. Pages are numbered
+            starting at 1.
 
           in: query
           name: page[number]
           schema:
             minimum: 1
             type: integer
-        - description: >+
+        - description: |+
             Indicate how many records to return per page. The maximum is 100.
 
           in: query
@@ -901,7 +1045,8 @@ paths:
             minimum: 1
             type: integer
         - description: >
-            Limit the result to credits for the entity with this ID only. If the entity is not
+            Limit the result to credits for the entity with this ID only. If
+            the entity is not
 
             published, the credential needs to have the right privilege to list the credits for it.
           example: 76654e16-76ce-4945-92e9-e0a381917853
@@ -925,7 +1070,8 @@ paths:
               - Episode
             type: string
         - description: >
-            Specify how to sort the result. Please refer to either the top section or the
+            Specify how to sort the result. Please refer to either the top
+            section or the
 
             [JSON:API specification](https://jsonapi.org/format/#fetching-sorting) on how sorting works in general.
           explode: false
@@ -933,11 +1079,11 @@ paths:
           name: sort
           schema:
             default: position
-            enum:
-              - created_at
-              - position
-              - updated_at
             items:
+              enum:
+                - created_at
+                - position
+                - updated_at
               type: string
             type: array
           style: form
@@ -956,6 +1102,65 @@ paths:
                 type: object
           description: Success
         "400":
+          content:
+            application/vnd.api+json:
+              schema:
+                properties:
+                  errors:
+                    description: >
+                      An error object describing the problem. Please check out the
+
+                      [JSON:API Error document reference](https://jsonapi.org/format/#error-objects) for a full
+
+                      description of the returned object.
+                    items:
+                      properties:
+                        code:
+                          description: An application-specific error code, expressed as a string value
+                          type: string
+                        detail:
+                          description: >
+                            A human-readable explanation specific to this occurrence of the
+                            problem. Like title, this field’s value can be
+                            localized.
+                          example: Required query parameter “series_id” is missing
+                          type: string
+                        source:
+                          description: >
+                            An object containing references to the source of the error,
+                            optionally including any of the following members.
+                          nullable: true
+                          properties:
+                            parameter:
+                              description: A string indicating which URI query parameter caused the error.
+                              example: series_id
+                              type: string
+                            pointer:
+                              description: >
+                                A JSON Pointer [RFC6901](https://tools.ietf.org/html/rfc6901) to
+                                the associated entity in the request document
+                                (e.g. `/data` for a primary data object, or
+                                `/data/attributes/title` for a specific
+                                attribute).
+                              example: /data/attributes/name
+                              type: string
+                          type: object
+                        status:
+                          description: "The HTTP status code applicable to this problem, expressed as a
+                            string value: 400"
+                          example: "400"
+                          type: string
+                        title:
+                          description: >
+                            A short, human-readable summary of the problem that SHOULD NOT
+                            change from occurrence to occurrence of the
+
+                            problem, except for purposes of localization.
+                          example: Bad Request
+                          type: string
+                      type: object
+                    type: array
+                type: object
           description: >
             Bad Request
 
@@ -983,7 +1188,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="55f91532-8a9b-4789-84c4-8fa480a07f95"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="0e37bf80-6f46-4961-aea0-67b9b037a729"'
               },
               params: {
                 # add filters if desired
@@ -1008,7 +1213,7 @@ paths:
               const response = await fetch('https://art19.com/credits?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="d22420bc-b983-4db9-8ed4-3767c5974b2b"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="603c5985-22a4-42c9-bc64-567149140e1e"'
                 }
               });
 
@@ -1047,7 +1252,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="64f42e85-8612-4808-96d5-cd737e75ba14"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="4a63ce3a-e74a-4a0c-af39-f4d61ed6561c"'
               ));
 
               // Execute the request and grab all status information
@@ -1077,13 +1282,13 @@ paths:
           source: >
             curl 'https://art19.com/credits?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="87f7d3ab-a91c-42ef-bea5-3a028b5984d2"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="74c598e4-3dd2-4b73-b8e0-bae3da60e320"' \
               --compressed
   "/credits/{id}":
     get:
       parameters:
         - description: The ID of the credit resource to load.
-          example: 1d7a3761-dde2-47c7-944e-15071146132e
+          example: e82e68f8-0c5e-4363-ab10-ade007ce7d8f
           in: path
           name: id
           required: true
@@ -1120,11 +1325,11 @@ paths:
           lang: ruby
           source: >
             response = Typhoeus.get(
-              "https://art19.com/credits/e89373f3-3b8d-4dca-9c19-ff11b47fb4d4",
+              "https://art19.com/credits/2c771d49-fbe2-4af0-9636-8a3185be3411",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="9e35cc09-7239-41b2-a1b7-b225b070d0e7"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="6be16173-f3cf-4544-a80a-9b3c35cc6998"'
               },
               timeout: 10
             )
@@ -1142,10 +1347,10 @@ paths:
           lang: javascript
           source: >
             try {
-              const response = await fetch('https://art19.com/credits/e89373f3-3b8d-4dca-9c19-ff11b47fb4d4', {
+              const response = await fetch('https://art19.com/credits/2c771d49-fbe2-4af0-9636-8a3185be3411', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="56576853-5856-47d0-80fd-6e552ccf316c"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="7a554e1e-dae3-4df0-93a9-b3b4ebe45e31"'
                 }
               });
 
@@ -1170,13 +1375,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/credits/e89373f3-3b8d-4dca-9c19-ff11b47fb4d4');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/credits/2c771d49-fbe2-4af0-9636-8a3185be3411');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="8e924ab5-8e0b-4c3e-9098-2f16ff8a0a51"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="4fc49bce-6c0b-43a5-ac18-6ae216d9531a"'
               ));
 
               // Execute the request and grab all status information
@@ -1204,14 +1409,15 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/credits/e89373f3-3b8d-4dca-9c19-ff11b47fb4d4' \
+            curl 'https://art19.com/credits/2c771d49-fbe2-4af0-9636-8a3185be3411' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="f0deb565-5864-496c-bdca-a031766664d2"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="35e5473c-0866-47c2-af70-829de73fd6bb"' \
               --compressed
   /episodes:
     get:
       description: >
-        One initial filter must be provided (`ids`, `series_id`, or `season_id`), otherwise a `400 Bad Request` response
+        One initial filter must be provided (`ids`, `series_id`, or
+        `season_id`), otherwise a `400 Bad Request` response
 
         will be returned. Additional filters are allowed.
 
@@ -1221,7 +1427,8 @@ paths:
         your account, depending on the filter(s) being used. Be careful to filter the results as needed.
       parameters:
         - description: >
-            The list of IDs to filter by. Repeat this parameter for each ID you want to include in the filter.
+            The list of IDs to filter by. Repeat this parameter for each ID you
+            want to include in the filter.
 
             The brackets *MUST* be percent-encoded, per the requirements in
 
@@ -1237,7 +1444,8 @@ paths:
             type: array
             uniqueItems: true
         - description: >+
-            Select which page number to receive results for. Pages are numbered starting at 1.
+            Select which page number to receive results for. Pages are numbered
+            starting at 1.
 
           in: query
           name: page[number]
@@ -1245,7 +1453,7 @@ paths:
           schema:
             minimum: 1
             type: integer
-        - description: >+
+        - description: |+
             Indicate how many records to return per page. The maximum is 100.
 
           in: query
@@ -1255,7 +1463,8 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: Limit the result to episodes usable with an inventory management calendar for the provided AdDeal ID.
+        - description: Limit the result to episodes usable with an inventory management
+            calendar for the provided AdDeal ID.
           example: b97239ef-1776-489a-a1df-5f70a8407148
           in: query
           name: included_in_inventory_calendar
@@ -1267,15 +1476,15 @@ paths:
           name: month
           schema:
             type: string
-        - description: >
+        - description: |
             If `true`, limit the result to published episodes only.
-
             If `false`, limit the result to _unpublished_ episodes only.
           in: query
           name: published
           schema:
             type: boolean
-        - description: Limit the result to episodes with a title containing this parameter in a case-insensitive way.
+        - description: Limit the result to episodes with a title containing this parameter
+            in a case-insensitive way.
           in: query
           name: q
           schema:
@@ -1293,7 +1502,8 @@ paths:
             format: date-time
             type: string
         - description: >
-            If `true`, limit the result to published and released episodes holding an available media file.
+            If `true`, limit the result to published and released episodes
+            holding an available media file.
 
             If this is `true`, it also changes the default sort order to `-released_at`.
           in: query
@@ -1315,7 +1525,8 @@ paths:
             format: uuid
             type: string
         - description: >
-            Specify how to sort the result. Please refer to either the top section or the
+            Specify how to sort the result. Please refer to either the top
+            section or the
 
             [JSON:API specification](https://jsonapi.org/format/#fetching-sorting) on how sorting works in general.
           explode: false
@@ -1323,15 +1534,15 @@ paths:
           name: sort
           schema:
             default: sort_title
-            enum:
-              - created_at
-              - earliest_released_at
-              - released_at
-              - released_or_created_at
-              - sort_title
-              - title
-              - updated_at
             items:
+              enum:
+                - created_at
+                - earliest_released_at
+                - released_at
+                - released_or_created_at
+                - sort_title
+                - title
+                - updated_at
               type: string
             type: array
           style: form
@@ -1355,6 +1566,65 @@ paths:
                 type: object
           description: Success
         "400":
+          content:
+            application/vnd.api+json:
+              schema:
+                properties:
+                  errors:
+                    description: >
+                      An error object describing the problem. Please check out the
+
+                      [JSON:API Error document reference](https://jsonapi.org/format/#error-objects) for a full
+
+                      description of the returned object.
+                    items:
+                      properties:
+                        code:
+                          description: An application-specific error code, expressed as a string value
+                          type: string
+                        detail:
+                          description: >
+                            A human-readable explanation specific to this occurrence of the
+                            problem. Like title, this field’s value can be
+                            localized.
+                          example: Required query parameter “series_id” is missing
+                          type: string
+                        source:
+                          description: >
+                            An object containing references to the source of the error,
+                            optionally including any of the following members.
+                          nullable: true
+                          properties:
+                            parameter:
+                              description: A string indicating which URI query parameter caused the error.
+                              example: series_id
+                              type: string
+                            pointer:
+                              description: >
+                                A JSON Pointer [RFC6901](https://tools.ietf.org/html/rfc6901) to
+                                the associated entity in the request document
+                                (e.g. `/data` for a primary data object, or
+                                `/data/attributes/title` for a specific
+                                attribute).
+                              example: /data/attributes/name
+                              type: string
+                          type: object
+                        status:
+                          description: "The HTTP status code applicable to this problem, expressed as a
+                            string value: 400"
+                          example: "400"
+                          type: string
+                        title:
+                          description: >
+                            A short, human-readable summary of the problem that SHOULD NOT
+                            change from occurrence to occurrence of the
+
+                            problem, except for purposes of localization.
+                          example: Bad Request
+                          type: string
+                      type: object
+                    type: array
+                type: object
           description: >
             Bad Request
 
@@ -1382,7 +1652,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="60f5b127-1821-4c64-89a7-49374a781276"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="a0f1f928-f603-4964-bb55-0d29f1fa5d80"'
               },
               params: {
                 # add filters if desired
@@ -1407,7 +1677,7 @@ paths:
               const response = await fetch('https://art19.com/episodes?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="16b29af0-8469-4c86-94a9-1f639e8ca3bb"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="1bf407ac-5b90-429d-9886-4fe4e079a9b5"'
                 }
               });
 
@@ -1446,7 +1716,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="16611ce9-ad50-4cee-9ee0-b4f96a4cfac3"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="24afd9b2-b07e-4885-b757-af6b39673cce"'
               ));
 
               // Execute the request and grab all status information
@@ -1476,13 +1746,13 @@ paths:
           source: >
             curl 'https://art19.com/episodes?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="6592dd0a-ca5e-4ca9-b61d-45b8713ddec3"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="fc04da24-c1db-4a6a-85ed-e7eaba1bb136"' \
               --compressed
   "/episodes/{id}":
     get:
       parameters:
         - description: The ID of the episode resource to load.
-          example: 8c6d5f91-6344-4ff9-8de6-3fd0b916a3c7
+          example: 3c298747-3c6a-486a-aed2-80eb6beef31b
           in: path
           name: id
           required: true
@@ -1519,11 +1789,11 @@ paths:
           lang: ruby
           source: >
             response = Typhoeus.get(
-              "https://art19.com/episodes/171e3836-c13b-4f64-90f9-5e90971165b6",
+              "https://art19.com/episodes/557321dc-0173-447c-afa4-6648762ef7b1",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="70f112ab-f2d0-4a10-ab7d-4944ed48ece4"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="b80edd7f-cb15-4929-9cab-572590682335"'
               },
               timeout: 10
             )
@@ -1541,10 +1811,10 @@ paths:
           lang: javascript
           source: >
             try {
-              const response = await fetch('https://art19.com/episodes/171e3836-c13b-4f64-90f9-5e90971165b6', {
+              const response = await fetch('https://art19.com/episodes/557321dc-0173-447c-afa4-6648762ef7b1', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="7fc00b59-4797-4bf7-a5ad-52a03182e598"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="0b57dab7-aaf1-42ff-8193-505228447dd4"'
                 }
               });
 
@@ -1569,13 +1839,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/episodes/171e3836-c13b-4f64-90f9-5e90971165b6');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/episodes/557321dc-0173-447c-afa4-6648762ef7b1');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="ca9feeb9-7abc-4d86-b98a-f947f003cdd2"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="ed7e10ad-093c-4734-b145-7a31a1396bbb"'
               ));
 
               // Execute the request and grab all status information
@@ -1603,15 +1873,16 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/episodes/171e3836-c13b-4f64-90f9-5e90971165b6' \
+            curl 'https://art19.com/episodes/557321dc-0173-447c-afa4-6648762ef7b1' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="893e51e7-94e6-4a88-addc-f03d74783508"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="a7116706-0d7b-4644-801c-66cec747fb93"' \
               --compressed
   "/episodes/{id}/next_sibling":
     get:
       parameters:
-        - description: The ID of the episode to find the one episode released right after it.
-          example: f0a8839d-50b9-4f97-a418-75845ec637c0
+        - description: The ID of the episode to find the one episode released right after
+            it.
+          example: 74716edc-0c77-4638-9001-5f6642b25a4b
           in: path
           name: id
           required: true
@@ -1619,7 +1890,8 @@ paths:
             format: uuid
             type: string
         - description: >
-            If `true`, get the next released and published episode with an available media file.
+            If `true`, get the next released and published episode with an
+            available media file.
           in: query
           name: rss
           schema:
@@ -1654,11 +1926,11 @@ paths:
           lang: ruby
           source: >
             response = Typhoeus.get(
-              "https://art19.com/episodes/cd717915-4fb4-44d1-8db5-073b5276d027/next_sibling",
+              "https://art19.com/episodes/0b88d438-0b65-4c5a-b8b4-abe9ad8f14d1/next_sibling",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="d6184c5b-407f-40ca-8be2-5642585f47c4"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="703c062e-d9c6-49a1-81b3-574b522e4d85"'
               },
               timeout: 10
             )
@@ -1676,10 +1948,10 @@ paths:
           lang: javascript
           source: >
             try {
-              const response = await fetch('https://art19.com/episodes/cd717915-4fb4-44d1-8db5-073b5276d027/next_sibling', {
+              const response = await fetch('https://art19.com/episodes/0b88d438-0b65-4c5a-b8b4-abe9ad8f14d1/next_sibling', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="e3158f52-d586-4294-88e5-149067b7abd0"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="1757f074-1d58-4eee-bc27-b460f0a50c82"'
                 }
               });
 
@@ -1704,13 +1976,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/episodes/cd717915-4fb4-44d1-8db5-073b5276d027/next_sibling');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/episodes/0b88d438-0b65-4c5a-b8b4-abe9ad8f14d1/next_sibling');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="15e539a7-200d-4186-af9b-ae5a5589821d"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="f8fd1fdf-85b0-417f-a810-48b44b6b8092"'
               ));
 
               // Execute the request and grab all status information
@@ -1738,15 +2010,18 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/episodes/cd717915-4fb4-44d1-8db5-073b5276d027/next_sibling' \
+            curl
+            'https://art19.com/episodes/0b88d438-0b65-4c5a-b8b4-abe9ad8f14d1/next_sibling'
+            \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="0d2cb355-76d5-4766-b432-62347292b244"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="f32ba1a2-db39-4aa5-ba63-6a50c10c3072"' \
               --compressed
   "/episodes/{id}/previous_sibling":
     get:
       parameters:
-        - description: The ID of the episode to find the one episode released right before it.
-          example: 25eee531-a678-4fa5-b8f9-5d782f726992
+        - description: The ID of the episode to find the one episode released right before
+            it.
+          example: 66b64b5a-6e51-41f2-af87-080d28f99e56
           in: path
           name: id
           required: true
@@ -1754,7 +2029,8 @@ paths:
             format: uuid
             type: string
         - description: >
-            If `true`, get the previously released and published episode with an available media file.
+            If `true`, get the previously released and published episode with
+            an available media file.
           in: query
           name: rss
           schema:
@@ -1789,11 +2065,11 @@ paths:
           lang: ruby
           source: >
             response = Typhoeus.get(
-              "https://art19.com/episodes/ac761332-e2a8-4eac-9c05-077cae2feb78/previous_sibling",
+              "https://art19.com/episodes/4cfdc136-627b-4852-bc88-508035ad15c9/previous_sibling",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="581441b7-5296-4cec-9c72-f5b08f4448bc"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="d52f67bf-600b-4481-b795-1c3964b34f03"'
               },
               timeout: 10
             )
@@ -1811,10 +2087,10 @@ paths:
           lang: javascript
           source: >
             try {
-              const response = await fetch('https://art19.com/episodes/ac761332-e2a8-4eac-9c05-077cae2feb78/previous_sibling', {
+              const response = await fetch('https://art19.com/episodes/4cfdc136-627b-4852-bc88-508035ad15c9/previous_sibling', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="c02ecc9a-b56d-4f68-977e-b2a46ad1c875"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="41556079-5b3a-4daf-971c-a7dc992e25de"'
                 }
               });
 
@@ -1839,13 +2115,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/episodes/ac761332-e2a8-4eac-9c05-077cae2feb78/previous_sibling');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/episodes/4cfdc136-627b-4852-bc88-508035ad15c9/previous_sibling');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="42342572-b106-45b0-baf3-9cc6346c1a9f"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="d1133ead-7b8e-439c-bf2c-93e545932bd0"'
               ));
 
               // Execute the request and grab all status information
@@ -1873,14 +2149,17 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/episodes/ac761332-e2a8-4eac-9c05-077cae2feb78/previous_sibling' \
+            curl
+            'https://art19.com/episodes/4cfdc136-627b-4852-bc88-508035ad15c9/previous_sibling'
+            \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="2c36a446-1d5b-4d94-bea2-71258d72cad8"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="5cde6b77-5f42-4216-80b4-2f1c6c537f1e"' \
               --compressed
   /images:
     get:
       description: >+
-        An image represents a piece of artwork attached to some entity like a series, season, or episode,
+        An image represents a piece of artwork attached to some entity like
+        a series, season, or episode,
 
         and is _owned_ by an entity called the `bucket`.
 
@@ -1941,7 +2220,8 @@ paths:
 
       parameters:
         - description: >
-            The list of IDs to filter by. Repeat this parameter for each ID you want to include in the filter.
+            The list of IDs to filter by. Repeat this parameter for each ID you
+            want to include in the filter.
 
             The brackets *MUST* be percent-encoded, per the requirements in
 
@@ -1971,6 +2251,65 @@ paths:
                 type: object
           description: Success
         "400":
+          content:
+            application/vnd.api+json:
+              schema:
+                properties:
+                  errors:
+                    description: >
+                      An error object describing the problem. Please check out the
+
+                      [JSON:API Error document reference](https://jsonapi.org/format/#error-objects) for a full
+
+                      description of the returned object.
+                    items:
+                      properties:
+                        code:
+                          description: An application-specific error code, expressed as a string value
+                          type: string
+                        detail:
+                          description: >
+                            A human-readable explanation specific to this occurrence of the
+                            problem. Like title, this field’s value can be
+                            localized.
+                          example: Required query parameter “series_id” is missing
+                          type: string
+                        source:
+                          description: >
+                            An object containing references to the source of the error,
+                            optionally including any of the following members.
+                          nullable: true
+                          properties:
+                            parameter:
+                              description: A string indicating which URI query parameter caused the error.
+                              example: series_id
+                              type: string
+                            pointer:
+                              description: >
+                                A JSON Pointer [RFC6901](https://tools.ietf.org/html/rfc6901) to
+                                the associated entity in the request document
+                                (e.g. `/data` for a primary data object, or
+                                `/data/attributes/title` for a specific
+                                attribute).
+                              example: /data/attributes/name
+                              type: string
+                          type: object
+                        status:
+                          description: "The HTTP status code applicable to this problem, expressed as a
+                            string value: 400"
+                          example: "400"
+                          type: string
+                        title:
+                          description: >
+                            A short, human-readable summary of the problem that SHOULD NOT
+                            change from occurrence to occurrence of the
+
+                            problem, except for purposes of localization.
+                          example: Bad Request
+                          type: string
+                      type: object
+                    type: array
+                type: object
           description: >
             Bad Request
 
@@ -1998,7 +2337,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="b322596f-271b-41ac-9bf9-350c8bc5294a"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="2bc2bafc-b293-4e2b-b592-3d3bf525b0a0"'
               },
               params: {
                 # add filters if desired
@@ -2023,7 +2362,7 @@ paths:
               const response = await fetch('https://art19.com/images?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="5e9168ff-a5da-4604-a135-27a2f0310f6c"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="9c5b1e95-e973-4523-a9f4-e65ba9e67a1c"'
                 }
               });
 
@@ -2062,7 +2401,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="c4519394-23bc-475a-bc58-7ff88e1e5019"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="86517c9d-9781-4c8b-ab95-2ceae3c326ea"'
               ));
 
               // Execute the request and grab all status information
@@ -2092,12 +2431,13 @@ paths:
           source: >
             curl 'https://art19.com/images?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="a19ee417-889b-4471-9deb-3d68210a937f"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="c70191aa-0cb7-409d-952b-cd349f1f3ef8"' \
               --compressed
   "/images/{id}":
     get:
       description: >+
-        An image represents a piece of artwork attached to some entity like a series, season, or episode,
+        An image represents a piece of artwork attached to some entity like
+        a series, season, or episode,
 
         and is _owned_ by an entity called the `bucket`.
 
@@ -2158,7 +2498,7 @@ paths:
 
       parameters:
         - description: The ID of the image resource to load.
-          example: 67279677-3a90-42fa-a2a8-362263033b94
+          example: 4fda2ee0-70c6-4693-a4ac-787ea1eec06c
           in: path
           name: id
           required: true
@@ -2195,11 +2535,11 @@ paths:
           lang: ruby
           source: >
             response = Typhoeus.get(
-              "https://art19.com/images/9a059c16-5cae-4549-bc67-5b2dd352ddfc",
+              "https://art19.com/images/93014add-6102-4d3a-9ca9-548c9fa0bf14",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="995b8de1-5798-46be-a661-3266822c18b3"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="8ea4ed88-a7ea-4134-8002-917fe7485baf"'
               },
               timeout: 10
             )
@@ -2217,10 +2557,10 @@ paths:
           lang: javascript
           source: >
             try {
-              const response = await fetch('https://art19.com/images/9a059c16-5cae-4549-bc67-5b2dd352ddfc', {
+              const response = await fetch('https://art19.com/images/93014add-6102-4d3a-9ca9-548c9fa0bf14', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="9bf30171-bbdd-47cd-8a37-db9df949c8b3"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="cc8e8f9d-ce70-4fa1-ae70-31ab1effdcf2"'
                 }
               });
 
@@ -2245,13 +2585,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/images/9a059c16-5cae-4549-bc67-5b2dd352ddfc');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/images/93014add-6102-4d3a-9ca9-548c9fa0bf14');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="81b08e51-c8ed-4f0a-8448-be9759012ad5"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="e848355d-4e58-4054-9e99-60241aade58b"'
               ));
 
               // Execute the request and grab all status information
@@ -2279,14 +2619,15 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/images/9a059c16-5cae-4549-bc67-5b2dd352ddfc' \
+            curl 'https://art19.com/images/93014add-6102-4d3a-9ca9-548c9fa0bf14' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="cd717813-77b9-4e15-bf84-2ca16e1088b4"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="a5a06090-d492-4c22-8e4b-fcc4b6431f2c"' \
               --compressed
   /media_assets:
     get:
       description: >+
-        A media asset is part of a collection of assets or files representing an image or a piece of audio content
+        A media asset is part of a collection of assets or files
+        representing an image or a piece of audio content
 
         like an episode or an ad. Images, for example, have differently sized versions for better rendering performance,
 
@@ -2361,7 +2702,8 @@ paths:
 
       parameters:
         - description: >
-            The list of IDs to filter by. Repeat this parameter for each ID you want to include in the filter.
+            The list of IDs to filter by. Repeat this parameter for each ID you
+            want to include in the filter.
 
             The brackets *MUST* be percent-encoded, per the requirements in
 
@@ -2391,6 +2733,65 @@ paths:
                 type: object
           description: Success
         "400":
+          content:
+            application/vnd.api+json:
+              schema:
+                properties:
+                  errors:
+                    description: >
+                      An error object describing the problem. Please check out the
+
+                      [JSON:API Error document reference](https://jsonapi.org/format/#error-objects) for a full
+
+                      description of the returned object.
+                    items:
+                      properties:
+                        code:
+                          description: An application-specific error code, expressed as a string value
+                          type: string
+                        detail:
+                          description: >
+                            A human-readable explanation specific to this occurrence of the
+                            problem. Like title, this field’s value can be
+                            localized.
+                          example: Required query parameter “series_id” is missing
+                          type: string
+                        source:
+                          description: >
+                            An object containing references to the source of the error,
+                            optionally including any of the following members.
+                          nullable: true
+                          properties:
+                            parameter:
+                              description: A string indicating which URI query parameter caused the error.
+                              example: series_id
+                              type: string
+                            pointer:
+                              description: >
+                                A JSON Pointer [RFC6901](https://tools.ietf.org/html/rfc6901) to
+                                the associated entity in the request document
+                                (e.g. `/data` for a primary data object, or
+                                `/data/attributes/title` for a specific
+                                attribute).
+                              example: /data/attributes/name
+                              type: string
+                          type: object
+                        status:
+                          description: "The HTTP status code applicable to this problem, expressed as a
+                            string value: 400"
+                          example: "400"
+                          type: string
+                        title:
+                          description: >
+                            A short, human-readable summary of the problem that SHOULD NOT
+                            change from occurrence to occurrence of the
+
+                            problem, except for purposes of localization.
+                          example: Bad Request
+                          type: string
+                      type: object
+                    type: array
+                type: object
           description: >
             Bad Request
 
@@ -2418,7 +2819,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="71fcf88d-ecfd-4f85-bdac-cfcc0d1dddfe"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="22938b22-25f9-4c43-8b00-3f66528b2d66"'
               },
               params: {
                 # add filters if desired
@@ -2443,7 +2844,7 @@ paths:
               const response = await fetch('https://art19.com/media_assets?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="3cfe3ab2-4a92-40a5-b3fb-a06a843b8b91"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="25bd1eea-2db9-4056-8272-bfb1af75f77e"'
                 }
               });
 
@@ -2482,7 +2883,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="76e6b1e8-200d-4455-b439-df24048c68b0"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="6f5be5e4-894e-4959-b68e-4a8d40cf6d66"'
               ));
 
               // Execute the request and grab all status information
@@ -2510,14 +2911,17 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/media_assets?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
+            curl
+            'https://art19.com/media_assets?page%5Bnumber%5D=1&page%5Bsize%5D=25'
+            \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="1740deac-0833-4277-b0df-ec6227f7a961"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="211d8f48-76bd-4559-bcf3-5c05fdc39290"' \
               --compressed
   "/media_assets/{id}":
     get:
       description: >+
-        A media asset is part of a collection of assets or files representing an image or a piece of audio content
+        A media asset is part of a collection of assets or files
+        representing an image or a piece of audio content
 
         like an episode or an ad. Images, for example, have differently sized versions for better rendering performance,
 
@@ -2592,7 +2996,7 @@ paths:
 
       parameters:
         - description: The ID of the media asset resource to load.
-          example: 17538826-df62-43d1-8862-ef50561ac187
+          example: 7bb0559a-fe12-4909-893d-baaec7b7068b
           in: path
           name: id
           required: true
@@ -2629,11 +3033,11 @@ paths:
           lang: ruby
           source: >
             response = Typhoeus.get(
-              "https://art19.com/media_assets/a0608550-aee2-4efa-9b0c-af93555a619c",
+              "https://art19.com/media_assets/cebb3ce9-d680-4ee2-aa64-7a96e45bba2d",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="0f71fbbb-f105-4219-be23-8426fe34dfe5"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="e4444d02-a287-4d00-8b68-6dc48646cc23"'
               },
               timeout: 10
             )
@@ -2651,10 +3055,10 @@ paths:
           lang: javascript
           source: >
             try {
-              const response = await fetch('https://art19.com/media_assets/a0608550-aee2-4efa-9b0c-af93555a619c', {
+              const response = await fetch('https://art19.com/media_assets/cebb3ce9-d680-4ee2-aa64-7a96e45bba2d', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="f10a0193-5ad7-4d65-9594-d9630da9b296"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="cfb939ee-3f7e-4a62-b7d6-6fb57c8d0124"'
                 }
               });
 
@@ -2679,13 +3083,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/media_assets/a0608550-aee2-4efa-9b0c-af93555a619c');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/media_assets/cebb3ce9-d680-4ee2-aa64-7a96e45bba2d');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="18640e23-4da3-4a4a-a049-cab95ec8e670"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="a0356313-650c-4c9e-b8ae-04f33328f737"'
               ));
 
               // Execute the request and grab all status information
@@ -2713,15 +3117,24 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/media_assets/a0608550-aee2-4efa-9b0c-af93555a619c' \
+            curl
+            'https://art19.com/media_assets/cebb3ce9-d680-4ee2-aa64-7a96e45bba2d'
+            \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="bf69d753-ded5-40e9-8494-f8eec574e164"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="830b18d5-6e1f-4201-844e-361927e1e633"' \
               --compressed
   /networks:
     get:
+      description: >
+        ### Deprecations
+
+
+        - The attribute `cover_image_id` has been replaced with the relationship `cover_image`
+          and will be removed from the response in a future release.
       parameters:
         - description: >
-            The list of IDs to filter by. Repeat this parameter for each ID you want to include in the filter.
+            The list of IDs to filter by. Repeat this parameter for each ID you
+            want to include in the filter.
 
             The brackets *MUST* be percent-encoded, per the requirements in
 
@@ -2737,14 +3150,15 @@ paths:
             type: array
             uniqueItems: true
         - description: >+
-            Select which page number to receive results for. Pages are numbered starting at 1.
+            Select which page number to receive results for. Pages are numbered
+            starting at 1.
 
           in: query
           name: page[number]
           schema:
             minimum: 1
             type: integer
-        - description: >+
+        - description: |+
             Indicate how many records to return per page. The maximum is 100.
 
           in: query
@@ -2753,20 +3167,23 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: Limit the result to networks with a name containing this parameter in a case-insensitive way.
+        - description: Limit the result to networks with a name containing this parameter
+            in a case-insensitive way.
           in: query
           name: q
           schema:
             type: string
         - description: >
-            Limit the result to networks containing at least one series with an ad deal of this AdOps profile.
+            Limit the result to networks containing at least one series with an
+            ad deal of this Ad Ops profile.
           in: query
           name: ad_rep_account_id
           schema:
             format: uuid
             type: string
         - description: >
-            Limit the result to networks containing at least one series with an ad deal matching one of the
+            Limit the result to networks containing at least one series with an
+            ad deal matching one of the
 
             values in this parameter.
           explode: false
@@ -2783,7 +3200,8 @@ paths:
             type: array
           style: form
         - description: >
-            Specify how to sort the result. Please refer to either the top section or the
+            Specify how to sort the result. Please refer to either the top
+            section or the
 
             [JSON:API specification](https://jsonapi.org/format/#fetching-sorting) on how sorting works in general.
           explode: false
@@ -2791,11 +3209,11 @@ paths:
           name: sort
           schema:
             default: name
-            enum:
-              - created_at
-              - name
-              - updated_at
             items:
+              enum:
+                - created_at
+                - name
+                - updated_at
               type: string
             type: array
           style: form
@@ -2814,6 +3232,65 @@ paths:
                 type: object
           description: Success
         "400":
+          content:
+            application/vnd.api+json:
+              schema:
+                properties:
+                  errors:
+                    description: >
+                      An error object describing the problem. Please check out the
+
+                      [JSON:API Error document reference](https://jsonapi.org/format/#error-objects) for a full
+
+                      description of the returned object.
+                    items:
+                      properties:
+                        code:
+                          description: An application-specific error code, expressed as a string value
+                          type: string
+                        detail:
+                          description: >
+                            A human-readable explanation specific to this occurrence of the
+                            problem. Like title, this field’s value can be
+                            localized.
+                          example: Required query parameter “series_id” is missing
+                          type: string
+                        source:
+                          description: >
+                            An object containing references to the source of the error,
+                            optionally including any of the following members.
+                          nullable: true
+                          properties:
+                            parameter:
+                              description: A string indicating which URI query parameter caused the error.
+                              example: series_id
+                              type: string
+                            pointer:
+                              description: >
+                                A JSON Pointer [RFC6901](https://tools.ietf.org/html/rfc6901) to
+                                the associated entity in the request document
+                                (e.g. `/data` for a primary data object, or
+                                `/data/attributes/title` for a specific
+                                attribute).
+                              example: /data/attributes/name
+                              type: string
+                          type: object
+                        status:
+                          description: "The HTTP status code applicable to this problem, expressed as a
+                            string value: 400"
+                          example: "400"
+                          type: string
+                        title:
+                          description: >
+                            A short, human-readable summary of the problem that SHOULD NOT
+                            change from occurrence to occurrence of the
+
+                            problem, except for purposes of localization.
+                          example: Bad Request
+                          type: string
+                      type: object
+                    type: array
+                type: object
           description: >
             Bad Request
 
@@ -2841,7 +3318,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="01be268a-bd87-486c-a422-d4e6227c734e"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="bba8449d-49c6-40bc-8971-771b7555efed"'
               },
               params: {
                 # add filters if desired
@@ -2866,7 +3343,7 @@ paths:
               const response = await fetch('https://art19.com/networks?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="f2fd7599-bb70-454e-8e49-50d5f0270bc4"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="4d974200-a449-498b-a6ec-dbe8d649f719"'
                 }
               });
 
@@ -2905,7 +3382,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="e3d96cfd-3856-4b28-a75c-b76bc8907e18"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="071b7404-dc0e-45dc-ba4f-0a6899162d0a"'
               ));
 
               // Execute the request and grab all status information
@@ -2935,13 +3412,19 @@ paths:
           source: >
             curl 'https://art19.com/networks?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="6a62f589-a14c-4b4c-a811-bdec64d6baa4"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="6a4251a5-ce86-4283-b4ac-3cffcefab7f0"' \
               --compressed
   "/networks/{id}":
     get:
+      description: >
+        ### Deprecations
+
+
+        - The attribute `cover_image_id` has been replaced with the relationship `cover_image`
+          and will be removed from the response in a future release.
       parameters:
         - description: The ID of the network resource to load.
-          example: d65f22ed-dba6-4280-a1be-2035b9ce37fb
+          example: ff702d30-364e-43c6-89bc-c3827f783153
           in: path
           name: id
           required: true
@@ -2978,11 +3461,11 @@ paths:
           lang: ruby
           source: >
             response = Typhoeus.get(
-              "https://art19.com/networks/a48d0e62-c4d5-4223-83ab-dcc55fbb0fe0",
+              "https://art19.com/networks/781c31b8-e822-41f4-a492-47bf0ef3e8f3",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="71b880ab-0706-49cf-95f6-a948de7357db"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="987ded10-b8f5-479d-af64-221ce5a2e148"'
               },
               timeout: 10
             )
@@ -3000,10 +3483,10 @@ paths:
           lang: javascript
           source: >
             try {
-              const response = await fetch('https://art19.com/networks/a48d0e62-c4d5-4223-83ab-dcc55fbb0fe0', {
+              const response = await fetch('https://art19.com/networks/781c31b8-e822-41f4-a492-47bf0ef3e8f3', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="7dba2ab3-5e8c-41b8-a3dd-122b97eb286b"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="4f91f6c9-83a7-4727-8729-660939c3bf77"'
                 }
               });
 
@@ -3028,13 +3511,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/networks/a48d0e62-c4d5-4223-83ab-dcc55fbb0fe0');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/networks/781c31b8-e822-41f4-a492-47bf0ef3e8f3');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="7d094ac8-56e9-4e54-b4ff-62d14e29d06e"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="c0060152-e653-470a-a65e-2c689e1211a9"'
               ));
 
               // Execute the request and grab all status information
@@ -3062,21 +3545,23 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/networks/a48d0e62-c4d5-4223-83ab-dcc55fbb0fe0' \
+            curl 'https://art19.com/networks/781c31b8-e822-41f4-a492-47bf0ef3e8f3' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="c27bc9cc-692b-4437-916b-2cadefb30e8f"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="90f3de22-4bba-4b6b-920a-ad3192267187"' \
               --compressed
   /people:
     get:
       description: >
-        Each series, season, and episode has a Credits section where you may add people and roles.
+        Each series, season, and episode has a Credits section where you
+        may add people and roles.
 
         This is an internal tool to recognize contributors. It is not related to ART19 users or account permissions.
 
         Each Person added will have no additional access or permissions granted as a result of being included in the Credits section.
       parameters:
         - description: >
-            The list of IDs to filter by. Repeat this parameter for each ID you want to include in the filter.
+            The list of IDs to filter by. Repeat this parameter for each ID you
+            want to include in the filter.
 
             The brackets *MUST* be percent-encoded, per the requirements in
 
@@ -3092,14 +3577,15 @@ paths:
             type: array
             uniqueItems: true
         - description: >+
-            Select which page number to receive results for. Pages are numbered starting at 1.
+            Select which page number to receive results for. Pages are numbered
+            starting at 1.
 
           in: query
           name: page[number]
           schema:
             minimum: 1
             type: integer
-        - description: >+
+        - description: |+
             Indicate how many records to return per page. The maximum is 100.
 
           in: query
@@ -3108,13 +3594,15 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: Limit the result to people with a full name containing this parameter in a case-insensitive way.
+        - description: Limit the result to people with a full name containing this
+            parameter in a case-insensitive way.
           in: query
           name: q
           schema:
             type: string
         - description: >
-            Specify how to sort the result. Please refer to either the top section or the
+            Specify how to sort the result. Please refer to either the top
+            section or the
 
             [JSON:API specification](https://jsonapi.org/format/#fetching-sorting) on how sorting works in general.
           explode: false
@@ -3122,12 +3610,12 @@ paths:
           name: sort
           schema:
             default: last_name,first_name
-            enum:
-              - created_at
-              - first_name
-              - last_name
-              - updated_at
             items:
+              enum:
+                - created_at
+                - first_name
+                - last_name
+                - updated_at
               type: string
             type: array
           style: form
@@ -3146,6 +3634,65 @@ paths:
                 type: object
           description: Success
         "400":
+          content:
+            application/vnd.api+json:
+              schema:
+                properties:
+                  errors:
+                    description: >
+                      An error object describing the problem. Please check out the
+
+                      [JSON:API Error document reference](https://jsonapi.org/format/#error-objects) for a full
+
+                      description of the returned object.
+                    items:
+                      properties:
+                        code:
+                          description: An application-specific error code, expressed as a string value
+                          type: string
+                        detail:
+                          description: >
+                            A human-readable explanation specific to this occurrence of the
+                            problem. Like title, this field’s value can be
+                            localized.
+                          example: Required query parameter “series_id” is missing
+                          type: string
+                        source:
+                          description: >
+                            An object containing references to the source of the error,
+                            optionally including any of the following members.
+                          nullable: true
+                          properties:
+                            parameter:
+                              description: A string indicating which URI query parameter caused the error.
+                              example: series_id
+                              type: string
+                            pointer:
+                              description: >
+                                A JSON Pointer [RFC6901](https://tools.ietf.org/html/rfc6901) to
+                                the associated entity in the request document
+                                (e.g. `/data` for a primary data object, or
+                                `/data/attributes/title` for a specific
+                                attribute).
+                              example: /data/attributes/name
+                              type: string
+                          type: object
+                        status:
+                          description: "The HTTP status code applicable to this problem, expressed as a
+                            string value: 400"
+                          example: "400"
+                          type: string
+                        title:
+                          description: >
+                            A short, human-readable summary of the problem that SHOULD NOT
+                            change from occurrence to occurrence of the
+
+                            problem, except for purposes of localization.
+                          example: Bad Request
+                          type: string
+                      type: object
+                    type: array
+                type: object
           description: >
             Bad Request
 
@@ -3173,7 +3720,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="84af321a-f49d-4d50-be2b-1f1e4e299742"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="f7a17037-e089-407c-a3dc-4b170414c903"'
               },
               params: {
                 # add filters if desired
@@ -3198,7 +3745,7 @@ paths:
               const response = await fetch('https://art19.com/people?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="272e4acd-7954-4c3c-9d74-ed2d2c43b9cc"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="594e22cd-c595-4fd2-9965-cc6be99408a6"'
                 }
               });
 
@@ -3237,7 +3784,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="0065361c-c34b-4c94-bdf5-d7d6c7ee3829"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="2ff85b46-f604-4b74-9625-b2ba707accc5"'
               ));
 
               // Execute the request and grab all status information
@@ -3267,19 +3814,20 @@ paths:
           source: >
             curl 'https://art19.com/people?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="1bffd638-37f3-4fd7-81f8-2b9433ea2920"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="d946aab3-018f-477c-b1e4-6e2708471777"' \
               --compressed
   "/people/{id}":
     get:
       description: >
-        Each series, season, and episode has a Credits section where you may add people and roles.
+        Each series, season, and episode has a Credits section where you
+        may add people and roles.
 
         This is an internal tool to recognize contributors. It is not related to ART19 users or account permissions.
 
         Each Person added will have no additional access or permissions granted as a result of being included in the Credits section.
       parameters:
         - description: The ID of the person resource to load.
-          example: 2b833e97-74f8-487a-8141-e83d2f6820f7
+          example: 267ae3eb-7d08-4974-9ed5-0395e2abbe26
           in: path
           name: id
           required: true
@@ -3316,11 +3864,11 @@ paths:
           lang: ruby
           source: >
             response = Typhoeus.get(
-              "https://art19.com/people/e65420d8-d337-4f30-81a0-5ab5d624e13d",
+              "https://art19.com/people/24405ff9-dbd2-41c0-aa4b-7b488713cdd2",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="e78bd666-c0c4-4327-9ad3-eaa2a01c5888"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="0d18cf53-61ef-4bec-96dc-cb488d83273c"'
               },
               timeout: 10
             )
@@ -3338,10 +3886,10 @@ paths:
           lang: javascript
           source: >
             try {
-              const response = await fetch('https://art19.com/people/e65420d8-d337-4f30-81a0-5ab5d624e13d', {
+              const response = await fetch('https://art19.com/people/24405ff9-dbd2-41c0-aa4b-7b488713cdd2', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="67ff16a9-542a-477f-ba3b-35eaef7cdd6f"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="6fd1181a-7198-48d9-9252-f4a73db5e131"'
                 }
               });
 
@@ -3366,13 +3914,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/people/e65420d8-d337-4f30-81a0-5ab5d624e13d');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/people/24405ff9-dbd2-41c0-aa4b-7b488713cdd2');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="af468ef7-f6db-4543-8ac8-9af966589b06"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="e03bcc9c-2376-4444-9f87-4d8464a230cd"'
               ));
 
               // Execute the request and grab all status information
@@ -3400,21 +3948,23 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/people/e65420d8-d337-4f30-81a0-5ab5d624e13d' \
+            curl 'https://art19.com/people/24405ff9-dbd2-41c0-aa4b-7b488713cdd2' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="f518ade8-fd7d-432a-aace-d198f2e49275"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="176ad731-bb4e-4029-91f4-16341783fb85"' \
               --compressed
   /seasons:
     get:
       description: >
-        When retrieving a list of seasons, the result is automatically filtered depending on the
+        When retrieving a list of seasons, the result is automatically
+        filtered depending on the
 
         privileges the used credential holds. If there are no specific privileges to a series or network,
 
         only active seasons for active series are included.
       parameters:
         - description: >
-            The list of IDs to filter by. Repeat this parameter for each ID you want to include in the filter.
+            The list of IDs to filter by. Repeat this parameter for each ID you
+            want to include in the filter.
 
             The brackets *MUST* be percent-encoded, per the requirements in
 
@@ -3430,14 +3980,15 @@ paths:
             type: array
             uniqueItems: true
         - description: >+
-            Select which page number to receive results for. Pages are numbered starting at 1.
+            Select which page number to receive results for. Pages are numbered
+            starting at 1.
 
           in: query
           name: page[number]
           schema:
             minimum: 1
             type: integer
-        - description: >+
+        - description: |+
             Indicate how many records to return per page. The maximum is 100.
 
           in: query
@@ -3453,13 +4004,15 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Limit the result to seasons with a title containing this parameter in a case-insensitive way.
+        - description: Limit the result to seasons with a title containing this parameter
+            in a case-insensitive way.
           in: query
           name: q
           schema:
             type: string
         - description: >
-            Specify how to sort the result. Please refer to either the top section or the
+            Specify how to sort the result. Please refer to either the top
+            section or the
 
             [JSON:API specification](https://jsonapi.org/format/#fetching-sorting) on how sorting works in general.
           explode: false
@@ -3467,12 +4020,12 @@ paths:
           name: sort
           schema:
             default: sort_title
-            enum:
-              - created_at
-              - sort_title
-              - title
-              - updated_at
             items:
+              enum:
+                - created_at
+                - sort_title
+                - title
+                - updated_at
               type: string
             type: array
           style: form
@@ -3491,6 +4044,65 @@ paths:
                 type: object
           description: Success
         "400":
+          content:
+            application/vnd.api+json:
+              schema:
+                properties:
+                  errors:
+                    description: >
+                      An error object describing the problem. Please check out the
+
+                      [JSON:API Error document reference](https://jsonapi.org/format/#error-objects) for a full
+
+                      description of the returned object.
+                    items:
+                      properties:
+                        code:
+                          description: An application-specific error code, expressed as a string value
+                          type: string
+                        detail:
+                          description: >
+                            A human-readable explanation specific to this occurrence of the
+                            problem. Like title, this field’s value can be
+                            localized.
+                          example: Required query parameter “series_id” is missing
+                          type: string
+                        source:
+                          description: >
+                            An object containing references to the source of the error,
+                            optionally including any of the following members.
+                          nullable: true
+                          properties:
+                            parameter:
+                              description: A string indicating which URI query parameter caused the error.
+                              example: series_id
+                              type: string
+                            pointer:
+                              description: >
+                                A JSON Pointer [RFC6901](https://tools.ietf.org/html/rfc6901) to
+                                the associated entity in the request document
+                                (e.g. `/data` for a primary data object, or
+                                `/data/attributes/title` for a specific
+                                attribute).
+                              example: /data/attributes/name
+                              type: string
+                          type: object
+                        status:
+                          description: "The HTTP status code applicable to this problem, expressed as a
+                            string value: 400"
+                          example: "400"
+                          type: string
+                        title:
+                          description: >
+                            A short, human-readable summary of the problem that SHOULD NOT
+                            change from occurrence to occurrence of the
+
+                            problem, except for purposes of localization.
+                          example: Bad Request
+                          type: string
+                      type: object
+                    type: array
+                type: object
           description: >
             Bad Request
 
@@ -3518,7 +4130,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="7c1a5621-20ce-4987-b479-7daaab7daf77"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="224fcee3-ae46-4573-9060-4a1890442b71"'
               },
               params: {
                 # add filters if desired
@@ -3543,7 +4155,7 @@ paths:
               const response = await fetch('https://art19.com/seasons?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="8ac4212f-312a-4b94-8197-f866e241674e"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="6b7e018c-af01-4c0d-b7d7-aefbff23f837"'
                 }
               });
 
@@ -3582,7 +4194,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="2a78defa-f5ba-4384-891a-cb66c9d31935"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="5de0d3f4-3c7d-4251-bb32-7ee85d21766f"'
               ));
 
               // Execute the request and grab all status information
@@ -3612,13 +4224,13 @@ paths:
           source: >
             curl 'https://art19.com/seasons?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="3084bea6-221d-416d-9c0c-409354ad589f"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="d27cbc22-8da2-46d3-b059-20918459a45a"' \
               --compressed
   "/seasons/{id}":
     get:
       parameters:
         - description: The ID of the season resource to load.
-          example: 8df27f8c-9db3-4027-a8f9-8830a1492d97
+          example: e9f133d9-97f2-4032-8827-2a6d259be364
           in: path
           name: id
           required: true
@@ -3655,11 +4267,11 @@ paths:
           lang: ruby
           source: >
             response = Typhoeus.get(
-              "https://art19.com/seasons/cf5d14eb-1340-420f-99d4-e3c75eae1370",
+              "https://art19.com/seasons/986f1b45-6434-40bc-adfa-0469ec75039a",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="3069f865-09e2-4f83-bd2c-21f5508ef05d"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="340e3a62-0922-4de1-af47-577e7a350d23"'
               },
               timeout: 10
             )
@@ -3677,10 +4289,10 @@ paths:
           lang: javascript
           source: >
             try {
-              const response = await fetch('https://art19.com/seasons/cf5d14eb-1340-420f-99d4-e3c75eae1370', {
+              const response = await fetch('https://art19.com/seasons/986f1b45-6434-40bc-adfa-0469ec75039a', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="a5ac6bf5-a4d8-4594-99b3-c0a7c57bb846"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="200e3f32-3709-4de2-b0de-17c8b6c16d33"'
                 }
               });
 
@@ -3705,13 +4317,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/seasons/cf5d14eb-1340-420f-99d4-e3c75eae1370');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/seasons/986f1b45-6434-40bc-adfa-0469ec75039a');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="f9228eaf-caa7-4236-be53-27fbdadd500f"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="6e48e32e-080a-4d51-829e-e768441eaebd"'
               ));
 
               // Execute the request and grab all status information
@@ -3739,14 +4351,15 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/seasons/cf5d14eb-1340-420f-99d4-e3c75eae1370' \
+            curl 'https://art19.com/seasons/986f1b45-6434-40bc-adfa-0469ec75039a' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="0863f18a-0a39-4e37-b3e2-bb5b4afb5919"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="06cde72c-b775-44c5-ab06-256ee944254f"' \
               --compressed
   /series:
     get:
       description: >
-        When retrieving a list of series, the result is automatically filtered depending on the
+        When retrieving a list of series, the result is automatically
+        filtered depending on the
 
         privileges the used credential holds. All credentials will have access to active series
 
@@ -3755,7 +4368,8 @@ paths:
         associated with your account is recommended.
       parameters:
         - description: >
-            The list of IDs to filter by. Repeat this parameter for each ID you want to include in the filter.
+            The list of IDs to filter by. Repeat this parameter for each ID you
+            want to include in the filter.
 
             The brackets *MUST* be percent-encoded, per the requirements in
 
@@ -3771,14 +4385,15 @@ paths:
             type: array
             uniqueItems: true
         - description: >+
-            Select which page number to receive results for. Pages are numbered starting at 1.
+            Select which page number to receive results for. Pages are numbered
+            starting at 1.
 
           in: query
           name: page[number]
           schema:
             minimum: 1
             type: integer
-        - description: >+
+        - description: |+
             Indicate how many records to return per page. The maximum is 100.
 
           in: query
@@ -3787,8 +4402,8 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: >
-            Limit the result to series with an ad deal of this AdOps profile.
+        - description: |
+            Limit the result to series with an ad deal of this Ad Ops profile.
           example: 35eb02fc-54db-4650-98e0-4695b101b71d
           in: query
           name: ad_rep_account_id
@@ -3802,13 +4417,15 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Limit the result to series with a title or slug containing this parameter in a case-insensitive way.
+        - description: Limit the result to series with a title or slug containing this
+            parameter in a case-insensitive way.
           in: query
           name: q
           schema:
             type: string
         - description: >
-            Specify how to sort the result. Please refer to either the top section or the
+            Specify how to sort the result. Please refer to either the top
+            section or the
 
             [JSON:API specification](https://jsonapi.org/format/#fetching-sorting) on how sorting works in general.
           explode: false
@@ -3816,13 +4433,13 @@ paths:
           name: sort
           schema:
             default: sort_title
-            enum:
-              - created_at
-              - episode_released_at
-              - sort_title
-              - title
-              - updated_at
             items:
+              enum:
+                - created_at
+                - episode_released_at
+                - sort_title
+                - title
+                - updated_at
               type: string
             type: array
           style: form
@@ -3841,6 +4458,65 @@ paths:
                 type: object
           description: Success
         "400":
+          content:
+            application/vnd.api+json:
+              schema:
+                properties:
+                  errors:
+                    description: >
+                      An error object describing the problem. Please check out the
+
+                      [JSON:API Error document reference](https://jsonapi.org/format/#error-objects) for a full
+
+                      description of the returned object.
+                    items:
+                      properties:
+                        code:
+                          description: An application-specific error code, expressed as a string value
+                          type: string
+                        detail:
+                          description: >
+                            A human-readable explanation specific to this occurrence of the
+                            problem. Like title, this field’s value can be
+                            localized.
+                          example: Required query parameter “series_id” is missing
+                          type: string
+                        source:
+                          description: >
+                            An object containing references to the source of the error,
+                            optionally including any of the following members.
+                          nullable: true
+                          properties:
+                            parameter:
+                              description: A string indicating which URI query parameter caused the error.
+                              example: series_id
+                              type: string
+                            pointer:
+                              description: >
+                                A JSON Pointer [RFC6901](https://tools.ietf.org/html/rfc6901) to
+                                the associated entity in the request document
+                                (e.g. `/data` for a primary data object, or
+                                `/data/attributes/title` for a specific
+                                attribute).
+                              example: /data/attributes/name
+                              type: string
+                          type: object
+                        status:
+                          description: "The HTTP status code applicable to this problem, expressed as a
+                            string value: 400"
+                          example: "400"
+                          type: string
+                        title:
+                          description: >
+                            A short, human-readable summary of the problem that SHOULD NOT
+                            change from occurrence to occurrence of the
+
+                            problem, except for purposes of localization.
+                          example: Bad Request
+                          type: string
+                      type: object
+                    type: array
+                type: object
           description: >
             Bad Request
 
@@ -3868,7 +4544,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="2c59306b-5d65-42d2-9a91-be120b58a2a8"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="586f4eef-4928-4ea6-a6e3-15960c594207"'
               },
               params: {
                 # add filters if desired
@@ -3893,7 +4569,7 @@ paths:
               const response = await fetch('https://art19.com/series?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="7d1ddd51-6dbe-4728-afa6-77d2be4712cd"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="5eabbc90-8a12-4cc1-981d-e9ea5acb1539"'
                 }
               });
 
@@ -3932,7 +4608,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="83c83df7-7687-4faa-9c8a-f61e72cce67f"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="f2f0407e-dce3-47b8-868e-864b2e19ee67"'
               ));
 
               // Execute the request and grab all status information
@@ -3962,13 +4638,13 @@ paths:
           source: >
             curl 'https://art19.com/series?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="0059c19d-7f68-4509-b141-e1dd1e38edce"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="ab95b887-15b8-45f3-948e-859e410c9e14"' \
               --compressed
   "/series/{id}":
     get:
       parameters:
         - description: The ID of the series resource to load.
-          example: 016c9110-941b-4bd2-ad07-e2b8c555f673
+          example: 4856e22a-715a-4769-a948-067d93e5f22a
           in: path
           name: id
           required: true
@@ -4005,11 +4681,11 @@ paths:
           lang: ruby
           source: >
             response = Typhoeus.get(
-              "https://art19.com/series/061390ad-d372-482a-bdb0-40bce4a44da0",
+              "https://art19.com/series/e936d99b-781e-4eb8-beb7-da5c04960774",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="eb5fed32-c6d5-447b-a6a4-44a2af999efe"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="36d16d31-0852-4aed-9bed-39ee6e448fb4"'
               },
               timeout: 10
             )
@@ -4027,10 +4703,10 @@ paths:
           lang: javascript
           source: >
             try {
-              const response = await fetch('https://art19.com/series/061390ad-d372-482a-bdb0-40bce4a44da0', {
+              const response = await fetch('https://art19.com/series/e936d99b-781e-4eb8-beb7-da5c04960774', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="45fe424a-266b-4888-a4e0-22091a1a682a"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="cc0e38f3-208a-426d-bc81-47276090c3d9"'
                 }
               });
 
@@ -4055,13 +4731,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/series/061390ad-d372-482a-bdb0-40bce4a44da0');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/series/e936d99b-781e-4eb8-beb7-da5c04960774');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="1d73d273-34ed-4dab-9bfc-05744a430052"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="66b15f40-d8c8-4387-b0e2-f1d5b441c7d7"'
               ));
 
               // Execute the request and grab all status information
@@ -4089,9 +4765,9 @@ paths:
         - label: cURL
           lang: shell
           source: >
-            curl 'https://art19.com/series/061390ad-d372-482a-bdb0-40bce4a44da0' \
+            curl 'https://art19.com/series/e936d99b-781e-4eb8-beb7-da5c04960774' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="6d2cf7df-7391-46b5-b352-94aedfdd21ef"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="9e730ade-04a7-4a60-a6f1-a5ce8418acad"' \
               --compressed
 components:
   responses:
@@ -4130,19 +4806,17 @@ components:
           schema:
             type: integer
     unauthorized:
-      description: >
+      description: |
         Unauthorized
 
-
         A valid credential was not supplied, but one is required.
-
         [See RFC 7235 § 3.1](https://tools.ietf.org/html/rfc7235#section-3.1).
-
         A `WWW-Authenticate` header is not currently returned.
   schemas:
     Classification:
       description: >
-        A classification, in general, is something that can describe other resources, such as countries, genres or
+        A classification, in general, is something that can describe other
+        resources, such as countries, genres or
 
         languages. How they're described (included or excluded, and whether they're the primary classification
 
@@ -4167,26 +4841,29 @@ components:
             parent_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `parent` in a future update.<br/>
+                This will be replaced by the relationship `parent` in a future
+                update.<br/>
 
                 For hierarchical classifications, this is the ID of the parent classification
               format: uuid
               type: string
             tree_path:
               description: >
-                For hierarchical classifications this is the list of IDs reflecting the hierarchy starting
+                For hierarchical classifications this is the list of IDs reflecting
+                the hierarchy starting
 
                 with the root level node.
               example:
-                - ce5dbc7e-012c-4f7a-a709-4c1ed6c3aef9
-                - a2bd7d86-6678-4c08-8fd3-52f7adfcb19f
+                - 1d142c2e-9562-40ef-8304-9c69540ae60f
+                - 17903d19-b84b-4870-88ba-bfc08f347644
               items:
                 format: uuid
                 type: string
               type: array
             type:
               description: >
-                The type of classification. The type of retrievable classifications depends on the privileges
+                The type of classification. The type of retrievable classifications
+                depends on the privileges
 
                 of the credential being used.
               enum:
@@ -4202,11 +4879,13 @@ components:
               type: string
             value:
               description: >
-                The value the classification represents. The meaning of this attribute depends on the type of classification.
+                The value the classification represents. The meaning of this
+                attribute depends on the type of classification.
               type: string
             value_path:
               description: >
-                For hierarchical classifications this is a concatenated string of all the classification
+                For hierarchical classifications this is a concatenated string of
+                all the classification
 
                 values from the root to this classification using a `: ` as separator.
               example: "Comedy: Standup"
@@ -4223,14 +4902,16 @@ components:
       type: object
     ClassificationInclusion:
       description: >
-        Connects a Classification with a classified item like a Series, Season or Episode.
+        Connects a Classification with a classified item like a Series,
+        Season or Episode.
       properties:
         attributes:
           properties:
             classification_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `classification` in a future update.<br/>
+                This will be replaced by the relationship `classification` in a
+                future update.<br/>
 
                 The ID of the classification linked to the entity
               example: 497aad13-1c96-41d8-80e2-9a5aa7bc96fa
@@ -4238,7 +4919,8 @@ components:
               type: string
             classification_type:
               deprecated: true
-              description: This will be replaced by the relationship `classification` in a future update.<br/>
+              description: This will be replaced by the relationship `classification` in a
+                future update.<br/>
               enum:
                 - AlternateFeedType
                 - Genre
@@ -4249,7 +4931,8 @@ components:
             classified_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `classified` in a future update.<br/>
+                This will be replaced by the relationship `classified` in a future
+                update.<br/>
 
                 The ID of the entity linked to the classification
               example: 8e9dc5d8-8a16-424e-ba96-6a7261a9a23b
@@ -4257,7 +4940,8 @@ components:
               type: string
             classified_type:
               deprecated: true
-              description: This will be replaced by the relationship `classified` in a future update.<br/>
+              description: This will be replaced by the relationship `classified` in a future
+                update.<br/>
               enum:
                 - Series
                 - Season
@@ -4267,11 +4951,13 @@ components:
               format: date-time
               type: string
             position:
-              description: The position or order of the linked classification within the classified resource
+              description: The position or order of the linked classification within the
+                classified resource
               type: integer
             primary:
               description: >
-                When `true` it describes the best classification of a specific type for a given
+                When `true` it describes the best classification of a specific type
+                for a given
 
                 classified item
               type: boolean
@@ -4298,7 +4984,8 @@ components:
       type: object
     Credit:
       description: >
-        A credit links a specific person to a series, season, or episode in a specific role.
+        A credit links a specific person to a series, season, or episode in
+        a specific role.
       properties:
         attributes:
           properties:
@@ -4308,7 +4995,8 @@ components:
             creditable_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `creditable` in a future update.<br/>
+                This will be replaced by the relationship `creditable` in a future
+                update.<br/>
 
                 The ID of the entity this credit is for
               example: c71c6734-ab34-4464-ae03-d7f677e3b658
@@ -4317,7 +5005,8 @@ components:
             creditable_type:
               deprecated: true
               description: >
-                This will be replaced by the relationship `creditable` in a future update.<br/>
+                This will be replaced by the relationship `creditable` in a future
+                update.<br/>
 
                 The type of entitiy this credit is for
               enum:
@@ -4326,7 +5015,8 @@ components:
                 - Episode
               type: string
             position:
-              description: The order of this credit within all credits of the referenced creditable entity
+              description: The order of this credit within all credits of the referenced
+                creditable entity
               type: integer
             type:
               description: The type of credit the linked person has on the referenced entity
@@ -4387,7 +5077,8 @@ components:
             cascaded_cover_image_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `cascaded_cover_image` in a future update.<br/>
+                This will be replaced by the relationship `cascaded_cover_image` in
+                a future update.<br/>
 
                 The image ID of the cover art for this episode. This is the preferred image ID to use.
 
@@ -4402,7 +5093,8 @@ components:
             cover_image_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `cover_image` in a future update.<br/>
+                This will be replaced by the relationship `cover_image` in a future
+                update.<br/>
 
                 The image ID of the cover art for this episode, if an episode-specific image has been provided.
 
@@ -4422,13 +5114,15 @@ components:
               type: boolean
             description_plain:
               description: >
-                The description with all HTML markup removed. If the description does not contain markup,
+                The description with all HTML markup removed. If the description
+                does not contain markup,
 
                 this is identitcal to `description`.
               example: Some funny example.
               type: string
             file_name:
-              description: The file name, without extension, to present users when downloading the episode
+              description: The file name, without extension, to present users when downloading
+                the episode
               type: string
             itunes_type:
               description: The type of the episode according to Apple's type categorization
@@ -4453,19 +5147,22 @@ components:
               type: string
             published:
               description: >
-                If true, the episode will be available for download and included in the feed as soon as its
+                If true, the episode will be available for download and included in
+                the feed as soon as its
 
                 release time is reached. Aside from that, it also needs to have valid media file associated.
               type: boolean
             release_immediately:
               description: >
-                If true, the episode's release time is set in a way it is considered released right away.
+                If true, the episode's release time is set in a way it is
+                considered released right away.
 
                 Only visible if the credential has write privileges on the series.
               type: boolean
             released_at:
               description: >
-                The date & time when an episode shall be released. It will be available for download and
+                The date & time when an episode shall be released. It will be
+                available for download and
 
                 included in the feed, if this time is reached and `published` is set to `true` and the episode
 
@@ -4474,7 +5171,8 @@ components:
               type: string
             rss_guid:
               description: >
-                A globally unique identifier describing the episode. This ID is commonly used by podcast applications
+                A globally unique identifier describing the episode. This ID is
+                commonly used by podcast applications
 
                 to determine whether an episode has already been downloaded or not.
               type: string
@@ -4491,16 +5189,16 @@ components:
               type: string
             series_id:
               deprecated: true
-              description: >
+              description: |
                 Use the relationship `series` instead.<br />
-
                 The ID of the series an episode belongs to.
               example: 9897f8cb-ffa7-4674-9529-c6037826c738
               format: uuid
               type: string
             sort_title:
               description: >
-                The title of the episode modified for sorting. This converts all characters to
+                The title of the episode modified for sorting. This converts all
+                characters to
 
                 lower case, removes an eventually leading `The` as well as leading and trailling whitespace characters.
               example: big hit
@@ -4525,6 +5223,19 @@ components:
           type: string
         relationships:
           properties:
+            cascaded_cover_image:
+              description: >
+                The cover art for this episode. This is the preferred image to use.
+
+                If there is no specific cover image for the episode, the cover of the season or the
+
+                series will be returned, whichever has one defined.
+
+                The `/images` endpoint provides details to the image.
+              properties:
+                data:
+                  $ref: "#/components/schemas/ResourceIdentifier"
+              type: object
             classification_inclusions:
               properties:
                 data:
@@ -4532,6 +5243,16 @@ components:
                     $ref: "#/components/schemas/ResourceIdentifier"
                   type: array
               title: A list of classifications associated with the episode
+              type: object
+            cover_image:
+              description: >
+                The cover art for this episode, if an episode-specific image has
+                been provided.
+
+                The `/images` endpoint provideds details to the image.
+              properties:
+                data:
+                  $ref: "#/components/schemas/ResourceIdentifier"
               type: object
             credits:
               properties:
@@ -4589,7 +5310,7 @@ components:
               title: The series an episode belongs to
               type: object
             taggings:
-              description: "`DEPRECATED`"
+              deprecated: true
               properties:
                 data:
                   items:
@@ -4598,6 +5319,7 @@ components:
               title: A list of associations linking tags to the episodes.
               type: object
             tags:
+              deprecated: true
               properties:
                 data:
                   items:
@@ -4618,7 +5340,8 @@ components:
             bucket_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `bucket` in a future update.<br/>
+                This will be replaced by the relationship `bucket` in a future
+                update.<br/>
 
                 The ID of the owning entity
               example: 687282a1-faf7-4d37-8f4a-cbddedf6db8f
@@ -4627,7 +5350,8 @@ components:
             bucket_type:
               deprecated: true
               description: >
-                This will be replaced by the relationship `bucket` in a future update.<br/>
+                This will be replaced by the relationship `bucket` in a future
+                update.<br/>
 
                 The type of the owning entity
               enum:
@@ -4666,7 +5390,8 @@ components:
               type: object
             status:
               description: >
-                The current value of the image state machine. It starts with `uploaded` and
+                The current value of the image state machine. It starts with
+                `uploaded` and
 
                 transitions to `processing` once a worker has picked it up. If all variations and
 
@@ -4706,16 +5431,20 @@ components:
     Links:
       properties:
         first:
-          description: A URL to retrieve the first page of data keeping the provided page size
+          description: A URL to retrieve the first page of data keeping the provided page
+            size
           type: string
         last:
-          description: A URL to retrieve the last page of data keeping the provided page size
+          description: A URL to retrieve the last page of data keeping the provided page
+            size
           type: string
         next:
-          description: A URL to retrieve the next page of data keeping the provided page size
+          description: A URL to retrieve the next page of data keeping the provided page
+            size
           type: string
         prev:
-          description: A URL to retrieve the previous page of keeping using the provided page size
+          description: A URL to retrieve the previous page of keeping using the provided
+            page size
           type: string
         self:
           description: A URL to retrieve the collection as the primary data
@@ -4728,7 +5457,8 @@ components:
             attachment_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `attachment` in a future update.<br/>
+                This will be replaced by the relationship `attachment` in a future
+                update.<br/>
 
                 The ID of the entity this media asset is attached to
               example: 09a93847-d5bf-47b4-90d6-854e95011951
@@ -4737,7 +5467,8 @@ components:
             attachment_type:
               deprecated: true
               description: >
-                This will be replaced by the relationship `attachment` in a future update.<br/>
+                This will be replaced by the relationship `attachment` in a future
+                update.<br/>
 
                 The type of the entity this media asset is attached to
               enum:
@@ -4756,7 +5487,7 @@ components:
               format: date-time
               type: string
             file_name:
-              description: >
+              description: |
                 The filename of the media asset without any path components.
               type: string
             file_size:
@@ -4764,16 +5495,19 @@ components:
               example: 2544307
               type: integer
             size_height:
-              description: The height in pixels of the media asset, if the media asset is an image
+              description: The height in pixels of the media asset, if the media asset is an
+                image
               example: 1839
               type: integer
             size_width:
-              description: The width in pixels of the media asset, if the media asset is an image
+              description: The width in pixels of the media asset, if the media asset is an
+                image
               example: 1839
               type: integer
             style:
               description: >
-                The style of the media asset. A media asset is part of a collection of related media files,
+                The style of the media asset. A media asset is part of a collection
+                of related media files,
 
                 for example an image or an episode (audio). Images usually have differently sized versions,
 
@@ -4813,15 +5547,6 @@ components:
             copyright:
               description: The copyright of the network
               type: string
-            cover_image_id:
-              deprecated: true
-              description: >
-                This will be replaced by the relationship `cover_image` in a future update.<br/>
-
-                The image ID of the cover art for this network. The `/images` endpoint provideds details to the image.
-              example: 1fcae36a-0ff5-46ea-aa14-c1f378d28d2f
-              format: uuid
-              type: string
             created_at:
               format: date-time
               type: string
@@ -4834,7 +5559,8 @@ components:
               type: boolean
             description_plain:
               description: >
-                The description with all HTML markup removed. If the description does not contain markup
+                The description with all HTML markup removed. If the description
+                does not contain markup
 
                 this is identitcal to `description`.
               example: Some funny example.
@@ -4856,7 +5582,8 @@ components:
               type: string
             public_page_enabled:
               description: >
-                If this is `true`, a public web page for this network is available under
+                If this is `true`, a public web page for this network is available
+                under
 
                 `https://art19.com/networks/{slug}`, where `slug` is the value of the corresponding attribute.
 
@@ -4866,7 +5593,8 @@ components:
               type: boolean
             slug:
               description: >
-                The unique slug for the network also used on its public page for example.
+                The unique slug for the network also used on its public page for
+                example.
 
                 This value is unique system-wide amongst all networks _and_ series.
               type: string
@@ -4889,24 +5617,37 @@ components:
           type: string
         relationships:
           properties:
-            images:
+            cover_image:
+              description: The cover image for the network
               properties:
                 data:
-                  items:
-                    $ref: "#/components/schemas/ResourceIdentifier"
-                  type: array
-              title: >
-                A collection of images linked to the network. This currently only includes
+                  $ref: "#/components/schemas/ResourceIdentifier"
+              type: object
+            images:
+              description: >
+                A collection of images linked to the network. This currently only
+                includes
 
                 the cover image for the network.
-              type: object
-            series:
               properties:
                 data:
                   items:
                     $ref: "#/components/schemas/ResourceIdentifier"
                   type: array
-              title: List of currently active series within the network
+              type: object
+            parent:
+              description: The parent network of the network
+              properties:
+                data:
+                  $ref: "#/components/schemas/ResourceIdentifier"
+              type: object
+            series:
+              description: List of series within the network which are accessible to you
+              properties:
+                data:
+                  items:
+                    $ref: "#/components/schemas/ResourceIdentifier"
+                  type: array
               type: object
           type: object
         type:
@@ -4921,7 +5662,8 @@ components:
             avatar_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `avatar` in a future update.<br/>
+                This will be replaced by the relationship `avatar` in a future
+                update.<br/>
 
                 The image ID of an avatar or head shot of the person. Details can be
 
@@ -4969,6 +5711,17 @@ components:
           example: c1fbb1bf-45b1-4803-986e-123166f7f427
           format: uuid
           type: string
+        relationships:
+          properties:
+            avatar:
+              description: >
+                The avatar or head shot of the person. Details can be retrieved
+                using the `/images` endpoint.
+              properties:
+                data:
+                  $ref: "#/components/schemas/ResourceIdentifier"
+              type: object
+          type: object
         type:
           description: The type of resource. This is always `people`
           example: people
@@ -4978,7 +5731,7 @@ components:
       properties:
         id:
           description: The ID of the resource
-          example: 0e545515-c464-480e-a841-e216a24fc123
+          example: 7aa45628-4df2-4f90-8092-2c7a59bf7e9c
           format: uuid
           type: string
         type:
@@ -5000,7 +5753,8 @@ components:
             cascaded_cover_image_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `cascaded_cover_image` in a future update.<br/>
+                This will be replaced by the relationship `cascaded_cover_image` in
+                a future update.<br/>
 
                 The image ID of the cover art for this season. If there is no specific cover for the season,
 
@@ -5013,7 +5767,8 @@ components:
             cover_image_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `cover_image` in a future update.<br/>
+                This will be replaced by the relationship `cover_image` in a future
+                update.<br/>
 
                 The image ID of the cover art for this season. The `/images` endpoint provideds details to the image.
               example: ec8f13bf-77c0-40fe-933a-8c088c16bc17
@@ -5031,7 +5786,8 @@ components:
               type: boolean
             description_plain:
               description: >
-                The description with all HTML markup removed. If the description does not contain markup
+                The description with all HTML markup removed. If the description
+                does not contain markup
 
                 this is identitcal to `description`.
               example: Some funny example.
@@ -5039,7 +5795,8 @@ components:
             first_released_episode_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `first_released_episode` in a future update.<br/>
+                This will be replaced by the relationship `first_released_episode`
+                in a future update.<br/>
 
                 The ID of the first released episode within the season
               example: 73a97f1a-5c3c-4226-8ab3-1d7f9e486e4d
@@ -5048,7 +5805,8 @@ components:
             last_released_episode_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `last_released_episode` in a future update.<br/>
+                This will be replaced by the relationship `last_released_episode`
+                in a future update.<br/>
 
                 The ID of the most recently released episode within the season
               example: a50b7a22-2128-46d7-b3df-2b308df21bf0
@@ -5060,7 +5818,8 @@ components:
               type: integer
             sort_title:
               description: >
-                The title of the season modified for sorting. This converts all characters to
+                The title of the season modified for sorting. This converts all
+                characters to
 
                 lower case, removes an eventually leading `The` as well as leading and trailling whitespace characters.
               example: awesome season
@@ -5085,6 +5844,18 @@ components:
           type: string
         relationships:
           properties:
+            cascaded_cover_image:
+              description: >
+                The cover art for this season. If there is no specific cover for
+                the season,
+
+                the cover image of the series' cover art will be returned.
+
+                The `/images` endpoint provideds details to the image.
+              properties:
+                data:
+                  $ref: "#/components/schemas/ResourceIdentifier"
+              type: object
             classification_inclusions:
               properties:
                 data:
@@ -5092,6 +5863,12 @@ components:
                     $ref: "#/components/schemas/ResourceIdentifier"
                   type: array
               title: A list of classifications associated with the season
+              type: object
+            cover_image:
+              description: The cover image for the season
+              properties:
+                data:
+                  $ref: "#/components/schemas/ResourceIdentifier"
               type: object
             credits:
               properties:
@@ -5107,7 +5884,14 @@ components:
                   items:
                     $ref: "#/components/schemas/ResourceIdentifier"
                   type: array
-              title: A list of published and released episodes with an actual media file within the season
+              title: A list of published and released episodes with an actual media file
+                within the season
+              type: object
+            first_released_episode:
+              description: The first released episode within the season
+              properties:
+                data:
+                  $ref: "#/components/schemas/ResourceIdentifier"
               type: object
             images:
               properties:
@@ -5117,6 +5901,12 @@ components:
                   type: array
               title: Both the cover image and the cascaded cover image for the season
               type: object
+            last_released_episode:
+              description: The most recently released episode within the season
+              properties:
+                data:
+                  $ref: "#/components/schemas/ResourceIdentifier"
+              type: object
             series:
               properties:
                 data:
@@ -5124,7 +5914,7 @@ components:
               title: The series the season belongs to
               type: object
             taggings:
-              description: "`DEPRECATED`"
+              deprecated: true
               properties:
                 data:
                   items:
@@ -5133,6 +5923,7 @@ components:
               title: A list of associations linking tags to the season.
               type: object
             tags:
+              deprecated: true
               properties:
                 data:
                   items:
@@ -5159,7 +5950,8 @@ components:
             cover_image_id:
               deprecated: true
               description: >
-                This will be replaced by the relationship `cover_image` in a future update.<br/>
+                This will be replaced by the relationship `cover_image` in a future
+                update.<br/>
 
                 The image ID of the cover art for this series. The `/images` endpoint provideds details to the image.
               example: ec8f13bf-77c0-40fe-933a-8c088c16bc17
@@ -5177,7 +5969,8 @@ components:
               type: boolean
             description_plain:
               description: >
-                The description with all HTML markup removed. If the description does not contain markup
+                The description with all HTML markup removed. If the description
+                does not contain markup
 
                 this is identitcal to `description`.
               example: Some funny example.
@@ -5195,7 +5988,8 @@ components:
               description: The URL of the series on Instagram
               type: string
             itunes_subscription_badge_enabled:
-              description: If `null` or `true`, the ART19 web player will render an iTunes subscription badge
+              description: If `null` or `true`, the ART19 web player will render an iTunes
+                subscription badge
               type: boolean
             itunes_subscription_url:
               description: The Apple iTunes subscription URL
@@ -5212,7 +6006,8 @@ components:
               type: string
             public_page_enabled:
               description: >
-                If this is `true`, a public web page for this series is available under
+                If this is `true`, a public web page for this series is available
+                under
 
                 `https://art19.com/shows/{slug}`, where `slug` is the value of the corresponding attribute.
 
@@ -5221,7 +6016,8 @@ components:
                 episodes. If this is `false`, no such public page is available.
               type: boolean
             public_title:
-              description: If present, this is the preferred title for the series in the RSS Feed
+              description: If present, this is the preferred title for the series in the RSS
+                Feed
               type: string
             radio_public_subscription_url:
               description: The RadioPublic subscription URL
@@ -5230,7 +6026,8 @@ components:
               description: The author responsible for the RSS feed
               type: string
             rss_copyright:
-              description: The copyright disclaimer for the contents of the show, appearing after a © symbol, e.g. `2020 ART19, Inc.`
+              description: The copyright disclaimer for the contents of the show, appearing
+                after a © symbol, e.g. `2020 ART19, Inc.`
               type: string
             rss_email:
               description: The pubic point of contact for the show
@@ -5240,20 +6037,23 @@ components:
               type: string
             slug:
               description: >
-                This slug is unique over all series and networks system wide and is used to access the series' feed
+                This slug is unique over all series and networks system wide and is
+                used to access the series' feed
 
                 as well as its eventually enabled public page on ART19.
               example: greatest-show-ever
               type: string
             sort_title:
               description: >
-                The title of the series modified for sorting. This converts all characters to
+                The title of the series modified for sorting. This converts all
+                characters to
 
                 lower case, removes an eventually leading `The` as well as leading and trailling whitespace characters.
               example: greatest show ever
               type: string
             spotify_subscription_badge_enabled:
-              description: If `null` or `true`, the ART19 web player will render a Spotify subscription badge
+              description: If `null` or `true`, the ART19 web player will render a Spotify
+                subscription badge
               type: boolean
             spotify_subscription_url:
               description: The Spotify subscription URL
@@ -5265,7 +6065,8 @@ components:
                 - inactive
               type: string
             stitcher_subscription_badge_enabled:
-              description: If `null` or `true`, the ART19 web player will render a Stitcher subscription badge
+              description: If `null` or `true`, the ART19 web player will render a Stitcher
+                subscription badge
               type: boolean
             stitcher_subscription_url:
               description: The Stitcher subscription URL
@@ -5309,6 +6110,12 @@ components:
                   type: array
               title: A list of classifications associated with the series
               type: object
+            cover_image:
+              description: The cover image for the series
+              properties:
+                data:
+                  $ref: "#/components/schemas/ResourceIdentifier"
+              type: object
             credits:
               properties:
                 data:
@@ -5348,7 +6155,7 @@ components:
               title: A list of seasons in the series
               type: object
             taggings:
-              description: "`DEPRECATED`"
+              deprecated: true
               properties:
                 data:
                   items:
@@ -5357,6 +6164,7 @@ components:
               title: A list of associations linking tags to the series
               type: object
             tags:
+              deprecated: true
               properties:
                 data:
                   items:
@@ -5373,7 +6181,8 @@ components:
   securitySchemes:
     api_key:
       description: >
-        Authentication is **REQUIRED** for all APIs using an API token, which is placed into an HTTP Authorization header.
+        Authentication is **REQUIRED** for all APIs using an API token,
+        which is placed into an HTTP Authorization header.
 
 
         This token is generated by ART19 Support and consists of a shared secret placed in the `token`

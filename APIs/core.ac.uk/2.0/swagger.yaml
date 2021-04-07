@@ -7,7 +7,8 @@ info:
   contact:
     x-twitter: oacore
   description: >-
-    <p style="text-align: justify;">You can use the CORE API to access the 
+    <p style="text-align: justify;">You can use the CORE API to access
+    the 
         resources harvested and enriched by CORE. If you encounter any problems with the API, please <a href="/contact">report them to us</a>.</p>
 
     <h2>Overview</h2>
@@ -107,7 +108,10 @@ tags:
 paths:
   /articles/dedup:
     post:
-      description: Method accepts values for several parameters and retrieves a JSON array of articles which have near duplicate content matching the input parameters' values. The response array contains ids of the near duplicate articles along with their relevance scores.
+      description: Method accepts values for several parameters and retrieves a JSON
+        array of articles which have near duplicate content matching the input
+        parameters' values. The response array contains ids of the near
+        duplicate articles along with their relevance scores.
       operationId: nearDuplicateArticles
       parameters:
         - description: The DOI for which the duplicates will be identified
@@ -115,17 +119,20 @@ paths:
           name: doi
           required: false
           type: string
-        - description: Title to match when looking for duplicate articles. Only useful when either value for @year or @description is supplied.
+        - description: Title to match when looking for duplicate articles. Only useful
+            when either value for @year or @description is supplied.
           in: query
           name: title
           required: false
           type: string
-        - description: "Year the article was published. Only useful when value for @title is supplied. "
+        - description: "Year the article was published. Only useful when value for @title
+            is supplied. "
           in: query
           name: year
           required: false
           type: string
-        - description: Abstract for an article based on which its duplicates will be found. Only useful when value for @title is supplied.
+        - description: Abstract for an article based on which its duplicates will be
+            found. Only useful when value for @title is supplied.
           in: query
           name: description
           required: false
@@ -135,7 +142,9 @@ paths:
           name: fulltext
           required: false
           type: string
-        - description: Article identifier for which the duplicates will be identified. Only useful when either values for @doi or (@title and @year) or (@title and @abstract) or @fulltext are supplied.
+        - description: Article identifier for which the duplicates will be identified.
+            Only useful when either values for @doi or (@title and @year) or
+            (@title and @abstract) or @fulltext are supplied.
           in: query
           name: identifier
           required: false
@@ -157,13 +166,16 @@ paths:
         "401":
           description: Invalid or no API key provided
         "503":
-          description: Could not run the deduplication service at this time; please try again later.
+          description: Could not run the deduplication service at this time; please try
+            again later.
       summary: Get all near duplicate articles
       tags:
         - articles
   /articles/get:
     post:
-      description: Method accepts a JSON array of CORE IDs and retrieves a list of articles. The response array is ordered based on the order of the IDs in the request array.
+      description: Method accepts a JSON array of CORE IDs and retrieves a list of
+        articles. The response array is ordered based on the order of the IDs in
+        the request array.
       operationId: getArticleByCoreIdBatch
       parameters:
         - description: JSON array with CORE IDs of articles that need to be fetched
@@ -175,43 +187,52 @@ paths:
               type: integer
             type: array
         - default: true
-          description: Whether to retrieve the full article metadata or only the IDs. The default value is true
+          description: Whether to retrieve the full article metadata or only the IDs. The
+            default value is true
           in: query
           name: metadata
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve fulltexts of the articles. The default value is false
+          description: Whether to retrieve fulltexts of the articles. The default value is
+            false
           in: query
           name: fulltext
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve citations found in the articles. The default value is false
+          description: Whether to retrieve citations found in the articles. The default
+            value is false
           in: query
           name: citations
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve lists of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time
+          description: Whether to retrieve lists of similar articles. The default value is
+            false. Because the similar articles are calculated on demand,
+            setting this parameter to true might slightly slow down the response
+            time
           in: query
           name: similar
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve CORE IDs of different versions of the articles. The default value is false
+          description: Whether to retrieve CORE IDs of different versions of the articles.
+            The default value is false
           in: query
           name: duplicate
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve lists of URLs of the article fulltexts. The default value is false
+          description: Whether to retrieve lists of URLs of the article fulltexts. The
+            default value is false
           in: query
           name: urls
           required: false
           type: boolean
         - default: false
-          description: Returns the records raw XML metadata from the original repository. The default value is false
+          description: Returns the records raw XML metadata from the original repository.
+            The default value is false
           in: query
           name: faithfulMetadata
           required: false
@@ -248,43 +269,53 @@ paths:
           required: true
           type: integer
         - default: true
-          description: Whether to retrieve the full article metadata or only the ID. The default value is true.
+          description: Whether to retrieve the full article metadata or only the ID. The
+            default value is true.
           in: query
           name: metadata
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve full text of the article. The default value is false
+          description: Whether to retrieve full text of the article. The default value is
+            false
           in: query
           name: fulltext
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve citations found in the article. The default value is false
+          description: Whether to retrieve citations found in the article. The default
+            value is false
           in: query
           name: citations
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time
+          description: Whether to retrieve a list of similar articles. The default value
+            is false. Because the similar articles are calculated on demand,
+            setting this parameter to true might slightly slow down the response
+            time
           in: query
           name: similar
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of CORE IDs of different versions of the article. The default value is false
+          description: Whether to retrieve a list of CORE IDs of different versions of the
+            article. The default value is false
           in: query
           name: duplicate
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of URLs from which the article can be downloaded. This can include links to PDFs as well as HTML pages. The default value is false
+          description: Whether to retrieve a list of URLs from which the article can be
+            downloaded. This can include links to PDFs as well as HTML pages.
+            The default value is false
           in: query
           name: urls
           required: false
           type: boolean
         - default: false
-          description: Returns the records raw XML metadata from the original repository. The default value is false
+          description: Returns the records raw XML metadata from the original repository.
+            The default value is false
           in: query
           name: faithfulMetadata
           required: false
@@ -331,7 +362,9 @@ paths:
         - articles
   "/articles/get/{coreId}/history":
     get:
-      description: Method accepts a single CORE ID and returns a list of all historical versions of the article, which are stored in CORE database. The results are ordered from the newest one to the oldest one.
+      description: Method accepts a single CORE ID and returns a list of all
+        historical versions of the article, which are stored in CORE database.
+        The results are ordered from the newest one to the oldest one.
       operationId: getArticleHistoryByCoreId
       parameters:
         - description: CORE ID of the article which history should be fetched
@@ -340,7 +373,8 @@ paths:
           required: true
           type: string
         - default: 1
-          description: Which page of the history results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).
+          description: Which page of the history results should be retrieved. Can be any
+            number betwen 1 and 100, default is 1 (first page).
           format: int32
           in: query
           maximum: 100
@@ -349,7 +383,8 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: The number of results to return per page. Can be any number between 10 and 100, default is 10.
+          description: The number of results to return per page. Can be any number between
+            10 and 100, default is 10.
           format: int32
           in: query
           maximum: 100
@@ -375,10 +410,14 @@ paths:
         - articles
   /articles/search:
     post:
-      description: Method accepts a JSON array of search queries and parameters. It then searches through all articles and returns a JSON array of search results for each of the queries. Method searches through all article fields (title, authors, subjects, identifiers, etc.).
+      description: Method accepts a JSON array of search queries and parameters. It
+        then searches through all articles and returns a JSON array of search
+        results for each of the queries. Method searches through all article
+        fields (title, authors, subjects, identifiers, etc.).
       operationId: searchArticlesBatch
       parameters:
-        - description: JSON array with search queries and parameters. One request can contain up to 100 queries
+        - description: JSON array with search queries and parameters. One request can
+            contain up to 100 queries
           in: body
           name: body
           required: true
@@ -387,43 +426,53 @@ paths:
               $ref: "#/definitions/SearchRequest"
             type: array
         - default: true
-          description: Whether to retrieve the full article metadata or only the ID. The default value is true.
+          description: Whether to retrieve the full article metadata or only the ID. The
+            default value is true.
           in: query
           name: metadata
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve full text of the article. The default value is false
+          description: Whether to retrieve full text of the article. The default value is
+            false
           in: query
           name: fulltext
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve citations found in the article. The default value is false
+          description: Whether to retrieve citations found in the article. The default
+            value is false
           in: query
           name: citations
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time
+          description: Whether to retrieve a list of similar articles. The default value
+            is false. Because the similar articles are calculated on demand,
+            setting this parameter to true might slightly slow down the response
+            time
           in: query
           name: similar
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of CORE IDs of different versions of the article. The default value is false
+          description: Whether to retrieve a list of CORE IDs of different versions of the
+            article. The default value is false
           in: query
           name: duplicate
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of URLs from which the article can be downloaded. This can include links to PDFs as well as HTML pages. The default value is false
+          description: Whether to retrieve a list of URLs from which the article can be
+            downloaded. This can include links to PDFs as well as HTML pages.
+            The default value is false
           in: query
           name: urls
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve the raw XML metadata of the article. The default value is false
+          description: Whether to retrieve the raw XML metadata of the article. The
+            default value is false
           in: query
           name: faithfulMetadata
           required: false
@@ -450,7 +499,8 @@ paths:
         - articles
   "/articles/search/{query}":
     get:
-      description: Searches through all articles and returns a JSON array with search results. Method searches through all article fields.
+      description: Searches through all articles and returns a JSON array with search
+        results. Method searches through all article fields.
       operationId: searchArticles
       parameters:
         - description: The search query
@@ -460,7 +510,8 @@ paths:
           required: true
           type: integer
         - default: 1
-          description: Which page of the search results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).
+          description: Which page of the search results should be retrieved. Can be any
+            number betwen 1 and 100, default is 1 (first page).
           format: int32
           in: query
           maximum: 100
@@ -469,7 +520,8 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: The number of results to return per page. Can be any number between 10 and 100, default is 10.
+          description: The number of results to return per page. Can be any number between
+            10 and 100, default is 10.
           format: int32
           in: query
           maximum: 100
@@ -478,43 +530,53 @@ paths:
           required: false
           type: integer
         - default: true
-          description: Whether to retrieve the full article metadata or only the ID. The default value is true.
+          description: Whether to retrieve the full article metadata or only the ID. The
+            default value is true.
           in: query
           name: metadata
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve full text of the article. The default value is false
+          description: Whether to retrieve full text of the article. The default value is
+            false
           in: query
           name: fulltext
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve citations found in the article. The default value is false
+          description: Whether to retrieve citations found in the article. The default
+            value is false
           in: query
           name: citations
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time
+          description: Whether to retrieve a list of similar articles. The default value
+            is false. Because the similar articles are calculated on demand,
+            setting this parameter to true might slightly slow down the response
+            time
           in: query
           name: similar
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of CORE IDs of different versions of the article. The default value is false
+          description: Whether to retrieve a list of CORE IDs of different versions of the
+            article. The default value is false
           in: query
           name: duplicate
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of URLs from which the article can be downloaded. This can include links to PDFs as well as HTML pages. The default value is false
+          description: Whether to retrieve a list of URLs from which the article can be
+            downloaded. This can include links to PDFs as well as HTML pages.
+            The default value is false
           in: query
           name: urls
           required: false
           type: boolean
         - default: false
-          description: Returns the records raw XML metadata from the original repository. The default value is false
+          description: Returns the records raw XML metadata from the original repository.
+            The default value is false
           in: query
           name: faithfulMetadata
           required: false
@@ -537,7 +599,9 @@ paths:
         - articles
   /articles/similar:
     post:
-      description: Method accepts a text and retrieves a JSON array of articles which are similar to the given text. The response array is ordered based on similarity score, starting from the most similar.
+      description: Method accepts a text and retrieves a JSON array of articles which
+        are similar to the given text. The response array is ordered based on
+        similarity score, starting from the most similar.
       operationId: similarArticles
       parameters:
         - description: The text that requires similar articles to be calculated on
@@ -547,7 +611,8 @@ paths:
           schema:
             $ref: "#/definitions/SimilarRequest"
         - default: 10
-          description: How many similar articles to retrieve at most. Can be any number betwen 1 and 100, default is 10
+          description: How many similar articles to retrieve at most. Can be any number
+            betwen 1 and 100, default is 10
           in: query
           maximum: 100
           minimum: 1
@@ -555,43 +620,52 @@ paths:
           required: false
           type: integer
         - default: true
-          description: Whether to retrieve the full article metadata or only the IDs of the similar articles. The default value is true
+          description: Whether to retrieve the full article metadata or only the IDs of
+            the similar articles. The default value is true
           in: query
           name: metadata
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve fulltexts of the similar articles. The default value is false
+          description: Whether to retrieve fulltexts of the similar articles. The default
+            value is false
           in: query
           name: fulltext
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve citations found in the articles. The default value is false
+          description: Whether to retrieve citations found in the articles. The default
+            value is false
           in: query
           name: citations
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve lists of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time
+          description: Whether to retrieve lists of similar articles. The default value is
+            false. Because the similar articles are calculated on demand,
+            setting this parameter to true might slightly slow down the response
+            time
           in: query
           name: similar
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve CORE IDs of different versions of the articles. The default value is false
+          description: Whether to retrieve CORE IDs of different versions of the articles.
+            The default value is false
           in: query
           name: duplicate
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve lists of URLs of the article fulltexts. The default value is false
+          description: Whether to retrieve lists of URLs of the article fulltexts. The
+            default value is false
           in: query
           name: urls
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve the raw XML metadata of the articles. The default value is false
+          description: Whether to retrieve the raw XML metadata of the articles. The
+            default value is false
           in: query
           name: faithfulMetadata
           required: false
@@ -604,7 +678,8 @@ paths:
           schema:
             $ref: "#/definitions/ArticleSimilarResponse"
         "400":
-          description: Missing text in request body or parameter out of bounds or invalid parameter
+          description: Missing text in request body or parameter out of bounds or invalid
+            parameter
         "401":
           description: Invalid or no API key provided
         "429":
@@ -669,9 +744,13 @@ paths:
         - journals
   /journals/search:
     post:
-      description: Method accepts a JSON array of search queries and parameters. It then searches through all journals and returns a JSON array of search results for each of the queries. Method searches through all journal fields (title, identifiers, subjects, language, rights and publisher).
+      description: Method accepts a JSON array of search queries and parameters. It
+        then searches through all journals and returns a JSON array of search
+        results for each of the queries. Method searches through all journal
+        fields (title, identifiers, subjects, language, rights and publisher).
       parameters:
-        - description: JSON array with search queries and parameters. One request can contain up to 100 queries.
+        - description: JSON array with search queries and parameters. One request can
+            contain up to 100 queries.
           in: body
           name: body
           required: true
@@ -699,7 +778,9 @@ paths:
         - journals
   "/journals/search/{query}":
     get:
-      description: Searches through all journals and returns a JSON array of search results. Method searches through all journal fields (title, identifiers, subjects, language, rights and publisher).
+      description: Searches through all journals and returns a JSON array of search
+        results. Method searches through all journal fields (title, identifiers,
+        subjects, language, rights and publisher).
       parameters:
         - description: Search query
           in: path
@@ -707,7 +788,8 @@ paths:
           required: true
           type: string
         - default: 1
-          description: Which page of the search results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).
+          description: Which page of the search results should be retrieved. Can be any
+            number betwen 1 and 100, default is 1 (first page).
           format: int32
           in: query
           maximum: 100
@@ -716,7 +798,8 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: The number of results to return per page. Can be any number between 10 and 100, default is 10.
+          description: The number of results to return per page. Can be any number between
+            10 and 100, default is 10.
           format: int32
           in: query
           maximum: 100
@@ -740,10 +823,14 @@ paths:
         - journals
   /repositories/get:
     post:
-      description: Method accepts a JSON array of CORE repository IDs and retrieves a list of repositories. The response array is ordered based on the order of the IDs in the request array. The maximum number of IDs in request is 100.
+      description: Method accepts a JSON array of CORE repository IDs and retrieves a
+        list of repositories. The response array is ordered based on the order
+        of the IDs in the request array. The maximum number of IDs in request is
+        100.
       operationId: getRepositoryByIdBatch
       parameters:
-        - description: JSON array with CORE repository IDs of repositories that need to be fetched
+        - description: JSON array with CORE repository IDs of repositories that need to be
+            fetched
           in: body
           name: body
           required: true
@@ -752,7 +839,8 @@ paths:
               type: integer
             type: array
         - default: false
-          description: Whether to retrieve statistics about the repository. The default value is false
+          description: Whether to retrieve statistics about the repository. The default
+            value is false
           in: query
           name: stats
           required: false
@@ -800,7 +888,8 @@ paths:
           required: true
           type: integer
         - default: false
-          description: Whether to retrieve statistics about the repository. The default value is false
+          description: Whether to retrieve statistics about the repository. The default
+            value is false
           in: query
           name: stats
           required: false
@@ -835,9 +924,13 @@ paths:
         - repositories
   /repositories/search:
     post:
-      description: Method accepts a JSON array of search queries and parameters. It then searches through all repositories and returns a JSON array of search results for each of the queries. Method searches through all repository fields.
+      description: Method accepts a JSON array of search queries and parameters. It
+        then searches through all repositories and returns a JSON array of
+        search results for each of the queries. Method searches through all
+        repository fields.
       parameters:
-        - description: JSON array with search queries and parameters. One request can contain up to 100 queries
+        - description: JSON array with search queries and parameters. One request can
+            contain up to 100 queries
           in: body
           name: body
           required: true
@@ -846,7 +939,8 @@ paths:
               $ref: "#/definitions/SearchRequest"
             type: array
         - default: false
-          description: Whether to retrieve statistics about the repository. The default value is false
+          description: Whether to retrieve statistics about the repository. The default
+            value is false
           in: query
           name: stats
           required: false
@@ -883,7 +977,8 @@ paths:
         - repositories
   "/repositories/search/{query}":
     get:
-      description: Searches through all repositories and returns a JSON array with search results. Method searches through all repository fields.
+      description: Searches through all repositories and returns a JSON array with
+        search results. Method searches through all repository fields.
       parameters:
         - description: The search query
           in: path
@@ -891,7 +986,8 @@ paths:
           required: true
           type: string
         - default: 1
-          description: Which page of the search results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).
+          description: Which page of the search results should be retrieved. Can be any
+            number betwen 1 and 100, default is 1 (first page).
           format: int32
           in: query
           maximum: 100
@@ -900,7 +996,8 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: The number of results to return per page. Can be any number between 10 and 100, default is 10.
+          description: The number of results to return per page. Can be any number between
+            10 and 100, default is 10.
           format: int32
           in: query
           maximum: 100
@@ -909,7 +1006,8 @@ paths:
           required: false
           type: integer
         - default: false
-          description: Whether to retrieve statistics about the repository. The default value is false
+          description: Whether to retrieve statistics about the repository. The default
+            value is false
           in: query
           name: stats
           required: false
@@ -944,9 +1042,16 @@ paths:
         - repositories
   /search:
     post:
-      description: Method accepts a JSON array of search queries. It searches through all resources and returns a JSON array with search results for each of the queries. Method searches through all resources and all fields. The results are ordered by relevance score and contain type of the relevant resource and its ID. Furthermore, the responses are oredered based on the order of the request items. The metadata of each resource need to be obtained through an appropriate method.
+      description: Method accepts a JSON array of search queries. It searches through
+        all resources and returns a JSON array with search results for each of
+        the queries. Method searches through all resources and all fields. The
+        results are ordered by relevance score and contain type of the relevant
+        resource and its ID. Furthermore, the responses are oredered based on
+        the order of the request items. The metadata of each resource need to be
+        obtained through an appropriate method.
       parameters:
-        - description: JSON array with search queries and pagination parameters. One request can contain up to 100 queries
+        - description: JSON array with search queries and pagination parameters. One
+            request can contain up to 100 queries
           in: body
           name: body
           required: true
@@ -976,7 +1081,11 @@ paths:
         - all
   "/search/{query}":
     get:
-      description: Searches through all resources and returns a JSON array with search results. Method searches through all resources and all fields. The results are ordered by relevance score and contain type of the relevant resource and its ID. The metadata of each resource need to be obtained through an appropriate method.
+      description: Searches through all resources and returns a JSON array with search
+        results. Method searches through all resources and all fields. The
+        results are ordered by relevance score and contain type of the relevant
+        resource and its ID. The metadata of each resource need to be obtained
+        through an appropriate method.
       parameters:
         - description: The search query
           in: path
@@ -984,7 +1093,8 @@ paths:
           required: true
           type: string
         - default: 1
-          description: Which page of the search results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).
+          description: Which page of the search results should be retrieved. Can be any
+            number betwen 1 and 100, default is 1 (first page).
           format: int32
           in: query
           maximum: 100
@@ -993,7 +1103,8 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: The number of results to return per page. Can be any number between 10 and 100, default is 10.
+          description: The number of results to return per page. Can be any number between
+            10 and 100, default is 10.
           format: int32
           in: query
           maximum: 100
@@ -1045,7 +1156,8 @@ definitions:
         description: The DOI of the article
         type: string
       downloadUrl:
-        description: The download PDF URL which is displayed on our /display/[ArticleID] page
+        description: The download PDF URL which is displayed on our /display/[ArticleID]
+          page
         type: string
       fulltext:
         description: Article full text
@@ -1236,7 +1348,8 @@ definitions:
   Journal:
     properties:
       identifiers:
-        description: List of journal identifiers (e.g. URL, OAI or ISSN). The type is prepended to the identifier string (e.g. 'issn:2296-0597')
+        description: List of journal identifiers (e.g. URL, OAI or ISSN). The type is
+          prepended to the identifier string (e.g. 'issn:2296-0597')
         items:
           type: string
         type: array
@@ -1300,10 +1413,12 @@ definitions:
   Language:
     properties:
       deletedStatus:
-        description: "The deleted status of the document: 0 for allowed, 1 for deleted, 2 for disabled"
+        description: "The deleted status of the document: 0 for allowed, 1 for deleted,
+          2 for disabled"
         type: integer
       depositedDate:
-        description: The date the item was deposited in the Data Provider (repository/Journal)
+        description: The date the item was deposited in the Data Provider
+          (repository/Journal)
         format: date
         type: string
       indexed:
@@ -1344,22 +1459,27 @@ definitions:
   Repository:
     properties:
       dataProviderSourceStats:
-        description: Statistics based on the Data Provider/repository rather than data processed and filtered by CORE. This array is in beta and may change in the future
+        description: Statistics based on the Data Provider/repository rather than data
+          processed and filtered by CORE. This array is in beta and may change
+          in the future
         items: {}
         type: array
       history:
-        description: The number of deposits in the repository per date. This field is in beta and may change in the future
+        description: The number of deposits in the repository per date. This field is in
+          beta and may change in the future
         items: {}
         type: array
       historyCumulative:
-        description: The number of deposits in the repository per date over time (cumulative). This field is in beta and may change in the future
+        description: The number of deposits in the repository per date over time
+          (cumulative). This field is in beta and may change in the future
         items: {}
         type: array
       id:
         description: CORE repository ID
         type: integer
       lastSeen:
-        description: The time the repository was last harvested by CORE. This field is in beta and may change in the future
+        description: The time the repository was last harvested by CORE. This field is
+          in beta and may change in the future
         format: date-time
         type: string
       name:
@@ -1496,13 +1616,15 @@ definitions:
     properties:
       page:
         default: 1
-        description: Which page of the search results should be retrieved. Can be any number from 1 to 100, default is 1 (first page)
+        description: Which page of the search results should be retrieved. Can be any
+          number from 1 to 100, default is 1 (first page)
         maximum: 100
         minimum: 1
         type: integer
       pageSize:
         default: 10
-        description: The number of results to return per page. Can be any number from 10 to 100, default is 10
+        description: The number of results to return per page. Can be any number from 10
+          to 100, default is 10
         maximum: 100
         minimum: 10
         type: integer

@@ -579,7 +579,8 @@ paths:
         - Spec
   "/1.1/workgroups/{workgroup_id}/projects/{project_id}/teammembers":
     post:
-      description: Invite a team member or all the members of team template for the specific project.
+      description: Invite a team member or all the members of team template for the
+        specific project.
       operationId: postTeamMemberOfProject
       parameters:
         - in: path
@@ -697,7 +698,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/HTTPStatusVO"
           description: Internal server error
-      summary: Invite a team member or all the members of team template for the specific project.
+      summary: Invite a team member or all the members of team template for the
+        specific project.
       tags:
         - Team Member
   "/1.1/workgroups/{workgroup_id}/specTypes/{spec_type_id}/specTypeFields":
@@ -900,7 +902,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: 1000001 for Buyer, 1000002 for supplier, 1000003 for agent, 1000004 for Broker/Outsourcer and 1000005 for Partner
+        - description: 1000001 for Buyer, 1000002 for supplier, 1000003 for agent, 1000004
+            for Broker/Outsourcer and 1000005 for Partner
           explode: false
           in: query
           name: workgroup_types
@@ -5840,7 +5843,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: Quote Object State Id, use /workgroups/{workgroup_id}/quoteStates to get correct value
+        - description: Quote Object State Id, use /workgroups/{workgroup_id}/quoteStates
+            to get correct value
           in: query
           name: quote_state_id, use filters={"quote_state_id":111111}
           required: false
@@ -8775,7 +8779,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: Quote Object State Id, use /workgroups/{workgroup_id}/quoteStates to get correct value
+        - description: Quote Object State Id, use /workgroups/{workgroup_id}/quoteStates
+            to get correct value
           in: query
           name: quote_state_id, use filters={"quote_state_id":111111}
           required: false
@@ -11507,7 +11512,8 @@ components:
           example: sample status_reason
           type: string
     MultiExchangeRatePersisitVO:
-      description: "Java type: com.noosh.domain.nooshapi.persist.vo.MultiExchangeRatePersisitVO"
+      description: "Java type:
+        com.noosh.domain.nooshapi.persist.vo.MultiExchangeRatePersisitVO"
       properties:
         activate_date:
           description: ""
@@ -11529,7 +11535,8 @@ components:
           example: sample target
           type: string
     MultiExchangeRatePersistListVO:
-      description: "Java type: com.noosh.domain.nooshapi.persist.vo.MultiExchangeRatePersistListVO"
+      description: "Java type:
+        com.noosh.domain.nooshapi.persist.vo.MultiExchangeRatePersistListVO"
       properties:
         exchange_rates:
           description: ""
@@ -14422,7 +14429,8 @@ components:
           example: sample status_reason
           type: string
     ShipmentLocationPersistVO:
-      description: "Java type: com.noosh.domain.nooshapi.persist.vo.ShipmentLocationPersistVO"
+      description: "Java type:
+        com.noosh.domain.nooshapi.persist.vo.ShipmentLocationPersistVO"
       properties:
         due_date:
           description: ""
@@ -14458,7 +14466,8 @@ components:
           example: sample type
           type: string
     ShipmentLocationPostPersistVO:
-      description: "Java type: com.noosh.domain.nooshapi.persist.vo.ShipmentLocationPostPersistVO"
+      description: "Java type:
+        com.noosh.domain.nooshapi.persist.vo.ShipmentLocationPostPersistVO"
       properties:
         address_line1:
           description: ""
@@ -16712,7 +16721,8 @@ components:
           example: sample status_reason
           type: string
     V1x1SpecPamAndAttPO:
-      description: "Java type: com.noosh.domain.nooshapi.persist.po.v1x1.V1x1SpecPamAndAttPO"
+      description: "Java type:
+        com.noosh.domain.nooshapi.persist.po.v1x1.V1x1SpecPamAndAttPO"
       properties:
         attribute_id:
           description: ""
@@ -16758,7 +16768,8 @@ components:
           example: sample param_name
           type: string
     WgSpecPrdTypeRegPersistVO:
-      description: "Java type: com.noosh.domain.nooshapi.persist.vo.WgSpecPrdTypeRegPersistVO"
+      description: "Java type:
+        com.noosh.domain.nooshapi.persist.vo.WgSpecPrdTypeRegPersistVO"
       properties:
         enableDifferentiatePrdTypePreference:
           description: ""

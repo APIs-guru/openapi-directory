@@ -58,7 +58,8 @@ paths:
       responses:
         "301":
           description: Moved
-      summary: Return a redirect to a badge svg file depending on a source definition's validity
+      summary: Return a redirect to a badge svg file depending on a source
+        definition's validity
       tags:
         - validation
   /convert:
@@ -97,9 +98,8 @@ paths:
           name: source
           required: false
           type: string
-          x-example: >
+          x-example: |
             swagger: 2.0
-
             info:
               title: API
               version: 1.0.0
@@ -169,9 +169,8 @@ paths:
           name: source
           required: false
           type: string
-          x-example: >
+          x-example: |
             openapi: 3.0.0
-
             info:
               title: API
               version: 1.0.0

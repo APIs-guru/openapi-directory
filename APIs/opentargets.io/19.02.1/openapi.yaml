@@ -106,7 +106,8 @@ tags:
     name: search
   - description: Publicly supported stable API.
     name: public
-  - description: Unstable API methods. Subject to change without prior notice. Use at your own risk.
+  - description: Unstable API methods. Subject to change without prior notice. Use
+      at your own risk.
     name: private
   - description: Utility methods.
     name: utils
@@ -133,7 +134,7 @@ paths:
         - private
   /platform/private/autocomplete:
     get:
-      description: >
+      description: |
         Search for the closest term to autocomplete in the search box.
       operationId: getAutocomplete
       parameters:
@@ -157,7 +158,7 @@ paths:
         - private
   /platform/private/besthitsearch:
     post:
-      description: >
+      description: |
         Fire the search method for multiple strings
       operationId: postBestHitSearch
       requestBody:
@@ -175,16 +176,15 @@ paths:
         - private
   /platform/private/disease:
     post:
-      description: >
+      description: |
         Get `disease` objects.
       operationId: postDiseaseById
       requestBody:
         content:
           application/json:
             schema:
-              example: >
+              example: |
                 {"disease":["disease1", "disease2"],
-
                 "facets" = "true"}
               type: string
         description: An EFO identifier.
@@ -197,7 +197,7 @@ paths:
         - private
   "/platform/private/disease/{disease}":
     get:
-      description: >
+      description: |
         Get `disease` objects.
       operationId: getDiseaseById
       parameters:
@@ -215,7 +215,7 @@ paths:
         - private
   "/platform/private/drug/{DRUG_ID}":
     get:
-      description: >
+      description: |
         Get `drug` objects.
       operationId: getDrugByID
       parameters:
@@ -238,11 +238,12 @@ paths:
         - private
   "/platform/private/eco/{ECO_ID}":
     get:
-      description: >
+      description: |
         Get `ECO` objects.
       operationId: getECObyID
       parameters:
-        - description: An [evidence code ontology](http://www.ebi.ac.uk/ols/v2/browse.do?ontName=ECO) ID.
+        - description: An [evidence code
+            ontology](http://www.ebi.ac.uk/ols/v2/browse.do?ontName=ECO) ID.
           in: path
           name: ECO_ID
           required: true
@@ -256,14 +257,14 @@ paths:
         - private
   /platform/private/enrichment/targets:
     post:
-      description: >
+      description: |
         Returns an enrichment analysis for a list of targets passed in the body
       operationId: postEnrichmentTarget
       requestBody:
         content:
           application/json:
             schema:
-              example: >
+              example: |
                 {"target" : ["ENSG00000001", "ENSG00000002"],
                  "pvalue" : 0.001,
                  "size" : 20}
@@ -278,7 +279,7 @@ paths:
         - private
   /platform/private/quicksearch:
     get:
-      description: >
+      description: |
         Get `search-result` objects. Enables search bar functionality.
       operationId: getQuickSearch
       parameters:
@@ -302,14 +303,14 @@ paths:
         - private
   /platform/private/relation:
     post:
-      description: >
+      description: |
         Get `relation` objects.
       operationId: postRelation
       requestBody:
         content:
           application/json:
             schema:
-              example: >
+              example: |
                 {"subject":["gene1", "gene2"]}
               type: string
         description: An Ensembl gene identifier.
@@ -322,7 +323,7 @@ paths:
         - private
   "/platform/private/relation/disease/{disease}":
     get:
-      description: >
+      description: |
         Get `relation` objects starting from diseases.
       operationId: getRelationByEFOID
       parameters:
@@ -340,7 +341,7 @@ paths:
         - private
   "/platform/private/relation/target/{target}":
     get:
-      description: >
+      description: |
         Get `relation` objects starting from diseases.
       operationId: getRelationByENSGID
       parameters:
@@ -358,16 +359,15 @@ paths:
         - private
   /platform/private/target:
     post:
-      description: >
+      description: |
         Get `target` objects. Used for the target profile page.
       operationId: postTargetByENSGID
       requestBody:
         content:
           application/json:
             schema:
-              example: >
+              example: |
                 {"target":["target1", "target2"],
-
                 "facets" = "true"}
               type: string
         description: An Ensembl gene identifier.
@@ -397,7 +397,7 @@ paths:
                         pass
   /platform/private/target/expression:
     get:
-      description: >
+      description: |
         Get `gene-expression` objects.
       operationId: getTargetExpressionByENSGID
       parameters:
@@ -414,14 +414,14 @@ paths:
       tags:
         - private
     post:
-      description: >
+      description: |
         Get `gene-expression` objects.
       operationId: postTargetExpressionByENSGID
       requestBody:
         content:
           application/json:
             schema:
-              example: >
+              example: |
                 {"gene":["gene1", "gene2"]}
               type: string
         description: An Ensembl gene identifier.
@@ -434,7 +434,7 @@ paths:
         - private
   "/platform/private/target/{target}":
     get:
-      description: >
+      description: |
         Get `target` objects.
       operationId: getTargetByENSGID
       parameters:
@@ -453,7 +453,8 @@ paths:
   /platform/public/association:
     get:
       description: >
-        Once we integrate all evidence connecting a target to a specific disease, we
+        Once we integrate all evidence connecting a target to a specific
+        disease, we
          compute an association score by the means of an harmonic sum. This *association score* provides
          an indication of how strong the evidence behind each connection is and can be
          used to rank genes in order of likelihood as drug targets.
@@ -479,7 +480,8 @@ paths:
   /platform/public/association/filter:
     get:
       description: >
-        More complex queries for associations scores and objects can be done using
+        More complex queries for associations scores and objects can be
+        done using
 
         this method, which allows to sort in different order, restrict to a specific class
 
@@ -516,13 +518,15 @@ paths:
           required: false
           schema:
             type: string
-        - description: A Reactome pathway identifier (returning only those targets linked to the specified pathway).
+        - description: A Reactome pathway identifier (returning only those targets linked
+            to the specified pathway).
           in: query
           name: pathway
           required: false
           schema:
             type: string
-        - description: A ChEMBL target class identifier (returning only those targets belonging to the specified class).
+        - description: A ChEMBL target class identifier (returning only those targets
+            belonging to the specified class).
           in: query
           name: target_class
           required: false
@@ -534,19 +538,25 @@ paths:
           required: false
           schema:
             type: string
-        - description: If `true`, it returns associations that have at least one direct evidence connecting the target and the disease. If `false` it only returns associations for which there is no direct evidence connecting the target and the disease, but only evidence connecting the target to a children of the disease in the EFO ontology.
+        - description: If `true`, it returns associations that have at least one direct
+            evidence connecting the target and the disease. If `false` it only
+            returns associations for which there is no direct evidence
+            connecting the target and the disease, but only evidence connecting
+            the target to a children of the disease in the EFO ontology.
           in: query
           name: direct
           required: false
           schema:
             type: boolean
-        - description: Type of data structure to return. Can be 'full', 'simple', 'ids', or 'count'.
+        - description: Type of data structure to return. Can be 'full', 'simple', 'ids',
+            or 'count'.
           in: query
           name: datastructure
           required: false
           schema:
             type: string
-        - description: Fields you want to retrieve. This will get priority over the data structure requested.
+        - description: Fields you want to retrieve. This will get priority over the data
+            structure requested.
           in: query
           name: fields
           required: false
@@ -559,7 +569,8 @@ paths:
           schema:
             default: false
             type: boolean
-        - description: Filter by minimum score value. The default is 0, but using 0.2 is a good trade-off to filter lower quality data points.
+        - description: Filter by minimum score value. The default is 0, but using 0.2 is a
+            good trade-off to filter lower quality data points.
           in: query
           name: scorevalue_min
           required: false
@@ -574,7 +585,8 @@ paths:
           schema:
             format: float
             type: number
-        - description: Score types to apply the score value min and max filters. The default is `overall`.
+        - description: Score types to apply the score value min and max filters. The
+            default is `overall`.
           in: query
           name: scorevalue_types
           required: false
@@ -594,14 +606,18 @@ paths:
           schema:
             format: integer
             type: number
-        - description: Format to get the data back. Can be 'json', 'xml', 'tab' or 'csv'. **Note** that this option can only be used when calling the API directly and will not work in this page. The response here will always be JSON.
+        - description: Format to get the data back. Can be 'json', 'xml', 'tab' or 'csv'.
+            **Note** that this option can only be used when calling the API
+            directly and will not work in this page. The response here will
+            always be JSON.
           in: query
           name: format
           required: false
           schema:
             type: string
         - description: >
-            Sort by the given score type. Defaults to 'overall' and descending order. Use '~' prefix to do ascending
+            Sort by the given score type. Defaults to 'overall' and descending
+            order. Use '~' prefix to do ascending
 
             order e.g. '~overall'. You will call a data type score like: 'datatypes.literature', and a data source as
 
@@ -612,7 +628,8 @@ paths:
           schema:
             type: string
         - description: >
-            Restrict the filtered results to those matching the passed string. The matching is done with a
+            Restrict the filtered results to those matching the passed string.
+            The matching is done with a
 
             phrase match prefix.
           in: query
@@ -630,10 +647,13 @@ paths:
       x-code-samples:
         - lang: httpie
           source: >
-            http https://www.targetvalidation.org/api/latest/public/association/filter target==ENSG00000167207 disease==EFO_0003767
+            http
+            https://www.targetvalidation.org/api/latest/public/association/filter
+            target==ENSG00000167207 disease==EFO_0003767
     post:
       description: >
-        Complex queries and filters for association objects can also be submitted using a JSON
+        Complex queries and filters for association objects can also be
+        submitted using a JSON
 
         object and the equivalent POST method.
       operationId: postAssociationFilter
@@ -641,7 +661,7 @@ paths:
         content:
           application/json:
             schema:
-              example: >
+              example: |
                 {"target":["target1", "target2"]}
               type: string
         description: Filters to apply when retrieving association objects.
@@ -656,7 +676,8 @@ paths:
   /platform/public/evidence:
     get:
       description: >
-        We call **evidence** a unit of data that support a connection between a target and a disease.
+        We call **evidence** a unit of data that support a connection
+        between a target and a disease.
 
         The Open Targets Platform integrates multiple types of evidence including genetic associations,
 
@@ -690,7 +711,8 @@ paths:
         - retrieve
     post:
       description: >
-        This is the POST version of [/public/evidence](#!/public/get_public_evidence).
+        This is the POST version of
+        [/public/evidence](#!/public/get_public_evidence).
 
         It allows to query for a list of evidence strings encoded in a `json` object to be passed in the body.
       operationId: postEvidenceById
@@ -698,7 +720,7 @@ paths:
         content:
           application/json:
             schema:
-              example: >
+              example: |
                 {"id":["id1", "id2"]}
               type: string
         description: IDs of the evidence string to retrieve.
@@ -713,7 +735,8 @@ paths:
   /platform/public/evidence/filter:
     get:
       description: >
-        The filter method allows to retrieve the specific data that supports a connection between targets and diseases.
+        The filter method allows to retrieve the specific data that
+        supports a connection between targets and diseases.
 
         Filters can be used to restrict the results by source and type of data,
 
@@ -748,7 +771,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: A pathway identifier (meaning all the targets linked to that pathway).
+        - description: A pathway identifier (meaning all the targets linked to that
+            pathway).
           in: query
           name: pathway
           required: false
@@ -760,19 +784,22 @@ paths:
           required: false
           schema:
             type: string
-        - description: Type of data structure to return. Can be 'full', 'simple', 'ids', or 'count'.
+        - description: Type of data structure to return. Can be 'full', 'simple', 'ids',
+            or 'count'.
           in: query
           name: datastructure
           required: false
           schema:
             type: string
-        - description: The fields you want to retrieve. This will get priority over the data structure requested.
+        - description: The fields you want to retrieve. This will get priority over the
+            data structure requested.
           in: query
           name: fields
           required: false
           schema:
             type: string
-        - description: Filter by minimum score value. The default is 0, but using 0.2 is a good trade-off to filter lower quality data points.
+        - description: Filter by minimum score value. The default is 0, but using 0.2 is a
+            good trade-off to filter lower quality data points.
           in: query
           name: scorevalue_min
           required: false
@@ -788,7 +815,8 @@ paths:
             format: float
             type: number
         - description: >
-            Sort by the given field. The default is 'scores.association_score' in descending order. Use '~' prefix to do ascending
+            Sort by the given field. The default is 'scores.association_score'
+            in descending order. Use '~' prefix to do ascending
 
             order e.g. '~scores.association_score'. It supports multiple entries.
           in: query
@@ -810,7 +838,10 @@ paths:
           schema:
             format: integer
             type: number
-        - description: Format to get the data back. Can be 'json', 'xml', 'tab' or 'csv'. **Note** that this option can only be used when calling the API directly and will not work in this page. The response here will always be JSON.
+        - description: Format to get the data back. Can be 'json', 'xml', 'tab' or 'csv'.
+            **Note** that this option can only be used when calling the API
+            directly and will not work in this page. The response here will
+            always be JSON.
           in: query
           name: format
           required: false
@@ -826,10 +857,12 @@ paths:
       x-code-samples:
         - lang: httpie
           source: >
-            http https://www.targetvalidation.org/api/latest/public/evidence/filter target==ENSG00000167207 disease==EFO_0003767 datastructure==simple
+            http https://www.targetvalidation.org/api/latest/public/evidence/filter
+            target==ENSG00000167207 disease==EFO_0003767 datastructure==simple
     post:
       description: >
-        POST version of [/public/evidence/filter](#!/public/get_public_evidence_filter).
+        POST version of
+        [/public/evidence/filter](#!/public/get_public_evidence_filter).
 
         Filters can be specified as part of a `json` object in the body, simplifying the submission of queries.
       operationId: postEvidenceFilter
@@ -838,7 +871,8 @@ paths:
           application/json:
             schema:
               example: >
-                {"target":["ENSG00000094755", "ENSG00000167207"], "disease":["EFO_0003767"]}
+                {"target":["ENSG00000094755", "ENSG00000167207"],
+                "disease":["EFO_0003767"]}
               type: string
         description: Filters to apply when retrieving evidence string objects.
         required: true
@@ -852,7 +886,8 @@ paths:
   /platform/public/search:
     get:
       description: >
-        This method allows you to look for gene or diseases of interest using a free text search,
+        This method allows you to look for gene or diseases of interest
+        using a free text search,
 
         replicating the functionality of the search box on our homepage. It should be used to identify
 
@@ -893,7 +928,8 @@ paths:
       x-code-samples:
         - lang: httpie
           source: >
-            http https://api.opentargets.io/api/latest/public/search q==NOD2 size==1 filter==target
+            http https://api.opentargets.io/api/latest/public/search q==NOD2 size==1
+            filter==target
         - lang: Python
           source: >
             import requests
@@ -906,7 +942,8 @@ paths:
   /platform/public/utils/metrics:
     get:
       description: >
-        Returns the metrics about associations and evidences, divided by datasource, genes and so on.
+        Returns the metrics about associations and evidences, divided by
+        datasource, genes and so on.
       operationId: getDataMetrics
       responses:
         "200":
@@ -929,7 +966,7 @@ paths:
             print(r.json())
   /platform/public/utils/ping:
     get:
-      description: >
+      description: |
         Check if the API is up
       operationId: getPing
       responses:
@@ -941,7 +978,7 @@ paths:
         - utils
   /platform/public/utils/stats:
     get:
-      description: >
+      description: |
         Returns the number of associations and evidences, divided by datasource.
       operationId: getDataStats
       responses:
@@ -965,7 +1002,7 @@ paths:
             print(r.json())
   /platform/public/utils/therapeuticareas:
     get:
-      description: >
+      description: |
         Returns the list of therapeutic areas for the current data release
       operationId: getTherapeuticAreas
       responses:
@@ -989,7 +1026,7 @@ paths:
             print(r.json())
   /platform/public/utils/version:
     get:
-      description: >
+      description: |
         Returns current API version.
       operationId: getVersion
       responses:
@@ -1002,7 +1039,8 @@ paths:
       x-code-samples:
         - lang: Shell
           source: >
-            curl -X GET https://www.targetvalidation.org/api/latest/public/utils/version
+            curl -X GET
+            https://www.targetvalidation.org/api/latest/public/utils/version
   /platform/swagger:
     get:
       description: Get swagger.yaml specs for the API

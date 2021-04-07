@@ -141,7 +141,11 @@ paths:
   /s1/correction:
     get:
       deprecated: false
-      description: <br/><strong>Possible options:</strong><p class="markdown">An optional parameter <code>diacritize</code> with values <code>yes</code>, <code>no</code> or <code>auto</code> indicate whether the text diacritization will be performed. The default value is <code>auto</code>.</p>
+      description: <br/><strong>Possible options:</strong><p class="markdown">An
+        optional parameter <code>diacritize</code> with values <code>yes</code>,
+        <code>no</code> or <code>auto</code> indicate whether the text
+        diacritization will be performed. The default value is
+        <code>auto</code>.</p>
       operationId: correctionGet
       parameters:
         - description: document ID
@@ -195,7 +199,18 @@ paths:
         - geneea-api-s1
     post:
       deprecated: false
-      description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation" target="_blank">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello world!"}</code></pre><pre><code>{"url": "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre><br/><strong>Possible options:</strong><p class="markdown">An optional parameter <code>diacritize</code> with values <code>yes</code>, <code>no</code> or <code>auto</code> indicate whether the text diacritization will be performed. The default value is <code>auto</code>.</p>'
+      description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline
+        characters. These have to be escaped. (See also <a
+        href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation"
+        target="_blank">Interpretor documentation</a>)<br/>Fields
+        <code>text</code> and <code>url</code> are mutually
+        exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello
+        world!"}</code></pre><pre><code>{"url":
+        "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre><br/><strong>Possible
+        options:</strong><p class="markdown">An optional parameter
+        <code>diacritize</code> with values <code>yes</code>, <code>no</code> or
+        <code>auto</code> indicate whether the text diacritization will be
+        performed. The default value is <code>auto</code>.</p>'
       operationId: correctionPost
       parameters:
         - description: request
@@ -279,7 +294,14 @@ paths:
         - geneea-api-s1
     post:
       deprecated: false
-      description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation" target="_blank">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello world!"}</code></pre><pre><code>{"url": "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre>'
+      description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline
+        characters. These have to be escaped. (See also <a
+        href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation"
+        target="_blank">Interpretor documentation</a>)<br/>Fields
+        <code>text</code> and <code>url</code> are mutually
+        exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello
+        world!"}</code></pre><pre><code>{"url":
+        "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre>'
       operationId: entitiesPost
       parameters:
         - description: request
@@ -363,7 +385,14 @@ paths:
         - geneea-api-s1
     post:
       deprecated: false
-      description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation" target="_blank">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello world!"}</code></pre><pre><code>{"url": "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre>'
+      description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline
+        characters. These have to be escaped. (See also <a
+        href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation"
+        target="_blank">Interpretor documentation</a>)<br/>Fields
+        <code>text</code> and <code>url</code> are mutually
+        exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello
+        world!"}</code></pre><pre><code>{"url":
+        "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre>'
       operationId: lemmatizePost
       parameters:
         - description: request
@@ -447,7 +476,14 @@ paths:
         - geneea-api-s1
     post:
       deprecated: false
-      description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation" target="_blank">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello world!"}</code></pre><pre><code>{"url": "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre>'
+      description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline
+        characters. These have to be escaped. (See also <a
+        href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation"
+        target="_blank">Interpretor documentation</a>)<br/>Fields
+        <code>text</code> and <code>url</code> are mutually
+        exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello
+        world!"}</code></pre><pre><code>{"url":
+        "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre>'
       operationId: sentimentPost
       parameters:
         - description: request
@@ -531,7 +567,14 @@ paths:
         - geneea-api-s1
     post:
       deprecated: false
-      description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation" target="_blank">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello world!"}</code></pre><pre><code>{"url": "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre>'
+      description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline
+        characters. These have to be escaped. (See also <a
+        href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation"
+        target="_blank">Interpretor documentation</a>)<br/>Fields
+        <code>text</code> and <code>url</code> are mutually
+        exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello
+        world!"}</code></pre><pre><code>{"url":
+        "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre>'
       operationId: topicPost
       parameters:
         - description: request
@@ -665,7 +708,8 @@ definitions:
         description: The used language of the document
         type: string
       lemmatizedText:
-        description: Lemmatized text of the document, individual tokens are separated by a space and sentences are separated by a new-line character
+        description: Lemmatized text of the document, individual tokens are separated by
+          a space and sentences are separated by a new-line character
         type: string
       text:
         description: The raw text of the document which has been analysed
@@ -687,19 +731,24 @@ definitions:
         description: Unique identifier of the document, it's optional
         type: string
       language:
-        description: "[optional] The language of the document, auto-detection will be used if omitted"
+        description: "[optional] The language of the document, auto-detection will be
+          used if omitted"
         type: string
       options:
-        description: "[optional] Additional options for the internal modules (key-value pairs)"
+        description: "[optional] Additional options for the internal modules (key-value
+          pairs)"
         type: object
       returnTextInfo:
-        description: "[optional] Indicates whether to return the source text within the response object"
+        description: "[optional] Indicates whether to return the source text within the
+          response object"
         type: boolean
       text:
-        description: The raw text to be analyzed, mutually exclusive with the 'url' parameter
+        description: The raw text to be analyzed, mutually exclusive with the 'url'
+          parameter
         type: string
       url:
-        description: URL of a document to be analysed, mutually exclusive with the 'text' parameter
+        description: URL of a document to be analysed, mutually exclusive with the
+          'text' parameter
         type: string
   Response for the text correction: {}
   Response_for_the_text_correction:

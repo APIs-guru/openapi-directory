@@ -299,10 +299,13 @@ info:
       version: "3.0"
   x-providerName: enode.io
 tags:
-  - description: Charging Locations are created by a user to denote locations where they pay for the power used to charge their vehicle. Smart Charging is active at these locations only.
+  - description: Charging Locations are created by a user to denote locations where
+      they pay for the power used to charge their vehicle. Smart Charging is
+      active at these locations only.
     name: Charging Locations
   - description: >
-      Webhooks are a mechanism that allows your server to recieve notifications of events from the Enode system.
+      Webhooks are a mechanism that allows your server to recieve
+      notifications of events from the Enode system.
 
 
       Currently, there is only one webhook available - a preconfigured webhook called `Firehose` that reports all supported events ocurring within the system. You can configure it using the [Update Firehose Webhook](#operation/putWebhooksFirehose) endpoint.
@@ -585,7 +588,8 @@ paths:
         - Charging Locations
   /health/ready:
     get:
-      description: Gets the combined health status of the service and all functionalities and dependencies.
+      description: Gets the combined health status of the service and all
+        functionalities and dependencies.
       operationId: getHealthReady
       responses:
         "204":
@@ -617,7 +621,8 @@ paths:
         - Service Health
   /me:
     get:
-      description: Returns metadata about the authenticated User, including a list of vendors for which the user has provided credentials
+      description: Returns metadata about the authenticated User, including a list of
+        vendors for which the user has provided credentials
       operationId: getMe
       responses:
         "200":
@@ -665,10 +670,13 @@ paths:
         - Me
   /statistics/charging:
     get:
-      description: Returns a normalized timeseries of statistics about power consumption and price for the User.
+      description: Returns a normalized timeseries of statistics about power
+        consumption and price for the User.
       operationId: getStatisticsCharging
       parameters:
-        - description: The unit of time the data will be cut into before aggregate statistics are applied. For instance if you choose DAY, then each item in the returned array will cover 1 day.
+        - description: The unit of time the data will be cut into before aggregate
+            statistics are applied. For instance if you choose DAY, then each
+            item in the returned array will cover 1 day.
           in: query
           name: resolution
           schema:
@@ -687,7 +695,8 @@ paths:
           schema:
             format: date
             type: string
-        - description: Latest date to include in the response (defaults to current date/time)
+        - description: Latest date to include in the response (defaults to current
+            date/time)
           in: query
           name: endDate
           schema:
@@ -720,7 +729,8 @@ paths:
         - Experimental 🧪
   "/users/{userId}":
     delete:
-      description: Deletes a User and all of their data permanently, and invalidates any associated sessions, authorization codes, and access/refresh tokens
+      description: Deletes a User and all of their data permanently, and invalidates
+        any associated sessions, authorization codes, and access/refresh tokens
       operationId: deleteUsersUserid
       parameters:
         - description: ID of the User
@@ -742,7 +752,9 @@ paths:
   "/users/{userId}/authorization":
     delete:
       description: >-
-        Deletes the User's stored vendor authorizations and credentials, invalidates any associated sessions, authorization codes, and access/refresh tokens.
+        Deletes the User's stored vendor authorizations and credentials,
+        invalidates any associated sessions, authorization codes, and
+        access/refresh tokens.
 
 
         All other User data is retained, and if the User is sent through the Link User flow in the future their account will be just as they left it.
@@ -769,7 +781,9 @@ paths:
         - User Management
   "/users/{userId}/link":
     post:
-      description: Creates an Enode Link session attached to the provided User ID. If this User does not exist, it will be created. The returned `linkState` gives the user short-lived access to Enode Link.
+      description: Creates an Enode Link session attached to the provided User ID. If
+        this User does not exist, it will be created. The returned `linkState`
+        gives the user short-lived access to Enode Link.
       operationId: postUsersUseridLink
       parameters:
         - description: ID of the User
@@ -801,7 +815,8 @@ paths:
       operationId: getVehicles
       parameters:
         - description: >-
-            An optional array of Vehicle fields that should be included in the response, for example: `?field[]=information&field[]=location` 
+            An optional array of Vehicle fields that should be included in the
+            response, for example: `?field[]=information&field[]=location` 
 
 
             By default, no fields are included and only the Vehicle ID will be returned. Response time may be impacted by which fields you request.
@@ -855,7 +870,8 @@ paths:
             minLength: 1
             type: string
         - description: >-
-            An optional array of Vehicle fields that should be included in the response, for example: `?field[]=information&field[]=location` 
+            An optional array of Vehicle fields that should be included in the
+            response, for example: `?field[]=information&field[]=location` 
 
 
             By default, no fields are included and only the Vehicle ID will be returned. Response time may be impacted by which fields you request.
@@ -1103,7 +1119,10 @@ paths:
   "/vehicles/{vehicleId}/watch":
     post:
       description: >
-        Temporarily triggers high-rate updates of the vehicle's properties, and this state expires automatically. This gives you a way to tell us that user may be interacting with your application and are expecting as-fast-as-possible updates on the status of their vehicle in your UI.
+        Temporarily triggers high-rate updates of the vehicle's properties,
+        and this state expires automatically. This gives you a way to tell us
+        that user may be interacting with your application and are expecting
+        as-fast-as-possible updates on the status of their vehicle in your UI.
 
 
         Any data changes resulting from this high-rate updating are reflected everywhere, whether you pull data from the `Vehicles` endpoint, or recieve it via the [Firehose Webhook](#tag/Webhooks)
@@ -1160,7 +1179,8 @@ paths:
         - Webhooks 🧪
   /webhooks/firehose/test:
     post:
-      description: Trigger a test payload to be sent to your configured Firehose Webhook url.
+      description: Trigger a test payload to be sent to your configured Firehose
+        Webhook url.
       operationId: postWebhooksFirehoseTest
       responses:
         default:
@@ -1202,7 +1222,8 @@ components:
     Charge_State:
       properties:
         batteryCapacity:
-          description: Vehicle's maximum physical battery capacity in kWh. This number slowly decreases/degrades over time.
+          description: Vehicle's maximum physical battery capacity in kWh. This number
+            slowly decreases/degrades over time.
           example: 73.21
           minimum: 0
           type: number
@@ -1229,7 +1250,8 @@ components:
           type: number
         chargeTimeRemaining:
           description: >-
-            Estimated time until the current charging intent is completed, in minutes.
+            Estimated time until the current charging intent is completed, in
+            minutes.
 
 
             This property is only available when the vehicle is charging, and is `null` any other time.
@@ -1242,7 +1264,8 @@ components:
         isChargingReasons:
           $ref: "#/components/schemas/isChargingReasons"
         isPluggedIn:
-          description: Indicates whether the vehicle is connected to a charging box (regardless of whether it is actually charging)
+          description: Indicates whether the vehicle is connected to a charging box
+            (regardless of whether it is actually charging)
           example: true
           type: boolean
         range:
@@ -1275,23 +1298,33 @@ components:
     Link_User_Options:
       properties:
         forceLanguage:
-          description: BCP47 language code - Force the Link UI to prefer the specified language. If omitted, the UI will default to the user's browser default language.
+          description: BCP47 language code - Force the Link UI to prefer the specified
+            language. If omitted, the UI will default to the user's browser
+            default language.
           example: no-NB
           type: string
         linkMultiple:
           default: false
-          description: Allow multiple car vendors to be linked during a single Link session. Automatically disabled if `vendor` is set.
+          description: Allow multiple car vendors to be linked during a single Link
+            session. Automatically disabled if `vendor` is set.
           type: boolean
         userImage:
-          description: Full URL to an image that the user would recognize as being their own. This URL is only stored for the duration of the Link session, and is displayed to the user to reduce the effectiveness of phishing attacks.
+          description: Full URL to an image that the user would recognize as being their
+            own. This URL is only stored for the duration of the Link session,
+            and is displayed to the user to reduce the effectiveness of phishing
+            attacks.
           example: https://cdn.website.example/user/x/profile.jpg
           type: string
         userName:
-          description: The User's first name, full name, or other identifier that the user would recognize as being their own. This name is only stored for the duration of the Link session, and is displayed to the user to reduce the effectiveness of phishing attacks.
+          description: The User's first name, full name, or other identifier that the user
+            would recognize as being their own. This name is only stored for the
+            duration of the Link session, and is displayed to the user to reduce
+            the effectiveness of phishing attacks.
           example: Ola
           type: string
         vendor:
-          description: Automatically skip to the credential input screen for this vendor, skipping the Vendor selection menu.
+          description: Automatically skip to the credential input screen for this vendor,
+            skipping the Vendor selection menu.
           enum:
             - TESLA
             - BMW
@@ -1312,7 +1345,10 @@ components:
     Linked_Vendor:
       properties:
         isValid:
-          description: Whether the provided credentials are currently valid. A `false` value here indicates that a credential has become invalidated, and [Link User](#operation/postUsersUseridLink) should be used to get new credentials from this user.
+          description: Whether the provided credentials are currently valid. A `false`
+            value here indicates that a credential has become invalidated, and
+            [Link User](#operation/postUsersUseridLink) should be used to get
+            new credentials from this user.
           type: boolean
         vendor:
           description: Vendor
@@ -1482,11 +1518,13 @@ components:
     Update_Firehose_Webhook:
       properties:
         secret:
-          description: A cryptographically secure secret, generated and provided by your client
+          description: A cryptographically secure secret, generated and provided by your
+            client
           example: 0Kvs1tAUQ69FOMBiWlt5XJSrruXMhWDiVbyrWaNm
           type: string
         url:
-          description: The HTTPS url to which Enode should POST the event payload when a watched property changes
+          description: The HTTPS url to which Enode should POST the event payload when a
+            watched property changes
           example: https://brainpower.co/enode-webhooks/firehose
           type: string
           x-format:
@@ -1497,7 +1535,8 @@ components:
         chargeState:
           $ref: "#/components/schemas/Charge_State"
         chargingLocationId:
-          description: Id of the charging location the vehicle is currently positioned at (if any)
+          description: Id of the charging location the vehicle is currently positioned at
+            (if any)
           example: 8d90101b-3f2f-462a-bbb4-1ed320d33bbe
           type: string
           x-format:
@@ -1586,18 +1625,22 @@ components:
     Vehicle_Smart_Charging_Policy:
       properties:
         deadline:
-          description: The deadline for fully charging the vehicle. Smart charging does not work without setting a deadline. The deadline is expressed as a time on a 24h clock in UTC
+          description: The deadline for fully charging the vehicle. Smart charging does
+            not work without setting a deadline. The deadline is expressed as a
+            time on a 24h clock in UTC
           example: 08:00
           pattern: \d{2}:\d{2}
           type: string
         isEnabled:
-          description: When enabled, this vehicle's charging status may be controlled by Smart Charging.
+          description: When enabled, this vehicle's charging status may be controlled by
+            Smart Charging.
           example: true
           type: boolean
       type: object
     isChargingReasons:
       description: >-
-        Array of string constants that explain why the car is or is not charging. May contain multiple values.
+        Array of string constants that explain why the car is or is not
+        charging. May contain multiple values.
 
 
         **Any:**
@@ -1634,7 +1677,9 @@ components:
   securitySchemes:
     ClientAccessToken:
       description: >
-        A `ClientAccessToken` access token is obtained via the [OAuth 2.0 Client Credentials grant](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/)
+        A `ClientAccessToken` access token is obtained via the [OAuth 2.0
+        Client Credentials
+        grant](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/)
 
 
         When accessing protected resources, the token should be provided in a Bearer authorization header as specified in [RFC6750](https://tools.ietf.org/html/rfc6750#section-2.1)
@@ -1659,7 +1704,9 @@ components:
       type: oauth2
     UserAccessToken:
       description: >
-        A `UserAccessToken` access token is obtained via the [OAuth 2.0 Authorization Code grant](https://www.oauth.com/oauth2-servers/access-tokens/authorization-code-request/)
+        A `UserAccessToken` access token is obtained via the [OAuth 2.0
+        Authorization Code
+        grant](https://www.oauth.com/oauth2-servers/access-tokens/authorization-code-request/)
 
 
         This token represents the authorization for the bearer to access resources on behalf of the user who authorized it. This authorization is further limited by scopes. When relevant, the `scope` required by each endpoint is listed in the documentation for that endpoint.

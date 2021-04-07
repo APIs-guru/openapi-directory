@@ -95,13 +95,15 @@ parameters:
     required: true
     type: integer
   MeetingId4Metrics:
-    description: The meeting ID or meeting UUID. If given meeting ID, will take the last meeting instance.
+    description: The meeting ID or meeting UUID. If given meeting ID, will take the
+      last meeting instance.
     in: path
     name: meetingId
     required: true
     type: string
   MeetingId4Recording:
-    description: The meeting ID or meeting UUID. If given meeting ID, will take the last meeting instance.
+    description: The meeting ID or meeting UUID. If given meeting ID, will take the
+      last meeting instance.
     in: path
     name: meetingId
     required: true
@@ -179,7 +181,10 @@ parameters:
     required: true
     type: string
   NextPageToken:
-    description: Next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceed the current page size. The expiration period for this token is 15 minutes.
+    description: Next page token is used to paginate through large result sets. A
+      next page token will be returned whenever the set of available results
+      exceed the current page size. The expiration period for this token is 15
+      minutes.
     in: query
     name: next_page_token
     type: string
@@ -209,7 +214,10 @@ parameters:
     name: page_size
     type: integer
   PageToken:
-    description: Next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceed the current page size. The expiration period for this token is 15 minutes.
+    description: Next page token is used to paginate through large result sets. A
+      next page token will be returned whenever the set of available results
+      exceed the current page size. The expiration period for this token is 15
+      minutes.
     in: query
     name: next_page_token
     type: string
@@ -325,7 +333,8 @@ parameters:
     required: true
     type: integer
   WebinarId4Metrics:
-    description: The webinar ID or webinar UUID. If given webinar ID, will take the last webinar instance.
+    description: The webinar ID or webinar UUID. If given webinar ID, will take the
+      last webinar instance.
     in: path
     name: webinarId
     required: true
@@ -412,7 +421,10 @@ paths:
       tags:
         - Accounts
     post:
-      description: Create a sub account under the master account. <aside>Your account must be a master account and have this privilege to create sub account. Zoom only assigns this privilege to trusted partners. The created user will not receive a confirmation email.</aside>.
+      description: Create a sub account under the master account. <aside>Your account
+        must be a master account and have this privilege to create sub account.
+        Zoom only assigns this privilege to trusted partners. The created user
+        will not receive a confirmation email.</aside>.
       operationId: accountCreate
       parameters:
         - description: Account
@@ -449,7 +461,9 @@ paths:
         - Accounts
   "/accounts/{accountId}":
     delete:
-      description: Disassociate a sub account from the master account. This will leave the account intact but the sub account will not longer be associated with the master account.
+      description: Disassociate a sub account from the master account. This will leave
+        the account intact but the sub account will not longer be associated
+        with the master account.
       operationId: accountDisassociate
       parameters:
         - $ref: "#/parameters/AccountId"
@@ -462,7 +476,9 @@ paths:
       tags:
         - Accounts
     get:
-      description: Retrieve a sub account under the master account. <aside>Your account must be a master account and have this privilege to read sub accounts. Zoom only assigns this privilege to trusted partners</aside>.
+      description: Retrieve a sub account under the master account. <aside>Your
+        account must be a master account and have this privilege to read sub
+        accounts. Zoom only assigns this privilege to trusted partners</aside>.
       operationId: account
       parameters:
         - $ref: "#/parameters/AccountId"
@@ -511,7 +527,9 @@ paths:
       tags:
         - Billing
     patch:
-      description: Update billing information for a sub account under the master account <aside>Only for the sub account which is a paid account and paid by master account</aside>
+      description: Update billing information for a sub account under the master
+        account <aside>Only for the sub account which is a paid account and paid
+        by master account</aside>
       operationId: accountBillingUpdate
       parameters:
         - $ref: "#/parameters/AccountId"
@@ -565,7 +583,9 @@ paths:
         - Accounts
   "/accounts/{accountId}/plans":
     get:
-      description: Retrieve plan information for a sub account under the master account  <aside>Only for the sub account which is paid by master account</aside>
+      description: Retrieve plan information for a sub account under the master
+        account  <aside>Only for the sub account which is paid by master
+        account</aside>
       operationId: accountPlans
       parameters:
         - $ref: "#/parameters/AccountId"
@@ -580,7 +600,9 @@ paths:
       tags:
         - Billing
     post:
-      description: Subscribe plans for a sub account of the master account <aside>Can only subscribe plans for the sub account which is a free account and paid by master account</aside>
+      description: Subscribe plans for a sub account of the master account <aside>Can
+        only subscribe plans for the sub account which is a free account and
+        paid by master account</aside>
       operationId: accountPlanCreate
       parameters:
         - $ref: "#/parameters/AccountId"
@@ -604,7 +626,9 @@ paths:
         - Billing
   "/accounts/{accountId}/plans/addons":
     post:
-      description: Add an additional plan for sub account <aside>Can only add an Additional plan for the sub account which is a paid account and paid by master account</aside>
+      description: Add an additional plan for sub account <aside>Can only add an
+        Additional plan for the sub account which is a paid account and paid by
+        master account</aside>
       operationId: accountPlanAddonCreate
       parameters:
         - $ref: "#/parameters/AccountId"
@@ -620,7 +644,9 @@ paths:
       tags:
         - Billing
     put:
-      description: Update an additional plan for sub account<aside>Can only update an Additional plan for the sub account which is a paid account and paid by master account</aside>
+      description: Update an additional plan for sub account<aside>Can only update an
+        Additional plan for the sub account which is a paid account and paid by
+        master account</aside>
       operationId: accountPlanAddonUpdate
       parameters:
         - $ref: "#/parameters/AccountId"
@@ -637,7 +663,9 @@ paths:
         - Billing
   "/accounts/{accountId}/plans/base":
     put:
-      description: Update a base plan for a sub account <aside>Can only update a base plan for the sub account which is a paid account and paid by master account</aside>
+      description: Update a base plan for a sub account <aside>Can only update a base
+        plan for the sub account which is a paid account and paid by master
+        account</aside>
       operationId: accountPlanBaseUpdate
       parameters:
         - $ref: "#/parameters/AccountId"
@@ -777,7 +805,8 @@ paths:
           schema:
             properties:
               name:
-                description: Group name. Must be unique in one account. Character length is less than 128.
+                description: Group name. Must be unique in one account. Character length is less
+                  than 128.
                 type: string
       responses:
         "204":
@@ -931,7 +960,8 @@ paths:
         - Devices
   /im/chat/sessions:
     get:
-      description: Retrieve IM Chat sessions for a specified period <aside>This API only supports oauth2.</aside>
+      description: Retrieve IM Chat sessions for a specified period <aside>This API
+        only supports oauth2.</aside>
       operationId: imChatSessions
       parameters:
         - $ref: "#/parameters/FromDate"
@@ -977,7 +1007,8 @@ paths:
         - IM Chat
   "/im/chat/sessions/{sessionId}":
     get:
-      description: Retrieve IM Chat messages for a specified period <aside>This API only supports oauth2.</aside>
+      description: Retrieve IM Chat messages for a specified period <aside>This API
+        only supports oauth2.</aside>
       operationId: imChatMessages
       parameters:
         - $ref: "#/parameters/SessionId"
@@ -1062,7 +1093,8 @@ paths:
                 description: Members can search others in the same email domain
                 type: boolean
               search_by_ma_account:
-                description: Members can search others under same master account, including all sub accounts
+                description: Members can search others under same master account, including all
+                  sub accounts
                 type: boolean
               type:
                 default: normal
@@ -1073,9 +1105,12 @@ paths:
                   - restricted
                 type: string
                 x-enum-descriptions:
-                  - Only members can see the group automatically. Other people can search members in the group.
-                  - All people in the account can see the group and members automatically
-                  - Nobody can see the group or search members except the members in the group
+                  - Only members can see the group automatically. Other people
+                    can search members in the group.
+                  - All people in the account can see the group and members
+                    automatically
+                  - Nobody can see the group or search members except the
+                    members in the group
       responses:
         "201":
           description: IM Group created
@@ -1098,7 +1133,8 @@ paths:
                 description: Members can search others in the same email domain
                 type: boolean
               search_by_ma_account:
-                description: Members can search others under same master account, including all sub accounts
+                description: Members can search others under same master account, including all
+                  sub accounts
                 type: boolean
               total_members:
                 description: Group member count
@@ -1161,7 +1197,8 @@ paths:
                 description: Members can search others in the same email domain
                 type: boolean
               search_by_ma_account:
-                description: Members can search others under same master account, including all sub accounts
+                description: Members can search others under same master account, including all
+                  sub accounts
                 type: boolean
               type:
                 description: IM Group type
@@ -1171,9 +1208,12 @@ paths:
                   - restricted
                 type: string
                 x-enum-descriptions:
-                  - Only members can see the group automatically. Other people can search members in the group.
-                  - All people in the account can see the group and members automatically
-                  - Nobody can see the group or search members except the members in the group
+                  - Only members can see the group automatically. Other people
+                    can search members in the group.
+                  - All people in the account can see the group and members
+                    automatically
+                  - Nobody can see the group or search members except the
+                    members in the group
       responses:
         "204":
           description: IM Group updated
@@ -1675,7 +1715,8 @@ paths:
       operationId: meetingRegistrantCreate
       parameters:
         - $ref: "#/parameters/MeetingId"
-        - description: Occurrence IDs. You can find these with the meeting get API. Multiple values separated by comma.
+        - description: Occurrence IDs. You can find these with the meeting get API.
+            Multiple values separated by comma.
           in: query
           name: occurrence_ids
           type: string
@@ -1758,7 +1799,10 @@ paths:
         - Meetings
   /metrics/crc:
     get:
-      description: Get CRC Port usage hour by hour for a specified time period <aside class='notice'>We will report a maximum of one month. For example, if "from" is set to "2017-08-05" and "to" is "2017-10-10" we will adjust "from" to "2017-09-10"</aside>.
+      description: Get CRC Port usage hour by hour for a specified time period <aside
+        class='notice'>We will report a maximum of one month. For example, if
+        "from" is set to "2017-08-05" and "to" is "2017-10-10" we will adjust
+        "from" to "2017-09-10"</aside>.
       operationId: dashboardCRC
       parameters:
         - $ref: "#/parameters/FromDate"
@@ -2492,7 +2536,10 @@ paths:
         - Webinars
   /report/cloud_recording:
     get:
-      description: Retrieve cloud recording usage report for a specified period. You can only get cloud recording reports for the most recent period of 6 months. The date gap between from and to dates should be smaller or equal to 30 days.
+      description: Retrieve cloud recording usage report for a specified period. You
+        can only get cloud recording reports for the most recent period of 6
+        months. The date gap between from and to dates should be smaller or
+        equal to 30 days.
       operationId: reportCloudRecording
       parameters:
         - $ref: "#/parameters/FromDate"
@@ -2533,7 +2580,8 @@ paths:
         - Reports
   /report/daily:
     get:
-      description: Retrieve daily report for one month, can only get daily report for recent 6 months
+      description: Retrieve daily report for one month, can only get daily report for
+        recent 6 months
       operationId: reportDaily
       parameters:
         - description: Year for this report
@@ -2745,7 +2793,8 @@ paths:
         - Reports
   /report/telephone:
     get:
-      description: Retrieve telephone report for a specified period <aside>Toll Report option would be removed.</aside>.
+      description: Retrieve telephone report for a specified period <aside>Toll Report
+        option would be removed.</aside>.
       operationId: reportTelephone
       parameters:
         - default: 1
@@ -3285,10 +3334,24 @@ paths:
                   - ssoCreate
                 type: string
                 x-enum-descriptions:
-                  - User will get an email sent from Zoom. There is a confirmation link in this email. User will then need to click this link to activate their account to the Zoom service. The user can set or change their password in Zoom. <br/>.
-                  - This action is provided for enterprise customer who has a managed domain. This feature is disabled by default because of the security risk involved in creating a user who does not belong to your domain without notifying the user. <br/>
-                  - This action is provided for API partner only. User created in this way has no password and is not able to log into the Zoom web site or client. <br/>
-                  - This action is provided for enabled "Pre-provisioning SSO User" option. User created in this way has no password. If it is not a basic user, will generate a Personal Vanity URL using user name (no domain) of the provisioning email. If user name or pmi is invalid or occupied, will use random number/random personal vanity URL. <br/>
+                  - User will get an email sent from Zoom. There is a
+                    confirmation link in this email. User will then need to
+                    click this link to activate their account to the Zoom
+                    service. The user can set or change their password in Zoom.
+                    <br/>.
+                  - This action is provided for enterprise customer who has a
+                    managed domain. This feature is disabled by default because
+                    of the security risk involved in creating a user who does
+                    not belong to your domain without notifying the user. <br/>
+                  - This action is provided for API partner only. User created
+                    in this way has no password and is not able to log into the
+                    Zoom web site or client. <br/>
+                  - This action is provided for enabled "Pre-provisioning SSO
+                    User" option. User created in this way has no password. If
+                    it is not a basic user, will generate a Personal Vanity URL
+                    using user name (no domain) of the provisioning email. If
+                    user name or pmi is invalid or occupied, will use random
+                    number/random personal vanity URL. <br/>
               user_info:
                 properties:
                   email:
@@ -3644,7 +3707,8 @@ paths:
       tags:
         - Meetings
     post:
-      description: Create a meeting for a user <aside>The expiration time of start_url is two hours. But for API users, the expiration time is 90 days.</aside>
+      description: Create a meeting for a user <aside>The expiration time of start_url
+        is two hours. But for API users, the expiration time is 90 days.</aside>
       operationId: meetingCreate
       parameters:
         - $ref: "#/parameters/UserId"
@@ -3941,7 +4005,8 @@ paths:
           x-enum-descriptions:
             - Used for starting meeting with client SDK.
             - Used for generating the start meeting url. (Deprecated)
-            - Used for generating the start meeting url. The expiration time is two hours. For API users, the expiration time is 90 days.
+            - Used for generating the start meeting url. The expiration time is
+              two hours. For API users, the expiration time is 90 days.
       responses:
         "200":
           description: Token returned
@@ -4058,7 +4123,8 @@ paths:
       tags:
         - Webinars
     post:
-      description: Create a webinar for a user <aside>The expiration time of start_url is two hours. But for API users, the expiration time is 90 days.</aside>
+      description: Create a webinar for a user <aside>The expiration time of start_url
+        is two hours. But for API users, the expiration time is 90 days.</aside>
       operationId: webinarCreate
       parameters:
         - $ref: "#/parameters/UserId"
@@ -4638,7 +4704,8 @@ paths:
       operationId: webinarRegistrantCreate
       parameters:
         - $ref: "#/parameters/WebinarId"
-        - description: Occurrence IDs, could get this value from Webinar Get API. Multiple value separated by comma.
+        - description: Occurrence IDs, could get this value from Webinar Get API. Multiple
+            value separated by comma.
           in: query
           name: occurrence_ids
           type: string
@@ -4743,7 +4810,11 @@ paths:
         - Webinars
 definitions:
   Account:
-    description: The account object represents an account on zoom. The person who created the account, or who the account was created for, is referred to as the account owner. You can read more about the Zoom account structure <a href='https://developer.zoom.us/blog/a-brief-look-at-zoom-account-structures/' target='_blank'>here</a>.
+    description: The account object represents an account on zoom. The person who
+      created the account, or who the account was created for, is referred to as
+      the account owner. You can read more about the Zoom account structure <a
+      href='https://developer.zoom.us/blog/a-brief-look-at-zoom-account-structures/'
+      target='_blank'>here</a>.
     properties:
       email:
         description: User's email address
@@ -4852,7 +4923,11 @@ definitions:
     description: Account base plan object
     properties:
       hosts:
-        description: Account base plan number of hosts. For a Pro Plan, please select a value between 1 and 9. For a Business Plan, please select a value between 10 and 49. For a Education Plan, please select a value between 20 and 149. For a Free Trial Plan, please select a value between 1 and 9999.
+        description: Account base plan number of hosts. For a Pro Plan, please select a
+          value between 1 and 9. For a Business Plan, please select a value
+          between 10 and 49. For a Education Plan, please select a value between
+          20 and 149. For a Free Trial Plan, please select a value between 1 and
+          9999.
         type: integer
       type:
         description: Account base <a href="#plans">plan type</a>
@@ -4962,7 +5037,8 @@ definitions:
     properties:
       meeting_capacity:
         default: 100
-        description: Set the maximum number of participants this user can have in a single meeting
+        description: Set the maximum number of participants this user can have in a
+          single meeting
         type: integer
     type: object
   AccountSettingsInMeeting:
@@ -4978,7 +5054,8 @@ definitions:
         description: Show Zoom Desktop application when sharing screen
         type: boolean
       annotation:
-        description: Allow participants to use annotation tools to add information to shared screens
+        description: Allow participants to use annotation tools to add information to
+          shared screens
         type: boolean
       anonymous_question_answer:
         description: Allow Anonymous Q&A in Webinar
@@ -4987,22 +5064,29 @@ definitions:
         description: Allow hosts to temporarily remove an attendee from the meeting
         type: boolean
       attention_tracking:
-        description: Lets the host see an indicator in the participant panel if a meeting/webinar attendee does not have Zoom in focus during screen sharing
+        description: Lets the host see an indicator in the participant panel if a
+          meeting/webinar attendee does not have Zoom in focus during screen
+          sharing
         type: boolean
       auto_answer:
-        description: Enable users to see and add contacts to 'auto-answer group' in the contact list on chat. Any call from members of this group will be automatically answered.
+        description: Enable users to see and add contacts to 'auto-answer group' in the
+          contact list on chat. Any call from members of this group will be
+          automatically answered.
         type: boolean
       auto_saving_chat:
-        description: Automatically save all in-meeting chats so that hosts do not need to manually save the text of the chat after the meeting starts
+        description: Automatically save all in-meeting chats so that hosts do not need
+          to manually save the text of the chat after the meeting starts
         type: boolean
       breakout_room:
         description: Allow host to split meeting participants into separate, smaller rooms
         type: boolean
       chat:
-        description: Allow meeting participants to send a message visible to all participants
+        description: Allow meeting participants to send a message visible to all
+          participants
         type: boolean
       closed_caption:
-        description: Allow host to type closed captions or assign a participant/third party device to add closed captions
+        description: Allow host to type closed captions or assign a participant/third
+          party device to add closed captions
         type: boolean
       co_host:
         description: Allow the host to add co-hosts
@@ -5033,13 +5117,16 @@ definitions:
         description: Allow another user to take control of your camera during a meeting
         type: boolean
       feedback:
-        description: Add a Feedback tab to the Windows Settings or Mac Preferences dialog, and also enable users to provide feedback to Zoom at the end of the meeting
+        description: Add a Feedback tab to the Windows Settings or Mac Preferences
+          dialog, and also enable users to provide feedback to Zoom at the end
+          of the meeting
         type: boolean
       file_transfer:
         description: Hosts and participants can send files through the in-meeting chat
         type: boolean
       group_hd:
-        description: Activate higher quality video for host and participants. (This will use more bandwidth.)
+        description: Activate higher quality video for host and participants. (This will
+          use more bandwidth.)
         type: boolean
       original_audio:
         description: Allow users to select original sound in their client settings
@@ -5055,13 +5142,15 @@ definitions:
         type: boolean
       ports_range:
         default: ""
-        description: Listening ports range, separated by comma (ex 55,56). The ports range must be between 1 to 65535.
+        description: Listening ports range, separated by comma (ex 55,56). The ports
+          range must be between 1 to 65535.
         type: string
       post_meeting_feedback:
         description: Display a thumbs up/down survey at the end of each meeting
         type: boolean
       private_chat:
-        description: Allow meeting participants to send a private 1:1 message to another participants
+        description: Allow meeting participants to send a private 1:1 message to another
+          participants
         type: boolean
       remote_control:
         description: Allow users to request remote control
@@ -5082,7 +5171,8 @@ definitions:
         description: Use HTML format email for Outlook plugin
         type: boolean
       virtual_background:
-        description: Allow users to replace their background with any selected image. Choose or upload an image in the Zoom Desktop application settings.
+        description: Allow users to replace their background with any selected image.
+          Choose or upload an image in the Zoom Desktop application settings.
         type: boolean
       watermark:
         description: Add watermark when viewing shared screen
@@ -5101,35 +5191,44 @@ definitions:
     description: "Account Settings: Integration"
     properties:
       box:
-        description: Enables users who join a meeting from their mobile device to share content from their Box account
+        description: Enables users who join a meeting from their mobile device to share
+          content from their Box account
         type: boolean
       dropbox:
-        description: Enables users who join a meeting from their mobile device to share content from their Dropbox account
+        description: Enables users who join a meeting from their mobile device to share
+          content from their Dropbox account
         type: boolean
       google_calendar:
         description: Enables meetings to be scheduled using Google Calendars
         type: boolean
       google_drive:
-        description: Enables users who join a meeting from their mobile device to share content from their Google Drive
+        description: Enables users who join a meeting from their mobile device to share
+          content from their Google Drive
         type: boolean
       kubi:
-        description: Enables users to control a connected Kubi device from within a Zoom meeting
+        description: Enables users to control a connected Kubi device from within a Zoom
+          meeting
         type: boolean
       microsoft_one_drive:
-        description: Enables users who join a meeting from their mobile device to share content from their Microsoft OneDrive account
+        description: Enables users who join a meeting from their mobile device to share
+          content from their Microsoft OneDrive account
         type: boolean
     type: object
   AccountSettingsRecording:
     description: "Account Settings: Recording"
     properties:
       account_user_access_recording:
-        description: Cloud recordings are only accessible to account members. People outside of your organization cannot open links that provide access to cloud recordings.
+        description: Cloud recordings are only accessible to account members. People
+          outside of your organization cannot open links that provide access to
+          cloud recordings.
         type: boolean
       auto_delete_cmr:
-        description: Allow Zoom to automatically delete recordings permanently after a specified number of days
+        description: Allow Zoom to automatically delete recordings permanently after a
+          specified number of days
         type: boolean
       auto_delete_cmr_days:
-        description: When `auto_delete_cmr` is 'true' this value will set the number of days before auto deletion of cloud recordings
+        description: When `auto_delete_cmr` is 'true' this value will set the number of
+          days before auto deletion of cloud recordings
         type: integer
       auto_recording:
         description: Record meetings automatically as they start
@@ -5164,7 +5263,8 @@ definitions:
         description: Record active speaker with shared screen
         type: boolean
       recording_audio_transcript:
-        description: Automatically transcribe the audio of the meeting or webinar to the cloud
+        description: Automatically transcribe the audio of the meeting or webinar to the
+          cloud
         type: boolean
       save_chat_text:
         description: Save chat text from the meeting
@@ -5200,7 +5300,8 @@ definitions:
         description: Only signed-in users with a specific domain can join meetings
         type: boolean
       force_pmi_jbh_password:
-        description: Require a password for Personal Meetings if attendees can join before host
+        description: Require a password for Personal Meetings if attendees can join
+          before host
         type: boolean
       host_video:
         description: Start meetings with host video on
@@ -5212,7 +5313,8 @@ definitions:
         description: Always display "Zoom Meeting" as the meeting topic
         type: boolean
       participant_video:
-        description: Start meetings with participant video on. Participants can change this during the meeting.
+        description: Start meetings with participant video on. Participants can change
+          this during the meeting.
         type: boolean
     type: object
   AccountSettingsSecurity:
@@ -5235,7 +5337,8 @@ definitions:
         description: 3rd party audio conference info
         type: string
       third_party_audio:
-        description: Users can join the meeting using the existing 3rd party audio configuration
+        description: Users can join the meeting using the existing 3rd party audio
+          configuration
         type: boolean
     type: object
   AccountSettingsZoomRooms:
@@ -5512,7 +5615,8 @@ definitions:
             description: Members can search others in the same email domain
             type: boolean
           search_by_ma_account:
-            description: Members can search others under same master account, including all sub accounts
+            description: Members can search others under same master account, including all
+              sub accounts
             type: boolean
           type:
             default: normal
@@ -5523,9 +5627,12 @@ definitions:
               - restricted
             type: string
             x-enum-descriptions:
-              - Only members can see the group automatically. Other people can search members in the group.
-              - All people in the account can see the group and members automatically
-              - Nobody can see the group or search members except the members in the group
+              - Only members can see the group automatically. Other people can
+                search members in the group.
+              - All people in the account can see the group and members
+                automatically
+              - Nobody can see the group or search members except the members in
+                the group
     description: IM Group object
     type: object
   IMGroupList:
@@ -5881,7 +5988,8 @@ definitions:
         type: boolean
       join_before_host:
         default: false
-        description: Allow participants to join the meeting before the host starts the meeting. Only used for scheduled or recurring meetings.
+        description: Allow participants to join the meeting before the host starts the
+          meeting. Only used for scheduled or recurring meetings.
         type: boolean
       mute_upon_entry:
         default: false
@@ -5901,10 +6009,12 @@ definitions:
         x-enum-descriptions:
           - Attendees register once and can attend any of the occurrences
           - Attendees need to register for each occurrence to attend
-          - Attendees register once and can choose one or more occurrences to attend
+          - Attendees register once and can choose one or more occurrences to
+            attend
       use_pmi:
         default: false
-        description: Use Personal Meeting ID. Only used for scheduled meetings and recurring meetings with no fixed time.
+        description: Use Personal Meeting ID. Only used for scheduled meetings and
+          recurring meetings with no fixed time.
         type: boolean
       waiting_room:
         default: false
@@ -6007,7 +6117,10 @@ definitions:
     description: Pagination Object
     properties:
       next_page_token:
-        description: Next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceed the current page size. The expiration period for this token is 15 minutes.
+        description: Next page token is used to paginate through large result sets. A
+          next page token will be returned whenever the set of available results
+          exceed the current page size. The expiration period for this token is
+          15 minutes.
         type: string
       page_count:
         description: The number of items returned on this page
@@ -6025,7 +6138,9 @@ definitions:
     description: Pagination Object
     properties:
       next_page_token:
-        description: Next page token, used to paginate through large result sets. A next page token will be returned whenever the set of available result list exceeds page size. The expiration period is 15 minutes.
+        description: Next page token, used to paginate through large result sets. A next
+          page token will be returned whenever the set of available result list
+          exceeds page size. The expiration period is 15 minutes.
         type: string
       page_size:
         default: 30
@@ -6037,7 +6152,10 @@ definitions:
     description: Pagination Object
     properties:
       next_page_token:
-        description: Next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceed the current page size. The expiration period for this token is 15 minutes.
+        description: Next page token is used to paginate through large result sets. A
+          next page token will be returned whenever the set of available results
+          exceed the current page size. The expiration period for this token is
+          15 minutes.
         type: string
       page_count:
         description: The number of items returned on this page
@@ -6418,7 +6536,8 @@ definitions:
         type: integer
         x-enum-descriptions:
           - Registrants can watch the recording directly after registration
-          - Registrants will receive emails then watch the recording after you approve the registration
+          - Registrants will receive emails then watch the recording after you
+            approve the registration
           - Disabled
       on_demand:
         description: Registration required
@@ -6452,16 +6571,20 @@ definitions:
     description: Recurrence object
     properties:
       end_date_time:
-        description: Select a date the meeting will occur before it is canceled.. Should be UTC time, such as 2017-11-25T12:00:00Z. (Cannot be used with "end_times".)
+        description: Select a date the meeting will occur before it is canceled.. Should
+          be UTC time, such as 2017-11-25T12:00:00Z. (Cannot be used with
+          "end_times".)
         format: date-time
         type: string
       end_times:
         default: 1
-        description: Select how many times the meeting will occur before it is canceled. (Cannot be used with "end_date_time".)
+        description: Select how many times the meeting will occur before it is canceled.
+          (Cannot be used with "end_date_time".)
         maximum: 50
         type: integer
       monthly_day:
-        description: Day of the month for the meeting to be scheduled. The value range is from 1 to 31.
+        description: Day of the month for the meeting to be scheduled. The value range
+          is from 1 to 31.
         type: integer
       monthly_week:
         description: Week for which the meeting should recur each month,
@@ -6498,7 +6621,9 @@ definitions:
           - Friday
           - Saturday
       repeat_interval:
-        description: At which interval should the meeting repeat? For a daily meeting, max of 90 days. For a weekly meeting, max of 12 weeks. For a monthly meeting, max of 3 months.
+        description: At which interval should the meeting repeat? For a daily meeting,
+          max of 90 days. For a weekly meeting, max of 12 weeks. For a monthly
+          meeting, max of 3 months.
         type: integer
       type:
         description: Recurrence meeting type
@@ -6512,7 +6637,8 @@ definitions:
           - Weekly
           - Monthly
       weekly_days:
-        description: Days of the week the meeting should repeat, multiple values separated by comma
+        description: Days of the week the meeting should repeat, multiple values
+          separated by comma
         enum:
           - 1
           - 2
@@ -6673,18 +6799,25 @@ definitions:
         description: Meeting duration (minutes). Used for scheduled meetings only
         type: integer
       password:
-        description: "Password to join the meeting. Password may only contain the following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters."
+        description: "Password to join the meeting. Password may only contain the
+          following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters."
         type: string
       recurrence:
         $ref: "#/definitions/Recurrence"
       settings:
         $ref: "#/definitions/MeetingSettings"
       start_time:
-        description: Meeting start time. When using a format like "yyyy-MM-dd'T'HH:mm:ss'Z'", always use GMT time. When using a format like "yyyy-MM-dd'T'HH:mm:ss", you should use local time and you will need to specify the time zone. Only used for scheduled meetings and recurring meetings with fixed time.
+        description: Meeting start time. When using a format like
+          "yyyy-MM-dd'T'HH:mm:ss'Z'", always use GMT time. When using a format
+          like "yyyy-MM-dd'T'HH:mm:ss", you should use local time and you will
+          need to specify the time zone. Only used for scheduled meetings and
+          recurring meetings with fixed time.
         format: date-time
         type: string
       timezone:
-        description: Timezone to format start_time. For example, "America/Los_Angeles". For scheduled meetings only. Please reference our [timezone](#timezones) list for supported timezones and their formats.
+        description: Timezone to format start_time. For example, "America/Los_Angeles".
+          For scheduled meetings only. Please reference our
+          [timezone](#timezones) list for supported timezones and their formats.
         type: string
       topic:
         description: Meeting topic
@@ -6725,7 +6858,8 @@ definitions:
         description: Meeting duration (minutes). Used for scheduled meetings only
         type: integer
       password:
-        description: "Password to join the meeting. Password may only contain the following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters."
+        description: "Password to join the meeting. Password may only contain the
+          following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters."
         type: string
       recurrence:
         $ref: "#/definitions/Recurrence"
@@ -6737,11 +6871,17 @@ definitions:
                 description: Send confirmation Email to Registrants
                 type: boolean
       start_time:
-        description: Meeting start time. When using a format like "yyyy-MM-dd'T'HH:mm:ss'Z'", always use GMT time. When using a format like "yyyy-MM-dd'T'HH:mm:ss", you should use local time and you will need to specify the time zone. Only used for scheduled meetings and recurring meetings with fixed time.
+        description: Meeting start time. When using a format like
+          "yyyy-MM-dd'T'HH:mm:ss'Z'", always use GMT time. When using a format
+          like "yyyy-MM-dd'T'HH:mm:ss", you should use local time and you will
+          need to specify the time zone. Only used for scheduled meetings and
+          recurring meetings with fixed time.
         format: date-time
         type: string
       timezone:
-        description: Timezone to format start_time. For example, "America/Los_Angeles". For scheduled meetings only. Please reference our [timezone](#timezones) list for supported timezones and their formats.
+        description: Timezone to format start_time. For example, "America/Los_Angeles".
+          For scheduled meetings only. Please reference our
+          [timezone](#timezones) list for supported timezones and their formats.
         type: string
       topic:
         description: Meeting topic
@@ -6782,18 +6922,24 @@ definitions:
         description: Webinar duration (minutes). Used for scheduled webinar only
         type: integer
       password:
-        description: "Webinar password. Password may only contain the following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters."
+        description: "Webinar password. Password may only contain the following
+          characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters."
         type: string
       recurrence:
         $ref: "#/definitions/Recurrence"
       settings:
         $ref: "#/definitions/WebinarSettings"
       start_time:
-        description: Webinar start time, in the format "yyyy-MM-dd'T'HH:mm:ss'Z'", should be GMT time. In the format "yyyy-MM-dd'T'HH:mm:ss", should be local time, need to specify the time zone. Only used for scheduled webinar and recurring webinar with fixed time.
+        description: Webinar start time, in the format "yyyy-MM-dd'T'HH:mm:ss'Z'",
+          should be GMT time. In the format "yyyy-MM-dd'T'HH:mm:ss", should be
+          local time, need to specify the time zone. Only used for scheduled
+          webinar and recurring webinar with fixed time.
         format: date-time
         type: string
       timezone:
-        description: Timezone to format start_time. For example, "America/Los_Angeles". For scheduled meetings only. Please reference our [timezone](#timezones) list for supported timezones and their formats.
+        description: Timezone to format start_time. For example, "America/Los_Angeles".
+          For scheduled meetings only. Please reference our
+          [timezone](#timezones) list for supported timezones and their formats.
         type: string
       topic:
         description: Webinar topic
@@ -6832,7 +6978,8 @@ definitions:
         description: Webinar duration (minutes). Used for scheduled webinar only
         type: integer
       password:
-        description: "Webinar password. Password may only contain the following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters."
+        description: "Webinar password. Password may only contain the following
+          characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters."
         type: string
       recurrence:
         $ref: "#/definitions/Recurrence"
@@ -6844,11 +6991,16 @@ definitions:
                 description: Send confirmation Email to Registrants
                 type: boolean
       start_time:
-        description: Webinar start time, in the format "yyyy-MM-dd'T'HH:mm:ss'Z'", should be GMT time. In the format "yyyy-MM-dd'T'HH:mm:ss", should be local time, need to specify the time zone. Only used for scheduled webinar and recurring webinar with fixed time.
+        description: Webinar start time, in the format "yyyy-MM-dd'T'HH:mm:ss'Z'",
+          should be GMT time. In the format "yyyy-MM-dd'T'HH:mm:ss", should be
+          local time, need to specify the time zone. Only used for scheduled
+          webinar and recurring webinar with fixed time.
         format: date-time
         type: string
       timezone:
-        description: Timezone to format start_time. For example, "America/Los_Angeles". For scheduled meetings only. Please reference our [timezone](#timezones) list for supported timezones and their formats.
+        description: Timezone to format start_time. For example, "America/Los_Angeles".
+          For scheduled meetings only. Please reference our
+          [timezone](#timezones) list for supported timezones and their formats.
         type: string
       topic:
         description: Webinar topic
@@ -7021,7 +7173,8 @@ definitions:
         items:
           properties:
             email:
-              description: User email address. Must have id or email, if given id, the email is ignored.
+              description: User email address. Must have id or email, if given id, the email
+                is ignored.
               type: string
             id:
               description: User ID
@@ -7128,7 +7281,8 @@ definitions:
         description: Large meting feature
         type: boolean
       large_meeting_capacity:
-        description: Large meeting capacity, can be 100, 200, 300 or 500, depends on if having related large meeting capacity plan subscription or not
+        description: Large meeting capacity, can be 100, 200, 300 or 500, depends on if
+          having related large meeting capacity plan subscription or not
         type: integer
       meeting_capacity:
         description: User’s meeting capacity
@@ -7137,7 +7291,8 @@ definitions:
         description: Webinar feature
         type: boolean
       webinar_capacity:
-        description: Webinar capacity, can be 100, 500, 1000, 3000, 5000 or 10000, depends on if having related webinar capacity plan subscription or not
+        description: Webinar capacity, can be 100, 500, 1000, 3000, 5000 or 10000,
+          depends on if having related webinar capacity plan subscription or not
         type: integer
     title: "User settings: Feature settings"
     type: object
@@ -7148,7 +7303,8 @@ definitions:
         description: Large meting feature
         type: boolean
       large_meeting_capacity:
-        description: Large meeting capacity, can be 100, 200, 300 or 500, depends on if having related large meeting capacity plan subscription or not
+        description: Large meeting capacity, can be 100, 200, 300 or 500, depends on if
+          having related large meeting capacity plan subscription or not
         type: integer
       meeting_capacity:
         description: User’s meeting capacity
@@ -7157,7 +7313,8 @@ definitions:
         description: Webinar feature
         type: boolean
       webinar_capacity:
-        description: Webinar capacity, can be 100, 500, 1000, 3000, 5000 or 10000, depends on if having related webinar capacity plan subscription or not
+        description: Webinar capacity, can be 100, 500, 1000, 3000, 5000 or 10000,
+          depends on if having related webinar capacity plan subscription or not
         type: integer
     title: "User settings: Feature settings"
     type: object
@@ -7351,7 +7508,8 @@ definitions:
           - VoIP only
           - 3rd party audio conference
       force_pmi_jbh_password:
-        description: Require a password for Personal Meetings if attendees can join before host
+        description: Require a password for Personal Meetings if attendees can join
+          before host
         type: boolean
       host_video:
         description: Host video
@@ -7430,7 +7588,8 @@ definitions:
         minLength: 10
         type: string
       timezone:
-        description: The time zone id for user profile. For this parameter value please refer to the id value in [timezone](#timezones) list.
+        description: The time zone id for user profile. For this parameter value please
+          refer to the id value in [timezone](#timezones) list.
         format: date-time
         type: string
       type:
@@ -7862,7 +8021,8 @@ definitions:
         x-enum-descriptions:
           - Attendees register once and can attend any of the occurrences
           - Attendees need to register for each occurrence to attend
-          - Attendees register once and can choose one or more occurrences to attend
+          - Attendees register once and can choose one or more occurrences to
+            attend
       show_share_button:
         description: Show social share buttons on registration page
         type: boolean

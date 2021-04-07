@@ -7,7 +7,11 @@ info:
   contact:
     x-twitter: Netlify
   description: >-
-    Netlify is a hosting service for the programmable web. It understands your documents and provides an API to handle atomic deploys of websites, manage form submissions, inject JavaScript snippets, and much more. This is a REST-style API that uses JSON for serialization and OAuth 2 for authentication.
+    Netlify is a hosting service for the programmable web. It
+    understands your documents and provides an API to handle atomic deploys of
+    websites, manage form submissions, inject JavaScript snippets, and much
+    more. This is a REST-style API that uses JSON for serialization and OAuth 2
+    for authentication.
 
 
     This document is an OpenAPI reference for the Netlify API that you can explore. For more detailed instructions for common uses, please visit the [online documentation](https://www.netlify.com/docs/api/). Visit our Community forum to join the conversation about [understanding and using Netlify’s API](https://community.netlify.com/t/common-issue-understanding-and-using-netlifys-api/160).
@@ -1897,16 +1901,12 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         [Beta] Unlinks the repo from the site.
 
-
         This action will also:
-
         - Delete associated deploy keys
-
         - Delete outgoing webhooks for the repo
-
         - Delete the site's build hooks
       operationId: unlinkSiteRepo
       responses:

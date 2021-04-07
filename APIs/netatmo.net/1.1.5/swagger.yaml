@@ -80,7 +80,7 @@ tags:
 paths:
   /addwebhook:
     get:
-      description: >
+      description: |
         Links a callback url to a user.
       operationId: addwebhook
       parameters:
@@ -106,7 +106,8 @@ paths:
         - welcome
   /createnewschedule:
     post:
-      description: The method createnewschedule creates a new schedule stored in the backup list.
+      description: The method createnewschedule creates a new schedule stored in the
+        backup list.
       operationId: createnewschedule
       parameters:
         - description: The relay id
@@ -141,24 +142,29 @@ paths:
     get:
       deprecated: true
       description: >
-        The method devicelist returns the list of devices owned by the user, and their modules.
+        The method devicelist returns the list of devices owned by the
+        user, and their modules.
 
         A device is identified by its _id (which is its mac address) and each device may have one, several or no modules, also identified by an _id.
       operationId: devicelist
       parameters:
-        - description: Defines which device type will be returned by devicelist. It could be app_thermostat or app_station (by default if not provided)
+        - description: Defines which device type will be returned by devicelist. It could
+            be app_thermostat or app_station (by default if not provided)
           enum:
             - app_thermostat
             - app_station
           in: query
           name: app_type
           type: string
-        - description: Specify a device_id if you want to retrieve only this device informations.
+        - description: Specify a device_id if you want to retrieve only this device
+            informations.
           in: query
           name: device_id
           type: string
         - default: false
-          description: When set to "true", the favorite devices of the user are returned. This flag is available only if the devices requested are Weather Stations.
+          description: When set to "true", the favorite devices of the user are returned.
+            This flag is available only if the devices requested are Weather
+            Stations.
           in: query
           name: get_favorites
           required: false
@@ -179,7 +185,7 @@ paths:
         - deprecated
   /dropwebhook:
     get:
-      description: >
+      description: |
         Dissociates a webhook from a user.
       operationId: dropwebhook
       parameters:
@@ -200,11 +206,13 @@ paths:
         - welcome
   /getcamerapicture:
     get:
-      description: >
+      description: |
         Returns the snapshot associated to an event.
       operationId: getcamerapicture
       parameters:
-        - description: id of the image (can be retrieved as 'id' in 'face' in Gethomedata, or as 'id' in 'snapshot' in Getnextevents, Getlasteventof and Geteventsuntil)
+        - description: id of the image (can be retrieved as 'id' in 'face' in Gethomedata,
+            or as 'id' in 'snapshot' in Getnextevents, Getlasteventof and
+            Geteventsuntil)
           in: query
           name: image_id
           required: true
@@ -227,7 +235,7 @@ paths:
         - welcome
   /geteventsuntil:
     get:
-      description: >
+      description: |
         Returns the snapshot associated to an event.
       operationId: geteventsuntil
       parameters:
@@ -257,7 +265,8 @@ paths:
         - welcome
   /gethomecoachsdata:
     get:
-      description: The method gethomecoachsdata Returns data from a user Healthy Home Coach Station (measures and device specific data).
+      description: The method gethomecoachsdata Returns data from a user Healthy Home
+        Coach Station (measures and device specific data).
       operationId: gethomecoachsdata
       parameters:
         - description: Id of the device you want to retrieve information of
@@ -278,7 +287,7 @@ paths:
         - healthyhomecoach
   /gethomedata:
     get:
-      description: >
+      description: |
         Returns information about users homes and cameras.
       operationId: gethomedata
       parameters:
@@ -306,7 +315,7 @@ paths:
         - welcome
   /getlasteventof:
     get:
-      description: >
+      description: |
         Returns most recent events.
       operationId: getlasteventof
       parameters:
@@ -315,7 +324,8 @@ paths:
           name: home_id
           required: true
           type: string
-        - description: Your request will retrieve all events of the given home until the most recent event of the given person
+        - description: Your request will retrieve all events of the given home until the
+            most recent event of the given person
           in: query
           name: person_id
           required: true
@@ -340,36 +350,31 @@ paths:
         - welcome
   /getmeasure:
     get:
-      description: >
+      description: |
         The method getmeasure returns the measurements of a device or a module.
       operationId: getmeasure
       parameters:
-        - description: Id of the device whose module's measurements you want to retrieve. This _id can be found in the user's devices field.
+        - description: Id of the device whose module's measurements you want to retrieve.
+            This _id can be found in the user's devices field.
           in: query
           name: device_id
           required: true
           type: string
-        - description: If you don't specify any module_id you will retrieve the device's measurements. If you specify a module_id you will retrieve the module's measurements.
+        - description: If you don't specify any module_id you will retrieve the device's
+            measurements. If you specify a module_id you will retrieve the
+            module's measurements.
           in: query
           name: module_id
           type: string
-        - description: >
+        - description: |
             Defines the time interval between two measurements.
-
             Possible values :
-
             max -> every value stored will be returned
-
             30min -> 1 value every 30 minutes
-
             1hour -> 1 value every hour
-
             3hours -> 1 value every 3 hours
-
             1day -> 1 value per day
-
             1week -> 1 value per week
-
             1month -> 1 value per month
           enum:
             - max
@@ -385,7 +390,8 @@ paths:
           type: string
         - collectionFormat: csv
           description: >
-            Measures you are interested in. Data you can request depends on the scale.
+            Measures you are interested in. Data you can request depends on the
+            scale.
 
             **For Weather Station:**
               * max -> Temperature (°C), CO2 (ppm), Humidity (%), Pressure (mbar), Noise (db), Rain (mm), WindStrength (km/h), WindAngle (angles), Guststrength (km/h), GustAngle (angles)
@@ -440,9 +446,8 @@ paths:
           name: type
           required: true
           type: array
-        - description: >
+        - description: |
             Starting timestamp (utc) of the requested measurements.
-
             Please note measurement retrieving is limited to 1024 measurements.
           format: int32
           in: query
@@ -502,7 +507,8 @@ paths:
           name: optimize
           type: boolean
         - description: >
-            In scales higher than max, since the data is aggregated, the timestamps returned are by default offset by +(scale/2).
+            In scales higher than max, since the data is aggregated, the
+            timestamps returned are by default offset by +(scale/2).
 
             For instance, if you ask for measurements at a daily scale, you will receive data timestamped at 12:00 if real_time is set to `false` (default case), and timestamped at 00:00 if real_time is set to `true`.
 
@@ -529,7 +535,7 @@ paths:
         - public
   /getnextevents:
     get:
-      description: >
+      description: |
         Returns previous events.
       operationId: getnextevents
       parameters:
@@ -563,35 +569,43 @@ paths:
         - welcome
   /getpublicdata:
     get:
-      description: Retrieves publicly shared weather data from Outdoor Modules within a predefined area.
+      description: Retrieves publicly shared weather data from Outdoor Modules within
+        a predefined area.
       operationId: getpublicdata
       parameters:
-        - description: Latitude of the north east corner of the requested area. -85 <= lat_ne <= 85 and lat_ne>lat_sw
+        - description: Latitude of the north east corner of the requested area. -85 <=
+            lat_ne <= 85 and lat_ne>lat_sw
           format: int32
           in: query
           name: lat_ne
           required: true
           type: integer
-        - description: Longitude of the north east corner of the requested area. -180 <= lon_ne <= 180 and lon_ne>lon_sw
+        - description: Longitude of the north east corner of the requested area. -180 <=
+            lon_ne <= 180 and lon_ne>lon_sw
           format: int32
           in: query
           name: lon_ne
           required: true
           type: integer
-        - description: Latitude of the south west corner of the requested area. -85 <= lat_sw <= 85
+        - description: Latitude of the south west corner of the requested area. -85 <=
+            lat_sw <= 85
           format: int32
           in: query
           name: lat_sw
           required: true
           type: integer
-        - description: Longitude of the south west corner of the requested area. -180 <= lon_sw <= 180
+        - description: Longitude of the south west corner of the requested area. -180 <=
+            lon_sw <= 180
           format: int32
           in: query
           name: lon_sw
           required: true
           type: integer
         - collectionFormat: csv
-          description: To filter stations based on relevant measurements you want (e.g. rain will only return stations with rain gauges). Default is no filter. You can find all measurements available on the Thermostat page.
+          description: To filter stations based on relevant measurements you want (e.g.
+            rain will only return stations with rain gauges). Default is no
+            filter. You can find all measurements available on the Thermostat
+            page.
           in: query
           items:
             enum:
@@ -603,7 +617,8 @@ paths:
             type: string
           name: required_data
           type: array
-        - description: True to exclude stations with abnormal temperature measures. Default is false.
+        - description: True to exclude stations with abnormal temperature measures.
+            Default is false.
           in: query
           name: filter
           type: boolean
@@ -619,7 +634,8 @@ paths:
         - public
   /getstationsdata:
     get:
-      description: The method getstationsdata Returns data from a user's Weather Stations (measures and device specific data).
+      description: The method getstationsdata Returns data from a user's Weather
+        Stations (measures and device specific data).
       operationId: getstationsdata
       parameters:
         - description: Id of the device you want to retrieve information of
@@ -627,7 +643,8 @@ paths:
           name: device_id
           type: string
         - default: false
-          description: Whether to include the user's favorite Weather Stations in addition to the user's own Weather Stations
+          description: Whether to include the user's favorite Weather Stations in addition
+            to the user's own Weather Stations
           in: query
           name: get_favorites
           type: boolean
@@ -645,7 +662,8 @@ paths:
         - station
   /getthermostatsdata:
     get:
-      description: The method getthermostatsdata returns information about user's thermostats such as their last measurements.
+      description: The method getthermostatsdata returns information about user's
+        thermostats such as their last measurements.
       operationId: getthermostatsdata
       parameters:
         - description: Id of the device you want to retrieve information of
@@ -667,7 +685,9 @@ paths:
   /getthermstate:
     get:
       deprecated: true
-      description: The method getthermstate returns the last Thermostat measurements, its current weekly schedule, and, if present, its current manual temperature setpoint.
+      description: The method getthermstate returns the last Thermostat measurements,
+        its current weekly schedule, and, if present, its current manual
+        temperature setpoint.
       operationId: getthermstate
       parameters:
         - description: The relay id
@@ -696,7 +716,8 @@ paths:
     get:
       deprecated: true
       description: >
-        The method getuser returns information about a user such as prefered language, prefered units, and list of devices.
+        The method getuser returns information about a user such as
+        prefered language, prefered units, and list of devices.
       operationId: getuser
       responses:
         "200":
@@ -710,7 +731,8 @@ paths:
         - deprecated
   /partnerdevices:
     get:
-      description: The method partnerdevices returns the list of device_id to which your partner application has access to.
+      description: The method partnerdevices returns the list of device_id to which
+        your partner application has access to.
       operationId: partnerdevices
       responses:
         "200":
@@ -725,7 +747,8 @@ paths:
   /setpersonsaway:
     post:
       description: >
-        Sets a person as 'Away' or the Home as 'Empty'. The event will be added to the user’s timeline.
+        Sets a person as 'Away' or the Home as 'Empty'. The event will be
+        added to the user’s timeline.
       operationId: setpersonsaway
       parameters:
         - description: ID of the Home you're interested in
@@ -733,7 +756,8 @@ paths:
           name: home_id
           required: true
           type: string
-        - description: If a person_id is specified, that person will be set as 'Away'. If no person_id is specified, the Home will be set as 'Empty'.
+        - description: If a person_id is specified, that person will be set as 'Away'. If
+            no person_id is specified, the Home will be set as 'Empty'.
           in: query
           name: person_id
           type: string
@@ -751,7 +775,7 @@ paths:
         - welcome
   /setpersonshome:
     post:
-      description: >
+      description: |
         Sets a person as 'At home'.
       operationId: setpersonshome
       parameters:
@@ -779,7 +803,8 @@ paths:
         - welcome
   /setthermpoint:
     post:
-      description: The method setthermpoint changes the Thermostat manual temperature setpoint.
+      description: The method setthermpoint changes the Thermostat manual temperature
+        setpoint.
       operationId: setthermpoint
       parameters:
         - description: The relay id
@@ -804,12 +829,14 @@ paths:
           name: setpoint_mode
           required: true
           type: string
-        - description: When using the manual or max setpoint_mode, this parameter defines when the setpoint expires.
+        - description: When using the manual or max setpoint_mode, this parameter defines
+            when the setpoint expires.
           format: int32
           in: query
           name: setpoint_endtime
           type: integer
-        - description: When using the manual setpoint_mode, this parameter defines the temperature setpoint (in Celcius) to use.
+        - description: When using the manual setpoint_mode, this parameter defines the
+            temperature setpoint (in Celcius) to use.
           format: float
           in: query
           name: setpoint_temp
@@ -828,7 +855,8 @@ paths:
         - thermostat
   /switchschedule:
     post:
-      description: The method switchschedule switches the Thermostat's schedule to another existing schedule.
+      description: The method switchschedule switches the Thermostat's schedule to
+        another existing schedule.
       operationId: switchschedule
       parameters:
         - description: The relay id
@@ -842,7 +870,8 @@ paths:
           required: true
           type: string
         - description: >
-            The schedule id. It can be found in the getthermstate response, under the keys `therm_program_backup` and `therm_program`.
+            The schedule id. It can be found in the getthermstate response,
+            under the keys `therm_program_backup` and `therm_program`.
           in: query
           name: schedule_id
           required: true
@@ -961,7 +990,8 @@ definitions:
         format: float
         type: number
       health_idx:
-        description: "Current health index: 0 = Healthy, 1 = Fine, 2 = Fair, 3 = Poor, 4 = Unhealthy"
+        description: "Current health index: 0 = Healthy, 1 = Fine, 2 = Fair, 3 = Poor, 4
+          = Unhealthy"
         format: int32
         type: integer
       max_temp:
@@ -1088,7 +1118,8 @@ definitions:
         type: object
       type:
         description: >
-          Included in every device or module. It defines the type of the device/module. Its values are among :
+          Included in every device or module. It defines the type of the
+          device/module. Its values are among :
 
           NAMain : for the base station
 
@@ -1110,7 +1141,8 @@ definitions:
         type: array
       wifi_status:
         description: >
-          It contains the current wifi status. The different thresholds to take into account are
+          It contains the current wifi status. The different thresholds to
+          take into account are
 
           RSSI_THRESHOLD_0 = 86 bad signal
 
@@ -1178,13 +1210,15 @@ definitions:
         $ref: "#/definitions/NAPlace"
       type:
         description: >
-          Included in every device or module. It defines the type of the device/module. Its values are among :
+          Included in every device or module. It defines the type of the
+          device/module. Its values are among :
 
           NHC: Healthy Home Coach
         type: string
       wifi_status:
         description: >
-          It contains the current wifi status. The different thresholds to take into account are
+          It contains the current wifi status. The different thresholds to
+          take into account are
 
           RSSI_THRESHOLD_0 = 86 bad signal
 
@@ -1322,16 +1356,19 @@ definitions:
       place:
         $ref: "#/definitions/NAPlace"
       reachable:
-        description: true when the station was seen by the Netatmo cloud within the last 4 hours
+        description: true when the station was seen by the Netatmo cloud within the last
+          4 hours
         type: boolean
       read_only:
-        description: true when the user was invited to (or has favorited) a station, false when the user owns it
+        description: true when the user was invited to (or has favorited) a station,
+          false when the user owns it
         type: boolean
       station_name:
         type: string
       type:
         description: >
-          Included in every device or module. It defines the type of the device/module. Its values are among :
+          Included in every device or module. It defines the type of the
+          device/module. Its values are among :
 
           NAMain : for the base station
 
@@ -1347,7 +1384,8 @@ definitions:
         type: string
       wifi_status:
         description: >
-          It contains the current wifi status. The different thresholds to take into account are
+          It contains the current wifi status. The different thresholds to
+          take into account are
 
           RSSI_THRESHOLD_0 = 86 bad signal
 
@@ -1428,7 +1466,9 @@ definitions:
         type: integer
       battery_vp:
         description: >
-          It contains the current battery status. The threshold depends on the kind of module, below is the list of the different threshold to take into account according the module type.
+          It contains the current battery status. The threshold depends on
+          the kind of module, below is the list of the different threshold to
+          take into account according the module type.
 
           "Indoor module Battery range: 6000 ... 4200" |
 
@@ -1493,7 +1533,8 @@ definitions:
         type: boolean
       rf_status:
         description: >
-          "It contains the current radio status. The different thresholds to take into account are :" |
+          "It contains the current radio status. The different thresholds to
+          take into account are :" |
 
           RADIO_THRESHOLD_SIGNAL_LOW = 90 
 
@@ -1512,7 +1553,8 @@ definitions:
         type: integer
       type:
         description: >
-          Included in every device or module. It defines the type of the device/module. Its values are among :
+          Included in every device or module. It defines the type of the
+          device/module. Its values are among :
 
           NAMain : for the base station
 
@@ -1529,7 +1571,7 @@ definitions:
   NANewScheduleBody:
     properties:
       schedule_id:
-        description: >
+        description: |
           Id of the schedule. It can be use with the method "switchschedule" 
         type: string
   NANewScheduleResponse:
@@ -1644,7 +1686,8 @@ definitions:
         type: boolean
       type:
         description: >
-          Included in every device or module. It defines the type of the device/module. Its values are among :
+          Included in every device or module. It defines the type of the
+          device/module. Its values are among :
 
           NAMain : for the base station
 
@@ -1662,7 +1705,8 @@ definitions:
         type: boolean
       wifi_status:
         description: >
-          It contains the current wifi status. The different thresholds to take into account are
+          It contains the current wifi status. The different thresholds to
+          take into account are
 
           RSSI_THRESHOLD_0 = 86 bad signal
 
@@ -1694,7 +1738,8 @@ definitions:
         type: array
       place:
         $ref: "#/definitions/NAPlace"
-        description: Information about the station location (latitude/longitude of the station, altitude (meters), timezone)
+        description: Information about the station location (latitude/longitude of the
+          station, altitude (meters), timezone)
   NAPublicDataResponse:
     properties:
       body:
@@ -1783,7 +1828,9 @@ definitions:
         type: integer
       battery_vp:
         description: >
-          It contains the current battery status. The threshold depends on the kind of module, below is the list of the different threshold to take into account according the module type.
+          It contains the current battery status. The threshold depends on
+          the kind of module, below is the list of the different threshold to
+          take into account according the module type.
 
           "Indoor module Battery range: 6000 ... 4200" |
 
@@ -1844,11 +1891,13 @@ definitions:
       module_name:
         type: string
       reachable:
-        description: true when the station was seen by the Netatmo cloud within the last 4 hours
+        description: true when the station was seen by the Netatmo cloud within the last
+          4 hours
         type: boolean
       rf_status:
         description: >
-          "It contains the current radio status. The different thresholds to take into account are :" |
+          "It contains the current radio status. The different thresholds to
+          take into account are :" |
 
           RADIO_THRESHOLD_SIGNAL_LOW = 90 
 
@@ -1861,7 +1910,8 @@ definitions:
         type: integer
       type:
         description: >
-          Included in every device or module. It defines the type of the device/module. Its values are among :
+          Included in every device or module. It defines the type of the
+          device/module. Its values are among :
 
           NAMain : for the base station
 
@@ -1971,7 +2021,9 @@ definitions:
         type: integer
       battery_vp:
         description: >
-          It contains the current battery status. The threshold depends on the kind of module, below is the list of the different threshold to take into account according the module type.
+          It contains the current battery status. The threshold depends on
+          the kind of module, below is the list of the different threshold to
+          take into account according the module type.
 
           "Indoor module Battery range: 6000 ... 4200" |
 
@@ -2026,7 +2078,8 @@ definitions:
         type: string
       rf_status:
         description: >
-          "It contains the current radio status. The different thresholds to take into account are :" |
+          "It contains the current radio status. The different thresholds to
+          take into account are :" |
 
           RADIO_THRESHOLD_SIGNAL_LOW = 90 
 
@@ -2041,7 +2094,8 @@ definitions:
         $ref: "#/definitions/NASetpoint"
         description: Setpoint currently in use by the Thermostat.
       setpoint_history:
-        description: The last 20 setpoints (mode, endtime, and timestamp) the thermostats has entered.
+        description: The last 20 setpoints (mode, endtime, and timestamp) the
+          thermostats has entered.
         items:
           $ref: "#/definitions/NASetpointLog"
         type: array
@@ -2060,7 +2114,8 @@ definitions:
         type: integer
       type:
         description: >
-          Included in every device or module. It defines the type of the device/module. Its values are among :
+          Included in every device or module. It defines the type of the
+          device/module. Its values are among :
 
           NAMain : for the base station
 
@@ -2119,7 +2174,8 @@ definitions:
         type: array
       friend_devices:
         description: >
-          An array of string containing the ids of the devices on which the user has a "guest" access
+          An array of string containing the ids of the devices on which the
+          user has a "guest" access
         items:
           type: string
         type: array
@@ -2137,7 +2193,8 @@ definitions:
         description: user country
         type: string
       feel_like_algo:
-        description: algorithm used to compute feel like temperature, 0 -> humidex, 1 -> heat-index
+        description: algorithm used to compute feel like temperature, 0 -> humidex, 1 ->
+          heat-index
         type: string
       lang:
         description: user locale
@@ -2176,7 +2233,8 @@ definitions:
         description: Id of the camera
         type: string
       is_local:
-        description: Only for scope access_camera. If Camera and application requesting the information are on the same IP (true/false)
+        description: Only for scope access_camera. If Camera and application requesting
+          the information are on the same IP (true/false)
         type: boolean
       light_mode_status:
         description: State of (flood-)light

@@ -131,30 +131,38 @@ security:
   - OAuth2: []
 tags:
   - description: >
-      A payee is a person you wish to transfer money to. In this section you will find API opertions for working with Payees.
+      A payee is a person you wish to transfer money to. In this section
+      you will find API opertions for working with Payees.
     name: Payees
-  - description: Payee invitation is a process of inviting individual payees to the Velo platform. In this sction you will find APIs for working with Payee Invitations.
+  - description: Payee invitation is a process of inviting individual payees to the
+      Velo platform. In this sction you will find APIs for working with Payee
+      Invitations.
     name: Payee Invitation
-  - description: A Payor is the entity which is sending money. Here you will find the available APIs for working with Payors.
+  - description: A Payor is the entity which is sending money. Here you will find
+      the available APIs for working with Payors.
     name: Payors
   - description: Payout Service APIs allow you to create and instruct payouts to payees.
     name: Payouts
-  - description: Payment Audit Service APIs allow you to see the history of fundings, payouts, and payments to payees.
+  - description: Payment Audit Service APIs allow you to see the history of
+      fundings, payouts, and payments to payees.
     name: Payment Audit Service
   - description: >
-      <p>When a payor creates a payee then an invite token is emailed to the invited payee</p>
+      <p>When a payor creates a payee then an invite token is emailed to
+      the invited payee</p>
 
       <p>Payees use this token to onboard to the platform</p>
 
       <p>There are several required tasks that the payee must perform before they are accepted onto the platform</p>
     name: Invites
   - description: >
-      <p>Verification tokens allow users to complete authenitcation flows such as user invite, MFA registration and password reset</p>
+      <p>Verification tokens allow users to complete authenitcation flows
+      such as user invite, MFA registration and password reset</p>
 
       <p>Tokens have an expiry and are one-time use only</p>
     name: Tokens
   - description: >
-      <p>This document, including all counts herein, and the Velo Payments API are the intellectual property
+      <p>This document, including all counts herein, and the Velo
+      Payments API are the intellectual property
 
       of Velo Payments. The Velo Payment API and your use of the Velo Payment API, is goverend by and subject to the
 
@@ -166,7 +174,8 @@ paths:
   /v1/authenticate:
     post:
       description: >
-        Use this endpoint to obtain an access token for calling Velo Payments APIs. Use HTTP Basic Auth. String value of
+        Use this endpoint to obtain an access token for calling Velo
+        Payments APIs. Use HTTP Basic Auth. String value of
 
         Basic and a Base64 endcoded string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API
 
@@ -244,7 +253,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PageResourceFundingPayorStatusAuditResponseFundingPayorStatusAuditResponse"
+                $ref: "#/components/schemas/PageResourceFundingPayorStatusAuditResponseFundingP\
+                  ayorStatusAuditResponse"
           description: Funding Account Deltas
         "400":
           content:
@@ -323,7 +333,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/deltas/payments?pageSize=2&page=8&payorId=0a818933-087d-47f2-ad83-2f986ed087eb&updatedSince=2019-01-20T09:00:00+00:00' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/deltas/payments?pageSize=2&page=8&payorId=0a818933-087d-47f2-ad83-2f986ed087eb&updatedSince=2019-01-20T09:00:00+00:00'
+            -i -X GET \
                 -H 'Authorization: Bearer 6dd5e976-e329-462f-bd6b-25d463cf02fd' \
                 -H 'Content-Type: application/json'
   /v1/fundingAccounts:
@@ -362,7 +374,9 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: List of sort fields (e.g. ?sort=accountName:asc,name:asc) Default is accountName:asc The supported sort fields are - accountName, name and currency.
+        - description: List of sort fields (e.g. ?sort=accountName:asc,name:asc) Default
+            is accountName:asc The supported sort fields are - accountName, name
+            and currency.
           in: query
           name: sort
           required: false
@@ -448,7 +462,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get Funding Account
       tags:
@@ -456,7 +470,8 @@ paths:
   /v1/logout:
     post:
       description: >
-        <p>Given a valid access token in the header then log out the authenticated user or client </p>
+        <p>Given a valid access token in the header then log out the
+        authenticated user or client </p>
 
         <p>Will revoke the token</p>
       operationId: logout
@@ -483,7 +498,7 @@ paths:
         - Login
       x-code-samples:
         - lang: shell
-          source: >
+          source: |
             $ curl 'https://api.sandbox.velopayments.com/v1/logout' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Authorization: Bearer 93560bbb-5e79-492a-97b5-1ffbdf1cfeb8'
@@ -519,7 +534,8 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/password/reset' -i -X POST \
+            $ curl 'https://api.sandbox.velopayments.com/v1/password/reset' -i -X
+            POST \
                   -H 'Content-Type: application/json' \
                   -d '{"email":"foo@example.com"}'
   /v1/paymentChannelRules:
@@ -545,7 +561,8 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/paymentChannelRules' -i -X GET \
+            $ curl 'https://api.sandbox.velopayments.com/v1/paymentChannelRules' -i
+            -X GET \
                 -H 'Authorization: Bearer 63fa49a0-1eeb-4756-b4fb-7cdd94ae80c1'
   /v1/paymentaudit/fundings:
     get:
@@ -579,7 +596,8 @@ paths:
             minimum: 1
             type: integer
         - description: >
-            List of sort fields. Example: ```?sort=destinationCurrency:asc,destinationAmount:asc```
+            List of sort fields. Example:
+            ```?sort=destinationCurrency:asc,destinationAmount:asc```
 
             Default is no sort. The supported sort fields are: dateTime and amount.
           in: query
@@ -619,7 +637,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: V1 Get Fundings for Payor
       tags:
@@ -627,7 +645,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/paymentaudit/fundings?payorId=2a5d8af2-a1ed-4d7f-b9a7-ebe4b333be5a' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/paymentaudit/fundings?payorId=2a5d8af2-a1ed-4d7f-b9a7-ebe4b333be5a'
+            -i -X GET \
                 -H 'Authorization: Bearer 3667f994-7d41-4d20-990d-b79fa720e56b'
   /v1/paymentaudit/payoutStatistics:
     get:
@@ -675,7 +695,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: V1 Get Payout Statistics
       tags:
@@ -683,15 +703,15 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/paymentaudit/payoutStatistics?payorId=c61b32ac-8e50-433e-9372-b5b1c8180742' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/paymentaudit/payoutStatistics?payorId=c61b32ac-8e50-433e-9372-b5b1c8180742'
+            -i -X GET \
                 -H 'Authorization: Bearer e71d3dfe-3587-4df6-9f8d-59d3135d7bf7'
   "/v1/payments/{paymentId}/withdraw":
     post:
-      description: >
+      description: |
         <p>withdraw a payment </p>
-
         <p>There are a variety of reasons why this can fail</p>
-
         <ul>
             <li>the payment must be in a state of 'accepted' or 'unfunded'</li>
             <li>the payout must not be in a state of 'instructed'</li>
@@ -741,7 +761,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Withdraw a Payment
       tags:
@@ -749,7 +769,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/payments/b39264fc-560e-4fa6-b6c3-b12d42e14596/withdraw' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/payments/b39264fc-560e-4fa6-b6c3-b12d42e14596/withdraw'
+            -i -X POST \
 
             -H 'Authorization: Bearer 63e4d691-847b-46b5-893d-fd15c54dd4bf' \
 
@@ -776,7 +798,8 @@ paths:
             format: uuid
             type: string
         - description: >
-            List of additional Payor fields to include in the response for each Payor.
+            List of additional Payor fields to include in the response for each
+            Payor.
 
             The values of payorId and payorName and always included for each Payor - 'fields' allows you to add to this.
 
@@ -872,7 +895,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: List Payor Links
       tags:
@@ -880,7 +903,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/payorLinks?descendantsOfPayor=0a818933-087d-47f2-ad83-2f986ed087eb' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/payorLinks?descendantsOfPayor=0a818933-087d-47f2-ad83-2f986ed087eb'
+            -i -X GET \
                 -H 'Authorization: Bearer 3387c417-464c-41a6-b25e-6630f0a06093' \
                 -H 'Content-Type: application/json'
       x-contracts:
@@ -941,7 +966,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       security:
         - oAuthVeloBackOffice: []
@@ -951,7 +976,7 @@ paths:
   "/v1/payors/{payorId}":
     get:
       deprecated: true
-      description: >
+      description: |
         Get a Single Payor by Id.
       operationId: getPayorById
       parameters:
@@ -1018,7 +1043,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/payors/126969bd-6a18-47ec-96e1-57559afecf32' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/payors/126969bd-6a18-47ec-96e1-57559afecf32'
+            -i -X GET \
                 -H 'Authorization: Bearer 3387c417-464c-41a6-b25e-6630f0a06093' \
                 -H 'Content-Type: application/json'
       x-contracts:
@@ -1032,7 +1059,8 @@ paths:
           serviceName: payor-service
   "/v1/payors/{payorId}/applications":
     post:
-      description: Create an application for the given Payor ID. Applications are programatic users which can be assigned unique keys.
+      description: Create an application for the given Payor ID. Applications are
+        programatic users which can be assigned unique keys.
       operationId: payorCreateApplicationRequest
       parameters:
         - description: The Payor Id
@@ -1101,14 +1129,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
         "409":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_409"
-          description: >
+          description: |
             The request contained data that would result in a duplicate value
       summary: Create Application
       tags:
@@ -1116,7 +1144,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/payors/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/applications' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/payors/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/applications'
+            -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Authorization: Bearer 93560bbb-5e79-492a-97b5-1ffbdf1cfeb8' \
                 -d '{"name":"foo","description":"a foo application"}'
@@ -1219,7 +1249,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Create API Key
       tags:
@@ -1227,7 +1257,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/payors/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/applications/ba08877f-9d96-41e4-9c26-44a872d856ae/keys' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/payors/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/applications/ba08877f-9d96-41e4-9c26-44a872d856ae/keys'
+            -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Authorization: Bearer 698f1609-c616-48f0-b8d5-03373e9fbd40' \
                 -d '{"name":"foo","description":"a foo key","roles":["foo.role"]}'
@@ -1312,7 +1344,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/payors/450ecb66-df18-4d0c-b557-f718782775df/branding' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/payors/450ecb66-df18-4d0c-b557-f718782775df/branding'
+            -i -X GET \
                 -H 'Content-Type: application/json' \
                 -H 'Authorization: Bearer d60eef1c-bea6-4f7e-8755-e916268ad4ff'
       x-contracts:
@@ -1333,7 +1367,8 @@ paths:
           serviceName: payor-service
   "/v1/payors/{payorId}/branding/logos":
     post:
-      description: Add Payor Logo. Logo file is used in your branding, and emails sent to payees.
+      description: Add Payor Logo. Logo file is used in your branding, and emails sent
+        to payees.
       operationId: payorAddPayorLogo
       parameters:
         - description: The Payor Id
@@ -1373,7 +1408,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Add Logo
       tags:
@@ -1381,13 +1416,16 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/payors/450ecb66-df18-4d0c-b557-f718782775df/branding/logos' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/payors/450ecb66-df18-4d0c-b557-f718782775df/branding/logos'
+            -i -X POST \
                 -H 'Content-Type: multipart/form-data' \
                 -F 'logo=@mylogo.png;type=image/png'
   "/v1/payors/{payorId}/reminderEmailsUpdate":
     post:
       description: >
-        Update the emailRemindersOptOut field for a Payor. This API can be used to opt out
+        Update the emailRemindersOptOut field for a Payor. This API can be
+        used to opt out
 
         or opt into Payor Reminder emails. These emails are typically around payee events
 
@@ -1453,7 +1491,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/payors/d8d49d3a-0712-4ad0-bb14-2e308d240233/reminderEmailsUpdate' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/payors/d8d49d3a-0712-4ad0-bb14-2e308d240233/reminderEmailsUpdate'
+            -i -X POST \
                 -H 'Authorization: Bearer fc825fad-e4a7-49e5-b6d9-9b9aa47a19c8' \
                 -H 'Content-Type: application/json' \
                 -d '{"reminderEmailsOptOut":true}'
@@ -1504,11 +1544,9 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: >
+        - description: |
             List of sort fields e.g. ?sort=name:asc
-
             Default is name:asc
-
             The supported sort fields are - fundingRef
           in: query
           name: sort
@@ -1540,7 +1578,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/sourceAccounts?payorId=a2967711-df07-41e5-b5ea-f563088911c6' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/sourceAccounts?payorId=a2967711-df07-41e5-b5ea-f563088911c6'
+            -i -X GET \
                 -H 'Authorization: Bearer 757a7dbf-2afb-45ec-877c-2aa3857c8e08'
     summary: List Source Accounts
   "/v1/sourceAccounts/{sourceAccountId}":
@@ -1577,7 +1617,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get details about given source account.
       tags:
@@ -1585,13 +1625,16 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/sourceAccounts/126895a8-ba3d-44e8-9b34-84ee579cee7a' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/sourceAccounts/126895a8-ba3d-44e8-9b34-84ee579cee7a'
+            -i -X GET \
                 -H 'Authorization: Bearer a016f840-dafc-4b10-95f5-70ecc75a02d1'
     summary: Get Source Account
   "/v1/sourceAccounts/{sourceAccountId}/achFundingRequest":
     post:
       deprecated: true
-      description: Instruct a funding request to transfer funds from the payor’s funding bank to the payor’s balance held within Velo.
+      description: Instruct a funding request to transfer funds from the payor’s
+        funding bank to the payor’s balance held within Velo.
       operationId: createAchFundingRequest
       parameters:
         - description: Source account id
@@ -1628,7 +1671,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Create Funding Request
       tags:
@@ -1636,7 +1679,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/sourceAccounts/533b082b-b3eb-4712-8242-0fd3a307033f/achFundingRequest' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/sourceAccounts/533b082b-b3eb-4712-8242-0fd3a307033f/achFundingRequest'
+            -i -X POST \
                 -H 'Authorization: Bearer 67c1b4fc-29ce-425c-863b-950163a5e971' \
                 -H 'Content-Type: application/json' \
                 -d '{"amount":999990}'
@@ -1688,7 +1733,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Set notifications
       tags:
@@ -1696,7 +1741,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/sourceAccounts/533b082b-b3eb-4712-8242-0fd3a307033f/notifications' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/sourceAccounts/533b082b-b3eb-4712-8242-0fd3a307033f/notifications'
+            -i -X POST \
                 -H 'Authorization: Bearer 67c1b4fc-29ce-425c-863b-950163a5e971' \
                 -H 'Content-Type: application/json' \
                 -d '{"minimumBalance":900}'
@@ -1722,13 +1769,13 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/supportedCountries' -i -X GET \
+            $ curl 'https://api.sandbox.velopayments.com/v1/supportedCountries' -i
+            -X GET \
                 -H 'Authorization: Bearer 9a7c9010-547f-410e-ac3c-fd6f6701c745'
   /v1/validate:
     post:
-      description: >
+      description: |
         <p>The second part of login involves validating using an MFA device</p>
-
         <p>An access token with PRE_AUTH authorities is required</p>
       operationId: validateAccessToken
       parameters:
@@ -1743,7 +1790,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/AccessTokenValidationRequest"
-        description: >
+        description: |
           An OTP from the user's registered MFA Device
         required: true
       responses:
@@ -1839,7 +1886,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/webhooks?payorId=a2967711-df07-41e5-b5ea-f563088911c6' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/webhooks?payorId=a2967711-df07-41e5-b5ea-f563088911c6'
+            -i -X GET \
                 -H 'Authorization: Bearer 757a7dbf-2afb-45ec-877c-2aa3857c8e08'
     post:
       description: Create Webhook
@@ -1924,7 +1973,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get details about the given webhook.
       tags:
@@ -1932,7 +1981,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/webhooks/126895a8-ba3d-44e8-9b34-84ee579cee7a' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/webhooks/126895a8-ba3d-44e8-9b34-84ee579cee7a'
+            -i -X GET \
                 -H 'Authorization: Bearer a016f840-dafc-4b10-95f5-70ecc75a02d1'
     post:
       description: Update Webhook
@@ -1979,7 +2030,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Update Webhook
       tags:
@@ -2059,7 +2110,9 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: List of sort fields (e.g. ?sort=accountName:asc,name:asc) Default is accountName:asc The supported sort fields are - accountName, name.
+        - description: List of sort fields (e.g. ?sort=accountName:asc,name:asc) Default
+            is accountName:asc The supported sort fields are - accountName,
+            name.
           in: query
           name: sort
           required: false
@@ -2133,7 +2186,8 @@ paths:
                 format: uri
                 type: string
             Retry-After:
-              description: How long the user agent should wait before making a follow-up request (seconds)
+              description: How long the user agent should wait before making a follow-up
+                request (seconds)
               schema:
                 type: integer
         "400":
@@ -2206,14 +2260,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get Funding Account
       tags:
         - Funding Manager
   "/v2/payors/{payorId}":
     get:
-      description: >
+      description: |
         Get a Single Payor by Id.
       operationId: getPayorByIdV2
       parameters:
@@ -2287,7 +2341,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/payors/126969bd-6a18-47ec-96e1-57559afecf32' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/payors/126969bd-6a18-47ec-96e1-57559afecf32'
+            -i -X GET \
                 -H 'Authorization: Bearer 3387c417-464c-41a6-b25e-6630f0a06093' \
                 -H 'Content-Type: application/json'
       x-contracts:
@@ -2351,11 +2407,9 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: >
+        - description: |
             List of sort fields e.g. ?sort=name:asc
-
             Default is name:asc
-
             The supported sort fields are - fundingRef, name, balance
           in: query
           name: sort
@@ -2397,7 +2451,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get list of source accounts
       tags:
@@ -2405,7 +2459,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/sourceAccounts?payorId=a2967711-df07-41e5-b5ea-f563088911c6' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/sourceAccounts?payorId=a2967711-df07-41e5-b5ea-f563088911c6'
+            -i -X GET \
                 -H 'Authorization: Bearer 757a7dbf-2afb-45ec-877c-2aa3857c8e08'
     summary: List Source Accounts
   "/v2/sourceAccounts/{sourceAccountId}":
@@ -2455,7 +2511,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get details about given source account.
       tags:
@@ -2463,13 +2519,17 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/sourceAccounts/126895a8-ba3d-44e8-9b34-84ee579cee7a' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/sourceAccounts/126895a8-ba3d-44e8-9b34-84ee579cee7a'
+            -i -X GET \
                 -H 'Authorization: Bearer a016f840-dafc-4b10-95f5-70ecc75a02d1'
     summary: Get Source Account
   "/v2/sourceAccounts/{sourceAccountId}/fundingRequest":
     post:
       deprecated: true
-      description: Instruct a funding request to transfer funds from the payor’s funding bank to the payor’s balance held within Velo  (202 - accepted, 400 - invalid request body, 404 - source account not found).
+      description: Instruct a funding request to transfer funds from the payor’s
+        funding bank to the payor’s balance held within Velo  (202 - accepted,
+        400 - invalid request body, 404 - source account not found).
       operationId: createFundingRequest
       parameters:
         - description: Source account id
@@ -2515,7 +2575,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Create Funding Request
       tags:
@@ -2523,14 +2583,21 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/sourceAccounts/533b082b-b3eb-4712-8242-0fd3a307033f/fundingRequest' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/sourceAccounts/533b082b-b3eb-4712-8242-0fd3a307033f/fundingRequest'
+            -i -X POST \
                 -H 'Authorization: Bearer 67c1b4fc-29ce-425c-863b-950163a5e971' \
                 -H 'Content-Type: application/json' \
                 -d '{"amount":999990}'
   "/v2/sourceAccounts/{sourceAccountId}/transfers":
     post:
       deprecated: true
-      description: Transfer funds between source accounts for a Payor. The 'from' source account is identified in the URL, and is the account which will be debited. The 'to' (destination) source account is in the body, and is the account which will be credited. Both source accounts must belong to the same Payor. There must be sufficient balance in the 'from' source account, otherwise the transfer attempt will fail.
+      description: Transfer funds between source accounts for a Payor. The 'from'
+        source account is identified in the URL, and is the account which will
+        be debited. The 'to' (destination) source account is in the body, and is
+        the account which will be credited. Both source accounts must belong to
+        the same Payor. There must be sufficient balance in the 'from' source
+        account, otherwise the transfer attempt will fail.
       operationId: transferFunds
       parameters:
         - description: The 'from' source account id, which will be debited
@@ -2576,7 +2643,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Transfer Funds between source accounts
       tags:
@@ -2584,7 +2651,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/sourceAccounts/533b082b-b3eb-4712-8242-0fd3a307033f/transfers' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/sourceAccounts/533b082b-b3eb-4712-8242-0fd3a307033f/transfers'
+            -i -X POST \
                 -H 'Authorization: Bearer 67c1b4fc-29ce-425c-863b-950163a5e971' \
                 -H 'Content-Type: application/json' \
                 -d '{ "toSourceAccountId": "a99f93f9-6845-451d-a1f5-f3c841599dd7", "amount": 10000, "currency": "USD" }'
@@ -2606,7 +2675,8 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/supportedCountries' -i -X GET
+            $ curl 'https://api.sandbox.velopayments.com/v1/supportedCountries' -i
+            -X GET
   /v2/users:
     get:
       description: Get a paginated response listing the Users
@@ -2649,11 +2719,9 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: >
+        - description: |
             List of sort fields (e.g. ?sort=email:asc,lastName:asc)
-
             Default is email:asc 'name'
-
             The supported sort fields are - email, lastNmae.
           in: query
           name: sort
@@ -2696,12 +2764,14 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users?pageSize=2&page=8&status=DISABLED' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/users?pageSize=2&page=8&status=DISABLED'
+            -i -X GET \
                 -H 'Authorization: Bearer 6dd5e976-e329-462f-bd6b-25d463cf02fd' \
                 -H 'Content-Type: application/json'
   /v2/users/invite:
     post:
-      description: >
+      description: |
         Create a User and invite them to the system
       operationId: inviteUser
       requestBody:
@@ -2740,14 +2810,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_409"
-          description: >
+          description: |
             The request contained data that would result in a duplicate value
         "412":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_412"
-          description: >
+          description: |
             The request could not be completed as a precondition was not met
       summary: Invite a User
       tags:
@@ -2755,7 +2825,8 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/invite' -i -X POST \
+            $ curl 'https://api.sandbox.velopayments.com/v2/users/invite' -i -X POST
+            \
                 -H 'Content-Type: application/json' \
                 -H 'Authorization: Bearer 93560bbb-5e79-492a-97b5-1ffbdf1cfeb8' \
                 -d '{"email":"foo@example.com", \
@@ -2817,13 +2888,14 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/registration/sms' -i -X POST \
+            $ curl 'https://api.sandbox.velopayments.com/v2/users/registration/sms'
+            -i -X POST \
                   -H 'Authorization: Bearer 147c0008-2ec1-4009-9e2e-1f435f02a69b' \
                   -H 'Content-Type: application/json' \
                   -d '{"smsNumber":"+4411223344556"}'
   /v2/users/self:
     get:
-      description: >
+      description: |
         Get the user's details
       operationId: getSelf
       responses:
@@ -2908,12 +2980,14 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/self/mfa/unregister' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/users/self/mfa/unregister'
+            -i -X POST \
                   -H 'Content-Type: application/json' \
                   -d '{"mfaType":"TOTP"}'
   /v2/users/self/password:
     post:
-      description: >
+      description: |
         Update password for self
       operationId: updatePasswordSelf
       requestBody:
@@ -2953,13 +3027,14 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/users/self/password' -i -X POST \
+            $ curl 'https://api.sandbox.velopayments.com/v1/users/self/password' -i
+            -X POST \
                   -H 'Content-Type: application/json' \
                   -d '{"oldpassword":"abcd_12345", \
                       "newPassword": "myNewPassword"}'
   /v2/users/self/password/validate:
     post:
-      description: >
+      description: |
         validate the password and return a score
       operationId: validatePasswordSelf
       requestBody:
@@ -3003,14 +3078,15 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/self/password/validate' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/users/self/password/validate'
+            -i -X POST \
                   -H 'Content-Type: application/json' \
                   -d '{"password":"abcd_12345"}'
   /v2/users/self/userDetailsUpdate:
     post:
-      description: >
+      description: |
         <p>Update the profile details for the given user</p>
-
         <p>Only Payee user types are supported</p>
       operationId: userDetailsUpdateForSelf
       requestBody:
@@ -3049,7 +3125,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_409"
-          description: >
+          description: |
             The request contained data that would result in a duplicate value
       summary: Update User Details for self
       tags:
@@ -3057,7 +3133,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/self/userDetailsUpdate' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/users/self/userDetailsUpdate'
+            -i -X POST \
                   -H 'Authorization: Bearer 147c0008-2ec1-4009-9e2e-1f435f02a69b' \
                   -H 'Content-Type: application/json' \
                   -d '{"firstName: "Foo", \
@@ -3069,7 +3147,7 @@ paths:
                        }'
   "/v2/users/{userId}":
     delete:
-      description: >
+      description: |
         Delete User by Id.
       operationId: deleteUserByIdV2
       parameters:
@@ -3103,7 +3181,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Delete a User
       tags:
@@ -3111,11 +3189,13 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/d4ca564-f2ee-4725-97c2-7193a093f0f1' -i -X DELETE \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/users/d4ca564-f2ee-4725-97c2-7193a093f0f1'
+            -i -X DELETE \
                 -H 'Authorization: Bearer 3387c417-464c-41a6-b25e-6630f0a06093' \
                 -H 'Content-Type: application/json'
     get:
-      description: >
+      description: |
         Get a Single User by Id.
       operationId: getUserByIdV2
       parameters:
@@ -3172,7 +3252,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get User
       tags:
@@ -3180,7 +3260,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/d4ca564-f2ee-4725-97c2-7193a093f0f1' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/users/d4ca564-f2ee-4725-97c2-7193a093f0f1'
+            -i -X GET \
                 -H 'Authorization: Bearer 3387c417-464c-41a6-b25e-6630f0a06093' \
                 -H 'Content-Type: application/json'
   "/v2/users/{userId}/disable":
@@ -3231,7 +3313,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Disable a User
       tags:
@@ -3239,7 +3321,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v1/users/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/disable' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v1/users/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/disable'
+            -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Authorization: Bearer 93560bbb-5e79-492a-97b5-1ffbdf1cfeb8'
   "/v2/users/{userId}/enable":
@@ -3292,7 +3376,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Enable a User
       tags:
@@ -3300,7 +3384,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/enable' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/users/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/enable'
+            -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Authorization: Bearer 93560bbb-5e79-492a-97b5-1ffbdf1cfeb8'
   "/v2/users/{userId}/mfa/unregister":
@@ -3354,7 +3440,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Unregister MFA for the user
       tags:
@@ -3362,14 +3448,16 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/mfa/unregister' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/users/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/mfa/unregister'
+            -i -X POST \
                   -H 'Content-Type: application/json' \
                   -d '{"mfaType":"TOTP", \
                     "verificationCode":"123456", \
                     }'
   "/v2/users/{userId}/roleUpdate":
     post:
-      description: >
+      description: |
         <p>Update the user's Role</p>
       operationId: roleUpdate
       parameters:
@@ -3416,7 +3504,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Update User Role
       tags:
@@ -3424,7 +3512,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/ad19fc24-0cf6-4c15-a571-754b015b18e0/roleUpdate' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/users/ad19fc24-0cf6-4c15-a571-754b015b18e0/roleUpdate'
+            -i -X POST \
                   -H 'Authorization: Bearer 147c0008-2ec1-4009-9e2e-1f435f02a69b' \
                   -H 'Content-Type: application/json' \
                   -d '{"role":"payor.admin", \
@@ -3432,11 +3522,9 @@ paths:
                       }'
   "/v2/users/{userId}/tokens":
     post:
-      description: >
+      description: |
         <p>Resend the specified token </p>
-
         <p>The token to resend must already exist for the user </p>
-
         <p>It will be revoked and a new one issued</p>
       operationId: resendToken
       parameters:
@@ -3485,13 +3573,15 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/tokens' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/users/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/tokens'
+            -i -X POST \
                   -H 'Authorization: Bearer 147c0008-2ec1-4009-9e2e-1f435f02a69b' \
                   -H 'Content-Type: application/json' \
                   -d '{"tokenType":"MFA_REGISTRATION"}'
   "/v2/users/{userId}/unlock":
     post:
-      description: >
+      description: |
         If a user is locked this endpoint will unlock them
       operationId: unlockUserV2
       parameters:
@@ -3531,7 +3621,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Unlock a User
       tags:
@@ -3539,7 +3629,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/unlock' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/users/79a6fdaa-f4bb-47b7-9c1f-f6fd99c156a0/unlock'
+            -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Authorization: Bearer 93560bbb-5e79-492a-97b5-1ffbdf1cfeb8'
   "/v2/users/{userId}/userDetailsUpdate":
@@ -3593,14 +3685,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
         "409":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_409"
-          description: >
+          description: |
             The request contained data that would result in a duplicate value
       summary: Update User Details
       tags:
@@ -3608,7 +3700,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v2/users/ad19fc24-0cf6-4c15-a571-754b015b18e0/userDetailsUpdate' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v2/users/ad19fc24-0cf6-4c15-a571-754b015b18e0/userDetailsUpdate'
+            -i -X POST \
                   -H 'Authorization: Bearer 147c0008-2ec1-4009-9e2e-1f435f02a69b' \
                   -H 'Content-Type: application/json' \
                   -d '{"firstName: "Foo", \
@@ -3623,9 +3717,8 @@ paths:
   /v3/payees:
     get:
       deprecated: true
-      description: >
+      description: |
         <p>Use v4 instead</p>
-
         Get a paginated response listing the payees for a payor.
       operationId: listPayeesV3
       parameters:
@@ -3688,7 +3781,8 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/PayeeType"
-        - description: The country of the payee - 2 letter ISO 3166-1 country code (upper case)
+        - description: The country of the payee - 2 letter ISO 3166-1 country code (upper
+            case)
           in: query
           name: payeeCountry
           required: false
@@ -3714,7 +3808,10 @@ paths:
             format: int32
             type: integer
         - description: >
-            List of sort fields (e.g. ?sort=onboardedStatus:asc,name:asc) Default is name:asc 'name' is treated as company name for companies - last name + ',' + firstName for individuals The supported sort fields are - payeeId, displayName, payoutStatus, onboardedStatus.
+            List of sort fields (e.g. ?sort=onboardedStatus:asc,name:asc)
+            Default is name:asc 'name' is treated as company name for companies
+            - last name + ',' + firstName for individuals The supported sort
+            fields are - payeeId, displayName, payoutStatus, onboardedStatus.
           in: query
           name: sort
           required: false
@@ -3814,7 +3911,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: List Payees
       tags:
@@ -3822,7 +3919,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/payees?pageSize=2&page=8&payorId=9cade13d-0c55-41a7-9e6d-164e8b138b40&watchlistStatus=PASSED&onboardedStatus=INVITED&email=foo@example.com&displayName=Bar&remoteId=remote&payeeCountry=US&payeeType=Individual' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/payees?pageSize=2&page=8&payorId=9cade13d-0c55-41a7-9e6d-164e8b138b40&watchlistStatus=PASSED&onboardedStatus=INVITED&email=foo@example.com&displayName=Bar&remoteId=remote&payeeCountry=US&payeeType=Individual'
+            -i -X GET \
                 -H 'Authorization: Bearer 6dd5e976-e329-462f-bd6b-25d463cf02fd' \
                 -H 'Content-Type: application/json'
       x-contracts:
@@ -3961,7 +4060,17 @@ paths:
             multipart:
               named:
                 - fileContent: >
-                    type,remoteId,email,addressLine1,addressLine2,addressLine3,addressLine4,addressCity,addressCountyOrProvince,addressZipOrPostcode,addressCountry,individualNationalIdentification,individualDateOfBirth,individualTite,individualFirstName,individualOtherNames,individualLastName,companyName,companyEIN,paymentChannelAccountNumber,paymentChannelRoutingNumber,paymentChannelIban,paymentChannelAccountName,paymentChannelCountryCode,paymentChannelCurrency,challengeDescription,challengeValue,payeeLanguage\n Individual,remoteId123,bob@example.com,Address line 1,Address line 2,Address line 3,Address line 4,The City,The County,The Zip,GB,123456789,1970-02-25,Mr,Bob,Hungry,Wiggins,,,12345678,123456789,,Account name,US,USD,Challenge Description,Challenge Value,EN\n Company,remoteId1234,jim@example.com,Address line 1,Address line 2,Address line 3,Address line 4,The City,The County,The Zip,GB,,,,,,,ABC Corp,987654321,,,1234567890123456789012345678901234,Account name,US,USD,,,FR\n
+                    type,remoteId,email,addressLine1,addressLine2,addressLine3,addressLine4,addressCity,addressCountyOrProvince,addressZipOrPostcode,addressCountry,individualNationalIdentification,individualDateOfBirth,individualTite,individualFirstName,individualOtherNames,individualLastName,companyName,companyEIN,paymentChannelAccountNumber,paymentChannelRoutingNumber,paymentChannelIban,paymentChannelAccountName,paymentChannelCountryCode,paymentChannelCurrency,challengeDescription,challengeValue,payeeLanguage\n
+                    Individual,remoteId123,bob@example.com,Address line
+                    1,Address line 2,Address line 3,Address line 4,The City,The
+                    County,The
+                    Zip,GB,123456789,1970-02-25,Mr,Bob,Hungry,Wiggins,,,12345678,123456789,,Account
+                    name,US,USD,Challenge Description,Challenge Value,EN\n
+                    Company,remoteId1234,jim@example.com,Address line 1,Address
+                    line 2,Address line 3,Address line 4,The City,The County,The
+                    Zip,GB,,,,,,,ABC
+                    Corp,987654321,,,1234567890123456789012345678901234,Account
+                    name,US,USD,,,FR\n
                   fileName: filename.csv
                   paramName: file
               params:
@@ -4019,7 +4128,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Initiate Payee Creation
       tags:
@@ -4098,7 +4207,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Query Batch Status
       tags:
@@ -4106,15 +4215,16 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/payees/batch/cb6ff8c6-85e9-45a6-b7d9-d05305db67f3' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/payees/batch/cb6ff8c6-85e9-45a6-b7d9-d05305db67f3'
+            -i -X GET \
                 -H 'Content-Type: application/json' \
                 -H 'Authorization: Bearer f01caad1-5ae5-454d-9467-5053e459fe45'
   /v3/payees/deltas:
     get:
       deprecated: true
-      description: >
+      description: |
         <p>Use v4 instead</p>
-
         <p>Get a paginated response listing payee changes.</p>
       operationId: listPayeeChangesV3
       parameters:
@@ -4179,7 +4289,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/payees/deltas?pageSize=2&page=8&payorId=0a818933-087d-47f2-ad83-2f986ed087eb&updatedSince=2019-01-20T09:00:00+00:00' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/payees/deltas?pageSize=2&page=8&payorId=0a818933-087d-47f2-ad83-2f986ed087eb&updatedSince=2019-01-20T09:00:00+00:00'
+            -i -X GET \
                 -H 'Authorization: Bearer 6dd5e976-e329-462f-bd6b-25d463cf02fd' \
                 -H 'Content-Type: application/json'
       x-contracts:
@@ -4248,7 +4360,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PagedPayeeInvitationStatusResponse"
-          description: Get Payees with Invitaion status - filters of payeeId and invitationStatus
+          description: Get Payees with Invitaion status - filters of payeeId and
+            invitationStatus
           x-contracts:
             - body:
                 content:
@@ -4327,7 +4440,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get Payee Invitation Status
       tags:
@@ -4335,7 +4448,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/payees/payors/f20b038b-e841-4d80-9175-b47c6cf19bc1/invitationStatus?payeeId=c3d60e1f-a4d0-4273-b501-bfa81c70d56b&invitationStatus=ACCEPTED' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/payees/payors/f20b038b-e841-4d80-9175-b47c6cf19bc1/invitationStatus?payeeId=c3d60e1f-a4d0-4273-b501-bfa81c70d56b&invitationStatus=ACCEPTED'
+            -i -X GET \
                 -H 'Authorization: Bearer ed73aa9a-b51b-44cb-a8e9-11e2fb85046b'
   "/v3/payees/{payeeId}":
     delete:
@@ -4374,9 +4489,8 @@ paths:
         - Payees
     get:
       deprecated: true
-      description: >
+      description: |
         <p>Use v4 instead</p>
-
         <p>Get Payee by Id</p>
       operationId: getPayeeByIdV3
       parameters:
@@ -4389,7 +4503,8 @@ paths:
             format: uuid
             type: string
         - description: >
-            Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked.
+            Optional. If omitted or set to false, any Personal Identifiable
+            Information (PII) values are returned masked.
 
             If set to true, and you have permission, the PII values will be returned as their original unmasked values.
           in: query
@@ -4627,14 +4742,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
         "409":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_409"
-          description: >
+          description: |
             The request contained data that would result in a duplicate value
       summary: Resend Payee Invite
       tags:
@@ -4642,16 +4757,17 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/payees/5032e339-2e24-4fca-bfc9-f6a66e3157dd/invite' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/payees/5032e339-2e24-4fca-bfc9-f6a66e3157dd/invite'
+            -i -X POST \
                 -H 'Authorization: Bearer 5e40dde3-ff1c-4d69-94b0-3a6e96fd789e' \
                 -H 'Content-Type: application/json' \
                 -d '{"payorId":"545e29bd-75a8-4354-8192-ae68bab59d7b"}'
   "/v3/payees/{payeeId}/payeeDetailsUpdate":
     post:
       deprecated: true
-      description: >
+      description: |
         <p>Use v4 instead</p>
-
         <p>Update payee details for the given Payee Id.<p>
       operationId: payeeDetailsUpdateV3
       parameters:
@@ -4699,7 +4815,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Update Payee Details
       tags:
@@ -4707,7 +4823,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/payees/77f84ae9-42df-49d7-941b-47360347f86f/payeeDetailsUpdate' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/payees/77f84ae9-42df-49d7-941b-47360347f86f/payeeDetailsUpdate'
+            -i -X POST \
                 -H 'Authorization: Bearer ed73aa9a-b51b-44cb-a8e9-11e2fb85046b' \
                 -H 'Content-Type: application/json' \
                 -d '{
@@ -4735,9 +4853,8 @@ paths:
   "/v3/payees/{payeeId}/remoteIdUpdate":
     post:
       deprecated: true
-      description: >
+      description: |
         <p>Use v4 instead</p>
-
         <p>Update the remote Id for the given Payee Id.</p>
       parameters:
         - description: The UUID of the payee.
@@ -4784,14 +4901,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
         "409":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_409"
-          description: >
+          description: |
             The request contained data that would result in a duplicate value
       summary: Update Payee Remote Id
       tags:
@@ -4816,7 +4933,8 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: The payor’s name. This filters via a case insensitive substring match.
+        - description: The payor’s name. This filters via a case insensitive substring
+            match.
           in: query
           name: payorName
           required: false
@@ -4846,47 +4964,54 @@ paths:
               - RETURNED
               - WITHDRAWN
             type: string
-        - description: The source account name filter. This filters via a case insensitive substring match.
+        - description: The source account name filter. This filters via a case insensitive
+            substring match.
           in: query
           name: sourceAccountName
           required: false
           schema:
             type: string
-        - description: The source amount from range filter. Filters for sourceAmount >= sourceAmountFrom
+        - description: The source amount from range filter. Filters for sourceAmount >=
+            sourceAmountFrom
           in: query
           name: sourceAmountFrom
           required: false
           schema:
             format: int32
             type: integer
-        - description: The source amount to range filter. Filters for sourceAmount ⇐ sourceAmountTo
+        - description: The source amount to range filter. Filters for sourceAmount ⇐
+            sourceAmountTo
           in: query
           name: sourceAmountTo
           required: false
           schema:
             format: int32
             type: integer
-        - description: The source currency filter. Filters based on an exact match on the currency.
+        - description: The source currency filter. Filters based on an exact match on the
+            currency.
           in: query
           name: sourceCurrency
           required: false
           schema:
             type: string
-        - description: The payment amount from range filter. Filters for paymentAmount >= paymentAmountFrom
+        - description: The payment amount from range filter. Filters for paymentAmount >=
+            paymentAmountFrom
           in: query
           name: paymentAmountFrom
           required: false
           schema:
             format: int32
             type: integer
-        - description: The payment amount to range filter. Filters for paymentAmount ⇐ paymentAmountTo
+        - description: The payment amount to range filter. Filters for paymentAmount ⇐
+            paymentAmountTo
           in: query
           name: paymentAmountTo
           required: false
           schema:
             format: int32
             type: integer
-        - description: The payment currency filter. Filters based on an exact match on the currency.
+        - description: The payment currency filter. Filters based on an exact match on the
+            currency.
           in: query
           name: paymentCurrency
           required: false
@@ -4906,7 +5031,8 @@ paths:
           schema:
             format: date
             type: string
-        - description: The payment memo filter. This filters via a case insensitive substring match.
+        - description: The payment memo filter. This filters via a case insensitive
+            substring match.
           in: query
           name: paymentMemo
           required: false
@@ -4931,7 +5057,8 @@ paths:
             minimum: 1
             type: integer
         - description: >
-            List of sort fields (e.g. ?sort=submittedDateTime:asc,status:asc). Default is sort by remoteId
+            List of sort fields (e.g. ?sort=submittedDateTime:asc,status:asc).
+            Default is sort by remoteId
 
             The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency,
 
@@ -4942,7 +5069,8 @@ paths:
           schema:
             type: string
         - description: >
-            Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked.
+            Optional. If omitted or set to false, any Personal Identifiable
+            Information (PII) values are returned masked.
 
             If set to true, and you have permission, the PII values will be returned as their original unmasked values.
           in: query
@@ -4995,7 +5123,8 @@ paths:
             format: uuid
             type: string
         - description: >
-            Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked.
+            Optional. If omitted or set to false, any Personal Identifiable
+            Information (PII) values are returned masked.
 
             If set to true, and you have permission, the PII values will be returned as their original unmasked values.
           in: query
@@ -5036,7 +5165,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: V3 Get Payment
       tags:
@@ -5044,7 +5173,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/paymentaudit/payments/c3a422c2-12ac-4416-84fe-964221bd9815' -i \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/paymentaudit/payments/c3a422c2-12ac-4416-84fe-964221bd9815'
+            -i \
                 -H 'Authorization: Bearer 67a1b299-69b1-4fdf-a576-96b81199a2b9'
   /v3/paymentaudit/payouts:
     get:
@@ -5114,7 +5245,8 @@ paths:
             minimum: 1
             type: integer
         - description: >
-            List of sort fields (e.g. ?sort=submittedDateTime:asc,instructedDateTime:asc,status:asc)
+            List of sort fields (e.g.
+            ?sort=submittedDateTime:asc,instructedDateTime:asc,status:asc)
 
             Default is submittedDateTime:asc
 
@@ -5157,7 +5289,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: V3 Get Payouts for Payor
       tags:
@@ -5165,7 +5297,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/paymentaudit/payouts?payorId=449aa6c3-0569-47f6-a430-a470040da67c' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/paymentaudit/payouts?payorId=449aa6c3-0569-47f6-a430-a470040da67c'
+            -i -X GET \
                 -H 'Authorization: Bearer a9d9247d-5e30-4cea-a6e1-0898534ce768'
   "/v3/paymentaudit/payouts/{payoutId}":
     get:
@@ -5204,28 +5338,32 @@ paths:
               - RETURNED
               - WITHDRAWN
             type: string
-        - description: The source amount from range filter. Filters for sourceAmount >= sourceAmountFrom
+        - description: The source amount from range filter. Filters for sourceAmount >=
+            sourceAmountFrom
           in: query
           name: sourceAmountFrom
           required: false
           schema:
             format: int32
             type: integer
-        - description: The source amount to range filter. Filters for sourceAmount ⇐ sourceAmountTo
+        - description: The source amount to range filter. Filters for sourceAmount ⇐
+            sourceAmountTo
           in: query
           name: sourceAmountTo
           required: false
           schema:
             format: int32
             type: integer
-        - description: The payment amount from range filter. Filters for paymentAmount >= paymentAmountFrom
+        - description: The payment amount from range filter. Filters for paymentAmount >=
+            paymentAmountFrom
           in: query
           name: paymentAmountFrom
           required: false
           schema:
             format: int32
             type: integer
-        - description: The payment amount to range filter. Filters for paymentAmount ⇐ paymentAmountTo
+        - description: The payment amount to range filter. Filters for paymentAmount ⇐
+            paymentAmountTo
           in: query
           name: paymentAmountTo
           required: false
@@ -5265,7 +5403,9 @@ paths:
             minimum: 1
             type: integer
         - description: >
-            <p>List of sort fields (e.g. ?sort=submittedDateTime:asc,status:asc). Default is sort by remoteId</p>
+            <p>List of sort fields (e.g.
+            ?sort=submittedDateTime:asc,status:asc). Default is sort by
+            remoteId</p>
 
             <p>The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency,
 
@@ -5276,7 +5416,8 @@ paths:
           schema:
             type: string
         - description: >
-            Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked.
+            Optional. If omitted or set to false, any Personal Identifiable
+            Information (PII) values are returned masked.
 
             If set to true, and you have permission, the PII values will be returned as their original unmasked values.
           in: query
@@ -5317,7 +5458,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: V3 Get Payments for Payout
       tags:
@@ -5325,7 +5466,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/paymentaudit/payouts/7b524212-6fd7-4699-983d-cac082022a2e' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/paymentaudit/payouts/7b524212-6fd7-4699-983d-cac082022a2e'
+            -i -X GET \
                 -H 'Authorization: Bearer f7a9a696-e528-487b-8734-e0a22e41ef7a'
   /v3/paymentaudit/transactions:
     get:
@@ -5391,12 +5534,15 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/paymentaudit/transactions?startDate=2018-05-01&endDate=2018-05-31' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/paymentaudit/transactions?startDate=2018-05-01&endDate=2018-05-31'
+            -i -X GET \
                 -H 'Authorization: Bearer 76748e09-775d-4e2d-b889-f0555901d8eb'
   /v3/payouts:
     post:
       description: >
-        <p>Create a new payout and return a location header with a link to get the payout.</p>
+        <p>Create a new payout and return a location header with a link to
+        get the payout.</p>
 
         <p>Basic validation of the payout is performed before returning but more comprehensive validation is done asynchronously.</p>
 
@@ -5420,7 +5566,8 @@ paths:
             schema:
               properties:
                 file:
-                  description: Create a new payout from a CSV source file and return a location header with a link to get the payout
+                  description: Create a new payout from a CSV source file and return a location
+                    header with a link to get the payout
                   items:
                     $ref: "#/components/schemas/PaymentInstructionV3"
                   type: array
@@ -5430,11 +5577,14 @@ paths:
                   format: uuid
                   type: string
                 payoutFromPayorId:
-                  description: The id of the payor whose source account(s) will be debited. payoutFromPayorId and payoutToPayorId must be both supplied or both omitted.
+                  description: The id of the payor whose source account(s) will be debited.
+                    payoutFromPayorId and payoutToPayorId must be both supplied
+                    or both omitted.
                   format: uuid
                   type: string
                 payoutToPayorId:
-                  description: The id of the payor whose payees will be paid. payoutFromPayorId and payoutToPayorId must be both supplied or both omitted.
+                  description: The id of the payor whose payees will be paid. payoutFromPayorId
+                    and payoutToPayorId must be both supplied or both omitted.
                   format: uuid
                   type: string
               type: object
@@ -5485,7 +5635,9 @@ paths:
             -d '{"payments":[{"remoteId":"myRemoteId01","currency":"USD","amount":12345,"sourceAccountName":"PAYOR_SRC_ACCT","payorPaymentId":"1111"},{"remoteId":"myRemoteId02","currency":"USD","amount":23456,"sourceAccountName":"PAYOR_SRC_ACCT","payorPaymentId":"2222"},{"remoteId":"myRemoteId01","currency":"USD","amount":1020,"sourceAccountName":"PAYOR_SRC_ACCT","payorPaymentId":"3333"},{"remoteId":"myRemoteId03","currency":"USD","amount":3456,"sourceAccountName":"PAYOR_SRC_ACCT","payorPaymentId":"4444"},{"remoteId":"myRemoteId04","currency":"USD","amount":8765,"sourceAccountName":"PAYOR_SRC_ACCT","payorPaymentId":"5555"}]}'
   "/v3/payouts/{payoutId}":
     delete:
-      description: Withdraw Payout will delete payout details from payout service and rails services but will just move the status of the payout to WITHDRAWN in payment audit.
+      description: Withdraw Payout will delete payout details from payout service and
+        rails services but will just move the status of the payout to WITHDRAWN
+        in payment audit.
       operationId: withdrawPayoutV3
       parameters:
         - description: Id of the payout
@@ -5524,7 +5676,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Withdraw Payout
       tags:
@@ -5532,7 +5684,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/payouts/240c2341-8ddb-4764-9768-f1e0a498158c' -i -X DELETE \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/payouts/240c2341-8ddb-4764-9768-f1e0a498158c'
+            -i -X DELETE \
                 -H 'Authorization: Bearer 1681d963-f971-4b82-8376-b3e86834de78' \
                 -H 'Content-Type: application/json'
     get:
@@ -5573,7 +5727,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get Payout Summary
       tags:
@@ -5581,7 +5735,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/payouts/cc2e1a8d-39ae-461c-bde3-ce78525f89ac' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/payouts/cc2e1a8d-39ae-461c-bde3-ce78525f89ac'
+            -i -X POST \
                 -H 'Authorization: Bearer f081303c-7fcc-4204-8530-02e8ec2ef73f' \
                 -H 'Content-Type: application/json'
     post:
@@ -5624,14 +5780,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
         "409":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_409"
-          description: >
+          description: |
             The request contained data that would result in a duplicate value
       summary: Instruct Payout
       tags:
@@ -5639,7 +5795,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/payouts/0627380c-2330-4fcd-a2a2-02b12152e62e' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/payouts/0627380c-2330-4fcd-a2a2-02b12152e62e'
+            -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Authorization: Bearer d1963608-6612-4aa0-bf7d-cf18ce540cdc'
   "/v3/payouts/{payoutId}/payments":
@@ -5692,13 +5850,10 @@ paths:
           required: false
           schema:
             type: string
-        - description: >
+        - description: |
             Transmission Type
-
             * ACH
-
             * SAME_DAY_ACH
-
             * WIRE
           in: query
           name: transmissionType
@@ -5745,7 +5900,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Retrieve payments for a payout
       tags:
@@ -5753,7 +5908,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/payouts/cc2e1a8d-39ae-461c-bde3-ce78525f89ac/payments?payoutId=fb2c5dd0-3573-11eb-a2c2-f2189898ab4d' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/payouts/cc2e1a8d-39ae-461c-bde3-ce78525f89ac/payments?payoutId=fb2c5dd0-3573-11eb-a2c2-f2189898ab4d'
+            -i -X GET \
                 -H 'Authorization: Bearer f081303c-7fcc-4204-8530-02e8ec2ef73f' \
                 -H 'Content-Type: application/json'
   "/v3/payouts/{payoutId}/quote":
@@ -5780,14 +5937,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
         "409":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_409"
-          description: >
+          description: |
             The request contained data that would result in a duplicate value
       summary: Create a quote for the payout
       tags:
@@ -5795,7 +5952,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/payouts/cc2e1a8d-39ae-461c-bde3-ce78525f89ac/quote' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/payouts/cc2e1a8d-39ae-461c-bde3-ce78525f89ac/quote'
+            -i -X POST \
                 -H 'Authorization: Bearer f081303c-7fcc-4204-8530-02e8ec2ef73f' \
                 -H 'Content-Type: application/json'
   /v3/sourceAccounts:
@@ -5855,11 +6014,9 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: >
+        - description: |
             List of sort fields e.g. ?sort=name:asc
-
             Default is name:asc
-
             The supported sort fields are - fundingRef, name, balance
           in: query
           name: sort
@@ -5901,7 +6058,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get list of source accounts
       tags:
@@ -5909,7 +6066,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/sourceAccounts?payorId=a2967711-df07-41e5-b5ea-f563088911c6' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/sourceAccounts?payorId=a2967711-df07-41e5-b5ea-f563088911c6'
+            -i -X GET \
                 -H 'Authorization: Bearer 757a7dbf-2afb-45ec-877c-2aa3857c8e08'
     summary: List Source Accounts
   "/v3/sourceAccounts/{sourceAccountId}":
@@ -5958,7 +6117,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get details about given source account.
       tags:
@@ -5966,12 +6125,16 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/sourceAccounts/126895a8-ba3d-44e8-9b34-84ee579cee7a' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/sourceAccounts/126895a8-ba3d-44e8-9b34-84ee579cee7a'
+            -i -X GET \
                 -H 'Authorization: Bearer a016f840-dafc-4b10-95f5-70ecc75a02d1'
     summary: Get Source Account
   "/v3/sourceAccounts/{sourceAccountId}/fundingRequest":
     post:
-      description: Instruct a funding request to transfer funds from the payor’s funding bank to the payor’s balance held within Velo  (202 - accepted, 400 - invalid request body, 404 - source account not found).
+      description: Instruct a funding request to transfer funds from the payor’s
+        funding bank to the payor’s balance held within Velo  (202 - accepted,
+        400 - invalid request body, 404 - source account not found).
       operationId: createFundingRequestV3
       parameters:
         - description: Source account id
@@ -6017,7 +6180,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Create Funding Request
       tags:
@@ -6025,13 +6188,20 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/sourceAccounts/533b082b-b3eb-4712-8242-0fd3a307033f/fundingRequest' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/sourceAccounts/533b082b-b3eb-4712-8242-0fd3a307033f/fundingRequest'
+            -i -X POST \
                 -H 'Authorization: Bearer 67c1b4fc-29ce-425c-863b-950163a5e971' \
                 -H 'Content-Type: application/json' \
                 -d '{"amount":999990}'
   "/v3/sourceAccounts/{sourceAccountId}/transfers":
     post:
-      description: Transfer funds between source accounts for a Payor. The 'from' source account is identified in the URL, and is the account which will be debited. The 'to' (destination) source account is in the body, and is the account which will be credited. Both source accounts must belong to the same Payor. There must be sufficient balance in the 'from' source account, otherwise the transfer attempt will fail.
+      description: Transfer funds between source accounts for a Payor. The 'from'
+        source account is identified in the URL, and is the account which will
+        be debited. The 'to' (destination) source account is in the body, and is
+        the account which will be credited. Both source accounts must belong to
+        the same Payor. There must be sufficient balance in the 'from' source
+        account, otherwise the transfer attempt will fail.
       operationId: transferFundsV3
       parameters:
         - description: The 'from' source account id, which will be debited
@@ -6077,7 +6247,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Transfer Funds between source accounts
       tags:
@@ -6085,7 +6255,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v3/sourceAccounts/533b082b-b3eb-4712-8242-0fd3a307033f/transfers' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v3/sourceAccounts/533b082b-b3eb-4712-8242-0fd3a307033f/transfers'
+            -i -X POST \
                 -H 'Authorization: Bearer 67c1b4fc-29ce-425c-863b-950163a5e971' \
                 -H 'Content-Type: application/json' \
                 -d '{ "toSourceAccountId": "a99f93f9-6845-451d-a1f5-f3c841599dd7", "amount": 10000, "currency": "USD" }'
@@ -6153,7 +6325,8 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/PayeeType"
-        - description: The country of the payee - 2 letter ISO 3166-1 country code (upper case)
+        - description: The country of the payee - 2 letter ISO 3166-1 country code (upper
+            case)
           in: query
           name: payeeCountry
           required: false
@@ -6185,7 +6358,10 @@ paths:
             format: int32
             type: integer
         - description: >
-            List of sort fields (e.g. ?sort=onboardedStatus:asc,name:asc) Default is name:asc 'name' is treated as company name for companies - last name + ',' + firstName for individuals The supported sort fields are - payeeId, displayName, payoutStatus, onboardedStatus.
+            List of sort fields (e.g. ?sort=onboardedStatus:asc,name:asc)
+            Default is name:asc 'name' is treated as company name for companies
+            - last name + ',' + firstName for individuals The supported sort
+            fields are - payeeId, displayName, payoutStatus, onboardedStatus.
           in: query
           name: sort
           required: false
@@ -6285,7 +6461,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: List Payees
       tags:
@@ -6293,7 +6469,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/payees?pageSize=2&page=8&payorId=9cade13d-0c55-41a7-9e6d-164e8b138b40&watchlistStatus=PASSED&onboardedStatus=INVITED&email=foo@example.com&displayName=Bar&remoteId=remote&payeeCountry=US&payeeType=Individual' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/payees?pageSize=2&page=8&payorId=9cade13d-0c55-41a7-9e6d-164e8b138b40&watchlistStatus=PASSED&onboardedStatus=INVITED&email=foo@example.com&displayName=Bar&remoteId=remote&payeeCountry=US&payeeType=Individual'
+            -i -X GET \
                 -H 'Authorization: Bearer 6dd5e976-e329-462f-bd6b-25d463cf02fd' \
                 -H 'Content-Type: application/json'
       x-contracts:
@@ -6324,7 +6502,8 @@ paths:
           serviceName: payee-service
     post:
       description: >
-        Initiate the process of creating 1 to 2000 payees in a batch Use the response location header to query
+        Initiate the process of creating 1 to 2000 payees in a batch Use
+        the response location header to query
 
         for status (201 - Created, 400 - invalid request body. In addition to standard semantic validations, a
 
@@ -6429,7 +6608,17 @@ paths:
             multipart:
               named:
                 - fileContent: >
-                    type,remoteId,email,addressLine1,addressLine2,addressLine3,addressLine4,addressCity,addressCountyOrProvince,addressZipOrPostcode,addressCountry,individualNationalIdentification,individualDateOfBirth,individualTitle,individualFirstName,individualOtherNames,individualLastName,companyName,companyEIN,paymentChannelAccountNumber,paymentChannelRoutingNumber,paymentChannelIban,paymentChannelAccountName,paymentChannelCountryCode,paymentChannelCurrency,challengeDescription,challengeValue,payeeLanguage\n Individual,remoteId123,bob@example.com,Address line 1,Address line 2,Address line 3,Address line 4,The City,The County,The Zip,GB,123456789,1970-02-25,Mr,Bob,Hungry,Wiggins,,,12345678,123456789,,Account name,US,USD,Challenge Description,Challenge Value,EN\n Company,remoteId1234,jim@example.com,Address line 1,Address line 2,Address line 3,Address line 4,The City,The County,The Zip,GB,,,,,,,ABC Corp,987654321,,,1234567890123456789012345678901234,Account name,US,USD,,,FR\n
+                    type,remoteId,email,addressLine1,addressLine2,addressLine3,addressLine4,addressCity,addressCountyOrProvince,addressZipOrPostcode,addressCountry,individualNationalIdentification,individualDateOfBirth,individualTitle,individualFirstName,individualOtherNames,individualLastName,companyName,companyEIN,paymentChannelAccountNumber,paymentChannelRoutingNumber,paymentChannelIban,paymentChannelAccountName,paymentChannelCountryCode,paymentChannelCurrency,challengeDescription,challengeValue,payeeLanguage\n
+                    Individual,remoteId123,bob@example.com,Address line
+                    1,Address line 2,Address line 3,Address line 4,The City,The
+                    County,The
+                    Zip,GB,123456789,1970-02-25,Mr,Bob,Hungry,Wiggins,,,12345678,123456789,,Account
+                    name,US,USD,Challenge Description,Challenge Value,EN\n
+                    Company,remoteId1234,jim@example.com,Address line 1,Address
+                    line 2,Address line 3,Address line 4,The City,The County,The
+                    Zip,GB,,,,,,,ABC
+                    Corp,987654321,,,1234567890123456789012345678901234,Account
+                    name,US,USD,,,FR\n
                   fileName: filename.csv
                   paramName: file
               params:
@@ -6487,7 +6676,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Initiate Payee Creation
       tags:
@@ -6520,7 +6709,9 @@ paths:
   "/v4/payees/batch/{batchId}":
     get:
       description: >
-        Fetch the status of a specific batch of payees. The batch is fully processed when status is ACCEPTED and pendingCount is 0 ( 200 - OK, 404 - batch not found ).
+        Fetch the status of a specific batch of payees. The batch is fully
+        processed when status is ACCEPTED and pendingCount is 0 ( 200 - OK, 404
+        - batch not found ).
       operationId: queryBatchStatusV4
       parameters:
         - description: Batch Id
@@ -6563,7 +6754,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Query Batch Status
       tags:
@@ -6571,13 +6762,16 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/payees/batch/cb6ff8c6-85e9-45a6-b7d9-d05305db67f3' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/payees/batch/cb6ff8c6-85e9-45a6-b7d9-d05305db67f3'
+            -i -X GET \
                 -H 'Content-Type: application/json' \
                 -H 'Authorization: Bearer f01caad1-5ae5-454d-9467-5053e459fe45'
   /v4/payees/deltas:
     get:
       description: >
-        Get a paginated response listing payee changes (updated since a particular time) to a limited set of fields:
+        Get a paginated response listing payee changes (updated since a
+        particular time) to a limited set of fields:
 
         - dbaName
 
@@ -6655,7 +6849,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/payees/deltas?pageSize=2&page=8&payorId=0a818933-087d-47f2-ad83-2f986ed087eb&updatedSince=2019-01-20T09:00:00+00:00' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/payees/deltas?pageSize=2&page=8&payorId=0a818933-087d-47f2-ad83-2f986ed087eb&updatedSince=2019-01-20T09:00:00+00:00'
+            -i -X GET \
                 -H 'Authorization: Bearer 6dd5e976-e329-462f-bd6b-25d463cf02fd' \
                 -H 'Content-Type: application/json'
       x-contracts:
@@ -6672,7 +6868,8 @@ paths:
   "/v4/payees/payors/{payorId}/invitationStatus":
     get:
       description: >
-        Returns a filtered, paginated list of payees associated with a payor, along with invitation status and grace period end date.
+        Returns a filtered, paginated list of payees associated with a
+        payor, along with invitation status and grace period end date.
       operationId: getPayeesInvitationStatusV4
       parameters:
         - description: The account owner Payor ID
@@ -6721,7 +6918,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PagedPayeeInvitationStatusResponse_2"
-          description: Get Payees with Invitaion status - filters of payeeId and invitationStatus
+          description: Get Payees with Invitaion status - filters of payeeId and
+            invitationStatus
           x-contracts:
             - body:
                 content:
@@ -6800,7 +6998,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get Payee Invitation Status
       tags:
@@ -6808,12 +7006,15 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/payees/payors/f20b038b-e841-4d80-9175-b47c6cf19bc1/invitationStatus?payeeId=c3d60e1f-a4d0-4273-b501-bfa81c70d56b&invitationStatus=ACCEPTED' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/payees/payors/f20b038b-e841-4d80-9175-b47c6cf19bc1/invitationStatus?payeeId=c3d60e1f-a4d0-4273-b501-bfa81c70d56b&invitationStatus=ACCEPTED'
+            -i -X GET \
                 -H 'Authorization: Bearer ed73aa9a-b51b-44cb-a8e9-11e2fb85046b'
   "/v4/payees/{payeeId}":
     delete:
       description: >
-        <p>This API will delete Payee by Id (UUID). Deletion by ID is not allowed if:</p>
+        <p>This API will delete Payee by Id (UUID). Deletion by ID is not
+        allowed if:</p>
 
         <p>* Payee ID is not found</p>
 
@@ -6855,7 +7056,8 @@ paths:
             format: uuid
             type: string
         - description: >
-            Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked.
+            Optional. If omitted or set to false, any Personal Identifiable
+            Information (PII) values are returned masked.
 
             If set to true, and you have permission, the PII values will be returned as their original unmasked values.
           in: query
@@ -7041,7 +7243,8 @@ paths:
   "/v4/payees/{payeeId}/invite":
     post:
       description: >
-        <p>Resend an invite to the Payee The payee must have already been invited by the payor and not yet accepted or declined</p>
+        <p>Resend an invite to the Payee The payee must have already been
+        invited by the payor and not yet accepted or declined</p>
 
         <p>Any previous invites to the payee by this Payor will be invalidated</p>
       operationId: resendPayeeInviteV4
@@ -7090,14 +7293,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
         "409":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_409"
-          description: >
+          description: |
             The request contained data that would result in a duplicate value
       summary: Resend Payee Invite
       tags:
@@ -7105,13 +7308,15 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/payees/5032e339-2e24-4fca-bfc9-f6a66e3157dd/invite' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/payees/5032e339-2e24-4fca-bfc9-f6a66e3157dd/invite'
+            -i -X POST \
                 -H 'Authorization: Bearer 5e40dde3-ff1c-4d69-94b0-3a6e96fd789e' \
                 -H 'Content-Type: application/json' \
                 -d '{"payorId":"545e29bd-75a8-4354-8192-ae68bab59d7b"}'
   "/v4/payees/{payeeId}/payeeDetailsUpdate":
     post:
-      description: >
+      description: |
         <p>Update payee details for the given Payee Id.<p>
       operationId: payeeDetailsUpdateV4
       parameters:
@@ -7159,7 +7364,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Update Payee Details
       tags:
@@ -7167,7 +7372,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/payees/77f84ae9-42df-49d7-941b-47360347f86f/payeeDetailsUpdate' -i -X POST \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/payees/77f84ae9-42df-49d7-941b-47360347f86f/payeeDetailsUpdate'
+            -i -X POST \
                 -H 'Authorization: Bearer ed73aa9a-b51b-44cb-a8e9-11e2fb85046b' \
                 -H 'Content-Type: application/json' \
                 -d '{
@@ -7194,7 +7401,7 @@ paths:
                     }'
   "/v4/payees/{payeeId}/remoteIdUpdate":
     post:
-      description: >
+      description: |
         <p>Update the remote Id for the given Payee Id.</p>
       parameters:
         - description: The UUID of the payee.
@@ -7241,21 +7448,21 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
         "409":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_409"
-          description: >
+          description: |
             The request contained data that would result in a duplicate value
       summary: Update Payee Remote Id
       tags:
         - Payees
   /v4/paymentaudit/fundings:
     get:
-      description: >
+      description: |
         <p>Get a list of Fundings for a payor.</p>
       operationId: getFundingsV4
       parameters:
@@ -7285,7 +7492,8 @@ paths:
             minimum: 1
             type: integer
         - description: >
-            List of sort fields. Example: ```?sort=destinationCurrency:asc,destinationAmount:asc```
+            List of sort fields. Example:
+            ```?sort=destinationCurrency:asc,destinationAmount:asc```
 
             Default is no sort. The supported sort fields are: dateTime and amount.
           in: query
@@ -7325,7 +7533,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get Fundings for Payor
       tags:
@@ -7333,7 +7541,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/paymentaudit/fundings?payorId=2a5d8af2-a1ed-4d7f-b9a7-ebe4b333be5a' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/paymentaudit/fundings?payorId=2a5d8af2-a1ed-4d7f-b9a7-ebe4b333be5a'
+            -i -X GET \
                 -H 'Authorization: Bearer 3667f994-7d41-4d20-990d-b79fa720e56b'
   /v4/paymentaudit/payments:
     get:
@@ -7354,7 +7564,8 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: The payor’s name. This filters via a case insensitive substring match.
+        - description: The payor’s name. This filters via a case insensitive substring
+            match.
           in: query
           name: payorName
           required: false
@@ -7390,13 +7601,10 @@ paths:
               - RETURNED
               - WITHDRAWN
             type: string
-        - description: >
+        - description: |
             Transmission Type
-
             * ACH
-
             * SAME_DAY_ACH
-
             * WIRE
           in: query
           name: transmissionType
@@ -7407,47 +7615,54 @@ paths:
               - SAME_DAY_ACH
               - WIRE
             type: string
-        - description: The source account name filter. This filters via a case insensitive substring match.
+        - description: The source account name filter. This filters via a case insensitive
+            substring match.
           in: query
           name: sourceAccountName
           required: false
           schema:
             type: string
-        - description: The source amount from range filter. Filters for sourceAmount >= sourceAmountFrom
+        - description: The source amount from range filter. Filters for sourceAmount >=
+            sourceAmountFrom
           in: query
           name: sourceAmountFrom
           required: false
           schema:
             format: int32
             type: integer
-        - description: The source amount to range filter. Filters for sourceAmount ⇐ sourceAmountTo
+        - description: The source amount to range filter. Filters for sourceAmount ⇐
+            sourceAmountTo
           in: query
           name: sourceAmountTo
           required: false
           schema:
             format: int32
             type: integer
-        - description: The source currency filter. Filters based on an exact match on the currency.
+        - description: The source currency filter. Filters based on an exact match on the
+            currency.
           in: query
           name: sourceCurrency
           required: false
           schema:
             type: string
-        - description: The payment amount from range filter. Filters for paymentAmount >= paymentAmountFrom
+        - description: The payment amount from range filter. Filters for paymentAmount >=
+            paymentAmountFrom
           in: query
           name: paymentAmountFrom
           required: false
           schema:
             format: int32
             type: integer
-        - description: The payment amount to range filter. Filters for paymentAmount ⇐ paymentAmountTo
+        - description: The payment amount to range filter. Filters for paymentAmount ⇐
+            paymentAmountTo
           in: query
           name: paymentAmountTo
           required: false
           schema:
             format: int32
             type: integer
-        - description: The payment currency filter. Filters based on an exact match on the currency.
+        - description: The payment currency filter. Filters based on an exact match on the
+            currency.
           in: query
           name: paymentCurrency
           required: false
@@ -7467,7 +7682,8 @@ paths:
           schema:
             format: date
             type: string
-        - description: The payment memo filter. This filters via a case insensitive substring match.
+        - description: The payment memo filter. This filters via a case insensitive
+            substring match.
           in: query
           name: paymentMemo
           required: false
@@ -7492,7 +7708,8 @@ paths:
             minimum: 1
             type: integer
         - description: >
-            List of sort fields (e.g. ?sort=submittedDateTime:asc,status:asc). Default is sort by submittedDateTime:desc,paymentId:asc
+            List of sort fields (e.g. ?sort=submittedDateTime:asc,status:asc).
+            Default is sort by submittedDateTime:desc,paymentId:asc
 
             The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency,
 
@@ -7503,7 +7720,8 @@ paths:
           schema:
             type: string
         - description: >
-            Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked.
+            Optional. If omitted or set to false, any Personal Identifiable
+            Information (PII) values are returned masked.
 
             If set to true, and you have permission, the PII values will be returned as their original unmasked values.
           in: query
@@ -7544,7 +7762,7 @@ paths:
         - Payment Audit Service
   "/v4/paymentaudit/payments/{paymentId}":
     get:
-      description: >
+      description: |
         Get the payment with the given id. This contains the payment history.
       operationId: getPaymentDetailsV4
       parameters:
@@ -7556,7 +7774,8 @@ paths:
             format: uuid
             type: string
         - description: >
-            Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked.
+            Optional. If omitted or set to false, any Personal Identifiable
+            Information (PII) values are returned masked.
 
             If set to true, and you have permission, the PII values will be returned as their original unmasked values.
           in: query
@@ -7597,7 +7816,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get Payment
       tags:
@@ -7605,11 +7824,13 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/paymentaudit/payments/c3a422c2-12ac-4416-84fe-964221bd9815' -i \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/paymentaudit/payments/c3a422c2-12ac-4416-84fe-964221bd9815'
+            -i \
                 -H 'Authorization: Bearer 67a1b299-69b1-4fdf-a576-96b81199a2b9'
   /v4/paymentaudit/payoutStatistics:
     get:
-      description: >
+      description: |
         <p>Get payout statistics for a payor.</p>
       operationId: getPayoutStatsV4
       parameters:
@@ -7653,7 +7874,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get Payout Statistics
       tags:
@@ -7661,15 +7882,18 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/paymentaudit/payoutStatistics?payorId=c61b32ac-8e50-433e-9372-b5b1c8180742' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/paymentaudit/payoutStatistics?payorId=c61b32ac-8e50-433e-9372-b5b1c8180742'
+            -i -X GET \
                 -H 'Authorization: Bearer e71d3dfe-3587-4df6-9f8d-59d3135d7bf7'
   /v4/paymentaudit/payouts:
     get:
-      description: >
+      description: |
         Get List of payouts for payor
       operationId: getPayoutsForPayorV4
       parameters:
-        - description: The id (UUID) of the payor funding the payout or the payor whose payees are being paid.
+        - description: The id (UUID) of the payor funding the payout or the payor whose
+            payees are being paid.
           in: query
           name: payorId
           required: false
@@ -7712,7 +7936,8 @@ paths:
           schema:
             format: date
             type: string
-        - description: The name of the payor whose payees are being paid. This filters via a case insensitive substring match.
+        - description: The name of the payor whose payees are being paid. This filters via
+            a case insensitive substring match.
           in: query
           name: fromPayorName
           required: false
@@ -7737,7 +7962,8 @@ paths:
             minimum: 1
             type: integer
         - description: >
-            List of sort fields (e.g. ?sort=submittedDateTime:asc,instructedDateTime:asc,status:asc)
+            List of sort fields (e.g.
+            ?sort=submittedDateTime:asc,instructedDateTime:asc,status:asc)
 
             Default is submittedDateTime:asc
 
@@ -7780,7 +8006,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get Payouts for Payor
       tags:
@@ -7788,11 +8014,13 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/paymentaudit/payouts?payorId=449aa6c3-0569-47f6-a430-a470040da67c' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/paymentaudit/payouts?payorId=449aa6c3-0569-47f6-a430-a470040da67c'
+            -i -X GET \
                 -H 'Authorization: Bearer a9d9247d-5e30-4cea-a6e1-0898534ce768'
   "/v4/paymentaudit/payouts/{payoutId}":
     get:
-      description: >
+      description: |
         Get List of payments for Payout, allowing for RETURNED status
       operationId: getPaymentsForPayoutV4
       parameters:
@@ -7833,28 +8061,32 @@ paths:
               - RETURNED
               - WITHDRAWN
             type: string
-        - description: The source amount from range filter. Filters for sourceAmount >= sourceAmountFrom
+        - description: The source amount from range filter. Filters for sourceAmount >=
+            sourceAmountFrom
           in: query
           name: sourceAmountFrom
           required: false
           schema:
             format: int32
             type: integer
-        - description: The source amount to range filter. Filters for sourceAmount ⇐ sourceAmountTo
+        - description: The source amount to range filter. Filters for sourceAmount ⇐
+            sourceAmountTo
           in: query
           name: sourceAmountTo
           required: false
           schema:
             format: int32
             type: integer
-        - description: The payment amount from range filter. Filters for paymentAmount >= paymentAmountFrom
+        - description: The payment amount from range filter. Filters for paymentAmount >=
+            paymentAmountFrom
           in: query
           name: paymentAmountFrom
           required: false
           schema:
             format: int32
             type: integer
-        - description: The payment amount to range filter. Filters for paymentAmount ⇐ paymentAmountTo
+        - description: The payment amount to range filter. Filters for paymentAmount ⇐
+            paymentAmountTo
           in: query
           name: paymentAmountTo
           required: false
@@ -7875,13 +8107,10 @@ paths:
           schema:
             format: date
             type: string
-        - description: >
+        - description: |
             Transmission Type
-
             * ACH
-
             * SAME_DAY_ACH
-
             * WIRE
           in: query
           name: transmissionType
@@ -7911,7 +8140,8 @@ paths:
             minimum: 1
             type: integer
         - description: >
-            List of sort fields (e.g. ?sort=submittedDateTime:asc,status:asc). Default is sort by remoteId
+            List of sort fields (e.g. ?sort=submittedDateTime:asc,status:asc).
+            Default is sort by remoteId
 
             The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency,
 
@@ -7922,7 +8152,8 @@ paths:
           schema:
             type: string
         - description: >
-            Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked.
+            Optional. If omitted or set to false, any Personal Identifiable
+            Information (PII) values are returned masked.
 
             If set to true, and you have permission, the PII values will be returned as their original unmasked values.
           in: query
@@ -7963,7 +8194,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/inline_response_404"
-          description: >
+          description: |
             The resource was not found or is no longer available
       summary: Get Payments for Payout
       tags:
@@ -7971,11 +8202,15 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/paymentaudit/payouts/7b524212-6fd7-4699-983d-cac082022a2e' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/paymentaudit/payouts/7b524212-6fd7-4699-983d-cac082022a2e'
+            -i -X GET \
                 -H 'Authorization: Bearer f7a9a696-e528-487b-8734-e0a22e41ef7a'
   /v4/paymentaudit/transactions:
     get:
-      description: Download a CSV file containing payments in a date range. Uses Transfer-Encoding - chunked to stream to the client. Date range is inclusive of both the start and end dates.
+      description: Download a CSV file containing payments in a date range. Uses
+        Transfer-Encoding - chunked to stream to the client. Date range is
+        inclusive of both the start and end dates.
       operationId: exportTransactionsCSVV4
       parameters:
         - description: >
@@ -8003,7 +8238,8 @@ paths:
             format: date
             type: string
         - description: >
-            <p>Mode to determine whether to include other Payor's data in the results.</p>
+            <p>Mode to determine whether to include other Payor's data in the
+            results.</p>
 
             <p>May only be used if payorId is specified.</p>
 
@@ -8041,7 +8277,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/paymentaudit/transactions?startDate=2018-05-01&endDate=2018-05-31' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/paymentaudit/transactions?startDate=2018-05-01&endDate=2018-05-31'
+            -i -X GET \
                 -H 'Authorization: Bearer 76748e09-775d-4e2d-b889-f0555901d8eb'
   /v4/payments/deltas:
     get:
@@ -8095,7 +8333,9 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            $ curl 'https://api.sandbox.velopayments.com/v4/payments/deltas?pageSize=2&page=8&payorId=0a818933-087d-47f2-ad83-2f986ed087eb&updatedSince=2019-01-20T09:00:00+00:00' -i -X GET \
+            $ curl
+            'https://api.sandbox.velopayments.com/v4/payments/deltas?pageSize=2&page=8&payorId=0a818933-087d-47f2-ad83-2f986ed087eb&updatedSince=2019-01-20T09:00:00+00:00'
+            -i -X GET \
                 -H 'Authorization: Bearer 6dd5e976-e329-462f-bd6b-25d463cf02fd' \
                 -H 'Content-Type: application/json'
 components:
@@ -8115,7 +8355,9 @@ components:
           example: 1234
           type: integer
         currencyType:
-          description: Valid ISO 4217 3 letter currency code. See the <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank" a>ISO specification</a> for details.
+          description: Valid ISO 4217 3 letter currency code. See the <a
+            href="https://www.iso.org/iso-4217-currency-codes.html"
+            target="_blank" a>ISO specification</a> for details.
           example: USD
           maxLength: 3
           minLength: 3
@@ -8164,14 +8406,13 @@ components:
           user_id: 39976ee5-dc4c-4b21-a966-a04fa71ef9e1
       properties:
         access_token:
-          description: >
+          description: |
             Bearer token used in headers to access secure endpoints
           example: 9b58410b-e1b7-4f90-bebb-7e09c5427020
           type: string
         entityIds:
-          description: >
+          description: |
             If the user is a payee then the payeeId<P>
-
             If the user is a payor then the payorId
           example:
             - ed89eaa0-4450-4916-a4ff-62a328d60bd6
@@ -8252,17 +8493,22 @@ components:
         targetBalance: 300000
       properties:
         enabled:
-          description: Is auto top-up enabled? automatically trigger funding to top-up the source account balance when the balance falls below the configured minimum level.
+          description: Is auto top-up enabled? automatically trigger funding to top-up the
+            source account balance when the balance falls below the configured
+            minimum level.
           example: true
           type: boolean
         minBalance:
-          description: When the payor balance falls below this level then auto top-up will be triggered. Note - This is in minor units.
+          description: When the payor balance falls below this level then auto top-up will
+            be triggered. Note - This is in minor units.
           example: 10000
           format: int64
           nullable: true
           type: integer
         targetBalance:
-          description: When the payor balance falls below the min balance then auto top-up will request funds bring the balance to this level. Note - this is in minor units.
+          description: When the payor balance falls below the min balance then auto top-up
+            will request funds bring the balance to this level. Note - this is
+            in minor units.
           example: 300000
           format: int64
           nullable: true
@@ -8278,22 +8524,29 @@ components:
         targetBalance: 300000
       properties:
         enabled:
-          description: Is auto top-up enabled? automatically trigger funding to top-up the source account balance when the balance falls below the configured minimum level.
+          description: Is auto top-up enabled? automatically trigger funding to top-up the
+            source account balance when the balance falls below the configured
+            minimum level.
           example: true
           type: boolean
         fundingAccountId:
-          description: Id of funding account from which to pull funds when auto top-up is triggered.  Note - if this is not set then auto top-up is effectively disabled.
+          description: Id of funding account from which to pull funds when auto top-up is
+            triggered.  Note - if this is not set then auto top-up is
+            effectively disabled.
           example: 640ab1bd-8a6a-4603-a83a-1edbc3ed5689
           format: uuid
           type: string
         minBalance:
-          description: When the payor balance falls below this level then auto top-up will be triggered. Note - This is in minor units.
+          description: When the payor balance falls below this level then auto top-up will
+            be triggered. Note - This is in minor units.
           example: 10000
           format: int64
           nullable: true
           type: integer
         targetBalance:
-          description: When the payor balance falls below the min balance then auto top-up will request funds bring the balance to this level. Note - this is in minor units.
+          description: When the payor balance falls below the min balance then auto top-up
+            will request funds bring the balance to this level. Note - this is
+            in minor units.
           example: 300000
           format: int64
           nullable: true
@@ -8600,7 +8853,8 @@ components:
           $ref: "#/components/schemas/CreateIndividual"
         language:
           description: >
-            An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+            An IETF BCP 47 language code which has been configured for use
+            within this Velo environment.<BR>
           example: en-US
           type: string
         payeeId:
@@ -9262,7 +9516,8 @@ components:
           $ref: "#/components/schemas/CreateIndividual_2"
         language:
           description: >
-            An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+            An IETF BCP 47 language code which has been configured for use
+            within this Velo environment.<BR>
 
             See the /v1/supportedLanguages endpoint to list the available codes for an environment.
           example: en-US
@@ -9645,7 +9900,8 @@ components:
           type: string
         payeeLanguage:
           description: >
-            An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+            An IETF BCP 47 language code which has been configured for use
+            within this Velo environment.<BR>
 
             See the /v1/supportedLanguages endpoint to list the available codes for an environment.
           example: en-US
@@ -10302,7 +10558,8 @@ components:
           type: string
         payeeLanguage:
           description: >
-            An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+            An IETF BCP 47 language code which has been configured for use
+            within this Velo environment.<BR>
 
             See the /v1/supportedLanguages endpoint to list the available codes for an environment.
           example: en-US
@@ -11087,7 +11344,8 @@ components:
             - EUR
           type: string
         iban:
-          description: Must match the regular expression ```^[A-Za-z0-9]+$```. Either routing number and account number or only iban must be set
+          description: Must match the regular expression ```^[A-Za-z0-9]+$```. Either
+            routing number and account number or only iban must be set
           example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX1234
           maxLength: 34
           minLength: 15
@@ -11381,7 +11639,8 @@ components:
             - EUR
           type: string
         iban:
-          description: Must match the regular expression ```^[A-Za-z0-9]+$```. Either routing number and account number or only iban must be set
+          description: Must match the regular expression ```^[A-Za-z0-9]+$```. Either
+            routing number and account number or only iban must be set
           example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX1234
           maxLength: 34
           minLength: 15
@@ -11490,7 +11749,8 @@ components:
           type: string
         payoutMemo:
           description: >
-            <p>Text applied to all payment memos unless specified explicitly on a payment</p>
+            <p>Text applied to all payment memos unless specified explicitly on
+            a payment</p>
 
             <p>This should be the reference field on the statement seen by the payee (but not via ACH)</p>
           example: Monthly Payment
@@ -11547,7 +11807,8 @@ components:
     Error:
       properties:
         errorCode:
-          description: Unique numeric code that can be used for switching client behavior or to drive translated or customised error messages
+          description: Unique numeric code that can be used for switching client behavior
+            or to drive translated or customised error messages
           example: "20110003"
           type: string
         errorData:
@@ -11564,7 +11825,7 @@ components:
           type: string
         locationType:
           deprecated: true
-          description: >
+          description: |
             the location type in the request that was the cause of the error
           enum:
             - requestBody
@@ -11576,7 +11837,8 @@ components:
           type: string
         reasonCode:
           deprecated: true
-          description: a camel-cased string that can be used by clients to localise client error messages (deprecated)
+          description: a camel-cased string that can be used by clients to localise client
+            error messages (deprecated)
           example: validationError
           type: string
       type: object
@@ -11594,7 +11856,8 @@ components:
       description: Error response returned by all error conditions in Velo Services
       properties:
         correlationId:
-          description: a unique identifier to track a request or related sequence of requests
+          description: a unique identifier to track a request or related sequence of
+            requests
           example: ee53e01d-c078-43fd-abd4-47e92f4a06cf
           format: uuid
           type: string
@@ -11605,7 +11868,8 @@ components:
           minItems: 1
           type: array
         httpStatusCode:
-          description: this will mirror the Status-Code part of the Status-Line http response header and is included for extra clarity
+          description: this will mirror the Status-Code part of the Status-Line http
+            response header and is included for extra clarity
           example: 400
           type: integer
       type: object
@@ -11859,7 +12123,8 @@ components:
           example: "7001001234"
           type: string
         archived:
-          description: A flag for whether the funding account has been archived.  Only present in the response if true.
+          description: A flag for whether the funding account has been archived.  Only
+            present in the response if true.
           type: boolean
         country:
           description: ISO 3166-1 2 letter country code (upper case)
@@ -11993,7 +12258,9 @@ components:
           format: int64
           type: integer
         currency:
-          description: Valid ISO 4217 3 letter currency code. See the <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank" a>ISO specification</a> for details.
+          description: Valid ISO 4217 3 letter currency code. See the <a
+            href="https://www.iso.org/iso-4217-currency-codes.html"
+            target="_blank" a>ISO specification</a> for details.
           example: USD
           maxLength: 3
           minLength: 3
@@ -12308,7 +12575,8 @@ components:
           $ref: "#/components/schemas/GetPayeeListResponseIndividual"
         language:
           description: >
-            An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+            An IETF BCP 47 language code which has been configured for use
+            within this Velo environment.<BR>
           example: en-US
           type: string
         onboardedStatus:
@@ -12469,7 +12737,8 @@ components:
           $ref: "#/components/schemas/GetPayeeListResponseIndividual_2"
         language:
           description: >
-            An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+            An IETF BCP 47 language code which has been configured for use
+            within this Velo environment.<BR>
 
             See the /v1/supportedLanguages endpoint to list the available codes for an environment.
           example: en-US
@@ -12691,7 +12960,8 @@ components:
           example: 123
           type: integer
         failedPayments:
-          description: The count of payments within the payout which have failed or been returned.
+          description: The count of payments within the payout which have failed or been
+            returned.
           example: 0
           type: integer
         incompletePayments:
@@ -13290,7 +13560,8 @@ components:
         nationalIdentification: AB123456C
       properties:
         dateOfBirth:
-          description: "If not authorized to view, value will be masked. Example: - XXXX-XX-XX"
+          description: "If not authorized to view, value will be masked. Example: -
+            XXXX-XX-XX"
           example: 1985-01-01
           readOnly: true
           type: string
@@ -13350,7 +13621,8 @@ components:
         nationalIdentification: AB123456C
       properties:
         dateOfBirth:
-          description: "If not authorized to view, value will be masked. Example: - XXXX-XX-XX"
+          description: "If not authorized to view, value will be masked. Example: -
+            XXXX-XX-XX"
           example: 1985-01-01
           readOnly: true
           type: string
@@ -13449,7 +13721,7 @@ components:
           format: email
           type: string
         entityId:
-          description: >
+          description: |
             The payorId or null if the user is not a payor user
           example: 7fffa261-ac68-49e6-b605-d24a444d9206
           format: uuid
@@ -13466,9 +13738,8 @@ components:
           minLength: 1
           type: string
         mfaType:
-          description: >
+          description: |
             <p>The MFA type that the user will use</p>
-
             <p>The type may be conditional on the role(s) the user has</p>
           enum:
             - SMS
@@ -13477,7 +13748,7 @@ components:
           example: TOTP
           type: string
         primaryContactNumber:
-          description: >
+          description: |
             The main contact number for the user
           example: "11235555555"
           pattern: ^\+[1-9]\d{1,14}$
@@ -13497,7 +13768,7 @@ components:
             type: string
           type: array
         secondaryContactNumber:
-          description: >
+          description: |
             The secondary contact number for the user
           example: "11235555550"
           nullable: true
@@ -13505,13 +13776,15 @@ components:
           type: string
         smsNumber:
           description: >
-            The phone number of a device that the user can receive sms messages on
+            The phone number of a device that the user can receive sms messages
+            on
           example: "11235555555"
           pattern: ^\+[1-9]\d{1,14}$
           type: string
         verificationCode:
           description: >
-            Optional property that MUST be suppied when manually verifying a user
+            Optional property that MUST be suppied when manually verifying a
+            user
 
             The user's smsNumber is registered via a separate endpoint and an OTP sent to them
           example: "123456"
@@ -13527,7 +13800,9 @@ components:
         - smsNumber
       type: object
     IsoCountryCode:
-      description: Valid ISO 3166 2 character country code. See the <a href="https://www.iso.org/iso-3166-country-codes.html" target="_blank" a>ISO specification</a> for details.
+      description: Valid ISO 3166 2 character country code. See the <a
+        href="https://www.iso.org/iso-3166-country-codes.html" target="_blank"
+        a>ISO specification</a> for details.
       example: US
       maxLength: 2
       minLength: 2
@@ -13535,7 +13810,9 @@ components:
       title: ISO 3166 2 Character Country Code
       type: string
     IsoCurrency:
-      description: Valid ISO 4217 3 letter currency code. See the <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank" a>ISO specification</a> for details.
+      description: Valid ISO 4217 3 letter currency code. See the <a
+        href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank"
+        a>ISO specification</a> for details.
       example: USD
       maxLength: 3
       minLength: 3
@@ -13553,12 +13830,14 @@ components:
       type: string
     Language:
       description: >
-        An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+        An IETF BCP 47 language code which has been configured for use
+        within this Velo environment.<BR>
       example: en-US
       type: string
     Language_2:
       description: >
-        An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+        An IETF BCP 47 language code which has been configured for use
+        within this Velo environment.<BR>
 
         See the /v1/supportedLanguages endpoint to list the available codes for an environment.
       example: en-US
@@ -14260,13 +14539,15 @@ components:
         parameters:
           additionalProperties:
             type: string
-          description: name to value map containing any named parameters that appear in the message template
+          description: name to value map containing any named parameters that appear in
+            the message template
           example:
             max: "10"
             min: "0"
           type: object
         template:
-          description: the English language message template used to construct the error message
+          description: the English language message template used to construct the error
+            message
           example: size must be between {min} and {max}
           type: string
       type: object
@@ -15160,7 +15441,8 @@ components:
           $ref: "#/components/schemas/IndividualDetail"
         language:
           description: >
-            An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+            An IETF BCP 47 language code which has been configured for use
+            within this Velo environment.<BR>
           example: en-US
           type: string
         marketingOptInDecision:
@@ -15643,7 +15925,8 @@ components:
           type: string
         language:
           description: >
-            An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+            An IETF BCP 47 language code which has been configured for use
+            within this Velo environment.<BR>
           example: en-US
           type: string
         marketingOptInDecision:
@@ -15818,7 +16101,8 @@ components:
           type: string
         language:
           description: >
-            An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+            An IETF BCP 47 language code which has been configured for use
+            within this Velo environment.<BR>
 
             See the /v1/supportedLanguages endpoint to list the available codes for an environment.
           example: en-US
@@ -16043,7 +16327,8 @@ components:
           nullable: true
           type: string
         payableIssues:
-          description: Indicates any conditions which prevent the payee from being payable for this payor
+          description: Indicates any conditions which prevent the payee from being payable
+            for this payor
           items:
             $ref: "#/components/schemas/PayableIssue_2"
           type: array
@@ -16084,7 +16369,8 @@ components:
           nullable: true
           type: string
         payableIssues:
-          description: Indicates any conditions which prevent the payee from being payable for this payor
+          description: Indicates any conditions which prevent the payee from being payable
+            for this payor
           items:
             $ref: "#/components/schemas/PayableIssue"
           type: array
@@ -16714,11 +17000,9 @@ components:
         - COMPANY
       type: string
     PayeeUserSelfUpdateRequest:
-      description: >
+      description: |
         <p>All properties are optional</p>
-
         <p>Only provided properties will be updated</p>
-
         <p>Use null to null out a property that is allowed to be nullable</p>
       example:
         email: foo@example.com
@@ -16747,14 +17031,14 @@ components:
           nullable: true
           type: string
         primaryContactNumber:
-          description: >
+          description: |
             The main contact number for the user
           example: "11235555555"
           nullable: true
           pattern: ^\+[1-9]\d{1,14}$
           type: string
         secondaryContactNumber:
-          description: >
+          description: |
             The secondary contact number for the user
           example: "11235555550"
           nullable: true
@@ -16762,7 +17046,8 @@ components:
           type: string
         smsNumber:
           description: >
-            The phone number of a device that the user can receive sms messages on
+            The phone number of a device that the user can receive sms messages
+            on
           example: "11235555555"
           nullable: true
           pattern: ^\+[1-9]\d{1,14}$
@@ -16884,7 +17169,8 @@ components:
           $ref: "#/components/schemas/IndividualDetail_2"
         language:
           description: >
-            An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+            An IETF BCP 47 language code which has been configured for use
+            within this Velo environment.<BR>
 
             See the /v1/supportedLanguages endpoint to list the available codes for an environment.
           example: en-US
@@ -16973,7 +17259,8 @@ components:
         - rules
       type: object
     PaymentChannelRule:
-      description: Rules that will get applied when creating or updating a payment channel for the given country
+      description: Rules that will get applied when creating or updating a payment
+        channel for the given country
       example:
         displayName: Account Name
         displayOrder: 0
@@ -17420,16 +17707,17 @@ components:
         transmissionType: ACH
       properties:
         amount:
-          description: >
+          description: |
             <p>Amount to send to Payee</p>
-
             <p>The maximum payment amount is dependent on the currency</p>
           example: 1299
           format: int64
           minimum: 1
           type: integer
         currency:
-          description: Valid ISO 4217 3 letter currency code. See the <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank" a>ISO specification</a> for details.
+          description: Valid ISO 4217 3 letter currency code. See the <a
+            href="https://www.iso.org/iso-4217-currency-codes.html"
+            target="_blank" a>ISO specification</a> for details.
           example: USD
           maxLength: 3
           minLength: 3
@@ -17438,7 +17726,8 @@ components:
           type: string
         paymentMemo:
           description: >
-            <p>Any value here will override the memo value in the parent payout</p>
+            <p>Any value here will override the memo value in the parent
+            payout</p>
 
             <p>This should be the reference field on the statement seen by the payee (but not via ACH)</p>
           example: my memo
@@ -17447,7 +17736,8 @@ components:
           type: string
         paymentMetadata:
           description: >
-            <p>Metadata about the payment that may be relevant to the specific rails or remote system making the payout</p>
+            <p>Metadata about the payment that may be relevant to the specific
+            rails or remote system making the payout</p>
 
             <p>The structure of the data will be dictated by the requirements of the payment rails</p>
           example: invoiceeId_123|abc001:12345|xyz002:4567
@@ -17467,9 +17757,8 @@ components:
           minLength: 1
           type: string
         remoteSystemId:
-          description: >
+          description: |
             <p>The identifier for the remote payments system if not Velo</p>
-
             <p>Should only be used after consultation with Velo Payments</p>
           maxLength: 100
           minLength: 1
@@ -17581,11 +17870,14 @@ components:
           example: DE89 3704 0044 0532 0130 00
           type: string
         individualIdentificationNumber:
-          description: Individual Identification Number assigned to the payment in the ACH file, if applicable
+          description: Individual Identification Number assigned to the payment in the ACH
+            file, if applicable
           example: 1231231adf
           type: string
         invertedRate:
-          description: The inverted FX rate for the payment, if FX was involved. **Note** that (depending on the role of the caller) this information may not be displayed
+          description: The inverted FX rate for the payment, if FX was involved. **Note**
+            that (depending on the role of the caller) this information may not
+            be displayed
           format: float
           type: number
         payeeId:
@@ -17629,19 +17921,23 @@ components:
           type: string
         railsId:
           default: RAILS ID UNAVAILABLE
-          description: The rails ID. Default value is RAILS ID UNAVAILABLE when not populated.
+          description: The rails ID. Default value is RAILS ID UNAVAILABLE when not
+            populated.
           example: asdf123
           type: string
         railsPaymentId:
           type: string
         rate:
-          description: The FX rate for the payment, if FX was involved. **Note** that (depending on the role of the caller) this information may not be displayed
+          description: The FX rate for the payment, if FX was involved. **Note** that
+            (depending on the role of the caller) this information may not be
+            displayed
           format: float
           type: number
         rejectionReason:
           type: string
         remoteId:
-          description: The remote id by which the payor refers to the payee. Only populated once payment is confirmed
+          description: The remote id by which the payor refers to the payee. Only
+            populated once payment is confirmed
           example: aasdf123
           type: string
         returnCost:
@@ -17664,7 +17960,8 @@ components:
           example: My Account
           type: string
         sourceAmount:
-          description: The source amount for the payment (amount debited to make the payment)
+          description: The source amount for the payment (amount debited to make the
+            payment)
           example: 12345
           type: integer
         sourceCurrency:
@@ -17812,11 +18109,14 @@ components:
           example: DE89 3704 0044 0532 0130 00
           type: string
         individualIdentificationNumber:
-          description: Individual Identification Number assigned to the payment in the ACH file, if applicable
+          description: Individual Identification Number assigned to the payment in the ACH
+            file, if applicable
           example: 1231231adf
           type: string
         invertedRate:
-          description: The inverted FX rate for the payment, if FX was involved. **Note** that (depending on the role of the caller) this information may not be displayed
+          description: The inverted FX rate for the payment, if FX was involved. **Note**
+            that (depending on the role of the caller) this information may not
+            be displayed
           format: double
           type: number
         isPaymentCcyBaseCcy:
@@ -17870,27 +18170,33 @@ components:
           type: string
         railsId:
           default: RAILS ID UNAVAILABLE
-          description: The rails ID. Default value is RAILS ID UNAVAILABLE when not populated.
+          description: The rails ID. Default value is RAILS ID UNAVAILABLE when not
+            populated.
           example: asdf123
           type: string
         railsPaymentId:
           type: string
         rate:
-          description: The FX rate for the payment, if FX was involved. **Note** that (depending on the role of the caller) this information may not be displayed
+          description: The FX rate for the payment, if FX was involved. **Note** that
+            (depending on the role of the caller) this information may not be
+            displayed
           format: double
           type: number
         rejectionReason:
           type: string
         remoteId:
-          description: The remote id by which the payor refers to the payee. Only populated once payment is confirmed
+          description: The remote id by which the payor refers to the payee. Only
+            populated once payment is confirmed
           example: aasdf123
           type: string
         remoteSystemId:
-          description: The velo id of the remote system orchestrating the payment. Not populated for normal Velo payments.
+          description: The velo id of the remote system orchestrating the payment. Not
+            populated for normal Velo payments.
           example: REMOTE_SYSTEM_ID
           type: string
         remoteSystemPaymentId:
-          description: The id of the payment in the remote system. Not populated for normal Velo payments.
+          description: The id of the payment in the remote system. Not populated for
+            normal Velo payments.
           type: string
         returnCost:
           description: The return cost if a returned payment.
@@ -17912,7 +18218,8 @@ components:
           example: My Account
           type: string
         sourceAmount:
-          description: The source amount for the payment (amount debited to make the payment)
+          description: The source amount for the payment (amount debited to make the
+            payment)
           example: 12345
           type: integer
         sourceCurrency:
@@ -18742,7 +19049,8 @@ components:
           example: Example, Corp
           type: string
         payorXid:
-          description: A unique identifier that an external system uses to reference the payor in their system
+          description: A unique identifier that an external system uses to reference the
+            payor in their system
           example: ABC_201234
           type: string
         primaryContactEmail:
@@ -18817,7 +19125,8 @@ components:
         - lastName
       type: object
     PayoutPayeeV3:
-      description: Payee data associated with a payment. Either individual or company must be populated
+      description: Payee data associated with a payment. Either individual or company
+        must be populated
       example:
         company:
           companyName: ACME Anvils PLC
@@ -19126,7 +19435,8 @@ components:
           - amount: 1234
             currencyType: USD
             lineNumber: 10
-            message: Payment cannot be processed because of the Payee's OFAC or Compliance Status
+            message: Payment cannot be processed because of the Payee's OFAC or Compliance
+              Status
             paymentMetadata: invoiceeId_123|abc001:12345|xyz002:4567
             payorPaymentId: paymenIdVal123123
             reason: The payee has not been onboarded
@@ -19137,7 +19447,8 @@ components:
           - amount: 1234
             currencyType: USD
             lineNumber: 10
-            message: Payment cannot be processed because of the Payee's OFAC or Compliance Status
+            message: Payment cannot be processed because of the Payee's OFAC or Compliance
+              Status
             paymentMetadata: invoiceeId_123|abc001:12345|xyz002:4567
             payorPaymentId: paymenIdVal123123
             reason: The payee has not been onboarded
@@ -19579,7 +19890,9 @@ components:
           format: float
           type: number
         paymentCurrency:
-          description: Valid ISO 4217 3 letter currency code. See the <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank" a>ISO specification</a> for details.
+          description: Valid ISO 4217 3 letter currency code. See the <a
+            href="https://www.iso.org/iso-4217-currency-codes.html"
+            target="_blank" a>ISO specification</a> for details.
           example: USD
           maxLength: 3
           minLength: 3
@@ -19594,7 +19907,9 @@ components:
           format: float
           type: number
         sourceCurrency:
-          description: Valid ISO 4217 3 letter currency code. See the <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank" a>ISO specification</a> for details.
+          description: Valid ISO 4217 3 letter currency code. See the <a
+            href="https://www.iso.org/iso-4217-currency-codes.html"
+            target="_blank" a>ISO specification</a> for details.
           example: USD
           maxLength: 3
           minLength: 3
@@ -19676,7 +19991,8 @@ components:
       properties:
         smsNumber:
           description: >
-            The phone number of a device that the user can receive sms messages on
+            The phone number of a device that the user can receive sms messages
+            on
           example: "11235555555"
           pattern: ^\+[1-9]\d{1,14}$
           type: string
@@ -19688,7 +20004,8 @@ components:
         amount: 1234
         currencyType: USD
         lineNumber: 10
-        message: Payment cannot be processed because of the Payee's OFAC or Compliance Status
+        message: Payment cannot be processed because of the Payee's OFAC or Compliance
+          Status
         paymentMetadata: invoiceeId_123|abc001:12345|xyz002:4567
         payorPaymentId: paymenIdVal123123
         reason: The payee has not been onboarded
@@ -19701,7 +20018,9 @@ components:
           example: 1234
           type: integer
         currencyType:
-          description: Valid ISO 4217 3 letter currency code. See the <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank" a>ISO specification</a> for details.
+          description: Valid ISO 4217 3 letter currency code. See the <a
+            href="https://www.iso.org/iso-4217-currency-codes.html"
+            target="_blank" a>ISO specification</a> for details.
           example: USD
           maxLength: 3
           minLength: 3
@@ -19712,7 +20031,8 @@ components:
           example: 10
           type: integer
         message:
-          example: Payment cannot be processed because of the Payee's OFAC or Compliance Status
+          example: Payment cannot be processed because of the Payee's OFAC or Compliance
+            Status
           type: string
         paymentMetadata:
           example: invoiceeId_123|abc001:12345|xyz002:4567
@@ -19757,7 +20077,8 @@ components:
           type: string
         verificationCode:
           description: >
-            <p>Optional property that MUST be suppied when manually verifying a user</p>
+            <p>Optional property that MUST be suppied when manually verifying a
+            user</p>
 
             <p>The user's smsNumber is registered via a separate endpoint and an OTP sent to them</p>
           example: "123456"
@@ -19811,7 +20132,8 @@ components:
           type: array
         verificationCode:
           description: >
-            <p>Optional property that MUST be suppied when manually verifying a user</p>
+            <p>Optional property that MUST be suppied when manually verifying a
+            user</p>
 
             <p>The user's smsNumber is registered via a separate endpoint and an OTP sent to them</p>
           example: "123456"
@@ -20048,7 +20370,8 @@ components:
         type: FBO
       properties:
         archived:
-          description: A flag for whether the source account has been archived.  Only present in the response if true.
+          description: A flag for whether the source account has been archived.  Only
+            present in the response if true.
           type: boolean
         autoTopUpConfig:
           $ref: "#/components/schemas/AutoTopUpConfig_2"
@@ -20165,7 +20488,9 @@ components:
         totalPayoutCost: 1231200
       properties:
         currency:
-          description: Valid ISO 4217 3 letter currency code. See the <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank" a>ISO specification</a> for details.
+          description: Valid ISO 4217 3 letter currency code. See the <a
+            href="https://www.iso.org/iso-4217-currency-codes.html"
+            target="_blank" a>ISO specification</a> for details.
           example: USD
           maxLength: 3
           minLength: 3
@@ -20243,7 +20568,9 @@ components:
             $ref: "#/components/schemas/IsoCurrency"
           type: array
         isoCountryCode:
-          description: Valid ISO 3166 2 character country code. See the <a href="https://www.iso.org/iso-3166-country-codes.html" target="_blank" a>ISO specification</a> for details.
+          description: Valid ISO 3166 2 character country code. See the <a
+            href="https://www.iso.org/iso-3166-country-codes.html"
+            target="_blank" a>ISO specification</a> for details.
           example: US
           maxLength: 2
           minLength: 2
@@ -20268,7 +20595,9 @@ components:
             $ref: "#/components/schemas/IsoCurrency"
           type: array
         isoCountryCode:
-          description: Valid ISO 3166 2 character country code. See the <a href="https://www.iso.org/iso-3166-country-codes.html" target="_blank" a>ISO specification</a> for details.
+          description: Valid ISO 3166 2 character country code. See the <a
+            href="https://www.iso.org/iso-3166-country-codes.html"
+            target="_blank" a>ISO specification</a> for details.
           example: US
           maxLength: 2
           minLength: 2
@@ -20299,7 +20628,9 @@ components:
         maxPaymentAmount: 100000
       properties:
         currency:
-          description: Valid ISO 4217 3 letter currency code. See the <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank" a>ISO specification</a> for details.
+          description: Valid ISO 4217 3 letter currency code. See the <a
+            href="https://www.iso.org/iso-4217-currency-codes.html"
+            target="_blank" a>ISO specification</a> for details.
           example: USD
           maxLength: 3
           minLength: 3
@@ -20313,7 +20644,8 @@ components:
       type: object
     SupportedLanguage:
       description: >
-        An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+        An IETF BCP 47 language code which has been configured for use
+        within this Velo environment.<BR>
 
         See the /v1/supportedLanguages endpoint to list the available codes for an environment.
       example: en-US
@@ -20367,9 +20699,8 @@ components:
         - toSourceAccountId
       type: object
     TransmissionType:
-      description: >
+      description: |
         <p>The transmission type that will be used to send a payment</p>
-
         <p>If omitted, a default will be provided by the payment rails</p>
       enum:
         - SAME_DAY_ACH
@@ -20437,7 +20768,8 @@ components:
           type: string
         verificationCode:
           description: >
-            <p>Optional property that MUST be suppied when manually verifying a user</p>
+            <p>Optional property that MUST be suppied when manually verifying a
+            user</p>
 
             <p>The user's smsNumber is registered via a separate endpoint and an OTP sent to them</p>
           example: "123456"
@@ -20492,7 +20824,8 @@ components:
           $ref: "#/components/schemas/Individual"
         language:
           description: >
-            An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+            An IETF BCP 47 language code which has been configured for use
+            within this Velo environment.<BR>
           example: en-US
           type: string
         payeeType:
@@ -20515,7 +20848,8 @@ components:
           $ref: "#/components/schemas/Individual_2"
         language:
           description: >
-            An IETF BCP 47 language code which has been configured for use within this Velo environment.<BR>
+            An IETF BCP 47 language code which has been configured for use
+            within this Velo environment.<BR>
 
             See the /v1/supportedLanguages endpoint to list the available codes for an environment.
           example: en-US
@@ -20575,11 +20909,9 @@ components:
           type: string
       type: object
     UserDetailsUpdateRequest:
-      description: >
+      description: |
         <p>All properties are optional</p>
-
         <p>Only provided properties will be updated</p>
-
         <p>Use null to null out a property that is allowed to be nullable</p>
       example:
         email: foo@example.com
@@ -20612,14 +20944,14 @@ components:
         mfaType:
           $ref: "#/components/schemas/MFAType"
         primaryContactNumber:
-          description: >
+          description: |
             The main contact number for the user
           example: "11235555555"
           nullable: true
           pattern: ^\+[1-9]\d{1,14}$
           type: string
         secondaryContactNumber:
-          description: >
+          description: |
             The secondary contact number for the user
           example: "11235555550"
           nullable: true
@@ -20627,14 +20959,16 @@ components:
           type: string
         smsNumber:
           description: >
-            The phone number of a device that the user can receive sms messages on
+            The phone number of a device that the user can receive sms messages
+            on
           example: "11235555555"
           nullable: true
           pattern: ^\+[1-9]\d{1,14}$
           type: string
         verificationCode:
           description: >
-            <p>Optional property that MUST be suppied when manually verifying a user</p>
+            <p>Optional property that MUST be suppied when manually verifying a
+            user</p>
 
             <p>The user's smsNumber is registered via a separate endpoint and an OTP sent to them</p>
           example: "123456"
@@ -20686,7 +21020,8 @@ components:
           type: string
         entityId:
           description: >
-            The payorId or payeeId or null if the user is not a payor or payee user
+            The payorId or payeeId or null if the user is not a payor or payee
+            user
           example: 7fffa261-ac68-49e6-b605-d24a444d9206
           format: uuid
           type: string
@@ -20710,9 +21045,8 @@ components:
           example: true
           type: boolean
         lockedOutTimestamp:
-          description: >
+          description: |
             A timestamp showing when the user was locked out
-
             If null then the user is not currently locked out
           format: date-time
           nullable: true
@@ -20733,13 +21067,13 @@ components:
           example: TOTP
           type: string
         primaryContactNumber:
-          description: >
+          description: |
             The main contact number for the user
           example: "11235555555"
           pattern: ^\+[1-9]\d{1,14}$
           type: string
         roles:
-          description: >
+          description: |
             The role(s) for the user
           example:
             - payor.admin
@@ -20748,14 +21082,15 @@ components:
           minItems: 1
           type: array
         secondaryContactNumber:
-          description: >
+          description: |
             The secondary contact number for the user
           example: "11235555550"
           pattern: ^\+[1-9]\d{1,14}$
           type: string
         smsNumber:
           description: >
-            The phone number of a device that the user can receive sms messages on
+            The phone number of a device that the user can receive sms messages
+            on
           example: "11235555555"
           pattern: ^\+[1-9]\d{1,14}$
           type: string
@@ -20818,7 +21153,8 @@ components:
         suggestions:
           items:
             description: >
-              Any suggested changes to password text which would make the password more secure
+              Any suggested changes to password text which would make the
+              password more secure
             example: "[password has been used before]"
             type: string
           type: array
@@ -20832,7 +21168,8 @@ components:
       type: object
     VerificationCode:
       description: >
-        <p>Optional property that MUST be suppied when manually verifying a user</p>
+        <p>Optional property that MUST be suppied when manually verifying a
+        user</p>
 
         <p>The user's smsNumber is registered via a separate endpoint and an OTP sent to them</p>
       example: "123456"
@@ -20943,7 +21280,8 @@ components:
     inline_response_400:
       properties:
         correlationId:
-          description: a unique identifier to track a request or related sequence of requests
+          description: a unique identifier to track a request or related sequence of
+            requests
           example: ee53e01d-c078-43fd-abd4-47e92f4a06cf
           format: uuid
           nullable: true
@@ -20956,13 +21294,15 @@ components:
           nullable: true
           type: array
         httpStatusCode:
-          description: this will mirror the Status-Code part of the Status-Line http response header and is included for extra clarity
+          description: this will mirror the Status-Code part of the Status-Line http
+            response header and is included for extra clarity
           example: 400
           type: integer
     inline_response_401:
       properties:
         correlationId:
-          description: a unique identifier to track a request or related sequence of requests
+          description: a unique identifier to track a request or related sequence of
+            requests
           example: ee53e01d-c078-43fd-abd4-47e92f4a06cf
           format: uuid
           nullable: true
@@ -20975,13 +21315,15 @@ components:
           nullable: true
           type: array
         httpStatusCode:
-          description: this will mirror the Status-Code part of the Status-Line http response header and is included for extra clarity
+          description: this will mirror the Status-Code part of the Status-Line http
+            response header and is included for extra clarity
           example: 401
           type: integer
     inline_response_403:
       properties:
         correlationId:
-          description: a unique identifier to track a request or related sequence of requests
+          description: a unique identifier to track a request or related sequence of
+            requests
           example: ee53e01d-c078-43fd-abd4-47e92f4a06cf
           format: uuid
           nullable: true
@@ -20994,13 +21336,15 @@ components:
           nullable: true
           type: array
         httpStatusCode:
-          description: this will mirror the Status-Code part of the Status-Line http response header and is included for extra clarity
+          description: this will mirror the Status-Code part of the Status-Line http
+            response header and is included for extra clarity
           example: 403
           type: integer
     inline_response_404:
       properties:
         correlationId:
-          description: a unique identifier to track a request or related sequence of requests
+          description: a unique identifier to track a request or related sequence of
+            requests
           example: ee53e01d-c078-43fd-abd4-47e92f4a06cf
           format: uuid
           nullable: true
@@ -21013,13 +21357,15 @@ components:
           nullable: true
           type: array
         httpStatusCode:
-          description: this will mirror the Status-Code part of the Status-Line http response header and is included for extra clarity
+          description: this will mirror the Status-Code part of the Status-Line http
+            response header and is included for extra clarity
           example: 404
           type: integer
     inline_response_409:
       properties:
         correlationId:
-          description: a unique identifier to track a request or related sequence of requests
+          description: a unique identifier to track a request or related sequence of
+            requests
           example: ee53e01d-c078-43fd-abd4-47e92f4a06cf
           format: uuid
           nullable: true
@@ -21032,13 +21378,15 @@ components:
           nullable: true
           type: array
         httpStatusCode:
-          description: this will mirror the Status-Code part of the Status-Line http response header and is included for extra clarity
+          description: this will mirror the Status-Code part of the Status-Line http
+            response header and is included for extra clarity
           example: 409
           type: integer
     inline_response_412:
       properties:
         correlationId:
-          description: a unique identifier to track a request or related sequence of requests
+          description: a unique identifier to track a request or related sequence of
+            requests
           example: ee53e01d-c078-43fd-abd4-47e92f4a06cf
           format: uuid
           nullable: true
@@ -21051,12 +21399,14 @@ components:
           nullable: true
           type: array
         httpStatusCode:
-          description: this will mirror the Status-Code part of the Status-Line http response header and is included for extra clarity
+          description: this will mirror the Status-Code part of the Status-Line http
+            response header and is included for extra clarity
           example: 412
           type: integer
   securitySchemes:
     OAuth2:
-      description: This API uses OAuth 2 with the Client Credentials grant flow. [More info](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials)
+      description: This API uses OAuth 2 with the Client Credentials grant flow. [More
+        info](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials)
       flows:
         clientCredentials:
           scopes:
@@ -21067,7 +21417,9 @@ components:
       scheme: basic
       type: http
     oAuthVeloBackOffice:
-      description: This API uses OAuth 2 with the implicit grant flow. Authenticated user must have backoffice role [More info](https://api.example.com/docs/auth)
+      description: This API uses OAuth 2 with the implicit grant flow. Authenticated
+        user must have backoffice role [More
+        info](https://api.example.com/docs/auth)
       flows:
         clientCredentials:
           scopes:

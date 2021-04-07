@@ -28,7 +28,7 @@ tags:
 paths:
   /gifs:
     get:
-      description: >
+      description: |
         A multiget version of the get GIF by ID endpoint.
       operationId: getGifsById
       parameters:
@@ -63,7 +63,8 @@ paths:
   /gifs/random:
     get:
       description: >
-        Returns a random GIF, limited by tag. Excluding the tag parameter will return a random GIF from the GIPHY catalog.
+        Returns a random GIF, limited by tag. Excluding the tag parameter
+        will return a random GIF from the GIPHY catalog.
       operationId: randomGif
       parameters:
         - $ref: "#/components/parameters/tag"
@@ -94,7 +95,9 @@ paths:
   /gifs/search:
     get:
       description: >
-        Search all GIPHY GIFs for a word or phrase. Punctuation will be stripped and ignored.  Use a plus or url encode for phrases. Example paul+rudd, ryan+gosling or american+psycho.
+        Search all GIPHY GIFs for a word or phrase. Punctuation will be
+        stripped and ignored.  Use a plus or url encode for phrases. Example
+        paul+rudd, ryan+gosling or american+psycho.
       operationId: searchGifs
       parameters:
         - $ref: "#/components/parameters/query"
@@ -132,7 +135,9 @@ paths:
   /gifs/translate:
     get:
       description: >
-        The translate API draws on search, but uses the GIPHY `special sauce` to handle translating from one vocabulary to another. In this case, words and phrases to GIF
+        The translate API draws on search, but uses the GIPHY `special
+        sauce` to handle translating from one vocabulary to another. In this
+        case, words and phrases to GIF
       operationId: translateGif
       parameters:
         - $ref: "#/components/parameters/term"
@@ -162,7 +167,9 @@ paths:
   /gifs/trending:
     get:
       description: >
-        Fetch GIFs currently trending online. Hand curated by the GIPHY editorial team.  The data returned mirrors the GIFs showcased on the GIPHY homepage. Returns 25 results by default.
+        Fetch GIFs currently trending online. Hand curated by the GIPHY
+        editorial team.  The data returned mirrors the GIFs showcased on the
+        GIPHY homepage. Returns 25 results by default.
       operationId: trendingGifs
       parameters:
         - $ref: "#/components/parameters/limit"
@@ -197,7 +204,7 @@ paths:
         - gifs
   "/gifs/{gifId}":
     get:
-      description: >
+      description: |
         Returns a GIF given that GIF's unique ID
       operationId: getGifById
       parameters:
@@ -228,7 +235,8 @@ paths:
   /stickers/random:
     get:
       description: >
-        Returns a random GIF, limited by tag. Excluding the tag parameter will return a random GIF from the GIPHY catalog.
+        Returns a random GIF, limited by tag. Excluding the tag parameter
+        will return a random GIF from the GIPHY catalog.
       operationId: randomSticker
       parameters:
         - $ref: "#/components/parameters/tag"
@@ -259,7 +267,8 @@ paths:
   /stickers/search:
     get:
       description: >
-        Replicates the functionality and requirements of the classic GIPHY search, but returns animated stickers rather than GIFs.
+        Replicates the functionality and requirements of the classic GIPHY
+        search, but returns animated stickers rather than GIFs.
       operationId: searchStickers
       parameters:
         - $ref: "#/components/parameters/query"
@@ -297,7 +306,9 @@ paths:
   /stickers/translate:
     get:
       description: >
-        The translate API draws on search, but uses the GIPHY `special sauce` to handle translating from one vocabulary to another. In this case, words and phrases to GIFs.
+        The translate API draws on search, but uses the GIPHY `special
+        sauce` to handle translating from one vocabulary to another. In this
+        case, words and phrases to GIFs.
       operationId: translateSticker
       parameters:
         - $ref: "#/components/parameters/term"
@@ -327,7 +338,8 @@ paths:
   /stickers/trending:
     get:
       description: >
-        Fetch Stickers currently trending online. Hand curated by the GIPHY editorial team. Returns 25 results by default.
+        Fetch Stickers currently trending online. Hand curated by the GIPHY
+        editorial team. Returns 25 results by default.
       operationId: trendingStickers
       parameters:
         - $ref: "#/components/parameters/limit"
@@ -377,7 +389,8 @@ components:
       schema:
         type: string
     lang:
-      description: Specify default language for regional content; use a 2-letter ISO 639-1 language code.
+      description: Specify default language for regional content; use a 2-letter ISO
+        639-1 language code.
       in: query
       name: lang
       schema:
@@ -428,12 +441,16 @@ components:
     BadRequest:
       description: Your request was formatted incorrectly or missing required parameters.
     Forbidden:
-      description: You weren't authorized to make your request; most likely this indicates an issue with your API Key.
+      description: You weren't authorized to make your request; most likely this
+        indicates an issue with your API Key.
     NotFound:
-      description: The particular GIF you are requesting was not found. This occurs, for example, if you request a GIF by an id that does not exist.
+      description: The particular GIF you are requesting was not found. This occurs,
+        for example, if you request a GIF by an id that does not exist.
     TooManyRequests:
       description: >
-        Your API Key is making too many requests. Read about [requesting a Production Key](https://developers.giphy.com/docs/#access) to upgrade your API Key rate limits.
+        Your API Key is making too many requests. Read about [requesting a
+        Production Key](https://developers.giphy.com/docs/#access) to upgrade
+        your API Key rate limits.
   schemas:
     Gif:
       properties:
@@ -455,7 +472,8 @@ components:
           type: string
         featured_tags:
           description: >
-            An array of featured tags for this GIF (Note: Not available when using the Public Beta Key)
+            An array of featured tags for this GIF (Note: Not available when
+            using the Public Beta Key)
           items:
             description: Tag name
             type: string
@@ -465,7 +483,8 @@ components:
           example: YsTs5ltWtEhnq
           type: string
         images:
-          description: An object containing data for various available formats and sizes of this GIF.
+          description: An object containing data for various available formats and sizes
+            of this GIF.
           properties:
             downsized:
               allOf:
@@ -486,47 +505,58 @@ components:
             downsized_still:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding a static preview image of the downsized version of this GIF.
+                - description: Data surrounding a static preview image of the downsized version of
+                    this GIF.
             fixed_height:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding versions of this GIF with a fixed height of 200 pixels. Good for mobile use.
+                - description: Data surrounding versions of this GIF with a fixed height of 200
+                    pixels. Good for mobile use.
             fixed_height_downsampled:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding versions of this GIF with a fixed height of 200 pixels and the number of frames reduced to 6.
+                - description: Data surrounding versions of this GIF with a fixed height of 200
+                    pixels and the number of frames reduced to 6.
             fixed_height_small:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding versions of this GIF with a fixed height of 100 pixels. Good for mobile keyboards.
+                - description: Data surrounding versions of this GIF with a fixed height of 100
+                    pixels. Good for mobile keyboards.
             fixed_height_small_still:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding a static image of this GIF with a fixed height of 100 pixels.
+                - description: Data surrounding a static image of this GIF with a fixed height of
+                    100 pixels.
             fixed_height_still:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding a static image of this GIF with a fixed height of 200 pixels.
+                - description: Data surrounding a static image of this GIF with a fixed height of
+                    200 pixels.
             fixed_width:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding versions of this GIF with a fixed width of 200 pixels. Good for mobile use.
+                - description: Data surrounding versions of this GIF with a fixed width of 200
+                    pixels. Good for mobile use.
             fixed_width_downsampled:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding versions of this GIF with a fixed width of 200 pixels and the number of frames reduced to 6.
+                - description: Data surrounding versions of this GIF with a fixed width of 200
+                    pixels and the number of frames reduced to 6.
             fixed_width_small:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding versions of this GIF with a fixed width of 100 pixels. Good for mobile keyboards.
+                - description: Data surrounding versions of this GIF with a fixed width of 100
+                    pixels. Good for mobile keyboards.
             fixed_width_small_still:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding a static image of this GIF with a fixed width of 100 pixels.
+                - description: Data surrounding a static image of this GIF with a fixed width of
+                    100 pixels.
             fixed_width_still:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding a static image of this GIF with a fixed width of 200 pixels.
+                - description: Data surrounding a static image of this GIF with a fixed width of
+                    200 pixels.
             looping:
               allOf:
                 - $ref: "#/components/schemas/Image"
@@ -534,7 +564,8 @@ components:
             original:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding the original version of this GIF. Good for desktop use.
+                - description: Data surrounding the original version of this GIF. Good for desktop
+                    use.
             original_still:
               allOf:
                 - $ref: "#/components/schemas/Image"
@@ -542,11 +573,13 @@ components:
             preview:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding a version of this GIF in .MP4 format limited to 50kb that displays the first 1-2 seconds of the GIF.
+                - description: Data surrounding a version of this GIF in .MP4 format limited to
+                    50kb that displays the first 1-2 seconds of the GIF.
             preview_gif:
               allOf:
                 - $ref: "#/components/schemas/Image"
-                - description: Data surrounding a version of this GIF limited to 50kb that displays the first 1-2 seconds of the GIF.
+                - description: Data surrounding a version of this GIF limited to 50kb that
+                    displays the first 1-2 seconds of the GIF.
           type: object
         import_datetime:
           description: The creation or upload date from this GIF's source.
@@ -554,7 +587,8 @@ components:
           format: date-time
           type: string
         rating:
-          description: The MPAA-style rating for this content. Examples include Y, G, PG, PG-13 and R
+          description: The MPAA-style rating for this content. Examples include Y, G, PG,
+            PG-13 and R
           example: g
           type: string
         slug:
@@ -575,7 +609,8 @@ components:
           type: string
         tags:
           description: >
-            An array of tags for this GIF (Note: Not available when using the Public Beta Key)
+            An array of tags for this GIF (Note: Not available when using the
+            Public Beta Key)
           items:
             description: Tag name
             type: string
@@ -648,7 +683,10 @@ components:
       type: object
     Meta:
       description: >
-        The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
+        The Meta Object contains basic information regarding the request,
+        whether it was successful, and the response given by the API.  Check
+        `responses` to see a description of types of response codes the API
+        might give you under different cirumstances.
       properties:
         msg:
           description: HTTP Response Message
@@ -666,7 +704,9 @@ components:
       type: object
     Pagination:
       description: >
-        The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions.
+        The Pagination Object contains information relating to the number
+        of total results available as well as the number of results fetched and
+        their relative positions.
       properties:
         count:
           description: Total number of items returned.
@@ -685,18 +725,22 @@ components:
           type: integer
       type: object
     User:
-      description: The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
+      description: The User Object contains information about the user associated with
+        a GIF and URLs to assets such as that user's avatar image, profile, and
+        more.
       properties:
         avatar_url:
           description: The URL for this user's avatar image.
           example: https://media1.giphy.com/avatars/election2016/XwYrZi5H87o6.gif
           type: string
         banner_url:
-          description: The URL for the banner image that appears atop this user's profile page.
+          description: The URL for the banner image that appears atop this user's profile
+            page.
           example: https://media4.giphy.com/avatars/cheezburger/XkuejOhoGLE6.jpg
           type: string
         display_name:
-          description: The display name associated with this user (contains formatting the base username might not).
+          description: The display name associated with this user (contains formatting the
+            base username might not).
           example: JoeCool4000
           type: string
         profile_url:

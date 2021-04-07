@@ -22,7 +22,11 @@ produces:
   - application/json
 securityDefinitions:
   Authorization:
-    description: HTTP Basic Authentication/API Key. Basic Auth requires a username and a password. For the username, use a valid API key. Ritc accepts the API key as both plaintext and base64 encoded. Remember that you must append a colon after the api key in order to avoid being prompted for a password. The format is Base64encode(api-key:)
+    description: HTTP Basic Authentication/API Key. Basic Auth requires a username
+      and a password. For the username, use a valid API key. Ritc accepts the
+      API key as both plaintext and base64 encoded. Remember that you must
+      append a colon after the api key in order to avoid being prompted for a
+      password. The format is Base64encode(api-key:)
     in: header
     name: Authorization
     type: apiKey
@@ -2432,7 +2436,9 @@ definitions:
         description: Channel name
         type: string
       type:
-        description: Type of channel. Choices are 'public' or 'private'. Private channels are only viewable within an account, while public channels are viewable to everyone in the system
+        description: Type of channel. Choices are 'public' or 'private'. Private
+          channels are only viewable within an account, while public channels
+          are viewable to everyone in the system
         type: object
     title: Channel
     type: object
@@ -2452,7 +2458,9 @@ definitions:
         description: Channel name
         type: string
       type:
-        description: Type of channel. Choices are 'public' or 'private'. Private channels are only viewable within an account, while public channels are viewable to everyone
+        description: Type of channel. Choices are 'public' or 'private'. Private
+          channels are only viewable within an account, while public channels
+          are viewable to everyone
         type: object
     title: Channel_Response
     type: object

@@ -6,7 +6,8 @@ basePath: /api/merchant/1
 info:
   contact:
     name: info@spectrocoin.com
-  description: This is an API designed for merchants who are using SpectroCoin services and wishes to integrate them locally.
+  description: This is an API designed for merchants who are using SpectroCoin
+    services and wishes to integrate them locally.
   title: SpectroCoin Merchant
   version: 1.0.0
   x-apisguru-categories:
@@ -37,7 +38,8 @@ paths:
           name: body
           required: false
           schema:
-            $ref: "#/definitions/Order_request_class_used_to_provide_order_specific_information"
+            $ref: "#/definitions/Order_request_class_used_to_provide_order_specific_informa\
+              tion"
       responses:
         "200":
           description: successful operation
@@ -72,7 +74,8 @@ definitions:
         description: Currency to be funded to merchant account
         type: string
       redirectUrl:
-        description: SpectroCoin payment window url where merchant customer may be redirected
+        description: SpectroCoin payment window url where merchant customer may be
+          redirected
         type: string
       validUntil:
         description: Timestamp until when order is valid
@@ -109,10 +112,12 @@ definitions:
           - de
         type: string
       description:
-        description: Order description. Will be presented for merchant customer at payment window
+        description: Order description. Will be presented for merchant customer at
+          payment window
         type: string
       failureUrl:
-        description: Url of merchant page customer should be redirected after unsuccessful payment
+        description: Url of merchant page customer should be redirected after
+          unsuccessful payment
         type: string
       merchantId:
         description: Merchant ID assigned to your account
@@ -121,10 +126,13 @@ definitions:
         minimum: 0
         type: integer
       orderId:
-        description: Custom order ID. Must be unique per API. If not provided it will be generated.
+        description: Custom order ID. Must be unique per API. If not provided it will be
+          generated.
         type: string
       payAmount:
-        description: Pay amount in pay currency of value which should be paid by merchant customer. If not provided receive amount will be used to calculate pay amount
+        description: Pay amount in pay currency of value which should be paid by
+          merchant customer. If not provided receive amount will be used to
+          calculate pay amount
         type: number
       payCurrency:
         description: Currency of pay amount
@@ -139,7 +147,9 @@ definitions:
         description: Specified payer surname.
         type: string
       receiveAmount:
-        description: Receive amount in receive currency of value that merchant will be funded after merchant customers payment approval. If not provided pay amount will be used to calculate receive amount
+        description: Receive amount in receive currency of value that merchant will be
+          funded after merchant customers payment approval. If not provided pay
+          amount will be used to calculate receive amount
         type: number
       receiveCurrency:
         description: Currency of receive amount
@@ -148,7 +158,8 @@ definitions:
         description: Signature required for signing create order request
         type: string
       successUrl:
-        description: Url of merchant page customer should be redirected after successful payment
+        description: Url of merchant page customer should be redirected after successful
+          payment
         type: string
     required:
       - apiId

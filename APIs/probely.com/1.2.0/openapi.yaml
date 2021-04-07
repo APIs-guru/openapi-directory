@@ -8,7 +8,8 @@ info:
     name: Probely Support
     url: https://probely.com
   description: >
-    Probely is a Web Vulnerability Scanning suite for Agile Teams. It provides
+    Probely is a Web Vulnerability Scanning suite for Agile Teams. It
+    provides
 
     continuous scanning of your Web Applications and lets you efficiently
 
@@ -669,172 +670,122 @@ security:
   - jwtAuth: []
 tags:
   - description: >
-      Login users and verify token. For login we make use of [JSON web tokens](https://jwt.io/).
+      Login users and verify token. For login we make use of [JSON web
+      tokens](https://jwt.io/).
     name: Login
-  - description: >
+  - description: |
       In Probely, a target is what defines what is being scanned.
-
       Connected to a target there are two other objects: a site and a list of
-
       assets.
 
-
       The site is the where the scan starts and will usually be the main
-
       entry point for your web application.
 
-
       As things are today, a single URL is not enough to describe all of the
-
       resources an application uses.
-
       For example, a modern single page web application might load the main
-
       page from one domain and make AJAX requests to one or more other domains.
-
       This where assets come in, they are used to add extra domains that
-
       our scanner should follow.
     name: Targets
-  - description: >
+  - description: |
       Every target has a site object, it contains the main entry URL for scans.
-
       Other settings are also connected to a site like login parameters,
-
       basic auth, and custom headers and cookies.
     name: Site
-  - description: >
+  - description: |
       Other resources a scan required access to (e.g. the domain where an
-
       API is being served) should be added here.
-
       You can also configure custom headers and cookies for each asset.
     name: Assets
-  - description: >
+  - description: |
       Start and manage scans against the target.
-
       You can also produce reports and access the list of scanned endpoints.
     name: Scans
-  - description: >
+  - description: |
       You can schedule scans for the future as a one off, or on a recurring
-
       basis.
     name: Scheduled
-  - description: >
+  - description: |
       Findings are security issues found during scans.
-
       We try hard to present valid findings only. We give as much information
-
       as possible to help you know exactly what to do, without having to
-
       resort to outside resources.
 
-
       Findings come with all the data we gathered during the scan, a
-
       suggestion on how to fix it, and a description of the vulnerability.
     name: Findings
-  - description: >
+  - description: |
       During the scans we run fingerprinters against the target and record the
-
       result on the site and assets.
-
       You can access our list of frameworks/software here.
     name: Frameworks
-  - description: >
+  - description: |
       You can add labels to findings to help you keep track of you development.
-
       Use these endpoints to manage your labels.
     name: Labels
-  - description: >
+  - description: |
       In Probely findings are connected to vulnerability definitions.
-
       This is how we keep track what type of vulnerability it is, it also
-
       includes a name and description.
     name: Vulnerabilities
-  - description: >
+  - description: |
       API keys allow you to perform operations without using your regular user.
-
       There are two endpoints for API keys:
         * one to create keys that can only access the current scope;
         * one that allows the user to perform operations like creating targets.
     name: API Keys
-  - description: >
+  - description: |
       Use these endpoints to reset a user's password.
     name: Password Reset
   - description: Manage self and other users.
     name: Users
   - description: Account management.
     name: Account
-  - description: >
+  - description: |
       Probely has several graphs and tables that it uses to
-
       display statistics of the current state of a target or account.
     name: Statistics
-  - description: >
+  - description: |
       If you only require a small number of active targets at a time but don't
-
       want to lose their history by deleting one to add another it is now
-
       possible to archive targets.
-
       This feature is still experimental, please contact our support if you
-
       are interested.
     name: Archive
-  - description: >
+  - description: |
       Important events in your Probely account are recorded as events.
-
       An event is comprised of the resource acted on, when it occurred and
-
       what kind of event (ex: `target_created`).
 
-
       Besides fetching these events using their endpoints you are also able
-
       to receive them in real-time by registering webhooks.
-
       The event is sent to every registered webhook URL as JSON and an HTTP
-
       success status code (2XX) is expected in the response.
-
       In case a webhook fails it will be retried with an exponential back-off
-
       (maxing out at 4 hours) during 2 days, at the end of which an email is
-
       sent to the users informing of this failure.
-
       For security we suggest using an unique hard to guess identifier for the
-
       webhook:
-
       ```
-
       https://webhook.example.com/d69179e3b06549469817560c650be98f/
-
       ```
-
       Webhook URL's are required to be HTTPS.
 
-
       When registering a webhook according to the chosen endpoint you can
-
       receive any event for the account or only events for a single target.
-
       A target webhook will not receive `user_created`, `user_deleted` and
-
       `target_created` events and all events received pertain to the target
-
       the webhook was created for.
     name: Events
   - description: List available and installed integrations
     name: Integrations
-  - description: >
+  - description: |
       Receive slack notifications on Probely events.
     name: Slack Integration
   - description: >
-      To start integrating Probely with Jira you will first need to add the
+      To start integrating Probely with Jira you will first need to add
+      the
 
       Probely app to your Jira instance.
 
@@ -849,7 +800,8 @@ tags:
       [here](https://help.probely.com/integrations/jira-syncronization-settings).
     name: Jira Cloud Integration
   - description: >
-      Find instructions on how to configure this integration for your Jira
+      Find instructions on how to configure this integration for your
+      Jira
 
       deployment [here](https://help.probely.com/integrations/how-to-integrate-probely-with-jira-server).
 
@@ -872,7 +824,8 @@ paths:
   /auth/obtain/:
     post:
       description: >
-        The received token should be used for authenticated requests by including in the Authorization header as `Authorization: JWT <token>`.
+        The received token should be used for authenticated requests by
+        including in the Authorization header as `Authorization: JWT <token>`.
       requestBody:
         $ref: "#/components/requestBodies/Login"
       responses:
@@ -918,7 +871,7 @@ paths:
         - Login
   /auth/verify/:
     post:
-      description: >
+      description: |
         Check for the validity of a user token.
       requestBody:
         $ref: "#/components/requestBodies/Token"
@@ -1379,9 +1332,8 @@ paths:
         - Users
   /profile/change_password/:
     post:
-      description: >
+      description: |
         Our password policy requires a minimum password length of 10 chars with
-
         at least one symbol or number.
       requestBody:
         $ref: "#/components/requestBodies/PasswordChange"
@@ -1418,7 +1370,7 @@ paths:
         "400":
           $ref: "#/components/responses/BadRequestErrorMessage"
       security: []
-      summary: >
+      summary: |
         Reset password after asking for a reset (with the token sent by email).
       tags:
         - Password Reset
@@ -1873,7 +1825,7 @@ paths:
         $ref: "#/components/requestBodies/FindingBulkIds"
       responses:
         "200":
-          description: >
+          description: |
             Token to retrieve report.
         "400":
           $ref: "#/components/responses/BadRequestErrorMessage"
@@ -1892,7 +1844,7 @@ paths:
         $ref: "#/components/requestBodies/FindingBulkRetest"
       responses:
         "200":
-          description: >
+          description: |
             List of assessment IDs.
         "400":
           $ref: "#/components/responses/BadRequestErrorMessage"
@@ -3145,7 +3097,8 @@ components:
         type: array
     ordering:
       description: >
-        Which field to use when ordering the results, prefix with `-` to invert ordering.
+        Which field to use when ordering the results, prefix with `-` to
+        invert ordering.
       in: query
       name: ordering
       required: false
@@ -3367,7 +3320,7 @@ components:
           schema:
             properties:
               scan_profile:
-                description: >
+                description: |
                   Override the target's `scan_profile`.
                 enum:
                   - safe
@@ -3821,7 +3774,8 @@ components:
             properties:
               "0":
                 description: >
-                  These are arrays, they are being displayed as objects with numerical indexes due to limitations of the framework.
+                  These are arrays, they are being displayed as objects with
+                  numerical indexes due to limitations of the framework.
                 properties:
                   "0":
                     default: needing attention
@@ -3837,7 +3791,8 @@ components:
                 type: object
               "1":
                 description: >
-                  These are arrays, they are being displayed as objects with numerical indexes due to limitations of the framework.
+                  These are arrays, they are being displayed as objects with
+                  numerical indexes due to limitations of the framework.
                 properties:
                   "0":
                     default: no issues found
@@ -4270,15 +4225,11 @@ components:
     Action:
       properties:
         action:
-          description: >
+          description: |
             Action to enable targets:
-
             * null - no action required
-
             * trial - start a trial
-
             * plan - select a plan to subscribe
-
             * subscribe - add target to subscribed plan
           enum:
             - null
@@ -4291,23 +4242,15 @@ components:
       items:
         properties:
           action:
-            description: >
+            description: |
               Actions are:
-
               * edit - edit target
-
               * delete - delete target
-
               * trial - start a trial with this target
-
               * plan - select a subscipition plan with this target
-
               * subscribe - add target to subscribed plan
-
               * unsubscribe - remove target from subscription
-
               * archive - archive target
-
               * activate - unarchive target
             enum:
               - edit
@@ -4327,7 +4270,7 @@ components:
     Activity:
       properties:
         change:
-          description: >
+          description: |
             Type of change:
               * created - First time the issue is found
               * comment - User left a comment in the timeline
@@ -4978,7 +4921,8 @@ components:
         completed:
           $ref: "#/components/schemas/scanCompleted"
         crawler:
-          description: Information on the status of the crawling step of the scanning process
+          description: Information on the status of the crawling step of the scanning
+            process
           properties:
             error:
               description: List of possible errors from the crawler
@@ -5012,7 +4956,8 @@ components:
         created_by:
           $ref: "#/components/schemas/CreatedBy"
         fingerprinter:
-          description: Information on the status of the crawling step of the scanning process
+          description: Information on the status of the crawling step of the scanning
+            process
           properties:
             count:
               description: The number of detected frameworks/software on the target
@@ -5048,7 +4993,8 @@ components:
         scan_profile:
           $ref: "#/components/schemas/scanProfile"
         scanner:
-          description: Information on the status of the search for vulnerabilities of the scanning process
+          description: Information on the status of the search for vulnerabilities of the
+            scanning process
           properties:
             error:
               description: List of possible errors from the scanner
@@ -5062,7 +5008,8 @@ components:
                 - ended
               type: string
             status:
-              description: The number of scanner tasks completed and total number of tasks in the queue
+              description: The number of scanner tasks completed and total number of tasks in
+                the queue
               properties:
                 "0":
                   description: Number of completed tasks
@@ -5230,7 +5177,8 @@ components:
           $ref: "#/components/schemas/id"
         labels:
           description: >
-            User labels for the scope. (This feature is currently only available for certain accounts,
+            User labels for the scope. (This feature is currently only
+            available for certain accounts,
 
             please contact our support if you are interested in using it)
           items:
@@ -5324,7 +5272,7 @@ components:
       type: array
     Whitelist:
       items:
-        description: >
+        description: |
           Paths that the spider should visit that are not directly accessible
         example: /private/path/
         type: string
@@ -5353,11 +5301,9 @@ components:
       readOnly: true
       type: string
     accountStatus:
-      description: >
+      description: |
         * active - active subscription, either trial or paying
-
         * trial_ended - trial ended and subscription was discontinued
-
         * canceled - subscription canceled
       enum:
         - active
@@ -5394,7 +5340,7 @@ components:
       example: Munich
       type: string
     connectedTarget:
-      description: >
+      description: |
         Id of the connected target in a multi-environment targets.
       type: string
     country:
@@ -5431,19 +5377,21 @@ components:
       type: string
     enabled:
       description: >
-        Certain operations (e.g. changing a target's `type`) may require going through billing. Until the change is reverted or the billing is settled.
+        Certain operations (e.g. changing a target's `type`) may require
+        going through billing. Until the change is reverted or the billing is
+        settled.
       readOnly: true
       type: boolean
     environment:
       default: testing
-      description: >
+      description: |
         Multi-environment targets can identify environments using this property.
       enum:
         - testing
         - production
       type: string
     eventObjectType:
-      description: >
+      description: |
         Type of object in the event content.
       enum:
         - user
@@ -5459,31 +5407,19 @@ components:
       readOnly: true
       type: string
     eventType:
-      description: >
+      description: |
         Event type:
-
         - `user_created` new user added to account
-
         - `user_deleted` user deleted from account
-
         - `target_created` new target added to account
-
         - `target_deleted` target deleted from account
-
         - `target_verified` target ownership verified
-
         - `target_verification_failed` target ownership verification failed
-
         - `scan_started` scan started on target
-
         - `scan_canceled` scan on target canceled
-
         - `scan_completed` scan finished with successfuly
-
         - `scan_failed` scan finished unsuccessfuly
-
         - `finding_detected` new finding detected (not found before)
-
         - `finding_fixed` finding was fixed
       enum:
         - user_created
@@ -5513,9 +5449,8 @@ components:
       readOnly: true
       type: string
     findingInsertionPoint:
-      description: >
+      description: |
         An insertion point is the place in the HTTP request where the
-
         malicious payload is injected to exploit the vulnerability.
           * cookie - Payload injected into the value of an HTTP cookie
           * header - Payload injected into the header of an HTTP request
@@ -5539,7 +5474,7 @@ components:
       readOnly: true
       type: string
     findingSeverity:
-      description: >
+      description: |
         Severity, how serious the issue is considered:
           * 10 - low
           * 20 - medium
@@ -5550,7 +5485,7 @@ components:
         - 30
       type: string
     findingState:
-      description: >
+      description: |
         Finding state:
           * notfixed - Issue can still be exploited
           * invalid - Issue determined to be a false positive
@@ -5622,13 +5557,16 @@ components:
     jira_priority_mapping:
       properties:
         "10":
-          description: Id of the Jira priority that low severity findings should be mapped to.
+          description: Id of the Jira priority that low severity findings should be mapped
+            to.
           type: string
         "20":
-          description: Id of the Jira priority that medium severity findings should be mapped to.
+          description: Id of the Jira priority that medium severity findings should be
+            mapped to.
           type: string
         "30":
-          description: Id of the Jira status that high severity findings should be mapped to.
+          description: Id of the Jira status that high severity findings should be mapped
+            to.
           type: string
       type: object
     jira_project_id:
@@ -5700,9 +5638,8 @@ components:
         type: string
       type: array
     planChargeModel:
-      description: >
+      description: |
         * per_unit - each target is paid independently
-
         * flat_fee - targets are paid as a pool
       enum:
         - per_unit
@@ -5727,7 +5664,7 @@ components:
       example: 5000
       type: integer
     recurrence:
-      description: >
+      description: |
         Scan recurrence:
           * d - daily
           * w - weekly
@@ -5745,11 +5682,9 @@ components:
       description: Company registration number
       type: string
     reportType:
-      description: >
+      description: |
         * default - default report, no extra information added
-
         * owasp - adds table on OWASP Top 10 most critical web application risks
-
         * pci - adds table on PCI requirements
       enum:
         - default
@@ -5768,17 +5703,12 @@ components:
       type: string
     scanProfile:
       default: normal
-      description: >
+      description: |
         * lightning - fast simple scan
-
         * normal - default profile
-
         * full - does everything the default profile does and adds boolean based
-
         SQL injection tests
-
         * safe - doesn't use any content changing methods (no POST, DELETE, etc)
-
         and tries fewer payloads for SQL injection tests
       enum:
         - safe
@@ -5823,7 +5753,8 @@ components:
     siteUrl:
       default: ""
       description: >
-        Site URL, it should include the path if the site is not located at the root. This URL can only be set once.
+        Site URL, it should include the path if the site is not located at
+        the root. This URL can only be set once.
       example: https://app.probely.com
       format: URL
       type: string
@@ -5833,23 +5764,15 @@ components:
       type: array
     targetType:
       default: single
-      description: >
+      description: |
         The type of a target determines what the limitations imposed on a
-
         target.
-
         * free - Every account is allowed to have 5 free targets, these targets
-
         do not need to be verified but can only perform lightning
-
         scans.
-
         * single - Single environment targets need to be verified but are
-
         allowed to run any type of scan allowed by the plan.
-
         * multi - Multi environment targets are used when you want
-
         to scan the same application in different environments.
       enum:
         - free
@@ -5875,7 +5798,8 @@ components:
       example: 31536000
       type: integer
     userEmail:
-      description: User's email (changing this resets the user's password and revokes existing tokens)
+      description: User's email (changing this resets the user's password and revokes
+        existing tokens)
       example: example@probely.com
       type: string
     userId:
@@ -5924,15 +5848,11 @@ components:
       readOnly: true
       type: string
     verificationMethod:
-      description: >
+      description: |
         Type of verification:
-
         * dns - we look or a TXT record on the host you registered containing
-
         `Probely=<verification_token>`
-
         * file - on the root of the path you registered we look for a file
-
         named `<verification token>` containing `Probely`.
       enum:
         - dns
@@ -5945,15 +5865,11 @@ components:
       readOnly: true
       type: string
     verificationType:
-      description: >
+      description: |
         Type of verification:
-
         * dns - we look or a TXT record on the host you registered containing
-
         `Probely=<verification_token>`
-
         * file - on the root of the path you registered we look for a file
-
         named `<verification token>` containing `Probely`.
       enum:
         - dns

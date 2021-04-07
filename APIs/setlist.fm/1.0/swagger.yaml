@@ -192,11 +192,9 @@ tags:
 paths:
   "/1.0/artist/{mbid}":
     get:
-      description: >-
+      description: |-
         <p>
-
         Returns an artist for a given Musicbrainz MBID
-
         </p>
       operationId: resource__1.0_artist__mbid__getArtist_GET
       parameters:
@@ -228,11 +226,9 @@ paths:
         - /1.0/artist/{mbid}
   "/1.0/artist/{mbid}/setlists":
     get:
-      description: >-
+      description: |-
         <p>
-
         Get a list of an artist's setlists.
-
         </p>
       operationId: resource__1.0_artist__mbid__setlists_getArtistSetlists_GET
       parameters:
@@ -551,7 +547,8 @@ paths:
           name: lastFm
           type: integer
         - description: >-
-            the date and time (UTC) when this setlist was last updated (format yyyyMMddHHmmss) - either edited or
+            the date and time (UTC) when this setlist was last updated (format
+            yyyyMMddHHmmss) - either edited or
 
             reverted. search will return setlists that were updated on or after this date
           in: query
@@ -948,11 +945,9 @@ paths:
         - /1.0/user/{userId}
   "/1.0/user/{userId}/attended":
     get:
-      description: >-
+      description: |-
         <p>
-
         Get a list of setlists of concerts attended by a user.
-
         </p>
       operationId: resource__1.0_user__userId__attended_getUserAttendedSetlists_GET
       parameters:
@@ -1191,11 +1186,9 @@ paths:
         - /1.0/venue/{venueId}
   "/1.0/venue/{venueId}/setlists":
     get:
-      description: >-
+      description: |-
         <p>
-
         Get setlists for a specific venue.
-
         </p>
       operationId: resource__1.0_venue__venueId__setlists_getVenueSetlists_GET
       parameters:
@@ -1293,7 +1286,8 @@ paths:
 definitions:
   json_Artist:
     description: >-
-      This class represents an artist. An artist is a musician or a group of musicians. Each artist has a definite
+      This class represents an artist. An artist is a musician or a group
+      of musicians. Each artist has a definite
 
       <a href="http://wiki.musicbrainz.org/MBID">Musicbrainz Identifier</a> (MBID) with which the artist can be uniquely
 
@@ -1311,7 +1305,8 @@ definitions:
         example: John, Paul, George and Ringo
         type: string
       mbid:
-        description: unique Musicbrainz Identifier (MBID), e.g. <em>&quot;b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d&quot;</em>
+        description: unique Musicbrainz Identifier (MBID), e.g.
+          <em>&quot;b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d&quot;</em>
         example: b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d
         type: string
       name:
@@ -1319,7 +1314,8 @@ definitions:
         example: The Beatles
         type: string
       sortName:
-        description: the artist's sort name, e.g. <em>&quot;Beatles, The&quot;</em> or <em>&quot;Springsteen, Bruce&quot;</em>
+        description: the artist's sort name, e.g. <em>&quot;Beatles, The&quot;</em> or
+          <em>&quot;Springsteen, Bruce&quot;</em>
         example: Beatles, The
         type: string
       tmid:
@@ -1420,7 +1416,8 @@ definitions:
     type: object
   json_City:
     description: >-
-      This class represents a city where Venues are located. Most of the original city data was taken from
+      This class represents a city where Venues are located. Most of the
+      original city data was taken from
 
       <a href="http://geonames.org/">Geonames.org</a>.
     example:
@@ -1437,7 +1434,8 @@ definitions:
     properties:
       coords:
         $ref: "#/definitions/json_Coords"
-        description: The city's coordinates. Usually the coordinates of the city centre are used.
+        description: The city's coordinates. Usually the coordinates of the city centre
+          are used.
       country:
         $ref: "#/definitions/json_Country"
         description: The city's country.
@@ -1447,18 +1445,21 @@ definitions:
         type: string
       name:
         description: >-
-          the city's name, depending on the language valid values are e.g. <em>&quot;M&uuml;chen&quot;</em> or
+          the city's name, depending on the language valid values are e.g.
+          <em>&quot;M&uuml;chen&quot;</em> or
 
           <em>Munich</em>
         example: Hollywood
         type: string
       state:
-        description: The name of city's state, e.g. <em>&quot;Bavaria&quot;</em> or <em>&quot;Florida&quot;</em>
+        description: The name of city's state, e.g. <em>&quot;Bavaria&quot;</em> or
+          <em>&quot;Florida&quot;</em>
         example: California
         type: string
       stateCode:
         description: >-
-          The code of the city's state. For most countries this is a two-digit numeric code, with which the state can be
+          The code of the city's state. For most countries this is a
+          two-digit numeric code, with which the state can be
 
           identified uniquely in the specific Country. The code can also be a String for other cities. Valid
 
@@ -1538,14 +1539,17 @@ definitions:
     properties:
       code:
         description: >-
-          The country's <a href= "http://www.iso.org/iso/english_country_names_and_code_elements" >ISO code</a>. E.g.
+          The country's <a href=
+          "http://www.iso.org/iso/english_country_names_and_code_elements" >ISO
+          code</a>. E.g.
 
           <em>&quot;ie&quot;</em> for Ireland
         example: US
         type: string
       name:
         description: >-
-          The country's name. Can be a localized name - e.g. <em>&quot;Austria&quot;</em> or
+          The country's name. Can be a localized name - e.g.
+          <em>&quot;Austria&quot;</em> or
 
           <em>&quot;&Ouml;sterreich&quot;</em> for Austria if the German name was requested.
         example: United States
@@ -1580,7 +1584,8 @@ definitions:
     type: object
   json_Set:
     description: >-
-      A setlist consists of different (at least one) sets. Sets can either be sets as defined in the
+      A setlist consists of different (at least one) sets. Sets can
+      either be sets as defined in the
 
       <a href="https://www.setlist.fm/guidelines">Guidelines</a> or encores.
     example:
@@ -1624,13 +1629,15 @@ definitions:
     properties:
       encore:
         description: >-
-          if the set is an encore, this is the number of the encore, starting with 1 for the first encore, 2 for the second
+          if the set is an encore, this is the number of the encore, starting
+          with 1 for the first encore, 2 for the second
 
           and so on.
         type: number
       name:
         description: >-
-          the description/name of the set. E.g. <em>&quot;Acoustic set&quot;</em> or <em>&quot;Paul McCartney
+          the description/name of the set. E.g. <em>&quot;Acoustic
+          set&quot;</em> or <em>&quot;Paul McCartney
 
           solo&quot;</em>
         type: string
@@ -1643,7 +1650,8 @@ definitions:
     type: object
   json_Setlist:
     description: >-
-      Setlists, that's what it's all about. So if you're trying to use this API without knowing what a setlist is then
+      Setlists, that's what it's all about. So if you're trying to use
+      this API without knowing what a setlist is then
 
       you're kinda wrong on this page ;-).
 
@@ -1725,18 +1733,21 @@ definitions:
         type: string
       info:
         description: >-
-          additional information on the concert - see the <a href="https://www.setlist.fm/guidelines">setlist.fm
+          additional information on the concert - see the <a
+          href="https://www.setlist.fm/guidelines">setlist.fm
 
           guidelines</a> for a complete list of allowed content.
         example: Recorded and published as 'The Beatles at the Hollywood Bowl'
         type: string
       lastFmEventId:
-        description: the id this event has on <a href="http://last.fm/">last.fm</a> (deprecated)
+        description: the id this event has on <a href="http://last.fm/">last.fm</a>
+          (deprecated)
         example: 1164056
         type: number
       lastUpdated:
         description: >-
-          date, time and time zone of the last update to this setlist in the format
+          date, time and time zone of the last update to this setlist in the
+          format
 
           &quot;yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ&quot;
         example: 2013-10-20T05:18:08.000+0000
@@ -1750,7 +1761,8 @@ definitions:
         $ref: "#/definitions/json_Tour"
         description: the setlist's tour
       url:
-        description: the attribution url to which you have to link to wherever you use data from this setlist in your application
+        description: the attribution url to which you have to link to wherever you use
+          data from this setlist in your application
         example: https://www.setlist.fm/setlist/the-beatles/1964/hollywood-bowl-hollywood-ca-63de4613.html
         type: string
       venue:
@@ -1874,15 +1886,18 @@ definitions:
     properties:
       cover:
         $ref: "#/definitions/json_Artist"
-        description: The original Artist of this song, if different to the performing artist.
+        description: The original Artist of this song, if different to the performing
+          artist.
       info:
         description: >-
-          Special incidents or additional information about the way the song was performed at this specific concert. See
+          Special incidents or additional information about the way the song
+          was performed at this specific concert. See
 
           the <a href="https://www.setlist.fm/guidelines">setlist.fm guidelines</a> for a complete list of allowed content.
         type: string
       name:
-        description: The name of the song. E.g. <em>Yesterday</em> or <em>&quot;Wish You Were Here&quot;</em>
+        description: The name of the song. E.g. <em>Yesterday</em> or <em>&quot;Wish You
+          Were Here&quot;</em>
         example: Yesterday
         type: string
       tape:
@@ -1894,7 +1909,8 @@ definitions:
         type: boolean
       with:
         $ref: "#/definitions/json_Artist"
-        description: A different Artist than the performing one that joined the stage for this song.
+        description: A different Artist than the performing one that joined the stage
+          for this song.
     title: song
     type: object
   json_Tour:
@@ -1952,7 +1968,8 @@ definitions:
     type: object
   json_Venue:
     description: >-
-      Venues are places where concerts take place. They usually consist of a venue name and a city - but there are also
+      Venues are places where concerts take place. They usually consist
+      of a venue name and a city - but there are also
 
       some venues that do not have a city attached yet. In such a case, the city simply isn't set and the city and country
 
@@ -1982,7 +1999,8 @@ definitions:
         type: string
       name:
         description: >-
-          the name of the venue, usually without city and country. E.g. <em>&quot;Madison Square Garden&quot;</em> or
+          the name of the venue, usually without city and country. E.g.
+          <em>&quot;Madison Square Garden&quot;</em> or
 
           <em>&quot;Royal Albert Hall&quot;</em>
         example: Compaq Center
@@ -2050,7 +2068,8 @@ definitions:
               attribute: true
               namespace: ""
           mbid:
-            description: unique Musicbrainz Identifier (MBID), e.g. <em>&quot;b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d&quot;</em>
+            description: unique Musicbrainz Identifier (MBID), e.g.
+              <em>&quot;b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d&quot;</em>
             type: string
             xml:
               attribute: true
@@ -2062,7 +2081,8 @@ definitions:
               attribute: true
               namespace: ""
           sortName:
-            description: the artist's sort name, e.g. <em>&quot;Beatles, The&quot;</em> or <em>&quot;Springsteen, Bruce&quot;</em>
+            description: the artist's sort name, e.g. <em>&quot;Beatles, The&quot;</em> or
+              <em>&quot;Springsteen, Bruce&quot;</em>
             type: string
             xml:
               attribute: true
@@ -2079,7 +2099,8 @@ definitions:
             xml:
               namespace: ""
     description: >-
-      This class represents an artist. An artist is a musician or a group of musicians. Each artist has a definite
+      This class represents an artist. An artist is a musician or a group
+      of musicians. Each artist has a definite
 
       <a href="http://wiki.musicbrainz.org/MBID">Musicbrainz Identifier</a> (MBID) with which the artist can be uniquely
 
@@ -2110,7 +2131,8 @@ definitions:
       - properties:
           coords:
             $ref: "#/definitions/xml_ns0_coords"
-            description: The city's coordinates. Usually the coordinates of the city centre are used.
+            description: The city's coordinates. Usually the coordinates of the city centre
+              are used.
             xml:
               namespace: ""
           country:
@@ -2126,7 +2148,8 @@ definitions:
               namespace: ""
           name:
             description: >-
-              the city's name, depending on the language valid values are e.g. <em>&quot;M&uuml;chen&quot;</em> or
+              the city's name, depending on the language valid values are e.g.
+              <em>&quot;M&uuml;chen&quot;</em> or
 
               <em>Munich</em>
             type: string
@@ -2134,14 +2157,16 @@ definitions:
               attribute: true
               namespace: ""
           state:
-            description: The name of city's state, e.g. <em>&quot;Bavaria&quot;</em> or <em>&quot;Florida&quot;</em>
+            description: The name of city's state, e.g. <em>&quot;Bavaria&quot;</em> or
+              <em>&quot;Florida&quot;</em>
             type: string
             xml:
               attribute: true
               namespace: ""
           stateCode:
             description: >-
-              The code of the city's state. For most countries this is a two-digit numeric code, with which the state can be
+              The code of the city's state. For most countries this is a
+              two-digit numeric code, with which the state can be
 
               identified uniquely in the specific Country. The code can also be a String for other cities. Valid
 
@@ -2167,7 +2192,8 @@ definitions:
               attribute: true
               namespace: ""
     description: >-
-      This class represents a city where Venues are located. Most of the original city data was taken from
+      This class represents a city where Venues are located. Most of the
+      original city data was taken from
 
       <a href="http://geonames.org/">Geonames.org</a>.
     required:
@@ -2209,7 +2235,9 @@ definitions:
       - properties:
           code:
             description: >-
-              The country's <a href= "http://www.iso.org/iso/english_country_names_and_code_elements" >ISO code</a>. E.g.
+              The country's <a href=
+              "http://www.iso.org/iso/english_country_names_and_code_elements"
+              >ISO code</a>. E.g.
 
               <em>&quot;ie&quot;</em> for Ireland
             type: string
@@ -2218,7 +2246,8 @@ definitions:
               namespace: ""
           name:
             description: >-
-              The country's name. Can be a localized name - e.g. <em>&quot;Austria&quot;</em> or
+              The country's name. Can be a localized name - e.g.
+              <em>&quot;Austria&quot;</em> or
 
               <em>&quot;&Ouml;sterreich&quot;</em> for Austria if the German name was requested.
             type: string
@@ -2310,7 +2339,8 @@ definitions:
       - properties:
           encore:
             description: >-
-              if the set is an encore, this is the number of the encore, starting with 1 for the first encore, 2 for the second
+              if the set is an encore, this is the number of the encore, starting
+              with 1 for the first encore, 2 for the second
 
               and so on.
             type: number
@@ -2319,7 +2349,8 @@ definitions:
               namespace: ""
           name:
             description: >-
-              the description/name of the set. E.g. <em>&quot;Acoustic set&quot;</em> or <em>&quot;Paul McCartney
+              the description/name of the set. E.g. <em>&quot;Acoustic
+              set&quot;</em> or <em>&quot;Paul McCartney
 
               solo&quot;</em>
             type: string
@@ -2332,7 +2363,8 @@ definitions:
             xml:
               namespace: ""
     description: >-
-      A setlist consists of different (at least one) sets. Sets can either be sets as defined in the
+      A setlist consists of different (at least one) sets. Sets can
+      either be sets as defined in the
 
       <a href="https://www.setlist.fm/guidelines">Guidelines</a> or encores.
     required:
@@ -2361,21 +2393,24 @@ definitions:
               namespace: ""
           info:
             description: >-
-              additional information on the concert - see the <a href="https://www.setlist.fm/guidelines">setlist.fm
+              additional information on the concert - see the <a
+              href="https://www.setlist.fm/guidelines">setlist.fm
 
               guidelines</a> for a complete list of allowed content.
             type: string
             xml:
               namespace: ""
           lastFmEventId:
-            description: the id this event has on <a href="http://last.fm/">last.fm</a> (deprecated)
+            description: the id this event has on <a href="http://last.fm/">last.fm</a>
+              (deprecated)
             type: number
             xml:
               attribute: true
               namespace: ""
           lastUpdated:
             description: >-
-              date, time and time zone of the last update to this setlist in the format
+              date, time and time zone of the last update to this setlist in the
+              format
 
               &quot;yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ&quot;
             type: string
@@ -2395,7 +2430,8 @@ definitions:
             xml:
               namespace: ""
           url:
-            description: the attribution url to which you have to link to wherever you use data from this setlist in your application
+            description: the attribution url to which you have to link to wherever you use
+              data from this setlist in your application
             type: string
             xml:
               namespace: ""
@@ -2411,7 +2447,8 @@ definitions:
               attribute: true
               namespace: ""
     description: >-
-      Setlists, that's what it's all about. So if you're trying to use this API without knowing what a setlist is then
+      Setlists, that's what it's all about. So if you're trying to use
+      this API without knowing what a setlist is then
 
       you're kinda wrong on this page ;-).
 
@@ -2447,19 +2484,22 @@ definitions:
       - properties:
           cover:
             $ref: "#/definitions/xml_ns0_artist"
-            description: The original Artist of this song, if different to the performing artist.
+            description: The original Artist of this song, if different to the performing
+              artist.
             xml:
               namespace: ""
           info:
             description: >-
-              Special incidents or additional information about the way the song was performed at this specific concert. See
+              Special incidents or additional information about the way the song
+              was performed at this specific concert. See
 
               the <a href="https://www.setlist.fm/guidelines">setlist.fm guidelines</a> for a complete list of allowed content.
             type: string
             xml:
               namespace: ""
           name:
-            description: The name of the song. E.g. <em>Yesterday</em> or <em>&quot;Wish You Were Here&quot;</em>
+            description: The name of the song. E.g. <em>Yesterday</em> or <em>&quot;Wish You
+              Were Here&quot;</em>
             type: string
             xml:
               attribute: true
@@ -2475,7 +2515,8 @@ definitions:
               namespace: ""
           with:
             $ref: "#/definitions/xml_ns0_artist"
-            description: A different Artist than the performing one that joined the stage for this song.
+            description: A different Artist than the performing one that joined the stage
+              for this song.
             xml:
               namespace: ""
     description: This class represents a song that is part of a Set.
@@ -2574,7 +2615,8 @@ definitions:
               namespace: ""
           name:
             description: >-
-              the name of the venue, usually without city and country. E.g. <em>&quot;Madison Square Garden&quot;</em> or
+              the name of the venue, usually without city and country. E.g.
+              <em>&quot;Madison Square Garden&quot;</em> or
 
               <em>&quot;Royal Albert Hall&quot;</em>
             type: string
@@ -2587,7 +2629,8 @@ definitions:
             xml:
               namespace: ""
     description: >-
-      Venues are places where concerts take place. They usually consist of a venue name and a city - but there are also
+      Venues are places where concerts take place. They usually consist
+      of a venue name and a city - but there are also
 
       some venues that do not have a city attached yet. In such a case, the city simply isn't set and the city and country
 

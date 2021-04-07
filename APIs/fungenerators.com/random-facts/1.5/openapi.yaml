@@ -6,7 +6,11 @@ info:
     name: Fun Generators
     url: http://fungenerators.com/
   description: >
-    A full featured Facts API. REST access with json/xml/jsonp result support. On this day birth and death support, random fact, keyword search support etc. Below is the documentation for the Random Facts API calls. You can try them out right here. [Click here to subscribe](http://fungenerators.com/api/facts/)
+    A full featured Facts API. REST access with json/xml/jsonp result
+    support. On this day birth and death support, random fact, keyword search
+    support etc. Below is the documentation for the Random Facts API calls. You
+    can try them out right here. [Click here to
+    subscribe](http://fungenerators.com/api/facts/)
   termsOfService: https://fungenerators.com/terms
   title: Facts API
   version: "1.5"
@@ -62,7 +66,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "success": {
                             "total": 1
@@ -77,7 +81,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -117,7 +121,6 @@ paths:
                       }
 
 
-
                       
                     }
           description: 200  response
@@ -126,7 +129,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -176,7 +179,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "success": {
                             "total": 1
@@ -191,7 +194,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -243,7 +246,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -259,7 +262,8 @@ paths:
     get:
       description: Get fact of the day for the given category.
       parameters:
-        - description: Category to get the fact of the day from. Must be one from the list returned from /fact/fod/categories
+        - description: Category to get the fact of the day from. Must be one from the list
+            returned from /fact/fod/categories
           in: query
           name: category
           required: false
@@ -298,7 +302,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -319,7 +323,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "success": {
                         "total": 2
@@ -348,7 +352,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -394,7 +398,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -408,7 +412,8 @@ paths:
         - Number Facts
   /fact/onthisday/born:
     get:
-      description: Returns a random ( famous/ relatively famous ) person born on a given day and month
+      description: Returns a random ( famous/ relatively famous ) person born on a
+        given day and month
       parameters:
         - description: Optional month (1-12). Defaults to current month
           in: query
@@ -417,7 +422,8 @@ paths:
           schema:
             format: string
             type: string
-        - description: Optional day of the month (1- 28/30/31 based on the month). Defaults to current day of the month.
+        - description: Optional day of the month (1- 28/30/31 based on the month).
+            Defaults to current day of the month.
           in: query
           name: day
           required: false
@@ -451,7 +457,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -465,7 +471,8 @@ paths:
         - On this day
   /fact/onthisday/died:
     get:
-      description: Returns a random ( famous/ relatively famous ) person died on a given day and month
+      description: Returns a random ( famous/ relatively famous ) person died on a
+        given day and month
       parameters:
         - description: Optional month (1-12). Defaults to current month
           in: query
@@ -474,7 +481,8 @@ paths:
           schema:
             format: string
             type: string
-        - description: Optional day of the month (1- 28/30/31 based on the month). Defaults to current day of the month.
+        - description: Optional day of the month (1- 28/30/31 based on the month).
+            Defaults to current day of the month.
           in: query
           name: day
           required: false
@@ -508,7 +516,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -522,7 +530,8 @@ paths:
         - On this day
   /fact/onthisday/event:
     get:
-      description: Returns a random ( famous/ relatively famous ) historic event on a given day and month
+      description: Returns a random ( famous/ relatively famous ) historic event on a
+        given day and month
       parameters:
         - description: Optional month (1-12). Defaults to current month
           in: query
@@ -531,7 +540,8 @@ paths:
           schema:
             format: string
             type: string
-        - description: Optional day of the month (1- 28/30/31 based on the month). Defaults to current day of the month.
+        - description: Optional day of the month (1- 28/30/31 based on the month).
+            Defaults to current day of the month.
           in: query
           name: day
           required: false
@@ -565,7 +575,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -579,7 +589,8 @@ paths:
         - On this day
   /fact/random:
     get:
-      description: Get a random Fact for a given category(optional) and subcategory(optional).
+      description: Get a random Fact for a given category(optional) and
+        subcategory(optional).
       parameters:
         - description: Category to get the fact from
           in: query
@@ -613,7 +624,6 @@ paths:
                       }
 
 
-
                       
                     }
           description: 200  response
@@ -622,7 +632,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,
@@ -636,7 +646,8 @@ paths:
         - Random Facts
   /fact/search:
     get:
-      description: Search for random Fact which has the text in the query, for a given category(optional) and subcategory(optional).
+      description: Search for random Fact which has the text in the query, for a given
+        category(optional) and subcategory(optional).
       parameters:
         - description: Text to search for in the facts
           in: query
@@ -677,7 +688,6 @@ paths:
                       }
 
 
-
                       
                     }
           description: 200  response
@@ -686,7 +696,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 401,

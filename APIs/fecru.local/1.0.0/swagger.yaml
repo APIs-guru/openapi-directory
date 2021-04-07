@@ -102,9 +102,11 @@ paths:
           description: Successful Response
     parameters: []
     post:
-      description: Creates a new permission scheme. The new permission scheme is blank or can be created from another existing permission scheme.
+      description: Creates a new permission scheme. The new permission scheme is blank
+        or can be created from another existing permission scheme.
       parameters:
-        - description: if set, the new permission scheme will be a copy of permissionSchemeName
+        - description: if set, the new permission scheme will be a copy of
+            permissionSchemeName
           in: query
           name: copyFrom
           required: false
@@ -137,14 +139,16 @@ paths:
           description: Successful Response
   "/rest-service-fecru/admin/permission-schemes/{name}/anonymous-users":
     delete:
-      description: Removes anonymous-user permission [action name] from given permission scheme
+      description: Removes anonymous-user permission [action name] from given
+        permission scheme
       operationId: deletePermissionSchemeAnonymousUsers
       parameters: []
       responses:
         "200":
           description: Successful Response
     get:
-      description: Retrieve a page of anonymous users permissions [action name] for given permission scheme.
+      description: Retrieve a page of anonymous users permissions [action name] for
+        given permission scheme.
       operationId: listAnonymousUsersPrincipalAssociation
       parameters:
         - description: action name
@@ -162,7 +166,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Add anonymous-user permission [action name] to given permission scheme
          List of available action names:
       operationId: addPermissionSchemeAnonymousUsers
@@ -172,14 +176,16 @@ paths:
           description: Successful Response
   "/rest-service-fecru/admin/permission-schemes/{name}/groups":
     delete:
-      description: Removes group permission [group name, action name] from given permission scheme
+      description: Removes group permission [group name, action name] from given
+        permission scheme
       operationId: deletePermissionSchemeGroup
       parameters: []
       responses:
         "200":
           description: Successful Response
     get:
-      description: Retrieve a page of group permissions [group name, action name] for given permission scheme.
+      description: Retrieve a page of group permissions [group name, action name] for
+        given permission scheme.
       operationId: listGroupPrincipalAssociation
       parameters:
         - description: group name
@@ -203,7 +209,8 @@ paths:
         type: string
     put:
       description: >-
-        Add group permission [group name, action name] to given permission scheme
+        Add group permission [group name, action name] to given permission
+        scheme
          List of available action names:
       operationId: addPermissionSchemeGroup
       parameters: []
@@ -212,14 +219,16 @@ paths:
           description: Successful Response
   "/rest-service-fecru/admin/permission-schemes/{name}/logged-in-users":
     delete:
-      description: Removes logged-in-users permission [action name] from given permission scheme
+      description: Removes logged-in-users permission [action name] from given
+        permission scheme
       operationId: deletePermissionSchemeLoggedUsers
       parameters: []
       responses:
         "200":
           description: Successful Response
     get:
-      description: Retrieve a page of logged in users permissions [action name] for given permission scheme.
+      description: Retrieve a page of logged in users permissions [action name] for
+        given permission scheme.
       operationId: listLoggedUsersPrincipalAssociation
       parameters:
         - description: action name
@@ -237,7 +246,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Add logged-in-users permission [action name] to given permission scheme
          List of available action names:
       operationId: addPermissionSchemeLoggedUsers
@@ -260,14 +269,16 @@ paths:
         type: string
   "/rest-service-fecru/admin/permission-schemes/{name}/review-roles":
     delete:
-      description: Removes review-role permission [role name, action name] from given permission scheme
+      description: Removes review-role permission [role name, action name] from given
+        permission scheme
       operationId: deletePermissionSchemeRole
       parameters: []
       responses:
         "200":
           description: Successful Response
     get:
-      description: Retrieve a page of review-roles permissions [role name, action name] for given permission scheme.
+      description: Retrieve a page of review-roles permissions [role name, action
+        name] for given permission scheme.
       operationId: listRolesPrincipalAssociation
       parameters:
         - description: role name
@@ -291,7 +302,8 @@ paths:
         type: string
     put:
       description: >-
-        Add review-role permission [role name, action name] to given permission scheme
+        Add review-role permission [role name, action name] to given
+        permission scheme
          List of available action names:
          
 
@@ -303,14 +315,16 @@ paths:
           description: Successful Response
   "/rest-service-fecru/admin/permission-schemes/{name}/users":
     delete:
-      description: Removes user permission [username, action name] from given permission scheme
+      description: Removes user permission [username, action name] from given
+        permission scheme
       operationId: deletePermissionSchemeUser
       parameters: []
       responses:
         "200":
           description: Successful Response
     get:
-      description: Retrieve a page of user permissions [username, action name] for given permission scheme.
+      description: Retrieve a page of user permissions [username, action name] for
+        given permission scheme.
       operationId: listUserPrincipalAssociation
       parameters:
         - description: permission scheme name
@@ -333,7 +347,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Add user permission [username, action name] to given permission scheme
          List of available action names:
       operationId: addPermissionSchemeUser
@@ -377,7 +391,7 @@ paths:
           description: Successful Response
   "/rest-service-fecru/admin/projects/{key}":
     delete:
-      description: >-
+      description: |-
         Deletes a project by key (including all reviews in this project).
          Use 
          to move reviews to another project.
@@ -536,7 +550,8 @@ paths:
           description: Successful Response
   /rest-service-fecru/admin/repositories:
     get:
-      description: Retrieve a page of repositories. Repository properties with default values may not be returned.
+      description: Retrieve a page of repositories. Repository properties with default
+        values may not be returned.
       parameters:
         - description: "filter repositories by repository type: svn, git, hg, cvs, p4, ..."
           in: query
@@ -574,7 +589,8 @@ paths:
           description: Successful Response
   "/rest-service-fecru/admin/repositories-v1/{repository}":
     get:
-      description: Returns information about the status of the repository and the current indexing status
+      description: Returns information about the status of the repository and the
+        current indexing status
       responses:
         "200":
           description: Successful Response
@@ -586,7 +602,7 @@ paths:
         type: string
   "/rest-service-fecru/admin/repositories-v1/{repository}/":
     delete:
-      description: >-
+      description: |-
         Deletes repository.
          Warning: you can not undo this operation
       operationId: deleteRepository
@@ -634,7 +650,8 @@ paths:
         type: string
     post:
       description: >-
-        Rebuilds the changeset discussion index for the specified repository. The index is used to display changeset
+        Rebuilds the changeset discussion index for the specified
+        repository. The index is used to display changeset
          discussions in activity streams.
       operationId: reindexChangesetComments
       responses:
@@ -649,7 +666,8 @@ paths:
         type: string
     post:
       description: >-
-        Re-indexes the linecount data used to generate the LOC graphs. The linecount data will be recalculated in daily
+        Re-indexes the linecount data used to generate the LOC graphs. The
+        linecount data will be recalculated in daily
          buckets based on the server timezone.
       responses:
         "200":
@@ -662,7 +680,8 @@ paths:
         required: true
         type: string
     post:
-      description: Re-indexes all the Crucible revision data (which revisions have been reviewed)
+      description: Re-indexes all the Crucible revision data (which revisions have
+        been reviewed)
       operationId: doReviewRevisionReindex
       parameters:
         - default: false
@@ -683,7 +702,8 @@ paths:
         type: string
     post:
       description: >-
-        Rebuilds the search index data for the given repository. This will rebuild the data used to search by path,
+        Rebuilds the search index data for the given repository. This will
+        rebuild the data used to search by path,
          commit message and comitter, also used for activity streams and JIRA integration.
       operationId: rebuildSearchIndex
       responses:
@@ -698,13 +718,15 @@ paths:
         type: string
     post:
       description: >-
-        Deletes the existing cache and re-indexes the repository from scratch.
+        Deletes the existing cache and re-indexes the repository from
+        scratch.
          For large or slow repositories this may take some time, during which some functionality will be unavailable.
          This action will also restart the repository.
       parameters:
         - default: false
           description: >-
-            if true and the repository is a dvcs repository (git or mercurial) it will re-clone the repository
+            if true and the repository is a dvcs repository (git or mercurial)
+            it will re-clone the repository
              before re-indexing
           in: query
           name: clone
@@ -721,7 +743,8 @@ paths:
         required: true
         type: string
     post:
-      description: Re-scans the repository metadata for SVN and Perforce repositories. Only valid for Perforce and SVN repositories.
+      description: Re-scans the repository metadata for SVN and Perforce repositories.
+        Only valid for Perforce and SVN repositories.
       parameters:
         - description: the revision number to start at
           format: int64
@@ -747,7 +770,8 @@ paths:
         type: string
     post:
       description: >-
-        Runs an incremental repository index now.  This is the same operation as triggered by scheduled indexing.
+        Runs an incremental repository index now.  This is the same
+        operation as triggered by scheduled indexing.
          Can be called using the REST Api Token to authorize.
       operationId: scan
       parameters:
@@ -768,7 +792,8 @@ paths:
         required: true
         type: string
     post:
-      description: Scans the whole CVS repository for any changes since the last scan. Only valid for CVS repositories.
+      description: Scans the whole CVS repository for any changes since the last scan.
+        Only valid for CVS repositories.
       operationId: scanCvs
       responses:
         "200":
@@ -794,7 +819,8 @@ paths:
         required: true
         type: string
     post:
-      description: Stops the repository. Does not wait for the repository to stop before returning.
+      description: Stops the repository. Does not wait for the repository to stop
+        before returning.
       operationId: stopRepository
       responses:
         "200":
@@ -806,7 +832,8 @@ paths:
         "200":
           description: Successful Response
     get:
-      description: Retrieve a repository by key. Repository properties with default values may not be returned.
+      description: Retrieve a repository by key. Repository properties with default
+        values may not be returned.
       responses:
         "200":
           description: Successful Response
@@ -847,7 +874,8 @@ paths:
         type: string
     put:
       description: >-
-        Runs an incremental repository index.  This is the same operation as triggered by scheduled indexing.
+        Runs an incremental repository index.  This is the same operation
+        as triggered by scheduled indexing.
          Can be called using the REST API Token to authorize.
       operationId: incrementalIndex
       parameters:
@@ -893,7 +921,8 @@ paths:
           description: Successful Response
     get:
       description: >-
-        Note: use /rest-service-fecru/admin/repository-permissions/ endpoint for full repository permission administration functionality
+        Note: use /rest-service-fecru/admin/repository-permissions/
+        endpoint for full repository permission administration functionality
          Lists groups allowed to access repository.
       operationId: permissionsGroups
       responses:
@@ -907,7 +936,8 @@ paths:
         type: string
     put:
       description: >-
-        Note: use /rest-service-fecru/admin/repository-permissions/ endpoint for full repository permission administration functionality
+        Note: use /rest-service-fecru/admin/repository-permissions/
+        endpoint for full repository permission administration functionality
          Adds group to repository allowed groups
       operationId: addGroupToPermissions
       parameters: []
@@ -923,7 +953,8 @@ paths:
         type: string
     put:
       description: >-
-        Rebuilds the changeset discussion index for the specified repository. The index is used to display changeset
+        Rebuilds the changeset discussion index for the specified
+        repository. The index is used to display changeset
          discussions in activity streams.
       operationId: reindexChangesetDiscussion
       responses:
@@ -938,7 +969,8 @@ paths:
         type: string
     put:
       description: >-
-        Re-indexes the linecount data used to generate the LOC graphs. The linecount data will be recalculated in daily
+        Re-indexes the linecount data used to generate the LOC graphs. The
+        linecount data will be recalculated in daily
          buckets based on the server timezone.
       responses:
         "200":
@@ -951,7 +983,8 @@ paths:
         required: true
         type: string
     put:
-      description: Re-indexes all the Crucible revision data (which revisions have been reviewed)
+      description: Re-indexes all the Crucible revision data (which revisions have
+        been reviewed)
       operationId: reindexReviews
       responses:
         "200":
@@ -965,7 +998,8 @@ paths:
         type: string
     put:
       description: >-
-        Rebuilds the search index data for the given repository. This will rebuild the data used to search by path,
+        Rebuilds the search index data for the given repository. This will
+        rebuild the data used to search by path,
          commit message and committer, also used for activity streams and JIRA integration.
       operationId: reindexSearch
       responses:
@@ -980,12 +1014,14 @@ paths:
         type: string
     put:
       description: >-
-        Deletes the existing cache and re-indexes the repository from scratch.
+        Deletes the existing cache and re-indexes the repository from
+        scratch.
          For large or slow repositories this may take some time, during which some functionality will be unavailable.
          This action will also restart the repository.
       parameters:
         - default: false
-          description: if true and the repository is a dvcs repository (git or mercurial) it will re-clone the repository before re-indexing
+          description: if true and the repository is a dvcs repository (git or mercurial)
+            it will re-clone the repository before re-indexing
           in: query
           name: clone
           required: false
@@ -1001,7 +1037,8 @@ paths:
         required: true
         type: string
     put:
-      description: Re-scans the repository metadata. Only valid for Perforce and SVN repositories.
+      description: Re-scans the repository metadata. Only valid for Perforce and SVN
+        repositories.
       parameters:
         - description: the revision number to start at
           in: query
@@ -1024,7 +1061,8 @@ paths:
         required: true
         type: string
     put:
-      description: Starts repository. Does not wait for the repository to start before returning.
+      description: Starts repository. Does not wait for the repository to start before
+        returning.
       operationId: start
       responses:
         "200":
@@ -1037,7 +1075,8 @@ paths:
         required: true
         type: string
     put:
-      description: Stops repository. Does not wait for the repository to stop before returning.
+      description: Stops repository. Does not wait for the repository to stop before
+        returning.
       operationId: stop
       responses:
         "200":
@@ -1087,7 +1126,8 @@ paths:
           description: Successful Response
     parameters: []
     post:
-      description: Creates a new user. Tries to add the user to fisheye-users and crucible-users groups if those exist.
+      description: Creates a new user. Tries to add the user to fisheye-users and
+        crucible-users groups if those exist.
       parameters: []
       responses:
         "200":
@@ -1171,7 +1211,8 @@ paths:
     parameters: []
   /rest-service-fecru/recently-visited-v1/detailed:
     get:
-      description: Get a list of recently visisted items for the currently logged in user, including the detailed entities.
+      description: Get a list of recently visisted items for the currently logged in
+        user, including the detailed entities.
       operationId: getRecentDetailed
       responses:
         "200":
@@ -1187,7 +1228,8 @@ paths:
     parameters: []
   /rest-service-fecru/recently-visited-v1/projects/detailed:
     get:
-      description: Get a list of recently visited projects for the currently logged in Project, including the detailed entities.
+      description: Get a list of recently visited projects for the currently logged in
+        Project, including the detailed entities.
       operationId: getRecentProjectsDetailed
       responses:
         "200":
@@ -1195,7 +1237,8 @@ paths:
     parameters: []
   /rest-service-fecru/recently-visited-v1/repositories:
     get:
-      description: Get a list of recently visited repositories for the currently logged in user.
+      description: Get a list of recently visited repositories for the currently
+        logged in user.
       operationId: getRecentRepositories
       responses:
         "200":
@@ -1203,7 +1246,8 @@ paths:
     parameters: []
   /rest-service-fecru/recently-visited-v1/repositories/detailed:
     get:
-      description: Get a list of recently visisted repositories for the currently logged in user, including the detailed entities.
+      description: Get a list of recently visisted repositories for the currently
+        logged in user, including the detailed entities.
       operationId: getRecentRepositoriesDetailed
       responses:
         "200":
@@ -1219,7 +1263,8 @@ paths:
     parameters: []
   /rest-service-fecru/recently-visited-v1/reviews/detailed:
     get:
-      description: Get a list of recently visited reviews for the currently logged in user, including the detailed entities.
+      description: Get a list of recently visited reviews for the currently logged in
+        user, including the detailed entities.
       operationId: getRecentReviewsDetailed
       responses:
         "200":
@@ -1235,7 +1280,8 @@ paths:
     parameters: []
   /rest-service-fecru/recently-visited-v1/snippets/detailed:
     get:
-      description: Get a list of recently visited snippets for the currently logged in user, including the detailed entities.
+      description: Get a list of recently visited snippets for the currently logged in
+        user, including the detailed entities.
       operationId: getRecentSnippetsDetailed
       responses:
         "200":
@@ -1251,7 +1297,8 @@ paths:
     parameters: []
   /rest-service-fecru/recently-visited-v1/users/detailed:
     get:
-      description: Get a list of recently visited users for the currently logged in user, including the detailed entities.
+      description: Get a list of recently visited users for the currently logged in
+        user, including the detailed entities.
       operationId: getRecentUsersDetailed
       responses:
         "200":

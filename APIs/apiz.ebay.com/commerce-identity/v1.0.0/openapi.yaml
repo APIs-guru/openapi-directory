@@ -9,7 +9,10 @@ info:
   contact:
     name: eBay Inc,
     x-twitter: ebay
-  description: Retrieves the authenticated user's account profile information. It can be used to let users log into your app or site using eBay, which frees you from needing to store and protect user's PII (Personal Identifiable Information) data.
+  description: Retrieves the authenticated user's account profile information. It
+    can be used to let users log into your app or site using eBay, which frees
+    you from needing to store and protect user's PII (Personal Identifiable
+    Information) data.
   license:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
@@ -29,7 +32,17 @@ info:
 paths:
   /user/:
     get:
-      description: "This method retrieves the account profile information for an authenticated user, which requires a User access token. What is returned is controlled by the scopes. For a business account you use the default scope commerce.identity.readonly, which returns all the fields in the businessAccount container. These are returned because this is all public information. For an individual account, the fields returned in the individualAccount container are based on the scope you use. Using the default scope, only public information, such as eBay user ID, are returned. For details about what each scope returns, see the Identity API Overview. In the Sandbox, this API returns mock data. Note: You must use the correct scope or scopes for the data you want returned."
+      description: "This method retrieves the account profile information for an
+        authenticated user, which requires a User access token. What is returned
+        is controlled by the scopes. For a business account you use the default
+        scope commerce.identity.readonly, which returns all the fields in the
+        businessAccount container. These are returned because this is all public
+        information. For an individual account, the fields returned in the
+        individualAccount container are based on the scope you use. Using the
+        default scope, only public information, such as eBay user ID, are
+        returned. For details about what each scope returns, see the Identity
+        API Overview. In the Sandbox, this API returns mock data. Note: You must
+        use the correct scope or scopes for the data you want returned."
       operationId: getUser
       responses:
         "200":
@@ -46,7 +59,8 @@ paths:
             errors:
               "140000":
                 category: APPLICATION
-                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                description: There was a problem with an eBay internal system or process.
+                  Contact eBay developer support for assistance.
                 domain: API_IDENTITY
       security:
         - api_auth:
@@ -66,13 +80,17 @@ components:
           description: The first line of the street address.
           type: string
         addressLine2:
-          description: The second line of the street address. This field is not always used, but can be used for 'Suite Number' or 'Apt Number'.
+          description: The second line of the street address. This field is not always
+            used, but can be used for 'Suite Number' or 'Apt Number'.
           type: string
         city:
           description: The city of the address.
           type: string
         country:
-          description: The two-letter ISO 3166 standard of the country of the address. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/bas:CountryCodeEnum'>eBay API documentation</a>
+          description: The two-letter ISO 3166 standard of the country of the address. For
+            implementation help, refer to <a
+            href='https://developer.ebay.com/api-docs/commerce/identity/types/bas:CountryCodeEnum'>eBay
+            API documentation</a>
           type: string
         county:
           description: The county of the address.
@@ -91,7 +109,8 @@ components:
           $ref: "#/components/schemas/Address"
           description: The container that returns the address of the business account.
         doingBusinessAs:
-          description: An additional name that is used for their business on eBay. The business name is returned in the name field.
+          description: An additional name that is used for their business on eBay. The
+            business name is returned in the name field.
           type: string
         email:
           description: The email address of the business account.
@@ -101,19 +120,23 @@ components:
           type: string
         primaryContact:
           $ref: "#/components/schemas/Contact"
-          description: The container that returns the contact details of the person who is the primary contact for this account.
+          description: The container that returns the contact details of the person who is
+            the primary contact for this account.
         primaryPhone:
           $ref: "#/components/schemas/Phone"
-          description: The container that returns the primary phone number for the business account.
+          description: The container that returns the primary phone number for the
+            business account.
         secondaryPhone:
           $ref: "#/components/schemas/Phone"
-          description: The container that returns the secondary phone number for the business account.
+          description: The container that returns the secondary phone number for the
+            business account.
         website:
           description: The business website address associated with the eBay account.
           type: string
       type: object
     Contact:
-      description: The type that defines the fields for the information of the contact person for the account.
+      description: The type that defines the fields for the information of the contact
+        person for the account.
       properties:
         firstName:
           description: The first name of the contact person.
@@ -129,7 +152,8 @@ components:
           description: Identifies the type of erro.
           type: string
         domain:
-          description: Name for the primary system where the error occurred. This is relevant for application errors.
+          description: Name for the primary system where the error occurred. This is
+            relevant for application errors.
           type: string
         errorId:
           description: A unique number to identify the error.
@@ -144,7 +168,8 @@ components:
           description: A more detailed explanation of the error.
           type: string
         message:
-          description: Information on how to correct the problem, in the end user's terms and language where applicable.
+          description: Information on how to correct the problem, in the end user's terms
+            and language where applicable.
           type: string
         outputRefIds:
           description: An array of request elements most closely associated to the error.
@@ -152,12 +177,15 @@ components:
             type: string
           type: array
         parameters:
-          description: An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned.
+          description: An array of name/value pairs that describe details the error
+            condition. These are useful when multiple errors are returned.
           items:
             $ref: "#/components/schemas/ErrorParameter"
           type: array
         subdomain:
-          description: "Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc."
+          description: "Further helps indicate which subsystem the error is coming from.
+            System subcategories include: Initialization, Serialization,
+            Security, Monitoring, Rate Limiting, etc."
           type: string
       type: object
     ErrorParameter:
@@ -170,7 +198,8 @@ components:
           type: string
       type: object
     IndividualAccount:
-      description: The type that defines the fields for the information of an individual account.
+      description: The type that defines the fields for the information of an
+        individual account.
       properties:
         email:
           description: The eBay user's registration email address.
@@ -183,63 +212,96 @@ components:
           type: string
         primaryPhone:
           $ref: "#/components/schemas/Phone"
-          description: The container that returns the eBay user's primary phone number information.
+          description: The container that returns the eBay user's primary phone number
+            information.
         registrationAddress:
           $ref: "#/components/schemas/Address"
           description: The container that returns the eBay user's address information.
         secondaryPhone:
           $ref: "#/components/schemas/Phone"
-          description: The container that returns the eBay user's secondary phone number information.
+          description: The container that returns the eBay user's secondary phone number
+            information.
       type: object
     Phone:
       description: The type that defines the fields for the details of a phone.
       properties:
         countryCode:
-          description: The two-letter ISO 3166 standard of the country to which the phone number belongs.
+          description: The two-letter ISO 3166 standard of the country to which the phone
+            number belongs.
           type: string
         number:
           description: The numeric string representing the phone number.
           type: string
         phoneType:
-          description: "The type of phone service. Valid Values: MOBILE or LAND_LINE Code so that your app gracefully handles any future changes to this list."
+          description: "The type of phone service. Valid Values: MOBILE or LAND_LINE Code
+            so that your app gracefully handles any future changes to this
+            list."
           type: string
       type: object
     UserResponse:
       description: The type that defines the fields for the getUser method.
       properties:
         accountType:
-          description: "Indicates the user account type. This is determined when the user registers with eBay. If they register for a business account, this value will be BUSINESS. If they register for a private account, this value will be INDIVIDUAL. This designation is required by the tax laws in the following countries: EBAY_AT, EBAY_BE, EBAY_CH, EBAY_DE, EBAY_ES, EBAY_FR, EBAY_GB, EBAY_IE, EBAY_IT, EBAY_PL Valid Values: BUSINESS or INDIVIDUAL Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/api:AccountTypeEnum'>eBay API documentation</a>"
+          description: "Indicates the user account type. This is determined when the user
+            registers with eBay. If they register for a business account, this
+            value will be BUSINESS. If they register for a private account, this
+            value will be INDIVIDUAL. This designation is required by the tax
+            laws in the following countries: EBAY_AT, EBAY_BE, EBAY_CH, EBAY_DE,
+            EBAY_ES, EBAY_FR, EBAY_GB, EBAY_IE, EBAY_IT, EBAY_PL Valid Values:
+            BUSINESS or INDIVIDUAL Code so that your app gracefully handles any
+            future changes to this list. For implementation help, refer to <a
+            href='https://developer.ebay.com/api-docs/commerce/identity/types/a\
+            pi:AccountTypeEnum'>eBay API documentation</a>"
           type: string
         businessAccount:
           $ref: "#/components/schemas/BusinessAccount"
-          description: The container that returns the business account information of the user.
+          description: The container that returns the business account information of the
+            user.
         individualAccount:
           $ref: "#/components/schemas/IndividualAccount"
           description: The account information of the user.
         registrationMarketplaceId:
-          description: The eBay site on which the account is registered. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/bas:MarketplaceIdEnum'>eBay API documentation</a>
+          description: The eBay site on which the account is registered. For
+            implementation help, refer to <a
+            href='https://developer.ebay.com/api-docs/commerce/identity/types/bas:MarketplaceIdEnum'>eBay
+            API documentation</a>
           type: string
         status:
-          description: "Indicates the user's account status. Possible values: CONFIRMED, UNCONFIRMED, ACCOUNTONHOLD and UNDETERMINED. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/api:UserStatusEnum'>eBay API documentation</a>"
+          description: "Indicates the user's account status. Possible values: CONFIRMED,
+            UNCONFIRMED, ACCOUNTONHOLD and UNDETERMINED. For implementation
+            help, refer to <a
+            href='https://developer.ebay.com/api-docs/commerce/identity/types/a\
+            pi:UserStatusEnum'>eBay API documentation</a>"
           type: string
         userId:
-          description: The eBay immutable user ID of the user's account and can always be used to identify the user.
+          description: The eBay immutable user ID of the user's account and can always be
+            used to identify the user.
           type: string
         username:
-          description: "The user name, which was specific by the user when they created the account. Note: This value can be changed by the user."
+          description: "The user name, which was specific by the user when they created
+            the account. Note: This value can be changed by the user."
           type: string
       type: object
   securitySchemes:
     api_auth:
-      description: The security definitions for this API. Please check individual operations for applicable scopes.
+      description: The security definitions for this API. Please check individual
+        operations for applicable scopes.
       flows:
         authorizationCode:
           authorizationUrl: https://auth.ebay.com/oauth2/authorize
           scopes:
-            https://api.ebay.com/oauth/api_scope/commerce.identity.address.readonly: View a user's personal address information from their eBay member account
-            https://api.ebay.com/oauth/api_scope/commerce.identity.email.readonly: View a user's personal email information from their eBay member account
+            https://api.ebay.com/oauth/api_scope/commerce.identity.address.readonly:
+              View a user's personal address information from their eBay member
+              account
+            https://api.ebay.com/oauth/api_scope/commerce.identity.email.readonly:
+              View a user's personal email information from their eBay member
+              account
             https://api.ebay.com/oauth/api_scope/commerce.identity.name.readonly: View a user's first and last name from their eBay member account
-            https://api.ebay.com/oauth/api_scope/commerce.identity.phone.readonly: View a user's personal telephone information from their eBay member account
-            https://api.ebay.com/oauth/api_scope/commerce.identity.readonly: View a user's basic information, such as username or business account details, from their eBay member account
+            https://api.ebay.com/oauth/api_scope/commerce.identity.phone.readonly:
+              View a user's personal telephone information from their eBay
+              member account
+            https://api.ebay.com/oauth/api_scope/commerce.identity.readonly:
+              View a user's basic information, such as username or business
+              account details, from their eBay member account
           tokenUrl: https://api.ebay.com/identity/v1/oauth2/token
       type: oauth2

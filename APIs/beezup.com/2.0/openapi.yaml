@@ -217,7 +217,8 @@ paths:
     post:
       deprecated: false
       description: >
-        The purpose of this operation is to reduce the amount of request to the API. 
+        The purpose of this operation is to reduce the amount of request to
+        the API. 
 
         Max 100 items per call.
       operationId: ChangeOrderListV3
@@ -232,7 +233,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/batchOrderOperationResponse"
-          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
+          description: Succesfully received and processed batched operations. Please check
+            response to see the status per operation.
         "400":
           content:
             application/json:
@@ -241,7 +243,8 @@ paths:
           description: Requested too many batch operations
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "[PLANNED] Send a batch of operations to change your marketplace Order information: accept, ship, etc.  (max 100 items per call)"
+      summary: "[PLANNED] Send a batch of operations to change your marketplace Order
+        information: accept, ship, etc.  (max 100 items per call)"
       tags:
         - Marketplaces - Orders V3 - Batches
       x-releaseStatus: PLANNED
@@ -249,7 +252,8 @@ paths:
     post:
       deprecated: false
       description: >
-        The purpose of this operation is to reduce the amount of request to the API. 
+        The purpose of this operation is to reduce the amount of request to
+        the API. 
 
         Max 100 items per call.
       operationId: ChangeOrderListV2
@@ -269,7 +273,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/batchOrderOperationResponse"
-          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
+          description: Succesfully received and processed batched operations. Please check
+            response to see the status per operation.
         "400":
           content:
             application/json:
@@ -278,14 +283,16 @@ paths:
           description: Requested too many batch operations
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "[PLANNED] Send a batch of operations to change your marketplace Order information: accept, ship, etc.  (max 100 items per call)"
+      summary: "[PLANNED] Send a batch of operations to change your marketplace Order
+        information: accept, ship, etc.  (max 100 items per call)"
       tags:
         - Marketplaces - Orders V3 - Batches
       x-releaseStatus: PLANNED
   /orders/v3/batches/clearMerchantOrderInfos:
     post:
       deprecated: false
-      description: The purpose of this operation is to reduce the amount of request to the API.
+      description: The purpose of this operation is to reduce the amount of request to
+        the API.
       operationId: ClearMerchantOrderInfoListV3
       parameters:
         - $ref: "#/components/parameters/testModeInQueryParameter"
@@ -297,7 +304,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/batchOrderOperationResponse"
-          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
+          description: Succesfully received and processed batched operations. Please check
+            response to see the status per operation.
         "400":
           content:
             application/json:
@@ -306,13 +314,15 @@ paths:
           description: Requested too many batch operations
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "[PLANNED] Send a batch of operations to clear an Order's merchant information (max 100 items per call)"
+      summary: "[PLANNED] Send a batch of operations to clear an Order's merchant
+        information (max 100 items per call)"
       tags:
         - Marketplaces - Orders V3 - Batches
       x-releaseStatus: PLANNED
   /orders/v3/batches/setMerchantOrderInfos:
     post:
-      description: The purpose of this operation is to reduce the amount of request to the API.
+      description: The purpose of this operation is to reduce the amount of request to
+        the API.
       operationId: SetMerchantOrderInfoListV3
       parameters:
         - $ref: "#/components/parameters/testModeInQueryParameter"
@@ -324,7 +334,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/batchOrderOperationResponse"
-          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
+          description: Succesfully received and processed batched operations. Please check
+            response to see the status per operation.
         "400":
           content:
             application/json:
@@ -333,7 +344,8 @@ paths:
           description: Requested too many batch operations
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "[PLANNED] Send a batch of operations to set an Order's merchant information  (max 100 items per call)"
+      summary: "[PLANNED] Send a batch of operations to set an Order's merchant
+        information  (max 100 items per call)"
       tags:
         - Marketplaces - Orders V3 - Batches
       x-releaseStatus: PLANNED
@@ -385,7 +397,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorResponseMessage"
-          description: Could not process request for given parameters values. Please check error message for more details.
+          description: Could not process request for given parameters values. Please check
+            error message for more details.
         default:
           $ref: "#/components/responses/GeneralError"
       summary: "[PLANNED] Get a paginated list of Order report exportations"
@@ -394,7 +407,8 @@ paths:
       x-releaseStatus: PLANNED
     post:
       deprecated: false
-      description: A new file will be generated containing a summary of all the Orders matching the requested filter settings.
+      description: A new file will be generated containing a summary of all the Orders
+        matching the requested filter settings.
       operationId: ExportOrdersV3
       requestBody:
         $ref: "#/components/requestBodies/exportOrderListRequest"
@@ -406,7 +420,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorResponseMessage"
-          description: Could not process request for given parameters values. Please check error message for more details.
+          description: Could not process request for given parameters values. Please check
+            error message for more details.
         "404":
           content:
             application/json:
@@ -437,7 +452,8 @@ paths:
           description: Successfully sent harvest request to all marketplaces
           headers:
             Retry-After:
-              description: Indicates the duration in seconds to wait to be able to make this request again
+              description: Indicates the duration in seconds to wait to be able to make this
+                request again
               schema:
                 type: integer
         "404":
@@ -451,10 +467,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorResponseMessage"
-          description: Failed to send harvest request because allowed rate limits have been exceeded
+          description: Failed to send harvest request because allowed rate limits have
+            been exceeded
           headers:
             Retry-After:
-              description: Indicates the duration in seconds to wait to be able to make this request again
+              description: Indicates the duration in seconds to wait to be able to make this
+                request again
               schema:
                 type: integer
         default:
@@ -467,14 +485,16 @@ paths:
     post:
       deprecated: false
       description: >
-        The purpose of this operation is to reduce the amount of request to the API.\
+        The purpose of this operation is to reduce the amount of request to
+        the API.\
 
         \
 
         Previous implmentation of this feature only returned a partial (light) version of the Orders. The purpose of this API is to reduce the number of incoming requests by returning the complete (full) Order and Order Item(s) properties.
       operationId: GetOrderListFullV3
       parameters:
-        - description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size
+        - description: Allows the client to indicate wether it accepts a compressed
+            encoding to reduce traffic size
           in: header
           name: Accept-Encoding
           required: true
@@ -494,10 +514,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorResponseMessage"
-          description: Could not process request for given parameters values. Please check error message for more details.
+          description: Could not process request for given parameters values. Please check
+            error message for more details.
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get a paginated list of all Orders with all Order and Order Item(s) properties
+      summary: Get a paginated list of all Orders with all Order and Order Item(s)
+        properties
       tags:
         - Marketplaces - Orders V3 - List
   /orders/v3/list/light:
@@ -518,7 +540,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorResponseMessage"
-          description: Could not process request for given parameters values. Please check error message for more details.
+          description: Could not process request for given parameters values. Please check
+            error message for more details.
         default:
           $ref: "#/components/responses/GeneralError"
       summary: Get a paginated list of all Orders without details
@@ -552,7 +575,8 @@ paths:
         - Marketplaces - Orders V3 - Global
   /orders/v3/status:
     get:
-      description: Get current synchronization status between your marketplaces and BeezUP accounts
+      description: Get current synchronization status between your marketplaces and
+        BeezUP accounts
       operationId: GetMarketplaceAccountsSynchronizationV3
       parameters:
         - $ref: "#/components/parameters/ifNoneMatchParameter"
@@ -563,7 +587,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/accountSynchronizationList"
-          description: Successfully fetched the list of MarketplaceBusinessCode ready for Order Management
+          description: Successfully fetched the list of MarketplaceBusinessCode ready for
+            Order Management
         "304":
           $ref: "#/components/responses/304_NotModified"
         "400":
@@ -588,7 +613,8 @@ paths:
           description: Successfully sent Order harvest request
           headers:
             Retry-After:
-              description: Indicates the duration in seconds to wait to be able to make this request again
+              description: Indicates the duration in seconds to wait to be able to make this
+                request again
               schema:
                 type: integer
         "404":
@@ -602,10 +628,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorResponseMessage"
-          description: Failed to send harvest request because allowed rate limits have been exceeded
+          description: Failed to send harvest request because allowed rate limits have
+            been exceeded
           headers:
             Retry-After:
-              description: Indicates the duration in seconds to wait to be able to make this request again
+              description: Indicates the duration in seconds to wait to be able to make this
+                request again
               schema:
                 type: integer
         default:
@@ -667,7 +695,9 @@ paths:
     head:
       deprecated: false
       description: >
-        The purpose of this operation is to reduce the bandwith usage by getting just the meta information about the order (ETag, Last-Modified) with the body.
+        The purpose of this operation is to reduce the bandwith usage by
+        getting just the meta information about the order (ETag, Last-Modified)
+        with the body.
 
         This could be useful
       operationId: HeadOrderV3
@@ -725,7 +755,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorResponseMessage"
-          description: Could not update Order merchant information. Please see body for more information.
+          description: Could not update Order merchant information. Please see body for
+            more information.
         "404":
           content:
             application/json:
@@ -751,7 +782,8 @@ paths:
           description: Successfully sent Order harvest request
           headers:
             Retry-After:
-              description: Indicates the duration in seconds to wait to be able to make this request again
+              description: Indicates the duration in seconds to wait to be able to make this
+                request again
               schema:
                 type: integer
         "404":
@@ -765,10 +797,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorResponseMessage"
-          description: Failed to send harvest request because allowed rate limits have been exceeded
+          description: Failed to send harvest request because allowed rate limits have
+            been exceeded
           headers:
             Retry-After:
-              description: Indicates the duration in seconds to wait to be able to make this request again
+              description: Indicates the duration in seconds to wait to be able to make this
+                request again
               schema:
                 type: integer
         default:
@@ -813,7 +847,8 @@ paths:
   "/orders/v3/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/history/{orderChangeExecutionUUID}":
     get:
       deprecated: false
-      description: This operation will help you to know the status of your order change operation
+      description: This operation will help you to know the status of your order
+        change operation
       operationId: GetOrderChangeReportingV3
       parameters:
         - $ref: "#/components/parameters/marketplaceTechnicalCodeParameter"
@@ -865,7 +900,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorResponseMessage"
-          description: Could not update Order merchant information. Please see body for more information.
+          description: Could not update Order merchant information. Please see body for
+            more information.
         "404":
           content:
             application/json:
@@ -896,7 +932,8 @@ paths:
           description: Order change request accepted
           headers:
             Location:
-              description: Indicate the address you should follow to know the status of your order change operation
+              description: Indicate the address you should follow to know the status of your
+                order change operation
               schema:
                 type: string
         "400":
@@ -904,7 +941,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorResponseMessage"
-          description: Invalid order change request, could not be send to the marketplace. Please check the body of this request.
+          description: Invalid order change request, could not be send to the marketplace.
+            Please check the body of this request.
         "404":
           content:
             application/json:
@@ -916,30 +954,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorResponseMessage"
-          description: >
+          description: |
             Already processing a change request for this Order.\
-
             Please refresh your clients Order information and retry later.
           headers:
             Location:
-              description: Indicate the address you should follow to know the status of the existing order change operation
+              description: Indicate the address you should follow to know the status of the
+                existing order change operation
               schema:
                 type: string
             Retry-After:
-              description: Indicates the duration in seconds to wait to be able to make this request again
+              description: Indicates the duration in seconds to wait to be able to make this
+                request again
               schema:
                 type: integer
         "412":
           $ref: "#/components/responses/412_PreConditionFailed"
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "[PREVIEW] Change your marketplace Order Information (accept, ship, etc.)"
+      summary: "[PREVIEW] Change your marketplace Order Information (accept, ship,
+        etc.)"
       tags:
         - Marketplaces - Orders V3 - Order
       x-releaseStatus: PREVIEW
   /v2/public/channels/:
     get:
-      description: Use this operation to get the correct link to the channels and to the list of values
+      description: Use this operation to get the correct link to the channels and to
+        the list of values
       operationId: GetChannelsIndex
       parameters:
         - $ref: "#/components/parameters/ifNoneMatchParameter"
@@ -962,7 +1003,8 @@ paths:
       operationId: GetChannels
       parameters:
         - description: >
-            The country iso code alpha 3 based on this: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Decoding_table \
+            The country iso code alpha 3 based on this:
+            https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Decoding_table \
 
             To know which country are available you have to use the operation: GetChannelsByCountry
           in: path
@@ -1030,7 +1072,8 @@ paths:
               schema:
                 type: string
         "304":
-          description: The ETag sent in the http header If-None-Match did not change. So you can keep your version.
+          description: The ETag sent in the http header If-None-Match did not change. So
+            you can keep your version.
           headers:
             Cache-Control:
               description: >
@@ -1096,7 +1139,8 @@ paths:
               schema:
                 type: string
         "304":
-          description: The ETag sent in the http header If-None-Match did not change. So you can keep your version.
+          description: The ETag sent in the http header If-None-Match did not change. So
+            you can keep your version.
           headers:
             Cache-Control:
               description: >
@@ -1226,9 +1270,8 @@ paths:
         - Analytics - Global
   /v2/user/analytics/tracking/status:
     get:
-      description: >
+      description: |
         Clicks and orders are eventually consistent. \
-
         This operation gets the current global state of projections.
       operationId: GetTrackingStatus
       responses:
@@ -1264,11 +1307,9 @@ paths:
         - Analytics - Global
   "/v2/user/analytics/{storeId}/optimisations/all/{actionName}":
     post:
-      description: >
+      description: |
         /!\ WARNING /!\ \
-
         Apply the operation on every product related to this request. \
-
         This operation is used at the bottom of the analytics page result.
       operationId: OptimiseAll
       parameters:
@@ -1325,9 +1366,8 @@ paths:
         - Analytics - Optimisations
   "/v2/user/analytics/{storeId}/optimisations/bychannel/{channelId}/{actionName}":
     post:
-      description: >
+      description: |
         /!\ WARNING /!\ \
-
         Apply the operation on every product on this channel.
       operationId: OptimiseByChannel
       parameters:
@@ -1412,11 +1452,9 @@ paths:
         - Analytics - Optimisations
   "/v2/user/analytics/{storeId}/optimisations/{actionName}":
     post:
-      description: >
+      description: |
         /!\ WARNING /!\ \
-
         Apply the operation on every product related to this request. \
-
         This operation is used at the bottom of the analytics page result.
       operationId: Optimise
       parameters:
@@ -1585,7 +1623,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: This report filter is used by rule. In the error message you will find the rule identifier.
+          description: This report filter is used by rule. In the error message you will
+            find the rule identifier.
         "404":
           content:
             application/json:
@@ -1641,13 +1680,15 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: This report filter is used by rule. In the error message you will find the rule identifier.
+          description: This report filter is used by rule. In the error message you will
+            find the rule identifier.
         "403":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: This report filter identifier is already used by another store, please check your identifiers.
+          description: This report filter identifier is already used by another store,
+            please check your identifiers.
         "404":
           $ref: "#/components/responses/StoreNotFoundResponse"
         "409":
@@ -1704,13 +1745,15 @@ paths:
             "*/*":
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Store not allowed to use rules. Please upgrade your offer or contact us.
+          description: Store not allowed to use rules. Please upgrade your offer or
+            contact us.
         "403":
           content:
             "*/*":
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Reached the maximum amount of rules allowed for your offer. Please upgrade your offer or contact us.
+          description: Reached the maximum amount of rules allowed for your offer. Please
+            upgrade your offer or contact us.
         "404":
           $ref: "#/components/responses/StoreNotFoundResponse"
         default:
@@ -1769,7 +1812,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Store not allowed to use rules. Please upgrade your offer or contact us.
+          description: Store not allowed to use rules. Please upgrade your offer or
+            contact us.
         "404":
           content:
             application/json:
@@ -1857,7 +1901,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Store not allowed to use rules. Please upgrade your offer or contact us.
+          description: Store not allowed to use rules. Please upgrade your offer or
+            contact us.
         "404":
           content:
             application/json:
@@ -2011,7 +2056,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Store not allowed to use rules. Please upgrade your offer or contact us.
+          description: Store not allowed to use rules. Please upgrade your offer or
+            contact us.
         "404":
           content:
             application/json:
@@ -2119,9 +2165,8 @@ paths:
         - Analytics - Tracking
   "/v2/user/analytics/{storeId}/tracking/status":
     get:
-      description: >
+      description: |
         Clicks and orders are eventually consistent. \
-
         This operation gets the current state of projections for a store.
       operationId: GetStoreTrackingStatus
       parameters:
@@ -2142,7 +2187,8 @@ paths:
         - Analytics - Tracking
   /v2/user/catalogs/:
     get:
-      description: The operation will give you all the operations you will be able to do and all the LOV used in this API.
+      description: The operation will give you all the operations you will be able to
+        do and all the LOV used in this API.
       operationId: CatalogIndex
       responses:
         "200":
@@ -2158,7 +2204,8 @@ paths:
         - Catalogs - Global
   /v2/user/catalogs/beezupColumns:
     get:
-      description: Get the BeezUP columns, this columns are used for mapping during the manual catalog importation process.
+      description: Get the BeezUP columns, this columns are used for mapping during
+        the manual catalog importation process.
       operationId: Catalog_GetBeezUPColumns
       responses:
         "200":
@@ -2194,7 +2241,8 @@ paths:
         - Catalogs - Global
   "/v2/user/catalogs/{storeId}":
     get:
-      description: The operation will give you all the operations you will be able to do on this store for this API.
+      description: The operation will give you all the operations you will be able to
+        do on this store for this API.
       operationId: CatalogStoreIndex
       parameters:
         - $ref: "#/components/parameters/storeIdOnlyGeneralParameters"
@@ -2259,7 +2307,9 @@ paths:
         - Catalogs - Auto
   "/v2/user/catalogs/{storeId}/autoImport/activate":
     post:
-      description: Once you have made your fist manual catalog importation with success, you can call this operation to import it automatically. No parameter required, we know which one it is.
+      description: Once you have made your fist manual catalog importation with
+        success, you can call this operation to import it automatically. No
+        parameter required, we know which one it is.
       operationId: Importation_ActivateAutoImport
       parameters:
         - $ref: "#/components/parameters/storeIdOnlyGeneralParameters"
@@ -2286,7 +2336,8 @@ paths:
           description: When a catalog importation is already in progress!
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Activate the auto importation of the last successful manual catalog importation.
+      summary: Activate the auto importation of the last successful manual catalog
+        importation.
       tags:
         - Catalogs - Auto
   "/v2/user/catalogs/{storeId}/autoImport/pause":
@@ -2502,9 +2553,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when a catalog column is not found.
         "409":
           $ref: "#/components/responses/importAlreadyInProgress"
@@ -2518,7 +2568,8 @@ paths:
       operationId: Catalog_GetCategories
       parameters:
         - $ref: "#/components/parameters/storeIdOnlyGeneralParameters"
-        - description: Indicates that the client accepts that the response will be compressed to reduce traffic size.
+        - description: Indicates that the client accepts that the response will be
+            compressed to reduce traffic size.
           in: header
           name: Accept-Encoding
           required: true
@@ -2658,7 +2709,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
           description: >-
-            Occurs when a catalog custom column id is already used by a catalog column.
+            Occurs when a catalog custom column id is already used by a catalog
+            column.
 
             When the catalog custom column count limit has been reached.
         "404":
@@ -2685,9 +2737,8 @@ paths:
                 type: string
           description: Encrypted expression
         "404":
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when a catalog custom column is not found.
         default:
           $ref: "#/components/responses/GeneralError"
@@ -2713,15 +2764,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Occurs when the user try to change a custom column related to a Category. If you want to change this custom column expression you have to make a new manual importation.
+          description: Occurs when the user try to change a custom column related to a
+            Category. If you want to change this custom column expression you
+            have to make a new manual importation.
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when a catalog custom column is not found.
         "409":
           $ref: "#/components/responses/importAlreadyInProgress"
@@ -2752,9 +2804,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when a catalog column is not found.
         "409":
           $ref: "#/components/responses/importAlreadyInProgress"
@@ -2842,7 +2893,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: ExecutionId not found or not yet synchronized. If not synchronized within 30 sec after the import has been started, please contact our support
+          description: ExecutionId not found or not yet synchronized. If not synchronized
+            within 30 sec after the import has been started, please contact our
+            support
         default:
           $ref: "#/components/responses/GeneralError"
       summary: Get the importation status
@@ -2862,9 +2915,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
         "409":
           content:
@@ -2895,13 +2947,15 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: ExecutionId not found or not yet synchronized. If not synchronized within 30 sec, please contact our support
+          description: ExecutionId not found or not yet synchronized. If not synchronized
+            within 30 sec, please contact our support
         "409":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Catalog preparation read step is not completed. Please refer to the reporting of this execution for more details.
+          description: Catalog preparation read step is not completed. Please refer to the
+            reporting of this execution for more details.
         default:
           $ref: "#/components/responses/GeneralError"
       summary: Get detected catalog columns during this importation.
@@ -2922,13 +2976,14 @@ paths:
         required: true
       responses:
         "204":
-          description: Catalog column configured. This operation has no impact on the current catalog until you commit the catalog importation.
+          description: Catalog column configured. This operation has no impact on the
+            current catalog until you commit the catalog importation.
         "400":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             
             When the catalog column name is not found
         "404":
@@ -2936,11 +2991,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
-
             Occurs when a catalog column is not found.
         "409":
           content:
@@ -2962,17 +3015,16 @@ paths:
         - $ref: "#/components/parameters/customColumnId"
       responses:
         "204":
-          description: Catalog column ignored. This operation has no impact on the current catalog until you commit the catalog importation.
+          description: Catalog column ignored. This operation has no impact on the current
+            catalog until you commit the catalog importation.
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
-
             Occurs when a catalog column is not found.
         "409":
           content:
@@ -2996,17 +3048,16 @@ paths:
         $ref: "#/components/requestBodies/mapBeezUPColumnRequest"
       responses:
         "204":
-          description: Catalog column mapped. This operation has no impact on the current catalog until you commit the catalog importation.
+          description: Catalog column mapped. This operation has no impact on the current
+            catalog until you commit the catalog importation.
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
-
             Occurs when a catalog column is not found.
         "409":
           content:
@@ -3028,17 +3079,16 @@ paths:
         - $ref: "#/components/parameters/customColumnId"
       responses:
         "204":
-          description: Catalog column reattended. This operation has no impact on the current catalog until you commit the catalog importation.
+          description: Catalog column reattended. This operation has no impact on the
+            current catalog until you commit the catalog importation.
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
-
             Occurs when a catalog column is not found.
         "409":
           content:
@@ -3060,17 +3110,16 @@ paths:
         - $ref: "#/components/parameters/catalogColumnId"
       responses:
         "204":
-          description: Catalog Column unmapped. This operation has no impact on the current catalog until you commit the catalog importation.
+          description: Catalog Column unmapped. This operation has no impact on the
+            current catalog until you commit the catalog importation.
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
-
             Occurs when a catalog column is not found.
         "409":
           content:
@@ -3103,9 +3152,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
         "409":
           content:
@@ -3126,36 +3174,30 @@ paths:
         - $ref: "#/components/parameters/executionId"
       responses:
         "204":
-          description: Columns configuration have been committed. This operation has no impact on the current catalog until you commit the catalog importation.
+          description: Columns configuration have been committed. This operation has no
+            impact on the current catalog until you commit the catalog
+            importation.
         "400":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             When a user column name is duplicate.
-
             When the catalog column name are duplicate.
-
             When the BeezUP column have duplicate mapping.
-
             Occurs when the required beezup column is not mapped to any column.
-
             Occurs when the category hierarchy is not correctly mapped.
-
             When the catalog column count limit has been reached.
-
             When the catalog custom column count limit has been reached.
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
-
             Occurs when a catalog column is not found.
         default:
           $ref: "#/components/responses/GeneralError"
@@ -3164,14 +3206,17 @@ paths:
         - Catalogs - Importation Process
   "/v2/user/catalogs/{storeId}/importations/{executionId}/configureRemainingCatalogColumns":
     post:
-      description: This operation should be used after you have mapped the required BeezUP Columns
+      description: This operation should be used after you have mapped the required
+        BeezUP Columns
       operationId: Importation_ConfigureRemainingCatalogColumns
       parameters:
         - $ref: "#/components/parameters/storeIdOnlyGeneralParameters"
         - $ref: "#/components/parameters/executionId"
       responses:
         "204":
-          description: Remaining catalog columns have been configured. This operation has no impact on the current catalog until you commit the catalog importation.
+          description: Remaining catalog columns have been configured. This operation has
+            no impact on the current catalog until you commit the catalog
+            importation.
         "400":
           content:
             application/json:
@@ -3194,11 +3239,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
-
             Occurs when a catalog column is not found.
         "409":
           description: Occurs when this importation is already finished.
@@ -3225,13 +3268,15 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: ExecutionId not found or not yet synchronized. If not synchronized within 30 sec, please contact our support
+          description: ExecutionId not found or not yet synchronized. If not synchronized
+            within 30 sec, please contact our support
         "409":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Catalog preparation read step is not completed. Please refer to the reporting of this execution for more details.
+          description: Catalog preparation read step is not completed. Please refer to the
+            reporting of this execution for more details.
         default:
           $ref: "#/components/responses/GeneralError"
       summary: Get custom columns currently place in this importation
@@ -3252,9 +3297,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
         default:
           $ref: "#/components/responses/GeneralError"
@@ -3275,15 +3319,15 @@ paths:
         required: true
       responses:
         "204":
-          description: Custom column configured. This operation has no impact on the current catalog until you commit the catalog importation.
+          description: Custom column configured. This operation has no impact on the
+            current catalog until you commit the catalog importation.
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
         "409":
           content:
@@ -3316,13 +3360,15 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: ExecutionId not found or not yet synchronized. If not synchronized within 30 sec, please contact our support
+          description: ExecutionId not found or not yet synchronized. If not synchronized
+            within 30 sec, please contact our support
         "409":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Catalog preparation read step is not completed. Please refer to the reporting of this execution for more details.
+          description: Catalog preparation read step is not completed. Please refer to the
+            reporting of this execution for more details.
         default:
           $ref: "#/components/responses/GeneralError"
       summary: Get the encrypted custom column expression in this importation
@@ -3339,17 +3385,16 @@ paths:
         $ref: "#/components/requestBodies/mapBeezUPColumnRequest"
       responses:
         "204":
-          description: Custom column mapped. This operation has no impact on the current catalog until you commit the catalog importation.
+          description: Custom column mapped. This operation has no impact on the current
+            catalog until you commit the catalog importation.
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
-
             Occurs when a catalog column is not found.
         "409":
           content:
@@ -3371,17 +3416,16 @@ paths:
         - $ref: "#/components/parameters/customColumnId"
       responses:
         "204":
-          description: Custom column unmapped. This operation has no impact on the current catalog until you commit the catalog importation.
+          description: Custom column unmapped. This operation has no impact on the current
+            catalog until you commit the catalog importation.
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
-
             Occurs when a catalog column is not found.
         "409":
           content:
@@ -3410,7 +3454,8 @@ paths:
           description: OK
         "404":
           description: >-
-            ExecutionId not found or not yet synchronized. If not synchronized within 30 sec, please contact our support
+            ExecutionId not found or not yet synchronized. If not synchronized
+            within 30 sec, please contact our support
                   schema:
             $ref: 'https://api.beezup.com/swaggerhub/domains/BeezUP/api.beezup.com/v2#/definitions/BeezUP.Common.ErrorResponseMessage'
         "409":
@@ -3418,15 +3463,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Catalog preparation read step is not completed. Please refer to the reporting of this execution for more details.
+          description: Catalog preparation read step is not completed. Please refer to the
+            reporting of this execution for more details.
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get the product sample related to this importation with all columns (catalog and custom)
+      summary: Get the product sample related to this importation with all columns
+        (catalog and custom)
       tags:
         - Catalogs - Importation Catalog Info
   "/v2/user/catalogs/{storeId}/importations/{executionId}/productSamples/{productSampleIndex}/customColumns/{columnId}":
     get:
-      description: /!\ Use this operation only when you just changed the custom column expression and you want to get a precise the property value. Otherwise use the operation Importation_GetProductSample which will give you all property values
+      description: /!\ Use this operation only when you just changed the custom column
+        expression and you want to get a precise the property value. Otherwise
+        use the operation Importation_GetProductSample which will give you all
+        property values
       operationId: Importation_GetProductSampleCustomColumnValue
       parameters:
         - $ref: "#/components/parameters/storeIdOnlyGeneralParameters"
@@ -3446,7 +3496,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: ExecutionId not found or not yet synchronized. If not synchronized within 30 sec, please contact our support
+          description: ExecutionId not found or not yet synchronized. If not synchronized
+            within 30 sec, please contact our support
           headers:
             Retry-After:
               description: The duration in second to wait before polling this resource
@@ -3460,7 +3511,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Catalog preparation read step is not completed. Please refer to the reporting of this execution for more details.
+          description: Catalog preparation read step is not completed. Please refer to the
+            reporting of this execution for more details.
         default:
           $ref: "#/components/responses/GeneralError"
       summary: Get product sample custom column value related to this importation.
@@ -3486,9 +3538,8 @@ paths:
                 $ref: "#/components/schemas/getImportationProductsReportResponse"
           description: Get Products Report Response
         "404":
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
         "409":
           description: Report Not ready Yet. Please retry in a few minutes.
@@ -3509,9 +3560,8 @@ paths:
                 $ref: "#/components/schemas/getImportationReportResponse"
           description: Get Report Response
         "404":
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
         "409":
           description: Report Not ready Yet. Please retry in a few minutes.
@@ -3536,9 +3586,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >-
+          description: |-
             Occurs when a user tries to work on the wrong store.
-
             Occurs when the message concerns the wrong execution.
         "409":
           content:
@@ -4471,7 +4520,8 @@ paths:
       operationId: GetChannelCategories
       parameters:
         - $ref: "#/components/parameters/channelIdParameter"
-        - description: Indicates that the client accepts that the response will be compressed to reduce traffic size.
+        - description: Indicates that the client accepts that the response will be
+            compressed to reduce traffic size.
           in: header
           name: Accept-Encoding
           required: true
@@ -4504,7 +4554,8 @@ paths:
       operationId: GetChannelColumns
       parameters:
         - $ref: "#/components/parameters/channelIdParameter"
-        - description: Indicates that the client accepts that the response will be compressed to reduce traffic size.
+        - description: Indicates that the client accepts that the response will be
+            compressed to reduce traffic size.
           in: header
           name: Accept-Encoding
           required: true
@@ -4651,7 +4702,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Old password is invalid or the new password does not respect the password's constraints
+          description: Old password is invalid or the new password does not respect the
+            password's constraints
         default:
           $ref: "#/components/responses/GeneralError"
       summary: Change user password
@@ -4711,7 +4763,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: We are unable to get your credit card info. This is a temporary state. Please retry later
+          description: We are unable to get your credit card info. This is a temporary
+            state. Please retry later
         default:
           $ref: "#/components/responses/GeneralError"
       summary: Get credit card information
@@ -4728,7 +4781,8 @@ paths:
         required: true
       responses:
         "202":
-          description: The credit card information has been accepted for processing, the authorization will be processed shortly.
+          description: The credit card information has been accepted for processing, the
+            authorization will be processed shortly.
         "400":
           content:
             application/json:
@@ -4833,13 +4887,15 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Email activation not sent because of email problem. Ensure that your email is the correct one.
+          description: Email activation not sent because of email problem. Ensure that
+            your email is the correct one.
         "409":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Email activation not available because user account already activated.
+          description: Email activation not available because user account already
+            activated.
         "429":
           content:
             application/json:
@@ -4858,7 +4914,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Email activate send failed because of our email service. Ensure that your email is the correct one otherwise please contact our support if the problem persists.
+          description: Email activate send failed because of our email service. Ensure
+            that your email is the correct one otherwise please contact our
+            support if the problem persists.
         default:
           $ref: "#/components/responses/GeneralError"
       summary: Resend email activation
@@ -4904,7 +4962,9 @@ paths:
         - Customer - Contracts
     post:
       description: >
-        Now you are ready to create your contract. Before that, please ensure that you check the offer with the same request parameterts. /offers
+        Now you are ready to create your contract. Before that, please
+        ensure that you check the offer with the same request parameterts.
+        /offers
       operationId: CreateContract
       requestBody:
         content:
@@ -4918,7 +4978,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/createContractResponse"
-          description: New contract has been created. Some warnings can be present in response.
+          description: New contract has been created. Some warnings can be present in
+            response.
         "400":
           content:
             application/json:
@@ -4930,7 +4991,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: The contract is not modifiable or the coupon offer has been already used
+          description: The contract is not modifiable or the coupon offer has been already
+            used
         default:
           $ref: "#/components/responses/GeneralError"
       summary: Create a new contract
@@ -4938,7 +5000,8 @@ paths:
         - Customer - Contracts
   /v2/user/customer/contracts/current/disableAutoRenewal:
     post:
-      description: By default your contract are automatically renew. By calling this operation you can disable the auto renewal.
+      description: By default your contract are automatically renew. By calling this
+        operation you can disable the auto renewal.
       operationId: TerminateCurrentContract
       requestBody:
         content:
@@ -4964,7 +5027,8 @@ paths:
           description: No current contract
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Schedule termination of your current contract at the end of the commitment.
+      summary: Schedule termination of your current contract at the end of the
+        commitment.
       tags:
         - Customer - Contracts
   /v2/user/customer/contracts/current/reenableAutoRenewal:
@@ -5068,7 +5132,8 @@ paths:
         - Customer - Contracts
     post:
       description: >
-        Get the offer pricing then you can create your contract with the same request parameters. /v2/user/customer/contracts
+        Get the offer pricing then you can create your contract with the
+        same request parameters. /v2/user/customer/contracts
       operationId: GetOffer
       requestBody:
         content:
@@ -5088,7 +5153,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Bad request. (Invalid billing period, invalid offer, etc.). You cannot get a pricing for a free offer.
+          description: Bad request. (Invalid billing period, invalid offer, etc.). You
+            cannot get a pricing for a free offer.
         "403":
           content:
             application/json:
@@ -5145,13 +5211,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/links.getStoreLink"
-          description: The store has been created successfully. The http header Location contains the new resource url. The body contains the link to the new resource.
+          description: The store has been created successfully. The http header Location
+            contains the new resource url. The body contains the link to the new
+            resource.
         "402":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorResponseMessagePaymentRequired"
-          description: The maximum amount of store has been reached. Please upgrade your contract.
+          description: The maximum amount of store has been reached. Please upgrade your
+            contract.
         "409":
           content:
             application/json:
@@ -5208,7 +5277,7 @@ paths:
       tags:
         - Customer - Stores
     patch:
-      description: >
+      description: |
         Update some store's information. FYI, you cannot change the country.
       operationId: UpdateStore
       parameters:
@@ -5266,7 +5335,8 @@ paths:
       tags:
         - Customer - Alerts
     post:
-      description: You just have to send the alert you want to update, does not need all alerts. (PARTIAL UPDATE ACCEPTED)
+      description: You just have to send the alert you want to update, does not need
+        all alerts. (PARTIAL UPDATE ACCEPTED)
       operationId: SaveStoreAlerts
       parameters:
         - $ref: "#/components/parameters/storeIdOnlyGeneralParameters"
@@ -5406,7 +5476,10 @@ paths:
         - Customer - Shares
   /v2/user/customer/zendeskToken:
     get:
-      description: "Zendesk token - Generates a JWT token to access BeezUP restricted Help Center in SSO as described here: https://support.zendesk.com/hc/en-us/articles/222874768-Using-restricted-Help-Center-content-with-the-Web-Widget"
+      description: "Zendesk token - Generates a JWT token to access BeezUP restricted
+        Help Center in SSO as described here:
+        https://support.zendesk.com/hc/en-us/articles/222874768-Using-restricte\
+        d-Help-Center-content-with-the-Web-Widget"
       operationId: ZendeskToken
       responses:
         "200":
@@ -5447,7 +5520,8 @@ paths:
               schema:
                 type: string
         "304":
-          description: The ETag sent in the http header If-None-Match did not change. So you can keep your version.
+          description: The ETag sent in the http header If-None-Match did not change. So
+            you can keep your version.
           headers:
             Cache-Control:
               description: >
@@ -5513,7 +5587,8 @@ paths:
               schema:
                 type: string
         "304":
-          description: The ETag sent in the http header If-None-Match did not change. So you can keep your version.
+          description: The ETag sent in the http header If-None-Match did not change. So
+            you can keep your version.
           headers:
             Cache-Control:
               description: >
@@ -5625,14 +5700,17 @@ paths:
                 $ref: "#/components/schemas/accountPublications"
           description: Successfully fetched channel catalog settings
         "400":
-          description: Feature only available for Amazon, Ebay, CDiscount and Mirakl marketplaces
+          description: Feature only available for Amazon, Ebay, CDiscount and Mirakl
+            marketplaces
         "404":
-          description: Requested account, marketplace or authorization for current user not found
+          description: Requested account, marketplace or authorization for current user
+            not found
         "503":
           $ref: "#/components/responses/processingResponse"
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Fetch the publication history for an account, sorted by descending start date
+      summary: Fetch the publication history for an account, sorted by descending
+        start date
       tags:
         - Marketplaces - Channel catalogs - Publications
   "/v2/user/marketplaces/channelcatalogs/publications/{marketplaceTechnicalCode}/{accountId}/publish":
@@ -5668,9 +5746,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: One or more channel catalog marketplace property keys or values are invalid for requested marketplace channel catalog. See response for details.
+          description: One or more channel catalog marketplace property keys or values are
+            invalid for requested marketplace channel catalog. See response for
+            details.
         "404":
-          description: Requested account, marketplace or authorization for current user not found
+          description: Requested account, marketplace or authorization for current user
+            not found
         "503":
           $ref: "#/components/responses/processingResponse"
         default:
@@ -5740,9 +5821,8 @@ paths:
       tags:
         - Marketplaces - Channel catalogs - Settings
     post:
-      description: >
+      description: |
         Allow you to configure your marketplace settings.
-
         Partial update accepted.
       operationId: SetChannelCatalogMarketplaceSettings
       parameters:
@@ -5768,7 +5848,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: One or more channel catalog marketplace property keys or values are invalid for requested marketplace channel catalog. See response for details.
+          description: One or more channel catalog marketplace property keys or values are
+            invalid for requested marketplace channel catalog. See response for
+            details.
         "404":
           description: Marketplace channel catalog not found
         "503":
@@ -5819,7 +5901,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/automaticTransitionInfoList"
-          description: Successfully fetched list of configured automatic Order status transitions
+          description: Successfully fetched list of configured automatic Order status
+            transitions
         "304":
           $ref: "#/components/responses/304_NotModified"
         "404":
@@ -5844,7 +5927,8 @@ paths:
         required: true
       responses:
         "204":
-          description: Successfully confirugred new or existing automatic Order status transition
+          description: Successfully confirugred new or existing automatic Order status
+            transition
         "400":
           content:
             application/json:
@@ -5860,7 +5944,8 @@ paths:
     post:
       deprecated: false
       description: >
-        The purpose of this operation is to reduce the amount of request to the API. 
+        The purpose of this operation is to reduce the amount of request to
+        the API. 
 
         Max 100 items per call.
       operationId: ChangeOrderList
@@ -5876,7 +5961,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/batchOrderOperationResponse"
-          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
+          description: Succesfully received and processed batched operations. Please check
+            response to see the status per operation.
         "400":
           content:
             application/json:
@@ -5885,13 +5971,15 @@ paths:
           description: Requested too many batch operations
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "Send a batch of operations to change your marketplace Order information: accept, ship, etc.  (max 100 items per call)"
+      summary: "Send a batch of operations to change your marketplace Order
+        information: accept, ship, etc.  (max 100 items per call)"
       tags:
         - Marketplaces - Orders - Batches
   /v2/user/marketplaces/orders/batches/clearMerchantOrderInfos:
     post:
       deprecated: false
-      description: The purpose of this operation is to reduce the amount of request to the API.
+      description: The purpose of this operation is to reduce the amount of request to
+        the API.
       operationId: ClearMerchantOrderInfoList
       requestBody:
         $ref: "#/components/requestBodies/clearMerchantOrderInfoListRequest"
@@ -5901,7 +5989,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/batchOrderOperationResponse"
-          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
+          description: Succesfully received and processed batched operations. Please check
+            response to see the status per operation.
         "400":
           content:
             application/json:
@@ -5910,13 +5999,15 @@ paths:
           description: Requested too many batch operations
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Send a batch of operations to clear an Order's merchant information (max 100 items per call)
+      summary: Send a batch of operations to clear an Order's merchant information
+        (max 100 items per call)
       tags:
         - Marketplaces - Orders - Batches
   /v2/user/marketplaces/orders/batches/setMerchantOrderInfos:
     post:
       deprecated: false
-      description: The purpose of this operation is to reduce the amount of request to the API.
+      description: The purpose of this operation is to reduce the amount of request to
+        the API.
       operationId: SetMerchantOrderInfoList
       requestBody:
         $ref: "#/components/requestBodies/setMerchantOrderInfoListRequest"
@@ -5926,7 +6017,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/batchOrderOperationResponse"
-          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
+          description: Succesfully received and processed batched operations. Please check
+            response to see the status per operation.
         "400":
           content:
             application/json:
@@ -5935,7 +6027,8 @@ paths:
           description: Requested too many batch operations
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Send a batch of operations to set an Order's merchant information  (max 100 items per call)
+      summary: Send a batch of operations to set an Order's merchant information  (max
+        100 items per call)
       tags:
         - Marketplaces - Orders - Batches
   /v2/user/marketplaces/orders/exportations:
@@ -5967,7 +6060,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Could not process request for given parameters values. Please check error message for more details.
+          description: Could not process request for given parameters values. Please check
+            error message for more details.
         default:
           $ref: "#/components/responses/GeneralError"
       summary: Get a paginated list of Order report exportations
@@ -5975,7 +6069,8 @@ paths:
         - Marketplaces - Orders - Exports
     post:
       deprecated: false
-      description: A new file will be generated containing a summary of all the Orders matching the requested filter settings.
+      description: A new file will be generated containing a summary of all the Orders
+        matching the requested filter settings.
       operationId: ExportOrders
       requestBody:
         $ref: "#/components/requestBodies/exportOrderListRequest"
@@ -5987,7 +6082,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Could not process request for given parameters values. Please check error message for more details.
+          description: Could not process request for given parameters values. Please check
+            error message for more details.
         "404":
           content:
             application/json:
@@ -6017,7 +6113,8 @@ paths:
           description: Successfully sent harvest request to all marketplaces
           headers:
             Retry-After:
-              description: Indicates the duration in seconds to wait to be able to make this request again
+              description: Indicates the duration in seconds to wait to be able to make this
+                request again
               schema:
                 type: integer
         "404":
@@ -6031,10 +6128,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Failed to send harvest request because allowed rate limits have been exceeded
+          description: Failed to send harvest request because allowed rate limits have
+            been exceeded
           headers:
             Retry-After:
-              description: Indicates the duration in seconds to wait to be able to make this request again
+              description: Indicates the duration in seconds to wait to be able to make this
+                request again
               schema:
                 type: integer
         default:
@@ -6108,7 +6207,8 @@ paths:
     post:
       operationId: GetOrderInvoiceDesignSettingsPreview
       parameters:
-        - description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size
+        - description: Allows the client to indicate wether it accepts a compressed
+            encoding to reduce traffic size
           in: header
           name: Accept-Encoding
           required: true
@@ -6191,7 +6291,8 @@ paths:
           description: Request Accepted.
           headers:
             Location:
-              description: The location of the generated invoice. Might take a few seconds to be available
+              description: The location of the generated invoice. Might take a few seconds to
+                be available
               schema:
                 type: string
               x-example: http://blob.com/generated.html
@@ -6215,7 +6316,8 @@ paths:
         - $ref: "#/components/parameters/marketplaceTechnicalCode"
         - $ref: "#/components/parameters/accountId"
         - $ref: "#/components/parameters/beezUPOrderUUID"
-        - description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size
+        - description: Allows the client to indicate wether it accepts a compressed
+            encoding to reduce traffic size
           in: header
           name: Accept-Encoding
           required: true
@@ -6261,7 +6363,8 @@ paths:
         Previous implmentation of this feature only returned a partial (light) version of the Orders. The purpose of this API is to reduce the number of incoming requests by returning the complete (full) Order and Order Item(s) properties.
       operationId: GetOrderListFull
       parameters:
-        - description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size
+        - description: Allows the client to indicate wether it accepts a compressed
+            encoding to reduce traffic size
           in: header
           name: Accept-Encoding
           required: true
@@ -6284,10 +6387,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Could not process request for given parameters values. Please check error message for more details.
+          description: Could not process request for given parameters values. Please check
+            error message for more details.
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "[DEPRECATED] Get a paginated list of all Orders with all Order and Order Item(s) properties"
+      summary: "[DEPRECATED] Get a paginated list of all Orders with all Order and
+        Order Item(s) properties"
       tags:
         - Marketplaces - Orders - List
       x-releaseStatus: DEPRECATED
@@ -6310,7 +6415,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Could not process request for given parameters values. Please check error message for more details.
+          description: Could not process request for given parameters values. Please check
+            error message for more details.
         default:
           $ref: "#/components/responses/GeneralError"
       summary: "[DEPRECATED] Get a paginated list of all Orders without details"
@@ -6349,7 +6455,8 @@ paths:
           description: Requested Store could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "[DEPRECATED] Get current synchronization status between your marketplaces and BeezUP accounts"
+      summary: "[DEPRECATED] Get current synchronization status between your
+        marketplaces and BeezUP accounts"
       tags:
         - Marketplaces - Orders - Global
       x-releaseStatus: DEPRECATED
@@ -6408,7 +6515,9 @@ paths:
       tags:
         - Marketplaces - Orders - Subscriptions - Subscriptions
     post:
-      description: Please take a look at this sequence diagram to understand the subscription process to follow [here](https://www.websequencediagrams.com/files/render?link=SBYbeIc8NGshk6ooCbmjoBLIMl4fIGO1xjJbPBQAglBo0n6BwEReh7NXQiPSjOTX)
+      description: Please take a look at this sequence diagram to understand the
+        subscription process to follow
+        [here](https://www.websequencediagrams.com/files/render?link=SBYbeIc8NGshk6ooCbmjoBLIMl4fIGO1xjJbPBQAglBo0n6BwEReh7NXQiPSjOTX)
       operationId: CreateSubscription
       parameters:
         - $ref: "#/components/parameters/subscriptionIdPathParameter"
@@ -6439,7 +6548,8 @@ paths:
   "/v2/user/marketplaces/orders/subscriptions/{id}/activate":
     post:
       description: >
-        At this moment, BeezUP will ensure that your callback url is respecting this specification: 
+        At this moment, BeezUP will ensure that your callback url is
+        respecting this specification: 
 
         - https://app.swaggerhub.com/apis/BeezUP/public_marketplaces_orders_subscriptions_consumer-dev/1.0#/Subscriptions/Verification
 
@@ -6519,7 +6629,10 @@ paths:
           description: Subscription push reporting info
           headers:
             Link:
-              description: Based on the RFC 5988 - Web Linking, the page navigation will be indicated here with the rel=next, rel=previous, rel=first, rel=last, the pageNumber and the pageSize will be indicated in the link param
+              description: Based on the RFC 5988 - Web Linking, the page navigation will be
+                indicated here with the rel=next, rel=previous, rel=first,
+                rel=last, the pageNumber and the pageSize will be indicated in
+                the link param
               schema:
                 items:
                   type: string
@@ -6538,7 +6651,9 @@ paths:
         - Marketplaces - Orders - Subscriptions - Subscriptions
   "/v2/user/marketplaces/orders/subscriptions/{id}/retry":
     post:
-      description: In case your subscription consumption is unavailable and your subscription is still active you can ask to retry immediatly to push orders instead of waiting the next scheduled retry date
+      description: In case your subscription consumption is unavailable and your
+        subscription is still active you can ask to retry immediatly to push
+        orders instead of waiting the next scheduled retry date
       operationId: RetryPushOrders
       parameters:
         - $ref: "#/components/parameters/subscriptionIdPathParameter"
@@ -6644,7 +6759,8 @@ paths:
           description: Requested Order could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "[DEPRECATED] DEPRECATED - Get the meta information about the order (ETag, Last-Modified)"
+      summary: "[DEPRECATED] DEPRECATED - Get the meta information about the order
+        (ETag, Last-Modified)"
       tags:
         - Marketplaces - Orders - Order
       x-releaseStatus: DEPRECATED
@@ -6664,7 +6780,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Could not update Order merchant information. Please see body for more information.
+          description: Could not update Order merchant information. Please see body for
+            more information.
         "404":
           content:
             application/json:
@@ -6689,7 +6806,8 @@ paths:
           description: Successfully sent Order harvest request
           headers:
             Retry-After:
-              description: Indicates the duration in seconds to wait to be able to make this request again
+              description: Indicates the duration in seconds to wait to be able to make this
+                request again
               schema:
                 type: integer
         "404":
@@ -6703,10 +6821,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Failed to send harvest request because allowed rate limits have been exceeded
+          description: Failed to send harvest request because allowed rate limits have
+            been exceeded
           headers:
             Retry-After:
-              description: Indicates the duration in seconds to wait to be able to make this request again
+              description: Indicates the duration in seconds to wait to be able to make this
+                request again
               schema:
                 type: integer
         default:
@@ -6763,7 +6883,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Could not update Order merchant information. Please see body for more information.
+          description: Could not update Order merchant information. Please see body for
+            more information.
         "404":
           content:
             application/json:
@@ -6798,7 +6919,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: Invalid order change request, could not be send to the marketplace. Please check the body of this request.
+          description: Invalid order change request, could not be send to the marketplace.
+            Please check the body of this request.
         "404":
           content:
             application/json:
@@ -6810,27 +6932,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
-          description: >
+          description: |
             Already processing a change request for this Order.\
-
             Please refresh your clients Order information and retry later.
           headers:
             Retry-After:
-              description: Indicates the duration in seconds to wait to be able to make this request again
+              description: Indicates the duration in seconds to wait to be able to make this
+                request again
               schema:
                 type: integer
         "412":
           $ref: "#/components/responses/412_PreConditionFailed"
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "[DEPRECATED] Change your marketplace Order Information (accept, ship, etc.)"
+      summary: "[DEPRECATED] Change your marketplace Order Information (accept, ship,
+        etc.)"
       tags:
         - Marketplaces - Orders - Order
       x-releaseStatus: DEPRECATED
 components:
   parameters:
     acceptEncodingRequiredParameter:
-      description: Allows the client to indicate whether it accepts a compressed encoding to reduce traffic size.
+      description: Allows the client to indicate whether it accepts a compressed
+        encoding to reduce traffic size.
       in: header
       name: Accept-Encoding
       required: true
@@ -6953,7 +7077,8 @@ components:
         type: string
     ifMatchParameter:
       description: >
-        ETag value to identify the last known version of requested resource.\
+        ETag value to identify the last known version of requested
+        resource.\
 
         To ensure that you are making a change on the lastest version of the resource.\
 
@@ -6965,7 +7090,8 @@ components:
         type: string
     ifNoneMatchParameter:
       description: >
-        ETag value to identify the last known version of requested resource.\
+        ETag value to identify the last known version of requested
+        resource.\
 
         To avoid useless exchange, we recommend you to indicate the ETag you previously got from this operation.\
 
@@ -7086,7 +7212,8 @@ components:
         format: SubscriptionId
         type: string
     testModeInQueryParameter:
-      description: If true, the operation will be not be sent to marketplace. But the validation will be taken in account.
+      description: If true, the operation will be not be sent to marketplace. But the
+        validation will be taken in account.
       example: "false"
       in: query
       name: testMode
@@ -7095,7 +7222,9 @@ components:
         default: "false"
         type: boolean
     userNameInQueryParameter:
-      description: Sometimes the user in the e-commerce application is not the same as user associated with the current subscription key. We recommend providing your application's user login.
+      description: Sometimes the user in the e-commerce application is not the same as
+        user associated with the current subscription key. We recommend
+        providing your application's user login.
       in: query
       name: userName
       required: true
@@ -7184,7 +7313,8 @@ components:
       required: true
   responses:
     304_NotModified:
-      description: The ETag sent in the http header If-None-Match did not change. So you are up to date !
+      description: The ETag sent in the http header If-None-Match did not change. So
+        you are up to date !
       headers:
         ETag:
           description: >
@@ -7202,7 +7332,9 @@ components:
             format: date-time
             type: string
     412_PreConditionFailed:
-      description: The ETag sent in the http header If-Match did not match with the current version. Please refresh the information related to this resource.
+      description: The ETag sent in the http header If-Match did not match with the
+        current version. Please refresh the information related to this
+        resource.
       headers:
         ETag:
           description: >
@@ -7259,11 +7391,9 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/errorResponseMessage"
-      description: >
+      description: |
         OwnerId not authorized
-
         The required order invoice settings have not been set
-
         BeezUPOrderStatus forbidden
       x-exceptions:
         - UserNotOwnerException
@@ -7275,7 +7405,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/errorResponseMessage"
-      description: >
+      description: |
         Too many Requests. Please retry in a few seconds
       x-exceptions:
         - OrderInvoiceTooManyRequestsException
@@ -7284,9 +7414,8 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/errorResponseMessage"
-      description: >
+      description: |
         The InvoiceNumber is already used
-
         There is already an invoice for this order
       x-exceptions:
         - OrderInvoiceNumberAlreadyUsedException
@@ -7296,7 +7425,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/errorResponseMessage"
-      description: >
+      description: |
         The order invoice design is not found
       x-exceptions:
         - OrderInvoiceDesignSettingsNotFoundException
@@ -7305,7 +7434,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/errorResponseMessage"
-      description: >
+      description: |
         The order invoice general settings are not found
       x-exceptions:
         - OrderInvoiceGeneralSettingsNotFoundException
@@ -7314,7 +7443,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/errorResponseMessage"
-      description: >
+      description: |
         The order invoice does not exist
       x-exceptions:
         - OrderInvoiceNotFoundException
@@ -7323,7 +7452,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/errorResponseMessage"
-      description: >
+      description: |
         The order cannot be retrieved
       x-exceptions:
         - OrderNotFoundException
@@ -7344,7 +7473,8 @@ components:
       x-exceptions:
         - UserNotOwnerException
     processingResponse:
-      description: The marketplace configuration related to this channel catalog is currently in progress. Please retry later.
+      description: The marketplace configuration related to this channel catalog is
+        currently in progress. Please retry later.
       headers:
         Retry-After:
           description: Indicate the duration to before the next retry in second.
@@ -7357,7 +7487,8 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/errorResponseMessage"
-      description: The subscription is deactivated or your subscription consumption availability status is available.
+      description: The subscription is deactivated or your subscription consumption
+        availability status is available.
       x-exceptions:
         - OrderSubscriptionRetryRejectedException
     saveOrderInvoiceDesignSettingsBadRequestResponse:
@@ -7365,7 +7496,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/errorResponseMessage"
-      description: >
+      description: |
         The design did not pass the validation
       x-exceptions:
         - OrderInvoiceDesignSettingsValidationFailedException
@@ -7374,7 +7505,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/errorResponseMessage"
-      description: >
+      description: |
         The settingsgeneral did not pass the validation
       x-exceptions:
         - OrderInvoiceGeneralSettingsValidationFailedException
@@ -7398,9 +7529,8 @@ components:
     BeezUP.Common.AdditionalProductFilters:
       additionalProperties:
         $ref: "#/components/schemas/BeezUP.Common.AdditionalProductFiltersValue"
-      description: >
+      description: |
         Describe a filter on a product's column.
-
         The key is the column identifier of your catalog or a custom column.
       type: object
     BeezUP.Common.AdditionalProductFiltersValue:
@@ -7531,7 +7661,8 @@ components:
       type: string
     BeezUP.Common.ColumnDataType:
       default: String
-      description: Data type of the column, will be used for parsing and for consolidation proces
+      description: Data type of the column, will be used for parsing and for
+        consolidation proces
       enum:
         - String
         - Url
@@ -7555,13 +7686,16 @@ components:
       example: Required
       type: string
     BeezUP.Common.CountryIsoCodeAlpha3:
-      description: The country iso code alpha 3 <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3">(ISO 3166-1_alpha-3)</a>
+      description: The country iso code alpha 3 <a
+        href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3">(ISO
+        3166-1_alpha-3)</a>
       example: FRA
       type: string
       x-lov: Country
     BeezUP.Common.CurrencyCode:
       description: >
-        The currency code <a href="https://en.wikipedia.org/wiki/ISO_4217">(ISO 4217)</a>
+        The currency code <a
+        href="https://en.wikipedia.org/wiki/ISO_4217">(ISO 4217)</a>
       example: EUR
       type: string
     BeezUP.Common.DocUrl:
@@ -7642,7 +7776,8 @@ components:
       example: GET
       type: string
     BeezUP.Common.HttpUrl:
-      description: The URL <a href="https://en.wikipedia.org/wiki/URL">https://en.wikipedia.org/wiki/URL</a>
+      description: The URL <a
+        href="https://en.wikipedia.org/wiki/URL">https://en.wikipedia.org/wiki/URL</a>
       example: http://www.mydomain.com
       pattern: ^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$
       type: string
@@ -7714,7 +7849,8 @@ components:
         info:
           $ref: "#/components/schemas/BeezUP.Common.InfoSummaries"
         label:
-          description: The label corresponding to the link. This label is automatically translated based on the Accept-Language http header.
+          description: The label corresponding to the link. This label is automatically
+            translated based on the Accept-Language http header.
           example: The translated label
           type: string
         method:
@@ -7740,19 +7876,23 @@ components:
         in:
           $ref: "#/components/schemas/BeezUP.Common.ParameterIn"
         label:
-          description: The label corresponding to the link parameter. This label is automatically translated based on the Accept-Language http header.
+          description: The label corresponding to the link parameter. This label is
+            automatically translated based on the Accept-Language http header.
           example: The translated label
           type: string
         lovLink:
           $ref: "#/components/schemas/BeezUP.Common.LOVLink3"
         lovRequired:
-          description: If true, you MUST indicate a value from the list of values otherwise it's a freetext
+          description: If true, you MUST indicate a value from the list of values
+            otherwise it's a freetext
           example: "true"
           type: boolean
         properties:
           additionalProperties:
             $ref: "#/components/schemas/BeezUP.Common.LinkParameterProperty3"
-          description: If the parameter is an object with flexible properties (additionProperties/dictionary), we will describe the properties of the object.
+          description: If the parameter is an object with flexible properties
+            (additionProperties/dictionary), we will describe the properties of
+            the object.
           example:
             shipOrder:
               type: string
@@ -7768,7 +7908,8 @@ components:
         type:
           $ref: "#/components/schemas/BeezUP.Common.ParameterType"
         value:
-          description: The value of the parameter. It can be an integer a string or an object.
+          description: The value of the parameter. It can be an integer a string or an
+            object.
           type: object
       required:
         - in
@@ -7780,13 +7921,16 @@ components:
           example: the store identifier
           type: string
         label:
-          description: The label corresponding to the link parameter property. This label is automatically translated based on the Accept-Language http header.
+          description: The label corresponding to the link parameter property. This label
+            is automatically translated based on the Accept-Language http
+            header.
           example: The translated label
           type: string
         lovLink:
           $ref: "#/components/schemas/BeezUP.Common.LOVLink3"
         lovRequired:
-          description: If true, you MUST use indicate a value from the list of values otherwise it's a freetext
+          description: If true, you MUST use indicate a value from the list of values
+            otherwise it's a freetext
           example: "true"
           type: boolean
         required:
@@ -7799,7 +7943,8 @@ components:
         type:
           $ref: "#/components/schemas/BeezUP.Common.ParameterType"
         value:
-          description: The value of the parameter. It can be an integer a string or an object.
+          description: The value of the parameter. It can be an integer a string or an
+            object.
           type: object
       required:
         - type
@@ -7826,12 +7971,15 @@ components:
         - intIdentifier
       type: object
     BeezUP.Common.MarketplaceAccountId:
-      description: The marketplace account identifier in BeezUP. This account identifier is based on your api settings.
+      description: The marketplace account identifier in BeezUP. This account
+        identifier is based on your api settings.
       example: "1234"
       format: int32
       type: integer
     BeezUP.Common.MarketplaceBusinessCode:
-      description: In an marketplace technical code like CDiscount you can have several marketplaces like GO SPORT, etc. We identify them by a business code.
+      description: In an marketplace technical code like CDiscount you can have
+        several marketplaces like GO SPORT, etc. We identify them by a business
+        code.
       example: GOSPORT
       type: string
       x-lov: MarketplaceBusinessCode
@@ -7944,13 +8092,10 @@ components:
         - last
       type: object
     BeezUP.Common.ParameterIn:
-      description: >
+      description: |
         * path: if the parameter must be pass in the path uri
-
         * header: if the parameter must be passed in http header
-
         * query: if the parameter must be passed in querystring
-
         * body: if the paramter must be passed in the body
       enum:
         - path
@@ -8067,8 +8212,10 @@ components:
             type: object
           type: array
         code:
-          description: the error code. The error code can be a pattern containing the argument's name
-          example: CatalogImportationAlreadyInProgress(ExecutionId currentCatalogImportationId)
+          description: the error code. The error code can be a pattern containing the
+            argument's name
+          example: CatalogImportationAlreadyInProgress(ExecutionId
+            currentCatalogImportationId)
           type: string
         cultureName:
           description: If the error is translated, the culture name will be indicated
@@ -8080,7 +8227,8 @@ components:
         message:
           description: The error message
           example: >
-            There is already an importation in progress: b24d0dd8-a561-478a-9b26-34f573f03527
+            There is already an importation in progress:
+            b24d0dd8-a561-478a-9b26-34f573f03527
           type: string
       required:
         - code
@@ -8119,7 +8267,8 @@ components:
       type: object
       x-exclude: true
     accountId:
-      description: The marketplace account identifier in BeezUP. This account identifier is based on your api settings.
+      description: The marketplace account identifier in BeezUP. This account
+        identifier is based on your api settings.
       example: "1234"
       format: int32
       type: integer
@@ -8328,12 +8477,16 @@ components:
     activateSubscriptionRequest:
       properties:
         recoverBeginPeriodOrderLastModificationUtcDate:
-          description: If set, the date must be in the past the subscription will recover existing orders using the begin period order last modification date. If not set then you will receive new/updated orders in real-time.
+          description: If set, the date must be in the past the subscription will recover
+            existing orders using the begin period order last modification date.
+            If not set then you will receive new/updated orders in real-time.
           format: date-time
           type: string
         recoverEndPeriodOrderLastModificationUtcDate:
           description: >-
-            If end period set, first the date must be in the past, the subscription will recover existing orders using the begin and the end period order last modification date. 
+            If end period set, first the date must be in the past, the
+            subscription will recover existing orders using the begin and the
+            end period order last modification date. 
 
             If end period is not set and the begin period is set, then you will recover existing orders from the past using the begin period last modification date and after than you will continue to receive new/updated orders in real-time.
 
@@ -8359,9 +8512,8 @@ components:
     additionalAnalyticsProductColumnFilters:
       additionalProperties:
         $ref: "#/components/schemas/analyticsProductColumnFilter"
-      description: >
+      description: |
         Describes a filter on a product's column.
-
         The key is the column identifier of your catalog or a custom column.
       type: object
     address:
@@ -8538,7 +8690,8 @@ components:
           example: UserAPI
           type: string
         secondaryToken:
-          description: The secondary token. Could be usefull if you want to share your access with someone else.
+          description: The secondary token. Could be usefull if you want to share your
+            access with someone else.
           example: 162ae17fd52044c38cce3388ea5b0c91
           type: string
       type: object
@@ -8578,13 +8731,16 @@ components:
           $ref: "#/components/schemas/BeezUP.Common.UserId"
         schedulingLocalTimeZoneName:
           default: Romance Standard Time
-          description: Indicate the time zone name of the scheduling. If the scheduling type is "Schedule"
+          description: Indicate the time zone name of the scheduling. If the scheduling
+            type is "Schedule"
           example: Romance Standard Time
           type: string
         schedulingType:
           $ref: "#/components/schemas/schedulingType"
         schedulingValue:
-          description: Indicate the scheduling value. If the scheduling type is Interval then the value will be a duration otherwise the values will be the time.
+          description: Indicate the scheduling value. If the scheduling type is Interval
+            then the value will be a duration otherwise the values will be the
+            time.
           example:
             - 21:00:00
             - 23:00:00
@@ -8719,9 +8875,11 @@ components:
           default: "false"
           description: "/!\\ ONLY AVAILABLE ON CATALOG COLUMN NOT ON CUSTOM COLUMNS!!\r
 
-            If true, an error happen at the second occurence of the same value for this column\r
+            If true, an error happen at the second occurence of the
+            same value for this column\r
 
-            This information will be used during the importation process and later for mapping proposal"
+            This information will be used during the importation
+            process and later for mapping proposal"
           example: "false"
           type: boolean
       required:
@@ -8730,12 +8888,15 @@ components:
         - displayGroupName
       type: object
     beezUPMarketplaceAccountId:
-      description: The marketplace account identifier in BeezUP. This account identifier is based on your api settings.
+      description: The marketplace account identifier in BeezUP. This account
+        identifier is based on your api settings.
       example: "1234"
       format: int32
       type: integer
     beezUPMarketplaceBusinessCode:
-      description: In an marketplace technical code like CDiscount you can have several marketplaces like GO SPORT, etc. We identify them by a business code.
+      description: In an marketplace technical code like CDiscount you can have
+        several marketplaces like GO SPORT, etc. We identify them by a business
+        code.
       example: GOSPORT
       type: string
       x-lov: MarketplaceBusinessCode
@@ -8755,7 +8916,8 @@ components:
       type: string
       x-lov: BeezUPOrderState
     beezUPTimeZoneId:
-      description: The time zone identifier based on the list of values /v2/user/lov/BeezUPTimeZone
+      description: The time zone identifier based on the list of values
+        /v2/user/lov/BeezUPTimeZone
       example: "79"
       format: int32
       type: integer
@@ -8827,7 +8989,8 @@ components:
       x-lov: OrderChangeBusinessOperationType
     canBeTruncated:
       default: "false"
-      description: If the size of the value is greater than the limit we can truncate the value instead of failing...
+      description: If the size of the value is greater than the limit we can truncate
+        the value instead of failing...
       example: "false"
       type: boolean
     cardNumber:
@@ -8867,7 +9030,8 @@ components:
           $ref: "#/components/schemas/columnId"
         ignored:
           default: "false"
-          description: IF true, the product values of this column will be not taken in account during the importation process
+          description: IF true, the product values of this column will be not taken in
+            account during the importation process
           type: boolean
         links:
           $ref: "#/components/schemas/catalogColumnLinks"
@@ -8967,7 +9131,8 @@ components:
         importations:
           $ref: "#/components/schemas/links.Importation_GetReportingsLink"
         inputConfiguration:
-          $ref: "#/components/schemas/links.Importation_GetManualUpdateLastInputConfigLink"
+          $ref: "#/components/schemas/links.Importation_GetManualUpdateLastInputConfigLin\
+            k"
         products:
           $ref: "#/components/schemas/links.Catalog_GetProductsLink"
         randomProducts:
@@ -8988,13 +9153,10 @@ components:
           type: object
       type: object
     catalogStoreStatus:
-      description: >
+      description: |
         Indicates the status of the catalog store.
-
         * OK: If the latest importation is a success!
-
         * Failed: If the latest importation has failed !
-
         * Outdated: If the latest succeed importation is later than 1 day.
       enum:
         - OK
@@ -9015,7 +9177,8 @@ components:
           format: int32
           type: integer
         totalProductCount:
-          description: The total product count related to this category and his sub categories
+          description: The total product count related to this category and his sub
+            categories
           example: "101"
           format: int32
           type: integer
@@ -9038,7 +9201,8 @@ components:
       description: The category mapping state of the channel catalog
       properties:
         categorizedWithoutCostProductCount:
-          description: Indicates the categorized product count without cost defined on the category
+          description: Indicates the categorized product count without cost defined on the
+            category
           example: "42"
           format: int32
           type: integer
@@ -9090,7 +9254,8 @@ components:
         - newEmail
       type: object
     changeOrderListRequest:
-      description: Contains all change order operations you want to make.  (max 100 items per call)
+      description: Contains all change order operations you want to make.  (max 100
+        items per call)
       properties:
         changeOrders:
           description: The change order operations
@@ -9123,7 +9288,8 @@ components:
         - order
       type: object
     changeOrderListRequestV2:
-      description: Contains all change order operations you want to make.  (max 100 items per call)
+      description: Contains all change order operations you want to make.  (max 100
+        items per call)
       properties:
         changeOrders:
           description: The change order operations
@@ -9183,7 +9349,8 @@ components:
     changeOrderRequest:
       additionalProperties:
         type: string
-      description: All properties with the prefix order_ are translated in the list of values /user/lov#OrderMetaInfoPosted
+      description: All properties with the prefix order_ are translated in the list of
+        values /user/lov#OrderMetaInfoPosted
       example:
         order_Shipping_CarrierName: La poste
         order_Shipping_EstimatedDeliveryDate: 2014-09-24T09:58:00Z
@@ -9194,7 +9361,8 @@ components:
     changePasswordRequest:
       properties:
         newPassword:
-          description: Your new password. Which must respect the same constraints as the user registeration
+          description: Your new password. Which must respect the same constraints as the
+            user registeration
           format: password
           type: string
         oldPassword:
@@ -9247,7 +9415,8 @@ components:
             links:
               $ref: "#/components/schemas/channelCatalogLinks"
             productCount:
-              description: The product count exported considering category mapping. Not all filters have been applied.
+              description: The product count exported considering category mapping. Not all
+                filters have been applied.
               example: "101"
               format: int32
               type: integer
@@ -9280,12 +9449,15 @@ components:
           type: object
     channelCatalogCategoryConfiguration:
       description: >
-        Represent a mapping between a catalog category path and a channel category path.
+        Represent a mapping between a catalog category path and a channel
+        category path.
 
         The cost on this mapping can be applied.
       properties:
         autoMapNewSubCategories:
-          description: Great feature! In case of mapping to parent catalog category, you can ask to automatically map new sub catalog category in the next importation to this channel category path.
+          description: Great feature! In case of mapping to parent catalog category, you
+            can ask to automatically map new sub catalog category in the next
+            importation to this channel category path.
           example: "true"
           type: boolean
         catalogCategoryPath:
@@ -9332,7 +9504,8 @@ components:
         - costStatus
       type: object
     channelCatalogCategoryCostValue:
-      description: In case of CPC_ByCategory or CPA_ByCategory cost type, you have to indicate the cost value.
+      description: In case of CPC_ByCategory or CPA_ByCategory cost type, you have to
+        indicate the cost value.
       example: "10.21"
       format: decimal
       type: number
@@ -9344,7 +9517,8 @@ components:
     channelCatalogCategoryMappingSettings:
       properties:
         categoryMappingDisabledByMerchant:
-          description: Optional parameter. Indicates that you have decided to do not map your categories with the channel's categories.
+          description: Optional parameter. Indicates that you have decided to do not map
+            your categories with the channel's categories.
           example: "false"
           type: boolean
       type: object
@@ -9361,7 +9535,8 @@ components:
         - self
       type: object
     channelCatalogColumnMapping:
-      description: Represent a mapping between a channel column (considering channel category mapping) and a catalog column
+      description: Represent a mapping between a channel column (considering channel
+        category mapping) and a catalog column
       properties:
         catalogColumnId:
           $ref: "#/components/schemas/BeezUP.Common.CatalogColumnId"
@@ -9477,13 +9652,13 @@ components:
           example: 42.101.42.101
           type: string
         clientUserAgent:
-          description: The http header User-Agent sent by the client who requests this operation
+          description: The http header User-Agent sent by the client who requests this
+            operation
           example: Wget/1.13.4 (linux-gnu)
           type: string
         exportationDuration:
-          description: >
+          description: |
             The exportation duration. \
-
             '00:01:00' measn 1 minute.
           example: 00:01:00
           pattern: (00:1[5-9])|(00:[2-5][0-9])|(0[1-9]:[0-5][0-9])|(1[0-9]:[0-5][0-9])|(2[0-3]:[0-5][0-9])
@@ -9529,7 +9704,8 @@ components:
         exportationCacheInfo:
           $ref: "#/components/schemas/links.GetChannelCatalogExportationCacheInfoLink"
         marketplaceSettings:
-          $ref: "#/components/schemas/externalLinks.GetChannelCatalogMarketplaceSettingsLink"
+          $ref: "#/components/schemas/externalLinks.GetChannelCatalogMarketplaceSettingsL\
+            ink"
         products:
           $ref: "#/components/schemas/links.GetChannelCatalogProductInfoListLink"
         reenableCategoryMappings:
@@ -9554,7 +9730,8 @@ components:
       type: object
     channelCatalogListLinks:
       description: >
-        Indicates how global actions you can do like how to create a channel catalog, exclusion filter operators, etc...
+        Indicates how global actions you can do like how to create a
+        channel catalog, exclusion filter operators, etc...
       properties:
         add:
           $ref: "#/components/schemas/links.AddChannelCatalogLink"
@@ -9816,7 +9993,8 @@ components:
           example: "10"
           type: integer
         pattern:
-          description: Channel catalog marketplace setting value format validation regular expression
+          description: Channel catalog marketplace setting value format validation regular
+            expression
           example: (?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])
           type: string
         position:
@@ -9826,7 +10004,8 @@ components:
           type: integer
         readOnly:
           default: "false"
-          description: Indicate if the value cannot be changed. This is used for example for ebay token that should not be changed.
+          description: Indicate if the value cannot be changed. This is used for example
+            for ebay token that should not be changed.
           example: "false"
           type: boolean
         required:
@@ -9838,7 +10017,8 @@ components:
           $ref: "#/components/schemas/type"
         visible:
           default: "true"
-          description: Indicates if this property should be displayed in the configuration page.
+          description: Indicates if this property should be displayed in the configuration
+            page.
           example: "true"
           type: boolean
       required:
@@ -10055,7 +10235,8 @@ components:
         channelCatalogs:
           additionalProperties:
             $ref: "#/components/schemas/channelCatalogProductInfo"
-          description: The channel catalog product by channel catalog. The key is the channel catalog identifier
+          description: The channel catalog product by channel catalog. The key is the
+            channel catalog identifier
           type: object
       type: object
     channelCatalogProductInfo:
@@ -10084,7 +10265,8 @@ components:
             overrides:
               $ref: "#/components/schemas/productOverridesWithCatalogValues"
             uncategorized:
-              description: Indicates if the product's category has been NOT mapped to a channel category
+              description: Indicates if the product's category has been NOT mapped to a
+                channel category
               example: "true"
               type: boolean
           required:
@@ -10137,25 +10319,30 @@ components:
         - self
       type: object
     channelCatalogProductsCounters:
-      description: The channel catalog products counters. For each counter you will have a count.
+      description: The channel catalog products counters. For each counter you will
+        have a count.
       properties:
         disabledProductCountExcludingUncategorizedAndExcluded:
-          description: Disabled product count EXCLUDING uncategorized products AND excluded products on existing products.
+          description: Disabled product count EXCLUDING uncategorized products AND
+            excluded products on existing products.
           example: "50"
           format: int32
           type: integer
         disabledProductCountIncludingUncategorizedAndExcluded:
-          description: Disabled product count INCLUDING uncategorized products AND excluded products on existing products.
+          description: Disabled product count INCLUDING uncategorized products AND
+            excluded products on existing products.
           example: "66"
           format: int32
           type: integer
         excludedProductCountExcludingUncategorized:
-          description: Excluded product count EXCLUDING uncategorized products on existing products.
+          description: Excluded product count EXCLUDING uncategorized products on existing
+            products.
           example: "150"
           format: int32
           type: integer
         excludedProductCountIncludingUncategorized:
-          description: Excluded product count INCLUDING uncategorized products on existing products.
+          description: Excluded product count INCLUDING uncategorized products on existing
+            products.
           example: "169"
           format: int32
           type: integer
@@ -10252,11 +10439,14 @@ components:
     channelCategorySettings:
       properties:
         mappingLeafRequired:
-          description: Indicates if the category mapping is required on category path leaf or not
+          description: Indicates if the category mapping is required on category path leaf
+            or not
           example: "true"
           type: boolean
         mappingRequired:
-          description: Indicates if the category mapping is required, otherwise you can map the categories but it will not block the publication of your catalog
+          description: Indicates if the category mapping is required, otherwise you can
+            map the categories but it will not block the publication of your
+            catalog
           example: "true"
           type: boolean
       type: object
@@ -10287,7 +10477,9 @@ components:
         - configuration
       type: object
     channelColumnConfiguration:
-      description: The channel column configuration. The BeezUP Column Name is optional. If the BeezUP column is mapped we will indicate the data type and column importance of the BeezUP column.
+      description: The channel column configuration. The BeezUP Column Name is
+        optional. If the BeezUP column is mapped we will indicate the data type
+        and column importance of the BeezUP column.
       properties:
         beezUPColumnName:
           $ref: "#/components/schemas/BeezUP.Common.BeezUPColumnName"
@@ -10301,13 +10493,16 @@ components:
       type: object
     channelColumnDescription:
       description: The channel column description
-      example: Please enter the base prices (price per unit) according to <a href="http://www.gesetze-im-internet.de/pangv/__2.html">Article PAngV</a>
+      example: Please enter the base prices (price per unit) according to <a
+        href="http://www.gesetze-im-internet.de/pangv/__2.html">Article
+        PAngV</a>
       type: string
     channelColumnRestrictedValues:
       additionalProperties:
         type: string
       description: >
-        The restricted values. The key will be the restricted value identifier (format:guid) and the value will be the restriced value
+        The restricted values. The key will be the restricted value
+        identifier (format:guid) and the value will be the restriced value
       type: object
     channelColumnShowInMapping:
       description: Indicates if this column must shown in the mapping page or not
@@ -10492,7 +10687,8 @@ components:
           type: number
       type: object
     columnConfiguration:
-      description: Indicates the configuration applied on the column (catalog or custom) during the importation process.
+      description: Indicates the configuration applied on the column (catalog or
+        custom) during the importation process.
       properties:
         beezUPColumnName:
           $ref: "#/components/schemas/BeezUP.Common.BeezUPColumnName"
@@ -10513,11 +10709,13 @@ components:
         - columnDataType
       type: object
     columnCultureName:
-      description: If non null, culture used to parse the value to the storage type of this column\r\n will be used for parsing and for consolidation proces
+      description: If non null, culture used to parse the value to the storage type of
+        this column\r\n will be used for parsing and for consolidation proces
       example: fr-FR
       type: string
     columnFormat:
-      description: If non null, format used to parse the value to the storage type of this column\r\n will be used for parsing and for consolidation proces
+      description: If non null, format used to parse the value to the storage type of
+        this column\r\n will be used for parsing and for consolidation proces
       example: MM/dd/yyyy
       type: string
     columnId:
@@ -10584,7 +10782,8 @@ components:
       example: None
       type: string
     computeExpressionRequest:
-      description: The request message to compute an expression based on the provided product values
+      description: The request message to compute an expression based on the provided
+        product values
       properties:
         encryptedExpression:
           $ref: "#/components/schemas/encryptedExpression"
@@ -10598,7 +10797,8 @@ components:
       description: The message request to configure the auto import interval
       properties:
         interval:
-          description: Indicate the interval in time span. (i.e. "04:00:00" for every 4 hours)
+          description: Indicate the interval in time span. (i.e. "04:00:00" for every 4
+            hours)
           example: 04:00:00
           pattern: (00:1[5-9])|(00:[2-5][0-9])|(0[1-9]:[0-5][0-9])|(1[0-9]:[0-5][0-9])|(2[0-3]:[0-5][0-9])
           type: string
@@ -10624,14 +10824,17 @@ components:
         - catalogColumn
       type: object
     configureCategoryRequest:
-      description: The request message to make a mapping between catalog category path and a channel category path
+      description: The request message to make a mapping between catalog category path
+        and a channel category path
       properties:
         channelCatalogCategories:
           items:
             $ref: "#/components/schemas/channelCatalogCategoryConfiguration"
           type: array
         overrideSubCategoryMappings:
-          description: Great feature! In case of mapping to parent channel category, you can ask to override the mapping of all sub channel category to this catalog category path
+          description: Great feature! In case of mapping to parent channel category, you
+            can ask to override the mapping of all sub channel category to this
+            catalog category path
           example: "true"
           type: boolean
       required:
@@ -10739,7 +10942,8 @@ components:
           example: "false"
           type: boolean
         isModelMustBeTransmittedInNewContract:
-          description: "Internal usage: Old offer type. Is the current contract model needs to be converted into a new contract type"
+          description: "Internal usage: Old offer type. Is the current contract model
+            needs to be converted into a new contract type"
           example: "false"
           type: boolean
         minBillingPeriodInMonths:
@@ -10914,7 +11118,8 @@ components:
       description: Describe the pricing information related to the offer.
       properties:
         amountExcludingTaxesAndExcludingCodePromoDiscountIncludingBillingPeriodDiscount:
-          description: The amount excluding taxes and excluding code promo discount including billing period discount.
+          description: The amount excluding taxes and excluding code promo discount
+            including billing period discount.
           format: double
           type: number
         amountExcludingTaxesAndExcludingDiscounts:
@@ -10930,7 +11135,8 @@ components:
           format: double
           type: number
         amountIncludingTaxesExcludingDiscountIncludingBillingPeriodDiscount:
-          description: The amount including taxes excluding discount including billing period discount.
+          description: The amount including taxes excluding discount including billing
+            period discount.
           format: double
           type: number
         amountIncludingTaxesIncludingDiscounts:
@@ -10983,11 +11189,14 @@ components:
           type: integer
       type: object
     contractTerminationReason:
-      description: The termination reason, if your current contract is scheduled to be terminated.
+      description: The termination reason, if your current contract is scheduled to be
+        terminated.
       example: I'm crazy, I want to leave your splendid service...
       type: string
     contractTerminationReasonType:
-      description: The contract termination reason type identifier, if your current contract is scheduled to be terminated. The value is based on the list of values /user/lov/ContractTerminationReason
+      description: The contract termination reason type identifier, if your current
+        contract is scheduled to be terminated. The value is based on the list
+        of values /user/lov/ContractTerminationReason
       example: "1"
       format: int32
       type: integer
@@ -11046,7 +11255,8 @@ components:
       type: object
     costSettings:
       description: >
-        If this property is not indicated please force the user to configure the cost settings.
+        If this property is not indicated please force the user to
+        configure the cost settings.
 
         Defines the cost type you have on this channel with the cost value.
       properties:
@@ -11068,15 +11278,11 @@ components:
       example: required
       type: string
     costType:
-      description: >
+      description: |
         CPC means cost per click.
-
         CPA means cost per action.
-
         You can have CPC/CPA with a global cost value.
-
         You can have CPC/CPA by category the cost value MUST be null
-
         You can have global fixed price.
       enum:
         - CPC_Global
@@ -11158,7 +11364,8 @@ components:
         - reportFilterId
       type: object
     createStoreRequest:
-      description: The request to create a store. The store identifier is optional, if null it will be automatically computed.
+      description: The request to create a store. The store identifier is optional, if
+        null it will be automatically computed.
       properties:
         countryIsoCodeAlpha3:
           $ref: "#/components/schemas/storeCountryIsoCodeAlpha3"
@@ -11281,7 +11488,8 @@ components:
       x-lov: Go2CultureName
     currencyCode:
       description: >
-        The currency code <a href="https://en.wikipedia.org/wiki/ISO_4217">(ISO 4217)</a>
+        The currency code <a
+        href="https://en.wikipedia.org/wiki/ISO_4217">(ISO 4217)</a>
       example: EUR
       pattern: ^[A-Z]{3}$
       type: string
@@ -11644,7 +11852,8 @@ components:
           example: "true"
           type: boolean
         groupId:
-          description: Indicate the filter's group. All filters in the same group means an "AND" operation in the filter group
+          description: Indicate the filter's group. All filters in the same group means an
+            "AND" operation in the filter group
           example: d9833f4b-718a-436f-bab5-89da3d21bf60
           format: guid
           type: string
@@ -11659,7 +11868,8 @@ components:
           minimum: 1
           type: integer
         positionInGroup:
-          description: Indicate the filter group position. This information is used for the UI purpose and must be unique in the filter group.
+          description: Indicate the filter group position. This information is used for
+            the UI purpose and must be unique in the filter group.
           example: "1"
           format: int32
           minimum: 1
@@ -11763,7 +11973,8 @@ components:
       example: csv
       type: string
     exportOrderListRequest:
-      description: The message request to export order list. The store identifier is requested to regroup the exportations.
+      description: The message request to export order list. The store identifier is
+        requested to regroup the exportations.
       properties:
         format:
           $ref: "#/components/schemas/exportOrderListFormat"
@@ -11823,7 +12034,8 @@ components:
       example: Paul
       type: string
     fixedAndVariableClickModelInfo:
-      description: "Internal usage: Old offer type. Describe the fix and variable model information"
+      description: "Internal usage: Old offer type. Describe the fix and variable
+        model information"
       properties:
         clickIncludedAndAdditionalClickPrices:
           items:
@@ -11890,7 +12102,8 @@ components:
       description: Represents the general settings of your channel catalog
       properties:
         acceptToPublishInfo:
-          description: If true then you authorize disclosure of my statistics generated from clicks and sales
+          description: If true then you authorize disclosure of my statistics generated
+            from clicks and sales
           example: "true"
           type: boolean
         activeBeezUPTracking:
@@ -11900,7 +12113,8 @@ components:
           type: boolean
         doNotExportOutOfStockProducts:
           description: >
-            Do not export "out of stock" products. Note: this option is not taken into account by the counter.
+            Do not export "out of stock" products. Note: this option is not
+            taken into account by the counter.
           example: "true"
           type: boolean
       required:
@@ -11922,7 +12136,8 @@ components:
         criteria:
           $ref: "#/components/schemas/productSetVisibilityCriteria"
         overridden:
-          description: Search overridden products. If null the filter will not be taken in account.
+          description: Search overridden products. If null the filter will not be taken in
+            account.
           example: "true"
           type: boolean
         pageNumber:
@@ -12145,7 +12360,8 @@ components:
           example: Frigo
           type: string
         withoutSubCategories:
-          description: Do not retrieve sub categories. By default, this value is set to false
+          description: Do not retrieve sub categories. By default, this value is set to
+            false
           example: "false"
           type: boolean
       required:
@@ -12161,7 +12377,9 @@ components:
       description: The reporting related to a harvest order operation
       properties:
         beezUPForcedStatus:
-          description: The marketplace order status forced by BeezUP during the order change oepration. This could happend when there is no status on the marketplace side.
+          description: The marketplace order status forced by BeezUP during the order
+            change oepration. This could happend when there is no status on the
+            marketplace side.
           example: In_progress_3
           type: string
         beezUPStatus:
@@ -12219,7 +12437,8 @@ components:
       type: string
       x-exclude: true
     httpUrl:
-      description: The URL <a href="https://en.wikipedia.org/wiki/URL">https://en.wikipedia.org/wiki/URL</a>
+      description: The URL <a
+        href="https://en.wikipedia.org/wiki/URL">https://en.wikipedia.org/wiki/URL</a>
       example: http://www.mydomain.com
       pattern: ^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$
       type: string
@@ -12275,7 +12494,8 @@ components:
         map:
           $ref: "#/components/schemas/links.Importation_MapCustomColumnLink"
         productSampleValue:
-          $ref: "#/components/schemas/links.Importation_GetProductSampleCustomColumnValueLink"
+          $ref: "#/components/schemas/links.Importation_GetProductSampleCustomColumnValue\
+            Link"
         save:
           $ref: "#/components/schemas/links.Importation_SaveCustomColumnLink"
         unmap:
@@ -12331,7 +12551,8 @@ components:
         steps:
           additionalProperties:
             type: boolean
-          description: Contains all steps of the importation process with a boolean. If true the step has been passed, false the step is not complete
+          description: Contains all steps of the importation process with a boolean. If
+            true the step has been passed, false the step is not complete
           example:
             isCatalogImportComputeDiffCompleted: "false"
             isCatalogImportPrepareReadCompleted: "false"
@@ -12365,7 +12586,8 @@ components:
         commitColumns:
           $ref: "#/components/schemas/links.Importation_CommitColumnsLink"
         configureRemainingCatalogColumns:
-          $ref: "#/components/schemas/links.Importation_ConfigureRemainingCatalogColumnsLink"
+          $ref: "#/components/schemas/links.Importation_ConfigureRemainingCatalogColumnsL\
+            ink"
         customColumns:
           $ref: "#/components/schemas/links.Importation_GetCustomColumnsLink"
         productSamples:
@@ -12421,7 +12643,8 @@ components:
         steps:
           additionalProperties:
             type: boolean
-          description: Indicate the steps that have been passed during the importation process
+          description: Indicate the steps that have been passed during the importation
+            process
           example:
             isCatalogImportComputeDiffCompleted: "false"
             isCatalogImportPrepareReadCompleted: "false"
@@ -12433,17 +12656,20 @@ components:
           example: "true"
           type: boolean
         totalProductCount:
-          description: Indicate the total product count detected in the catalog during the importation.
+          description: Indicate the total product count detected in the catalog during the
+            importation.
           example: "101"
           format: int32
           type: integer
         totalProductErrorCount:
-          description: Indicate the total product count in error detected in the catalog during the importation.
+          description: Indicate the total product count in error detected in the catalog
+            during the importation.
           example: "0"
           format: int32
           type: integer
         totalProductSuccessCount:
-          description: Indicate the total product count in success in the catalog during the importation.
+          description: Indicate the total product count in success in the catalog during
+            the importation.
           example: "101"
           format: int32
           type: integer
@@ -12583,7 +12809,8 @@ components:
           format: int32
           type: integer
         uri:
-          description: Indicate the Uri of the file. (http, https, ftp, ftps, sftp are allowed)
+          description: Indicate the Uri of the file. (http, https, ftp, ftps, sftp are
+            allowed)
           example: http://www.mywebsite.com/mycatalog.csv
           type: string
       required:
@@ -12592,13 +12819,16 @@ components:
       type: object
     inputFileReadConfiguration:
       description: >
-        Describe how to read the file. If FileFormatStrategy is CSV, csvFileReadProperties is required. Otherwise the xmlFileReadProperties is required.
+        Describe how to read the file. If FileFormatStrategy is CSV,
+        csvFileReadProperties is required. Otherwise the xmlFileReadProperties
+        is required.
       properties:
         csvFileReadProperties:
           $ref: "#/components/schemas/inputFileReadCsvConfiguration"
         cultureName:
           default: ""
-          description: The culture name of the file.  (i.e. fr-FR). If null then Invariant culture will be used.
+          description: The culture name of the file.  (i.e. fr-FR). If null then Invariant
+            culture will be used.
           example: fr-FR
           type: string
         encodingTypeName:
@@ -12630,7 +12860,8 @@ components:
           type: boolean
         ignoreHeaderRecord:
           default: "false"
-          description: Indicate if the importation should not use the csv column name from the file
+          description: Indicate if the importation should not use the csv column name from
+            the file
           example: "true"
           type: boolean
       required:
@@ -12642,11 +12873,13 @@ components:
       description: The XML file description
       properties:
         flattenXmlChildElements:
-          description: Indicate if the children xml nodes should be flatten with there parent to take in account the sub node values.
+          description: Indicate if the children xml nodes should be flatten with there
+            parent to take in account the sub node values.
           example: "true"
           type: boolean
         useXmlAttributes:
-          description: Indicate if the importation should take in account the attribute in the xml nodes.
+          description: Indicate if the importation should take in account the attribute in
+            the xml nodes.
           example: "true"
           type: boolean
       required:
@@ -12748,7 +12981,8 @@ components:
       example: Paid
       type: string
     invoicePrefix:
-      description: "Invoice Prefix. Can contain 1 to 50 characters, with alphanumeric characters in lowercase uppercase and #, _, -"
+      description: "Invoice Prefix. Can contain 1 to 50 characters, with alphanumeric
+        characters in lowercase uppercase and #, _, -"
       example: TOTO
       pattern: ^[a-zA-Z0-9#_-]{1,50}$
       type: string
@@ -12789,7 +13023,8 @@ components:
         info:
           $ref: "#/components/schemas/infoSummaries"
         label:
-          description: The label corresponding to the link. This label is automatically translated based on the Accept-Language http header.
+          description: The label corresponding to the link. This label is automatically
+            translated based on the Accept-Language http header.
           example: The translated label
           type: string
         method:
@@ -12824,13 +13059,15 @@ components:
         in:
           $ref: "#/components/schemas/parameterIn"
         label:
-          description: The label corresponding to the link parameter. This label is automatically translated based on the Accept-Language http header.
+          description: The label corresponding to the link parameter. This label is
+            automatically translated based on the Accept-Language http header.
           example: The translated label
           type: string
         lovLink:
           $ref: "#/components/schemas/LOVLink3"
         lovRequired:
-          description: If true, you MUST indicate a value from the list of values otherwise it's a freetext
+          description: If true, you MUST indicate a value from the list of values
+            otherwise it's a freetext
           example: "true"
           type: boolean
         pattern:
@@ -12838,7 +13075,9 @@ components:
         properties:
           additionalProperties:
             $ref: "#/components/schemas/linkParameterProperty3"
-          description: If the parameter is an object with flexible properties (additionProperties/dictionary), we will describe the properties of the object.
+          description: If the parameter is an object with flexible properties
+            (additionProperties/dictionary), we will describe the properties of
+            the object.
         required:
           default: "false"
           example: "true"
@@ -12848,7 +13087,8 @@ components:
           example: orderListRequest
           type: string
         value:
-          description: The value of the parameter. It can be an integer a string or an object.
+          description: The value of the parameter. It can be an integer a string or an
+            object.
           type: object
       required:
         - in
@@ -12865,13 +13105,16 @@ components:
           example: the store identifier
           type: string
         label:
-          description: The label corresponding to the link parameter property. This label is automatically translated based on the Accept-Language http header.
+          description: The label corresponding to the link parameter property. This label
+            is automatically translated based on the Accept-Language http
+            header.
           example: The translated label
           type: string
         lovLink:
           $ref: "#/components/schemas/LOVLink3"
         lovRequired:
-          description: If true, you MUST use indicate a value from the list of values otherwise it's a freetext
+          description: If true, you MUST use indicate a value from the list of values
+            otherwise it's a freetext
           example: "true"
           type: boolean
         pattern:
@@ -12886,7 +13129,8 @@ components:
         type:
           $ref: "#/components/schemas/parameterType"
         value:
-          description: The value of the parameter. It can be an integer a string or an object.
+          description: The value of the parameter. It can be an integer a string or an
+            object.
           type: object
       required:
         - type
@@ -13385,7 +13629,8 @@ components:
     links.GetChannelCatalogCategoriesLink:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
-        - description: If you did not configure the cost settings this link will not be displayed.
+        - description: If you did not configure the cost settings this link will not be
+            displayed.
         - example:
             href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categories
             method: GET
@@ -14459,7 +14704,9 @@ components:
       example: Global
       type: string
     marketplaceChannelCatalog:
-      description: This object indicates you the association between a channel catalog and a marketplace. The account identifier will be automatically defined based on your marketplace merchant identfier.
+      description: This object indicates you the association between a channel catalog
+        and a marketplace. The account identifier will be automatically defined
+        based on your marketplace merchant identfier.
       properties:
         apiSettingsStatus:
           $ref: "#/components/schemas/BeezUP.Common.ApiSettingsStatus"
@@ -14489,7 +14736,9 @@ components:
         marketplaceBusinessCode:
           $ref: "#/components/schemas/BeezUP.Common.MarketplaceBusinessCode"
         marketplaceIsoCountryCodeAlpha2:
-          description: The marketplace country iso code alpha 2 (see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Decoding_table for more details)
+          description: The marketplace country iso code alpha 2 (see
+            http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Decoding_table for
+            more details)
           example: FR
           type: string
         marketplaceMarketPlaceId:
@@ -14521,7 +14770,9 @@ components:
         - links
       type: object
     marketplaceChannelCatalogLinks:
-      description: Indicate the actions you can do on a channel catalog. If the settings are valid, you will be able to access to the publication history.
+      description: Indicate the actions you can do on a channel catalog. If the
+        settings are valid, you will be able to access to the publication
+        history.
       properties:
         properties:
           $ref: "#/components/schemas/links.GetChannelCatalogMarketplacePropertiesLink"
@@ -14656,7 +14907,8 @@ components:
         contractTerminationReasonType:
           $ref: "#/components/schemas/contractTerminationReasonType"
         notifyVatExemption:
-          description: "Internal usage: Indicates if we have to notify you about VAT exemption."
+          description: "Internal usage: Indicates if we have to notify you about VAT
+            exemption."
           example: "true"
           type: boolean
         previousFixPeriodInvoiceProrataInfo:
@@ -14761,7 +15013,9 @@ components:
     order:
       allOf:
         - $ref: "#/components/schemas/orderHeader"
-        - description: Describe in details all informations related to an order. All properties with the prefix order_ are translated in the list of values /user/lov/OrderMetaInfoOrderDetails.
+        - description: Describe in details all informations related to an order. All
+            properties with the prefix order_ are translated in the list of
+            values /user/lov/OrderMetaInfoOrderDetails.
           properties:
             links:
               $ref: "#/components/schemas/orderLinks"
@@ -14774,7 +15028,9 @@ components:
               example: Marseille
               type: string
             order_Buyer_AddressCountryIsoCodeAlpha2:
-              description: The Buyer address country iso code alpha 2 (see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#/decoding_table for more details)
+              description: The Buyer address country iso code alpha 2 (see
+                http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#/decoding_table
+                for more details)
               example: FR
               type: string
             order_Buyer_AddressCountryName:
@@ -14853,13 +15109,15 @@ components:
               type: string
             order_OrderItemsSourceUri:
               description: >
-                Technical information: The url to the source of this order items. We received this information from the marketplace.
+                Technical information: The url to the source of this order items.
+                We received this information from the marketplace.
               example: http://beezupblob.com/orderItems.xml
               format: uri
               type: string
             order_OrderSourceUri:
               description: >
-                Technical information: The url to the source of this order. We received this information from the marketplace.
+                Technical information: The url to the source of this order. We
+                received this information from the marketplace.
               example: http://beezupblob.com/order.xml
               format: uri
               type: string
@@ -14877,7 +15135,9 @@ components:
               example: Marseille
               type: string
             order_Shipping_AddressCountryIsoCodeAlpha2:
-              description: The shipping address country iso code alpha 2 (see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#/decoding_table for more details)
+              description: The shipping address country iso code alpha 2 (see
+                http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#/decoding_table
+                for more details)
               example: FR
               type: string
             order_Shipping_AddressCountryName:
@@ -14943,11 +15203,13 @@ components:
               example: DPD Domicile
               type: string
             order_Shipping_MobilePhone:
-              description: The mobile phone number of the person in the shipping address for this order
+              description: The mobile phone number of the person in the shipping address for
+                this order
               example: "+33000000042"
               type: string
             order_Shipping_Phone:
-              description: The phone number of the person in the shipping address for this order
+              description: The phone number of the person in the shipping address for this
+                order
               example: "+33000000041"
               type: string
             order_Shipping_Price:
@@ -15098,9 +15360,8 @@ components:
       example: Done
       type: string
     orderExportations:
-      description: >
+      description: |
         The list of Order report exportations.\
-
         The paginationResult properties can be null if the list is empty.
       properties:
         exportations:
@@ -15138,7 +15399,9 @@ components:
         - links
       type: object
     orderHeader:
-      description: Describe the basic information related to an order. All properties with the prefix order_ are translated in the list of values /user/lov/OrderMetaInfoOrderDetails
+      description: Describe the basic information related to an order. All properties
+        with the prefix order_ are translated in the list of values
+        /user/lov/OrderMetaInfoOrderDetails
       properties:
         accountId:
           $ref: "#/components/schemas/accountId"
@@ -15192,7 +15455,8 @@ components:
         order_Status_MarketplaceOrderStatus:
           $ref: "#/components/schemas/marketplaceOrderStatus"
         order_TotalPrice:
-          description: The total price of this order (corresponding to the amount paid by the customer)
+          description: The total price of this order (corresponding to the amount paid by
+            the customer)
           example: "101.42"
           format: decimal
           type: number
@@ -15314,7 +15578,8 @@ components:
         - lightOrders
       type: object
     orderIndexLovLinks:
-      description: Gives you all the LOV to get the translations realated to operation name, codes, property names and statuses.
+      description: Gives you all the LOV to get the translations realated to operation
+        name, codes, property names and statuses.
       properties:
         orderChangeBusinessOperationType:
           $ref: "#/components/schemas/BeezUP.Common.LOVLink3"
@@ -15365,14 +15630,16 @@ components:
       x-exclude: true
       x-pattern: ^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.?&\%-=])*\/?$
     orderItem:
-      description: Describe an order item. All properties with the prefix orderItem_ are translated in the list of values /user/lov/OrderMetaInfoOrderItems
+      description: Describe an order item. All properties with the prefix orderItem_
+        are translated in the list of values /user/lov/OrderMetaInfoOrderItems
       properties:
         beezUPOrderItemId:
           description: The BeezUP identifier of the order Item
           example: "1"
           type: string
         orderItem_BeezUPStoreId:
-          description: The store id in the beezup system related to the order item. This property will help you to match the order to the inventory system.
+          description: The store id in the beezup system related to the order item. This
+            property will help you to match the order to the inventory system.
           example: 00000000-cceb-4c20-b2c9-000000000000
           type: string
         orderItem_Condition:
@@ -15406,15 +15673,20 @@ components:
           example: http://beezupblob.com/productLink.xml
           type: string
         orderItem_MerchantImportedProductId:
-          description: The product id indicated in the catalog importation in BeezUP system for this order item. This property will help you to match the order to the inventory system.
+          description: The product id indicated in the catalog importation in BeezUP
+            system for this order item. This property will help you to match the
+            order to the inventory system.
           example: "73267"
           type: string
         orderItem_MerchantImportedProductIdColumnName:
-          description: The column name for the product id indicated in the catalog importation in BeezUP system related to this order item. This property will help you to match the order to the inventory system.
+          description: The column name for the product id indicated in the catalog
+            importation in BeezUP system related to this order item. This
+            property will help you to match the order to the inventory system.
           example: reference
           type: string
         orderItem_MerchantImportedProductUrl:
-          description: The product url indicated in the catalog importation in BeezUP system related to this order item
+          description: The product url indicated in the catalog importation in BeezUP
+            system related to this order item
           example: http://blabla.com/my-folder/73267.html
           type: string
         orderItem_MerchantProductId:
@@ -15422,7 +15694,8 @@ components:
           example: BlaLdas6-4.5
           type: string
         orderItem_MerchantProductIdColumnName:
-          description: The column name indicate in the mapping for the product id related to the order item
+          description: The column name indicate in the mapping for the product id related
+            to the order item
           example: reference_produit
           type: string
         orderItem_OrderItemType:
@@ -15485,7 +15758,8 @@ components:
       type: string
     orderListFull:
       description: >
-        The order list with all information we have from the orders and its items.\
+        The order list with all information we have from the orders and its
+        items.\
 
         The paginationResult properties can be null if the list is empty.
       properties:
@@ -15531,9 +15805,8 @@ components:
         - links
       type: object
     orderListLight:
-      description: >
+      description: |
         The order list with minimum information we have from the orders.\
-
         The paginationResult properties can be null if the list is empty.
       properties:
         links:
@@ -15627,11 +15900,9 @@ components:
             $ref: "#/components/schemas/beezUPOrderStatus"
           type: array
         beginPeriodUtcDate:
-          description: >
+          description: |
             The begin period you want to make the search. \
-
             The period MUST not be greater than 30 days.
-
             The begin period MUST be lower than the end period.
           example: 2017-03-01T13:10:01Z
           format: date-time
@@ -15639,13 +15910,10 @@ components:
         dateSearchType:
           $ref: "#/components/schemas/dateSearchType"
         endPeriodUtcDate:
-          description: >
+          description: |
             The end period of you search. \
-
             The period MUST not be greater than 30 days. \
-
             The end period MUST be greater than the begin period.
-
             The end period MUST be lower to the current date.
           example: 2017-04-01T13:10:01Z
           format: date-time
@@ -16140,7 +16408,8 @@ components:
           type: string
       type: object
     processing:
-      description: If true, there is currently a harvest or an order change in progress. Otherwise false.
+      description: If true, there is currently a harvest or an order change in
+        progress. Otherwise false.
       example: "false"
       type: boolean
     product:
@@ -16287,21 +16556,26 @@ components:
     productSetVisibilityCriteria:
       properties:
         disabled:
-          description: Search disabled products. If null the filter will not be taken in account.
+          description: Search disabled products. If null the filter will not be taken in
+            account.
           example: "false"
           type: boolean
         excluded:
-          description: Search excluded products by at least an exclusion filter. If null the filter will not be taken in account.
+          description: Search excluded products by at least an exclusion filter. If null
+            the filter will not be taken in account.
           example: "false"
           type: boolean
         exist:
-          description: If false, search for products absent from the current catalog. If true, search for products currently in the catalog. If null the filter will not be taken in account.
+          description: If false, search for products absent from the current catalog. If
+            true, search for products currently in the catalog. If null the
+            filter will not be taken in account.
           example: "true"
           type: boolean
         logic:
           $ref: "#/components/schemas/productSetVisibilityCriteriaLogicType"
         uncategorized:
-          description: Search product WITHOUT category mapped with the channel. If null the filter will not be taken in account.
+          description: Search product WITHOUT category mapped with the channel. If null
+            the filter will not be taken in account.
           example: "false"
           type: boolean
       required:
@@ -16389,7 +16663,8 @@ components:
             - gravatarProfilePictureUrl
           type: object
     profilePictureSelected:
-      description: Your profile picture choice about usage of gravatar picture, initials picture or uploaded picture.
+      description: Your profile picture choice about usage of gravatar picture,
+        initials picture or uploaded picture.
       enum:
         - gravatar
         - initials
@@ -16531,12 +16806,14 @@ components:
           example: Done
           type: string
         publishedItems:
-          description: The item count (products or offers) the marketplace flagged as successful
+          description: The item count (products or offers) the marketplace flagged as
+            successful
           example: "10041"
           format: int32
           type: integer
         publishedItemsWithWarning:
-          description: The item count (products or offers) the marketplace flagged as successful with warnings
+          description: The item count (products or offers) the marketplace flagged as
+            successful with warnings
           example: "123"
           format: int32
           type: integer
@@ -16616,7 +16893,9 @@ components:
         publicationStrategyKind:
           $ref: "#/components/schemas/publicationStrategyKind"
         withUnpublish:
-          description: In full publication strategy kind, for some marktetplace, you can ask to unpublish or not your existing feeds on the markeptlace absent from your exported catalog.
+          description: In full publication strategy kind, for some marktetplace, you can
+            ask to unpublish or not your existing feeds on the markeptlace
+            absent from your exported catalog.
           type: boolean
       required:
         - feedType
@@ -16641,7 +16920,8 @@ components:
           type: string
         cultureName:
           description: >
-            Can be null. Default: en-GB. The culture name you want to use. FYI. \
+            Can be null. Default: en-GB. The culture name you want to use. FYI.
+            \
 
             The email activation will use this culture.
           example: en-GB
@@ -16666,14 +16946,16 @@ components:
     reportAdvancedFilters:
       properties:
         globalMarginPercent:
-          description: If the margin type is 'Global', indicate the percentage of sale price.
+          description: If the margin type is 'Global', indicate the percentage of sale
+            price.
           example: "10"
           maximum: 100
           minimum: 0
           type: integer
         linkClickToOrderMaxDay:
           default: "30"
-          description: If the linkOrderType is OnClickDate, indicate the max day to search the click from the order
+          description: If the linkOrderType is OnClickDate, indicate the max day to search
+            the click from the order
           example: "5"
           maximum: 180
           minimum: 0
@@ -16684,12 +16966,14 @@ components:
           $ref: "#/components/schemas/marginType"
         onlyDirectSales:
           default: "false"
-          description: If true, you will get only direct sales. Otherwise the indirect sales will be included.
+          description: If true, you will get only direct sales. Otherwise the indirect
+            sales will be included.
           example: "true"
           type: boolean
         onlyPaymentValidatedOrders:
           default: "false"
-          description: If true, you will get the only the orders with payment validated. Otherwise, you will get all orders validated or not.
+          description: If true, you will get the only the orders with payment validated.
+            Otherwise, you will get all orders validated or not.
           example: "true"
           type: boolean
         performanceIndicatorFormula:
@@ -16704,7 +16988,9 @@ components:
     reportByCategory:
       properties:
         allProductCount:
-          description: The product count for this category. This includes all the products that have been imported and can still have associated clicks and orders.
+          description: The product count for this category. This includes all the products
+            that have been imported and can still have associated clicks and
+            orders.
           example: "101"
           type: integer
         catalogCategoryId:
@@ -16712,7 +16998,8 @@ components:
         catalogCategoryPath:
           $ref: "#/components/schemas/BeezUP.Common.CatalogCategoryPath"
         catalogProductCount:
-          description: The catalog product count for this category. This includes all products that are still present in your imported catalog.
+          description: The catalog product count for this category. This includes all
+            products that are still present in your imported catalog.
           example: "101"
           type: integer
         clickCount:
@@ -16724,7 +17011,9 @@ components:
           example: "12.42"
           type: number
         enabledProductCount:
-          description: The enabled product count for this category. This includes all products that are still present in your imported catalog and have not been disabled via the optimisation feature.
+          description: The enabled product count for this category. This includes all
+            products that are still present in your imported catalog and have
+            not been disabled via the optimisation feature.
           example: "101"
           type: integer
         links:
@@ -16738,7 +17027,8 @@ components:
           example: "25"
           type: integer
         performanceIndicator:
-          description: The performance indicator based on the performance indicator formula indicated in the request for this category
+          description: The performance indicator based on the performance indicator
+            formula indicated in the request for this category
           example: "25.33"
           type: number
         roi:
@@ -16824,7 +17114,8 @@ components:
           example: "42"
           type: integer
         performanceIndicator:
-          description: The performance indicator based on the performance indicator formula indicated in the request
+          description: The performance indicator based on the performance indicator
+            formula indicated in the request
           example: "12.21"
           type: number
         roi:
@@ -16930,7 +17221,8 @@ components:
           example: "42"
           type: integer
         performanceIndicator:
-          description: The performance indicator based on the performance indicator formula indicated in the request
+          description: The performance indicator based on the performance indicator
+            formula indicated in the request
           example: "23.09"
           type: number
         roi:
@@ -17067,7 +17359,8 @@ components:
           example: "234"
           type: integer
         performanceIndicator:
-          description: The performance indicator based on the performance indicator formula indicated in the request for this product
+          description: The performance indicator based on the performance indicator
+            formula indicated in the request for this product
           example: "10.12"
           type: number
         product:
@@ -17115,7 +17408,9 @@ components:
           $ref: "#/components/schemas/reportByProductOneChannelLinks"
       type: object
     reportByProductOneChannelLinks:
-      description: If the report concerned one product for one channel the channel catalog product info will give you all you need to enable or disable the product.
+      description: If the report concerned one product for one channel the channel
+        catalog product info will give you all you need to enable or disable the
+        product.
       properties:
         disableProductForOneChannel:
           $ref: "#/components/schemas/links.OptimiseByProductLink"
@@ -17192,7 +17487,8 @@ components:
         advancedFilters:
           $ref: "#/components/schemas/reportAdvancedFilters"
         beginPeriodUtcDate:
-          description: The begin date period you want to get the report. It's required only in case of custom period type !
+          description: The begin date period you want to get the report. It's required
+            only in case of custom period type !
           example: 2006-11-20T00:00:00Z
           format: date-time
           type: string
@@ -17201,7 +17497,8 @@ components:
         channelId:
           $ref: "#/components/schemas/BeezUP.Common.ChannelId"
         endPeriodUtcDate:
-          description: The end date period you want to get the report. It's required only in case of custom period type !
+          description: The end date period you want to get the report. It's required only
+            in case of custom period type !
           example: 2006-12-20T00:00:00Z
           format: date-time
           type: string
@@ -17577,7 +17874,8 @@ components:
           example: Romance Standard Time
           type: string
         schedules:
-          description: Indicate the time span you want to import your catalog. (i.e. "21:00:00" to import your catalog at 9PM)
+          description: Indicate the time span you want to import your catalog. (i.e.
+            "21:00:00" to import your catalog at 9PM)
           example:
             - 21:00:00
             - 23:00:00
@@ -17593,7 +17891,8 @@ components:
       type: object
     schedulingType:
       default: Interval
-      description: Indicate the scheduling type. Schedule or Interval. We recommand you to use interval for a better reporting.
+      description: Indicate the scheduling type. Schedule or Interval. We recommand
+        you to use interval for a better reporting.
       enum:
         - Schedule
         - Interval
@@ -17670,7 +17969,9 @@ components:
       minimum: 0
       type: number
     sku:
-      description: The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers. http://schema.org/sku
+      description: The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier
+        for a product or service, or the product to which the offer refers.
+        http://schema.org/sku
       maxLength: 50
       type: string
     sourceType:
@@ -17786,7 +18087,9 @@ components:
         - self
       type: object
     startManualImportRequest:
-      description: The message request start a manual importation process. Indicate the way to handle duplicate product. Can be null if you want to reuse the configuration of the previous importation succeed.
+      description: The message request start a manual importation process. Indicate
+        the way to handle duplicate product. Can be null if you want to reuse
+        the configuration of the previous importation succeed.
       properties:
         duplicateProductSkuConfiguration:
           $ref: "#/components/schemas/duplicateProductValueConfiguration"
@@ -17937,7 +18240,8 @@ components:
       minimum: 1
       type: integer
     storeCountryIsoCodeAlpha3:
-      description: The country iso code alpha 3 based on the list of values /user/lov/StoreCountry
+      description: The country iso code alpha 3 based on the list of values
+        /user/lov/StoreCountry
       example: DEU
       type: string
       x-lov: StoreCountry
@@ -18036,13 +18340,10 @@ components:
           $ref: "#/components/schemas/links.shareStoreLink"
       type: object
     storeStatus:
-      description: >
+      description: |
         The store status
-
         * Active:  When the store is active
-
         * SystemBlocked:  When the store is blocked by the system
-
         * UserBlocked: When the store is blocked on GO not on the system
       enum:
         - Active
@@ -18074,11 +18375,9 @@ components:
       pattern: ^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$
       type: string
     storeUserRole:
-      description: >
+      description: |
         Indicates the role can have a user on a store.
-
         * Owner: Indicates that you are the owner of this store
-
         * User: Indicates that you are a simple user on this store
       enum:
         - Owner
@@ -18093,7 +18392,8 @@ components:
         consumerLastRequestSentUri:
           $ref: "#/components/schemas/httpUrl"
         consumerUnvailableSinceUtcDate:
-          description: This date indicates since when the subscription consumer is unavailable
+          description: This date indicates since when the subscription consumer is
+            unavailable
           format: date-time
           type: string
         id:
@@ -18101,7 +18401,8 @@ components:
         lastErrorMessage:
           $ref: "#/components/schemas/errorResponseMessage"
         lastOrderPushedModificationUtcDate:
-          description: This modification date correspond to the last order pushed by your subscription consumer
+          description: This modification date correspond to the last order pushed by your
+            subscription consumer
           format: date-time
           type: string
         lastRetryUtcDate:
@@ -18109,11 +18410,14 @@ components:
           format: date-time
           type: string
         lastSuccessfulOrderPushedUtcDate:
-          description: The date of the last pushed order successfully received by your subscription consumer
+          description: The date of the last pushed order successfully received by your
+            subscription consumer
           format: date-time
           type: string
         maxRetryCount:
-          description: The maximum BeezUP will retry to push orders. When we the retry count will reach maximum retry count, the subscription will be deactivated.
+          description: The maximum BeezUP will retry to push orders. When we the retry
+            count will reach maximum retry count, the subscription will be
+            deactivated.
           type: integer
         merchantApplicationName:
           $ref: "#/components/schemas/subscriptionMerchantApplicationName"
@@ -18128,18 +18432,22 @@ components:
           format: date-time
           type: string
         recoverBeginPeriodOrderLastModificationUtcDate:
-          description: Recover existing orders using the begin period order last modification date. If not set then you will receive new/updated orders in real-time.
+          description: Recover existing orders using the begin period order last
+            modification date. If not set then you will receive new/updated
+            orders in real-time.
           format: date-time
           type: string
         recoverEndPeriodOrderLastModificationUtcDate:
           description: >
-            Recover existing orders using the begin and the end period order last modification date.
+            Recover existing orders using the begin and the end period order
+            last modification date.
 
             Otherwise, you will receive new/updated orders in real-time.
           format: date-time
           type: string
         retryCount:
-          description: The retry count. When we the retry count will reach maximum retry count, the subscription will be deactivated.
+          description: The retry count. When we the retry count will reach maximum retry
+            count, the subscription will be deactivated.
           type: integer
         status:
           $ref: "#/components/schemas/subscriptionStatus"
@@ -18206,11 +18514,14 @@ components:
           format: int32
           type: integer
         lastOrderModificationUtcDate:
-          description: This modification date correspond to the last order pushed by your subscription consumer
+          description: This modification date correspond to the last order pushed by your
+            subscription consumer
           format: date-time
           type: string
         maxRetryCount:
-          description: The maximum BeezUP will retry to push orders. When we the retry count will reach maximum retry count, the subscription will be deactivated.
+          description: The maximum BeezUP will retry to push orders. When we the retry
+            count will reach maximum retry count, the subscription will be
+            deactivated.
           type: integer
         nextScheduledRetryUtcDate:
           description: The next scheduled  date we retry to send orders
@@ -18225,7 +18536,8 @@ components:
         responseUri:
           $ref: "#/components/schemas/httpUrl"
         retryCount:
-          description: The retry count. When we the retry count will reach maximum retry count, the subscription will be deactivated.
+          description: The retry count. When we the retry count will reach maximum retry
+            count, the subscription will be deactivated.
           type: integer
         subscriptionId:
           $ref: "#/components/schemas/subscriptionId"
@@ -18313,7 +18625,8 @@ components:
           example: My_Order_Merchant_Id
           type: string
         paymentValidated:
-          description: Indicate if the payment of this external order has been validated or not
+          description: Indicate if the payment of this external order has been validated
+            or not
           example: "false"
           type: boolean
         products:
@@ -18353,20 +18666,30 @@ components:
     trackedExternalOrderProduct:
       properties:
         margin:
-          description: The product's margin for the external order. This property is voluntarily a string because the value could be an invalid one
+          description: The product's margin for the external order. This property is
+            voluntarily a string because the value could be an invalid one
           example: "9.66"
           type: string
         productActive:
-          description: We tried to get the catalog product if it's still active based on the product SKU. This property can be null, if we cannot found the product. This is possible if the product is not referenced in the imported catalog.
+          description: We tried to get the catalog product if it's still active based on
+            the product SKU. This property can be null, if we cannot found the
+            product. This is possible if the product is not referenced in the
+            imported catalog.
           example: "true"
           type: boolean
         productId:
-          description: We tried to get the catalog product identifier based on the product SKU. This property can be null, if we cannot found the product. This is possible if the product is not referenced in the imported catalog.
+          description: We tried to get the catalog product identifier based on the product
+            SKU. This property can be null, if we cannot found the product. This
+            is possible if the product is not referenced in the imported
+            catalog.
           example: 6d469a54-8426-4855-abc2-9e062e2056b9
           format: guid
           type: string
         productImageUrl:
-          description: We tried to get the catalog product image Url based on the product SKU. This property can be null, if we cannot found the product. This is possible if the product is not referenced in the imported catalog.
+          description: We tried to get the catalog product image Url based on the product
+            SKU. This property can be null, if we cannot found the product. This
+            is possible if the product is not referenced in the imported
+            catalog.
           example: http://cdn3.sarenza.net/static/_img/productsV4/0000010744/MD_0000010744_29411_09.jpg?201308142051
           format: uri
           type: string
@@ -18375,15 +18698,19 @@ components:
           example: something
           type: string
         productTitle:
-          description: We tried to get the catalog product title based on the product SKU. This property can be null, if we cannot found the product. This is possible if the product is not referenced in the imported catalog.
+          description: We tried to get the catalog product title based on the product SKU.
+            This property can be null, if we cannot found the product. This is
+            possible if the product is not referenced in the imported catalog.
           example: Something great
           type: string
         quantity:
-          description: The quantity of this product for the external order. This property is voluntarily a string because the value could be an invalid one
+          description: The quantity of this product for the external order. This property
+            is voluntarily a string because the value could be an invalid one
           example: "1.00"
           type: string
         unitPrice:
-          description: The product's unit price for the external order. This property is voluntarily a string because the value could be an invalid one.
+          description: The product's unit price for the external order. This property is
+            voluntarily a string because the value could be an invalid one.
           example: "101.42"
           type: string
       required:
@@ -18511,7 +18838,8 @@ components:
       example: string
       type: string
     unmapCategoryRequest:
-      description: The request message to unmap a catalog category path to a channel category path
+      description: The request message to unmap a catalog category path to a channel
+        category path
       properties:
         catalogCategoryPath:
           $ref: "#/components/schemas/BeezUP.Common.CatalogCategoryPath"
@@ -18552,7 +18880,8 @@ components:
         - sectors
       type: object
     upgradeOfferRequired:
-      description: The message contains the offer identifier required to execute this operation
+      description: The message contains the offer identifier required to execute this
+        operation
       properties:
         offerId:
           description: The offer identifier required
@@ -18579,7 +18908,8 @@ components:
         message:
           description: The error message
           example: >
-            There is already an importation in progress: b24d0dd8-a561-478a-9b26-34f573f03527
+            There is already an importation in progress:
+            b24d0dd8-a561-478a-9b26-34f573f03527
           type: string
       required:
         - code
@@ -18671,7 +19001,8 @@ components:
       example: "*.-api$"
       type: string
     variableModelInfo:
-      description: "Internal usage: Old offer type. Describe the fix and variable model information"
+      description: "Internal usage: Old offer type. Describe the fix and variable
+        model information"
       properties:
         clickIncludedAndVariablePrices:
           description: Click included with variable pricing information
@@ -18692,7 +19023,8 @@ components:
         - overflowClickPrice
       type: object
     vatNumber:
-      description: Your company VATNumber. Used for french company. This number is checked with official web service before being saved.
+      description: Your company VATNumber. Used for french company. This number is
+        checked with official web service before being saved.
       example: "1234567890"
       type: string
     warningSummary:

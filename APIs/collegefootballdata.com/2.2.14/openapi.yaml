@@ -4,7 +4,9 @@ servers:
 info:
   contact:
     email: admin@collegefootballdata.com
-  description: This is an API for accessing all sorts of college football data.  It currently has a wide array of data ranging from play by play to player statistics to game scores and more.
+  description: This is an API for accessing all sorts of college football
+    data.  It currently has a wide array of data ranging from play by play to
+    player statistics to game scores and more.
   title: College Football Data API
   version: 2.2.14
   x-apisguru-categories:
@@ -862,7 +864,8 @@ paths:
         - players
   /plays:
     get:
-      description: Get play data and results. Requires either a week or team to be specified.
+      description: Get play data and results. Requires either a week or team to be
+        specified.
       operationId: getPlays
       parameters:
         - description: Season type filter
@@ -1426,7 +1429,8 @@ paths:
         - recruiting
   /recruiting/players:
     get:
-      description: Get player recruiting rankings and data. Requires either a year or team to be specified.
+      description: Get player recruiting rankings and data. Requires either a year or
+        team to be specified.
       operationId: getRecruitingPlayers
       parameters:
         - description: Recruiting class year (required if team no specified)

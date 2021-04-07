@@ -4,7 +4,8 @@ servers:
 info:
   contact:
     email: support@aoncadis.org
-  description: This API allows programmers to build National Snow and Ice Data Center data and metadata services into their applications.
+  description: This API allows programmers to build National Snow and Ice Data
+    Center data and metadata services into their applications.
   title: NSIDC Web Service Documentation Index
   version: 1.0.0
   x-apisguru-categories:
@@ -25,7 +26,9 @@ tags:
 paths:
   /Facets:
     get:
-      description: In the NSIDC Search and Arctic Data Explorer interfaces, this endpoint is used in conjunction with /OpenSearch whenever a user submits a new search. Consequently, it has the same parameters as /OpenSearch.
+      description: In the NSIDC Search and Arctic Data Explorer interfaces, this
+        endpoint is used in conjunction with /OpenSearch whenever a user submits
+        a new search. Consequently, it has the same parameters as /OpenSearch.
       operationId: facets
       parameters:
         - description: URL-encoded keyword or keywords desired by the client; OpenSearch 1.1
@@ -34,7 +37,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: The number of search results per page desired by the client; OpenSearch 1.1
+        - description: The number of search results per page desired by the client;
+            OpenSearch 1.1
           in: query
           name: count
           required: false
@@ -48,14 +52,17 @@ paths:
           schema:
             default: 1
             type: integer
-        - description: 4 comma separated values - W, S, E, N; OpenSearch-Geo 1.0, "box" parameter
+        - description: 4 comma separated values - W, S, E, N; OpenSearch-Geo 1.0, "box"
+            parameter
           in: query
           name: spatial
           required: false
           schema:
             default: -180.0,-90.0,180.0,90.0
             type: string
-        - description: Sort the results by most relevant (default), smallest or largest spatial area, shortest or longest temporal duration, or most recently updated; partial implementation of OpenSearch SRU 1.0
+        - description: Sort the results by most relevant (default), smallest or largest
+            spatial area, shortest or longest temporal duration, or most
+            recently updated; partial implementation of OpenSearch SRU 1.0
           in: query
           name: sortKeys
           required: false
@@ -83,13 +90,17 @@ paths:
           schema:
             format: date
             type: string
-        - description: Describes faceted restrictions on the search. A URL-encoded JSON object where the keys are the names of the facet, and the values are arrays of the selected facet values
+        - description: Describes faceted restrictions on the search. A URL-encoded JSON
+            object where the keys are the names of the facet, and the values are
+            arrays of the selected facet values
           in: query
           name: facetFilters
           required: false
           schema:
             type: string
-        - description: Custom parameter for selecting which source to use; the Arctic Data Explorer (ADE) uses data aggregated from many sources, including, but not limited to, NSIDC
+        - description: Custom parameter for selecting which source to use; the Arctic Data
+            Explorer (ADE) uses data aggregated from many sources, including,
+            but not limited to, NSIDC
           in: query
           name: source
           required: false
@@ -115,7 +126,9 @@ paths:
         - SwaggerDocs
   /OpenSearch:
     get:
-      description: This endpoint uses parameters from the OpenSearch 1.1 specification, as well as parameters from the OpenSearch Geo (1.0) and SRU (1.0) extensions.
+      description: This endpoint uses parameters from the OpenSearch 1.1
+        specification, as well as parameters from the OpenSearch Geo (1.0) and
+        SRU (1.0) extensions.
       operationId: open search
       parameters:
         - description: URL-encoded keyword or keywords desired by the client; OpenSearch 1.1
@@ -124,7 +137,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: The number of search results per page desired by the client; OpenSearch 1.1
+        - description: The number of search results per page desired by the client;
+            OpenSearch 1.1
           in: query
           name: count
           required: false
@@ -138,14 +152,17 @@ paths:
           schema:
             default: 1
             type: integer
-        - description: 4 comma separated values - W, S, E, N; OpenSearch-Geo 1.0, "box" parameter
+        - description: 4 comma separated values - W, S, E, N; OpenSearch-Geo 1.0, "box"
+            parameter
           in: query
           name: spatial
           required: false
           schema:
             default: -180.0,-90.0,180.0,90.0
             type: string
-        - description: Sort the results by most relevant (default), smallest or largest spatial area, shortest or longest temporal duration, or most recently updated; partial implementation of OpenSearch SRU 1.0
+        - description: Sort the results by most relevant (default), smallest or largest
+            spatial area, shortest or longest temporal duration, or most
+            recently updated; partial implementation of OpenSearch SRU 1.0
           in: query
           name: sortKeys
           required: false
@@ -173,13 +190,17 @@ paths:
           schema:
             format: date
             type: string
-        - description: Describes faceted restrictions on the search. A URL-encoded JSON object where the keys are the names of the facet, and the values are arrays of the selected facet values
+        - description: Describes faceted restrictions on the search. A URL-encoded JSON
+            object where the keys are the names of the facet, and the values are
+            arrays of the selected facet values
           in: query
           name: facetFilters
           required: false
           schema:
             type: string
-        - description: Custom parameter for selecting which source to use; the Arctic Data Explorer (ADE) uses data aggregated from many sources, including, but not limited to, NSIDC
+        - description: Custom parameter for selecting which source to use; the Arctic Data
+            Explorer (ADE) uses data aggregated from many sources, including,
+            but not limited to, NSIDC
           in: query
           name: source
           required: false
@@ -218,7 +239,11 @@ paths:
         - SwaggerDocs
   /suggest:
     get:
-      description: In NSIDC Search and the Arctic Data Explorer, this endpoint is queried whenever the user types into the search terms box, and the returned suggestions are displayed in a dropdown beneath the search terms box. The q parameter and returned JSON follow the specifications of the OpenSearch Suggestions 1.0 extension.
+      description: In NSIDC Search and the Arctic Data Explorer, this endpoint is
+        queried whenever the user types into the search terms box, and the
+        returned suggestions are displayed in a dropdown beneath the search
+        terms box. The q parameter and returned JSON follow the specifications
+        of the OpenSearch Suggestions 1.0 extension.
       operationId: id
       parameters:
         - description: Search terms typed into the interface (minimum two characters)
@@ -227,7 +252,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: Custom parameter for selecting which source to use; the Arctic Data Explorer (ADE) uses data aggregated from many sources, including, but not limited to, NSIDC
+        - description: Custom parameter for selecting which source to use; the Arctic Data
+            Explorer (ADE) uses data aggregated from many sources, including,
+            but not limited to, NSIDC
           in: query
           name: source
           required: true

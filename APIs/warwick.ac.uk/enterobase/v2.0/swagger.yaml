@@ -50,7 +50,8 @@ paths:
           name: prefix
           required: false
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: query
           name: name
           required: false
@@ -92,7 +93,8 @@ paths:
     get:
       description: Generic endpoint for lookup list of barcodes
       parameters:
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_<Table code> e.g. SAL_AA0001AA_ST
+        - description: Unique barcode for Traces records, <database prefix>_<ID
+            code>_<Table code> e.g. SAL_AA0001AA_ST
           in: query
           name: barcode
           required: false
@@ -110,7 +112,8 @@ paths:
     get:
       description: Generic endpoint for lookup of barcodes
       parameters:
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_<Table code> e.g. SAL_AA0001AA_ST
+        - description: Unique barcode for Traces records, <database prefix>_<ID
+            code>_<Table code> e.g. SAL_AA0001AA_ST
           in: path
           name: barcode
           required: true
@@ -134,7 +137,8 @@ paths:
               barcode:
                 type: string
             type: object
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_<Table code> e.g. SAL_AA0001AA_ST
+        - description: Unique barcode for Traces records, <database prefix>_<ID
+            code>_<Table code> e.g. SAL_AA0001AA_ST
           in: path
           name: barcode
           required: true
@@ -165,7 +169,8 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
+          description: Unique barcode for Traces records, <database prefix>_<ID code>_AS
+            e.g. SAL_AA0001AA_AS
           in: query
           items:
             type: string
@@ -225,7 +230,8 @@ paths:
           name: sortorder
           required: false
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -285,12 +291,14 @@ paths:
                 format: int32
                 type: integer
             type: object
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS
+            e.g. SAL_AA0001AA_AS
           in: path
           name: barcode
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -349,12 +357,14 @@ paths:
                 format: int32
                 type: integer
             type: object
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS
+            e.g. SAL_AA0001AA_AS
           in: path
           name: barcode
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -413,12 +423,14 @@ paths:
                 format: int32
                 type: integer
             type: object
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS
+            e.g. SAL_AA0001AA_AS
           in: path
           name: barcode
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -456,7 +468,8 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+          description: Unique barcode for Strain records, <database prefix>_<ID code> e.g.
+            SAL_AA0001AA
           in: query
           items:
             type: string
@@ -502,7 +515,8 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -560,12 +574,14 @@ paths:
                 format: int32
                 type: integer
             type: object
-        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g.
+            SAL_AA0001AA
           in: path
           name: barcode
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -622,12 +638,14 @@ paths:
                 format: int32
                 type: integer
             type: object
-        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g.
+            SAL_AA0001AA
           in: path
           name: barcode
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -684,12 +702,14 @@ paths:
                 format: int32
                 type: integer
             type: object
-        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g.
+            SAL_AA0001AA
           in: path
           name: barcode
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -830,7 +850,8 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
+          description: Unique barcode for Traces records, <database prefix>_<ID code>_AS
+            e.g. SAL_AA0001AA_AS
           in: query
           items:
             type: string
@@ -907,7 +928,8 @@ paths:
           name: collection_time
           required: false
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -1037,7 +1059,8 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+          description: Unique barcode for Strain records, <database prefix>_<ID code> e.g.
+            SAL_AA0001AA
           in: query
           items:
             type: string
@@ -1117,7 +1140,8 @@ paths:
           name: collection_time
           required: false
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -1227,12 +1251,14 @@ paths:
                 format: int32
                 type: integer
             type: object
-        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g.
+            SAL_AA0001AA
           in: path
           name: barcode
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -1341,12 +1367,14 @@ paths:
                 format: int32
                 type: integer
             type: object
-        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g.
+            SAL_AA0001AA
           in: path
           name: barcode
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -1455,12 +1483,14 @@ paths:
                 format: int32
                 type: integer
             type: object
-        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g.
+            SAL_AA0001AA
           in: path
           name: barcode
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -1588,7 +1618,8 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+          description: Unique barcode for Strain records, <database prefix>_<ID code> e.g.
+            SAL_AA0001AA
           in: query
           items:
             type: string
@@ -1668,7 +1699,8 @@ paths:
           name: collection_time
           required: false
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -1691,7 +1723,8 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Unique barcode for Traces records, <database prefix>_<ID code>_TR e.g. SAL_AA0001AA_TR
+          description: Unique barcode for Traces records, <database prefix>_<ID code>_TR
+            e.g. SAL_AA0001AA_TR
           in: query
           items:
             type: string
@@ -1726,7 +1759,8 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -1771,12 +1805,14 @@ paths:
                 default: asc
                 type: string
             type: object
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR e.g. SAL_AA0001AA_TR
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR
+            e.g. SAL_AA0001AA_TR
           in: path
           name: barcode
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -1820,12 +1856,14 @@ paths:
                 default: asc
                 type: string
             type: object
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR e.g. SAL_AA0001AA_TR
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR
+            e.g. SAL_AA0001AA_TR
           in: path
           name: barcode
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -1869,12 +1907,14 @@ paths:
                 default: asc
                 type: string
             type: object
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR e.g. SAL_AA0001AA_TR
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR
+            e.g. SAL_AA0001AA_TR
           in: path
           name: barcode
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -1899,7 +1939,8 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+          description: Unique barcode for Strain records, <database prefix>_<ID code> e.g.
+            SAL_AA0001AA
           in: query
           items:
             type: string
@@ -1944,7 +1985,8 @@ paths:
           name: scheme
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -1963,7 +2005,8 @@ paths:
       description: "Loci "
       parameters:
         - collectionFormat: multi
-          description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+          description: Unique barcode for Strain records, <database prefix>_<ID code> e.g.
+            SAL_AA0001AA
           in: query
           items:
             type: string
@@ -2013,7 +2056,8 @@ paths:
           name: scheme
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true
@@ -2047,7 +2091,8 @@ paths:
           required: false
           type: boolean
         - collectionFormat: multi
-          description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+          description: Unique barcode for Strain records, <database prefix>_<ID code> e.g.
+            SAL_AA0001AA
           in: query
           items:
             type: string
@@ -2087,7 +2132,8 @@ paths:
           name: scheme
           required: true
           type: string
-        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
+        - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis)
+            for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
           required: true

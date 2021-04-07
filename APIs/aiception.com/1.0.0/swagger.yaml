@@ -6,7 +6,8 @@ basePath: /api/v2.1
 info:
   contact:
     x-twitter: AIception
-  description: Here you can play & test & prototype all the endpoints using just your browser! Go ahead!
+  description: Here you can play & test & prototype all the endpoints using just
+    your browser! Go ahead!
   title: AIception Interactive
   version: 1.0.0
   x-apisguru-categories:
@@ -41,7 +42,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: Creates a new adult_content task that tells the if the image has nudity or sexual content.
+      description: Creates a new adult_content task that tells the if the image has
+        nudity or sexual content.
       parameters:
         - description: The image to analyze
           in: body
@@ -91,7 +93,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: Given an image content and a style image create a new stylized image of the content.
+      description: Given an image content and a style image create a new stylized
+        image of the content.
       parameters:
         - description: The content image and the style image
           in: body
@@ -244,7 +247,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: Creates a new face age task that approximates the age of the person in the image.
+      description: Creates a new face age task that approximates the age of the person
+        in the image.
       parameters:
         - description: The image to analyze
           in: body

@@ -120,7 +120,8 @@ paths:
           description: server error
   /generate-partial-yara-rules:
     post:
-      description: generate partial YARA rules for give executable. (Rule without the condition section)
+      description: generate partial YARA rules for give executable. (Rule without the
+        condition section)
       operationId: generatePartialYaraRule
       requestBody:
         content:

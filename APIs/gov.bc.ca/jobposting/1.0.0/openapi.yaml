@@ -3,7 +3,14 @@ servers:
   - description: Production
     url: https://workbcjobs.api.gov.bc.ca/v1
 info:
-  description: This API allows you to receive a feed of jobs from WorkBC's Job Board. Please see our <a href="https://github.com/bcgov/api-specs/blob/master/COLLECTION_NOTICE.md#collection-notice" target="_blank">data collection notice</a>. Please note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs) in other API console viewers.
+  description: This API allows you to receive a feed of jobs from WorkBC's Job
+    Board. Please see our <a
+    href="https://github.com/bcgov/api-specs/blob/master/COLLECTION_NOTICE.md#collection-notice"
+    target="_blank">data collection notice</a>. Please note that you may
+    experience issues when submitting requests to the delivery or test
+    environment if using this [OpenAPI
+    specification](https://github.com/bcgov/api-specs) in other API console
+    viewers.
   title: WorkBC Job Posting API
   version: 1.0.0
   x-apisguru-categories:
@@ -23,7 +30,8 @@ paths:
   /Industries:
     get:
       description: >
-        The Industries endpoint returns all the Industries and related sub industries 
+        The Industries endpoint returns all the Industries and related sub
+        industries 
 
         defined in WorkBC's Job Board. The response includes the id and caption for 
 
@@ -48,11 +56,9 @@ paths:
         - Job Feed
   /jobTypes:
     get:
-      description: >
+      description: |
         The Job Types endpoint returns details of all of the
-
         job types defined in WorkBC's Job Board. The response includes the
-
         id and caption.
       responses:
         "200":
@@ -74,7 +80,8 @@ paths:
         - Job Feed
   /jobs:
     post:
-      description: The job feed endpoint returns an array of job records that satisfy the supplied criteria.
+      description: The job feed endpoint returns an array of job records that satisfy
+        the supplied criteria.
       requestBody:
         content:
           application/json:
@@ -86,7 +93,9 @@ paths:
               properties:
                 city:
                   default: Victoria
-                  description: The name of a city within B.C. Only job postings located within the specified city will be included in the response. If not specified, the data is not filtered by city.
+                  description: The name of a city within B.C. Only job postings located within the
+                    specified city will be included in the response. If not
+                    specified, the data is not filtered by city.
                   enum:
                     - Victoria
                     - Vancouver
@@ -94,24 +103,35 @@ paths:
                 jobTypes:
                   default:
                     - 1
-                  description: ID values for types of job to filter on. Only job postings matching all specified values will be included in the response. If not specified, the data is not filtered by job type.
+                  description: ID values for types of job to filter on. Only job postings matching
+                    all specified values will be included in the response. If
+                    not specified, the data is not filtered by job type.
                   enum:
                     - - 1
                     - - 2
                   type: integer
                 lastRequestDate:
                   default: 2018-08-29
-                  description: The date of the last request. Only job postings changed or deleted after this time will be included in the response. Default is _today_ - 10 days.
+                  description: The date of the last request. Only job postings changed or deleted
+                    after this time will be included in the response. Default is
+                    _today_ - 10 days.
                   enum:
                     - 2018-08-29T00:00:00.000Z
                   type: string
                 majorProjects:
                   default: true
-                  description: When true, only include job postings that have a Major Project associated with them. When false, only include job postings that do not have a Major Project associated with them. If not specified, the data is not filtered by major project, unless the MajorProjectID parameter is used.
+                  description: When true, only include job postings that have a Major Project
+                    associated with them. When false, only include job postings
+                    that do not have a Major Project associated with them. If
+                    not specified, the data is not filtered by major project,
+                    unless the MajorProjectID parameter is used.
                   type: boolean
                 region:
                   default: 1
-                  description: The unique id of a region within B.C. Only job postings located within the specified region will be included in the response. If not specified, the data is not filtered by region
+                  description: The unique id of a region within B.C. Only job postings located
+                    within the specified region will be included in the
+                    response. If not specified, the data is not filtered by
+                    region
                   enum:
                     - 1
                     - 2
@@ -135,11 +155,9 @@ paths:
         - Job Feed
   /majorProjects:
     get:
-      description: >
+      description: |
         The Major Projects endpoint returns details of all of the
-
         major projects defined in WorkBC's Job Board. The response includes the
-
         id and caption.
       responses:
         "200":
@@ -161,11 +179,9 @@ paths:
         - Job Feed
   /regions:
     get:
-      description: >
+      description: |
         The Regions endpoint returns details of all of the
-
         regions defined in WorkBC's Job Board. The response includes the
-
         id and caption.
       responses:
         "200":
@@ -211,11 +227,15 @@ components:
           description: The name of the employer who is offering the job.
           type: string
         ExpiryDate:
-          description: The date that the job will expire. It is the caller's responsibility to remove job postings once they expire. After this date the supplied Url will show a 404 page.
+          description: The date that the job will expire. It is the caller's
+            responsibility to remove job postings once they expire. After this
+            date the supplied Url will show a 404 page.
           format: date-time
           type: string
         JobDescription:
-          description: Details of the job posting. This is limited to 250 characters, and HTML tags are stripped out. For a full description, use the Url property to view the job posting on the WorkBC website.
+          description: Details of the job posting. This is limited to 250 characters, and
+            HTML tags are stripped out. For a full description, use the Url
+            property to view the job posting on the WorkBC website.
           type: string
         JobID:
           description: The unique id of the job in the WorkBC Job Board database.
@@ -248,7 +268,10 @@ components:
           format: double
           type: number
         SalaryMultiplier:
-          description: The amount to multiply SalaryMin and SalaryMax by in order to convert to annual values. This is needed if you want to compare salaries for jobs that have been posted using different salary types.
+          description: The amount to multiply SalaryMin and SalaryMax by in order to
+            convert to annual values. This is needed if you want to compare
+            salaries for jobs that have been posted using different salary
+            types.
           type: integer
         SalaryType:
           type: string
@@ -291,7 +314,8 @@ components:
         - Apprenticeship
       type: integer
     Location:
-      description: Details of where a job is located. A job can have up to three associated locations.
+      description: Details of where a job is located. A job can have up to three
+        associated locations.
       properties:
         City:
           description: The name of the city where the job is located.
@@ -311,7 +335,9 @@ components:
           description: The name of the Major Project.
           type: string
         ID:
-          description: The unique ID of the Major Project in the WorkBC Job Board database. Use this when restricting the Job Feed to only one Major Project.
+          description: The unique ID of the Major Project in the WorkBC Job Board
+            database. Use this when restricting the Job Feed to only one Major
+            Project.
           type: integer
       type: object
     RecordType:

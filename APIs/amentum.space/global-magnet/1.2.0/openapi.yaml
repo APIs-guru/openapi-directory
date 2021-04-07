@@ -38,7 +38,7 @@ info:
 paths:
   /magnetic_field:
     get:
-      description: >
+      description: |
         at specified conditions.
       operationId: app.api_wmm.endpoints.WMM.magnetic_field
       parameters:
@@ -67,7 +67,9 @@ paths:
                 properties:
                   declination:
                     description: >
-                      The angle in the horizontal plane between magnetic north and true north. Declination is positive when magnetic north is east of true north.
+                      The angle in the horizontal plane between magnetic north and true
+                      north. Declination is positive when magnetic north is east
+                      of true north.
                     properties:
                       units:
                         type: string
@@ -76,7 +78,10 @@ paths:
                     type: object
                   grid_variation:
                     description: >
-                      Referenced to grid north, referenced to 0 deg meridian of a polar stereographic projection.  Only defined for latitudes greater than 55 degrees and less than -55 degrees (arctic and antarctic).
+                      Referenced to grid north, referenced to 0 deg meridian of a polar
+                      stereographic projection.  Only defined for latitudes
+                      greater than 55 degrees and less than -55 degrees (arctic
+                      and antarctic).
                     properties:
                       units:
                         type: string
@@ -85,7 +90,9 @@ paths:
                     type: object
                   inclination:
                     description: >
-                      Also known as 'dip', is the angle made between the horizontal plane and the magnetic field vector at some position. Positive inclination corresponds to a downward pointing 
+                      Also known as 'dip', is the angle made between the horizontal plane
+                      and the magnetic field vector at some position. Positive
+                      inclination corresponds to a downward pointing 
                     properties:
                       units:
                         type: string
@@ -93,7 +100,7 @@ paths:
                         type: number
                     type: object
                   total_intensity:
-                    description: >
+                    description: |
                       Total magnetic field intensity in nano Teslas
                     properties:
                       units:
@@ -104,11 +111,14 @@ paths:
                 type: object
           description: Successful magnetic field intensity calculation
       summary: >
-        Calculate magnetic declination, inclination, total field intensity, and grid variation
+        Calculate magnetic declination, inclination, total field intensity, and
+        grid variation
       x-codeSamples:
         - lang: Shell
           source: >
-            curl -X GET "https://globalmagnet.amentum.space/wmm/magnetic_field?altitude=10&latitude=80&longitude=100&year=2020.5" -H  "accept: application/json"
+            curl -X GET
+            "https://globalmagnet.amentum.space/wmm/magnetic_field?altitude=10&latitude=80&longitude=100&year=2020.5"
+            -H  "accept: application/json"
         - lang: Python
           source: >
             import json
@@ -172,7 +182,8 @@ components:
         example: 100
         type: number
     Year:
-      description: Year as a decimal in the range 2015-2025 (2017.5 would be half way through 2017).
+      description: Year as a decimal in the range 2015-2025 (2017.5 would be half way
+        through 2017).
       in: query
       name: year
       required: true

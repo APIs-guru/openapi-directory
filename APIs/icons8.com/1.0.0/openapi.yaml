@@ -120,7 +120,8 @@ paths:
   "/api/iconsets/v3/categories?platform={platform}&language={language}":
     get:
       description: >-
-        The operation will not return the categories that have less than 10 icons.
+        The operation will not return the categories that have less than 10
+        icons.
 
         We need it to test the categories without showing garbage on the production website.
       operationId: Categories
@@ -569,14 +570,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: the maximum number of icons which you'd like to receive (will be multiplied by platforms count, if you didn't specify the platform and didn't set the 'exact_amount' parameter)
+        - description: the maximum number of icons which you'd like to receive (will be
+            multiplied by platforms count, if you didn't specify the platform
+            and didn't set the 'exact_amount' parameter)
           in: path
           name: amount
           required: true
           schema:
             default: 25
             type: number
-        - description: set it to 'true' if you'd like to receive the exact amount of icons, not multiplied by platforms count
+        - description: set it to 'true' if you'd like to receive the exact amount of
+            icons, not multiplied by platforms count
           in: path
           name: exact_amount
           required: true
@@ -716,7 +720,8 @@ paths:
       operationId: Totals
       parameters:
         - description: >
-            the optional date to calculate the total number of icons that were created after it.
+            the optional date to calculate the total number of icons that were
+            created after it.
 
             It should be in format "four year digits - dash - two month number digits - dash - two day number digits. For example 2014-12-31 means "31th of December, 2014".
           example: 2014-12-31
@@ -780,7 +785,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: the maximum number of icons which you'd like to receive (will be multiplied by platforms count, if you didn't specify the platform and didn't set the 'exact_amount' parameter)
+        - description: the maximum number of icons which you'd like to receive (will be
+            multiplied by platforms count, if you didn't specify the platform
+            and didn't set the 'exact_amount' parameter)
           in: path
           name: amount
           required: true
@@ -1053,7 +1060,8 @@ components:
                         type: string
                       css_selector:
                         default: .icons8-{{glyph}}
-                        description: template for glyph selector; placeholder {{glyph}} will be replaced with glyph names
+                        description: template for glyph selector; placeholder {{glyph}} will be replaced
+                          with glyph names
                         type: string
                       font_name:
                         default: font_icons8
@@ -1101,7 +1109,8 @@ components:
                 - as_is
               type: string
             css_selector:
-              description: template for glyph selector; placeholder {{glyph}} will be replaced with glyph names
+              description: template for glyph selector; placeholder {{glyph}} will be replaced
+                with glyph names
               type: string
             font_name:
               description: name of iconic webfont
@@ -1126,13 +1135,15 @@ components:
         category:
           type: string
         common_icon_id:
-          description: identifier for group of the same icons in different styles; i.e. id of all "home" icons
+          description: identifier for group of the same icons in different styles; i.e. id
+            of all "home" icons
           type: number
         created:
           description: date (ISO8601 format) of icon was published
           type: string
         features:
-          description: internal service attribute; internal information about icon features; private; depend on the rights of the current user
+          description: internal service attribute; internal information about icon
+            features; private; depend on the rights of the current user
           properties:
             bitmap:
               description: '"Could user use images in bitmap / raster formats in any size ?"'
@@ -1182,10 +1193,12 @@ components:
           description: plain SVG content of icon
           type: string
         url:
-          description: internal service attribute; the meaning of this attribute is "Identifier of thread at Disquss"
+          description: internal service attribute; the meaning of this attribute is
+            "Identifier of thread at Disquss"
           type: string
         vector:
-          description: URLs to icon sources in different vector formats; private; depend on the current user and could be opened in user's browser only
+          description: URLs to icon sources in different vector formats; private; depend
+            on the current user and could be opened in user's browser only
           properties:
             eps:
               description: absolute URL to file in EPS format
@@ -1216,13 +1229,15 @@ components:
             category:
               type: string
             common_icon_id:
-              description: identifier for group of the same icons in different styles; i.e. id of all "home" icons
+              description: identifier for group of the same icons in different styles; i.e. id
+                of all "home" icons
               type: number
             created:
               description: date (ISO8601 format) of icon was published
               type: string
             features:
-              description: internal service attribute; internal information about icon features; private; depend on the rights of the current user
+              description: internal service attribute; internal information about icon
+                features; private; depend on the rights of the current user
               properties:
                 bitmap:
                   description: '"Could user use images in bitmap / raster formats in any size ?"'
@@ -1272,10 +1287,12 @@ components:
               description: plain SVG content of icon
               type: string
             url:
-              description: internal service attribute; the meaning of this attribute is "Identifier of thread at Disquss"
+              description: internal service attribute; the meaning of this attribute is
+                "Identifier of thread at Disquss"
               type: string
             vector:
-              description: URLs to icon sources in different vector formats; private; depend on the current user and could be opened in user's browser only
+              description: URLs to icon sources in different vector formats; private; depend
+                on the current user and could be opened in user's browser only
               properties:
                 eps:
                   description: absolute URL to file in EPS format
@@ -1362,7 +1379,8 @@ components:
     TotalV3Item:
       properties:
         api_code:
-          description: icons style code; in other places it named `plarform` or `platform_api_code`
+          description: icons style code; in other places it named `plarform` or
+            `platform_api_code`
           enum:
             - ios7
             - win8

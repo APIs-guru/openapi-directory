@@ -3,7 +3,8 @@ servers:
   - url: https://circleci.com/api/v1
 info:
   description: >
-    The CircleCI API is a RESTful, fully-featured API that allows you to do almost anything in CircleCI.
+    The CircleCI API is a RESTful, fully-featured API that allows you
+    to do almost anything in CircleCI.
 
     You can access all information and trigger all actions.
 
@@ -28,7 +29,7 @@ security:
 paths:
   /me:
     get:
-      description: >
+      description: |
         Provides information about the signed in user.
       responses:
         "200":
@@ -39,7 +40,7 @@ paths:
           description: signed in user
   "/project/{username}/{project}":
     get:
-      description: >
+      description: |
         Build summary for each of the last 30 builds for a single git repo.
       parameters:
         - $ref: "#/components/parameters/limit"
@@ -56,7 +57,7 @@ paths:
       - $ref: "#/components/parameters/username"
       - $ref: "#/components/parameters/project"
     post:
-      description: >
+      description: |
         Triggers a new build, returns a summary of the build.
       requestBody:
         content:
@@ -81,7 +82,7 @@ paths:
           description: returns a summary of the build
   "/project/{username}/{project}/build-cache":
     delete:
-      description: >
+      description: |
         Clears the cache for a project.
       responses:
         "200":
@@ -98,7 +99,7 @@ paths:
       - $ref: "#/components/parameters/project"
   "/project/{username}/{project}/checkout-key":
     get:
-      description: >
+      description: |
         Lists checkout keys.
       responses:
         "200":
@@ -111,9 +112,8 @@ paths:
       - $ref: "#/components/parameters/username"
       - $ref: "#/components/parameters/project"
     post:
-      description: >
+      description: |
         Creates a new checkout key.
-
         Only usable with a user API token.
       requestBody:
         content:
@@ -123,14 +123,14 @@ paths:
                 - deploy-key
                 - github-user-key
               type: string
-        description: >
+        description: |
           The type of key to create. Can be 'deploy-key' or 'github-user-key'.
       responses:
         "200":
           $ref: "#/components/responses/key"
   "/project/{username}/{project}/checkout-key/{fingerprint}":
     delete:
-      description: >
+      description: |
         Delete a checkout key.
       responses:
         "200":
@@ -145,7 +145,7 @@ paths:
                 type: object
           description: status message
     get:
-      description: >
+      description: |
         Get a checkout key.
       responses:
         "200":
@@ -156,7 +156,7 @@ paths:
       - $ref: "#/components/parameters/fingerprint"
   "/project/{username}/{project}/envvar":
     get:
-      description: >
+      description: |
         Lists the environment variables for :project
       responses:
         "200":
@@ -165,14 +165,14 @@ paths:
       - $ref: "#/components/parameters/username"
       - $ref: "#/components/parameters/project"
     post:
-      description: >
+      description: |
         Creates a new environment variable
       responses:
         "200":
           $ref: "#/components/responses/envvar"
   "/project/{username}/{project}/envvar/{name}":
     delete:
-      description: >
+      description: |
         Deletes the environment variable named ':name'
       responses:
         "200":
@@ -185,10 +185,10 @@ paths:
                       - OK
                     type: string
                 type: object
-          description: >
+          description: |
             Deletes the environment variable named ':name'
     get:
-      description: >
+      description: |
         Gets the hidden value of environment variable :name
       responses:
         "200":
@@ -203,7 +203,8 @@ paths:
       - $ref: "#/components/parameters/project"
     post:
       description: >
-        Create an ssh key used to access external systems that require SSH key-based authentication
+        Create an ssh key used to access external systems that require SSH
+        key-based authentication
       parameters:
         - in: header
           name: Content-Type
@@ -277,7 +278,8 @@ paths:
   "/project/{username}/{project}/{build_num}":
     get:
       description: >
-        Full details for a single build. The response includes all of the fields from the build summary.
+        Full details for a single build. The response includes all of the
+        fields from the build summary.
 
         This is also the payload for the [notification webhooks](/docs/configuration/#notify), in which case this object is the value to a key named 'payload'.
       responses:
@@ -293,7 +295,7 @@ paths:
       - $ref: "#/components/parameters/build_num"
   "/project/{username}/{project}/{build_num}/artifacts":
     get:
-      description: >
+      description: |
         List the artifacts produced by a given build.
       responses:
         "200":
@@ -312,7 +314,7 @@ paths:
       - $ref: "#/components/parameters/project"
       - $ref: "#/components/parameters/build_num"
     post:
-      description: >
+      description: |
         Cancels the build, returns a summary of the build.
       responses:
         "200":
@@ -327,7 +329,7 @@ paths:
       - $ref: "#/components/parameters/project"
       - $ref: "#/components/parameters/build_num"
     post:
-      description: >
+      description: |
         Retries the build, returns a summary of the new build.
       responses:
         "200":
@@ -348,7 +350,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Tests"
-          description: >
+          description: |
             test metadata for a build
     parameters:
       - $ref: "#/components/parameters/username"
@@ -357,19 +359,21 @@ paths:
   /projects:
     get:
       description: >
-        List of all the projects you're following on CircleCI, with build information organized by branch.
+        List of all the projects you're following on CircleCI, with build
+        information organized by branch.
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Projects"
-          description: >
+          description: |
             List of all the projects you're following on CircleCI
   /recent-builds:
     get:
       description: >
-        Build summary for each of the last 30 recent builds, ordered by build_num.
+        Build summary for each of the last 30 recent builds, ordered by
+        build_num.
       parameters:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/offset"
@@ -382,7 +386,7 @@ paths:
           description: Build summary for each of the last 30 recent builds
   /user/heroku-key:
     post:
-      description: >
+      description: |
         Adds your Heroku API key to CircleCI, takes apikey as form param name.
       responses:
         "403":
@@ -393,12 +397,12 @@ paths:
                   message:
                     type: string
                 type: object
-          description: >
+          description: |
             Your Heroku API key is invalid.
 components:
   parameters:
     branch:
-      description: >
+      description: |
         The branch name should be url-encoded.
       in: path
       name: branch
@@ -406,7 +410,7 @@ components:
       schema:
         type: string
     build_num:
-      description: >
+      description: |
         XXXXXXXXXX
       in: path
       name: build_num
@@ -414,7 +418,7 @@ components:
       schema:
         type: integer
     envvar_name:
-      description: >
+      description: |
         XXXXXXXXXX
       in: path
       name: name
@@ -436,7 +440,7 @@ components:
           - running
         type: string
     fingerprint:
-      description: >
+      description: |
         XXXXXXXXXX
       in: path
       name: fingerprint
@@ -444,7 +448,7 @@ components:
       schema:
         type: string
     limit:
-      description: >
+      description: |
         The number of builds to return. Maximum 100, defaults to 30.
       in: query
       name: limit
@@ -453,7 +457,7 @@ components:
         maximum: 100
         type: integer
     offset:
-      description: >
+      description: |
         The API returns builds starting from this offset, defaults to 0.
       in: query
       name: offset
@@ -461,7 +465,7 @@ components:
         default: 0
         type: integer
     project:
-      description: >
+      description: |
         XXXXXXXXX
       in: path
       name: project
@@ -469,7 +473,7 @@ components:
       schema:
         type: string
     username:
-      description: >
+      description: |
         XXXXXXXXX
       in: path
       name: username
@@ -603,7 +607,8 @@ components:
       type: object
     BuildParameters:
       description: >
-        Additional environment variables to inject into the build environment. A map of names to values.
+        Additional environment variables to inject into the build
+        environment. A map of names to values.
       type: object
     BuildSummary:
       properties:
@@ -686,7 +691,7 @@ components:
           format: date-time
           type: string
         type:
-          description: >
+          description: |
             can be "deploy-key" or "github-user-key"
           enum:
             - deploy-key
@@ -717,7 +722,8 @@ components:
       type: string
     Parallel:
       description: >
-        The number of containers to use to run the build. Default is null and the project default is used.
+        The number of containers to use to run the build. Default is null
+        and the project default is used.
       type: string
     PreviousBuild:
       description: previous build
@@ -882,7 +888,8 @@ components:
       type: string
     Tag:
       description: >
-        The tag to build. Default is null. Cannot be used with revision parameter.
+        The tag to build. Default is null. Cannot be used with revision
+        parameter.
       type: string
     Tests:
       properties:

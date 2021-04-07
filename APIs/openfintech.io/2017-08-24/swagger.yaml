@@ -232,7 +232,7 @@ parameters:
     name: page[number]
     type: integer
   "page[size]":
-    description: >
+    description: |
       Page size.<br>*Default value: 100*
     in: query
     name: page[size]
@@ -274,7 +274,9 @@ paths:
   /banks:
     get:
       description: >
-        Returns list of banks. Each object contains general information about bank such as name and status, also information about bank details and related link to main organization.
+        Returns list of banks. Each object contains general information
+        about bank such as name and status, also information about bank details
+        and related link to main organization.
       parameters:
         - $ref: "#/parameters/page[number]"
         - $ref: "#/parameters/page[size]"
@@ -285,20 +287,14 @@ paths:
         - $ref: "#/parameters/filter[code]"
         - $ref: "#/parameters/second_filter[status]"
         - collectionFormat: csv
-          description: >
+          description: |
             Sort params:<br>
 
-
             | ASC | DESC |
-
             |-----|------|
-
             | name | -name |
-
             | code | -code |
-
             | status | -status |
-
             | sort_code | -sort_code |
           in: query
           items:
@@ -325,7 +321,7 @@ paths:
         - Banks
   "/banks/{id}":
     get:
-      description: >
+      description: |
         Returns bank with specific ID.
       parameters:
         - $ref: "#/parameters/id"
@@ -341,7 +337,7 @@ paths:
         - Banks
   /countries:
     get:
-      description: >
+      description: |
         Returns all available countries.
       parameters:
         - $ref: "#/parameters/page[number]"
@@ -393,22 +389,15 @@ paths:
           type: array
           uniqueItems: true
         - collectionFormat: csv
-          description: >
+          description: |
             Sort params:<br>
 
-
             | ASC | DESC |
-
             |-----|------|
-
             | name | -name |
-
             | area | -area |
-
             | population | -population |
-
             | region | -region |
-
             | sub_region | -sub_region |
           in: query
           items:
@@ -437,7 +426,7 @@ paths:
         - Countries
   "/countries/{id}":
     get:
-      description: >
+      description: |
         Returns country with specific ID.
       parameters:
         - $ref: "#/parameters/id"
@@ -453,12 +442,13 @@ paths:
         - Countries
   /currencies:
     get:
-      description: >
+      description: |
         Returns all available currencies.
       parameters:
         - $ref: "#/parameters/page[number]"
         - $ref: "#/parameters/page[size]"
-        - description: Full text search with name, code, type, code_iso_alpha3, code_jsons_alpha, code_estandards_alpha, category.
+        - description: Full text search with name, code, type, code_iso_alpha3,
+            code_jsons_alpha, code_estandards_alpha, category.
           in: query
           name: filter[search]
           type: string
@@ -512,26 +502,17 @@ paths:
           type: array
           uniqueItems: true
         - collectionFormat: csv
-          description: >
+          description: |
             Sort params:<br>
 
-
             | ASC | DESC |
-
             |-----|------|
-
             | name | -name |
-
             | type | -type |
-
             | category | -category |
-
             | code | -code |
-
             | code_iso_alpha3 | -code_iso_alpha3 |
-
             | code_iso_numeric3 | -code_iso_numeric3 |
-
             | code_estandards_alpha | -code_estandards_alpha |
           in: query
           items:
@@ -564,7 +545,7 @@ paths:
         - Currencies
   "/currencies/{id}":
     get:
-      description: >
+      description: |
         Returns currency with specific ID.
       parameters:
         - $ref: "#/parameters/id"
@@ -581,7 +562,9 @@ paths:
   /deposit-methods:
     get:
       description: >
-        Returns list of deposit methods. Each object contains information about deposit method such as name and category, also related link to deposit method issuer (which processing it).
+        Returns list of deposit methods. Each object contains information
+        about deposit method such as name and category, also related link to
+        deposit method issuer (which processing it).
       parameters:
         - $ref: "#/parameters/page[number]"
         - $ref: "#/parameters/page[size]"
@@ -617,20 +600,14 @@ paths:
           type: array
           uniqueItems: true
         - collectionFormat: csv
-          description: >
+          description: |
             Sort params:<br>
 
-
             | ASC | DESC |
-
             |-----|------|
-
             | name | -name |
-
             | code | -code |
-
             | processor_name | -processor_name |
-
             | category | -category |
           in: query
           items:
@@ -657,7 +634,7 @@ paths:
         - Deposit methods
   "/deposit-methods/{id}":
     get:
-      description: >
+      description: |
         Returns deposit method with specific ID.
       parameters:
         - $ref: "#/parameters/id"
@@ -674,7 +651,9 @@ paths:
   /exchangers:
     get:
       description: >
-        Returns list of exchange markets. Each object contains general information about exchanger such as name and status, also information about rates export and related link to main organization.<br>
+        Returns list of exchange markets. Each object contains general
+        information about exchanger such as name and status, also information
+        about rates export and related link to main organization.<br>
 
         Rates export standards is represented by:
 
@@ -689,22 +668,15 @@ paths:
         - $ref: "#/parameters/filter[name]"
         - $ref: "#/parameters/filter[status]"
         - collectionFormat: csv
-          description: >
+          description: |
             Sort params:<br>
 
-
             | ASC | DESC |
-
             |-----|------|
-
             | name | -name |
-
             | status | -status |
-
             | wmid | -wmid |
-
             | rate_type | -rate_type |
-
             | rates_export_standard | <nobr>-rates_export_standard</nobr> |
           in: query
           items:
@@ -733,7 +705,7 @@ paths:
         - Exchangers
   "/exchangers/{id}":
     get:
-      description: >
+      description: |
         Returns exchanger with specific ID.
       parameters:
         - $ref: "#/parameters/id"
@@ -749,7 +721,7 @@ paths:
         - Exchangers
   /merchant-industries:
     get:
-      description: >
+      description: |
         Returns all available merchant fields of activity.
       parameters:
         - $ref: "#/parameters/page[number]"
@@ -765,7 +737,7 @@ paths:
         - Merchant industries
   "/merchant-industries/{id}":
     get:
-      description: >
+      description: |
         Returns merchant industry with specific ID.
       parameters:
         - $ref: "#/parameters/id"
@@ -782,7 +754,9 @@ paths:
   /organizations:
     get:
       description: >
-        This endpoint retrievs the list of organizations present in the system. The data displays general, public information, without reference to the type of activity (for example - name, address, contacts, etc.).
+        This endpoint retrievs the list of organizations present in the
+        system. The data displays general, public information, without reference
+        to the type of activity (for example - name, address, contacts, etc.).
       parameters:
         - $ref: "#/parameters/page[number]"
         - $ref: "#/parameters/page[size]"
@@ -798,20 +772,14 @@ paths:
           name: filter[industries]
           type: string
         - collectionFormat: csv
-          description: >
+          description: |
             Sort params:<br>
 
-
             | ASC | DESC |
-
             |-----|------|
-
             | name | -name |
-
             | code | -code |
-
             | status | -status |
-
             | description | -description |
           in: query
           items:
@@ -838,7 +806,7 @@ paths:
         - Organizations
   "/organizations/{id}":
     get:
-      description: >
+      description: |
         Returns organization with specific ID.
       parameters:
         - $ref: "#/parameters/id"
@@ -855,7 +823,9 @@ paths:
   /payment-methods:
     get:
       description: >
-        Returns list of payment methods. Each object contains information about payment method such as name and category, also related link to payment method issuer (which processing it).
+        Returns list of payment methods. Each object contains information
+        about payment method such as name and category, also related link to
+        payment method issuer (which processing it).
       parameters:
         - $ref: "#/parameters/page[number]"
         - $ref: "#/parameters/page[size]"
@@ -891,20 +861,14 @@ paths:
           type: array
           uniqueItems: true
         - collectionFormat: csv
-          description: >
+          description: |
             Sort params:<br>
 
-
             | ASC | DESC |
-
             |-----|------|
-
             | name | -name |
-
             | code | -code |
-
             | processor_name | -processor_name |
-
             | category | -category |
           in: query
           items:
@@ -931,7 +895,7 @@ paths:
         - Payment methods
   "/payment-methods/{id}":
     get:
-      description: >
+      description: |
         Returns payment method with specific ID.
       parameters:
         - $ref: "#/parameters/id"
@@ -948,7 +912,11 @@ paths:
   /payment-providers:
     get:
       description: >
-        A payment service provider (PSP) offers shops online services for accepting electronic payments by a variety of payment methods.<br> Endpoint returns list of PSPs. Each object contains: name, type, supported features and sales channels, also related link to available payment methods and main organization.
+        A payment service provider (PSP) offers shops online services for
+        accepting electronic payments by a variety of payment methods.<br>
+        Endpoint returns list of PSPs. Each object contains: name, type,
+        supported features and sales channels, also related link to available
+        payment methods and main organization.
       parameters:
         - $ref: "#/parameters/page[number]"
         - $ref: "#/parameters/page[size]"
@@ -1019,16 +987,12 @@ paths:
           type: array
           uniqueItems: true
         - collectionFormat: csv
-          description: >
+          description: |
             Sort params:<br>
 
-
             | ASC | DESC |
-
             |-----|------|
-
             | name | -name |
-
             | code | -code |
           in: query
           items:
@@ -1051,7 +1015,7 @@ paths:
         - Payment providers
   "/payment-providers/{id}":
     get:
-      description: >
+      description: |
         Returns payment provider with specific ID.
       parameters:
         - $ref: "#/parameters/id"
@@ -1244,7 +1208,7 @@ definitions:
         example: 42836922
         type: string
       region:
-        description: >
+        description: |
           Countryâ€™s region:<br>
 
             * Africa
@@ -1256,7 +1220,7 @@ definitions:
         example: europe
         type: string
       sub_region:
-        description: >
+        description: |
           Countryâ€™s sub region:<br>
 
             * Northern Africa
@@ -1429,7 +1393,7 @@ definitions:
         type: string
     type: object
   CurrencyIssuer:
-    description: >
+    description: |
       Currency Issuer. 'Only for virtual currency'
     properties:
       data:
@@ -1444,7 +1408,7 @@ definitions:
         type: string
     type: object
   CurrencyIssuerOrganization:
-    description: >
+    description: |
       Issuer.
     properties:
       data:
@@ -1477,7 +1441,7 @@ definitions:
         type: string
     type: object
   CurrencyParent:
-    description: >
+    description: |
       Parent currency. 'Only for virtual currency'
     properties:
       data:
@@ -1764,7 +1728,7 @@ definitions:
         example: 2184
         type: integer
       region:
-        description: >
+        description: |
           Countryâ€™s region:<br>
 
             * Africa
@@ -2099,7 +2063,7 @@ definitions:
           type: string
         type: array
       types:
-        example: >-
+        example: |-
           [
             "aggregator"
           ]

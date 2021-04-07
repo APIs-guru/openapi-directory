@@ -5,7 +5,8 @@ info:
   contact:
     x-twitter: amentumspace
   description: >
-    The gravitational field of the earth is non-uniform.  The <a href='https://en.wikipedia.org/wiki/Geoid'>geoid</a> is the shape the
+    The gravitational field of the earth is non-uniform.  The <a
+    href='https://en.wikipedia.org/wiki/Geoid'>geoid</a> is the shape the
      ocean surface would take if only gravity and the rotation of the Earth
       were considered. The geoid is the surface that defines zero elevation.<br><br>
 
@@ -40,14 +41,14 @@ info:
   x-providerName: amentum.space
   x-serviceName: gravity
 tags:
-  - description: >
+  - description: |
       Calculate geoid height and gravity anomaly values using the EGM2008 model
     name: egm2008
     x-displayName: EGM2008 API
 paths:
   /egm2008/geoid_height:
     get:
-      description: >
+      description: |
         for a given latitude / longitude. 
       operationId: app.api_egm2008.endpoints.EGM2008.calculate_height
       parameters:
@@ -64,14 +65,16 @@ paths:
               schema:
                 $ref: "#/components/schemas/Height"
           description: Successful geoid height calculation
-      summary: >
+      summary: |
         Calculate the geoid height
       tags:
         - egm2008
       x-codeSamples:
         - lang: Shell
           source: >
-            curl -X GET "https://gravity.amentum.space/egm2008/geoid_height?latitude=-45&longitude=45" -H  "accept: application/json"
+            curl -X GET
+            "https://gravity.amentum.space/egm2008/geoid_height?latitude=-45&longitude=45"
+            -H  "accept: application/json"
         - lang: Python
           source: >
             import requests
@@ -98,7 +101,7 @@ paths:
               print("Height: ", height, h_unit)
   /egm2008/gravity_anomaly:
     get:
-      description: >
+      description: |
         for a given latitude / longitude.
       operationId: app.api_egm2008.endpoints.EGM2008.calculate_anomaly
       parameters:
@@ -121,14 +124,16 @@ paths:
               schema:
                 $ref: "#/components/schemas/Anomaly"
           description: Successful anomaly calculation
-      summary: >
+      summary: |
         Calculate gravity anomaly values
       tags:
         - egm2008
       x-codeSamples:
         - lang: Shell
           source: >
-            curl -X GET "https://gravity.amentum.space/egm2008/gravity_anomaly?latitude=-45&longitude=45" -H  "accept: application/json"
+            curl -X GET
+            "https://gravity.amentum.space/egm2008/gravity_anomaly?latitude=-45&longitude=45"
+            -H  "accept: application/json"
         - lang: Python
           source: >
             import requests
@@ -185,7 +190,7 @@ components:
     Anomaly:
       properties:
         eta:
-          description: >
+          description: |
             Eta (arcsec) - easterly component of deflection of vertical.
           properties:
             units:
@@ -194,7 +199,7 @@ components:
               type: number
           type: object
         gravity_anomaly:
-          description: >
+          description: |
             Gravity anomaly (mGal)
           properties:
             units:
@@ -203,7 +208,7 @@ components:
               type: number
           type: object
         xi:
-          description: >
+          description: |
             Xi (arcsec) - northerly component of deflection of vertical.
           properties:
             units:
@@ -215,7 +220,7 @@ components:
     Height:
       properties:
         height:
-          description: >
+          description: |
             Geoid height (m)
           properties:
             units:

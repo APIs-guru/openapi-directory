@@ -225,12 +225,14 @@ parameters:
     type: integer
   query_capacities_show-ignored:
     default: false
-    description: If set to `false`, show only the [event-]categories which are not ignored. If set to `true`, show everything.
+    description: If set to `false`, show only the [event-]categories which are not
+      ignored. If set to `true`, show everything.
     in: query
     name: show_ignored
     type: boolean
   query_events_city:
-    description: Find only the events whose venue city (or metropolitan area) contains this value.
+    description: Find only the events whose venue city (or metropolitan area)
+      contains this value.
     in: query
     name: city
     type: string
@@ -268,7 +270,8 @@ parameters:
     type: string
   query_page-size:
     default: 25
-    description: Pagination size, i.e. maximum number of items to be displayed in the response.
+    description: Pagination size, i.e. maximum number of items to be displayed in
+      the response.
     format: int32
     in: query
     name: page_size
@@ -319,13 +322,16 @@ parameters:
     type: string
   query_ticket-counts_show-ignored:
     default: false
-    description: If set to `false`, show only the [event-]categories/[event-]price ranges/[event]channels which are not ignored. If set to `true`, show everything.
+    description: If set to `false`, show only the [event-]categories/[event-]price
+      ranges/[event]channels which are not ignored. If set to `true`, show
+      everything.
     in: query
     name: show_ignored
     type: boolean
   query_ticket-counts_show-not-approved:
     default: false
-    description: If set to `false`, show only the approved ticket counts. If set to `true`, show all the ticket counts.
+    description: If set to `false`, show only the approved ticket counts. If set to
+      `true`, show all the ticket counts.
     in: query
     name: show_not_approved
     type: boolean
@@ -387,7 +393,8 @@ paths:
           name: label
           type: string
         - default: false
-          description: If set to `false`, show only the categories which are not ignored. If set to `true`, show all categories.
+          description: If set to `false`, show only the categories which are not ignored.
+            If set to `true`, show all categories.
           in: query
           name: show_ignored
           type: boolean
@@ -457,7 +464,8 @@ paths:
           name: label
           type: string
         - default: false
-          description: If set to `false`, show only the channels which are not ignored. If set to `true`, show all channels.
+          description: If set to `false`, show only the channels which are not ignored. If
+            set to `true`, show all channels.
           in: query
           name: show_ignored
           type: boolean
@@ -632,7 +640,8 @@ paths:
       parameters:
         - $ref: "#/parameters/path_event-id"
         - default: false
-          description: If set to `false`, show only the [event-]categories/[event-]price ranges which are not ignored. If set to `true`, show everything.
+          description: If set to `false`, show only the [event-]categories/[event-]price
+            ranges which are not ignored. If set to `true`, show everything.
           in: query
           name: show_ignored
           type: boolean
@@ -667,7 +676,8 @@ paths:
           required: true
           type: number
         - default: false
-          description: If set to `false`, show only the embedded [event-]price ranges which are not ignored. If set to `true`, show everything.
+          description: If set to `false`, show only the embedded [event-]price ranges
+            which are not ignored. If set to `true`, show everything.
           in: query
           name: show_ignored
           type: boolean
@@ -693,7 +703,8 @@ paths:
       parameters:
         - $ref: "#/parameters/path_event-id"
         - default: false
-          description: If set to `false`, show only the [event-]channels which are not ignored. If set to `true`, show everything.
+          description: If set to `false`, show only the [event-]channels which are not
+            ignored. If set to `true`, show everything.
           in: query
           name: show_ignored
           type: boolean
@@ -893,7 +904,8 @@ paths:
           name: label
           type: string
         - default: false
-          description: If set to `false`, show only the price ranges which are not ignored. If set to `true`, show all price ranges.
+          description: If set to `false`, show only the price ranges which are not
+            ignored. If set to `true`, show all price ranges.
           in: query
           name: show_ignored
           type: boolean
@@ -1282,7 +1294,8 @@ definitions:
         example: CATEGORY 1
         type: string
       last_update_timestamp:
-        description: Timestamp for when the category was last updated in the customer's database.
+        description: Timestamp for when the category was last updated in the customer's
+          database.
         example: 1516500001
         format: int64
         type: integer
@@ -1315,7 +1328,8 @@ definitions:
         example: TICKETMASTER
         type: string
       last_update_timestamp:
-        description: Timestamp for when the channel was last updated in the customer's database.
+        description: Timestamp for when the channel was last updated in the customer's
+          database.
         example: 1516500001
         format: int64
         type: integer
@@ -1473,7 +1487,9 @@ definitions:
               type: integer
               x-nullable: true
             holds:
-              description: Number of *holds* in the category. <span class="definition">Holds</span> are seats/places that are not in sale at the date of the capacity, but will eventually be later.
+              description: Number of *holds* in the category. <span
+                class="definition">Holds</span> are seats/places that are not in
+                sale at the date of the capacity, but will eventually be later.
               format: int32
               type: integer
               x-nullable: true
@@ -1482,12 +1498,16 @@ definitions:
               format: int32
               type: integer
             kills:
-              description: Number of *kills* in the category. <span class="definition">Kills</span> are seats/places that will not be sold for technical reasons.
+              description: Number of *kills* in the category. <span
+                class="definition">Kills</span> are seats/places that will not
+                be sold for technical reasons.
               format: int32
               type: integer
               x-nullable: true
             sellable_capacity:
-              description: "Number of sellable seats/places in the category. This is calculated by the formula: `total_capacity - kills - comps - holds`."
+              description: "Number of sellable seats/places in the category. This is
+                calculated by the formula: `total_capacity - kills - comps -
+                holds`."
               format: int32
               type: integer
             total_capacity:
@@ -1521,7 +1541,8 @@ definitions:
         items:
           properties:
             base_price:
-              description: Base price of the event price range (i.e. including VAT but excluding all commissions).
+              description: Base price of the event price range (i.e. including VAT but
+                excluding all commissions).
               example: 44.5
               format: float
               minimum: 0
@@ -1542,7 +1563,8 @@ definitions:
             price_range:
               $ref: "#/definitions/PriceRangesEntity"
             public_price:
-              description: Public price of the event price range (i.e. including VAT and all commissions).
+              description: Public price of the event price range (i.e. including VAT and all
+                commissions).
               example: 50
               format: float
               minimum: 0
@@ -1636,7 +1658,8 @@ definitions:
                 example: COP
                 type: string
               label:
-                description: Label of the contract type. This value is translated according to the 'Accept-Language' header.
+                description: Label of the contract type. This value is translated according to
+                  the 'Accept-Language' header.
                 example: Coprod
                 type: string
             required:
@@ -1670,7 +1693,8 @@ definitions:
         description: Whether this event is free or not.
         type: boolean
       general_sales_date:
-        description: Date the event went on general sales (relative to the timezone of the venue).
+        description: Date the event went on general sales (relative to the timezone of
+          the venue).
         example: 2017-06-15
         format: date
         type: string
@@ -1690,7 +1714,8 @@ definitions:
             example: DET
             type: string
           label:
-            description: Label of the input type. This value is translated according to the 'Accept-Language' header.
+            description: Label of the input type. This value is translated according to the
+              'Accept-Language' header.
             example: Detailed sales
             type: string
         required:
@@ -1702,7 +1727,8 @@ definitions:
         example: Alan Wilson
         type: string
       last_update_timestamp:
-        description: Timestamp for when the venue was last updated in the customer's database.
+        description: Timestamp for when the venue was last updated in the customer's
+          database.
         example: 1516500001
         format: int64
         type: integer
@@ -1713,7 +1739,8 @@ definitions:
         minimum: 0
         type: integer
       presales_date:
-        description: Date the event went on presales (relative to the timezone of the venue).
+        description: Date the event went on presales (relative to the timezone of the
+          venue).
         example: 2017-06-14
         format: date
         type: string
@@ -1758,7 +1785,8 @@ definitions:
         example: REDUCED PRICE
         type: string
       last_update_timestamp:
-        description: Timestamp for when the price range was last updated in the customer's database.
+        description: Timestamp for when the price range was last updated in the
+          customer's database.
         example: 1516500001
         format: int64
         type: integer
@@ -1778,11 +1806,15 @@ definitions:
   PromotionsEntity:
     properties:
       applied_to:
-        description: List of events and/or series where the promotion is applied. A promotion can be applied on several events, and its costs can be split between those events.
+        description: List of events and/or series where the promotion is applied. A
+          promotion can be applied on several events, and its costs can be split
+          between those events.
         items:
           properties:
             event_id:
-              description: "ID of the event the promotion applies to. This property is exclusive with 'series_id': if defined, then 'series_id' will not be displayed."
+              description: "ID of the event the promotion applies to. This property is
+                exclusive with 'series_id': if defined, then 'series_id' will
+                not be displayed."
               example: 2142
               format: int32
               type: integer
@@ -1794,25 +1826,34 @@ definitions:
               type: number
               x-nullable: true
             series_id:
-              description: "ID of the series the promotion applies to. This property is exclusive with 'event_id': if defined, then 'event_id' will not be displayed."
+              description: "ID of the series the promotion applies to. This property is
+                exclusive with 'event_id': if defined, then 'event_id' will not
+                be displayed."
               example: 263
               format: int32
               type: integer
               x-nullable: true
             unit_cost:
-              description: "Unit cost share of the promotion devoted to this event/series. The total cost of the share can be calculated with: quantity × unit_cost. *This field may be omitted according to the customer configuration.*"
+              description: "Unit cost share of the promotion devoted to this event/series. The
+                total cost of the share can be calculated with: quantity ×
+                unit_cost. *This field may be omitted according to the customer
+                configuration.*"
               format: float
               minimum: 0
               type: number
               x-nullable: true
             valorized_quantity:
-              description: Valorized quantity share of the promotion devoted to this event/series. *This field may be omitted according to the customer configuration.*
+              description: Valorized quantity share of the promotion devoted to this
+                event/series. *This field may be omitted according to the
+                customer configuration.*
               format: float
               minimum: 0
               type: number
               x-nullable: true
             valorized_unit_cost:
-              description: "Valorized unit cost share of the promotion devoted to this event/series. The total valorized cost of the share can be calculated with: valorized_quantity × valorized_unit_cost."
+              description: "Valorized unit cost share of the promotion devoted to this
+                event/series. The total valorized cost of the share can be
+                calculated with: valorized_quantity × valorized_unit_cost."
               format: float
               minimum: 0
               type: number
@@ -1827,7 +1868,9 @@ definitions:
         description: Cost of the promotion.
         properties:
           currency:
-            description: Currency of the unit_cost (<a href='https://en.wikipedia.org/wiki/ISO_4217#Active_codes'>ISO 4212 alphabetic code</a>).
+            description: Currency of the unit_cost (<a
+              href='https://en.wikipedia.org/wiki/ISO_4217#Active_codes'>ISO
+              4212 alphabetic code</a>).
             type: string
             x-nullable: true
           exchange:
@@ -1841,7 +1884,8 @@ definitions:
             type: number
             x-nullable: true
           state:
-            description: State of the promotion cost. *This object may be omitted according to the customer configuration.*
+            description: State of the promotion cost. *This object may be omitted according
+              to the customer configuration.*
             properties:
               id:
                 description: String identifying the state of the promotion cost.
@@ -1852,7 +1896,8 @@ definitions:
                   - PAY
                 type: string
               label:
-                description: Label of the state of the promotion cost. This value is translated according to the 'Accept-Language' header.
+                description: Label of the state of the promotion cost. This value is translated
+                  according to the 'Accept-Language' header.
                 type: string
             required:
               - id
@@ -1871,7 +1916,8 @@ definitions:
                 example: GRA
                 type: string
               label:
-                description: Label of the type of the promotion cost. This value is translated according to the 'Accept-Language' header.
+                description: Label of the type of the promotion cost. This value is translated
+                  according to the 'Accept-Language' header.
                 example: Free
                 type: string
             required:
@@ -1879,19 +1925,25 @@ definitions:
               - label
             type: object
           unit_cost:
-            description: "Unit cost of the promotion. The total cost of the promotion can be calculated with: quantity × unit_cost."
+            description: "Unit cost of the promotion. The total cost of the promotion can be
+              calculated with: quantity × unit_cost."
             format: float
             minimum: 0
             type: number
             x-nullable: true
           valorized_quantity:
-            description: Valorized quantity of the promotion (see valorized_unit_cost). *This field may be omitted according to the customer configuration.*
+            description: Valorized quantity of the promotion (see valorized_unit_cost).
+              *This field may be omitted according to the customer
+              configuration.*
             format: float
             minimum: 0
             type: number
             x-nullable: true
           valorized_unit_cost:
-            description: "Valorized unit cost of the promotion. The total valorized cost of the promotion can be calculated with: valorized_quantity × valorized_unit_cost. *This field may be omitted according to the customer configuration.*"
+            description: "Valorized unit cost of the promotion. The total valorized cost of
+              the promotion can be calculated with: valorized_quantity ×
+              valorized_unit_cost. *This field may be omitted according to the
+              customer configuration.*"
             format: float
             minimum: 0
             type: number
@@ -1950,7 +2002,8 @@ definitions:
                 example: PRE
                 type: string
               label:
-                description: Label of the promotion family. This value is translated according to the 'Accept-Language' header.
+                description: Label of the promotion family. This value is translated according
+                  to the 'Accept-Language' header.
                 example: Press
                 type: string
             required:
@@ -1962,7 +2015,8 @@ definitions:
             example: PPR
             type: string
           label:
-            description: Label of the promotion type. This value is translated according to the 'Accept-Language' header.
+            description: Label of the promotion type. This value is translated according to
+              the 'Accept-Language' header.
             example: Media ads
             type: string
         required:
@@ -2016,7 +2070,8 @@ definitions:
                 example: PRO
                 type: string
               label:
-                description: Label of the contract type. This value is translated according to the 'Accept-Language' header.
+                description: Label of the contract type. This value is translated according to
+                  the 'Accept-Language' header.
                 example: Production
                 type: string
             required:
@@ -2058,7 +2113,8 @@ definitions:
         format: date
         type: string
       last_update_timestamp:
-        description: Timestamp for when the series was last updated in the customer's database.
+        description: Timestamp for when the series was last updated in the customer's
+          database.
         example: 1516500001
         format: int64
         type: integer
@@ -2073,7 +2129,8 @@ definitions:
             example: LGS
             type: string
           label:
-            description: Label of the series type. This value is translated according to the 'Accept-Language' header.
+            description: Label of the series type. This value is translated according to the
+              'Accept-Language' header.
             example: Long series
             type: string
         required:
@@ -2122,11 +2179,15 @@ definitions:
                     items:
                       properties:
                         currency:
-                          description: Currency of the gross (<a href='https://en.wikipedia.org/wiki/ISO_4217#Active_codes'>ISO 4212 alphabetic code</a>).
+                          description: Currency of the gross (<a
+                            href='https://en.wikipedia.org/wiki/ISO_4217#Active_codes'>ISO
+                            4212 alphabetic code</a>).
                           example: EUR
                           type: string
                         gross:
-                          description: Gross (= income for the sold tickets for the current channel/category/price range, including VAT but excluding all commissions).
+                          description: Gross (= income for the sold tickets for the current
+                            channel/category/price range, including VAT but
+                            excluding all commissions).
                           example: 864
                           format: float
                           minimum: 0
@@ -2138,14 +2199,18 @@ definitions:
                           format: int32
                           type: integer
                         reservations:
-                          description: Detailed ticket reservations (= number of reserved tickets for the current channel/category/price range). *This field may be omitted according to the customer configuration.*
+                          description: Detailed ticket reservations (= number of reserved tickets for the
+                            current channel/category/price range). *This field
+                            may be omitted according to the customer
+                            configuration.*
                           example: 0
                           format: int32
                           minimum: 0
                           type: integer
                           x-nullable: true
                         sales:
-                          description: Detailed ticket sales (= number of sold tickets for the current channel/category/price range).
+                          description: Detailed ticket sales (= number of sold tickets for the current
+                            channel/category/price range).
                           example: 37
                           format: int32
                           minimum: 0
@@ -2179,7 +2244,9 @@ definitions:
           type: object
         type: array
       final:
-        description: Whether this ticket count is the last and final one of its event or not. If it is, it means that no further ticket counts will be added for the event it belongs to.
+        description: Whether this ticket count is the last and final one of its event or
+          not. If it is, it means that no further ticket counts will be added
+          for the event it belongs to.
         example: false
         type: boolean
       id:
@@ -2207,7 +2274,9 @@ definitions:
         type: string
         x-nullable: true
       currency:
-        description: Currency of the gross (<a href='https://en.wikipedia.org/wiki/ISO_4217#Active_codes'>ISO 4212 alphabetic code</a>).
+        description: Currency of the gross (<a
+          href='https://en.wikipedia.org/wiki/ISO_4217#Active_codes'>ISO 4212
+          alphabetic code</a>).
         example: EUR
         type: string
       date:
@@ -2216,11 +2285,14 @@ definitions:
         format: date
         type: string
       final:
-        description: Whether this ticket count is the last and final one of its event or not. If it is, it means that no further ticket counts will be added for the event it belongs to.
+        description: Whether this ticket count is the last and final one of its event or
+          not. If it is, it means that no further ticket counts will be added
+          for the event it belongs to.
         example: false
         type: boolean
       gross:
-        description: Gross (= income for the sold tickets, including VAT but excluding all commissions).
+        description: Gross (= income for the sold tickets, including VAT but excluding
+          all commissions).
         example: 48735.6
         format: float
         minimum: 0
@@ -2231,7 +2303,8 @@ definitions:
         format: int32
         type: integer
       reservations:
-        description: Ticket reservations (= number of reserved tickets). *This field may be omitted according to the customer configuration.*
+        description: Ticket reservations (= number of reserved tickets). *This field may
+          be omitted according to the customer configuration.*
         example: 81
         format: int32
         minimum: 0
@@ -2263,7 +2336,9 @@ definitions:
         example: Saint-Herblain
         type: string
       country_code:
-        description: Country in which the venue is (<a href='https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3'>ISO 3166-1 alpha-3 code</a>).
+        description: Country in which the venue is (<a
+          href='https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3'>ISO 3166-1
+          alpha-3 code</a>).
         example: FR
         type: string
       creation_timestamp:
@@ -2286,7 +2361,8 @@ definitions:
         example: Zénith de Nantes Métropole
         type: string
       last_update_timestamp:
-        description: Timestamp for when the venue was last updated in the customer's database.
+        description: Timestamp for when the venue was last updated in the customer's
+          database.
         example: 1473008115
         format: int64
         type: integer
@@ -2310,7 +2386,8 @@ definitions:
             example: SAL
             type: string
           label:
-            description: Label of the venue type. This value is translated according to the 'Accept-Language' header.
+            description: Label of the venue type. This value is translated according to the
+              'Accept-Language' header.
             example: Venue
             type: string
         required:

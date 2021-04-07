@@ -464,6 +464,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -550,6 +552,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -636,6 +640,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -699,6 +705,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -826,6 +834,8 @@ paths:
                 ssh_key_identifier: $response.body#/ssh_key/id
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -897,6 +907,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -995,6 +1007,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -1059,6 +1073,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -1142,6 +1158,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -1222,6 +1240,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -1485,6 +1505,22 @@ paths:
                   - message
                 type: object
           description: Unauthorized
+          headers:
+            ratelimit-limit:
+              $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-limit"
+            ratelimit-remaining:
+              $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-remaining"
+            ratelimit-reset:
+              $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
+        "429":
+          content:
+            application/json:
+              example:
+                id: too_many_requests
+                message: API Rate limit exceeded.
+              schema:
+                $ref: "#/paths/~1v2~1apps/get/responses/401/content/application~1json/schema"
+          description: API Rate limit exceeded
           headers:
             ratelimit-limit:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-limit"
@@ -2362,6 +2398,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -2499,6 +2537,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -2543,6 +2583,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -2616,6 +2658,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -2724,6 +2768,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -2787,6 +2833,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -2844,6 +2892,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -2970,6 +3020,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -3102,12 +3154,8 @@ paths:
                       jobs:
                         items:
                           properties:
-                            image:
-                              example: Ubuntu
-                              title: The image that this job uses
-                              type: string
                             name:
-                              example: Clean Old Droplets
+                              example: migrate-db
                               title: The name of this job
                               type: string
                             source_commit_hash:
@@ -3237,12 +3285,8 @@ paths:
                       services:
                         items:
                           properties:
-                            image:
-                              example: Ubuntu
-                              title: The image that this service uses
-                              type: string
                             name:
-                              example: Service Name
+                              example: web
                               title: The name of this service
                               type: string
                             source_commit_hash:
@@ -3259,7 +3303,7 @@ paths:
                         items:
                           properties:
                             name:
-                              example: static site
+                              example: web
                               title: The name of this static site
                               type: string
                             source_commit_hash:
@@ -3282,12 +3326,8 @@ paths:
                       workers:
                         items:
                           properties:
-                            image:
-                              example: Ubuntu
-                              title: The image that this worker uses
-                              type: string
                             name:
-                              example: worker
+                              example: queue-runner
                               title: The name of this worker
                               type: string
                             source_commit_hash:
@@ -3312,6 +3352,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -3362,6 +3404,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -3407,6 +3451,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -3470,6 +3516,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -3540,7 +3588,7 @@ paths:
                 properties:
                   historic_urls:
                     items:
-                      example: digitalocean.com
+                      example: https://logs/build.log
                       type: string
                     title: A list of URLs to archived log files
                     type: array
@@ -3548,10 +3596,7 @@ paths:
                     description: A URL of the real-time live logs. This URL may use either the
                       `https://` or `wss://` protocols and will keep pushing
                       live logs as they become available.
-                    example: hello.com
-                    type: string
-                  url:
-                    example: digitalocean.com
+                    example: ws://logs/build
                     type: string
                 type: object
           description: A JSON object with urls that point to archived logs
@@ -3566,6 +3611,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -3613,6 +3660,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -3669,6 +3718,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -3730,6 +3781,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -3793,6 +3846,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -3958,6 +4013,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -4032,6 +4089,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -4092,6 +4151,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -4173,6 +4234,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -4262,6 +4325,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -4372,6 +4437,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -4836,6 +4903,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -4933,6 +5002,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -5030,6 +5101,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -5119,6 +5192,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -5226,6 +5301,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -5319,6 +5396,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -5447,6 +5526,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -5500,6 +5581,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -5543,6 +5626,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -5747,6 +5832,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -5849,6 +5936,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -6208,6 +6297,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -6266,6 +6357,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -6326,6 +6419,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -6416,6 +6511,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -6492,6 +6589,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -6583,6 +6682,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -6646,6 +6747,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -6709,6 +6812,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -6773,6 +6878,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -6842,6 +6949,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -6932,6 +7041,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -7046,6 +7157,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -7151,6 +7264,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -7241,6 +7356,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -7321,6 +7438,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -7380,6 +7499,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -7424,6 +7545,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -7506,6 +7629,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -7661,6 +7786,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -7728,6 +7855,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -7786,6 +7915,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -7876,6 +8007,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -8042,6 +8175,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -8103,6 +8238,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -8161,6 +8298,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -8236,6 +8375,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -8304,6 +8445,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -8370,6 +8513,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -8456,6 +8601,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -8567,6 +8714,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -8631,6 +8780,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -8700,6 +8851,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -8777,6 +8930,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -8872,6 +9027,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -9022,6 +9179,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -9085,6 +9244,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -9175,6 +9336,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -9370,6 +9533,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -9654,6 +9819,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -9725,6 +9892,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -9822,6 +9991,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -9895,6 +10066,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -9936,6 +10109,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -10016,6 +10191,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -10718,6 +10895,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -11634,6 +11813,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -11804,6 +11985,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -11864,6 +12047,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -12067,6 +12252,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -12189,6 +12376,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -12390,6 +12579,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -12750,6 +12941,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -12878,6 +13071,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -13007,6 +13202,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -13062,6 +13259,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -13106,6 +13305,8 @@ paths:
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
         "409":
           $ref: "#/paths/~1v2~1registry~1validate-name/post/responses/409"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -13155,6 +13356,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -13280,6 +13483,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -13392,6 +13597,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -13458,6 +13665,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -13548,6 +13757,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -13625,6 +13836,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -13739,6 +13952,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -14043,6 +14258,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -14167,6 +14384,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -14271,6 +14490,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -14419,6 +14640,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -14570,6 +14793,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -14655,6 +14880,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -14752,6 +14979,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -14889,6 +15118,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -15015,6 +15246,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -15099,6 +15332,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -15213,6 +15448,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -15467,6 +15704,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -15532,6 +15771,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -15801,6 +16042,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -15914,6 +16157,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -16078,6 +16323,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -16155,6 +16402,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -16557,6 +16806,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -16835,6 +17086,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -16865,6 +17118,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -16985,6 +17240,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -17106,6 +17363,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -17233,6 +17492,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -17437,6 +17698,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -17569,6 +17832,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -17756,6 +18021,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -18238,6 +18505,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -18343,6 +18612,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -18530,6 +18801,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -18750,6 +19023,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -18911,6 +19186,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -19015,6 +19292,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -19151,6 +19430,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -19266,6 +19547,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -19318,6 +19601,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -19414,6 +19699,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -19539,6 +19826,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -19693,6 +19982,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -19984,6 +20275,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -20067,6 +20360,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -20196,6 +20491,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -20333,6 +20630,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -20460,6 +20759,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -20530,6 +20831,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -20573,6 +20876,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -20654,6 +20959,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -20734,6 +21041,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -20946,6 +21255,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -21000,6 +21311,8 @@ paths:
           $ref: "#/paths/~1v2~1volumes/delete/responses/204"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -21056,6 +21369,8 @@ paths:
           $ref: "#/paths/~1v2~1volumes/delete/responses/204"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -21259,6 +21574,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -21944,6 +22261,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -22095,6 +22414,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -22184,6 +22505,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -22379,6 +22702,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -22534,6 +22859,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -22618,6 +22945,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -22704,6 +23033,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -22806,6 +23137,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -22925,6 +23258,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -23089,6 +23424,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -23180,6 +23517,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -23247,6 +23586,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -23317,6 +23658,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -23450,6 +23793,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -23525,6 +23870,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -23613,6 +23960,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-remaining"
             ratelimit-reset:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -23671,6 +24020,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -23735,6 +24086,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -23815,6 +24168,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -23886,6 +24241,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -23959,6 +24316,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24141,6 +24500,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24197,6 +24558,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24234,6 +24597,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24318,6 +24683,8 @@ paths:
           $ref: "#/paths/~1v2~1registry/get/responses/200"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24421,6 +24788,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24521,6 +24890,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24607,6 +24978,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24645,6 +25018,8 @@ paths:
           $ref: "#/paths/~1v2~1registry~1subscription/get/responses/200"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24702,6 +25077,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-remaining"
             ratelimit-reset:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24793,6 +25170,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24878,6 +25257,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24939,6 +25320,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -24989,6 +25372,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -25051,6 +25436,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -25105,6 +25492,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -25219,6 +25608,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -25272,6 +25663,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -25338,6 +25731,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -25511,6 +25906,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -25771,6 +26168,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -25870,6 +26269,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -25957,6 +26358,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -26061,6 +26464,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -26289,6 +26694,8 @@ paths:
                 type: string
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -26347,6 +26754,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -26445,6 +26854,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -26508,6 +26919,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -26606,6 +27019,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -26680,6 +27095,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -26937,6 +27354,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -27239,6 +27658,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -27523,6 +27944,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -27569,6 +27992,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -27650,6 +28075,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -27675,6 +28102,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -27736,6 +28165,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -27862,6 +28293,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -28034,6 +28467,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -28129,6 +28564,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -28230,6 +28667,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -28311,6 +28750,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -28440,6 +28881,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-remaining"
             ratelimit-reset:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -28578,6 +29021,8 @@ paths:
               $ref: "#/paths/~1v2~1apps/get/responses/200/headers/ratelimit-reset"
         "401":
           $ref: "#/paths/~1v2~1apps/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -28642,6 +29087,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -28695,6 +29142,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -28751,6 +29200,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -28824,6 +29275,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
@@ -28949,6 +29402,8 @@ paths:
           $ref: "#/paths/~1v2~1apps/get/responses/401"
         "404":
           $ref: "#/paths/~1v2~1vpcs/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~1apps/get/responses/429"
         "500":
           $ref: "#/paths/~1v2~1apps/get/responses/500"
         default:
