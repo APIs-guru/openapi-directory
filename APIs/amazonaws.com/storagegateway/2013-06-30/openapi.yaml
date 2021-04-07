@@ -252,7 +252,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.AddUploadBuffer:
     post:
       operationId: AddUploadBuffer
-      description: '<p>Configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for the stored volume, cached volume and tape gateway types.</p> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.</p>'
+      description: '<p>Configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for the stored volume, cached volume, and tape gateway types.</p> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.</p>'
       responses:
         '200':
           description: Success
@@ -376,6 +376,51 @@ paths:
             type: string
             enum:
               - StorageGateway_20130630.AssignTapePool
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StorageGateway_20130630.AssociateFileSystem:
+    post:
+      operationId: AssociateFileSystem
+      description: 'Associate an Amazon FSx file system with the Amazon FSx file gateway. After the association process is complete, the file shares on the Amazon FSx file system are available for access through the gateway. This operation only supports the Amazon FSx file gateway type.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateFileSystemOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateFileSystemInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StorageGateway_20130630.AssociateFileSystem
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -657,7 +702,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.CreateSnapshot:
     post:
       operationId: CreateSnapshot
-      description: '<p>Initiates a snapshot of a volume.</p> <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot">Editing a snapshot schedule</a>.</p> <p>In the <code>CreateSnapshot</code> request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html">DescribeSnapshots</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note> <important> <p>Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <a href="https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html">Welcome</a> page.</p> </important>'
+      description: '<p>Initiates a snapshot of a volume.</p> <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, and also import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot">Editing a snapshot schedule</a>.</p> <p>In the <code>CreateSnapshot</code> request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html">DescribeSnapshots</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note> <important> <p>Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <a href="https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html">Welcome</a> page.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1389,7 +1434,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.DescribeAvailabilityMonitorTest:
     post:
       operationId: DescribeAvailabilityMonitorTest
-      description: 'Returns information about the most recent High Availability monitoring test that was performed on the host in a cluster. If a test isn''t performed, the status and start time in the response would be null.'
+      description: 'Returns information about the most recent high availability monitoring test that was performed on the host in a cluster. If a test isn''t performed, the status and start time in the response would be null.'
       responses:
         '200':
           description: Success
@@ -1648,6 +1693,51 @@ paths:
             type: string
             enum:
               - StorageGateway_20130630.DescribeChapCredentials
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StorageGateway_20130630.DescribeFileSystemAssociations:
+    post:
+      operationId: DescribeFileSystemAssociations
+      description: Gets the file system association information. This operation is only supported for Amazon FSx file gateways.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFileSystemAssociationsOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeFileSystemAssociationsInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StorageGateway_20130630.DescribeFileSystemAssociations
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2379,6 +2469,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StorageGateway_20130630.DisassociateFileSystem:
+    post:
+      operationId: DisassociateFileSystem
+      description: 'Disassociates an Amazon FSx file system from the specified gateway. After the disassociation process finishes, the gateway can no longer access the Amazon FSx file system. This operation is only supported in the Amazon FSx file gateway type.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateFileSystemOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateFileSystemInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StorageGateway_20130630.DisassociateFileSystem
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=StorageGateway_20130630.JoinDomain:
     post:
       operationId: JoinDomain
@@ -2518,6 +2653,63 @@ paths:
             type: string
             enum:
               - StorageGateway_20130630.ListFileShares
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StorageGateway_20130630.ListFileSystemAssociations:
+    post:
+      operationId: ListFileSystemAssociations
+      description: Gets a list of <code>FileSystemAssociationSummary</code> objects. Each object contains a summary of a file system association. This operation is only supported for Amazon FSx file gateways.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFileSystemAssociationsOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFileSystemAssociationsInput'
+      parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StorageGateway_20130630.ListFileSystemAssociations
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2994,7 +3186,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.RefreshCache:
     post:
       operationId: RefreshCache
-      description: '<p>Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket''s contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn''t necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your <code>RefreshCache</code> operation completes.</p> <p>Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an <code>InvalidGatewayRequestException</code> error because too many requests were sent to the server.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p>'
+      description: '<p>Refreshes the cached inventory of objects for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket''s contents and cached the results. This operation does not import files into the file gateway cache storage. It only updates the cached inventory to reflect changes in the inventory of the objects in the S3 bucket. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your <code>RefreshCache</code> operation completes. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn''t necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through a CloudWatch event when your <code>RefreshCache</code> operation completes.</p> <p>Throttle limit: This API is asynchronous, so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an <code>InvalidGatewayRequestException</code> error because too many requests were sent to the server.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -3613,6 +3805,51 @@ paths:
             type: string
             enum:
               - StorageGateway_20130630.UpdateChapCredentials
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StorageGateway_20130630.UpdateFileSystemAssociation:
+    post:
+      operationId: UpdateFileSystemAssociation
+      description: Updates a file system association. This operation is only supported in the Amazon FSx file gateway type.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFileSystemAssociationOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFileSystemAssociationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StorageGateway_20130630.UpdateFileSystemAssociation
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4244,6 +4481,51 @@ components:
           allOf:
             - $ref: '#/components/schemas/boolean'
             - description: '<p>Set permissions to bypass governance retention. If the lock type of the archived tape is <code>Governance</code>, the tape''s archived age is not older than <code>RetentionLockInDays</code>, and the user does not already have <code>BypassGovernanceRetention</code>, setting this to TRUE enables the user to bypass the retention lock. This parameter is set to true by default for calls from the console.</p> <p>Valid values: <code>TRUE</code> | <code>FALSE</code> </p>'
+    AssociateFileSystemOutput:
+      type: object
+      properties:
+        FileSystemAssociationARN:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationARN'
+            - description: The ARN of the newly created file system association.
+    AssociateFileSystemInput:
+      type: object
+      required:
+        - UserName
+        - Password
+        - ClientToken
+        - GatewayARN
+        - LocationARN
+      title: AssociateFileSystemInput
+      properties:
+        UserName:
+          allOf:
+            - $ref: '#/components/schemas/DomainUserName'
+            - description: The user name of the user credential that has permission to access the root share D$ of the Amazon FSx file system. The user account must belong to the Amazon FSx delegated admin user group.
+        Password:
+          allOf:
+            - $ref: '#/components/schemas/DomainUserPassword'
+            - description: The password of the user credential.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: A unique string value that you supply that is used by the file gateway to ensure idempotent file system association creation.
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
+        LocationARN:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemLocationARN'
+            - description: The Amazon Resource Name (ARN) of the Amazon FSx file system to associate with the Amazon FSx file gateway.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: A list of up to 50 tags that can be assigned to the file system association. Each tag is a key-value pair.
+        AuditDestinationARN:
+          allOf:
+            - $ref: '#/components/schemas/AuditDestinationARN'
+            - description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
+        CacheAttributes:
+          $ref: '#/components/schemas/CacheAttributes'
     AttachVolumeOutput:
       type: object
       properties:
@@ -4479,11 +4761,11 @@ components:
         CacheAttributes:
           allOf:
             - $ref: '#/components/schemas/CacheAttributes'
-            - description: Refresh cache information.
+            - description: Specifies refresh cache information for the file share.
         NotificationPolicy:
           allOf:
             - $ref: '#/components/schemas/NotificationPolicy'
-            - description: The notification policy of the file share.
+            - description: '<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it''s best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\"Upload\": {\"SettlingTimeInSeconds\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>'
       description: CreateNFSFileShareInput
     CreateSMBFileShareOutput:
       type: object
@@ -4556,20 +4838,20 @@ components:
             - description: The files and folders on this share will only be visible to users with read access.
         AdminUserList:
           allOf:
-            - $ref: '#/components/schemas/FileShareUserList'
+            - $ref: '#/components/schemas/UserList'
             - description: '<p>A list of users or groups in the Active Directory that will be granted administrator privileges on the file share. These users can do all file operations as the super-user. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>.</p> <important> <p>Use this option very carefully, because any user in this list can do anything they like on the file share, regardless of file permissions.</p> </important>'
         ValidUserList:
           allOf:
-            - $ref: '#/components/schemas/FileShareUserList'
+            - $ref: '#/components/schemas/UserList'
             - description: 'A list of users or groups in the Active Directory that are allowed to access the file <a href=""/> share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         InvalidUserList:
           allOf:
-            - $ref: '#/components/schemas/FileShareUserList'
+            - $ref: '#/components/schemas/UserList'
             - description: 'A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         AuditDestinationARN:
           allOf:
             - $ref: '#/components/schemas/AuditDestinationARN'
-            - description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
+            - description: The Amazon Resource Name (ARN) of the storage used for audit logs.
         Authentication:
           allOf:
             - $ref: '#/components/schemas/Authentication'
@@ -4589,11 +4871,11 @@ components:
         CacheAttributes:
           allOf:
             - $ref: '#/components/schemas/CacheAttributes'
-            - description: Refresh cache information.
+            - description: Specifies refresh cache information for the file share.
         NotificationPolicy:
           allOf:
             - $ref: '#/components/schemas/NotificationPolicy'
-            - description: The notification policy of the file share.
+            - description: '<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it''s best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\"Upload\": {\"SettlingTimeInSeconds\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>'
       description: CreateSMBFileShareInput
     CreateSnapshotOutput:
       type: object
@@ -4708,11 +4990,11 @@ components:
         SnapshotId:
           allOf:
             - $ref: '#/components/schemas/SnapshotId'
-            - description: 'The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot; otherwise, do not include this field. To list snapshots for your account use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.'
+            - description: 'The snapshot ID (e.g., "snap-1122aabb") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot; otherwise, do not include this field. To list snapshots for your account use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.'
         PreserveExistingData:
           allOf:
             - $ref: '#/components/schemas/boolean'
-            - description: '<p>Set to true <code>true</code> if you want to preserve the data on the local disk. Otherwise, set to <code>false</code> to create an empty volume.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set to <code>true</code> if you want to preserve the data on the local disk. Otherwise, set to <code>false</code> to create an empty volume.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         TargetName:
           allOf:
             - $ref: '#/components/schemas/TargetName'
@@ -4861,7 +5143,7 @@ components:
         TapeBarcodePrefix:
           allOf:
             - $ref: '#/components/schemas/TapeBarcodePrefix'
-            - description: <p>A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.</p> <note> <p>The prefix must be 1 to 4 characters in length and must be one of the uppercase letters from A to Z.</p> </note>
+            - description: <p>A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.</p> <note> <p>The prefix must be 1-4 characters in length and must be one of the uppercase letters from A to Z.</p> </note>
         KMSEncrypted:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -5109,11 +5391,11 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/AvailabilityMonitorTestStatus'
-            - description: 'The status of the High Availability monitoring test. If a test hasn''t been performed, the value of this field is null.'
+            - description: 'The status of the high availability monitoring test. If a test hasn''t been performed, the value of this field is null.'
         StartTime:
           allOf:
             - $ref: '#/components/schemas/Time'
-            - description: 'The time the High Availability monitoring test was started. If a test hasn''t been performed, the value of this field is null.'
+            - description: 'The time the high availability monitoring test was started. If a test hasn''t been performed, the value of this field is null.'
     DescribeAvailabilityMonitorTestInput:
       type: object
       required:
@@ -5269,6 +5551,23 @@ components:
             - $ref: '#/components/schemas/TargetARN'
             - description: The Amazon Resource Name (ARN) of the iSCSI volume target. Use the <a>DescribeStorediSCSIVolumes</a> operation to return to retrieve the TargetARN for specified VolumeARN.
       description: A JSON object containing the Amazon Resource Name (ARN) of the iSCSI volume target.
+    DescribeFileSystemAssociationsOutput:
+      type: object
+      properties:
+        FileSystemAssociationInfoList:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationInfoList'
+            - description: 'An array containing the <code>FileSystemAssociationInfo</code> data type of each file system association to be described. '
+    DescribeFileSystemAssociationsInput:
+      type: object
+      required:
+        - FileSystemAssociationARNList
+      title: DescribeFileSystemAssociationsInput
+      properties:
+        FileSystemAssociationARNList:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationARNList'
+            - description: An array containing the Amazon Resource Name (ARN) of each file system association to be described.
     DescribeGatewayInformationOutput:
       type: object
       example:
@@ -5653,7 +5952,7 @@ components:
         Marker:
           allOf:
             - $ref: '#/components/schemas/Marker'
-            - description: '<p>An opaque string which can be used as part of a subsequent DescribeTapes call to retrieve the next page of results.</p> <p>If a response does not contain a marker, then there are no more results to be retrieved.</p>'
+            - description: '<p>An opaque string that can be used as part of a subsequent <code>DescribeTapes</code> call to retrieve the next page of results.</p> <p>If a response does not contain a marker, then there are no more results to be retrieved.</p>'
       description: DescribeTapesOutput
     DescribeTapesInput:
       type: object
@@ -5850,6 +6149,27 @@ components:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
       description: DisableGatewayInput
+    DisassociateFileSystemOutput:
+      type: object
+      properties:
+        FileSystemAssociationARN:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationARN'
+            - description: The Amazon Resource Name (ARN) of the deleted file system association.
+    DisassociateFileSystemInput:
+      type: object
+      required:
+        - FileSystemAssociationARN
+      title: DisassociateFileSystemInput
+      properties:
+        FileSystemAssociationARN:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationARN'
+            - description: The Amazon Resource Name (ARN) of the file system association to be deleted.
+        ForceDelete:
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: 'If this value is set to true, the operation disassociates an Amazon FSx file system immediately. It ends all data uploads to the file system, and the file system association enters the <code>FORCE_DELETING</code> status. If this value is set to false, the Amazon FSx file system does not disassociate until all data is uploaded.'
     JoinDomainOutput:
       type: object
       properties:
@@ -5946,6 +6266,35 @@ components:
             - $ref: '#/components/schemas/Marker'
             - description: 'Opaque pagination token returned from a previous ListFileShares operation. If present, <code>Marker</code> specifies where to continue the list from after a previous call to ListFileShares. Optional.'
       description: ListFileShareInput
+    ListFileSystemAssociationsOutput:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/Marker'
+            - description: 'If the request includes <code>Marker</code>, the response returns that value in this field.'
+        NextMarker:
+          allOf:
+            - $ref: '#/components/schemas/Marker'
+            - description: 'If a value is present, there are more file system associations to return. In a subsequent request, use <code>NextMarker</code> as the value for <code>Marker</code> to retrieve the next set of file system associations.'
+        FileSystemAssociationSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationSummaryList'
+            - description: An array of information about the Amazon FSx gateway's file system associations.
+    ListFileSystemAssociationsInput:
+      type: object
+      title: ListFileSystemAssociationsInput
+      properties:
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
+        Limit:
+          allOf:
+            - $ref: '#/components/schemas/PositiveIntObject'
+            - description: 'The maximum number of file system associations to return in the response. If present, <code>Limit</code> must be an integer with a value greater than zero. Optional.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/Marker'
+            - description: 'Opaque pagination token returned from a previous <code>ListFileSystemAssociations</code> operation. If present, <code>Marker</code> specifies where to continue the list from after a previous call to <code>ListFileSystemAssociations</code>. Optional.'
     ListGatewaysOutput:
       type: object
       example:
@@ -6512,6 +6861,37 @@ components:
             - $ref: '#/components/schemas/ChapSecret'
             - description: '<p>The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g. Windows client).</p> <p>Byte constraints: Minimum bytes of 12. Maximum bytes of 16.</p> <note> <p>The secret key must be between 12 and 16 bytes when encoded in UTF-8.</p> </note>'
       description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>UpdateChapCredentialsInput$InitiatorName</a> </p> </li> <li> <p> <a>UpdateChapCredentialsInput$SecretToAuthenticateInitiator</a> </p> </li> <li> <p> <a>UpdateChapCredentialsInput$SecretToAuthenticateTarget</a> </p> </li> <li> <p> <a>UpdateChapCredentialsInput$TargetARN</a> </p> </li> </ul>'
+    UpdateFileSystemAssociationOutput:
+      type: object
+      properties:
+        FileSystemAssociationARN:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationARN'
+            - description: The ARN of the updated file system association.
+    UpdateFileSystemAssociationInput:
+      type: object
+      required:
+        - FileSystemAssociationARN
+      title: UpdateFileSystemAssociationInput
+      properties:
+        FileSystemAssociationARN:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationARN'
+            - description: The Amazon Resource Name (ARN) of the file system association that you want to update.
+        UserName:
+          allOf:
+            - $ref: '#/components/schemas/DomainUserName'
+            - description: The user name of the user credential that has permission to access the root share D$ of the Amazon FSx file system. The user account must belong to the Amazon FSx delegated admin user group.
+        Password:
+          allOf:
+            - $ref: '#/components/schemas/DomainUserPassword'
+            - description: The password of the user credential.
+        AuditDestinationARN:
+          allOf:
+            - $ref: '#/components/schemas/AuditDestinationARN'
+            - description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
+        CacheAttributes:
+          $ref: '#/components/schemas/CacheAttributes'
     UpdateGatewayInformationOutput:
       type: object
       example:
@@ -6660,11 +7040,11 @@ components:
         CacheAttributes:
           allOf:
             - $ref: '#/components/schemas/CacheAttributes'
-            - description: Refresh cache information.
+            - description: specifies refresh cache information for the file share.
         NotificationPolicy:
           allOf:
             - $ref: '#/components/schemas/NotificationPolicy'
-            - description: The notification policy of the file share.
+            - description: '<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it''s best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\"Upload\": {\"SettlingTimeInSeconds\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>'
       description: UpdateNFSFileShareInput
     UpdateSMBFileShareOutput:
       type: object
@@ -6722,20 +7102,20 @@ components:
             - description: The files and folders on this share will only be visible to users with read access.
         AdminUserList:
           allOf:
-            - $ref: '#/components/schemas/FileShareUserList'
+            - $ref: '#/components/schemas/UserList'
             - description: 'A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         ValidUserList:
           allOf:
-            - $ref: '#/components/schemas/FileShareUserList'
+            - $ref: '#/components/schemas/UserList'
             - description: 'A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         InvalidUserList:
           allOf:
-            - $ref: '#/components/schemas/FileShareUserList'
+            - $ref: '#/components/schemas/UserList'
             - description: 'A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         AuditDestinationARN:
           allOf:
             - $ref: '#/components/schemas/AuditDestinationARN'
-            - description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
+            - description: The Amazon Resource Name (ARN) of the storage used for audit logs.
         CaseSensitivity:
           allOf:
             - $ref: '#/components/schemas/CaseSensitivity'
@@ -6747,11 +7127,11 @@ components:
         CacheAttributes:
           allOf:
             - $ref: '#/components/schemas/CacheAttributes'
-            - description: Refresh cache information.
+            - description: Specifies refresh cache information for the file share.
         NotificationPolicy:
           allOf:
             - $ref: '#/components/schemas/NotificationPolicy'
-            - description: The notification policy of the file share.
+            - description: '<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it''s best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\"Upload\": {\"SettlingTimeInSeconds\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>'
       description: UpdateSMBFileShareInput
     UpdateSMBFileShareVisibilityOutput:
       type: object
@@ -6921,6 +7301,40 @@ components:
       maxLength: 100
     boolean:
       type: boolean
+    DomainUserName:
+      type: string
+      pattern: '^\w[\w\.\- ]*$'
+      minLength: 1
+      maxLength: 1024
+    DomainUserPassword:
+      type: string
+      pattern: '^[ -~]+$'
+      minLength: 1
+      maxLength: 1024
+      format: password
+    ClientToken:
+      type: string
+      minLength: 5
+      maxLength: 100
+    FileSystemLocationARN:
+      type: string
+      minLength: 8
+      maxLength: 512
+    AuditDestinationARN:
+      type: string
+      maxLength: 1024
+    CacheAttributes:
+      type: object
+      properties:
+        CacheStaleTimeoutInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/CacheStaleTimeoutInSeconds'
+            - description: '<p>Refreshes a file share''s cache by using Time To Live (TTL). TTL is the length of time since the last refresh after which access to the directory would cause the file gateway to first refresh that directory''s contents from the Amazon S3 bucket or Amazon FSx file system. The TTL duration is in seconds.</p> <p>Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)</p>'
+      description: The refresh cache information for the file share.
+    FileSystemAssociationARN:
+      type: string
+      minLength: 50
+      maxLength: 500
     TargetName:
       type: string
       pattern: '^[-\.;a-z0-9]+$'
@@ -6941,9 +7355,6 @@ components:
       type: string
       minLength: 50
       maxLength: 800
-    AuditDestinationARN:
-      type: string
-      maxLength: 1024
     Authentication:
       type: string
       description: '<p>The authentication method of the file share. The default is <code>ActiveDirectory</code>.</p> <p>Valid Values: <code>ActiveDirectory</code> | <code>GuestAccess</code> </p>'
@@ -7063,7 +7474,7 @@ components:
         DaysOfWeek:
           allOf:
             - $ref: '#/components/schemas/DaysOfWeek'
-            - description: ' The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 Saturday. '
+            - description: ' The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents Saturday. '
         AverageUploadRateLimitInBitsPerSec:
           allOf:
             - $ref: '#/components/schemas/BandwidthUploadRateLimit'
@@ -7087,14 +7498,6 @@ components:
       type: boolean
     CacheStaleTimeoutInSeconds:
       type: integer
-    CacheAttributes:
-      type: object
-      properties:
-        CacheStaleTimeoutInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/CacheStaleTimeoutInSeconds'
-            - description: '<p>Refreshes a file share''s cache by using Time To Live (TTL). TTL is the length of time since the last refresh after which access to the directory would cause the file gateway to first refresh that directory''s contents from the Amazon S3 bucket. The TTL duration is in seconds.</p> <p>Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)</p>'
-      description: Lists refresh cache information.
     VolumeId:
       type: string
       minLength: 12
@@ -7251,10 +7654,6 @@ components:
       pattern: '[0-9a-z:.-]+'
       minLength: 1
       maxLength: 255
-    ClientToken:
-      type: string
-      minLength: 5
-      maxLength: 100
     CloudWatchLogGroupARN:
       type: string
       maxLength: 562
@@ -7331,10 +7730,10 @@ components:
       description: The Amazon Resource Name (ARN) of the file share.
       minLength: 50
       maxLength: 500
-    FileShareUserList:
+    UserList:
       type: array
       items:
-        $ref: '#/components/schemas/FileShareUser'
+        $ref: '#/components/schemas/UserListUser'
       minItems: 0
       maxItems: 100
     SnapshotDescription:
@@ -7403,6 +7802,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/VolumeARN'
+    FileSystemAssociationARNList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FileSystemAssociationARN'
+      minItems: 1
+      maxItems: 10
+    FileSystemAssociationInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FileSystemAssociationInfo'
     GatewayId:
       type: string
       minLength: 12
@@ -7585,17 +7994,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Disk'
-    DomainUserName:
-      type: string
-      pattern: '^\w[\w\.\- ]*$'
-      minLength: 1
-      maxLength: 1024
-    DomainUserPassword:
-      type: string
-      pattern: '^[ -~]+$'
-      minLength: 1
-      maxLength: 1024
-      format: password
     IPV4AddressCIDR:
       type: string
       pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))?$'
@@ -7633,10 +8031,64 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FileShareInfo'
-    FileShareUser:
+    FileSystemAssociationId:
       type: string
-      minLength: 1
-      maxLength: 64
+      minLength: 10
+      maxLength: 30
+    FileSystemAssociationStatus:
+      type: string
+      minLength: 3
+      maxLength: 50
+    FileSystemAssociationInfo:
+      type: object
+      properties:
+        FileSystemAssociationARN:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationARN'
+            - description: The Amazon Resource Name (ARN) of the file system association.
+        LocationARN:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemLocationARN'
+            - description: 'The ARN of the backend Amazon FSx file system used for storing file data. For information, see <a href="https://docs.aws.amazon.com/fsx/latest/APIReference/API_FileSystem.html">FileSystem</a> in the <i>Amazon FSx API Reference</i>.'
+        FileSystemAssociationStatus:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationStatus'
+            - description: 'The status of the file system association. Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | <code>FORCE_DELETING</code> | <code>MISCONFIGURED</code> | <code>UPDATING</code> | <code>UNAVAILABLE</code> '
+        AuditDestinationARN:
+          allOf:
+            - $ref: '#/components/schemas/AuditDestinationARN'
+            - description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by key name. Each tag is a key-value pair.'
+        CacheAttributes:
+          $ref: '#/components/schemas/CacheAttributes'
+      description: Describes the object returned by <code>DescribeFileSystemAssociations</code> that describes a created file system association.
+    FileSystemAssociationSummary:
+      type: object
+      properties:
+        FileSystemAssociationId:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationId'
+            - description: The ID of the file system association.
+        FileSystemAssociationARN:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationARN'
+            - description: The Amazon Resource Name (ARN) of the file system association.
+        FileSystemAssociationStatus:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemAssociationStatus'
+            - description: 'The status of the file share. Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | <code>FORCE_DELETING</code> | <code>MISCONFIGURED</code> | <code>UPDATING</code> | <code>UNAVAILABLE</code> '
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
+      description: 'Gets the summary returned by <code>ListFileSystemAssociation</code>, which is a summary of a created file system association.'
+    FileSystemAssociationSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FileSystemAssociationSummary'
     Folder:
       type: string
       minLength: 1
@@ -7825,11 +8277,11 @@ components:
         CacheAttributes:
           allOf:
             - $ref: '#/components/schemas/CacheAttributes'
-            - description: Refresh cache information.
+            - description: Refresh cache information for the file share.
         NotificationPolicy:
           allOf:
             - $ref: '#/components/schemas/NotificationPolicy'
-            - description: The notification policy of the file share.
+            - description: '<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it''s best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\"Upload\": {\"SettlingTimeInSeconds\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>'
       description: 'The Unix file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported in file gateways.'
     NotificationId:
       type: string
@@ -7926,20 +8378,20 @@ components:
             - description: Indicates whether <code>AccessBasedEnumeration</code> is enabled.
         AdminUserList:
           allOf:
-            - $ref: '#/components/schemas/FileShareUserList'
+            - $ref: '#/components/schemas/UserList'
             - description: 'A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         ValidUserList:
           allOf:
-            - $ref: '#/components/schemas/FileShareUserList'
+            - $ref: '#/components/schemas/UserList'
             - description: 'A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         InvalidUserList:
           allOf:
-            - $ref: '#/components/schemas/FileShareUserList'
+            - $ref: '#/components/schemas/UserList'
             - description: 'A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         AuditDestinationARN:
           allOf:
             - $ref: '#/components/schemas/AuditDestinationARN'
-            - description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
+            - description: The Amazon Resource Name (ARN) of the storage used for audit logs.
         Authentication:
           $ref: '#/components/schemas/Authentication'
         CaseSensitivity:
@@ -7957,11 +8409,11 @@ components:
         CacheAttributes:
           allOf:
             - $ref: '#/components/schemas/CacheAttributes'
-            - description: Refresh cache information.
+            - description: Refresh cache information for the file share.
         NotificationPolicy:
           allOf:
             - $ref: '#/components/schemas/NotificationPolicy'
-            - description: The notification policy of the file share.
+            - description: '<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it''s best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\"Upload\": {\"SettlingTimeInSeconds\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>'
       description: 'The Windows file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported for file gateways.'
     SMBGuestPassword:
       type: string
@@ -8230,6 +8682,10 @@ components:
             - $ref: '#/components/schemas/TapeRecoveryPointStatus'
             - description: The status of the virtual tapes.
       description: Describes a recovery point.
+    UserListUser:
+      type: string
+      minLength: 1
+      maxLength: 64
     VTLDeviceType:
       type: string
     VTLDeviceVendor:

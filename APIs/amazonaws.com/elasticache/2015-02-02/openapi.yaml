@@ -118,7 +118,7 @@ paths:
     get:
       x-aws-operation-name: AddTagsToResource
       operationId: GET_AddTagsToResource
-      description: '<p>Adds up to 50 cost allocation tags to the named resource. A cost allocation tag is a key-value pair where the key and value are case-sensitive. You can use cost allocation tags to categorize and track your AWS costs.</p> <p> When you apply tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html">Using Cost Allocation Tags in Amazon ElastiCache</a> in the <i>ElastiCache User Guide</i>.</p>'
+      description: '<p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html">Resource-level permissions</a>.</p> <p> For example, you can use cost-allocation tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html">Using Cost Allocation Tags in Amazon ElastiCache</a> in the <i>ElastiCache User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -133,18 +133,66 @@ paths:
               schema:
                 $ref: '#/components/schemas/CacheClusterNotFoundFault'
         '481':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '482':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '483':
+          description: CacheSubnetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
+        '484':
+          description: InvalidReplicationGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
+        '485':
+          description: ReplicationGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '486':
+          description: ReservedCacheNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodeNotFoundFault'
+        '487':
           description: SnapshotNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/SnapshotNotFoundFault'
-        '482':
+        '488':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '489':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '490':
           description: TagQuotaPerResourceExceeded
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
-        '483':
+        '491':
           description: InvalidARNFault
           content:
             text/xml:
@@ -160,7 +208,7 @@ paths:
         - name: Tags
           in: query
           required: true
-          description: A list of cost allocation tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value.
+          description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
           schema:
             type: array
             items:
@@ -193,7 +241,7 @@ paths:
     post:
       x-aws-operation-name: AddTagsToResource
       operationId: POST_AddTagsToResource
-      description: '<p>Adds up to 50 cost allocation tags to the named resource. A cost allocation tag is a key-value pair where the key and value are case-sensitive. You can use cost allocation tags to categorize and track your AWS costs.</p> <p> When you apply tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html">Using Cost Allocation Tags in Amazon ElastiCache</a> in the <i>ElastiCache User Guide</i>.</p>'
+      description: '<p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html">Resource-level permissions</a>.</p> <p> For example, you can use cost-allocation tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html">Using Cost Allocation Tags in Amazon ElastiCache</a> in the <i>ElastiCache User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -208,18 +256,66 @@ paths:
               schema:
                 $ref: '#/components/schemas/CacheClusterNotFoundFault'
         '481':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '482':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '483':
+          description: CacheSubnetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
+        '484':
+          description: InvalidReplicationGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
+        '485':
+          description: ReplicationGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '486':
+          description: ReservedCacheNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodeNotFoundFault'
+        '487':
           description: SnapshotNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/SnapshotNotFoundFault'
-        '482':
+        '488':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '489':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '490':
           description: TagQuotaPerResourceExceeded
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
-        '483':
+        '491':
           description: InvalidARNFault
           content:
             text/xml:
@@ -768,12 +864,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidSnapshotStateFault'
         '484':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '485':
           description: InvalidParameterValueException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
-        '485':
+        '486':
           description: InvalidParameterCombinationException
           content:
             text/xml:
@@ -795,7 +897,7 @@ paths:
         - name: TargetBucket
           in: query
           required: false
-          description: '<p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.</p> <p>When using this parameter to export a snapshot, be sure Amazon ElastiCache has the needed permissions to this S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the <i>Amazon ElastiCache User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html">Exporting a Snapshot</a> in the <i>Amazon ElastiCache User Guide</i>.</p>'
+          description: '<p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.</p> <p>When using this parameter to export a snapshot, be sure Amazon ElastiCache has the needed permissions to this S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the <i>Amazon ElastiCache User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html">Exporting a Snapshot</a> in the <i>Amazon ElastiCache User Guide</i>.</p>'
           schema:
             type: string
         - name: KmsKeyId
@@ -804,6 +906,17 @@ paths:
           description: The ID of the KMS key used to encrypt the target snapshot.
           schema:
             type: string
+        - name: Tags
+          in: query
+          required: false
+          description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Tag'
+                - xml:
+                    name: Tag
         - name: Action
           in: query
           required: true
@@ -862,12 +975,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidSnapshotStateFault'
         '484':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '485':
           description: InvalidParameterValueException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
-        '485':
+        '486':
           description: InvalidParameterCombinationException
           content:
             text/xml:
@@ -1089,7 +1208,7 @@ paths:
         - name: Tags
           in: query
           required: false
-          description: A list of cost allocation tags to be added to this resource.
+          description: A list of tags to be added to this resource.
           schema:
             type: array
             items:
@@ -1350,12 +1469,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidCacheParameterGroupStateFault'
         '483':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '484':
           description: InvalidParameterValueException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
-        '484':
+        '485':
           description: InvalidParameterCombinationException
           content:
             text/xml:
@@ -1380,6 +1505,17 @@ paths:
           description: A user-specified description for the cache parameter group.
           schema:
             type: string
+        - name: Tags
+          in: query
+          required: false
+          description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Tag'
+                - xml:
+                    name: Tag
         - name: Action
           in: query
           required: true
@@ -1432,12 +1568,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidCacheParameterGroupStateFault'
         '483':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '484':
           description: InvalidParameterValueException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
-        '484':
+        '485':
           description: InvalidParameterCombinationException
           content:
             text/xml:
@@ -1488,12 +1630,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/CacheSecurityGroupQuotaExceededFault'
         '482':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '483':
           description: InvalidParameterValueException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
-        '483':
+        '484':
           description: InvalidParameterCombinationException
           content:
             text/xml:
@@ -1512,6 +1660,17 @@ paths:
           description: A description for the cache security group.
           schema:
             type: string
+        - name: Tags
+          in: query
+          required: false
+          description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Tag'
+                - xml:
+                    name: Tag
         - name: Action
           in: query
           required: true
@@ -1558,12 +1717,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/CacheSecurityGroupQuotaExceededFault'
         '482':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '483':
           description: InvalidParameterValueException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
-        '483':
+        '484':
           description: InvalidParameterCombinationException
           content:
             text/xml:
@@ -1620,12 +1785,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/CacheSubnetQuotaExceededFault'
         '483':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '484':
           description: InvalidSubnet
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidSubnet'
-        '484':
+        '485':
           description: SubnetNotAllowedFault
           content:
             text/xml:
@@ -1655,6 +1826,17 @@ paths:
                 - $ref: '#/components/schemas/String'
                 - xml:
                     name: SubnetIdentifier
+        - name: Tags
+          in: query
+          required: false
+          description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Tag'
+                - xml:
+                    name: Tag
         - name: Action
           in: query
           required: true
@@ -1707,12 +1889,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/CacheSubnetQuotaExceededFault'
         '483':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '484':
           description: InvalidSubnet
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidSubnet'
-        '484':
+        '485':
           description: SubnetNotAllowedFault
           content:
             text/xml:
@@ -1742,7 +1930,7 @@ paths:
     get:
       x-aws-operation-name: CreateGlobalReplicationGroup
       operationId: GET_CreateGlobalReplicationGroup
-      description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
+      description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1784,13 +1972,13 @@ paths:
         - name: GlobalReplicationGroupIdSuffix
           in: query
           required: true
-          description: '<p>The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix to the Global Datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global Datastore ID created in the US-West-1 region will begin with "dsdfu" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global Datastore name across multiple regions. </p> <p>For a full list of AWS Regions and their respective Global Datastore iD prefixes, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html">Using the AWS CLI with Global Datastores </a>.</p>'
+          description: '<p>The suffix name of a Global datastore. Amazon ElastiCache automatically applies a prefix to the Global datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global datastore ID created in the US-West-1 region will begin with "dsdfu" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global datastore name across multiple regions. </p> <p>For a full list of AWS Regions and their respective Global datastore iD prefixes, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html">Using the AWS CLI with Global datastores </a>.</p>'
           schema:
             type: string
         - name: GlobalReplicationGroupDescription
           in: query
           required: false
-          description: Provides details of the Global Datastore
+          description: Provides details of the Global datastore
           schema:
             type: string
         - name: PrimaryReplicationGroupId
@@ -1824,7 +2012,7 @@ paths:
     post:
       x-aws-operation-name: CreateGlobalReplicationGroup
       operationId: POST_CreateGlobalReplicationGroup
-      description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
+      description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1886,7 +2074,7 @@ paths:
     get:
       x-aws-operation-name: CreateReplicationGroup
       operationId: GET_CreateReplicationGroup
-      description: '<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p> <p>This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global Datastore.</p> <p>A Redis (cluster mode disabled) replication group is a collection of clusters, where one of the clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas.</p> <p>A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed. </p> <p>The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between 83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html">Creating a Subnet Group</a>. For versions below 5.0.6, the limit is 250 per cluster.</p> <p>To request a limit increase, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">AWS Service Limits</a> and choose the limit type <b>Nodes per cluster per instance type</b>. </p> <p>When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. If you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis'' scaling. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html">Scaling ElastiCache for Redis Clusters</a> in the <i>ElastiCache User Guide</i>.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
+      description: '<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p> <p>This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global datastore.</p> <p>A Redis (cluster mode disabled) replication group is a collection of clusters, where one of the clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas.</p> <p>A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed. </p> <p>The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between 83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html">Creating a Subnet Group</a>. For versions below 5.0.6, the limit is 250 per cluster.</p> <p>To request a limit increase, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">AWS Service Limits</a> and choose the limit type <b>Nodes per cluster per instance type</b>. </p> <p>When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. If you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis'' scaling. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html">Scaling ElastiCache for Redis Clusters</a> in the <i>ElastiCache User Guide</i>.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2024,7 +2212,7 @@ paths:
         - name: GlobalReplicationGroupId
           in: query
           required: false
-          description: The name of the Global Datastore
+          description: The name of the Global datastore
           schema:
             type: string
         - name: PrimaryClusterId
@@ -2140,7 +2328,7 @@ paths:
         - name: Tags
           in: query
           required: false
-          description: 'A list of cost allocation tags to be added to this resource. Tags are comma-separated key,value pairs (e.g. Key=<code>myKey</code>, Value=<code>myKeyValue</code>. You can include multiple tags as shown following: Key=<code>myKey</code>, Value=<code>myKeyValue</code> Key=<code>mySecondKey</code>, Value=<code>mySecondKeyValue</code>.'
+          description: 'A list of tags to be added to this resource. Tags are comma-separated key,value pairs (e.g. Key=<code>myKey</code>, Value=<code>myKeyValue</code>. You can include multiple tags as shown following: Key=<code>myKey</code>, Value=<code>myKeyValue</code> Key=<code>mySecondKey</code>, Value=<code>mySecondKeyValue</code>. Tags on replication groups will be replicated to all nodes.'
           schema:
             type: array
             items:
@@ -2259,7 +2447,7 @@ paths:
     post:
       x-aws-operation-name: CreateReplicationGroup
       operationId: POST_CreateReplicationGroup
-      description: '<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p> <p>This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global Datastore.</p> <p>A Redis (cluster mode disabled) replication group is a collection of clusters, where one of the clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas.</p> <p>A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed. </p> <p>The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between 83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html">Creating a Subnet Group</a>. For versions below 5.0.6, the limit is 250 per cluster.</p> <p>To request a limit increase, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">AWS Service Limits</a> and choose the limit type <b>Nodes per cluster per instance type</b>. </p> <p>When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. If you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis'' scaling. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html">Scaling ElastiCache for Redis Clusters</a> in the <i>ElastiCache User Guide</i>.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
+      description: '<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p> <p>This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global datastore.</p> <p>A Redis (cluster mode disabled) replication group is a collection of clusters, where one of the clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas.</p> <p>A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed. </p> <p>The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between 83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html">Creating a Subnet Group</a>. For versions below 5.0.6, the limit is 250 per cluster.</p> <p>To request a limit increase, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">AWS Service Limits</a> and choose the limit type <b>Nodes per cluster per instance type</b>. </p> <p>When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. If you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis'' scaling. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html">Scaling ElastiCache for Redis Clusters</a> in the <i>ElastiCache User Guide</i>.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2456,12 +2644,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/SnapshotFeatureNotSupportedFault'
         '487':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '488':
           description: InvalidParameterCombinationException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterCombinationException'
-        '488':
+        '489':
           description: InvalidParameterValueException
           content:
             text/xml:
@@ -2492,6 +2686,17 @@ paths:
           description: The ID of the KMS key used to encrypt the snapshot.
           schema:
             type: string
+        - name: Tags
+          in: query
+          required: false
+          description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Tag'
+                - xml:
+                    name: Tag
         - name: Action
           in: query
           required: true
@@ -2568,12 +2773,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/SnapshotFeatureNotSupportedFault'
         '487':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '488':
           description: InvalidParameterCombinationException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterCombinationException'
-        '488':
+        '489':
           description: InvalidParameterValueException
           content:
             text/xml:
@@ -2641,6 +2852,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '485':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
       parameters:
         - name: UserId
           in: query
@@ -2686,6 +2903,17 @@ paths:
           description: Indicates a password is not required for this user.
           schema:
             type: boolean
+        - name: Tags
+          in: query
+          required: false
+          description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Tag'
+                - xml:
+                    name: Tag
         - name: Action
           in: query
           required: true
@@ -2749,6 +2977,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '485':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
       requestBody:
         content:
           text/xml:
@@ -2817,6 +3051,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
+        '486':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
       parameters:
         - name: UserGroupId
           in: query
@@ -2840,6 +3080,17 @@ paths:
             items:
               $ref: '#/components/schemas/UserId'
             minItems: 1
+        - name: Tags
+          in: query
+          required: false
+          description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Tag'
+                - xml:
+                    name: Tag
         - name: Action
           in: query
           required: true
@@ -2909,6 +3160,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
+        '486':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
       requestBody:
         content:
           text/xml:
@@ -2933,7 +3190,7 @@ paths:
     get:
       x-aws-operation-name: DecreaseNodeGroupsInGlobalReplicationGroup
       operationId: GET_DecreaseNodeGroupsInGlobalReplicationGroup
-      description: Decreases the number of node groups in a Global Datastore
+      description: Decreases the number of node groups in a Global datastore
       responses:
         '200':
           description: Success
@@ -2969,7 +3226,7 @@ paths:
         - name: GlobalReplicationGroupId
           in: query
           required: true
-          description: The name of the Global Datastore
+          description: The name of the Global datastore
           schema:
             type: string
         - name: NodeGroupCount
@@ -3031,7 +3288,7 @@ paths:
     post:
       x-aws-operation-name: DecreaseNodeGroupsInGlobalReplicationGroup
       operationId: POST_DecreaseNodeGroupsInGlobalReplicationGroup
-      description: Decreases the number of node groups in a Global Datastore
+      description: Decreases the number of node groups in a Global datastore
       responses:
         '200':
           description: Success
@@ -3808,7 +4065,7 @@ paths:
     get:
       x-aws-operation-name: DeleteGlobalReplicationGroup
       operationId: GET_DeleteGlobalReplicationGroup
-      description: '<p>Deleting a Global Datastore is a two-step process: </p> <ul> <li> <p>First, you must <a>DisassociateGlobalReplicationGroup</a> to remove the secondary clusters in the Global Datastore.</p> </li> <li> <p>Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.</p> </li> </ul> <p>Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting <code>RetainPrimaryCluster=true</code>.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p>'
+      description: '<p>Deleting a Global datastore is a two-step process: </p> <ul> <li> <p>First, you must <a>DisassociateGlobalReplicationGroup</a> to remove the secondary clusters in the Global datastore.</p> </li> <li> <p>Once the Global datastore contains only the primary cluster, you can use the <code>DeleteGlobalReplicationGroup</code> API to delete the Global datastore while retainining the primary cluster using <code>RetainPrimaryReplicationGroup=true</code>.</p> </li> </ul> <p>Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting <code>RetainPrimaryReplicationGroup=true</code>. The primary cluster is never deleted when deleting a Global Datastore. It can only be deleted when it no longer is associated with any Global Datastore.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p>'
       responses:
         '200':
           description: Success
@@ -3838,7 +4095,7 @@ paths:
         - name: GlobalReplicationGroupId
           in: query
           required: true
-          description: The name of the Global Datastore
+          description: The name of the Global datastore
           schema:
             type: string
         - name: RetainPrimaryReplicationGroup
@@ -3872,7 +4129,7 @@ paths:
     post:
       x-aws-operation-name: DeleteGlobalReplicationGroup
       operationId: POST_DeleteGlobalReplicationGroup
-      description: '<p>Deleting a Global Datastore is a two-step process: </p> <ul> <li> <p>First, you must <a>DisassociateGlobalReplicationGroup</a> to remove the secondary clusters in the Global Datastore.</p> </li> <li> <p>Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.</p> </li> </ul> <p>Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting <code>RetainPrimaryCluster=true</code>.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p>'
+      description: '<p>Deleting a Global datastore is a two-step process: </p> <ul> <li> <p>First, you must <a>DisassociateGlobalReplicationGroup</a> to remove the secondary clusters in the Global datastore.</p> </li> <li> <p>Once the Global datastore contains only the primary cluster, you can use the <code>DeleteGlobalReplicationGroup</code> API to delete the Global datastore while retainining the primary cluster using <code>RetainPrimaryReplicationGroup=true</code>.</p> </li> </ul> <p>Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting <code>RetainPrimaryReplicationGroup=true</code>. The primary cluster is never deleted when deleting a Global Datastore. It can only be deleted when it no longer is associated with any Global Datastore.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p>'
       responses:
         '200':
           description: Success
@@ -5482,7 +5739,7 @@ paths:
     get:
       x-aws-operation-name: DescribeGlobalReplicationGroups
       operationId: GET_DescribeGlobalReplicationGroups
-      description: 'Returns information about a particular global replication group. If no identifier is specified, returns information about all Global Datastores. '
+      description: 'Returns information about a particular global replication group. If no identifier is specified, returns information about all Global datastores. '
       responses:
         '200':
           description: Success
@@ -5512,7 +5769,7 @@ paths:
         - name: GlobalReplicationGroupId
           in: query
           required: false
-          description: The name of the Global Datastore
+          description: The name of the Global datastore
           schema:
             type: string
         - name: MaxRecords
@@ -5530,7 +5787,7 @@ paths:
         - name: ShowMemberInfo
           in: query
           required: false
-          description: Returns the list of members that comprise the Global Datastore.
+          description: Returns the list of members that comprise the Global datastore.
           schema:
             type: boolean
         - name: Action
@@ -5558,7 +5815,7 @@ paths:
     post:
       x-aws-operation-name: DescribeGlobalReplicationGroups
       operationId: POST_DescribeGlobalReplicationGroups
-      description: 'Returns information about a particular global replication group. If no identifier is specified, returns information about all Global Datastores. '
+      description: 'Returns information about a particular global replication group. If no identifier is specified, returns information about all Global datastores. '
       responses:
         '200':
           description: Success
@@ -6820,7 +7077,7 @@ paths:
     get:
       x-aws-operation-name: DisassociateGlobalReplicationGroup
       operationId: GET_DisassociateGlobalReplicationGroup
-      description: 'Remove a secondary cluster from the Global Datastore using the Global Datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.'
+      description: 'Remove a secondary cluster from the Global datastore using the Global datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.'
       responses:
         '200':
           description: Success
@@ -6856,19 +7113,19 @@ paths:
         - name: GlobalReplicationGroupId
           in: query
           required: true
-          description: The name of the Global Datastore
+          description: The name of the Global datastore
           schema:
             type: string
         - name: ReplicationGroupId
           in: query
           required: true
-          description: The name of the secondary cluster you wish to remove from the Global Datastore
+          description: The name of the secondary cluster you wish to remove from the Global datastore
           schema:
             type: string
         - name: ReplicationGroupRegion
           in: query
           required: true
-          description: The AWS region of secondary cluster you wish to remove from the Global Datastore
+          description: The AWS region of secondary cluster you wish to remove from the Global datastore
           schema:
             type: string
         - name: Action
@@ -6896,7 +7153,7 @@ paths:
     post:
       x-aws-operation-name: DisassociateGlobalReplicationGroup
       operationId: POST_DisassociateGlobalReplicationGroup
-      description: 'Remove a secondary cluster from the Global Datastore using the Global Datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.'
+      description: 'Remove a secondary cluster from the Global datastore using the Global datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.'
       responses:
         '200':
           description: Success
@@ -6988,13 +7245,13 @@ paths:
         - name: GlobalReplicationGroupId
           in: query
           required: true
-          description: The name of the Global Datastore
+          description: The name of the Global datastore
           schema:
             type: string
         - name: PrimaryRegion
           in: query
           required: true
-          description: The AWS region of the primary cluster of the Global Datastore
+          description: The AWS region of the primary cluster of the Global datastore
           schema:
             type: string
         - name: PrimaryReplicationGroupId
@@ -7084,7 +7341,7 @@ paths:
     get:
       x-aws-operation-name: IncreaseNodeGroupsInGlobalReplicationGroup
       operationId: GET_IncreaseNodeGroupsInGlobalReplicationGroup
-      description: Increase the number of node groups in the Global Datastore
+      description: Increase the number of node groups in the Global datastore
       responses:
         '200':
           description: Success
@@ -7114,7 +7371,7 @@ paths:
         - name: GlobalReplicationGroupId
           in: query
           required: true
-          description: The name of the Global Datastore
+          description: The name of the Global datastore
           schema:
             type: string
         - name: NodeGroupCount
@@ -7126,7 +7383,7 @@ paths:
         - name: RegionalConfigurations
           in: query
           required: false
-          description: 'Describes the replication group IDs, the AWS regions where they are stored and the shard configuration for each that comprise the Global Datastore'
+          description: 'Describes the replication group IDs, the AWS regions where they are stored and the shard configuration for each that comprise the Global datastore'
           schema:
             type: array
             items:
@@ -7165,7 +7422,7 @@ paths:
     post:
       x-aws-operation-name: IncreaseNodeGroupsInGlobalReplicationGroup
       operationId: POST_IncreaseNodeGroupsInGlobalReplicationGroup
-      description: Increase the number of node groups in the Global Datastore
+      description: Increase the number of node groups in the Global datastore
       responses:
         '200':
           description: Success
@@ -7580,7 +7837,7 @@ paths:
     get:
       x-aws-operation-name: ListTagsForResource
       operationId: GET_ListTagsForResource
-      description: '<p>Lists all cost allocation tags currently on the named resource. A <code>cost allocation tag</code> is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs.</p> <p>If the cluster is not in the <i>available</i> state, <code>ListTagsForResource</code> returns an error.</p> <p>You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html">Monitoring Costs with Tags</a>.</p>'
+      description: '<p>Lists all tags currently on a named resource.</p> <p> A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html">Resource-level permissions</a>.</p> <p>If the cluster is not in the <i>available</i> state, <code>ListTagsForResource</code> returns an error.</p>'
       responses:
         '200':
           description: Success
@@ -7595,12 +7852,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/CacheClusterNotFoundFault'
         '481':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '482':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '483':
+          description: CacheSubnetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
+        '484':
+          description: InvalidReplicationGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
+        '485':
+          description: ReplicationGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '486':
+          description: ReservedCacheNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodeNotFoundFault'
+        '487':
           description: SnapshotNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/SnapshotNotFoundFault'
-        '482':
+        '488':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '489':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '490':
           description: InvalidARNFault
           content:
             text/xml:
@@ -7638,7 +7943,7 @@ paths:
     post:
       x-aws-operation-name: ListTagsForResource
       operationId: POST_ListTagsForResource
-      description: '<p>Lists all cost allocation tags currently on the named resource. A <code>cost allocation tag</code> is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs.</p> <p>If the cluster is not in the <i>available</i> state, <code>ListTagsForResource</code> returns an error.</p> <p>You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html">Monitoring Costs with Tags</a>.</p>'
+      description: '<p>Lists all tags currently on a named resource.</p> <p> A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html">Resource-level permissions</a>.</p> <p>If the cluster is not in the <i>available</i> state, <code>ListTagsForResource</code> returns an error.</p>'
       responses:
         '200':
           description: Success
@@ -7653,12 +7958,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/CacheClusterNotFoundFault'
         '481':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '482':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '483':
+          description: CacheSubnetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
+        '484':
+          description: InvalidReplicationGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
+        '485':
+          description: ReplicationGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '486':
+          description: ReservedCacheNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodeNotFoundFault'
+        '487':
           description: SnapshotNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/SnapshotNotFoundFault'
-        '482':
+        '488':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '489':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '490':
           description: InvalidARNFault
           content:
             text/xml:
@@ -8319,7 +8672,7 @@ paths:
     get:
       x-aws-operation-name: ModifyGlobalReplicationGroup
       operationId: GET_ModifyGlobalReplicationGroup
-      description: Modifies the settings for a Global Datastore.
+      description: Modifies the settings for a Global datastore.
       responses:
         '200':
           description: Success
@@ -8349,7 +8702,7 @@ paths:
         - name: GlobalReplicationGroupId
           in: query
           required: true
-          description: The name of the Global Datastore
+          description: The name of the Global datastore
           schema:
             type: string
         - name: ApplyImmediately
@@ -8361,13 +8714,13 @@ paths:
         - name: CacheNodeType
           in: query
           required: false
-          description: A valid cache node type that you want to scale this Global Datastore to.
+          description: A valid cache node type that you want to scale this Global datastore to.
           schema:
             type: string
         - name: EngineVersion
           in: query
           required: false
-          description: 'The upgraded version of the cache engine to be run on the clusters in the Global Datastore. '
+          description: 'The upgraded version of the cache engine to be run on the clusters in the Global datastore. '
           schema:
             type: string
         - name: CacheParameterGroupName
@@ -8379,7 +8732,7 @@ paths:
         - name: GlobalReplicationGroupDescription
           in: query
           required: false
-          description: A description of the Global Datastore
+          description: A description of the Global datastore
           schema:
             type: string
         - name: AutomaticFailoverEnabled
@@ -8413,7 +8766,7 @@ paths:
     post:
       x-aws-operation-name: ModifyGlobalReplicationGroup
       operationId: POST_ModifyGlobalReplicationGroup
-      description: Modifies the settings for a Global Datastore.
+      description: Modifies the settings for a Global datastore.
       responses:
         '200':
           description: Success
@@ -8601,7 +8954,7 @@ paths:
         - name: MultiAZEnabled
           in: query
           required: false
-          description: 'A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html">Minimizing Downtime: Multi-AZ</a>.'
+          description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
           schema:
             type: boolean
         - name: NodeGroupId
@@ -9472,12 +9825,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReservedCacheNodeQuotaExceededFault'
         '483':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '484':
           description: InvalidParameterValueException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
-        '484':
+        '485':
           description: InvalidParameterCombinationException
           content:
             text/xml:
@@ -9502,6 +9861,17 @@ paths:
           description: '<p>The number of cache node instances to reserve.</p> <p>Default: <code>1</code> </p>'
           schema:
             type: integer
+        - name: Tags
+          in: query
+          required: false
+          description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Tag'
+                - xml:
+                    name: Tag
         - name: Action
           in: query
           required: true
@@ -9554,12 +9924,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReservedCacheNodeQuotaExceededFault'
         '483':
+          description: TagQuotaPerResourceExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '484':
           description: InvalidParameterValueException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
-        '484':
+        '485':
           description: InvalidParameterCombinationException
           content:
             text/xml:
@@ -9619,7 +9995,7 @@ paths:
         - name: GlobalReplicationGroupId
           in: query
           required: true
-          description: The name of the Global Datastore
+          description: The name of the Global datastore
           schema:
             type: string
         - name: ApplyImmediately
@@ -9810,7 +10186,7 @@ paths:
     get:
       x-aws-operation-name: RemoveTagsFromResource
       operationId: GET_RemoveTagsFromResource
-      description: Removes the tags identified by the <code>TagKeys</code> list from the named resource.
+      description: 'Removes the tags identified by the <code>TagKeys</code> list from the named resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html">Resource-level permissions</a>.'
       responses:
         '200':
           description: Success
@@ -9825,18 +10201,66 @@ paths:
               schema:
                 $ref: '#/components/schemas/CacheClusterNotFoundFault'
         '481':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '482':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '483':
+          description: CacheSubnetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
+        '484':
+          description: InvalidReplicationGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
+        '485':
+          description: ReplicationGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '486':
+          description: ReservedCacheNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodeNotFoundFault'
+        '487':
           description: SnapshotNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/SnapshotNotFoundFault'
-        '482':
+        '488':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '489':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '490':
           description: InvalidARNFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidARNFault'
-        '483':
+        '491':
           description: TagNotFoundFault
           content:
             text/xml:
@@ -9882,7 +10306,7 @@ paths:
     post:
       x-aws-operation-name: RemoveTagsFromResource
       operationId: POST_RemoveTagsFromResource
-      description: Removes the tags identified by the <code>TagKeys</code> list from the named resource.
+      description: 'Removes the tags identified by the <code>TagKeys</code> list from the named resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html">Resource-level permissions</a>.'
       responses:
         '200':
           description: Success
@@ -9897,18 +10321,66 @@ paths:
               schema:
                 $ref: '#/components/schemas/CacheClusterNotFoundFault'
         '481':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '482':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '483':
+          description: CacheSubnetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
+        '484':
+          description: InvalidReplicationGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
+        '485':
+          description: ReplicationGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '486':
+          description: ReservedCacheNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodeNotFoundFault'
+        '487':
           description: SnapshotNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/SnapshotNotFoundFault'
-        '482':
+        '488':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '489':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '490':
           description: InvalidARNFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidARNFault'
-        '483':
+        '491':
           description: TagNotFoundFault
           content:
             text/xml:
@@ -10602,7 +11074,7 @@ components:
         TagList:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: A list of cost allocation tags as key-value pairs.
+            - description: A list of tags as key-value pairs.
       description: 'Represents the output from the <code>AddTagsToResource</code>, <code>ListTagsForResource</code>, and <code>RemoveTagsFromResource</code> operations.'
     Tag:
       type: object
@@ -10615,9 +11087,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The tag's value. May be null.
-      description: A cost allocation Tag that can be added to an ElastiCache cluster or replication group. Tags are composed of a Key/Value pair. A tag with a null Value is permitted.
+      description: 'A tag that can be added to an ElastiCache cluster or replication group. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. A tag with a null Value is permitted.'
     CacheClusterNotFoundFault: {}
+    CacheParameterGroupNotFoundFault: {}
+    CacheSecurityGroupNotFoundFault: {}
+    CacheSubnetGroupNotFoundFault: {}
+    InvalidReplicationGroupStateFault: {}
+    ReplicationGroupNotFoundFault: {}
+    ReservedCacheNodeNotFoundFault: {}
     SnapshotNotFoundFault: {}
+    UserNotFoundFault: {}
+    UserGroupNotFoundFault: {}
     TagQuotaPerResourceExceeded: {}
     InvalidARNFault: {}
     AuthorizeCacheSecurityGroupIngressResult:
@@ -10625,7 +11105,6 @@ components:
       properties:
         CacheSecurityGroup:
           $ref: '#/components/schemas/CacheSecurityGroup'
-    CacheSecurityGroupNotFoundFault: {}
     InvalidCacheSecurityGroupStateFault: {}
     AuthorizationAlreadyExistsFault: {}
     InvalidParameterValueException: {}
@@ -10649,8 +11128,6 @@ components:
       properties:
         ReplicationGroup:
           $ref: '#/components/schemas/ReplicationGroup'
-    ReplicationGroupNotFoundFault: {}
-    InvalidReplicationGroupStateFault: {}
     ReplicationGroupNotUnderMigrationFault: {}
     CopySnapshotResult:
       type: object
@@ -10667,11 +11144,9 @@ components:
           $ref: '#/components/schemas/CacheCluster'
     CacheClusterAlreadyExistsFault: {}
     InsufficientCacheClusterCapacityFault: {}
-    CacheSubnetGroupNotFoundFault: {}
     ClusterQuotaForCustomerExceededFault: {}
     NodeQuotaForClusterExceededFault: {}
     NodeQuotaForCustomerExceededFault: {}
-    CacheParameterGroupNotFoundFault: {}
     InvalidVPCNetworkStateFault: {}
     CreateCacheParameterGroupResult:
       type: object
@@ -10749,7 +11224,6 @@ components:
     InvalidCacheClusterStateFault: {}
     ReplicationGroupAlreadyExistsFault: {}
     InvalidUserGroupStateFault: {}
-    UserGroupNotFoundFault: {}
     NodeGroupsPerReplicationGroupQuotaExceededFault: {}
     GlobalReplicationGroupNotFoundFault: {}
     InvalidGlobalReplicationGroupStateFault: {}
@@ -10832,7 +11306,6 @@ components:
       type: string
       pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
       minLength: 1
-    UserNotFoundFault: {}
     UserGroupAlreadyExistsFault: {}
     DefaultUserRequired: {}
     UserGroupQuotaExceededFault: {}
@@ -11021,7 +11494,6 @@ components:
             - $ref: '#/components/schemas/ReservedCacheNodeList'
             - description: A list of reserved cache nodes. Each element in the list contains detailed information about one node.
       description: Represents the output of a <code>DescribeReservedCacheNodes</code> operation.
-    ReservedCacheNodeNotFoundFault: {}
     ReservedCacheNodesOfferingMessage:
       type: object
       properties:
@@ -11322,7 +11794,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: A list of cost allocation tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value.
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
       description: Represents the input of an AddTagsToResource operation.
     NodeTypeList:
       type: array
@@ -11898,7 +12370,7 @@ components:
         IsGlobal:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the parameter group is associated with a Global Datastore
+            - description: Indicates whether the parameter group is associated with a Global datastore
         ARN:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -12024,7 +12496,7 @@ components:
         GlobalReplicationGroupInfo:
           allOf:
             - $ref: '#/components/schemas/GlobalReplicationGroupInfo'
-            - description: The name of the Global Datastore and role of this replication group in the Global Datastore.
+            - description: The name of the Global datastore and role of this replication group in the Global datastore.
         Status:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -12140,11 +12612,15 @@ components:
         TargetBucket:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.</p> <p>When using this parameter to export a snapshot, be sure Amazon ElastiCache has the needed permissions to this S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the <i>Amazon ElastiCache User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html">Exporting a Snapshot</a> in the <i>Amazon ElastiCache User Guide</i>.</p>'
+            - description: '<p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.</p> <p>When using this parameter to export a snapshot, be sure Amazon ElastiCache has the needed permissions to this S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the <i>Amazon ElastiCache User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html">Exporting a Snapshot</a> in the <i>Amazon ElastiCache User Guide</i>.</p>'
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The ID of the KMS key used to encrypt the target snapshot.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
       description: Represents the input of a <code>CopySnapshotMessage</code> operation.
     Snapshot:
       type: object
@@ -12338,7 +12814,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: A list of cost allocation tags to be added to this resource.
+            - description: A list of tags to be added to this resource.
         SnapshotArns:
           allOf:
             - $ref: '#/components/schemas/SnapshotArnsList'
@@ -12408,6 +12884,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: A user-specified description for the cache parameter group.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
       description: Represents the input of a <code>CreateCacheParameterGroup</code> operation.
     CreateCacheSecurityGroupMessage:
       type: object
@@ -12424,6 +12904,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: A description for the cache security group.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
       description: Represents the input of a <code>CreateCacheSecurityGroup</code> operation.
     SubnetIdentifierList:
       type: array
@@ -12452,6 +12936,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SubnetIdentifierList'
             - description: A list of VPC subnet IDs for the cache subnet group.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
       description: Represents the input of a <code>CreateCacheSubnetGroup</code> operation.
     CreateGlobalReplicationGroupMessage:
       type: object
@@ -12463,11 +12951,11 @@ components:
         GlobalReplicationGroupIdSuffix:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix to the Global Datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global Datastore ID created in the US-West-1 region will begin with "dsdfu" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global Datastore name across multiple regions. </p> <p>For a full list of AWS Regions and their respective Global Datastore iD prefixes, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html">Using the AWS CLI with Global Datastores </a>.</p>'
+            - description: '<p>The suffix name of a Global datastore. Amazon ElastiCache automatically applies a prefix to the Global datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global datastore ID created in the US-West-1 region will begin with "dsdfu" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global datastore name across multiple regions. </p> <p>For a full list of AWS Regions and their respective Global datastore iD prefixes, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html">Using the AWS CLI with Global datastores </a>.</p>'
         GlobalReplicationGroupDescription:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Provides details of the Global Datastore
+            - description: Provides details of the Global datastore
         PrimaryReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -12478,19 +12966,19 @@ components:
         GlobalReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the Global Datastore
+            - description: The name of the Global datastore
         GlobalReplicationGroupDescription:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The optional description of the Global Datastore
+            - description: The optional description of the Global datastore
         Status:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The status of the Global Datastore
+            - description: The status of the Global datastore
         CacheNodeType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The cache node type of the Global Datastore
+            - description: The cache node type of the Global datastore
         Engine:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -12502,11 +12990,11 @@ components:
         Members:
           allOf:
             - $ref: '#/components/schemas/GlobalReplicationGroupMemberList'
-            - description: The replication groups that comprise the Global Datastore.
+            - description: The replication groups that comprise the Global datastore.
         ClusterEnabled:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: A flag that indicates whether the Global Datastore is cluster enabled.
+            - description: A flag that indicates whether the Global datastore is cluster enabled.
         GlobalNodeGroups:
           allOf:
             - $ref: '#/components/schemas/GlobalNodeGroupList'
@@ -12527,7 +13015,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The ARN (Amazon Resource Name) of the global replication group.
-      description: '<p>Consists of a primary cluster that accepts writes and an associated secondary cluster that resides in a different AWS region. The secondary cluster accepts only reads. The primary cluster automatically replicates updates to the secondary cluster.</p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> represents the name of the Global Datastore, which is what you use to associate a secondary cluster.</p> </li> </ul>'
+      description: '<p>Consists of a primary cluster that accepts writes and an associated secondary cluster that resides in a different AWS region. The secondary cluster accepts only reads. The primary cluster automatically replicates updates to the secondary cluster.</p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> represents the name of the Global datastore, which is what you use to associate a secondary cluster.</p> </li> </ul>'
     NodeGroupConfigurationList:
       type: array
       items:
@@ -12558,7 +13046,7 @@ components:
         GlobalReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the Global Datastore
+            - description: The name of the Global datastore
         PrimaryClusterId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -12622,7 +13110,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'A list of cost allocation tags to be added to this resource. Tags are comma-separated key,value pairs (e.g. Key=<code>myKey</code>, Value=<code>myKeyValue</code>. You can include multiple tags as shown following: Key=<code>myKey</code>, Value=<code>myKeyValue</code> Key=<code>mySecondKey</code>, Value=<code>mySecondKeyValue</code>.'
+            - description: 'A list of tags to be added to this resource. Tags are comma-separated key,value pairs (e.g. Key=<code>myKey</code>, Value=<code>myKeyValue</code>. You can include multiple tags as shown following: Key=<code>myKey</code>, Value=<code>myKeyValue</code> Key=<code>mySecondKey</code>, Value=<code>mySecondKeyValue</code>. Tags on replication groups will be replicated to all nodes.'
         SnapshotArns:
           allOf:
             - $ref: '#/components/schemas/SnapshotArnsList'
@@ -12698,6 +13186,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The ID of the KMS key used to encrypt the snapshot.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
       description: Represents the input of a <code>CreateSnapshot</code> operation.
     EngineType:
       type: string
@@ -12726,6 +13218,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/UserIdListInput'
             - description: The list of user IDs that belong to the user group.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
     UserName:
       type: string
       minLength: 1
@@ -12767,6 +13263,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: Indicates a password is not required for this user.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
     CustomerNodeEndpointList:
       type: array
       items:
@@ -12789,7 +13289,7 @@ components:
         GlobalReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the Global Datastore
+            - description: The name of the Global datastore
         NodeGroupCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -12902,7 +13402,7 @@ components:
         GlobalReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the Global Datastore
+            - description: The name of the Global datastore
         RetainPrimaryReplicationGroup:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -13174,7 +13674,7 @@ components:
         GlobalReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the Global Datastore
+            - description: The name of the Global datastore
         MaxRecords:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -13186,7 +13686,7 @@ components:
         ShowMemberInfo:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: Returns the list of members that comprise the Global Datastore.
+            - description: Returns the list of members that comprise the Global datastore.
     GlobalReplicationGroupList:
       type: array
       items:
@@ -13470,15 +13970,15 @@ components:
         GlobalReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the Global Datastore
+            - description: The name of the Global datastore
         ReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the secondary cluster you wish to remove from the Global Datastore
+            - description: The name of the secondary cluster you wish to remove from the Global datastore
         ReplicationGroupRegion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The AWS region of secondary cluster you wish to remove from the Global Datastore
+            - description: The AWS region of secondary cluster you wish to remove from the Global datastore
     Double:
       type: number
       format: double
@@ -13536,11 +14036,11 @@ components:
         GlobalReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the Global Datastore
+            - description: The name of the Global datastore
         PrimaryRegion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The AWS region of the primary cluster of the Global Datastore
+            - description: The AWS region of the primary cluster of the Global datastore
         PrimaryReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -13588,23 +14088,23 @@ components:
         GlobalReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the Global Datastore
+            - description: The name of the Global datastore
         GlobalReplicationGroupMemberRole:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The role of the replication group in a Global Datastore. Can be primary or secondary.
-      description: The name of the Global Datastore and role of this replication group in the Global Datastore.
+            - description: The role of the replication group in a Global datastore. Can be primary or secondary.
+      description: The name of the Global datastore and role of this replication group in the Global datastore.
     GlobalReplicationGroupMember:
       type: object
       properties:
         ReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The replication group id of the Global Datastore member.
+            - description: The replication group id of the Global datastore member.
         ReplicationGroupRegion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The AWS region of the Global Datastore member.
+            - description: The AWS region of the Global datastore member.
         Role:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -13617,7 +14117,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The status of the membership of the replication group.
-      description: 'A member of a Global Datastore. It contains the Replication Group Id, the AWS region and the role of the replication group. '
+      description: 'A member of a Global datastore. It contains the Replication Group Id, the AWS region and the role of the replication group. '
     RegionalConfigurationList:
       type: array
       items:
@@ -13636,7 +14136,7 @@ components:
         GlobalReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the Global Datastore
+            - description: The name of the Global datastore
         NodeGroupCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -13644,7 +14144,7 @@ components:
         RegionalConfigurations:
           allOf:
             - $ref: '#/components/schemas/RegionalConfigurationList'
-            - description: 'Describes the replication group IDs, the AWS regions where they are stored and the shard configuration for each that comprise the Global Datastore'
+            - description: 'Describes the replication group IDs, the AWS regions where they are stored and the shard configuration for each that comprise the Global datastore'
         ApplyImmediately:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -13835,7 +14335,7 @@ components:
         GlobalReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the Global Datastore
+            - description: The name of the Global datastore
         ApplyImmediately:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -13843,11 +14343,11 @@ components:
         CacheNodeType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: A valid cache node type that you want to scale this Global Datastore to.
+            - description: A valid cache node type that you want to scale this Global datastore to.
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The upgraded version of the cache engine to be run on the clusters in the Global Datastore. '
+            - description: 'The upgraded version of the cache engine to be run on the clusters in the Global datastore. '
         CacheParameterGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -13855,7 +14355,7 @@ components:
         GlobalReplicationGroupDescription:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: A description of the Global Datastore
+            - description: A description of the Global datastore
         AutomaticFailoverEnabled:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -13893,7 +14393,7 @@ components:
         MultiAZEnabled:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: 'A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html">Minimizing Downtime: Multi-AZ</a>.'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
         NodeGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -14343,6 +14843,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
             - description: '<p>The number of cache node instances to reserve.</p> <p>Default: <code>1</code> </p>'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
       description: Represents the input of a <code>PurchaseReservedCacheNodesOffering</code> operation.
     ReservedCacheNode:
       type: object
@@ -14410,7 +14914,7 @@ components:
         GlobalReplicationGroupId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the Global Datastore
+            - description: The name of the Global datastore
         ApplyImmediately:
           allOf:
             - $ref: '#/components/schemas/Boolean'
