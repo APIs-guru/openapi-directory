@@ -7,13 +7,13 @@ info:
     name: Twitter Developers
     url: https://developer.twitter.com/
     x-twitter: twitter
-  description: API Reference — v2
+  description: Twitter API v2 available endpoints
   license:
     name: Twitter Developer Agreement and Policy
     url: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   termsOfService: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
-  title: Early Access
-  version: "2.8"
+  title: Twitter API v2
+  version: "2.9"
   x-apisguru-categories:
     - social
   x-logo:
@@ -33,17 +33,12 @@ tags:
       description: Find out more
       url: https://developer.twitter.com/en/docs/twitter-api
     name: General
-  - description: APIs related to Search
-    externalDocs:
-      description: Find out more
-      url: https://developer.twitter.com/en/docs/twitter-api/tweets/search
-    name: Search
-  - description: APIs related to Tweets
+  - description: Endpoints related to retrieving, searching, and modifying Tweets
     externalDocs:
       description: Find out more
       url: https://developer.twitter.com/en/docs/twitter-api/tweets/lookup
     name: Tweets
-  - description: APIs related to Users
+  - description: Endpoints related to retrieving, managing relationships of Users
     externalDocs:
       description: Find out more
       url: https://developer.twitter.com/en/docs/twitter-api/users/lookup
@@ -102,12 +97,12 @@ paths:
       security:
         - BearerToken: []
           UserToken: []
-      summary: Returns hydrated Tweet objects
+      summary: Tweet lookup by Tweet IDs
       tags:
         - Tweets
   /2/tweets/sample/stream:
     get:
-      description: Streams a deterministic 1% of public tweets.
+      description: Streams a deterministic 1% of public Tweets.
       operationId: sampleStream
       parameters:
         - $ref: "#/components/parameters/TweetExpansionsParameter"
@@ -126,7 +121,9 @@ paths:
             stream of individual JSON Tweet payloads.
         default:
           $ref: "#/components/responses/HttpErrorResponse"
-      summary: Streams a deterministic 1% of public tweets.
+      security:
+        - BearerToken: []
+      summary: Sample stream
       tags:
         - Tweets
   /2/tweets/search/all:
@@ -139,6 +136,7 @@ paths:
           name: query
           required: true
           schema:
+            example: (from:TwitterDev OR from:TwitterAPI) has:media -is:retweet
             maxLength: 1024
             minLength: 1
             type: string
@@ -243,9 +241,8 @@ paths:
           $ref: "#/components/responses/HttpErrorResponse"
       security:
         - BearerToken: []
-      summary: Returns Tweets that match a search query.
+      summary: Full-archive search
       tags:
-        - Search
         - Tweets
   /2/tweets/search/recent:
     get:
@@ -257,6 +254,7 @@ paths:
           name: query
           required: true
           schema:
+            example: (from:TwitterDev OR from:TwitterAPI) has:media -is:retweet
             maxLength: 512
             minLength: 1
             type: string
@@ -330,13 +328,13 @@ paths:
           $ref: "#/components/responses/HttpErrorResponse"
       security:
         - BearerToken: []
-      summary: Returns Tweets from the last 7 days that match a search query.
+          UserToken: []
+      summary: Recent search
       tags:
-        - Search
         - Tweets
   /2/tweets/search/stream:
     get:
-      description: Streams tweets matching a user's active rule set.
+      description: Streams Tweets matching the stream's active rule set.
       operationId: searchStream
       parameters:
         - $ref: "#/components/parameters/TweetExpansionsParameter"
@@ -355,7 +353,9 @@ paths:
             stream of individual JSON Tweet payloads.
         default:
           $ref: "#/components/responses/HttpErrorResponse"
-      summary: Streams tweets matching a user's active rule set.
+      security:
+        - BearerToken: []
+      summary: Filtered stream
       tags:
         - Tweets
   /2/tweets/search/stream/rules:
@@ -391,9 +391,10 @@ paths:
           description: The request was successful
         default:
           $ref: "#/components/responses/HttpErrorResponse"
-      summary: Returns rules from a user's active rule set.
+      security:
+        - BearerToken: []
+      summary: Rules lookup
       tags:
-        - Rules
         - Tweets
     post:
       description: Add or delete rules from a user's active rule set. Users can
@@ -427,9 +428,10 @@ paths:
           description: The request was successful
         default:
           $ref: "#/components/responses/HttpErrorResponse"
-      summary: Add or delete rules from a user's active rule set.
+      security:
+        - BearerToken: []
+      summary: Add/Delete rules
       tags:
-        - Rules
         - Tweets
   "/2/tweets/{id}":
     get:
@@ -461,12 +463,12 @@ paths:
       security:
         - BearerToken: []
           UserToken: []
-      summary: Returns hydrated Tweet objects
+      summary: Tweet lookup by Tweet ID
       tags:
         - Tweets
   "/2/tweets/{id}/hidden":
     put:
-      description: Tweet ID in the path is that of the reply to hide or unhide.
+      description: Hides or unhides a reply to an owned conversation.
       operationId: hideReplyById
       parameters:
         - description: The ID of the reply that you want to hide or unhide.
@@ -498,7 +500,7 @@ paths:
           description: A successful response. The reply has been hidden or unhidden.
         default:
           $ref: "#/components/responses/HttpErrorResponse"
-      summary: Hides or unhides a reply to an owned conversation.
+      summary: Hide replies
       tags:
         - Tweets
   /2/users:
@@ -508,6 +510,7 @@ paths:
       parameters:
         - description: Required. A list of User IDs, comma-separated. You can specify up
             to 100 IDs.
+          example: 2244994945,6253282,12
           explode: false
           in: query
           name: ids
@@ -534,7 +537,7 @@ paths:
       security:
         - BearerToken: []
           UserToken: []
-      summary: Return details for the specified users
+      summary: User lookup by IDs
       tags:
         - Users
   /2/users/by:
@@ -545,6 +548,7 @@ paths:
       parameters:
         - description: Required . A list of usernames, comma-separated. You can specify up
             to 100 usernames.
+          example: TwitterDev,TwitterAPI,jack
           explode: false
           in: query
           name: usernames
@@ -571,7 +575,7 @@ paths:
       security:
         - BearerToken: []
           UserToken: []
-      summary: Return details for the specified users
+      summary: User lookup by usernames
       tags:
         - Users
   "/2/users/by/username/{username}":
@@ -580,6 +584,7 @@ paths:
       operationId: findUserByUsername
       parameters:
         - description: Required. A username.
+          example: TwitterDev
           in: path
           name: username
           required: true
@@ -600,7 +605,7 @@ paths:
       security:
         - BearerToken: []
           UserToken: []
-      summary: Return details for the specified users
+      summary: User lookup by username
       tags:
         - Users
   "/2/users/{id}":
@@ -609,6 +614,7 @@ paths:
       operationId: findUserById
       parameters:
         - description: Required. A User ID.
+          example: "2244994945"
           in: path
           name: id
           required: true
@@ -629,7 +635,42 @@ paths:
       security:
         - BearerToken: []
           UserToken: []
-      summary: Return details for the specified users
+      summary: User lookup by ID
+      tags:
+        - Users
+  "/2/users/{id}/blocking":
+    post:
+      description: Causes the user (in the path) to block the target user. The user
+        (in the path) must match the user context authorizing the request
+      operationId: usersIdBlock
+      parameters:
+        - description: The ID of the user that is requesting to block the target user
+          in: path
+          name: id
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                target_user_id:
+                  pattern: ^[0-9]{1,19}$
+                  type: string
+              required:
+                - target_user_id
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersBlockingMutationResponse"
+          description: The request was successful
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      summary: Block User by User ID
       tags:
         - Users
   "/2/users/{id}/followers":
@@ -711,7 +752,10 @@ paths:
           description: The request was successful
         default:
           $ref: "#/components/responses/HttpErrorResponse"
-      summary: Returns user objects that are being followed by the provided user ID
+      security:
+        - BearerToken: []
+          UserToken: []
+      summary: Following by User ID
       tags:
         - Users
     post:
@@ -746,8 +790,7 @@ paths:
           description: The request was successful
         default:
           $ref: "#/components/responses/HttpErrorResponse"
-      summary: Causes the user(in the path) to follow the target user, defined by user
-        ID
+      summary: Follow User
       tags:
         - Users
   "/2/users/{id}/mentions":
@@ -786,10 +829,9 @@ paths:
       security:
         - BearerToken: []
           UserToken: []
-      summary: Returns Tweet objects that mention the username associated to the
-        provided User ID
+      summary: User mention timeline by User ID
       tags:
-        - Mentions
+        - Tweets
   "/2/users/{id}/tweets":
     get:
       description: Returns a list of Tweets authored by the provided User ID
@@ -826,9 +868,39 @@ paths:
       security:
         - BearerToken: []
           UserToken: []
-      summary: Returns Tweet objects authored by the provided User ID
+      summary: User Tweets timeline by User ID
       tags:
         - Tweets
+  "/2/users/{source_user_id}/blocking/{target_user_id}":
+    delete:
+      description: Causes the source user to unblock the target user. The source user
+        must match the user context authorizing the request
+      operationId: usersIdUnblock
+      parameters:
+        - description: The ID of the user that is requesting to unblock the target user
+          in: path
+          name: source_user_id
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - description: The ID of the user that the source user is requesting to unblock
+          in: path
+          name: target_user_id
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersBlockingMutationResponse"
+          description: The request was successful
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      summary: Unblock User by User ID
+      tags:
+        - Users
   "/2/users/{source_user_id}/following/{target_user_id}":
     delete:
       description: Causes the source user to unfollow the target user. The source user
@@ -856,7 +928,7 @@ paths:
           description: The request was successful
         default:
           $ref: "#/components/responses/HttpErrorResponse"
-      summary: Causes the source user to unfollow the target user, defined by user ID
+      summary: Unfollow User
       tags:
         - Users
 components:
@@ -865,6 +937,7 @@ components:
       description: YYYY-MM-DDTHH:mm:ssZ. The latest UTC timestamp to which the Tweets
         will be provided. The until_id parameter takes precedence if it is also
         specified.
+      example: 2021-02-14T18:40:40.000Z
       in: query
       name: end_time
       required: false
@@ -890,7 +963,14 @@ components:
       schema:
         description: The list of fields you can display for a Media object.
         example:
+          - media_key
+          - duration_ms
+          - height
+          - preview_image_url
+          - type
           - url
+          - width
+          - public_metrics
         items:
           enum:
             - media_key
@@ -925,7 +1005,15 @@ components:
       required: false
       schema:
         description: The list of fields you can display for a Place object.
-        example: country_code
+        example:
+          - id
+          - name
+          - country_code
+          - place_type
+          - full_name
+          - country
+          - contained_within
+          - geo
         items:
           enum:
             - id
@@ -949,7 +1037,11 @@ components:
       required: false
       schema:
         description: The list of fields you can display for a Poll object.
-        example: end_datetime
+        example:
+          - duration_minutes
+          - options
+          - voting_status
+          - end_datetime
         items:
           enum:
             - id
@@ -965,6 +1057,7 @@ components:
     SinceIdRequestParameter:
       description: The minimum Tweet ID to be included in the result set. This
         parameter takes precedence over start_time if both are specified.
+      example: "791775337160081409"
       in: query
       name: since_id
       required: false
@@ -972,8 +1065,9 @@ components:
         $ref: "#/components/schemas/TweetID"
     StartTimeRequestParameter:
       description: YYYY-MM-DDTHH:mm:ssZ. The earliest UTC timestamp from which the
-        mentions will be provided. The since_id parameter takes precedence if it
+        Tweets will be provided. The since_id parameter takes precedence if it
         is also specified.
+      example: 2021-02-01T18:40:40.000Z
       in: query
       name: start_time
       required: false
@@ -988,7 +1082,15 @@ components:
       schema:
         description: The list of fields you can expand for a [Tweet](#Tweet) object. If
           the field has an ID, it can be expanded into a full object.
-        example: author_id
+        example:
+          - author_id
+          - referenced_tweets.id
+          - in_reply_to_user_id
+          - geo.place_id
+          - attachments.media_keys
+          - attachments.poll_ids
+          - entities.mentions.username
+          - referenced_tweets.id.author_id
         items:
           enum:
             - author_id
@@ -1012,7 +1114,13 @@ components:
       required: false
       schema:
         description: The list of fields you can display for a [Tweet](#Tweet) object.
-        example: created_at
+        example:
+          - created_at
+          - author_id
+          - entities
+          - conversation_id
+          - reply_settings
+          - public_metrics
         items:
           enum:
             - id
@@ -1042,19 +1150,28 @@ components:
       style: form
     TweetTypeExcludesRequestParameter:
       description: The set of entities to exclude (e.g. 'replies' or 'retweets')
+      explode: false
       in: query
       name: exclude
       required: false
       schema:
+        description: The set of entities to exclude (e.g. 'replies' or 'retweets')
+        example:
+          - replies
+          - retweets
         items:
           enum:
             - replies
             - retweets
           type: string
+        minItems: 1
         type: array
+        uniqueItems: true
+      style: form
     UntilIdRequestParameter:
       description: The maximum Tweet ID to be included in the result set. This
         parameter takes precedence over end_time if both are specified.
+      example: "1346889436626259968"
       in: query
       name: until_id
       required: false
@@ -1068,7 +1185,8 @@ components:
       schema:
         description: The list of fields you can expand for a [User](#User) object. If
           the field has an ID, it can be expanded into a full object.
-        example: pinned_tweet_id
+        example:
+          - pinned_tweet_id
         items:
           enum:
             - pinned_tweet_id
@@ -1085,7 +1203,10 @@ components:
       required: false
       schema:
         description: The list of fields you can display for a [User](#User) object.
-        example: created_at
+        example:
+          - username
+          - verified
+          - profile_image_url
         items:
           enum:
             - id
@@ -1129,6 +1250,7 @@ components:
         - $ref: "#/components/schemas/DeleteRulesResponse"
       type: object
     AddRulesRequest:
+      description: A request to add a user-specified stream filtering rule.
       properties:
         add:
           items:
@@ -1138,8 +1260,10 @@ components:
         - add
       type: object
     AddRulesResponse:
+      description: A response from adding user-specified stream filtering rules.
       properties:
         data:
+          description: All user-specified stream filtering rules that were created.
           items:
             $ref: "#/components/schemas/Rule"
           type: array
@@ -1171,6 +1295,7 @@ components:
         start and end position within the text.
       properties:
         tag:
+          example: TWTR
           type: string
       required:
         - tag
@@ -1272,15 +1397,20 @@ components:
         - id
       type: object
     CountryCode:
+      description: A two-letter ISO 3166-1 alpha-2 country code
+      example: US
       pattern: ^[A-Z]{2}$
       type: string
     DeleteRulesRequest:
+      description: A response from deleting user-specified stream filtering rules.
       properties:
         ids:
+          description: IDs of all deleted user-specified stream filtering rules.
           items:
             $ref: "#/components/schemas/RuleId"
           type: array
         values:
+          description: Values of all deleted user-specified stream filtering rules.
           items:
             $ref: "#/components/schemas/RuleValue"
           type: array
@@ -1337,10 +1467,12 @@ components:
       properties:
         end:
           description: Index (zero-based) at which position this entity ends.
+          example: 61
           minimum: 0
           type: integer
         start:
           description: Index (zero-based) at which position this entity starts.
+          example: 50
           minimum: 0
           type: integer
       required:
@@ -1487,10 +1619,44 @@ components:
           type: object
       description: A generic problem with no additional information beyond that
         provided by the HTTP status code.
-    GenericTweetsTimelineResponse: {}
+    GenericTweetsTimelineResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Tweet"
+          minItems: 1
+          type: array
+        errors:
+          items:
+            $ref: "#/components/schemas/Problem"
+          minItems: 1
+          type: array
+        includes:
+          $ref: "#/components/schemas/Expansions"
+        meta:
+          properties:
+            newest_id:
+              description: Newest Tweet ID in the result set
+              pattern: ^[0-9]{1,19}$
+              type: string
+            oldest_id:
+              description: Oldest Tweet ID in the result set
+              pattern: ^[0-9]{1,19}$
+              type: string
+            result_count:
+              description: Number of Tweets in result set
+              format: int32
+              type: integer
+          type: object
+      type: object
     Geo:
       properties:
         bbox:
+          example:
+            - -105.193475
+            - 39.60973
+            - -105.053164
+            - 39.761974
           items:
             format: double
             maximum: 180
@@ -1527,6 +1693,7 @@ components:
       properties:
         tag:
           description: The text of the Hashtag
+          example: MondayMotivation
           type: string
       required:
         - tag
@@ -1649,10 +1816,14 @@ components:
           minItems: 1
           type: array
         country:
+          description: The full name of the county in which this place exists.
+          example: United States
           type: string
         country_code:
           $ref: "#/components/schemas/CountryCode"
         full_name:
+          description: The full name of this place.
+          example: Lakewood, CO
           type: string
         geo:
           $ref: "#/components/schemas/Geo"
@@ -1660,6 +1831,7 @@ components:
           $ref: "#/components/schemas/PlaceId"
         name:
           description: The human readable name of this place.
+          example: Lakewood
           type: string
         place_type:
           $ref: "#/components/schemas/PlaceType"
@@ -1668,6 +1840,7 @@ components:
         - full_name
     PlaceId:
       description: The identifier for this place
+      example: f7eb2fa2fea288b1
       type: string
     PlaceType:
       enum:
@@ -1677,6 +1850,7 @@ components:
         - admin
         - country
         - unknown
+      example: city
       type: string
     Point:
       description: A [GeoJson
@@ -1688,6 +1862,7 @@ components:
         type:
           enum:
             - Point
+          example: Point
           type: string
       required:
         - type
@@ -1720,6 +1895,7 @@ components:
       type: object
     PollId:
       description: Unique identifier of this poll.
+      example: "1365059861688410112"
       pattern: ^[0-9]{1,19}$
       type: string
     PollOption:
@@ -1743,6 +1919,9 @@ components:
       description: A [GeoJson
         Position](https://tools.ietf.org/html/rfc7946#section-3.1.1) in the
         format `[longitude,latitude]`.
+      example:
+        - -105.18816086351444
+        - 40.247749999999996
       items:
         type: number
       maxItems: 2
@@ -1817,6 +1996,8 @@ components:
             parameter:
               minLength: 1
               type: string
+            resource_id:
+              type: string
             resource_type:
               enum:
                 - user
@@ -1832,6 +2013,7 @@ components:
           required:
             - parameter
             - value
+            - resource_id
             - resource_type
       description: A problem that indicates that a given Tweet, User, etc. does not exist.
     ResourceUnauthorizedProblem:
@@ -1839,6 +2021,8 @@ components:
         - $ref: "#/components/schemas/ProblemFields"
         - properties:
             parameter:
+              type: string
+            resource_id:
               type: string
             resource_type:
               enum:
@@ -1859,6 +2043,7 @@ components:
               type: string
           required:
             - value
+            - resource_id
             - resource_type
             - section
             - parameter
@@ -1867,6 +2052,7 @@ components:
         Tweet, User, etc.
       type: object
     Rule:
+      description: A user-provided stream filtering rule.
       properties:
         id:
           $ref: "#/components/schemas/RuleId"
@@ -1883,6 +2069,7 @@ components:
       pattern: ^[0-9]{1,19}$
       type: string
     RuleNoId:
+      description: A user-provided stream filtering rule.
       properties:
         tag:
           $ref: "#/components/schemas/RuleTag"
@@ -1911,22 +2098,44 @@ components:
       type: object
     RulesRequestSummary:
       oneOf:
-        - properties:
+        - description: A summary of the results of the addition of user-specified stream
+            filtering rules.
+          properties:
             created:
+              description: Number of user-specified stream filtering rules that were created.
+              example: 1
+              format: int32
+              type: integer
+            invalid:
+              description: Number of invalid user-specified stream filtering rules.
+              example: 1
               format: int32
               type: integer
             not_created:
+              description: Number of user-specified stream filtering rules that were not
+                created.
+              example: 1
+              format: int32
+              type: integer
+            valid:
+              description: Number of valid user-specified stream filtering rules.
+              example: 1
               format: int32
               type: integer
           required:
             - created
             - not_created
+            - valid
+            - invalid
           type: object
         - properties:
             deleted:
+              description: Number of user-specified stream filtering rules that were deleted.
               format: int32
               type: integer
             not_deleted:
+              description: Number of user-specified stream filtering rules that were not
+                deleted.
               format: int32
               type: integer
           required:
@@ -1982,10 +2191,12 @@ components:
       type: object
     Tweet:
       example:
-        author_id: "712089797812"
-        created_at: Wed Jun 20 16:53:49 +0000 2018
-        id: "12234"
-        text: Some great insight into the human condition.
+        author_id: "2244994945"
+        created_at: Wed Jan 06 18:40:40 +0000 2021
+        id: "1346889436626259968"
+        text: Learn how to use the user Tweet timeline and user mention timeline
+          endpoints in the Twitter API v2 to explore Tweet\u2026
+          https:\/\/t.co\/56a0vZUx7i
       properties:
         attachments:
           description: Specifies the type of attachments (if any) present in this Tweet.
@@ -2015,6 +2226,7 @@ components:
           $ref: "#/components/schemas/TweetID"
         created_at:
           description: Creation time of the Tweet.
+          example: 2021-01-06T18:40:40.000Z
           format: date-time
           type: string
         entities:
@@ -2034,6 +2246,7 @@ components:
         lang:
           description: Language of the Tweet, if detected by Twitter. Returned as a BCP47
             language tag.
+          example: en
           type: string
         non_public_metrics:
           description: Nonpublic engagement metrics for the Tweet at the time of the
@@ -2069,6 +2282,7 @@ components:
         possibly_sensitive:
           description: Indicates if this Tweet contains URLs marked as sensitive, for
             example content suitable for mature audiences.
+          example: false
           type: boolean
         promoted_metrics:
           description: Promoted nonpublic engagement metrics for the Tweet at the time of
@@ -2138,6 +2352,9 @@ components:
           type: string
         text:
           description: The content of the Tweet.
+          example: Learn how to use the user Tweet timeline and user mention timeline
+            endpoints in the Twitter API v2 to explore Tweet\u2026
+            https:\/\/t.co\/56a0vZUx7i
           type: string
         withheld:
           $ref: "#/components/schemas/TweetWithheld"
@@ -2149,7 +2366,7 @@ components:
       description: Unique identifier of this Tweet. This is returned as a string in
         order to avoid complications with languages and tools that cannot handle
         large integers.
-      example: "120897978112909812"
+      example: "1346889436626259968"
       pattern: ^[0-9]{1,19}$
       type: string
     TweetLookupResponse:
@@ -2170,18 +2387,23 @@ components:
           properties:
             newest_id:
               description: The ID of the newest Tweet in the response.
+              example: "1346889436626259968"
               type: string
             next_token:
               description: The next cursor provided by the response.
+              example: b26v89c19zqg8o3fosnu6iw2546eijh0544aj2le8n0xp
               type: string
             oldest_id:
               description: The ID of the oldest Tweet in the response.
+              example: "1346889436626259968"
               type: string
             previous_token:
               description: The previous cursor provided by the response.
+              example: b26v89c19zqg8o3fosnu6iw2546eijh0544aj2le8n0xp
               type: string
             result_count:
               description: Number of results returned in the response.
+              example: 50
               type: integer
           type: object
       type: object
@@ -2247,7 +2469,7 @@ components:
       type: object
     URL:
       description: A validly formatted URL.
-      example: https://example.com
+      example: https://developer.twitter.com/en/docs/twitter-api
       format: uri
       type: string
     URLFields:
@@ -2255,9 +2477,11 @@ components:
       properties:
         description:
           description: Description of the URL landing page.
+          example: This is a description of the website.
           type: string
         display_url:
           description: The URL as displayed in the Twitter client.
+          example: twittercommunity.com/t/introducing-…
           type: string
         expanded_url:
           $ref: "#/components/schemas/URL"
@@ -2270,9 +2494,11 @@ components:
           $ref: "#/components/schemas/HTTPStatusCode"
         title:
           description: Title of the page the URL points to.
+          example: Introducing the v2 follow lookup endpoints
           type: string
         unwound_url:
           description: Fully resolved url
+          example: https://twittercommunity.com/t/introducing-the-v2-follow-lookup-endpoints/147118
           format: uri
           type: string
         url:
@@ -2331,11 +2557,11 @@ components:
     User:
       description: The Twitter User object
       example:
-        created_at: 2017-10-09T17:16:24Z
-        id: "1234"
-        name: Twitter API
+        created_at: 2013-12-14T04:35:55Z
+        id: "2244994945"
+        name: Twitter Dev
         protected: false
-        username: twitterapi
+        username: TwitterDev
       properties:
         created_at:
           description: Creation time of this user.
@@ -2421,7 +2647,7 @@ components:
       description: Unique identifier of this User. This is returned as a string in
         order to avoid complications with languages and tools that cannot handle
         large integers.
-      example: "712089797812"
+      example: "2244994945"
       pattern: ^[0-9]{1,19}$
       type: string
     UserLookupResponse:
@@ -2461,6 +2687,19 @@ components:
           type: string
       required:
         - country_codes
+      type: object
+    UsersBlockingMutationResponse:
+      properties:
+        data:
+          properties:
+            blocking:
+              type: boolean
+          type: object
+        errors:
+          items:
+            $ref: "#/components/schemas/Problem"
+          minItems: 1
+          type: array
       type: object
     UsersFollowersLookupResponse:
       properties:
