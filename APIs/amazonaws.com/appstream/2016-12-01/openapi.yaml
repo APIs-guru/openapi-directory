@@ -787,6 +787,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.CreateUpdatedImage:
+    post:
+      operationId: CreateUpdatedImage
+      description: '<p>Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software.</p> <p>For more information, see the "Update an Image by Using Managed AppStream 2.0 Image Updates" section in <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html">Administer Your AppStream 2.0 Images</a>, in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUpdatedImageResult'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: InvalidAccountStatusException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccountStatusException'
+        '482':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '483':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '486':
+          description: IncompatibleImageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleImageException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUpdatedImageRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.CreateUpdatedImage
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PhotonAdminProxyService.CreateUsageReportSubscription:
     post:
       operationId: CreateUsageReportSubscription
@@ -3078,6 +3153,46 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The session context. For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters">Session Context</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.'
+    CreateUpdatedImageResult:
+      type: object
+      properties:
+        image:
+          $ref: '#/components/schemas/Image'
+        canUpdateImage:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether a new image can be created.
+    CreateUpdatedImageRequest:
+      type: object
+      required:
+        - existingImageName
+        - newImageName
+      title: CreateUpdatedImageRequest
+      properties:
+        existingImageName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the image to update.
+        newImageName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the new image. The name must be unique within the AWS account and Region.
+        newImageDescription:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description to display for the new image.
+        newImageDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The name to display for the new image.
+        newImageTags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: '<p>The tags to associate with the new image. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \ - @</p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+        dryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether to display the status of image update availability before AppStream 2.0 initiates the process of creating a new updated image. If this value is set to <code>true</code>, AppStream 2.0 displays whether image updates are available. If this value is set to <code>false</code>, AppStream 2.0 initiates the process of creating a new updated image without displaying whether image updates are available.'
     CreateUsageReportSubscriptionResult:
       type: object
       properties:
@@ -4510,26 +4625,6 @@ components:
       pattern: '[\w+=,.@-]*'
       minLength: 2
       maxLength: 32
-    UsageReportSchedule:
-      type: string
-      enum:
-        - DAILY
-    Username:
-      type: string
-      pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
-      minLength: 1
-      maxLength: 128
-      format: password
-    MessageAction:
-      type: string
-      enum:
-        - SUPPRESS
-        - RESEND
-    UserAttributeValue:
-      type: string
-      pattern: '^[A-Za-z0-9_\-\s]+$'
-      maxLength: 2048
-      format: password
     Image:
       type: object
       required:
@@ -4599,7 +4694,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImagePermissions'
             - description: The permissions to provide to the destination AWS account for the specified image.
+        ImageErrors:
+          allOf:
+            - $ref: '#/components/schemas/ResourceErrors'
+            - description: Describes the errors that are returned when a new image can't be created.
       description: Describes an image.
+    UsageReportSchedule:
+      type: string
+      enum:
+        - DAILY
+    Username:
+      type: string
+      pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
+      minLength: 1
+      maxLength: 128
+      format: password
+    MessageAction:
+      type: string
+      enum:
+        - SUPPRESS
+        - RESEND
+    UserAttributeValue:
+      type: string
+      pattern: '^[A-Za-z0-9_\-\s]+$'
+      maxLength: 2048
+      format: password
     DirectoryNameList:
       type: array
       items:
@@ -4792,6 +4911,10 @@ components:
             - $ref: '#/components/schemas/BooleanObject'
             - description: Indicates whether the image can be used for an image builder.
       description: 'Describes the permissions for an image. '
+    ResourceErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceError'
     ImageBuilderState:
       type: string
       enum:
@@ -4804,6 +4927,8 @@ components:
         - SNAPSHOTTING
         - DELETING
         - FAILED
+        - UPDATING
+        - PENDING_QUALIFICATION
     ImageBuilderStateChangeReason:
       type: object
       properties:
@@ -4828,10 +4953,6 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The resource identifier of the elastic network interface that is attached to instances in your VPC. All network interfaces have the eni-xxxxxxxx resource identifier.
       description: Describes the network details of the fleet or image builder instance.
-    ResourceErrors:
-      type: array
-      items:
-        $ref: '#/components/schemas/ResourceError'
     ImageBuilderStateChangeReasonCode:
       type: string
       enum:

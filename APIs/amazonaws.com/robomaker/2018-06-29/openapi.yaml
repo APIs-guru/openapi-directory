@@ -4838,6 +4838,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
             - description: '<p>A Boolean indicating whether to use default upload configurations. By default, <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application terminates and all ROS topics will be recorded.</p> <p>If you set this value, you must specify an <code>outputLocation</code>. </p>'
+        tools:
+          allOf:
+            - $ref: '#/components/schemas/Tools'
+            - description: Information about tools configured for the robot application.
+        useDefaultTools:
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: 'A Boolean indicating whether to use default robot application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>. '
       description: Application configuration information for a robot.
     SimulationApplicationConfig:
       type: object
@@ -4869,6 +4877,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
             - description: '<p>A Boolean indicating whether to use default upload configurations. By default, <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application terminates and all ROS topics will be recorded.</p> <p>If you set this value, you must specify an <code>outputLocation</code>. </p>'
+        tools:
+          allOf:
+            - $ref: '#/components/schemas/Tools'
+            - description: Information about tools configured for the simulation application.
+        useDefaultTools:
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: 'A Boolean indicating whether to use default simulation application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>. '
       description: Information about a simulation application configuration.
     DataSourceConfig:
       type: object
@@ -6130,7 +6146,11 @@ components:
         - PostLaunchFileFailure
         - BadPermissionError
         - DownloadConditionFailed
+        - BadLambdaAssociated
         - InternalServerError
+        - RobotApplicationDoesNotExist
+        - DeploymentFleetDoesNotExist
+        - FleetDeploymentTimeout
     CreatedAt:
       type: string
       format: date-time
@@ -6477,6 +6497,8 @@ components:
         - InternalServiceError
         - RobotApplicationCrash
         - SimulationApplicationCrash
+        - RobotApplicationHealthCheckFailure
+        - SimulationApplicationHealthCheckFailure
         - BadPermissionsRobotApplication
         - BadPermissionsSimulationApplication
         - BadPermissionsS3Object
@@ -6488,6 +6510,7 @@ components:
         - InvalidBundleRobotApplication
         - InvalidBundleSimulationApplication
         - InvalidS3Resource
+        - ThrottlingError
         - LimitExceeded
         - MismatchedEtag
         - RobotApplicationVersionMismatchedEtag
@@ -7073,6 +7096,11 @@ components:
       pattern: .*
       minLength: 1
       maxLength: 1024
+    ExitBehavior:
+      type: string
+      enum:
+        - FAIL
+        - RESTART
     FailedAt:
       type: string
       format: date-time
@@ -7587,6 +7615,12 @@ components:
         $ref: '#/components/schemas/UploadConfiguration'
       minItems: 0
       maxItems: 10
+    Tools:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tool'
+      minItems: 0
+      maxItems: 10
     RobotApplicationNames:
       type: array
       items:
@@ -7942,6 +7976,38 @@ components:
             - $ref: '#/components/schemas/TemplateName'
             - description: The name of the template.
       description: Summary information for a template.
+    UnrestrictedCommand:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 1024
+    Tool:
+      type: object
+      required:
+        - name
+        - command
+      properties:
+        streamUI:
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: 'Boolean indicating whether a streaming session will be configured for the tool. If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with the tool as it is running in the simulation. It must have a graphical user interface. The default is <code>False</code>. '
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the tool.
+        command:
+          allOf:
+            - $ref: '#/components/schemas/UnrestrictedCommand'
+            - description: Command-line arguments for the tool. It must include the tool executable name.
+        streamOutputToCloudWatch:
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: 'Boolean indicating whether logs will be recorded in CloudWatch for the tool. The default is <code>False</code>. '
+        exitBehavior:
+          allOf:
+            - $ref: '#/components/schemas/ExitBehavior'
+            - description: 'Exit behavior determines what happens when your tool quits running. <code>RESTART</code> will cause your tool to be restarted. <code>FAIL</code> will cause your job to exit. The default is <code>RESTART</code>. '
+      description: Information about a tool. Tools are used in a simulation job.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -8048,7 +8114,7 @@ components:
         uploadBehavior:
           allOf:
             - $ref: '#/components/schemas/UploadBehavior'
-            - description: '<p>Specifies how to upload the files:</p> <dl> <dt>UPLOAD_ON_TERMINATE</dt> <dd> <p>Matching files are uploaded once the simulation enters the <code>TERMINATING</code> state. Matching files are not uploaded until all of your code (including tools) have stopped. </p> <p>If there is a problem uploading a file, the upload is retried. If problems persist, no further upload attempts will be made.</p> </dd> <dt>UPLOAD_ROLLING_AUTO_REMOVE</dt> <dd> <p>Matching files are uploaded as they are created. They are deleted after they are uploaded. The specified path is checked every 5 seconds. A final check is made when all of your code (including tools) have stopped. </p> </dd> </dl>'
+            - description: '<p>Specifies when to upload the files:</p> <dl> <dt>UPLOAD_ON_TERMINATE</dt> <dd> <p>Matching files are uploaded once the simulation enters the <code>TERMINATING</code> state. Matching files are not uploaded until all of your code (including tools) have stopped. </p> <p>If there is a problem uploading a file, the upload is retried. If problems persist, no further upload attempts will be made.</p> </dd> <dt>UPLOAD_ROLLING_AUTO_REMOVE</dt> <dd> <p>Matching files are uploaded as they are created. They are deleted after they are uploaded. The specified path is checked every 5 seconds. A final check is made when all of your code (including tools) have stopped. </p> </dd> </dl>'
       description: 'Provides upload configuration information. Files are uploaded from the simulation job to a location you specify. '
     WorldConfig:
       type: object

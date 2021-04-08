@@ -3,7 +3,7 @@ info:
   version: '2020-08-15'
   x-release: v4
   title: Amazon Connect Customer Profiles
-  description: '<fullname>Amazon Connect Customer Profiles</fullname> <p>Welcome to the Amazon Connect Customer Profiles API Reference. This guide provides information about the Amazon Connect Customer Profiles API, including supported operations, data types, parameters, and schemas.</p> <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center that has pre-built connectors powered by AppFlow that make it easy to combine customer information from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and your enterprise resource planning (ERP), with contact history from your Amazon Connect contact center.</p> <p>If you''re new to Amazon Connect, you might find it helpful to also review the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html">Amazon Connect Administrator Guide</a>.</p>'
+  description: '<fullname>Amazon Connect Customer Profiles</fullname> <p>Welcome to the Amazon Connect Customer Profiles API Reference. This guide provides information about the Amazon Connect Customer Profiles API, including supported operations, data types, parameters, and schemas.</p> <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center that has pre-built connectors powered by AppFlow that make it easy to combine customer information from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and your enterprise resource planning (ERP), with contact history from your Amazon Connect contact center.</p> <p>If you''re new to Amazon Connect , you might find it helpful to also review the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html">Amazon Connect Administrator Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1896,21 +1896,33 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 FlowDefinition:
-                  description: ''
+                  description: 'The configurations that control how Customer Profiles retrieves data from the source, Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf of customers.'
                   type: object
                   properties:
                     Description:
-                      $ref: '#/components/schemas/FlowDescription'
+                      allOf:
+                        - $ref: '#/components/schemas/FlowDescription'
+                        - description: A description of the flow you want to create.
                     FlowName:
-                      $ref: '#/components/schemas/FlowName'
+                      allOf:
+                        - $ref: '#/components/schemas/FlowName'
+                        - description: The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces are not allowed.
                     KmsArn:
-                      $ref: '#/components/schemas/KmsArn'
+                      allOf:
+                        - $ref: '#/components/schemas/KmsArn'
+                        - description: The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide for encryption.
                     SourceFlowConfig:
-                      $ref: '#/components/schemas/SourceFlowConfig'
+                      allOf:
+                        - $ref: '#/components/schemas/SourceFlowConfig'
+                        - description: The configuration that controls how Customer Profiles retrieves data from the source.
                     Tasks:
-                      $ref: '#/components/schemas/Tasks'
+                      allOf:
+                        - $ref: '#/components/schemas/Tasks'
+                        - description: A list of tasks that Customer Profiles performs while transferring the data in the flow run.
                     TriggerConfig:
-                      $ref: '#/components/schemas/TriggerConfig'
+                      allOf:
+                        - $ref: '#/components/schemas/TriggerConfig'
+                        - description: The trigger settings that determine how and when the flow runs.
   '/templates/{TemplateId}':
     get:
       operationId: GetProfileObjectTypeTemplate
@@ -3117,13 +3129,22 @@ components:
         - SourceConnectorProperties
       properties:
         ConnectorProfileName:
-          $ref: '#/components/schemas/ConnectorProfileName'
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileName'
+            - description: The name of the AppFlow connector profile. This name must be unique for each connector profile in the AWS account.
         ConnectorType:
-          $ref: '#/components/schemas/SourceConnectorType'
+          allOf:
+            - $ref: '#/components/schemas/SourceConnectorType'
+            - description: 'The type of connector, such as Salesforce, Marketo, and so on.'
         IncrementalPullConfig:
-          $ref: '#/components/schemas/IncrementalPullConfig'
+          allOf:
+            - $ref: '#/components/schemas/IncrementalPullConfig'
+            - description: 'Defines the configuration for a scheduled incremental data pull. If a valid configuration is provided, the fields specified in the configuration are used when querying for the incremental data pull.'
         SourceConnectorProperties:
-          $ref: '#/components/schemas/SourceConnectorProperties'
+          allOf:
+            - $ref: '#/components/schemas/SourceConnectorProperties'
+            - description: Specifies the information that is required to query a particular source connector.
+      description: Contains information about the configuration of the source connector used in the flow.
     Tasks:
       type: array
       items:
@@ -3134,9 +3155,14 @@ components:
         - TriggerType
       properties:
         TriggerType:
-          $ref: '#/components/schemas/TriggerType'
+          allOf:
+            - $ref: '#/components/schemas/TriggerType'
+            - description: 'Specifies the type of flow trigger. It can be OnDemand, Scheduled, or Event.'
         TriggerProperties:
-          $ref: '#/components/schemas/TriggerProperties'
+          allOf:
+            - $ref: '#/components/schemas/TriggerProperties'
+            - description: 'Specifies the configuration details of a schedule-triggered flow that you define. Currently, these settings only apply to the Scheduled trigger type.'
+      description: The trigger settings that determine how and when Amazon AppFlow runs the specified flow.
     PutProfileObjectResponse:
       type: object
       properties:
@@ -3484,15 +3510,26 @@ components:
       type: object
       properties:
         Marketo:
-          $ref: '#/components/schemas/MarketoConnectorOperator'
+          allOf:
+            - $ref: '#/components/schemas/MarketoConnectorOperator'
+            - description: The operation to be performed on the provided Marketo source fields.
         S3:
-          $ref: '#/components/schemas/S3ConnectorOperator'
+          allOf:
+            - $ref: '#/components/schemas/S3ConnectorOperator'
+            - description: The operation to be performed on the provided Amazon S3 source fields.
         Salesforce:
-          $ref: '#/components/schemas/SalesforceConnectorOperator'
+          allOf:
+            - $ref: '#/components/schemas/SalesforceConnectorOperator'
+            - description: The operation to be performed on the provided Salesforce source fields.
         ServiceNow:
-          $ref: '#/components/schemas/ServiceNowConnectorOperator'
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowConnectorOperator'
+            - description: The operation to be performed on the provided ServiceNow source fields.
         Zendesk:
-          $ref: '#/components/schemas/ZendeskConnectorOperator'
+          allOf:
+            - $ref: '#/components/schemas/ZendeskConnectorOperator'
+            - description: The operation to be performed on the provided Zendesk source fields.
+      description: The operation to be performed on the provided source fields.
     ConnectorProfileName:
       type: string
       pattern: '[\w/!@#+=.-]+'
@@ -3811,17 +3848,30 @@ components:
         - TriggerConfig
       properties:
         Description:
-          $ref: '#/components/schemas/FlowDescription'
+          allOf:
+            - $ref: '#/components/schemas/FlowDescription'
+            - description: A description of the flow you want to create.
         FlowName:
-          $ref: '#/components/schemas/FlowName'
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces are not allowed.
         KmsArn:
-          $ref: '#/components/schemas/KmsArn'
+          allOf:
+            - $ref: '#/components/schemas/KmsArn'
+            - description: The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide for encryption.
         SourceFlowConfig:
-          $ref: '#/components/schemas/SourceFlowConfig'
+          allOf:
+            - $ref: '#/components/schemas/SourceFlowConfig'
+            - description: The configuration that controls how Customer Profiles retrieves data from the source.
         Tasks:
-          $ref: '#/components/schemas/Tasks'
+          allOf:
+            - $ref: '#/components/schemas/Tasks'
+            - description: A list of tasks that Customer Profiles performs while transferring the data in the flow run.
         TriggerConfig:
-          $ref: '#/components/schemas/TriggerConfig'
+          allOf:
+            - $ref: '#/components/schemas/TriggerConfig'
+            - description: The trigger settings that determine how and when the flow runs.
+      description: 'The configurations that control how Customer Profiles retrieves data from the source, Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf of customers.'
     GetDomainRequest:
       type: object
       title: GetDomainRequest
@@ -3858,7 +3908,10 @@ components:
       type: object
       properties:
         DatetimeTypeFieldName:
-          $ref: '#/components/schemas/DatetimeTypeFieldName'
+          allOf:
+            - $ref: '#/components/schemas/DatetimeTypeFieldName'
+            - description: A field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source.
+      description: Specifies the configuration used when importing incremental records from the source.
     ListIntegrationItem:
       type: object
       required:
@@ -4039,7 +4092,10 @@ components:
         - Object
       properties:
         Object:
-          $ref: '#/components/schemas/Object'
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: The object specified in the Marketo flow source.
+      description: The properties that are applied when Marketo is being used as a source.
     StandardIdentifierList:
       type: array
       items:
@@ -4192,7 +4248,9 @@ components:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource.'
         FlowDefinition:
-          $ref: '#/components/schemas/FlowDefinition'
+          allOf:
+            - $ref: '#/components/schemas/FlowDefinition'
+            - description: The configuration that controls how Customer Profiles retrieves data from the source.
     PutProfileObjectRequest:
       type: object
       required:
@@ -4252,20 +4310,32 @@ components:
         - BucketName
       properties:
         BucketName:
-          $ref: '#/components/schemas/BucketName'
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The Amazon S3 bucket name where the source files are stored.
         BucketPrefix:
-          $ref: '#/components/schemas/BucketPrefix'
+          allOf:
+            - $ref: '#/components/schemas/BucketPrefix'
+            - description: The object key for the Amazon S3 bucket in which the source files are stored.
+      description: The properties that are applied when Amazon S3 is being used as the flow source.
     SalesforceSourceProperties:
       type: object
       required:
         - Object
       properties:
         Object:
-          $ref: '#/components/schemas/Object'
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: The object specified in the Salesforce flow source.
         EnableDynamicFieldUpdate:
-          $ref: '#/components/schemas/boolean'
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: The flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
         IncludeDeletedRecords:
-          $ref: '#/components/schemas/boolean'
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: Indicates whether Amazon AppFlow includes deleted files in the flow run.
+      description: The properties that are applied when Salesforce is being used as a source.
     ScheduleExpression:
       type: string
       pattern: .*
@@ -4284,19 +4354,34 @@ components:
         - ScheduleExpression
       properties:
         ScheduleExpression:
-          $ref: '#/components/schemas/ScheduleExpression'
+          allOf:
+            - $ref: '#/components/schemas/ScheduleExpression'
+            - description: 'The scheduling expression that determines the rate at which the schedule will run, for example rate (5 minutes).'
         DataPullMode:
-          $ref: '#/components/schemas/DataPullMode'
+          allOf:
+            - $ref: '#/components/schemas/DataPullMode'
+            - description: Specifies whether a scheduled flow has an incremental data transfer or a complete data transfer for each flow run.
         ScheduleStartTime:
-          $ref: '#/components/schemas/Date'
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: Specifies the scheduled start time for a scheduled-trigger flow.
         ScheduleEndTime:
-          $ref: '#/components/schemas/Date'
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: Specifies the scheduled end time for a scheduled-trigger flow.
         Timezone:
-          $ref: '#/components/schemas/Timezone'
+          allOf:
+            - $ref: '#/components/schemas/Timezone'
+            - description: 'Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as America/New_York.'
         ScheduleOffset:
-          $ref: '#/components/schemas/ScheduleOffset'
+          allOf:
+            - $ref: '#/components/schemas/ScheduleOffset'
+            - description: Specifies the optional offset that is added to the time interval for a schedule-triggered flow.
         FirstExecutionFrom:
-          $ref: '#/components/schemas/Date'
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: Specifies the date range for the records to import from the connector in the first flow run.
+      description: 'Specifies the configuration details of a scheduled-trigger flow that you define. Currently, these settings only apply to the scheduled-trigger type.'
     SearchProfilesRequest:
       type: object
       required:
@@ -4318,27 +4403,44 @@ components:
         - Object
       properties:
         Object:
-          $ref: '#/components/schemas/Object'
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: The object specified in the ServiceNow flow source.
+      description: The properties that are applied when ServiceNow is being used as a source.
     ZendeskSourceProperties:
       type: object
       required:
         - Object
       properties:
         Object:
-          $ref: '#/components/schemas/Object'
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: The object specified in the Zendesk flow source.
+      description: The properties that are applied when using Zendesk as a flow source.
     SourceConnectorProperties:
       type: object
       properties:
         Marketo:
-          $ref: '#/components/schemas/MarketoSourceProperties'
+          allOf:
+            - $ref: '#/components/schemas/MarketoSourceProperties'
+            - description: The properties that are applied when Marketo is being used as a source.
         S3:
-          $ref: '#/components/schemas/S3SourceProperties'
+          allOf:
+            - $ref: '#/components/schemas/S3SourceProperties'
+            - description: The properties that are applied when Amazon S3 is being used as the flow source.
         Salesforce:
-          $ref: '#/components/schemas/SalesforceSourceProperties'
+          allOf:
+            - $ref: '#/components/schemas/SalesforceSourceProperties'
+            - description: The properties that are applied when Salesforce is being used as a source.
         ServiceNow:
-          $ref: '#/components/schemas/ServiceNowSourceProperties'
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowSourceProperties'
+            - description: The properties that are applied when ServiceNow is being used as a source.
         Zendesk:
-          $ref: '#/components/schemas/ZendeskSourceProperties'
+          allOf:
+            - $ref: '#/components/schemas/ZendeskSourceProperties'
+            - description: The properties that are applied when using Zendesk as a flow source.
+      description: 'Specifies the information that is required to query a particular Amazon AppFlow connector. Customer Profiles supports Salesforce, Zendesk, Marketo, ServiceNow and Amazon S3.'
     SourceConnectorType:
       type: string
       enum:
@@ -4400,15 +4502,26 @@ components:
         - TaskType
       properties:
         ConnectorOperator:
-          $ref: '#/components/schemas/ConnectorOperator'
+          allOf:
+            - $ref: '#/components/schemas/ConnectorOperator'
+            - description: The operation to be performed on the provided source fields.
         DestinationField:
-          $ref: '#/components/schemas/DestinationField'
+          allOf:
+            - $ref: '#/components/schemas/DestinationField'
+            - description: 'A field in a destination connector, or a field value against which Amazon AppFlow validates a source field.'
         SourceFields:
-          $ref: '#/components/schemas/SourceFields'
+          allOf:
+            - $ref: '#/components/schemas/SourceFields'
+            - description: The source fields to which a particular task is applied.
         TaskProperties:
-          $ref: '#/components/schemas/TaskPropertiesMap'
+          allOf:
+            - $ref: '#/components/schemas/TaskPropertiesMap'
+            - description: A map used to store task-related information. The service looks for particular information based on the TaskType.
         TaskType:
-          $ref: '#/components/schemas/TaskType'
+          allOf:
+            - $ref: '#/components/schemas/TaskType'
+            - description: Specifies the particular task implementation that Amazon AppFlow performs.
+      description: A class for modeling different type of tasks. Task implementation varies based on the TaskType.
     TriggerType:
       type: string
       enum:
@@ -4419,7 +4532,10 @@ components:
       type: object
       properties:
         Scheduled:
-          $ref: '#/components/schemas/ScheduledTriggerProperties'
+          allOf:
+            - $ref: '#/components/schemas/ScheduledTriggerProperties'
+            - description: Specifies the configuration details of a schedule-triggered flow that you define.
+      description: 'Specifies the configuration details that control the trigger for a flow. Currently, these settings only apply to the Scheduled trigger type.'
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
