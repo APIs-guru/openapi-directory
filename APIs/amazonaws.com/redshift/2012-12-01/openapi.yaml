@@ -2930,7 +2930,7 @@ paths:
     get:
       x-aws-operation-name: CreateHsmClientCertificate
       operationId: GET_CreateHsmClientCertificate
-      description: '<p>Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to the client''s HSM in order to store and retrieve the keys used to encrypt the cluster databases.</p> <p>The command returns a public key, which you must store in the HSM. In addition to creating the HSM certificate, you must create an Amazon Redshift HSM configuration that provides a cluster the information needed to store and use encryption keys in the HSM. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html">Hardware Security Modules</a> in the Amazon Redshift Cluster Management Guide.</p>'
+      description: '<p>Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to the client''s HSM in order to store and retrieve the keys used to encrypt the cluster databases.</p> <p>The command returns a public key, which you must store in the HSM. In addition to creating the HSM certificate, you must create an Amazon Redshift HSM configuration that provides a cluster the information needed to store and use encryption keys in the HSM. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html#working-with-HSM">Hardware Security Modules</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -3006,7 +3006,7 @@ paths:
     post:
       x-aws-operation-name: CreateHsmClientCertificate
       operationId: POST_CreateHsmClientCertificate
-      description: '<p>Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to the client''s HSM in order to store and retrieve the keys used to encrypt the cluster databases.</p> <p>The command returns a public key, which you must store in the HSM. In addition to creating the HSM certificate, you must create an Amazon Redshift HSM configuration that provides a cluster the information needed to store and use encryption keys in the HSM. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html">Hardware Security Modules</a> in the Amazon Redshift Cluster Management Guide.</p>'
+      description: '<p>Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to the client''s HSM in order to store and retrieve the keys used to encrypt the cluster databases.</p> <p>The command returns a public key, which you must store in the HSM. In addition to creating the HSM certificate, you must create an Amazon Redshift HSM configuration that provides a cluster the information needed to store and use encryption keys in the HSM. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html#working-with-HSM">Hardware Security Modules</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -14013,6 +14013,12 @@ paths:
           schema:
             type: string
             maxLength: 2147483647
+        - name: EnableCaseSensitiveIdentifier
+          in: query
+          required: false
+          description: 'Indicates whether name identifiers for database, schema, and table are case sensitive. If <code>true</code>, the names are case sensitive. If <code>false</code> (default), the names are not case sensitive.'
+          schema:
+            type: boolean
         - name: Action
           in: query
           required: true
@@ -19941,6 +19947,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the table to create as a result of the current request.
+        EnableCaseSensitiveIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'Indicates whether name identifiers for database, schema, and table are case sensitive. If <code>true</code>, the names are case sensitive. If <code>false</code> (default), the names are not case sensitive.'
       description: <p/>
     TableRestoreStatus:
       type: object
