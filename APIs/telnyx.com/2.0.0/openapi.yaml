@@ -120,6 +120,12 @@ tags:
     name: Verify
   - description: Webhooks operations
     name: Webhooks
+  - description: WhatsApp contacts
+    name: WhatsApp Contacts
+  - description: WhatsApp media files
+    name: WhatsApp Media
+  - description: WhatsApp messages
+    name: WhatsApp Messages
   - description: Wireless operations
     name: Wireless
 paths:
@@ -2993,12 +2999,12 @@ paths:
       parameters:
         - $ref: "#/components/parameters/PageNumber"
         - $ref: "#/components/parameters/PageSize"
-        - $ref: "#/components/parameters/DocumentIdFilter"
+        - $ref: "#/components/parameters/DocServiceDocumentIdFilter"
         - $ref: "#/components/parameters/LinkedRecordTypeFilter"
         - $ref: "#/components/parameters/LinkedResourceIdFilter"
       responses:
         "200":
-          $ref: "#/components/responses/ListDocumentLinksResponse"
+          $ref: "#/components/responses/ListDocServiceDocumentLinksResponse"
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: List all document links
@@ -3014,7 +3020,7 @@ paths:
         - $ref: "#/components/parameters/PageSize"
       responses:
         "200":
-          $ref: "#/components/responses/ListDocumentsResponse"
+          $ref: "#/components/responses/ListDocServiceDocumentsResponse"
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: List all documents
@@ -3029,14 +3035,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateDocumentRequest"
+              $ref: "#/components/schemas/CreateDocServiceDocumentRequest"
           multipart/form-data:
             schema:
-              $ref: "#/components/schemas/CreateMultiPartDocumentRequest"
+              $ref: "#/components/schemas/CreateMultiPartDocServiceDocumentRequest"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/DocumentResponse"
+          $ref: "#/components/responses/DocServiceDocumentResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntity"
         default:
@@ -3055,7 +3061,7 @@ paths:
         - $ref: "#/components/parameters/Id"
       responses:
         "200":
-          $ref: "#/components/responses/DocumentResponse"
+          $ref: "#/components/responses/DocServiceDocumentResponse"
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Delete a document
@@ -3069,7 +3075,7 @@ paths:
         - $ref: "#/components/parameters/Id"
       responses:
         "200":
-          $ref: "#/components/responses/DocumentResponse"
+          $ref: "#/components/responses/DocServiceDocumentResponse"
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Retrieve a document
@@ -3085,11 +3091,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Document"
+              $ref: "#/components/schemas/DocServiceDocument"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/DocumentResponse"
+          $ref: "#/components/responses/DocServiceDocumentResponse"
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Update a document
@@ -3099,12 +3105,12 @@ paths:
   "/documents/{id}/download":
     get:
       description: Download a document.
-      operationId: downloadDocument
+      operationId: downloadDocServiceDocument
       parameters:
         - $ref: "#/components/parameters/Id"
       responses:
         "200":
-          $ref: "#/components/responses/DownloadDocumentResponse"
+          $ref: "#/components/responses/DownloadDocServiceDocumentResponse"
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Download a document
@@ -6627,12 +6633,9 @@ paths:
       description: Asynchronously create a Private Wireless Gateway for SIM cards for
         a previously created network.
       operationId: createPrivateWirelessGateway
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PrivateWirelessGatewayRequest"
-        required: true
+      parameters:
+        - $ref: "#/components/parameters/NetworkId"
+        - $ref: "#/components/parameters/NetworkName"
       responses:
         "202":
           $ref: "#/components/responses/CreatePrivateWirelessGatewayResponse"
@@ -8286,6 +8289,222 @@ paths:
       tags:
         - Webhooks
       x-latency-category: responsive
+  /whatsapp_contacts:
+    post:
+      deprecated: false
+      operationId: CheckContact
+      requestBody:
+        content:
+          application/json:
+            example:
+              blocking: wait
+              contacts:
+                - "15125551000"
+                - +1 512 555 1001
+                - "5125551002"
+                - +1 (512) 555-1004
+                - 1-512-555-1005
+              whatsapp_user_id: "15125551212"
+            schema:
+              $ref: "#/components/schemas/CheckContactRequestBody"
+        description: ""
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/CheckContactResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Check Contact
+      tags:
+        - WhatsApp Contacts
+      x-latency-category: responsive
+  /whatsapp_media:
+    post:
+      deprecated: false
+      operationId: UploadMedia
+      requestBody:
+        content:
+          multipart/form-data:
+            example:
+              media_content_type: image/jpeg
+              upload_file: string($binary)
+              whatsapp_user_id: "15125551212"
+            schema:
+              $ref: "#/components/schemas/MediaRequestBody"
+        description: ""
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UploadMediaResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Upload Media
+      tags:
+        - WhatsApp Media
+      x-latency-category: responsive
+  "/whatsapp_media/{whatsapp_user_id}/{media_id}":
+    delete:
+      deprecated: false
+      operationId: DeleteMedia
+      parameters:
+        - description: User's WhatsApp ID
+          explode: false
+          in: path
+          name: whatsapp_user_id
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: WhatsApp's Media ID
+          explode: false
+          in: path
+          name: media_id
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "204":
+          description: Request successful, empty response body.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Delete Media
+      tags:
+        - WhatsApp Media
+      x-latency-category: responsive
+    get:
+      deprecated: false
+      operationId: DownloadMedia
+      parameters:
+        - description: User's WhatsApp ID
+          explode: false
+          in: path
+          name: whatsapp_user_id
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: WhatsApp's Media ID
+          explode: false
+          in: path
+          name: media_id
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: The requested media.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Download Media
+      tags:
+        - WhatsApp Media
+      x-latency-category: responsive
+  /whatsapp_messages:
+    post:
+      deprecated: false
+      operationId: SendMessage
+      requestBody:
+        content:
+          application/json:
+            example:
+              text:
+                body: <Message Text>
+              to: "15125558989"
+              type: text
+              whatsapp_user_id: "15125551212"
+            schema:
+              $ref: "#/components/schemas/SendMessageRequestBody"
+        description: ""
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/MessageResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Send Message
+      tags:
+        - WhatsApp Messages
+      x-latency-category: responsive
+  "/whatsapp_messages/{message_id}":
+    patch:
+      deprecated: false
+      operationId: MarkMessageAsRead
+      parameters:
+        - description: Message ID from Webhook
+          in: path
+          name: message_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              status: read
+              whatsapp_user_id: "15125551212"
+            schema:
+              $ref: "#/components/schemas/MarkMessageAsReadRequestBody"
+        description: ""
+        required: true
+      responses:
+        "204":
+          description: Request successful, empty response body.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Mark Message As Read
+      tags:
+        - WhatsApp Messages
+      x-latency-category: responsive
+  "/whatsapp_users/{whatsapp_user_id}":
+    get:
+      deprecated: false
+      operationId: GetUser
+      parameters:
+        - description: User's WhatsApp ID
+          explode: false
+          in: path
+          name: whatsapp_user_id
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "200":
+          $ref: "#/components/responses/WhatsAppUserResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Get User
+      tags:
+        - WhatsApp Users
+      x-latency-category: responsive
+    patch:
+      operationId: UpdateWhatsAppWebhook
+      parameters:
+        - description: User's WhatsApp ID
+          explode: false
+          in: path
+          name: whatsapp_user_id
+          required: true
+          schema:
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserRequest"
+        required: true
+      responses:
+        "204":
+          description: Request successful, empty response body.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Update WhatsApp User
+      tags:
+        - WhatsApp Users
+      x-latency-category: responsive
   /wireless/detail_records_reports:
     get:
       description: Returns the WDR Reports that match the given parameters.
@@ -8401,7 +8620,7 @@ components:
           - voice
         example: webhook
         type: string
-    DocumentIdFilter:
+    DocServiceDocumentIdFilter:
       description: Identifies the associated document to filter on.
       in: query
       name: filter[document_id]
@@ -8772,6 +8991,23 @@ components:
       schema:
         example: office-profile
         type: string
+    NetworkId:
+      description: The identification of the related network resource.
+      in: query
+      name: network_id
+      required: true
+      schema:
+        example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+        format: uuid
+        type: string
+    NetworkName:
+      description: The private wireless gateway name.
+      in: query
+      name: name
+      required: true
+      schema:
+        example: My private wireless gateway
+        type: string
     NotificationChannelId:
       description: Filter by the id of a notification channel
       in: query
@@ -9083,14 +9319,14 @@ components:
                 type: array
             type: object
       description: ""
-    BulkUploadDocumentsResponse:
+    BulkUploadDocServiceDocumentsResponse:
       content:
         application/json:
           schema:
             properties:
               data:
                 items:
-                  $ref: "#/components/schemas/Document"
+                  $ref: "#/components/schemas/DocServiceDocument"
                 type: array
             type: object
       description: Successful response
@@ -9114,6 +9350,18 @@ components:
             title: Call Control Command Response
             type: object
       description: Successful response upon making a call control command.
+    CheckContactResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/CheckContact"
+                type: array
+            title: Check Contact Response
+            type: object
+      description: Successful response with details about WhatsApp contact(s).
     ConferenceCommandResponse:
       content:
         application/json:
@@ -9289,16 +9537,16 @@ components:
                 $ref: "#/components/schemas/WdrReport"
             type: object
       description: Successful response
-    DocumentResponse:
+    DocServiceDocumentResponse:
       content:
         application/json:
           schema:
             properties:
               data:
-                $ref: "#/components/schemas/Document"
+                $ref: "#/components/schemas/DocServiceDocument"
             type: object
       description: Successful response
-    DownloadDocumentResponse:
+    DownloadDocServiceDocumentResponse:
       content:
         "*":
           schema:
@@ -9625,27 +9873,27 @@ components:
             title: List CSV Downloads Response
             type: object
       description: Successful response with a list of CSV downloads.
-    ListDocumentLinksResponse:
+    ListDocServiceDocumentLinksResponse:
       content:
         application/json:
           schema:
             properties:
               data:
                 items:
-                  $ref: "#/components/schemas/DocumentLink"
+                  $ref: "#/components/schemas/DocServiceDocumentLink"
                 type: array
               meta:
                 $ref: "#/components/schemas/PaginationMeta"
             type: object
       description: Successful response
-    ListDocumentsResponse:
+    ListDocServiceDocumentsResponse:
       content:
         application/json:
           schema:
             properties:
               data:
                 items:
-                  $ref: "#/components/schemas/Document"
+                  $ref: "#/components/schemas/DocServiceDocument"
                 type: array
               meta:
                 $ref: "#/components/schemas/PaginationMeta"
@@ -10113,10 +10361,10 @@ components:
           schema:
             properties:
               data:
-                $ref: "#/components/schemas/OutboundMessagePayload"
-            title: Message Response
+                $ref: "#/components/schemas/Message"
+            title: Successful response with details about the WhatsApp message sent.
             type: object
-      description: Successful response with details about a message.
+      description: ""
     MessagingHostedNumberOrderResponse:
       content:
         application/json:
@@ -10605,6 +10853,18 @@ components:
                 $ref: "#/components/schemas/SIMCard"
             type: object
       description: Successful response
+    UploadMediaResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/UploadMedia"
+                type: array
+            title: Upload Media response.
+            type: object
+      description: ""
     UserBalanceResponse:
       content:
         application/json:
@@ -10624,6 +10884,16 @@ components:
             title: Validate address action response
             type: object
       description: Action response
+    WhatsAppUserResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/WhatsAppUser"
+            title: Successful response with details about the WhatsApp message sent.
+            type: object
+      description: ""
   schemas:
     ActivationStatus:
       description: Activation status
@@ -10644,54 +10914,44 @@ components:
       example: Active
       type: string
     Address:
+      example:
+        city: Menlo Park
+        country: United States
+        country_code: us
+        state: CA
+        street: 1 Hacker Way
+        type: HOME
+        zip: "94025"
       properties:
-        address_book:
-          $ref: "#/components/schemas/address_book"
-        administrative_area:
-          $ref: "#/components/schemas/administrative_area"
-        borough:
-          $ref: "#/components/schemas/borough"
-        business_name:
-          $ref: "#/components/schemas/business_name"
+        city:
+          description: City name
+          type: string
+        country:
+          description: Full country name
+          type: string
         country_code:
-          $ref: "#/components/schemas/country_code"
-        created_at:
-          description: ISO 8601 formatted date indicating when the resource was created.
-          example: 2018-02-02T22:25:27.521Z
+          description: Two-letter country abbreviation
           type: string
-        customer_reference:
-          $ref: "#/components/schemas/customer_reference"
-        extended_address:
-          $ref: "#/components/schemas/extended_address"
-        first_name:
-          $ref: "#/components/schemas/first_name"
-        id:
-          description: Uniquely identifies the address.
-          example: "1293384261075731499"
-          format: int64
+        state:
+          description: State abbreviation
           type: string
-        last_name:
-          $ref: "#/components/schemas/last_name"
-        locality:
-          $ref: "#/components/schemas/locality"
-        neighborhood:
-          $ref: "#/components/schemas/neighborhood"
-        phone_number:
-          $ref: "#/components/schemas/phone_number"
-        postal_code:
-          $ref: "#/components/schemas/postal_code"
-        record_type:
-          description: Identifies the type of the resource.
-          example: address
+        street:
+          description: Street number and name
           type: string
-        street_address:
-          $ref: "#/components/schemas/street_address"
-        updated_at:
-          description: ISO 8601 formatted date indicating when the resource was updated.
-          example: 2018-02-02T22:25:27.521Z
+        type:
+          description: "Standard Values: HOME, WORK"
           type: string
-        validate_address:
-          $ref: "#/components/schemas/validate_address"
+        zip:
+          description: ZIP code
+          type: string
+      required:
+        - city
+        - country
+        - country_code
+        - state
+        - street
+        - type
+        - zip
       title: Address
       type: object
     AddressCreate:
@@ -10797,6 +11057,23 @@ components:
       example: call-router
       title: Application Name
       type: string
+    Audio:
+      description: The media object containing audio details.
+      example:
+        id: f043afd0-f0ae-4b9c-ab3d-696fb4c8cd68
+      properties:
+        id:
+          description: The media object ID returned when the media is successfully
+            uploaded to the media endpoint.
+          example: your-media-id
+          type: string
+        link:
+          description: The protocol and URL of the media to be sent. Use only with
+            HTTP/HTTPS URLs. Either id or link must be provided, not both.
+          example: http://www.example.com/file
+          type: string
+      title: Audio
+      type: object
     AvailablePhoneNumber:
       example:
         best_effort: false
@@ -13203,6 +13480,74 @@ components:
           format: date-time
           type: string
       type: object
+    CheckContact:
+      description: ""
+      example:
+        id: "15125551234"
+        input: +1 (512) 555-1234
+        record_type: whatsapp_contact
+        status: valid
+      properties:
+        id:
+          description: WhatsApp user identifier that can be used in other API calls. Only
+            returned if the status is valid.
+          type: string
+        input:
+          description: The value you sent in the contacts field of the JSON request.
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          enum:
+            - whatsapp_contact
+          readOnly: true
+          type: string
+        status:
+          description: Status of the user.
+          enum:
+            - processing
+            - valid
+            - invalid
+          type: string
+          x-enum-descriptions:
+            - "processing: Input is still being processed."
+            - "valid: Input determined to be a valid WhatsApp user."
+            - "invalid: Input determined to not be a valid WhatsApp user or the
+              phone number is in a bad format."
+      title: Check Contact
+      type: object
+    CheckContactRequestBody:
+      example:
+        blocking: wait
+        contacts:
+          - "15125551000"
+          - +1 512 555 1001
+          - "5125551002"
+          - +1 (512) 555-1004
+          - 1-512-555-1005
+        whatsapp_user_id: "15125551212"
+      properties:
+        blocking:
+          default: no_wait
+          description: Blocking determines whether the request should wait for the
+            processing to complete (synchronous) or not (asynchronous).
+          enum:
+            - no_wait
+            - wait
+          type: string
+        contacts:
+          description: Array of contact phone numbers. The numbers can be in any standard
+            telephone number format.
+          items:
+            type: string
+          type: array
+        whatsapp_user_id:
+          description: The sender's WhatsApp ID.
+          type: string
+      required:
+        - whatsapp_user_id
+        - contacts
+      title: Check Contact Request Body
+      type: object
     CnamListing:
       description: The CNAM listing settings for a phone number.
       example:
@@ -14685,6 +15030,81 @@ components:
           type: string
       title: ConsumedData
       type: object
+    Contact:
+      example:
+        addresses:
+          - city: Menlo Park
+            country: United States
+            country_code: us
+            state: CA
+            street: 1 Hacker Way
+            type: HOME
+            zip: "94025"
+          - city: Menlo Park
+            country: United States
+            country_code: us
+            state: CA
+            street: 200 Jefferson Dr
+            type: WORK
+            zip: "94025"
+        birthday: 2012-08-18
+        emails:
+          - email: test@fb.com
+            type: WORK
+          - email: test@whatsapp.com
+            type: WORK
+        name:
+          first_name: John
+          formatted_name: John Smith
+          last_name: Smith
+        org:
+          company: WhatsApp
+          department: Design
+          title: Manager
+        phones:
+          - phone: +1 (940) 555-1234
+            type: HOME
+          - id: "16505551234"
+            phone: +1 (650) 555-1234
+            type: WORK
+        urls:
+          - type: WORK
+            url: https://www.facebook.com
+      properties:
+        addresses:
+          description: Full contact address(es)
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        birthday:
+          description: YYYY-MM-DD formatted string
+          type: string
+        emails:
+          description: Contact email address(es)
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        ims:
+          description: ""
+          items:
+            type: string
+          type: array
+        name:
+          $ref: "#/components/schemas/Name"
+        org:
+          $ref: "#/components/schemas/Organization"
+        phones:
+          description: Contact phone number(s)
+          items:
+            $ref: "#/components/schemas/Phone"
+          type: array
+        urls:
+          description: Contact URL(s)
+          items:
+            $ref: "#/components/schemas/Url"
+          type: array
+      title: Contact
+      type: object
     CostInformation:
       example:
         currency: USD
@@ -15014,13 +15434,10 @@ components:
         - connection_name
       title: Create Credential Connection Request
       type: object
-    CreateDocumentRequest:
-      allOf:
-        - $ref: "#/components/schemas/Record"
-        - $ref: "#/components/schemas/Document"
-        - oneOf:
-            - $ref: "#/components/schemas/DocumentUploadURL"
-            - $ref: "#/components/schemas/DocumentUploadInline"
+    CreateDocServiceDocumentRequest:
+      oneOf:
+        - $ref: "#/components/schemas/DocServiceDocumentUploadURL"
+        - $ref: "#/components/schemas/DocServiceDocumentUploadInline"
     CreateFaxApplicationRequest:
       example:
         active: false
@@ -15776,7 +16193,7 @@ components:
       required:
         - name
       type: object
-    CreateMultiPartDocumentRequest:
+    CreateMultiPartDocServiceDocumentRequest:
       properties:
         file:
           description: The file you are uploading.
@@ -16787,6 +17204,24 @@ components:
           example: https://www.telnyx.com/sample/42587e44-3a3e-46de-9255-0c9a7a1d1ec7
           type: string
       type: object
+    Currency:
+      description: ""
+      example:
+        amount_1000: 100990
+        currency_code: USD
+      properties:
+        amount_1000:
+          format: int32
+          type: integer
+        currency_code:
+          type: string
+        fallback_value:
+          type: string
+      required:
+        - amount_1000
+        - currency_code
+      title: Currency
+      type: object
     CustomSipHeader:
       example:
         name: head_1
@@ -16805,6 +17240,96 @@ components:
         - value
       title: Custom SIP Header
       type: object
+    DateTimeComponent:
+      description: Date/time by component
+      example:
+        day_of_month: 25
+        day_of_week: 5
+        hour: 15
+        minute: 33
+        month: 2
+        year: 1977
+      properties:
+        day_of_month:
+          description: The day of month
+          format: int32
+          type: integer
+        day_of_week:
+          description: Both strings and numbers are accepted. If different from the value
+            derived from the date (if specified), use the derived value.
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+          format: int32
+          type: integer
+          x-enum-descriptions:
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+            - Sunday
+          x-enum-varnames:
+            - MONDAY
+            - TUESDAY
+            - WEDNESDAY
+            - THURSDAY
+            - FRIDAY
+            - SATURDAY
+            - SUNDAY
+        hour:
+          description: The hour
+          format: int32
+          type: integer
+        minute:
+          description: The minute
+          format: int32
+          type: integer
+        month:
+          description: The month
+          format: int32
+          type: integer
+        year:
+          description: The year
+          format: int32
+          type: integer
+      title: Date Time by Component
+      type: object
+    DateTimeObject:
+      description: The Whatsapp Business API Client will attempt to format the
+        date/time based on a specified localization.
+      example:
+        component:
+          day_of_month: 25
+          day_of_week: 5
+          hour: 15
+          minute: 33
+          month: 2
+          year: 1977
+      properties:
+        component:
+          $ref: "#/components/schemas/DateTimeComponent"
+        unix_epoch:
+          $ref: "#/components/schemas/DateTimeUnixEpoch"
+      title: Date Time Object
+      type: object
+    DateTimeUnixEpoch:
+      description: Date/time by Unix epoch
+      example:
+        timestamp: 123456789
+      properties:
+        timestamp:
+          description: Epoch timestamp in seconds
+          format: int32
+          type: integer
+      title: Date Time by Unix Epoch
+      type: object
     DeleteVerifyProfileResponse:
       properties:
         data:
@@ -16813,9 +17338,9 @@ components:
         - data
       title: DeleteVerifyProfileResponse
       type: object
-    Document:
+    DocServiceDocument:
       allOf:
-        - $ref: "#/components/schemas/Record"
+        - $ref: "#/components/schemas/DocServiceRecord"
         - properties:
             content_type:
               description: The document's content_type.
@@ -16853,9 +17378,9 @@ components:
               readOnly: true
               type: object
           type: object
-    DocumentLink:
+    DocServiceDocumentLink:
       allOf:
-        - $ref: "#/components/schemas/Record"
+        - $ref: "#/components/schemas/DocServiceRecord"
         - properties:
             document_id:
               description: Identifies the associated document.
@@ -16879,16 +17404,17 @@ components:
               readOnly: true
               type: string
           type: object
-    DocumentUploadInline:
+    DocServiceDocumentUploadInline:
       properties:
         file:
           description: The Base64 encoded contents of the file you are uploading.
+          example: "[Base64 encoded content]"
           format: byte
           type: string
       required:
         - file
       type: object
-    DocumentUploadURL:
+    DocServiceDocumentUploadURL:
       properties:
         url:
           description: If the file is already hosted publicly, you can provide a URL and
@@ -16897,6 +17423,59 @@ components:
           type: string
       required:
         - url
+      type: object
+    DocServiceRecord:
+      properties:
+        created_at:
+          description: ISO 8601 formatted date-time indicating when the resource was
+            created.
+          example: 2018-02-02T22:25:27.521Z
+          readOnly: true
+          type: string
+        id:
+          description: Identifies the resource.
+          example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+          format: uuid
+          readOnly: true
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: sample_record_type
+          readOnly: true
+          type: string
+        updated_at:
+          description: ISO 8601 formatted date-time indicating when the resource was
+            updated.
+          example: 2018-02-02T22:25:27.521Z
+          readOnly: true
+          type: string
+      type: object
+    Document:
+      description: The media object containing a document reference
+      example:
+        caption: Very important document
+        filename: example.pdf
+        id: f043afd0-f0ae-4b9c-ab3d-696fb4c8cd68
+      properties:
+        caption:
+          description: Describes the specified media.
+          example: My cool media!
+          type: string
+        filename:
+          description: Describes the filename for the specific document.
+          example: example.pdf
+          type: string
+        id:
+          description: The media object ID returned when the media is successfully
+            uploaded to the media endpoint.
+          example: f043afd0-f0ae-4b9c-ab3d-696fb4c8cd68
+          type: string
+        link:
+          description: The protocol and URL of the media to be sent. Use only with
+            HTTP/HTTPS URLs. Either id or link must be provided, not both.
+          example: http://www.example.com/file
+          type: string
+      title: Document
       type: object
     DtmfType:
       default: RFC 2833
@@ -16909,6 +17488,20 @@ components:
       example: Inband
       title: DTMF Type
       type: string
+    Email:
+      example:
+        email: <Contact's Email>
+        type: <Contact's Email Type>
+      properties:
+        email:
+          type: string
+        type:
+          type: string
+      required:
+        - email
+        - type
+      title: Email
+      type: object
     EmergencySettings:
       description: The emergency services settings for a phone number.
       example:
@@ -18070,6 +18663,63 @@ components:
             - successful
           type: string
       type: object
+    Hsm:
+      description: The containing element for the message content — Indicates that the
+        message is highly structured. Parameters contained within provide the
+        structure.
+      example:
+        element_name: hello_world
+        language:
+          code: en
+          policy: deterministic
+        localizable_params:
+          - default: "1234"
+        namespace: business_a_namespace
+      properties:
+        element_name:
+          description: The element name that indicates which template to use within the
+            namespace
+          type: string
+        language:
+          $ref: "#/components/schemas/Language"
+        localizable_params:
+          description: This field is an array of values to apply to variables in the
+            template
+          items:
+            $ref: "#/components/schemas/LocalizableParam"
+          type: array
+        namespace:
+          description: The namespace that will be used
+          type: string
+      required:
+        - namespace
+        - element_name
+        - language
+        - localizable_params
+      title: Hsm
+      type: object
+    Image:
+      description: The media object containing an image
+      example:
+        caption: My cool media!
+        id: f043afd0-f0ae-4b9c-ab3d-696fb4c8cd68
+      properties:
+        caption:
+          description: Describes the specified media.
+          example: My cool media!
+          type: string
+        id:
+          description: The media object ID returned when the media is successfully
+            uploaded to the media endpoint.
+          example: f043afd0-f0ae-4b9c-ab3d-696fb4c8cd68
+          type: string
+        link:
+          description: The protocol and URL of the media to be sent. Use only with
+            HTTP/HTTPS URLs. Either id or link must be provided, not both.
+          example: http://www.example.com/file
+          type: string
+      title: Image
+      type: object
     ImmutableSetLong:
       example: "[1234567890L, 9876543210L]"
       items:
@@ -18984,6 +19634,26 @@ components:
         - call_control_id
       title: Join Conference Request
       type: object
+    Language:
+      example:
+        code: en
+        policy: deterministic
+      properties:
+        code:
+          description: The code of the language or locale to use — Accepts both language
+            and language_locale formats (e.g., en and en_US).
+          type: string
+        policy:
+          description: The language policy the message should follow
+          enum:
+            - fallback
+            - deterministic
+          type: string
+      required:
+        - policy
+        - code
+      title: Language
+      type: object
     LedgerBillingGroupReport:
       example:
         created_at: 2019-10-15T10:07:15.527Z
@@ -19057,6 +19727,47 @@ components:
         - data
         - meta
       title: ListVerifyProfilesResponse
+      type: object
+    LocalizableParam:
+      example:
+        default: <param value>
+      properties:
+        currency:
+          $ref: "#/components/schemas/Currency"
+        date_time:
+          $ref: "#/components/schemas/DateTimeObject"
+        default:
+          description: Default text if localization fails
+          type: string
+      required:
+        - default
+      title: LocalizableParam
+      type: object
+    Location:
+      example:
+        address: <Location's Address>
+        latitude: <Latitude>
+        longitude: <Longitude>
+        name: <Location Name>
+      properties:
+        address:
+          description: Address of the location. Only displayed if name is present.
+          type: string
+        latitude:
+          description: Latitude of the location
+          type: string
+        longitude:
+          description: Longitude of the location
+          type: string
+        name:
+          description: Name of the location
+          type: string
+      required:
+        - longitude
+        - latitude
+        - name
+        - address
+      title: Location
       type: object
     Loopcount:
       oneOf:
@@ -19157,6 +19868,21 @@ components:
             - balance
           example: balance
           type: string
+      type: object
+    MarkMessageAsReadRequestBody:
+      example:
+        status: read
+        whatsapp_user_id: "15125551212"
+      properties:
+        status:
+          default: read
+          type: string
+        whatsapp_user_id:
+          type: string
+      required:
+        - whatsapp_user_id
+        - status
+      title: Mark Message As Read Request Body
       type: object
     MdrDeleteDetailReportResponse:
       properties:
@@ -19566,6 +20292,58 @@ components:
             only controls whether one will be accepted.
           type: boolean
       type: object
+    MediaRequestBody:
+      description: ""
+      properties:
+        media_content_type:
+          description: The content-type of the uplaoded media.
+          type: string
+        upload_file:
+          description: The media to store with WhatsApp.
+          format: binary
+          type: string
+        whatsapp_user_id:
+          description: The user's WhatsApp ID.
+          type: string
+      required:
+        - whatsapp_user_id
+        - media_content_type
+        - upload_file
+      title: Media Request Body
+      type: object
+    Message:
+      description: ""
+      example:
+        id: gBEGkYiEB1VXAglK1ZEqA1YKPrU
+        record_type: whatsapp_message_id
+      properties:
+        id:
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          enum:
+            - whatsapp_message_id
+          readOnly: true
+          type: string
+      title: Message
+      type: object
+    MessageType:
+      default: text
+      description: type of the message
+      enum:
+        - audio
+        - contacts
+        - document
+        - hsm
+        - image
+        - location
+        - template
+        - text
+        - video
+        - voice
+        - unknown
+      title: Message Type
+      type: string
     MessagingFeatureSet:
       description: >
         The set of features available for a specific messaging use case
@@ -19997,6 +20775,32 @@ components:
       items:
         $ref: "#/components/schemas/MobileOperatorNetworkPreferencesResponse"
       type: array
+    Name:
+      description: Full contact name
+      example:
+        first_name: John
+        formatted_name: John Smith
+        last_name: Smith
+      properties:
+        first_name:
+          description: First name
+          type: string
+        formatted_name:
+          description: Full name as it normally appears
+          type: string
+        last_name:
+          description: Last name
+          type: string
+        prefix:
+          description: Name preffix
+          type: string
+        suffix:
+          description: Name suffix
+          type: string
+      required:
+        - formatted_name
+      title: Name
+      type: object
     NewBillingGroup:
       example:
         name: string
@@ -20604,6 +21408,26 @@ components:
           format: datetime
           readOnly: true
           type: string
+    Organization:
+      description: Contact organization information
+      example:
+        company: WhatsApp
+        department: Design
+        title: Manager
+      properties:
+        company:
+          description: Name of the contact's company
+          type: string
+        department:
+          description: Name of the contact's department
+          type: string
+        title:
+          description: Contact's business title
+          type: string
+      required:
+        - company
+      title: Organization
+      type: object
     OutboundCallRecording:
       example:
         call_recording_caller_phone_numbers:
@@ -21320,6 +22144,22 @@ components:
           example: 891510ac-f3e4-11e8-af5b-de00688a4901
           type: string
       title: Pause Recording Request
+      type: object
+    Phone:
+      example:
+        id: "16505551234"
+        phone: +1 (650) 555-1234
+        type: WORK
+      properties:
+        id:
+          description: WhatsApp ID
+          type: string
+        phone:
+          type: string
+        type:
+          description: "Standard Values: CELL, MAIN, IPHONE, HOME, WORK"
+          type: string
+      title: Phone Number
       type: object
     PhoneNumber:
       properties:
@@ -22421,11 +23261,11 @@ components:
           example: f1486bae-f067-460c-ad43-73a92848f901
           type: string
         tags:
+          example:
+            - abc
+            - "123"
           items:
             description: Tag to set on the numbers when ported
-            example:
-              - abc
-              - "123"
             type: string
           type: array
       type: object
@@ -22605,7 +23445,7 @@ components:
           type: string
         name:
           description: The private wireless gateway name.
-          example: My company's private wireless gateway
+          example: My private wireless gateway
           type: string
         network_id:
           description: The identification of the related network resource.
@@ -22633,8 +23473,13 @@ components:
       type: object
     PrivateWirelessGatewayRequest:
       example:
+        name: My private wireless gateway
         network_id: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
       properties:
+        name:
+          description: The private wireless gateway name.
+          example: My private wireless gateway
+          type: string
         network_id:
           description: The identification of the related network resource.
           example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
@@ -22680,32 +23525,6 @@ components:
             - failed
             - decommissioning
           example: provisioned
-          readOnly: true
-          type: string
-      type: object
-    Record:
-      properties:
-        created_at:
-          description: ISO 8601 formatted date-time indicating when the resource was
-            created.
-          example: 2018-02-02T22:25:27.521Z
-          readOnly: true
-          type: string
-        id:
-          description: Identifies the resource.
-          example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
-          format: uuid
-          readOnly: true
-          type: string
-        record_type:
-          description: Identifies the type of the resource.
-          example: sample_record_type
-          readOnly: true
-          type: string
-        updated_at:
-          description: ISO 8601 formatted date-time indicating when the resource was
-            updated.
-          example: 2018-02-02T22:25:27.521Z
           readOnly: true
           type: string
       type: object
@@ -23380,7 +24199,8 @@ components:
         value:
           default: provisioning
           description: >-
-            The current status of the SIM card's public IP. <ul>
+            The current status or failure details of the SIM card's public IP.
+            <ul>
              <li><code>provisioning</code> - the IP is being provisioned.</li>
              <li><code>provisioned</code> - the IP was provisioned and the SIM is reachable on the public internet.</li>
              <li><code>failed</code> - the provisioning had failed for a reason and it requires an intervention.</li>
@@ -23576,6 +24396,55 @@ components:
         - media_url
         - to
       title: Send fax request
+      type: object
+    SendMessageRequestBody:
+      example:
+        preview_url: true
+        text:
+          body: "Check out this site: http://www.telnyx.com"
+        to: "15125557878"
+        type: text
+      properties:
+        audio:
+          $ref: "#/components/schemas/Audio"
+        contacts:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Contact"
+          type: array
+        document:
+          $ref: "#/components/schemas/Document"
+        hsm:
+          $ref: "#/components/schemas/Hsm"
+        image:
+          $ref: "#/components/schemas/Image"
+        location:
+          $ref: "#/components/schemas/Location"
+        preview_url:
+          description: >-
+            Specifying preview_url in the request is optional when not
+            including a URL in your message.
+
+            To include a URL preview, set preview_url to true in the message body and make sure the URL begins with http:// or https://.
+          type: boolean
+        template:
+          $ref: "#/components/schemas/Template"
+        text:
+          $ref: "#/components/schemas/Text"
+        to:
+          description: The WhatsApp ID (phone number) returned from contacts endpoint.
+          type: string
+        type:
+          $ref: "#/components/schemas/MessageType"
+        video:
+          $ref: "#/components/schemas/Video"
+        whatsapp_user_id:
+          description: The sender's WhatsApp ID.
+          type: string
+      required:
+        - to
+        - whatsapp_user_id
+      title: Send Message Request Body
       type: object
     ServicePlan:
       default: global
@@ -24124,6 +24993,78 @@ components:
           type: string
       title: TelephonyCredentialUpdate
       type: object
+    Template:
+      properties:
+        components:
+          $ref: "#/components/schemas/TemplateComponents"
+        language:
+          $ref: "#/components/schemas/Language"
+        name:
+          description: Name of the template.
+          type: string
+        namespace:
+          description: Namespace of the template. This must be the namespace associated
+            with the WhatsApp business account that owns the phone number
+            associated with the current WhatsApp Business API client or the
+            message fails to send.
+          type: string
+      required:
+        - namespace
+        - name
+        - language
+      title: Template
+      type: object
+    TemplateComponents:
+      items:
+        description: ""
+        properties:
+          parameters:
+            $ref: "#/components/schemas/TemplateParameters"
+          type:
+            description: Describes the component type.
+            enum:
+              - header
+              - body
+              - footer
+            type: string
+        required:
+          - type
+        title: Template Components
+        type: object
+      title: Template Components
+      type: array
+    TemplateParameters:
+      items:
+        description: Array containing the content of the message.
+        properties:
+          currency:
+            $ref: "#/components/schemas/Currency"
+          date_time:
+            $ref: "#/components/schemas/DateTimeObject"
+          document:
+            $ref: "#/components/schemas/Document"
+          image:
+            $ref: "#/components/schemas/Image"
+          text:
+            type: string
+          type:
+            description: Describes the parameter type.
+            enum:
+              - text
+              - currency
+              - date_time
+              - image
+              - document
+              - video
+            type: string
+          video:
+            $ref: "#/components/schemas/Video"
+        required:
+          - type
+        title: Template Parameters
+        type: object
+      title: Template Component Parameters
+      type: array
     TexmlApplication:
       example:
         active: false
@@ -24255,6 +25196,16 @@ components:
           format: url
           type: string
       title: Texml Application
+      type: object
+    Text:
+      example:
+        body: <Message Text>
+      properties:
+        body:
+          type: string
+      required:
+        - body
+      title: Text
       type: object
     ToNumber:
       description: Receiving address (+E.164 formatted phone number or short code).
@@ -25859,6 +26810,17 @@ components:
         - voice_url
       title: Update Texml Application Request
       type: object
+    UpdateUserRequest:
+      properties:
+        webhook_url:
+          description: The desired URL to set for your WhatsApp webhook endpoint.
+          example: https://mywebhook.com/example/endpoint
+          title: Webhook Url
+          type: string
+      required:
+        - webhook_url
+      title: UpdateUserRequest
+      type: object
     UpdateVerifyProfileRequest:
       description: The request body when updating a Verify profile.
       properties:
@@ -25923,6 +26885,36 @@ components:
           description: Must be a signed LOA for the numbers in the order in PDF format.
           format: binary
           type: string
+      type: object
+    UploadMedia:
+      description: ""
+      example:
+        id: f043afd0-f0ae-4b9c-ab3d-696fb4c8cd68
+        record_type: whatsapp_media_id
+      properties:
+        id:
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          enum:
+            - whatsapp_media_id
+          readOnly: true
+          type: string
+      title: Upload Media
+      type: object
+    Url:
+      description: "Standard Values: HOME, WORK"
+      example:
+        type: WORK
+        url: https://www.facebook.com
+      properties:
+        type:
+          description: "Standard Values: HOME, WORK"
+          type: string
+        url:
+          description: URL
+          type: string
+      title: Root Type for Url
       type: object
     UrlShortenerSettings:
       description: >
@@ -26240,6 +27232,28 @@ components:
         - data
       title: VerifyVerificationCodeResponse
       type: object
+    Video:
+      description: The media object containing a video
+      example:
+        caption: My cool media!
+        id: f043afd0-f0ae-4b9c-ab3d-696fb4c8cd68
+      properties:
+        caption:
+          description: Describes the specified media.
+          example: My cool media!
+          type: string
+        id:
+          description: The media object ID returned when the media is successfully
+            uploaded to the media endpoint.
+          example: f043afd0-f0ae-4b9c-ab3d-696fb4c8cd68
+          type: string
+        link:
+          description: The protocol and URL of the media to be sent. Use only with
+            HTTP/HTTPS URLs. Either id or link must be provided, not both.
+          example: http://www.example.com/file
+          type: string
+      title: Video
+      type: object
     WdrReport:
       properties:
         created_at:
@@ -26336,6 +27350,30 @@ components:
       nullable: true
       title: Webhook Timeout Secs
       type: integer
+    WhatsAppUser:
+      description: The WhatsApp user object
+      example:
+        id: "15125551212"
+        record_type: whatsapp_user
+        webhook_url: https://mywebhook.com/example/endpoint
+      properties:
+        id:
+          description: The WhatsApp User ID, usually a phone number.
+          example: "15125551212"
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          enum:
+            - whatsapp_user
+          readOnly: true
+          type: string
+        webhook_url:
+          description: The URL that WhatsApp webhooks are sent to.
+          example: https://mywebhook.com/example/endpoint
+          title: Webhook Url
+          type: string
+      title: WhatsApp User
+      type: object
     address_book:
       default: true
       description: Indicates whether or not the address should be considered part of

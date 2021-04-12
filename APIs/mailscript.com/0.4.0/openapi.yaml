@@ -61,6 +61,12 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                list:
+                  value: |-
+                    [
+                    "hielle.com"
+                    ]
               schema:
                 $ref: "#/components/schemas/AddActionResponse"
           description: Successful operation
@@ -489,6 +495,233 @@ paths:
       summary: Get a token for opening a daemon connection
       tags:
         - daemon
+  /domains:
+    get:
+      description: ""
+      operationId: getAllDomains
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                list:
+                  value: |-
+                    {
+                    "list": ["hielle.com"]
+                    }
+              schema:
+                $ref: "#/components/schemas/GetAllDomainsResponse"
+          description: successful operation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad credentials
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid input
+      summary: Get all domains you have access to
+      tags:
+        - domains
+    post:
+      description: ""
+      operationId: addDomain
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddDomainRequest"
+        description: Domain body
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Add:
+                  value: >-
+                    {
+                      "id": "hielle.com",
+                      "records": [
+                        {
+                          "type:" "TXT",
+                          "name": "@",
+                          "value": "ms_verify=eecbb911-d940-41ea-8fc2-2c83295f418b"
+                        }
+                      ]
+                    }
+              schema:
+                $ref: "#/components/schemas/DomainResponse"
+          description: successful operation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad credentials
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid input
+      summary: Claim a new Domain
+      tags:
+        - domains
+  "/domains/verify/{domain}":
+    get:
+      description: ""
+      operationId: getDomainVerify
+      parameters:
+        - description: Full Top-level domain name
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Domain verification record:
+                  value: >-
+                    {
+                      "id": "hielle.com",
+                      "records": [
+                        {
+                          "type:" "TXT",
+                          "name": "@",
+                          "value": "ms_verify=eecbb911-d940-41ea-8fc2-2c83295f418b"
+                        }
+                      ]
+                    }
+              schema:
+                $ref: "#/components/schemas/DomainResponse"
+          description: successful operation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad credentials
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid input
+      summary: Get domain verification
+      tags:
+        - domains
+    post:
+      description: ""
+      operationId: CheckDomainVerify
+      parameters:
+        - description: Full Top-level domain name
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                checkDomainVerify:
+                  value: |-
+                    {
+                    "id":"hielle.com",
+                    "success": true
+                    }
+              schema:
+                $ref: "#/components/schemas/CheckDomainVerify"
+          description: successful operation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Authorization failed
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad credentials
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid input
+      summary: Check a new Domain
+      tags:
+        - domains
+  "/domains/{domain}":
+    delete:
+      description: ""
+      operationId: removeDomainVerify
+      parameters:
+        - description: Full Top-level domain name
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad credentials
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid input
+      summary: Remove a domain
+      tags:
+        - domains
   /inputs:
     get:
       description: ""
@@ -933,6 +1166,40 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Invalid input
       summary: Setup workflow
+      tags:
+        - workflows
+  /workflows/set:
+    post:
+      operationId: setWorkflow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetWorkflowRequest"
+        description: Set Workflow body
+        required: true
+      responses:
+        "204":
+          description: Successful update operation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Failure
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad credentials
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Key not found
+      summary: Set a property on a workflow
       tags:
         - workflows
   "/workflows/{workflow}":
@@ -1385,6 +1652,12 @@ components:
           type: string
       required:
         - address
+    AddDomainRequest:
+      properties:
+        domain:
+          type: string
+      required:
+        - domain
     AddEmailVerificationRequest:
       properties:
         email:
@@ -1450,6 +1723,8 @@ components:
       properties:
         action:
           type: string
+        active:
+          type: boolean
         input:
           type: string
         name:
@@ -1484,6 +1759,15 @@ components:
         - owner
         - createdAt
         - createdBy
+    CheckDomainVerify:
+      properties:
+        domain:
+          type: string
+        success:
+          type: boolean
+      required:
+        - domain
+        - success
     Criteria:
       minProperties: 1
       properties:
@@ -1510,6 +1794,28 @@ components:
           items:
             type: string
           type: array
+    DomainResponse:
+      properties:
+        domain:
+          type: string
+        records:
+          items:
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+              value:
+                type: string
+            required:
+              - type
+              - name
+              - value
+            type: object
+          type: array
+      required:
+        - domain
+        - records
     ErrorResponse:
       properties:
         error:
@@ -1533,6 +1839,14 @@ components:
             oneOf:
               - $ref: "#/components/schemas/Address"
             type: object
+          type: array
+      required:
+        - list
+    GetAllDomainsResponse:
+      properties:
+        id:
+          items:
+            type: string
           type: array
       required:
         - list
@@ -1640,6 +1954,15 @@ components:
         - write
         - createdBy
         - createdAt
+    KeyValuePair:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+        - key
+        - value
     MailscriptEmailInput:
       properties:
         address:
@@ -1683,6 +2006,16 @@ components:
         - to
         - from
         - subject
+    SetWorkflowRequest:
+      properties:
+        id:
+          type: string
+        pairs:
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/KeyValuePair"
+            type: object
+          type: array
     Trigger:
       properties:
         createdAt:
@@ -1799,6 +2132,8 @@ components:
       properties:
         action:
           type: string
+        active:
+          type: boolean
         createdAt:
           format: date-time
           type: string

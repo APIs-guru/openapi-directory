@@ -1084,6 +1084,40 @@ paths:
           description: A JSON-escaped URL of a Creative Commons image on Wikimedia
             servers, if exists. Null if no image is found.
       summary: Generate image from text
+  /transform:
+    post:
+      description: >
+        The method translates the input in the source language to the
+        target language. 
+
+
+        The request body is a JSON structure made of three elements:
+
+
+        * `from` (string) - a standard IETF tag for the source language. To invoke autodetect, use `*`
+
+        * `to` (string) - a standard IETF tag for the target language
+
+        * `content` (string) - a content to analyze
+
+        * `settings` (structure) - the [settings](#settings-reference) to apply when analyzing
+      operationId: translate
+      requestBody:
+        content:
+          application/json:
+            example:
+              content: 汪世杰
+              from: "*"
+              settings:
+                entity: person
+              to: en
+      responses:
+        "200":
+          content:
+            application/json:
+              example: Wang Shi Jie
+          description: "The translation. "
+      summary: Translate
 components:
   schemas:
     settings:

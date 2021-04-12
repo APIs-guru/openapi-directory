@@ -10,16 +10,17 @@ info:
     url: http://www.namsor.com/
     x-twitter: gendreapp
   description: "NamSor API v2 : enpoints to process personal names (gender,
-    cultural origin or ethnicity) in all alphabets or languages. Use GET methods
-    for small tests, but prefer POST methods for higher throughput (batch
-    processing of up to 100 names at a time). Need something you can't find
-    here? We have many more features coming soon. Let us know, we'll do our best
-    to add it! "
+    cultural origin or ethnicity) in all alphabets or languages. By default,
+    enpoints use 1 unit per name (ex. Gender), but Ethnicity classification uses
+    10 to 20 units per name depending on taxonomy. Use GET methods for small
+    tests, but prefer POST methods for higher throughput (batch processing of up
+    to 100 names at a time). Need something you can't find here? We have many
+    more features coming soon. Let us know, we'll do our best to add it! "
   license:
     name: NamSorAPI_Lic_v0.0.7
     url: https://v2.namsor.com/NamSorAPIv2/assets/pdf/201803_NamSor_API_Terms_v007.pdf
   title: NamSor API v2
-  version: 2.0.13
+  version: 2.0.14
   x-apisguru-categories:
     - text
   x-logo:
@@ -2537,7 +2538,8 @@ paths:
                 $ref: "#/components/schemas/FirstLastNameUSRaceEthnicityOut"
           description: "a US resident's likely race/ethnicity : W_NL (white, non latino),
             HL (hispano latino),  A (asian, non latino), B_NL (black, non
-            latino)."
+            latino), AI_AN (American Indian or Alaskan Native*) and PI (Pacific
+            Islander*). *optionally"
         "401":
           description: Missing or incorrect API Key
         "403":
@@ -2546,7 +2548,10 @@ paths:
         - api_key: []
       summary: "[USES 10 UNITS PER NAME] Infer a US resident's likely race/ethnicity
         according to US Census taxonomy W_NL (white, non latino), HL (hispano
-        latino),  A (asian, non latino), B_NL (black, non latino)."
+        latino),  A (asian, non latino), B_NL (black, non latino). Optionally
+        add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES
+        for two additional classes, AI_AN (American Indian or Alaskan Native)
+        and PI (Pacific Islander)."
       tags:
         - personal
   /api2/json/usRaceEthnicityBatch:
@@ -2566,7 +2571,8 @@ paths:
                 $ref: "#/components/schemas/BatchFirstLastNameUSRaceEthnicityOut"
           description: A list of US resident's likely race/ethnicity. W_NL (white, non
             latino), HL (hispano latino),  A (asian, non latino), B_NL (black,
-            non latino).
+            non latino), AI_AN (American Indian or Alaskan Native*) and PI
+            (Pacific Islander*). *optionally
         "401":
           description: Missing or incorrect API Key
         "403":
@@ -2574,7 +2580,11 @@ paths:
       security:
         - api_key: []
       summary: "[USES 10 UNITS PER NAME] Infer up-to 100 US resident's likely
-        race/ethnicity according to US Census taxonomy."
+        race/ethnicity according to US Census taxonomy. Output is W_NL (white,
+        non latino), HL (hispano latino),  A (asian, non latino), B_NL (black,
+        non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY:
+        USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American
+        Indian or Alaskan Native) and PI (Pacific Islander)."
       tags:
         - personal
   "/api2/json/usRaceEthnicityZIP5/{firstName}/{lastName}/{zip5Code}":
@@ -2604,7 +2614,8 @@ paths:
                 $ref: "#/components/schemas/FirstLastNameUSRaceEthnicityOut"
           description: "a US resident's likely race/ethnicity : W_NL (white, non latino),
             HL (hispano latino),  A (asian, non latino), B_NL (black, non
-            latino)."
+            latino), AI_AN (American Indian or Alaskan Native*) and PI (Pacific
+            Islander*). *optionally"
         "401":
           description: Missing or incorrect API Key
         "403":
@@ -2614,7 +2625,10 @@ paths:
       summary: "[USES 10 UNITS PER NAME] Infer a US resident's likely race/ethnicity
         according to US Census taxonomy, using (optional) ZIP5 code info. Output
         is W_NL (white, non latino), HL (hispano latino),  A (asian, non
-        latino), B_NL (black, non latino)."
+        latino), B_NL (black, non latino). Optionally add header
+        X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two
+        additional classes, AI_AN (American Indian or Alaskan Native) and PI
+        (Pacific Islander)."
       tags:
         - personal
   /api2/json/usZipRaceEthnicityBatch:
@@ -2634,7 +2648,8 @@ paths:
                 $ref: "#/components/schemas/BatchFirstLastNameUSRaceEthnicityOut"
           description: A list of US resident's likely race/ethnicity. W_NL (white, non
             latino), HL (hispano latino),  A (asian, non latino), B_NL (black,
-            non latino).
+            non latino), AI_AN (American Indian or Alaskan Native*) and PI
+            (Pacific Islander*). *optionally
         "401":
           description: Missing or incorrect API Key
         "403":
@@ -2643,7 +2658,11 @@ paths:
         - api_key: []
       summary: "[USES 10 UNITS PER NAME] Infer up-to 100 US resident's likely
         race/ethnicity according to US Census taxonomy, with (optional) ZIP
-        code."
+        code. Output is W_NL (white, non latino), HL (hispano latino),  A
+        (asian, non latino), B_NL (black, non latino). Optionally add header
+        X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two
+        additional classes, AI_AN (American Indian or Alaskan Native) and PI
+        (Pacific Islander)."
       tags:
         - personal
   "/api2/json/userInfo/{token}":
@@ -3814,6 +3833,8 @@ components:
             - HL
             - A
             - B_NL
+            - AI_AN
+            - PI
           type: string
           xml:
             attribute: true
@@ -3824,6 +3845,8 @@ components:
             - HL
             - A
             - B_NL
+            - AI_AN
+            - PI
           type: string
           xml:
             attribute: true

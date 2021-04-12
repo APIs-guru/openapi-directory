@@ -506,9 +506,14 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: "#/components/schemas/VideoChannel"
-                type: array
+                properties:
+                  data:
+                    items:
+                      $ref: "#/components/schemas/VideoChannel"
+                    type: array
+                  total:
+                    example: 1
+                    type: integer
           description: successful operation
       summary: List video channels of an account
       tags:
@@ -1645,6 +1650,16 @@ paths:
       tags:
         - Abuses
         - My User
+  /users/me/avatar:
+    delete:
+      responses:
+        "204":
+          description: successful operation
+      security:
+        - OAuth2: []
+      summary: Delete my avatar
+      tags:
+        - My User
   /users/me/avatar/pick:
     post:
       requestBody:
@@ -1665,7 +1680,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Avatar"
+                properties:
+                  avatar:
+                    $ref: "#/components/schemas/ActorImage"
+                type: object
           description: successful operation
         "413":
           description: image file too large
@@ -2178,6 +2196,110 @@ paths:
       security:
         - OAuth2: []
       summary: Update a video channel
+      tags:
+        - Video Channels
+  "/video-channels/{channelHandle}/avatar":
+    delete:
+      parameters:
+        - $ref: "#/components/parameters/channelHandle"
+      responses:
+        "204":
+          description: successful operation
+      security:
+        - OAuth2: []
+      summary: Delete channel avatar
+      tags:
+        - Video Channels
+  "/video-channels/{channelHandle}/avatar/pick":
+    post:
+      parameters:
+        - $ref: "#/components/parameters/channelHandle"
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              avatarfile:
+                contentType: image/png, image/jpeg
+            schema:
+              properties:
+                avatarfile:
+                  description: The file to upload.
+                  format: binary
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  avatar:
+                    $ref: "#/components/schemas/ActorImage"
+                type: object
+          description: successful operation
+        "413":
+          description: image file too large
+          headers:
+            X-File-Maximum-Size:
+              description: Maximum file size for the avatar
+              schema:
+                format: Nginx size
+                type: string
+      security:
+        - OAuth2: []
+      summary: Update channel avatar
+      tags:
+        - Video Channels
+  "/video-channels/{channelHandle}/banner":
+    delete:
+      parameters:
+        - $ref: "#/components/parameters/channelHandle"
+      responses:
+        "204":
+          description: successful operation
+      security:
+        - OAuth2: []
+      summary: Delete channel banner
+      tags:
+        - Video Channels
+  "/video-channels/{channelHandle}/banner/pick":
+    post:
+      parameters:
+        - $ref: "#/components/parameters/channelHandle"
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              bannerfile:
+                contentType: image/png, image/jpeg
+            schema:
+              properties:
+                bannerfile:
+                  description: The file to upload.
+                  format: binary
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  banner:
+                    $ref: "#/components/schemas/ActorImage"
+                type: object
+          description: successful operation
+        "413":
+          description: image file too large
+          headers:
+            X-File-Maximum-Size:
+              description: Maximum file size for the banner
+              schema:
+                format: Nginx size
+                type: string
+      security:
+        - OAuth2: []
+      summary: Update channel banner
       tags:
         - Video Channels
   "/video-channels/{channelHandle}/videos":
@@ -3927,7 +4049,7 @@ components:
       properties:
         avatar:
           allOf:
-            - $ref: "#/components/schemas/Avatar"
+            - $ref: "#/components/schemas/ActorImage"
           nullable: true
         displayName:
           type: string
@@ -3944,7 +4066,7 @@ components:
     Actor:
       properties:
         avatar:
-          $ref: "#/components/schemas/Avatar"
+          $ref: "#/components/schemas/ActorImage"
         createdAt:
           format: date-time
           type: string
@@ -3965,6 +4087,16 @@ components:
           type: string
         url:
           format: url
+          type: string
+    ActorImage:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        path:
+          type: string
+        updatedAt:
+          format: date-time
           type: string
     ActorInfo:
       properties:
@@ -4036,16 +4168,6 @@ components:
               example: 8
               type: integer
           type: object
-    Avatar:
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        path:
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
     CommentThreadPostResponse:
       properties:
         comment:
@@ -5162,7 +5284,7 @@ components:
       properties:
         avatar:
           allOf:
-            - $ref: "#/components/schemas/Avatar"
+            - $ref: "#/components/schemas/ActorImage"
           nullable: true
         displayName:
           type: string

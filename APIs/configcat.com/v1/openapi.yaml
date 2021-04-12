@@ -1319,12 +1319,12 @@ paths:
             application/hal+json:
               schema:
                 items:
-                  $ref: "#/components/schemas/MemberModel"
+                  $ref: "#/components/schemas/UserModel"
                 type: array
             application/json:
               schema:
                 items:
-                  $ref: "#/components/schemas/MemberModel"
+                  $ref: "#/components/schemas/UserModel"
                 type: array
           description: ""
         "400":
@@ -1507,13 +1507,13 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: "#/components/schemas/UpdateMemberGroupRequest"
+              $ref: "#/components/schemas/UpdatePermissionGroupRequest"
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateMemberGroupRequest"
+              $ref: "#/components/schemas/UpdatePermissionGroupRequest"
           text/json:
             schema:
-              $ref: "#/components/schemas/UpdateMemberGroupRequest"
+              $ref: "#/components/schemas/UpdatePermissionGroupRequest"
         required: true
       responses:
         "200":
@@ -2115,13 +2115,13 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: "#/components/schemas/CreateMemberGroupRequest"
+              $ref: "#/components/schemas/CreatePermissionGroupRequest"
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateMemberGroupRequest"
+              $ref: "#/components/schemas/CreatePermissionGroupRequest"
           text/json:
             schema:
-              $ref: "#/components/schemas/CreateMemberGroupRequest"
+              $ref: "#/components/schemas/CreatePermissionGroupRequest"
         required: true
       responses:
         "201":
@@ -3214,10 +3214,10 @@ components:
         - webHookChanged
         - webHookDeleted
         - subscriptionChanged
-        - memberGroupCreated
-        - memberGroupChanged
-        - memberGroupDeleted
-        - memberGroupDefault
+        - permissionGroupCreated
+        - permissionGroupChanged
+        - permissionGroupDeleted
+        - permissionGroupDefault
         - apiKeyAdded
         - apiKeyRemoved
         - integrationAdded
@@ -3336,14 +3336,46 @@ components:
       required:
         - name
       type: object
-    CreateMemberGroupRequest:
+    CreatePermissionGroupRequest:
       additionalProperties: false
       properties:
         accessType:
           $ref: "#/components/schemas/AccessType"
+        canCreateOrUpdateConfig:
+          type: boolean
+        canCreateOrUpdateEnvironment:
+          type: boolean
+        canCreateOrUpdateSetting:
+          type: boolean
+        canCreateOrUpdateTag:
+          type: boolean
+        canDeleteConfig:
+          type: boolean
+        canDeleteEnvironment:
+          type: boolean
+        canDeleteSetting:
+          type: boolean
+        canDeleteTag:
+          type: boolean
+        canManageIntegrations:
+          type: boolean
         canManageMembers:
           type: boolean
-        canManageResources:
+        canManageProductPreferences:
+          type: boolean
+        canManageWebhook:
+          type: boolean
+        canRotateSdkKey:
+          type: boolean
+        canTagSetting:
+          type: boolean
+        canUseExportImport:
+          type: boolean
+        canViewProductAuditLog:
+          type: boolean
+        canViewProductStatistics:
+          type: boolean
+        canViewSdkKey:
           type: boolean
         environmentAccesses:
           items:
@@ -3356,8 +3388,6 @@ components:
           type: string
         newEnvironmentAccessType:
           $ref: "#/components/schemas/EnvironmentAccessType"
-        showDeveloperInfo:
-          type: boolean
       required:
         - name
       type: object
@@ -3659,9 +3689,52 @@ components:
       properties:
         accessType:
           $ref: "#/components/schemas/AccessType"
+        canCreateOrUpdateConfig:
+          readOnly: true
+          type: boolean
+        canCreateOrUpdateEnvironment:
+          readOnly: true
+          type: boolean
+        canCreateOrUpdateSetting:
+          readOnly: true
+          type: boolean
+        canCreateOrUpdateTag:
+          readOnly: true
+          type: boolean
+        canDeleteConfig:
+          readOnly: true
+          type: boolean
+        canDeleteEnvironment:
+          readOnly: true
+          type: boolean
+        canDeleteSetting:
+          readOnly: true
+          type: boolean
+        canDeleteTag:
+          readOnly: true
+          type: boolean
+        canManageIntegrations:
+          readOnly: true
+          type: boolean
         canManageMembers:
           type: boolean
-        canManageResources:
+        canManageProductPreferences:
+          readOnly: true
+          type: boolean
+        canManageWebhook:
+          readOnly: true
+          type: boolean
+        canRotateSdkKey:
+          readOnly: true
+          type: boolean
+        canTagSetting:
+          readOnly: true
+          type: boolean
+        canUseExportImport:
+          readOnly: true
+          type: boolean
+        canViewSdkKey:
+          readOnly: true
           type: boolean
         environmentAccesses:
           items:
@@ -3676,8 +3749,6 @@ components:
         permissionGroupId:
           format: int64
           type: integer
-        showDeveloperInfo:
-          type: boolean
       type: object
     ProductModel:
       additionalProperties: false
@@ -4428,15 +4499,63 @@ components:
           nullable: true
           type: string
       type: object
-    UpdateMemberGroupRequest:
+    UpdatePermissionGroupRequest:
       additionalProperties: false
       properties:
         accessType:
           $ref: "#/components/schemas/AccessType"
+        canCreateOrUpdateConfig:
+          nullable: true
+          type: boolean
+        canCreateOrUpdateEnvironment:
+          nullable: true
+          type: boolean
+        canCreateOrUpdateSetting:
+          nullable: true
+          type: boolean
+        canCreateOrUpdateTag:
+          nullable: true
+          type: boolean
+        canDeleteConfig:
+          nullable: true
+          type: boolean
+        canDeleteEnvironment:
+          nullable: true
+          type: boolean
+        canDeleteSetting:
+          nullable: true
+          type: boolean
+        canDeleteTag:
+          nullable: true
+          type: boolean
+        canManageIntegrations:
+          nullable: true
+          type: boolean
         canManageMembers:
           nullable: true
           type: boolean
-        canManageResources:
+        canManageProductPreferences:
+          nullable: true
+          type: boolean
+        canManageWebhook:
+          nullable: true
+          type: boolean
+        canRotateSdkKey:
+          nullable: true
+          type: boolean
+        canTagSetting:
+          nullable: true
+          type: boolean
+        canUseExportImport:
+          nullable: true
+          type: boolean
+        canViewProductAuditLog:
+          nullable: true
+          type: boolean
+        canViewProductStatistics:
+          nullable: true
+          type: boolean
+        canViewSdkKey:
           nullable: true
           type: boolean
         environmentAccesses:
@@ -4451,9 +4570,6 @@ components:
           type: string
         newEnvironmentAccessType:
           $ref: "#/components/schemas/EnvironmentAccessType"
-        showDeveloperInfo:
-          nullable: true
-          type: boolean
       type: object
     UpdateProductRequest:
       additionalProperties: false
@@ -4496,9 +4612,21 @@ components:
         name:
           maxLength: 255
           minLength: 0
+          nullable: true
           type: string
-      required:
-        - name
+      type: object
+    UserModel:
+      additionalProperties: false
+      properties:
+        email:
+          nullable: true
+          type: string
+        fullName:
+          nullable: true
+          type: string
+        userId:
+          nullable: true
+          type: string
       type: object
   securitySchemes:
     Basic:

@@ -44,11 +44,13 @@ tags:
   - name: Groups
   - name: Issue Trackers
   - name: Person
+  - name: Published Binaries
   - name: Attribute Namespaces
   - name: Attributes
   - name: Request
   - name: Configuration
   - name: Distributions
+  - name: Workers
 paths:
   /about:
     get:
@@ -2389,6 +2391,162 @@ paths:
       summary: Delete a token of a person.
       tags:
         - Person
+  /published:
+    get:
+      description: |
+        Get a list of all the projects, all of them are considered published.
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                entry:
+                  - name: OBS:Server:Unstable
+                  - name: devel:languages:ruby
+                  - name: openSUSE:Maintenance:9810
+                  - name: zypp:plugins
+              schema:
+                $ref: "#/paths/~1group/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
+          description: OK. The request has succeeded.
+        "401":
+          $ref: "#/paths/~1group/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: List all the published projects.
+      tags:
+        - Published Binaries
+  "/published/{project_name}":
+    get:
+      description: >
+        Get a list of the repositories of the project that already have
+        published binaries.
+      parameters:
+        - description: Project name
+          example: home:Admin
+          in: path
+          name: project_name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                entry:
+                  - name: SLE_15_SP3
+                  - name: containers
+                  - name: images
+                  - name: openSUSE_15.2
+              schema:
+                $ref: "#/paths/~1group/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
+          description: OK. The request has succeeded.
+        "401":
+          $ref: "#/paths/~1group/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find Project
+              schema:
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: List the repositories of a project with published binaries
+      tags:
+        - Published Binaries
+  "/published/{project_name}/{repository_name}":
+    get:
+      description: >
+        Get a list of architectures' directories and other files (.repo,
+        .ymp, etc.) present at the level project/repository of the directory
+        tree where the published binaries are stored.
+      parameters:
+        - $ref: "#/paths/~1published~1{project_name}/get/parameters/0"
+        - description: Repository name
+          example: openSUSE:Tumbleweed
+          in: path
+          name: repository_name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                entry:
+                  - name: OBS:Server:Unstable.repo
+                  - name: OBS_Server.ymp
+                  - name: aarch64
+                  - name: x86_64
+              schema:
+                $ref: "#/paths/~1group/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
+          description: OK. The request has succeeded.
+        "401":
+          $ref: "#/paths/~1group/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find Project
+              schema:
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: List the content of the directory tree where the binaries are published
+        at the level project/repository.
+      tags:
+        - Published Binaries
+  "/published/{project_name}/{repository_name}/{architecture_name}":
+    get:
+      description: >
+        Get a list of binaries and other files present at the level
+        project/repository/architecture of the directory tree as a result of
+        successful building and publishing processes.
+      parameters:
+        - $ref: "#/paths/~1published~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1published~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                entry:
+                  - name: apache2-mod_auth_memcookie-1.1.1-lp152.2.1.x86_64.rpm
+                  - name: obs-api-testsuite-rspec-2.11~alpha.20200618T200341.d42d8310aa-lp152.10515.1.x86_64.rpm
+              schema:
+                $ref: "#/paths/~1group/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
+          description: OK. The request has succeeded.
+        "401":
+          $ref: "#/paths/~1group/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find Project
+              schema:
+                $ref: "#/paths/~1group/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: List the content of the directory tree where the binaries are published
+        at the level project/repository/architecture.
+      tags:
+        - Published Binaries
   /request:
     get:
       description: Get a simple directory listing of all requests
@@ -3339,6 +3497,274 @@ paths:
       summary: Get a collection of requests for a specified target
       tags:
         - Request
+  /worker/status:
+    get:
+      description: >
+        Lists status of workers, running jobs, waiting jobs, status of the
+        backend services and general statistics.
+
+
+        Other ways to obtain the same information as with this endpoint are:
+          * `GET /worker/_status`
+          * `GET /status/workerstatus`
+          * `GET /build/_workerstatus`
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                blocked:
+                  - arch: i586
+                    jobs: "0"
+                  - arch: x86_64
+                    jobs: "0"
+                buildavg:
+                  - arch: i586
+                    buildavg: "1200"
+                  - arch: x86_64
+                    buildavg: "1200"
+                building:
+                  - arch: x86_64
+                    hostarch: x86_64
+                    package: android-sdk
+                    project: home:enzokiel
+                    repository: openSUSE_11.3_Update
+                    starttime: "1289838671"
+                    workerid: 1a1f67b948b6:2
+                clients: "2"
+                down:
+                  - hostarch: aarch64
+                    workerid: armbuild03:1
+                idle:
+                  - hostarch: x86_64
+                    workerid: 1a1f67b948b6:1
+                partition:
+                  - daemon:
+                      - starttime: "1617711138"
+                        state: running
+                        type: srcserver
+                      - starttime: "1617711144"
+                        state: running
+                        type: servicedispatch
+                      - starttime: "1617711144"
+                        state: running
+                        type: service
+                      - starttime: "1617711145"
+                        state: running
+                        type: clouduploadserver
+                      - starttime: "1617711144"
+                        state: running
+                        type: clouduploadworker
+                      - arch: i586
+                        queue:
+                          high: "0"
+                          low: "11"
+                          med: "0"
+                          next: "0"
+                        starttime: "1617711145"
+                        state: running
+                        type: scheduler
+                      - arch: x86_64
+                        queue:
+                          high: "0"
+                          low: "11"
+                          med: "0"
+                          next: "0"
+                        starttime: "1617711145"
+                        state: running
+                        type: scheduler
+                      - starttime: "1617711143"
+                        state: running
+                        type: repserver
+                      - starttime: "1617711144"
+                        state: running
+                        type: dispatcher
+                      - starttime: "1617711145"
+                        state: running
+                        type: publisher
+                      - starttime: "1617711146"
+                        state: running
+                        type: signer
+                  - daemon:
+                      - arch: aarch64
+                        queue:
+                          high: "0"
+                          low: "4"
+                          med: "1"
+                          next: "22"
+                        starttime: "1617148925"
+                        state: running
+                        type: scheduler
+                    name: back-main
+                waiting:
+                  - arch: i586
+                    jobs: "0"
+                  - arch: x86_64
+                    jobs: "0"
+              schema:
+                properties:
+                  blocked:
+                    items:
+                      properties:
+                        arch:
+                          type: string
+                          xml:
+                            attribute: true
+                        jobs:
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                  buildavg:
+                    items:
+                      properties:
+                        arch:
+                          type: string
+                          xml:
+                            attribute: true
+                        buildavg:
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                  building:
+                    items:
+                      properties:
+                        arch:
+                          type: string
+                          xml:
+                            attribute: true
+                        hostarch:
+                          type: string
+                          xml:
+                            attribute: true
+                        package:
+                          type: string
+                          xml:
+                            attribute: true
+                        project:
+                          type: string
+                          xml:
+                            attribute: true
+                        repository:
+                          type: string
+                          xml:
+                            attribute: true
+                        starttime:
+                          type: string
+                          xml:
+                            attribute: true
+                        workerid:
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                  clients:
+                    type: integer
+                    xml:
+                      attribute: true
+                  down:
+                    items:
+                      properties:
+                        hostarch:
+                          type: string
+                          xml:
+                            attribute: true
+                        workerid:
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                  idle:
+                    items:
+                      properties:
+                        hostarch:
+                          type: string
+                          xml:
+                            attribute: true
+                        workerid:
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                  partition:
+                    items:
+                      properties:
+                        daemon:
+                          items:
+                            properties:
+                              arch:
+                                type: string
+                                xml:
+                                  attribute: true
+                              queue:
+                                properties:
+                                  high:
+                                    type: string
+                                    xml:
+                                      attribute: true
+                                  low:
+                                    type: string
+                                    xml:
+                                      attribute: true
+                                  med:
+                                    type: string
+                                    xml:
+                                      attribute: true
+                                  next:
+                                    type: string
+                                    xml:
+                                      attribute: true
+                                type: object
+                              starttime:
+                                type: string
+                                xml:
+                                  attribute: true
+                              state:
+                                type: string
+                                xml:
+                                  attribute: true
+                              type:
+                                type: string
+                                xml:
+                                  attribute: true
+                            type: object
+                          type: array
+                        name:
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                  waiting:
+                    items:
+                      properties:
+                        arch:
+                          type: string
+                          xml:
+                            attribute: true
+                        jobs:
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                type: object
+                xml:
+                  name: workerstatus
+          description: OK
+        "401":
+          $ref: "#/paths/~1group/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: Lists status of workers, jobs, backend services and general statistics.
+      tags:
+        - Workers
 components:
   securitySchemes:
     basic_authentication:

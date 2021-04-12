@@ -23,7 +23,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.nexmo.com/terms-of-use
   title: Reports API
-  version: 2.1.15
+  version: 2.1.16
   x-label: Beta
   x-origin:
     - format: openapi
@@ -1036,6 +1036,11 @@ components:
       maxLength: 40
       minLength: 40
       type: string
+    concatenated:
+      default: false
+      description: Whether the SMS was split up into multiple parts (due to its length).
+      example: "true"
+      type: boolean
     conversation_id:
       description: Search only for Voice calls attached to this particular
         Conversation. This should include the "CON-" prefix.
@@ -1598,6 +1603,8 @@ components:
           $ref: "#/components/schemas/account_id"
         client_ref:
           $ref: "#/components/schemas/client_ref"
+        concatenated:
+          $ref: "#/components/schemas/concatenated"
         country:
           $ref: "#/components/schemas/country"
         country_name:

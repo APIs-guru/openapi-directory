@@ -882,6 +882,7 @@ paths:
           name: startTime
           schema:
             format: int32
+            nullable: true
             type: integer
         - description: Format Military Time.End Time for availability search. Defaults to
             Business Hours End.
@@ -889,6 +890,7 @@ paths:
           name: endTime
           schema:
             format: int32
+            nullable: true
             type: integer
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -937,6 +939,7 @@ paths:
           name: tzOffset
           schema:
             format: int32
+            nullable: true
             type: integer
         - description: Format YYYY-DD-YY. Start date for day availability. Defaults to
             startDate.
@@ -955,6 +958,11 @@ paths:
         - description: Return available times for the first available day.
           in: query
           name: firstDayAvailable
+          schema:
+            type: boolean
+        - description: Use the faster full server based availability beta.
+          in: query
+          name: fullServerBasedAvailability
           schema:
             type: boolean
       responses:
@@ -1066,6 +1074,7 @@ paths:
           name: startTime
           schema:
             format: int32
+            nullable: true
             type: integer
         - description: Format Military Time. End Time for availability search. Defaults to
             Business Hours End.
@@ -1073,6 +1082,7 @@ paths:
           name: endTime
           schema:
             format: int32
+            nullable: true
             type: integer
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -1160,7 +1170,7 @@ paths:
   "/consumer/v1/availability/{serviceId}/{startDate}/{endDate}/unavailable":
     get:
       description: This endpoint is used to show unavailable times and provides
-        information why the timeslot is unavailable.
+        information why the time is unavailable.
       parameters:
         - description: Service Id for availability search.
           in: path
@@ -1209,6 +1219,11 @@ paths:
           schema:
             format: int32
             type: integer
+        - description: Use the faster full server based availability beta.
+          in: query
+          name: fullServerBasedAvailability
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -2681,6 +2696,10 @@ components:
           type: string
         firstname:
           type: string
+        groupSize:
+          format: int32
+          nullable: true
+          type: integer
         id:
           type: string
         ipAddress:
@@ -2893,6 +2912,10 @@ components:
           type: string
         firstname:
           type: string
+        groupSize:
+          format: int32
+          nullable: true
+          type: integer
         id:
           type: string
         ipAddress:
@@ -3839,6 +3862,10 @@ components:
       properties:
         address:
           $ref: "#/components/schemas/AddressViewModel"
+        adminEmail:
+          type: string
+        adminName:
+          type: string
         businessHolidays:
           items:
             $ref: "#/components/schemas/BusinessHolidayViewModel"
@@ -3869,6 +3896,12 @@ components:
         longitude:
           format: double
           type: number
+        maxCapacity:
+          format: int32
+          type: integer
+        maxGroupSize:
+          format: int32
+          type: integer
         name:
           type: string
         object:
@@ -4508,6 +4541,12 @@ components:
         locationId:
           type: string
         maxBookingLimit:
+          format: int32
+          type: integer
+        maxCapacity:
+          format: int32
+          type: integer
+        maxGroupSize:
           format: int32
           type: integer
         maxResourceBookingLimit:

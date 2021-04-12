@@ -362,6 +362,12 @@ paths:
                     verified them. An account may have some of its requested
                     capabilities be active and some be inactive.
                   properties:
+                    acss_debit_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     afterpay_clearpay_payments:
                       properties:
                         requested:
@@ -3881,6 +3887,12 @@ paths:
                     verified them. An account may have some of its requested
                     capabilities be active and some be inactive.
                   properties:
+                    acss_debit_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     afterpay_clearpay_payments:
                       properties:
                         requested:
@@ -4832,6 +4844,12 @@ paths:
                     verified them. An account may have some of its requested
                     capabilities be active and some be inactive.
                   properties:
+                    acss_debit_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     afterpay_clearpay_payments:
                       properties:
                         requested:
@@ -12006,6 +12024,9 @@ paths:
               payment_intent_data:
                 explode: true
                 style: deepObject
+              payment_method_options:
+                explode: true
+                style: deepObject
               payment_method_types:
                 explode: true
                 style: deepObject
@@ -12050,19 +12071,23 @@ paths:
                   type: string
                 customer:
                   description: >-
-                    ID of an existing customer, if one exists. The email stored on the
+                    ID of an existing Customer, if one exists. In `payment` mode, the
+                    customer’s most recent card
 
-                    customer will be used to prefill the email field on the Checkout page.
+                    payment method will be used to prefill the email, name, card details, and billing address
 
-                    If the customer changes their email on the Checkout page, the Customer
+                    on the Checkout page. In `subscription` mode, the customer’s [default payment method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method)
 
-                    object will be updated with the new email.
+                    will be used if it’s a card, and otherwise the most recent card will be used. A valid billing address is required for Checkout to prefill the customer's card details.
 
-                    If blank for Checkout Sessions in `payment` or `subscription` mode,
 
-                    Checkout will create a new customer object based on information
+                    If the customer changes their email on the Checkout page, the Customer object will be updated with the new email.
 
-                    provided during the payment flow.
+
+                    If blank for Checkout Sessions in `payment` or `subscription` mode, Checkout will create a new Customer object based on information provided during the payment flow.
+
+
+                    You can set [`payment_intent_data.setup_future_usage`](https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-payment_intent_data-setup_future_usage) to have Checkout automatically attach the payment method to the Customer you pass in for future reuse.
                   maxLength: 5000
                   type: string
                 customer_email:
@@ -12360,6 +12385,51 @@ paths:
                       type: string
                   title: payment_intent_data_params
                   type: object
+                payment_method_options:
+                  description: Payment-method-specific configuration.
+                  properties:
+                    acss_debit:
+                      properties:
+                        currency:
+                          enum:
+                            - cad
+                            - usd
+                          type: string
+                        mandate_options:
+                          properties:
+                            custom_mandate_url:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            interval_description:
+                              maxLength: 500
+                              type: string
+                            payment_schedule:
+                              enum:
+                                - combined
+                                - interval
+                                - sporadic
+                              type: string
+                            transaction_type:
+                              enum:
+                                - business
+                                - personal
+                              type: string
+                          title: payment_method_options_mandate_options_param
+                          type: object
+                        verification_method:
+                          enum:
+                            - automatic
+                            - instant
+                            - microdeposits
+                          type: string
+                          x-stripeBypassValidation: true
+                      title: payment_method_options_param
+                      type: object
+                  title: payment_method_options_param
+                  type: object
                 payment_method_types:
                   description: >-
                     A list of the types of payment methods (e.g., `card`) this Checkout
@@ -12378,6 +12448,7 @@ paths:
                     other characteristics.
                   items:
                     enum:
+                      - acss_debit
                       - afterpay_clearpay
                       - alipay
                       - bacs_debit
@@ -30936,6 +31007,23 @@ paths:
 
                     property on the PaymentIntent.
                   properties:
+                    acss_debit:
+                      properties:
+                        account_number:
+                          maxLength: 5000
+                          type: string
+                        institution_number:
+                          maxLength: 5000
+                          type: string
+                        transit_number:
+                          maxLength: 5000
+                          type: string
+                      required:
+                        - account_number
+                        - institution_number
+                        - transit_number
+                      title: payment_method_param
+                      type: object
                     afterpay_clearpay:
                       properties: {}
                       title: param
@@ -31175,6 +31263,7 @@ paths:
                       type: object
                     type:
                       enum:
+                        - acss_debit
                         - afterpay_clearpay
                         - alipay
                         - au_becs_debit
@@ -31198,6 +31287,45 @@ paths:
                 payment_method_options:
                   description: Payment-method-specific configuration for this PaymentIntent.
                   properties:
+                    acss_debit:
+                      anyOf:
+                        - properties:
+                            mandate_options:
+                              properties:
+                                custom_mandate_url:
+                                  anyOf:
+                                    - type: string
+                                    - enum:
+                                        - ""
+                                      type: string
+                                interval_description:
+                                  maxLength: 500
+                                  type: string
+                                payment_schedule:
+                                  enum:
+                                    - combined
+                                    - interval
+                                    - sporadic
+                                  type: string
+                                transaction_type:
+                                  enum:
+                                    - business
+                                    - personal
+                                  type: string
+                              title: payment_method_options_mandate_options_param
+                              type: object
+                            verification_method:
+                              enum:
+                                - automatic
+                                - instant
+                                - microdeposits
+                              type: string
+                              x-stripeBypassValidation: true
+                          title: payment_intent_payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
                     alipay:
                       anyOf:
                         - properties: {}
@@ -31673,6 +31801,23 @@ paths:
 
                     property on the PaymentIntent.
                   properties:
+                    acss_debit:
+                      properties:
+                        account_number:
+                          maxLength: 5000
+                          type: string
+                        institution_number:
+                          maxLength: 5000
+                          type: string
+                        transit_number:
+                          maxLength: 5000
+                          type: string
+                      required:
+                        - account_number
+                        - institution_number
+                        - transit_number
+                      title: payment_method_param
+                      type: object
                     afterpay_clearpay:
                       properties: {}
                       title: param
@@ -31912,6 +32057,7 @@ paths:
                       type: object
                     type:
                       enum:
+                        - acss_debit
                         - afterpay_clearpay
                         - alipay
                         - au_becs_debit
@@ -31935,6 +32081,45 @@ paths:
                 payment_method_options:
                   description: Payment-method-specific configuration for this PaymentIntent.
                   properties:
+                    acss_debit:
+                      anyOf:
+                        - properties:
+                            mandate_options:
+                              properties:
+                                custom_mandate_url:
+                                  anyOf:
+                                    - type: string
+                                    - enum:
+                                        - ""
+                                      type: string
+                                interval_description:
+                                  maxLength: 500
+                                  type: string
+                                payment_schedule:
+                                  enum:
+                                    - combined
+                                    - interval
+                                    - sporadic
+                                  type: string
+                                transaction_type:
+                                  enum:
+                                    - business
+                                    - personal
+                                  type: string
+                              title: payment_method_options_mandate_options_param
+                              type: object
+                            verification_method:
+                              enum:
+                                - automatic
+                                - instant
+                                - microdeposits
+                              type: string
+                              x-stripeBypassValidation: true
+                          title: payment_intent_payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
                     alipay:
                       anyOf:
                         - properties: {}
@@ -32560,6 +32745,23 @@ paths:
 
                     property on the PaymentIntent.
                   properties:
+                    acss_debit:
+                      properties:
+                        account_number:
+                          maxLength: 5000
+                          type: string
+                        institution_number:
+                          maxLength: 5000
+                          type: string
+                        transit_number:
+                          maxLength: 5000
+                          type: string
+                      required:
+                        - account_number
+                        - institution_number
+                        - transit_number
+                      title: payment_method_param
+                      type: object
                     afterpay_clearpay:
                       properties: {}
                       title: param
@@ -32799,6 +33001,7 @@ paths:
                       type: object
                     type:
                       enum:
+                        - acss_debit
                         - afterpay_clearpay
                         - alipay
                         - au_becs_debit
@@ -32822,6 +33025,45 @@ paths:
                 payment_method_options:
                   description: Payment-method-specific configuration for this PaymentIntent.
                   properties:
+                    acss_debit:
+                      anyOf:
+                        - properties:
+                            mandate_options:
+                              properties:
+                                custom_mandate_url:
+                                  anyOf:
+                                    - type: string
+                                    - enum:
+                                        - ""
+                                      type: string
+                                interval_description:
+                                  maxLength: 500
+                                  type: string
+                                payment_schedule:
+                                  enum:
+                                    - combined
+                                    - interval
+                                    - sporadic
+                                  type: string
+                                transaction_type:
+                                  enum:
+                                    - business
+                                    - personal
+                                  type: string
+                              title: payment_method_options_mandate_options_param
+                              type: object
+                            verification_method:
+                              enum:
+                                - automatic
+                                - instant
+                                - microdeposits
+                              type: string
+                              x-stripeBypassValidation: true
+                          title: payment_intent_payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
                     alipay:
                       anyOf:
                         - properties: {}
@@ -33129,6 +33371,7 @@ paths:
           required: true
           schema:
             enum:
+              - acss_debit
               - afterpay_clearpay
               - alipay
               - au_becs_debit
@@ -33207,6 +33450,9 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              acss_debit:
+                explode: true
+                style: deepObject
               afterpay_clearpay:
                 explode: true
                 style: deepObject
@@ -33267,6 +33513,25 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                acss_debit:
+                  description: If this is an `acss_debit` PaymentMethod, this hash contains
+                    details about the ACSS Debit payment method.
+                  properties:
+                    account_number:
+                      maxLength: 5000
+                      type: string
+                    institution_number:
+                      maxLength: 5000
+                      type: string
+                    transit_number:
+                      maxLength: 5000
+                      type: string
+                  required:
+                    - account_number
+                    - institution_number
+                    - transit_number
+                  title: payment_method_param
+                  type: object
                 afterpay_clearpay:
                   description: If this is an `AfterpayClearpay` PaymentMethod, this hash contains
                     details about the AfterpayClearpay payment method.
@@ -33600,6 +33865,7 @@ paths:
                     contains additional information specific to the
                     PaymentMethod type.
                   enum:
+                    - acss_debit
                     - afterpay_clearpay
                     - alipay
                     - au_becs_debit
@@ -39437,6 +39703,46 @@ paths:
                 payment_method_options:
                   description: Payment-method-specific configuration for this SetupIntent.
                   properties:
+                    acss_debit:
+                      properties:
+                        currency:
+                          enum:
+                            - cad
+                            - usd
+                          type: string
+                        mandate_options:
+                          properties:
+                            custom_mandate_url:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            interval_description:
+                              maxLength: 500
+                              type: string
+                            payment_schedule:
+                              enum:
+                                - combined
+                                - interval
+                                - sporadic
+                              type: string
+                            transaction_type:
+                              enum:
+                                - business
+                                - personal
+                              type: string
+                          title: payment_method_options_mandate_options_param
+                          type: object
+                        verification_method:
+                          enum:
+                            - automatic
+                            - instant
+                            - microdeposits
+                          type: string
+                          x-stripeBypassValidation: true
+                      title: setup_intent_payment_method_options_param
+                      type: object
                     card:
                       properties:
                         request_three_d_secure:
@@ -39643,6 +39949,46 @@ paths:
                 payment_method_options:
                   description: Payment-method-specific configuration for this SetupIntent.
                   properties:
+                    acss_debit:
+                      properties:
+                        currency:
+                          enum:
+                            - cad
+                            - usd
+                          type: string
+                        mandate_options:
+                          properties:
+                            custom_mandate_url:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            interval_description:
+                              maxLength: 500
+                              type: string
+                            payment_schedule:
+                              enum:
+                                - combined
+                                - interval
+                                - sporadic
+                              type: string
+                            transaction_type:
+                              enum:
+                                - business
+                                - personal
+                              type: string
+                          title: payment_method_options_mandate_options_param
+                          type: object
+                        verification_method:
+                          enum:
+                            - automatic
+                            - instant
+                            - microdeposits
+                          type: string
+                          x-stripeBypassValidation: true
+                      title: setup_intent_payment_method_options_param
+                      type: object
                     card:
                       properties:
                         request_three_d_secure:
@@ -39880,6 +40226,46 @@ paths:
                 payment_method_options:
                   description: Payment-method-specific configuration for this SetupIntent.
                   properties:
+                    acss_debit:
+                      properties:
+                        currency:
+                          enum:
+                            - cad
+                            - usd
+                          type: string
+                        mandate_options:
+                          properties:
+                            custom_mandate_url:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            interval_description:
+                              maxLength: 500
+                              type: string
+                            payment_schedule:
+                              enum:
+                                - combined
+                                - interval
+                                - sporadic
+                              type: string
+                            transaction_type:
+                              enum:
+                                - business
+                                - personal
+                              type: string
+                          title: payment_method_options_mandate_options_param
+                          type: object
+                        verification_method:
+                          enum:
+                            - automatic
+                            - instant
+                            - microdeposits
+                          type: string
+                          x-stripeBypassValidation: true
+                      title: setup_intent_payment_method_options_param
+                      type: object
                     card:
                       properties:
                         request_three_d_secure:
@@ -48471,6 +48857,15 @@ components:
     account_capabilities:
       description: ""
       properties:
+        acss_debit_payments:
+          description: The status of the ACSS Direct Debits payments capability of the
+            account, or whether the account can directly process ACSS Direct
+            Debits charges.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
         afterpay_clearpay_payments:
           description: The status of the Afterpay Clearpay capability of the account, or
             whether the account can directly process Afterpay Clearpay charges.
@@ -51398,6 +51793,12 @@ components:
           x-expansionResources:
             oneOf:
               - $ref: "#/components/schemas/payment_intent"
+        payment_method_options:
+          anyOf:
+            - $ref: "#/components/schemas/checkout_session_payment_method_options_for_payment"
+          description: Payment-method-specific configuration for the PaymentIntent or
+            SetupIntent of this CheckoutSession.
+          nullable: true
         payment_method_types:
           description: |-
             A list of the types of payment methods (e.g. card) this Checkout
@@ -51494,12 +51895,19 @@ components:
         - customer_details
         - line_items
         - payment_intent
+        - payment_method_options
         - setup_intent
         - shipping
         - shipping_address_collection
         - subscription
         - total_details
       x-resourceId: checkout.session
+    checkout_session_payment_method_options_for_payment:
+      description: ""
+      properties: {}
+      title: CheckoutSessionPaymentMethodOptionsForPayment
+      type: object
+      x-expandableFields: []
     connect_collection_transfer:
       description: ""
       properties:
@@ -59859,6 +60267,34 @@ components:
         - payment_method_details
         - single_use
       x-resourceId: mandate
+    mandate_acss_debit:
+      description: ""
+      properties:
+        interval_description:
+          description: Description of the interval. Only required if 'payment_schedule'
+            parmeter is 'interval' or 'combined'.
+          maxLength: 5000
+          nullable: true
+          type: string
+        payment_schedule:
+          description: Payment schedule for the mandate.
+          enum:
+            - combined
+            - interval
+            - sporadic
+          type: string
+        transaction_type:
+          description: Transaction type of the mandate.
+          enum:
+            - business
+            - personal
+          type: string
+      required:
+        - payment_schedule
+        - transaction_type
+      title: mandate_acss_debit
+      type: object
+      x-expandableFields: []
     mandate_au_becs_debit:
       description: ""
       properties:
@@ -59909,6 +60345,8 @@ components:
     mandate_payment_method_details:
       description: ""
       properties:
+        acss_debit:
+          $ref: "#/components/schemas/mandate_acss_debit"
         au_becs_debit:
           $ref: "#/components/schemas/mandate_au_becs_debit"
         bacs_debit:
@@ -59929,6 +60367,7 @@ components:
       title: mandate_payment_method_details
       type: object
       x-expandableFields:
+        - acss_debit
         - au_becs_debit
         - bacs_debit
         - card
@@ -60832,6 +61271,9 @@ components:
             The shape of the contents is subject to change and is only intended
             to be used by Stripe.js.
           type: object
+        verify_with_microdeposits:
+          $ref: "#/components/schemas/payment_intent_next_action_verify_with_microdeposit\
+            s"
       required:
         - type
       title: PaymentIntentNextAction
@@ -60840,6 +61282,7 @@ components:
         - alipay_handle_redirect
         - oxxo_display_details
         - redirect_to_url
+        - verify_with_microdeposits
     payment_intent_next_action_alipay_handle_redirect:
       description: ""
       properties:
@@ -60910,9 +61353,29 @@ components:
       title: PaymentIntentNextActionRedirectToUrl
       type: object
       x-expandableFields: []
+    payment_intent_next_action_verify_with_microdeposits:
+      description: ""
+      properties:
+        arrival_date:
+          description: The timestamp when the microdeposits are expected to land.
+          format: unix-time
+          type: integer
+        hosted_verification_url:
+          description: The URL for the hosted verification page, which allows customers to
+            verify their bank account.
+          maxLength: 5000
+          type: string
+      required:
+        - arrival_date
+        - hosted_verification_url
+      title: PaymentIntentNextActionVerifyWithMicrodeposits
+      type: object
+      x-expandableFields: []
     payment_intent_payment_method_options:
       description: ""
       properties:
+        acss_debit:
+          $ref: "#/components/schemas/payment_intent_payment_method_options_acss_debit"
         alipay:
           $ref: "#/components/schemas/payment_method_options_alipay"
         bancontact:
@@ -60930,6 +61393,7 @@ components:
       title: PaymentIntentPaymentMethodOptions
       type: object
       x-expandableFields:
+        - acss_debit
         - alipay
         - bancontact
         - card
@@ -60937,6 +61401,24 @@ components:
         - p24
         - sepa_debit
         - sofort
+    payment_intent_payment_method_options_acss_debit:
+      description: ""
+      properties:
+        mandate_options:
+          $ref: "#/components/schemas/payment_intent_payment_method_options_mandate_optio\
+            ns_acss_debit"
+        verification_method:
+          description: Bank account verification method.
+          enum:
+            - automatic
+            - instant
+            - microdeposits
+          type: string
+          x-stripeBypassValidation: true
+      title: payment_intent_payment_method_options_acss_debit
+      type: object
+      x-expandableFields:
+        - mandate_options
     payment_intent_payment_method_options_card:
       description: ""
       properties:
@@ -60988,6 +61470,37 @@ components:
       type: object
       x-expandableFields:
         - installments
+    payment_intent_payment_method_options_mandate_options_acss_debit:
+      description: ""
+      properties:
+        custom_mandate_url:
+          description: A URL for custom mandate text
+          maxLength: 5000
+          type: string
+        interval_description:
+          description: Description of the interval. Only required if 'payment_schedule'
+            parmeter is 'interval' or 'combined'.
+          maxLength: 5000
+          nullable: true
+          type: string
+        payment_schedule:
+          description: Payment schedule for the mandate.
+          enum:
+            - combined
+            - interval
+            - sporadic
+          nullable: true
+          type: string
+        transaction_type:
+          description: Transaction type of the mandate.
+          enum:
+            - business
+            - personal
+          nullable: true
+          type: string
+      title: payment_intent_payment_method_options_mandate_options_acss_debit
+      type: object
+      x-expandableFields: []
     payment_intent_payment_method_options_mandate_options_sepa_debit:
       description: ""
       properties: {}
@@ -61016,6 +61529,8 @@ components:
 
         Related guides: [Payment Methods](https://stripe.com/docs/payments/payment-methods) and [More Payment Scenarios](https://stripe.com/docs/payments/more-payment-scenarios).
       properties:
+        acss_debit:
+          $ref: "#/components/schemas/payment_method_acss_debit"
         afterpay_clearpay:
           $ref: "#/components/schemas/payment_method_afterpay_clearpay"
         alipay:
@@ -61097,6 +61612,7 @@ components:
             the PaymentMethod with a name matching this value. It contains
             additional information specific to the PaymentMethod type.
           enum:
+            - acss_debit
             - afterpay_clearpay
             - alipay
             - au_becs_debit
@@ -61126,6 +61642,7 @@ components:
       title: PaymentMethod
       type: object
       x-expandableFields:
+        - acss_debit
         - afterpay_clearpay
         - alipay
         - au_becs_debit
@@ -61146,6 +61663,38 @@ components:
         - sepa_debit
         - sofort
       x-resourceId: payment_method
+    payment_method_acss_debit:
+      description: ""
+      properties:
+        bank_name:
+          description: Name of the bank associated with the bank account.
+          maxLength: 5000
+          nullable: true
+          type: string
+        fingerprint:
+          description: Uniquely identifies this particular bank account. You can use this
+            attribute to check whether two bank accounts are the same.
+          maxLength: 5000
+          nullable: true
+          type: string
+        institution_number:
+          description: Institution number of the bank account.
+          maxLength: 5000
+          nullable: true
+          type: string
+        last4:
+          description: Last four digits of the bank account number.
+          maxLength: 5000
+          nullable: true
+          type: string
+        transit_number:
+          description: Transit number of the bank account.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: payment_method_acss_debit
+      type: object
+      x-expandableFields: []
     payment_method_afterpay_clearpay:
       description: ""
       properties: {}
@@ -61496,6 +62045,8 @@ components:
           $ref: "#/components/schemas/payment_method_details_ach_credit_transfer"
         ach_debit:
           $ref: "#/components/schemas/payment_method_details_ach_debit"
+        acss_debit:
+          $ref: "#/components/schemas/payment_method_details_acss_debit"
         afterpay_clearpay:
           $ref: "#/components/schemas/payment_method_details_afterpay_clearpay"
         alipay:
@@ -61559,6 +62110,7 @@ components:
       x-expandableFields:
         - ach_credit_transfer
         - ach_debit
+        - acss_debit
         - afterpay_clearpay
         - alipay
         - au_becs_debit
@@ -61645,6 +62197,42 @@ components:
           nullable: true
           type: string
       title: payment_method_details_ach_debit
+      type: object
+      x-expandableFields: []
+    payment_method_details_acss_debit:
+      description: ""
+      properties:
+        bank_name:
+          description: Name of the bank associated with the bank account.
+          maxLength: 5000
+          nullable: true
+          type: string
+        fingerprint:
+          description: Uniquely identifies this particular bank account. You can use this
+            attribute to check whether two bank accounts are the same.
+          maxLength: 5000
+          nullable: true
+          type: string
+        institution_number:
+          description: Institution number of the bank account
+          maxLength: 5000
+          nullable: true
+          type: string
+        last4:
+          description: Last four digits of the bank account number.
+          maxLength: 5000
+          nullable: true
+          type: string
+        mandate:
+          description: ID of the mandate used to make this payment.
+          maxLength: 5000
+          type: string
+        transit_number:
+          description: Transit number of the bank account.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: payment_method_details_acss_debit
       type: object
       x-expandableFields: []
     payment_method_details_afterpay_clearpay:
@@ -66076,6 +66664,8 @@ components:
     setup_attempt_payment_method_details:
       description: ""
       properties:
+        acss_debit:
+          $ref: "#/components/schemas/setup_attempt_payment_method_details_acss_debit"
         au_becs_debit:
           $ref: "#/components/schemas/setup_attempt_payment_method_details_au_becs_debit"
         bacs_debit:
@@ -66104,6 +66694,7 @@ components:
       title: SetupAttemptPaymentMethodDetails
       type: object
       x-expandableFields:
+        - acss_debit
         - au_becs_debit
         - bacs_debit
         - bancontact
@@ -66112,6 +66703,12 @@ components:
         - ideal
         - sepa_debit
         - sofort
+    setup_attempt_payment_method_details_acss_debit:
+      description: ""
+      properties: {}
+      title: setup_attempt_payment_method_details_acss_debit
+      type: object
+      x-expandableFields: []
     setup_attempt_payment_method_details_au_becs_debit:
       description: ""
       properties: {}
@@ -66642,12 +67239,15 @@ components:
             shape of the contents is subject to change and is only intended to
             be used by Stripe.js.
           type: object
+        verify_with_microdeposits:
+          $ref: "#/components/schemas/setup_intent_next_action_verify_with_microdeposits"
       required:
         - type
       title: SetupIntentNextAction
       type: object
       x-expandableFields:
         - redirect_to_url
+        - verify_with_microdeposits
     setup_intent_next_action_redirect_to_url:
       description: ""
       properties:
@@ -66665,9 +67265,29 @@ components:
       title: SetupIntentNextActionRedirectToUrl
       type: object
       x-expandableFields: []
+    setup_intent_next_action_verify_with_microdeposits:
+      description: ""
+      properties:
+        arrival_date:
+          description: The timestamp when the microdeposits are expected to land.
+          format: unix-time
+          type: integer
+        hosted_verification_url:
+          description: The URL for the hosted verification page, which allows customers to
+            verify their bank account.
+          maxLength: 5000
+          type: string
+      required:
+        - arrival_date
+        - hosted_verification_url
+      title: SetupIntentNextActionVerifyWithMicrodeposits
+      type: object
+      x-expandableFields: []
     setup_intent_payment_method_options:
       description: ""
       properties:
+        acss_debit:
+          $ref: "#/components/schemas/setup_intent_payment_method_options_acss_debit"
         card:
           $ref: "#/components/schemas/setup_intent_payment_method_options_card"
         sepa_debit:
@@ -66675,8 +67295,34 @@ components:
       title: SetupIntentPaymentMethodOptions
       type: object
       x-expandableFields:
+        - acss_debit
         - card
         - sepa_debit
+    setup_intent_payment_method_options_acss_debit:
+      description: ""
+      properties:
+        currency:
+          description: Currency supported by the bank account
+          enum:
+            - cad
+            - usd
+          nullable: true
+          type: string
+        mandate_options:
+          $ref: "#/components/schemas/setup_intent_payment_method_options_mandate_options\
+            _acss_debit"
+        verification_method:
+          description: Bank account verification method.
+          enum:
+            - automatic
+            - instant
+            - microdeposits
+          type: string
+          x-stripeBypassValidation: true
+      title: setup_intent_payment_method_options_acss_debit
+      type: object
+      x-expandableFields:
+        - mandate_options
     setup_intent_payment_method_options_card:
       description: ""
       properties:
@@ -66699,6 +67345,37 @@ components:
           nullable: true
           type: string
       title: setup_intent_payment_method_options_card
+      type: object
+      x-expandableFields: []
+    setup_intent_payment_method_options_mandate_options_acss_debit:
+      description: ""
+      properties:
+        custom_mandate_url:
+          description: A URL for custom mandate text
+          maxLength: 5000
+          type: string
+        interval_description:
+          description: Description of the interval. Only required if 'payment_schedule'
+            parmeter is 'interval' or 'combined'.
+          maxLength: 5000
+          nullable: true
+          type: string
+        payment_schedule:
+          description: Payment schedule for the mandate.
+          enum:
+            - combined
+            - interval
+            - sporadic
+          nullable: true
+          type: string
+        transaction_type:
+          description: Transaction type of the mandate.
+          enum:
+            - business
+            - personal
+          nullable: true
+          type: string
+      title: setup_intent_payment_method_options_mandate_options_acss_debit
       type: object
       x-expandableFields: []
     setup_intent_payment_method_options_mandate_options_sepa_debit:
@@ -69395,7 +70072,7 @@ components:
         a reader.
 
 
-        Related guide: [Fleet Management](https://stripe.com/docs/terminal/readers/fleet-management#create).
+        Related guide: [Fleet Management](https://stripe.com/docs/terminal/creating-locations).
       properties:
         location:
           description: The id of the location that this connection token is scoped to.
@@ -69423,7 +70100,7 @@ components:
         A Location represents a grouping of readers.
 
 
-        Related guide: [Fleet Management](https://stripe.com/docs/terminal/readers/fleet-management#create).
+        Related guide: [Fleet Management](https://stripe.com/docs/terminal/creating-locations).
       properties:
         address:
           $ref: "#/components/schemas/address"
@@ -69719,7 +70396,7 @@ components:
 
         [Radar](https://stripe.com/docs/radar), our integrated solution for automatic fraud protection,
 
-        supports only integrations that use client-side tokenization.
+        performs best with integrations that use client-side tokenization.
 
 
         Related guide: [Accept a payment](https://stripe.com/docs/payments/accept-a-payment-charges#web-create-token)

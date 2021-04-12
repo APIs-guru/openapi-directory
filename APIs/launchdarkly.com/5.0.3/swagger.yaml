@@ -15,7 +15,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://launchdarkly.com/terms
   title: LaunchDarkly REST API
-  version: 5.0.2
+  version: 5.0.3
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -77,6 +77,10 @@ parameters:
           description: A name that describes the changes you would like to apply to a
             feature flag configuration
           type: string
+        executionDate:
+          description: Timestamp for when instructions will be executed
+          format: int64
+          type: integer
         instructions:
           $ref: "#/definitions/SemanticPatchInstruction"
         notifyMemberIds:
@@ -86,6 +90,9 @@ parameters:
           items:
             type: string
           type: array
+        operatingOnId:
+          description: ID of scheduled change to edit or delete
+          type: string
       required:
         - description
         - instructions
@@ -136,6 +143,20 @@ parameters:
     name: before
     required: false
     type: integer
+  BigSegmentTargetsPostRequest:
+    description: Add or remove user targets to the included or excluded lists on a
+      big segment. Contact your account manager for early access to this
+      feature.
+    in: body
+    name: bigSegmentTargetsBody
+    required: true
+    schema:
+      properties:
+        excluded:
+          $ref: "#/definitions/BigSegmentTargetChanges"
+        included:
+          $ref: "#/definitions/BigSegmentTargetChanges"
+      type: object
   CloneFlagKeyQuery:
     description: The key of the feature flag to be cloned. The key identifies the
       flag in your code.  For example, setting clone=flagKey will copy the full
@@ -777,19 +798,6 @@ parameters:
             https://docs.launchdarkly.com/home/account-security/api-access-tokens#service-tokens
           type: boolean
       type: object
-  UnboundedSegmentTargetsPostRequest:
-    description: Add or remove user targets to the included or excluded lists on an
-      unbounded segment
-    in: body
-    name: unboundedSegmentTargetsBody
-    required: true
-    schema:
-      properties:
-        excluded:
-          $ref: "#/definitions/UnboundedSegmentTargetChanges"
-        included:
-          $ref: "#/definitions/UnboundedSegmentTargetChanges"
-      type: object
   UserKey:
     description: The user's key.
     in: path
@@ -829,9 +837,10 @@ parameters:
             type: string
           type: array
         unbounded:
-          description: Controls whether this segment can support unlimited numbers of
-            users. Requires the beta API and additional setup. Include/exclude
-            lists in this payload are not used in unbounded segments.
+          description: Controls whether this is considered a "big segment" which can
+            support an unlimited numbers of users. Include/exclude lists sent
+            with this payload are not used in big segments. Contact your account
+            manager for early access to this feature.
           example: false
           type: boolean
       required:
@@ -2195,14 +2204,14 @@ paths:
       summary: Perform a partial update to a user segment.
       tags:
         - User segments
-  "/segments/{projectKey}/{environmentKey}/{userSegmentKey}/unbounded-users":
+  "/segments/{projectKey}/{environmentKey}/{userSegmentKey}/users":
     post:
-      operationId: updatedUnboundedSegmentTargets
+      operationId: updatedBigSegmentTargets
       parameters:
         - $ref: "#/parameters/ProjectKey"
         - $ref: "#/parameters/EnvironmentKey"
         - $ref: "#/parameters/UserSegmentKey"
-        - $ref: "#/parameters/UnboundedSegmentTargetsPostRequest"
+        - $ref: "#/parameters/BigSegmentTargetsPostRequest"
       responses:
         "204":
           $ref: "#/responses/Standard204"
@@ -2210,7 +2219,7 @@ paths:
           $ref: "#/responses/Standard400"
         "401":
           $ref: "#/responses/Standard401"
-      summary: Update targets included or excluded in an unbounded segment
+      summary: Update targets included or excluded in a big segment
       tags:
         - User segments
   "/segments/{projectKey}/{userSegmentKey}/expiring-user-targets/{environmentKey}":
@@ -2783,6 +2792,10 @@ definitions:
         description: A unix epoch time in milliseconds specifying the date the approval
           request was requested
         type: integer
+      executionDate:
+        description: Timestamp for when instructions will be executed
+        format: int64
+        type: integer
       instructions:
         $ref: "#/definitions/SemanticPatchInstruction"
       notifyMemberIds:
@@ -2792,6 +2805,9 @@ definitions:
         items:
           type: string
         type: array
+      operatingOnId:
+        description: ID of scheduled change to edit or delete
+        type: string
       requestorId:
         description: The id of the member that requested the change
         type: string
@@ -2799,18 +2815,21 @@ definitions:
         $ref: "#/definitions/ApprovalRequestReviewStatus"
       status:
         description: >
-          | Name     | Description |
+          | Name      | Description |
 
-          | --------:| ----------- |
+          | ---------:| ----------- |
 
-          | pending  | the approval request has not been applied yet |
+          | pending   | the approval request has not been applied yet |
 
-          | completed| the approval request has been applied successfully |
+          | completed | the approval request has been applied successfully |
 
-          | failed   | the approval request has been applied but the changes were not applied successfully |
+          | scheduled | the approval request for a scheduled change has been applied successfully |
+
+          | failed    | the approval request has been applied but the changes were not applied successfully |
         enum:
           - pending
           - completed
+          - scheduled
           - failed
         type: string
     type: object
@@ -2908,6 +2927,22 @@ definitions:
       titleVerb:
         example: changed the name of
         type: string
+    type: object
+  BigSegmentTargetChanges:
+    properties:
+      add:
+        description: Users to add to this list of targets
+        example:
+          - user@launchdarkly.com
+        items:
+          type: string
+        type: array
+      remove:
+        description: Users to remove from this list of targets
+        example: []
+        items:
+          type: string
+        type: array
     type: object
   Clause:
     properties:
@@ -3460,7 +3495,7 @@ definitions:
   FeatureFlagStatus:
     properties:
       _links:
-        $ref: "#/definitions/Links"
+        $ref: "#/definitions/FeatureFlagStatusLinks"
       default:
         type: object
       lastRequested:
@@ -3489,7 +3524,7 @@ definitions:
   FeatureFlagStatusAcrossEnvironments:
     properties:
       _links:
-        $ref: "#/definitions/Links"
+        $ref: "#/definitions/FeatureFlagStatusLinks"
       environments:
         additionalProperties:
           $ref: "#/definitions/FeatureFlagStatusForQueriedEnvironment"
@@ -3524,10 +3559,17 @@ definitions:
           - launched
         type: string
     type: object
+  FeatureFlagStatusLinks:
+    properties:
+      parent:
+        $ref: "#/definitions/Link"
+      self:
+        $ref: "#/definitions/Link"
+    type: object
   FeatureFlagStatuses:
     properties:
       _links:
-        $ref: "#/definitions/Links"
+        $ref: "#/definitions/FeatureFlagStatusLinks"
       items:
         items:
           $ref: "#/definitions/FeatureFlagStatus"
@@ -4206,22 +4248,6 @@ definitions:
           $ref: "#/definitions/Token"
         type: array
     type: object
-  UnboundedSegmentTargetChanges:
-    properties:
-      add:
-        description: Users to add to this list of targets
-        example:
-          - user@launchdarkly.com
-        items:
-          type: string
-        type: array
-      remove:
-        description: Users to remove from this list of targets
-        example: []
-        items:
-          type: string
-        type: array
-    type: object
   Usage:
     properties:
       _links:
@@ -4392,9 +4418,10 @@ definitions:
           type: string
         type: array
       unbounded:
-        description: Controls whether this segment can support unlimited numbers of
-          users. Requires the beta API and additional setup. Include/exclude
-          lists in this payload are not used in unbounded segments.
+        description: Controls whether this is considered a "big segment" which can
+          support an unlimited numbers of users. Include/exclude lists sent with
+          this payload are not used in big segments. Contact your account
+          manager for early access to this feature.
         example: false
         type: boolean
       version:

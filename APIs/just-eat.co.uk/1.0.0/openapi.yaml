@@ -266,6 +266,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/4XXErrorSchema"
           description: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: You are forbidden from performing this request.
+                    errorCode: Forbidden
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Forbidden
         "404":
           content:
             application/json:
@@ -331,6 +343,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/4XXErrorSchema"
           description: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: You are forbidden from performing this request.
+                    errorCode: Forbidden
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Forbidden
         "404":
           content:
             application/json:
@@ -515,6 +539,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/4XXErrorSchema"
           description: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: You are forbidden from performing this request.
+                    errorCode: Forbidden
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Forbidden
         "404":
           content:
             application/json:
@@ -2100,6 +2136,7 @@ paths:
         - publicly-accessible
   "/orders/{orderId}/status":
     put:
+      deprecated: true
       description: Set Order status
       parameters:
         - in: path
@@ -2125,6 +2162,7 @@ paths:
       tags:
         - Order Acceptance API
         - publicly-accessible
+      x-status: Deprecated
   "/orders/{tenant}/{orderId}/consumerqueries/lateorder/restaurantresponse":
     post:
       description: If a customer has requested an update on the status of a late
@@ -3735,6 +3773,236 @@ paths:
       summary: Add reason and comments to the response
       tags:
         - Restaurant Claims
+        - publicly-accessible
+      x-status: Draft
+  "/restaurants/{tenant}/{restaurantId}/fees":
+    get:
+      description: Get the fees currently applied to a restaurant in a particular tenant
+      parameters:
+        - description: A two-character country code for which country the restaurant
+            resides in.
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+        - description: A unique identifier for a restaurant
+          in: path
+          name: restaurantId
+          required: true
+          schema:
+            type: string
+        - description: Request header string that allows the server to identify the
+            application making the request.
+          in: header
+          name: User-Agent
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                bagFee:
+                  description: A charge for bags in delivery
+                  serviceTypes:
+                    collection:
+                      amount: 5
+                    default:
+                      amount: 0
+                    delivery:
+                      amount: 10
+              schema:
+                $ref: "#/components/schemas/RestaurantFees"
+          description: Success
+          headers:
+            cache-control:
+              description: Information about how the response can be cached. (No caching will
+                be applied)
+              schema:
+                enum:
+                  - no-store
+                type: string
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: The supplied tenant is not supported
+                    errorCode: UnsupportedTenant
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Authorization required
+                    errorCode: Unauthorized
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: You do not have permission to access this resource
+                    errorCode: Forbidden
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: The requested resource does not exist on this server
+                    errorCode: NotFound
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Not Found
+        "500":
+          $ref: "#/components/responses/500ErrorResponse"
+          description: Internal Server Error
+      security:
+        - Bearer: []
+      summary: Get Restaurant Fees
+      tags:
+        - Restaurants
+        - publicly-accessible
+      x-status: Draft
+    put:
+      description: Creates or Updates the fees for a restaurant in a particular tenant
+      parameters:
+        - description: A two-character country code for which country the restaurant
+            resides in.
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+        - description: A unique identifier for a restaurant
+          in: path
+          name: restaurantId
+          required: true
+          schema:
+            type: string
+        - description: Request header string that allows the server to identify the
+            application making the request.
+          in: header
+          name: User-Agent
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              bagFee:
+                description: A charge for bags in delivery
+                serviceTypes:
+                  collection:
+                    amount: 5
+                  default:
+                    amount: 0
+                  delivery:
+                    amount: 10
+            schema:
+              $ref: "#/components/schemas/RestaurantFees"
+        description: Update Restaurant Fees
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                bagFee:
+                  description: A charge for bags in delivery
+                  serviceTypes:
+                    collection:
+                      amount: 5
+                    default:
+                      amount: 0
+                    delivery:
+                      amount: 10
+              schema:
+                $ref: "#/components/schemas/RestaurantFees"
+          description: Success
+          headers:
+            cache-control:
+              description: Information about how the response can be cached. (No caching will
+                be applied)
+              schema:
+                enum:
+                  - no-store
+                type: string
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: The supplied tenant is not supported
+                    errorCode: UnsupportedTenant
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Authorization required
+                    errorCode: Unauthorized
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: You do not have permission to access this resource
+                    errorCode: Forbidden
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: The requested resource does not exist on this server
+                    errorCode: NotFound
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Not Found
+        "500":
+          $ref: "#/components/responses/500ErrorResponse"
+          description: Internal Server Error
+      security:
+        - Bearer: []
+      summary: Create or Update Restaurant Fees
+      tags:
+        - Restaurants
         - publicly-accessible
       x-status: Draft
   "/restaurants/{tenant}/{restaurantId}/menu":
@@ -6706,86 +6974,139 @@ components:
               nullable: true
               type: string
             phoneNumber:
-              description: Customer's phone number represented in E.164 format.
+              description: |
+                Customer's phone number.
+
+                A phone number can be represented in:
+                  - E.164 format e.g. +447777111111 or;
+                  - Local format of submitted tenant e.g. 07777111111.
+
+                E.164 formatted phone numbers are preferred.
               maxLength: 16
               minLength: 3
               nullable: true
-              pattern: ^\+[1-9]\d{1,14}$
               type: string
           type: object
         fulfilment:
           description: How and when the items will be received by the customer.
           nullable: false
           properties:
-            address:
-              description: >
-                The postal address where the customer wants to receive the order.
-
+            location:
+              description: |
+                The destination the customer wants to receive the order.
 
                 This only applies to purchases with a delivery service type.
               nullable: true
               properties:
-                administrativeArea:
-                  description: |
-                    Geographical region of this address. 
-
-                    Also known as County or State.
-
-                    Set in Australia (AU) only for an order to be fulfilled.
-                  maxLength: 50
-                  minLength: 1
+                address:
+                  description: The postal address where the customer wants to receive the order.
                   nullable: true
-                  type: string
-                lines:
-                  description: One or more lines representing the street address.
-                  items:
-                    description: Represents part of a street address.
-                    maxLength: 100
-                    minLength: 1
-                    nullable: false
-                    type: string
-                  maxItems: 4
-                  minItems: 0
-                  nullable: false
-                  type: array
-                locality:
-                  description: |
-                    The locality of this address.
+                  properties:
+                    administrativeArea:
+                      description: >
+                        Geographical region of this address. 
 
-                    Also known as Town or City.
-                  maxLength: 50
-                  minLength: 1
+
+                        Also known as County or State.
+
+
+                        Required in Australia (AU) only for an order to be fulfilled.
+                      maxLength: 50
+                      minLength: 1
+                      nullable: true
+                      type: string
+                    lines:
+                      description: One or more lines representing the street address.
+                      items:
+                        description: Represents part of a street address.
+                        maxLength: 100
+                        minLength: 1
+                        nullable: false
+                        type: string
+                      maxItems: 4
+                      minItems: 0
+                      nullable: false
+                      type: array
+                    locality:
+                      description: |
+                        The locality of this address.
+
+                        Also known as Town or City.
+                      maxLength: 50
+                      minLength: 1
+                      nullable: true
+                      type: string
+                    postalCode:
+                      description: Postal code of this address.
+                      maxLength: 50
+                      minLength: 1
+                      nullable: true
+                      type: string
+                  type: object
+                geolocation:
+                  description: >
+                    The coordinates of a geographical location where the customer wants
+                    to receive the order.
+
+
+                    Required in Australia (AU) and New Zealand (NZ) only for an order to be fulfilled.
                   nullable: true
-                  type: string
-                postalCode:
-                  description: Postal code of this address.
-                  maxLength: 50
-                  minLength: 1
-                  nullable: true
-                  type: string
+                  properties:
+                    latitude:
+                      description: The latitude of the geographical location.
+                      format: decimal
+                      nullable: false
+                      type: number
+                    longitude:
+                      description: The longitude of the geographical location.
+                      format: decimal
+                      nullable: false
+                      type: number
+                  required:
+                    - latitude
+                    - longitude
+                  type: object
               type: object
             time:
               description: Time the customer wants to receive the order i.e. when order is
                 fulfilled.
               nullable: true
               properties:
-                from:
-                  description: Earliest time the customer wants the order to be fulfilled
-                    represented in ISO 8601 UTC (Zulu Time).
-                  nullable: false
-                  type: string
-                to:
+                asap:
                   description: >
-                    Latest time the customer wants the order to be fulfilled
-                    represented in ISO 8601 UTC (Zulu Time). 
+                    If the order should be fulfilled as soon as possible (ASAP).
 
 
-                    This time must be greater than or equal to the from time.
+                    A scheduled time must also be submitted even if ASAP is request.
+
+
+                    Default is false.
                   nullable: false
-                  type: string
+                  type: boolean
+                scheduled:
+                  description: Scheduled time the customer wants the order to be fulfilled.
+                  nullable: true
+                  properties:
+                    from:
+                      description: Earliest time the customer wants the order to be fulfilled
+                        represented in ISO 8601 UTC (Zulu Time).
+                      nullable: false
+                      type: string
+                    to:
+                      description: >
+                        Latest time the customer wants the order to be fulfilled
+                        represented in ISO 8601 UTC (Zulu Time). 
+
+
+                        This time must be greater than or equal to the from time.
+                      nullable: false
+                      type: string
+                  required:
+                    - from
+                    - to
+                  type: object
               required:
-                - from
-                - to
+                - asap
               type: object
           type: object
         isFulfillable:
@@ -6807,12 +7128,20 @@ components:
           description: The restaurant selling the items to be purchased.
           nullable: false
           properties:
+            availabilityId:
+              deprecated: true
+              description: >
+                Unique identifier to identify when item(s) are available for
+                ordering.
+              nullable: false
+              type: string
             id:
               description: Unique identifier for the restaurant.
               nullable: false
               type: string
           required:
             - id
+            - availabilityId
           type: object
         serviceType:
           description: How the order will be dispatched.
@@ -7149,7 +7478,7 @@ components:
                     enum:
                       - TENANT_INVALID
                       - CHECKOUT_ID_INVALID
-                      - INVALID_PATCH_REQUEST
+                      - INVALID_REQUEST
                       - FIRST_NAME_INVALID
                       - LAST_NAME_INVALID
                       - PHONE_NUMBER_INVALID
@@ -7226,11 +7555,17 @@ components:
               nullable: true
               type: string
             phoneNumber:
-              description: Customer's phone number represented in E.164 format.
+              description: |
+                Customer's phone number.
+
+                A phone number can be represented in:
+                  - E.164 format e.g. +447777111111 or;
+                  - Local format of submitted tenant e.g. 07777111111.
+
+                E.164 formatted phone numbers are preferred.
               maxLength: 16
               minLength: 3
               nullable: true
-              pattern: ^\+[1-9]\d{1,14}$
               type: string
           type: object
         fulfilment:
@@ -7295,7 +7630,7 @@ components:
                     to receive the order.
 
 
-                    Required in Australia (AU) and New Zealand (NZ) only to for an order to be fulfilled.
+                    Required in Australia (AU) and New Zealand (NZ) only for an order to be fulfilled.
                   nullable: true
                   properties:
                     latitude:
@@ -7318,23 +7653,39 @@ components:
                 fulfilled.
               nullable: true
               properties:
-                from:
-                  description: Earliest time the customer wants the order to be fulfilled
-                    represented in ISO 8601 UTC (Zulu Time).
-                  nullable: false
-                  type: string
-                to:
+                asap:
                   description: >
-                    Latest time the customer wants the order to be fulfilled
-                    represented in ISO 8601 UTC (Zulu Time). 
+                    If the order should be fulfilled as soon as possible (ASAP).
 
 
-                    This time must be greater than or equal to the from time.
+                    A scheduled time must also be submitted even if ASAP is request.
+
+
+                    Default is false.
                   nullable: false
-                  type: string
-              required:
-                - from
-                - to
+                  type: boolean
+                scheduled:
+                  description: Scheduled time the customer wants the order to be fulfilled.
+                  nullable: true
+                  properties:
+                    from:
+                      description: Earliest time the customer wants the order to be fulfilled
+                        represented in ISO 8601 UTC (Zulu Time).
+                      nullable: false
+                      type: string
+                    to:
+                      description: >
+                        Latest time the customer wants the order to be fulfilled
+                        represented in ISO 8601 UTC (Zulu Time). 
+
+
+                        This time must be greater than or equal to the from time.
+                      nullable: false
+                      type: string
+                  required:
+                    - from
+                    - to
+                  type: object
               type: object
           type: object
         notes:
@@ -9555,7 +9906,7 @@ components:
     CourierFeedbackRequest:
       example:
         additionalComment: Went above and beyond
-        isFeedbackPositive: true
+        isPositiveFeedback: true
         reasons:
           - had thermal bag
           - friendly
@@ -9565,7 +9916,7 @@ components:
           maxLength: 210
           nullable: true
           type: string
-        isFeedbackPositive:
+        isPositiveFeedback:
           description: A flag to determine if the feedback is overall positive
           type: boolean
         reasons:
@@ -9575,7 +9926,7 @@ components:
           nullable: false
           type: array
       required:
-        - isFeedbackPositive
+        - isPositiveFeedback
       type: object
     CourierStatus:
       description: The courier application status. A courier could have one of these
@@ -10331,6 +10682,40 @@ components:
           nullable: true
           type: string
       type: object
+    CustomerOrderDetailsErrorResponse:
+      description: The error object returned when an operation fails
+      example:
+        ErrorType: OrderTimeNotFound
+        Exceptions: []
+        Message: Order Time not found for Basket example-basket-id
+      properties:
+        ErrorType:
+          $ref: "#/components/schemas/CustomerOrderDetailsErrorType"
+          description: Value of the error thrown
+        Exceptions:
+          description: List of exceptions thrown during the request
+          items:
+            type: string
+          type: array
+        Message:
+          description: Detailed message on the error thrown
+          type: string
+      type: object
+    CustomerOrderDetailsErrorType:
+      enum:
+        - None
+        - Unknown
+        - OrderTimeNotFound
+        - OrderAddressNotFound
+        - BasketNotFound
+        - AvailabilityNotFound
+        - Unauthorized
+        - UpdateOrderAddressError
+        - UpdateOrderTimeError
+        - DependencyError
+        - InvalidZipcode
+        - InvalidMenuId
+      type: string
     CustomisationResponse:
       description: Information about initial options to show to user
       example:
@@ -11041,7 +11426,13 @@ components:
     DiscoveryResponse:
       example:
         searchResults:
-          - cuisines:
+          - availabilities:
+              - canPreOrder: false
+                isOpen: true
+                nextAvailability:
+                  - AvailableFrom: 2020-01-01T07:20:00Z
+                serviceType: Delivery
+            cuisines:
               - name: Pizza
                 seoName: pizza
               - name: fish-and-chips
@@ -11057,6 +11448,36 @@ components:
             $ref: "#/components/schemas/DiscoveryResponseItem"
           type: array
       type: object
+    DiscoveryResponseAvailabilities:
+      properties:
+        canPreOrder:
+          description: If the restaurant is in a pre order state
+          type: boolean
+        isOpen:
+          description: If the restaurant is in an open state. This also assumes it is
+            accepting orders
+          type: boolean
+        nextAvailability:
+          allOf:
+            - $ref: "#/components/schemas/DiscoveryResponseAvailability"
+          description: When the restaurant is next available
+          type: object
+        serviceType:
+          description: The type of service the restaurant availability is
+          enum:
+            - Unknown
+            - Delivery
+            - Collection
+          type: string
+      type: object
+    DiscoveryResponseAvailability:
+      properties:
+        availableFrom:
+          description: Date and time the restaurant is available from. Format -
+            'yyyy-dd-MMTHH:mm:ssZ'
+          format: date-time
+          type: string
+      type: object
     DiscoveryResponseCuisine:
       properties:
         name:
@@ -11068,6 +11489,12 @@ components:
       type: object
     DiscoveryResponseItem:
       example:
+        availabilities:
+          - canPreOrder: false
+            isOpen: true
+            nextAvailability:
+              - AvailableFrom: 2020-01-01T07:20:00Z
+            serviceType: Delivery
         cuisines:
           - name: Pizza
             seoName: pizza
@@ -11078,6 +11505,11 @@ components:
         name: Example Restaurant
         restaurantId: 12345
       properties:
+        availabilities:
+          description: Availabilities of the restaruant
+          items:
+            $ref: "#/components/schemas/DiscoveryResponseAvailabilities"
+          type: array
         cuisines:
           description: Cuisines of the restaurant
           items:
@@ -11291,6 +11723,37 @@ components:
                 type: string
             type: object
           type: array
+      type: object
+    Fee:
+      description: The object which encapsulates a Fee
+      example:
+        description: A charge for bags in delivery
+        serviceTypes:
+          collection:
+            amount: 5
+          default:
+            amount: 0
+          delivery:
+            amount: 10
+      properties:
+        description:
+          description: A description of what the Fee is
+          type: string
+        serviceTypes:
+          description: Contains Service type specific fee values. If set, default can be
+            used to apply a fee to as yet unspecified service types
+          properties:
+            collection:
+              $ref: "#/components/schemas/ServiceTypeFeeConfiguration"
+              description: Configuration of the fee for the collection service type
+            default:
+              $ref: "#/components/schemas/ServiceTypeFeeConfiguration"
+              description: Configuration of the fee for any service type which is not
+                explicitly configured
+            delivery:
+              $ref: "#/components/schemas/ServiceTypeFeeConfiguration"
+              description: Configuration of the fee for the delivery service type
+          type: object
       type: object
     Fees:
       description: The calculated courier payment components.
@@ -14887,6 +15350,7 @@ components:
         phoneNumber: "0123456789"
         polygonName: BS1 1AA
         postCode: BS1 1AA
+        serviceType: delivery
       properties:
         address:
           description: An array of strings containing lines of the customer's order address.
@@ -14925,6 +15389,13 @@ components:
           type: string
         postCode:
           description: String value containing the postcode of the customer's order address.
+          nullable: false
+          type: string
+        serviceType:
+          description: Service Type associated with the order details.
+          enum:
+            - delivery
+            - collection
           nullable: false
           type: string
       type: object
@@ -17659,6 +18130,24 @@ components:
           format: date-time
           type: string
       type: object
+    RestaurantFees:
+      description: An object encapsulating all possible fees which a restaurant can
+        apply to itself
+      example:
+        bagFee:
+          description: A charge for bags in delivery
+          serviceTypes:
+            collection:
+              amount: 5
+            default:
+              amount: 0
+            delivery:
+              amount: 10
+      properties:
+        bagFee:
+          $ref: "#/components/schemas/Fee"
+          description: A fee applied for bags used for delivery and collection orders
+      type: object
     RestaurantFinanceDetails:
       additionalProperties: false
       properties:
@@ -17867,6 +18356,20 @@ components:
           format: enum
           type: string
       type: object
+    RestaurantOrderAppliedDiscount:
+      description: A discount item in an order
+      properties:
+        discountAmount:
+          description: The discount value in smallest unit of relevant currency
+          format: integer
+          type: number
+        type:
+          description: The type of discount
+          enum:
+            - Percent
+            - FirstTimeCustomer
+            - StampCard
+      type: object
     RestaurantOrderCustomerInfo:
       description: Information about a customer
       properties:
@@ -17885,6 +18388,9 @@ components:
     RestaurantOrderDetails:
       description: An order details
       example:
+        appliedDiscounts:
+          - discountAmount: 2550
+            type: StampCard
         currencyCode: GBP
         customerInfo:
           deliveryAddress:
@@ -17893,6 +18399,7 @@ components:
             - BS5 1KG
             - Bristol
           name: Simon Moon
+        deliveryPrice: 200
         dueDate: 2020-01-01T10:15:00.000Z
         friendlyId: 821367535
         id: rtvtgo0wwugmiiikdpzvsg
@@ -17963,10 +18470,17 @@ components:
               value: 1549
         paymentType: Card
         placedDate: 2020-01-01T09:30:00.000Z
+        previousJustEatOrderCount: 3
+        previousRestaurantOrderCount: 1
         promptAsap: false
         statusReason: RejectedByRestaurant
         transactionReference: 123334567667989
       properties:
+        appliedDiscounts:
+          description: List of restaurant applied discounts
+          items:
+            $ref: "#/components/schemas/RestaurantOrderAppliedDiscount"
+          type: array
         currencyCode:
           description: The ISO-4217 currency code associated with the all prices and money
             amounts in order details
@@ -17974,6 +18488,10 @@ components:
         customerInfo:
           $ref: "#/components/schemas/RestaurantOrderCustomerInfo"
           description: Information about a customer
+        deliveryPrice:
+          description: The order delivery price in smallest unit of relevant currency
+          format: integer
+          type: number
         dueDate:
           description: The due date of the order
           format: date-time
@@ -18023,6 +18541,14 @@ components:
           description: The order placed date
           format: date-time
           type: string
+        previousRestaurantOrderCount:
+          description: The customer's previous total number of orders made to this
+            restaurant
+          type: number
+        previousTotalOrderCount:
+          description: The customer's previous total number of orders made to all
+            restaurants
+          type: number
         promptAsap:
           description: The flag that shows whether the customer awaits an order as soon as
             possible
@@ -18052,6 +18578,7 @@ components:
       example:
         orders:
           - currencyCode: GBP
+            deliveryPrice: 200
             friendlyId: 821367535
             id: rtvtgo0wwugmiiikdpzvsg
             orderPrice: 2099
@@ -18060,6 +18587,7 @@ components:
             placedDate: 2020-01-01T09:30:00.000Z
             serviceType: Delivery
           - currencyCode: GBP
+            deliveryPrice: 0
             friendlyId: 829022736
             id: uerbbymdfkxdecduuerbby
             orderPrice: 99900
@@ -18202,6 +18730,7 @@ components:
         totalCashOrderValue: 7003
         totalCollectionOrderValue: 22241
         totalDeliveryOrderValue: 77721
+        totalDeliveryPriceValue: 70
         totalOrderValue: 99962
       properties:
         count:
@@ -18227,6 +18756,10 @@ components:
           description: Total value of delivery orders for date range
           format: int32
           type: number
+        totalDeliveryPriceValue:
+          description: Total delivery price value for date range
+          format: int32
+          type: number
         totalOrderValue:
           description: Total value of all orders for date range
           format: int32
@@ -18238,6 +18771,10 @@ components:
         currencyCode:
           description: The ISO-4217 currency code associated with the order price
           type: string
+        deliveryPrice:
+          description: The order delivery price in smallest unit of relevant currency
+          format: integer
+          type: number
         friendlyId:
           description: The friendly order Id
           type: string
@@ -18673,6 +19210,80 @@ components:
           description: type of primitive
           type: string
       type: object
+    RichMediaImageBatchResponse:
+      example:
+        batchStatus: PartiallySucceeded
+        images:
+          - imageContext:
+              dishKey: pizza
+              restaurantKey: burgers&pizza
+              tenant: uk
+            imageStatus: Succeeded
+            sourceImageUrl: https://test.test/image01.jpg
+            urlTemplate: https://cloudinary.test/image/upload/c_fill,q_auto,{transformations}/v1/uk/dishes/burgers_pizza/image01
+          - failureReason: Source image exeeds maximum size of 10 MB.
+            imageContext:
+              dishKey: burger
+              restaurantKey: burgers&pizza
+              tenant: uk
+            imageStatus: Failed
+            sourceImageUrl: https://test.test/image02.jpg
+      nullable: false
+      properties:
+        batchStatus:
+          description: The status of batch request
+          enum:
+            - Queued
+            - Running
+            - Succeeded
+            - PartiallySucceeded
+            - Failed
+            - Cancelled
+          format: enum
+          type: string
+        images:
+          description: The array of images in the batch
+          items:
+            properties:
+              failureReason:
+                description: Can contain additional information about image publishing failure
+                type: string
+              imageContext:
+                additionalProperties:
+                  type: string
+                description: Image context in dictionary format. Can contain additional data
+                  that will be published alongside the image.
+                type: object
+              imageStatus:
+                description: The status of individual image
+                enum:
+                  - Succeeded
+                  - Failed
+                format: enum
+                type: string
+              sourceImageUrl:
+                description: Source image URL. The remote HTTP or HTTPS URL address of an
+                  existing image or a private S3 object URL in a whitelisted
+                  bucket.
+                type: string
+              urlTemplate:
+                description: Image URL template that can be used to access the image. Mandatory
+                  transformations are already baked in the URL template. The
+                  {transformations} placeholder can be replaced with additional
+                  Cloudinary transformations that suit your need (e.g. height,
+                  width etc). For more details see
+                  https://cloudinary.com/documentation/image_transformations
+                type: string
+            required:
+              - sourceImageUrl
+              - imageContext
+              - imageStatus
+            type: object
+          maxItems: 500
+          type: array
+      required:
+        - batchStatus
+      type: object
     RichMediaImagePublishRequest:
       example:
         imageType: DishImage
@@ -18681,12 +19292,12 @@ components:
               dishKey: pizza
               restaurantKey: burgers&pizza
               tenant: uk
-            imageSourceUrl: https://test.test/image01.jpg
+            sourceImageUrl: https://test.test/image01.jpg
           - imageContext:
               dishKey: burger
               restaurantKey: burgers&pizza
               tenant: uk
-            imageSourceUrl: https://test.test/image02.jpg
+            sourceImageUrl: https://test.test/image02.jpg
       nullable: false
       properties:
         imageType:
@@ -19554,6 +20165,17 @@ components:
       x-enumNames:
         - Collection
         - Delivery
+    ServiceTypeFeeConfiguration:
+      description: Distinct values which are configured for a particular service type
+      example:
+        amount: 5
+      properties:
+        amount:
+          description: The value to apply to the basket for this Fee in the smallest unit
+            of currency
+          format: integer
+          type: number
+      type: object
     SetPaymentModeRequest:
       additionalProperties: false
       properties:
@@ -19673,56 +20295,6 @@ components:
           description: Storage/Usage instructions
           nullable: true
           type: string
-      type: object
-    SuggestedSearchResponse:
-      example:
-        suggestions:
-          - category: Popular
-            categoryId: 1
-            contents:
-              - Chicken Korma
-              - Prawn Biryani
-          - category: Recommended
-            categoryId: 2
-            contents:
-              - Hawaiian
-              - Margherita
-              - 🍕
-      properties:
-        suggestions:
-          description: Suggested term completions, grouped by category
-          items:
-            $ref: "#/components/schemas/SuggestedSearchResponseItem"
-          maxItems: 100
-          type: array
-          uniqueItems: false
-      type: object
-    SuggestedSearchResponseItem:
-      example:
-        category: Popular
-        categoryId: 1
-        contents:
-          - Chicken Korma
-          - Prawn Biryani
-      properties:
-        category:
-          description: String value of the category enum - grouping to which the
-            suggestions belong
-          enum:
-            - Popular
-            - Recent
-            - Recommended
-          type: string
-        categoryId:
-          description: Integer value of the category enum - grouping to which the
-            suggestions belong
-          format: integer
-          type: number
-        contents:
-          description: Suggested search terms
-          items:
-            type: string
-          type: array
       type: object
     SupportRequest:
       description: Object that represents support request
@@ -20473,6 +21045,7 @@ components:
         phoneNumber: "0123456789"
         polygonName: BS1 1AA
         postCode: BS1 1AA
+        serviceType: delivery
       properties:
         address:
           description: An array of strings containing lines of the customer's order address.
@@ -20511,6 +21084,13 @@ components:
           type: string
         postCode:
           description: String value containing the postcode of the customer's order address.
+          nullable: false
+          type: string
+        serviceType:
+          description: Service Type associated with the order details.
+          enum:
+            - delivery
+            - collection
           nullable: false
           type: string
       required:

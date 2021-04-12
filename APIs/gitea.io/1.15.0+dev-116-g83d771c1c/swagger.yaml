@@ -11,7 +11,7 @@ info:
     name: MIT
     url: http://opensource.org/licenses/MIT
   title: Gitea API.
-  version: 1.15.0+dev-80-g426ebbfc3
+  version: 1.15.0+dev-116-g83d771c1c
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -7377,6 +7377,8 @@ paths:
       responses:
         "201":
           $ref: "#/responses/OAuth2Application"
+        "400":
+          $ref: "#/responses/error"
       summary: creates a new OAuth2 application
       tags:
         - user
@@ -7395,6 +7397,8 @@ paths:
       responses:
         "204":
           $ref: "#/responses/empty"
+        "404":
+          $ref: "#/responses/notFound"
       summary: delete an OAuth2 Application
       tags:
         - user
@@ -7412,6 +7416,8 @@ paths:
       responses:
         "200":
           $ref: "#/responses/OAuth2Application"
+        "404":
+          $ref: "#/responses/notFound"
       summary: get an OAuth2 Application
       tags:
         - user
@@ -7434,6 +7440,8 @@ paths:
       responses:
         "200":
           $ref: "#/responses/OAuth2Application"
+        "404":
+          $ref: "#/responses/notFound"
       summary: update an OAuth2 Application, this includes regenerating the client
         secret
       tags:
@@ -7451,6 +7459,8 @@ paths:
       responses:
         "204":
           $ref: "#/responses/empty"
+        "404":
+          $ref: "#/responses/notFound"
       summary: Delete email addresses
       tags:
         - user
@@ -8312,6 +8322,8 @@ paths:
       responses:
         "201":
           $ref: "#/responses/AccessToken"
+        "400":
+          $ref: "#/responses/error"
       summary: Create an access token
       tags:
         - user
@@ -8334,6 +8346,8 @@ paths:
       responses:
         "204":
           $ref: "#/responses/empty"
+        "404":
+          $ref: "#/responses/notFound"
         "422":
           $ref: "#/responses/error"
       summary: delete an access token
@@ -10755,6 +10769,12 @@ definitions:
       labels:
         type: boolean
         x-go-name: Labels
+      lfs:
+        type: boolean
+        x-go-name: LFS
+      lfs_endpoint:
+        type: string
+        x-go-name: LFSEndpoint
       milestones:
         type: boolean
         x-go-name: Milestones
@@ -10817,6 +10837,12 @@ definitions:
       labels:
         type: boolean
         x-go-name: Labels
+      lfs:
+        type: boolean
+        x-go-name: LFS
+      lfs_endpoint:
+        type: string
+        x-go-name: LFSEndpoint
       milestones:
         type: boolean
         x-go-name: Milestones

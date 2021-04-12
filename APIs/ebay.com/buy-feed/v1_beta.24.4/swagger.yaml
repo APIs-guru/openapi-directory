@@ -18,7 +18,7 @@ info:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
   title: Item Feed Service
-  version: v1_beta.24.3
+  version: v1_beta.24.4
   x-apisguru-categories:
     - ecommerce
   x-logo:
@@ -198,7 +198,7 @@ paths:
           schema:
             $ref: "#/definitions/ItemResponse"
         "400":
-          description: Bad Request
+          description: Bad request
           x-response-codes:
             errors:
               "13000":
@@ -311,7 +311,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "13006":
@@ -633,20 +633,22 @@ paths:
     get:
       description: "The Hourly Snapshot feed file is generated each hour every day for
         most categories. This method lets you download an Hourly Snapshot
-        TSV_GZIP (tab separated value gzip) feed file containing the details of
+        TSV_GZIP (tab-separated value gzip) feed file containing the details of
         all the items that have changed within the specified day and hour for a
         specific category. This means to generate the 8AM file of items that
         have changed from 8AM and 8:59AM, the service starts at 9AM. You can
-        retrieve the 8AM snapshot file at 10AM. Note: Filters are applied to the
-        feed files. For details, see Feed File Filters. When curating the items
-        returned, be sure to code as if these filters are not applied as they
-        can be changed or removed in the future. You can use the response from
-        this method to update the item details of items stored in your database.
-        By comparing the value of itemSnapshotDate for the same item you will be
-        able to tell which information is the latest. Important: When the value
-        of the availability column is UNAVAILABLE, only the itemId and
-        availability columns are populated. URLs for this method Production URL:
-        https://api.ebay.com/buy/feed/v1_beta/ Sandbox URL:
+        retrieve the 8AM snapshot file at 10AM. Snapshot feeds now include new
+        listings. You can check itemCreationDate to identify listings that were
+        newly created within the specified hour. Note: Filters are applied to
+        the feed files. For details, see Feed File Filters. When curating the
+        items returned, be sure to code as if these filters are not applied as
+        they can be changed or removed in the future. You can use the response
+        from this method to update the item details of items stored in your
+        database. By looking at the value of itemSnapshotDate for a given item,
+        you will be able to tell which information is the latest. Important:
+        When the value of the availability column is UNAVAILABLE, only the
+        itemId and availability columns are populated. URLs for this method
+        Production URL: https://api.ebay.com/buy/feed/v1_beta/ Sandbox URL:
         https://api.sandbox.ebay.com/buy/feed/v1_beta/ Downloading feed files
         Hourly snapshot feed files are binary gzip files. If the file is larger
         than 100 MB, the download must be streamed in chunks. You specify the
@@ -767,7 +769,7 @@ paths:
           schema:
             $ref: "#/definitions/ItemSnapshotResponse"
         "400":
-          description: Bad Request
+          description: Bad request
           x-response-codes:
             errors:
               "13000":
@@ -1656,8 +1658,8 @@ definitions:
           returned in the epid column instead.
         type: string
       itemCreationDate:
-        description: A timestamp indicating when the item was created. The format is
-          yyyy-mm-dd.
+        description: A timestamp indicating when the item was created. The format is UTC
+          (yyyy-MM-ddThh:mm:ss.sssZ).
         type: string
       itemEndDate:
         description: "A timestamp indicating when the item's sale period will end based

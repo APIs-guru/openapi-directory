@@ -458,6 +458,37 @@ paths:
               is set as src on fo:external-graphic elements>\": \"<Convert your
               images to Base64 encoded string>\"\r
 
+              \  },\r
+
+              \  \"metadata\": {\r
+
+              \    \"title\": \"Pdf title metadata can be set with
+              metadata object\",\r
+
+              \    \"author\": null,\r
+
+              \    \"subject\": null,\r
+
+              \    \"keywords\": [\r
+
+              \      \"pdf\",\r
+
+              \      \"api\"\r
+
+              \    ],\r
+
+              \    \"enableAdd\": true,\r
+
+              \    \"enableCopy\": true,\r
+
+              \    \"enableModify\": true,\r
+
+              \    \"enablePrinting\": true,\r
+
+              \    \"ownerPassword\": null,\r
+
+              \    \"userPassword\": null\r
+
               \  }\r
 
               }"
@@ -467,6 +498,8 @@ paths:
             encoding:
               fodocument:
                 contentType: application/octet-stream
+              metadata:
+                contentType: application/json
               resources:
                 contentType: application/octet-stream
             schema:
@@ -475,6 +508,11 @@ paths:
                   description: An entry named fodocument is required in the multipart/form-data
                     request
                   format: binary
+                  type: string
+                metadata:
+                  description: Add pdf document metadata like title, author, subject and keywords
+                  format: string
+                  nullable: true
                   type: string
                 resources:
                   description: After fodocument is added, add all digital resources one by one to
@@ -552,7 +590,9 @@ paths:
               is set as src on fo:external-graphic elements>\": \"<Convert your
               images to Base64 encoded string>\"\r
 
-              \  }\r
+              \  },\r
+
+              \  \"metadata\": null\r
 
               }"
             schema:
@@ -687,6 +727,8 @@ components:
           description: This is the complete XSL-FO document provided using Base64 encoding.
           nullable: true
           type: string
+        Metadata:
+          $ref: "#/components/schemas/PdfMetadataDto"
         Resources:
           additionalProperties:
             type: string
@@ -706,6 +748,8 @@ components:
           description: This is the complete XSL-FO document provided using Base64 encoding.
           nullable: true
           type: string
+        Metadata:
+          $ref: "#/components/schemas/PdfMetadataDto"
         Resources:
           additionalProperties:
             type: string
@@ -775,6 +819,57 @@ components:
             type: string
           nullable: true
           type: array
+      type: object
+    PdfMetadataDto:
+      additionalProperties: false
+      description: Enter meta data for pdf document
+      properties:
+        Author:
+          description: Pdf document author
+          nullable: true
+          type: string
+        EnableAdd:
+          description: "Enables or disables adding or modifying text annotations and
+            interactive\r
+
+            form fields."
+          type: boolean
+        EnableCopy:
+          description: Enables or disables copying of text and graphics.
+          type: boolean
+        EnableModify:
+          description: "Enables or disables modifying document contents (other than text
+            annotations and \r
+
+            interactive form fields)."
+          type: boolean
+        EnablePrinting:
+          description: Enables or disables printing.
+          type: boolean
+        Keywords:
+          description: Pdf document keywords
+          items:
+            type: string
+          nullable: true
+          type: array
+        OwnerPassword:
+          description: Specifies the owner password that will protect full access to any
+            generated PDF documents.
+          nullable: true
+          type: string
+        Subject:
+          description: Pdf document subject
+          nullable: true
+          type: string
+        Title:
+          description: Pdf document title
+          nullable: true
+          type: string
+        UserPassword:
+          description: Specifies the user password that will protect access to any
+            generated PDF documents.
+          nullable: true
+          type: string
       type: object
     PdfResponseDto:
       additionalProperties: false

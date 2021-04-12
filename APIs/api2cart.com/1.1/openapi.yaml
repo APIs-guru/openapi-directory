@@ -10049,6 +10049,10 @@ components:
           type: string
         id:
           type: string
+        images:
+          items:
+            $ref: "#/components/schemas/Image"
+          type: array
         meta_description:
           type: string
         meta_keywords:

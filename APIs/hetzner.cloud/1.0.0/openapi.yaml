@@ -2084,6 +2084,8 @@ paths:
         | `could_not_verify_domain_delegated_to_zone`             | Could not verify domain delegated to zone                                 |
 
         | `dns_zone_not_found`                                    | DNS zone not found                                                        |
+
+        | `dns_zone_is_secondary_zone`                            | DNS zone is a secondary zone                                              |
       parameters:
         - description: ID of the Certificate
           in: path
@@ -14876,6 +14878,7 @@ paths:
                           example: 42
                           type: integer
                         image:
+                          nullable: true
                           properties:
                             bound_to:
                               description: ID of Server the Image is bound to. Only set for Images of type
@@ -15901,6 +15904,7 @@ paths:
                         example: 42
                         type: integer
                       image:
+                        nullable: true
                         properties:
                           bound_to:
                             description: ID of Server the Image is bound to. Only set for Images of type
@@ -16614,6 +16618,7 @@ paths:
                         example: 42
                         type: integer
                       image:
+                        nullable: true
                         properties:
                           bound_to:
                             description: ID of Server the Image is bound to. Only set for Images of type
@@ -17245,6 +17250,7 @@ paths:
                         example: 42
                         type: integer
                       image:
+                        nullable: true
                         properties:
                           bound_to:
                             description: ID of Server the Image is bound to. Only set for Images of type

@@ -2547,7 +2547,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/group"
+              $ref: "#/components/schemas/group-new"
       responses:
         "200":
           content:
@@ -2563,7 +2563,7 @@ paths:
                     properties:
                       groups:
                         items:
-                          $ref: "#/components/schemas/group-new"
+                          $ref: "#/components/schemas/group"
                         type: array
                     required:
                       - groups

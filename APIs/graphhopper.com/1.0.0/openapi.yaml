@@ -5162,6 +5162,27 @@ components:
           type: string
       type: object
     RouteRequest:
+      example:
+        calc_points: true
+        details:
+          - road_class
+          - surface
+        instructions: true
+        locale: en
+        point_hints:
+          - Lindenschmitstraße
+          - Thalkirchener Str.
+        points:
+          - - 11.539421
+            - 48.118477
+          - - 11.559023
+            - 48.12228
+        points_encoded: false
+        snap_preventions:
+          - motorway
+          - ferry
+          - tunnel
+        vehicle: bike
       properties:
         algorithm:
           description: >
@@ -5402,100 +5423,148 @@ components:
       type: object
     RouteResponse:
       example:
+        hints:
+          visited_nodes.average: 58
+          visited_nodes.sum: 58
         info:
           copyrights:
             - GraphHopper
             - OpenStreetMap contributors
-          took: 15
+          took: 2
         paths:
-          - bbox:
-              - 13.362853824187303
-              - 52.469481955531585
-              - 13.385836736460217
-              - 52.473849308838446
-            details:
-              max_speed:
-                - - 0
-                  - 25
-                  - -1
-                - - 25
-                  - 98
-                  - 130
-                - - 98
-                  - 113
-                  - 90
-                - - 113
-                  - 140
-                  - 130
-                - - 140
-                  - 143
-                  - 110
-                - ..
-              street_name:
-                - - 0
-                  - 1
-                  - Rue Principale
-                - - 1
-                  - 13
-                  - D19E
-                - - 13
-                  - 18
-                  - D19
-                - ..
-              toll:
-                - - 0
-                  - 25
-                  - no
-                - - 25
-                  - 146
-                  - all
-                - - 146
-                  - 158
-                  - no
-                - - 158
-                  - 204
-                  - all
-                - ..
-            distance: 2138.3027624572337
+          - ascend: 6.3294677734375
+            bbox:
+              - 11.539424
+              - 48.118343
+              - 11.558901
+              - 48.122364
+            descend: 25.0579833984375
+            details: {}
+            distance: 1791.011
             instructions:
-              - distance: 1268.519329705091
+              - distance: 672.954
+                heading: 89.04
                 interval:
                   - 0
-                  - 10
+                  - 6
                 sign: 0
-                text: Geradeaus auf A 100
-                time: 65237
-              - distance: 379.74399999999997
+                street_name: Lindenschmitstraße
+                text: Continue onto Lindenschmitstraße
+                time: 144703
+              - distance: 107.145
                 interval:
-                  - 10
-                  - 11
-                sign: 0
-                text: Geradeaus auf Strasse
-                time: 24855
-              - distance: 16.451
-                interval:
-                  - 11
-                  - 11
-                sign: 0
-                text: Geradeaus auf Tempelhofer Damm
-                time: 1316
-              - distance: 473.58843275214315
-                interval:
-                  - 11
-                  - 12
+                  - 6
+                  - 7
                 sign: -2
-                text: Links abbiegen auf Tempelhofer Damm, B 96
-                time: 37882
+                street_name: ""
+                text: Turn left
+                time: 22675
+              - distance: 140.169
+                interval:
+                  - 7
+                  - 10
+                sign: 2
+                street_name: Oberländerstraße
+                text: Turn right onto Oberländerstraße
+                time: 28032
+              - distance: 360.232
+                interval:
+                  - 10
+                  - 18
+                sign: 1
+                street_name: ""
+                text: Turn slight right
+                time: 72677
+              - distance: 177.621
+                interval:
+                  - 18
+                  - 20
+                sign: 2
+                street_name: Thalkirchner Straße
+                text: Turn right onto Thalkirchner Straße
+                time: 35524
+              - distance: 332.89
+                interval:
+                  - 20
+                  - 24
+                sign: -2
+                street_name: Thalkirchner Straße
+                text: Turn left onto Thalkirchner Straße
+                time: 67351
               - distance: 0
                 interval:
-                  - 12
-                  - 12
+                  - 24
+                  - 24
+                last_heading: 45.67046584987792
                 sign: 4
-                text: Ziel erreicht!
+                street_name: ""
+                text: Arrive at destination
                 time: 0
-            points: oxg_Iy|ppAl@wCdE}LfFsN|@_Ej@eEtAaMh@sGVuDNcDb@{PFyGdAi]FoC?q@sXQ_@?
-            points_encoded: true
-            time: 129290
+            legs: []
+            points:
+              coordinates:
+                - - 11.539424
+                  - 48.118352
+                - - 11.540387
+                  - 48.118368
+                - - 11.54061
+                  - 48.118356
+                - - 11.541941
+                  - 48.118409
+                - - 11.543696
+                  - 48.118344
+                - - 11.547167
+                  - 48.118343
+                - - 11.548478
+                  - 48.118366
+                - - 11.548487
+                  - 48.119329
+                - - 11.548807
+                  - 48.119328
+                - - 11.549408
+                  - 48.119366
+                - - 11.550349
+                  - 48.119508
+                - - 11.550441
+                  - 48.119473
+                - - 11.551109
+                  - 48.119467
+                - - 11.551553
+                  - 48.119445
+                - - 11.551748
+                  - 48.119398
+                - - 11.552087
+                  - 48.119475
+                - - 11.552236
+                  - 48.119542
+                - - 11.552353
+                  - 48.119635
+                - - 11.553853
+                  - 48.121136
+                - - 11.555448
+                  - 48.12039
+                - - 11.555797
+                  - 48.120206
+                - - 11.55632
+                  - 48.120592
+                - - 11.556716
+                  - 48.120919
+                - - 11.557326
+                  - 48.121345
+                - - 11.558901
+                  - 48.122364
+              type: LineString
+            points_encoded: false
+            snapped_waypoints:
+              coordinates:
+                - - 11.539424
+                  - 48.118352
+                - - 11.558901
+                  - 48.122364
+              type: LineString
+            time: 370962
+            transfers: 0
+            weight: 307.852443
       properties:
         info:
           $ref: "#/components/schemas/ResponseInfo"

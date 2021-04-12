@@ -15,7 +15,7 @@ info:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
   title: eBay Finances API
-  version: 1.7.1
+  version: 1.8.0
   x-apisguru-categories:
     - ecommerce
   x-logo:
@@ -725,7 +725,7 @@ paths:
                 description: The transfer id was not found.
                 domain: API_FINANCES
         "500":
-          description: Internal Server Error
+          description: Internal Server Error.
           x-response-codes:
             errors:
               "135000":
@@ -919,10 +919,13 @@ components:
         amount:
           $ref: "#/components/schemas/Amount"
           description: The amount of the fee.
+        feeMemo:
+          description: A description of the fee that was deducted from the seller payout.
+          type: string
         feeType:
           description: The enumeration value returned here indicates the type of fee that
-            was deducted from the seller's payout. For implementation help,
-            refer to <a
+            was deducted from the seller payout. For implementation help, refer
+            to <a
             href='https://developer.ebay.com/api-docs/sell/finances/types/api:FeeTypeEnum'>eBay
             API documentation</a>
           type: string

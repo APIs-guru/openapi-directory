@@ -74,6 +74,39 @@ tags:
   - description: System level functionality, including versioning and status information.
     name: System
 paths:
+  /admin/export:
+    get:
+      description: Exports registry data as a ZIP archive.
+      operationId: exportData
+      responses:
+        "200":
+          content:
+            application/zip: {}
+          description: Response when the export is successful.
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Export registry data
+      tags:
+        - Admin
+    summary: Provides a way to export registry data.
+  /admin/import:
+    post:
+      description: Imports registry data that was previously exported using the `/admin/export` operation.
+      operationId: importData
+      requestBody:
+        content:
+          application/zip: {}
+        description: The ZIP file representing the previously exported registry data.
+        required: true
+      responses:
+        "201":
+          description: Indicates that the import was successful.
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Import registry data
+      tags:
+        - Admin
+    summary: Provides a way to import data into the registry.
   /admin/loggers:
     get:
       description: |-

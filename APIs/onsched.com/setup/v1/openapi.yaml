@@ -1565,7 +1565,31 @@ paths:
       tags:
         - Locations
     post:
-      description: Use this endpoint to create a new business location.
+      description: "Use this endpoint to create a new business location.\r
+
+        \r
+
+        Settings can be scoped to company or location. You can have all
+        locations use the defined company settings or individual locations\r
+
+        can define their own settings that override the company level
+        settings.\r
+
+        \r
+
+        If you wish to update settings then pass in the settings element
+        in the input.\r
+
+        When you are working with the Primary location, then the
+        settings will update the company level settings.\r
+
+        Otherwise, the settings will update business location
+        settings.\r
+
+        \r
+
+        If you wish to create a new location and want to just use the
+        company wide settings, don't pass in the settings element in the input."
       requestBody:
         content:
           application/*+json:
@@ -1741,8 +1765,27 @@ paths:
     put:
       description: "Use this endpoint to update a business location. \r
 
-        The optional removeRegion parameter is used to remove the region
-        relationship from the location"
+        \r
+
+        The optional removeRegion query parameter is used to remove the
+        region relationship from the location\r
+
+        \r
+
+        If the settings element is populated the scope will be set to
+        location with the settings supplied, otherwise it will be company
+        scope.\r
+
+        \r
+
+        If all your settings are uniform across all locations then do
+        not pass settings and the location will use the settings\r
+
+        defined on the primary location. This is company scope. Settings
+        cascade down to the locations. You can override any location\r
+
+        that needs different settings by providing settings in the
+        update model."
       parameters:
         - in: path
           name: id
@@ -1775,7 +1818,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/LocationViewModel"
           description: Success
-      summary: Updates a location object.
+      summary: Use this endpoint to change the scope of online booking settings
       tags:
         - Locations
   "/setup/v1/locations/{id}/deleteallimages":
@@ -2308,6 +2351,45 @@ paths:
                 $ref: "#/components/schemas/LocationViewModel"
           description: Success
       summary: Adds location services to the specified location
+      tags:
+        - Locations
+  "/setup/v1/locations/{id}/settings/scope/{settingsScope}":
+    put:
+      description: "Use this endpoint to update a business location. \r
+
+        \r
+
+        settingsScope values are 0 = company scope, 1 = business
+        location scope\r
+
+        if you wish to inherit the online settings defined in the
+        primary location then use value 0 for company scope.\r
+
+        Otherwise if you wish to override the settings for a specific
+        location then use value = 1 for business location scope\r
+
+        ///"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+        - in: path
+          name: settingsScope
+          required: true
+          schema:
+            default: ""
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocationViewModel"
+          description: Success
+      summary: Changes the scope of OnlineBooking Settings.
       tags:
         - Locations
   "/setup/v1/locations/{id}/uploadimage":
@@ -3492,6 +3574,27 @@ paths:
       summary: Uploads a resource image
       tags:
         - Resources
+  "/setup/v1/service/block/{id}":
+    delete:
+      description: Deletes a service block.
+      parameters:
+        - description: Valid id of a service block object
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceBlockViewModel"
+          description: Success
+      summary: Delete a service block object
+      tags:
+        - Services
   /setup/v1/services:
     get:
       description: "The results are returned in pages. Use the offset and limit
@@ -3651,6 +3754,63 @@ paths:
                 $ref: "#/components/schemas/ServiceAllocationViewModel"
           description: Success
       summary: Update a service allocation
+      tags:
+        - Services
+  "/setup/v1/services/block/{id}":
+    put:
+      description: Updates a resource block. Refer to the details in the POST resource
+        block for setting each of the required parameters.
+      parameters:
+        - description: Valid id of a service block object
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ServiceBlockUpdateModel"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceBlockUpdateModel"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/ServiceBlockUpdateModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ServiceBlockUpdateModel"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceBlockViewModel"
+          description: Success
+      summary: Update a service block
+      tags:
+        - Services
+  "/setup/v1/services/blocks/{id}":
+    get:
+      description: ""
+      parameters:
+        - description: Valid id of a service block object
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceBlockViewModel"
+          description: Success
+      summary: Get a service block
       tags:
         - Services
   /setup/v1/services/bookingwindows:
@@ -4199,6 +4359,167 @@ paths:
       summary: Updates Weekly Availability
       tags:
         - Services
+  "/setup/v1/services/{id}/block":
+    post:
+      description: "Creates a new service block. You must specify a StartDateTime and
+        EndDateTime.\r
+
+        A reason for the block is also required. This reason will
+        display in the OnSched Portal Calendar.\r
+
+        \r
+
+        Service blocks can be set to specific time ranges or for the
+        whole day. Use the AllDay setting to create an all day block.\r
+
+        \r
+
+        Service blocks can be for a specific date range instance or set
+        to repeat at a specified frequency.\r
+
+        The frequency can be set to a value of D,W,M,Y for Day, Week,
+        Month, or Year respecitively. \r
+
+        \r
+
+        Daily blocks will repeat for each day of the week for the date
+        range specified.\r
+
+        \r
+
+        Weekly blocks will repeat only on the specified days of the week
+        for the date range specified. For a weekly block\r
+
+        you must also specify the weekdays. Weekdays are expressed as a
+        string of digits with each single digit in the string representing a
+        day\r
+
+        of the week. The possible values are 0,1,2,3,4,5,6 where
+        0=Sunday, 1=Monday, 2=Tuesday, 3=Wed, 4=Thursday, 5=Friday,
+        6=Saturday.\r
+
+        For example a repeat weekly entry with weekdays 24 repeats each
+        week on Tuesday and Thursday.\r
+
+        \r
+
+        Use the interval property to specify the interval that the block
+        repeats. For example an interval of 2 for a weekly block means that\r
+
+        the block will repeat every second week beginning at the day
+        specified. A daily block with an interval of 10 means the block will\r
+
+        repeat every 10 days. The interval property applies to all
+        repeat frequencies.\r
+
+        \r
+
+        Monthly blocks repeat either on the day of the month specified
+        in the month day property or on the day of the week and week of the
+        month specified by\r
+
+        the start date. For example, repeat every 3rd friday of each
+        month, repeat on the 21st day of the month.\r
+
+        \r
+
+        Repeat blocks will end on the date specified by the end date.
+        You can specify 9999-12-31 in \r
+
+        the EndDate field to indicate the repeating block should
+        continue indefinitely."
+      parameters:
+        - description: Valid id of a service object
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ServiceBlockInputModel"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceBlockInputModel"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/ServiceBlockInputModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ServiceBlockInputModel"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceBlockViewModel"
+          description: Success
+      summary: Create a new service block
+      tags:
+        - Services
+  "/setup/v1/services/{id}/blocks":
+    get:
+      description: "The results are returned in pages. Use the offset and limit
+        parameters to control the page start and size. Default offset is 0, and
+        limit is 20.\r
+
+        Use the other query parameters to optionally filter the results
+        list."
+      parameters:
+        - description: The id of the service to list blocks
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+        - description: Format YYYY-MM-DD. Filter blocks on/after startDate
+          in: query
+          name: startDate
+          schema:
+            default: ""
+            format: date-time
+            nullable: true
+            type: string
+        - description: Format YYYY-MM-DD. Filter on/before endDate
+          in: query
+          name: endDate
+          schema:
+            default: ""
+            format: date-time
+            nullable: true
+            type: string
+        - description: Starting row of page, default 0
+          in: query
+          name: offset
+          schema:
+            format: int32
+            type: integer
+        - description: Page limit, default 20. Maximum 100.
+          in: query
+          name: limit
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceBlockListViewModel"
+          description: service block object's
+        "400":
+          description: Missing or invalid values in the request
+        "401":
+          description: Authorization error.
+        "404":
+          description: Service was not found
+      summary: Returns a list of service blocks.
+      tags:
+        - Services
   "/setup/v1/services/{id}/bookingwindows":
     get:
       description: "This endpoint is used to retrieve any booking windows related to
@@ -4365,7 +4686,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResourceListViewModel"
           description: Success
-      summary: Returns a list of resources.
+      summary: Returns a list of resources for the specified service.
       tags:
         - Services
   "/setup/v1/services/{id}/uploadimage":
@@ -4558,6 +4879,10 @@ components:
           type: string
         firstname:
           type: string
+        groupSize:
+          format: int32
+          nullable: true
+          type: integer
         id:
           type: string
         ipAddress:
@@ -5243,10 +5568,16 @@ components:
           type: string
         addressLine2:
           type: string
+        bookingWebhookUrl:
+          type: string
         city:
           type: string
         country:
           type: string
+        customerWebhookUrl:
+          type: string
+        disableEmailAndSmsNotifications:
+          type: boolean
         email:
           type: string
         fax:
@@ -5263,9 +5594,15 @@ components:
           type: string
         registrationEmail:
           type: string
+        reminderWebhookUrl:
+          type: string
+        resourceWebhookUrl:
+          type: string
         state:
           type: string
         timezoneName:
+          type: string
+        webhookSignatureHash:
           type: string
         website:
           type: string
@@ -5277,10 +5614,16 @@ components:
           type: string
         addressLine2:
           type: string
+        bookingWebhookUrl:
+          type: string
         city:
           type: string
         country:
           type: string
+        customerWebhookUrl:
+          type: string
+        disableEmailAndSmsNotifications:
+          type: boolean
         email:
           type: string
         fax:
@@ -5297,9 +5640,15 @@ components:
           type: string
         registrationEmail:
           type: string
+        reminderWebhookUrl:
+          type: string
+        resourceWebhookUrl:
+          type: string
         state:
           type: string
         timezoneName:
+          type: string
+        webhookSignatureHash:
           type: string
         website:
           type: string
@@ -5311,6 +5660,8 @@ components:
           type: string
         addressLine2:
           type: string
+        bookingWebhookUrl:
+          type: string
         city:
           type: string
         clientId:
@@ -5319,10 +5670,14 @@ components:
           type: string
         country:
           type: string
+        customerWebhookUrl:
+          type: string
         deletedStatus:
           type: boolean
         deletedTime:
           type: string
+        disableEmailAndSmsNotifications:
+          type: boolean
         email:
           type: string
         fax:
@@ -5344,6 +5699,10 @@ components:
         registrationDate:
           type: string
         registrationEmail:
+          type: string
+        reminderWebhookUrl:
+          type: string
+        resourceWebhookUrl:
           type: string
         state:
           type: string
@@ -5648,7 +6007,7 @@ components:
         address:
           $ref: "#/components/schemas/AddressInputModel"
         adminEmail:
-          description: This field is no longer required and has been deprecated.
+          description: Field is required.
           type: string
         adminName:
           description: This field is no longer required and has been deprecated.
@@ -5742,6 +6101,10 @@ components:
       properties:
         address:
           $ref: "#/components/schemas/AddressViewModel"
+        adminEmail:
+          type: string
+        adminName:
+          type: string
         businessHolidays:
           items:
             $ref: "#/components/schemas/BusinessHolidayViewModel"
@@ -5772,6 +6135,12 @@ components:
         longitude:
           format: double
           type: number
+        maxCapacity:
+          format: int32
+          type: integer
+        maxGroupSize:
+          format: int32
+          type: integer
         name:
           type: string
         object:
@@ -6159,6 +6528,24 @@ components:
           type: string
       type: object
     RepeatInputModel:
+      additionalProperties: false
+      properties:
+        frequency:
+          type: string
+        interval:
+          format: int32
+          nullable: true
+          type: integer
+        monthDay:
+          format: int32
+          nullable: true
+          type: integer
+        monthType:
+          type: string
+        weekdays:
+          type: string
+      type: object
+    RepeatUpdateModel:
       additionalProperties: false
       properties:
         frequency:
@@ -6996,6 +7383,112 @@ components:
         weekdays:
           $ref: "#/components/schemas/AvailabilityViewModel2"
       type: object
+    ServiceBlockInputModel:
+      additionalProperties: false
+      properties:
+        endDate:
+          format: date-time
+          nullable: true
+          type: string
+        endTime:
+          format: int32
+          type: integer
+        locationId:
+          type: string
+        reason:
+          type: string
+        repeat:
+          $ref: "#/components/schemas/RepeatInputModel"
+        repeats:
+          type: boolean
+        startDate:
+          format: date-time
+          type: string
+        startTime:
+          format: int32
+          type: integer
+      type: object
+    ServiceBlockListViewModel:
+      additionalProperties: false
+      properties:
+        count:
+          format: int32
+          type: integer
+        data:
+          items:
+            $ref: "#/components/schemas/ServiceBlockViewModel"
+          type: array
+        hasMore:
+          type: boolean
+        object:
+          type: string
+        total:
+          format: int32
+          type: integer
+        url:
+          type: string
+      type: object
+    ServiceBlockUpdateModel:
+      additionalProperties: false
+      properties:
+        endDate:
+          format: date-time
+          nullable: true
+          type: string
+        endTime:
+          format: int32
+          nullable: true
+          type: integer
+        reason:
+          type: string
+        repeat:
+          $ref: "#/components/schemas/RepeatUpdateModel"
+        repeats:
+          nullable: true
+          type: boolean
+        startDate:
+          format: date-time
+          nullable: true
+          type: string
+        startTime:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    ServiceBlockViewModel:
+      additionalProperties: false
+      properties:
+        deletedStatus:
+          type: boolean
+        deletedTime:
+          type: string
+        endDate:
+          format: date-time
+          type: string
+        endTime:
+          format: int32
+          type: integer
+        id:
+          type: string
+        locationId:
+          type: string
+        object:
+          type: string
+        reason:
+          type: string
+        repeat:
+          $ref: "#/components/schemas/RepeatViewModel"
+        repeats:
+          type: boolean
+        serviceId:
+          type: string
+        startDate:
+          format: date-time
+          type: string
+        startTime:
+          format: int32
+          type: integer
+      type: object
     ServiceCalendarInputModel:
       additionalProperties: false
       properties:
@@ -7348,6 +7841,12 @@ components:
         locationId:
           type: string
         maxBookingLimit:
+          format: int32
+          type: integer
+        maxCapacity:
+          format: int32
+          type: integer
+        maxGroupSize:
           format: int32
           type: integer
         maxResourceBookingLimit:

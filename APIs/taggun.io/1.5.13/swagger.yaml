@@ -11,7 +11,7 @@ info:
     digital form.
   termsOfService: https://www.taggun.io/terms
   title: TAGGUN Receipt OCR Scanning API
-  version: 1.5.11
+  version: 1.5.13
   x-apisguru-categories:
     - text
   x-logo:
@@ -21,8 +21,7 @@ info:
       url: https://api.taggun.io/docs/swagger.json
       version: "2.0"
   x-providerName: taggun.io
-tags:
-  - name: api
+tags: []
 paths:
   /api/account/v1/feedback:
     post:
@@ -49,7 +48,7 @@ paths:
       summary: Add manually verified receipt data to a given receipt for feedback and
         training purposes
       tags:
-        - api/account
+        - 3. Improve your results
   /api/account/v1/merchantname/add:
     post:
       operationId: postApiAccountV1MerchantnameAdd
@@ -72,13 +71,15 @@ paths:
           description: Bad Request
           schema:
             $ref: "#/definitions/badRequestError"
-      summary: add a keyword to your account's model to predict merchant name
+      summary: Add a keyword to your account's model to predict merchant name. Changes
+        in your account's model are updated daily.
       tags:
-        - api/account
+        - 3. Improve your results
   /api/receipt/v1/match/file:
     post:
       consumes:
         - multipart/form-data
+      deprecated: true
       operationId: postApiReceiptV1MatchFile
       parameters:
         - description: API authentication key.
@@ -165,7 +166,7 @@ paths:
       summary: detect and match a receipt against keywords and metadata by uploading
         an image file
       tags:
-        - api/receipt
+        - 4. Deprecated endpoints
   /api/receipt/v1/simple/encoded:
     post:
       operationId: postApiReceiptV1SimpleEncoded
@@ -190,7 +191,7 @@ paths:
             $ref: "#/definitions/badRequestError"
       summary: transcribe a receipt using base64 encoded image in json payload
       tags:
-        - api/receipt
+        - 2. Try other input format endpoints
   /api/receipt/v1/simple/file:
     post:
       consumes:
@@ -296,9 +297,10 @@ paths:
             $ref: "#/definitions/badRequestError"
       summary: transcribe a receipt by uploading an image file
       tags:
-        - api/receipt
+        - 1. Getting started
   /api/receipt/v1/simple/storage:
     post:
+      deprecated: true
       operationId: postApiReceiptV1SimpleStorage
       parameters:
         - description: API authentication key.
@@ -321,7 +323,7 @@ paths:
             $ref: "#/definitions/badRequestError"
       summary: transcribe a receipt in storage
       tags:
-        - api/receipt
+        - 4. Deprecated endpoints
   /api/receipt/v1/simple/url:
     post:
       operationId: postApiReceiptV1SimpleUrl
@@ -346,7 +348,7 @@ paths:
             $ref: "#/definitions/badRequestError"
       summary: transcribe a receipt from URL
       tags:
-        - api/receipt
+        - 2. Try other input format endpoints
   /api/receipt/v1/verbose/encoded:
     post:
       operationId: postApiReceiptV1VerboseEncoded
@@ -372,7 +374,7 @@ paths:
       summary: transcribe a receipt using base64 encoded image in json payload and
         return detailed result
       tags:
-        - api/receipt
+        - 2. Try other input format endpoints
   /api/receipt/v1/verbose/file:
     post:
       consumes:
@@ -479,9 +481,10 @@ paths:
       summary: transcribe a receipt by uploading an image file and return detailed
         result
       tags:
-        - api/receipt
+        - 1. Getting started
   /api/receipt/v1/verbose/storage:
     post:
+      deprecated: true
       operationId: postApiReceiptV1VerboseStorage
       parameters:
         - description: API authentication key.
@@ -504,7 +507,7 @@ paths:
             $ref: "#/definitions/badRequestError"
       summary: transcribe a receipt in storage and return detailed result
       tags:
-        - api/receipt
+        - 4. Deprecated endpoints
   /api/receipt/v1/verbose/url:
     post:
       operationId: postApiReceiptV1VerboseUrl
@@ -529,7 +532,7 @@ paths:
             $ref: "#/definitions/badRequestError"
       summary: transcribe a receipt from URL and return detailed result
       tags:
-        - api/receipt
+        - 2. Try other input format endpoints
 definitions:
   ABN:
     properties:

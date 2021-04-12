@@ -9,7 +9,7 @@ info:
   description: |
     The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.
 
-    > Date: 03 March, 2021
+    > Date: 07 April, 2021
     >
     > [What's New](https://meraki.io/whats-new/)
 
@@ -21,7 +21,7 @@ info:
 
     [Meraki Homepage](https://www.meraki.com)
   title: Meraki Dashboard API
-  version: 1.7.0
+  version: 1.8.0
   x-apisguru-categories:
     - iot
     - enterprise
@@ -72,6 +72,7 @@ tags:
   - name: billing
   - name: bluetooth
   - name: bluetoothClients
+  - name: bonjourForwarding
   - name: brandingPolicies
   - name: bypassActivationLockAttempts
   - name: categories
@@ -169,6 +170,7 @@ tags:
   - name: requests
   - name: restrictions
   - name: rfProfiles
+  - name: rollbacks
   - name: routing
   - name: rules
   - name: saml
@@ -1294,7 +1296,7 @@ paths:
         - lldpCdp
   "/devices/{serial}/lossAndLatencyHistory":
     get:
-      description: Get the uplink loss percentage and latency in milliseconds for a wired network device.
+      description: Get the uplink loss percentage and latency in milliseconds, and goodput in kilobits per second for a wired network device.
       operationId: getDeviceLossAndLatencyHistory
       parameters:
         - in: path
@@ -1337,20 +1339,23 @@ paths:
           examples:
             application/json:
               - endTime: 2018-10-09T22:19:27Z
-                latencyMs: 324
-                lossPercent: 5
+                goodput: 1493
+                latencyMs: 324.12
+                lossPercent: 5.23
                 startTime: 2018-10-09T22:18:27Z
               - endTime: 2018-10-09T22:20:27Z
+                goodput: 2567
                 latencyMs: 43
                 lossPercent: 1
                 startTime: 2018-10-09T22:19:27Z
               - endTime: 2018-10-09T22:21:27Z
-                latencyMs: 44
-                lossPercent: 0
+                goodput: 7899
+                latencyMs: 44.02
+                lossPercent: 0.01
                 startTime: 2018-10-09T22:20:27Z
           schema:
             type: object
-      summary: Get the uplink loss percentage and latency in milliseconds for a wired network device.
+      summary: Get the uplink loss percentage and latency in milliseconds, and goodput in kilobits per second for a wired network device.
       tags:
         - devices
         - monitor
@@ -1439,7 +1444,7 @@ paths:
                     description: The subnet mask for the WAN.
                     type: string
                   usingStaticIp:
-                    description: Configue the interface to have static IP settings or use DHCP.
+                    description: Configure the interface to have static IP settings or use DHCP.
                     type: boolean
                   vlan:
                     description: The VLAN that management traffic should be tagged with. Applies whether usingStaticIp is true or false.
@@ -1470,7 +1475,7 @@ paths:
                     description: The subnet mask for the WAN.
                     type: string
                   usingStaticIp:
-                    description: Configue the interface to have static IP settings or use DHCP.
+                    description: Configure the interface to have static IP settings or use DHCP.
                     type: boolean
                   vlan:
                     description: The VLAN that management traffic should be tagged with. Applies whether usingStaticIp is true or false.
@@ -9494,7 +9499,7 @@ paths:
         - devices
   "/networks/{networkId}/devices/claim":
     post:
-      description: Claim devices into a network
+      description: "Claim devices into a network. (Note: for recently claimed devices, it may take a few minutes for API requsts against that device to succeed)"
       operationId: claimNetworkDevices
       parameters:
         - in: path
@@ -9522,7 +9527,7 @@ paths:
       responses:
         "200":
           description: Successful operation
-      summary: Claim devices into a network
+      summary: "Claim devices into a network. (Note: for recently claimed devices, it may take a few minutes for API requsts against that device to succeed)"
       tags:
         - networks
         - configure
@@ -9692,7 +9697,7 @@ paths:
         - eventTypes
   "/networks/{networkId}/firmwareUpgrades":
     get:
-      description: Get current maintenance window for a network
+      description: Get firmware upgrade information for a network
       operationId: getNetworkFirmwareUpgrades
       parameters:
         - in: path
@@ -9704,18 +9709,105 @@ paths:
           description: Successful operation
           examples:
             application/json:
+              products:
+                camera:
+                  availableVersions:
+                    - firmware: camera-16-x-y
+                      id: 3421
+                      releaseType: beta
+                      shortName: MV 16.x.y
+                    - firmware: camera-15-x-x
+                      id: 2345
+                      releaseType: stable
+                      shortName: MV 15.x.x
+                    - firmware: camera-15-x-y
+                      id: 5435
+                      releaseType: stable
+                      shortName: MV 15.x.y
+                    - firmware: camera-18-z-z
+                      id: 4534
+                      releaseType: other?
+                      shortName: MV 18.z.z
+                  currentVersion:
+                    firmware: camera-11-2-1
+                    id: 4321
+                    releaseType: stable
+                    shortName: MV 11.2.1
+                  lastUpgrade:
+                    fromVersion:
+                      firmware: camera-10-8-1
+                      id: 1234
+                      releaseType: stable
+                      shortName: MV 10.8.1
+                    time: timestamp
+                    toVersion:
+                      firmware: camera-11-2-1
+                      id: 4321
+                      releaseType: stable
+                      shortName: MV 11.2.1
+                  nextUpgrade:
+                    time: timestamp
+                    toVersion:
+                      firmware: camera-15-5-2
+                      id: 2134
+                      releaseType: stable
+                      shortName: MV 25.5.2
+                switch:
+                  availableVersions:
+                    - firmware: switch-16-x-y
+                      id: 7768
+                      releaseType: beta
+                      shortName: MS 16.x.y
+                    - firmware: switch-15-x-x
+                      id: 9768
+                      releaseType: stable
+                      shortName: MS 15.x.x
+                    - firmware: switch-15-x-y
+                      id: 8896
+                      releaseType: stable
+                      shortName: MS 15.x.y
+                    - firmware: switch-18-z-z
+                      id: 8766
+                      releaseType: other?
+                      shortName: MS 18.z.z
+                  currentVersion:
+                    firmware: switch-11-2-1
+                    id: 5678
+                    releaseType: stable
+                    shortName: MS 11.2.1
+                  lastUpgrade:
+                    fromVersion:
+                      firmware: switch-10-8-1
+                      id: 7647
+                      releaseType: stable
+                      shortName: MS 10.8.1
+                    time: timestamp
+                    toVersion:
+                      firmware: switch-11-2-1
+                      id: 5678
+                      releaseType: stable
+                      shortName: MS 11.2.1
+                  nextUpgrade:
+                    time: timestamp
+                    toVersion:
+                      firmware: switch-15-5-2
+                      id: 7857
+                      releaseType: stable
+                      shortName: MS 25.5.2
+                  participateInNextBetaRelease: false
+              timezone: America/Los_Angeles
               upgradeWindow:
                 dayOfWeek: Sun
                 hourOfDay: 4:00
           schema:
             type: object
-      summary: Get current maintenance window for a network
+      summary: Get firmware upgrade information for a network
       tags:
         - networks
         - configure
         - firmwareUpgrades
     put:
-      description: Update current maintenance window for a network
+      description: Update firmware upgrade information for a network
       operationId: updateNetworkFirmwareUpgrades
       parameters:
         - in: path
@@ -9726,10 +9818,148 @@ paths:
           name: updateNetworkFirmwareUpgrades
           schema:
             example:
-              upgradeWindow:
-                dayOfWeek: Sun
-                hourOfDay: 4:00
+              products:
+                switch:
+                  nextUpgrade:
+                    toVersion:
+                      id: 7857
             properties:
+              products:
+                description: Contains information about the network to update
+                properties:
+                  appliance:
+                    description: The network device to be updated
+                    properties:
+                      nextUpgrade:
+                        description: The pending firmware upgrade if it exists
+                        properties:
+                          time:
+                            description: The time of the last successful upgrade
+                            type: string
+                          toVersion:
+                            description: The version to be updated to
+                            properties:
+                              id:
+                                description: The version ID
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  camera:
+                    description: The network device to be updated
+                    properties:
+                      nextUpgrade:
+                        description: The pending firmware upgrade if it exists
+                        properties:
+                          time:
+                            description: The time of the last successful upgrade
+                            type: string
+                          toVersion:
+                            description: The version to be updated to
+                            properties:
+                              id:
+                                description: The version ID
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  cellularGateway:
+                    description: The network device to be updated
+                    properties:
+                      nextUpgrade:
+                        description: The pending firmware upgrade if it exists
+                        properties:
+                          time:
+                            description: The time of the last successful upgrade
+                            type: string
+                          toVersion:
+                            description: The version to be updated to
+                            properties:
+                              id:
+                                description: The version ID
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  environmental:
+                    description: The network device to be updated
+                    properties:
+                      nextUpgrade:
+                        description: The pending firmware upgrade if it exists
+                        properties:
+                          time:
+                            description: The time of the last successful upgrade
+                            type: string
+                          toVersion:
+                            description: The version to be updated to
+                            properties:
+                              id:
+                                description: The version ID
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  switch:
+                    description: The network device to be updated
+                    properties:
+                      nextUpgrade:
+                        description: The pending firmware upgrade if it exists
+                        properties:
+                          time:
+                            description: The time of the last successful upgrade
+                            type: string
+                          toVersion:
+                            description: The version to be updated to
+                            properties:
+                              id:
+                                description: The version ID
+                                type: string
+                            type: object
+                        type: object
+                      participateInNextBetaRelease:
+                        description: Whether or not the network wants beta firmware
+                        type: boolean
+                    type: object
+                  vmxHost:
+                    description: The network device to be updated
+                    properties:
+                      nextUpgrade:
+                        description: The pending firmware upgrade if it exists
+                        properties:
+                          time:
+                            description: The time of the last successful upgrade
+                            type: string
+                          toVersion:
+                            description: The version to be updated to
+                            properties:
+                              id:
+                                description: The version ID
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  wireless:
+                    description: The network device to be updated
+                    properties:
+                      nextUpgrade:
+                        description: The pending firmware upgrade if it exists
+                        properties:
+                          time:
+                            description: The time of the last successful upgrade
+                            type: string
+                          toVersion:
+                            description: The version to be updated to
+                            properties:
+                              id:
+                                description: The version ID
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                type: object
+              timezone:
+                description: The timezone for the network
+                type: string
               upgradeWindow:
                 description: Upgrade window for devices in network
                 properties:
@@ -9786,16 +10016,200 @@ paths:
           description: Successful operation
           examples:
             application/json:
+              products:
+                camera:
+                  availableVersions:
+                    - firmware: camera-16-x-y
+                      id: 3421
+                      releaseType: beta
+                      shortName: MV 16.x.y
+                    - firmware: camera-15-x-x
+                      id: 2345
+                      releaseType: stable
+                      shortName: MV 15.x.x
+                    - firmware: camera-15-x-y
+                      id: 5435
+                      releaseType: stable
+                      shortName: MV 15.x.y
+                    - firmware: camera-18-z-z
+                      id: 4534
+                      releaseType: other?
+                      shortName: MV 18.z.z
+                  currentVersion:
+                    firmware: camera-11-2-1
+                    id: 4321
+                    releaseType: stable
+                    shortName: MV 11.2.1
+                  lastUpgrade:
+                    fromVersion:
+                      firmware: camera-10-8-1
+                      id: 1234
+                      releaseType: stable
+                      shortName: MV 10.8.1
+                    time: timestamp
+                    toVersion:
+                      firmware: camera-11-2-1
+                      id: 4321
+                      releaseType: stable
+                      shortName: MV 11.2.1
+                  nextUpgrade:
+                    time: timestamp
+                    toVersion:
+                      firmware: camera-15-5-2
+                      id: 2134
+                      releaseType: stable
+                      shortName: MV 25.5.2
+                switch:
+                  availableVersions:
+                    - firmware: switch-16-x-y
+                      id: 7768
+                      releaseType: beta
+                      shortName: MS 16.x.y
+                    - firmware: switch-15-x-x
+                      id: 9768
+                      releaseType: stable
+                      shortName: MS 15.x.x
+                    - firmware: switch-15-x-y
+                      id: 8896
+                      releaseType: stable
+                      shortName: MS 15.x.y
+                    - firmware: switch-18-z-z
+                      id: 8766
+                      releaseType: other?
+                      shortName: MS 18.z.z
+                  currentVersion:
+                    firmware: switch-11-2-1
+                    id: 5678
+                    releaseType: stable
+                    shortName: MS 11.2.1
+                  lastUpgrade:
+                    fromVersion:
+                      firmware: switch-10-8-1
+                      id: 7647
+                      releaseType: stable
+                      shortName: MS 10.8.1
+                    time: timestamp
+                    toVersion:
+                      firmware: switch-11-2-1
+                      id: 5678
+                      releaseType: stable
+                      shortName: MS 11.2.1
+                  nextUpgrade:
+                    time: timestamp
+                    toVersion:
+                      firmware: switch-15-5-2
+                      id: 7857
+                      releaseType: stable
+                      shortName: MS 25.5.2
+                  participateInNextBetaRelease: false
+              timezone: America/Los_Angeles
               upgradeWindow:
                 dayOfWeek: Sun
                 hourOfDay: 4:00
           schema:
             type: object
-      summary: Update current maintenance window for a network
+      summary: Update firmware upgrade information for a network
       tags:
         - networks
         - configure
         - firmwareUpgrades
+  "/networks/{networkId}/firmwareUpgrades/rollbacks":
+    post:
+      description: Rollback a Firmware Upgrade For A Network
+      operationId: createNetworkFirmwareUpgradesRollback
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: body
+          name: createNetworkFirmwareUpgradesRollback
+          required: true
+          schema:
+            example:
+              product: switch
+              reasons:
+                - category: performance
+                  comment: Network was slower with the upgrade
+                - category: stability
+                  comment: We saw some errors in the logs we didn't expect
+              time: 2020-10-21T02:00:00Z
+              toVersion:
+                id: 7857
+            properties:
+              product:
+                description: Product type to rollback (if the network is a combined network)
+                enum:
+                  - wireless
+                  - switch
+                  - appliance
+                  - camera
+                  - vmxHost
+                  - cellularGateway
+                type: string
+              reasons:
+                description: Reasons for the rollback
+                items:
+                  properties:
+                    category:
+                      description: Reason for the rollback
+                      enum:
+                        - performance
+                        - stability
+                        - broke old features
+                        - unifying networks versions
+                        - testing
+                        - other
+                      type: string
+                    comment:
+                      description: Additional comment about the rollback
+                      type: string
+                  required:
+                    - category
+                    - comment
+                  type: object
+                type: array
+              time:
+                description: Scheduled time for the rollback
+                format: date-time
+                type: string
+              toVersion:
+                description: Version to downgrade to (if the network has firmware flexibility)
+                properties:
+                  id:
+                    description: The version ID
+                    type: string
+                type: object
+            required:
+              - reasons
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              product: switch
+              reasons:
+                - category: performance
+                  comment: Network was slower with the upgrade
+                - category: stability
+                  comment: We saw some errors in the logs we didn't expect
+              status: pending
+              time: 2020-10-21T02:00:00Z
+              toVersion:
+                firmware: switch-15-5-2
+                id: 7857
+                releaseType: stable
+                shortName: MS 25.5.2
+              upgradeBatchId: 23456
+          schema:
+            type: object
+      summary: Rollback a Firmware Upgrade For A Network
+      tags:
+        - networks
+        - configure
+        - firmwareUpgrades
+        - rollbacks
   "/networks/{networkId}/floorPlans":
     get:
       description: List the floor plans that belong to your network
@@ -12442,7 +12856,7 @@ paths:
       summary: Get the channel utilization over each radio for all APs in a network.
       tags:
         - networks
-        - configure
+        - monitor
         - networkHealth
         - channelUtilization
   "/networks/{networkId}/pii/piiKeys":
@@ -21248,9 +21662,9 @@ paths:
                       type: object
                     type: array
                 type: object
-              adaptivePolicyGroupId:
-                description: Adaptive policy group ID this SSID is assigned to.
-                type: string
+              adultContentFilteringEnabled:
+                description: Boolean indicating whether or not adult content will be blocked
+                type: boolean
               apTagsAndVlanIds:
                 description: The list of tags and VLAN IDs used for VLAN tagging. This param is only valid when the ipAssignmentMode is 'Bridge mode' or 'Layer 3 roaming'
                 items:
@@ -21295,6 +21709,18 @@ paths:
               defaultVlanId:
                 description: The default VLAN ID used for 'all other APs'. This param is only valid when the ipAssignmentMode is 'Bridge mode' or 'Layer 3 roaming'
                 type: integer
+              dnsRewrite:
+                description: DNS servers rewrite settings
+                properties:
+                  dnsCustomNameservers:
+                    description: User specified DNS servers (up to two servers)
+                    items:
+                      type: string
+                    type: array
+                  enabled:
+                    description: Boolean indicating whether or not DNS server rewrite is enabled. If disabled, upstream DNS will be used
+                    type: boolean
+                type: object
               dot11r:
                 description: The current setting for 802.11r
                 properties:
@@ -21339,6 +21765,9 @@ paths:
               ldap:
                 description: The current setting for LDAP. Only valid if splashPage is 'Password-protected with LDAP'.
                 properties:
+                  baseDistinguishedName:
+                    description: The base distinguished name of users on the LDAP server.
+                    type: string
                   credentials:
                     description: (Optional) The credentials of the user account to be used by the AP to bind to your LDAP server. The LDAP account should have permissions on all your LDAP servers.
                     properties:
@@ -21347,6 +21776,13 @@ paths:
                         type: string
                       password:
                         description: The password of the LDAP user account.
+                        type: string
+                    type: object
+                  serverCaCertificate:
+                    description: The CA certificate used to sign the LDAP server's key.
+                    properties:
+                      contents:
+                        description: The contents of the CA certificate. Must be in PEM or DER format.
                         type: string
                     type: object
                   servers:
@@ -21365,6 +21801,43 @@ paths:
                       type: object
                     type: array
                 type: object
+              localRadius:
+                description: The current setting for Local Authentication, a built-in RADIUS server on the access point. Only valid if authMode is '8021x-localradius'.
+                properties:
+                  cacheTimeout:
+                    description: The duration (in seconds) for which LDAP and OCSP lookups are cached.
+                    type: integer
+                  certificateAuthentication:
+                    description: The current setting for certificate verification.
+                    properties:
+                      clientRootCaCertificate:
+                        description: The Client CA Certificate used to sign the client certificate.
+                        properties:
+                          contents:
+                            description: The contents of the Client CA Certificate. Must be in PEM or DER format.
+                            type: string
+                        type: object
+                      enabled:
+                        description: Whether or not to use EAP-TLS certificate-based authentication to validate wireless clients.
+                        type: boolean
+                      ocspResponderUrl:
+                        description: (Optional) The URL of the OCSP responder to verify client certificate status.
+                        type: string
+                      useLdap:
+                        description: Whether or not to verify the certificate with LDAP.
+                        type: boolean
+                      useOcsp:
+                        description: Whether or not to verify the certificate with OCSP.
+                        type: boolean
+                    type: object
+                  passwordAuthentication:
+                    description: The current setting for password-based authentication.
+                    properties:
+                      enabled:
+                        description: Whether or not to use EAP-TTLS/PAP or PEAP-GTC password-based authentication via LDAP lookup.
+                        type: boolean
+                    type: object
+                type: object
               mandatoryDhcpEnabled:
                 description: If true, Mandatory DHCP will enforce that clients connecting to this SSID must use the IP address assigned by the DHCP server. Clients who use a static IP address won't be able to associate.
                 type: boolean
@@ -21375,6 +21848,15 @@ paths:
               name:
                 description: The name of the SSID
                 type: string
+              oauth:
+                description: The OAuth settings of this SSID. Only valid if splashPage is 'Google OAuth'.
+                properties:
+                  allowedDomains:
+                    description: (Optional) The list of domains allowed access to the network.
+                    items:
+                      type: string
+                    type: array
+                type: object
               perClientBandwidthLimitDown:
                 description: The download bandwidth limit in Kbps. (0 represents no limit.)
                 type: integer
@@ -21489,7 +21971,7 @@ paths:
                   type: string
                 type: array
               splashPage:
-                description: The type of splash page for the SSID ('None', 'Click-through splash page', 'Billing', 'Password-protected with Meraki RADIUS', 'Password-protected with custom RADIUS', 'Password-protected with Active Directory', 'Password-protected with LDAP', 'SMS authentication', 'Systems Manager Sentry', 'Facebook Wi-Fi', 'Google OAuth', 'Sponsored guest' or 'Cisco ISE'). This attribute is not supported for template children.
+                description: The type of splash page for the SSID ('None', 'Click-through splash page', 'Billing', 'Password-protected with Meraki RADIUS', 'Password-protected with custom RADIUS', 'Password-protected with Active Directory', 'Password-protected with LDAP', 'SMS authentication', 'Systems Manager Sentry', 'Facebook Wi-Fi', 'Google OAuth', 'Sponsored guest', 'Cisco ISE' or 'Google Apps domain'). This attribute is not supported for template children.
                 enum:
                   - None
                   - Click-through splash page
@@ -21504,6 +21986,7 @@ paths:
                   - Google OAuth
                   - Sponsored guest
                   - Cisco ISE
+                  - Google Apps domain
                 type: string
               useVlanTagging:
                 description: Whether or not traffic should be directed to use specific VLANs. This param is only valid if the ipAssignmentMode is 'Bridge mode' or 'Layer 3 roaming'
@@ -21578,6 +22061,116 @@ paths:
         - wireless
         - configure
         - ssids
+  "/networks/{networkId}/wireless/ssids/{number}/bonjourForwarding":
+    get:
+      description: List the Bonjour forwarding setting and rules for the SSID
+      operationId: getNetworkWirelessSsidBonjourForwarding
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: path
+          name: number
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              enabled: true
+              rules:
+                - description: A simple bonjour rule
+                  services:
+                    - All Services
+                  vlanId: "1"
+          schema:
+            type: object
+      summary: List the Bonjour forwarding setting and rules for the SSID
+      tags:
+        - wireless
+        - configure
+        - ssids
+        - bonjourForwarding
+    put:
+      description: Update the bonjour forwarding setting and rules for the SSID
+      operationId: updateNetworkWirelessSsidBonjourForwarding
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: path
+          name: number
+          required: true
+          type: string
+        - in: body
+          name: updateNetworkWirelessSsidBonjourForwarding
+          schema:
+            example:
+              enabled: true
+              rules:
+                - description: A simple bonjour rule
+                  services:
+                    - All Services
+                  vlanId: "1"
+            properties:
+              enabled:
+                description: If true, Bonjour forwarding is enabled on this SSID.
+                type: boolean
+              rules:
+                description: List of bonjour forwarding rules.
+                items:
+                  properties:
+                    description:
+                      description: A description for your Bonjour forwarding rule. Optional.
+                      type: string
+                    services:
+                      description: A list of Bonjour services. At least one service must be specified. Available services are 'All Services', 'AirPlay', 'AFP', 'BitTorrent', 'FTP', 'iChat', 'iTunes', 'Printers', 'Samba', 'Scanners' and 'SSH'
+                      items:
+                        enum:
+                          - All Services
+                          - AirPlay
+                          - AFP
+                          - BitTorrent
+                          - FTP
+                          - iChat
+                          - iTunes
+                          - Printers
+                          - Samba
+                          - Scanners
+                          - SSH
+                        type: string
+                      type: array
+                    vlanId:
+                      description: The ID of the service VLAN. Required.
+                      type: string
+                  required:
+                    - vlanId
+                    - services
+                  type: object
+                type: array
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              enabled: true
+              rules:
+                - description: A simple bonjour rule
+                  services:
+                    - All Services
+                  vlanId: "1"
+          schema:
+            type: object
+      summary: Update the bonjour forwarding setting and rules for the SSID
+      tags:
+        - wireless
+        - configure
+        - ssids
+        - bonjourForwarding
   "/networks/{networkId}/wireless/ssids/{number}/deviceTypeGroupPolicies":
     get:
       description: List the device type group policies for the SSID
@@ -22580,6 +23173,134 @@ paths:
         - ssids
         - trafficShaping
         - rules
+  "/networks/{networkId}/wireless/ssids/{number}/vpn":
+    get:
+      description: List the VPN settings for the SSID.
+      operationId: getNetworkWirelessSsidVpn
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: path
+          name: number
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              splitTunnel:
+                enabled: true
+                rules:
+                  - comment: split tunnel rule 1
+                    destCidr: 1.1.1.1/32
+                    destPort: any
+                    policy: allow
+                    protocol: any
+                  - comment: split tunnel rule 2
+                    destCidr: foo.com
+                    destPort: any
+                    policy: deny
+          schema:
+            type: object
+      summary: List the VPN settings for the SSID.
+      tags:
+        - wireless
+        - configure
+        - ssids
+        - vpn
+    put:
+      description: Update the VPN settings for the SSID
+      operationId: updateNetworkWirelessSsidVpn
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: path
+          name: number
+          required: true
+          type: string
+        - in: body
+          name: updateNetworkWirelessSsidVpn
+          schema:
+            example:
+              splitTunnel:
+                enabled: true
+                rules:
+                  - comment: split tunnel rule 1
+                    destCidr: 1.1.1.1/32
+                    destPort: any
+                    policy: allow
+                    protocol: any
+                  - comment: split tunnel rule 2
+                    destCidr: foo.com
+                    destPort: any
+                    policy: deny
+            properties:
+              splitTunnel:
+                description: The VPN split tunnel settings for this SSID.
+                properties:
+                  enabled:
+                    description: If true, VPN split tunnel is enabled.
+                    type: boolean
+                  rules:
+                    description: List of VPN split tunnel rules.
+                    items:
+                      properties:
+                        comment:
+                          description: Description for this split tunnel rule (optional).
+                          type: string
+                        destCidr:
+                          description: Destination for this split tunnel rule. IP address, fully-qualified domain names (FQDN) or 'any'.
+                          type: string
+                        destPort:
+                          description: Destination port for this split tunnel rule, (integer in the range 1-65535), or 'any'.
+                          type: string
+                        policy:
+                          description: Traffic policy specified for this split tunnel rule, 'allow' or 'deny'.
+                          type: string
+                        protocol:
+                          description: Protocol for this split tunnel rule.
+                          enum:
+                            - Any
+                            - TCP
+                            - UDP
+                          type: string
+                      required:
+                        - destCidr
+                        - policy
+                      type: object
+                    type: array
+                type: object
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              splitTunnel:
+                enabled: true
+                rules:
+                  - comment: split tunnel rule 1
+                    destCidr: 1.1.1.1/32
+                    destPort: any
+                    policy: allow
+                    protocol: any
+                  - comment: split tunnel rule 2
+                    destCidr: foo.com
+                    destPort: any
+                    policy: deny
+          schema:
+            type: object
+      summary: Update the VPN settings for the SSID
+      tags:
+        - wireless
+        - configure
+        - ssids
+        - vpn
   "/networks/{networkId}/wireless/usageHistory":
     get:
       description: Return AP usage over time for a device or network client
@@ -27850,7 +28571,7 @@ x-batchable-actions:
   - group: Device
     operation: claim
     resource: /networks/{networkId}/devices
-    summary: Claim devices into a network
+    summary: "Claim devices into a network. (Note: for recently claimed devices, it may take a few minutes for API requsts against that device to succeed)"
   - group: Device
     operation: remove
     resource: /networks/{networkId}/devices
@@ -27863,10 +28584,14 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/switch/dscpToCosMappings
     summary: Update the DSCP to CoS mappings
+  - group: Firmware upgrade rollback
+    operation: create
+    resource: /networks/{networkId}/firmwareUpgrades/rollbacks
+    summary: Rollback a Firmware Upgrade For A Network
   - group: Firmware upgrades update
     operation: update
     resource: /networks/{networkId}/firmwareUpgrades
-    summary: Update current maintenance window for a network
+    summary: Update firmware upgrade information for a network
   - group: Floor plan
     operation: destroy
     resource: /networks/{networkId}/floorPlans/{floorPlanId}
@@ -28143,6 +28868,10 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/wireless/ssids/{number}
     summary: Update the attributes of an MR SSID
+  - group: Ssid bonjour forwarding
+    operation: update
+    resource: /networks/{networkId}/wireless/ssids/{number}/bonjourForwarding
+    summary: Update the bonjour forwarding setting and rules for the SSID
   - group: Ssid device type group policies
     operation: update
     resource: /networks/{networkId}/wireless/ssids/{number}/deviceTypeGroupPolicies
@@ -28151,6 +28880,10 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/wireless/ssids/{number}/splash/settings
     summary: Modify the splash page settings for the given SSID
+  - group: Ssid vpn
+    operation: update
+    resource: /networks/{networkId}/wireless/ssids/{number}/vpn
+    summary: Update the VPN settings for the SSID
   - group: Storm control
     operation: update
     resource: /networks/{networkId}/switch/stormControl

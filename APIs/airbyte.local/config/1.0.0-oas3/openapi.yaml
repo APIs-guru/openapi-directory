@@ -640,6 +640,29 @@ paths:
       summary: Get logs
       tags:
         - logs
+  /v1/notifications/try:
+    post:
+      operationId: tryNotificationConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Notification"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationRead"
+          description: Successful operation
+        "404":
+          description: Notification Client not found
+        "422":
+          $ref: "#/components/responses/InvalidInput"
+      summary: Try sending a notifications
+      tags:
+        - notifications
   /v1/openapi:
     get:
       operationId: getOpenApiSpec
@@ -1857,6 +1880,38 @@ components:
       required:
         - logType
       type: object
+    Notification:
+      properties:
+        notificationType:
+          $ref: "#/components/schemas/NotificationType"
+        slackConfiguration:
+          $ref: "#/components/schemas/SlackNotificationConfiguration"
+      required:
+        - notificationType
+      type: object
+    NotificationRead:
+      properties:
+        message:
+          type: string
+        status:
+          enum:
+            - succeeded
+            - failed
+          type: string
+      required:
+        - status
+      type: object
+    NotificationType:
+      enum:
+        - slack
+      type: string
+    SlackNotificationConfiguration:
+      properties:
+        webhook:
+          type: string
+      required:
+        - webhook
+      type: object
     SlugRequestBody:
       properties:
         slug:
@@ -2178,6 +2233,10 @@ components:
           type: string
         news:
           type: boolean
+        notifications:
+          items:
+            $ref: "#/components/schemas/Notification"
+          type: array
         securityUpdates:
           type: boolean
       required:
@@ -2210,6 +2269,10 @@ components:
           type: string
         news:
           type: boolean
+        notifications:
+          items:
+            $ref: "#/components/schemas/Notification"
+          type: array
         securityUpdates:
           type: boolean
         slug:
@@ -2236,6 +2299,10 @@ components:
           type: boolean
         news:
           type: boolean
+        notifications:
+          items:
+            $ref: "#/components/schemas/Notification"
+          type: array
         securityUpdates:
           type: boolean
         workspaceId:
