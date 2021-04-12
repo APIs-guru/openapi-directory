@@ -307,7 +307,7 @@ components:
           description: Required. Budgeted amount.
         budgetFilter:
           $ref: "#/components/schemas/GoogleCloudBillingBudgetsV1Filter"
-          description: Optional. Filters that define which resources are used to compute the actual spend against the budget.
+          description: Optional. Filters that define which resources are used to compute the actual spend against the budget amount, such as projects, services, and the budget's time period, as well as other filters.
         displayName:
           description: User data for display name in UI. The name must be less than or equal to 60 characters.
           type: string
@@ -332,7 +332,7 @@ components:
       properties:
         lastPeriodAmount:
           $ref: "#/components/schemas/GoogleCloudBillingBudgetsV1LastPeriodAmount"
-          description: Use the last period's actual spend as the budget for the present period. Cannot be set in combination with Filter.custom_period.
+          description: Use the last period's actual spend as the budget for the present period. LastPeriodAmount can only be set when the budget's time period is a Filter.calendar_period. It cannot be set in combination with Filter.custom_period.
         specifiedAmount:
           $ref: "#/components/schemas/GoogleTypeMoney"
           description: A specified amount to use as the budget. `currency_code` is optional. If specified when creating a budget, it must match the currency of the billing account. If specified when updating a budget, it must match the currency_code of the existing budget. The `currency_code` is provided on output.
@@ -397,7 +397,7 @@ components:
           type: array
       type: object
     GoogleCloudBillingBudgetsV1LastPeriodAmount:
-      description: Describes a budget amount targeted to last period's spend. At this time, the amount is automatically 100% of last period's spend; that is, there are no other options yet. Future configuration will be described here (for example, configuring a percentage of last period's spend).
+      description: Describes a budget amount targeted to the last Filter.calendar_period spend. At this time, the amount is automatically 100% of the last calendar period's spend; that is, there are no other options yet. Future configuration options will be described here (for example, configuring a percentage of last period's spend). LastPeriodAmount cannot be set for a budget configured with a Filter.custom_period.
       properties: {}
       type: object
     GoogleCloudBillingBudgetsV1ListBudgetsResponse:

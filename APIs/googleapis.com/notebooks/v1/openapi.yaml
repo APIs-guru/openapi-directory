@@ -390,6 +390,50 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}:rollback":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Rollbacks a notebook instance to the previous version.
+      operationId: notebooks.projects.locations.instances.rollback
+      parameters:
+        - description: "Required. Format:
+            `projects/{project_id}/locations/{location}/instances/{instance_id}\
+            `"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RollbackInstanceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}:setAccelerator":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1930,6 +1974,11 @@ components:
             - BASIC_TPU
             - CUSTOM
           type: string
+        serviceAccount:
+          description: The email address of a service account to use when running the
+            execution. You must have the `iam.serviceAccounts.actAs` permission
+            for the specified service account.
+          type: string
       type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language
@@ -2113,6 +2162,14 @@ components:
         network:
           description: "The name of the VPC that this instance is in. Format:
             `projects/{project_id}/global/networks/{network_id}`"
+          type: string
+        nicType:
+          description: Optional. The type of vNIC to be used on this interface. This may
+            be gVNIC or VirtioNet.
+          enum:
+            - UNSPECIFIED_NIC_TYPE
+            - VIRTIO_NET
+            - GVNIC
           type: string
         noProxyAccess:
           description: If true, the notebook instance will not register with the proxy.
@@ -2676,6 +2733,14 @@ components:
     ResetRuntimeRequest:
       description: Request for reseting a Managed Notebook Runtime.
       properties: {}
+      type: object
+    RollbackInstanceRequest:
+      description: Request for rollbacking a notebook instance
+      properties:
+        targetSnapshot:
+          description: 'Required. The snapshot for rollback. Example:
+            "projects/test-project/global/snapshots/krwlzipynril".'
+          type: string
       type: object
     Runtime:
       description: The definition of a Runtime for a managed notebook instance.
@@ -3257,6 +3322,14 @@ components:
             required). Requires configuring Private Service Access. * Shared VPC
             (network & subnet are required). Requires configuring Private
             Service Access.'
+          type: string
+        nicType:
+          description: Optional. The type of vNIC to be used on this interface. This may
+            be gVNIC or VirtioNet.
+          enum:
+            - UNSPECIFIED_NIC_TYPE
+            - VIRTIO_NET
+            - GVNIC
           type: string
         shieldedInstanceConfig:
           $ref: "#/components/schemas/RuntimeShieldedInstanceConfig"

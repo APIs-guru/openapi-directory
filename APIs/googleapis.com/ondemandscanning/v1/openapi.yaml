@@ -24,6 +24,7 @@ info:
       version: v1
   x-providerName: googleapis.com
   x-serviceName: ondemandscanning
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/container-analysis/docs/on-demand-scanning/
 tags:
@@ -1054,6 +1055,13 @@ components:
           type: string
         package:
           description: The package being analysed for vulnerabilities
+          type: string
+        projectId:
+          description: The projectId of the package to which this data belongs. Most of
+            Drydock's code does not set or use this field. This is added
+            specifically so we can group packages by projects and decide whether
+            or not to apply NVD data to the packages belonging to a specific
+            project.
           type: string
         version:
           description: The version of the package being analysed

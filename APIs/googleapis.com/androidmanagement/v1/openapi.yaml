@@ -771,6 +771,24 @@ components:
             - COMMON_CRITERIA_MODE_DISABLED
             - COMMON_CRITERIA_MODE_ENABLED
           type: string
+        developerSettings:
+          description: "Controls access to developer settings: developer options and safe
+            boot. Replaces safeBootDisabled (deprecated) and
+            debuggingFeaturesAllowed (deprecated)."
+          enum:
+            - DEVELOPER_SETTINGS_UNSPECIFIED
+            - DEVELOPER_SETTINGS_DISABLED
+            - DEVELOPER_SETTINGS_ALLOWED
+          type: string
+        googlePlayProtectVerifyApps:
+          description: Whether Google Play Protect verification
+            (https://support.google.com/accounts/answer/2812853) is enforced.
+            Replaces ensureVerifyAppsEnabled (deprecated).
+          enum:
+            - GOOGLE_PLAY_PROTECT_VERIFY_APPS_UNSPECIFIED
+            - VERIFY_APPS_ENFORCED
+            - VERIFY_APPS_USER_CHOICE
+          type: string
         untrustedAppsPolicy:
           description: The policy for untrusted apps (apps from unknown sources) enforced
             on the device. Replaces install_unknown_sources_allowed
@@ -1512,9 +1530,9 @@ components:
           description: Whether installing apps from unknown sources is enabled.
           type: boolean
         verifyAppsEnabled:
-          description: Whether Verify Apps (Google Play Protect
-            (https://support.google.com/googleplay/answer/2812853)) is enabled
-            on the device.
+          description: Whether Google Play Protect verification
+            (https://support.google.com/accounts/answer/2812853) is enforced on
+            the device.
           type: boolean
       type: object
     Display:

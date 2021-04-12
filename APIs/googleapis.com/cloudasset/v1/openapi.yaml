@@ -332,6 +332,11 @@ paths:
               type: string
             type: array
           style: form
+        - description: The hypothetical access timestamp to evaluate IAM conditions. Note that this value must not be earlier than the current time; otherwise, an INVALID_ARGUMENT error will be returned.
+          in: query
+          name: analysisQuery.conditionContext.accessTime
+          schema:
+            type: string
         - description: 'Required. The identity appear in the form of members in [IAM policy binding](https://cloud.google.com/iam/reference/rest/v1/Binding). The examples of supported forms are: "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-project-id@appspot.gserviceaccount.com". Notice that wildcard characters (such as * and ?) are not supported. You must give a specific identity.'
           in: query
           name: analysisQuery.identitySelector.identity
@@ -796,6 +801,26 @@ components:
           description: Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
+    ConditionContext:
+      description: The IAM conditions context.
+      properties:
+        accessTime:
+          description: The hypothetical access timestamp to evaluate IAM conditions. Note that this value must not be earlier than the current time; otherwise, an INVALID_ARGUMENT error will be returned.
+          format: google-datetime
+          type: string
+      type: object
+    ConditionEvaluation:
+      description: The Condition evaluation.
+      properties:
+        evaluationValue:
+          description: The evaluation result.
+          enum:
+            - EVALUATION_VALUE_UNSPECIFIED
+            - "TRUE"
+            - "FALSE"
+            - CONDITIONAL
+          type: string
+      type: object
     CreateFeedRequest:
       description: Create asset feed request.
       properties:
@@ -932,6 +957,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudAssetV1Access"
           type: array
+        conditionEvaluation:
+          $ref: "#/components/schemas/ConditionEvaluation"
+          description: Condition evaluation for this AccessControlList, if there is a condition defined in the above IAM policy binding.
         resourceEdges:
           description: Resource edges of the graph starting from the policy attached resource to any descendant resources. The Edge.source_node contains the full resource name of a parent resource and Edge.target_node contains the full resource name of a child resource. This field is present only if the output_resource_edges option is enabled in request.
           items:
@@ -1564,6 +1592,9 @@ components:
         accessSelector:
           $ref: "#/components/schemas/AccessSelector"
           description: Optional. Specifies roles or permissions for analysis. This is optional.
+        conditionContext:
+          $ref: "#/components/schemas/ConditionContext"
+          description: Optional. The hypothetical context for IAM conditions evaluation.
         identitySelector:
           $ref: "#/components/schemas/IdentitySelector"
           description: Optional. Specifies an identity for analysis.

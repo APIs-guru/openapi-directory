@@ -67,10 +67,6 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
-        - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
@@ -137,10 +133,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -260,10 +252,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -874,10 +862,6 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
-        - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
@@ -1014,10 +998,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -1188,10 +1168,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -1424,10 +1400,6 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
-        - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
@@ -1528,10 +1500,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -1690,10 +1658,6 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
-        - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
@@ -1763,10 +1727,6 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
-        - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
@@ -1808,10 +1768,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -2202,6 +2158,17 @@ components:
           description: Whether Arima model fitted with drift or not. It is always false
             when d is not 1.
           type: boolean
+        hasHolidayEffect:
+          description: If true, holiday_effect is a part of time series decomposition
+            result.
+          type: boolean
+        hasSpikesAndDips:
+          description: If true, spikes_and_dips is a part of time series decomposition
+            result.
+          type: boolean
+        hasStepChanges:
+          description: If true, step_changes is a part of time series decomposition result.
+          type: boolean
         nonSeasonalOrder:
           $ref: "#/components/schemas/ArimaOrder"
           description: Non-seasonal order.
@@ -2225,6 +2192,16 @@ components:
             ARIMA model training. Only present when time_series_id_column
             training option was used.
           type: string
+        timeSeriesIds:
+          description: The tuple of time_series_ids identifying this time series. It will
+            be one of the unique tuples of values present in the
+            time_series_id_columns specified during ARIMA model training. Only
+            present when time_series_id_columns training option was used and the
+            order of values here are same as the order of
+            time_series_id_columns.
+          items:
+            type: string
+          type: array
       type: object
     ArimaOrder:
       description: Arima order, can be used for both non-seasonal and seasonal parts.
@@ -2277,6 +2254,17 @@ components:
           description: Is arima model fitted with drift or not. It is always false when d
             is not 1.
           type: boolean
+        hasHolidayEffect:
+          description: If true, holiday_effect is a part of time series decomposition
+            result.
+          type: boolean
+        hasSpikesAndDips:
+          description: If true, spikes_and_dips is a part of time series decomposition
+            result.
+          type: boolean
+        hasStepChanges:
+          description: If true, step_changes is a part of time series decomposition result.
+          type: boolean
         nonSeasonalOrder:
           $ref: "#/components/schemas/ArimaOrder"
           description: Non-seasonal order.
@@ -2300,6 +2288,16 @@ components:
             ARIMA model training. Only present when time_series_id_column
             training option was used.
           type: string
+        timeSeriesIds:
+          description: The tuple of time_series_ids identifying this time series. It will
+            be one of the unique tuples of values present in the
+            time_series_id_columns specified during ARIMA model training. Only
+            present when time_series_id_columns training option was used and the
+            order of values here are same as the order of
+            time_series_id_columns.
+          items:
+            type: string
+          type: array
       type: object
     AuditConfig:
       description: 'Specifies the audit configuration for a service. The configuration
@@ -3118,15 +3116,6 @@ components:
             job will fail."
           type: object
       type: object
-    DimensionalityReductionMetrics:
-      description: Model evaluation metrics for dimensionality reduction models.
-      properties:
-        totalExplainedVarianceRatio:
-          description: Total percentage of variance explained by the selected principal
-            components.
-          format: double
-          type: number
-      type: object
     EncryptionConfiguration:
       properties:
         kmsKeyName:
@@ -3179,10 +3168,6 @@ components:
         clusteringMetrics:
           $ref: "#/components/schemas/ClusteringMetrics"
           description: Populated for clustering models.
-        dimensionalityReductionMetrics:
-          $ref: "#/components/schemas/DimensionalityReductionMetrics"
-          description: Evaluation metrics when the model is a dimensionality reduction
-            model, which currently includes PCA.
         multiClassClassificationMetrics:
           $ref: "#/components/schemas/MultiClassClassificationMetrics"
           description: Populated for multi-class classification/classifier models.
@@ -3671,11 +3656,6 @@ components:
           description: Learn rate used for this iteration.
           format: double
           type: number
-        principalComponentInfos:
-          description: The information of the principal components.
-          items:
-            $ref: "#/components/schemas/PrincipalComponentInfo"
-          type: array
         trainingLoss:
           description: Loss computed on the training data at the end of iteration.
           format: double
@@ -4789,6 +4769,7 @@ components:
             - ARIMA
             - AUTOML_REGRESSOR
             - AUTOML_CLASSIFIER
+            - ARIMA_PLUS
           readOnly: true
           type: string
         trainingRuns:
@@ -4944,30 +4925,6 @@ components:
             e-policies)."
           format: int32
           type: integer
-      type: object
-    PrincipalComponentInfo:
-      description: Principal component infos, used only for eigen decomposition based
-        models, e.g., PCA. Ordered by explained_variance in the descending
-        order.
-      properties:
-        cumulativeExplainedVarianceRatio:
-          description: The explained_variance is pre-ordered in the descending order to
-            compute the cumulative explained variance ratio.
-          format: double
-          type: number
-        explainedVariance:
-          description: Explained variance by this principal component, which is simply the
-            eigenvalue.
-          format: double
-          type: number
-        explainedVarianceRatio:
-          description: Explained_variance over the total explained variance.
-          format: double
-          type: number
-        principalComponentId:
-          description: Id of the principal component.
-          format: int64
-          type: string
       type: object
     ProjectList:
       properties:
@@ -6175,6 +6132,10 @@ components:
     TrainingOptions:
       description: Options used in model training.
       properties:
+        adjustStepChanges:
+          description: If true, detect step changes and make data adjustment in the input
+            time series.
+          type: boolean
         autoArima:
           description: Whether to enable auto ARIMA or not.
           type: boolean
@@ -6186,6 +6147,9 @@ components:
           description: Batch size for dnn models.
           format: int64
           type: string
+        cleanSpikesAndDips:
+          description: If true, clean spikes and dips in the input time series.
+          type: boolean
         dataFrequency:
           description: The data frequency of a time series.
           enum:
@@ -6227,6 +6191,9 @@ components:
             - NO_SPLIT
             - AUTO_SPLIT
           type: string
+        decomposeTimeSeries:
+          description: If true, perform decompose time series and save the results.
+          type: boolean
         distanceType:
           description: Distance type for clustering models.
           enum:
@@ -6458,6 +6425,12 @@ components:
         timeSeriesIdColumn:
           description: The time series id column that was used during ARIMA model training.
           type: string
+        timeSeriesIdColumns:
+          description: The time series id columns that were used during ARIMA model
+            training.
+          items:
+            type: string
+          type: array
         timeSeriesTimestampColumn:
           description: Column to be designated as time series timestamp for ARIMA model.
           type: string
@@ -6557,7 +6530,6 @@ components:
           scopes:
             https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery
             https://www.googleapis.com/auth/bigquery.insertdata: Insert data into Google BigQuery
-            https://www.googleapis.com/auth/bigquery.readonly: View your data in Google BigQuery
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
             https://www.googleapis.com/auth/devstorage.full_control: Manage your data and permissions in Google Cloud Storage
@@ -6572,7 +6544,6 @@ components:
           scopes:
             https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery
             https://www.googleapis.com/auth/bigquery.insertdata: Insert data into Google BigQuery
-            https://www.googleapis.com/auth/bigquery.readonly: View your data in Google BigQuery
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
             https://www.googleapis.com/auth/devstorage.full_control: Manage your data and permissions in Google Cloud Storage

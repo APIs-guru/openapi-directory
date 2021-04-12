@@ -1691,7 +1691,12 @@ components:
       properties: {}
       type: object
     Export:
-      description: An export
+      description: An export To work with Vault resources, the account must have the
+        [required Vault privileges]
+        (https://support.google.com/vault/answer/2799699) and access to the
+        matter. To access a matter, the account must have created the matter,
+        have the matter shared with them, or have the **View All Matters**
+        privilege.
       properties:
         cloudStorageSink:
           $ref: "#/components/schemas/CloudStorageSink"
@@ -1845,7 +1850,12 @@ components:
     HeldAccount:
       description: An account being held in a particular hold. This structure is
         immutable. This can be either a single user or a google group, depending
-        on the corpus.
+        on the corpus. To work with Vault resources, the account must have the
+        [required Vault privileges]
+        (https://support.google.com/vault/answer/2799699) and access to the
+        matter. To access a matter, the account must have created the matter,
+        have the matter shared with them, or have the **View All Matters**
+        privilege.
       properties:
         accountId:
           description: The account's ID as provided by the Admin SDK.
@@ -1948,7 +1958,12 @@ components:
         artifacts based on the combination of the query and accounts
         restrictions. A hold can be configured to either apply to an explicitly
         configured set of accounts, or can be applied to all members of an
-        organizational unit.
+        organizational unit. To work with Vault resources, the account must have
+        the [required Vault privileges]
+        (https://support.google.com/vault/answer/2799699) and access to the
+        matter. To access a matter, the account must have created the matter,
+        have the matter shared with them, or have the **View All Matters**
+        privilege.
       properties:
         accounts:
           description: If set, the hold applies to the enumerated accounts and org_unit
@@ -2111,7 +2126,12 @@ components:
           type: boolean
       type: object
     Matter:
-      description: Represents a matter.
+      description: Represents a matter. To work with Vault resources, the account must
+        have the [required Vault privileges]
+        (https://support.google.com/vault/answer/2799699) and access to the
+        matter. To access a matter, the account must have created the matter,
+        have the matter shared with them, or have the **View All Matters**
+        privilege.
       properties:
         description:
           description: The description of the matter.
@@ -2337,7 +2357,12 @@ components:
           description: The updated matter, with state OPEN.
       type: object
     SavedQuery:
-      description: Definition of the saved query.
+      description: Definition of the saved query. To work with Vault resources, the
+        account must have the [required Vault privileges]
+        (https://support.google.com/vault/answer/2799699) and access to the
+        matter. To access a matter, the account must have created the matter,
+        have the matter shared with them, or have the **View All Matters**
+        privilege.
       properties:
         createTime:
           description: Output only. The server generated timestamp at which saved query

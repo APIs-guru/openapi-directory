@@ -5355,7 +5355,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VideoRatingListResponse"
+                $ref: "#/components/schemas/VideoGetRatingResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -8465,11 +8465,11 @@ components:
           format: date-time
           type: string
         scheduledEndTime:
-          description: The date and time that the broadcast is scheduled to start.
+          description: The date and time that the broadcast is scheduled to end.
           format: date-time
           type: string
         scheduledStartTime:
-          description: The date and time that the broadcast is scheduled to end.
+          description: The date and time that the broadcast is scheduled to start.
           format: date-time
           type: string
         thumbnails:
@@ -10633,6 +10633,28 @@ components:
           format: uint32
           type: integer
       type: object
+    VideoGetRatingResponse:
+      properties:
+        etag:
+          description: Etag of this resource.
+          type: string
+        eventId:
+          description: Serialized EventId of the request which produced this response.
+          type: string
+        items:
+          description: A list of ratings that match the request criteria.
+          items:
+            $ref: "#/components/schemas/VideoRating"
+          type: array
+        kind:
+          default: youtube#videoGetRatingResponse
+          description: 'Identifies what kind of resource this is. Value: the fixed string
+            "youtube#videoGetRatingResponse".'
+          type: string
+        visitorId:
+          description: The visitorId identifies the visitor.
+          type: string
+      type: object
     VideoListResponse:
       properties:
         etag:
@@ -10852,28 +10874,6 @@ components:
           type: string
         videoId:
           description: The ID that YouTube uses to uniquely identify the video.
-          type: string
-      type: object
-    VideoRatingListResponse:
-      properties:
-        etag:
-          description: Etag of this resource.
-          type: string
-        eventId:
-          description: Serialized EventId of the request which produced this response.
-          type: string
-        items:
-          description: A list of ratings that match the request criteria.
-          items:
-            $ref: "#/components/schemas/VideoRating"
-          type: array
-        kind:
-          default: youtube#videoGetRatingResponse
-          description: 'Identifies what kind of resource this is. Value: the fixed string
-            "youtube#videoGetRatingResponse".'
-          type: string
-        visitorId:
-          description: The visitorId identifies the visitor.
           type: string
       type: object
     VideoRecordingDetails:

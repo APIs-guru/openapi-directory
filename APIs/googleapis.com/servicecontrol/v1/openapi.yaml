@@ -1135,7 +1135,7 @@ components:
           description: The HTTP request method, such as `GET`, `POST`.
           type: string
         path:
-          description: The HTTP URL path.
+          description: The HTTP URL path, excluding the query parameters.
           type: string
         protocol:
           description: The network protocol used with the request, such as "http/1.1", "spdy/3", "h2", "h2c", "webrtc", "tcp", "udp", "quic". See https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids for details.

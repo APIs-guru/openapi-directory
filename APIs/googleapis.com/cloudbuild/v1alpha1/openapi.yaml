@@ -413,7 +413,7 @@ components:
             $ref: "#/components/schemas/Secret"
           type: array
         serviceAccount:
-          description: IAM service account whose credentials will be used at build runtime. Must be of the format `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`. ACCOUNT can be email address or uniqueId of the service account. This field is in beta.
+          description: "IAM service account whose credentials will be used at build runtime. Must be of the format `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`. ACCOUNT can be email address or uniqueId of the service account. "
           type: string
         source:
           $ref: "#/components/schemas/Source"

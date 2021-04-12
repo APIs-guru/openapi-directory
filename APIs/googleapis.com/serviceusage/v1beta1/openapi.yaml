@@ -1236,6 +1236,10 @@ components:
           description: The service control environment to use. If empty, no control plane feature (like quota and billing) will be enabled.
           type: string
       type: object
+    CreateAdminQuotaPolicyMetadata:
+      description: Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by CreateAdminQuotaPolicy.
+      properties: {}
+      type: object
     CustomError:
       description: "Customize service error responses. For example, list any service specific protobuf types that can appear in error detail lists of error responses. Example: custom_error: types: - google.foo.v1.CustomError - google.foo.v1.AnotherError"
       properties:
@@ -1269,6 +1273,10 @@ components:
         path:
           description: The path matched by this custom verb.
           type: string
+      type: object
+    DeleteAdminQuotaPolicyMetadata:
+      description: Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by DeleteAdminQuotaPolicy.
+      properties: {}
       type: object
     DisableServiceRequest:
       description: Request message for the `DisableService` method.
@@ -1467,6 +1475,10 @@ components:
         typeUrl:
           description: 'The field type URL, without the scheme, for message or enumeration types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.'
           type: string
+      type: object
+    GetServiceIdentityMetadata:
+      description: Metadata for the `GetServiceIdentity` method.
+      properties: {}
       type: object
     GetServiceIdentityResponse:
       description: Response message for getting service identity.
@@ -1723,6 +1735,10 @@ components:
           description: Selects a method to which this rule applies. Refer to selector for syntax details.
           type: string
       type: object
+    ImportAdminOverridesMetadata:
+      description: Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by ImportAdminOverrides.
+      properties: {}
+      type: object
     ImportAdminOverridesRequest:
       description: Request message for ImportAdminOverrides
       properties:
@@ -1751,6 +1767,10 @@ components:
             $ref: "#/components/schemas/QuotaOverride"
           type: array
       type: object
+    ImportAdminQuotaPoliciesMetadata:
+      description: Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by ImportAdminQuotaPolicies.
+      properties: {}
+      type: object
     ImportAdminQuotaPoliciesResponse:
       description: Response message for ImportAdminQuotaPolicies
       properties:
@@ -1759,6 +1779,10 @@ components:
           items:
             $ref: "#/components/schemas/AdminQuotaPolicy"
           type: array
+      type: object
+    ImportConsumerOverridesMetadata:
+      description: Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by ImportConsumerOverrides.
+      properties: {}
       type: object
     ImportConsumerOverridesRequest:
       description: Request message for ImportConsumerOverrides
@@ -2471,6 +2495,10 @@ components:
             - SYNTAX_PROTO2
             - SYNTAX_PROTO3
           type: string
+      type: object
+    UpdateAdminQuotaPolicyMetadata:
+      description: Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by UpdateAdminQuotaPolicy.
+      properties: {}
       type: object
     Usage:
       description: Configuration controlling usage of a service.

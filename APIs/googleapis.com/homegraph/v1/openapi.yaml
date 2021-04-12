@@ -373,15 +373,6 @@ components:
         name:
           $ref: "#/components/schemas/DeviceNames"
           description: Names given to this device by your smart home Action.
-        nonLocalTraits:
-          description: 'See description for "traits". For Smart Home Entertainment Devices
-            (SHED) devices, some traits can only be executed on 3P cloud, e.g.
-            "non_local_traits": [ { "trait":
-            "action.devices.traits.MediaInitiation" }, { "trait":
-            "action.devices.traits.Channel" } ] go/shed-per-trait-routing.'
-          items:
-            $ref: "#/components/schemas/NonLocalTrait"
-          type: array
         notificationSupportedByAgent:
           description: Indicates whether your smart home Action will report notifications
             to Google for this device via ReportStateAndNotification. If your
@@ -460,16 +451,6 @@ components:
         (google.protobuf.Empty); } The JSON representation for `Empty` is empty
         JSON object `{}`."
       properties: {}
-      type: object
-    NonLocalTrait:
-      description: LINT.IfChange go/shed-per-trait-routing. Making it object to allow
-        for extendible design, where we can add attributes in future.
-      properties:
-        trait:
-          description: Trait name, e.g., "action.devices.traits.MediaInitiation". See
-            [device
-            traits](https://developers.google.com/assistant/smarthome/traits).
-          type: string
       type: object
     QueryRequest:
       description: Request type for the
