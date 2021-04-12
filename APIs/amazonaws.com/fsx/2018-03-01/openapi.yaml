@@ -229,6 +229,105 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSSimbaAPIService_v20180301.CopyBackup:
+    post:
+      operationId: CopyBackup
+      description: '<p>Copies an existing backup within the same AWS account to another Region (cross-Region copy) or within the same Region (in-Region copy). You can have up to five backup copy requests in progress to a single destination Region per account.</p> <p>You can use cross-Region backup copies for cross-region disaster recovery. You periodically take backups and copy them to another Region so that in the event of a disaster in the primary Region, you can restore from backup and recover availability quickly in the other Region. You can make cross-Region copies only within your AWS partition.</p> <p> You can also use backup copies to clone your file data set to another Region or within the same Region.</p> <p>You can use the <code>SourceRegion</code> parameter to specify the AWS Region from which the backup will be copied. For example, if you make the call from the <code>us-west-1</code> Region and want to copy a backup from the <code>us-east-2</code> Region, you specify <code>us-east-2</code> in the <code>SourceRegion</code> parameter to make a cross-Region copy. If you don''t specify a Region, the backup copy is created in the same Region where the request is sent from (in-Region copy).</p> <p>For more information on creating backup copies, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/copy-backups.html"> Copying backups</a> in the <i>Amazon FSx for Windows User Guide</i> and <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/copy-backups.html">Copying backups</a> in the <i>Amazon FSx for Lustre User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyBackupResponse'
+        '480':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '481':
+          description: BackupNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupNotFound'
+        '482':
+          description: ServiceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLimitExceeded'
+        '483':
+          description: UnsupportedOperation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperation'
+        '484':
+          description: IncompatibleParameterError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleParameterError'
+        '485':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '486':
+          description: InvalidSourceKmsKey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSourceKmsKey'
+        '487':
+          description: InvalidDestinationKmsKey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDestinationKmsKey'
+        '488':
+          description: InvalidRegion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRegion'
+        '489':
+          description: SourceBackupUnavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceBackupUnavailable'
+        '490':
+          description: IncompatibleRegionForMultiAZ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleRegionForMultiAZ'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyBackupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSSimbaAPIService_v20180301.CopyBackup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSSimbaAPIService_v20180301.CreateBackup:
     post:
       operationId: CreateBackup
@@ -606,6 +705,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
+        '486':
+          description: BackupBeingCopied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupBeingCopied'
       requestBody:
         required: true
         content:
@@ -1376,6 +1481,66 @@ components:
     UnsupportedOperation: {}
     DataRepositoryTaskNotFound: {}
     DataRepositoryTaskEnded: {}
+    CopyBackupResponse:
+      type: object
+      example:
+        Backup:
+          BackupId: backup-0a3364eded1014b28
+          CreationTime: 1617954808.068
+          FileSystem:
+            FileSystemId: fs-0498eed5fe91001ec
+            FileSystemType: LUSTRE
+            LustreConfiguration:
+              AutomaticBackupRetentionDays: 0
+              DeploymentType: PERSISTENT_1
+              PerUnitStorageThroughput: 50
+              WeeklyMaintenanceStartTime: '1:05:00'
+            ResourceARN: 'arn:aws:fsx:us-east-1:012345678912:file-system/fs-0f5179e395f597e66'
+            StorageCapacity: 2400
+            StorageType: SSD
+          KmsKeyId: 'arn:aws:fsx:us-east-1:012345678912:key/d1234e22-543a-12b7-a98f-e12c2b54001a'
+          Lifecycle: COPYING
+          OwnerId: '123456789012'
+          ResourceARN: 'arn:aws:fsx:us-east-1:012345678912:backup/backup-0a3364eded1014b28'
+          Tags:
+            - Key: Name
+              Value: MyBackup
+          Type: USER_INITIATED
+      properties:
+        Backup:
+          $ref: '#/components/schemas/Backup'
+    CopyBackupRequest:
+      type: object
+      required:
+        - SourceBackupId
+      title: CopyBackupRequest
+      properties:
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+        SourceBackupId:
+          allOf:
+            - $ref: '#/components/schemas/SourceBackupId'
+            - description: The ID of the source backup. Specifies the ID of the backup that is being copied.
+        SourceRegion:
+          allOf:
+            - $ref: '#/components/schemas/Region'
+            - description: 'The source AWS Region of the backup. Specifies the AWS Region from which the backup is being copied. The source and destination Regions must be in the same AWS partition. If you don''t specify a Region, it defaults to the Region where the request is sent from (in-Region copy).'
+        KmsKeyId:
+          $ref: '#/components/schemas/KmsKeyId'
+        CopyTags:
+          allOf:
+            - $ref: '#/components/schemas/Flag'
+            - description: '<p>A boolean flag indicating whether tags from the source backup should be copied to the backup copy. This value defaults to false.</p> <p>If you set <code>CopyTags</code> to true and the source backup has existing tags, you can use the <code>Tags</code> parameter to create new tags, provided that the sum of the source backup tags and the new tags doesn''t exceed 50. Both sets of tags are merged. If there are tag conflicts (for example, two tags with the same key but different values), the tags created with the <code>Tags</code> parameter take precedence.</p>'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+    BackupNotFound: {}
+    ServiceLimitExceeded: {}
+    IncompatibleParameterError: {}
+    InvalidSourceKmsKey: {}
+    InvalidDestinationKmsKey: {}
+    InvalidRegion: {}
+    SourceBackupUnavailable: {}
+    IncompatibleRegionForMultiAZ: {}
     CreateBackupResponse:
       type: object
       example:
@@ -1424,8 +1589,6 @@ components:
             - description: '(Optional) The tags to apply to the backup at backup creation. The key value of the <code>Name</code> tag appears in the console as the backup name. If you have set <code>CopyTagsToBackups</code> to true, and you specify one or more tags using the <code>CreateBackup</code> action, no existing file system tags are copied from the file system to the backup.'
       description: The request object for the <code>CreateBackup</code> operation.
     BackupInProgress: {}
-    IncompatibleParameterError: {}
-    ServiceLimitExceeded: {}
     CreateDataRepositoryTaskResponse:
       type: object
       properties:
@@ -1521,7 +1684,7 @@ components:
         SubnetIds:
           allOf:
             - $ref: '#/components/schemas/SubnetIds'
-            - description: '<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property.</p> <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet''s Availability Zone.</p>'
+            - description: '<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html"> Availability and durability: Single-AZ and Multi-AZ file systems</a>.</p> <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet''s Availability Zone.</p>'
         SecurityGroupIds:
           allOf:
             - $ref: '#/components/schemas/SecurityGroupIds'
@@ -1610,8 +1773,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/StorageType'
             - description: <p>Sets the storage type for the Windows file system you're creating from a backup. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. Supported on all Windows deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. Supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. </p> <note> <p>HDD and SSD storage types have different minimum storage capacity requirements. A restored file system's storage capacity is tied to the file system that was backed up. You can create a file system that uses HDD storage from a backup of a file system that used SSD storage only if the original SSD file system had a storage capacity of at least 2000 GiB. </p> </note>
+        KmsKeyId:
+          $ref: '#/components/schemas/KmsKeyId'
       description: The request object for the <code>CreateFileSystemFromBackup</code> operation.
-    BackupNotFound: {}
     DeleteBackupResponse:
       type: object
       example:
@@ -1643,6 +1807,7 @@ components:
             - description: A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent deletion. This is automatically filled on your behalf when using the AWS CLI or SDK.
       description: The request object for <code>DeleteBackup</code> operation.
     BackupRestoring: {}
+    BackupBeingCopied: {}
     DeleteFileSystemResponse:
       type: object
       example:
@@ -1706,7 +1871,7 @@ components:
         Backups:
           allOf:
             - $ref: '#/components/schemas/Backups'
-            - description: Any array of backups.
+            - description: An array of backups.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -2018,6 +2183,12 @@ components:
       pattern: '^d-[0-9a-f]{10}$'
       minLength: 12
       maxLength: 12
+    ResourceARN:
+      type: string
+      pattern: '^arn:(?=[^:]+:fsx:[^:]+:\d{12}:)((|(?=[a-z0-9-.]{1,63})(?!\d{1,3}(\.\d{1,3}){3})(?![^:]*-{2})(?![^:]*-\.)(?![^:]*\.-)[a-z0-9].*(?<!-)):){4}(?!/).{0,1024}$'
+      description: 'The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify AWS resources. We require an ARN when you need to specify a resource unambiguously across all of AWS. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+      minLength: 8
+      maxLength: 512
     ActiveDirectoryBackupAttributes:
       type: object
       properties:
@@ -2029,6 +2200,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/DirectoryId'
             - description: The ID of the AWS Managed Microsoft Active Directory instance to which the file system is joined.
+        ResourceARN:
+          $ref: '#/components/schemas/ResourceARN'
       description: The Microsoft AD attributes of the Amazon FSx for Windows File Server file system.
     AdministrativeActionType:
       type: string
@@ -2187,7 +2360,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/AlternateDNSName'
-            - description: '<p>The name of the DNS alias. The alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>'
+            - description: '<p>The name of the DNS alias. The alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>'
         Lifecycle:
           allOf:
             - $ref: '#/components/schemas/AliasLifecycle'
@@ -2235,7 +2408,7 @@ components:
     BackupId:
       type: string
       pattern: '^(backup-[0-9a-f]{8,})$'
-      description: The ID of the backup. Specifies the backup to use if you're creating a file system from an existing backup.
+      description: The ID of the source backup. Specifies the backup you are copying.
       minLength: 12
       maxLength: 128
     BackupLifecycle:
@@ -2247,7 +2420,8 @@ components:
         - DELETED
         - FAILED
         - PENDING
-      description: <p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the new user-intiated backup</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is backing up the file system.</p> </li> <li> <p> <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>
+        - COPYING
+      description: <p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the new user-intiated backup</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is backing up the file system.</p> </li> <li> <p> <code>COPYING</code> - Amazon FSx is copying the backup.</p> </li> <li> <p> <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>
     BackupFailureDetails:
       type: object
       properties:
@@ -2273,12 +2447,6 @@ components:
       description: 'The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system''s data for Amazon FSx for Windows File Server file systems and Amazon FSx for Lustre <code>PERSISTENT_1</code> file systems at rest. In either case, if not specified, the Amazon FSx managed key is used. The Amazon FSx for Lustre <code>SCRATCH_1</code> and <code>SCRATCH_2</code> file systems are always encrypted at rest using Amazon FSx managed keys. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html">Encrypt</a> in the <i>AWS Key Management Service API Reference</i>.'
       minLength: 1
       maxLength: 2048
-    ResourceARN:
-      type: string
-      pattern: '^arn:(?=[^:]+:fsx:[^:]+:\d{12}:)((|(?=[a-z0-9-.]{1,63})(?!\d{1,3}(\.\d{1,3}){3})(?![^:]*-{2})(?![^:]*-\.)(?![^:]*\.-)[a-z0-9].*(?<!-)):){4}(?!/).{0,1024}$'
-      description: 'The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify AWS resources. We require an ARN when you need to specify a resource unambiguously across all of AWS. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
-      minLength: 8
-      maxLength: 512
     Tags:
       type: array
       description: 'A list of <code>Tag</code> values, with a maximum of 50 elements.'
@@ -2286,6 +2454,11 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 50
+    Region:
+      type: string
+      pattern: '^[a-z0-9-]{1,20}$'
+      minLength: 1
+      maxLength: 20
     Backup:
       type: object
       required:
@@ -2302,7 +2475,7 @@ components:
         Lifecycle:
           allOf:
             - $ref: '#/components/schemas/BackupLifecycle'
-            - description: <p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the backup.</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is transferring the backup to S3.</p> </li> <li> <p> <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>
+            - description: <p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the backup.</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is transferring the backup to S3.</p> </li> <li> <p> <code>COPYING</code> - Amazon FSx is copying the backup.</p> </li> <li> <p> <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>
         FailureDetails:
           allOf:
             - $ref: '#/components/schemas/BackupFailureDetails'
@@ -2337,7 +2510,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/ActiveDirectoryBackupAttributes'
             - description: The configuration of the self-managed Microsoft Active Directory (AD) to which the Windows File Server instance is joined.
-      description: '<p>A backup of an Amazon FSx file system. For more information see:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html">Working with backups for Windows file systems</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html">Working with backups for Lustre file systems</a> </p> </li> </ul>'
+        OwnerId:
+          $ref: '#/components/schemas/AWSAccountId'
+        SourceBackupId:
+          $ref: '#/components/schemas/BackupId'
+        SourceBackupRegion:
+          allOf:
+            - $ref: '#/components/schemas/Region'
+            - description: The source Region of the backup. Specifies the Region from where this backup is copied.
+      description: A backup of an Amazon FSx file system.
     BackupIds:
       type: array
       description: A list of backup IDs.
@@ -2396,6 +2577,11 @@ components:
             - $ref: '#/components/schemas/ReportScope'
             - description: 'Required if <code>Enabled</code> is set to <code>true</code>. Specifies the scope of the <code>CompletionReport</code>; <code>FAILED_FILES_ONLY</code> is the only scope currently supported. When <code>Scope</code> is set to <code>FAILED_FILES_ONLY</code>, the <code>CompletionReport</code> only contains information about files that the data repository task failed to process.'
       description: 'Provides a report detailing the data repository task results of the files processed that match the criteria specified in the report <code>Scope</code> parameter. FSx delivers the report to the file system''s linked data repository in Amazon S3, using the path specified in the report <code>Path</code> parameter. You can specify whether or not a report gets generated for a task using the <code>Enabled</code> parameter.'
+    SourceBackupId:
+      type: string
+      pattern: '^(backup-[0-9a-f]{8,})$'
+      minLength: 12
+      maxLength: 128
     DataRepositoryTaskType:
       type: string
       enum:
@@ -2511,7 +2697,7 @@ components:
         Aliases:
           allOf:
             - $ref: '#/components/schemas/AlternateDNSNames'
-            - description: '<p>An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. You can associate up to 50 aliases with a file system at any time. You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation. You only need to specify the alias name in the request payload.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html">Working with DNS Aliases</a> and <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html">Walkthrough 5: Using DNS aliases to access your file system</a>, including additional steps you must take to be able to access your file system using a DNS alias.</p> <p>An alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>'
+            - description: '<p>An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. You can associate up to 50 aliases with a file system at any time. You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation. You only need to specify the alias name in the request payload.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html">Working with DNS Aliases</a> and <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html">Walkthrough 5: Using DNS aliases to access your file system</a>, including additional steps you must take to be able to access your file system using a DNS alias.</p> <p>An alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>'
       description: The configuration object for the Microsoft Windows file system used in <code>CreateFileSystem</code> and <code>CreateFileSystemFromBackup</code> operations.
     CreateFileSystemLustreConfiguration:
       type: object
@@ -2636,8 +2822,8 @@ components:
         DnsIps:
           allOf:
             - $ref: '#/components/schemas/DnsIps'
-            - description: '<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created, or in the private IP version 4 (IPv4) address ranges, as specified in <a href="http://www.faqs.org/rfcs/rfc1918.html">RFC 1918</a>:</p> <ul> <li> <p>10.0.0.0 - 10.255.255.255 (10/8 prefix)</p> </li> <li> <p>172.16.0.0 - 172.31.255.255 (172.16/12 prefix)</p> </li> <li> <p>192.168.0.0 - 192.168.255.255 (192.168/16 prefix)</p> </li> </ul>'
-      description: The configuration that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory.
+            - description: 'A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. '
+      description: 'The configuration that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html"> Using Amazon FSx with your self-managed Microsoft Active Directory</a>.'
     WindowsDeploymentType:
       type: string
       enum:
@@ -2924,7 +3110,7 @@ components:
         ActiveDirectoryId:
           allOf:
             - $ref: '#/components/schemas/DirectoryId'
-            - description: The ID for an existing Microsoft Active Directory instance that the file system should join when it's created.
+            - description: The ID for an existing AWS Managed Microsoft Active Directory instance that the file system is joined to.
         SelfManagedActiveDirectoryConfiguration:
           $ref: '#/components/schemas/SelfManagedActiveDirectoryAttributes'
         DeploymentType:
@@ -2938,7 +3124,7 @@ components:
         PreferredSubnetId:
           allOf:
             - $ref: '#/components/schemas/SubnetId'
-            - description: '<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in <code>SubnetIds</code> property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p> <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this value is the same as that for <code>SubnetIDs</code>. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources">Availability and Durability: Single-AZ and Multi-AZ File Systems</a> </p>'
+            - description: '<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in <code>SubnetIds</code> property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p> <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this value is the same as that for <code>SubnetIDs</code>. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources">Availability and durability: Single-AZ and Multi-AZ file systems</a>.</p>'
         PreferredFileServerIp:
           allOf:
             - $ref: '#/components/schemas/IpAddress'
@@ -2946,7 +3132,7 @@ components:
         ThroughputCapacity:
           allOf:
             - $ref: '#/components/schemas/MegabytesPerSecond'
-            - description: 'The throughput of an Amazon FSx file system, measured in megabytes per second.'
+            - description: 'The throughput of the Amazon FSx file system, measured in megabytes per second.'
         MaintenanceOperationsInProgress:
           allOf:
             - $ref: '#/components/schemas/FileSystemMaintenanceOperations'

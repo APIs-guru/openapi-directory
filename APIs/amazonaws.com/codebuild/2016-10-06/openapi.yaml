@@ -3868,6 +3868,13 @@ components:
       description: Specifies restrictions for the batch build.
     Boolean:
       type: boolean
+    BucketOwnerAccess:
+      type: string
+      enum:
+        - NONE
+        - READ_ONLY
+        - FULL
+      description: '<p>Specifies the access for objects that are uploaded to an Amazon S3 bucket that is owned by another account.</p> <p>By default, only the account that uploads the objects to the bucket has access to these objects. This property allows you to give the bucket owner access to these objects.</p> <dl> <dt>NONE</dt> <dd> <p>The bucket owner does not have access to the objects. This is the default.</p> </dd> <dt>READ_ONLY</dt> <dd> <p>The bucket owner has read only access to the objects. The uploading account retains ownership of the objects.</p> </dd> <dt>FULL</dt> <dd> <p>The bucket owner has full access to the objects. Object ownership is determined by the following criteria:</p> <ul> <li> <p>If the bucket is configured with the <b>Bucket owner preferred</b> setting, the bucket owner owns the objects. The uploading account will have object access as specified by the bucket''s policy.</p> </li> <li> <p>Otherwise, the uploading account retains ownership of the objects.</p> </li> </ul> <p>For more information about Amazon S3 object ownership, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html">Controlling ownership of uploaded objects using S3 Object Ownership</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> </dd> </dl>'
     NonEmptyString:
       type: string
       minLength: 1
@@ -3976,6 +3983,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: ' An identifier for this artifact definition. '
+        bucketOwnerAccess:
+          $ref: '#/components/schemas/BucketOwnerAccess'
       description: Information about build output artifacts.
     BuildArtifactsList:
       type: array
@@ -4243,7 +4252,7 @@ components:
         exportedEnvironmentVariables:
           allOf:
             - $ref: '#/components/schemas/ExportedEnvironmentVariables'
-            - description: ' A list of exported environment variables for this build. '
+            - description: '<p>A list of exported environment variables for this build.</p> <p>Exported environment variables are used in conjunction with AWS CodePipeline to export environment variables from the current build stage to subsequent stages in the pipeline. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html">Working with variables</a> in the <i>AWS CodePipeline User Guide</i>.</p>'
         reportArns:
           allOf:
             - $ref: '#/components/schemas/BuildReportArns'
@@ -4413,7 +4422,7 @@ components:
         debugSessionEnabled:
           allOf:
             - $ref: '#/components/schemas/WrapperBoolean'
-            - description: '<p/> <p>Specifies if session debugging is enabled for this batch build. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.</p>'
+            - description: 'Specifies if session debugging is enabled for this batch build. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.'
       description: Contains information about a batch build.
     BuildBatchFilter:
       type: object
@@ -4783,6 +4792,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: ' An identifier for this artifact definition. '
+        bucketOwnerAccess:
+          $ref: '#/components/schemas/BucketOwnerAccess'
       description: Information about the build output artifacts for the build project.
     ProjectArtifactsList:
       type: array
@@ -5155,12 +5166,12 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The name of this exported environment variable. '
+            - description: The name of the exported environment variable.
         value:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p> The value assigned to this exported environment variable. </p> <note> <p> During a build, the value of a variable is available starting with the <code>install</code> phase. It can be updated between the start of the <code>install</code> phase and the end of the <code>post_build</code> phase. After the <code>post_build</code> phase ends, the value of exported variables cannot change.</p> </note>'
-      description: ' Information about an exported environment variable. '
+            - description: The value assigned to the exported environment variable.
+      description: '<p>Contains information about an exported environment variable. </p> <p>Exported environment variables are used in conjunction with AWS CodePipeline to export environment variables from the current build stage to subsequent stages in the pipeline. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html">Working with variables</a> in the <i>AWS CodePipeline User Guide</i>.</p> <note> <p> During a build, the value of a variable is available starting with the <code>install</code> phase. It can be updated between the start of the <code>install</code> phase and the end of the <code>post_build</code> phase. After the <code>post_build</code> phase ends, the value of exported variables cannot change.</p> </note>'
     FileSystemType:
       type: string
       enum:
@@ -5305,6 +5316,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/WrapperBoolean'
             - description: ' Set to true if you do not want your S3 build log output encrypted. By default S3 build logs are encrypted. '
+        bucketOwnerAccess:
+          $ref: '#/components/schemas/BucketOwnerAccess'
       description: ' Information about S3 logs for a build project. '
     PhaseContext:
       type: object
