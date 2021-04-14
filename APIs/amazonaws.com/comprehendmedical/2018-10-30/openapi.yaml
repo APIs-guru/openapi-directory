@@ -554,7 +554,7 @@ paths:
   /#X-Amz-Target=ComprehendMedical_20181030.InferICD10CM:
     post:
       operationId: InferICD10CM
-      description: InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts.
+      description: 'InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts. '
       responses:
         '200':
           description: Success
@@ -623,7 +623,7 @@ paths:
   /#X-Amz-Target=ComprehendMedical_20181030.InferRxNorm:
     post:
       operationId: InferRxNorm
-      description: InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts.
+      description: 'InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts. '
       responses:
         '200':
           description: Success
@@ -2176,7 +2176,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3Key'
             - description: The path to the input data files in the S3 bucket.
-      description: 'The input properties for an entities detection job. This includes the name of the S3 bucket and the path to the files to be analyzed. See <a>batch-manifest</a> for more information. '
+      description: 'The input properties for an entities detection job. This includes the name of the S3 bucket and the path to the files to be analyzed. '
     OutputDataConfig:
       type: object
       required:
@@ -2331,10 +2331,22 @@ components:
         - SYSTEM_ORGAN_SITE
         - QUALITY
         - QUANTITY
+        - TIME_TO_DX_NAME
+        - TIME_EXPRESSION
     ICD10CMTraitList:
       type: array
       items:
         $ref: '#/components/schemas/ICD10CMTrait'
+    ICD10CMEntityType:
+      type: string
+      enum:
+        - DX_NAME
+        - TIME_EXPRESSION
+    ICD10CMRelationshipType:
+      type: string
+      enum:
+        - OVERLAP
+        - SYSTEM_ORGAN_SITE
     ICD10CMAttribute:
       type: object
       properties:
@@ -2370,6 +2382,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ICD10CMTraitList'
             - description: 'The contextual information for the attribute. The traits recognized by InferICD10CM are <code>DIAGNOSIS</code>, <code>SIGN</code>, <code>SYMPTOM</code>, and <code>NEGATION</code>.'
+        Category:
+          allOf:
+            - $ref: '#/components/schemas/ICD10CMEntityType'
+            - description: The category of attribute. Can be either of <code>DX_NAME</code> or <code>TIME_EXPRESSION</code>.
+        RelationshipType:
+          allOf:
+            - $ref: '#/components/schemas/ICD10CMRelationshipType'
+            - description: The type of relationship between the entity and attribute. Type for the relationship can be either of <code>OVERLAP</code> or <code>SYSTEM_ORGAN_SITE</code>.
       description: 'The detected attributes that relate to an entity. This includes an extracted segment of the text that is an attribute of an entity, or otherwise related to an entity. InferICD10CM detects the following attributes: <code>Direction</code>, <code>System, Organ or Site</code>, and <code>Acuity</code>.'
     ICD10CMAttributeList:
       type: array
@@ -2403,10 +2423,6 @@ components:
       type: string
       enum:
         - MEDICAL_CONDITION
-    ICD10CMEntityType:
-      type: string
-      enum:
-        - DX_NAME
     ICD10CMEntity:
       type: object
       properties:
@@ -2425,7 +2441,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/ICD10CMEntityType'
-            - description: Describes the specific type of entity with category of entities. InferICD10CM detects entities of the type <code>DX_NAME</code>.
+            - description: Describes the specific type of entity with category of entities. InferICD10CM detects entities of the type <code>DX_NAME</code> and <code>TIME_EXPRESSION</code>.
         Score:
           allOf:
             - $ref: '#/components/schemas/Float'

@@ -746,6 +746,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/HostArn'
             - description: The Amazon Resource Name (ARN) of the host to be created.
+        Tags:
+          $ref: '#/components/schemas/TagList'
     CreateHostInput:
       type: object
       required:
@@ -770,6 +772,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfiguration'
             - description: The VPC configuration to be provisioned for the host. A VPC must be configured and the infrastructure to be represented by the host must already be connected to the VPC.
+        Tags:
+          $ref: '#/components/schemas/TagList'
     DeleteConnectionOutput:
       type: object
       properties: {}
@@ -1087,6 +1091,9 @@ components:
       description: The VPC configuration provisioned for the host.
     HostStatus:
       type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 64
     HostStatusMessage:
       type: string
     Host:

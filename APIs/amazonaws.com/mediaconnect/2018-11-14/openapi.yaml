@@ -3790,6 +3790,12 @@ components:
             - xml:
                 name: entitlementArn
               description: The ARN of the entitlement on the originator''s flow. This value is relevant only on entitled flows.
+        ListenerAddress:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: listenerAddress
+              description: 'The IP address that the receiver requires in order to establish a connection with the flow. For public networking, the ListenerAddress is represented by the elastic IP address of the flow. For private networking, the ListenerAddress is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the Zixi pull or SRT listener protocol.'
         MediaLiveInputArn:
           allOf:
             - $ref: '#/components/schemas/__string'
