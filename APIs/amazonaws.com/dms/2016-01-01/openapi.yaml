@@ -1212,6 +1212,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeEndpointSettings:
+    post:
+      operationId: DescribeEndpointSettings
+      description: Returns information about the possible endpoint settings available when you create an endpoint for a specific database engine.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEndpointSettingsResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEndpointSettingsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeEndpointSettings
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.DescribeEndpointTypes:
     post:
       operationId: DescribeEndpointTypes
@@ -2525,6 +2570,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundFault'
+        '483':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
       requestBody:
         required: true
         content:
@@ -3014,6 +3065,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '484':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
       requestBody:
         required: true
         content:
@@ -3955,6 +4012,35 @@ components:
             - $ref: '#/components/schemas/String'
             - description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       description: <p/>
+    DescribeEndpointSettingsResponse:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+        EndpointSettings:
+          allOf:
+            - $ref: '#/components/schemas/EndpointSettingsList'
+            - description: Descriptions of the endpoint settings available for your source or target database engine.
+    DescribeEndpointSettingsMessage:
+      type: object
+      required:
+        - EngineName
+      title: DescribeEndpointSettingsMessage
+      properties:
+        EngineName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The databse engine used for your source or target endpoint.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
     DescribeEndpointTypesResponse:
       type: object
       example:
@@ -4530,7 +4616,7 @@ components:
             - description: 'A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can''t end with a hyphen or contain two consecutive hyphens.'
         CertificatePem:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/SecretString'
             - description: 'The contents of a <code>.pem</code> file, which contains an X.509 certificate.'
         CertificateWallet:
           allOf:
@@ -4887,7 +4973,7 @@ components:
         TableMappings:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with <code>file://</code>. When working with the DMS API, provide the JSON as the parameter value, for example: <code>--table-mappings file://mappingfile.json</code> '
+            - description: 'When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with <code>file://</code>. For example, <code>--table-mappings file://mappingfile.json</code>. When working with the DMS API, provide the JSON as the parameter value. '
         ReplicationTaskSettings:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -5455,7 +5541,7 @@ components:
         ServiceAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' The Amazon Resource Name (ARN) used by the service access IAM role. It is a required parameter that enables DMS to write and read objects from an 3S bucket.'
+            - description: ' The Amazon Resource Name (ARN) used by the service access IAM role. It is a required parameter that enables DMS to write and read objects from an S3 bucket.'
         ExternalTableDefinition:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -5683,7 +5769,7 @@ components:
         Broker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The broker location and port of the Kafka broker that hosts your Kafka instance. Specify the broker in the form <code> <i>broker-hostname-or-ip</i>:<i>port</i> </code>. For example, <code>"ec2-12-345-678-901.compute-1.amazonaws.com:2345"</code>.'
+            - description: 'A comma-separated list of one or more broker locations in your Kafka cluster that host your Kafka instance. Specify each broker location in the form <code> <i>broker-hostname-or-ip</i>:<i>port</i> </code>. For example, <code>"ec2-12-345-678-901.compute-1.amazonaws.com:2345"</code>. For more information and examples of specifying a list of broker locations, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html">Using Apache Kafka as a target for AWS Database Migration Service</a> in the <i>AWS Data Migration Service User Guide</i>. '
         Topic:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -5720,6 +5806,34 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: Include NULL and empty columns for records migrated to the endpoint. The default is <code>false</code>.
+        SecurityProtocol:
+          allOf:
+            - $ref: '#/components/schemas/KafkaSecurityProtocol'
+            - description: 'Set secure connection to a Kafka target endpoint using Transport Layer Security (TLS). Options include <code>ssl-encryption</code>, <code>ssl-authentication</code>, and <code>sasl-ssl</code>. <code>sasl-ssl</code> requires <code>SaslUsername</code> and <code>SaslPassword</code>.'
+        SslClientCertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the client certificate used to securely connect to a Kafka target endpoint.
+        SslClientKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the client private key used to securely connect to a Kafka target endpoint.
+        SslClientKeyPassword:
+          allOf:
+            - $ref: '#/components/schemas/SecretString'
+            - description: ' The password for the client private key used to securely connect to a Kafka target endpoint.'
+        SslCaCertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The Amazon Resource Name (ARN) for the private Certification Authority (CA) cert that AWS DMS uses to securely connect to your Kafka target endpoint.'
+        SaslUsername:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The secure username you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.'
+        SaslPassword:
+          allOf:
+            - $ref: '#/components/schemas/SecretString'
+            - description: The secure password you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
       description: Provides information that describes an Apache Kafka endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.
     ElasticsearchSettings:
       type: object
@@ -5970,6 +6084,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Specifies a script to run immediately after AWS DMS connects to the endpoint. The migration task continues running regardless if the SQL statement succeeds or fails.
+        CleanSourceMetadataOnMismatch:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'Adjusts the behavior of DMS when migrating from an SQL Server source database that is hosted as part of an Always On availability group cluster. If you need DMS to poll all the nodes in the Always On cluster for transaction backups, set this attribute to <code>false</code>.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -6138,6 +6256,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Fully qualified domain name of the endpoint.
+        SpatialDataOptionToGeoJsonFunctionName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Use this attribute to convert <code>SDO_GEOMETRY</code> to <code>GEOJSON</code> format. By default, DMS calls the <code>SDO2GEOJSON</code> custom function if present and accessible. Or you can create your own custom function that mimics the operation of <code>SDOGEOJSON</code> and set <code>SpatialDataOptionToGeoJsonFunctionName</code> to call it instead. '
         Username:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -6214,6 +6336,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SecretString'
             - description: Endpoint connection password.
+        QuerySingleAlwaysOnNode:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: Cleans and recreates table metadata information on the replication instance when a mismatch occurs. An example is a situation where running an alter DDL statement on a table might result in different information about the table cached in the replication instance.
         ReadBackupOnly:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -6234,6 +6360,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: 'Use this to attribute to transfer data for full-load operations using BCP. When the target table contains an identity column that does not exist in the source table, you must disable the use BCP for loading table option.'
+        UseThirdPartyBackupDevice:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'When this attribute is set to <code>Y</code>, DMS processes third-party transaction log backups if they are created in native format.'
         SecretsManagerAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -6761,6 +6891,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Filter'
+    EndpointSettingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EndpointSetting'
     SupportedEndpointTypeList:
       type: array
       items:
@@ -6869,6 +7003,53 @@ components:
       enum:
         - sse-s3
         - sse-kms
+    EndpointSettingTypeValue:
+      type: string
+      enum:
+        - string
+        - boolean
+        - integer
+        - enum
+    EndpointSettingEnumValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    EndpointSetting:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name that you want to give the endpoint settings.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/EndpointSettingTypeValue'
+            - description: The type of endpoint. Valid values are <code>source</code> and <code>target</code>.
+        EnumValues:
+          allOf:
+            - $ref: '#/components/schemas/EndpointSettingEnumValues'
+            - description: Enumerated values to use for this endpoint.
+        Sensitive:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: A value that marks this endpoint setting as sensitive.
+        Units:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unit of measure for this endpoint setting.
+        Applicability:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The relevance or validity of an endpoint setting for an engine name and its endpoint type.
+        IntValueMin:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The minimum value of an endpoint setting that is of type <code>int</code>.
+        IntValueMax:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The maximum value of an endpoint setting that is of type <code>int</code>.
+      description: Endpoint settings.
     Event:
       type: object
       properties:
@@ -6934,6 +7115,13 @@ components:
         $ref: '#/components/schemas/String'
     Integer:
       type: integer
+    KafkaSecurityProtocol:
+      type: string
+      enum:
+        - plaintext
+        - ssl-authentication
+        - ssl-encryption
+        - sasl-ssl
     MessageFormatValue:
       type: string
       enum:
