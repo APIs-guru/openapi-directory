@@ -1,15 +1,17 @@
-swagger: '2.0'
+swagger: "2.0"
 host: api.mastercard.com
 basePath: /mcapi/settlement/currencyrate
 info:
-  description: This API provides a range of functions to get back currency conversion rates and amounts based on current Mastercard currency conversion values.
+  description: This API provides a range of functions to get back currency
+    conversion rates and amounts based on current Mastercard currency conversion
+    values.
   title: API for the Settlement Currency Rate converter
   version: 1.0.0
   x-artifactId: currency-conversion
   x-origin:
     - format: swagger
-      url: 'https://developer.mastercard.com/devzone/api/portal/swagger/currency-conversion-calculator'
-      version: '2.0'
+      url: https://developer.mastercard.com/devzone/api/portal/swagger/currency-conversion-calculator
+      version: "2.0"
   x-providerName: mastercard.com
   x-serviceName: CurrencyConversionCalculator
   x-test-on-environment:
@@ -61,15 +63,15 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ConversionRateRequest'
-        '401':
+            $ref: "#/definitions/ConversionRateRequest"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get the currency conversion rate details.
       tags:
@@ -136,7 +138,7 @@ paths:
                 "transAmt":"345"
               }
           response:
-            application/json: |-
+            application/json: >-
               {  
                 "name":"settlement-conversion-rate",
                 "description":"An error occurred during the request",
@@ -163,15 +165,15 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SettlementRateIssuedRequest'
-        '401':
+            $ref: "#/definitions/SettlementRateIssuedRequest"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Determine if the settlement rate has been issued.
       tags:
@@ -216,15 +218,15 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SettlementCurrencyRequest'
-        '401':
+            $ref: "#/definitions/SettlementCurrencyRequest"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: getCurrencyRateData
       tags:
@@ -266,7 +268,8 @@ definitions:
         format: double
         type: number
       conversionRate:
-        description: Rate applied to the transaction to convert from Transaction Currency to Cardholder Billing Currency.
+        description: Rate applied to the transaction to convert from Transaction
+          Currency to Cardholder Billing Currency.
         example: 0.943078
         format: double
         type: number
@@ -285,11 +288,12 @@ definitions:
         type: string
       errorMessage:
         description: The reason for the error.
-        example: 'Not Found , The calculated cross rates for the selected date is not available.'
+        example: Not Found , The calculated cross rates for the selected date is not
+          available.
         type: string
       fxDate:
         description: Date of the requested FX rates.
-        example: '2016-09-30'
+        example: 2016-09-30
         type: string
       transAmt:
         description: Amount in the transaction currency.
@@ -303,10 +307,10 @@ definitions:
   ConversionRateRequest:
     properties:
       data:
-        $ref: '#/definitions/Conversion'
+        $ref: "#/definitions/Conversion"
       date:
         description: The date and time the API is being called in GMT.
-        example: '2019-08-08 16:43:27'
+        example: 2019-08-08 16:43:27
         type: string
       description:
         description: The description of the API being called.
@@ -334,15 +338,15 @@ definitions:
     properties:
       currencies:
         items:
-          $ref: '#/definitions/Currency'
+          $ref: "#/definitions/Currency"
         type: array
   SettlementCurrencyRequest:
     properties:
       data:
-        $ref: '#/definitions/SettlementCurrency'
+        $ref: "#/definitions/SettlementCurrency"
       date:
         description: The date and time the API is being called in GMT.
-        example: '2019-08-08 16:22:31'
+        example: 2019-08-08 16:22:31
         type: string
       description:
         description: The description of the API being called.
@@ -356,15 +360,15 @@ definitions:
     properties:
       rateIssued:
         description: The requested foreign exchange rate.
-        example: 'NO'
+        example: NO
         type: string
   SettlementRateIssuedRequest:
     properties:
       data:
-        $ref: '#/definitions/SettlementRateIssued'
+        $ref: "#/definitions/SettlementRateIssued"
       date:
         description: The date and time the API is being called in GMT.
-        example: '2019-08-08 16:22:31'
+        example: 2019-08-08 16:22:31
         type: string
       description:
         description: The description of the API being called.

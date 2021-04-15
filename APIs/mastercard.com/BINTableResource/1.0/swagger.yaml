@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.mastercard.com
@@ -10,14 +10,14 @@ info:
   description: MasterCard Bin Table Listing API
   license:
     name: mastercard
-    url: 'http://www.mastercard.com'
+    url: http://www.mastercard.com
   title: MasterCard Bin Table Listing
-  version: '1.0'
+  version: "1.0"
   x-artifactId: bintable
   x-origin:
     - format: swagger
-      url: 'https://developer.mastercard.com/devzone/api/portal/swagger/bin-table-resource'
-      version: '2.0'
+      url: https://developer.mastercard.com/devzone/api/portal/swagger/bin-table-resource
+      version: "2.0"
   x-providerName: mastercard.com
   x-serviceName: BINTableResource
   x-test-on-environment:
@@ -29,14 +29,15 @@ paths:
     get:
       description: REST service will retrieve and return the BIN Table file to Merchants.
       responses:
-        '200':
-          description: Successfully retrieved the BIN Table Listing file and available to Merchants
+        "200":
+          description: Successfully retrieved the BIN Table Listing file and available to
+            Merchants
           schema:
-            $ref: '#/definitions/BinTableResponse'
-        '404':
+            $ref: "#/definitions/BinTableResponse"
+        "404":
           description: Resource Not Found
           schema:
-            $ref: '#/definitions/NoResource'
+            $ref: "#/definitions/NoResource"
       summary: BIN Table Listing file
       tags:
         - BIN Table Listing Service
@@ -48,7 +49,7 @@ paths:
               {
                }     
           response:
-            application/json: |-
+            application/json: >-
               {
                  "data":"04241000000000000000424109999999999999MSI0000004782FIFTH"
 
@@ -58,7 +59,7 @@ definitions:
     properties:
       data:
         description: BIN Table Listing file.
-        example: '001234'
+        example: "001234"
         type: string
     required:
       - data
