@@ -8,7 +8,8 @@ info:
     url: https://support.adyen.com/
     x-twitter: Adyen
   description: >-
-    A web service containing utility functions available for merchants integrating with Checkout APIs.
+    A web service containing utility functions available for merchants
+    integrating with Checkout APIs.
 
     ## Authentication
 
@@ -61,7 +62,8 @@ info:
 paths:
   /originKeys:
     post:
-      description: This operation takes the origin domains and returns a JSON object containing the corresponding origin keys for the domains.
+      description: This operation takes the origin domains and returns a JSON object
+        containing the corresponding origin keys for the domains.
       requestBody:
         content:
           application/json:
@@ -103,7 +105,8 @@ components:
         originKeys:
           additionalProperties:
             type: string
-          description: The list of origin keys for all requested domains. For each list item, the key is the domain and the value is the origin key.
+          description: The list of origin keys for all requested domains. For each list
+            item, the key is the domain and the value is the origin key.
           type: object
 x-groups:
   - General

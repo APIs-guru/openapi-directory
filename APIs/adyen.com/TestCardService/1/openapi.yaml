@@ -3,10 +3,13 @@ servers:
   - url: https://pal-test.adyen.com/pal/services/TestCard/v1
 info:
   contact:
-    email: support@adyen.com
-    name: Adyen Support
-    url: https://support.adyen.com/
-  description: The Test Cards API provides endpoints for generating custom test card numbers. For more information, refer to [Custom test cards](https://docs.adyen.com/development-resources/test-cards/create-test-cards) documentation.
+    email: developer-experience@adyen.com
+    name: Adyen Developer Experience team
+    url: https://www.adyen.help/hc/en-us/community/topics
+  description: The Test Cards API provides endpoints for generating custom test
+    card numbers. For more information, refer to [Custom test
+    cards](https://docs.adyen.com/development-resources/test-cards/create-test-cards)
+    documentation.
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Adyen Test Cards API
   version: "1"
@@ -15,6 +18,7 @@ info:
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/TestCardService-v1.json
       version: "3.0"
   x-providerName: adyen.com
+  x-publicVersion: true
   x-serviceName: TestCardService
 paths:
   /createTestCardRanges:
@@ -34,33 +38,52 @@ paths:
                 $ref: "#/components/schemas/CreateTestCardRangesResult"
           description: OK - the request has succeeded.
         "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
         "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
         "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
         "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       summary: Creates one or more test card ranges.
       x-groupName: General
       x-sortIndex: 0
 components:
+  examples: {}
   schemas:
     AvsAddress:
       properties:
         streetAddress:
-          description: >-
+          description: |-
             The street and house number of the address.
-
 
             Example: 1 Infinite Loop, Cupertino.
           type: string
         zip:
-          description: >-
+          description: |-
             The zip or post code of the address.
-
 
             Example: CA 95014
           type: string
@@ -69,11 +92,13 @@ components:
     CreateTestCardRangesRequest:
       properties:
         accountCode:
-          description: The code of the account, for which the test card ranges should be created.
+          description: The code of the account, for which the test card ranges should be
+            created.
           type: string
         accountTypeCode:
           description: >-
-            The type of the account, for which the test card ranges should be created.
+            The type of the account, for which the test card ranges should be
+            created.
 
 
             Permitted values:
@@ -102,50 +127,57 @@ components:
           type: array
       required:
         - rangeCreationResults
+    ServiceError:
+      properties:
+        errorCode:
+          description: The error code mapped to the error message.
+          type: string
+        errorType:
+          description: The category of the error.
+          type: string
+        message:
+          description: A short explanation of the issue.
+          type: string
+        pspReference:
+          description: The PSP reference of the payment.
+          type: string
+        status:
+          description: The HTTP response status.
+          format: int32
+          type: integer
     TestCardRange:
       properties:
         address:
           $ref: "#/components/schemas/AvsAddress"
-          description: Contains the billing address of the card holder. The address details need to be AVS-compliant, which means that you need to provide at least street address.
+          description: Contains the billing address of the card holder. The address
+            details need to be AVS-compliant, which means that you need to
+            provide at least street address.
         cardHolderName:
-          description: The name of the card holder, as it appears on the card, for the test card range.
+          description: The name of the card holder, as it appears on the card, for the
+            test card range.
           type: string
         cvc:
-          description: >-
+          description: |-
             The test card range security code.
-
 
             Example: 123
           type: string
         expiryMonth:
-          description: >-
+          description: |-
             Expiry month for the test card range.
 
-
             Allowed values:
-
             * JANUARY
-
             * FEBRUARY
-
             * MARCH
-
             * APRIL
-
             * MAY
-
             * JUNE
-
             * JULY
-
             * AUGUST
-
             * SEPTEMBER
-
             * OCTOBER
-
             * NOVEMBER
-
             * DECEMBER
           enum:
             - APRIL
@@ -162,38 +194,32 @@ components:
             - SEPTEMBER
           type: string
         expiryYear:
-          description: >-
+          description: |-
             Expiry year for the test card range.
-
 
             Example: 2020
           format: int32
           type: integer
         rangeEnd:
-          description: >-
+          description: |-
             The last test card number in the test card range (inclusive):
 
-
             * Min 6, max 19 digits
-
             * BIN compliant
-
             Example: 5432 1234 1234 4321
           type: string
         rangeStart:
-          description: >-
+          description: |-
             The first test card number in the test card range (inclusive):
 
-
             * Min 6, max 19 digits
-
             * BIN compliant
-
             Example: 5432 1234 1234 1234
           type: string
         threeDDirectoryServerResponse:
           description: >-
-            3D Secure server response. It notifies whether the specified card holder is enrolled in a 3D Secure service. Possible values:
+            3D Secure server response. It notifies whether the specified card
+            holder is enrolled in a 3D Secure service. Possible values:
 
 
             * Y (Authentication available)
@@ -221,22 +247,21 @@ components:
     TestCardRangeCreationResult:
       properties:
         cardNumberRangeEnd:
-          description: >-
+          description: |-
             The last test card number in the generated test card range.
-
 
             Example: 5432 1234 1234 4321
           type: string
         cardNumberRangeStart:
-          description: >-
+          description: |-
             The first test card number in the generated test card range.
-
 
             Example: 5432 1234 1234 1234
           type: string
         creationResultCode:
           description: >-
-            Notification message. It informs about the outcome of the operation. Possible values:
+            Notification message. It informs about the outcome of the
+            operation. Possible values:
 
             * CREATED
 

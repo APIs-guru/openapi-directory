@@ -3,48 +3,32 @@ servers:
   - url: https://cal-test.adyen.com/cal/services/Hop/v5
 info:
   contact:
-    email: support@adyen.com
-    name: Adyen Support
-    url: https://support.adyen.com/
-  description: >-
-    The Hosted Onboarding Page (HOP) API provides endpoints for using the Hosted Onboarding Page. The related entities include account holders only. 
-
-    For more information, refer to our [documentation](https://docs.adyen.com/platforms/onboarding-and-verification/hosted-onboarding-page).
-
+    email: developer-experience@adyen.com
+    name: Adyen Developer Experience team
+    url: https://www.adyen.help/hc/en-us/community/topics
+  description: |-
+    Hosted Onboarding provides endpoints for using the Hosted Onboarding Page. The related entities include account holders only. 
+    For more information, refer to our [documentation](https://docs.adyen.com/platforms/hosted-onboarding-page).
     ## Authentication
-
     To connect to the HOP API, you must use basic authentication credentials of your web service user. If you don't have one, please contact the [Adyen Support Team](https://support.adyen.com/hc/en-us/requests/new). Then use its credentials to authenticate your request, for example:
 
-
     ```
-
     curl
-
     -U "ws@MarketPlace.YourMarketPlace":"YourWsPassword" \
-
     -H "Content-Type: application/json" \
-
     ...
-
     ```
-
     Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
 
-
     ## Versioning
-
     The HOP API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
 
-
     For example:
-
     ```
-
     https://cal-test.adyen.com/cal/services/Hop/v5/getOnboardingUrl
-
     ```
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
-  title: "Adyen for Platforms: Hosted Onboarding Page API"
+  title: "Adyen for Platforms: Hosted Onboarding"
   version: "5"
   x-origin:
     - format: openapi
@@ -52,11 +36,15 @@ info:
       version: "3.0"
   x-preferred: false
   x-providerName: adyen.com
+  x-publicVersion: true
   x-serviceName: HopService
 paths:
   /getOnboardingUrl:
     post:
-      description: This endpoint is used to get a new onboarding url for a specific account holder. Each account holder represents a single sub-merchant, and each sub-merchant must be represented by an account holder. A returnUrl can also be specified as part of this request.
+      description: |-
+        Returns a link to a Hosted Onboarding Page (HOP) to be used by a specific account holder. Each account holder represents a single sub-merchant.
+
+        For more information on how to use HOP, refer to [Hosted Onboarding Page](https://docs.adyen.com/platforms/hosted-onboarding-page). 
       operationId: post-getOnboardingUrl
       requestBody:
         content:
@@ -71,19 +59,89 @@ paths:
                 $ref: "#/components/schemas/GetOnboardingUrlResponse"
           description: OK - the request has succeeded.
         "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
         "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
         "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
         "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
-      summary: Get a new onboarding url for an account holder.
+      summary: Get a link to a Hosted Onboarding Page.
       x-groupName: Hosted Onboarding Page
       x-sortIndex: 1
+  /getPciQuestionnaireUrl:
+    post:
+      description: "This endpoint is used to get a new PCI compliance questionnaire URL for a specific account holder. Each account holder represents a single sub-merchant, and each sub-merchant must be represented by an account holder. "
+      operationId: post-getPciQuestionnaireUrl
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetPciUrlRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetPciUrlResponse"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      summary: Get a new PCI compliance questionnaire URL for an account holder.
+      x-groupName: PCI Compliance Questionnaire Page
+      x-sortIndex: 1
 components:
+  examples: {}
   schemas:
     ErrorFieldType:
       properties:
@@ -128,6 +186,7 @@ components:
             - checkCode
             - city
             - companyRegistration
+            - constitutionalDocument
             - country
             - countryCode
             - currency
@@ -148,6 +207,7 @@ components:
             - drivingLicense
             - email
             - firstName
+            - formType
             - fullPhoneNumber
             - gender
             - hopWebserviceUser
@@ -159,7 +219,19 @@ components:
             - idNumber
             - identityDocument
             - individualDetails
+            - jobTitle
             - lastName
+            - legalArrangement
+            - legalArrangementCode
+            - legalArrangementEntity
+            - legalArrangementEntityCode
+            - legalArrangementLegalForm
+            - legalArrangementMember
+            - legalArrangementName
+            - legalArrangementReference
+            - legalArrangementRegistrationNumber
+            - legalArrangementTaxNumber
+            - legalArrangementType
             - legalBusinessName
             - legalEntity
             - legalEntityType
@@ -191,8 +263,15 @@ components:
             - schedule
             - shareholder
             - shareholderCode
+            - shareholderType
+            - shopperInteraction
+            - signatory
             - socialSecurityNumber
             - sourceAccountCode
+            - splitAccount
+            - splitCurrency
+            - splitValue
+            - splits
             - stateOrProvince
             - status
             - stockExchange
@@ -209,9 +288,11 @@ components:
             - transferCode
             - unknown
             - value
+            - verificationType
             - virtualAccount
             - visaNumber
             - webAddress
+            - year
           type: string
         shareholderCode:
           description: The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.
@@ -222,7 +303,7 @@ components:
           description: The account holder code you provided when you created the account holder.
           type: string
         editMode:
-          description: Allows editing checks even if all the checks have passed.
+          description: Indicates if editing checks is allowed even if all the checks have passed.
           type: boolean
         platformName:
           description: The platform name which will show up in the welcome page.
@@ -230,24 +311,78 @@ components:
         returnUrl:
           description: The URL where the sub-merchant will be redirected back to after they complete the onboarding, or if their session times out. Maximum length of 500 characters. If you don't provide this, the sub-merchant will be redirected back to the default return URL configured in your platform account.
           type: string
+        shopperLocale:
+          description: |-
+            The language to be used in the page, specified by a combination of a language and country code. For example, **pt-BR**. 
+
+            If not specified in the request or if the language is not supported, the page uses the browser language. If the browser language is not supported, the page uses **en-US** by default.
+
+            For a list supported languages, refer to [Change the page language](https://docs.adyen.com/platforms/hosted-onboarding-page#change-page-language).
+          type: string
       required:
         - accountHolderCode
     GetOnboardingUrlResponse:
       properties:
         invalidFields:
-          description: Contains field validation errors that would prevent requests from being processed.
+          description: Information about any invalid fields.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         redirectUrl:
-          description: The URL to the Hosted Onboarding Page where you should redirect your sub-merchant. This URL must be used within 15 seconds and can only be used once.
+          description: The URL to the Hosted Onboarding Page where you should redirect your sub-merchant. This URL must be used within 30 seconds and can only be used once.
           type: string
         resultCode:
           description: The result code.
           type: string
+    GetPciUrlRequest:
+      properties:
+        accountHolderCode:
+          description: The account holder code you provided when you created the account holder.
+          type: string
+        returnUrl:
+          description: The URL where the sub-merchant will be redirected back to after they complete the onboarding, or if their session times out. Maximum length of 500 characters.
+          type: string
+      required:
+        - accountHolderCode
+    GetPciUrlResponse:
+      properties:
+        invalidFields:
+          description: Information about any invalid fields.
+          items:
+            $ref: "#/components/schemas/ErrorFieldType"
+          type: array
+          x-addedInVersion: 5
+        pspReference:
+          description: The reference of a request. Can be used to uniquely identify the request.
+          type: string
+        redirectUrl:
+          description: The URL to the PCI Compliance Questionnaire Page where you should redirect your sub-merchant. This URL must be used within 30 seconds and can only be used once.
+          type: string
+        resultCode:
+          description: The result code.
+          type: string
+    ServiceError:
+      properties:
+        errorCode:
+          description: The error code mapped to the error message.
+          type: string
+        errorType:
+          description: The category of the error.
+          type: string
+        message:
+          description: A short explanation of the issue.
+          type: string
+        pspReference:
+          description: The PSP reference of the payment.
+          type: string
+        status:
+          description: The HTTP response status.
+          format: int32
+          type: integer
   securitySchemes:
     ApiKeyAuth:
       in: header
@@ -258,3 +393,4 @@ components:
       type: http
 x-groups:
   - Hosted Onboarding Page
+  - PCI Compliance Questionnaire Page

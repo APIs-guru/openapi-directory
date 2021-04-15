@@ -1,15 +1,14 @@
 openapi: 3.0.3
 info:
   contact:
-    email: support@adyen.com
-    name: Adyen Support
-    url: https://support.adyen.com/
+    email: developer-experience@adyen.com
+    name: Adyen Developer Experience team
+    url: https://www.adyen.help/hc/en-us/community/topics
     x-twitter: Adyen
-  description: >-
+  description: |-
     The Notification API sends notifications to the endpoints specified in a given subscription. Subscriptions are managed through the Notification Configuration API. The API specifications listed here detail the format of each notification.
 
-
-    For more information, refer to our [documentation](https://docs.adyen.com/platforms/marketpay-notifications).
+    For more information, refer to our [documentation](https://docs.adyen.com/platforms/notifications).
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: "Adyen for Platforms: Notifications"
   version: "5"
@@ -26,6 +25,7 @@ info:
       version: "3.0"
   x-preferred: true
   x-providerName: adyen.com
+  x-publicVersion: true
   x-serviceName: MarketPayNotificationService
 paths:
   /ACCOUNT_CLOSED:
@@ -35,12 +35,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              accountClosed:
+                $ref: "#/components/examples/post-ACCOUNT_CLOSED-accountClosed"
             schema:
               $ref: "#/components/schemas/AccountCloseNotification"
       responses:
         "200":
           content:
             application/json:
+              examples:
+                accountClosed:
+                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
@@ -66,6 +72,25 @@ paths:
       summary: Triggered upon the creation of an account.
       x-groupName: Accounts
       x-sortIndex: 1
+  /ACCOUNT_FUNDS_BELOW_THRESHOLD:
+    post:
+      description: This notification is sent when a liable account's current funds are below configured threshold from the Adyen platform.
+      operationId: post-ACCOUNT_FUNDS_BELOW_THRESHOLD
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountFundsBelowThresholdNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered when a liable account current funds are below configured threshold.
+      x-groupName: Fund management
+      x-sortIndex: 7
   /ACCOUNT_HOLDER_CREATED:
     post:
       description: This notification is sent when an account holder has been created.
@@ -294,25 +319,6 @@ paths:
       summary: Triggered upon an account payment failure.
       x-groupName: Other
       x-sortIndex: 1
-  /PAYOUT_CONFIRMED:
-    post:
-      description: This notification is sent when a payout is confirmed from the Adyen platform.
-      operationId: post-PAYOUT_CONFIRMED
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AccountHolderPayoutNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered when a payout has been confirmed.
-      x-groupName: Fund management
-      x-sortIndex: 8
   /REFUND_FUNDS_TRANSFER:
     post:
       description: This notification is sent when the refund of funds from an account have been transferred to another account.
@@ -390,6 +396,33 @@ paths:
       x-groupName: Fund management
       x-sortIndex: 2
 components:
+  examples:
+    WebhookAck:
+      summary: Acknowledge Webhook
+      value:
+        notificationResponse: "[accepted]"
+    post-ACCOUNT_CLOSED-accountClosed:
+      summary: ACCOUNT CLOSED example
+      value:
+        content:
+          invalidFields:
+            - errorCode: 1
+              errorDescription: Field is missing
+              fieldType:
+                field: AccountHolderDetails.BusinessDetails.Shareholders.unknown
+                fieldName: unknown
+                shareholderCode: SH00001
+          pspReference: TSTPSPR0001
+          resultCode: Success
+          status: Closed
+        error:
+          errorCode: "000"
+          message: test error message
+        eventDate: 2019-01-01T01:00:00+01:00
+        eventType: ACCOUNT_CLOSED
+        executingUserKey: executing-user-key
+        live: false
+        pspReference: TSTPSPR0001
   schemas:
     AccountCloseNotification:
       properties:
@@ -399,10 +432,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -430,10 +465,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -456,12 +493,10 @@ components:
     AccountEvent:
       properties:
         event:
-          description: >-
+          description: |-
             The event.
-
             >Permitted values: `InactivateAccount`, `RefundNotPaidOutTransfers`.
-
-            For more information, refer to [Verification checks](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).
+            For more information, refer to [Verification checks](https://docs.adyen.com/platforms/verification-checks).
           enum:
             - InactivateAccount
             - RefundNotPaidOutTransfers
@@ -477,6 +512,59 @@ components:
         - event
         - executionDate
         - reason
+    AccountFundsBelowThresholdNotification:
+      properties:
+        content:
+          $ref: "#/components/schemas/AccountFundsBelowThresholdNotificationContent"
+          description: Details of the liable account with funds under threshold.
+        error:
+          $ref: "#/components/schemas/NotificationErrorContainer"
+          description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
+        eventDate:
+          description: The date and time when an event has been completed.
+          format: date-time
+          type: string
+          x-addedInVersion: 4
+        eventType:
+          description: The event type of the notification.
+          type: string
+        executingUserKey:
+          description: The user or process that has triggered the notification.
+          type: string
+        live:
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
+          type: boolean
+        pspReference:
+          description: The PSP reference of the request from which the notification originates.
+          type: string
+      required:
+        - executingUserKey
+        - pspReference
+        - eventType
+        - live
+        - eventDate
+    AccountFundsBelowThresholdNotificationContent:
+      properties:
+        accountCode:
+          description: The code of the account with funds under threshold
+          type: string
+        balanceDate:
+          $ref: "#/components/schemas/LocalDate"
+          description: The date of the funds were found to be below threshold.
+        currentFunds:
+          $ref: "#/components/schemas/Amount"
+          description: The current funds in the liable account.
+        fundThreshold:
+          $ref: "#/components/schemas/Amount"
+          description: The configured fund threshold for the liable account
+        merchantAccountCode:
+          description: The code of the merchant account.
+          type: string
+      required:
+        - accountCode
+        - merchantAccountCode
+        - fundThreshold
     AccountHolderCreateNotification:
       properties:
         content:
@@ -485,10 +573,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -514,71 +604,58 @@ components:
           $ref: "#/components/schemas/ViasAddress"
           description: The address of the account holder.
         bankAccountDetails:
-          description: >-
-            Each of the bank accounts associated with the account holder.
-
-            > Each array entry should represent one bank account.
-
-            > For comprehensive detail regarding the required `BankAccountDetail` fields, please refer to the [KYC Verification documentation](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).
+          description: Array of bank accounts associated with the account holder. For details about the required `BankAccountDetail` fields, refer to [Bank account check](https://docs.adyen.com/platforms/verification-checks/bank-account-check).
           items:
             $ref: "#/components/schemas/BankAccountDetail"
           type: array
         bankAggregatorDataReference:
           description: The opaque reference value returned by the Adyen API during bank account login.
           type: string
+          x-addedInVersion: 5
         businessDetails:
           $ref: "#/components/schemas/BusinessDetails"
-          description: >-
-            Details applicable to `Business` legal entities.
-
-            Populated only if the account holder's legal entity is of type `Business`.
-
-            > Required when being used in a `/createAccountHolder` request in which the legal entity is `Business`.
+          description: |-
+            Details about the business or nonprofit account holder.
+            Required when creating an account holder with `legalEntity` **Business** or **NonProfit**.
         email:
           description: The email address of the account holder.
           type: string
         fullPhoneNumber:
-          description: >-
+          description: |-
             The phone number of the account holder provided as a single string. It will be handled as a landline phone.
-
             **Examples:** "0031 6 11 22 33 44", "+316/1122-3344", "(0031) 611223344"
           type: string
         individualDetails:
           $ref: "#/components/schemas/IndividualDetails"
-          description: >-
-            Details applicable to `Individual` legal entities.
-
-            Populated only if the account holder's legal entity is of type `Individual`.
-
-            > Required when being used in a `/createAccountHolder` request in which the legal entity is `Individual`.
+          description: |
+            Details about the individual account holder.
+            Required when creating an account holder with `legalEntity` **Individual**.
         merchantCategoryCode:
-          description: >-
+          description: |-
             The Merchant Category Code of the account holder.
-
             > If not specified in the request, this will be derived from the platform account (which is configured by Adyen).
           type: string
         metadata:
           additionalProperties:
             type: string
-          description: >-
+          description: |-
             A set of key and value pairs for general use by the account holder or merchant.
-
             The keys do not have specific names and may be used for storing miscellaneous data as desired.
-
             > The values being stored have a maximum length of eighty (80) characters and will be truncated if necessary.
-
             > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
           type: object
         payoutMethods:
-          description: >-
-            Each of the card tokens associated with the account holder.
-
-            > Each array entry should represent one card token.
-
-            > For comprehensive detail regarding the required `CardToken` fields, please refer to the [KYC Verification documentation](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).
+          description: Array of tokenized card details associated with the account holder. For details about how you can use the tokens to pay out, refer to [Pay out to cards](https://docs.adyen.com/platforms/payout-to-cards).
           items:
             $ref: "#/components/schemas/PayoutMethod"
           type: array
+          x-addedInVersion: 5
+        storeDetails:
+          description: Array of stores associated with the account holder. Required when onboarding account holders that have an Adyen [point of sale](https://docs.adyen.com/platforms/platforms-for-pos).
+          items:
+            $ref: "#/components/schemas/StoreDetail"
+          type: array
+          x-addedInVersion: 5
         webAddress:
           description: The URL of the website of the account holder.
           type: string
@@ -594,10 +671,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -642,23 +721,29 @@ components:
         estimatedArrivalDate:
           $ref: "#/components/schemas/LocalDate"
           description: The estimated date of arrival.
+          x-addedInVersion: 5
         invalidFields:
           description: Invalid fields list.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         merchantReference:
           description: The merchant reference.
           type: string
+          x-addedInVersion: 2
         originalPspReference:
           description: The PSP reference of the original payout.
           type: string
+          x-addedInVersion: 5
         payoutSpeed:
           description: "Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`."
           enum:
+            - INSTANT
             - SAME_DAY
             - STANDARD
           type: string
+          x-addedInVersion: 5
         status:
           $ref: "#/components/schemas/OperationStatus"
           description: The payout status.
@@ -679,9 +764,8 @@ components:
           $ref: "#/components/schemas/AccountProcessingState"
           description: The processing state of the account holder.
         status:
-          description: >-
+          description: |-
             The status of the account holder.
-
             >Permitted values: `Active`, `Inactive`, `Suspended`, `Closed`.
           enum:
             - Active
@@ -702,10 +786,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -734,12 +820,15 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         newStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the account holder.
+          x-addedInVersion: 2
         oldStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The former status of the account holder.
+          x-addedInVersion: 2
         reason:
           description: The reason for the status change.
           type: string
@@ -755,10 +844,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -782,11 +873,13 @@ components:
         accountHolderCode:
           description: The code of the account holder.
           type: string
+          x-addedInVersion: 5
         invalidFields:
           description: In case the store status has not been updated, contains fields that did not pass the validation.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         newStatus:
           description: The new status of the account holder.
           enum:
@@ -796,6 +889,7 @@ components:
             - InactiveWithModifications
             - Pending
           type: string
+          x-addedInVersion: 5
         oldStatus:
           description: The former status of the account holder.
           enum:
@@ -805,15 +899,19 @@ components:
             - InactiveWithModifications
             - Pending
           type: string
+          x-addedInVersion: 5
         reason:
           description: The reason for the status change.
           type: string
+          x-addedInVersion: 5
         store:
           description: Alphanumeric identifier of the store.
           type: string
+          x-addedInVersion: 5
         storeReference:
           description: Store store reference.
           type: string
+          x-addedInVersion: 5
       required:
         - accountHolderCode
         - store
@@ -828,10 +926,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -859,17 +959,19 @@ components:
           description: The event name that will be trigger if no action is taken.
           enum:
             - AccessPii
+            - ApiTierUpdate
             - CloseAccount
             - CloseStores
             - DeleteBankAccounts
-            - DeletePayoutInstrumentTokens
             - DeletePayoutMethods
             - DeleteShareholders
             - InactivateAccount
+            - KYCDeadlineExtension
             - RecalculateAccountStatusAndProcessingTier
             - RefundNotPaidOutTransfers
             - ResolveEvents
             - SaveAccountHolder
+            - SaveCriminalityAndPEPChecks
             - SaveKYCCheckStatus
             - SuspendAccount
             - UnSuspendAccount
@@ -877,8 +979,9 @@ components:
             - Verification
           type: string
         executionDate:
-          $ref: "#/components/schemas/LocalDate"
           description: The execution date scheduled for the event.
+          format: date-time
+          type: string
         reason:
           description: The reason that leads to scheduling of the event.
           type: string
@@ -890,10 +993,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -921,10 +1026,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -955,6 +1062,7 @@ components:
         kycCheckStatusData:
           $ref: "#/components/schemas/KYCCheckStatusData"
           description: Information on the verification status
+          x-addedInVersion: 5
         shareholderCode:
           description: The code of the shareholder that has been verified.
           type: string
@@ -974,6 +1082,7 @@ components:
         notAllowedReason:
           description: The reason why payouts (to all of the account holder's accounts) have been disabled (by Adyen). If payouts have been disabled by Adyen, this field will explain why. If this field is blank, payouts have not been disabled by Adyen.
           type: string
+          x-addedInVersion: 5
         payoutLimit:
           $ref: "#/components/schemas/Amount"
           description: The maximum amount that payouts are limited to. Only applies if payouts are allowed but limited.
@@ -981,6 +1090,7 @@ components:
           description: The payout tier that the account holder occupies.
           format: int32
           type: integer
+          x-addedInVersion: 3
     AccountProcessingState:
       properties:
         disableReason:
@@ -999,6 +1109,7 @@ components:
           description: The processing tier that the account holder occupies.
           format: int32
           type: integer
+          x-addedInVersion: 3
     AccountUpdateNotification:
       properties:
         content:
@@ -1007,10 +1118,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -1038,11 +1151,7 @@ components:
           minLength: 3
           type: string
         value:
-          description: >-
-            The payable amount that can be charged for the transaction.
-
-
-            The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/development-resources/currency-codes).
+          description: The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           format: int64
           type: integer
       required:
@@ -1051,19 +1160,15 @@ components:
     BankAccountDetail:
       properties:
         accountNumber:
-          description: >-
+          description: |-
             The bank account number (without separators).
-
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         accountType:
-          description: >-
+          description: |-
             The type of bank account.
-
             Only applicable to bank accounts held in the USA.
-
             The permitted values are: `checking`, `savings`.
-
 
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
@@ -1073,168 +1178,137 @@ components:
         bankAccountReference:
           description: Merchant reference to the bank account.
           type: string
+          x-addedInVersion: 5
         bankAccountUUID:
-          description: >
+          description: |
             The unique identifier (UUID) of the Bank Account.
-
             >If, during an account holder create or update request, this field is left blank (but other fields provided), a new Bank Account will be created with a procedurally-generated UUID.
-
 
             >If, during an account holder create request, a UUID is provided, the creation of the Bank Account will fail while the creation of the account holder will continue.
 
-
             >If, during an account holder update request, a UUID that is not correlated with an existing Bank Account is provided, the update of the account holder will fail.
-
 
             >If, during an account holder update request, a UUID that is correlated with an existing Bank Account is provided, the existing Bank Account will be updated.
           type: string
         bankBicSwift:
-          description: >-
+          description: |-
             The bank identifier code.
-
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankCity:
-          description: >-
+          description: |-
             The city in which the bank branch is located.
-
 
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankCode:
-          description: >-
+          description: |-
             The bank code of the banking institution with which the bank account is registered.
-
 
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankName:
-          description: >-
+          description: |-
             The name of the banking institution with which the bank account is held.
-
 
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         branchCode:
-          description: >-
+          description: |-
             The branch code of the branch under which the bank account is registered. The value to be specified in this parameter depends on the country of the bank account:
-
             * United States - Routing number
-
             * United Kingdom - Sort code
-
             * Germany - Bankleitzahl
-
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         checkCode:
-          description: >-
+          description: |-
             The check code of the bank account.
-
 
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         countryCode:
-          description: >-
+          description: |-
             The two-letter country code in which the bank account is registered.
-
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
-
 
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         currencyCode:
-          description: >-
+          description: |-
             The currency in which the bank account deals.
-
             >The permitted currency codes are defined in ISO-4217 (e.g. 'EUR').
-
 
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         iban:
-          description: >-
+          description: |-
             The international bank account number.
-
             >The IBAN standard is defined in ISO-13616.
-
 
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerCity:
-          description: >-
+          description: |-
             The city of residence of the bank account owner.
-
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerCountryCode:
-          description: >-
+          description: |-
             The country code of the country of residence of the bank account owner.
-
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
-
 
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerDateOfBirth:
-          description: >
+          description: |
             The date of birth of the bank account owner.
           type: string
         ownerHouseNumberOrName:
-          description: >-
+          description: |-
             The house name or number of the residence of the bank account owner.
-
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerName:
-          description: >-
+          description: |-
             The name of the bank account owner.
-
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerNationality:
-          description: >-
+          description: |-
             The country code of the country of nationality of the bank account owner.
-
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
-
 
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerPostalCode:
-          description: >-
+          description: |-
             The postal code of the residence of the bank account owner.
-
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerState:
-          description: >-
+          description: |-
             The state of residence of the bank account owner.
-
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerStreet:
-          description: >-
+          description: |-
             The street name of the residence of the bank account owner.
-
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         primaryAccount:
           description: If set to true, the bank account is a primary account.
           type: boolean
         taxId:
-          description: >-
+          description: |-
             The tax ID number.
-
 
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         urlForVerification:
-          description: >-
+          description: |-
             The URL to be used for bank account verification.
-
             This may be generated on bank account creation.
-
 
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
@@ -1246,10 +1320,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -1282,6 +1358,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         merchantReference:
           description: The reference provided by the merchant.
           type: string
@@ -1312,13 +1389,18 @@ components:
         registrationNumber:
           description: The registration number of the company.
           type: string
+          x-addedInVersion: 4
         shareholders:
-          description: >-
-            Each of the shareholders associated with the company.
-
-            Each array entry should represent one shareholder.
+          description: Array containing information about individuals associated with the account holder either through ownership or control. For details about how you can identify them, refer to [Identity check](https://docs.adyen.com/platforms/verification-checks/identity-check).
           items:
             $ref: "#/components/schemas/ShareholderContact"
+          type: array
+        signatories:
+          description: |-
+            Signatories associated with the company.
+            Each array entry should represent one signatory.
+          items:
+            $ref: "#/components/schemas/SignatoryContact"
           type: array
         taxId:
           description: The tax ID of the company.
@@ -1328,11 +1410,13 @@ components:
         accountCode:
           description: The account code of the account that is closed.
           type: string
+          x-addedInVersion: 5
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -1340,9 +1424,8 @@ components:
           description: The result code.
           type: string
         status:
-          description: >-
+          description: |-
             The new status of the account.
-
             >Permitted values: `Active`, `Inactive`, `Suspended`, `Closed`.
           enum:
             - Active
@@ -1350,8 +1433,8 @@ components:
             - Inactive
             - Suspended
           type: string
+          x-addedInVersion: 2
       required:
-        - pspReference
         - status
     CompensateNegativeBalanceNotification:
       properties:
@@ -1361,10 +1444,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -1422,14 +1507,17 @@ components:
         accountHolderStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The status of the new account holder.
+          x-addedInVersion: 2
         description:
           description: The description of the new account holder.
           type: string
+          x-addedInVersion: 4
         invalidFields:
           description: A list of fields that caused the `/createAccountHolder` request to fail.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         legalEntity:
           description: The type of legal entity of the new account holder.
           enum:
@@ -1439,9 +1527,11 @@ components:
             - Partnership
             - PublicCompany
           type: string
+          x-addedInVersion: 4
         primaryCurrency:
           description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), with which the prospective account holder primarily deals.
           type: string
+          x-addedInVersion: 5
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -1449,10 +1539,10 @@ components:
           description: The result code.
           type: string
         verification:
-          $ref: "#/components/schemas/KYCVerificationResult"
+          $ref: "#/components/schemas/KYCVerificationResult2"
           description: The details of KYC Verification of the account holder.
+          x-addedInVersion: 2
       required:
-        - pspReference
         - accountHolderCode
         - accountHolderStatus
         - accountHolderDetails
@@ -1466,27 +1556,41 @@ components:
         accountHolderCode:
           description: The code of the account holder.
           type: string
+        bankAccountUUID:
+          description: The bankAccountUUID of the bank account held by the account holder to couple the account with. Scheduled payouts in currencies matching the currency of this bank account will be sent to this bank account. Payouts in different currencies will be sent to a matching bank account of the account holder.
+          type: string
+          x-addedInVersion: 5
         description:
           description: The description of the account.
           type: string
+          x-addedInVersion: 4
         invalidFields:
           description: A list of fields that caused the `/createAccount` request to fail.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         metadata:
           additionalProperties:
             type: string
+          description: A set of key and value pairs containing metadata.
           type: object
+          x-addedInVersion: 5
+        payoutMethodCode:
+          description: The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
+          type: string
+          x-addedInVersion: 5
         payoutSchedule:
           $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The payout schedule of the account.
         payoutSpeed:
           description: "Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`."
           enum:
+            - INSTANT
             - SAME_DAY
             - STANDARD
           type: string
+          x-addedInVersion: 5
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -1494,9 +1598,8 @@ components:
           description: The result code.
           type: string
         status:
-          description: >-
+          description: |-
             The status of the account.
-
             >Permitted values: `Active`.
           enum:
             - Active
@@ -1504,8 +1607,8 @@ components:
             - Inactive
             - Suspended
           type: string
+          x-addedInVersion: 2
       required:
-        - pspReference
         - accountHolderCode
         - accountCode
         - status
@@ -1517,10 +1620,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -1550,9 +1655,19 @@ components:
         debitInitiationDate:
           $ref: "#/components/schemas/LocalDate"
           description: The date of the debit initiation.
+        invalidFields:
+          description: Invalid fields list.
+          items:
+            $ref: "#/components/schemas/ErrorFieldType"
+          type: array
         merchantAccountCode:
           description: The code of the merchant account.
           type: string
+        splits:
+          description: The split data for the debit request
+          items:
+            $ref: "#/components/schemas/Split"
+          type: array
         status:
           $ref: "#/components/schemas/OperationStatus"
           description: Direct debit status.
@@ -1603,6 +1718,7 @@ components:
             - checkCode
             - city
             - companyRegistration
+            - constitutionalDocument
             - country
             - countryCode
             - currency
@@ -1623,6 +1739,7 @@ components:
             - drivingLicense
             - email
             - firstName
+            - formType
             - fullPhoneNumber
             - gender
             - hopWebserviceUser
@@ -1634,7 +1751,19 @@ components:
             - idNumber
             - identityDocument
             - individualDetails
+            - jobTitle
             - lastName
+            - legalArrangement
+            - legalArrangementCode
+            - legalArrangementEntity
+            - legalArrangementEntityCode
+            - legalArrangementLegalForm
+            - legalArrangementMember
+            - legalArrangementName
+            - legalArrangementReference
+            - legalArrangementRegistrationNumber
+            - legalArrangementTaxNumber
+            - legalArrangementType
             - legalBusinessName
             - legalEntity
             - legalEntityType
@@ -1666,8 +1795,15 @@ components:
             - schedule
             - shareholder
             - shareholderCode
+            - shareholderType
+            - shopperInteraction
+            - signatory
             - socialSecurityNumber
             - sourceAccountCode
+            - splitAccount
+            - splitCurrency
+            - splitValue
+            - splits
             - stateOrProvince
             - status
             - stockExchange
@@ -1684,9 +1820,11 @@ components:
             - transferCode
             - unknown
             - value
+            - verificationType
             - virtualAccount
             - visaNumber
             - webAddress
+            - year
           type: string
         shareholderCode:
           description: The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.
@@ -1695,9 +1833,8 @@ components:
       properties:
         name:
           $ref: "#/components/schemas/ViasName"
-          description: >-
+          description: |-
             The name of the individual.
-
             >Make sure your account holder registers using the name shown on their Photo ID.
         personalData:
           $ref: "#/components/schemas/ViasPersonalData"
@@ -1722,7 +1859,7 @@ components:
         payoutMethodCode:
           description: The unique ID of the card to which the check applies.
           type: string
-    KYCCheckResult:
+    KYCCheckResult2:
       properties:
         checks:
           description: A list of the checks and their statuses.
@@ -1737,9 +1874,8 @@ components:
             type: string
           type: array
         status:
-          description: >-
+          description: |-
             The status of the check.
-
             >Permitted Values: `DATA_PROVIDED`, `PASSED`, `PENDING`, `AWAITING_DATA`, `RETRY_LIMIT_REACHED`, `INVALID_DATA`, `FAILED`.
           enum:
             - AWAITING_DATA
@@ -1756,18 +1892,24 @@ components:
           $ref: "#/components/schemas/KYCCheckSummary"
           description: A summary of the execution of the check.
         type:
-          description: >-
+          description: |-
             The type of check.
-
             >Permitted Values: `COMPANY_VERIFICATION`, `IDENTITY_VERIFICATION`, `PASSPORT_VERIFICATION`, `BANK_ACCOUNT_VERIFICATION`, `NONPROFIT_VERIFICATION`, `CARD_VERIFICATION`.
           enum:
             - BANK_ACCOUNT_VERIFICATION
             - CARD_VERIFICATION
             - COMPANY_VERIFICATION
+            - CRIMINAL_BACKGROUND_EXTENSIVE_VERIFICATION
+            - CRIMINAL_BACKGROUND_MEDIUM_VERIFICATION
             - IDENTITY_VERIFICATION
+            - LEGAL_ARRANGEMENT_VERIFICATION
             - NONPROFIT_VERIFICATION
             - PASSPORT_VERIFICATION
             - PAYOUT_METHOD_VERIFICATION
+            - PCI_SELF_ASSESSMENT_PRESENCE_VERIFICATION
+            - PCI_VERIFICATION
+            - POLITICALLY_EXPOSED_IDENTIFICATION_VERIFICATION
+            - POLITICALLY_EXPOSED_VERIFICATION
           type: string
       required:
         - type
@@ -1778,9 +1920,11 @@ components:
           description: The code of the check.
           format: int32
           type: integer
+          x-addedInVersion: 5
         kycCheckDescription:
           description: A description of the check.
           type: string
+          x-addedInVersion: 5
     KYCShareholderCheckResult:
       properties:
         checks:
@@ -1791,10 +1935,10 @@ components:
         shareholderCode:
           description: The code of the shareholder to which the check applies.
           type: string
-    KYCVerificationResult:
+    KYCVerificationResult2:
       properties:
         accountHolder:
-          $ref: "#/components/schemas/KYCCheckResult"
+          $ref: "#/components/schemas/KYCCheckResult2"
           description: The result(s) of the checks on the account holder.
         bankAccounts:
           description: The result(s) of the checks on the bank account(s).
@@ -1806,6 +1950,7 @@ components:
           items:
             $ref: "#/components/schemas/KYCCardCheckResult"
           type: array
+          x-addedInVersion: 5
         shareholders:
           description: The result(s) of the checks on the shareholder(s).
           items:
@@ -1856,10 +2001,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -1917,9 +2064,8 @@ components:
           format: date-time
           type: string
         schedule:
-          description: >-
+          description: |-
             The payout schedule of the account.
-
             >Permitted values: `DEFAULT`, `HOLD`, `DAILY`, `WEEKLY`, `MONTHLY`.
           enum:
             - BIWEEKLY_ON_1ST_AND_15TH_AT_MIDNIGHT
@@ -1928,6 +2074,7 @@ components:
             - DAILY_6PM
             - DAILY_AU
             - DAILY_EU
+            - DAILY_SG
             - DAILY_US
             - DEFAULT
             - EVERY_6_HOURS_FROM_MIDNIGHT
@@ -1939,34 +2086,31 @@ components:
           type: string
       required:
         - schedule
-        - nextScheduledPayout
     PersonalDocumentData:
       properties:
         expirationDate:
-          description: >-
-            The expiration date of the document.
-
-            The date should be in ISO-8601 format yyyy-mm-dd (e.g. 2000-01-31).
+          description: |-
+            The expiry date of the document, 
+             in ISO-8601 YYYY-MM-DD format. For example, **2000-01-31**.
           type: string
         issuerCountry:
-          description: >-
-            The two-character country code of the issuer.
-
-            >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
+          description: |-
+            The country where the document was issued, in the two-character 
+            [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **NL**.
           maxLength: 2
           minLength: 2
           type: string
         issuerState:
-          description: The state issued the document (if applicable)
+          description: The state where the document was issued (if applicable).
           type: string
         number:
-          description: The number of the document. Delete the given type if the value empty.
+          description: The number in the document.
           type: string
         type:
-          description: >-
-            The type of the document. More then one item pert type does not allowed.
+          description: |-
+            The type of the document. Possible values: **ID**, **DRIVINGLICENSE**, **PASSPORT**, **SOCIALSECURITY**, **VISA**.
 
-            Valid values: ID, PASSPORT, VISA, DRIVINGLICENSE
+            To delete an existing entry for a document `type`, send only the `type` field in your request. 
           enum:
             - DRIVINGLICENSE
             - ID
@@ -1984,10 +2128,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -2017,6 +2163,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         merchantReference:
           description: A value that can be supplied at the discretion of the executing user in order to link multiple transactions to one another.
           type: string
@@ -2051,10 +2198,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -2100,10 +2249,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -2136,6 +2287,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         lastPayout:
           $ref: "#/components/schemas/Transaction"
           description: The most recent payout (after which all transactions were scheduled to be refunded).
@@ -2148,51 +2300,230 @@ components:
         - accountHolderCode
         - accountCode
         - refundResults
-        - lastPayout
     ShareholderContact:
       properties:
         address:
           $ref: "#/components/schemas/ViasAddress"
-          description: The address of the contact.
+          description: The address of the person.
         email:
-          description: The e-mail address of the contact.
+          description: The e-mail address of the person.
           type: string
         fullPhoneNumber:
-          description: >-
-            The phone number of the contact provided as a single string.  It will be handled as a landline phone.
+          description: |-
+            The phone number of the person provided as a single string.  It will be handled as a landline phone.
+            Examples: "0031 6 11 22 33 44", "+316/1122-3344", "(0031) 611223344"
+          type: string
+        jobTitle:
+          description: |-
+            Job title of the person. Required when the `shareholderType` is **Controller**.
 
-            **Examples:** "0031 6 11 22 33 44", "+316/1122-3344", "(0031) 611223344"
+            Example values: **Chief Executive Officer**, **Chief Financial Officer**, **Chief Operating Officer**, **President**, **Vice President**, **Executive President**, **Managing Member**, **Partner**, **Treasurer**, **Director**, or **Other**.
           type: string
         name:
           $ref: "#/components/schemas/ViasName"
-          description: The name of the contact.
+          description: The name of the person.
         personalData:
           $ref: "#/components/schemas/ViasPersonalData"
-          description: Personal data of the Shareholder.
+          description: Contains information about the person.
         phoneNumber:
           $ref: "#/components/schemas/ViasPhoneNumber"
-          description: The phone number of the contact.
+          description: The phone number of the person.
         shareholderCode:
-          description: >
-            The unique identifier (UUID) of the Shareholder.
-
+          description: |
+            The unique identifier (UUID) of the shareholder entry.
             >**If, during an Account Holder create or update request, this field is left blank (but other fields provided), a new Shareholder will be created with a procedurally-generated UUID.**
-
 
             >**If, during an Account Holder create request, a UUID is provided, the creation of the Shareholder will fail while the creation of the Account Holder will continue.**
 
-
             >**If, during an Account Holder update request, a UUID that is not correlated with an existing Shareholder is provided, the update of the Shareholder will fail.**
-
 
             >**If, during an Account Holder update request, a UUID that is correlated with an existing Shareholder is provided, the existing Shareholder will be updated.**
           type: string
         shareholderReference:
-          description: Merchant reference to the Shareholder.
+          description: Your reference for the shareholder entry.
+          type: string
+          x-addedInVersion: 5
+        shareholderType:
+          description: |-
+            Specifies how the person is associated with the account holder. 
+
+            Possible values: 
+
+            * **Owner**: Individuals who directly or indirectly own 25% or more of a company.
+
+            * **Controller**: Individuals who are members of senior management staff responsible for managing a company or organization.
+          enum:
+            - Controller
+            - Owner
+            - Signatory
           type: string
         webAddress:
-          description: The URL of the website of the contact.
+          description: The URL of the person's website.
           type: string
+    SignatoryContact:
+      properties:
+        address:
+          $ref: "#/components/schemas/ViasAddress"
+          description: The address of the person.
+        email:
+          description: The e-mail address of the person.
+          type: string
+        fullPhoneNumber:
+          description: |-
+            The phone number of the person provided as a single string.  It will be handled as a landline phone.
+            Examples: "0031 6 11 22 33 44", "+316/1122-3344", "(0031) 611223344"
+          type: string
+        jobTitle:
+          description: |-
+            Job title of the signatory.
+
+            Example values: **Chief Executive Officer**, **Chief Financial Officer**, **Chief Operating Officer**, **President**, **Vice President**, **Executive President**, **Managing Member**, **Partner**, **Treasurer**, **Director**, or **Other**.
+          type: string
+        name:
+          $ref: "#/components/schemas/ViasName"
+          description: The name of the person.
+        personalData:
+          $ref: "#/components/schemas/ViasPersonalData"
+          description: Contains information about the person.
+        phoneNumber:
+          $ref: "#/components/schemas/ViasPhoneNumber"
+          description: The phone number of the person.
+        signatoryCode:
+          description: |
+            The unique identifier (UUID) of the Signatory.
+            >**If, during an Account Holder create or update request, this field is left blank (but other fields provided), a new Signatory will be created with a procedurally-generated UUID.**
+
+            >**If, during an Account Holder create request, a UUID is provided, the creation of the Signatory will fail while the creation of the Account Holder will continue.**
+
+            >**If, during an Account Holder update request, a UUID that is not correlated with an existing Signatory is provided, the update of the Signatory will fail.**
+
+            >**If, during an Account Holder update request, a UUID that is correlated with an existing Signatory is provided, the existing Signatory will be updated.**
+          type: string
+        signatoryReference:
+          description: Your reference for the Signatory.
+          type: string
+        webAddress:
+          description: The URL of the person's website.
+          type: string
+    Split:
+      properties:
+        account:
+          description: |+
+            Unique identifier of the account where the split amount should be sent. This is required if `type` is **MarketPlace** or **BalanceAccount**.
+
+          type: string
+        amount:
+          $ref: "#/components/schemas/SplitAmount"
+          description: The amount of this split.
+        description:
+          description: A description of this split.
+          type: string
+        reference:
+          description: |-
+            Your reference for the split, which you can use to link the split to other operations such as captures and refunds.
+
+            This is required if `type` is **MarketPlace**. For the other types, we also recommend sending a reference so you can reconcile the split and the associated payment in the transaction overview and in the reports. If the reference is not provided, the split is reported as part of the aggregated [TransferBalance record type](https://docs.adyen.com/reporting/marketpay-payments-accounting-report) in Adyen for Platforms.
+          type: string
+        type:
+          description: |-
+            The type of split.
+            Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**.
+          enum:
+            - BalanceAccount
+            - Commission
+            - Default
+            - MarketPlace
+            - PaymentFee
+            - VAT
+            - Verification
+          type: string
+      required:
+        - amount
+        - type
+    SplitAmount:
+      properties:
+        currency:
+          description: |-
+            The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
+
+            If this value is not provided, the currency in which the payment is made will be used.
+          maxLength: 3
+          minLength: 3
+          type: string
+        value:
+          description: The amount in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+          format: int64
+          type: integer
+      required:
+        - value
+    StoreDetail:
+      properties:
+        address:
+          $ref: "#/components/schemas/ViasAddress"
+          description: The address of the physical store where the account holder will process payments from.
+        fullPhoneNumber:
+          description: |-
+            The phone number of the store provided as a single string.  It will be handled as a landline phone.
+
+            Examples: "0031 6 11 22 33 44", "+316/1122-3344", "(0031) 611223344"
+          type: string
+        merchantAccount:
+          description: The merchant account to which the store belongs.
+          type: string
+        merchantCategoryCode:
+          description: The merchant category code (MCC) that classifies the business of the account holder.
+          type: string
+        phoneNumber:
+          $ref: "#/components/schemas/ViasPhoneNumber"
+          description: The phone number of the store.
+          readOnly: true
+        shopperInteraction:
+          description: "The sales channel. Possible values: **Ecommerce**, **POS**."
+          enum:
+            - Ecommerce
+            - POS
+          type: string
+          x-addedInVersion: 5
+        splitConfigurationUUID:
+          description: The unique reference for the split configuration, returned when you configure splits in your Customer Area. When this is provided, the `virtualAccount` is also required. Adyen uses the configuration and the `virtualAccount` to split funds between accounts in your platform.
+          type: string
+          x-addedInVersion: 5
+        status:
+          description: "The status of the store. Possible values: **Pending**, **Active**, **Inactive**, **InactiveWithModifications**, **Closed**."
+          enum:
+            - Active
+            - Closed
+            - Inactive
+            - InactiveWithModifications
+            - Pending
+          readOnly: true
+          type: string
+        store:
+          description: Adyen-generated unique alphanumeric identifier (UUID) for the store, returned in the response when you create a store. Required when updating an existing store in an `/updateAccountHolder` request.
+          type: string
+        storeName:
+          description: |-
+            The name of the account holder's store, between  3 to 22 characters in length.
+            This value will be shown in shopper statements.
+          type: string
+        storeReference:
+          description: |-
+            Your unique identifier for the store, between 3 to 128 characters in length.
+            This value will be shown as the store description in your Customer Area.
+          type: string
+        virtualAccount:
+          description: The account holder's `accountCode` where the split amount will be sent. Required when you provide the `splitConfigurationUUID`.
+          type: string
+          x-addedInVersion: 5
+        webAddress:
+          description: URL of the ecommerce store.
+          type: string
+          x-addedInVersion: 5
+      required:
+        - storeReference
+        - merchantCategoryCode
+        - address
+        - merchantAccount
     Transaction:
       properties:
         amount:
@@ -2229,9 +2560,11 @@ components:
         paymentPspReference:
           description: The psp reference of the related authorisation or transfer.
           type: string
+          x-addedInVersion: 3
         payoutPspReference:
           description: The psp reference of the related payout.
           type: string
+          x-addedInVersion: 3
         pspReference:
           description: The psp reference of a transaction.
           type: string
@@ -2239,10 +2572,9 @@ components:
           description: The code of the account from which funds were debited during an incoming fund transfer.
           type: string
         transactionStatus:
-          description: >-
+          description: |-
             The status of the transaction.
-
-            >Permitted values: `PendingCredit`, `CreditFailed`, `CreditClosed`, `Credited`, `Converted`, `PendingDebit`, `DebitFailed`, `Debited`, `DebitReversedReceived`, `DebitedReversed`, `ChargebackReceived`, `Chargeback`, `ChargebackReversedReceived`, `ChargebackReversed`, `Payout`, `PayoutReversed`, `FundTransfer`, `PendingFundTransfer`, `ManualCorrected`.
+            >Permitted values: `PendingCredit`, `CreditFailed`, `CreditClosed`, `CreditSuspended`, `Credited`, `Converted`, `PendingDebit`, `DebitFailed`, `Debited`, `DebitReversedReceived`, `DebitedReversed`, `ChargebackReceived`, `Chargeback`, `ChargebackReversedReceived`, `ChargebackReversed`, `Payout`, `PayoutReversed`, `FundTransfer`, `PendingFundTransfer`, `ManualCorrected`.
           enum:
             - Chargeback
             - ChargebackCorrection
@@ -2257,15 +2589,24 @@ components:
             - CreditFailed
             - CreditReversed
             - CreditReversedReceived
+            - CreditSuspended
             - Credited
             - DebitFailed
             - DebitReversedReceived
             - Debited
             - DebitedReversed
+            - DepositCorrectionCredited
+            - DepositCorrectionDebited
             - Fee
             - FundTransfer
             - FundTransferReversed
+            - InvoiceDeductionCredited
+            - InvoiceDeductionDebited
             - ManualCorrected
+            - ManualCorrectionCredited
+            - ManualCorrectionDebited
+            - MerchantPayin
+            - MerchantPayinReversed
             - Payout
             - PayoutReversed
             - PendingCredit
@@ -2285,10 +2626,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
+          x-addedInVersion: 5
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
+          x-addedInVersion: 4
         eventType:
           description: The event type of the notification.
           type: string
@@ -2321,9 +2664,11 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         merchantReference:
           description: The reference provided by the merchant.
           type: string
+          x-addedInVersion: 2
         sourceAccountCode:
           description: The code of the Account from which funds were debited.
           type: string
@@ -2349,14 +2694,17 @@ components:
         accountHolderStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the account holder.
+          x-addedInVersion: 2
         description:
           description: The description of the account holder.
           type: string
+          x-addedInVersion: 4
         invalidFields:
           description: in case the account holder has not been updated, contains account holder fields, that did not pass the validation.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         legalEntity:
           description: The legal entity of the account holder.
           enum:
@@ -2366,9 +2714,11 @@ components:
             - Partnership
             - PublicCompany
           type: string
+          x-addedInVersion: 4
         primaryCurrency:
           description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), with which the prospective account holder primarily deals.
           type: string
+          x-addedInVersion: 5
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2376,10 +2726,10 @@ components:
           description: The result code.
           type: string
         verification:
-          $ref: "#/components/schemas/KYCVerificationResult"
+          $ref: "#/components/schemas/KYCVerificationResult2"
           description: The details of KYC Verification of the account holder.
+          x-addedInVersion: 2
       required:
-        - pspReference
         - accountHolderStatus
         - verification
         - legalEntity
@@ -2388,27 +2738,41 @@ components:
         accountCode:
           description: The code of the account.
           type: string
+        bankAccountUUID:
+          description: The bankAccountUUID of the bank account held by the account holder to couple the account with. Scheduled payouts in currencies matching the currency of this bank account will be sent to this bank account. Payouts in different currencies will be sent to a matching bank account of the account holder.
+          type: string
+          x-addedInVersion: 5
         description:
           description: The description of the account.
           type: string
+          x-addedInVersion: 4
         invalidFields:
           description: A list of fields that caused the `/updateAccount` request to fail.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
+          x-addedInVersion: 5
         metadata:
           additionalProperties:
             type: string
+          description: A set of key and value pairs containing metadata.
           type: object
+          x-addedInVersion: 5
+        payoutMethodCode:
+          description: The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
+          type: string
+          x-addedInVersion: 5
         payoutSchedule:
           $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The payout schedule of the account.
         payoutSpeed:
           description: "Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`."
           enum:
+            - INSTANT
             - SAME_DAY
             - STANDARD
           type: string
+          x-addedInVersion: 5
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2416,47 +2780,38 @@ components:
           description: The result code.
           type: string
       required:
-        - pspReference
         - accountCode
     ViasAddress:
       properties:
         city:
-          description: >-
+          description: |-
             The name of the city.
-
             >Required if either `houseNumberOrName`, `street`, `postalCode`, or `stateOrProvince` are provided.
           type: string
         country:
-          description: >-
+          description: |-
             The two-character country code of the address. The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
-
             > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
           type: string
         houseNumberOrName:
           description: The number or name of the house.
           type: string
         postalCode:
-          description: >-
+          description: |-
             The postal code.
-
             >A maximum of five (5) digits for an address in the USA, or a maximum of ten (10) characters for an address in all other countries.
-
             >Required if either `houseNumberOrName`, `street`, `city`, or `stateOrProvince` are provided.
           type: string
         stateOrProvince:
-          description: >-
+          description: |-
             The abbreviation of the state or province.
-
             >Two (2) characters for an address in the USA or Canada, or a maximum of three (3) characters for an address in all other countries.
-
             >Required for an address in the USA or Canada if either `houseNumberOrName`, `street`, `city`, or `postalCode` are provided.
           type: string
         street:
-          description: >-
+          description: |-
             The name of the street.
-
             >The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
-
             >Required if either `houseNumberOrName`, `city`, `postalCode`, or `stateOrProvince` are provided.
           type: string
       required:
@@ -2467,21 +2822,18 @@ components:
           description: The first name.
           type: string
         gender:
-          description: >-
+          description: |-
             The gender.
-
             >The following values are permitted: `MALE`, `FEMALE`, `UNKNOWN`.
           enum:
             - MALE
             - FEMALE
             - UNKNOWN
           maxLength: 1
-          minLength: 1
           type: string
         infix:
-          description: >-
+          description: |-
             The name's infix, if applicable.
-
             >A maximum length of twenty (20) characters is imposed.
           type: string
         lastName:
@@ -2490,46 +2842,38 @@ components:
       required:
         - firstName
         - lastName
-        - gender
     ViasPersonalData:
       properties:
         dateOfBirth:
-          description: >-
-            The date of birth of the person.
-
-            The date should be in ISO-8601 format yyyy-mm-dd (e.g. 2000-01-31).
+          description: The person's date of birth, in ISO-8601 YYYY-MM-DD format. For example, **2000-01-31**.
           type: string
         documentData:
-          description: Key value pairs of document type and identify numbers
+          description: Array that contains information about the person's identification document. You can submit only one entry per document type.
           items:
             $ref: "#/components/schemas/PersonalDocumentData"
           type: array
+          x-addedInVersion: 3
         nationality:
-          description: >-
-            The nationality of the person represented by a two-character country code.
-
-            >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
+          description: |
+            The nationality of the person represented by a two-character country code,  in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **NL**.
           maxLength: 2
           minLength: 2
           type: string
     ViasPhoneNumber:
       properties:
         phoneCountryCode:
-          description: >-
+          description: |-
             The two-character country code of the phone number.
-
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
           type: string
         phoneNumber:
-          description: >-
+          description: |-
             The phone number.
-
             >The inclusion of the phone number country code is not necessary.
           type: string
         phoneType:
-          description: >-
+          description: |-
             The type of the phone number.
-
             >The following values are permitted: `Landline`, `Mobile`, `SIP`, `Fax`.
           enum:
             - Fax

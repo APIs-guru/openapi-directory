@@ -3,47 +3,31 @@ servers:
   - url: https://cal-test.adyen.com/cal/services/Notification/v3
 info:
   contact:
-    email: support@adyen.com
-    name: Adyen Support
-    url: https://support.adyen.com/
+    email: developer-experience@adyen.com
+    name: Adyen Developer Experience team
+    url: https://www.adyen.help/hc/en-us/community/topics
     x-twitter: Adyen
-  description: >-
+  description: |-
     The Notification Configuration API provides endpoints for setting up and testing notifications that inform you of events on your platform, for example when a KYC check or a payout has been completed.
 
-
-    For more information, refer to our [documentation](https://docs.adyen.com/platforms/marketpay-notifications).
-
+    For more information, refer to our [documentation](https://docs.adyen.com/platforms/notifications).
     ## Authentication
-
     To connect to the Notification Configuration API, you must use basic authentication credentials of your web service user. If you don't have one, contact our [Adyen Support Team](https://support.adyen.com/hc/en-us/requests/new). Then use its credentials to authenticate your request, for example:
 
-
     ```
-
     curl
-
     -U "ws@MarketPlace.YourMarketPlace":"YourWsPassword" \
-
     -H "Content-Type: application/json" \
-
     ...
-
     ```
-
     Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
 
-
     ## Versioning
-
     The Notification Configuration API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
 
-
     For example:
-
     ```
-
     https://cal-test.adyen.com/cal/services/Notification/v3/createNotificationConfiguration
-
     ```
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: "Adyen for Platforms: Notification Configuration API"
@@ -58,6 +42,7 @@ info:
       version: "3.0"
   x-preferred: false
   x-providerName: adyen.com
+  x-publicVersion: true
   x-serviceName: NotificationConfigurationService
 paths:
   /createNotificationConfiguration:
@@ -67,6 +52,9 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              basic:
+                $ref: "#/components/examples/post-createNotificationConfiguration-basic"
             schema:
               $ref: "#/components/schemas/CreateNotificationConfigurationRequest"
       responses:
@@ -76,6 +64,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
       summary: Subscribe to notifications.
       x-groupName: General
       x-sortIndex: 1
@@ -95,6 +113,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericResponse"
           description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
       summary: Delete an existing notification subscription configuration.
       x-groupName: General
       x-sortIndex: 6
@@ -114,6 +162,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
       summary: Retrieve an existing notification subscription configuration.
       x-groupName: General
       x-sortIndex: 2
@@ -133,6 +211,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/GetNotificationConfigurationListResponse"
           description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
       summary: Retrieve a list of existing notification subscription configurations.
       x-groupName: General
       x-sortIndex: 3
@@ -152,6 +260,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/TestNotificationConfigurationResponse"
           description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
       summary: Test an existing notification configuration.
       x-groupName: General
       x-sortIndex: 4
@@ -162,6 +300,9 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              basic:
+                $ref: "#/components/examples/post-updateNotificationConfiguration-basic"
             schema:
               $ref: "#/components/schemas/UpdateNotificationConfigurationRequest"
       responses:
@@ -171,10 +312,76 @@ paths:
               schema:
                 $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
       summary: Update an existing notification subscription configuration.
       x-groupName: General
       x-sortIndex: 5
 components:
+  examples:
+    post-createNotificationConfiguration-basic:
+      summary: Create a notification configuration
+      value:
+        configurationDetails:
+          active: true
+          description: Test notification769551
+          eventConfigs:
+            - NotificationEventConfiguration:
+                eventType: ACCOUNT_HOLDER_VERIFICATION
+                includeMode: INCLUDE
+          messageFormat: SOAP
+          notifyPassword: testPassword
+          notifyURL: https://www.adyen.com/notification-handler
+          notifyUsername: testUserName
+          sendActionHeader: true
+          sslProtocol: SSL
+    post-updateNotificationConfiguration-basic:
+      summary: Update notification configurations
+      value:
+        configurationDetails:
+          active: false
+          description: new description799847
+          eventConfigs:
+            - NotificationEventConfiguration:
+                eventType: ACCOUNT_HOLDER_CREATED
+                includeMode: EXCLUDE
+            - NotificationEventConfiguration:
+                eventType: ACCOUNT_CREATED
+                includeMode: INCLUDE
+          notificationId: 21259
+          notifyPassword: testPassword2
+          notifyURL: http://www.adyen.com
+          notifyUsername: testUserName2
+          sendActionHeader: false
+          sslProtocol: TLSv10
   schemas:
     CreateNotificationConfigurationRequest:
       properties:
@@ -209,11 +416,9 @@ components:
           description: The result code.
           type: string
         submittedAsync:
-          description: >-
+          description: |-
             Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
-
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
     GetNotificationConfigurationListResponse:
@@ -230,11 +435,9 @@ components:
           description: The result code.
           type: string
         submittedAsync:
-          description: >-
+          description: |-
             Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
-
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
       required:
@@ -259,11 +462,9 @@ components:
           description: The result code.
           type: string
         submittedAsync:
-          description: >-
+          description: |-
             Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
-
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
       required:
@@ -287,18 +488,16 @@ components:
           type: array
         messageFormat:
           deprecated: true
-          description: >-
+          description: |-
             The data format of the notification to be sent.
-
             >Permitted values: `JSON`, `SOAP`.
           enum:
             - JSON
             - SOAP
           type: string
         notificationId:
-          description: >-
+          description: |-
             The ID of the configuration.
-
             >Required if updating an existing configuration, ignored during the creation of a configuration.
           format: int64
           type: integer
@@ -313,15 +512,13 @@ components:
           type: string
         sendActionHeader:
           deprecated: true
-          description: >-
+          description: |-
             Indicates whether an action header should be included.
-
             >Only applies to SOAP messages (as specified in messageFormat).
           type: boolean
         sslProtocol:
-          description: >-
+          description: |-
             The SSL protocol employed by the endpoint.
-
             >Permitted values: `SSL`, `SSLInsecureCiphers`, `TLS`, `TLSv10`, `TLSv10InsecureCiphers`, `TLSv11`, `TLSv12`.
           enum:
             - SSL
@@ -338,13 +535,13 @@ components:
     NotificationEventConfiguration:
       properties:
         eventType:
-          description: >-
+          description: |-
             The type of event triggering the notification.
-
             >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_STORE_STATUS_CHANGE`, `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
           enum:
             - ACCOUNT_CLOSED
             - ACCOUNT_CREATED
+            - ACCOUNT_FUNDS_BELOW_THRESHOLD
             - ACCOUNT_HOLDER_CREATED
             - ACCOUNT_HOLDER_LIMIT_REACHED
             - ACCOUNT_HOLDER_PAYOUT
@@ -364,13 +561,10 @@ components:
             - TRANSFER_FUNDS
           type: string
         includeMode:
-          description: >-
+          description: |-
             Indicates whether the specified eventType is to be sent to the endpoint or all events other than the specified eventType (and other specified eventTypes) are to be sent.
-
             >Permitted values: `INCLUDE`, `EXCLUDE`.
-
             >- `INCLUDE`: send the specified eventType.
-
             >- `EXCLUDE`: send all eventTypes other than the specified eventType (and other eventTypes marked with `EXCLUDE`).
           enum:
             - EXCLUDE
@@ -379,17 +573,35 @@ components:
       required:
         - eventType
         - includeMode
+    ServiceError:
+      properties:
+        errorCode:
+          description: The error code mapped to the error message.
+          type: string
+        errorType:
+          description: The category of the error.
+          type: string
+        message:
+          description: A short explanation of the issue.
+          type: string
+        pspReference:
+          description: The PSP reference of the payment.
+          type: string
+        status:
+          description: The HTTP response status.
+          format: int32
+          type: integer
     TestNotificationConfigurationRequest:
       properties:
         eventTypes:
-          description: >-
+          description: |-
             The event types to test.  If left blank, then all of the configured event types will be tested.
-
             >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_STORE_STATUS_CHANGE` `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
           items:
             enum:
               - ACCOUNT_CLOSED
               - ACCOUNT_CREATED
+              - ACCOUNT_FUNDS_BELOW_THRESHOLD
               - ACCOUNT_HOLDER_CREATED
               - ACCOUNT_HOLDER_LIMIT_REACHED
               - ACCOUNT_HOLDER_PAYOUT
@@ -423,14 +635,14 @@ components:
             type: string
           type: array
         eventTypes:
-          description: >-
+          description: |-
             The event types that were tested.
-
             >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_STORE_STATUS_CHANGE` `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
           items:
             enum:
               - ACCOUNT_CLOSED
               - ACCOUNT_CREATED
+              - ACCOUNT_FUNDS_BELOW_THRESHOLD
               - ACCOUNT_HOLDER_CREATED
               - ACCOUNT_HOLDER_LIMIT_REACHED
               - ACCOUNT_HOLDER_PAYOUT
@@ -471,11 +683,9 @@ components:
           description: The result code.
           type: string
         submittedAsync:
-          description: >-
+          description: |-
             Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
-
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
       required:
