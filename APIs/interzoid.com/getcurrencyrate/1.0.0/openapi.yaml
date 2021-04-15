@@ -7,7 +7,10 @@ info:
     name: API Support
     url: https://www.interzoid.com
     x-twitter: interzoid
-  description: This API retrieves the latest currency exchange rate, against the US Dollar, for the given three-letter international currency code. These currency rates are compiled from many global sources and are updated several times per day.
+  description: This API retrieves the latest currency exchange rate, against the
+    US Dollar, for the given three-letter international currency code. These
+    currency rates are compiled from many global sources and are updated several
+    times per day.
   license:
     name: Interzoid license
     url: https://www.interzoid.com/license
@@ -30,10 +33,13 @@ externalDocs:
 paths:
   /getcurrencyrate:
     get:
-      description: Use a currency symbol (EUR, GBP, CNY, JPY, AUD, etc.) to obtain a live currency foreign exchange rate for one US Dollar. See the API home page for list of all supported currencies.
+      description: Use a currency symbol (EUR, GBP, CNY, JPY, AUD, etc.) to obtain a
+        live currency foreign exchange rate for one US Dollar. See the API home
+        page for list of all supported currencies.
       operationId: getcurrencyrate
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true

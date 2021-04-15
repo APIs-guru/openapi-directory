@@ -7,7 +7,9 @@ info:
     name: API Support
     url: https://www.interzoid.com
     x-twitter: interzoid
-  description: This API provides current weather information for US Cities, including temperatures, wind speeds, wind direction, relative humidity, and visibility.
+  description: This API provides current weather information for US Cities,
+    including temperatures, wind speeds, wind direction, relative humidity, and
+    visibility.
   license:
     name: Interzoid license
     url: https://www.interzoid.com/license
@@ -33,7 +35,8 @@ paths:
       description: Use a US zip code to retrieve current weather information
       operationId: getweatherzipcode
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true

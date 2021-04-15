@@ -7,7 +7,8 @@ info:
     name: API Support
     url: https://www.interzoid.com
     x-twitter: interzoid
-  description: This API enables you to convert an amount of one currency into another currency using current foreign exchange rates.
+  description: This API enables you to convert an amount of one currency into
+    another currency using current foreign exchange rates.
   license:
     name: Interzoid license
     url: https://www.interzoid.com/license
@@ -30,10 +31,14 @@ externalDocs:
 paths:
   /convertcurrency:
     get:
-      description: Provide an amount in one currency (EUR, GBP, CNY, JPY, AUD, etc.), and also a second currency to convert it to. The API will return the result using current foreign exchange rates. See the API home page for a list of all supported currencies.
+      description: Provide an amount in one currency (EUR, GBP, CNY, JPY, AUD, etc.),
+        and also a second currency to convert it to. The API will return the
+        result using current foreign exchange rates. See the API home page for a
+        list of all supported currencies.
       operationId: convertcurrency
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true

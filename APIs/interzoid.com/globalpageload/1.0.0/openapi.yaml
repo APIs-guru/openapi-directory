@@ -7,7 +7,9 @@ info:
     name: API Support
     url: https://www.interzoid.com
     x-twitter: interzoid
-  description: This API provides a timed, browser-simulated page load function (or a measured API call) from the specified geography using a server from that geography.
+  description: This API provides a timed, browser-simulated page load function (or
+    a measured API call) from the specified geography using a server from that
+    geography.
   license:
     name: Interzoid license
     url: https://www.interzoid.com/license
@@ -30,17 +32,20 @@ externalDocs:
 paths:
   /globalpageload:
     get:
-      description: >
+      description: |
         Gets page load performance from a specified geography
       operationId: globalpageload
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true
           schema:
             type: string
-        - description: Geographic location to perform the measurement from (Paris, Hong Kong, Seoul, Mumbai, Sao Paolo, London, etc. see API home page for full list)
+        - description: Geographic location to perform the measurement from (Paris, Hong
+            Kong, Seoul, Mumbai, Sao Paolo, London, etc. see API home page for
+            full list)
           in: query
           name: origin
           required: true
@@ -84,6 +89,8 @@ paths:
           description: method not allowed
         "500":
           description: internal server error
-      summary: Gets page load (or an API call) performance from a specified global geography such as Paris, Tokyo, Virginia, Mumbai, Frankfurt, London, Seoul, California, Sao Paolo, and many more.
+      summary: Gets page load (or an API call) performance from a specified global
+        geography such as Paris, Tokyo, Virginia, Mumbai, Frankfurt, London,
+        Seoul, California, Sao Paolo, and many more.
       tags:
         - Page Load Performance Time

@@ -7,7 +7,9 @@ info:
     name: API Support
     url: https://www.interzoid.com
     x-twitter: interzoid
-  description: This API provides geographic information for a global telephone number, including city and country information, primary languages spoken, and mobile device identification.
+  description: This API provides geographic information for a global telephone
+    number, including city and country information, primary languages spoken,
+    and mobile device identification.
   license:
     name: Interzoid license
     url: https://www.interzoid.com/license
@@ -30,10 +32,13 @@ externalDocs:
 paths:
   /getglobalnumberinfo:
     get:
-      description: Get demographic information for a global telephone number, including city and country information, primary languages spoken, and mobile device identification.
+      description: Get demographic information for a global telephone number,
+        including city and country information, primary languages spoken, and
+        mobile device identification.
       operationId: getglobalnumberinfo
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true

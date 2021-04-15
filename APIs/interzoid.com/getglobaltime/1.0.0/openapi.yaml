@@ -7,7 +7,8 @@ info:
     name: API Support
     url: https://www.interzoid.com
     x-twitter: interzoid
-  description: This API retrieves the current time for a city or geographic location around the globe.
+  description: This API retrieves the current time for a city or geographic
+    location around the globe.
   license:
     name: Interzoid license
     url: https://www.interzoid.com/license
@@ -30,10 +31,13 @@ externalDocs:
 paths:
   /getglobaltime:
     get:
-      description: Gets the current time for a global locale (city, state, region, or country such as Chicago, London, Paris, Seoul, Spain, Buenos Aires, Hawaii, Moscow, Tokyo, Hanoi, etc.)
+      description: Gets the current time for a global locale (city, state, region, or
+        country such as Chicago, London, Paris, Seoul, Spain, Buenos Aires,
+        Hawaii, Moscow, Tokyo, Hanoi, etc.)
       operationId: getglobaltime
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true

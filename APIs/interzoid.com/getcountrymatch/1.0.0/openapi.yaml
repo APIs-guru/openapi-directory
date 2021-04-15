@@ -7,7 +7,11 @@ info:
     name: API Support
     url: https://www.interzoid.com
     x-twitter: interzoid
-  description: This API provides a similarity key used to match with other similar country name data, including for purposes of deduplication, fuzzy matching, or merging of datasets. A much higher match rate will be achieved by matching on the algorithmically generated similarity key rather than the data itself.
+  description: This API provides a similarity key used to match with other similar
+    country name data, including for purposes of deduplication, fuzzy matching,
+    or merging of datasets. A much higher match rate will be achieved by
+    matching on the algorithmically generated similarity key rather than the
+    data itself.
   license:
     name: Interzoid license
     url: https://www.interzoid.com/license
@@ -33,7 +37,8 @@ paths:
       description: Gets a similarity key to use for matching purposes for country name data
       operationId: getcountrymatch
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true

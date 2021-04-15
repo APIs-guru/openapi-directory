@@ -7,7 +7,9 @@ info:
     name: API Support
     url: https://www.interzoid.com
     x-twitter: interzoid
-  description: This API provides a standard for country name for the purposes of standardizing country name data, improving query results, analytics, and data merging.
+  description: This API provides a standard for country name for the purposes of
+    standardizing country name data, improving query results, analytics, and
+    data merging.
   license:
     name: Interzoid license
     url: https://www.interzoid.com/license
@@ -30,10 +32,12 @@ externalDocs:
 paths:
   /getcountrystandard:
     get:
-      description: Gets a pre-selected country name standard for various permutations of a given country name.
+      description: Gets a pre-selected country name standard for various permutations
+        of a given country name.
       operationId: getcountrystandard
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true
