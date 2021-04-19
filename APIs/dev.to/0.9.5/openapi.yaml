@@ -83,7 +83,7 @@ paths:
       summary: Admin config
       tags:
         - admin-configuration
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -275,7 +275,7 @@ paths:
       summary: Published articles
       tags:
         - articles
-      x-code-samples:
+      x-codeSamples:
         - label: curl (all articles)
           lang: Shell
           source: |
@@ -305,7 +305,7 @@ paths:
         ### Additional resources
 
 
-        - [Rails tests for Articles API](https://github.com/forem/forem/blob/master/spec/requests/api/v0/articles_spec.rb)
+        - [Rails tests for Articles API](https://github.com/forem/forem/blob/main/spec/requests/api/v0/articles_spec.rb)
       operationId: createArticle
       requestBody:
         content:
@@ -393,7 +393,7 @@ paths:
       summary: Create a new article
       tags:
         - articles
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: >
@@ -480,7 +480,7 @@ paths:
       tags:
         - articles
         - users
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -539,7 +539,7 @@ paths:
       tags:
         - articles
         - users
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -587,7 +587,7 @@ paths:
       tags:
         - articles
         - users
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -643,7 +643,7 @@ paths:
       tags:
         - articles
         - users
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: >
@@ -676,7 +676,7 @@ paths:
       summary: A published article by ID
       tags:
         - articles
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -712,7 +712,7 @@ paths:
         ### Additional resources
 
 
-        - [Rails tests for Articles API](https://github.com/forem/forem/blob/master/spec/requests/api/v0/articles_spec.rb)
+        - [Rails tests for Articles API](https://github.com/forem/forem/blob/main/spec/requests/api/v0/articles_spec.rb)
       operationId: updateArticle
       requestBody:
         content:
@@ -804,7 +804,7 @@ paths:
       summary: Update an article
       tags:
         - articles
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -840,7 +840,7 @@ paths:
       summary: A published article by path
       tags:
         - articles
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: >
@@ -915,7 +915,7 @@ paths:
       summary: Comments
       tags:
         - comments
-      x-code-samples:
+      x-codeSamples:
         - label: curl (all comments of an article)
           lang: Shell
           source: |
@@ -969,7 +969,7 @@ paths:
       summary: Comment
       tags:
         - comments
-      x-code-samples:
+      x-codeSamples:
         - label: curl (a comment and its descendants)
           lang: Shell
           source: |
@@ -990,6 +990,17 @@ paths:
       parameters:
         - $ref: "#/components/parameters/pageParam"
         - $ref: "#/components/parameters/perPageParam80to1000"
+        - description: |
+            Specifies the sort order for the `created_at` param of the follow
+            relationship. To sort by newest followers first (descending order)
+            specify `?sort=-created_at`.
+          in: query
+          name: sort
+          required: false
+          schema:
+            default: created_at
+            pattern: ^-?\w+(,-?\w+)*$
+            type: string
       responses:
         "200":
           content:
@@ -1016,7 +1027,7 @@ paths:
       summary: Followers
       tags:
         - followers
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -1054,7 +1065,7 @@ paths:
       tags:
         - follows
         - tags
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -1098,7 +1109,7 @@ paths:
       summary: Published listings
       tags:
         - listings
-      x-code-samples:
+      x-codeSamples:
         - label: curl (all listings)
           lang: Shell
           source: |
@@ -1127,7 +1138,7 @@ paths:
         ### Additional resources
 
 
-        - [Rails tests for Listings API](https://github.com/forem/forem/blob/master/spec/requests/api/v0/listings_spec.rb)
+        - [Rails tests for Listings API](https://github.com/forem/forem/blob/main/spec/requests/api/v0/listings_spec.rb)
       operationId: createListing
       requestBody:
         content:
@@ -1191,7 +1202,7 @@ paths:
       summary: Create a new listing
       tags:
         - listings
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: >
@@ -1260,7 +1271,7 @@ paths:
       summary: Published listings by category
       tags:
         - listings
-      x-code-samples:
+      x-codeSamples:
         - label: curl (call for papers listings)
           lang: Shell
           source: |
@@ -1299,7 +1310,7 @@ paths:
       summary: A listing
       tags:
         - listings
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -1401,7 +1412,7 @@ paths:
       summary: Update a listing
       tags:
         - listings
-      x-code-samples:
+      x-codeSamples:
         - label: curl (bump)
           lang: Shell
           source: |
@@ -1453,7 +1464,7 @@ paths:
       summary: An organization
       tags:
         - organizations
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -1502,7 +1513,7 @@ paths:
       summary: Organization's Articles
       tags:
         - organizations
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -1555,7 +1566,7 @@ paths:
       summary: Organization's listings
       tags:
         - organizations
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -1604,7 +1615,7 @@ paths:
       summary: Organization's users
       tags:
         - organizations
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -1657,7 +1668,7 @@ paths:
       summary: Published podcast episodes
       tags:
         - podcast-episodes
-      x-code-samples:
+      x-codeSamples:
         - label: curl (all podcast episodes)
           lang: Shell
           source: |
@@ -1702,7 +1713,7 @@ paths:
       summary: User or organization profile picture
       tags:
         - profile images
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -1750,7 +1761,7 @@ paths:
       summary: User's reading list
       tags:
         - readinglist
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -1783,7 +1794,7 @@ paths:
       summary: Tags
       tags:
         - tags
-      x-code-samples:
+      x-codeSamples:
         - label: curl (all tags)
           lang: Shell
           source: |
@@ -1819,7 +1830,7 @@ paths:
       summary: The authenticated user
       tags:
         - users
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -1873,7 +1884,7 @@ paths:
       summary: A user
       tags:
         - users
-      x-code-samples:
+      x-codeSamples:
         - label: curl (by id)
           lang: Shell
           source: |
@@ -1912,7 +1923,7 @@ paths:
       tags:
         - articles
         - videos
-      x-code-samples:
+      x-codeSamples:
         - label: curl (all video articles)
           lang: Shell
           source: |
@@ -1968,7 +1979,7 @@ paths:
       summary: Webhooks
       tags:
         - webhooks
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -2034,7 +2045,7 @@ paths:
       summary: Create a new webhook
       tags:
         - webhooks
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: >
@@ -2075,7 +2086,7 @@ paths:
       summary: A webhook endpoint
       tags:
         - webhooks
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -2121,7 +2132,7 @@ paths:
       summary: A webhook endpoint
       tags:
         - webhooks
-      x-code-samples:
+      x-codeSamples:
         - label: curl
           lang: Shell
           source: |
@@ -2607,13 +2618,15 @@ components:
         status: 422
     Followers:
       value:
-        - id: 12
+        - created_at: 2021-04-02T04:21:46Z
+          id: 12
           name: Mrs. Neda Morissette
           path: /nedamrsmorissette
           profile_image: https://res.cloudinary.com/...
           type_of: user_follower
           username: nedamrsmorissette
-        - id: 11
+        - created_at: 2021-04-02T04:21:46Z
+          id: 11
           name: Yoko Hintz
           path: /yokohintz
           profile_image: https://res.cloudinary.com/...
@@ -2703,6 +2716,7 @@ components:
 
             https://bit.ly/TBDetroit
           category: cfp
+          created_at: 2021-04-07 08:29:42 UTC
           id: 1157
           processed_html: >
             <p>Do you want to learn about automation? Maybe you're
@@ -3536,6 +3550,10 @@ components:
       type: object
     Follower:
       properties:
+        created_at:
+          description: Date the user became a follower
+          format: date-time
+          type: string
         id:
           description: Follow id
           format: int32
@@ -3554,6 +3572,7 @@ components:
           type: string
       required:
         - type_of
+        - created_at
         - id
         - name
         - path

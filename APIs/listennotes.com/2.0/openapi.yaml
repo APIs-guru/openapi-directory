@@ -1133,7 +1133,17 @@ paths:
         - Directory API
   /search:
     get:
-      description: Full-text search on episodes, podcasts, or curated lists of podcasts.
+      description: >
+        Full-text search on episodes, podcasts, or curated lists of
+        podcasts.
+
+        Use the `offset` parameter to paginate through search results.
+
+        The FREE plan allows to see up to 30 search results (or `offset` < 30) per query.
+
+        The PRO plan allows to see up to 300 search results (or `offset` < 300) per query.
+
+        The ENTERPRISE plan allows to see up to 10,000 search results ( or `offset` < 10000) per query.
       operationId: search
       parameters:
         - description: Get API Key on listennotes.com/api

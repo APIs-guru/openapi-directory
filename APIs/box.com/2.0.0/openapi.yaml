@@ -3794,10 +3794,14 @@ paths:
                           type: boolean
                       type: object
                     unshared_at:
-                      description: |-
+                      description: >-
                         The timestamp at which this shared link will
+
                         expire. This field can only be set by
-                        users with paid accounts.
+
+                        users with paid accounts. The value must be greater than the
+
+                        current date and time.
                       example: 2012-12-12T10:53:43-08:00
                       format: date-time
                       type: string
@@ -4199,10 +4203,14 @@ paths:
                           type: boolean
                       type: object
                     unshared_at:
-                      description: |-
+                      description: >-
                         The timestamp at which this shared link will
+
                         expire. This field can only be set by
-                        users with paid accounts.
+
+                        users with paid accounts. The value must be greater than the
+
+                        current date and time.
                       example: 2012-12-12T10:53:43-08:00
                       format: date-time
                       type: string
@@ -7146,9 +7154,11 @@ paths:
             Returns an error when the folder could not be found.
 
 
-            * `not_found` - The folder could not be found, or the user does not have
+            * `not_found` - The folder could not be found, the user does not have
 
-            access to the folder.
+            access to the folder, or the user making call is not an owner or co-owner
+
+            of folder.
         default:
           content:
             application/json:
@@ -8490,10 +8500,14 @@ paths:
                           type: boolean
                       type: object
                     unshared_at:
-                      description: |-
+                      description: >-
                         The timestamp at which this shared link will
+
                         expire. This field can only be set by
-                        users with paid accounts.
+
+                        users with paid accounts. The value must be greater than the
+
+                        current date and time.
                       example: 2012-12-12T10:53:43-08:00
                       format: date-time
                       type: string
@@ -8899,10 +8913,14 @@ paths:
                           type: boolean
                       type: object
                     unshared_at:
-                      description: |-
+                      description: >-
                         The timestamp at which this shared link will
+
                         expire. This field can only be set by
-                        users with paid accounts.
+
+                        users with paid accounts. The value must be greater than the
+
+                        current date and time.
                       example: 2012-12-12T10:53:43-08:00
                       format: date-time
                       type: string
@@ -25047,6 +25065,13 @@ components:
             as the `grant_type`.
           example: xxxxx.yyyyy.zzzzz
           format: jwt
+          type: string
+        box_shared_link:
+          description: |-
+            Full URL of the shared link on the file or folder
+            that the token should be generated for.
+          example: https://cloud.box.com/s/123456
+          format: url
           type: string
         box_subject_id:
           description: >-

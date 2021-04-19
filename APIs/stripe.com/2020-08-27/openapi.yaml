@@ -21498,7 +21498,8 @@ paths:
         - description: The coupons to redeem into discounts for the invoice preview. If
             not specified, inherits the discount from the customer or
             subscription. Pass an empty string to avoid inheriting any
-            discounts.
+            discounts. To preview the upcoming invoice for a subscription that
+            hasn't been created, use `coupon` instead.
           explode: true
           in: query
           name: discounts
@@ -21935,7 +21936,8 @@ paths:
         - description: The coupons to redeem into discounts for the invoice preview. If
             not specified, inherits the discount from the customer or
             subscription. Pass an empty string to avoid inheriting any
-            discounts.
+            discounts. To preview the upcoming invoice for a subscription that
+            hasn't been created, use `coupon` instead.
           explode: true
           in: query
           name: discounts
@@ -62091,10 +62093,10 @@ components:
         type:
           description: >-
             The type of transaction-specific details of the payment method used
-            in the payment, one of `ach_credit_transfer`, `ach_debit`, `alipay`,
-            `au_becs_debit`, `bancontact`, `card`, `card_present`, `eps`,
-            `giropay`, `ideal`, `klarna`, `multibanco`, `p24`, `sepa_debit`,
-            `sofort`, `stripe_account`, or `wechat`.
+            in the payment, one of `ach_credit_transfer`, `ach_debit`,
+            `acss_debit`, `alipay`, `au_becs_debit`, `bancontact`, `card`,
+            `card_present`, `eps`, `giropay`, `ideal`, `klarna`, `multibanco`,
+            `p24`, `sepa_debit`, `sofort`, `stripe_account`, or `wechat`.
 
             An additional hash is included on `payment_method_details` with a name matching this value.
 
@@ -67609,6 +67611,8 @@ components:
           $ref: "#/components/schemas/source_type_ach_credit_transfer"
         ach_debit:
           $ref: "#/components/schemas/source_type_ach_debit"
+        acss_debit:
+          $ref: "#/components/schemas/source_type_acss_debit"
         alipay:
           $ref: "#/components/schemas/source_type_alipay"
         amount:
@@ -67732,6 +67736,7 @@ components:
           enum:
             - ach_credit_transfer
             - ach_debit
+            - acss_debit
             - alipay
             - au_becs_debit
             - bancontact
@@ -68380,6 +68385,39 @@ components:
           nullable: true
           type: string
         type:
+          nullable: true
+          type: string
+      type: object
+    source_type_acss_debit:
+      properties:
+        bank_address_city:
+          nullable: true
+          type: string
+        bank_address_line_1:
+          nullable: true
+          type: string
+        bank_address_line_2:
+          nullable: true
+          type: string
+        bank_address_postal_code:
+          nullable: true
+          type: string
+        bank_name:
+          nullable: true
+          type: string
+        category:
+          nullable: true
+          type: string
+        country:
+          nullable: true
+          type: string
+        fingerprint:
+          nullable: true
+          type: string
+        last4:
+          nullable: true
+          type: string
+        routing_number:
           nullable: true
           type: string
       type: object

@@ -905,7 +905,7 @@ paths:
   "/v2/record/{collectionId}/{recordId}.json":
     get:
       deprecated: false
-      operationId: getSingleRecordJson
+      operationId: getSingleRecordJson_3
       parameters:
         - description: callback
           in: query
@@ -994,7 +994,7 @@ paths:
   "/v2/record/{collectionId}/{recordId}.rdf":
     get:
       deprecated: false
-      operationId: getSingleRecordRDF
+      operationId: getSingleRecordRDF_3
       parameters:
         - description: collectionId
           in: path
@@ -1030,7 +1030,7 @@ paths:
   "/v2/record/{collectionId}/{recordId}.schema.jsonld":
     get:
       deprecated: false
-      operationId: getSingleRecordSchemaOrg_3
+      operationId: getSingleRecordSchemaOrg
       parameters:
         - description: callback
           in: query

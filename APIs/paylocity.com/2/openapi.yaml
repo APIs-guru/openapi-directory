@@ -1642,6 +1642,14 @@ paths:
           required: false
           schema:
             type: boolean
+        - description: Retrieve pay statement details related to specific deduction,
+            earning or tax types. Common values include 401k, Memo, Reg, OT,
+            Cash Tips, FED and SITW.
+          in: query
+          name: dettypes
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -1731,6 +1739,14 @@ paths:
           required: false
           schema:
             type: boolean
+        - description: Retrieve pay statement details related to specific deduction,
+            earning or tax types. Common values include 401k, Memo, Reg, OT,
+            Cash Tips, FED and SITW.
+          in: query
+          name: dettypes
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -1813,6 +1829,14 @@ paths:
           required: false
           schema:
             type: boolean
+        - description: Retrieve pay statement details related to specific deduction,
+            earning or tax types. Common values include 401k, Memo, Reg, OT,
+            Cash Tips, FED and SITW.
+          in: query
+          name: dettypes
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -1902,6 +1926,14 @@ paths:
           required: false
           schema:
             type: boolean
+        - description: Retrieve pay statement details related to specific deduction,
+            earning or tax types. Common values include 401k, Memo, Reg, OT,
+            Cash Tips, FED and SITW.
+          in: query
+          name: dettypes
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -2063,6 +2095,12 @@ paths:
         required: true
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/clientCredentialsResponse"
+                type: array
           description: Successfully added
         "400":
           content:
@@ -2272,6 +2310,20 @@ components:
             Employment Type of Full Time.
           nullable: true
           type: boolean
+      type: object
+    clientCredentialsResponse:
+      additionalProperties: false
+      description: The Client Credentials Response Model
+      properties:
+        clientSecret:
+          description: The client's secret
+          nullable: true
+          type: string
+        clientSecretExpirationDate:
+          description: The client's secret expiration date
+          format: paylocity-date
+          nullable: true
+          type: string
       type: object
     companyCodes:
       additionalProperties: false
@@ -4128,6 +4180,10 @@ components:
           nullable: true
           type: string
         detCode:
+          description: .<br />
+          nullable: true
+          type: string
+        detType:
           description: .<br />
           nullable: true
           type: string

@@ -612,17 +612,6 @@ components:
             windows (this might change in the future). Other objects are
             returned without semitransparency, even if set to true.
           type: boolean
-        shadow_method:
-          default: latest
-          description: >
-            Controls whether car shadows are generated through the `latest`
-            approach  with realistic results (default), or the outdated `legacy`
-            approach (DEPRECATED). Only affects requests with `add_shadow`
-            enabled.
-          enum:
-            - legacy
-            - latest
-          type: string
         size:
           default: preview
           description: >
@@ -813,17 +802,6 @@ components:
             windows (this might change in the future). Other objects are
             returned without semitransparency, even if set to true.
           type: boolean
-        shadow_method:
-          default: latest
-          description: >
-            Controls whether car shadows are generated through the `latest`
-            approach  with realistic results (default), or the outdated `legacy`
-            approach (DEPRECATED). Only affects requests with `add_shadow`
-            enabled.
-          enum:
-            - legacy
-            - latest
-          type: string
         size:
           default: preview
           description: >

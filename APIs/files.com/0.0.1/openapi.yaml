@@ -2999,6 +2999,10 @@ paths:
                     type: string
                   type: array
                   x-ms-summary: A list of paths to include in this bundle.
+                preview_only:
+                  description: Restrict users to previewing files only?
+                  type: boolean
+                  x-ms-summary: Restrict users to previewing files only?
                 require_registration:
                   description: Show a registration page that captures the downloader's name and
                     email address?
@@ -3251,6 +3255,10 @@ paths:
                     type: string
                   type: array
                   x-ms-summary: A list of paths to include in this bundle.
+                preview_only:
+                  description: Restrict users to previewing files only?
+                  type: boolean
+                  x-ms-summary: Restrict users to previewing files only?
                 require_registration:
                   description: Show a registration page that captures the downloader's name and
                     email address?
@@ -18313,6 +18321,9 @@ components:
               - file.txt
             type: string
           type: array
+        preview_only:
+          description: Restrict users to previewing files only?
+          type: boolean
         require_registration:
           description: Show a registration page that captures the downloader's name and
             email address?
@@ -18378,6 +18389,10 @@ components:
     BundleRegistrationEntity:
       description: List Bundle Registrations
       properties:
+        clickwrap_body:
+          description: Clickwrap text that was shown to the registrant
+          example: ""
+          type: string
         code:
           description: Registration cookie code
           example: abc123
@@ -19278,6 +19293,10 @@ components:
     InboxRegistrationEntity:
       description: List Inbox Registrations
       properties:
+        clickwrap_body:
+          description: Clickwrap text that was shown to the registrant
+          example: ""
+          type: string
         code:
           description: Registration cookie code
           example: abc123

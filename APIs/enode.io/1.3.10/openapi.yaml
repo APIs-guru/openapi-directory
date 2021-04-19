@@ -3,10 +3,10 @@ servers:
   - url: https://api.test.enode.io/
 info:
   description: >+
-    Download [OpenAPI 3.0 Specification](/OpenAPI-Enode-v1.3.10.json)
+    Download [OpenAPI 3.0 Specification](/OpenAPI-Enode-v1.4.0.json)
 
 
-    Download [Postman Collection](/Postman-Enode-v1.3.10.json)
+    Download [Postman Collection](/Postman-Enode-v1.4.0.json)
 
 
     The Enode API is designed to make smart charging applications easy to develop. We provide an abstraction layer that reduces the complexity when extracting vehicle data and sending commands to vehicles from a variety of manufacturers.
@@ -103,7 +103,7 @@ info:
     Authorization: Bearer {access_token}
 
     {
-      "forceLanguage": "no-NB",
+      "forceLanguage": "nb-NO",
       "vendor": "Tesla",
     }
 
@@ -464,10 +464,171 @@ tags:
 
 
       The `vehicle` property follows the same schema as [Get Vehicle](#operation/getVehiclesVehicleid), and only changed fields will be populated.
-    name: Webhooks 🧪
+    name: Webhooks
   - description: The `Me` endpoint returns metadata about the authenticated User.
     name: Me
 paths:
+  /chargers:
+    get:
+      operationId: getChargers
+      parameters:
+        - description: >-
+            An optional array of Charger fields that should be included in the
+            response, for example: `?field[]=information&field[]=chargeState` 
+
+
+            By default, no optional fields are included and only the Charger ID will be returned. Response time will generally be slower the more fields you request.
+          explode: true
+          in: query
+          name: field[]
+          schema:
+            items:
+              enum:
+                - chargeState
+                - location
+              type: string
+            type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/paths/~1chargers~1%7BchargerId%7D/get/responses/200/content/applicatio\
+                    n~1json/schema"
+                type: array
+          description: Successful
+      security:
+        - UserAccessToken:
+            - all
+        - UserAccessToken:
+            - charger:charge_state
+        - UserAccessToken:
+            - charger:information
+      summary: List Chargers
+      tags:
+        - Chargers
+  "/chargers/{chargerId}":
+    get:
+      operationId: getCharger
+      parameters:
+        - description: ID of the Charger
+          in: path
+          name: chargerId
+          required: true
+          schema:
+            minLength: 1
+            type: string
+        - $ref: "#/paths/~1chargers/get/parameters/0"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  chargeState:
+                    properties:
+                      chargeRate:
+                        description: >-
+                          The current charge rate in kW.
+
+
+                          This property is only available when the charger is actively charging a vehicle, and is `null` any other time.
+                        example: 40.1
+                        minimum: 0
+                        type: number
+                      isCharging:
+                        description: Current charging status
+                        example: false
+                        type: boolean
+                      isPluggedIn:
+                        description: Indicates whether the charger has a vehicle plugged into it
+                          (regardless of whether that vehicle is actually
+                          charging)
+                        example: true
+                        type: boolean
+                    type: object
+                  id:
+                    description: Charger ID
+                    type: string
+                  information:
+                    description: Descriptive information about the Charger
+                    properties:
+                      brand:
+                        description: Charger brand
+                        example: Easee
+                        type: string
+                      id:
+                        description: Charger ID
+                        example: 8d90101b-3f2f-462a-bbb4-1ed320d33bbe
+                        type: string
+                      model:
+                        description: Charger model
+                        example: Home
+                        type: string
+                      year:
+                        description: Charger production year
+                        example: 2020
+                        type: integer
+                    type: object
+                  isReachable:
+                    description: Is the charger currently reachable?
+                    type: boolean
+                  lastSeen:
+                    description: The last time the charger was successfully communicated with
+                    format: date
+                    type: string
+                type: object
+          description: Successful
+      security:
+        - UserAccessToken:
+            - all
+        - UserAccessToken:
+            - charger:charge_state
+        - UserAccessToken:
+            - charger:information
+      summary: Get Charger
+      tags:
+        - Chargers
+  "/chargers/{chargerId}/charging":
+    post:
+      description: Instruct the charger to start or stop charging
+      operationId: controlChargerCharging
+      parameters:
+        - description: ID of the Charger
+          in: path
+          name: chargerId
+          required: true
+          schema:
+            minLength: 1
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                action:
+                  description: Charging action to perform
+                  enum:
+                    - START
+                    - STOP
+                  example: START
+                  type: string
+              required:
+                - action
+              type: object
+      responses:
+        "204":
+          content: {}
+          description: No Content
+      security:
+        - UserAccessToken:
+            - all
+        - UserAccessToken:
+            - control:charger:charging
+      summary: Control Charging
+      tags:
+        - Chargers
   /charging-locations:
     get:
       description: Returns a list of Charging Locations registered to the User
@@ -477,7 +638,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/List_of_Charging_Locations"
+                items:
+                  $ref: "#/paths/~1charging-locations/post/requestBody/content/application~1json/\
+                    schema"
+                type: array
           description: Successful
       security:
         - UserAccessToken:
@@ -490,13 +654,38 @@ paths:
     post:
       operationId: postCharginglocations
       requestBody:
-        $ref: "#/components/requestBodies/Post_Charging_Location_Payload"
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  description: Charging Location ID
+                  example: 8d90101b-3f2f-462a-bbb4-1ed320d33bbe
+                  format: uuid
+                  readOnly: true
+                  type: string
+                latitude:
+                  description: Latitude in degrees
+                  example: 59.911491
+                  type: number
+                longitude:
+                  description: Longitude in degrees
+                  example: 10.757933
+                  type: number
+                name:
+                  description: User-supplied name for the Charging Location
+                  example: Home
+                  type: string
+              required:
+                - id
+              type: object
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Charging_Location"
+                $ref: "#/paths/~1charging-locations/post/requestBody/content/application~1json/\
+                  schema"
           description: Created
       security:
         - UserAccessToken:
@@ -547,7 +736,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Charging_Location"
+                $ref: "#/paths/~1charging-locations/post/requestBody/content/application~1json/\
+                  schema"
           description: Successful
       security:
         - UserAccessToken:
@@ -570,13 +760,18 @@ paths:
           x-format:
             guid: true
       requestBody:
-        $ref: "#/components/requestBodies/Post_Charging_Location_Payload"
+        content:
+          application/json:
+            schema:
+              $ref: "#/paths/~1charging-locations/post/requestBody/content/application~1json/\
+                schema"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Charging_Location"
+                $ref: "#/paths/~1charging-locations/post/requestBody/content/application~1json/\
+                  schema"
           description: Successful
       security:
         - UserAccessToken:
@@ -614,7 +809,35 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Model3"
+                example:
+                  - displayName: Tesla
+                    status: READY
+                    vendor: TESLA
+                  - displayName: BMW
+                    status: READY
+                    vendor: BMW
+                  - displayName: Audi
+                    status: READY
+                    vendor: AUDI
+                items:
+                  description: Vendor status and metadata
+                  properties:
+                    displayName:
+                      description: Displayable name of the Vendor
+                      example: Tesla
+                      type: string
+                    status:
+                      description: Ready-state of the Vendor
+                      enum:
+                        - READY
+                        - ELEVATED_ERROR_RATE
+                        - OUTAGE
+                      example: READY
+                      type: string
+                    vendor:
+                      $ref: "#/paths/~1me~1vendors~1%7Bvendor%7D/delete/parameters/0/schema"
+                  type: object
+                type: array
           description: Successful
       summary: Check Available Vendors
       tags:
@@ -622,14 +845,33 @@ paths:
   /me:
     get:
       description: Returns metadata about the authenticated User, including a list of
-        vendors for which the user has provided credentials
+        vendors for which the user has provided credentials.
       operationId: getMe
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Model1"
+                properties:
+                  id:
+                    example: 123456789-ABc
+                    minLength: 1
+                    type: string
+                  linkedVendors:
+                    items:
+                      properties:
+                        isValid:
+                          description: Whether the provided credentials are currently valid. A `false`
+                            value here indicates that a credential has become
+                            invalidated, and [Link
+                            User](#operation/postUsersUseridLink) should be used
+                            to get new credentials from this user.
+                          type: boolean
+                        vendor:
+                          $ref: "#/paths/~1me~1vendors~1%7Bvendor%7D/delete/parameters/0/schema"
+                      type: object
+                    type: array
+                type: object
           description: Successful
       security:
         - UserAccessToken: []
@@ -643,13 +885,14 @@ paths:
 
 
         All stored data about their Vendor account will be deleted, and any vehicles that were provided by that Vendor will disappear from the system.
-      operationId: deleteMeVendorsVendor
+      operationId: disconnectVendor
       parameters:
         - description: Vendor to be unlinked
           in: path
           name: vendor
           required: true
           schema:
+            description: Vendor ID
             enum:
               - TESLA
               - BMW
@@ -658,6 +901,7 @@ paths:
               - HYUNDAI
               - PEUGEOT
               - NISSAN
+            example: TESLA
             type: string
       responses:
         "204":
@@ -720,13 +964,80 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Statistics_Charging_Timeseries"
+                example:
+                  - costSum: 3.14
+                    date: 2021-01-19T09:37:36.845Z
+                    kw:
+                      max: 78
+                      mean: 61
+                      min: 0
+                    kwhSum: 120
+                    price:
+                      max: 14.4
+                      mean: 14.1
+                      min: 13.8
+                items:
+                  properties:
+                    costSum:
+                      description: Total cost in <CURRENCY>
+                      example: 3.14
+                      type: number
+                    date:
+                      description: The start date of this sample within the timeseries
+                      format: date
+                      type: string
+                    kw:
+                      description: Aggregate statistics for charge rate in kW
+                      properties:
+                        max:
+                          example: 78
+                          type: number
+                        mean:
+                          example: 61
+                          type: number
+                        min:
+                          example: 0
+                          type: number
+                      required:
+                        - min
+                        - max
+                        - mean
+                      type: object
+                    kwhSum:
+                      description: Total power consumption in kWh
+                      example: 120
+                      type: number
+                    price:
+                      description: Aggregate statistics for power price (<CURRENCY> per kWh)
+                      properties:
+                        max:
+                          example: 78
+                          type: number
+                        mean:
+                          example: 61
+                          type: number
+                        min:
+                          example: 0
+                          type: number
+                      required:
+                        - min
+                        - max
+                        - mean
+                      type: object
+                  required:
+                    - kw
+                    - kwhSum
+                    - price
+                    - costSum
+                    - date
+                  type: object
+                type: array
           description: Successful
       security:
         - UserAccessToken: []
       summary: Get User Charging Statistics
       tags:
-        - Experimental 🧪
+        - Statistics
   "/users/{userId}":
     delete:
       description: Deletes a User and all of their data permanently, and invalidates
@@ -797,13 +1108,56 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Link_User_Options"
+              properties:
+                forceLanguage:
+                  description: BCP47 language code - Force the Link UI to prefer the specified
+                    language. If omitted, the UI will default to the user's
+                    browser default language.
+                  example: nb-NO
+                  type: string
+                linkMultiple:
+                  default: false
+                  description: Allow multiple car vendors to be linked during a single Link
+                    session. Automatically disabled if `vendor` is set.
+                  type: boolean
+                userImage:
+                  description: Full URL to an image that the user would recognize as being their
+                    own. This URL is only stored for the duration of the Link
+                    session, and is displayed to the user to reduce the
+                    effectiveness of phishing attacks.
+                  example: https://cdn.website.example/user/x/profile.jpg
+                  type: string
+                userName:
+                  description: The User's first name, full name, or other identifier that the user
+                    would recognize as being their own. This name is only stored
+                    for the duration of the Link session, and is displayed to
+                    the user to reduce the effectiveness of phishing attacks.
+                  example: Ola
+                  type: string
+                vendor:
+                  description: Automatically skip to the credential input screen for this vendor,
+                    skipping the Vendor selection menu.
+                  enum:
+                    - TESLA
+                    - BMW
+                    - AUDI
+                    - VOLKSWAGEN
+                    - HYUNDAI
+                    - PEUGEOT
+                    - NISSAN
+                  example: TESLA
+                  type: string
+              type: object
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Link_User_Response"
+                properties:
+                  linkState:
+                    example: ZjE2MzMxMGFiYmU4MzcxOTU1ZmRjMTU5NGU2ZmE4YTU3NjViMzIwY2YzNG
+                    type: string
+                type: object
           description: Successful
       security:
         - ClientAccessToken: []
@@ -822,25 +1176,21 @@ paths:
             By default, no fields are included and only the Vehicle ID will be returned. Response time may be impacted by which fields you request.
           explode: true
           in: query
-          name: field
+          name: field[]
           schema:
             items:
-              enum:
-                - smartChargingPolicy
-                - chargeState
-                - location
-                - information
-                - odometer
-              type: string
+              $ref: "#/paths/~1vehicles~1%7BvehicleId%7D/get/parameters/1"
             type: array
-          x-constraint:
-            single: true
+          style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/List_of_Vehicles"
+                items:
+                  $ref: "#/paths/~1vehicles~1%7BvehicleId%7D/get/responses/200/content/applicatio\
+                    n~1json/schema"
+                type: array
           description: Successful
       security:
         - UserAccessToken:
@@ -877,7 +1227,7 @@ paths:
             By default, no fields are included and only the Vehicle ID will be returned. Response time may be impacted by which fields you request.
           explode: true
           in: query
-          name: field
+          name: field[]
           schema:
             items:
               enum:
@@ -888,14 +1238,50 @@ paths:
                 - odometer
               type: string
             type: array
-          x-constraint:
-            single: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Vehicle"
+                properties:
+                  chargeState:
+                    $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1charge-state/get/responses/200/cont\
+                      ent/application~1json/schema"
+                  chargingLocationId:
+                    description: Id of the charging location the vehicle is currently positioned at
+                      (if any)
+                    example: 8d90101b-3f2f-462a-bbb4-1ed320d33bbe
+                    type: string
+                    x-format:
+                      guid: true
+                  id:
+                    description: Vehicle ID
+                    type: string
+                  information:
+                    $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1information/get/responses/200/conte\
+                      nt/application~1json/schema"
+                  isReachable:
+                    description: Is the vehicle currently reachable?
+                    type: boolean
+                  lastSeen:
+                    description: The last time vehicle was successfully communicated with
+                    format: date
+                    type: string
+                  location:
+                    $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1location/get/responses/200/content/\
+                      application~1json/schema"
+                  odometer:
+                    $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1odometer/get/responses/200/content/\
+                      application~1json/schema"
+                  smartChargingPolicy:
+                    $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1smart-charging-policy/put/requestBo\
+                      dy/content/application~1json/schema"
+                required:
+                  - id
+                  - lastSeen
+                  - isReachable
+                  - chargingLocationId
+                type: object
           description: Successful
       security:
         - UserAccessToken:
@@ -915,21 +1301,103 @@ paths:
         - Vehicles
   "/vehicles/{vehicleId}/charge-state":
     get:
-      operationId: getVehiclesVehicleidChargestate
+      operationId: getVehicleChargestate
       parameters:
-        - description: ID of the Vehicle
-          in: path
-          name: vehicleId
-          required: true
-          schema:
-            minLength: 1
-            type: string
+        - $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1watch/post/parameters/0"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Charge_State"
+                properties:
+                  batteryCapacity:
+                    description: Vehicle's maximum physical battery capacity in kWh. This number
+                      slowly decreases/degrades over time.
+                    example: 73.21
+                    minimum: 0
+                    type: number
+                  batteryLevel:
+                    description: Remaining battery in percent
+                    example: "38"
+                    maximum: 100
+                    minimum: 0
+                    type: number
+                  chargeLimit:
+                    description: Charge limit, as a percent of `batteryCapacity`.
+                    example: 80
+                    maximum: 100
+                    minimum: 0
+                    type: number
+                  chargeRate:
+                    description: >-
+                      The current charge rate in kW.
+
+
+                      This property is only available when the vehicle is charging, and is `null` any other time.
+                    example: 40.1
+                    minimum: 0
+                    type: number
+                  chargeTimeRemaining:
+                    description: >-
+                      Estimated time until the current charging intent is completed, in
+                      minutes.
+
+
+                      This property is only available when the vehicle is charging, and is `null` any other time.
+                    example: 319
+                    type: number
+                  isCharging:
+                    description: Current charging status of the vehicle
+                    example: false
+                    type: boolean
+                  isChargingReasons:
+                    description: >-
+                      Array of string constants that explain why the car is or is not
+                      charging. May contain multiple values.
+
+
+                      **Any:**
+
+                      - DEFAULT - the car is not being controlled by Enode
+
+
+                      **Not Charging:**
+
+                      - NOT_PLUGGED_IN - because the car is not plugged into a charger
+
+                      - FULLY_CHARGED - because the car is fully charged
+
+                      - MANUALLY_STOPPED - because the car has been manually commanded to stop charging
+
+                      - SMART_CHARGING_DELAY - because Smart Charging has identified an opportunity to delay charging until prices are lower
+
+
+                      **Charging:**
+
+                      - MANUALLY_STARTED - because the car has been manually commanded to start charging
+
+                      - SMART_CHARGING_ACTIVE - because Smart Charging has identified that this is an optimal time to charge
+
+                      - SMART_CHARGING_DEADLINE - because, regardless of price, charging must be active to meet the configured deadline
+                    example:
+                      - SMART_CHARGING_DELAY
+                    items:
+                      enum:
+                        - override: true
+                        - DEFAULT
+                      type: string
+                    type: array
+                  isPluggedIn:
+                    description: Indicates whether the vehicle is connected to a charging box
+                      (regardless of whether it is actually charging)
+                    example: true
+                    type: boolean
+                  range:
+                    description: Estimated remaining kilometers
+                    example: "127.5"
+                    minimum: 0
+                    type: number
+                type: object
           description: Successful
       security:
         - UserAccessToken:
@@ -957,18 +1425,7 @@ paths:
         The smart charging settings are not altered by these actions.
       operationId: postVehiclesVehicleidCharging
       parameters:
-        - description: ID of the Vehicle
-          in: path
-          name: vehicleId
-          required: true
-          schema:
-            minLength: 1
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Vehicle_Charging_Action"
+        - $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1watch/post/parameters/0"
       responses:
         "204":
           content: {}
@@ -985,19 +1442,31 @@ paths:
     get:
       operationId: getVehiclesVehicleidInformation
       parameters:
-        - description: ID of the Vehicle
-          in: path
-          name: vehicleId
-          required: true
-          schema:
-            minLength: 1
-            type: string
+        - $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1watch/post/parameters/0"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Vehicle_Information"
+                description: Descriptive information about the Vehicle
+                properties:
+                  brand:
+                    description: Vehicle brand
+                    example: Tesla
+                    type: string
+                  id:
+                    description: Vehicle ID
+                    example: 8d90101b-3f2f-462a-bbb4-1ed320d33bbe
+                    type: string
+                  model:
+                    description: Vehicle model
+                    example: Model S P85
+                    type: string
+                  year:
+                    description: Vehicle production year
+                    example: 2020
+                    type: integer
+                type: object
           description: Descriptive information about the Vehicle
       security:
         - UserAccessToken:
@@ -1011,19 +1480,28 @@ paths:
     get:
       operationId: getVehiclesVehicleidLocation
       parameters:
-        - description: ID of the Vehicle
-          in: path
-          name: vehicleId
-          required: true
-          schema:
-            minLength: 1
-            type: string
+        - $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1watch/post/parameters/0"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Vehicle_Location"
+                description: Vehicle's GPS coordinates with timestamp
+                properties:
+                  lastUpdated:
+                    description: ISO8601 UTC timestamp of last received location
+                    example: 2020-04-07T17:04:26Z
+                    format: date
+                    type: string
+                  latitude:
+                    description: Latitude in degrees
+                    example: 59.911491
+                    type: number
+                  longitude:
+                    description: Longitude in degrees
+                    example: 10.757933
+                    type: number
+                type: object
           description: Vehicle's GPS coordinates with timestamp
       security:
         - UserAccessToken:
@@ -1037,19 +1515,24 @@ paths:
     get:
       operationId: getVehiclesVehicleidOdometer
       parameters:
-        - description: ID of the Vehicle
-          in: path
-          name: vehicleId
-          required: true
-          schema:
-            minLength: 1
-            type: string
+        - $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1watch/post/parameters/0"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Vehicle_Odometer"
+                description: Vehicle's odometer with timestamp
+                properties:
+                  distance:
+                    description: Odometer in kilometers
+                    example: 24650
+                    type: number
+                  lastUpdated:
+                    description: ISO8601 UTC timestamp of last received odometer update
+                    example: 2020-01-07T16:21:76Z
+                    format: date
+                    type: string
+                type: object
           description: Vehicle's odometer with timestamp
       security:
         - UserAccessToken:
@@ -1063,19 +1546,14 @@ paths:
     get:
       operationId: getVehiclesVehicleidSmartchargingpolicy
       parameters:
-        - description: ID of the Vehicle
-          in: path
-          name: vehicleId
-          required: true
-          schema:
-            minLength: 1
-            type: string
+        - $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1watch/post/parameters/0"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Vehicle_Smart_Charging_Policy"
+                $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1smart-charging-policy/put/requestBo\
+                  dy/content/application~1json/schema"
           description: Successful
       security:
         - UserAccessToken:
@@ -1100,13 +1578,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Vehicle_Smart_Charging_Policy"
+              properties:
+                deadline:
+                  description: The deadline for fully charging the vehicle. Smart charging does
+                    not work without setting a deadline. The deadline is
+                    expressed as a time on a 24h clock in UTC
+                  example: 08:00
+                  pattern: \d{2}:\d{2}
+                  type: string
+                isEnabled:
+                  description: When enabled, this vehicle's charging status may be controlled by
+                    Smart Charging.
+                  example: true
+                  type: boolean
+              type: object
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Vehicle_Smart_Charging_Policy"
+                $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1smart-charging-policy/put/requestBo\
+                  dy/content/application~1json/schema"
           description: Successful
       security:
         - UserAccessToken:
@@ -1142,13 +1634,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Start_Vehicle_Watch_Payload"
+              properties:
+                properties:
+                  description: Array of vehicle properties to watch
+                  enum:
+                    - BATTERY_LEVEL
+                    - RANGE
+                    - IS_PLUGGED_IN
+                    - IS_CHARGING
+                    - IS_CHARGING_REASONS
+                    - LOCATION
+                  example:
+                    - LOCATION
+                    - BATTERY_LEVEL
+                  type: string
+              type: object
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Start_Vehicle_Watch_Payload"
+                $ref: "#/paths/~1vehicles~1%7BvehicleId%7D~1watch/post/requestBody/content/appl\
+                  ication~1json/schema"
           description: Successful
       security:
         - UserAccessToken:
@@ -1167,7 +1674,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Update_Firehose_Webhook"
+              properties:
+                secret:
+                  description: A cryptographically secure secret, generated and provided by your
+                    client
+                  example: 0Kvs1tAUQ69FOMBiWlt5XJSrruXMhWDiVbyrWaNm
+                  type: string
+                url:
+                  description: The HTTPS url to which Enode should POST the event payload when a
+                    watched property changes
+                  example: https://brainpower.co/enode-webhooks/firehose
+                  type: string
+                  x-format:
+                    uri: true
+              type: object
       responses:
         "204":
           content: {}
@@ -1195,485 +1715,6 @@ paths:
       tags:
         - Webhooks 🧪
 components:
-  requestBodies:
-    Post_Charging_Location_Payload:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Post_Charging_Location_Payload"
-  schemas:
-    Charge_Rate_Aggregates:
-      description: Aggregate statistics for charge rate in kW
-      properties:
-        max:
-          example: 78
-          type: number
-        mean:
-          example: 61
-          type: number
-        min:
-          example: 0
-          type: number
-      required:
-        - min
-        - max
-        - mean
-      type: object
-    Charge_State:
-      properties:
-        batteryCapacity:
-          description: Vehicle's maximum physical battery capacity in kWh. This number
-            slowly decreases/degrades over time.
-          example: 73.21
-          minimum: 0
-          type: number
-        batteryLevel:
-          description: Remaining battery in percent
-          example: "38"
-          maximum: 100
-          minimum: 0
-          type: number
-        chargeLimit:
-          description: Charge limit, as a percent of `batteryCapacity`.
-          example: 80
-          maximum: 100
-          minimum: 0
-          type: number
-        chargeRate:
-          description: >-
-            The current charge rate in kW.
-
-
-            This property is only available when the vehicle is charging, and is `null` any other time.
-          example: 40.1
-          minimum: 0
-          type: number
-        chargeTimeRemaining:
-          description: >-
-            Estimated time until the current charging intent is completed, in
-            minutes.
-
-
-            This property is only available when the vehicle is charging, and is `null` any other time.
-          example: 319
-          type: number
-        isCharging:
-          description: Current charging status of the vehicle
-          example: false
-          type: boolean
-        isChargingReasons:
-          $ref: "#/components/schemas/isChargingReasons"
-        isPluggedIn:
-          description: Indicates whether the vehicle is connected to a charging box
-            (regardless of whether it is actually charging)
-          example: true
-          type: boolean
-        range:
-          description: Estimated remaining kilometers
-          example: "127.5"
-          minimum: 0
-          type: number
-      type: object
-    Charging_Location:
-      properties:
-        id:
-          description: Charging Location ID
-          example: 8d90101b-3f2f-462a-bbb4-1ed320d33bbe
-          type: string
-          x-format:
-            guid: true
-        latitude:
-          description: Latitude in degrees
-          example: 59.911491
-          type: number
-        longitude:
-          description: Longitude in degrees
-          example: 10.757933
-          type: number
-        name:
-          description: User-supplied name for the Charging Location
-          example: Home
-          type: string
-      type: object
-    Link_User_Options:
-      properties:
-        forceLanguage:
-          description: BCP47 language code - Force the Link UI to prefer the specified
-            language. If omitted, the UI will default to the user's browser
-            default language.
-          example: no-NB
-          type: string
-        linkMultiple:
-          default: false
-          description: Allow multiple car vendors to be linked during a single Link
-            session. Automatically disabled if `vendor` is set.
-          type: boolean
-        userImage:
-          description: Full URL to an image that the user would recognize as being their
-            own. This URL is only stored for the duration of the Link session,
-            and is displayed to the user to reduce the effectiveness of phishing
-            attacks.
-          example: https://cdn.website.example/user/x/profile.jpg
-          type: string
-        userName:
-          description: The User's first name, full name, or other identifier that the user
-            would recognize as being their own. This name is only stored for the
-            duration of the Link session, and is displayed to the user to reduce
-            the effectiveness of phishing attacks.
-          example: Ola
-          type: string
-        vendor:
-          description: Automatically skip to the credential input screen for this vendor,
-            skipping the Vendor selection menu.
-          enum:
-            - TESLA
-            - BMW
-            - AUDI
-            - VOLKSWAGEN
-            - HYUNDAI
-            - PEUGEOT
-            - NISSAN
-          example: TESLA
-          type: string
-      type: object
-    Link_User_Response:
-      properties:
-        linkState:
-          example: ZjE2MzMxMGFiYmU4MzcxOTU1ZmRjMTU5NGU2ZmE4YTU3NjViMzIwY2YzNG
-          type: string
-      type: object
-    Linked_Vendor:
-      properties:
-        isValid:
-          description: Whether the provided credentials are currently valid. A `false`
-            value here indicates that a credential has become invalidated, and
-            [Link User](#operation/postUsersUseridLink) should be used to get
-            new credentials from this user.
-          type: boolean
-        vendor:
-          description: Vendor
-          enum:
-            - TESLA
-            - BMW
-            - AUDI
-            - VOLKSWAGEN
-            - HYUNDAI
-            - PEUGEOT
-            - NISSAN
-          type: string
-      type: object
-    List_of_Charging_Locations:
-      items:
-        $ref: "#/components/schemas/Charging_Location"
-      type: array
-    List_of_Linked_Vendors:
-      items:
-        $ref: "#/components/schemas/Linked_Vendor"
-      type: array
-    List_of_Vehicles:
-      items:
-        $ref: "#/components/schemas/Vehicle"
-      type: array
-    Model1:
-      properties:
-        id:
-          example: 123456789-ABc
-          minLength: 1
-          type: string
-        linkedVendors:
-          $ref: "#/components/schemas/List_of_Linked_Vendors"
-      type: object
-    Model2:
-      description: Vendor status and metadata
-      properties:
-        displayName:
-          description: Displayable name of the Vendor
-          example: Tesla
-          type: string
-        status:
-          description: Ready-state of the Vendor
-          enum:
-            - READY
-            - ELEVATED_ERROR_RATE
-            - OUTAGE
-          example: READY
-          type: string
-        vendor:
-          enum:
-            - TESLA
-            - BMW
-            - AUDI
-            - VOLKSWAGEN
-            - HYUNDAI
-            - PEUGEOT
-            - NISSAN
-          example: Tesla
-          type: string
-      type: object
-    Model3:
-      example:
-        - displayName: Tesla
-          status: READY
-          vendor: TESLA
-        - displayName: BMW
-          status: READY
-          vendor: BMW
-        - displayName: Audi
-          status: READY
-          vendor: AUDI
-      items:
-        $ref: "#/components/schemas/Model2"
-      type: array
-    Model4:
-      type: object
-    Post_Charging_Location_Payload:
-      properties:
-        latitude:
-          description: Latitude in degrees
-          example: 59.911491
-          type: number
-        longitude:
-          description: Longitude in degrees
-          example: 10.757933
-          type: number
-        name:
-          description: User-supplied name for the Charging Location
-          example: Home
-          type: string
-      type: object
-    Price_Aggregates:
-      description: Aggregate statistics for power price (<CURRENCY> per kWh)
-      properties:
-        max:
-          example: 78
-          type: number
-        mean:
-          example: 61
-          type: number
-        min:
-          example: 0
-          type: number
-      required:
-        - min
-        - max
-        - mean
-      type: object
-    Start_Vehicle_Watch_Payload:
-      properties:
-        properties:
-          description: Array of vehicle properties to watch
-          enum:
-            - BATTERY_LEVEL
-            - RANGE
-            - IS_PLUGGED_IN
-            - IS_CHARGING
-            - IS_CHARGING_REASONS
-            - LOCATION
-          example:
-            - LOCATION
-            - BATTERY_LEVEL
-          type: string
-      type: object
-    Statistics_Charging_Timeseries:
-      example:
-        - costSum: 3.14
-          date: 2020-11-18T10:18:12.181Z
-          kw:
-            max: 78
-            mean: 61
-            min: 0
-          kwhSum: 120
-          price:
-            max: 14.4
-            mean: 14.1
-            min: 13.8
-      items:
-        $ref: "#/components/schemas/Statistics_Timeseries_Sample"
-      type: array
-    Statistics_Timeseries_Sample:
-      properties:
-        costSum:
-          description: Total cost in <CURRENCY>
-          example: 3.14
-          type: number
-        date:
-          description: The start date of this sample within the timeseries
-          format: date
-          type: string
-        kw:
-          $ref: "#/components/schemas/Charge_Rate_Aggregates"
-        kwhSum:
-          description: Total power consumption in kWh
-          example: 120
-          type: number
-        price:
-          $ref: "#/components/schemas/Price_Aggregates"
-      required:
-        - kw
-        - kwhSum
-        - price
-        - costSum
-        - date
-      type: object
-    Update_Firehose_Webhook:
-      properties:
-        secret:
-          description: A cryptographically secure secret, generated and provided by your
-            client
-          example: 0Kvs1tAUQ69FOMBiWlt5XJSrruXMhWDiVbyrWaNm
-          type: string
-        url:
-          description: The HTTPS url to which Enode should POST the event payload when a
-            watched property changes
-          example: https://brainpower.co/enode-webhooks/firehose
-          type: string
-          x-format:
-            uri: true
-      type: object
-    Vehicle:
-      properties:
-        chargeState:
-          $ref: "#/components/schemas/Charge_State"
-        chargingLocationId:
-          description: Id of the charging location the vehicle is currently positioned at
-            (if any)
-          example: 8d90101b-3f2f-462a-bbb4-1ed320d33bbe
-          type: string
-          x-format:
-            guid: true
-        id:
-          description: Vehicle ID
-          type: string
-        information:
-          $ref: "#/components/schemas/Vehicle_Information"
-        isReachable:
-          description: Is the vehicle currently reachable?
-          type: boolean
-        lastSeen:
-          description: The last time vehicle was successfully communicated with
-          format: date
-          type: string
-        location:
-          $ref: "#/components/schemas/Vehicle_Location"
-        odometer:
-          $ref: "#/components/schemas/Vehicle_Odometer"
-        smartChargingPolicy:
-          $ref: "#/components/schemas/Vehicle_Smart_Charging_Policy"
-      type: object
-    Vehicle_Charging_Action:
-      properties:
-        action:
-          description: Charging action to perform
-          enum:
-            - START
-            - STOP
-          example: START
-          type: string
-      required:
-        - action
-      type: object
-    Vehicle_Information:
-      description: Descriptive information about the Vehicle
-      properties:
-        brand:
-          description: Vehicle brand
-          example: Tesla
-          type: string
-        id:
-          description: Vehicle ID
-          example: 8d90101b-3f2f-462a-bbb4-1ed320d33bbe
-          type: string
-        model:
-          description: Vehicle model
-          example: Model S P85
-          type: string
-        year:
-          description: Vehicle production year
-          example: 2020
-          type: integer
-      type: object
-    Vehicle_Location:
-      description: Vehicle's GPS coordinates with timestamp
-      properties:
-        lastUpdated:
-          description: ISO8601 UTC timestamp of last received location
-          example: 2020-04-07T17:04:26Z
-          format: date
-          type: string
-        latitude:
-          description: Latitude in degrees
-          example: 59.911491
-          type: number
-        longitude:
-          description: Longitude in degrees
-          example: 10.757933
-          type: number
-      type: object
-    Vehicle_Odometer:
-      description: Vehicle's odometer with timestamp
-      properties:
-        distance:
-          description: Odometer in kilometers
-          example: 24650
-          type: number
-        lastUpdated:
-          description: ISO8601 UTC timestamp of last received odometer update
-          example: 2020-01-07T16:21:76Z
-          format: date
-          type: string
-      type: object
-    Vehicle_Smart_Charging_Policy:
-      properties:
-        deadline:
-          description: The deadline for fully charging the vehicle. Smart charging does
-            not work without setting a deadline. The deadline is expressed as a
-            time on a 24h clock in UTC
-          example: 08:00
-          pattern: \d{2}:\d{2}
-          type: string
-        isEnabled:
-          description: When enabled, this vehicle's charging status may be controlled by
-            Smart Charging.
-          example: true
-          type: boolean
-      type: object
-    isChargingReasons:
-      description: >-
-        Array of string constants that explain why the car is or is not
-        charging. May contain multiple values.
-
-
-        **Any:**
-
-        - DEFAULT - the car is not being controlled by Enode
-
-
-        **Not Charging:**
-
-        - NOT_PLUGGED_IN - because the car is not plugged into a charger
-
-        - FULLY_CHARGED - because the car is fully charged
-
-        - MANUALLY_STOPPED - because the car has been manually commanded to stop charging
-
-        - SMART_CHARGING_DELAY - because Smart Charging has identified an opportunity to delay charging until prices are lower
-
-
-        **Charging:**
-
-        - MANUALLY_STARTED - because the car has been manually commanded to start charging
-
-        - SMART_CHARGING_ACTIVE - because Smart Charging has identified that this is an optimal time to charge
-
-        - SMART_CHARGING_DEADLINE - because, regardless of price, charging must be active to meet the configured deadline
-      example:
-        - SMART_CHARGING_DELAY
-      items:
-        enum:
-          - override: true
-          - DEFAULT
-        type: string
-      type: array
   securitySchemes:
     ClientAccessToken:
       description: >
@@ -1732,7 +1773,10 @@ components:
           authorizationUrl: https://link.test.enode.io/oauth2/auth
           scopes:
             all: Read and write all resources
+            charger:charge_state: Read charger charge state
+            charger:information: Read charger information
             charging_location: Read & write user's charging locations
+            control:charger:charging: Control charger charging
             control:vehicle:charging: Control vehicle charging
             vehicle:charge_state: Read vehicle charge state
             vehicle:information: Read vehicle information

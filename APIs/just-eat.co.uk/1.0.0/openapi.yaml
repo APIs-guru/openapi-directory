@@ -7073,18 +7073,20 @@ components:
               nullable: true
               properties:
                 asap:
-                  description: >
+                  description: |
                     If the order should be fulfilled as soon as possible (ASAP).
 
-
-                    A scheduled time must also be submitted even if ASAP is request.
-
+                    ASAP may not be fulfillable.
 
                     Default is false.
                   nullable: false
                   type: boolean
                 scheduled:
-                  description: Scheduled time the customer wants the order to be fulfilled.
+                  description: >
+                    Scheduled time the customer wants the order to be fulfilled.
+
+
+                    If ASAP is selected and fulfillable, this will be set to the next available fulfilment time.
                   nullable: true
                   properties:
                     from:
@@ -7654,18 +7656,19 @@ components:
               nullable: true
               properties:
                 asap:
-                  description: >
+                  description: |
                     If the order should be fulfilled as soon as possible (ASAP).
 
-
-                    A scheduled time must also be submitted even if ASAP is request.
-
+                    ASAP may not be fulfillable.
 
                     Default is false.
                   nullable: false
                   type: boolean
                 scheduled:
-                  description: Scheduled time the customer wants the order to be fulfilled.
+                  description: |
+                    Scheduled time the customer wants the order to be fulfilled.
+
+                    The scheduled time will be ignored if ASAP is selected.
                   nullable: true
                   properties:
                     from:
@@ -25619,7 +25622,7 @@ x-tagGroups:
       - Courier Feedback
   - name: Restaurant Management
     tags:
-      - RestaurantProduct
+      - Restaurant Product
       - Restaurants
       - RestaurantOffers
       - Restaurant OrderTimes

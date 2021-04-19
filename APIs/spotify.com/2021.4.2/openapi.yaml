@@ -6,7 +6,7 @@ info:
     name: sonallux
     url: https://github.com/sonallux/spotify-web-api
   title: Spotify Web API
-  version: 2021.4.10
+  version: 2021.4.14
   x-apisguru-categories:
     - media
   x-logo:
@@ -1829,18 +1829,17 @@ paths:
                     format: int32
                     type: integer
                 type: object
-          description: >-
-            - On success, the HTTP status code in the response header is `200`
+          description: "- On success, the HTTP status code in the response header is `200`
             OK and the response body contains an array of [saved episode
-            objects](https://developer.spotify.com/documentation/web-api/reference/#object-savedepisodeobject)
-            (wrapped in a [paging
-            object](https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject))
-            in JSON format. On error, the header status code is an [error
-            code](https://developer.spotify.com/documentation/web-api/#response-status-codes)
-            and the response body contains an [error
-            object](https://developer.spotify.com/documentation/web-api/#response-schema).
-
-            - Trying to get more than 2000 episodes for a user will return results for 2000 episodes. Only the 2000 returned episodes are sorted. This limitation will be removed in the near future.
+            objects](https://developer.spotify.com/documentation/web-api/refere\
+            nce/#object-savedepisodeobject) (wrapped in a [paging
+            object](https://developer.spotify.com/documentation/web-api/referen\
+            ce/#object-pagingobject)) in JSON format. On error, the header
+            status code is an [error
+            code](https://developer.spotify.com/documentation/web-api/#response\
+            -status-codes) and the response body contains an [error
+            object](https://developer.spotify.com/documentation/web-api/#respon\
+            se-schema)."
         default:
           $ref: "#/components/responses/ErrorResponse"
       security:
@@ -6848,7 +6847,8 @@ components:
             not available.
           type: string
         description:
-          description: A description of the episode.
+          description: A description of the episode. HTML tags are stripped away from this
+            field, use `html_description` field in case HTML tags are needed.
           type: string
         duration_ms:
           description: The episode length in milliseconds.
@@ -6862,6 +6862,9 @@ components:
           $ref: "#/components/schemas/ExternalUrlObject"
         href:
           description: A link to the Web API endpoint providing full details of the episode.
+          type: string
+        html_description:
+          description: A description of the episode. This field may contain HTML tags.
           type: string
         id:
           description: The [Spotify
@@ -6903,6 +6906,8 @@ components:
           description: 'The precision with which `release_date` value is known: `"year"`,
             `"month"`, or `"day"`.'
           type: string
+        restrictions:
+          $ref: "#/components/schemas/EpisodeRestrictionObject"
         resume_point:
           $ref: "#/components/schemas/ResumePointObject"
         show:
@@ -6914,6 +6919,24 @@ components:
           description: The [Spotify
             URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids)
             for the episode.
+          type: string
+      type: object
+    EpisodeRestrictionObject:
+      externalDocs:
+        description: Find more info on the official Spotify Web API Reference
+        url: https://developer.spotify.com/documentation/web-api/reference/#object-episoderestrictionobject
+      properties:
+        reason:
+          description: >-
+            The reason for the restriction. Supported values:  
+
+
+            - `market` - The content item is not available in the given market.  
+
+            - `product` - The content item is not available for the user's subscription type.  
+
+            - `explicit` - The content item is explicit and the user's account is set to not play explicit content.  
+              Additional reasons may be added in the future. **Note**: If you use this field, make sure that your application safely handles unknown values.
           type: string
       type: object
     EpisodesObject:
@@ -8196,7 +8219,8 @@ components:
             not available.
           type: string
         description:
-          description: A description of the episode.
+          description: A description of the episode. HTML tags are stripped away from this
+            field, use `html_description` field in case HTML tags are needed.
           type: string
         duration_ms:
           description: The episode length in milliseconds.
@@ -8210,6 +8234,9 @@ components:
           $ref: "#/components/schemas/ExternalUrlObject"
         href:
           description: A link to the Web API endpoint providing full details of the episode.
+          type: string
+        html_description:
+          description: A description of the episode. This field may contain HTML tags.
           type: string
         id:
           description: The [Spotify
@@ -8251,6 +8278,8 @@ components:
           description: 'The precision with which `release_date` value is known: `"year"`,
             `"month"`, or `"day"`.'
           type: string
+        restrictions:
+          $ref: "#/components/schemas/EpisodeRestrictionObject"
         resume_point:
           $ref: "#/components/schemas/ResumePointObject"
         type:

@@ -831,7 +831,7 @@ paths:
         description: >
           A request is made of three elements:
 
-            + `language` - a standard IETF tag for the language to analyze
+            + `language` - a standard IETF tag for the language to analyze; if the language is unknown, use `*` or the list of likely language codes separated by a vertical bar, e.g. `en|es|ko`
             + `content` - a content to analyze
             + `settings` - the settings to apply when analyzing
 

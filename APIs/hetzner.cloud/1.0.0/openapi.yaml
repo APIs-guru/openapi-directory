@@ -2626,6 +2626,35 @@ paths:
                         applied_to:
                           items:
                             properties:
+                              applied_to_resources:
+                                items:
+                                  properties:
+                                    server:
+                                      properties:
+                                        id:
+                                          description: ID of the Server
+                                          example: 42
+                                          type: integer
+                                      required:
+                                        - id
+                                      type: object
+                                    type:
+                                      description: Type of resource referenced
+                                      enum:
+                                        - server
+                                      example: server
+                                      type: string
+                                  type: object
+                                type: array
+                              label_selector:
+                                properties:
+                                  selector:
+                                    description: Label selector
+                                    example: env=prod
+                                    type: string
+                                required:
+                                  - selector
+                                type: object
                               server:
                                 properties:
                                   id:
@@ -2639,6 +2668,7 @@ paths:
                                 description: Type of resource referenced
                                 enum:
                                   - server
+                                  - label_selector
                                 example: server
                                 type: string
                             required:
@@ -2772,6 +2802,16 @@ paths:
                   description: Resources the Firewall should be applied to after creation
                   items:
                     properties:
+                      label_selector:
+                        description: Configuration for type LabelSelector, required if type is
+                          `label_selector`
+                        properties:
+                          selector:
+                            description: Label selector
+                            type: string
+                        required:
+                          - selector
+                        type: object
                       server:
                         description: Configuration for type Server, required if type is `server`
                         properties:
@@ -2785,6 +2825,7 @@ paths:
                         description: Type of the resource
                         enum:
                           - server
+                          - label_selector
                         type: string
                     required:
                       - type
@@ -2981,6 +3022,35 @@ paths:
                       applied_to:
                         items:
                           properties:
+                            applied_to_resources:
+                              items:
+                                properties:
+                                  server:
+                                    properties:
+                                      id:
+                                        description: ID of the Server
+                                        example: 42
+                                        type: integer
+                                    required:
+                                      - id
+                                    type: object
+                                  type:
+                                    description: Type of resource referenced
+                                    enum:
+                                      - server
+                                    example: server
+                                    type: string
+                                type: object
+                              type: array
+                            label_selector:
+                              properties:
+                                selector:
+                                  description: Label selector
+                                  example: env=prod
+                                  type: string
+                              required:
+                                - selector
+                              type: object
                             server:
                               properties:
                                 id:
@@ -2994,6 +3064,7 @@ paths:
                               description: Type of resource referenced
                               enum:
                                 - server
+                                - label_selector
                               example: server
                               type: string
                           required:
@@ -3128,6 +3199,35 @@ paths:
                       applied_to:
                         items:
                           properties:
+                            applied_to_resources:
+                              items:
+                                properties:
+                                  server:
+                                    properties:
+                                      id:
+                                        description: ID of the Server
+                                        example: 42
+                                        type: integer
+                                    required:
+                                      - id
+                                    type: object
+                                  type:
+                                    description: Type of resource referenced
+                                    enum:
+                                      - server
+                                    example: server
+                                    type: string
+                                type: object
+                              type: array
+                            label_selector:
+                              properties:
+                                selector:
+                                  description: Label selector
+                                  example: env=prod
+                                  type: string
+                              required:
+                                - selector
+                              type: object
                             server:
                               properties:
                                 id:
@@ -3141,6 +3241,7 @@ paths:
                               description: Type of resource referenced
                               enum:
                                 - server
+                                - label_selector
                               example: server
                               type: string
                           required:
@@ -3278,6 +3379,35 @@ paths:
                       applied_to:
                         items:
                           properties:
+                            applied_to_resources:
+                              items:
+                                properties:
+                                  server:
+                                    properties:
+                                      id:
+                                        description: ID of the Server
+                                        example: 42
+                                        type: integer
+                                    required:
+                                      - id
+                                    type: object
+                                  type:
+                                    description: Type of resource referenced
+                                    enum:
+                                      - server
+                                    example: server
+                                    type: string
+                                type: object
+                              type: array
+                            label_selector:
+                              properties:
+                                selector:
+                                  description: Label selector
+                                  example: env=prod
+                                  type: string
+                              required:
+                                - selector
+                              type: object
                             server:
                               properties:
                                 id:
@@ -3291,6 +3421,7 @@ paths:
                               description: Type of resource referenced
                               enum:
                                 - server
+                                - label_selector
                               example: server
                               type: string
                           required:
@@ -3545,7 +3676,7 @@ paths:
         Applies one Firewall to multiple resources.
 
 
-        Currently servers (public network interface) are supported.
+        Currently servers (public network interface) and label selectors are supported.
 
 
         #### Call specific error codes
@@ -3579,6 +3710,17 @@ paths:
                   description: Resources the Firewall should be applied to
                   items:
                     properties:
+                      label_selector:
+                        description: Configuration for type label_selector, required if type is
+                          `label_selector`
+                        properties:
+                          selector:
+                            description: Label selector
+                            example: env=prod
+                            type: string
+                        required:
+                          - selector
+                        type: object
                       server:
                         description: Configuration for type server, required if type is `server`
                         properties:
@@ -3592,6 +3734,7 @@ paths:
                         description: Type of the resource
                         enum:
                           - server
+                          - label_selector
                         type: string
                     required:
                       - type
@@ -3746,6 +3889,17 @@ paths:
                   description: Resources the Firewall should be removed from
                   items:
                     properties:
+                      label_selector:
+                        description: Configuration for type label_selector, required if type is
+                          `label_selector`
+                        properties:
+                          selector:
+                            description: Label selector
+                            example: env=prod
+                            type: string
+                        required:
+                          - selector
+                        type: object
                       server:
                         description: Configuration for type server, required if type is `server`
                         properties:
@@ -3759,6 +3913,7 @@ paths:
                         description: Type of the resource
                         enum:
                           - server
+                          - label_selector
                         type: string
                     required:
                       - type

@@ -1314,6 +1314,289 @@ paths:
           description: Not Found
       tags:
         - Environments
+  "/api/v1/GenevaActions/Billing/{environmentId}":
+    get:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: query
+          name: startTime
+          schema:
+            nullable: true
+            type: string
+        - in: query
+          name: endTime
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BillSummary"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/BillSummary"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/BillSummary"
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Billing
+  "/api/v1/GenevaActions/Billing/{environmentId}/state-changes":
+    get:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentStateChange"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentStateChange"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/EnvironmentStateChange"
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Billing
+    post:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentStateChangeBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentStateChangeBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentStateChangeBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentStateChangeBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentStateChange"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentStateChange"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/EnvironmentStateChange"
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Billing
+  "/api/v1/GenevaActions/Environments/{environmentId}":
+    delete:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              nullable: true
+              type: string
+          application/json:
+            schema:
+              nullable: true
+              type: string
+          application/json-patch+json:
+            schema:
+              nullable: true
+              type: string
+          text/json:
+            schema:
+              nullable: true
+              type: string
+      responses:
+        "204":
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
+    get:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
+  "/api/v1/GenevaActions/Environments/{environmentId}/archive":
+    put:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
+  "/api/v1/GenevaActions/Environments/{environmentId}/shutdown":
+    put:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
   /api/v1/HeartBeat:
     post:
       requestBody:
@@ -2802,6 +3085,50 @@ components:
         - 1902 (NorwayEast)
       format: int32
       type: integer
+    BillSummary:
+      additionalProperties: false
+      properties:
+        billGenerationTime:
+          format: date-time
+          type: string
+        environmentId:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        isFinalBill:
+          type: boolean
+        partitionKey:
+          nullable: true
+          type: string
+        partitionKeyType:
+          $ref: "#/components/schemas/PartitionKeyType"
+        periodEnd:
+          format: date-time
+          type: string
+        periodStart:
+          format: date-time
+          type: string
+        plan:
+          $ref: "#/components/schemas/VsoPlanInfo"
+        planId:
+          nullable: true
+          type: string
+        planIsDeleted:
+          type: boolean
+        usage:
+          additionalProperties:
+            format: double
+            type: number
+          nullable: true
+          type: object
+        usageDetail:
+          items:
+            $ref: "#/components/schemas/EnvironmentUsage"
+          nullable: true
+          type: array
+      type: object
     BillingProperties:
       additionalProperties: false
       properties:
@@ -2916,6 +3243,27 @@ components:
           format: date-time
           type: string
       type: object
+    CloudEnvironmentState:
+      enum:
+        - 0 (None)
+        - 1 (Created)
+        - 2 (Queued)
+        - 3 (Provisioning)
+        - 4 (Available)
+        - 5 (Awaiting)
+        - 6 (Unavailable)
+        - 7 (Deleted)
+        - 8 (Moved)
+        - 9 (Shutdown)
+        - 10 (Archived)
+        - 11 (Starting)
+        - 12 (ShuttingDown)
+        - 13 (Failed)
+        - 14 (Exporting)
+        - 15 (Updating)
+        - 16 (Rebuilding)
+      format: int32
+      type: integer
     CollectedData:
       additionalProperties: false
       properties:
@@ -2928,6 +3276,16 @@ components:
         timestamp:
           format: date-time
           type: string
+      type: object
+    ComputeUsageDetail:
+      additionalProperties: false
+      properties:
+        sku:
+          nullable: true
+          type: string
+        usage:
+          format: double
+          type: number
       type: object
     ConnectionInfoBody:
       additionalProperties: false
@@ -3030,6 +3388,18 @@ components:
         - friendlyName
         - type
       type: object
+    CreateEnvironmentStateChangeBody:
+      additionalProperties: false
+      properties:
+        newValue:
+          $ref: "#/components/schemas/CloudEnvironmentState"
+        oldValue:
+          $ref: "#/components/schemas/CloudEnvironmentState"
+        time:
+          format: date-time
+          nullable: true
+          type: string
+      type: object
     DelegateIdentity:
       additionalProperties: false
       properties:
@@ -3040,6 +3410,21 @@ components:
           nullable: true
           type: string
         username:
+          nullable: true
+          type: string
+      type: object
+    EnvironmentBillingInfo:
+      additionalProperties: false
+      properties:
+        id:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        sku:
+          $ref: "#/components/schemas/Sku"
+        userId:
           nullable: true
           type: string
       type: object
@@ -3062,6 +3447,51 @@ components:
         sessionPath:
           nullable: true
           type: string
+      type: object
+    EnvironmentStateChange:
+      additionalProperties: false
+      properties:
+        environment:
+          $ref: "#/components/schemas/EnvironmentBillingInfo"
+        id:
+          nullable: true
+          type: string
+        newValue:
+          $ref: "#/components/schemas/CloudEnvironmentState"
+        oldValue:
+          $ref: "#/components/schemas/CloudEnvironmentState"
+        partitionKey:
+          nullable: true
+          type: string
+        partitionKeyType:
+          $ref: "#/components/schemas/PartitionKeyType"
+        plan:
+          $ref: "#/components/schemas/VsoPlanInfo"
+        planId:
+          nullable: true
+          type: string
+        time:
+          format: date-time
+          type: string
+      type: object
+    EnvironmentUsage:
+      additionalProperties: false
+      properties:
+        endState:
+          $ref: "#/components/schemas/CloudEnvironmentState"
+        id:
+          nullable: true
+          type: string
+        resourceUsage:
+          $ref: "#/components/schemas/ResourceUsageDetail"
+        sku:
+          $ref: "#/components/schemas/Sku"
+        usage:
+          additionalProperties:
+            format: double
+            type: number
+          nullable: true
+          type: object
       type: object
     ExperimentalFeaturesBody:
       additionalProperties: false
@@ -3227,6 +3657,12 @@ components:
         - 32 (ExportRunningEnvironmentError)
         - 33 (GitHubProxyError)
         - 34 (EnvironmentCreationIsNotAllowed)
+      format: int32
+      type: integer
+    PartitionKeyType:
+      enum:
+        - 0 (Plan)
+        - 1 (Environment)
       format: int32
       type: integer
     PersonalizationInfoBody:
@@ -3441,6 +3877,20 @@ components:
           format: uuid
           type: string
       type: object
+    ResourceUsageDetail:
+      additionalProperties: false
+      properties:
+        compute:
+          items:
+            $ref: "#/components/schemas/ComputeUsageDetail"
+          nullable: true
+          type: array
+        storage:
+          items:
+            $ref: "#/components/schemas/StorageUsageDetail"
+          nullable: true
+          type: array
+      type: object
     ScopedCreateSecretBody:
       additionalProperties: false
       properties:
@@ -3575,6 +4025,16 @@ components:
           nullable: true
           type: string
       type: object
+    Sku:
+      additionalProperties: false
+      properties:
+        name:
+          nullable: true
+          type: string
+        tier:
+          nullable: true
+          type: string
+      type: object
     SkuInfoResult:
       additionalProperties: false
       properties:
@@ -3589,6 +4049,19 @@ components:
         os:
           nullable: true
           type: string
+      type: object
+    StorageUsageDetail:
+      additionalProperties: false
+      properties:
+        size:
+          format: int32
+          type: integer
+        sku:
+          nullable: true
+          type: string
+        usage:
+          format: double
+          type: number
       type: object
     StringStringKeyValuePair:
       additionalProperties: false
@@ -3765,6 +4238,28 @@ components:
       additionalProperties: false
       properties:
         subnetId:
+          nullable: true
+          type: string
+      type: object
+    VsoPlanInfo:
+      additionalProperties: false
+      properties:
+        location:
+          $ref: "#/components/schemas/AzureLocation"
+        name:
+          nullable: true
+          type: string
+        providerNamespace:
+          nullable: true
+          type: string
+        resourceGroup:
+          nullable: true
+          type: string
+        resourceId:
+          nullable: true
+          readOnly: true
+          type: string
+        subscription:
           nullable: true
           type: string
       type: object

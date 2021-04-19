@@ -1368,7 +1368,12 @@ paths:
         history at dealerships. Data includes the name of the dealership, dates
         it was for sale,
 
-        price, new/used condition, mileage, dealership state, and dealership zip code. The data for this endpoint is generally refreshed weekly.
+        price, new/used condition, mileage, dealership state, and dealership zip code. Data availability goes back to early 2016. 
+
+
+        If your use case involves checking if a vehicle has appeared on the open market on or after a given date see 
+
+        the /vehicleSeen endpoint.
       operationId: getHistory2_vehicleHistory_get
       parameters:
         - in: query
@@ -1410,6 +1415,8 @@ paths:
         We require at least the first 12 out of 17 characters in the vin to attempt a decode. The vin is not case sensitive.
 
         If passEmpty (default False) is True we will also include the empty fields in the response json. 
+
+        If includeRecall (default True) is True we will include recall data reported to the NHTSA. Set False for a faster response.
       operationId: vinDecode_vinDecode_get
       parameters:
         - in: query
@@ -1430,6 +1437,13 @@ paths:
           schema:
             default: false
             title: Passempty
+            type: boolean
+        - in: query
+          name: includeRecall
+          required: false
+          schema:
+            default: true
+            title: Includerecall
             type: boolean
       responses:
         "200":

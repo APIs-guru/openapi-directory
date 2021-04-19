@@ -495,6 +495,13 @@ paths:
           required: false
           schema:
             type: string
+        - description: Walmart environment
+          in: query
+          name: walmart_environment
+          required: false
+          schema:
+            default: production
+            type: string
         - description: Squarespace API Key
           in: query
           name: squarespace_api_key
@@ -553,9 +560,9 @@ paths:
           required: false
           schema:
             type: string
-        - description: CommerceHQ api secret
+        - description: CommerceHQ api password
           in: query
-          name: commercehq_api_secret
+          name: commercehq_api_password
           required: false
           schema:
             type: string
@@ -2819,6 +2826,13 @@ paths:
           required: false
           schema:
             type: string
+        - description: Walmart environment
+          in: query
+          name: walmart_environment
+          required: false
+          schema:
+            default: production
+            type: string
         - description: LightSpeed api key
           in: query
           name: lightspeed_api_key
@@ -2849,9 +2863,9 @@ paths:
           required: false
           schema:
             type: string
-        - description: CommerceHQ api secret
+        - description: CommerceHQ api password
           in: query
-          name: commercehq_api_secret
+          name: commercehq_api_password
           required: false
           schema:
             type: string
@@ -5342,6 +5356,39 @@ paths:
           store_key: []
       tags:
         - order
+  /order.fulfillment_status.list.json:
+    get:
+      description: Retrieve list of fulfillment statuses
+      operationId: OrderFulfillmentStatusList
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    properties:
+                      order_fulfillment_statuses:
+                        items:
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                          type: object
+                        type: array
+                    type: object
+                  return_code:
+                    type: integer
+                  return_message:
+                    type: string
+                type: object
+          description: successful operation
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - order
   /order.info.json:
     get:
       description: Info about a specific order by ID
@@ -7216,6 +7263,12 @@ paths:
         - description: Store Id
           in: query
           name: store_id
+          required: false
+          schema:
+            type: string
+        - description: Language id
+          in: query
+          name: lang_id
           required: false
           schema:
             type: string
@@ -9744,8 +9797,8 @@ components:
         commercehq_api_key:
           description: CommerceHQ api key
           type: string
-        commercehq_api_secret:
-          description: CommerceHQ api secret
+        commercehq_api_password:
+          description: CommerceHQ api password
           type: string
         db_tables_prefix:
           description: DB tables prefix
@@ -9916,6 +9969,10 @@ components:
           type: string
         walmart_client_secret:
           description: Walmart client secret
+          type: string
+        walmart_environment:
+          default: production
+          description: Walmart environment
           type: string
       required:
         - cart_id

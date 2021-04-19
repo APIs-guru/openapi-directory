@@ -616,6 +616,21 @@ paths:
       summary: Returns a list with all defined paymenttypes
       tags:
         - EnumApi
+  /api/v1/enums/shipmenttypes:
+    get:
+      consumes: []
+      operationId: EnumApi_GetShipmentTypes
+      produces:
+        - application/json
+        - text/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+      summary: Returns a list with all defined shipmenttypes
+      tags:
+        - EnumApi
   /api/v1/enums/shippingcarriers:
     get:
       consumes: []
@@ -3421,6 +3436,10 @@ definitions:
         description: The creation date
         format: date-time
         type: string
+      ShipmentType:
+        description: Shipment Type, 0 if Shipment, 1 if Retoure
+        format: int32
+        type: integer
       Shipper:
         description: The name of the shipping provider
         type: string
@@ -3781,6 +3800,12 @@ definitions:
       OrderId:
         description: Optional a differing order number of the shipment if available
         type: string
+      ShipmentType:
+        description: "0 if Shipment, 1 if Retoure\r
+
+          {Billbee.Interfaces.Shipping.Enums.ShipmentTypeEnum}"
+        format: int32
+        type: integer
       ShippingId:
         description: The id of the shipment (Sendungsnummer/trackingid)
         type: string

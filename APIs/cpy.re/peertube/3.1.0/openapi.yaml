@@ -5426,9 +5426,12 @@ components:
     VideoFile:
       properties:
         fileDownloadUrl:
+          description: URL endpoint that transfers the video file as an attachment (so
+            that the browser opens a download dialog)
           format: url
           type: string
         fileUrl:
+          description: Direct URL of the video
           format: url
           type: string
         fps:
@@ -5444,9 +5447,12 @@ components:
           description: Video file size in bytes
           type: integer
         torrentDownloadUrl:
+          description: URL endpoint that transfers the torrent file as an attachment (so
+            that the browser opens a download dialog)
           format: url
           type: string
         torrentUrl:
+          description: Direct URL of the torrent file
           format: url
           type: string
     VideoImport:

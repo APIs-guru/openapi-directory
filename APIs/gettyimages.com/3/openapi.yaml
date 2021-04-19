@@ -4559,6 +4559,7 @@ paths:
                 "mastered_to",
                 "originally_shot_on",
                 "product_types",
+                "quality_rank",
                 "shot_speed",
                 "source",
                 "title"
@@ -4714,6 +4715,17 @@ paths:
               (non-commercial) use. Default value is false.
             nullable: true
             type: boolean
+        - description: Specifies fields to return. Defaults to 'summary_set'.
+          explode: false
+          in: query
+          name: fields
+          schema:
+            description: Specifies fields to return. Defaults to 'summary_set'.
+            items:
+              $ref: "#/components/schemas/CreativeVideosFieldValues"
+            nullable: true
+            type: array
+          style: form
         - in: query
           name: format_available
           schema:
@@ -4726,17 +4738,6 @@ paths:
             description: Provides filtering by video frame rate (frames/second).
             items:
               $ref: "#/components/schemas/VideoFrameRates"
-            nullable: true
-            type: array
-          style: form
-        - description: Specifies fields to return. Defaults to 'summary_set'.
-          explode: false
-          in: query
-          name: fields
-          schema:
-            description: Specifies fields to return. Defaults to 'summary_set'.
-            items:
-              $ref: "#/components/schemas/CreativeVideosFieldValues"
             nullable: true
             type: array
           style: form
@@ -4995,10 +4996,12 @@ paths:
                     }
                 ],
                 "era",
+                "event_ids",
                 "license_model",
                 "mastered_to",
                 "originally_shot_on",
                 "product_types",
+                "quality_rank",
                 "shot_speed",
                 "source",
                 "title"
@@ -5169,14 +5172,14 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Allows filtering by specific peoples' names.
+        - description: Specifies fields to return. Defaults to 'summary_set'.
           explode: false
           in: query
-          name: specific_people
+          name: fields
           schema:
-            description: Allows filtering by specific peoples' names.
+            description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              type: string
+              $ref: "#/components/schemas/VideosFieldValues"
             nullable: true
             type: array
           style: form
@@ -5192,17 +5195,6 @@ paths:
             description: Provides filtering by video frame rate (frames/second).
             items:
               $ref: "#/components/schemas/VideoFrameRates"
-            nullable: true
-            type: array
-          style: form
-        - description: Specifies fields to return. Defaults to 'summary_set'.
-          explode: false
-          in: query
-          name: fields
-          schema:
-            description: Specifies fields to return. Defaults to 'summary_set'.
-            items:
-              $ref: "#/components/schemas/VideosFieldValues"
             nullable: true
             type: array
           style: form
@@ -5288,6 +5280,17 @@ paths:
           name: sort_order
           schema:
             $ref: "#/components/schemas/SortOrder"
+        - description: Allows filtering by specific peoples' names.
+          explode: false
+          in: query
+          name: specific_people
+          schema:
+            description: Allows filtering by specific peoples' names.
+            items:
+              type: string
+            nullable: true
+            type: array
+          style: form
         - in: query
           name: release_status
           schema:
@@ -5510,10 +5513,12 @@ paths:
                 ],
                 "download_sizes",
                 "era",
+                "event_ids",
                 "license_model",
                 "mastered_to",
                 "originally_shot_on",
                 "product_types",
+                "quality_rank",
                 "shot_speed",
                 "source",
                 "title"
@@ -5704,10 +5709,12 @@ paths:
                 ],
                 "download_sizes",
                 "era",
+                "event_ids",
                 "license_model",
                 "mastered_to",
                 "originally_shot_on",
                 "product_types",
+                "quality_rank",
                 "shot_speed",
                 "source",
                 "title"
@@ -5959,6 +5966,7 @@ paths:
                 "mastered_to",
                 "originally_shot_on",
                 "product_types",
+                "quality_rank",
                 "shot_speed",
                 "source",
                 "title"
@@ -6149,10 +6157,12 @@ paths:
                 ],
                 "download_sizes",
                 "era",
+                "event_ids",
                 "license_model",
                 "mastered_to",
                 "originally_shot_on",
                 "product_types",
+                "quality_rank",
                 "shot_speed",
                 "source",
                 "title"
@@ -7110,6 +7120,7 @@ components:
         - object_name
         - preview
         - product_types
+        - quality_rank
         - referral_destinations
         - shot_speed
         - source
@@ -8572,6 +8583,7 @@ components:
         - editorial_segments
         - entity_details
         - era
+        - event_ids
         - istock_collection
         - istock_licenses
         - keywords
@@ -8581,6 +8593,7 @@ components:
         - originally_shot_on
         - preview
         - product_types
+        - quality_rank
         - referral_destinations
         - shot_speed
         - source
@@ -8654,6 +8667,12 @@ components:
         era:
           nullable: true
           type: string
+        event_ids:
+          items:
+            format: int32
+            type: integer
+          nullable: true
+          type: array
         id:
           nullable: true
           type: string
@@ -8758,6 +8777,7 @@ components:
         - editorial_segments
         - entity_details
         - era
+        - event_ids
         - id
         - istock_collection
         - keywords
@@ -8768,6 +8788,7 @@ components:
         - object_name
         - preview
         - product_types
+        - quality_rank
         - referral_destinations
         - shot_speed
         - source

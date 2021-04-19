@@ -144,73 +144,6 @@ paths:
       summary: Show an existing ServiceCredential
       tags:
         - ServiceCredential
-  /service_instance_nodes:
-    get:
-      description: Returns an array of ServiceInstanceNode objects
-      operationId: listServiceInstanceNodes
-      parameters:
-        - $ref: "#/components/parameters/QueryLimit"
-        - $ref: "#/components/parameters/QueryOffset"
-        - $ref: "#/components/parameters/QueryFilter"
-        - $ref: "#/components/parameters/QuerySortBy"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceInstanceNodesCollection"
-          description: ServiceInstanceNodes collection
-      summary: List ServiceInstanceNodes
-      tags:
-        - ServiceInstanceNode
-  "/service_instance_nodes/{id}":
-    get:
-      description: Returns a ServiceInstanceNode object
-      operationId: showServiceInstanceNode
-      parameters:
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceInstanceNode"
-          description: ServiceInstanceNode info
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorNotFound"
-          description: Not found
-      summary: Show an existing ServiceInstanceNode
-      tags:
-        - ServiceInstanceNode
-  "/service_instance_nodes/{id}/service_credentials":
-    get:
-      description: Returns an array of ServiceCredential objects
-      operationId: listServiceInstanceNodeServiceCredentials
-      parameters:
-        - $ref: "#/components/parameters/QueryLimit"
-        - $ref: "#/components/parameters/QueryOffset"
-        - $ref: "#/components/parameters/QueryFilter"
-        - $ref: "#/components/parameters/QuerySortBy"
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceCredentialsCollection"
-          description: ServiceCredentials collection
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorNotFound"
-          description: Not found
-      summary: List ServiceCredentials for ServiceInstanceNode
-      tags:
-        - ServiceInstanceNode
   /service_instances:
     get:
       description: Returns an array of ServiceInstance objects
@@ -250,58 +183,6 @@ paths:
                 $ref: "#/components/schemas/ErrorNotFound"
           description: Not found
       summary: Show an existing ServiceInstance
-      tags:
-        - ServiceInstance
-  "/service_instances/{id}/service_credentials":
-    get:
-      description: Returns an array of ServiceCredential objects
-      operationId: listServiceInstanceServiceCredentials
-      parameters:
-        - $ref: "#/components/parameters/QueryLimit"
-        - $ref: "#/components/parameters/QueryOffset"
-        - $ref: "#/components/parameters/QueryFilter"
-        - $ref: "#/components/parameters/QuerySortBy"
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceCredentialsCollection"
-          description: ServiceCredentials collection
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorNotFound"
-          description: Not found
-      summary: List ServiceCredentials for ServiceInstance
-      tags:
-        - ServiceInstance
-  "/service_instances/{id}/service_instance_nodes":
-    get:
-      description: Returns an array of ServiceInstanceNode objects
-      operationId: listServiceInstanceServiceInstanceNodes
-      parameters:
-        - $ref: "#/components/parameters/QueryLimit"
-        - $ref: "#/components/parameters/QueryOffset"
-        - $ref: "#/components/parameters/QueryFilter"
-        - $ref: "#/components/parameters/QuerySortBy"
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceInstanceNodesCollection"
-          description: ServiceInstanceNodes collection
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorNotFound"
-          description: Not found
-      summary: List ServiceInstanceNodes for ServiceInstance
       tags:
         - ServiceInstance
   /service_inventories:
@@ -522,32 +403,6 @@ paths:
       summary: Show an existing ServiceOfferingNode
       tags:
         - ServiceOfferingNode
-  "/service_offering_nodes/{id}/service_credentials":
-    get:
-      description: Returns an array of ServiceCredential objects
-      operationId: listServiceOfferingNodeServiceCredentials
-      parameters:
-        - $ref: "#/components/parameters/QueryLimit"
-        - $ref: "#/components/parameters/QueryOffset"
-        - $ref: "#/components/parameters/QueryFilter"
-        - $ref: "#/components/parameters/QuerySortBy"
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceCredentialsCollection"
-          description: ServiceCredentials collection
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorNotFound"
-          description: Not found
-      summary: List ServiceCredentials for ServiceOfferingNode
-      tags:
-        - ServiceOfferingNode
   /service_offerings:
     get:
       description: Returns an array of ServiceOffering objects
@@ -644,32 +499,6 @@ paths:
       summary: Order an existing ServiceOffering
       tags:
         - ServiceOffering
-  "/service_offerings/{id}/service_credentials":
-    get:
-      description: Returns an array of ServiceCredential objects
-      operationId: listServiceOfferingServiceCredentials
-      parameters:
-        - $ref: "#/components/parameters/QueryLimit"
-        - $ref: "#/components/parameters/QueryOffset"
-        - $ref: "#/components/parameters/QueryFilter"
-        - $ref: "#/components/parameters/QuerySortBy"
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceCredentialsCollection"
-          description: ServiceCredentials collection
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorNotFound"
-          description: Not found
-      summary: List ServiceCredentials for ServiceOffering
-      tags:
-        - ServiceOffering
   "/service_offerings/{id}/service_instances":
     get:
       description: Returns an array of ServiceInstance objects
@@ -746,82 +575,6 @@ paths:
                 $ref: "#/components/schemas/ErrorNotFound"
           description: Not found
       summary: List ServicePlans for ServiceOffering
-      tags:
-        - ServiceOffering
-  "/service_offerings/{id}/tag":
-    post:
-      description: Tags a ServiceOffering object
-      operationId: tagServiceOffering
-      parameters:
-        - $ref: "#/components/parameters/ID"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                $ref: "#/components/schemas/Tag"
-              type: array
-        description: Tag attributes to add
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/Tag"
-                type: array
-          description: ServiceOffering tagged successful
-        "304":
-          description: Not modified
-      summary: Tag a ServiceOffering
-      tags:
-        - ServiceOffering
-  "/service_offerings/{id}/tags":
-    get:
-      description: Returns an array of Tag objects
-      operationId: listServiceOfferingTags
-      parameters:
-        - $ref: "#/components/parameters/QueryLimit"
-        - $ref: "#/components/parameters/QueryOffset"
-        - $ref: "#/components/parameters/QueryFilter"
-        - $ref: "#/components/parameters/QuerySortBy"
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TagsCollection"
-          description: Tags collection
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorNotFound"
-          description: Not found
-      summary: List Tags for ServiceOffering
-      tags:
-        - ServiceOffering
-  "/service_offerings/{id}/untag":
-    post:
-      description: Untags a ServiceOffering object
-      operationId: untagServiceOffering
-      parameters:
-        - $ref: "#/components/parameters/ID"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                $ref: "#/components/schemas/Tag"
-              type: array
-        description: Tag attributes to removed
-        required: true
-      responses:
-        "204":
-          description: ServiceOffering untagged successfully
-      summary: Untag a ServiceOffering
       tags:
         - ServiceOffering
   /service_plans:
@@ -922,32 +675,6 @@ paths:
         "429":
           description: Too many requests
       summary: " Refresh an existing Source"
-      tags:
-        - Source
-  "/sources/{id}/service_instance_nodes":
-    get:
-      description: Returns an array of ServiceInstanceNode objects
-      operationId: listSourceServiceInstanceNodes
-      parameters:
-        - $ref: "#/components/parameters/QueryLimit"
-        - $ref: "#/components/parameters/QueryOffset"
-        - $ref: "#/components/parameters/QueryFilter"
-        - $ref: "#/components/parameters/QuerySortBy"
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceInstanceNodesCollection"
-          description: ServiceInstanceNodes collection
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorNotFound"
-          description: Not found
-      summary: List ServiceInstanceNodes for Source
       tags:
         - Source
   "/sources/{id}/service_instances":
@@ -1097,80 +824,6 @@ paths:
                 $ref: "#/components/schemas/TagsCollection"
           description: Tags collection
       summary: List Tags
-      tags:
-        - Tags
-  "/tags/{id}":
-    get:
-      description: Returns a Tag object
-      operationId: showTag
-      parameters:
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Tag"
-          description: Tag info
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorNotFound"
-          description: Not found
-      summary: Show an existing Tag
-      tags:
-        - Tags
-  "/tags/{id}/service_inventories":
-    get:
-      description: Returns an array of ServiceInventory objects
-      operationId: listTagServiceInventories
-      parameters:
-        - $ref: "#/components/parameters/QueryLimit"
-        - $ref: "#/components/parameters/QueryOffset"
-        - $ref: "#/components/parameters/QueryFilter"
-        - $ref: "#/components/parameters/QuerySortBy"
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceInventoriesCollection"
-          description: ServiceInventories collection
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorNotFound"
-          description: Not found
-      summary: List ServiceInventories for Tag
-      tags:
-        - Tags
-  "/tags/{id}/service_offerings":
-    get:
-      description: Returns an array of ServiceOffering objects
-      operationId: listTagServiceOfferings
-      parameters:
-        - $ref: "#/components/parameters/QueryLimit"
-        - $ref: "#/components/parameters/QueryOffset"
-        - $ref: "#/components/parameters/QueryFilter"
-        - $ref: "#/components/parameters/QuerySortBy"
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceOfferingsCollection"
-          description: ServiceOfferings collection
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorNotFound"
-          description: Not found
-      summary: List ServiceOfferings for Tag
       tags:
         - Tags
   /tasks:

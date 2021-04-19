@@ -40,7 +40,7 @@ tags:
       workflow. For example, owners or administrators can:
 
       * Limit push powers
-      * Prevent branch (bookmark) deletion
+      * Prevent branch deletion
       * Prevent history re-writes (Git only)
     name: Branch restrictions
   - description: |
@@ -2683,7 +2683,7 @@ paths:
         to pull request' is clicked from the web interface for a commit's
         details.
       tags:
-        - pullrequests
+        - Pullrequests
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports":
     get:
       description: Returns a paginated list of Reports linked to this commit.
@@ -2716,8 +2716,8 @@ paths:
                 $ref: "#/components/schemas/paginated_reports"
           description: OK
       tags:
-        - reports
-        - commits
+        - Reports
+        - Commits
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}":
     delete:
       description: Deletes a single Report matching the provided ID.
@@ -2752,8 +2752,8 @@ paths:
         "204":
           description: No content
       tags:
-        - reports
-        - commits
+        - Reports
+        - Commits
     get:
       description: Returns a single Report matching the provided ID.
       operationId: getReport
@@ -2797,8 +2797,8 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The report with the given ID was not found.
       tags:
-        - reports
-        - commits
+        - Reports
+        - Commits
     put:
       description: >
         Creates or updates a report for the specified commit.
@@ -2845,6 +2845,29 @@ paths:
         result: PASSED, FAILED, PENDING
 
         data.type: BOOLEAN, DATE, DURATION, LINK, NUMBER, PERCENTAGE, TEXT
+
+
+        #### Data field formats
+
+        | Type  Field   | Value Field Type  | Value Field Display |
+
+        |:--------------|:------------------|:--------------------|
+
+        | None/ Omitted | Number, String or Boolean (not an array or object) | Plain text |
+
+        | BOOLEAN	| Boolean | The value will be read as a JSON boolean and displayed as 'Yes' or 'No'. |
+
+        | DATE  | Number | The value will be read as a JSON number in the form of a Unix timestamp (milliseconds) and will be displayed as a relative date if the date is less than one week ago, otherwise  it will be displayed as an absolute date. |
+
+        | DURATION | Number | The value will be read as a JSON number in milliseconds and will be displayed in a human readable duration format. |
+
+        | LINK | Object: `{"text": "Link text here", "href": "https://link.to.annotation/in/external/tool"}` | The value will be read as a JSON object containing the fields "text" and "href" and will be displayed as a clickable link on the report. |
+
+        | NUMBER | Number | The value will be read as a JSON number and large numbers will be  displayed in a human readable format (e.g. 14.3k). |
+
+        | PERCENTAGE | Number (between 0 and 100) | The value will be read as a JSON number between 0 and 100 and will be displayed with a percentage sign. |
+
+        | TEXT | String | The value will be read as a JSON string and will be displayed as-is |
 
 
         Please refer to the [Code Insights documentation](https://confluence.atlassian.com/bitbucket/code-insights-994316785.html) for more information.
@@ -2896,8 +2919,8 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The provided Report object is malformed or incomplete.
       tags:
-        - reports
-        - commits
+        - Reports
+        - Commits
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations":
     get:
       description: Returns a paginated list of Annotations for a specified report.
@@ -2936,8 +2959,8 @@ paths:
                 $ref: "#/components/schemas/paginated_annotations"
           description: OK
       tags:
-        - reports
-        - commits
+        - Reports
+        - Commits
     post:
       description: >
         Bulk upload of annotations.
@@ -3039,8 +3062,8 @@ paths:
                 type: array
           description: OK
       tags:
-        - reports
-        - commits
+        - Reports
+        - Commits
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations/{annotationId}":
     delete:
       description: Deletes a single Annotation matching the provided ID.
@@ -3081,8 +3104,8 @@ paths:
         "204":
           description: No content
       tags:
-        - reports
-        - commits
+        - Reports
+        - Commits
     get:
       description: Returns a single Annotation matching the provided ID.
       operationId: getAnnotation
@@ -3132,8 +3155,8 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The annotation with the given ID was not found.
       tags:
-        - reports
-        - commits
+        - Reports
+        - Commits
     put:
       description: >
         Creates or updates an individual annotation for the specified
@@ -3229,8 +3252,8 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The provided Annotation object is malformed or incomplete.
       tags:
-        - reports
-        - commits
+        - Reports
+        - Commits
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/statuses":
     get:
       description: Returns all statuses (e.g. build results) for a specific commit.
@@ -3494,9 +3517,9 @@ paths:
       description: >-
         These are the repository's commits. They are paginated and returned
 
-        in reverse chronological order, similar to the output of `git log` and
+        in reverse chronological order, similar to the output of `git log`.
 
-        `hg log`. Like these tools, the DAG can be filtered.
+        Like these tools, the DAG can be filtered.
 
 
         ## GET /repositories/{workspace}/{repo_slug}/commits/
@@ -3506,23 +3529,7 @@ paths:
 
         first). All branches and tags are included (similar to
 
-        `git log --all` and `hg log`).
-
-
-        ## GET /repositories/{workspace}/{repo_slug}/commits/master
-
-
-        Returns all commits on rev `master` (similar to `git log master`,
-
-        `hg log master`).
-
-
-        ## GET /repositories/{workspace}/{repo_slug}/commits/dev?exclude=master
-
-
-        Returns all commits on ref `dev`, except those that are reachable on
-
-        `master` (similar to `git log dev ^master`).
+        `git log --all`).
 
 
         ## GET /repositories/{workspace}/{repo_slug}/commits/?exclude=master
@@ -3596,7 +3603,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
-          description: If the specified revision or repository does not exist.
+          description: If the specified repository does not exist.
       security:
         - oauth2:
             - repository
@@ -3610,12 +3617,6 @@ paths:
           surrounded by curly-braces, for example: `{repository UUID}`.
         in: path
         name: repo_slug
-        required: true
-        schema:
-          type: string
-      - description: (optional) The commit's SHA1.
-        in: query
-        name: revision
         required: true
         schema:
           type: string
@@ -3646,7 +3647,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
-          description: If the specified revision or repository does not exist.
+          description: If the specified repository does not exist.
       security:
         - oauth2:
             - repository
@@ -3659,51 +3660,23 @@ paths:
       description: >-
         These are the repository's commits. They are paginated and returned
 
-        in reverse chronological order, similar to the output of `git log` and
+        in reverse chronological order, similar to the output of `git log`.
 
-        `hg log`. Like these tools, the DAG can be filtered.
-
-
-        ## GET /repositories/{workspace}/{repo_slug}/commits/
-
-
-        Returns all commits in the repo in topological order (newest commit
-
-        first). All branches and tags are included (similar to
-
-        `git log --all` and `hg log`).
+        Like these tools, the DAG can be filtered.
 
 
         ## GET /repositories/{workspace}/{repo_slug}/commits/master
 
 
-        Returns all commits on rev `master` (similar to `git log master`,
-
-        `hg log master`).
+        Returns all commits on rev `master` (similar to `git log master`).
 
 
-        ## GET /repositories/{workspace}/{repo_slug}/commits/dev?exclude=master
+        ## GET /repositories/{workspace}/{repo_slug}/commits/dev?include=foo&exclude=master
 
 
-        Returns all commits on ref `dev`, except those that are reachable on
+        Returns all commits on ref `dev` or `foo`, except those that are reachable on
 
-        `master` (similar to `git log dev ^master`).
-
-
-        ## GET /repositories/{workspace}/{repo_slug}/commits/?exclude=master
-
-
-        Returns all commits in the repo that are not on master
-
-        (similar to `git log --all ^master`).
-
-
-        ## GET /repositories/{workspace}/{repo_slug}/commits/?include=foo&include=bar&exclude=fu&exclude=fubar
-
-
-        Returns all commits that are on refs `foo` or `bar`, but not on `fu` or
-
-        `fubar` (similar to `git log foo bar ^fu ^fubar`).
+        `master` (similar to `git log dev foo ^master`).
 
 
         An optional `path` parameter can be specified that will limit the
@@ -3721,18 +3694,18 @@ paths:
         do not modify the path will be omitted from the response.
 
 
-        ## GET /repositories/{workspace}/{repo_slug}/commits/?path=README.md&include=foo&include=bar&exclude=master
+        ## GET /repositories/{workspace}/{repo_slug}/commits/dev?path=README.md&include=foo&include=bar&exclude=master
 
 
-        Returns all commits that are on refs `foo` or `bar`, but not on `master`
+        Returns all commits that are on refs `dev` or `foo` or `bar`, but not on `master`
 
         that changed the file README.md.
 
 
-        ## GET /repositories/{workspace}/{repo_slug}/commits/?path=src/&include=foo&include=bar&exclude=master
+        ## GET /repositories/{workspace}/{repo_slug}/commits/dev?path=src/&include=foo&exclude=master
 
 
-        Returns all commits that are on refs `foo` or `bar`, but not on `master`
+        Returns all commits that are on refs `dev` or `foo`, but not on `master`
 
         that changed to a file in any file in the directory src or its children.
 
@@ -3761,7 +3734,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
-          description: If the specified revision or repository does not exist.
+          description: If the specified revision does not exist.
       security:
         - oauth2:
             - repository
@@ -3778,7 +3751,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: (optional) The commit's SHA1.
+      - description: The commit's SHA1.
         in: path
         name: revision
         required: true
@@ -3793,10 +3766,14 @@ paths:
         schema:
           type: string
     post:
-      description: |-
-        Identical to `GET /repositories/{workspace}/{repo_slug}/commits`,
+      description: >-
+        Identical to `GET
+        /repositories/{workspace}/{repo_slug}/commits/{revision}`,
+
         except that POST allows clients to place the include and exclude
+
         parameters in the request body to avoid URL length issues.
+
 
         **Note that this resource does NOT support new commit creation.**
       responses:
@@ -3811,7 +3788,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
-          description: If the specified revision or repository does not exist.
+          description: If the specified revision does not exist.
       security:
         - oauth2:
             - repository
@@ -4410,7 +4387,7 @@ paths:
                 $ref: "#/components/schemas/paginated_deployments"
           description: The matching deployments.
       tags:
-        - deployments
+        - Deployments
   "/repositories/{workspace}/{repo_slug}/deployments/{deployment_uuid}":
     get:
       description: Retrieve a deployment
@@ -4449,7 +4426,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: No account, repository or deployment with the UUID provided exists.
       tags:
-        - deployments
+        - Deployments
   "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables":
     get:
       description: Find deployment environment level variables.
@@ -4482,7 +4459,7 @@ paths:
                 $ref: "#/components/schemas/paginated_deployment_variable"
           description: The retrieved deployment variables.
       tags:
-        - pipelines
+        - Pipelines
     post:
       description: Create a deployment environment level variable.
       operationId: createDeploymentVariable
@@ -4545,7 +4522,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: A variable with the provided key already exists.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}":
     delete:
       description: Delete a deployment environment level variable.
@@ -4587,7 +4564,7 @@ paths:
           description: The account, repository, environment or variable with given UUID
             was not found.
       tags:
-        - pipelines
+        - Pipelines
     put:
       description: Update a deployment environment level variable.
       operationId: updateDeploymentVariable
@@ -4639,7 +4616,7 @@ paths:
           description: The account, repository, environment or variable with the given
             UUID was not found.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/diff/{spec}":
     get:
       description: |-
@@ -5041,7 +5018,7 @@ paths:
                 $ref: "#/components/schemas/paginated_environments"
           description: The matching environments.
       tags:
-        - deployments
+        - Deployments
     post:
       description: Create an environment.
       operationId: createEnvironment
@@ -5091,7 +5068,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: An environment host with the provided name already exists.
       tags:
-        - deployments
+        - Deployments
   "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}":
     delete:
       description: Delete an environment
@@ -5126,7 +5103,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: No account or repository with the UUID provided exists.
       tags:
-        - deployments
+        - Deployments
     get:
       description: Retrieve an environment
       operationId: getEnvironmentForRepository
@@ -5164,7 +5141,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: No account, repository or environment with the UUID provided exists.
       tags:
-        - deployments
+        - Deployments
   "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/":
     post:
       description: Update an environment
@@ -5199,7 +5176,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: No account, repository or environment with the UUID provided exists.
       tags:
-        - deployments
+        - Deployments
   "/repositories/{workspace}/{repo_slug}/filehistory/{commit}/{path}":
     get:
       description: >-
@@ -7670,7 +7647,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account or repository was not found.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}":
     delete:
       description: Delete a repository cache.
@@ -7705,7 +7682,7 @@ paths:
           description: The workspace, repository or cache_uuid with given UUID was not
             found.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}/content-uri":
     get:
       description: Retrieve the URI of the content of the specified cache.
@@ -7744,7 +7721,7 @@ paths:
           description: The workspace, repository or cache_uuid with given UUID was not
             found.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines/":
     get:
       description: Find pipelines
@@ -7771,7 +7748,7 @@ paths:
                 $ref: "#/components/schemas/paginated_pipelines"
           description: The matching pipelines.
       tags:
-        - pipelines
+        - Pipelines
     post:
       description: >
         Endpoint to create and initiate a pipeline.
@@ -8032,7 +8009,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account or repository was not found.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}":
     get:
       description: Retrieve a specified pipeline
@@ -8071,7 +8048,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: No account, repository or pipeline with the UUID provided exists.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/":
     get:
       description: Find steps for the given pipeline.
@@ -8104,7 +8081,7 @@ paths:
                 $ref: "#/components/schemas/paginated_pipeline_steps"
           description: The steps.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}":
     get:
       description: Retrieve a given step of a pipeline.
@@ -8150,7 +8127,7 @@ paths:
           description: No account, repository, pipeline or step with the UUID provided
             exists for the pipeline with the UUID provided.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log":
     get:
       description: >-
@@ -8211,7 +8188,7 @@ paths:
             [HTTP Range
             header](https://tools.ietf.org/html/rfc7233#section-3.1).
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/logs/{log_uuid}":
     get:
       parameters:
@@ -8368,7 +8345,7 @@ paths:
           description: Either the account, repository or pipeline with the given UUID does
             not exist.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines_config":
     get:
       description: Retrieve the repository pipelines configuration.
@@ -8394,7 +8371,7 @@ paths:
                 $ref: "#/components/schemas/pipelines_config"
           description: The repository pipelines configuration.
       tags:
-        - pipelines
+        - Pipelines
     put:
       description: Update the pipelines configuration for a repository.
       operationId: updateRepositoryPipelineConfig
@@ -8427,7 +8404,7 @@ paths:
                 $ref: "#/components/schemas/pipelines_config"
           description: The repository pipelines configuration was updated.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines_config/build_number":
     put:
       description: Update the next build number that should be assigned to a pipeline.
@@ -8476,7 +8453,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account or repository was not found.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/":
     get:
       description: Retrieve the configured schedules for the given repository.
@@ -8509,7 +8486,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account or repository was not found.
       tags:
-        - pipelines
+        - Pipelines
     post:
       description: Create a schedule for the given repository.
       operationId: createRepositoryPipelineSchedule
@@ -8560,7 +8537,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account or repository was not found.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}":
     delete:
       description: Delete a schedule.
@@ -8595,7 +8572,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account, repository or schedule was not found.
       tags:
-        - pipelines
+        - Pipelines
     get:
       description: Retrieve a schedule by its UUID.
       operationId: getRepositoryPipelineSchedule
@@ -8633,7 +8610,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account, repository or schedule was not found.
       tags:
-        - pipelines
+        - Pipelines
     put:
       description: Update a schedule.
       operationId: updateRepositoryPipelineSchedule
@@ -8678,7 +8655,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account, repository or schedule was not found.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/":
     get:
       description: Retrieve the executions of a given schedule.
@@ -8716,7 +8693,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account or repository was not found.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair":
     delete:
       description: Delete the repository SSH key pair.
@@ -8745,7 +8722,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account, repository or SSH key pair was not found.
       tags:
-        - pipelines
+        - Pipelines
     get:
       description: Retrieve the repository SSH key pair excluding the SSH private key.
         The private key is a write only field and will never be exposed in the
@@ -8779,7 +8756,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account, repository or SSH key pair was not found.
       tags:
-        - pipelines
+        - Pipelines
     put:
       description: Create or update the repository SSH key pair. The private key will
         be set as a default SSH identity in your build container.
@@ -8819,7 +8796,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account, repository or SSH key pair was not found.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/":
     get:
       description: Find repository level known hosts.
@@ -8846,7 +8823,7 @@ paths:
                 $ref: "#/components/schemas/paginated_pipeline_known_hosts"
           description: The retrieved known hosts.
       tags:
-        - pipelines
+        - Pipelines
     post:
       description: Create a repository level known host.
       operationId: createRepositoryPipelineKnownHost
@@ -8896,7 +8873,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: A known host with the provided hostname already exists.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}":
     delete:
       description: Delete a repository level known host.
@@ -8931,7 +8908,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account, repository or known host with given UUID was not found.
       tags:
-        - pipelines
+        - Pipelines
     get:
       description: Retrieve a repository level known host.
       operationId: getRepositoryPipelineKnownHost
@@ -8970,7 +8947,7 @@ paths:
           description: The account, repository or known host with the specified UUID was
             not found.
       tags:
-        - pipelines
+        - Pipelines
     put:
       description: Update a repository level known host.
       operationId: updateRepositoryPipelineKnownHost
@@ -9016,7 +8993,7 @@ paths:
           description: The account, repository or known host with the given UUID was not
             found.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/":
     get:
       description: Find repository level variables.
@@ -9043,7 +9020,7 @@ paths:
                 $ref: "#/components/schemas/paginated_pipeline_variables"
           description: The retrieved variables.
       tags:
-        - pipelines
+        - Pipelines
     post:
       description: Create a repository level variable.
       operationId: createRepositoryPipelineVariable
@@ -9093,7 +9070,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: A variable with the provided key already exists.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid}":
     delete:
       description: Delete a repository level variable.
@@ -9128,7 +9105,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account, repository or variable with given UUID was not found.
       tags:
-        - pipelines
+        - Pipelines
     get:
       description: Retrieve a repository level variable.
       operationId: getRepositoryPipelineVariable
@@ -9167,7 +9144,7 @@ paths:
           description: The account, repository or variable with the specified UUID was not
             found.
       tags:
-        - pipelines
+        - Pipelines
     put:
       description: Update a repository level variable.
       operationId: updateRepositoryPipelineVariable
@@ -9213,7 +9190,7 @@ paths:
           description: The account, repository or variable with the given UUID was not
             found.
       tags:
-        - pipelines
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}":
     delete:
       description: Delete an [application
@@ -11795,276 +11772,141 @@ paths:
       description: >-
         Returns a list of all open branches within the specified
         repository.
+                Results will be in the order the source control manager returns them.
 
-        Results will be in the order the source control manager returns them.
-
-
-        ```
-
-        $ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches | jq .
-
-        {
-          "pagelen": 10,
-          "values": [
-            {
-              "heads": [
+                ```
+                $ curl -s https://api.bitbucket.org/2.0/repositories/atlassian/aui/refs/branches?pagelen=1 | jq .
                 {
-                  "hash": "f1a0933ce59e809f190602655e22ae6ec107c397",
-                  "type": "commit",
-                  "links": {
-                    "self": {
-                      "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397"
-                    },
-                    "html": {
-                      "href": "https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397"
-                    }
-                  }
-                }
-              ],
-              "type": "named_branch",
-              "name": "default",
-              "links": {
-                "commits": {
-                  "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/default"
-                },
-                "self": {
-                  "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default"
-                },
-                "html": {
-                  "href": "https://bitbucket.org/seanfarley/mercurial/branch/default"
-                }
-              },
-              "target": {
-                "hash": "f1a0933ce59e809f190602655e22ae6ec107c397",
-                "repository": {
-                  "links": {
-                    "self": {
-                      "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial"
-                    },
-                    "html": {
-                      "href": "https://bitbucket.org/seanfarley/mercurial"
-                    },
-                    "avatar": {
-                      "href": "https://bitbucket.org/seanfarley/mercurial/avatar/32/"
-                    }
-                  },
-                  "type": "repository",
-                  "name": "mercurial",
-                  "full_name": "seanfarley/mercurial",
-                  "uuid": "{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}"
-                },
-                "links": {
-                  "self": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397"
-                  },
-                  "comments": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/comments"
-                  },
-                  "patch": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/f1a0933ce59e809f190602655e22ae6ec107c397"
-                  },
-                  "html": {
-                    "href": "https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397"
-                  },
-                  "diff": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/f1a0933ce59e809f190602655e22ae6ec107c397"
-                  },
-                  "approve": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/approve"
-                  },
-                  "statuses": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/statuses"
-                  }
-                },
-                "author": {
-                  "raw": "Martin von Zweigbergk <martinvonz@google.com>",
-                  "type": "author",
-                  "user": {
-                    "username": "martinvonz",
-                    "nickname": "martinvonz",
-                    "display_name": "Martin von Zweigbergk",
-                    "type": "user",
-                    "uuid": "{fdb0e657-3ade-4fad-a136-95f1ffe4a5ac}",
-                    "links": {
-                      "self": {
-                        "href": "https://api.bitbucket.org/2.0/users/martinvonz"
+                  "pagelen": 1,
+                  "size": 187,
+                  "values": [
+                    {
+                      "name": "issue-9.3/AUI-5343-assistive-class",
+                      "links": {
+                        "commits": {
+                          "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/commits/issue-9.3/AUI-5343-assistive-class"
+                        },
+                        "self": {
+                          "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/refs/branches/issue-9.3/AUI-5343-assistive-class"
+                        },
+                        "html": {
+                          "href": "https://bitbucket.org/atlassian/aui/branch/issue-9.3/AUI-5343-assistive-class"
+                        }
                       },
-                      "html": {
-                        "href": "https://bitbucket.org/martinvonz/"
-                      },
-                      "avatar": {
-                        "href": "https://bitbucket.org/account/martinvonz/avatar/32/"
+                      "default_merge_strategy": "squash",
+                      "merge_strategies": [
+                        "merge_commit",
+                        "squash",
+                        "fast_forward"
+                      ],
+                      "type": "branch",
+                      "target": {
+                        "hash": "e5d1cde9069fcb9f0af90403a4de2150c125a148",
+                        "repository": {
+                          "links": {
+                            "self": {
+                              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui"
+                            },
+                            "html": {
+                              "href": "https://bitbucket.org/atlassian/aui"
+                            },
+                            "avatar": {
+                              "href": "https://bytebucket.org/ravatar/%7B585074de-7b60-4fd1-81ed-e0bc7fafbda5%7D?ts=86317"
+                            }
+                          },
+                          "type": "repository",
+                          "name": "aui",
+                          "full_name": "atlassian/aui",
+                          "uuid": "{585074de-7b60-4fd1-81ed-e0bc7fafbda5}"
+                        },
+                        "links": {
+                          "self": {
+                            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e5d1cde9069fcb9f0af90403a4de2150c125a148"
+                          },
+                          "comments": {
+                            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e5d1cde9069fcb9f0af90403a4de2150c125a148/comments"
+                          },
+                          "patch": {
+                            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/patch/e5d1cde9069fcb9f0af90403a4de2150c125a148"
+                          },
+                          "html": {
+                            "href": "https://bitbucket.org/atlassian/aui/commits/e5d1cde9069fcb9f0af90403a4de2150c125a148"
+                          },
+                          "diff": {
+                            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/diff/e5d1cde9069fcb9f0af90403a4de2150c125a148"
+                          },
+                          "approve": {
+                            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e5d1cde9069fcb9f0af90403a4de2150c125a148/approve"
+                          },
+                          "statuses": {
+                            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e5d1cde9069fcb9f0af90403a4de2150c125a148/statuses"
+                          }
+                        },
+                        "author": {
+                          "raw": "Marcin Konopka <mkonopka@atlassian.com>",
+                          "type": "author",
+                          "user": {
+                            "display_name": "Marcin Konopka",
+                            "uuid": "{47cc24f4-2a05-4420-88fe-0417535a110a}",
+                            "links": {
+                              "self": {
+                                "href": "https://api.bitbucket.org/2.0/users/%7B47cc24f4-2a05-4420-88fe-0417535a110a%7D"
+                              },
+                              "html": {
+                                "href": "https://bitbucket.org/%7B47cc24f4-2a05-4420-88fe-0417535a110a%7D/"
+                              },
+                              "avatar": {
+                                "href": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MK-1.png"
+                              }
+                            },
+                            "nickname": "Marcin Konopka",
+                            "type": "user",
+                            "account_id": "60113d2b47a9540069f4de03"
+                          }
+                        },
+                        "parents": [
+                          {
+                            "hash": "87f7fc92b00464ae47b13ef65c91884e4ac9be51",
+                            "type": "commit",
+                            "links": {
+                              "self": {
+                                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/87f7fc92b00464ae47b13ef65c91884e4ac9be51"
+                              },
+                              "html": {
+                                "href": "https://bitbucket.org/atlassian/aui/commits/87f7fc92b00464ae47b13ef65c91884e4ac9be51"
+                              }
+                            }
+                          }
+                        ],
+                        "date": "2021-04-13T13:44:49+00:00",
+                        "message": "wip
+        ",
+                        "type": "commit"
                       }
                     }
-                  }
-                },
-                "parents": [
-                  {
-                    "hash": "5523aabb85c30ebc2b8e29aadcaf5e13fa92b375",
-                    "type": "commit",
-                    "links": {
-                      "self": {
-                        "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375"
-                      },
-                      "html": {
-                        "href": "https://bitbucket.org/seanfarley/mercurial/commits/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375"
-                      }
-                    }
-                  }
-                ],
-                "date": "2018-02-01T18:44:49+00:00",
-                "message": "config: replace a for-else by any()",
-                "type": "commit"
-              }
-            },
-            {
-              "heads": [
-                {
-                  "hash": "1d60ad093792706e1dc7a52b20942593f2c19655",
-                  "type": "commit",
-                  "links": {
-                    "self": {
-                      "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655"
-                    },
-                    "html": {
-                      "href": "https://bitbucket.org/seanfarley/mercurial/commits/1d60ad093792706e1dc7a52b20942593f2c19655"
-                    }
-                  }
+                  ],
+                  "page": 1,
+                  "next": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/refs/branches?pagelen=1&page=2"
                 }
-              ],
-              "type": "named_branch",
-              "name": "stable",
-              "links": {
-                "commits": {
-                  "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/stable"
-                },
-                "self": {
-                  "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/stable"
-                },
-                "html": {
-                  "href": "https://bitbucket.org/seanfarley/mercurial/branch/stable"
-                }
-              },
-              "target": {
-                "hash": "1d60ad093792706e1dc7a52b20942593f2c19655",
-                "repository": {
-                  "links": {
-                    "self": {
-                      "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial"
-                    },
-                    "html": {
-                      "href": "https://bitbucket.org/seanfarley/mercurial"
-                    },
-                    "avatar": {
-                      "href": "https://bitbucket.org/seanfarley/mercurial/avatar/32/"
-                    }
-                  },
-                  "type": "repository",
-                  "name": "mercurial",
-                  "full_name": "seanfarley/mercurial",
-                  "uuid": "{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}"
-                },
-                "links": {
-                  "self": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655"
-                  },
-                  "comments": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/comments"
-                  },
-                  "patch": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/1d60ad093792706e1dc7a52b20942593f2c19655"
-                  },
-                  "html": {
-                    "href": "https://bitbucket.org/seanfarley/mercurial/commits/1d60ad093792706e1dc7a52b20942593f2c19655"
-                  },
-                  "diff": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/1d60ad093792706e1dc7a52b20942593f2c19655"
-                  },
-                  "approve": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/approve"
-                  },
-                  "statuses": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/statuses"
-                  }
-                },
-                "author": {
-                  "raw": "Augie Fackler <raf@durin42.com>",
-                  "type": "author",
-                  "user": {
-                    "username": "durin42",
-                    "nickname": "durin42",
-                    "display_name": "Augie Fackler",
-                    "type": "user",
-                    "uuid": "{e07dc61f-bb05-4218-b43a-d991f26be65a}",
-                    "links": {
-                      "self": {
-                        "href": "https://api.bitbucket.org/2.0/users/durin42"
-                      },
-                      "html": {
-                        "href": "https://bitbucket.org/durin42/"
-                      },
-                      "avatar": {
-                        "href": "https://bitbucket.org/account/durin42/avatar/32/"
-                      }
-                    }
-                  }
-                },
-                "parents": [
-                  {
-                    "hash": "56a0da11bde519d79168e890df4bcf0da62f0a7b",
-                    "type": "commit",
-                    "links": {
-                      "self": {
-                        "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/56a0da11bde519d79168e890df4bcf0da62f0a7b"
-                      },
-                      "html": {
-                        "href": "https://bitbucket.org/seanfarley/mercurial/commits/56a0da11bde519d79168e890df4bcf0da62f0a7b"
-                      }
-                    }
-                  }
-                ],
-                "date": "2018-02-01T19:13:41+00:00",
-                "message": "Added signature for changeset d334afc585e2",
-                "type": "commit"
-              }
-            }
-          ],
-          "page": 1,
-          "size": 2
-        }
+                ```
 
-        ```
+                Branches support [filtering and sorting](../../../../../meta/filtering)
+                that can be used to search for specific branches. For instance, to find
+                all branches that have "stab" in their name:
 
+                ```
+                curl -s https://api.bitbucket.org/2.0/repositories/atlassian/aui/refs/branches -G --data-urlencode 'q=name ~ "stab"'
+                ```
 
-        Branches support [filtering and sorting](../../../../../meta/filtering)
+                By default, results will be in the order the underlying source control system returns them and identical to
+                the ordering one sees when running "$ hg branches" or "$ git branch --list". Note that this follows simple
+                lexical ordering of the ref names.
 
-        that can be used to search for specific branches. For instance, to find
+                This can be undesirable as it does apply any natural sorting semantics, meaning for instance that tags are
+                sorted ["v10", "v11", "v9"] instead of ["v9", "v10", "v11"].
 
-        all branches that have "stab" in their name:
-
-
-        ```
-
-        curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches -G --data-urlencode 'q=name ~ "stab"'
-
-        ```
-
-
-        By default, results will be in the order the underlying source control system returns them and identical to
-
-        the ordering one sees when running "$ hg branches" or "$ git branch --list". Note that this follows simple
-
-        lexical ordering of the ref names.
-
-
-        This can be undesirable as it does apply any natural sorting semantics, meaning for instance that tags are
-
-        sorted ["v10", "v11", "v9"] instead of ["v9", "v10", "v11"].
-
-
-        Sorting can be changed using the ?q= query parameter. When using ?q=name to explicitly sort on ref name,
-
-        Bitbucket will apply natural sorting and interpret numerical values as numbers instead of strings.
+                Sorting can be changed using the ?q= query parameter. When using ?q=name to explicitly sort on ref name,
+                Bitbucket will apply natural sorting and interpret numerical values as numbers instead of strings.
       parameters:
         - description: |-
             
@@ -12318,141 +12160,129 @@ paths:
       description: >-
         Returns a branch object within the specified repository.
 
-
-        ```
-
-        $ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default | jq .
-
-        {
-          "heads": [
-            {
-              "hash": "f1a0933ce59e809f190602655e22ae6ec107c397",
-              "type": "commit",
-              "links": {
-                "self": {
-                  "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397"
-                },
-                "html": {
-                  "href": "https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397"
-                }
-              }
-            }
-          ],
-          "type": "named_branch",
-          "name": "default",
-          "links": {
-            "commits": {
-              "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/default"
-            },
-            "self": {
-              "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default"
-            },
-            "html": {
-              "href": "https://bitbucket.org/seanfarley/mercurial/branch/default"
-            }
-          },
-          "target": {
-            "hash": "f1a0933ce59e809f190602655e22ae6ec107c397",
-            "repository": {
-              "links": {
-                "self": {
-                  "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial"
-                },
-                "html": {
-                  "href": "https://bitbucket.org/seanfarley/mercurial"
-                },
-                "avatar": {
-                  "href": "https://bitbucket.org/seanfarley/mercurial/avatar/32/"
-                }
-              },
-              "type": "repository",
-              "name": "mercurial",
-              "full_name": "seanfarley/mercurial",
-              "uuid": "{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}"
-            },
-            "links": {
-              "self": {
-                "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397"
-              },
-              "comments": {
-                "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/comments"
-              },
-              "patch": {
-                "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/f1a0933ce59e809f190602655e22ae6ec107c397"
-              },
-              "html": {
-                "href": "https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397"
-              },
-              "diff": {
-                "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/f1a0933ce59e809f190602655e22ae6ec107c397"
-              },
-              "approve": {
-                "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/approve"
-              },
-              "statuses": {
-                "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/statuses"
-              }
-            },
-            "author": {
-              "raw": "Martin von Zweigbergk <martinvonz@google.com>",
-              "type": "author",
-              "user": {
-                "username": "martinvonz",
-                "nickname": "martinvonz",
-                "display_name": "Martin von Zweigbergk",
-                "type": "user",
-                "uuid": "{fdb0e657-3ade-4fad-a136-95f1ffe4a5ac}",
-                "links": {
-                  "self": {
-                    "href": "https://api.bitbucket.org/2.0/users/martinvonz"
+                ```
+                $ curl -s https://api.bitbucket.org/2.0/repositories/atlassian/aui/refs/branches/master | jq .
+                {
+                  "name": "master",
+                  "links": {
+                    "commits": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/commits/master"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/refs/branches/master"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/atlassian/aui/branch/master"
+                    }
                   },
-                  "html": {
-                    "href": "https://bitbucket.org/martinvonz/"
-                  },
-                  "avatar": {
-                    "href": "https://bitbucket.org/account/martinvonz/avatar/32/"
+                  "default_merge_strategy": "squash",
+                  "merge_strategies": [
+                    "merge_commit",
+                    "squash",
+                    "fast_forward"
+                  ],
+                  "type": "branch",
+                  "target": {
+                    "hash": "e7d158ff7ed5538c28f94cd97a9ad569680fc94e",
+                    "repository": {
+                      "links": {
+                        "self": {
+                          "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui"
+                        },
+                        "html": {
+                          "href": "https://bitbucket.org/atlassian/aui"
+                        },
+                        "avatar": {
+                          "href": "https://bytebucket.org/ravatar/%7B585074de-7b60-4fd1-81ed-e0bc7fafbda5%7D?ts=86317"
+                        }
+                      },
+                      "type": "repository",
+                      "name": "aui",
+                      "full_name": "atlassian/aui",
+                      "uuid": "{585074de-7b60-4fd1-81ed-e0bc7fafbda5}"
+                    },
+                    "links": {
+                      "self": {
+                        "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e7d158ff7ed5538c28f94cd97a9ad569680fc94e"
+                      },
+                      "comments": {
+                        "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e7d158ff7ed5538c28f94cd97a9ad569680fc94e/comments"
+                      },
+                      "patch": {
+                        "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/patch/e7d158ff7ed5538c28f94cd97a9ad569680fc94e"
+                      },
+                      "html": {
+                        "href": "https://bitbucket.org/atlassian/aui/commits/e7d158ff7ed5538c28f94cd97a9ad569680fc94e"
+                      },
+                      "diff": {
+                        "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/diff/e7d158ff7ed5538c28f94cd97a9ad569680fc94e"
+                      },
+                      "approve": {
+                        "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e7d158ff7ed5538c28f94cd97a9ad569680fc94e/approve"
+                      },
+                      "statuses": {
+                        "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e7d158ff7ed5538c28f94cd97a9ad569680fc94e/statuses"
+                      }
+                    },
+                    "author": {
+                      "raw": "psre-renovate-bot <psre-renovate-bot@atlassian.com>",
+                      "type": "author",
+                      "user": {
+                        "display_name": "psre-renovate-bot",
+                        "uuid": "{250a442a-3ab3-4fcb-87c3-3c8f3df65ec7}",
+                        "links": {
+                          "self": {
+                            "href": "https://api.bitbucket.org/2.0/users/%7B250a442a-3ab3-4fcb-87c3-3c8f3df65ec7%7D"
+                          },
+                          "html": {
+                            "href": "https://bitbucket.org/%7B250a442a-3ab3-4fcb-87c3-3c8f3df65ec7%7D/"
+                          },
+                          "avatar": {
+                            "href": "https://secure.gravatar.com/avatar/6972ee037c9f36360170a86f544071a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FP-3.png"
+                          }
+                        },
+                        "nickname": "Renovate Bot",
+                        "type": "user",
+                        "account_id": "5d5355e8c6b9320d9ea5b28d"
+                      }
+                    },
+                    "parents": [
+                      {
+                        "hash": "eab868a309e75733de80969a7bed1ec6d4651e06",
+                        "type": "commit",
+                        "links": {
+                          "self": {
+                            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/eab868a309e75733de80969a7bed1ec6d4651e06"
+                          },
+                          "html": {
+                            "href": "https://bitbucket.org/atlassian/aui/commits/eab868a309e75733de80969a7bed1ec6d4651e06"
+                          }
+                        }
+                      }
+                    ],
+                    "date": "2021-04-12T06:44:38+00:00",
+                    "message": "Merged in issue/NONE-renovate-master-babel-monorepo (pull request #2883)
+
+        chore(deps): update babel monorepo to v7.13.15 (master)
+
+
+        Approved-by: Chris "Daz" Darroch
+
+        ",
+                    "type": "commit"
                   }
                 }
-              }
-            },
-            "parents": [
-              {
-                "hash": "5523aabb85c30ebc2b8e29aadcaf5e13fa92b375",
-                "type": "commit",
-                "links": {
-                  "self": {
-                    "href": "https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375"
-                  },
-                  "html": {
-                    "href": "https://bitbucket.org/seanfarley/mercurial/commits/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375"
-                  }
-                }
-              }
-            ],
-            "date": "2018-02-01T18:44:49+00:00",
-            "message": "config: replace a for-else by any()",
-            "type": "commit"
-          }
-        }
+                ```
 
-        ```
+                This call requires authentication. Private repositories require the
+                caller to authenticate with an account that has appropriate
+                authorization.
 
+                For Git, the branch name should not include any prefixes (e.g.
+                refs/heads).
 
-        This call requires authentication. Private repositories require the
-
-        caller to authenticate with an account that has appropriate
-
-        authorization.
-
-
-        For Git, the branch name should not include any prefixes (e.g.
-
-        refs/heads).
-
-
-        For Mercurial, the response will include an additional field that lists
-
-        the open heads.
+                For Mercurial, the response will include an additional field that lists
+                the open heads.
       responses:
         "200":
           content:
@@ -16789,7 +16619,7 @@ paths:
                 $ref: "#/components/schemas/paginated_pipeline_variables"
           description: The found account level variables.
       tags:
-        - pipelines
+        - Pipelines
     post:
       deprecated: true
       description: >-
@@ -16837,7 +16667,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: A variable with the provided key already exists.
       tags:
-        - pipelines
+        - Pipelines
   "/teams/{username}/pipelines_config/variables/{variable_uuid}":
     delete:
       deprecated: true
@@ -16869,7 +16699,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account or the variable with the provided UUID does not exist.
       tags:
-        - pipelines
+        - Pipelines
     get:
       deprecated: true
       description: >-
@@ -16904,7 +16734,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account or variable with the given UUID was not found.
       tags:
-        - pipelines
+        - Pipelines
     put:
       deprecated: true
       description: >-
@@ -16941,7 +16771,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account or the variable was not found.
       tags:
-        - pipelines
+        - Pipelines
   "/teams/{username}/projects/":
     get:
       deprecated: true
@@ -17524,7 +17354,7 @@ paths:
 
         Try `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.
       tags:
-        - search
+        - Search
   "/teams/{workspace}/repositories":
     get:
       deprecated: true
@@ -18326,7 +18156,7 @@ paths:
                 $ref: "#/components/schemas/paginated_pipeline_variables"
           description: The found user level variables.
       tags:
-        - pipelines
+        - Pipelines
     post:
       deprecated: true
       description: >-
@@ -18369,7 +18199,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: A variable with the provided key already exists.
       tags:
-        - pipelines
+        - Pipelines
   "/users/{selected_user}/pipelines_config/variables/{variable_uuid}":
     delete:
       deprecated: true
@@ -18402,7 +18232,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account or the variable with the provided UUID does not exist.
       tags:
-        - pipelines
+        - Pipelines
     get:
       deprecated: true
       description: >-
@@ -18438,7 +18268,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account or variable with the given UUID was not found.
       tags:
-        - pipelines
+        - Pipelines
     put:
       deprecated: true
       description: >-
@@ -18476,7 +18306,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The account or the variable was not found.
       tags:
-        - pipelines
+        - Pipelines
   "/users/{selected_user}/properties/{app_key}/{property_name}":
     delete:
       description: Delete an [application
@@ -18810,7 +18640,7 @@ paths:
 
         Try `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.
       tags:
-        - search
+        - Search
   "/users/{selected_user}/ssh-keys":
     get:
       description: >-
@@ -20162,7 +19992,7 @@ paths:
                 $ref: "#/components/schemas/paginated_pipeline_variables"
           description: The found workspace level variables.
       tags:
-        - pipelines
+        - Pipelines
     post:
       description: Create a workspace level variable.
       operationId: createPipelineVariableForWorkspace
@@ -20201,7 +20031,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: A variable with the provided key already exists.
       tags:
-        - pipelines
+        - Pipelines
   "/workspaces/{workspace}/pipelines-config/variables/{variable_uuid}":
     delete:
       description: Delete a workspace level variable.
@@ -20230,7 +20060,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The workspace or the variable with the provided UUID does not exist.
       tags:
-        - pipelines
+        - Pipelines
     get:
       description: Retrieve a workspace level variable.
       operationId: getPipelineVariableForWorkspace
@@ -20262,7 +20092,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The workspace or variable with the given UUID was not found.
       tags:
-        - pipelines
+        - Pipelines
     put:
       description: Update a workspace level variable.
       operationId: updatePipelineVariableForWorkspace
@@ -20296,7 +20126,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: The workspace or the variable was not found.
       tags:
-        - pipelines
+        - Pipelines
   "/workspaces/{workspace}/projects":
     get:
       description: Returns the list of projects in this workspace.
@@ -20844,7 +20674,7 @@ paths:
 
         Try `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.
       tags:
-        - search
+        - Search
 components:
   requestBodies:
     issue_comment:
@@ -21044,7 +20874,14 @@ components:
         - $ref: "#/components/schemas/ref"
         - additionalProperties: true
           description: A branch object, representing a branch in a repository.
-          properties: {}
+          properties:
+            default_merge_strategy:
+              description: The default merge strategy for pull requests targeting this branch.
+              type: string
+            merge_strategies:
+              description: Available merge strategies for pull requests targeting this branch.
+              items: {}
+              type: array
           title: Branch
           type: object
     branching_model:
@@ -21647,6 +21484,7 @@ components:
             uuid:
               description: The UUID identifying the deployment.
               type: string
+          title: Deployment
           type: object
     deployment_environment:
       allOf:
@@ -21660,6 +21498,7 @@ components:
             uuid:
               description: The UUID identifying the environment.
               type: string
+          title: Deployment Environment
           type: object
       x-bb-default-fields:
         - uuid
@@ -21686,6 +21525,7 @@ components:
             uuid:
               description: The UUID identifying the release.
               type: string
+          title: Deployment Release
           type: object
     deployment_state:
       allOf:
@@ -21693,6 +21533,7 @@ components:
         - additionalProperties: true
           description: The representation of the progress state of a deployment.
           properties: {}
+          title: Deployment State
           type: object
     deployment_state_completed:
       allOf:
@@ -21728,6 +21569,7 @@ components:
         - additionalProperties: true
           description: The status of a completed deployment.
           properties: {}
+          title: Completed Deployment
           type: object
     deployment_state_completed_status_failed:
       allOf:
@@ -21823,6 +21665,7 @@ components:
               description: The value of the variable. If the variable is secured, this will be
                 empty.
               type: string
+          title: Deployment Variable
           type: object
     deployments_ddev_deployment_environment:
       allOf:
@@ -22509,6 +22352,7 @@ components:
             $ref: "#/components/schemas/report_annotation"
           minItems: 0
           type: array
+      title: Paginated Annotations
       type: object
     paginated_branches:
       additionalProperties: false
@@ -22856,6 +22700,7 @@ components:
             $ref: "#/components/schemas/deployment_variable"
           minItems: 0
           type: array
+      title: Paginated Deployment Variables
       type: object
     paginated_deployments:
       description: A paged list of deployments
@@ -22895,6 +22740,7 @@ components:
             $ref: "#/components/schemas/deployment"
           minItems: 0
           type: array
+      title: Paginated Deployments
       type: object
     paginated_diffstats:
       additionalProperties: false
@@ -22978,6 +22824,7 @@ components:
             $ref: "#/components/schemas/deployment_environment"
           minItems: 0
           type: array
+      title: Paginated Deployment Environments
       type: object
     paginated_files:
       additionalProperties: false
@@ -23323,6 +23170,7 @@ components:
             $ref: "#/components/schemas/pipeline_cache"
           minItems: 0
           type: array
+      title: Paginated Pipeline Cache
       type: object
     paginated_pipeline_known_hosts:
       description: A paged list of known hosts.
@@ -23362,6 +23210,7 @@ components:
             $ref: "#/components/schemas/pipeline_known_host"
           minItems: 0
           type: array
+      title: Paginated Pipeline Known Hosts
       type: object
     paginated_pipeline_schedule_executions:
       description: A paged list of the executions of a schedule.
@@ -23401,6 +23250,7 @@ components:
             $ref: "#/components/schemas/pipeline_schedule_execution"
           minItems: 0
           type: array
+      title: Paginated Pipeline Schedule Executions
       type: object
     paginated_pipeline_schedules:
       description: A paged list of schedules
@@ -23440,6 +23290,7 @@ components:
             $ref: "#/components/schemas/pipeline_schedule"
           minItems: 0
           type: array
+      title: Paginated Pipeline Schedule
       type: object
     paginated_pipeline_steps:
       description: A paged list of pipeline steps.
@@ -23479,6 +23330,7 @@ components:
             $ref: "#/components/schemas/pipeline_step"
           minItems: 0
           type: array
+      title: Paginated Pipeline Steps
       type: object
     paginated_pipeline_variables:
       description: A paged list of variables.
@@ -23518,6 +23370,7 @@ components:
             $ref: "#/components/schemas/pipeline_variable"
           minItems: 0
           type: array
+      title: Paginated Pipeline Variables
       type: object
     paginated_pipelines:
       description: A paged list of pipelines
@@ -23557,6 +23410,7 @@ components:
             $ref: "#/components/schemas/pipeline"
           minItems: 0
           type: array
+      title: Paginated Pipelines
       type: object
     paginated_projects:
       additionalProperties: false
@@ -23772,6 +23626,7 @@ components:
             $ref: "#/components/schemas/report"
           minItems: 0
           type: array
+      title: Paginated Reports
       type: object
     paginated_repositories:
       additionalProperties: false
@@ -24497,6 +24352,7 @@ components:
             uuid:
               description: The UUID identifying the pipeline.
               type: string
+          title: Pipeline
           type: object
     pipeline_build_number:
       allOf:
@@ -24507,6 +24363,7 @@ components:
             next:
               description: The next number that will be used as build number.
               type: integer
+          title: Pipeline Build Number
           type: object
     pipeline_cache:
       allOf:
@@ -24537,6 +24394,7 @@ components:
             uuid:
               description: The UUID identifying the pipeline cache.
               type: string
+          title: Pipeline Cache
           type: object
     pipeline_cache_content_uri:
       description: A representation of the location of pipeline cache content.
@@ -24545,6 +24403,7 @@ components:
           description: The uri for pipeline cache content.
           format: uri
           type: string
+      title: Pipeline Cache Content URI
       type: object
     pipeline_command:
       description: An executable pipeline command.
@@ -24555,6 +24414,7 @@ components:
         name:
           description: The name of the command.
           type: string
+      title: Pipeline Command
       type: object
     pipeline_commit_target:
       allOf:
@@ -24566,6 +24426,7 @@ components:
               $ref: "#/components/schemas/commit"
             selector:
               $ref: "#/components/schemas/pipeline_selector"
+          title: Pipeline Commit Target
           type: object
     pipeline_error:
       allOf:
@@ -24579,6 +24440,7 @@ components:
             message:
               description: The error message.
               type: string
+          title: Pipeline Error
           type: object
     pipeline_image:
       description: The definition of a Docker image that can be used for a Bitbucket
@@ -24601,6 +24463,7 @@ components:
           description: The username needed to authenticate with the Docker registry. Only
             required when using a private Docker image.
           type: string
+      title: Pipeline Image
       type: object
     pipeline_known_host:
       allOf:
@@ -24616,6 +24479,7 @@ components:
             uuid:
               description: The UUID identifying the known host.
               type: string
+          title: Pipeline Known Host
           type: object
     pipeline_ref_target:
       allOf:
@@ -24638,6 +24502,7 @@ components:
               type: string
             selector:
               $ref: "#/components/schemas/pipeline_selector"
+          title: Pipeline Ref Target
           type: object
     pipeline_schedule:
       allOf:
@@ -24666,6 +24531,7 @@ components:
             uuid:
               description: The UUID identifying the schedule.
               type: string
+          title: Pipeline Schedule
           type: object
     pipeline_schedule_execution:
       allOf:
@@ -24673,6 +24539,7 @@ components:
         - additionalProperties: true
           description: A Pipelines schedule execution.
           properties: {}
+          title: Pipeline Schedule Execution
           type: object
     pipeline_schedule_execution_errored:
       allOf:
@@ -24711,6 +24578,7 @@ components:
                 - default
                 - custom
               type: string
+          title: Pipeline Selector
           type: object
     pipeline_ssh_key_pair:
       allOf:
@@ -24725,6 +24593,7 @@ components:
             public_key:
               description: The SSH public key.
               type: string
+          title: Pipeline SSH Key Pair
           type: object
     pipeline_ssh_public_key:
       allOf:
@@ -24744,6 +24613,7 @@ components:
             sha256_fingerprint:
               description: The SHA-256 fingerprint of the public key.
               type: string
+          title: Pipeline SSH Public Key
           type: object
     pipeline_state:
       allOf:
@@ -24751,6 +24621,7 @@ components:
         - additionalProperties: true
           description: The representation of the progress state of a pipeline.
           properties: {}
+          title: Pipeline State
           type: object
     pipeline_state_completed:
       allOf:
@@ -24765,6 +24636,7 @@ components:
               type: string
             result:
               $ref: "#/components/schemas/pipeline_state_completed_result"
+          title: Pipeline Completed State
           type: object
     pipeline_state_completed_error:
       allOf:
@@ -24779,6 +24651,7 @@ components:
               enum:
                 - ERROR
               type: string
+          title: Pipeline Completed Error
           type: object
     pipeline_state_completed_expired:
       allOf:
@@ -24810,6 +24683,7 @@ components:
         - additionalProperties: true
           description: A result of a completed pipeline state.
           properties: {}
+          title: Pipeline Completed Result
           type: object
     pipeline_state_completed_stopped:
       allOf:
@@ -24848,6 +24722,7 @@ components:
               type: string
             stage:
               $ref: "#/components/schemas/pipeline_state_in_progress_stage"
+          title: Pipeline In-Progress State
           type: object
     pipeline_state_in_progress_paused:
       allOf:
@@ -24880,6 +24755,7 @@ components:
         - additionalProperties: true
           description: A result of an in progress pipeline state.
           properties: {}
+          title: Pipeline In-Progress Stage
           type: object
     pipeline_state_pending:
       allOf:
@@ -24892,6 +24768,7 @@ components:
               enum:
                 - PENDING
               type: string
+          title: Pipeline Pending State
           type: object
     pipeline_step:
       allOf:
@@ -24930,6 +24807,7 @@ components:
             uuid:
               description: The UUID identifying the step.
               type: string
+          title: Pipeline Step
           type: object
       x-bb-default-fields:
         - uuid
@@ -24946,6 +24824,7 @@ components:
             message:
               description: The error message.
               type: string
+          title: Pipeline Step Error
           type: object
     pipeline_step_state:
       allOf:
@@ -24953,6 +24832,7 @@ components:
         - additionalProperties: true
           description: The representation of the progress state of a pipeline step.
           properties: {}
+          title: Pipeline Step State
           type: object
     pipeline_step_state_completed:
       allOf:
@@ -25024,6 +24904,7 @@ components:
         - additionalProperties: true
           description: A result of a completed pipeline step state.
           properties: {}
+          title: Pipeline Completed Step Result
           type: object
     pipeline_step_state_completed_stopped:
       allOf:
@@ -25091,6 +24972,7 @@ components:
         - additionalProperties: true
           description: A representation of the target that a pipeline executes on.
           properties: {}
+          title: Pipeline Target
           type: object
     pipeline_trigger:
       allOf:
@@ -25098,6 +24980,7 @@ components:
         - additionalProperties: true
           description: A representation of the trigger used for a pipeline.
           properties: {}
+          title: Pipeline Trigger
           type: object
     pipeline_trigger_manual:
       allOf:
@@ -25105,6 +24988,7 @@ components:
         - additionalProperties: true
           description: A Bitbucket Pipelines MANUAL trigger.
           properties: {}
+          title: Pipeline Manual Trigger
           type: object
     pipeline_trigger_push:
       allOf:
@@ -25112,6 +24996,7 @@ components:
         - additionalProperties: true
           description: A Bitbucket Pipelines PUSH trigger.
           properties: {}
+          title: Pipeline Push Trigger
           type: object
     pipeline_variable:
       allOf:
@@ -25133,6 +25018,7 @@ components:
               description: The value of the variable. If the variable is secured, this will be
                 empty.
               type: string
+          title: Pipeline Variable
           type: object
     pipelines_config:
       allOf:
@@ -25145,6 +25031,7 @@ components:
               type: boolean
             repository:
               $ref: "#/components/schemas/repository"
+          title: Pipelines Configuration
           type: object
     pipelines_ddev_pipeline_step:
       allOf:
@@ -25717,6 +25604,7 @@ components:
             uuid:
               description: The UUID that can be used to identify the report.
               type: string
+          title: Commit Report
           type: object
       x-bb-default-fields:
         - uuid
@@ -25793,6 +25681,7 @@ components:
             uuid:
               description: The UUID that can be used to identify the annotation.
               type: string
+          title: Report Annotation
           type: object
       x-bb-default-fields:
         - uuid
@@ -25818,6 +25707,7 @@ components:
         value:
           description: The value of the data element.
           type: object
+      title: Report Data
       type: object
     repository:
       allOf:
@@ -29144,7 +29034,7 @@ x-radar-pages:
           * [Repositoriess](#query-repo)
           * [Pull requests](#query-pullreq)
           * [Issues](#query-issues)
-          * [Refs, tags, bookmarks](#query-ref)
+          * [Refs, tags](#query-ref)
       * [Sorting query results](#query-sort)
 
 
@@ -30552,4 +30442,4 @@ x-radar-pages:
     icon: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMjU3LjMxNjMgMTYyLjU5OTQiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGlzb2xhdGlvbjogaXNvbGF0ZTsKICAgICAgfQoKICAgICAgLmNscy0yIHsKICAgICAgICBmaWxsOiAjMzQ0NTYzOwogICAgICB9CgogICAgICAuY2xzLTMgewogICAgICAgIGZpbGw6ICMxZGI5ZDQ7CiAgICAgIH0KCiAgICAgIC5jbHMtNCB7CiAgICAgICAgZmlsbDogIzAwNTdkODsKICAgICAgfQoKICAgICAgLmNscy01LCAuY2xzLTcsIC5jbHMtOSB7CiAgICAgICAgbWl4LWJsZW5kLW1vZGU6IG11bHRpcGx5OwogICAgICB9CgogICAgICAuY2xzLTUgewogICAgICAgIGZpbGw6IHVybCgjTjc1KTsKICAgICAgfQoKICAgICAgLmNscy02IHsKICAgICAgICBmaWxsOiAjMDA2NWZmOwogICAgICB9CgogICAgICAuY2xzLTcgewogICAgICAgIGZpbGw6IHVybCgjTjc1LTIpOwogICAgICB9CgogICAgICAuY2xzLTggewogICAgICAgIGZpbGw6IHVybCgjbGluZWFyLWdyYWRpZW50KTsKICAgICAgfQoKICAgICAgLmNscy05IHsKICAgICAgICBmaWxsOiB1cmwoI043NS0zKTsKICAgICAgfQoKICAgICAgLmNscy0xMCB7CiAgICAgICAgZmlsbDogdXJsKCNUMjAwLVQ3NSk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Ik43NSIgeDE9Ii0yMTg5LjU1NiIgeTE9IjI4MDguMjI4NCIgeDI9Ii0yMDkxLjE1NTEiIHkyPSIyODA4LjIyODQiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMC4xNjgxLCAwLjk4NTgsIDAuOTg1OCwgLTAuMTY4MSwgLTIzNzMuNzM2LCAyNzIyLjEyNzgpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2U1ZThlYyIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNWU4ZWMiIHN0b3Atb3BhY2l0eT0iMC4xIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJONzUtMiIgZGF0YS1uYW1lPSJONzUiIHgxPSItMjE2OC41OTQ3IiB5MT0iMjkzNS4wNTU2IiB4Mj0iLTIwNzAuMTkzNyIgeTI9IjI5MzUuMDU1NiIgeGxpbms6aHJlZj0iI043NSIvPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQiIHgxPSIxOTAuMzU0NyIgeTE9IjE1OS45NjciIHgyPSIyNTkuOTQ4NyIgeTI9IjkwLjM3MyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzNDQ1NjMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWU2Yzg0Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJONzUtMyIgZGF0YS1uYW1lPSJONzUiIHgxPSItMjI1Ny4zOTc3IiB5MT0iMjg4NC4yMjYzIiB4Mj0iLTIxNTguOTk2NyIgeTI9IjI4ODQuMjI2MyIgeGxpbms6aHJlZj0iI043NSIvPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJUMjAwLVQ3NSIgeDE9IjEyNi4wMjU3IiB5MT0iODUuMTA4IiB4Mj0iMTk1LjYxOTciIHkyPSIxNS41MTQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjM2RjN2RjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzljZTNlZSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHRpdGxlPkFkZCBPbiBCbG9ja3MgMjwvdGl0bGU+CiAgPGcgY2xhc3M9ImNscy0xIj4KICAgIDxnIGlkPSJMYXllcl8yIiBkYXRhLW5hbWU9IkxheWVyIDIiPgogICAgICA8ZyBpZD0iT2JqZWN0cyI+CiAgICAgICAgPHJlY3QgaWQ9Il9SZWN0YW5nbGVfIiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTIiIHg9IjEyOC42NTgxIiB5PSI4Ny43NDA1IiB3aWR0aD0iNjQuMzI5MSIgaGVpZ2h0PSI3NC44NTkiLz4KICAgICAgICA8cmVjdCBpZD0iX1JlY3RhbmdsZV8yIiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTMiIHg9IjY0LjMyOTEiIHk9IjEyLjg4MTUiIHdpZHRoPSI2NC4zMjkxIiBoZWlnaHQ9Ijc0Ljg1OSIvPgogICAgICAgIDxyZWN0IGlkPSJfUmVjdGFuZ2xlXzMiIGRhdGEtbmFtZT0iJmx0O1JlY3RhbmdsZSZndDsiIGNsYXNzPSJjbHMtNCIgeT0iODcuNzQwNSIgd2lkdGg9IjY0LjMyOTEiIGhlaWdodD0iNzQuODU5Ii8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNjQuMzI5MSw4Ny43NEg1OC42NTIzYTYyLjc4NzcsNjIuNzg3NywwLDAsMC0yNC41Njg0LDIwLjc2MjFjLTguMjYwNywxMi4xOTYtNC4zNDM3LDE4LjI0MTUtMTEuNjYzNywzMS42Mzk1QzE2LjUxLDE1MC45Niw4LjA1MSwxNTcuODIsMCwxNjIuNTU2di4wNDM1aDY0LjMyOVoiLz4KICAgICAgICA8cmVjdCBpZD0iX1JlY3RhbmdsZV80IiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTYiIHg9IjY0LjMyOTEiIHk9Ijg3Ljc0MDUiIHdpZHRoPSI2NC4zMjkxIiBoZWlnaHQ9Ijc0Ljg1OSIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTE5Mi45ODcyLDg3Ljc0SDE4My4zNDNhNjIuNzg3Nyw2Mi43ODc3LDAsMCwwLTI0LjU2ODQsMjAuNzYyMWMtOC4yNjA3LDEyLjE5Ni00LjM0MzgsMTguMjQxNS0xMS42NjM3LDMxLjYzOTVhNTYuNzI0Niw1Ni43MjQ2LDAsMCwxLTE4LjQ1MjcsMTkuOTF2Mi41NDc0aDY0LjMyOVoiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTgiIHg9IjE5Mi45ODcyIiB5PSI4Ny43NDA1IiB3aWR0aD0iNjQuMzI5MSIgaGVpZ2h0PSI3NC44NTkiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTkiIGQ9Ik0xMjguNjU4MiwxMi44ODE1SDExNi41OUE2MS45NjQ2LDYxLjk2NDYsMCwwLDAsMTAxLjMyMzMsMjguMjE1QzkzLjA2MjUsNDAuNDEwOSw5Ni45Nzk0LDQ2LjQ1NjUsODkuNjYsNTkuODU0NCw4My4wMzE2LDcxLjk4NTcsNzMuMTk3LDc5LjE1MTQsNjQuMzI5MSw4My45MTA4djMuODNoNjQuMzI5MVoiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTEwIiB4PSIxMjguNjU4MSIgeT0iMTIuODgxNSIgd2lkdGg9IjY0LjMyOTEiIGhlaWdodD0iNzQuODU5Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy00IiB4PSIxMC4xNjA1IiB5PSI3NC44NTkiIHdpZHRoPSIyNC43NTM2IiBoZWlnaHQ9IjEyLjg4MTUiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTQiIHg9IjUxLjk1MjMiIHk9Ijc0Ljg1OSIgd2lkdGg9IjI0Ljc1MzYiIGhlaWdodD0iMTIuODgxNSIvPgogICAgICAgIDxyZWN0IGNsYXNzPSJjbHMtNCIgeD0iOTMuNzQ0MSIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIxMzguODE4NiIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIxODAuNjEwNCIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIyMjIuNDAyMiIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSI3NC40ODk1IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSIxMTYuMjgxNCIgd2lkdGg9IjI0Ljc1MzYiIGhlaWdodD0iMTIuODgxNSIvPgogICAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMyIgeD0iMTU4LjA3MzIiIHdpZHRoPSIyNC43NTM2IiBoZWlnaHQ9IjEyLjg4MTUiLz4KICAgICAgPC9nPgogICAgPC9nPgogIDwvZz4KPC9zdmc+Cg==
     key: bb-connect
     title: Atlassian Connect
-x-revision: c7993f62e73e
+x-revision: 5a8127d5aaf1

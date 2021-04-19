@@ -126,6 +126,8 @@ tags:
     name: WhatsApp Media
   - description: WhatsApp messages
     name: WhatsApp Messages
+  - description: WhatsApp user info
+    name: WhatsApp Users
   - description: Wireless operations
     name: Wireless
 paths:
@@ -6297,7 +6299,7 @@ paths:
           description: Unauthorized
         "422":
           description: Unprocessable entity. Check message field in response for details.
-      summary: List all porting order
+      summary: List all porting orders
       tags:
         - Porting Order
       x-latency-category: responsive
@@ -6448,7 +6450,7 @@ paths:
           description: Unprocessable entity. Check message field in response for details.
       summary: List all porting phone numbers
       tags:
-        - Phone Number
+        - Porting Order
       x-latency-category: responsive
   /portouts:
     get:
@@ -8292,7 +8294,10 @@ paths:
   /whatsapp_contacts:
     post:
       deprecated: false
-      operationId: CheckContact
+      description: Verify that a phone number belongs to a valid WhatsApp account. You
+        must ensure that the status is valid before you can message a user, and
+        you'll get their WhatsApp ID to use for messaging.
+      operationId: checkContact
       requestBody:
         content:
           application/json:
@@ -8307,7 +8312,6 @@ paths:
               whatsapp_user_id: "15125551212"
             schema:
               $ref: "#/components/schemas/CheckContactRequestBody"
-        description: ""
         required: true
       responses:
         "200":
@@ -8321,7 +8325,9 @@ paths:
   /whatsapp_media:
     post:
       deprecated: false
-      operationId: UploadMedia
+      description: Upload media. Accepted media types include image/jpeg, image/png,
+        video/mp4, video/3gpp, audio/aac, audio/ogg.
+      operationId: uploadMedia
       requestBody:
         content:
           multipart/form-data:
@@ -8331,7 +8337,6 @@ paths:
               whatsapp_user_id: "15125551212"
             schema:
               $ref: "#/components/schemas/MediaRequestBody"
-        description: ""
         required: true
       responses:
         "200":
@@ -8345,7 +8350,8 @@ paths:
   "/whatsapp_media/{whatsapp_user_id}/{media_id}":
     delete:
       deprecated: false
-      operationId: DeleteMedia
+      description: Delete uploaded media.
+      operationId: deleteMedia
       parameters:
         - description: User's WhatsApp ID
           explode: false
@@ -8374,7 +8380,9 @@ paths:
       x-latency-category: responsive
     get:
       deprecated: false
-      operationId: DownloadMedia
+      description: Retrieve uploaded media. Media is typically available for 30 days
+        after uploading.
+      operationId: downloadMedia
       parameters:
         - description: User's WhatsApp ID
           explode: false
@@ -8394,7 +8402,7 @@ paths:
           style: simple
       responses:
         "200":
-          description: The requested media.
+          $ref: "#/components/responses/UploadedMediaResponse"
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Download Media
@@ -8404,7 +8412,9 @@ paths:
   /whatsapp_messages:
     post:
       deprecated: false
-      operationId: SendMessage
+      description: Send text messages, media/documents, and message templates to your
+        customers.
+      operationId: sendMessage
       requestBody:
         content:
           application/json:
@@ -8415,12 +8425,11 @@ paths:
               type: text
               whatsapp_user_id: "15125551212"
             schema:
-              $ref: "#/components/schemas/SendMessageRequestBody"
-        description: ""
+              $ref: "#/components/schemas/CreateWhatsAppMessageRequest"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/MessageResponse"
+          $ref: "#/components/responses/WhatsAppMessageResponse"
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Send Message
@@ -8430,7 +8439,8 @@ paths:
   "/whatsapp_messages/{message_id}":
     patch:
       deprecated: false
-      operationId: MarkMessageAsRead
+      description: Mark a message as read.
+      operationId: markMessageAsRead
       parameters:
         - description: Message ID from Webhook
           in: path
@@ -8446,7 +8456,6 @@ paths:
               whatsapp_user_id: "15125551212"
             schema:
               $ref: "#/components/schemas/MarkMessageAsReadRequestBody"
-        description: ""
         required: true
       responses:
         "204":
@@ -8460,7 +8469,8 @@ paths:
   "/whatsapp_users/{whatsapp_user_id}":
     get:
       deprecated: false
-      operationId: GetUser
+      description: Retrieve WhatsApp user information.
+      operationId: getUser
       parameters:
         - description: User's WhatsApp ID
           explode: false
@@ -8480,7 +8490,8 @@ paths:
         - WhatsApp Users
       x-latency-category: responsive
     patch:
-      operationId: UpdateWhatsAppWebhook
+      description: Update webhook URL used for a given WhatsApp user.
+      operationId: updateWhatsAppWebhook
       parameters:
         - description: User's WhatsApp ID
           explode: false
@@ -10361,10 +10372,10 @@ components:
           schema:
             properties:
               data:
-                $ref: "#/components/schemas/Message"
-            title: Successful response with details about the WhatsApp message sent.
+                $ref: "#/components/schemas/OutboundMessagePayload"
+            title: Message Response
             type: object
-      description: ""
+      description: Successful response with details about a message.
     MessagingHostedNumberOrderResponse:
       content:
         application/json:
@@ -10862,9 +10873,17 @@ components:
                 items:
                   $ref: "#/components/schemas/UploadMedia"
                 type: array
-            title: Upload Media response.
+            title: Upload Media.
             type: object
-      description: ""
+      description: Successful response
+    UploadedMediaResponse:
+      content:
+        "*":
+          schema:
+            format: binary
+            title: The requested media.
+            type: string
+      description: Successful response
     UserBalanceResponse:
       content:
         application/json:
@@ -10884,6 +10903,16 @@ components:
             title: Validate address action response
             type: object
       description: Action response
+    WhatsAppMessageResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/Message"
+            title: Successful response with details about the WhatsApp message sent.
+            type: object
+      description: Successful response
     WhatsAppUserResponse:
       content:
         application/json:
@@ -10893,7 +10922,7 @@ components:
                 $ref: "#/components/schemas/WhatsAppUser"
             title: Successful response with details about the WhatsApp message sent.
             type: object
-      description: ""
+      description: Successful response
   schemas:
     ActivationStatus:
       description: Activation status
@@ -10914,44 +10943,54 @@ components:
       example: Active
       type: string
     Address:
-      example:
-        city: Menlo Park
-        country: United States
-        country_code: us
-        state: CA
-        street: 1 Hacker Way
-        type: HOME
-        zip: "94025"
       properties:
-        city:
-          description: City name
-          type: string
-        country:
-          description: Full country name
-          type: string
+        address_book:
+          $ref: "#/components/schemas/address_book"
+        administrative_area:
+          $ref: "#/components/schemas/administrative_area"
+        borough:
+          $ref: "#/components/schemas/borough"
+        business_name:
+          $ref: "#/components/schemas/business_name"
         country_code:
-          description: Two-letter country abbreviation
+          $ref: "#/components/schemas/country_code"
+        created_at:
+          description: ISO 8601 formatted date indicating when the resource was created.
+          example: 2018-02-02T22:25:27.521Z
           type: string
-        state:
-          description: State abbreviation
+        customer_reference:
+          $ref: "#/components/schemas/customer_reference"
+        extended_address:
+          $ref: "#/components/schemas/extended_address"
+        first_name:
+          $ref: "#/components/schemas/first_name"
+        id:
+          description: Uniquely identifies the address.
+          example: "1293384261075731499"
+          format: int64
           type: string
-        street:
-          description: Street number and name
+        last_name:
+          $ref: "#/components/schemas/last_name"
+        locality:
+          $ref: "#/components/schemas/locality"
+        neighborhood:
+          $ref: "#/components/schemas/neighborhood"
+        phone_number:
+          $ref: "#/components/schemas/phone_number"
+        postal_code:
+          $ref: "#/components/schemas/postal_code"
+        record_type:
+          description: Identifies the type of the resource.
+          example: address
           type: string
-        type:
-          description: "Standard Values: HOME, WORK"
+        street_address:
+          $ref: "#/components/schemas/street_address"
+        updated_at:
+          description: ISO 8601 formatted date indicating when the resource was updated.
+          example: 2018-02-02T22:25:27.521Z
           type: string
-        zip:
-          description: ZIP code
-          type: string
-      required:
-        - city
-        - country
-        - country_code
-        - state
-        - street
-        - type
-        - zip
+        validate_address:
+          $ref: "#/components/schemas/validate_address"
       title: Address
       type: object
     AddressCreate:
@@ -15074,7 +15113,7 @@ components:
         addresses:
           description: Full contact address(es)
           items:
-            $ref: "#/components/schemas/Address"
+            $ref: "#/components/schemas/WhatsAppContactAddress"
           type: array
         birthday:
           description: YYYY-MM-DD formatted string
@@ -16834,6 +16873,55 @@ components:
       required:
         - data
       title: CreateVerifyProfileResponse
+      type: object
+    CreateWhatsAppMessageRequest:
+      example:
+        preview_url: true
+        text:
+          body: "Check out this site: http://www.telnyx.com"
+        to: "15125557878"
+        type: text
+      properties:
+        audio:
+          $ref: "#/components/schemas/Audio"
+        contacts:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Contact"
+          type: array
+        document:
+          $ref: "#/components/schemas/Document"
+        hsm:
+          $ref: "#/components/schemas/Hsm"
+        image:
+          $ref: "#/components/schemas/Image"
+        location:
+          $ref: "#/components/schemas/Location"
+        preview_url:
+          description: >-
+            Specifying preview_url in the request is optional when not
+            including a URL in your message.
+
+            To include a URL preview, set preview_url to true in the message body and make sure the URL begins with http:// or https://.
+          type: boolean
+        template:
+          $ref: "#/components/schemas/Template"
+        text:
+          $ref: "#/components/schemas/Text"
+        to:
+          description: The WhatsApp ID (phone number) returned from contacts endpoint.
+          type: string
+        type:
+          $ref: "#/components/schemas/MessageType"
+        video:
+          $ref: "#/components/schemas/Video"
+        whatsapp_user_id:
+          description: The sender's WhatsApp ID.
+          type: string
+      required:
+        - to
+        - whatsapp_user_id
+      title: Send Message Request Body
       type: object
     CreatedAt:
       description: ISO 8601 formatted date indicating when the resource was created.
@@ -19878,6 +19966,8 @@ components:
           default: read
           type: string
         whatsapp_user_id:
+          description: The user's WhatsApp ID.
+          example: "15125551212"
           type: string
       required:
         - whatsapp_user_id
@@ -22176,6 +22266,11 @@ components:
           example: f1486bae-f067-460c-ad43-73a92848f902
           format: uuid
           type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: porting_phone_number
+          readOnly: true
+          type: string
       type: object
     PhoneNumberDeletedDetailed:
       example:
@@ -23114,6 +23209,11 @@ components:
           example: 1
           readOnly: true
           type: integer
+        record_type:
+          description: Identifies the type of the resource.
+          example: porting_order
+          readOnly: true
+          type: string
         status:
           $ref: "#/components/schemas/PortingOrderStatus"
         support_key:
@@ -24218,67 +24318,6 @@ components:
       type: object
     SIMCardRegistration:
       properties:
-        created_at:
-          description: ISO 8601 formatted date-time indicating when the resource was
-            created.
-          example: 2018-02-02T22:25:27.521Z
-          readOnly: true
-          type: string
-        iccid:
-          description: >
-            The ICCID is the identifier of the specific SIM card/chip. Each SIM
-            is internationally identified by its integrated circuit card
-            identifier (ICCID). ICCIDs are stored in the SIM card's memory and
-            are also engraved or printed on the SIM card body during a process
-            called personalization.
-          example: "89310410106543789301"
-          readOnly: true
-          type: string
-        id:
-          description: Identifies the resource.
-          example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
-          format: uuid
-          readOnly: true
-          type: string
-        imsi:
-          description: >
-            SIM cards are identified on their individual operator networks by a
-            unique International Mobile Subscriber Identity (IMSI). <br/>
-
-            Mobile network operators connect mobile phone calls and communicate with their market SIM cards using their IMSIs. The IMSI is stored in the Subscriber  Identity Module (SIM) inside the device and is sent by the device to the appropriate network. It is used to acquire the details of the device in the Home  Location Register (HLR) or the Visitor Location Register (VLR).
-          example: 81932214823362980
-          readOnly: true
-          type: string
-        ipv4:
-          description: >
-            The SIM's address in the currently connected network. This IPv4
-            address is usually obtained dynamically, so it may vary according to
-            the location or new connections.
-          example: 192.168.0.0
-          readOnly: true
-          type: string
-        ipv6:
-          description: >
-            The SIM's address in the currently connected network. This IPv6
-            address is usually obtained dynamically, so it may vary according to
-            the location or new connections.
-          example: 2001:cdba:0000:0000:0000:0000:3257:9652
-          readOnly: true
-          type: string
-        msisdn:
-          description: >
-            Mobile Station International Subscriber Directory Number (MSISDN)
-            is a number used to identify a mobile phone number internationally.
-            <br/>
-
-            MSISDN is defined by the E.164 numbering plan. It includes a country code and a National Destination Code which identifies the subscriber's operator.
-          example: "+13109976224"
-          readOnly: true
-          type: string
-        record_type:
-          example: sim_card
-          readOnly: true
-          type: string
         registration_codes:
           example:
             - "0000000001"
@@ -24294,29 +24333,14 @@ components:
           format: uuid
           type: string
         status:
-          description: >
-            The current status of the SIM card. It will be one of the
-            following: <br/>
-
-            <ul>
-             <li><code>registering</code> - the card is being registered</li>
-             <li><code>enabling</code> - the card is being enabled</li>
-             <li><code>enabled</code> - the card is enabled and ready for use</li>
-             <li><code>disabling</code> - the card is being disabled</li>
-             <li><code>disabled</code> - the card has been disabled and cannot be used</li>
-             <li><code>data_limit_exceeded</code> - the card has exceeded its data consumption limit</li>
-            </ul>
-
-            Transitioning between the enabled and disabled states may take a period of time.
+          default: enabled
+          description: Status on which the SIM card will be set after being successful
+            registered.
           enum:
-            - registering
-            - enabling
             - enabled
-            - disabling
             - disabled
-            - data_limit_exceeded
-          example: enabled
-          readOnly: true
+            - standby
+          example: standby
           type: string
         tags:
           description: Searchable tags associated with the SIM card
@@ -24327,12 +24351,8 @@ components:
           items:
             type: string
           type: array
-        updated_at:
-          description: ISO 8601 formatted date-time indicating when the resource was
-            updated.
-          example: 2018-02-02T22:25:27.521Z
-          readOnly: true
-          type: string
+      required:
+        - registration_codes
       title: SIMCardRegistration
       type: object
     SendDTMFRequest:
@@ -24396,55 +24416,6 @@ components:
         - media_url
         - to
       title: Send fax request
-      type: object
-    SendMessageRequestBody:
-      example:
-        preview_url: true
-        text:
-          body: "Check out this site: http://www.telnyx.com"
-        to: "15125557878"
-        type: text
-      properties:
-        audio:
-          $ref: "#/components/schemas/Audio"
-        contacts:
-          description: ""
-          items:
-            $ref: "#/components/schemas/Contact"
-          type: array
-        document:
-          $ref: "#/components/schemas/Document"
-        hsm:
-          $ref: "#/components/schemas/Hsm"
-        image:
-          $ref: "#/components/schemas/Image"
-        location:
-          $ref: "#/components/schemas/Location"
-        preview_url:
-          description: >-
-            Specifying preview_url in the request is optional when not
-            including a URL in your message.
-
-            To include a URL preview, set preview_url to true in the message body and make sure the URL begins with http:// or https://.
-          type: boolean
-        template:
-          $ref: "#/components/schemas/Template"
-        text:
-          $ref: "#/components/schemas/Text"
-        to:
-          description: The WhatsApp ID (phone number) returned from contacts endpoint.
-          type: string
-        type:
-          $ref: "#/components/schemas/MessageType"
-        video:
-          $ref: "#/components/schemas/Video"
-        whatsapp_user_id:
-          description: The sender's WhatsApp ID.
-          type: string
-      required:
-        - to
-        - whatsapp_user_id
-      title: Send Message Request Body
       type: object
     ServicePlan:
       default: global
@@ -27350,6 +27321,47 @@ components:
       nullable: true
       title: Webhook Timeout Secs
       type: integer
+    WhatsAppContactAddress:
+      example:
+        city: Menlo Park
+        country: United States
+        country_code: us
+        state: CA
+        street: 1 Hacker Way
+        type: HOME
+        zip: "94025"
+      properties:
+        city:
+          description: City name
+          type: string
+        country:
+          description: Full country name
+          type: string
+        country_code:
+          description: Two-letter country abbreviation
+          type: string
+        state:
+          description: State abbreviation
+          type: string
+        street:
+          description: Street number and name
+          type: string
+        type:
+          description: "Standard Values: HOME, WORK"
+          type: string
+        zip:
+          description: ZIP code
+          type: string
+      required:
+        - city
+        - country
+        - country_code
+        - state
+        - street
+        - type
+        - zip
+      title: Address
+      type: object
     WhatsAppUser:
       description: The WhatsApp user object
       example:

@@ -2192,7 +2192,7 @@ paths:
         If you pass in an asterisk for the holidayId then all business
         holidays\r
 
-        will be set to the valaue"
+        will be set to the value"
       parameters:
         - in: path
           name: id
@@ -6619,6 +6619,7 @@ components:
           type: boolean
         startDate:
           format: date-time
+          nullable: true
           type: string
         startTime:
           format: int32
@@ -6666,6 +6667,7 @@ components:
           type: boolean
         startDate:
           format: date-time
+          nullable: true
           type: string
         startTime:
           format: int32

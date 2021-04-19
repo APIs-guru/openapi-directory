@@ -940,6 +940,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
         - description: Comma-separated list of fields to include in the response
           in: query
           name: fields
@@ -1010,6 +1015,11 @@ paths:
           in: header
           name: X-API2CRM-USER-KEY
           required: true
+          type: string
+        - description: Filter
+          in: query
+          name: filter
+          required: false
           type: string
       produces:
         - application/json
