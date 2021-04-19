@@ -3952,6 +3952,10 @@ components:
         serviceAccountEmail:
           description: The email address of the service account to run the job as.
           type: string
+        stagingLocation:
+          description: The Cloud Storage path for staging local files. Must be a valid
+            Cloud Storage URL, beginning with `gs://`.
+          type: string
         subnetwork:
           description: Subnetwork to which VMs will be assigned, if desired. You can
             specify a subnetwork using either a complete URL or an abbreviated
@@ -6968,7 +6972,7 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/compute: View and manage your Google Compute Engine resources
             https://www.googleapis.com/auth/compute.readonly: View your Google Compute Engine resources
-            https://www.googleapis.com/auth/userinfo.email: View your email address
+            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -6979,6 +6983,6 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/compute: View and manage your Google Compute Engine resources
             https://www.googleapis.com/auth/compute.readonly: View your Google Compute Engine resources
-            https://www.googleapis.com/auth/userinfo.email: View your email address
+            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

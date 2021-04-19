@@ -35792,6 +35792,10 @@ components:
         enableNestedVirtualization:
           description: Whether to enable nested virtualization or not (default is false).
           type: boolean
+        threadsPerCore:
+          description: The number of threads per physical core. To disable simultaneous multithreading (SMT) set this to 1. If unset, the maximum number of threads supported per core by the underlying processor is assumed.
+          format: int32
+          type: integer
       type: object
     AliasIpRange:
       description: An alias IP range attached to an instance's network interface.

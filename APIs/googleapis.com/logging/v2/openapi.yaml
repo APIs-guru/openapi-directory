@@ -263,13 +263,12 @@ paths:
       operationId: logging.projects.logs.delete
       parameters:
         - description: 'Required. The resource name of the log to delete:
-            "projects/[PROJECT_ID]/logs/[LOG_ID]"
-            "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
-            "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
-            "folders/[FOLDER_ID]/logs/[LOG_ID]" [LOG_ID] must be URL-encoded.
-            For example, "projects/my-project-id/logs/syslog",
-            "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity".
-            For more information about log names, see LogEntry.'
+            projects/[PROJECT_ID]/logs/[LOG_ID]
+            organizations/[ORGANIZATION_ID]/logs/[LOG_ID]
+            billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]
+            folders/[FOLDER_ID]/logs/[LOG_ID][LOG_ID] must be URL-encoded. For
+            example, "projects/my-project-id/logs/syslog".For more information
+            about log names, see LogEntry.'
           in: path
           name: logName
           required: true
@@ -698,7 +697,7 @@ paths:
           schema:
             type: string
         - description: The maximum number of results to return. If not set, the service
-            will select a default.
+            selects a default.
           in: query
           name: pageSize
           schema:
@@ -1025,9 +1024,9 @@ paths:
         accounts. Only logs that have entries are listed.
       operationId: logging.projects.logs.list
       parameters:
-        - description: 'Required. The resource name that owns the logs:
-            "projects/[PROJECT_ID]" "organizations/[ORGANIZATION_ID]"
-            "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" '
+        - description: "Required. The resource name that owns the logs:
+            projects/[PROJECT_ID] organizations/[ORGANIZATION_ID]
+            billingAccounts/[BILLING_ACCOUNT_ID] folders/[FOLDER_ID]"
           in: path
           name: parent
           required: true
@@ -1049,14 +1048,17 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: 'Optional. The resource name that owns the logs:
-            projects/PROJECT_ID/locations/LOCATION_ID/buckets/BUCKET_ID/views/VIEW_ID
-            organization/ORGANIZATION_ID/locations/LOCATION_ID/buckets/BUCKET_ID/views/VIEW_ID
-            billingAccounts/BILLING_ACCOUNT_ID/locations/LOCATION_ID/buckets/BUCKET_ID/views/VIEW_ID
-            folders/FOLDER_ID/locations/LOCATION_ID/buckets/BUCKET_ID/views/VIEW_IDTo
-            support legacy queries, it could also be: "projects/PROJECT_ID"
-            "organizations/ORGANIZATION_ID" "billingAccounts/BILLING_ACCOUNT_ID"
-            "folders/FOLDER_ID"'
+        - description: "Optional. The resource name that owns the logs:
+            projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/v\
+            iews/[VIEW_ID]
+            organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BU\
+            CKET_ID]/views/[VIEW_ID]
+            billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/bucket\
+            s/[BUCKET_ID]/views/[VIEW_ID]
+            folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/vie\
+            ws/[VIEW_ID]To support legacy queries, it could also be:
+            projects/[PROJECT_ID] organizations/[ORGANIZATION_ID]
+            billingAccounts/[BILLING_ACCOUNT_ID] folders/[FOLDER_ID]"
           explode: true
           in: query
           name: resourceNames
@@ -2082,16 +2084,19 @@ components:
             type: string
           type: array
         resourceNames:
-          description: 'Required. Names of one or more parent resources from which to
-            retrieve log entries: "projects/[PROJECT_ID]"
-            "organizations/[ORGANIZATION_ID]"
-            "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" May
-            alternatively be one or more views
-            projects/PROJECT_ID/locations/LOCATION_ID/buckets/BUCKET_ID/views/VIEW_ID
-            organization/ORGANIZATION_ID/locations/LOCATION_ID/buckets/BUCKET_ID/views/VIEW_ID
-            billingAccounts/BILLING_ACCOUNT_ID/locations/LOCATION_ID/buckets/BUCKET_ID/views/VIEW_ID
-            folders/FOLDER_ID/locations/LOCATION_ID/buckets/BUCKET_ID/views/VIEW_IDProjects
-            listed in the project_ids field are added to this list.'
+          description: "Required. Names of one or more parent resources from which to
+            retrieve log entries: projects/[PROJECT_ID]
+            organizations/[ORGANIZATION_ID] billingAccounts/[BILLING_ACCOUNT_ID]
+            folders/[FOLDER_ID]May alternatively be one or more views:
+            projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/v\
+            iews/[VIEW_ID]
+            organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BU\
+            CKET_ID]/views/[VIEW_ID]
+            billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/bucket\
+            s/[BUCKET_ID]/views/[VIEW_ID]
+            folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/vie\
+            ws/[VIEW_ID]Projects listed in the project_ids field are added to
+            this list."
           items:
             type: string
           type: array
@@ -3241,14 +3246,18 @@ components:
             filter is 20000 characters.
           type: string
         resourceNames:
-          description: 'Required. Name of a parent resource from which to retrieve log
-            entries: "projects/[PROJECT_ID]" "organizations/[ORGANIZATION_ID]"
-            "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" May
+          description: "Required. Name of a parent resource from which to retrieve log
+            entries: projects/[PROJECT_ID] organizations/[ORGANIZATION_ID]
+            billingAccounts/[BILLING_ACCOUNT_ID] folders/[FOLDER_ID]May
             alternatively be one or more views:
-            "projects/PROJECT_ID/locations/LOCATION_ID/buckets/BUCKET_ID/views/VIEW_ID"
-            "organization/ORGANIZATION_ID/locations/LOCATION_ID/buckets/BUCKET_ID/views/VIEW_ID"
-            "billingAccounts/BILLING_ACCOUNT_ID/locations/LOCATION_ID/buckets/BUCKET_ID/views/VIEW_ID"
-            "folders/FOLDER_ID/locations/LOCATION_ID/buckets/BUCKET_ID/views/VIEW_ID"'
+            projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/v\
+            iews/[VIEW_ID]
+            organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BU\
+            CKET_ID]/views/[VIEW_ID]
+            billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/bucket\
+            s/[BUCKET_ID]/views/[VIEW_ID]
+            folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/vie\
+            ws/[VIEW_ID]"
           items:
             type: string
           type: array
@@ -3323,13 +3332,13 @@ components:
         logName:
           description: 'Optional. A default log resource name that is assigned to all log
             entries in entries that do not specify a value for log_name:
-            "projects/[PROJECT_ID]/logs/[LOG_ID]"
-            "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
-            "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
-            "folders/[FOLDER_ID]/logs/[LOG_ID]" [LOG_ID] must be URL-encoded.
-            For example: "projects/my-project-id/logs/syslog"
-            "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-            The permission logging.logEntries.create is needed on each project,
+            projects/[PROJECT_ID]/logs/[LOG_ID]
+            organizations/[ORGANIZATION_ID]/logs/[LOG_ID]
+            billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]
+            folders/[FOLDER_ID]/logs/[LOG_ID][LOG_ID] must be URL-encoded. For
+            example: "projects/my-project-id/logs/syslog"
+            "organizations/123/logs/cloudaudit.googleapis.com%2Factivity" The
+            permission logging.logEntries.create is needed on each project,
             organization, billing account, or folder that is receiving new log
             entries, whether the resource is specified in logName or in an
             individual log entry.'

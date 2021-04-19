@@ -1107,6 +1107,9 @@ components:
         source:
           description: The source from which the information in this Detail was obtained.
           type: string
+        vendor:
+          description: The vendor of the product. e.g. "google"
+          type: string
       type: object
     Discovered:
       description: Provides information about the scan status of a discovered resource.

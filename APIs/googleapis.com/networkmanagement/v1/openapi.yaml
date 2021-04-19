@@ -146,7 +146,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: The maximum number of results to return. If not set, the service will select a default.
+        - description: The maximum number of results to return. If not set, the service selects a default.
           in: query
           name: pageSize
           schema:
@@ -628,6 +628,10 @@ components:
             - UNINTENDED_DESTINATION
             - TRACE_TOO_LONG
             - INTERNAL_ERROR
+            - SOURCE_ENDPOINT_NOT_FOUND
+            - MISMATCHED_SOURCE_NETWORK
+            - DESTINATION_ENDPOINT_NOT_FOUND
+            - MISMATCHED_DESTINATION_NETWORK
           type: string
         resourceUri:
           description: URI of the resource that caused the abort.
@@ -680,6 +684,28 @@ components:
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
+      type: object
+    CloudSQLInstanceInfo:
+      description: For display only. Metadata associated with a Cloud SQL instance.
+      properties:
+        displayName:
+          description: Name of a Cloud SQL instance.
+          type: string
+        externalIp:
+          description: External IP address of Cloud SQL instance.
+          type: string
+        internalIp:
+          description: Internal IP address of Cloud SQL instance.
+          type: string
+        networkUri:
+          description: URI of a Cloud SQL instance network or empty string if instance does not have one.
+          type: string
+        region:
+          description: Region in which the Cloud SQL instance is running.
+          type: string
+        uri:
+          description: URI of a Cloud SQL instance.
+          type: string
       type: object
     ConnectivityTest:
       description: A Connectivity Test for a network reachability analysis.
@@ -741,6 +767,8 @@ components:
             - INSTANCE
             - INTERNET
             - GOOGLE_API
+            - GKE_MASTER
+            - CLOUD_SQL_INSTANCE
           type: string
       type: object
     DropInfo:
@@ -766,6 +794,11 @@ components:
             - INSTANCE_NOT_RUNNING
             - TRAFFIC_TYPE_BLOCKED
             - GKE_MASTER_UNAUTHORIZED_ACCESS
+            - CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS
+            - DROPPED_INSIDE_GKE_SERVICE
+            - DROPPED_INSIDE_CLOUD_SQL_SERVICE
+            - GOOGLE_MANAGED_SERVICE_NO_PEERING
+            - CLOUD_SQL_INSTANCE_NO_IP_ADDRESS
           type: string
         resourceUri:
           description: URI of the resource that caused the drop.
@@ -904,6 +937,7 @@ components:
             - INTERCONNECT
             - GKE_MASTER
             - IMPORTED_CUSTOM_ROUTE_NEXT_HOP
+            - CLOUD_SQL_INSTANCE
           type: string
       type: object
     ForwardingRuleInfo:
@@ -929,6 +963,22 @@ components:
           type: string
         vip:
           description: VIP of the forwarding rule.
+          type: string
+      type: object
+    GKEMasterInfo:
+      description: For display only. Metadata associated with a Google Kubernetes Engine cluster master.
+      properties:
+        clusterNetworkUri:
+          description: URI of a Google Kubernetes Engine cluster network.
+          type: string
+        clusterUri:
+          description: URI of a Google Kubernetes Engine cluster.
+          type: string
+        externalIp:
+          description: External IP address of a Google Kubernetes Engine cluster master.
+          type: string
+        internalIp:
+          description: Internal IP address of a Google Kubernetes Engine cluster master.
           type: string
       type: object
     InstanceInfo:
@@ -1290,6 +1340,9 @@ components:
         causesDrop:
           description: This is a step that leads to the final state Drop.
           type: boolean
+        cloudSqlInstance:
+          $ref: "#/components/schemas/CloudSQLInstanceInfo"
+          description: Display info of a Cloud SQL instance.
         deliver:
           $ref: "#/components/schemas/DeliverInfo"
           description: Display info of the final state "deliver" and reason.
@@ -1311,6 +1364,9 @@ components:
         forwardingRule:
           $ref: "#/components/schemas/ForwardingRuleInfo"
           description: Display info of a Compute Engine forwarding rule.
+        gkeMaster:
+          $ref: "#/components/schemas/GKEMasterInfo"
+          description: Display info of a Google Kubernetes Engine cluster master.
         instance:
           $ref: "#/components/schemas/InstanceInfo"
           description: Display info of a Compute Engine instance.
@@ -1333,6 +1389,8 @@ components:
             - START_FROM_INSTANCE
             - START_FROM_INTERNET
             - START_FROM_PRIVATE_NETWORK
+            - START_FROM_GKE_MASTER
+            - START_FROM_CLOUD_SQL_INSTANCE
             - APPLY_INGRESS_FIREWALL_RULE
             - APPLY_EGRESS_FIREWALL_RULE
             - APPLY_ROUTE
@@ -1377,7 +1435,7 @@ components:
           type: array
       type: object
     Trace:
-      description: Trace represents one simulated packet forwarding path. * Each trace contains multiple ordered Steps. * Each step is in a particular state with associated configuration. * State is categorized as final or non-final states. * Each final state has a reason associated. * Each trace must end with a final state (the last step). ``` |---------------------Trace----------------------| Step1(State) Step2(State) --- StepN(State(final)) ```
+      description: Trace represents one simulated packet forwarding path. * Each trace contains multiple ordered steps. * Each step is in a particular state with associated configuration. * State is categorized as final or non-final states. * Each final state has a reason associated. * Each trace must end with a final state (the last step). ``` |---------------------Trace----------------------| Step1(State) Step2(State) --- StepN(State(final)) ```
       properties:
         endpointInfo:
           $ref: "#/components/schemas/EndpointInfo"

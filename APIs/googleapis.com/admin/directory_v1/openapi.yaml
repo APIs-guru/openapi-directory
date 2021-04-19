@@ -3806,6 +3806,14 @@ paths:
           required: true
           schema:
             type: string
+        - description: Events to watch for.
+          in: query
+          name: event
+          schema:
+            enum:
+              - add
+              - delete
+            type: string
       responses:
         "200":
           content:
@@ -6464,6 +6472,7 @@ components:
           type: array
       type: object
     RoleAssignment:
+      description: Defines an assignment of a role.
       properties:
         assignedTo:
           description: The unique ID of the user this role is assigned to.

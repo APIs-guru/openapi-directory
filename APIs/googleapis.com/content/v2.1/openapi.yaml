@@ -1719,7 +1719,7 @@ paths:
         - accounttax
   "/{merchantId}/buyongoogleprograms/{regionCode}":
     get:
-      description: Retrieves a status of BoG program for your Merchant Center account.
+      description: Retrieves a status of the BoG program for your Merchant Center account.
       operationId: content.buyongoogleprograms.get
       parameters:
         - description: Required. The ID of the account.
@@ -1760,6 +1760,50 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/{merchantId}/buyongoogleprograms/{regionCode}/activate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Reactivates the BoG program in your Merchant Center account. Moves the program to the active state when allowed, e.g. when paused. Important: This method is only whitelisted for selected merchants."
+      operationId: content.buyongoogleprograms.activate
+      parameters:
+        - description: Required. The ID of the account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The program region code [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Currently only US is available.
+          in: path
+          name: regionCode
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActivateBuyOnGoogleProgramRequest"
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - buyongoogleprograms
   "/{merchantId}/buyongoogleprograms/{regionCode}/onboard":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1774,7 +1818,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Onboards BoG in your Merchant Center account. By using this method, you agree to the [Terms of Service](https://merchants.google.com/mc/termsofservice/transactions/US/latest). Calling this method is only possible if the authenticated account is the same as the merchant id in the request. Calling this method multiple times will only accept Terms of Service if the latest version is not currently signed.
+      description: Onboards the BoG program in your Merchant Center account. By using this method, you agree to the [Terms of Service](https://merchants.google.com/mc/termsofservice/transactions/US/latest). Calling this method is only possible if the authenticated account is the same as the merchant id in the request. Calling this method multiple times will only accept Terms of Service if the latest version is not currently signed.
       operationId: content.buyongoogleprograms.onboard
       parameters:
         - description: Required. The ID of the account.
@@ -1794,6 +1838,94 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/OnboardBuyOnGoogleProgramRequest"
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - buyongoogleprograms
+  "/{merchantId}/buyongoogleprograms/{regionCode}/pause":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Pauses the BoG program in your Merchant Center account. Important: This method is only whitelisted for selected merchants."
+      operationId: content.buyongoogleprograms.pause
+      parameters:
+        - description: Required. The ID of the account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The program region code [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Currently only US is available.
+          in: path
+          name: regionCode
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PauseBuyOnGoogleProgramRequest"
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - buyongoogleprograms
+  "/{merchantId}/buyongoogleprograms/{regionCode}/requestreview":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Requests review and then activates the BoG program in your Merchant Center account for the first time. Moves the program to the REVIEW_PENDING state. Important: This method is only whitelisted for selected merchants."
+      operationId: content.buyongoogleprograms.requestreview
+      parameters:
+        - description: Required. The ID of the account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The program region code [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Currently only US is available.
+          in: path
+          name: regionCode
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestReviewBuyOnGoogleProgramRequest"
       responses:
         "200":
           description: Successful response
@@ -7217,6 +7349,10 @@ components:
             $ref: "#/components/schemas/AccountTax"
           type: array
       type: object
+    ActivateBuyOnGoogleProgramRequest:
+      description: Request message for the ActivateProgram method.
+      properties: {}
+      type: object
     Amount:
       properties:
         priceAmount:
@@ -7250,6 +7386,9 @@ components:
             - NOT_ELIGIBLE
             - ELIGIBLE
             - ONBOARDING
+            - ELIGIBLE_FOR_REVIEW
+            - PENDING_REVIEW
+            - REVIEW_DISAPPROVED
             - ACTIVE
             - PAUSED
           type: string
@@ -10181,6 +10320,10 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersUpdateShipmentResponse".'
           type: string
       type: object
+    PauseBuyOnGoogleProgramRequest:
+      description: Request message for the PauseProgram method.
+      properties: {}
+      type: object
     PickupCarrierService:
       properties:
         carrierName:
@@ -10867,6 +11010,22 @@ components:
           type: string
         locationId:
           description: The numeric ID of a location that the shipping rate applies to as defined in the AdWords API.
+          format: int64
+          type: string
+        maxHandlingTime:
+          description: Maximum handling time (inclusive) between when the order is received and shipped in business days. 0 means that the order is shipped on the same day as it is received if it happens before the cut-off time. Both maxHandlingTime and maxTransitTime are required if providing shipping speeds.
+          format: int64
+          type: string
+        maxTransitTime:
+          description: Maximum transit time (inclusive) between when the order has shipped and when it is delivered in business days. 0 means that the order is delivered on the same day as it ships. Both maxHandlingTime and maxTransitTime are required if providing shipping speeds.
+          format: int64
+          type: string
+        minHandlingTime:
+          description: Minimum handling time (inclusive) between when the order is received and shipped in business days. 0 means that the order is shipped on the same day as it is received if it happens before the cut-off time. minHandlingTime can only be present together with maxHandlingTime; but it is not required if maxHandlingTime is present.
+          format: int64
+          type: string
+        minTransitTime:
+          description: Minimum transit time (inclusive) between when the order has shipped and when it is delivered in business days. 0 means that the order is delivered on the same day as it ships. minTransitTime can only be present together with maxTransitTime; but it is not required if maxTransitTime is present.
           format: int64
           type: string
         postalCode:
@@ -11649,6 +11808,10 @@ components:
           description: The price delta against the above price target. A positive value means the price should be adjusted to be above statistical measure, and a negative value means below. Currency code must not be included.
           type: string
       type: object
+    RequestReviewBuyOnGoogleProgramRequest:
+      description: Request message for the RequestReviewProgram method.
+      properties: {}
+      type: object
     ReturnAddress:
       description: Return address resource.
       properties:
@@ -12068,7 +12231,7 @@ components:
           description: Token of the page to retrieve. If not specified, the first page of results is returned. In order to request the next page of results, the value obtained from `next_page_token` in the previous response should be used.
           type: string
         query:
-          description: "Required. Query that defines performance metrics to retrieve and dimensions according to which the metrics are to be segmented. "
+          description: Required. Query that defines performance metrics to retrieve and dimensions according to which the metrics are to be segmented.
           type: string
       type: object
     SearchResponse:
@@ -12084,7 +12247,7 @@ components:
           type: array
       type: object
     Segments:
-      description: "Dimensions according to which metrics are segmented in the response. Values of product dimensions, e.g., offer id, reflect the state of a product at the time of the corresponding event, e.g., impression or order. Segment fields cannot be selected in queries without also selecting at least one metric field. Values are only set for dimensions requested explicitly in the request's search query. Next id: 22"
+      description: Dimensions according to which metrics are segmented in the response. Values of product dimensions, e.g., offer id, reflect the state of a product at the time of the corresponding event, e.g., impression or order. Segment fields cannot be selected in queries without also selecting at least one metric field. Values are only set for dimensions requested explicitly in the request's search query.
       properties:
         date:
           $ref: "#/components/schemas/Date"

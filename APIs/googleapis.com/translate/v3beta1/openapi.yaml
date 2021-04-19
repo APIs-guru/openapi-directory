@@ -120,7 +120,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: The maximum number of results to return. If not set, the service will select a default.
+        - description: The maximum number of results to return. If not set, the service selects a default.
           in: query
           name: pageSize
           schema:
@@ -1031,7 +1031,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/cloud-translation: Translate text from one language to another using Google Translate
       type: oauth2
     Oauth2c:
@@ -1040,7 +1040,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/cloud-translation: Translate text from one language to another using Google Translate
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

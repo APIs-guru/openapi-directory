@@ -1901,14 +1901,6 @@ components:
         subsequent cross-origin request is # allowed to proceed. - name:
         library-example.googleapis.com allow_cors: true"
       properties:
-        aliases:
-          description: "DEPRECATED: This field is no longer supported. Instead of using
-            aliases, please specify multiple google.api.Endpoint for each of the
-            intended aliases. Additional names that this endpoint will be hosted
-            on."
-          items:
-            type: string
-          type: array
         allowCors:
           description: Allowing
             [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing),

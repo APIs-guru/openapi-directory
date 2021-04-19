@@ -3170,6 +3170,10 @@ components:
         expireTime:
           description: "[Output only] The time the cluster will be automatically deleted in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format."
           type: string
+        id:
+          description: Output only. Unique id for the cluster.
+          readOnly: true
+          type: string
         initialClusterVersion:
           description: 'The initial Kubernetes version for this cluster. Valid versions are those found in validMasterVersions returned by getServerConfig. The version can be upgraded over time; such upgrades are reflected in currentMasterVersion and currentNodeVersion. Users may specify either explicit versions offered by Kubernetes Engine or version aliases, which have the following behavior: - "latest": picks the highest valid Kubernetes version - "1.X": picks the highest valid patch+gke.N patch in the 1.X version - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version - "1.X.Y-gke.N": picks an explicit Kubernetes version - "","-": picks the default Kubernetes version'
           type: string
@@ -3302,6 +3306,9 @@ components:
         verticalPodAutoscaling:
           $ref: "#/components/schemas/VerticalPodAutoscaling"
           description: Cluster-level Vertical Pod Autoscaling configuration.
+        workloadCertificates:
+          $ref: "#/components/schemas/WorkloadCertificates"
+          description: Configuration for issuance of mTLS keys and certificates to Kubernetes pods.
         workloadIdentityConfig:
           $ref: "#/components/schemas/WorkloadIdentityConfig"
           description: Configuration for the use of Kubernetes Service Accounts in GCP IAM policies.
@@ -3446,6 +3453,9 @@ components:
         desiredVerticalPodAutoscaling:
           $ref: "#/components/schemas/VerticalPodAutoscaling"
           description: Cluster-level Vertical Pod Autoscaling configuration.
+        desiredWorkloadCertificates:
+          $ref: "#/components/schemas/WorkloadCertificates"
+          description: Configuration for issuance of mTLS keys and certificates to Kubernetes pods.
         desiredWorkloadIdentityConfig:
           $ref: "#/components/schemas/WorkloadIdentityConfig"
           description: Configuration for Workload Identity.
@@ -4012,7 +4022,7 @@ components:
           type: boolean
       type: object
     NetworkTags:
-      description: Collection of Compute Engine network tags that can be applied to a node's underyling VM instance. (See `tags` field in [`NodeConfig`](/kubernetes-engine/docs/reference/rest/v1/NodeConfig)).
+      description: Collection of Compute Engine network tags that can be applied to a node's underlying VM instance. (See `tags` field in [`NodeConfig`](/kubernetes-engine/docs/reference/rest/v1/NodeConfig)).
       properties:
         tags:
           description: List of network tags.
@@ -5151,6 +5161,13 @@ components:
           description: Enables vertical pod autoscaling.
           type: boolean
       type: object
+    WorkloadCertificates:
+      description: Configuration for issuance of mTLS keys and certificates to Kubernetes pods.
+      properties:
+        enableCertificates:
+          description: enable_certificates controls issuance of workload mTLS certificates. If set, the GKE Workload Identity Certificates controller and node agent will be deployed in the cluster, which can then be configured by creating a WorkloadCertificateConfig Custom Resource. Requires Workload Identity (workload_pool must be non-empty).
+          type: boolean
+      type: object
     WorkloadIdentityConfig:
       description: Configuration for the use of Kubernetes Service Accounts in GCP IAM policies.
       properties:
@@ -5190,7 +5207,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -5198,6 +5215,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

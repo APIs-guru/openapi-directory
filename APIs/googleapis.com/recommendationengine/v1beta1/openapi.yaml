@@ -41,7 +41,7 @@ paths:
       operationId: recommendationengine.projects.locations.catalogs.eventStores.predictionApiKeyRegistrations.delete
       parameters:
         - description: Required. The API key to unregister including full resource path.
-            "projects/*/locations/global/catalogs/default_catalog/eventStores/default_event_store/predictionApiKeyRegistrations/"
+            `projects/*/locations/global/catalogs/default_catalog/eventStores/default_event_store/predictionApiKeyRegistrations/`
           in: path
           name: name
           required: true
@@ -105,7 +105,7 @@ paths:
       operationId: recommendationengine.projects.locations.catalogs.catalogItems.patch
       parameters:
         - description: Required. Full resource name of catalog item, such as
-            "projects/*/locations/global/catalogs/default_catalog/catalogItems/some_catalog_item_id".
+            `projects/*/locations/global/catalogs/default_catalog/catalogItems/some_catalog_item_id`.
           in: path
           name: name
           required: true
@@ -217,8 +217,8 @@ paths:
       operationId: recommendationengine.projects.locations.catalogs.eventStores.placements.predict
       parameters:
         - description: "Required. Full resource name of the format:
-            {name=projects/*/locations/global/catalogs/default_catalog/eventSto\
-            res/default_event_store/placements/*} The id of the recommendation
+            `{name=projects/*/locations/global/catalogs/default_catalog/eventSt\
+            ores/default_event_store/placements/*}` The id of the recommendation
             engine placement. This id is used to identify the set of models that
             will be used to make the prediction. We currently support three
             placements with the following IDs by default: * `shopping_cart`:
@@ -272,7 +272,7 @@ paths:
       operationId: recommendationengine.projects.locations.catalogs.catalogItems.list
       parameters:
         - description: Required. The parent catalog resource name, such as
-            "projects/*/locations/global/catalogs/default_catalog".
+            `projects/*/locations/global/catalogs/default_catalog`.
           in: path
           name: parent
           required: true
@@ -326,7 +326,7 @@ paths:
       operationId: recommendationengine.projects.locations.catalogs.catalogItems.create
       parameters:
         - description: Required. The parent catalog resource name, such as
-            "projects/*/locations/global/catalogs/default_catalog".
+            `projects/*/locations/global/catalogs/default_catalog`.
           in: path
           name: parent
           required: true
@@ -371,7 +371,7 @@ paths:
         possible for a subset of the items to be successfully updated.
       operationId: recommendationengine.projects.locations.catalogs.catalogItems.import
       parameters:
-        - description: Required. "projects/1234/locations/global/catalogs/default_catalog"
+        - description: Required. `projects/1234/locations/global/catalogs/default_catalog`
             If no updateMask is specified, requires catalogItems.create
             permission. If updateMask is specified, requires catalogItems.update
             permission.
@@ -456,7 +456,7 @@ paths:
       operationId: recommendationengine.projects.locations.catalogs.eventStores.predictionApiKeyRegistrations.list
       parameters:
         - description: Required. The parent placement resource name such as
-            "projects/1234/locations/global/catalogs/default_catalog/eventStores/default_event_store"
+            `projects/1234/locations/global/catalogs/default_catalog/eventStores/default_event_store`
           in: path
           name: parent
           required: true
@@ -506,7 +506,7 @@ paths:
       operationId: recommendationengine.projects.locations.catalogs.eventStores.predictionApiKeyRegistrations.create
       parameters:
         - description: Required. The parent resource path.
-            "projects/*/locations/global/catalogs/default_catalog/eventStores/default_event_store".
+            `projects/*/locations/global/catalogs/default_catalog/eventStores/default_event_store`.
           in: path
           name: parent
           required: true
@@ -545,7 +545,7 @@ paths:
       operationId: recommendationengine.projects.locations.catalogs.eventStores.userEvents.list
       parameters:
         - description: Required. The parent eventStore resource name, such as
-            "projects/*/locations/*/catalogs/default_catalog/eventStores/default_event_store".
+            `projects/*/locations/*/catalogs/default_catalog/eventStores/default_event_store`.
           in: path
           name: parent
           required: true
@@ -624,7 +624,7 @@ paths:
       operationId: recommendationengine.projects.locations.catalogs.eventStores.userEvents.collect
       parameters:
         - description: Required. The parent eventStore name, such as
-            "projects/1234/locations/global/catalogs/default_catalog/eventStores/default_event_store".
+            `projects/1234/locations/global/catalogs/default_catalog/eventStores/default_event_store`.
           in: path
           name: parent
           required: true
@@ -699,7 +699,7 @@ paths:
       operationId: recommendationengine.projects.locations.catalogs.eventStores.userEvents.import
       parameters:
         - description: Required.
-            "projects/1234/locations/global/catalogs/default_catalog/eventStores/default_event_store"
+            `projects/1234/locations/global/catalogs/default_catalog/eventStores/default_event_store`
           in: path
           name: parent
           required: true
@@ -747,7 +747,7 @@ paths:
       parameters:
         - description: Required. The resource name of the event_store under which the
             events are created. The format is
-            "projects/${projectId}/locations/global/catalogs/${catalogId}/eventStores/${eventStoreId}"
+            `projects/${projectId}/locations/global/catalogs/${catalogId}/eventStores/${eventStoreId}`
           in: path
           name: parent
           required: true
@@ -797,7 +797,7 @@ paths:
       operationId: recommendationengine.projects.locations.catalogs.eventStores.userEvents.rejoin
       parameters:
         - description: Required. Full resource name of user event, such as
-            "projects/*/locations/*/catalogs/default_catalog/eventStores/default_event_store".
+            `projects/*/locations/*/catalogs/default_catalog/eventStores/default_event_store`.
           in: path
           name: parent
           required: true
@@ -1276,8 +1276,8 @@ components:
         inputUris:
           description: Required. Google Cloud Storage URIs to input files. URI can be up
             to 2000 characters long. URIs can match the full object path (for
-            example, gs://bucket/directory/object.json) or a pattern matching
-            one or more files, such as gs://bucket/directory/*.json. A request
+            example, `gs://bucket/directory/object.json`) or a pattern matching
+            one or more files, such as `gs://bucket/directory/*.json`. A request
             can contain at most 100 files, and each file can be up to 2 GB. See
             [Importing catalog
             information](/recommendations-ai/docs/upload-catalog) for the

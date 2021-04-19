@@ -151,7 +151,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: The maximum number of results to return. If not set, the service will select a default.
+        - description: The maximum number of results to return. If not set, the service selects a default.
           in: query
           name: pageSize
           schema:
@@ -297,7 +297,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new Backup in a given project and location.
+      description: Creates a new backup in a given project and location.
       operationId: metastore.projects.locations.services.backups.create
       parameters:
         - description: Required. The relative resource name of the service in which to create a backup of the following form:projects/{project_number}/locations/{location_id}/services/{service_id}.

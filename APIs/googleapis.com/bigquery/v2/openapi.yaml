@@ -396,10 +396,6 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
-        - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
@@ -488,10 +484,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -614,10 +606,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -752,10 +740,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -1293,10 +1277,6 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
-        - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
@@ -1826,10 +1806,6 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
-        - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
@@ -1928,10 +1904,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -5605,6 +5577,7 @@ components:
             - GEOGRAPHY
             - NUMERIC
             - BIGNUMERIC
+            - JSON
             - ARRAY
             - STRUCT
           type: string
@@ -5931,7 +5904,7 @@ components:
         name:
           description: "[Required] The field name. The name must contain only letters
             (a-z, A-Z), numbers (0-9), or underscores (_), and must start with a
-            letter or underscore. The maximum length is 128 characters."
+            letter or underscore. The maximum length is 300 characters."
           type: string
         policyTags:
           properties:

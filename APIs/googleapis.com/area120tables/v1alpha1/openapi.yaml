@@ -35,6 +35,12 @@ paths:
       description: Lists tables for the user.
       operationId: area120tables.tables.list
       parameters:
+        - description: Optional. Sorting order for the list of tables on
+            createTime/updateTime.
+          in: query
+          name: orderBy
+          schema:
+            type: string
         - description: The maximum number of tables to return. The service may return
             fewer than this value. If unspecified, at most 20 tables are
             returned. The maximum value is 100; values above 100 are coerced to
@@ -341,6 +347,12 @@ paths:
             results](https://support.google.com/area120-tables/answer/10503371).
           in: query
           name: filter
+          schema:
+            type: string
+        - description: Optional. Sorting order for the list of rows on
+            createTime/updateTime.
+          in: query
+          name: orderBy
           schema:
             type: string
         - description: The maximum number of rows to return. The service may return fewer
@@ -787,6 +799,10 @@ components:
             derived from the relationship column specified in the details.
             Lookup columns can not be updated directly. To change the value you
             must update the associated relationship column.
+        multipleValuesDisallowed:
+          description: Optional. Indicates whether or not multiple values are allowed for
+            array types where such a restriction is possible.
+          type: boolean
         name:
           description: column name
           type: string
@@ -912,8 +928,18 @@ components:
             view in the request.
           type: object
       type: object
+    SavedView:
+      description: "A saved view of a table. NextId: 3"
+      properties:
+        id:
+          description: Internal id associated with the saved view.
+          type: string
+        name:
+          description: Display name of the saved view.
+          type: string
+      type: object
     Table:
-      description: A single table.
+      description: "A single table. NextId: 7"
       properties:
         columns:
           description: List of columns in this table. Order of columns matches the display
@@ -932,6 +958,11 @@ components:
           description: The resource name of the table. Table names have the form
             `tables/{table}`.
           type: string
+        savedViews:
+          description: Saved views for this table.
+          items:
+            $ref: "#/components/schemas/SavedView"
+          type: array
         updateTime:
           description: Time when the table was last updated excluding updates to
             individual rows
