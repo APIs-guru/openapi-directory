@@ -510,6 +510,7 @@ paths:
                     - EC2
                     - Fargate
                     - Lambda
+                    - SageMaker
                 planTypes:
                   description: The plan type.
                   type: array
@@ -896,18 +897,22 @@ components:
       enum:
         - Compute
         - EC2Instance
+        - SageMaker
     SavingsPlanProductType:
       type: string
       enum:
         - EC2
         - Fargate
         - Lambda
+        - SageMaker
     SavingsPlanRateServiceCode:
       type: string
       enum:
         - AmazonEC2
         - AmazonECS
+        - AmazonEKS
         - AWSLambda
+        - AmazonSageMaker
     SavingsPlanRateUsageType:
       type: string
       pattern: '^[a-zA-Z0-9_ \/.:-]+$'
