@@ -260,6 +260,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DataflowEndpointConfig'
                         - description: Information about the dataflow endpoint <code>Config</code>.
+                    s3RecordingConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/S3RecordingConfig'
+                        - description: Information about an S3 recording <code>Config</code>.
                     trackingConfig:
                       allOf:
                         - $ref: '#/components/schemas/TrackingConfig'
@@ -600,6 +604,7 @@ paths:
               - dataflow-endpoint
               - tracking
               - uplink-echo
+              - s3-recording
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -656,6 +661,7 @@ paths:
               - dataflow-endpoint
               - tracking
               - uplink-echo
+              - s3-recording
     put:
       operationId: UpdateConfig
       description: <p>Updates the <code>Config</code> used when scheduling contacts.</p> <p>Updating a <code>Config</code> will not update the execution parameters for existing future contacts scheduled with this <code>Config</code>.</p>
@@ -704,6 +710,7 @@ paths:
               - dataflow-endpoint
               - tracking
               - uplink-echo
+              - s3-recording
       requestBody:
         required: true
         content:
@@ -734,6 +741,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DataflowEndpointConfig'
                         - description: Information about the dataflow endpoint <code>Config</code>.
+                    s3RecordingConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/S3RecordingConfig'
+                        - description: Information about an S3 recording <code>Config</code>.
                     trackingConfig:
                       allOf:
                         - $ref: '#/components/schemas/TrackingConfig'
@@ -1630,6 +1641,25 @@ components:
             - $ref: '#/components/schemas/String'
             - description: Region of a dataflow endpoint.
       description: Information about the dataflow endpoint <code>Config</code>.
+    S3RecordingConfig:
+      type: object
+      required:
+        - bucketArn
+        - roleArn
+      properties:
+        bucketArn:
+          allOf:
+            - $ref: '#/components/schemas/BucketArn'
+            - description: ARN of the bucket to record to.
+        prefix:
+          allOf:
+            - $ref: '#/components/schemas/S3KeyPrefix'
+            - description: S3 Key prefix to prefice data files.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: ARN of the role Ground Station assumes to write data to the bucket.
+      description: Information about an S3 recording <code>Config</code>.
     TrackingConfig:
       type: object
       required:
@@ -2086,6 +2116,8 @@ components:
         - GHz
         - MHz
         - kHz
+    BucketArn:
+      type: string
     CancelContactRequest:
       type: object
       title: CancelContactRequest
@@ -2102,6 +2134,19 @@ components:
         - dataflow-endpoint
         - tracking
         - uplink-echo
+        - s3-recording
+    S3RecordingDetails:
+      type: object
+      properties:
+        bucketArn:
+          allOf:
+            - $ref: '#/components/schemas/BucketArn'
+            - description: ARN of the bucket used.
+        keyTemplate:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Template of the S3 key used.
+      description: Details about an S3 recording <code>Config</code> used in a contact.
     ConfigDetails:
       type: object
       properties:
@@ -2111,6 +2156,10 @@ components:
             - description: Details for antenna demod decode <code>Config</code> in a contact.
         endpointDetails:
           $ref: '#/components/schemas/EndpointDetails'
+        s3RecordingDetails:
+          allOf:
+            - $ref: '#/components/schemas/S3RecordingDetails'
+            - description: Details for an S3 recording <code>Config</code> in a contact.
       description: Details for certain <code>Config</code> object types in a contact.
     ConfigListItem:
       type: object
@@ -2155,6 +2204,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataflowEndpointConfig'
             - description: Information about the dataflow endpoint <code>Config</code>.
+        s3RecordingConfig:
+          allOf:
+            - $ref: '#/components/schemas/S3RecordingConfig'
+            - description: Information about an S3 recording <code>Config</code>.
         trackingConfig:
           allOf:
             - $ref: '#/components/schemas/TrackingConfig'
@@ -2413,7 +2466,7 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: Port of a socket address.
       description: Information about the socket address.
-    DataflowEndpointmtuInteger:
+    DataflowEndpointMtuInteger:
       type: integer
       minimum: 1400
       maximum: 1500
@@ -2434,7 +2487,7 @@ components:
             - description: Socket address of a dataflow endpoint.
         mtu:
           allOf:
-            - $ref: '#/components/schemas/DataflowEndpointmtuInteger'
+            - $ref: '#/components/schemas/DataflowEndpointMtuInteger'
             - description: Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
         name:
           allOf:
@@ -2772,6 +2825,11 @@ components:
       description: <p/>
     RoleArn:
       type: string
+    S3KeyPrefix:
+      type: string
+      pattern: '^([a-zA-Z0-9_\-=/]|\{satellite_id\}|\{config\-name}|\{s3\-config-id}|\{year\}|\{month\}|\{day\}){1,900}$'
+      minLength: 1
+      maxLength: 900
     SatelliteListItem:
       type: object
       properties:

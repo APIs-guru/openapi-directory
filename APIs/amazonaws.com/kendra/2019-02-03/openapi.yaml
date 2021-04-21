@@ -2939,6 +2939,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/QueryResultType'
             - description: Sets the type of query. Only results for the specified query type are returned.
+        DocumentRelevanceOverrideConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/DocumentRelevanceOverrideConfigurationList'
+            - description: '<p>Overrides relevance tuning configurations of fields or attributes set at the index level.</p> <p>If you use this API to override the relevance tuning configured at the index level, but there is no relevance tuning configured at the index level, then Amazon Kendra does not apply any relevance tuning.</p> <p>If there is relevance tuning configured at the index level, but you do not use this API to override any relevance tuning in the index, then Amazon Kendra uses the relevance tuning that is configured at the index level.</p> <p>If there is relevance tuning configured for fields at the index level, but you use this API to override only some of these fields, then for the fields you did not override, the importance is set to 1.</p>'
         PageNumber:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -4639,6 +4643,25 @@ components:
             - $ref: '#/components/schemas/Search'
             - description: Provides information about how the field is used during a search.
       description: Specifies the properties of a custom index field.
+    DocumentRelevanceConfiguration:
+      type: object
+      required:
+        - Name
+        - Relevance
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DocumentMetadataConfigurationName'
+            - description: The name of the tuning configuration to override document relevance at the index level.
+        Relevance:
+          $ref: '#/components/schemas/Relevance'
+      description: Overrides the document relevance properties of a custom index field.
+    DocumentRelevanceOverrideConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DocumentRelevanceConfiguration'
+      minItems: 0
+      maxItems: 500
     DocumentsMetadataConfiguration:
       type: object
       properties:

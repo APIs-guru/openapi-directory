@@ -278,6 +278,141 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  /#Action=AddPartner:
+    get:
+      x-aws-operation-name: AddPartner
+      operationId: GET_AddPartner
+      description: 'Adds a partner integration to a cluster. This operation authorizes a partner to push status updates for the specified database. To complete the integration, you also set up the integration on the partner website.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PartnerIntegrationOutputMessage'
+        '480':
+          description: PartnerNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PartnerNotFoundFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: UnauthorizedPartnerIntegrationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedPartnerIntegrationFault'
+      parameters:
+        - name: AccountId
+          in: query
+          required: true
+          description: The AWS account ID that owns the cluster.
+          schema:
+            type: string
+            pattern: '^[0-9]+$'
+            minLength: 12
+            maxLength: 12
+        - name: ClusterIdentifier
+          in: query
+          required: true
+          description: The cluster identifier of the cluster that receives data from the partner.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9\-]+$'
+            maxLength: 63
+        - name: DatabaseName
+          in: query
+          required: true
+          description: The name of the database that receives data from the partner.
+          schema:
+            type: string
+            pattern: '^[\p{L}_][\p{L}\p{N}@$#_]+$'
+            maxLength: 127
+        - name: PartnerName
+          in: query
+          required: true
+          description: The name of the partner that is authorized to send data.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9\-_]+$'
+            maxLength: 255
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AddPartner
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: AddPartner
+      operationId: POST_AddPartner
+      description: 'Adds a partner integration to a cluster. This operation authorizes a partner to push status updates for the specified database. To complete the integration, you also set up the integration on the partner website.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PartnerIntegrationOutputMessage'
+        '480':
+          description: PartnerNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PartnerNotFoundFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: UnauthorizedPartnerIntegrationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedPartnerIntegrationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/PartnerIntegrationInputMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AddPartner
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   /#Action=AuthorizeClusterSecurityGroupIngress:
     get:
       x-aws-operation-name: AuthorizeClusterSecurityGroupIngress
@@ -5061,6 +5196,141 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  /#Action=DeletePartner:
+    get:
+      x-aws-operation-name: DeletePartner
+      operationId: GET_DeletePartner
+      description: Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PartnerIntegrationOutputMessage'
+        '480':
+          description: PartnerNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PartnerNotFoundFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: UnauthorizedPartnerIntegrationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedPartnerIntegrationFault'
+      parameters:
+        - name: AccountId
+          in: query
+          required: true
+          description: The AWS account ID that owns the cluster.
+          schema:
+            type: string
+            pattern: '^[0-9]+$'
+            minLength: 12
+            maxLength: 12
+        - name: ClusterIdentifier
+          in: query
+          required: true
+          description: The cluster identifier of the cluster that receives data from the partner.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9\-]+$'
+            maxLength: 63
+        - name: DatabaseName
+          in: query
+          required: true
+          description: The name of the database that receives data from the partner.
+          schema:
+            type: string
+            pattern: '^[\p{L}_][\p{L}\p{N}@$#_]+$'
+            maxLength: 127
+        - name: PartnerName
+          in: query
+          required: true
+          description: The name of the partner that is authorized to send data.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9\-_]+$'
+            maxLength: 255
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeletePartner
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeletePartner
+      operationId: POST_DeletePartner
+      description: Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PartnerIntegrationOutputMessage'
+        '480':
+          description: PartnerNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PartnerNotFoundFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: UnauthorizedPartnerIntegrationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedPartnerIntegrationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/PartnerIntegrationInputMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeletePartner
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   /#Action=DeleteScheduledAction:
     get:
       x-aws-operation-name: DeleteScheduledAction
@@ -7004,13 +7274,13 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: Reserved for Amazon Redshift internal use.
+          description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a <code>Marker</code> is included in the response so that the remaining results can be retrieved.'
           schema:
             type: integer
         - name: Marker
           in: query
           required: false
-          description: Reserved for Amazon Redshift internal use.
+          description: 'An optional pagination token provided by a previous <code>DescribeEndpointAccess</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter.'
           schema:
             type: string
             maxLength: 2147483647
@@ -7071,6 +7341,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeEndpointAccessMessage'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -7133,13 +7415,13 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: Reserved for Amazon Redshift internal use.
+          description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a <code>Marker</code> is included in the response so that the remaining results can be retrieved.'
           schema:
             type: integer
         - name: Marker
           in: query
           required: false
-          description: Reserved for Amazon Redshift internal use.
+          description: 'An optional pagination token provided by a previous <code>DescribeEndpointAuthorization</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter.'
           schema:
             type: string
             maxLength: 2147483647
@@ -7194,6 +7476,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeEndpointAuthorizationMessage'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -8207,6 +8501,129 @@ paths:
             type: string
             enum:
               - DescribeOrderableClusterOptions
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=DescribePartners:
+    get:
+      x-aws-operation-name: DescribePartners
+      operationId: GET_DescribePartners
+      description: Returns information about the partner integrations defined for a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribePartnersOutputMessage'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: UnauthorizedPartnerIntegrationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedPartnerIntegrationFault'
+      parameters:
+        - name: AccountId
+          in: query
+          required: true
+          description: The AWS account ID that owns the cluster.
+          schema:
+            type: string
+            pattern: '^[0-9]+$'
+            minLength: 12
+            maxLength: 12
+        - name: ClusterIdentifier
+          in: query
+          required: true
+          description: The cluster identifier of the cluster whose partner integration is being described.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9\-]+$'
+            maxLength: 63
+        - name: DatabaseName
+          in: query
+          required: false
+          description: 'The name of the database whose partner integration is being described. If database name is not specified, then all databases in the cluster are described.'
+          schema:
+            type: string
+            pattern: '^[\p{L}_][\p{L}\p{N}@$#_]+$'
+            maxLength: 127
+        - name: PartnerName
+          in: query
+          required: false
+          description: 'The name of the partner that is being described. If partner name is not specified, then all partner integrations are described.'
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9\-_]+$'
+            maxLength: 255
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribePartners
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribePartners
+      operationId: POST_DescribePartners
+      description: Returns information about the partner integrations defined for a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribePartnersOutputMessage'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: UnauthorizedPartnerIntegrationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedPartnerIntegrationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribePartnersInputMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribePartners
         - name: Version
           in: query
           required: true
@@ -14893,6 +15310,160 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  /#Action=UpdatePartnerStatus:
+    get:
+      x-aws-operation-name: UpdatePartnerStatus
+      operationId: GET_UpdatePartnerStatus
+      description: Updates the status of a partner integration.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PartnerIntegrationOutputMessage'
+        '480':
+          description: PartnerNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PartnerNotFoundFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: UnauthorizedPartnerIntegrationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedPartnerIntegrationFault'
+      parameters:
+        - name: AccountId
+          in: query
+          required: true
+          description: The AWS account ID that owns the cluster.
+          schema:
+            type: string
+            pattern: '^[0-9]+$'
+            minLength: 12
+            maxLength: 12
+        - name: ClusterIdentifier
+          in: query
+          required: true
+          description: The cluster identifier of the cluster whose partner integration status is being updated.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9\-]+$'
+            maxLength: 63
+        - name: DatabaseName
+          in: query
+          required: true
+          description: The name of the database whose partner integration status is being updated.
+          schema:
+            type: string
+            pattern: '^[\p{L}_][\p{L}\p{N}@$#_]+$'
+            maxLength: 127
+        - name: PartnerName
+          in: query
+          required: true
+          description: The name of the partner whose integration status is being updated.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9\-_]+$'
+            maxLength: 255
+        - name: Status
+          in: query
+          required: true
+          description: The value of the updated status.
+          schema:
+            type: string
+            enum:
+              - Active
+              - Inactive
+              - RuntimeFailure
+              - ConnectionFailure
+        - name: StatusMessage
+          in: query
+          required: false
+          description: The status message provided by the partner.
+          schema:
+            type: string
+            pattern: '^[\x20-\x7E]+$'
+            maxLength: 262144
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - UpdatePartnerStatus
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: UpdatePartnerStatus
+      operationId: POST_UpdatePartnerStatus
+      description: Updates the status of a partner integration.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PartnerIntegrationOutputMessage'
+        '480':
+          description: PartnerNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PartnerNotFoundFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: UnauthorizedPartnerIntegrationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedPartnerIntegrationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdatePartnerStatusInputMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - UpdatePartnerStatus
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -14959,6 +15530,20 @@ components:
     UnsupportedOperationFault: {}
     DependentServiceUnavailableFault: {}
     ReservedNodeAlreadyExistsFault: {}
+    PartnerIntegrationOutputMessage:
+      type: object
+      properties:
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationDatabaseName'
+            - description: The name of the database that receives data from the partner.
+        PartnerName:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationPartnerName'
+            - description: The name of the partner that is authorized to send data.
+    PartnerNotFoundFault: {}
+    ClusterNotFoundFault: {}
+    UnauthorizedPartnerIntegrationFault: {}
     AuthorizeClusterSecurityGroupIngressResult:
       type: object
       properties:
@@ -15011,7 +15596,6 @@ components:
     String:
       type: string
       maxLength: 2147483647
-    ClusterNotFoundFault: {}
     EndpointAuthorizationsPerClusterLimitExceededFault: {}
     EndpointAuthorizationAlreadyExistsFault: {}
     InvalidAuthorizationStateFault: {}
@@ -15617,7 +16201,7 @@ components:
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Reserved for Amazon Redshift internal use.
+            - description: 'An optional pagination token provided by a previous <code>DescribeEndpointAccess</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter.'
     EndpointAuthorizationList:
       type: object
       properties:
@@ -15628,7 +16212,7 @@ components:
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Reserved for Amazon Redshift internal use.
+            - description: 'An optional pagination token provided by a previous <code>DescribeEndpointAuthorization</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter.'
     EventCategoriesMessage:
       type: object
       properties:
@@ -15755,6 +16339,13 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field is empty, all response records have been retrieved for the request. '
       description: 'Contains the output from the <a>DescribeOrderableClusterOptions</a> action. '
+    DescribePartnersOutputMessage:
+      type: object
+      properties:
+        PartnerIntegrationInfoList:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationInfoList'
+            - description: A list of partner integrations.
     ReservedNodeOfferingsMessage:
       type: object
       properties:
@@ -18517,11 +19108,11 @@ components:
         MaxRecords:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: Reserved for Amazon Redshift internal use.
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a <code>Marker</code> is included in the response so that the remaining results can be retrieved.'
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Reserved for Amazon Redshift internal use.
+            - description: 'An optional pagination token provided by a previous <code>DescribeEndpointAccess</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter.'
     DescribeEndpointAuthorizationMessage:
       type: object
       title: DescribeEndpointAuthorizationMessage
@@ -18541,11 +19132,11 @@ components:
         MaxRecords:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: Reserved for Amazon Redshift internal use.
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a <code>Marker</code> is included in the response so that the remaining results can be retrieved.'
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Reserved for Amazon Redshift internal use.
+            - description: 'An optional pagination token provided by a previous <code>DescribeEndpointAuthorization</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter.'
     DescribeEventCategoriesMessage:
       type: object
       title: DescribeEventCategoriesMessage
@@ -18746,6 +19337,53 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeOrderableClusterOptions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
       description: <p/>
+    PartnerIntegrationAccountId:
+      type: string
+      pattern: '^[0-9]+$'
+      minLength: 12
+      maxLength: 12
+    PartnerIntegrationClusterIdentifier:
+      type: string
+      pattern: '^[a-zA-Z0-9\-]+$'
+      maxLength: 63
+    PartnerIntegrationDatabaseName:
+      type: string
+      pattern: '^[\p{L}_][\p{L}\p{N}@$#_]+$'
+      maxLength: 127
+    PartnerIntegrationPartnerName:
+      type: string
+      pattern: '^[a-zA-Z0-9\-_]+$'
+      maxLength: 255
+    DescribePartnersInputMessage:
+      type: object
+      required:
+        - AccountId
+        - ClusterIdentifier
+      title: DescribePartnersInputMessage
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationAccountId'
+            - description: The AWS account ID that owns the cluster.
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationClusterIdentifier'
+            - description: The cluster identifier of the cluster whose partner integration is being described.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationDatabaseName'
+            - description: 'The name of the database whose partner integration is being described. If database name is not specified, then all databases in the cluster are described.'
+        PartnerName:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationPartnerName'
+            - description: 'The name of the partner that is being described. If partner name is not specified, then all partner integrations are described.'
+    PartnerIntegrationInfoList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/PartnerIntegrationInfo'
+          - xml:
+              name: PartnerIntegrationInfo
     DescribeReservedNodeOfferingsMessage:
       type: object
       title: DescribeReservedNodeOfferingsMessage
@@ -19846,6 +20484,70 @@ components:
       enum:
         - static
         - dynamic
+    PartnerIntegrationStatus:
+      type: string
+      enum:
+        - Active
+        - Inactive
+        - RuntimeFailure
+        - ConnectionFailure
+    PartnerIntegrationStatusMessage:
+      type: string
+      pattern: '^[\x20-\x7E]+$'
+      maxLength: 262144
+    PartnerIntegrationInfo:
+      type: object
+      properties:
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationDatabaseName'
+            - description: The name of the database that receives data from a partner.
+        PartnerName:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationPartnerName'
+            - description: The name of the partner.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationStatus'
+            - description: The partner integration status.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationStatusMessage'
+            - description: The status message provided by the partner.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date (UTC) that the partner integration was created.
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date (UTC) that the partner integration status was last updated by the partner.
+      description: Describes a partner integration.
+    PartnerIntegrationInputMessage:
+      type: object
+      required:
+        - AccountId
+        - ClusterIdentifier
+        - DatabaseName
+        - PartnerName
+      title: PartnerIntegrationInputMessage
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationAccountId'
+            - description: The AWS account ID that owns the cluster.
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationClusterIdentifier'
+            - description: The cluster identifier of the cluster that receives data from the partner.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationDatabaseName'
+            - description: The name of the database that receives data from the partner.
+        PartnerName:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationPartnerName'
+            - description: The name of the partner that is authorized to send data.
     PurchaseReservedNodeOfferingMessage:
       type: object
       required:
@@ -20426,6 +21128,40 @@ components:
           - $ref: '#/components/schemas/MaintenanceTrack'
           - xml:
               name: MaintenanceTrack
+    UpdatePartnerStatusInputMessage:
+      type: object
+      required:
+        - AccountId
+        - ClusterIdentifier
+        - DatabaseName
+        - PartnerName
+        - Status
+      title: UpdatePartnerStatusInputMessage
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationAccountId'
+            - description: The AWS account ID that owns the cluster.
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationClusterIdentifier'
+            - description: The cluster identifier of the cluster whose partner integration status is being updated.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationDatabaseName'
+            - description: The name of the database whose partner integration status is being updated.
+        PartnerName:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationPartnerName'
+            - description: The name of the partner whose integration status is being updated.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationStatus'
+            - description: The value of the updated status.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/PartnerIntegrationStatusMessage'
+            - description: The status message provided by the partner.
     UsageLimits:
       type: array
       items:
