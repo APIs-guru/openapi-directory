@@ -13,7 +13,7 @@ info:
     url: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   termsOfService: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   title: Twitter API v2
-  version: "2.9"
+  version: "2.10"
   x-apisguru-categories:
     - social
   x-logo:
@@ -793,6 +793,65 @@ paths:
       summary: Follow User
       tags:
         - Users
+  "/2/users/{id}/likes":
+    post:
+      description: Causes the user (in the path) to like the specified tweet. The user
+        in the path must match the user context authorizing the request.
+      operationId: usersIdLike
+      parameters:
+        - description: The ID of the user that is requesting to like the tweet
+          in: path
+          name: id
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsersLikesCreateRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersLikesCreateResponse"
+          description: The request was successful
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      summary: Causes the user (in the path) to like the specified tweet
+      tags:
+        - Tweets
+  "/2/users/{id}/likes/{tweet_id}":
+    delete:
+      description: Causes the user (in the path) to unlike the specified tweet. The
+        user must match the user context authorizing the request
+      operationId: usersIdUnlike
+      parameters:
+        - description: The ID of the user that is requesting to unlike the tweet
+          in: path
+          name: id
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - description: The ID of the tweet that the user is requesting to unlike
+          in: path
+          name: tweet_id
+          required: true
+          schema:
+            $ref: "#/components/schemas/TweetID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersLikesDeleteResponse"
+          description: The request was successful
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      summary: Causes the user (in the path) to unlike the specified tweet
+      tags:
+        - Tweets
   "/2/users/{id}/mentions":
     get:
       description: Returns Tweet objects that mention username associated to the
@@ -1639,9 +1698,17 @@ components:
               description: Newest Tweet ID in the result set
               pattern: ^[0-9]{1,19}$
               type: string
+            next_token:
+              description: The next token
+              pattern: ^[a-zA-Z0-9]+$
+              type: string
             oldest_id:
               description: Oldest Tweet ID in the result set
               pattern: ^[0-9]{1,19}$
+              type: string
+            previous_token:
+              description: The previous token
+              pattern: ^[a-zA-Z0-9]+$
               type: string
             result_count:
               description: Number of Tweets in result set
@@ -2785,6 +2852,9 @@ components:
               type: integer
           type: object
       type: object
+    UsersLikesCreateRequest: {}
+    UsersLikesCreateResponse: {}
+    UsersLikesDeleteResponse: {}
     Video:
       allOf:
         - $ref: "#/components/schemas/CommonMediaFields"
