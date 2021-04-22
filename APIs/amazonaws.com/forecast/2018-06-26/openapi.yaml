@@ -2400,6 +2400,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataSource'
             - description: '<p>The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data.</p> <p>If encryption is used, <code>DataSource</code> includes an AWS Key Management Service (KMS) key.</p>'
+        EstimatedTimeRemainingInMinutes:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The estimated time in minutes for the dataset import job to complete.
         FieldStatistics:
           allOf:
             - $ref: '#/components/schemas/FieldStatistics'
@@ -2457,6 +2461,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The ARN of the dataset group that provided the data used to train the predictor.
+        EstimatedTimeRemainingInMinutes:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The estimated time in minutes for the forecast job to complete.
         Status:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2587,6 +2595,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/PredictorExecutionDetails'
             - description: Details on the the status and results of the backtests performed to evaluate the accuracy of the predictor. You specify the number of backtests to perform when you call the operation.
+        EstimatedTimeRemainingInMinutes:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The estimated time in minutes for the predictor training job to complete.
         DatasetImportJobArns:
           allOf:
             - $ref: '#/components/schemas/ArnList'
@@ -3301,6 +3313,8 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DatasetSummary'
+    Long:
+      type: integer
     FieldStatistics:
       type: object
       additionalProperties:
