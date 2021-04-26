@@ -95,10 +95,6 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
-        - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
@@ -217,7 +213,7 @@ paths:
           schema:
             type: string
         - description: The maximum number of results to return. If not set, the service
-            will select a default.
+            selects a default.
           in: query
           name: pageSize
           schema:
@@ -240,10 +236,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -314,10 +306,6 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
-        - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
@@ -368,10 +356,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -462,10 +446,6 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
-        - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
@@ -537,10 +517,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -689,10 +665,6 @@ paths:
             - https://www.googleapis.com/auth/bigquery
           Oauth2c:
             - https://www.googleapis.com/auth/bigquery
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigquery.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigquery.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -1536,7 +1508,6 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery
-            https://www.googleapis.com/auth/bigquery.readonly: View your data in Google BigQuery
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
       type: oauth2
@@ -1547,7 +1518,6 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery
-            https://www.googleapis.com/auth/bigquery.readonly: View your data in Google BigQuery
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
           tokenUrl: https://accounts.google.com/o/oauth2/token

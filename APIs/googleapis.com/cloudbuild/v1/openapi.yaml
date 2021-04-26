@@ -1181,6 +1181,9 @@ components:
         filename:
           description: Path, from the source root, to the build configuration file (i.e. cloudbuild.yaml).
           type: string
+        filter:
+          description: Optional. A Common Expression Language string.
+          type: string
         github:
           $ref: "#/components/schemas/GitHubEventsConfig"
           description: GitHubEventsConfig describes the configuration of a trigger that creates a build whenever a GitHub event is received. Mutually exclusive with `trigger_template`.
@@ -1201,6 +1204,9 @@ components:
         name:
           description: "User-assigned name of the trigger. Must be unique within the project. Trigger names must meet the following requirements: + They must contain only alphanumeric characters and dashes. + They can be 1-64 characters long. + They must begin and end with an alphanumeric character."
           type: string
+        pubsubConfig:
+          $ref: "#/components/schemas/PubsubConfig"
+          description: Optional. PubsubConfig describes the configuration of a trigger that creates a build whenever a Pub/Sub message is published.
         substitutions:
           additionalProperties:
             type: string
@@ -1454,6 +1460,29 @@ components:
             description: Properties of the object. Contains field @type with type URL.
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
+      type: object
+    PubsubConfig:
+      description: PubsubConfig describes the configuration of a trigger that creates a build whenever a Pub/Sub message is published.
+      properties:
+        serviceAccountEmail:
+          description: Service account that will make the push request.
+          type: string
+        state:
+          description: Potential issues with the underlying Pub/Sub subscription configuration. Only populated on get requests.
+          enum:
+            - STATE_UNSPECIFIED
+            - OK
+            - SUBSCRIPTION_DELETED
+            - TOPIC_DELETED
+            - SUBSCRIPTION_MISCONFIGURED
+          type: string
+        subscription:
+          description: Output only. Name of the subscription. Format is `projects/{project}/subscriptions/{subscription}`.
+          readOnly: true
+          type: string
+        topic:
+          description: The name of the topic from which this subscription is receiving messages. Format is `projects/{project}/topics/{topic}`.
+          type: string
       type: object
     PullRequestFilter:
       description: PullRequestFilter contains filter properties for matching GitHub Pull Requests.

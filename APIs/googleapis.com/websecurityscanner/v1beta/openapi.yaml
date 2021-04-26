@@ -803,6 +803,9 @@ components:
             - ENABLED
             - DISABLED
           type: string
+        ignoreHttpStatusErrors:
+          description: Whether to keep scanning even if most requests return HTTP error codes.
+          type: boolean
         latestRun:
           $ref: "#/components/schemas/ScanRun"
           description: Latest ScanRun if available.

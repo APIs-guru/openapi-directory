@@ -257,7 +257,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Disable a service so that it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks. It is not valid to call the disable method on a service that is not currently enabled. Callers will receive a `FAILED_PRECONDITION` status if the target service is not currently enabled. Operation
+      description: "Disables a service so that it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks. It is not valid to call the disable method on a service that is not currently enabled. Callers will receive a `FAILED_PRECONDITION` status if the target service is not currently enabled. Operation response type: `google.protobuf.Empty`"
       operationId: serviceusage.services.disable
       parameters:
         - description: "Name of the consumer and service to disable the service on. The enable and disable methods currently only support projects. An example name would be: `projects/123/services/serviceusage.googleapis.com` where `123` is the project number (not project ID)."
@@ -303,7 +303,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Enable a service so that it can be used with a project. Operation
+      description: "Enables a service so that it can be used with a project. Operation response type: `google.protobuf.Empty`"
       operationId: serviceusage.services.enable
       parameters:
         - description: "Name of the consumer and service to enable the service on. The `EnableService` and `DisableService` methods currently only support projects. Enabling a service requires that the service is public or is shared with the user enabling the service. An example name would be: `projects/123/services/serviceusage.googleapis.com` where `123` is the project number (not project ID)."
@@ -544,7 +544,7 @@ paths:
       description: Retrieves a summary of all quota information visible to the service consumer, organized by service metric. Each metric includes information about all of its defined limits. Each limit includes the limit configuration (quota unit, preciseness, default value), the current effective limit value, and all of the overrides applied to the limit.
       operationId: serviceusage.services.consumerQuotaMetrics.list
       parameters:
-        - description: "Parent of the quotas resource. Some example names would be: projects/123/services/serviceconsumermanagement.googleapis.com folders/345/services/serviceconsumermanagement.googleapis.com organizations/456/services/serviceconsumermanagement.googleapis.com"
+        - description: "Parent of the quotas resource. Some example names would be: `projects/123/services/serviceconsumermanagement.googleapis.com` `folders/345/services/serviceconsumermanagement.googleapis.com` `organizations/456/services/serviceconsumermanagement.googleapis.com`"
           in: path
           name: parent
           required: true
@@ -613,7 +613,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create or update multiple admin overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.
+      description: Creates or updates multiple admin overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.
       operationId: serviceusage.services.consumerQuotaMetrics.importAdminOverrides
       parameters:
         - description: "The resource name of the consumer. An example name would be: `projects/123/services/compute.googleapis.com`"
@@ -659,7 +659,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create or update multiple consumer overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.
+      description: Creates or updates multiple consumer overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.
       operationId: serviceusage.services.consumerQuotaMetrics.importConsumerOverrides
       parameters:
         - description: "The resource name of the consumer. An example name would be: `projects/123/services/compute.googleapis.com`"
@@ -693,7 +693,7 @@ paths:
         - services
   "/v1beta1/{parent}/services":
     get:
-      description: List all services available to the specified project, and the current state of those services with respect to the project. The list includes all public services, all services for which the calling user has the `servicemanagement.services.bind` permission, and all services that have already been enabled on the project. The list can be filtered to only include services in a specific state, for example to only include services enabled on the project.
+      description: Lists all services available to the specified project, and the current state of those services with respect to the project. The list includes all public services, all services for which the calling user has the `servicemanagement.services.bind` permission, and all services that have already been enabled on the project. The list can be filtered to only include services in a specific state, for example to only include services enabled on the project.
       operationId: serviceusage.services.list
       parameters:
         - description: "Parent to search for services on. An example name would be: `projects/123` where `123` is the project number (not project ID)."
@@ -761,7 +761,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Enable multiple services on a project. The operation is atomic: if enabling any service fails, then the entire batch fails, and no state changes occur. Operation"
+      description: "Enables multiple services on a project. The operation is atomic: if enabling any service fails, then the entire batch fails, and no state changes occur. Operation response type: `google.protobuf.Empty`"
       operationId: serviceusage.services.batchEnable
       parameters:
         - description: "Parent to enable services on. An example name would be: `projects/123` where `123` is the project number (not project ID). The `BatchEnableServices` method currently only supports projects."
@@ -807,7 +807,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Generate service identity for service.
+      description: Generates service identity for service.
       operationId: serviceusage.services.generateServiceIdentity
       parameters:
         - description: "Name of the consumer and service to generate an identity for. The `GenerateServiceIdentity` methods currently only support projects. An example name would be: `projects/123/services/example.googleapis.com` where `123` is the project number."
@@ -914,12 +914,12 @@ components:
       description: Quota policy created by quota administrator.
       properties:
         container:
-          description: The cloud resource container at which the quota policy is created. The format is {container_type}/{container_number}
+          description: The cloud resource container at which the quota policy is created. The format is `{container_type}/{container_number}`
           type: string
         dimensions:
           additionalProperties:
             type: string
-          description: ' If this map is nonempty, then this policy applies only to specific values for dimensions defined in the limit unit. For example, an policy on a limit with the unit 1/{project}/{region} could contain an entry with the key "region" and the value "us-east-1"; the policy is only applied to quota consumed in that region. This map has the following restrictions: * If "region" appears as a key, its value must be a valid Cloud region. * If "zone" appears as a key, its value must be a valid Cloud zone. * Keys other than "region" or "zone" are not valid.'
+          description: " If this map is nonempty, then this policy applies only to specific values for dimensions defined in the limit unit. For example, an policy on a limit with the unit `1/{project}/{region}` could contain an entry with the key `region` and the value `us-east-1`; the policy is only applied to quota consumed in that region. This map has the following restrictions: * If `region` appears as a key, its value must be a valid Cloud region. * If `zone` appears as a key, its value must be a valid Cloud zone. * Keys other than `region` or `zone` are not valid."
           type: object
         metric:
           description: "The name of the metric to which this policy applies. An example name would be: `compute.googleapis.com/cpus`"
@@ -1004,7 +1004,7 @@ components:
           type: string
       type: object
     Authentication:
-      description: '`Authentication` defines the authentication configuration for an API. Example for an API targeted for external use: name: calendar.googleapis.com authentication: providers: - id: google_calendar_auth jwks_uri: https://www.googleapis.com/oauth2/v1/certs issuer: https://securetoken.google.com rules: - selector: "*" requirements: provider_id: google_calendar_auth'
+      description: '`Authentication` defines the authentication configuration for API methods provided by an API service. Example: name: calendar.googleapis.com authentication: providers: - id: google_calendar_auth jwks_uri: https://www.googleapis.com/oauth2/v1/certs issuer: https://securetoken.google.com rules: - selector: "*" requirements: provider_id: google_calendar_auth - selector: google.calendar.Delegate oauth: canonical_scopes: https://www.googleapis.com/auth/calendar.read'
       properties:
         providers:
           description: Defines a set of authentication providers that a service supports.
@@ -1181,13 +1181,13 @@ components:
             $ref: "#/components/schemas/ConsumerQuotaLimit"
           type: array
         displayName:
-          description: 'The display name of the metric. An example name would be: "CPUs"'
+          description: "The display name of the metric. An example name would be: `CPUs`"
           type: string
         metric:
           description: "The name of the metric. An example name would be: `compute.googleapis.com/cpus`"
           type: string
         name:
-          description: "The resource name of the quota settings on this metric for this consumer. An example name would be: `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus The resource name is intended to be opaque and should not be parsed for its component strings, since its representation could change in the future."
+          description: "The resource name of the quota settings on this metric for this consumer. An example name would be: `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus` The resource name is intended to be opaque and should not be parsed for its component strings, since its representation could change in the future."
           type: string
         unit:
           description: The units in which the metric value is reported.
@@ -2245,7 +2245,7 @@ components:
         dimensions:
           additionalProperties:
             type: string
-          description: The dimensions of this quota bucket. If this map is empty, this is the global bucket, which is the default quota value applied to all requests that do not have a more specific override. If this map is nonempty, the default limit, effective limit, and quota overrides apply only to requests that have the dimensions given in the map. For example, if the map has key "region" and value "us-east-1", then the specified effective limit is only effective in that region, and the specified overrides apply only in that region.
+          description: The dimensions of this quota bucket. If this map is empty, this is the global bucket, which is the default quota value applied to all requests that do not have a more specific override. If this map is nonempty, the default limit, effective limit, and quota overrides apply only to requests that have the dimensions given in the map. For example, if the map has key `region` and value `us-east-1`, then the specified effective limit is only effective in that region, and the specified overrides apply only in that region.
           type: object
         effectiveLimit:
           description: The effective limit of this quota bucket. Equal to default_limit if there are no overrides.
@@ -2299,12 +2299,12 @@ components:
       description: A quota override
       properties:
         adminOverrideAncestor:
-          description: 'The resource name of the ancestor that requested the override. For example: "organizations/12345" or "folders/67890". Used by admin overrides only.'
+          description: "The resource name of the ancestor that requested the override. For example: `organizations/12345` or `folders/67890`. Used by admin overrides only."
           type: string
         dimensions:
           additionalProperties:
             type: string
-          description: "If this map is nonempty, then this override applies only to specific values for dimensions defined in the limit unit. For example, an override on a limit with the unit 1/{project}/{region} could contain an entry with the key \"region\" and the value \"us-east-1\"; the override is only applied to quota consumed in that region. This map has the following restrictions: * Keys that are not defined in the limit's unit are not valid keys. Any string appearing in {brackets} in the unit (besides {project} or {user}) is a defined key. * \"project\" is not a valid key; the project is already specified in the parent resource name. * \"user\" is not a valid key; the API does not support quota overrides that apply only to a specific user. * If \"region\" appears as a key, its value must be a valid Cloud region. * If \"zone\" appears as a key, its value must be a valid Cloud zone. * If any valid key other than \"region\" or \"zone\" appears in the map, then all valid keys other than \"region\" or \"zone\" must also appear in the map."
+          description: "If this map is nonempty, then this override applies only to specific values for dimensions defined in the limit unit. For example, an override on a limit with the unit `1/{project}/{region}` could contain an entry with the key `region` and the value `us-east-1`; the override is only applied to quota consumed in that region. This map has the following restrictions: * Keys that are not defined in the limit's unit are not valid keys. Any string appearing in `{brackets}` in the unit (besides `{project}` or `{user}`) is a defined key. * `project` is not a valid key; the project is already specified in the parent resource name. * `user` is not a valid key; the API does not support quota overrides that apply only to a specific user. * If `region` appears as a key, its value must be a valid Cloud region. * If `zone` appears as a key, its value must be a valid Cloud zone. * If any valid key other than `region` or `zone` appears in the map, then all valid keys other than `region` or `zone` must also appear in the map."
           type: object
         metric:
           description: "The name of the metric to which this override applies. An example name would be: `compute.googleapis.com/cpus`"
@@ -2327,10 +2327,10 @@ components:
           $ref: "#/components/schemas/ServiceConfig"
           description: The service configuration of the available service. Some fields may be filtered out of the configuration in responses to the `ListServices` method. These fields are present only in responses to the `GetService` method.
         name:
-          description: "The resource name of the consumer and service. A valid name would be: - projects/123/services/serviceusage.googleapis.com"
+          description: "The resource name of the consumer and service. A valid name would be: - `projects/123/services/serviceusage.googleapis.com`"
           type: string
         parent:
-          description: "The resource name of the consumer. A valid name would be: - projects/123"
+          description: "The resource name of the consumer. A valid name would be: - `projects/123`"
           type: string
         state:
           description: Whether or not the service has been enabled for use by the consumer.

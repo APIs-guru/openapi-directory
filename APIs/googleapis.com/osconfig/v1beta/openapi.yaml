@@ -31,7 +31,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: osconfig
 externalDocs:
-  url: https://cloud.google.com/compute/docs/manage-os
+  url: https://cloud.google.com/compute/docs/osconfig/rest
 tags:
   - name: projects
 paths:
@@ -963,6 +963,38 @@ components:
         weekDayOfMonth:
           $ref: "#/components/schemas/WeekDayOfMonth"
           description: Required. Week day in a month.
+      type: object
+    OSPolicyAssignmentOperationMetadata:
+      description: OS policy assignment operation metadata provided by OS policy assignment API methods that return long running operations.
+      properties:
+        apiMethod:
+          description: The OS policy assignment API method.
+          enum:
+            - API_METHOD_UNSPECIFIED
+            - CREATE
+            - UPDATE
+            - DELETE
+          type: string
+        osPolicyAssignment:
+          description: "Reference to the `OSPolicyAssignment` API resource. Format: projects/{project_number}/locations/{location}/osPolicyAssignments/{os_policy_assignment_id@revision_id}"
+          type: string
+        rolloutStartTime:
+          description: Rollout start time
+          format: google-datetime
+          type: string
+        rolloutState:
+          description: State of the rollout
+          enum:
+            - ROLLOUT_STATE_UNSPECIFIED
+            - IN_PROGRESS
+            - CANCELLING
+            - CANCELLED
+            - SUCCEEDED
+          type: string
+        rolloutUpdateTime:
+          description: Rollout update time
+          format: google-datetime
+          type: string
       type: object
     OneTimeSchedule:
       description: Sets the time for a one time patch deployment. Timestamp is in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.

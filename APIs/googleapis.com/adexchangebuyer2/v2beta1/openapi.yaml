@@ -3971,9 +3971,30 @@ components:
           description: Count of guaranteed looks. Required for deal, optional for product.
           format: int64
           type: string
+        impressionCap:
+          description: The lifetime impression cap for CPM sponsorship deals. The deal
+            will stop serving when the cap is reached.
+          format: int64
+          type: string
         minimumDailyLooks:
           description: Daily minimum looks for CPD deal types.
           format: int64
+          type: string
+        percentShareOfVoice:
+          description: For sponsorship deals, this is the percentage of the seller's
+            eligible impressions that the deal will serve until the cap is
+            reached.
+          format: int64
+          type: string
+        reservationType:
+          description: The reservation type for a Programmatic Guaranteed deal. This
+            indicates whether the number of impressions is fixed, or a percent
+            of available impressions. If not specified, the default reservation
+            type is STANDARD.
+          enum:
+            - RESERVATION_TYPE_UNSPECIFIED
+            - STANDARD
+            - SPONSORSHIP
           type: string
       type: object
     HtmlContent:

@@ -161,7 +161,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: The maximum number of results to return. If not set, the service will select a default.
+        - description: The maximum number of results to return. If not set, the service selects a default.
           in: query
           name: pageSize
           schema:
@@ -1150,6 +1150,12 @@ components:
         description:
           description: Optional. Description of the version, as specified in its metadata.
           type: string
+        metadata:
+          additionalProperties:
+            description: Properties of the object.
+          description: Output only. Repository-specific Metadata stored against this version. The fields returned are defined by the underlying repository-specific resource. Currently, the only resource in use is DockerImage
+          readOnly: true
+          type: object
         name:
           description: 'The name of the version, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/art1".'
           type: string

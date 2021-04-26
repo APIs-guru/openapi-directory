@@ -3110,7 +3110,7 @@ components:
           $ref: "#/components/schemas/SchemaConfig"
           description: The configuration for the exported BigQuery schema.
         writeDisposition:
-          description: Determines whether existing tables in the destination dataset are overwritten or appended to. If a write_disposition is specified, the `force` parameter is ignored.
+          description: Determines if existing data in the destination dataset is overwritten, appended to, or not written if the tables contain data. If a write_disposition is specified, the `force` parameter is ignored.
           enum:
             - WRITE_DISPOSITION_UNSPECIFIED
             - WRITE_EMPTY

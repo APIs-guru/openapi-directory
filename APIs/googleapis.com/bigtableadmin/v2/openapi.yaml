@@ -213,7 +213,7 @@ paths:
       tags:
         - projects
     put:
-      description: Updates a cluster within an instance.
+      description: Updates a cluster within an instance. UpdateCluster is deprecated. Please use PartialUpdateCluster instead.
       operationId: bigtableadmin.projects.instances.clusters.update
       parameters:
         - description: The unique name of the cluster. Values are of the form `projects/{project}/instances/{instance}/clusters/a-z*`.

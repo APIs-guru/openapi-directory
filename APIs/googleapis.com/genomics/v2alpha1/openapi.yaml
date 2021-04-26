@@ -368,6 +368,9 @@ components:
         credentials:
           $ref: "#/components/schemas/Secret"
           description: If the specified image is hosted on a private registry other than Google Container Registry, the credentials required to pull the image must be specified here as an encrypted secret. The secret must decrypt to a JSON-encoded dictionary containing both `username` and `password` keys.
+        encryptedEnvironment:
+          $ref: "#/components/schemas/Secret"
+          description: The encrypted environment to pass into the container. This environment is merged with values specified in the google.genomics.v2alpha1.Pipeline message, overwriting any duplicate values. The secret must decrypt to a JSON-encoded dictionary where key-value pairs serve as environment variable names and their values. The decoded environment variables can overwrite the values specified by the `environment` field.
         entrypoint:
           description: If specified, overrides the `ENTRYPOINT` specified in the container.
           type: string
@@ -800,6 +803,9 @@ components:
           items:
             $ref: "#/components/schemas/Action"
           type: array
+        encryptedEnvironment:
+          $ref: "#/components/schemas/Secret"
+          description: The encrypted environment to pass into every action. Each action can also specify its own encrypted environment. The secret must decrypt to a JSON-encoded dictionary where key-value pairs serve as environment variable names and their values. The decoded environment variables can overwrite the values specified by the `environment` field.
         environment:
           additionalProperties:
             type: string

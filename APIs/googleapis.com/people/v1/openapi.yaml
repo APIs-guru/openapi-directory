@@ -267,7 +267,8 @@ paths:
       operationId: people.otherContacts.search
       parameters:
         - description: Optional. The number of results to return. Defaults to 10 if field
-            is not set, or set to 0.
+            is not set, or set to 0. Values greater than 10 will be capped to
+            10.
           in: query
           name: pageSize
           schema:
@@ -725,7 +726,9 @@ paths:
         `organizations` fields that are from the CONTACT" source.
       operationId: people.people.searchContacts
       parameters:
-        - description: Optional. The number of results to return.
+        - description: Optional. The number of results to return. Defaults to 10 if field
+            is not set, or set to 0. Values greater than 10 will be capped to
+            10.
           in: query
           name: pageSize
           schema:
@@ -2350,6 +2353,10 @@ components:
           items:
             $ref: "#/components/schemas/Person"
           type: array
+        totalSize:
+          description: The total number of other contacts in the list without pagination.
+          format: int32
+          type: integer
       type: object
     Locale:
       description: A person's locale preference.

@@ -943,6 +943,10 @@ components:
           items:
             $ref: "#/components/schemas/NetworkConfig"
           type: array
+        satisfiesPzs:
+          description: Output only. Reserved for future use.
+          readOnly: true
+          type: boolean
         state:
           description: Output only. The instance state.
           enum:
