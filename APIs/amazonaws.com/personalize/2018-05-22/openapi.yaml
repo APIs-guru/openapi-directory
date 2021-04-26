@@ -304,6 +304,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonPersonalize.CreateDatasetExportJob:
+    post:
+      operationId: CreateDatasetExportJob
+      description: '<p> Creates a job that exports data from your dataset to an Amazon S3 bucket. To allow Amazon Personalize to export the training data, you must specify an service-linked AWS Identity and Access Management (IAM) role that gives Amazon Personalize <code>PutObject</code> permissions for your Amazon S3 bucket. For information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/export-permissions.html">Dataset export job permissions requirements</a> in the Amazon Personalize developer guide. </p> <p> <b>Status</b> </p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p> To get the status of the export job, call <a>DescribeDatasetExportJob</a>, and specify the Amazon Resource Name (ARN) of the dataset export job. The dataset export is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDatasetExportJobResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDatasetExportJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonPersonalize.CreateDatasetExportJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonPersonalize.CreateDatasetGroup:
     post:
       operationId: CreateDatasetGroup
@@ -358,7 +421,7 @@ paths:
   /#X-Amz-Target=AmazonPersonalize.CreateDatasetImportJob:
     post:
       operationId: CreateDatasetImportJob
-      description: '<p>Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it in an internal AWS system.</p> <important> <p>The dataset import job replaces any existing data in the dataset that you imported in bulk.</p> </important> <p> <b>Status</b> </p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p>To get the status of the import job, call <a>DescribeDatasetImportJob</a>, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed.</p> <note> <p>Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.</p> </note> <p class="title"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListDatasetImportJobs</a> </p> </li> <li> <p> <a>DescribeDatasetImportJob</a> </p> </li> </ul>'
+      description: '<p>Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) service role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it in an internal AWS system. For information on granting access to your Amazon S3 bucket, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html">Giving Amazon Personalize Access to Amazon S3 Resources</a>. </p> <important> <p>The dataset import job replaces any existing data in the dataset that you imported in bulk.</p> </important> <p> <b>Status</b> </p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p>To get the status of the import job, call <a>DescribeDatasetImportJob</a>, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed.</p> <note> <p>Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.</p> </note> <p class="title"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListDatasetImportJobs</a> </p> </li> <li> <p> <a>DescribeDatasetImportJob</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1218,6 +1281,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonPersonalize.DescribeDatasetExportJob:
+    post:
+      operationId: DescribeDatasetExportJob
+      description: 'Describes the dataset export job created by <a>CreateDatasetExportJob</a>, including the export job status.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDatasetExportJobResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDatasetExportJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonPersonalize.DescribeDatasetExportJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonPersonalize.DescribeDatasetGroup:
     post:
       operationId: DescribeDatasetGroup
@@ -1788,6 +1896,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonPersonalize.ListDatasetExportJobs:
+    post:
+      operationId: ListDatasetExportJobs
+      description: 'Returns a list of dataset export jobs that use the given dataset. When a dataset is not specified, all the dataset export jobs associated with the account are listed. The response provides the properties for each dataset export job, including the Amazon Resource Name (ARN). For more information on dataset export jobs, see <a>CreateDatasetExportJob</a>. For more information on datasets, see <a>CreateDataset</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatasetExportJobsResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDatasetExportJobsRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonPersonalize.ListDatasetExportJobs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonPersonalize.ListDatasetGroups:
     post:
       operationId: ListDatasetGroups
@@ -2040,6 +2205,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListFiltersRequest'
       parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2408,7 +2585,7 @@ components:
         filterArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: 'The ARN of the filter to apply to the batch inference job. For more information on using filters, see Using Filters with Amazon Personalize.'
+            - description: 'The ARN of the filter to apply to the batch inference job. For more information on using filters, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html">Filtering Batch Recommendations</a>..'
         numResults:
           allOf:
             - $ref: '#/components/schemas/NumBatchResults'
@@ -2424,7 +2601,7 @@ components:
         roleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and out Amazon S3 buckets respectively.
+            - description: The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and output Amazon S3 buckets respectively.
         batchInferenceJobConfig:
           allOf:
             - $ref: '#/components/schemas/BatchInferenceJobConfig'
@@ -2497,6 +2674,42 @@ components:
           allOf:
             - $ref: '#/components/schemas/DatasetType'
             - description: '<p>The type of dataset.</p> <p>One of the following (case insensitive) values:</p> <ul> <li> <p>Interactions</p> </li> <li> <p>Items</p> </li> <li> <p>Users</p> </li> </ul>'
+    CreateDatasetExportJobResponse:
+      type: object
+      properties:
+        datasetExportJobArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset export job.
+    CreateDatasetExportJobRequest:
+      type: object
+      required:
+        - jobName
+        - datasetArn
+        - roleArn
+        - jobOutput
+      title: CreateDatasetExportJobRequest
+      properties:
+        jobName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name for the dataset export job.
+        datasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset that contains the data to export.
+        ingestionMode:
+          allOf:
+            - $ref: '#/components/schemas/IngestionMode'
+            - description: 'The data to export, based on how you imported the data. You can choose to export only <code>BULK</code> data that you imported using a dataset import job, only <code>PUT</code> data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code> for both types. The default value is <code>PUT</code>. '
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management service role that has permissions to add data to your output Amazon S3 bucket.
+        jobOutput:
+          allOf:
+            - $ref: '#/components/schemas/DatasetExportJobOutput'
+            - description: The path to the Amazon S3 bucket where the job's output is stored.
     CreateDatasetGroupResponse:
       type: object
       properties:
@@ -2830,6 +3043,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the dataset to describe.
+    DescribeDatasetExportJobResponse:
+      type: object
+      properties:
+        datasetExportJob:
+          allOf:
+            - $ref: '#/components/schemas/DatasetExportJob'
+            - description: '<p>Information about the dataset export job, including the status.</p> <p>The status is one of the following values:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>'
+    DescribeDatasetExportJobRequest:
+      type: object
+      required:
+        - datasetExportJobArn
+      title: DescribeDatasetExportJobRequest
+      properties:
+        datasetExportJobArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset export job to describe.
     DescribeDatasetGroupResponse:
       type: object
       properties:
@@ -3014,7 +3244,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retreive the next page of results. The value is <code>null</code> when there are no more results to return.
+            - description: The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.
     ListBatchInferenceJobsRequest:
       type: object
       title: ListBatchInferenceJobsRequest
@@ -3059,6 +3289,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of campaigns to return.
+    ListDatasetExportJobsResponse:
+      type: object
+      properties:
+        datasetExportJobs:
+          allOf:
+            - $ref: '#/components/schemas/DatasetExportJobs'
+            - description: The list of dataset export jobs.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A token for getting the next set of dataset export jobs (if they exist).
+    ListDatasetExportJobsRequest:
+      type: object
+      title: ListDatasetExportJobsRequest
+      properties:
+        datasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset to list the dataset export jobs for.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A token returned from the previous call to <code>ListDatasetExportJobs</code> for getting the next set of dataset export jobs (if they exist).
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of dataset export jobs to return.
     ListDatasetGroupsResponse:
       type: object
       properties:
@@ -3489,7 +3746,7 @@ components:
         itemExplorationConfig:
           allOf:
             - $ref: '#/components/schemas/HyperParameters'
-            - description: 'A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. See <a>native-recipe-new-item-USER_PERSONALIZATION</a>.'
+            - description: 'A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. See <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a>.'
       description: The configuration details of a batch inference job.
     RoleArn:
       type: string
@@ -3780,6 +4037,20 @@ components:
       items:
         $ref: '#/components/schemas/ContinuousHyperParameterRange'
       maxItems: 100
+    IngestionMode:
+      type: string
+      enum:
+        - BULK
+        - PUT
+        - ALL
+    DatasetExportJobOutput:
+      type: object
+      required:
+        - s3DataDestination
+      properties:
+        s3DataDestination:
+          $ref: '#/components/schemas/S3DataConfig'
+      description: The output configuration parameters of a dataset export job.
     KmsKeyArn:
       type: string
     DataSource:
@@ -3788,7 +4059,7 @@ components:
         dataLocation:
           allOf:
             - $ref: '#/components/schemas/S3Location'
-            - description: '<p>The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored. For example: </p> <p> <code>s3://bucket-name/training-data.csv</code> </p>'
+            - description: '<p>The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored. For example: </p> <p> <code>s3://bucket-name/folder-name/</code> </p>'
       description: Describes the data source that contains the data to upload to a dataset.
     DatasetType:
       type: string
@@ -3874,6 +4145,83 @@ components:
             - $ref: '#/components/schemas/Date'
             - description: A time stamp that shows when the dataset was updated.
       description: Provides metadata for a dataset.
+    DatasetExportJob:
+      type: object
+      properties:
+        jobName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the export job.
+        datasetExportJobArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset export job.
+        datasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset to export.
+        ingestionMode:
+          allOf:
+            - $ref: '#/components/schemas/IngestionMode'
+            - description: 'The data to export, based on how you imported the data. You can choose to export <code>BULK</code> data that you imported using a dataset import job, <code>PUT</code> data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code> for both types. The default value is <code>PUT</code>. '
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management service role that has permissions to add data to your output Amazon S3 bucket.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: '<p>The status of the dataset export job.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
+        jobOutput:
+          allOf:
+            - $ref: '#/components/schemas/DatasetExportJobOutput'
+            - description: '<p>The path to the Amazon S3 bucket where the job''s output is stored. For example:</p> <p> <code>s3://bucket-name/folder-name/</code> </p>'
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The creation date and time (in Unix time) of the dataset export job.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time (in Unix time) the status of the dataset export job was last updated.
+        failureReason:
+          allOf:
+            - $ref: '#/components/schemas/FailureReason'
+            - description: 'If a dataset export job fails, provides the reason why.'
+      description: '<p>Describes a job that exports a dataset to an Amazon S3 bucket. For more information, see <a>CreateDatasetExportJob</a>.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
+    DatasetExportJobSummary:
+      type: object
+      properties:
+        datasetExportJobArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset export job.
+        jobName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the dataset export job.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: '<p>The status of the dataset export job.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time (in Unix time) that the dataset export job was created.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time (in Unix time) that the dataset export job status was last updated.
+        failureReason:
+          allOf:
+            - $ref: '#/components/schemas/FailureReason'
+            - description: 'If a dataset export job fails, the reason behind the failure.'
+      description: 'Provides a summary of the properties of a dataset export job. For a complete listing, call the <a>DescribeDatasetExportJob</a> API.'
+    DatasetExportJobs:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatasetExportJobSummary'
+      maxItems: 100
     DatasetGroup:
       type: object
       properties:
@@ -4005,7 +4353,7 @@ components:
         lastUpdatedDateTime:
           allOf:
             - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the dataset was last updated.
+            - description: The date and time (in Unix time) that the dataset import job status was last updated.
         failureReason:
           allOf:
             - $ref: '#/components/schemas/FailureReason'

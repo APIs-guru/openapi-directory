@@ -4300,6 +4300,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Seq'
             - description: The sequence number.
+        MessageType:
+          $ref: '#/components/schemas/MessageType'
       description: Information about a Sidewalk router.
     TagResourceResponse:
       type: object
@@ -5507,6 +5509,14 @@ components:
       description: LoRaWANUpdateGatewayTaskEntry object.
     MessageId:
       type: string
+    MessageType:
+      type: string
+      enum:
+        - CUSTOM_COMMAND_ID_NOTIFY
+        - CUSTOM_COMMAND_ID_GET
+        - CUSTOM_COMMAND_ID_SET
+        - CUSTOM_COMMAND_ID_RESP
+      description: Sidewalk device message type.
     NwkKey:
       type: string
       pattern: '[a-fA-F0-9]{32}'

@@ -900,7 +900,7 @@ paths:
                   properties:
                     minSize:
                       allOf:
-                        - $ref: '#/components/schemas/Capacity'
+                        - $ref: '#/components/schemas/ZeroCapacity'
                         - description: The minimum number of nodes that the managed node group can scale in to. This number must be greater than zero.
                     maxSize:
                       allOf:
@@ -908,7 +908,7 @@ paths:
                         - description: 'The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
                     desiredSize:
                       allOf:
-                        - $ref: '#/components/schemas/Capacity'
+                        - $ref: '#/components/schemas/ZeroCapacity'
                         - description: The current number of nodes that the managed node group should maintain.
                 diskSize:
                   description: 'The root device disk size (in GiB) for your node group instances. The default disk size is 20 GiB. If you specify <code>launchTemplate</code>, then don''t specify <code>diskSize</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
@@ -930,6 +930,7 @@ paths:
                     - AL2_x86_64
                     - AL2_x86_64_GPU
                     - AL2_ARM_64
+                    - CUSTOM
                 remoteAccess:
                   description: An object representing the remote access configuration for the managed node group.
                   type: object
@@ -2423,7 +2424,7 @@ paths:
                   properties:
                     minSize:
                       allOf:
-                        - $ref: '#/components/schemas/Capacity'
+                        - $ref: '#/components/schemas/ZeroCapacity'
                         - description: The minimum number of nodes that the managed node group can scale in to. This number must be greater than zero.
                     maxSize:
                       allOf:
@@ -2431,7 +2432,7 @@ paths:
                         - description: 'The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
                     desiredSize:
                       allOf:
-                        - $ref: '#/components/schemas/Capacity'
+                        - $ref: '#/components/schemas/ZeroCapacity'
                         - description: The current number of nodes that the managed node group should maintain.
                 clientRequestToken:
                   description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
@@ -2692,6 +2693,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/Nodegroup'
             - description: The full description of your new node group.
+    ZeroCapacity:
+      type: integer
+      minimum: 0
     Capacity:
       type: integer
       minimum: 1
@@ -2933,6 +2937,7 @@ components:
         - AL2_x86_64
         - AL2_x86_64_GPU
         - AL2_ARM_64
+        - CUSTOM
     ClusterName:
       type: string
       pattern: '^[0-9A-Za-z][A-Za-z0-9\-_]*'
@@ -3559,7 +3564,7 @@ components:
       properties:
         minSize:
           allOf:
-            - $ref: '#/components/schemas/Capacity'
+            - $ref: '#/components/schemas/ZeroCapacity'
             - description: The minimum number of nodes that the managed node group can scale in to. This number must be greater than zero.
         maxSize:
           allOf:
@@ -3567,7 +3572,7 @@ components:
             - description: 'The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
         desiredSize:
           allOf:
-            - $ref: '#/components/schemas/Capacity'
+            - $ref: '#/components/schemas/ZeroCapacity'
             - description: The current number of nodes that the managed node group should maintain.
       description: 'An object representing the scaling configuration details for the Auto Scaling group that is associated with your node group. If you specify a value for any property, then you must specify values for all of the properties.'
     RemoteAccessConfig:
@@ -4277,6 +4282,8 @@ components:
         - MinSize
         - ReleaseVersion
         - PublicAccessCidrs
+        - LaunchTemplateName
+        - LaunchTemplateVersion
         - IdentityProviderConfig
         - EncryptionConfig
         - AddonVersion
