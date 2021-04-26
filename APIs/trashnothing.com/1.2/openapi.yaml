@@ -3826,11 +3826,11 @@ paths:
                     source:
                       description: >
                         The source of the image.  Currently one of: gravatar, facebook,
-                        twitter, google <br /><br /> NOTE: Additional sources
-                        may be added in the future (eg. 'trashnothing' when
-                        support for uploading custom profile images is added) so
-                        clients should take care to support arbitrary sources
-                        being returned.
+                        google <br /><br /> NOTE: Additional sources may be
+                        added in the future (eg. 'trashnothing' when support for
+                        uploading custom profile images is added) so clients
+                        should take care to support arbitrary sources being
+                        returned.
                       type: string
                   type: object
                 type: array
@@ -4762,7 +4762,7 @@ components:
             profile_image_source:
               description: >
                 The source of the users' profile image. One of: gravatar, facebook,
-                twitter, google, freegle, custom
+                google, freegle, custom
               type: string
             public_name:
               description: Whether or not the user has chosen to make their first and last
@@ -5493,10 +5493,10 @@ components:
         profile_image:
           description: >
             A URL to a profile image for the user.  Profile images sizes vary
-            based on the source (Google, Facebook, Twitter, Gravatar, etc) and
-            some can be as small as 64px by 64px.  Will be null for api key
-            requests and requests where the oauth user doesn't belong to any of
-            the same groups as this user.
+            based on the source (Google, Facebook, Gravatar, etc) and some can
+            be as small as 64px by 64px.  Will be null for api key requests and
+            requests where the oauth user doesn't belong to any of the same
+            groups as this user.
           type: string
         reply_time:
           description: >

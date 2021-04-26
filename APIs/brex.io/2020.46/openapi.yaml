@@ -4,11 +4,11 @@ servers:
     url: https://api.brex.io
 info:
   contact:
-    email: support@brex.io
-    name: Brex Support
+    email: support@kompany.com
+    name: KYC API Support
     url: https://brex.io
   description: API Interface to retrieve company data and products from business registers
-  title: Brex API Documentation
+  title: KYC API Documentation
   version: "2020.46"
   x-apisguru-categories:
     - financial
@@ -387,7 +387,8 @@ paths:
         - v1-company
   "/api/v1/company/search/name/{country}/{name}":
     get:
-      description: Brex company index lookup for companies with a certain name in a country.
+      description: KYC API company index lookup for companies with a certain name in a
+        country.
       operationId: CompanySearchName
       parameters:
         - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
@@ -418,12 +419,12 @@ paths:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
-      summary: Retrieves a list of companies from the brex company index
+      summary: Retrieves a list of companies from the KYC API company index
       tags:
         - v1-company
   "/api/v1/company/search/number/{country}/{number}":
     get:
-      description: Brex company index lookup for companies with a certain register
+      description: KYC API company index lookup for companies with a certain register
         number in a country.
       operationId: CompanySearchNumber
       parameters:
@@ -455,12 +456,12 @@ paths:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
-      summary: Retrieves a list of companies from the brex company index
+      summary: Retrieves a list of companies from the KYC API company index
       tags:
         - v1-company
   "/api/v1/company/search/{country}":
     post:
-      description: Brex company index lookup by country and mixed parameters. This
+      description: KYC API company index lookup by country and mixed parameters. This
         function requires a country code then a mixture of name
       operationId: CompanyAlternativeSearch
       parameters:
@@ -547,7 +548,7 @@ paths:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
-      summary: Retrieves a list of companies from the brex company index
+      summary: Retrieves a list of companies from the KYC API company index
       tags:
         - v1-company
   "/api/v1/company/{id}/announcements":
@@ -1744,8 +1745,8 @@ paths:
                   example: FULL
                   type: string
                 subjectId:
-                  description: BrexId (32 byte hexid) of the company you want to place the order
-                    for
+                  description: KYC API Id (32 byte hexid) of the company you want to place the
+                    order for
                   example: "null"
                   type: string
               type: object

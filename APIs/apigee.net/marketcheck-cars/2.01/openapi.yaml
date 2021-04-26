@@ -103,6 +103,7 @@ paths:
         - $ref: "#/components/parameters/first_seen_range"
         - $ref: "#/components/parameters/last_seen_days"
         - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/include_relevant_links"
       responses:
         "200":
           content:
@@ -659,6 +660,7 @@ paths:
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/append_api_key"
         - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/include_relevant_links"
       responses:
         "200":
           content:
@@ -730,6 +732,7 @@ paths:
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/append_api_key"
         - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/include_relevant_links"
       responses:
         "200":
           content:
@@ -802,6 +805,7 @@ paths:
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/append_api_key"
         - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/include_relevant_links"
       responses:
         "200":
           content:
@@ -1104,6 +1108,8 @@ paths:
           schema:
             format: int32
             type: integer
+        - $ref: "#/components/parameters/zip"
+        - $ref: "#/components/parameters/msa_code"
         - description: Debug parameter
           in: query
           name: debug
@@ -1122,6 +1128,49 @@ paths:
         - $ref: "#/components/parameters/state"
         - $ref: "#/components/parameters/city"
         - $ref: "#/components/parameters/ymmt"
+        - $ref: "#/components/parameters/car_car_type"
+        - $ref: "#/components/parameters/lease_term"
+        - $ref: "#/components/parameters/lease_down_payment"
+        - $ref: "#/components/parameters/lease_emp"
+        - $ref: "#/components/parameters/finance_loan_term"
+        - $ref: "#/components/parameters/finance_loan_apr"
+        - $ref: "#/components/parameters/finance_emp"
+        - $ref: "#/components/parameters/finance_down_payment"
+        - $ref: "#/components/parameters/finance_down_payment_per"
+        - $ref: "#/components/parameters/carfax_1_owner"
+        - $ref: "#/components/parameters/carfax_clean_title"
+        - $ref: "#/components/parameters/year"
+        - $ref: "#/components/parameters/make"
+        - $ref: "#/components/parameters/model"
+        - $ref: "#/components/parameters/trim"
+        - $ref: "#/components/parameters/dealer_id"
+        - $ref: "#/components/parameters/source"
+        - $ref: "#/components/parameters/body_type"
+        - $ref: "#/components/parameters/body_subtype"
+        - $ref: "#/components/parameters/vehicle_type"
+        - $ref: "#/components/parameters/cylinders"
+        - $ref: "#/components/parameters/transmission"
+        - $ref: "#/components/parameters/doors"
+        - $ref: "#/components/parameters/drivetrain"
+        - $ref: "#/components/parameters/exterior_color"
+        - $ref: "#/components/parameters/interior_color"
+        - $ref: "#/components/parameters/base_exterior_color"
+        - $ref: "#/components/parameters/base_interior_color"
+        - $ref: "#/components/parameters/engine"
+        - $ref: "#/components/parameters/engine_size"
+        - $ref: "#/components/parameters/engine_aspiration"
+        - $ref: "#/components/parameters/engine_block"
+        - $ref: "#/components/parameters/highway_mpg_range"
+        - $ref: "#/components/parameters/city_mpg_range"
+        - $ref: "#/components/parameters/miles_range"
+        - $ref: "#/components/parameters/price_range"
+        - $ref: "#/components/parameters/msrp_range"
+        - $ref: "#/components/parameters/dom_range"
+        - $ref: "#/components/parameters/dealership_group_name"
+        - $ref: "#/components/parameters/dom_active_range"
+        - $ref: "#/components/parameters/dom_180_range"
+        - $ref: "#/components/parameters/fuel_type"
+        - $ref: "#/components/parameters/dealer_type"
       responses:
         "200":
           content:
@@ -1415,6 +1464,7 @@ paths:
         - $ref: "#/components/parameters/first_seen_range"
         - $ref: "#/components/parameters/last_seen_days"
         - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/include_relevant_links"
       responses:
         "200":
           content:
@@ -1678,6 +1728,7 @@ paths:
         - $ref: "#/components/parameters/first_seen_range"
         - $ref: "#/components/parameters/last_seen_days"
         - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/include_relevant_links"
       responses:
         "200":
           content:
@@ -1902,6 +1953,7 @@ paths:
         - $ref: "#/components/parameters/first_seen_range"
         - $ref: "#/components/parameters/last_seen_days"
         - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/include_relevant_links"
       responses:
         "200":
           content:
@@ -2422,6 +2474,8 @@ paths:
           required: false
           schema:
             type: boolean
+        - $ref: "#/components/parameters/include_relevant_links"
+        - $ref: "#/components/parameters/expired"
       responses:
         "200":
           content:
@@ -3791,6 +3845,24 @@ components:
       required: false
       schema:
         type: boolean
+    expired:
+      description: Boolean falg to either fetch only the expired listings or active ones
+      in: query
+      name: expired
+      required: false
+      schema:
+        enum:
+          - "true"
+          - "false"
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: in
+        targetAlias: is_expired_listing
+        transformConstraints:
+          - transformer: boolToFlag
+            type: string
     exterior_color:
       description: Exterior color to match. Valid filter values are those that our
         Search facets API returns for unique exterior colors. You can pass in
@@ -4011,6 +4083,14 @@ components:
       description: To include non vin listings. Default is false
       in: query
       name: include_non_vin_listings
+      required: false
+      schema:
+        default: false
+        type: boolean
+    include_relevant_links:
+      description: To include_relevant_links. Default is true
+      in: query
+      name: include_relevant_links
       required: false
       schema:
         default: false

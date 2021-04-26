@@ -144,8 +144,6 @@ paths:
           in: query
           name: userId
           schema:
-            description: User ID of the user to be used to acknowledge the alarms.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -260,8 +258,6 @@ paths:
           in: query
           name: userId
           schema:
-            description: User ID of the user to be used to close the alarms.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -389,19 +385,12 @@ paths:
           in: query
           name: maxResults
           schema:
-            description: "Defines the limit of retrieved alert details per request. 1 to 100
-              are allowed per request.\r
-
-              \                Number of alerts could be less if
-              filtered but at least 1."
             format: int32
             type: integer
         - description: User ID of the user you want to get alerts for.
           in: query
           name: userId
           schema:
-            description: User ID of the user you want to get alerts for.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -497,8 +486,6 @@ paths:
           in: query
           name: userId
           schema:
-            description: User ID of the user for whom you want a report.
-            nullable: true
             type: string
       responses:
         "200":
@@ -682,8 +669,6 @@ paths:
           name: alertId
           required: true
           schema:
-            description: Id of the requested Alert.
-            nullable: true
             type: string
       responses:
         "200":
@@ -745,8 +730,6 @@ paths:
           name: alertId
           required: true
           schema:
-            description: Id to acknowledge an alert.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -836,8 +819,6 @@ paths:
           name: alertId
           required: true
           schema:
-            description: Id of the alert to annotate.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -915,8 +896,6 @@ paths:
           name: alertId
           required: true
           schema:
-            description: Id of the requested Alert.
-            nullable: true
             type: string
       responses:
         "200":
@@ -987,8 +966,6 @@ paths:
           name: alertId
           required: true
           schema:
-            description: Id of the requested Alert.
-            nullable: true
             type: string
       responses:
         "200":
@@ -1056,36 +1033,26 @@ paths:
           name: alertId
           required: true
           schema:
-            description: Id of the alert that contains the wanted attachment.
-            nullable: true
             type: string
         - description: Id of the attachment, that you want to retrieve.
           in: path
           name: attachmentId
           required: true
           schema:
-            description: Id of the attachment, that you want to retrieve.
-            nullable: true
             type: string
         - description: Optional parameter defining the wanted width of the picture that is
             retrieved.
           in: query
           name: width
           schema:
-            description: Optional parameter defining the wanted width of the picture that is
-              retrieved.
             format: int32
-            nullable: true
             type: integer
         - description: Optional parameter defining the wanted height of the picture that
             is retrieved.
           in: query
           name: height
           schema:
-            description: Optional parameter defining the wanted height of the picture that
-              is retrieved.
             format: int32
-            nullable: true
             type: integer
         - description: "Optional parameter defining whether it's wanted to scale the
             retrieved image. Default is set to\r
@@ -1095,10 +1062,6 @@ paths:
           name: scale
           schema:
             default: true
-            description: "Optional parameter defining whether it's wanted to scale the
-              retrieved image. Default is set to\r
-
-              true."
             type: boolean
       responses:
         "200":
@@ -1167,8 +1130,6 @@ paths:
           name: alertId
           required: true
           schema:
-            description: Id to acknowledge an alert.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -1258,8 +1219,6 @@ paths:
           name: alertId
           required: true
           schema:
-            description: Id of the requested Alert.
-            nullable: true
             type: string
       responses:
         "200":
@@ -1328,8 +1287,6 @@ paths:
           name: alertId
           required: true
           schema:
-            description: Id of the requested Alert.
-            nullable: true
             type: string
       responses:
         "200":
@@ -1391,7 +1348,6 @@ paths:
           name: alertId
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -1467,7 +1423,6 @@ paths:
           name: alertId
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -1613,8 +1568,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the categories belong to
-            nullable: true
             type: string
       responses:
         "200":
@@ -1726,8 +1679,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the category belongs to
-            nullable: true
             type: string
       requestBody:
         content:
@@ -1822,8 +1773,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the categories belongs to
-            nullable: true
             type: string
       responses:
         "200":
@@ -1910,16 +1859,12 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the category belongs to
-            nullable: true
             type: string
         - description: ID of the category to delete
           in: path
           name: categoryId
           required: true
           schema:
-            description: ID of the category to delete
-            nullable: true
             type: string
       responses:
         "200":
@@ -1991,16 +1936,12 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the category belongs to
-            nullable: true
             type: string
         - description: ID of the category to get
           in: path
           name: categoryId
           required: true
           schema:
-            description: ID of the category to get
-            nullable: true
             type: string
       responses:
         "200":
@@ -2114,14 +2055,11 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the category belongs to
-            nullable: true
             type: string
         - in: path
           name: categoryId
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -2217,16 +2155,12 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the category belongs to
-            nullable: true
             type: string
         - description: ID of the category to get
           in: path
           name: categoryId
           required: true
           schema:
-            description: ID of the category to get
-            nullable: true
             type: string
       responses:
         "200":
@@ -2311,16 +2245,12 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the category belongs to
-            nullable: true
             type: string
         - description: Category to get subscriptions for
           in: path
           name: categoryId
           required: true
           schema:
-            description: Category to get subscriptions for
-            nullable: true
             type: string
       responses:
         "200":
@@ -2400,16 +2330,12 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the category belongs to
-            nullable: true
             type: string
         - description: Category to be updated
           in: path
           name: categoryId
           required: true
           schema:
-            description: Category to be updated
-            nullable: true
             type: string
       requestBody:
         content:
@@ -2417,25 +2343,21 @@ paths:
             schema:
               items:
                 $ref: "#/components/schemas/CategorySubscriptionInfo"
-              nullable: true
               type: array
           application/json:
             schema:
               items:
                 $ref: "#/components/schemas/CategorySubscriptionInfo"
-              nullable: true
               type: array
           application/json-patch+json:
             schema:
               items:
                 $ref: "#/components/schemas/CategorySubscriptionInfo"
-              nullable: true
               type: array
           text/json:
             schema:
               items:
                 $ref: "#/components/schemas/CategorySubscriptionInfo"
-              nullable: true
               type: array
       responses:
         "200":
@@ -2510,11 +2432,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            description: "Defines the limit of retrieved alert details per request. 1 to 100
-              are allowed per request.\r
-
-              \                 Number of alerts could be less if
-              filtered but at least 1."
             format: int32
             type: integer
       requestBody:
@@ -2596,8 +2513,6 @@ paths:
           name: eventId
           required: true
           schema:
-            description: Id of event to get.
-            nullable: true
             type: string
       responses:
         "200":
@@ -2660,8 +2575,6 @@ paths:
           name: eventId
           required: true
           schema:
-            description: Event Id of the requested Alert.
-            nullable: true
             type: string
       responses:
         "200":
@@ -2964,7 +2877,6 @@ paths:
         - in: query
           name: teamId
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -3091,8 +3003,6 @@ paths:
           name: instanceId
           required: true
           schema:
-            description: Instance Id of script instance to be returned.
-            nullable: true
             type: string
       responses:
         "200":
@@ -3132,8 +3042,6 @@ paths:
           name: instanceId
           required: true
           schema:
-            description: Instance Id of script instance to be returned.
-            nullable: true
             type: string
       responses:
         "200":
@@ -3184,8 +3092,6 @@ paths:
           name: instanceId
           required: true
           schema:
-            description: InstanceId of the script to be updated.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -3264,8 +3170,6 @@ paths:
           name: instanceId
           required: true
           schema:
-            description: InstanceId of the script to be updated.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -3343,8 +3247,6 @@ paths:
           name: instanceId
           required: true
           schema:
-            description: Id of the instance to be disabled.
-            nullable: true
             type: string
       responses:
         "200":
@@ -3406,8 +3308,6 @@ paths:
           name: instanceId
           required: true
           schema:
-            description: Id of the instance to be enabled.
-            nullable: true
             type: string
       responses:
         "200":
@@ -3519,8 +3419,6 @@ paths:
           in: query
           name: language
           schema:
-            description: ""
-            nullable: true
             type: string
       responses:
         "200":
@@ -3577,13 +3475,10 @@ paths:
           name: scriptId
           required: true
           schema:
-            description: The Id of the script to be returned.
-            nullable: true
             type: string
         - in: query
           name: language
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -3705,8 +3600,6 @@ paths:
           name: subscriptionId
           required: true
           schema:
-            description: Id of the subscription that's to be retrieved.
-            nullable: true
             type: string
       responses:
         "200":
@@ -3780,8 +3673,6 @@ paths:
           name: subscriptionId
           required: true
           schema:
-            description: Id of the subscription that needs to be retrieved.
-            nullable: true
             type: string
       responses:
         "200":
@@ -3843,9 +3734,6 @@ paths:
           name: subscriptionId
           required: true
           schema:
-            description: Id of the subscription from which the features need to be
-              retrieved.
-            nullable: true
             type: string
       responses:
         "200":
@@ -3924,7 +3812,6 @@ paths:
           name: subscriptionId
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -3997,7 +3884,6 @@ paths:
           name: subscriptionId
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -4070,8 +3956,6 @@ paths:
           name: subscriptionId
           required: true
           schema:
-            description: ID of the subscription
-            nullable: true
             type: string
       requestBody:
         content:
@@ -4160,8 +4044,6 @@ paths:
           name: subscriptionId
           required: true
           schema:
-            description: ID of the subscription to get transactions for
-            nullable: true
             type: string
       responses:
         "200":
@@ -4241,8 +4123,6 @@ paths:
           name: subscriptionId
           required: true
           schema:
-            description: ID of the subscription to be updated
-            nullable: true
             type: string
       requestBody:
         content:
@@ -4330,7 +4210,6 @@ paths:
           name: subscriptionId
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -4398,8 +4277,6 @@ paths:
           name: subscriptionId
           required: true
           schema:
-            description: ID of the subscription
-            nullable: true
             type: string
       responses:
         "200":
@@ -4533,8 +4410,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team that should be retrieved.
-            nullable: true
             type: string
       responses:
         "200":
@@ -4608,8 +4483,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of team you want to download reports from.
-            nullable: true
             type: string
       responses:
         "200":
@@ -4689,16 +4562,12 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of team you want to get the duty report file infos for.
-            nullable: true
             type: string
         - description: File name of file you want to download.
           in: path
           name: fileName
           required: true
           schema:
-            description: File name of file you want to download.
-            nullable: true
             type: string
       responses:
         "200":
@@ -4775,8 +4644,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the settings should be retrieved for.
-            nullable: true
             type: string
       responses:
         "200":
@@ -4849,8 +4716,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the settings should be set for.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -4939,8 +4804,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of team you want to get the duty report file infos for.
-            nullable: true
             type: string
       responses:
         "200":
@@ -5020,16 +4883,12 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of team you want to download the duty report for.
-            nullable: true
             type: string
         - description: Filename of the csv to download.
           in: path
           name: fileName
           required: true
           schema:
-            description: Filename of the csv to download.
-            nullable: true
             type: string
       responses:
         "200":
@@ -5106,8 +4965,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the duty belongs to.
-            nullable: true
             type: string
         - in: query
           name: lastTwoDuties
@@ -5161,8 +5018,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the sources should be retrieved for.
-            nullable: true
             type: string
       responses:
         "200":
@@ -5242,8 +5097,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: Team ID of team you want to request.
-            nullable: true
             type: string
       responses:
         "200":
@@ -5315,8 +5168,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: Id of team the user should be invited to.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -5404,8 +5255,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: Team ID of team with invited user.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -5482,23 +5331,17 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the user should be deleted from
-            nullable: true
             type: string
         - description: ID of the user that should be deleted
           in: path
           name: userId
           required: true
           schema:
-            description: ID of the user that should be deleted
-            nullable: true
             type: string
         - description: User ID of user which will remove the other user.
           in: query
           name: requesterUserId
           schema:
-            description: User ID of user which will remove the other user.
-            nullable: true
             type: string
       responses:
         "200":
@@ -5579,16 +5422,12 @@ paths:
           name: teamId
           required: true
           schema:
-            description: Team the user you want to update belongs to at the moment.
-            nullable: true
             type: string
         - description: User ID of user you want to update.
           in: path
           name: userId
           required: true
           schema:
-            description: User ID of user you want to update.
-            nullable: true
             type: string
         - description: User ID of user which you want to change role with. This must be
             provided when using an api key. This user must have role
@@ -5597,11 +5436,6 @@ paths:
           in: query
           name: requesterUserId
           schema:
-            description: User ID of user which you want to change role with. This must be
-              provided when using an api key. This user must have role
-              administrator (for setting administrator role) or team
-              administrator (for setting  rights.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -5703,8 +5537,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: Team ID of team which should be updated.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -5792,25 +5624,20 @@ paths:
           name: teamId
           required: true
           schema:
-            description: Id of the team the schedules user belongs to
-            nullable: true
             type: string
         - in: query
           name: UserId
           schema:
-            nullable: true
             type: string
         - in: query
           name: MinDate
           schema:
             format: date-time
-            nullable: true
             type: string
         - in: query
           name: Limit
           schema:
             format: int32
-            nullable: true
             type: integer
       responses:
         "200":
@@ -5889,8 +5716,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: Id of the team the duty is to be assigned to.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -5991,8 +5816,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: Team ID you want to delete
-            nullable: true
             type: string
       requestBody:
         content:
@@ -6099,44 +5922,33 @@ paths:
           name: teamId
           required: true
           schema:
-            description: Team ID to set
-            nullable: true
             type: string
         - description: Override or cut existing schedules if set to true.
           in: query
           name: overrideExisting
           schema:
-            description: Override or cut existing schedules if set to true.
             type: boolean
       requestBody:
         content:
           application/*+json:
             schema:
-              description: List of schedules to save
               items:
                 $ref: "#/components/schemas/ScheduleInfo"
-              nullable: true
               type: array
           application/json:
             schema:
-              description: List of schedules to save
               items:
                 $ref: "#/components/schemas/ScheduleInfo"
-              nullable: true
               type: array
           application/json-patch+json:
             schema:
-              description: List of schedules to save
               items:
                 $ref: "#/components/schemas/ScheduleInfo"
-              nullable: true
               type: array
           text/json:
             schema:
-              description: List of schedules to save
               items:
                 $ref: "#/components/schemas/ScheduleInfo"
-              nullable: true
               type: array
         description: List of schedules to save
       responses:
@@ -6230,16 +6042,12 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the duty belongs to.
-            nullable: true
             type: string
         - description: ID of the duty to be deleted.
           in: path
           name: dutyId
           required: true
           schema:
-            description: ID of the duty to be deleted.
-            nullable: true
             type: string
       responses:
         "204":
@@ -6303,16 +6111,12 @@ paths:
           name: teamId
           required: true
           schema:
-            description: Id of the team the duty belongs to
-            nullable: true
             type: string
         - description: Id of the requested duty schedule.
           in: path
           name: scheduleId
           required: true
           schema:
-            description: Id of the requested duty schedule.
-            nullable: true
             type: string
       responses:
         "200":
@@ -6386,8 +6190,6 @@ paths:
           name: teamId
           required: true
           schema:
-            description: ID of the team the progress should be retrieved for.
-            nullable: true
             type: string
       responses:
         "200":
@@ -6523,13 +6325,6 @@ paths:
           name: userId
           required: true
           schema:
-            description: "Identifier of the user to get. Use 'Me' to get information about
-              the currently logged in user. This is not possible with an api
-              key.\r
-
-              Can also be an email address of a user in the team
-              or the unique id of an according user object.”"
-            nullable: true
             type: string
       responses:
         "200":
@@ -6582,8 +6377,6 @@ paths:
           name: userId
           required: true
           schema:
-            description: User ID of user whose password should be changed.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -6661,13 +6454,10 @@ paths:
           name: userId
           required: true
           schema:
-            description: ID of the user to check permissions for.
-            nullable: true
             type: string
         - in: query
           name: teamId
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -6750,13 +6540,6 @@ paths:
           name: userId
           required: true
           schema:
-            description: "Identifier of the user to get. Use 'Me' to get information about
-              the currently logged in user. This is not possible with an api
-              key.\r
-
-              Can also be an email address of a user in the team
-              or the unique id of an according user object.”"
-            nullable: true
             type: string
       responses:
         "200":
@@ -6808,7 +6591,6 @@ paths:
           name: userId
           required: true
           schema:
-            nullable: true
             type: string
         - in: query
           name: height
@@ -6878,8 +6660,6 @@ paths:
           name: userId
           required: true
           schema:
-            description: Id of the user.
-            nullable: true
             type: string
       responses:
         "200":
@@ -6948,8 +6728,6 @@ paths:
           name: userId
           required: true
           schema:
-            description: ID of user to update.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -7043,13 +6821,6 @@ paths:
           name: userId
           required: true
           schema:
-            description: "Identifier of the user to punch in. Use 'Me' to get information
-              about the currently logged in\r
-
-              user. This is not possible with an api key. Can also
-              be an email address of a user in the team or the unique id of an
-              according user object.”"
-            nullable: true
             type: string
       responses:
         "200":
@@ -7117,13 +6888,6 @@ paths:
           name: userId
           required: true
           schema:
-            description: "Identifier of the user to punch in. Use 'Me' to get information
-              about the currently logged in\r
-
-              user. This is not possible with an api key. Can also
-              be an email address of a user in the team or the unique id of an
-              according user object.”"
-            nullable: true
             type: string
       responses:
         "200":
@@ -7191,13 +6955,6 @@ paths:
           name: userId
           required: true
           schema:
-            description: "Identifier of the user to punch out. Use 'Me' to get information
-              about the currently logged in\r
-
-              user. This is not possible with an api key. Can also
-              be an email address of a user in the team or the unique id of an
-              according user object.”"
-            nullable: true
             type: string
       responses:
         "200":
@@ -7276,8 +7033,6 @@ paths:
           name: userId
           required: true
           schema:
-            description: ID of the user the progress should be retrieved for.
-            nullable: true
             type: string
       responses:
         "200":
@@ -7350,7 +7105,6 @@ paths:
         - in: query
           name: teamId
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -7468,8 +7222,6 @@ paths:
           name: webhookId
           required: true
           schema:
-            description: Id of the outbound webhook that will be deleted.
-            nullable: true
             type: string
       responses:
         "200":
@@ -7522,8 +7274,6 @@ paths:
           name: webhookId
           required: true
           schema:
-            description: Id of the outbound webhook to be retrieved.
-            nullable: true
             type: string
       responses:
         "200":
@@ -7586,8 +7336,6 @@ paths:
           name: webhookId
           required: true
           schema:
-            description: Id of the outbound webhook to be updated.
-            nullable: true
             type: string
       requestBody:
         content:
@@ -7665,8 +7413,6 @@ paths:
           name: webhookId
           required: true
           schema:
-            description: Webhook ID for webhook which should be disabled.
-            nullable: true
             type: string
       responses:
         "200":
@@ -7729,8 +7475,6 @@ paths:
           name: webhookId
           required: true
           schema:
-            description: Webhook ID for webhook which should be enabled.
-            nullable: true
             type: string
       responses:
         "200":

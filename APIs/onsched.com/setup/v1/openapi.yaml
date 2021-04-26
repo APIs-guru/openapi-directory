@@ -4801,6 +4801,14 @@ components:
         statusBefore:
           type: string
       type: object
+    AppointmentCustomerViewModel:
+      additionalProperties: false
+      properties:
+        appointmentId:
+          type: string
+        customerId:
+          type: string
+      type: object
     AppointmentListViewModel:
       additionalProperties: false
       properties:
@@ -4824,13 +4832,9 @@ components:
     AppointmentResourceViewModel:
       additionalProperties: false
       properties:
-        resourceGroupId:
-          type: string
-        resourceGroupName:
+        appointmentId:
           type: string
         resourceId:
-          type: string
-        resourceName:
           type: string
       type: object
     AppointmentViewModel:
@@ -4860,6 +4864,10 @@ components:
           type: string
         customerMessage:
           type: string
+        customers:
+          items:
+            $ref: "#/components/schemas/AppointmentCustomerViewModel"
+          type: array
         date:
           type: string
         dateInternational:
@@ -7610,6 +7618,12 @@ components:
           $ref: "#/components/schemas/ServiceFeesInputModel"
         locationId:
           type: string
+        maxCapacity:
+          format: int32
+          type: integer
+        maxGroupSize:
+          format: int32
+          type: integer
         mediaPageUrl:
           type: string
         name:
@@ -7758,6 +7772,14 @@ components:
           $ref: "#/components/schemas/ServiceFeesUpdateModel"
         locationId:
           type: string
+        maxCapacity:
+          format: int32
+          nullable: true
+          type: integer
+        maxGroupSize:
+          format: int32
+          nullable: true
+          type: integer
         mediaPageUrl:
           type: string
         name:

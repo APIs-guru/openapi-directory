@@ -1084,6 +1084,13 @@ components:
           example: 9AM-5PM
           type: string
       type: object
+    Meta:
+      description: JSON API-compliant object containing metadata about this response
+      properties:
+        band_version:
+          example: APR2021
+          type: string
+      type: object
     Nearby:
       description: JSON API-compliant object describing a nearby VA facility
       properties:
@@ -1122,6 +1129,8 @@ components:
           items:
             $ref: "#/components/schemas/Nearby"
           type: array
+        meta:
+          $ref: "#/components/schemas/Meta"
       required:
         - data
       type: object

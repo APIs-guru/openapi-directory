@@ -12276,6 +12276,10 @@ paths:
                   description: Do Bundles require password protection?
                   type: boolean
                   x-ms-summary: Do Bundles require password protection?
+                bundle_require_share_recipient:
+                  description: Do Bundles require recipients for sharing?
+                  type: boolean
+                  x-ms-summary: Do Bundles require recipients for sharing?
                 color2_left:
                   description: Page link and button color
                   type: string
@@ -17162,6 +17166,7 @@ components:
                   - dropbox
                   - google_drive
                   - azure
+                  - sharepoint
                 example: s3
                 type: string
                 x-ms-summary: Remote server type.
@@ -17663,6 +17668,7 @@ components:
             - dropbox
             - google_drive
             - azure
+            - sharepoint
           example: ""
           type: string
         screenshot_list_urls:
@@ -19938,6 +19944,7 @@ components:
             - dropbox
             - google_drive
             - azure
+            - sharepoint
           example: s3
           type: string
         ssl:
@@ -19997,6 +20004,9 @@ components:
 
 
         OneDrive follow the `auth_setup_link` and login with Microsoft.
+
+
+        Sharepoint follow the `auth_setup_link` and login with Microsoft.
 
 
         Box follow the `auth_setup_link` and login with Box.
@@ -20203,6 +20213,10 @@ components:
           type: integer
         bundle_password_required:
           description: Do Bundles require password protection?
+          example: true
+          type: boolean
+        bundle_require_share_recipient:
+          description: Do Bundles require recipients for sharing?
           example: true
           type: boolean
         color2_left:
@@ -20773,6 +20787,11 @@ components:
           description: Auto-provisioned users get WebDAV permission?
           example: true
           type: boolean
+        provision_email_signup_groups:
+          description: Comma-separated list of group names whose members will be created
+            with email_signup authentication.
+          example: Employees
+          type: string
         provision_ftp_permission:
           description: Auto-provisioned users get FTP permission?
           example: true
@@ -22512,6 +22531,7 @@ x-regions:
 x-site_attribute_requirements:
   allowed_countries: feature_bundle_power
   bundle_password_required: feature_bundle_power
+  bundle_require_share_recipient: feature_bundle_power
   custom_namespace: feature_bundle_power
   disallowed_countries: feature_bundle_power
   domain: feature_bundle_power

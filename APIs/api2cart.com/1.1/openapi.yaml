@@ -502,6 +502,12 @@ paths:
           schema:
             default: production
             type: string
+        - description: Walmart WM_CONSUMER.CHANNEL.TYPE header
+          in: query
+          name: walmart_channel_type
+          required: false
+          schema:
+            type: string
         - description: Squarespace API Key
           in: query
           name: squarespace_api_key
@@ -2832,6 +2838,12 @@ paths:
           required: false
           schema:
             default: production
+            type: string
+        - description: Walmart WM_CONSUMER.CHANNEL.TYPE header
+          in: query
+          name: walmart_channel_type
+          required: false
+          schema:
             type: string
         - description: LightSpeed api key
           in: query
@@ -7649,7 +7661,13 @@ paths:
           required: false
           schema:
             type: string
-        - description: Defines option values that has to be added in Magento
+        - description: Defines default option value that has to be added
+          in: query
+          name: default_option_value
+          required: false
+          schema:
+            type: string
+        - description: Defines option values that has to be added
           in: query
           name: option_values
           required: false
@@ -7681,6 +7699,13 @@ paths:
           required: false
           schema:
             default: false
+            type: boolean
+        - description: Is cache clear required
+          in: query
+          name: clear_cache
+          required: false
+          schema:
+            default: true
             type: boolean
       responses:
         "200":
@@ -7723,6 +7748,33 @@ paths:
           required: true
           schema:
             type: integer
+        - description: Defines if the option is required
+          in: query
+          name: required
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: Sort number in the list
+          in: query
+          name: sort_order
+          required: false
+          schema:
+            default: 0
+            type: integer
+        - description: Defines option values that has to be assigned
+          in: query
+          name: option_values
+          required: false
+          schema:
+            type: string
+        - description: Is cache clear required
+          in: query
+          name: clear_cache
+          required: false
+          schema:
+            default: true
+            type: boolean
       responses:
         "200":
           content:
@@ -7827,6 +7879,12 @@ paths:
       description: Add product option item from option.
       operationId: ProductOptionValueAdd
       parameters:
+        - description: Defines product id where the option value should be added
+          in: query
+          name: product_id
+          required: true
+          schema:
+            type: string
         - description: Defines option id where the value has to be added
           in: query
           name: option_id
@@ -7846,6 +7904,13 @@ paths:
           schema:
             default: 0
             type: integer
+        - description: Is cache clear required
+          in: query
+          name: clear_cache
+          required: false
+          schema:
+            default: true
+            type: boolean
       responses:
         "200":
           content:
@@ -7885,6 +7950,13 @@ paths:
           required: true
           schema:
             type: integer
+        - description: Is cache clear required
+          in: query
+          name: clear_cache
+          required: false
+          schema:
+            default: true
+            type: boolean
       responses:
         "200":
           content:
@@ -7912,12 +7984,30 @@ paths:
       description: Update product option item from option.
       operationId: ProductOptionValueUpdate
       parameters:
+        - description: Defines product id where the option value should be updated
+          in: query
+          name: product_id
+          required: true
+          schema:
+            type: string
+        - description: Defines option id where the value has to be updated
+          in: query
+          name: option_id
+          required: true
+          schema:
+            type: integer
         - description: Defines value id that has to be assigned
           in: query
           name: option_value_id
           required: true
           schema:
             type: integer
+        - description: Defines option value that has to be added
+          in: query
+          name: option_value
+          required: true
+          schema:
+            type: string
         - description: Defines new product option price
           in: query
           name: price
@@ -7930,6 +8020,13 @@ paths:
           required: false
           schema:
             type: number
+        - description: Is cache clear required
+          in: query
+          name: clear_cache
+          required: false
+          schema:
+            default: true
+            type: boolean
       responses:
         "200":
           content:
@@ -9963,6 +10060,9 @@ components:
           type: string
         volusion_password:
           description: Volusion API Password
+          type: string
+        walmart_channel_type:
+          description: Walmart WM_CONSUMER.CHANNEL.TYPE header
           type: string
         walmart_client_id:
           description: Walmart client ID

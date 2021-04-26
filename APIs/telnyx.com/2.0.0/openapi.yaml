@@ -108,6 +108,10 @@ tags:
     name: Recordings Commands
   - description: Wireless reporting operations
     name: Reporting
+  - description: Rooms operations.
+    name: Rooms
+  - description: Rooms Access Tokens operations.
+    name: Rooms Access Tokens
   - description: SIM Card Groups operations
     name: SIM Card Groups
   - description: SIM Cards operations
@@ -3427,6 +3431,29 @@ paths:
       tags:
         - Programmable Fax Commands
       x-latency-category: responsive
+  "/faxes/{id}/actions/refresh":
+    post:
+      description: This endpoint refreshes the media_url expiration for inbound faxes
+      operationId: RefreshFax
+      parameters:
+        - description: The unique identifier of a fax.
+          in: path
+          name: id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/RefreshFaxResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Refresh a fax
+      tags:
+        - Programmable Fax Commands
+      x-latency-category: responsive
   /fqdn_connections:
     get:
       description: Returns a list of your FQDN connections.
@@ -6622,6 +6649,42 @@ paths:
       parameters:
         - $ref: "#/components/parameters/PageNumber"
         - $ref: "#/components/parameters/PageSize"
+        - description: The name of the Private Wireless Gateway.
+          example: my private gateway
+          in: query
+          name: filter[name]
+          required: false
+          schema:
+            type: string
+        - description: The IP address range of the Private Wireless Gateway.
+          example: 192.168.0.0/24
+          in: query
+          name: filter[ip_range]
+          required: false
+          schema:
+            type: string
+        - description: The name of the region where the Private Wireless Gateway is
+            deployed.
+          example: ashburn-va
+          in: query
+          name: filter[region_code]
+          required: false
+          schema:
+            type: string
+        - description: Private Wireless Gateway resource creation date.
+          example: 2018-02-02T22:25:27.521Z
+          in: query
+          name: filter[created_at]
+          required: false
+          schema:
+            type: string
+        - description: When the Private Wireless Gateway was last updated.
+          example: 2018-02-02T22:25:27.521Z
+          in: query
+          name: filter[updated_at]
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           $ref: "#/components/responses/GetAllPrivateWirelessGatewaysResponse"
@@ -6635,9 +6698,25 @@ paths:
       description: Asynchronously create a Private Wireless Gateway for SIM cards for
         a previously created network.
       operationId: createPrivateWirelessGateway
-      parameters:
-        - $ref: "#/components/parameters/NetworkId"
-        - $ref: "#/components/parameters/NetworkName"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  description: The private wireless gateway name.
+                  example: My private wireless gateway
+                  type: string
+                network_id:
+                  description: The identification of the related network resource.
+                  example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+                  format: uuid
+                  type: string
+              required:
+                - network_id
+                - name
+              type: object
+        required: true
       responses:
         "202":
           $ref: "#/components/responses/CreatePrivateWirelessGatewayResponse"
@@ -7202,6 +7281,206 @@ paths:
       tags:
         - MDR Detail Reports
       x-latency-category: interactive
+  /rooms:
+    get:
+      description: ""
+      operationId: ListRooms
+      parameters:
+        - description: ISO 8601 date for filtering rooms created on that date.
+          in: query
+          name: filter[date_created_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering rooms created after that date.
+          in: query
+          name: filter[date_created_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering rooms created before that date.
+          in: query
+          name: filter[date_created_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering rooms updated on that date.
+          in: query
+          name: filter[date_updated_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering rooms updated after that date.
+          in: query
+          name: filter[date_updated_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering rooms updated before that date.
+          in: query
+          name: filter[date_updated_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: Unique_name for filtering rooms.
+          in: query
+          name: filter[unique_name]
+          schema:
+            example: my_video_room
+            type: string
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/PageNumber"
+      responses:
+        "200":
+          $ref: "#/components/responses/ListRoomsResponse"
+      summary: View a list of rooms.
+      tags:
+        - Rooms
+      x-endpoint-cost: medium
+      x-latency-category: responsive
+    post:
+      description: Synchronously create a Room.
+      operationId: CreateRoom
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRoomRequest"
+        description: Parameters that can be defined during room creation.
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateRoomResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntity"
+      summary: Create a room
+      tags:
+        - Rooms
+      x-endpoint-cost: medium
+      x-latency-category: responsive
+  "/rooms/{room_id}":
+    delete:
+      description: Synchronously delete a Room. Participants from that room will be
+        kicked out, they won't be able to join that room anymore, and you won't
+        be charged anymore for that room.
+      operationId: DeleteRoom
+      parameters:
+        - description: The unique identifier of a room.
+          in: query
+          name: id
+          required: true
+          schema:
+            example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+            format: uuid
+            type: string
+        - in: path
+          name: room_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+      summary: Delete a room
+      tags:
+        - Rooms
+      x-endpoint-cost: medium
+      x-latency-category: responsive
+    get:
+      operationId: ViewRoom
+      parameters:
+        - description: The unique identifier of a room.
+          in: path
+          name: room_id
+          required: true
+          schema:
+            example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+            format: uuid
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/GetRoomResponse"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+      summary: View a room
+      tags:
+        - Rooms
+      x-endpoint-cost: light
+      x-latency-category: responsive
+  "/rooms/{room_id}/actions/create_access_token":
+    post:
+      description: Synchronously create an Access Token to join a Room. Access Token
+        is necessary to join a Telnyx Room. Access Token will expire after
+        `ttl_secs`, a Refresh Token is also provided to refresh an Access Token,
+        the Refresh Token expires after `refresh_token_ttl_secs`.
+      operationId: CreateRoomAccessToken
+      parameters:
+        - description: The unique identifier of a room.
+          in: path
+          name: room_id
+          required: true
+          schema:
+            example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRoomAccessTokenRequest"
+        description: Parameters that can be defined during Room Access Token creation.
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateRoomAccessTokenResponse"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      summary: Create Access Token to join a room
+      tags:
+        - Rooms Access Tokens
+      x-endpoint-cost: medium
+      x-latency-category: responsive
+  "/rooms/{room_id}/actions/refresh_access_token":
+    post:
+      description: Synchronously refresh an Access Token to join a Room. Access Token
+        is necessary to join a Telnyx Room. Access Token will expire after
+        `ttl_secs`.
+      operationId: RefreshRoomAccessToken
+      parameters:
+        - description: The unique identifier of a room.
+          in: path
+          name: room_id
+          required: true
+          schema:
+            example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefreshRoomAccessTokenRequest"
+        description: Parameters that can be defined during Room Access Token refresh.
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/RefreshRoomAccessTokenResponse"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      security: []
+      summary: Refresh Access Token to join a room
+      tags:
+        - Rooms Access Tokens
+      x-endpoint-cost: light
+      x-latency-category: responsive
   /short_codes:
     get:
       operationId: listShortCodes
@@ -7501,6 +7780,28 @@ paths:
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Request a SIM card enable
+      tags:
+        - SIM Cards
+      x-latency-category: background
+  "/sim_cards/{id}/actions/set_standby":
+    post:
+      description: >
+        The SIM card will be able to connect to the network once the
+        process to set it to standby has been completed, thus making it possible
+        to consume data.<br/>
+
+        To set a SIM card to standby, it must be associated with SIM card group.<br/>
+
+        Transitioning to the standby state may take a period of time. Until the transition is completed, the SIM card status will be <code>setting_standby</code>.
+      operationId: SimCardSetStandby
+      parameters:
+        - $ref: "#/components/parameters/ResourceId"
+      responses:
+        "202":
+          $ref: "#/components/responses/SimpleSimCardResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Request setting a SIM card to standby
       tags:
         - SIM Cards
       x-latency-category: background
@@ -9002,23 +9303,6 @@ components:
       schema:
         example: office-profile
         type: string
-    NetworkId:
-      description: The identification of the related network resource.
-      in: query
-      name: network_id
-      required: true
-      schema:
-        example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
-        format: uuid
-        type: string
-    NetworkName:
-      description: The private wireless gateway name.
-      in: query
-      name: name
-      required: true
-      schema:
-        example: My private wireless gateway
-        type: string
     NotificationChannelId:
       description: Filter by the id of a notification channel
       in: query
@@ -9430,6 +9714,48 @@ components:
                 $ref: "#/components/schemas/PrivateWirelessGateway"
             type: object
       description: Successful response
+    CreateRoomAccessTokenResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example:
+                  access_token: eyJhbGciOiJFZDI1NTE5IiwidHlwIjoiSldUIn0.eyJhdWQiOiJ0ZWxueXhfYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjE5MDk0Mjk1LCJncmFudHMiOlt7ImFjdGlvbnMiOlsiam9pbiJdLCJyZXNvdXJjZXMiOlsidGVsbnl4OnZpZGVvOnJvb21zOjllMmEwY2JlLWNlNjYtNDExZS1hMWFjLTQ2OGYwYjEwM2M5YSJdLCJzdWJqZWN0cyI6WyJ0ZWxueXg6dXNlcnM6NzgyYjJjYmUtODQ2Ni00ZTNmLWE0ZDMtOTc4MWViNTc3ZTUwIl19XSwiZ3JhbnRzX3ZlcnNpb24iOiIxLjAuMCIsImlhdCI6MTYxOTA5MzY5NSwiaXNzIjoidGVsbnl4X2FjY2Vzc190b2tlbiIsImp0aSI6IjllNjIyOTA2LTc1ZTctNDBiNi1iOTAwLTc1NGIxZjNlZDMyZiIsIm5iZiI6MTYxOTA5MzY5NCwic3ViIjoibnVsbCIsInR5cCI6ImFjY2VzcyJ9.1JGK9PyHkTtoP_iMu-8TzXH_fhmnsDtZZOAJLDzLW6DDtAb80wZ93l1VH5yNx5tFqwIFG0t48dRiBKWlW-nzDA
+                  access_token_expires_at: 2021-04-22T12:24:55Z
+                  refresh_token: eyJhbGciOiJFZDI1NTE5IiwidHlwIjoiSldUIn0.eyJhdWQiOiJ0ZWxueXhfYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjE5MDkzNzA1LCJncmFudHMiOlt7ImFjdGlvbnMiOlsiam9pbiJdLCJyZXNvdXJjZXMiOlsidGVsbnl4OnZpZGVvOnJvb21zOjllMmEwY2JlLWNlNjYtNDExZS1hMWFjLTQ2OGYwYjEwM2M5YSJdLCJzdWJqZWN0cyI6WyJ0ZWxueXg6dXNlcnM6NzgyYjJjYmUtODQ2Ni00ZTNmLWE0ZDMtOTc4MWViNTc3ZTUwIl19XSwiZ3JhbnRzX3ZlcnNpb24iOiIxLjAuMCIsImlhdCI6MTYxOTA5MzY5NSwiaXNzIjoidGVsbnl4X2FjY2Vzc190b2tlbiIsImp0aSI6ImQ3OWJlMzhjLWFkNTQtNGQ5ZC1hODc4LWExNjVjNTk0MGQwNyIsIm5iZiI6MTYxOTA5MzY5NCwic3ViIjoibnVsbCIsInR5cCI6InJlZnJlc2gifQ.FHsp7KlVXn1E5tTUiKZzmQ4of39gi57AakeQeqI0oAa8hzjFMVb0RGj-mxWTvHVen4GpgsUW_epqqaxK16viCA
+                  refresh_token_expires_at: 2021-04-22T12:15:05Z
+                properties:
+                  access_token:
+                    example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0ZWxueXhfdGVsZXBob255IiwiZXhwIjoxNTkwMDEwMTQzLCJpYXQiOjE1ODc1OTA5NDMsImlzcyI6InRlbG55eF90ZWxlcGhvbnkiLCJqdGkiOiJiOGM3NDgzNy1kODllLTRhNjUtOWNmMi0zNGM3YTZmYTYwYzgiLCJuYmYiOjE1ODc1OTA5NDIsInN1YiI6IjVjN2FjN2QwLWRiNjUtNGYxMS05OGUxLWVlYzBkMWQ1YzZhZSIsInRlbF90b2tlbiI6InJqX1pra1pVT1pNeFpPZk9tTHBFVUIzc2lVN3U2UmpaRmVNOXMtZ2JfeENSNTZXRktGQUppTXlGMlQ2Q0JSbWxoX1N5MGlfbGZ5VDlBSThzRWlmOE1USUlzenl6U2xfYURuRzQ4YU81MHlhSEd1UlNZYlViU1ltOVdJaVEwZz09IiwidHlwIjoiYWNjZXNzIn0.gNEwzTow5MLLPLQENytca7pUN79PmPj6FyqZWW06ZeEmesxYpwKh0xRtA0TzLh6CDYIRHrI8seofOO0YFGDhpQ
+                    format: jwt
+                    type: string
+                  access_token_expires_at:
+                    description: ISO 8601 timestamp when the access token expires.
+                    example: 2021-03-26T17:51:59Z
+                    format: datetime
+                    type: string
+                  refresh_token:
+                    example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0ZWxueXhfdGVsZXBob255IiwiZXhwIjoxNTkwMDEwMTQzLCJpYXQiOjE1ODc1OTA5NDMsImlzcyI6InRlbG55eF90ZWxlcGhvbnkiLCJqdGkiOiJiOGM3NDgzNy1kODllLTRhNjUtOWNmMi0zNGM3YTZmYTYwYzgiLCJuYmYiOjE1ODc1OTA5NDIsInN1YiI6IjVjN2FjN2QwLWRiNjUtNGYxMS05OGUxLWVlYzBkMWQ1YzZhZSIsInRlbF90b2tlbiI6InJqX1pra1pVT1pNeFpPZk9tTHBFVUIzc2lVN3U2UmpaRmVNOXMtZ2JfeENSNTZXRktGQUppTXlGMlQ2Q0JSbWxoX1N5MGlfbGZ5VDlBSThzRWlmOE1USUlzenl6U2xfYURuRzQ4YU81MHlhSEd1UlNZYlViU1ltOVdJaVEwZz09IiwidHlwIjoiYWNjZXNzIn0.gNEwzTow5MLLPLQENytca7pUN79PmPj6FyqZWW06ZeEmesxYpwKh0xRtA0TzLh6CDYIRHrI8seofOO0YFGDhpQ
+                    format: jwt
+                    type: string
+                  refresh_token_expires_at:
+                    description: ISO 8601 timestamp when the refresh token expires.
+                    example: 2021-03-26T17:51:59Z
+                    format: datetime
+                    type: string
+                type: object
+            type: object
+      description: Create room access token response.
+    CreateRoomResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/Room"
+            type: object
+      description: Create room response.
     CreateSimCardGroupResponse:
       content:
         application/json:
@@ -9580,6 +9906,12 @@ components:
                 $ref: "#/components/schemas/FaxApplication"
             type: object
       description: Successful response
+    Forbidden:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+      description: Forbidden
     FqdnConnectionResponse:
       content:
         application/json:
@@ -9702,6 +10034,15 @@ components:
                 $ref: "#/components/schemas/PrivateWirelessGateway"
             type: object
       description: Successful response
+    GetRoomResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/Room"
+            type: object
+      description: Get room response.
     GetSimCardGroupResponse:
       content:
         application/json:
@@ -10310,6 +10651,19 @@ components:
             title: List Recordings Response
             type: object
       description: Successful response with a list of recordings.
+    ListRoomsResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/Room"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            type: object
+      description: List rooms response.
     ListShortCodesResponse:
       content:
         application/json:
@@ -10577,6 +10931,41 @@ components:
             title: Get Recording Response
             type: object
       description: Successful response with details about a recording.
+    RefreshFaxResponse:
+      content:
+        application/json:
+          schema:
+            example:
+              data:
+                result: ok
+            properties:
+              result:
+                example: ok
+                type: string
+            type: object
+      description: Refresh fax response
+    RefreshRoomAccessTokenResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example:
+                  access_token: eyJhbGciOiJFZDI1NTE5IiwidHlwIjoiSldUIn0.eyJhdWQiOiJ0ZWxueXhfYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjE5MDk0Mjk1LCJncmFudHMiOlt7ImFjdGlvbnMiOlsiam9pbiJdLCJyZXNvdXJjZXMiOlsidGVsbnl4OnZpZGVvOnJvb21zOjllMmEwY2JlLWNlNjYtNDExZS1hMWFjLTQ2OGYwYjEwM2M5YSJdLCJzdWJqZWN0cyI6WyJ0ZWxueXg6dXNlcnM6NzgyYjJjYmUtODQ2Ni00ZTNmLWE0ZDMtOTc4MWViNTc3ZTUwIl19XSwiZ3JhbnRzX3ZlcnNpb24iOiIxLjAuMCIsImlhdCI6MTYxOTA5MzY5NSwiaXNzIjoidGVsbnl4X2FjY2Vzc190b2tlbiIsImp0aSI6IjllNjIyOTA2LTc1ZTctNDBiNi1iOTAwLTc1NGIxZjNlZDMyZiIsIm5iZiI6MTYxOTA5MzY5NCwic3ViIjoibnVsbCIsInR5cCI6ImFjY2VzcyJ9.1JGK9PyHkTtoP_iMu-8TzXH_fhmnsDtZZOAJLDzLW6DDtAb80wZ93l1VH5yNx5tFqwIFG0t48dRiBKWlW-nzDA
+                  access_token_expires_at: 2021-04-22T12:24:55Z
+                properties:
+                  access_token:
+                    example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0ZWxueXhfdGVsZXBob255IiwiZXhwIjoxNTkwMDEwMTQzLCJpYXQiOjE1ODc1OTA5NDMsImlzcyI6InRlbG55eF90ZWxlcGhvbnkiLCJqdGkiOiJiOGM3NDgzNy1kODllLTRhNjUtOWNmMi0zNGM3YTZmYTYwYzgiLCJuYmYiOjE1ODc1OTA5NDIsInN1YiI6IjVjN2FjN2QwLWRiNjUtNGYxMS05OGUxLWVlYzBkMWQ1YzZhZSIsInRlbF90b2tlbiI6InJqX1pra1pVT1pNeFpPZk9tTHBFVUIzc2lVN3U2UmpaRmVNOXMtZ2JfeENSNTZXRktGQUppTXlGMlQ2Q0JSbWxoX1N5MGlfbGZ5VDlBSThzRWlmOE1USUlzenl6U2xfYURuRzQ4YU81MHlhSEd1UlNZYlViU1ltOVdJaVEwZz09IiwidHlwIjoiYWNjZXNzIn0.gNEwzTow5MLLPLQENytca7pUN79PmPj6FyqZWW06ZeEmesxYpwKh0xRtA0TzLh6CDYIRHrI8seofOO0YFGDhpQ
+                    format: jwt
+                    type: string
+                  access_token_expires_at:
+                    description: ISO 8601 timestamp when the access token expires.
+                    example: 2021-03-26T17:51:59Z
+                    format: datetime
+                    type: string
+                type: object
+            type: object
+      description: Refresh room access token response.
     RegisterSimCardsResponse:
       content:
         application/json:
@@ -16605,6 +16994,42 @@ components:
         - phone_numbers
       title: CreatePortingOrder
       type: object
+    CreateRoomAccessTokenRequest:
+      properties:
+        refresh_token_ttl_secs:
+          default: 3600
+          description: The time to live in seconds of the Refresh Token, after that time
+            the Refresh Token is invalid and can't be used to refresh Access
+            Token.
+          example: 3600
+          maximum: 86400
+          minimum: 60
+          type: integer
+        ttl_secs:
+          default: 600
+          description: The time to live in seconds of the Access Token, after that time
+            the Access Token is invalid and can't be used to join a Room.
+          example: 600
+          maximum: 3600
+          minimum: 10
+          type: integer
+      type: object
+    CreateRoomRequest:
+      properties:
+        max_participants:
+          default: 10
+          description: The maximum amount of participants allowed in a room. If new
+            participants try to join after that limit is reached, their request
+            will be rejected.
+          example: 10
+          maximum: 50
+          minimum: 2
+          type: integer
+        unique_name:
+          description: The unique (within the Telnyx account scope) name of the room.
+          example: My room
+          type: string
+      type: object
     CreateShortCodeMessageRequest:
       example:
         from: "+18445550001"
@@ -17728,7 +18153,7 @@ components:
           type: boolean
         stored_media_url:
           description: If store_media was set to true, this is a link to temporary
-            location. Link expires after 2h.
+            location. Link expires after 7 days.
           type: boolean
         to:
           description: The phone number, in E.164 format, the fax will be sent to or SIP URI
@@ -23774,6 +24199,23 @@ components:
         - sip_address
       title: Refer request
       type: object
+    RefreshRoomAccessTokenRequest:
+      properties:
+        refresh_token:
+          example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0ZWxueXhfdGVsZXBob255IiwiZXhwIjoxNTkwMDEwMTQzLCJpYXQiOjE1ODc1OTA5NDMsImlzcyI6InRlbG55eF90ZWxlcGhvbnkiLCJqdGkiOiJiOGM3NDgzNy1kODllLTRhNjUtOWNmMi0zNGM3YTZmYTYwYzgiLCJuYmYiOjE1ODc1OTA5NDIsInN1YiI6IjVjN2FjN2QwLWRiNjUtNGYxMS05OGUxLWVlYzBkMWQ1YzZhZSIsInRlbF90b2tlbiI6InJqX1pra1pVT1pNeFpPZk9tTHBFVUIzc2lVN3U2UmpaRmVNOXMtZ2JfeENSNTZXRktGQUppTXlGMlQ2Q0JSbWxoX1N5MGlfbGZ5VDlBSThzRWlmOE1USUlzenl6U2xfYURuRzQ4YU81MHlhSEd1UlNZYlViU1ltOVdJaVEwZz09IiwidHlwIjoiYWNjZXNzIn0.gNEwzTow5MLLPLQENytca7pUN79PmPj6FyqZWW06ZeEmesxYpwKh0xRtA0TzLh6CDYIRHrI8seofOO0YFGDhpQ
+          format: jwt
+          type: string
+        ttl_secs:
+          default: 600
+          description: The time to live in seconds of the Access Token, after that time
+            the Access Token is invalid and can't be used to join a Room.
+          example: 600
+          maximum: 3600
+          minimum: 10
+          type: integer
+      required:
+        - refresh_token
+      type: object
     RegionInformation:
       example:
         region_name: US
@@ -23992,6 +24434,38 @@ components:
       required:
         - data
       title: RetrieveVerificationResponse
+      type: object
+    Room:
+      example:
+        created_at: 2021-04-16T09:46:20.954863Z
+        id: 7b61621f-62e0-4aad-ab11-9fd19e272e73
+        max_participants: 50
+        unique_name: My Room
+        updated_at: 2021-04-16T10:24:55.962200Z
+      properties:
+        created_at:
+          description: ISO 8601 timestamp when the room was created.
+          example: 2021-03-26T17:51:59.588408Z
+          format: datetime
+          type: string
+        id:
+          description: Identifies the room.
+          example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+          format: uuid
+          type: string
+        max_participants:
+          description: Maximum participants allowed in the room.
+          example: 50
+          type: integer
+        unique_name:
+          description: The unique (within the Telnyx account scope) name of the room.
+          example: My room
+          type: string
+        updated_at:
+          description: ISO 8601 timestamp when the room was updated.
+          example: 2021-03-26T17:51:59.588408Z
+          format: datetime
+          type: string
       type: object
     SIMCard:
       properties:

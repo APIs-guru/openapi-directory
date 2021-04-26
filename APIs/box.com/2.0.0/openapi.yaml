@@ -21544,25 +21544,23 @@ components:
               allOf:
                 - description: >-
                     The display name of the user that uploaded the file. In most cases
+                    this is the
 
-                    this is the name of the logged in user at the time of upload.
-
-
-                    If this file was uploaded by a logged out user and an email address
-
-                    was provided on upload, then this field will return that email address.
+                    name of the user logged in at the time of the upload.
 
 
-                    If this file was uploaded using a **File Request form** then this field
+                    If the file was uploaded using a File Request form that requires the user to
 
-                    will be set to return a value of `File Request`. No email address will
+                    provide an email address, this field is populated with that email address. If
 
-                    be added.
+                    an email address was not required in the File Request form, this field is set
+
+                    to return a value of `File Request`.
 
 
                     In all other anonymous cases where no email was provided this field
 
-                    will default to a value of "Someone".
+                    will default to a value of `Someone`.
                   example: Ellis Wiggins
                   nullable: false
                   title: Uploader display name
@@ -21986,25 +21984,23 @@ components:
               allOf:
                 - description: >-
                     The display name of the user that uploaded the file. In most cases
+                    this is the
 
-                    this is the name of the logged in user at the time of upload.
-
-
-                    If this file was uploaded by a logged out user and an email address
-
-                    was provided on upload, then this field will return that email address.
+                    name of the user logged in at the time of the upload.
 
 
-                    If this file was uploaded using a **File Request form** then this field
+                    If the file was uploaded using a File Request form that requires the user to
 
-                    will be set to return a value of `File Request`. No email address will
+                    provide an email address, this field is populated with that email address. If
 
-                    be added.
+                    an email address was not required in the File Request form, this field is set
+
+                    to return a value of `File Request`.
 
 
                     In all other anonymous cases where no email was provided this field
 
-                    will default to a value of "Someone".
+                    will default to a value of `Someone`.
                   example: Ellis Wiggins
                   nullable: false
                   title: Uploader display name

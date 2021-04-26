@@ -171,128 +171,141 @@ paths:
       tags:
         - Appointments
     post:
-      description: "This end point creates a new appointment in an Initial \"IN\"
-        status. The exception is if completeBooking parameter set.<br /><br />\r
+      description: "<p>This end point creates a new appointment in an Initial \"IN\"
+        status. The exception is if completeBooking parameter set.</p>\r
 
-        \r
+        <br />\r
 
-        If you supply a valid customerId in the body, then the POST will
-        create either a booking or reservation using the customer data.<br /><br
-        />\r
+        <p>If you supply a valid customerId in the body, then the POST
+        will create either a booking or reservation using the customer
+        data.</p>\r
 
-        \r
+        <br />\r
 
-        A valid serviceId is required. Use GET consumer/v1/services to
-        retrieve a list of your services.<br /><br />\r
+        <p> A valid serviceId is required. Use GET consumer/v1/services
+        to retrieve a list of your services.</p>\r
 
-        \r
+        <br />\r
 
-        A valid resourceId is required if your calendar is a resource
-        based calendar and you are booking single resource appointments. <br
-        /><br />\r
+        <p> A valid resourceId is required if your calendar is a
+        resource based calendar and you are booking single resource
+        appointments. </p>\r
 
-        \r
+        <br />\r
 
-        Use consumer/v1/resources to retrieve a list of your resources
-        or use a resourceId returned from the /availability endpoints. <br /><br
-        />\r
+        <p> Use consumer/v1/resources to retrieve a list of your
+        resources or use a resourceId returned from the /availability endpoints.
+        </p>\r
 
-        \r
+        <br />\r
 
-        The resourceIds parameter is required for multi-resource
-        appointments. Pass in comma separated valid resourceIds.<br /><br />\r
+        <p> The resourceIds parameter is required for multi-resource
+        appointments. Pass in comma separated valid resourceIds. This is beta
+        until we update the notifications.</p>\r
 
-        \r
+        <br />\r
 
-        The locationId is optional. If the locationId is not passed, the
-        system will default to the primary company location. <br /><br />\r
+        <br />\r
 
-        \r
+        <p> The customerIds parameter is required for multi-customer
+        appointments. Pass in comma separated valid customerIds. This is beta
+        until we update the notifications.</p>\r
 
-        ServiceId provided must be valid for the location being
-        searched. A valid serviceId is one that is scoped to\r
+        <br />\r
 
-        \r
+        <br />\r
 
-        Primary Company Location or is associated with that business
-        LocationId<br /><br />\r
+        <p> The locationId is optional. If the locationId is not passed,
+        the system will default to the primary company location. </p>\r
 
-        \r
+        <br />\r
 
-        ResourceIds will be validated on the location being used.
-        ResourceIds are only valid at the location on which they are defined.<br
-        /><br />\r
+        <br />\r
 
-        \r
+        <p> ServiceId provided must be valid for the location being
+        searched. A valid serviceId is one that is scoped to \r
 
-        The customerId is optional. If supplied you can use the
-        completeBooking option and skip the PUT /book step. <br /><br />\r
+        \             Primary Company Location or is associated with
+        that business LocationId</p>\r
 
-        \r
+        <br />\r
 
-        The email, name and phone fields are only used with the
+        <br />\r
+
+        <p> The customerId is optional. If supplied you can use the
+        completeBooking option and skip the PUT /book step. </p>\r
+
+        <br />\r
+
+        <p> The email, name and phone fields are only used with the
         completeBooking option. As with customerId you can\r
 
-        \r
+        \             skip the PUT /book step. This endpoint completes
+        the booking, and sends notifications.</p>\r
 
-        skip the PUT /book step. This endpoint completes the booking,
-        and sends notifications.<br /><br />\r
+        <br />\r
 
-        \r
+        <p> A bookingWindowId is required if you are booking
+        appointments into a defined booking window on the service.</p>\r
 
-        A bookingWindowId is required if you are booking appointments
-        into a defined booking window on the service.<br /><br />\r
+        <br />\r
 
-        \r
+        <br />\r
 
-        BookedBy is an optional parameter. If it is not supplied the
+        <p> BookedBy is an optional parameter. If it is not supplied the
         email address of the booked appointment is used or the ip address if no
         email address is\r
 
-        \r
+        \             used in the /appointment/book endpoint. Booked by
+        is used in the Appointment Audit trail which can be viewed in the Admin
+        Portal.</p>\r
 
-        used in the /appointment/book endpoint. Booked by is used in the
-        Appointment Audit trail which can be viewed in the Admin Portal.<br
-        /><br />\r
+        <br />\r
 
-        \r
+        <br />\r
 
-        Location is optional. This is a string representing the location
-        of the appointment.<br /><br /> \r
+        <p> Location is optional. This is a string representing the
+        location of the actual appointment, not to be confused with a Business
+        Location.</p>\r
 
-        \r
+        <br />\r
 
-        Timezone name is optional. The Timezone name is in Iana format
-        e.g. America/New_York. This is the timezone where the appointment was
-        booked. Populating\r
+        <br />\r
 
-        \r
+        <p>Timezone name is optional. The Timezone name is in Iana
+        format e.g. America/New_York. This is the timezone where the appointment
+        was booked. Populating\r
 
-        this information can help later in situations where appointments
-        are booked before a Daylight Savings change.<br /><br />\r
+        \             this information can help later in situations
+        where appointments are booked before a Daylight Savings change.</p>\r
 
-        \r
+        <br />\r
 
-        StartDateTime and EndDateTime are required. Use the ISO 8601
-        format for DateTime Timezone. e.g. 2016-10-30T09:00:00-5:00<br /><br
-        />\r
+        <br />\r
 
-        \r
+        <p>StartDateTime and EndDateTime are required. Use the ISO 8601
+        format for DateTime Timezone. e.g. 2016-10-30T09:00:00-5:00</p>\r
 
-        TravelTimeMins and TravelAppointmentId are optional. These are
-        important if you factor in Travel Time for resources to move between
-        appointments.<br /><br />\r
+        <br />\r
 
-        \r
+        <br />\r
 
-        This information is returned from the availability/times
+        <p>TravelTimeMins and TravelAppointmentId are optional. These
+        are important if you factor in Travel Time for resources to move between
+        appointments.</p>\r
+
+        <br />\r
+
+        <br />\r
+
+        <p>This information is returned from the availability/times
         endpoint. <br /><br />\r
 
-        \r
-
-        See more information at <a
+        \             See more information at <a
         href=\"https://onsched.readme.io/docs/appointments-overview\">Appointme\
-        nts Overview</a>"
+        nts Overview</a></p>\r
+
+        <br />"
       parameters:
         - description: Status of BK or RS. Only applies if customerId or name and email
             are supplied.
@@ -960,7 +973,8 @@ paths:
           name: firstDayAvailable
           schema:
             type: boolean
-        - description: Use the faster full server based availability beta.
+        - description: Try the full server based availability beta. Will be faster when
+            caching implmented.
           in: query
           name: fullServerBasedAvailability
           schema:
@@ -1219,7 +1233,8 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: Use the faster full server based availability beta.
+        - description: Try the full server based availability beta. Will be faster when
+            caching implmented.
           in: query
           name: fullServerBasedAvailability
           schema:
@@ -2587,6 +2602,14 @@ components:
         phoneType:
           type: string
       type: object
+    AppointmentCustomerViewModel:
+      additionalProperties: false
+      properties:
+        appointmentId:
+          type: string
+        customerId:
+          type: string
+      type: object
     AppointmentInitialModel:
       additionalProperties: false
       properties:
@@ -2598,6 +2621,8 @@ components:
           type: string
         bookingWindowId:
           type: string
+        calendarId:
+          type: string
         customFields:
           $ref: "#/components/schemas/CustomFieldInputModel"
         customerBookingFields:
@@ -2606,11 +2631,17 @@ components:
           type: array
         customerId:
           type: string
+        customerIds:
+          type: string
         email:
           type: string
         endDateTime:
           format: date-time
           type: string
+        groupSize:
+          format: int32
+          nullable: true
+          type: integer
         location:
           type: string
         locationId:
@@ -2677,6 +2708,10 @@ components:
           type: string
         customerMessage:
           type: string
+        customers:
+          items:
+            $ref: "#/components/schemas/AppointmentCustomerViewModel"
+          type: array
         date:
           type: string
         dateInternational:
@@ -2857,13 +2892,9 @@ components:
     AppointmentResourceViewModel:
       additionalProperties: false
       properties:
-        resourceGroupId:
-          type: string
-        resourceGroupName:
+        appointmentId:
           type: string
         resourceId:
-          type: string
-        resourceName:
           type: string
       type: object
     AppointmentViewModel:
@@ -2893,6 +2924,10 @@ components:
           type: string
         customerMessage:
           type: string
+        customers:
+          items:
+            $ref: "#/components/schemas/AppointmentCustomerViewModel"
+          type: array
         date:
           type: string
         dateInternational:
@@ -3098,6 +3133,8 @@ components:
           type: string
         resourceId:
           type: string
+        resourceIds:
+          type: string
         resourceName:
           type: string
         serviceDescription:
@@ -3180,7 +3217,13 @@ components:
         allowableBookings:
           format: int32
           type: integer
+        allowableCapacity:
+          format: int32
+          type: integer
         availableBookings:
+          format: int32
+          type: integer
+        availableCapacity:
           format: int32
           type: integer
         date:
@@ -3197,6 +3240,11 @@ components:
         startDateTime:
           type: string
         time:
+          format: int32
+          type: integer
+        travelAppointmentId:
+          type: string
+        travelTimeMins:
           format: int32
           type: integer
       type: object

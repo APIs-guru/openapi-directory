@@ -5701,7 +5701,18 @@ components:
         - taxableAmount
       title: Tax Subtotal
       type: object
-    WebhookInstance: {}
+    WebhookInstance:
+      properties:
+        body:
+          description: The webhook body that would have been pushed if this were a
+            push-mode webhook.
+          title: Body
+          type: string
+        guid:
+          description: The GUID of the WebhookInstance. Use this to delete it.
+          format: uuid
+          title: GUID
+          type: string
   securitySchemes:
     Bearer:
       in: header

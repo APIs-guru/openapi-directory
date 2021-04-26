@@ -1071,13 +1071,17 @@ paths:
         the API.
 components:
   schemas:
-    AnnotationsEntry: {}
     Api:
       description: An Api is a top-level description of an API. Apis are produced by
         producers and are commitments to provide services.
       properties:
         annotations:
-          $ref: "#/components/schemas/AnnotationsEntry"
+          description: Annotations attach non-identifying metadata to resources.
+            Annotation keys and values are less restricted than those of labels,
+            but should be generally used for small values of broad interest.
+            Larger, topic- specific metadata should be stored in Artifacts.
+            Annotations are returned only when the FULL view is requested.
+          type: object
         availability:
           description: 'A user-definable description of the availability of this service.
             Format: free-form, but we expect single words that describe
@@ -1085,7 +1089,10 @@ components:
             "DEPRECATED", "SHUTDOWN".'
           type: string
         create_time:
-          $ref: "#/components/schemas/Timestamp"
+          description: Creation timestamp.
+          format: RFC3339
+          readOnly: true
+          type: string
         description:
           description: A detailed description.
           type: string
@@ -1093,7 +1100,16 @@ components:
           description: Human-meaningful name.
           type: string
         labels:
-          $ref: "#/components/schemas/LabelsEntry"
+          description: Labels attach identifying metadata to resources. Identifying
+            metadata can be used to filter list operations. Label keys and
+            values can be no longer than 64 characters (Unicode codepoints), can
+            only contain lowercase letters, numeric characters, underscores and
+            dashes. International characters are allowed. No more than 64 user
+            labels can be associated with one resource (System labels are
+            excluded). See https://goo.gl/xmQnxf for more information and
+            examples of labels. System reserved label keys are prefixed with
+            "registry.googleapis.com/" and cannot be changed.
+          type: object
         name:
           description: Resource name.
           type: string
@@ -1102,7 +1118,10 @@ components:
             apis/{api}/versions/{version}"
           type: string
         update_time:
-          $ref: "#/components/schemas/Timestamp"
+          description: Last update timestamp.
+          format: RFC3339
+          readOnly: true
+          type: string
     ApiSpec:
       description: An ApiSpec describes a version of an API in a structured way.
         ApiSpecs provide formal descriptions that consumers can use to use a
@@ -1114,14 +1133,22 @@ components:
         be provided by tooling and background services.
       properties:
         annotations:
-          $ref: "#/components/schemas/AnnotationsEntry"
+          description: Annotations attach non-identifying metadata to resources.
+            Annotation keys and values are less restricted than those of labels,
+            but should be generally used for small values of broad interest.
+            Larger, topic- specific metadata should be stored in Artifacts.
+            Annotations are returned only when the FULL view is requested.
+          type: object
         contents:
           description: The contents of the spec. Returned only when the FULL view is
             requested.
           format: bytes
           type: string
         create_time:
-          $ref: "#/components/schemas/Timestamp"
+          description: Creation timestamp; when the spec resource was created.
+          format: RFC3339
+          readOnly: true
+          type: string
         description:
           description: A detailed description.
           type: string
@@ -1134,7 +1161,16 @@ components:
           readOnly: true
           type: string
         labels:
-          $ref: "#/components/schemas/LabelsEntry"
+          description: Labels attach identifying metadata to resources. Identifying
+            metadata can be used to filter list operations. Label keys and
+            values can be no longer than 64 characters (Unicode codepoints), can
+            only contain lowercase letters, numeric characters, underscores and
+            dashes. International characters are allowed. No more than 64 user
+            labels can be associated with one resource (System labels are
+            excluded). See https://goo.gl/xmQnxf for more information and
+            examples of labels. System reserved label keys are prefixed with
+            "registry.googleapis.com/" and cannot be changed.
+          type: object
         mime_type:
           description: A style (format) descriptor for this spec that is specified as a
             Media Type (https://en.wikipedia.org/wiki/Media_type). Possible
@@ -1149,7 +1185,11 @@ components:
           description: Resource name.
           type: string
         revision_create_time:
-          $ref: "#/components/schemas/Timestamp"
+          description: Revision creation timestamp; when the represented revision was
+            created.
+          format: RFC3339
+          readOnly: true
+          type: string
         revision_id:
           description: The revision ID of the spec. A new revision is committed whenever
             the spec contents are changed. The format is an 8-character
@@ -1163,7 +1203,11 @@ components:
           readOnly: true
           type: array
         revision_update_time:
-          $ref: "#/components/schemas/Timestamp"
+          description: "Last update timestamp: when the represented revision was last
+            modified."
+          format: RFC3339
+          readOnly: true
+          type: string
         size_bytes:
           description: The size of the spec file in bytes.
           format: int32
@@ -1180,9 +1224,17 @@ components:
         are what consumers actually use.
       properties:
         annotations:
-          $ref: "#/components/schemas/AnnotationsEntry"
+          description: Annotations attach non-identifying metadata to resources.
+            Annotation keys and values are less restricted than those of labels,
+            but should be generally used for small values of broad interest.
+            Larger, topic- specific metadata should be stored in Artifacts.
+            Annotations are returned only when the FULL view is requested.
+          type: object
         create_time:
-          $ref: "#/components/schemas/Timestamp"
+          description: Creation timestamp.
+          format: RFC3339
+          readOnly: true
+          type: string
         description:
           description: A detailed description.
           type: string
@@ -1190,7 +1242,16 @@ components:
           description: Human-meaningful name.
           type: string
         labels:
-          $ref: "#/components/schemas/LabelsEntry"
+          description: Labels attach identifying metadata to resources. Identifying
+            metadata can be used to filter list operations. Label keys and
+            values can be no longer than 64 characters (Unicode codepoints), can
+            only contain lowercase letters, numeric characters, underscores and
+            dashes. International characters are allowed. No more than 64 user
+            labels can be associated with one resource (System labels are
+            excluded). See https://goo.gl/xmQnxf for more information and
+            examples of labels. System reserved label keys are prefixed with
+            "registry.googleapis.com/" and cannot be changed.
+          type: object
         name:
           description: Resource name.
           type: string
@@ -1201,7 +1262,10 @@ components:
             "PRODUCTION", "DEPRECATED", "RETIRED".'
           type: string
         update_time:
-          $ref: "#/components/schemas/Timestamp"
+          description: Last update timestamp.
+          format: RFC3339
+          readOnly: true
+          type: string
     Artifact:
       description: Artifacts of resources. Artifacts are unique (single-value) per
         resource and are used to store metadata that is too large or numerous to
@@ -1219,7 +1283,10 @@ components:
           format: bytes
           type: string
         create_time:
-          $ref: "#/components/schemas/Timestamp"
+          description: Creation timestamp.
+          format: RFC3339
+          readOnly: true
+          type: string
         hash:
           description: A SHA-256 hash of the artifact's contents
           readOnly: true
@@ -1239,7 +1306,10 @@ components:
           readOnly: true
           type: integer
         update_time:
-          $ref: "#/components/schemas/Timestamp"
+          description: Last update timestamp.
+          format: RFC3339
+          readOnly: true
+          type: string
     Empty:
       description: "A generic empty message that you can re-use to avoid defining
         duplicated empty messages in your APIs. A typical example is to use it
@@ -1248,19 +1318,18 @@ components:
         (google.protobuf.Empty);     } The JSON representation for `Empty` is
         empty JSON object `{}`."
       properties: {}
-    LabelsEntry: {}
     ListApiSpecRevisionsResponse:
       description: Response message for ListApiSpecRevisionsResponse.
       properties:
-        next_page_token:
-          description: A token that can be sent as `page_token` to retrieve the next page.
-            If this field is omitted, there are no subsequent pages.
-          type: string
-        specs:
+        api_specs:
           description: The revisions of the spec.
           items:
             $ref: "#/components/schemas/ApiSpec"
           type: array
+        next_page_token:
+          description: A token that can be sent as `page_token` to retrieve the next page.
+            If this field is omitted, there are no subsequent pages.
+          type: string
     ListApiSpecsResponse:
       description: Response message for ListApiSpecs.
       properties:
@@ -1329,7 +1398,10 @@ components:
         projects."
       properties:
         create_time:
-          $ref: "#/components/schemas/Timestamp"
+          description: Creation timestamp.
+          format: RFC3339
+          readOnly: true
+          type: string
         description:
           description: A detailed description.
           type: string
@@ -1340,7 +1412,10 @@ components:
           description: Resource name.
           type: string
         update_time:
-          $ref: "#/components/schemas/Timestamp"
+          description: Last update timestamp.
+          format: RFC3339
+          readOnly: true
+          type: string
     RollbackApiSpecRequest:
       description: Request message for RollbackApiSpec.
       properties:
@@ -1368,79 +1443,3 @@ components:
           description: The tag to apply. The tag should be at most 40 characters, and
             match `[a-z][a-z0-9-]{3,39}`.
           type: string
-    Timestamp:
-      description: "A Timestamp represents a point in time independent of any time
-        zone or local calendar, encoded as a count of seconds and fractions of
-        seconds at nanosecond resolution. The count is relative to an epoch at
-        UTC midnight on January 1, 1970, in the proleptic Gregorian calendar
-        which extends the Gregorian calendar backwards to year one. All minutes
-        are 60 seconds long. Leap seconds are \"smeared\" so that no leap second
-        table is needed for interpretation, using a [24-hour linear
-        smear](https://developers.google.com/time/smear). The range is from
-        0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By restricting
-        to that range, we ensure that we can convert to and from [RFC
-        3339](https://www.ietf.org/rfc/rfc3339.txt) date strings. # Examples
-        Example 1: Compute Timestamp from POSIX `time()`.     Timestamp
-        timestamp;     timestamp.set_seconds(time(NULL));     timestamp.set_nan\
-        os(0); Example 2: Compute Timestamp from POSIX
-        `gettimeofday()`.     struct timeval tv;     gettimeofday(&tv,
-        NULL);     Timestamp
-        timestamp;     timestamp.set_seconds(tv.tv_sec);     timestamp.set_nano\
-        s(tv.tv_usec * 1000); Example 3: Compute Timestamp from Win32
-        `GetSystemTimeAsFileTime()`.     FILETIME
-        ft;     GetSystemTimeAsFileTime(&ft);     UINT64 ticks =
-        (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;     // A Windows
-        tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z     // is
-        11644473600 seconds before Unix epoch
-        1970-01-01T00:00:00Z.     Timestamp
-        timestamp;     timestamp.set_seconds((INT64) ((ticks / 10000000) -
-        11644473600LL));     timestamp.set_nanos((INT32) ((ticks % 10000000) *
-        100)); Example 4: Compute Timestamp from Java
-        `System.currentTimeMillis()`.     long millis =
-        System.currentTimeMillis();     Timestamp timestamp =
-        Timestamp.newBuilder().setSeconds(millis / 1000)         .setNanos((int)
-        ((millis % 1000) * 1000000)).build(); Example 5: Compute Timestamp from
-        Java `Instant.now()`.     Instant now = Instant.now();     Timestamp
-        timestamp
-        =         Timestamp.newBuilder().setSeconds(now.getEpochSecond())             \
-        .setNanos(now.getNano()).build(); Example 6: Compute Timestamp from
-        current time in Python.     timestamp =
-        Timestamp()     timestamp.GetCurrentTime() # JSON Mapping In JSON
-        format, the Timestamp type is encoded as a string in the [RFC
-        3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the format
-        is \"{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z\" where
-        {year} is always expressed using four digits while {month}, {day},
-        {hour}, {min}, and {sec} are zero-padded to two digits each. The
-        fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond
-        resolution), are optional. The \"Z\" suffix indicates the timezone
-        (\"UTC\"); the timezone is required. A proto3 JSON serializer should
-        always use UTC (as indicated by \"Z\") when printing the Timestamp type
-        and a proto3 JSON parser should be able to accept both UTC and other
-        timezones (as indicated by an offset). For example,
-        \"2017-01-15T01:30:15.01Z\" encodes 15.01 seconds past 01:30 UTC on
-        January 15, 2017. In JavaScript, one can convert a Date object to this
-        format using the standard
-        [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript\
-        /Reference/Global_Objects/Date/toISOString) method. In Python, a
-        standard `datetime.datetime` object can be converted to this format
-        using
-        [`strftime`](https://docs.python.org/2/library/time.html#time.strftime)
-        with the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java,
-        one can use the Joda Time's [`ISODateTimeFormat.dateTime()`](
-        http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeF\
-        ormat.html#dateTime%2D%2D ) to obtain a formatter capable of generating
-        timestamps in this format."
-      properties:
-        nanos:
-          description: Non-negative fractions of a second at nanosecond resolution.
-            Negative second values with fractions must still have non-negative
-            nanos values that count forward in time. Must be from 0 to
-            999,999,999 inclusive.
-          format: int32
-          type: integer
-        seconds:
-          description: Represents seconds of UTC time since Unix epoch
-            1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
-            9999-12-31T23:59:59Z inclusive.
-          format: int64
-          type: integer

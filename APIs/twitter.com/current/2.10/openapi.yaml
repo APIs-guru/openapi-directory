@@ -2852,9 +2852,40 @@ components:
               type: integer
           type: object
       type: object
-    UsersLikesCreateRequest: {}
-    UsersLikesCreateResponse: {}
-    UsersLikesDeleteResponse: {}
+    UsersLikesCreateRequest:
+      properties:
+        tweet_id:
+          pattern: ^[0-9]{1,19}$
+          type: string
+      required:
+        - tweet_id
+      type: object
+    UsersLikesCreateResponse:
+      properties:
+        data:
+          properties:
+            liked:
+              type: boolean
+          type: object
+        errors:
+          items:
+            $ref: "#/components/schemas/Problem"
+          minItems: 1
+          type: array
+      type: object
+    UsersLikesDeleteResponse:
+      properties:
+        data:
+          properties:
+            liked:
+              type: boolean
+          type: object
+        errors:
+          items:
+            $ref: "#/components/schemas/Problem"
+          minItems: 1
+          type: array
+      type: object
     Video:
       allOf:
         - $ref: "#/components/schemas/CommonMediaFields"

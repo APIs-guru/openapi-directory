@@ -3913,7 +3913,7 @@ components:
         type:
           $ref: "#/components/schemas/SecretType"
         value:
-          maxLength: 1024
+          maxLength: 65536
           minLength: 1
           nullable: true
           type: string
@@ -3963,7 +3963,7 @@ components:
           pattern: ^(?!CLOUDENV.*$)[a-zA-Z_][a-zA-Z0-9_]{0,199}$
           type: string
         value:
-          maxLength: 1024
+          maxLength: 65536
           minLength: 1
           nullable: true
           type: string
@@ -3977,7 +3977,7 @@ components:
         type:
           $ref: "#/components/schemas/SecretType"
         value:
-          maxLength: 1024
+          maxLength: 65536
           minLength: 1
           nullable: true
           type: string

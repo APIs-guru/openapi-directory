@@ -149,6 +149,95 @@ paths:
         - publicly-accessible
       x-status: Stable
   "/consumers/{tenant}":
+    get:
+      description: Currently this operation only supports retrieving a count of
+        consumer accounts given an email address.
+      parameters:
+        - description: The identifier for the tenant.
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+        - description: Email address of the consumer.
+          in: query
+          name: emailAddress
+          required: true
+          schema:
+            type: string
+        - description: The account type of the consumer - currently only 'registered'
+            accounts are supported.
+          in: query
+          name: accountType
+          required: true
+          schema:
+            default: registered
+            enum:
+              - registered
+            type: string
+        - description: Returns the number of consumers that matches the emailAddress and
+            accountType. The query value should be empty, e.g.
+            /consumers/uk/?emailAddress=someone@email.com&accountType=registered&count.
+          in: query
+          name: count
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            text/plain:
+              example: 1
+              schema:
+                type: integer
+          description: Success
+          headers:
+            cache-control:
+              description: Information about how the response can be cached.
+              schema:
+                type: string
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: The Email is missing or invalid.
+                    errorCode: InvalidEmail
+                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Bad request.
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Tenant not found
+                    errorCode: TenantNotFound
+                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: The specified tenant does not exist.
+        "500":
+          $ref: "#/components/responses/500ErrorResponse"
+        "501":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Non-Count queries have not been implemented
+                    errorCode: NotImplemented
+                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/5XXErrorSchema"
+          description: The operation has not been implemented
+      summary: Get consumers details
+      tags:
+        - Consumers
+        - publicly-accessible
     post:
       description: Creates a consumer for the given tenant.
       parameters:
@@ -190,7 +279,7 @@ paths:
               example:
                 errors:
                   - description: Not authorized to do this.
-                    errorCode: BadRequest
+                    errorCode: Forbidden
                 faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
                 traceId: H3TKh4QSJUSwVBCBqEtkKw==
               schema:
@@ -202,7 +291,7 @@ paths:
               example:
                 errors:
                   - description: Tenant not found
-                    errorCode: BadRequest
+                    errorCode: TenantNotFound
                 faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
                 traceId: H3TKh4QSJUSwVBCBqEtkKw==
               schema:
@@ -213,8 +302,8 @@ paths:
             application/json:
               example:
                 errors:
-                  - description: Emai address already in use
-                    errorCode: BadRequest
+                  - description: The specified email already exists
+                    errorCode: Conflict
                 faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
                 traceId: H3TKh4QSJUSwVBCBqEtkKw==
               schema:
@@ -5162,8 +5251,8 @@ components:
               items:
                 properties:
                   description:
-                    description: Specific details about the error that may assist the you in
-                      resolving the issue
+                    description: Specific details about the error that may assist you in resolving
+                      the issue
                     type: string
                   errorCode:
                     description: A code that identifies the problem type. It will be supported by
@@ -5260,6 +5349,40 @@ components:
           description: Error Message Text
           example: Internal Server Error
           type: string
+      type: object
+    5XXErrorSchema:
+      description: A HTTP 5xx error response
+      properties:
+        fault:
+          description: An object representing the nature of the failure.
+          properties:
+            errors:
+              description: The list of errors.
+              items:
+                properties:
+                  description:
+                    description: Specific details about the error that may assist you in resolving
+                      the issue
+                    type: string
+                  errorCode:
+                    description: A code that identifies the problem type. It will be supported by
+                      human-readable documentation that identifies how to
+                      resolve the error
+                    type: string
+                type: object
+              type: array
+            faultId:
+              description: A value that helps identify this response back to logs, so we can
+                easily find this specific fault
+              type: string
+            traceId:
+              description: A value that helps identify the trace back to logs, so that we can
+                easily find what was happening on our system when the fault was
+                generated
+              type: string
+          required:
+            - faultId
+          type: object
       type: object
     AccountBalanceResponse:
       properties:
@@ -20290,6 +20413,28 @@ components:
         - ALCOHOL_ELIGIBLE
         - UNKNOWN
       type: string
+    SkipMenuEditorGatewayRequest:
+      description: GraphQL request
+      properties:
+        query:
+          description: GraphQL statement
+          type: string
+        variables:
+          description: variables used in query
+          type: object
+      type: object
+    SkipMenuEditorGatewayResponse:
+      description: GraphQL response
+      properties:
+        data:
+          description: GraphQL data response
+          type: object
+        errors:
+          description: GraphQL errors response
+          items:
+            type: object
+          type: array
+      type: object
     Storage:
       example:
         stgInstruction: Example

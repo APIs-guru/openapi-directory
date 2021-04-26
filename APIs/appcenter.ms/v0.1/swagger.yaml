@@ -38913,30 +38913,6 @@ definitions:
       id:
         description: the id of the app
         type: string
-  AppIntegration:
-    properties:
-      app_id:
-        description: app id
-        format: uuid
-        type: string
-      provider:
-        description: provider type
-        type: string
-      state:
-        description: integration state
-        type: string
-    required:
-      - app_id
-      - state
-      - provider
-  AppIntegrationResponse:
-    properties:
-      app_id:
-        description: app id
-        format: uuid
-        type: string
-    required:
-      - app_id
   AppInvitationDetailResponse:
     properties:
       app:
@@ -49814,11 +49790,6 @@ definitions:
       - export_id
       - status
     type: object
-  ExternalAppId:
-    properties:
-      external_id:
-        description: The identifier for external apps that map to an App Center app
-        type: string
   ExternalRepositoryProvider:
     description: Supported external providers of source control repositories
     enum:

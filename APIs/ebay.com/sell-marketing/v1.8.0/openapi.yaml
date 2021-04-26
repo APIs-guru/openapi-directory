@@ -59,15 +59,14 @@ info:
 paths:
   /ad_campaign:
     get:
-      description: "This method retrieves the details for all the campaigns of a
+      description: This method retrieves the details for all the campaigns of a
         seller, including the campaign's the selection rules. Note that this
         method does not return the listing IDs or inventory reference IDs of the
         items included in the ad campaign. Call getAds to retrieve these IDs.
         You can filter the result set by a campaign name, end date range, start
         date range, or campaign status. You can also paginate the records
         returned from the result set using the limit query parameter, and
-        control which records to return using the offset parameter. Note: This
-        call does not retrieve campaigns created via the eBay web flow."
+        control which records to return using the offset parameter.
       operationId: getCampaigns
       parameters:
         - description: "Specifies the campaign name. The results are filtered to include
@@ -549,15 +548,14 @@ paths:
         - campaign
   /ad_campaign/get_campaign_by_name:
     get:
-      description: "This method retrieves the details of a single campaign, as
+      description: This method retrieves the details of a single campaign, as
         specified with the campaign_name query parameter. Note that the campaign
         name you specify must be an exact, case-sensitive match of the name of
         the campaign you want to retrieve. This method returns all the details
         of a campaign (including the campaign's the selection rules), except the
         for the listing IDs or inventory reference IDs included in the campaign.
         These IDs are returned by getAds. Call getCampaigns to retrieve a list
-        of the seller's campaign names. Note: This call does not retrieve
-        campaigns created via the eBay web flow."
+        of the seller's campaign names.
       operationId: getCampaignByName
       parameters:
         - description: Name of the campaign.
@@ -685,13 +683,12 @@ paths:
       tags:
         - campaign
     get:
-      description: "This method retrieves the details of a single campaign, as
+      description: This method retrieves the details of a single campaign, as
         specified with the campaign_id query parameter. This method returns all
         the details of a campaign (including the campaign's the selection
         rules), except the for the listing IDs or inventory reference IDs
         included in the campaign. These IDs are returned by getAds. Call
-        getCampaigns to retrieve a list of the seller's campaign IDs. Note: This
-        call does not retrieve campaigns created via the eBay web flow."
+        getCampaigns to retrieve a list of the seller's campaign IDs.
       operationId: getCampaign
       parameters:
         - description: A unique eBay-assigned ID for an ad campaign that's generated when
