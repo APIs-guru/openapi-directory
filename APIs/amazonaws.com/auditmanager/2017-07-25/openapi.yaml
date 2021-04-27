@@ -603,7 +603,7 @@ paths:
                 name:
                   description: ' The name of the assessment to be created. '
                   type: string
-                  pattern: '^[\w\W\s\S]*$'
+                  pattern: '^[^\\]*$'
                   minLength: 1
                   maxLength: 300
                 description:
@@ -757,7 +757,7 @@ paths:
                 name:
                   description: ' The name of the new custom framework. '
                   type: string
-                  pattern: '^[\w\W\s\S]*$'
+                  pattern: '^[^\\]*$'
                   minLength: 1
                   maxLength: 300
                 description:
@@ -914,7 +914,7 @@ paths:
                 name:
                   description: ' The name of the control. '
                   type: string
-                  pattern: '^[\w\W\s\S]*$'
+                  pattern: '^[^\\]*$'
                   minLength: 1
                   maxLength: 300
                 description:
@@ -1111,7 +1111,7 @@ paths:
                 assessmentName:
                   description: ' The name of the specified assessment to be updated. '
                   type: string
-                  pattern: '^[\w\W\s\S]*$'
+                  pattern: '^[^\\]*$'
                   minLength: 1
                   maxLength: 300
                 assessmentDescription:
@@ -1302,7 +1302,7 @@ paths:
                 name:
                   description: ' The name of the framework to be updated. '
                   type: string
-                  pattern: '^[\w\W\s\S]*$'
+                  pattern: '^[^\\]*$'
                   minLength: 1
                   maxLength: 300
                 description:
@@ -1537,7 +1537,7 @@ paths:
                 name:
                   description: ' The name of the control to be updated. '
                   type: string
-                  pattern: '^[\w\W\s\S]*$'
+                  pattern: '^[^\\]*$'
                   minLength: 1
                   maxLength: 300
                 description:
@@ -3987,7 +3987,7 @@ components:
       properties:
         id:
           allOf:
-            - $ref: '#/components/schemas/UUID'
+            - $ref: '#/components/schemas/ControlSetName'
             - description: ' The unique identifier for the control set. '
         name:
           allOf:
@@ -4248,7 +4248,7 @@ components:
       description: ' An entity that defines the scope of audit evidence collected by AWS Audit Manager. An AWS Audit Manager assessment is an implementation of an AWS Audit Manager framework. '
     ControlName:
       type: string
-      pattern: '^[\w\W\s\S]*$'
+      pattern: '^[^\\]*$'
       minLength: 1
       maxLength: 300
     ControlDescription:
@@ -4515,7 +4515,7 @@ components:
         - Custom
     FrameworkName:
       type: string
-      pattern: '^[\w\W\s\S]*$'
+      pattern: '^[^\\]*$'
       minLength: 1
       maxLength: 300
     FrameworkDescription:
@@ -4586,7 +4586,7 @@ components:
       description: ' The metadata associated with a standard or custom framework. '
     AssessmentName:
       type: string
-      pattern: '^[\w\W\s\S]*$'
+      pattern: '^[^\\]*$'
       minLength: 1
       maxLength: 300
     AssessmentStatus:
