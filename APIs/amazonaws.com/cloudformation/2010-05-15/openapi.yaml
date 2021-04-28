@@ -887,7 +887,9 @@ paths:
                   - $ref: '#/components/schemas/AccountList'
                   - description: The names of one or more AWS accounts for which you want to deploy stack set updates.
               AccountsUrl:
-                $ref: '#/components/schemas/AccountsUrl'
+                allOf:
+                  - $ref: '#/components/schemas/AccountsUrl'
+                  - description: Returns the value of the AccountsUrl property.
               OrganizationalUnitIds:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
@@ -917,7 +919,9 @@ paths:
             type: object
             properties:
               RegionConcurrencyType:
-                $ref: '#/components/schemas/RegionConcurrencyType'
+                allOf:
+                  - $ref: '#/components/schemas/RegionConcurrencyType'
+                  - description: 'The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time.'
               RegionOrder:
                 allOf:
                   - $ref: '#/components/schemas/RegionList'
@@ -1527,7 +1531,9 @@ paths:
                   - $ref: '#/components/schemas/AccountList'
                   - description: The names of one or more AWS accounts for which you want to deploy stack set updates.
               AccountsUrl:
-                $ref: '#/components/schemas/AccountsUrl'
+                allOf:
+                  - $ref: '#/components/schemas/AccountsUrl'
+                  - description: Returns the value of the AccountsUrl property.
               OrganizationalUnitIds:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
@@ -1549,7 +1555,9 @@ paths:
             type: object
             properties:
               RegionConcurrencyType:
-                $ref: '#/components/schemas/RegionConcurrencyType'
+                allOf:
+                  - $ref: '#/components/schemas/RegionConcurrencyType'
+                  - description: 'The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time.'
               RegionOrder:
                 allOf:
                   - $ref: '#/components/schemas/RegionList'
@@ -3359,7 +3367,9 @@ paths:
             type: object
             properties:
               RegionConcurrencyType:
-                $ref: '#/components/schemas/RegionConcurrencyType'
+                allOf:
+                  - $ref: '#/components/schemas/RegionConcurrencyType'
+                  - description: 'The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time.'
               RegionOrder:
                 allOf:
                   - $ref: '#/components/schemas/RegionList'
@@ -3922,6 +3932,15 @@ paths:
           schema:
             type: string
             pattern: '[a-zA-Z][-a-zA-Z0-9]*(?::[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12})?'
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -6380,7 +6399,9 @@ paths:
                   - $ref: '#/components/schemas/AccountList'
                   - description: The names of one or more AWS accounts for which you want to deploy stack set updates.
               AccountsUrl:
-                $ref: '#/components/schemas/AccountsUrl'
+                allOf:
+                  - $ref: '#/components/schemas/AccountsUrl'
+                  - description: Returns the value of the AccountsUrl property.
               OrganizationalUnitIds:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
@@ -6410,7 +6431,9 @@ paths:
             type: object
             properties:
               RegionConcurrencyType:
-                $ref: '#/components/schemas/RegionConcurrencyType'
+                allOf:
+                  - $ref: '#/components/schemas/RegionConcurrencyType'
+                  - description: 'The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time.'
               RegionOrder:
                 allOf:
                   - $ref: '#/components/schemas/RegionList'
@@ -6656,7 +6679,9 @@ paths:
             type: object
             properties:
               RegionConcurrencyType:
-                $ref: '#/components/schemas/RegionConcurrencyType'
+                allOf:
+                  - $ref: '#/components/schemas/RegionConcurrencyType'
+                  - description: 'The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time.'
               RegionOrder:
                 allOf:
                   - $ref: '#/components/schemas/RegionList'
@@ -6707,7 +6732,9 @@ paths:
                   - $ref: '#/components/schemas/AccountList'
                   - description: The names of one or more AWS accounts for which you want to deploy stack set updates.
               AccountsUrl:
-                $ref: '#/components/schemas/AccountsUrl'
+                allOf:
+                  - $ref: '#/components/schemas/AccountsUrl'
+                  - description: Returns the value of the AccountsUrl property.
               OrganizationalUnitIds:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
@@ -8470,7 +8497,9 @@ components:
             - $ref: '#/components/schemas/AccountList'
             - description: The names of one or more AWS accounts for which you want to deploy stack set updates.
         AccountsUrl:
-          $ref: '#/components/schemas/AccountsUrl'
+          allOf:
+            - $ref: '#/components/schemas/AccountsUrl'
+            - description: Returns the value of the AccountsUrl property.
         OrganizationalUnitIds:
           allOf:
             - $ref: '#/components/schemas/OrganizationalUnitIdList'
@@ -8480,7 +8509,9 @@ components:
       type: object
       properties:
         RegionConcurrencyType:
-          $ref: '#/components/schemas/RegionConcurrencyType'
+          allOf:
+            - $ref: '#/components/schemas/RegionConcurrencyType'
+            - description: 'The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time.'
         RegionOrder:
           allOf:
             - $ref: '#/components/schemas/RegionList'
@@ -9533,6 +9564,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StackSetNameOrId'
             - description: '<p>The name or unique ID of the stack set from which the stack was created.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>StackSetName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>'
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
       description: The input for the <a>GetTemplateSummary</a> action.
     ParameterDeclarations:
       type: array

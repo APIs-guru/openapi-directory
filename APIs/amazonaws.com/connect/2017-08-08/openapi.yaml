@@ -821,7 +821,7 @@ paths:
                   description: One or more tags.
                   type: object
                   minProperties: 1
-                  maxProperties: 200
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
     parameters:
@@ -1253,7 +1253,7 @@ paths:
                   description: One or more tags.
                   type: object
                   minProperties: 1
-                  maxProperties: 200
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
     parameters:
@@ -1370,7 +1370,7 @@ paths:
                   description: One or more tags.
                   type: object
                   minProperties: 1
-                  maxProperties: 200
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
     parameters:
@@ -1568,7 +1568,7 @@ paths:
                   description: One or more tags.
                   type: object
                   minProperties: 1
-                  maxProperties: 200
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
     parameters:
@@ -1875,7 +1875,7 @@ paths:
                   description: One or more tags.
                   type: object
                   minProperties: 1
-                  maxProperties: 200
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
     parameters:
@@ -5572,7 +5572,7 @@ paths:
                   description: 'One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
                   type: object
                   minProperties: 1
-                  maxProperties: 200
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
   '/user-hierarchy-groups-summary/{InstanceId}':
@@ -6441,7 +6441,7 @@ paths:
             items:
               $ref: '#/components/schemas/TagKey'
             minItems: 1
-            maxItems: 200
+            maxItems: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6810,8 +6810,6 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - MaxContacts
               properties:
                 MaxContacts:
                   description: The maximum number of contacts that can be in the queue before it is considered full.
@@ -9343,7 +9341,7 @@ components:
     TagMap:
       type: object
       minProperties: 1
-      maxProperties: 200
+      maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
     ContactFlow:
@@ -11442,7 +11440,7 @@ components:
       items:
         $ref: '#/components/schemas/TagKey'
       minItems: 1
-      maxItems: 200
+      maxItems: 50
     TagResourceRequest:
       type: object
       required:
@@ -11532,8 +11530,6 @@ components:
             - description: The identifier for the hours of operation.
     UpdateQueueMaxContactsRequest:
       type: object
-      required:
-        - MaxContacts
       title: UpdateQueueMaxContactsRequest
       properties:
         MaxContacts:

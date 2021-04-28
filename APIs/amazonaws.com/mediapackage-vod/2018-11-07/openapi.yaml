@@ -434,6 +434,13 @@ paths:
                         - xml:
                             name: hlsManifests
                           description: A list of HLS manifest configurations.
+                    IncludeEncoderConfigurationInSegments:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: includeEncoderConfigurationInSegments
+                          description: |
+                            When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.
                     SegmentDurationSeconds:
                       allOf:
                         - $ref: '#/components/schemas/__integer'
@@ -457,6 +464,13 @@ paths:
                         - $ref: '#/components/schemas/DashEncryption'
                         - xml:
                             name: encryption
+                    IncludeEncoderConfigurationInSegments:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: includeEncoderConfigurationInSegments
+                          description: |
+                            When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.
                     PeriodTriggers:
                       allOf:
                         - $ref: '#/components/schemas/__listOf__PeriodTriggersElement'
@@ -1518,6 +1532,8 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/HlsManifest'
+    __boolean:
+      type: boolean
     __integer:
       type: integer
     __listOfDashManifest:
@@ -1570,8 +1586,6 @@ components:
             - xml:
                 name: spekeKeyProvider
       description: An HTTP Live Streaming (HLS) encryption configuration.
-    __boolean:
-      type: boolean
     MssEncryption:
       required:
         - SpekeKeyProvider
@@ -1985,6 +1999,13 @@ components:
             - xml:
                 name: hlsManifests
               description: A list of HLS manifest configurations.
+        IncludeEncoderConfigurationInSegments:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: includeEncoderConfigurationInSegments
+              description: |
+                When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.
         SegmentDurationSeconds:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -2079,6 +2100,13 @@ components:
             - $ref: '#/components/schemas/DashEncryption'
             - xml:
                 name: encryption
+        IncludeEncoderConfigurationInSegments:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: includeEncoderConfigurationInSegments
+              description: |
+                When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.
         PeriodTriggers:
           allOf:
             - $ref: '#/components/schemas/__listOf__PeriodTriggersElement'

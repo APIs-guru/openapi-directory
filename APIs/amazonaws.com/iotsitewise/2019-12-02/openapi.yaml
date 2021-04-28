@@ -631,7 +631,7 @@ paths:
             type: string
             pattern: '[A-Za-z0-9+/=]+'
             minLength: 1
-            maxLength: 2048
+            maxLength: 4096
         - name: maxResults
           in: query
           required: false
@@ -780,7 +780,7 @@ paths:
             type: string
             pattern: '[A-Za-z0-9+/=]+'
             minLength: 1
-            maxLength: 2048
+            maxLength: 4096
         - name: maxResults
           in: query
           required: false
@@ -955,7 +955,7 @@ paths:
             type: string
             pattern: '[A-Za-z0-9+/=]+'
             minLength: 1
-            maxLength: 2048
+            maxLength: 4096
         - name: maxResults
           in: query
           required: false
@@ -1180,7 +1180,7 @@ paths:
             type: string
             pattern: '[A-Za-z0-9+/=]+'
             minLength: 1
-            maxLength: 2048
+            maxLength: 4096
         - name: maxResults
           in: query
           required: false
@@ -1342,7 +1342,7 @@ paths:
             type: string
             pattern: '[A-Za-z0-9+/=]+'
             minLength: 1
-            maxLength: 2048
+            maxLength: 4096
         - name: maxResults
           in: query
           required: false
@@ -3395,7 +3395,7 @@ paths:
             type: string
             pattern: '[A-Za-z0-9+/=]+'
             minLength: 1
-            maxLength: 2048
+            maxLength: 4096
         - name: maxResults
           in: query
           required: false
@@ -3599,7 +3599,7 @@ paths:
             type: string
             pattern: '[A-Za-z0-9+/=]+'
             minLength: 1
-            maxLength: 2048
+            maxLength: 4096
         - name: maxResults
           in: query
           required: false
@@ -3608,6 +3608,157 @@ paths:
             type: integer
             minimum: 1
             maximum: 250
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /properties/interpolated#startTimeInSeconds&endTimeInSeconds&quality&intervalInSeconds&type:
+    get:
+      operationId: GetInterpolatedAssetPropertyValues
+      description: '<p>Get interpolated values for an asset property for a specified time interval, during a period of time. For example, you can use the this operation to return the interpolated temperature values for a wind turbine every 24 hours over a duration of 7 days.</p> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property''s alias, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html">UpdateAssetProperty</a>.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInterpolatedAssetPropertyValuesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: assetId
+          in: query
+          required: false
+          description: The ID of the asset.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+        - name: propertyId
+          in: query
+          required: false
+          description: The ID of the asset property.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+        - name: propertyAlias
+          in: query
+          required: false
+          description: 'The property alias that identifies the property, such as an OPC-UA server data stream path (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html">Mapping industrial data streams to asset properties</a> in the <i>AWS IoT SiteWise User Guide</i>.'
+          schema:
+            type: string
+            pattern: '[^\u0000-\u001F\u007F]+'
+            minLength: 1
+            maxLength: 2048
+        - name: startTimeInSeconds
+          in: query
+          required: true
+          description: 'The exclusive start of the range from which to interpolate data, expressed in seconds in Unix epoch time.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 31556889864403200
+        - name: startTimeOffsetInNanos
+          in: query
+          required: false
+          description: The nanosecond offset converted from <code>startTimeInSeconds</code>.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: endTimeInSeconds
+          in: query
+          required: true
+          description: 'The inclusive end of the range from which to interpolate data, expressed in seconds in Unix epoch time.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 31556889864403200
+        - name: endTimeOffsetInNanos
+          in: query
+          required: false
+          description: The nanosecond offset converted from <code>endTimeInSeconds</code>.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: quality
+          in: query
+          required: true
+          description: The quality of the asset property value. You can use this parameter as a filter to choose only the asset property values that have a specific quality.
+          schema:
+            type: string
+            enum:
+              - GOOD
+              - BAD
+              - UNCERTAIN
+        - name: intervalInSeconds
+          in: query
+          required: true
+          description: The time interval in seconds over which to interpolate data. Each interval starts when the previous one ends.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 320000000
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to be used for the next set of paginated results.
+          schema:
+            type: string
+            pattern: '[A-Za-z0-9+/=]+'
+            minLength: 1
+            maxLength: 4096
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to be returned per paginated request. If not specified, the default value is 10.'
+          schema:
+            type: integer
+            minimum: 1
+        - name: type
+          in: query
+          required: true
+          description: '<p>The interpolation type.</p> <p>Valid values: <code>LINEAR_INTERPOLATION</code> </p>'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3677,7 +3828,7 @@ paths:
             type: string
             pattern: '[A-Za-z0-9+/=]+'
             minLength: 1
-            maxLength: 2048
+            maxLength: 4096
         - name: maxResults
           in: query
           required: false
@@ -3765,7 +3916,7 @@ paths:
             type: string
             pattern: '[A-Za-z0-9+/=]+'
             minLength: 1
-            maxLength: 2048
+            maxLength: 4096
         - name: maxResults
           in: query
           required: false
@@ -3829,7 +3980,7 @@ paths:
             type: string
             pattern: '[A-Za-z0-9+/=]+'
             minLength: 1
-            maxLength: 2048
+            maxLength: 4096
         - name: maxResults
           in: query
           required: false
@@ -3893,7 +4044,7 @@ paths:
             type: string
             pattern: '[A-Za-z0-9+/=]+'
             minLength: 1
-            maxLength: 2048
+            maxLength: 4096
         - name: maxResults
           in: query
           required: false
@@ -3957,7 +4108,7 @@ paths:
             type: string
             pattern: '[A-Za-z0-9+/=]+'
             minLength: 1
-            maxLength: 2048
+            maxLength: 4096
         - name: maxResults
           in: query
           required: false
@@ -4459,7 +4610,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/ARN'
-            - description: 'The ARN of the IAM role. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.htmll#identifiers-arns">IAM ARNs</a> in the <i>IAM User Guide</i>.'
+            - description: 'The ARN of the IAM role. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM ARNs</a> in the <i>IAM User Guide</i>.'
       description: 'Contains information about an AWS Identity and Access Management (IAM) role. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM roles</a> in the <i>IAM User Guide</i>.'
     PortalResource:
       type: object
@@ -5166,6 +5317,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssetPropertyValueHistory'
             - description: The asset property's value history.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next set of results, or null if there are no additional results.'
+    GetInterpolatedAssetPropertyValuesResponse:
+      type: object
+      required:
+        - interpolatedAssetPropertyValues
+      properties:
+        interpolatedAssetPropertyValues:
+          allOf:
+            - $ref: '#/components/schemas/InterpolatedAssetPropertyValues'
+            - description: The requested interpolated values.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -6929,7 +7093,7 @@ components:
       type: string
       pattern: '[A-Za-z0-9+/=]+'
       minLength: 1
-      maxLength: 2048
+      maxLength: 4096
     MaxResults:
       type: integer
       minimum: 1
@@ -6946,6 +7110,33 @@ components:
       type: object
       title: GetAssetPropertyValueRequest
       properties: {}
+    TimeInSeconds:
+      type: integer
+      minimum: 1
+      maximum: 31556889864403200
+    OffsetInNanos:
+      type: integer
+      minimum: 0
+      maximum: 999999999
+    IntervalInSeconds:
+      type: integer
+      minimum: 1
+      maximum: 320000000
+    MaxInterpolatedResults:
+      type: integer
+      minimum: 1
+    InterpolationType:
+      type: string
+      minLength: 1
+      maxLength: 256
+    GetInterpolatedAssetPropertyValuesRequest:
+      type: object
+      title: GetInterpolatedAssetPropertyValuesRequest
+      properties: {}
+    InterpolatedAssetPropertyValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/InterpolatedAssetPropertyValue'
     IdentityId:
       type: string
       pattern: \S+
@@ -6967,6 +7158,17 @@ components:
         file:
           $ref: '#/components/schemas/ImageFile'
       description: '<p>Contains an image that is one of the following:</p> <ul> <li> <p>An image file. Choose this option to upload a new image.</p> </li> <li> <p>The ID of an existing image. Choose this option to keep an existing image.</p> </li> </ul>'
+    InterpolatedAssetPropertyValue:
+      type: object
+      required:
+        - timestamp
+        - value
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/TimeInNanos'
+        value:
+          $ref: '#/components/schemas/Variant'
+      description: Contains information about an interpolated asset property value.
     Interval:
       type: string
       pattern: 1w|1d|1h|15m|5m|1m
@@ -7114,10 +7316,6 @@ components:
             - $ref: '#/components/schemas/MonitorErrorMessage'
             - description: The error message.
       description: Contains AWS IoT SiteWise Monitor error details.
-    OffsetInNanos:
-      type: integer
-      minimum: 0
-      maximum: 999999999
     PortalState:
       type: string
       enum:
@@ -7264,10 +7462,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your AWS IoT SiteWise resources</a> in the <i>AWS IoT SiteWise User Guide</i>.'
-    TimeInSeconds:
-      type: integer
-      minimum: 1
-      maximum: 31556889864403200
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
