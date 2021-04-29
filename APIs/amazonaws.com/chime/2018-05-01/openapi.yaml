@@ -1794,9 +1794,9 @@ paths:
                 AppInstanceUserId:
                   description: The user ID of the <code>AppInstance</code>.
                   type: string
-                  pattern: '[A-Za-z0-9][A-Za-z0-9\:\-\_\.\@]{3,50}[A-Za-z0-9]'
+                  pattern: '[A-Za-z0-9]([A-Za-z0-9\:\-\_\.\@]{0,62}[A-Za-z0-9])?'
                   minLength: 1
-                  maxLength: 50
+                  maxLength: 64
                   format: password
                 Name:
                   description: The user's name.
@@ -17519,9 +17519,9 @@ components:
             - description: Tags assigned to the <code>AppInstanceUser</code>.
     UserId:
       type: string
-      pattern: '[A-Za-z0-9][A-Za-z0-9\:\-\_\.\@]{3,50}[A-Za-z0-9]'
+      pattern: '[A-Za-z0-9]([A-Za-z0-9\:\-\_\.\@]{0,62}[A-Za-z0-9])?'
       minLength: 1
-      maxLength: 50
+      maxLength: 64
       format: password
     CreateAppInstanceUserRequest:
       type: object
