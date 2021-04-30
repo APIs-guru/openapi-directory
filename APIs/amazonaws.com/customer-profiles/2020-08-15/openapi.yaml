@@ -275,6 +275,14 @@ paths:
                   type: string
                   minLength: 0
                   maxLength: 255
+                Matching:
+                  description: The flag that enables the matching process of duplicate profiles.
+                  type: object
+                  properties:
+                    Enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/optionalBoolean'
+                        - description: The flag that enables the matching process of duplicate profiles.
                 Tags:
                   description: 'The tags used to organize, track, or control access for this resource.'
                   type: object
@@ -384,7 +392,7 @@ paths:
         - name: DomainName
           in: path
           required: true
-          description: A unique name for the domain.
+          description: The unique name of the domain.
           schema:
             type: string
             pattern: '^[a-zA-Z0-9_-]+$'
@@ -392,7 +400,7 @@ paths:
             maxLength: 64
     put:
       operationId: UpdateDomain
-      description: '<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>Once a domain is created, the name can’t be changed.</p>'
+      description: '<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>After a domain is created, the name can’t be changed.</p>'
       responses:
         '200':
           description: Success
@@ -434,7 +442,7 @@ paths:
         - name: DomainName
           in: path
           required: true
-          description: The unique name for the domain.
+          description: The unique name of the domain.
           schema:
             type: string
             pattern: '^[a-zA-Z0-9_-]+$'
@@ -462,6 +470,14 @@ paths:
                   type: string
                   minLength: 0
                   maxLength: 255
+                Matching:
+                  description: The flag that enables the matching process of duplicate profiles.
+                  type: object
+                  properties:
+                    Enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/optionalBoolean'
+                        - description: The flag that enables the matching process of duplicate profiles.
                 Tags:
                   description: 'The tags used to organize, track, or control access for this resource.'
                   type: object
@@ -533,7 +549,7 @@ paths:
                   minLength: 1
                   maxLength: 255
                 AdditionalInformation:
-                  description: Any additional information relevant to the customer's profile.
+                  description: Any additional information relevant to the customer’s profile.
                   type: string
                   minLength: 1
                   maxLength: 1000
@@ -565,19 +581,19 @@ paths:
                   minLength: 1
                   maxLength: 255
                 BirthDate:
-                  description: The customer’s birth date.
+                  description: 'The customer’s birth date. '
                   type: string
                   minLength: 1
                   maxLength: 255
                 Gender:
-                  description: The gender with which the customer identifies.
+                  description: 'The gender with which the customer identifies. '
                   type: string
                   enum:
                     - MALE
                     - FEMALE
                     - UNSPECIFIED
                 PhoneNumber:
-                  description: 'The customer''s phone number, which has not been specified as a mobile, home, or business number.'
+                  description: 'The customer’s phone number, which has not been specified as a mobile, home, or business number. '
                   type: string
                   minLength: 1
                   maxLength: 255
@@ -597,7 +613,7 @@ paths:
                   minLength: 1
                   maxLength: 255
                 EmailAddress:
-                  description: 'The customer''s email address, which has not been specified as a personal or business address.'
+                  description: 'The customer’s email address, which has not been specified as a personal or business address. '
                   type: string
                   minLength: 1
                   maxLength: 255
@@ -864,7 +880,7 @@ paths:
                   type: string
                   pattern: '[a-f0-9]{32}'
                 AdditionalInformation:
-                  description: Any additional information relevant to the customer's profile.
+                  description: Any additional information relevant to the customer’s profile.
                   type: string
                   minLength: 0
                   maxLength: 1000
@@ -901,19 +917,19 @@ paths:
                   minLength: 0
                   maxLength: 255
                 BirthDate:
-                  description: The customer’s birth date.
+                  description: 'The customer’s birth date. '
                   type: string
                   minLength: 0
                   maxLength: 255
                 Gender:
-                  description: The gender with which the customer identifies.
+                  description: 'The gender with which the customer identifies. '
                   type: string
                   enum:
                     - MALE
                     - FEMALE
                     - UNSPECIFIED
                 PhoneNumber:
-                  description: 'The customer''s phone number, which has not been specified as a mobile, home, or business number.'
+                  description: 'The customer’s phone number, which has not been specified as a mobile, home, or business number. '
                   type: string
                   minLength: 0
                   maxLength: 255
@@ -933,7 +949,7 @@ paths:
                   minLength: 0
                   maxLength: 255
                 EmailAddress:
-                  description: 'The customer''s email address, which has not been specified as a personal or business address.'
+                  description: 'The customer’s email address, which has not been specified as a personal or business address. '
                   type: string
                   minLength: 0
                   maxLength: 255
@@ -1923,6 +1939,81 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/TriggerConfig'
                         - description: The trigger settings that determine how and when the flow runs.
+  '/domains/{DomainName}/matches':
+    get:
+      operationId: GetMatches
+      description: '<p>This API is in preview release for Amazon Connect and subject to change.</p> <p>Before calling this API, use <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html">CreateDomain</a> or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to enable identity resolution: set <code>Matching</code> to true.</p> <p>GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process. </p> <important> <p>Amazon Connect runs a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.</p> </important> <p>Amazon Connect uses the following profile attributes to identify matches:</p> <ul> <li> <p>PhoneNumber</p> </li> <li> <p>HomePhoneNumber</p> </li> <li> <p>BusinessPhoneNumber</p> </li> <li> <p>MobilePhoneNumber</p> </li> <li> <p>EmailAddress</p> </li> <li> <p>PersonalEmailAddress</p> </li> <li> <p>BusinessEmailAddress</p> </li> <li> <p>FullName</p> </li> <li> <p>BusinessName</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMatchesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/templates/{TemplateId}':
     get:
       operationId: GetProfileObjectTypeTemplate
@@ -2534,6 +2625,168 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  '/domains/{DomainName}/profiles/objects/merge':
+    post:
+      operationId: MergeProfiles
+      description: '<p>This API is in preview release for Amazon Connect and subject to change.</p> <p>Runs an AWS Lambda job that does the following:</p> <ol> <li> <p>All the profileKeys in the <code>ProfileToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>All the objects in the <code>ProfileToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>All the <code>ProfileToBeMerged</code> will be deleted at the end.</p> </li> <li> <p>All the profileKeys in the <code>ProfileIdsToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>Standard fields are merged as follows:</p> <ol> <li> <p>Fields are always "union"-ed if there are no conflicts in standard fields or attributeKeys.</p> </li> <li> <p>When there are conflicting fields:</p> <ol> <li> <p>If no <code>SourceProfileIds</code> entry is specified, the main Profile value is always taken. </p> </li> <li> <p>If a <code>SourceProfileIds</code> entry is specified, the specified profileId is always taken, even if it is a NULL value.</p> </li> </ol> </li> </ol> </li> </ol> <p>You can use MergeProfiles together with <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MergeProfilesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - MainProfileId
+                - ProfileIdsToBeMerged
+              properties:
+                MainProfileId:
+                  description: The identifier of the profile to be taken.
+                  type: string
+                  pattern: '[a-f0-9]{32}'
+                ProfileIdsToBeMerged:
+                  description: The identifier of the profile to be merged into MainProfileId.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/uuid'
+                  minItems: 1
+                  maxItems: 20
+                FieldSourceProfileIds:
+                  description: 'A duplicate customer profile that is to be merged into a main profile. '
+                  type: object
+                  properties:
+                    AccountNumber:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: 'A unique identifier for the account number field to be merged. '
+                    AdditionalInformation:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the additional information field to be merged.
+                    PartyType:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the party type field to be merged.
+                    BusinessName:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the business name field to be merged.
+                    FirstName:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the first name field to be merged.
+                    MiddleName:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the middle name field to be merged.
+                    LastName:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the last name field to be merged.
+                    BirthDate:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the birthdate field to be merged.
+                    Gender:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the gender field to be merged.
+                    PhoneNumber:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the phone number field to be merged.
+                    MobilePhoneNumber:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the mobile phone number field to be merged.
+                    HomePhoneNumber:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the home phone number field to be merged.
+                    BusinessPhoneNumber:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the business phone number field to be merged.
+                    EmailAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the email address field to be merged.
+                    PersonalEmailAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the personal email address field to be merged.
+                    BusinessEmailAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the party type field to be merged.
+                    Address:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the party type field to be merged.
+                    ShippingAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the shipping address field to be merged.
+                    MailingAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the mailing address field to be merged.
+                    BillingAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/uuid'
+                        - description: A unique identifier for the billing type field to be merged.
+                    Attributes:
+                      allOf:
+                        - $ref: '#/components/schemas/AttributeSourceIdMap'
+                        - description: A unique identifier for the attributes field to be merged.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/domains/{DomainName}/profiles/search':
     post:
       operationId: SearchProfiles
@@ -2782,6 +3035,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/sqsQueueUrl'
             - description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.'
+        Matching:
+          allOf:
+            - $ref: '#/components/schemas/MatchingResponse'
+            - description: The process of matching duplicate profiles. This process runs every Saturday at 12AM.
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -2794,6 +3051,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource.'
+    optionalBoolean:
+      type: boolean
     TagValue:
       type: string
       maxLength: 256
@@ -2881,6 +3140,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DomainStats'
             - description: Usage-specific statistics about the domain.
+        Matching:
+          allOf:
+            - $ref: '#/components/schemas/MatchingResponse'
+            - description: The process of matching duplicate profiles. This process runs every Saturday at 12AM.
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -2926,6 +3189,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource.'
+    GetMatchesResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/token'
+            - description: 'If there are additional results, this is the token for the next set of results.'
+        MatchGenerationDate:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp this version of Match Result generated.
+        PotentialMatches:
+          allOf:
+            - $ref: '#/components/schemas/matchesNumber'
+            - description: The number of potential matches found.
+        Matches:
+          allOf:
+            - $ref: '#/components/schemas/MatchesList'
+            - description: The list of matched profiles for this instance.
     GetProfileObjectTypeResponse:
       type: object
       required:
@@ -3076,6 +3358,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource.'
+    MergeProfilesResponse:
+      type: object
+      properties:
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/message'
+            - description: A message that indicates the merge request is complete.
+    uuid:
+      type: string
+      pattern: '[a-f0-9]{32}'
+    AttributeSourceIdMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/uuid'
     PutIntegrationResponse:
       type: object
       required:
@@ -3272,7 +3568,7 @@ components:
         DomainName:
           allOf:
             - $ref: '#/components/schemas/name'
-            - description: The unique name for the domain.
+            - description: The unique name of the domain.
         DefaultExpirationDays:
           allOf:
             - $ref: '#/components/schemas/expirationDaysInteger'
@@ -3285,6 +3581,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/sqsQueueUrl'
             - description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.'
+        Matching:
+          allOf:
+            - $ref: '#/components/schemas/MatchingResponse'
+            - description: The process of matching duplicate profiles. This process runs every Saturday at 12AM.
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -3315,9 +3615,6 @@ components:
       pattern: '^[a-zA-Z0-9_-]+$'
       minLength: 1
       maxLength: 64
-    uuid:
-      type: string
-      pattern: '[a-f0-9]{32}'
     requestValueList:
       type: array
       items:
@@ -3546,6 +3843,16 @@ components:
       type: string
       minLength: 0
       maxLength: 255
+    MatchingRequest:
+      type: object
+      required:
+        - Enabled
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/optionalBoolean'
+            - description: The flag that enables the matching process of duplicate profiles.
+      description: The flag that enables the matching process of duplicate profiles.
     TagMap:
       type: object
       minProperties: 1
@@ -3570,10 +3877,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/sqsQueueUrl'
             - description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications. You must set up a policy on the DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the DeadLetterQueue.'
+        Matching:
+          allOf:
+            - $ref: '#/components/schemas/MatchingRequest'
+            - description: The process of matching duplicate profiles. This process runs every Saturday at 12AM.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource.'
+    MatchingResponse:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/optionalBoolean'
+            - description: The flag that enables the matching process of duplicate profiles.
+      description: The flag that enables the matching process of duplicate profiles.
     timestamp:
       type: string
       format: date-time
@@ -3604,7 +3923,7 @@ components:
         AdditionalInformation:
           allOf:
             - $ref: '#/components/schemas/string1To1000'
-            - description: Any additional information relevant to the customer's profile.
+            - description: Any additional information relevant to the customer’s profile.
         PartyType:
           allOf:
             - $ref: '#/components/schemas/PartyType'
@@ -3628,15 +3947,15 @@ components:
         BirthDate:
           allOf:
             - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s birth date.
+            - description: 'The customer’s birth date. '
         Gender:
           allOf:
             - $ref: '#/components/schemas/Gender'
-            - description: The gender with which the customer identifies.
+            - description: 'The gender with which the customer identifies. '
         PhoneNumber:
           allOf:
             - $ref: '#/components/schemas/string1To255'
-            - description: 'The customer''s phone number, which has not been specified as a mobile, home, or business number.'
+            - description: 'The customer’s phone number, which has not been specified as a mobile, home, or business number. '
         MobilePhoneNumber:
           allOf:
             - $ref: '#/components/schemas/string1To255'
@@ -3652,7 +3971,7 @@ components:
         EmailAddress:
           allOf:
             - $ref: '#/components/schemas/string1To255'
-            - description: 'The customer''s email address, which has not been specified as a personal or business address.'
+            - description: 'The customer’s email address, which has not been specified as a personal or business address. '
         PersonalEmailAddress:
           allOf:
             - $ref: '#/components/schemas/string1To255'
@@ -3838,6 +4157,94 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/name'
+    FieldSourceProfileIds:
+      type: object
+      properties:
+        AccountNumber:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: 'A unique identifier for the account number field to be merged. '
+        AdditionalInformation:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the additional information field to be merged.
+        PartyType:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the party type field to be merged.
+        BusinessName:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the business name field to be merged.
+        FirstName:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the first name field to be merged.
+        MiddleName:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the middle name field to be merged.
+        LastName:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the last name field to be merged.
+        BirthDate:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the birthdate field to be merged.
+        Gender:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the gender field to be merged.
+        PhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the phone number field to be merged.
+        MobilePhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the mobile phone number field to be merged.
+        HomePhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the home phone number field to be merged.
+        BusinessPhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the business phone number field to be merged.
+        EmailAddress:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the email address field to be merged.
+        PersonalEmailAddress:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the personal email address field to be merged.
+        BusinessEmailAddress:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the party type field to be merged.
+        Address:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the party type field to be merged.
+        ShippingAddress:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the shipping address field to be merged.
+        MailingAddress:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the mailing address field to be merged.
+        BillingAddress:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: A unique identifier for the billing type field to be merged.
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/AttributeSourceIdMap'
+            - description: A unique identifier for the attributes field to be merged.
+      description: 'A duplicate customer profile that is to be merged into a main profile. '
     FlowDefinition:
       type: object
       required:
@@ -3886,6 +4293,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/string1To255'
             - description: The URI of the S3 bucket or any other type of data source.
+    token:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    maxSize100:
+      type: integer
+      minimum: 1
+      maximum: 100
+    GetMatchesRequest:
+      type: object
+      title: GetMatchesRequest
+      properties: {}
+    matchesNumber:
+      type: integer
+      minimum: 0
+    MatchesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MatchItem'
     GetProfileObjectTypeRequest:
       type: object
       title: GetProfileObjectTypeRequest
@@ -3950,14 +4376,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ListIntegrationItem'
-    token:
-      type: string
-      minLength: 1
-      maxLength: 1024
-    maxSize100:
-      type: integer
-      minimum: 1
-      maximum: 100
     ListAccountIntegrationsRequest:
       type: object
       required:
@@ -4096,6 +4514,47 @@ components:
             - $ref: '#/components/schemas/Object'
             - description: The object specified in the Marketo flow source.
       description: The properties that are applied when Marketo is being used as a source.
+    ProfileIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/uuid'
+    MatchItem:
+      type: object
+      properties:
+        MatchId:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: The unique identifiers for this group of profiles that match.
+        ProfileIds:
+          allOf:
+            - $ref: '#/components/schemas/ProfileIdList'
+            - description: A list of identifiers for profiles that match.
+      description: The Match group object.
+    ProfileIdToBeMergedList:
+      type: array
+      items:
+        $ref: '#/components/schemas/uuid'
+      minItems: 1
+      maxItems: 20
+    MergeProfilesRequest:
+      type: object
+      required:
+        - MainProfileId
+        - ProfileIdsToBeMerged
+      title: MergeProfilesRequest
+      properties:
+        MainProfileId:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: The identifier of the profile to be taken.
+        ProfileIdsToBeMerged:
+          allOf:
+            - $ref: '#/components/schemas/ProfileIdToBeMergedList'
+            - description: The identifier of the profile to be merged into MainProfileId.
+        FieldSourceProfileIds:
+          allOf:
+            - $ref: '#/components/schemas/FieldSourceProfileIds'
+            - description: 'The identifiers of the fields in the profile that has the information you want to apply to the merge. For example, say you want to merge EmailAddress from Profile1 into MainProfile. This would be the identifier of the EmailAddress field in Profile1. '
     StandardIdentifierList:
       type: array
       items:
@@ -4143,7 +4602,7 @@ components:
         AdditionalInformation:
           allOf:
             - $ref: '#/components/schemas/string1To1000'
-            - description: Any additional information relevant to the customer's profile.
+            - description: Any additional information relevant to the customer’s profile.
         PartyType:
           allOf:
             - $ref: '#/components/schemas/PartyType'
@@ -4167,11 +4626,11 @@ components:
         BirthDate:
           allOf:
             - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s birth date.
+            - description: 'The customer’s birth date. '
         Gender:
           allOf:
             - $ref: '#/components/schemas/Gender'
-            - description: The gender with which the customer identifies.
+            - description: 'The gender with which the customer identifies. '
         PhoneNumber:
           allOf:
             - $ref: '#/components/schemas/string1To255'
@@ -4191,7 +4650,7 @@ components:
         EmailAddress:
           allOf:
             - $ref: '#/components/schemas/string1To255'
-            - description: 'The customer''s email address, which has not been specified as a personal or business address.'
+            - description: 'The customer’s email address, which has not been specified as a personal or business address. '
         PersonalEmailAddress:
           allOf:
             - $ref: '#/components/schemas/string1To255'
@@ -4604,6 +5063,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/sqsQueueUrl'
             - description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications. If specified as an empty string, it will clear any existing value. You must set up a policy on the DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the DeadLetterQueue.'
+        Matching:
+          allOf:
+            - $ref: '#/components/schemas/MatchingRequest'
+            - description: The process of matching duplicate profiles. This process runs every Saturday at 12AM.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4625,7 +5088,7 @@ components:
         AdditionalInformation:
           allOf:
             - $ref: '#/components/schemas/string0To1000'
-            - description: Any additional information relevant to the customer's profile.
+            - description: Any additional information relevant to the customer’s profile.
         AccountNumber:
           allOf:
             - $ref: '#/components/schemas/string0To255'
@@ -4653,15 +5116,15 @@ components:
         BirthDate:
           allOf:
             - $ref: '#/components/schemas/string0To255'
-            - description: The customer’s birth date.
+            - description: 'The customer’s birth date. '
         Gender:
           allOf:
             - $ref: '#/components/schemas/Gender'
-            - description: The gender with which the customer identifies.
+            - description: 'The gender with which the customer identifies. '
         PhoneNumber:
           allOf:
             - $ref: '#/components/schemas/string0To255'
-            - description: 'The customer''s phone number, which has not been specified as a mobile, home, or business number.'
+            - description: 'The customer’s phone number, which has not been specified as a mobile, home, or business number. '
         MobilePhoneNumber:
           allOf:
             - $ref: '#/components/schemas/string0To255'
@@ -4677,7 +5140,7 @@ components:
         EmailAddress:
           allOf:
             - $ref: '#/components/schemas/string0To255'
-            - description: 'The customer''s email address, which has not been specified as a personal or business address.'
+            - description: 'The customer’s email address, which has not been specified as a personal or business address. '
         PersonalEmailAddress:
           allOf:
             - $ref: '#/components/schemas/string0To255'

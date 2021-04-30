@@ -873,6 +873,53 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonForecast.DeleteResourceTree:
+    post:
+      operationId: DeleteResourceTree
+      description: '<p>Deletes an entire resource tree. This operation will delete the parent resource and its child resources.</p> <p>Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource.</p> <p>Amazon Forecast resources possess the following parent-child resource hierarchies:</p> <ul> <li> <p> <b>Dataset Group</b>: predictors, predictor backtest export jobs, forecasts, forecast export jobs</p> </li> <li> <p> <b>Dataset</b>: dataset import jobs</p> </li> <li> <p> <b>Predictor</b>: predictor backtest export jobs, forecasts, forecast export jobs</p> </li> <li> <p> <b>Forecast</b>: forecast export jobs</p> </li> </ul> <note> <p> <code>DeleteResourceTree</code> will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3. </p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteResourceTreeRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonForecast.DeleteResourceTree
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonForecast.DescribeDataset:
     post:
       operationId: DescribeDataset
@@ -2271,6 +2318,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the predictor backtest export job to delete.
+    DeleteResourceTreeRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: DeleteResourceTreeRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the parent resource to delete. All child resources of the parent resource will also be deleted.
     DescribeDatasetResponse:
       type: object
       properties:
@@ -2403,7 +2460,7 @@ components:
         EstimatedTimeRemainingInMinutes:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: The estimated time in minutes for the dataset import job to complete.
+            - description: The estimated time remaining in minutes for the dataset import job to complete.
         FieldStatistics:
           allOf:
             - $ref: '#/components/schemas/FieldStatistics'
@@ -2464,7 +2521,7 @@ components:
         EstimatedTimeRemainingInMinutes:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: The estimated time in minutes for the forecast job to complete.
+            - description: The estimated time remaining in minutes for the forecast job to complete.
         Status:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2598,7 +2655,7 @@ components:
         EstimatedTimeRemainingInMinutes:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: The estimated time in minutes for the predictor training job to complete.
+            - description: The estimated time remaining in minutes for the predictor training job to complete.
         DatasetImportJobArns:
           allOf:
             - $ref: '#/components/schemas/ArnList'

@@ -133,7 +133,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: A comment to describe the cache policy.
+                        - description: A comment to describe the cache policy. The comment cannot be longer than 128 characters.
                     Name:
                       allOf:
                         - $ref: '#/components/schemas/string'
@@ -274,7 +274,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: 'Any comments you want to include about the origin access identity. '
+                        - description: An optional comment to describe the origin access identity. The comment cannot be longer than 128 characters.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -564,77 +564,107 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidLambdaFunctionAssociation'
         '520':
+          description: TooManyDistributionsWithFunctionAssociations
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionsWithFunctionAssociations'
+        '521':
+          description: TooManyFunctionAssociations
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyFunctionAssociations'
+        '522':
+          description: InvalidFunctionAssociation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidFunctionAssociation'
+        '523':
           description: InvalidOriginReadTimeout
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidOriginReadTimeout'
-        '521':
+        '524':
           description: InvalidOriginKeepaliveTimeout
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidOriginKeepaliveTimeout'
-        '522':
+        '525':
           description: NoSuchFieldLevelEncryptionConfig
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchFieldLevelEncryptionConfig'
-        '523':
+        '526':
           description: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior'
-        '524':
+        '527':
           description: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToFieldLevelEncryptionConfig'
-        '525':
+        '528':
           description: NoSuchCachePolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchCachePolicy'
-        '526':
+        '529':
           description: TooManyDistributionsAssociatedToCachePolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToCachePolicy'
-        '527':
+        '530':
           description: NoSuchOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchOriginRequestPolicy'
-        '528':
+        '531':
           description: TooManyDistributionsAssociatedToOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginRequestPolicy'
-        '529':
+        '532':
           description: TooManyDistributionsAssociatedToKeyGroup
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToKeyGroup'
-        '530':
+        '533':
           description: TooManyKeyGroupsAssociatedToDistribution
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyKeyGroupsAssociatedToDistribution'
-        '531':
+        '534':
           description: TrustedKeyGroupDoesNotExist
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TrustedKeyGroupDoesNotExist'
+        '535':
+          description: NoSuchRealtimeLogConfig
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchRealtimeLogConfig'
+        '536':
+          description: RealtimeLogConfigOwnerMismatch
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RealtimeLogConfigOwnerMismatch'
       parameters: []
       requestBody:
         required: true
@@ -684,7 +714,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/CommentType'
-                        - description: '<p>Any comments you want to include about the distribution.</p> <p>If you don''t want to specify a comment, include an empty <code>Comment</code> element.</p> <p>To delete an existing comment, update the distribution configuration and include an empty <code>Comment</code> element.</p> <p>To add or change a comment, update the distribution configuration and specify the new comment.</p>'
+                        - description: An optional comment to describe the distribution. The comment cannot be longer than 128 characters.
                     Logging:
                       allOf:
                         - $ref: '#/components/schemas/LoggingConfig'
@@ -1012,77 +1042,107 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidLambdaFunctionAssociation'
         '521':
+          description: TooManyDistributionsWithFunctionAssociations
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionsWithFunctionAssociations'
+        '522':
+          description: TooManyFunctionAssociations
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyFunctionAssociations'
+        '523':
+          description: InvalidFunctionAssociation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidFunctionAssociation'
+        '524':
           description: InvalidOriginReadTimeout
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidOriginReadTimeout'
-        '522':
+        '525':
           description: InvalidOriginKeepaliveTimeout
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidOriginKeepaliveTimeout'
-        '523':
+        '526':
           description: NoSuchFieldLevelEncryptionConfig
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchFieldLevelEncryptionConfig'
-        '524':
+        '527':
           description: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior'
-        '525':
+        '528':
           description: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToFieldLevelEncryptionConfig'
-        '526':
+        '529':
           description: NoSuchCachePolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchCachePolicy'
-        '527':
+        '530':
           description: TooManyDistributionsAssociatedToCachePolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToCachePolicy'
-        '528':
+        '531':
           description: NoSuchOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchOriginRequestPolicy'
-        '529':
+        '532':
           description: TooManyDistributionsAssociatedToOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginRequestPolicy'
-        '530':
+        '533':
           description: TooManyDistributionsAssociatedToKeyGroup
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToKeyGroup'
-        '531':
+        '534':
           description: TooManyKeyGroupsAssociatedToDistribution
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyKeyGroupsAssociatedToDistribution'
-        '532':
+        '535':
           description: TrustedKeyGroupDoesNotExist
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TrustedKeyGroupDoesNotExist'
+        '536':
+          description: NoSuchRealtimeLogConfig
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchRealtimeLogConfig'
+        '537':
+          description: RealtimeLogConfigOwnerMismatch
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RealtimeLogConfigOwnerMismatch'
       parameters:
         - name: WithTags
           in: query
@@ -1201,7 +1261,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: An optional comment about the configuration.
+                        - description: An optional comment about the configuration. The comment cannot be longer than 128 characters.
                     QueryArgProfileConfig:
                       allOf:
                         - $ref: '#/components/schemas/QueryArgProfileConfig'
@@ -1331,7 +1391,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: An optional comment for the field-level encryption profile.
+                        - description: An optional comment for the field-level encryption profile. The comment cannot be longer than 128 characters.
                     EncryptionEntities:
                       allOf:
                         - $ref: '#/components/schemas/EncryptionEntities'
@@ -1373,6 +1433,123 @@ paths:
           description: 'The maximum number of field-level encryption profiles you want in the response body. '
           schema:
             type: string
+  /2020-05-31/function:
+    post:
+      operationId: CreateFunction2020_05_31
+      description: '<p>Creates a CloudFront function.</p> <p>To create a function, you provide the function code and some configuration information about the function. The response contains an Amazon Resource Name (ARN) that uniquely identifies the function.</p> <p>When you create a function, it’s in the <code>DEVELOPMENT</code> stage. In this stage, you can test the function with <code>TestFunction</code>, and update it with <code>UpdateFunction</code>.</p> <p>When you’re ready to use your function with a CloudFront distribution, use <code>PublishFunction</code> to copy the function from the <code>DEVELOPMENT</code> stage to <code>LIVE</code>. When it’s live, you can attach the function to a distribution’s cache behavior, using the function’s ARN.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateFunctionResult'
+        '480':
+          description: TooManyFunctions
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyFunctions'
+        '481':
+          description: FunctionAlreadyExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/FunctionAlreadyExists'
+        '482':
+          description: FunctionSizeLimitExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/FunctionSizeLimitExceeded'
+        '483':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              required:
+                - Name
+                - FunctionConfig
+                - FunctionCode
+              properties:
+                Name:
+                  description: A name to identify the function.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]{1,64}$'
+                  minLength: 1
+                  maxLength: 64
+                FunctionConfig:
+                  description: Contains configuration information about a CloudFront function.
+                  type: object
+                  properties:
+                    Comment:
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: A comment to describe the function.
+                    Runtime:
+                      allOf:
+                        - $ref: '#/components/schemas/FunctionRuntime'
+                        - description: The function’s runtime environment. The only valid value is <code>cloudfront-js-1.0</code>.
+                FunctionCode:
+                  description: 'The function code. For more information about writing a CloudFront function, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html">Writing function code for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 40960
+                  format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListFunctions2020_05_31
+      description: '<p>Gets a list of all CloudFront functions in your AWS account.</p> <p>You can optionally apply a filter to return only the functions that are in the specified stage, either <code>DEVELOPMENT</code> or <code>LIVE</code>.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListFunctionsResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters:
+        - name: Marker
+          in: query
+          required: false
+          description: 'Use this field when paginating results to indicate where to begin in your list of functions. The response includes functions in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of <code>NextMarker</code> from the current page’s response.'
+          schema:
+            type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: The maximum number of functions that you want in the response.
+          schema:
+            type: string
+        - name: Stage
+          in: query
+          required: false
+          description: 'An optional filter to return only the functions that are in the specified stage, either <code>DEVELOPMENT</code> or <code>LIVE</code>.'
+          schema:
+            type: string
+            enum:
+              - DEVELOPMENT
+              - LIVE
   '/2020-05-31/distribution/{DistributionId}/invalidation':
     post:
       operationId: CreateInvalidation2020_05_31
@@ -1569,7 +1746,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: A comment to describe the key group.
+                        - description: A comment to describe the key group. The comment cannot be longer than 128 characters.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1630,6 +1807,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchDistribution'
+        '482':
+          description: UnsupportedOperation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperation'
       parameters:
         - name: DistributionId
           in: path
@@ -1684,6 +1867,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchDistribution'
+        '482':
+          description: UnsupportedOperation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperation'
       parameters:
         - name: DistributionId
           in: path
@@ -1713,6 +1902,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchDistribution'
+        '482':
+          description: UnsupportedOperation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperation'
       parameters:
         - name: DistributionId
           in: path
@@ -1796,7 +1991,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: A comment to describe the origin request policy.
+                        - description: A comment to describe the origin request policy. The comment cannot be longer than 128 characters.
                     Name:
                       allOf:
                         - $ref: '#/components/schemas/string'
@@ -1929,7 +2124,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: A comment to describe the public key.
+                        - description: A comment to describe the public key. The comment cannot be longer than 128 characters.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2574,7 +2769,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: A comment to describe the cache policy.
+                        - description: A comment to describe the cache policy. The comment cannot be longer than 128 characters.
                     Name:
                       allOf:
                         - $ref: '#/components/schemas/string'
@@ -2943,6 +3138,139 @@ paths:
           description: Get the ID for the field-level encryption profile information.
           schema:
             type: string
+  '/2020-05-31/function/{Name}#If-Match':
+    delete:
+      operationId: DeleteFunction2020_05_31
+      description: '<p>Deletes a CloudFront function.</p> <p>You cannot delete a function if it’s associated with a cache behavior. First, update your distributions to remove the function association from all cache behaviors, then delete the function.</p> <p>To delete a function, you must provide the function’s name and version (<code>ETag</code> value). To get these values, you can use <code>ListFunctions</code> and <code>DescribeFunction</code>.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InvalidIfMatchVersion
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidIfMatchVersion'
+        '481':
+          description: NoSuchFunctionExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchFunctionExists'
+        '482':
+          description: FunctionInUse
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/FunctionInUse'
+        '483':
+          description: PreconditionFailed
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailed'
+      parameters:
+        - name: Name
+          in: path
+          required: true
+          description: The name of the function that you are deleting.
+          schema:
+            type: string
+        - name: If-Match
+          in: header
+          required: true
+          description: 'The current version (<code>ETag</code> value) of the function that you are deleting, which you can get using <code>DescribeFunction</code>.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateFunction2020_05_31
+      description: '<p>Updates a CloudFront function.</p> <p>You can update a function’s code or the comment that describes the function. You cannot update a function’s name.</p> <p>To update a function, you provide the function’s name and version (<code>ETag</code> value) along with the updated function code. To get the name and version, you can use <code>ListFunctions</code> and <code>DescribeFunction</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateFunctionResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '481':
+          description: InvalidIfMatchVersion
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidIfMatchVersion'
+        '482':
+          description: NoSuchFunctionExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchFunctionExists'
+        '483':
+          description: PreconditionFailed
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailed'
+        '484':
+          description: FunctionSizeLimitExceeded
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/FunctionSizeLimitExceeded'
+      parameters:
+        - name: Name
+          in: path
+          required: true
+          description: The name of the function that you are updating.
+          schema:
+            type: string
+        - name: If-Match
+          in: header
+          required: true
+          description: 'The current version (<code>ETag</code> value) of the function that you are updating, which you can get using <code>DescribeFunction</code>.'
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              required:
+                - FunctionConfig
+                - FunctionCode
+              properties:
+                FunctionConfig:
+                  description: Contains configuration information about a CloudFront function.
+                  type: object
+                  properties:
+                    Comment:
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: A comment to describe the function.
+                    Runtime:
+                      allOf:
+                        - $ref: '#/components/schemas/FunctionRuntime'
+                        - description: The function’s runtime environment. The only valid value is <code>cloudfront-js-1.0</code>.
+                FunctionCode:
+                  description: 'The function code. For more information about writing a CloudFront function, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html">Writing function code for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 40960
+                  format: password
   '/2020-05-31/key-group/{Id}':
     delete:
       operationId: DeleteKeyGroup2020_05_31
@@ -3101,7 +3429,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: A comment to describe the key group.
+                        - description: A comment to describe the key group. The comment cannot be longer than 128 characters.
   '/2020-05-31/origin-request-policy/{Id}':
     delete:
       operationId: DeleteOriginRequestPolicy2020_05_31
@@ -3300,7 +3628,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: A comment to describe the origin request policy.
+                        - description: A comment to describe the origin request policy. The comment cannot be longer than 128 characters.
                     Name:
                       allOf:
                         - $ref: '#/components/schemas/string'
@@ -3544,6 +3872,47 @@ paths:
           description: The streaming distribution's ID.
           schema:
             type: string
+  '/2020-05-31/function/{Name}/describe':
+    get:
+      operationId: DescribeFunction2020_05_31
+      description: '<p>Gets configuration information and metadata about a CloudFront function, but not the function’s code. To get a function’s code, use <code>GetFunction</code>.</p> <p>To get configuration information and metadata about a function, you must provide the function’s name and stage. To get these values, you can use <code>ListFunctions</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeFunctionResult'
+        '480':
+          description: NoSuchFunctionExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchFunctionExists'
+      parameters:
+        - name: Name
+          in: path
+          required: true
+          description: The name of the function that you are getting information about.
+          schema:
+            type: string
+        - name: Stage
+          in: query
+          required: false
+          description: 'The function’s stage, either <code>DEVELOPMENT</code> or <code>LIVE</code>.'
+          schema:
+            type: string
+            enum:
+              - DEVELOPMENT
+              - LIVE
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2020-05-31/cache-policy/{Id}/config':
     get:
       operationId: GetCachePolicyConfig2020_05_31
@@ -3711,7 +4080,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: 'Any comments you want to include about the origin access identity. '
+                        - description: An optional comment to describe the origin access identity. The comment cannot be longer than 128 characters.
   '/2020-05-31/distribution/{Id}/config':
     get:
       operationId: GetDistributionConfig2020_05_31
@@ -4001,77 +4370,107 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidLambdaFunctionAssociation'
         '520':
+          description: TooManyDistributionsWithFunctionAssociations
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionsWithFunctionAssociations'
+        '521':
+          description: TooManyFunctionAssociations
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyFunctionAssociations'
+        '522':
+          description: InvalidFunctionAssociation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidFunctionAssociation'
+        '523':
           description: InvalidOriginReadTimeout
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidOriginReadTimeout'
-        '521':
+        '524':
           description: InvalidOriginKeepaliveTimeout
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidOriginKeepaliveTimeout'
-        '522':
+        '525':
           description: NoSuchFieldLevelEncryptionConfig
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchFieldLevelEncryptionConfig'
-        '523':
+        '526':
           description: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior'
-        '524':
+        '527':
           description: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToFieldLevelEncryptionConfig'
-        '525':
+        '528':
           description: NoSuchCachePolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchCachePolicy'
-        '526':
+        '529':
           description: TooManyDistributionsAssociatedToCachePolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToCachePolicy'
-        '527':
+        '530':
           description: NoSuchOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchOriginRequestPolicy'
-        '528':
+        '531':
           description: TooManyDistributionsAssociatedToOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginRequestPolicy'
-        '529':
+        '532':
           description: TooManyDistributionsAssociatedToKeyGroup
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToKeyGroup'
-        '530':
+        '533':
           description: TooManyKeyGroupsAssociatedToDistribution
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyKeyGroupsAssociatedToDistribution'
-        '531':
+        '534':
           description: TrustedKeyGroupDoesNotExist
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TrustedKeyGroupDoesNotExist'
+        '535':
+          description: NoSuchRealtimeLogConfig
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchRealtimeLogConfig'
+        '536':
+          description: RealtimeLogConfigOwnerMismatch
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RealtimeLogConfigOwnerMismatch'
       parameters:
         - name: Id
           in: path
@@ -4133,7 +4532,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/CommentType'
-                        - description: '<p>Any comments you want to include about the distribution.</p> <p>If you don''t want to specify a comment, include an empty <code>Comment</code> element.</p> <p>To delete an existing comment, update the distribution configuration and include an empty <code>Comment</code> element.</p> <p>To add or change a comment, update the distribution configuration and specify the new comment.</p>'
+                        - description: An optional comment to describe the distribution. The comment cannot be longer than 128 characters.
                     Logging:
                       allOf:
                         - $ref: '#/components/schemas/LoggingConfig'
@@ -4313,7 +4712,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: An optional comment about the configuration.
+                        - description: An optional comment about the configuration. The comment cannot be longer than 128 characters.
                     QueryArgProfileConfig:
                       allOf:
                         - $ref: '#/components/schemas/QueryArgProfileConfig'
@@ -4479,11 +4878,52 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: An optional comment for the field-level encryption profile.
+                        - description: An optional comment for the field-level encryption profile. The comment cannot be longer than 128 characters.
                     EncryptionEntities:
                       allOf:
                         - $ref: '#/components/schemas/EncryptionEntities'
                         - description: 'A complex data type of encryption entities for the field-level encryption profile that include the public key ID, provider, and field patterns for specifying which fields to encrypt with this key.'
+  '/2020-05-31/function/{Name}':
+    get:
+      operationId: GetFunction2020_05_31
+      description: '<p>Gets the code of a CloudFront function. To get configuration information and metadata about a function, use <code>DescribeFunction</code>.</p> <p>To get a function’s code, you must provide the function’s name and stage. To get these values, you can use <code>ListFunctions</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetFunctionResult'
+        '480':
+          description: NoSuchFunctionExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchFunctionExists'
+      parameters:
+        - name: Name
+          in: path
+          required: true
+          description: The name of the function whose code you are getting.
+          schema:
+            type: string
+        - name: Stage
+          in: query
+          required: false
+          description: 'The function’s stage, either <code>DEVELOPMENT</code> or <code>LIVE</code>.'
+          schema:
+            type: string
+            enum:
+              - DEVELOPMENT
+              - LIVE
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2020-05-31/distribution/{DistributionId}/invalidation/{Id}':
     get:
       operationId: GetInvalidation2020_05_31
@@ -4735,7 +5175,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: A comment to describe the public key.
+                        - description: A comment to describe the public key. The comment cannot be longer than 128 characters.
   /2020-05-31/get-realtime-log-config/:
     post:
       operationId: GetRealtimeLogConfig2020_05_31
@@ -5279,6 +5719,62 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2020-05-31/function/{Name}/publish#If-Match':
+    post:
+      operationId: PublishFunction2020_05_31
+      description: '<p>Publishes a CloudFront function by copying the function code from the <code>DEVELOPMENT</code> stage to <code>LIVE</code>. This automatically updates all cache behaviors that are using this function to use the newly published copy in the <code>LIVE</code> stage.</p> <p>When a function is published to the <code>LIVE</code> stage, you can attach the function to a distribution’s cache behavior, using the function’s Amazon Resource Name (ARN).</p> <p>To publish a function, you must provide the function’s name and version (<code>ETag</code> value). To get these values, you can use <code>ListFunctions</code> and <code>DescribeFunction</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishFunctionResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '481':
+          description: InvalidIfMatchVersion
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidIfMatchVersion'
+        '482':
+          description: NoSuchFunctionExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchFunctionExists'
+        '483':
+          description: PreconditionFailed
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailed'
+      parameters:
+        - name: Name
+          in: path
+          required: true
+          description: The name of the function that you are publishing.
+          schema:
+            type: string
+        - name: If-Match
+          in: header
+          required: true
+          description: 'The current version (<code>ETag</code> value) of the function that you are publishing, which you can get using <code>DescribeFunction</code>.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /2020-05-31/tagging#Operation=Tag&Resource:
     post:
       operationId: TagResource2020_05_31
@@ -5342,6 +5838,82 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/TagList'
                         - description: ' A complex type that contains <code>Tag</code> elements.'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2020-05-31/function/{Name}/test#If-Match':
+    post:
+      operationId: TestFunction2020_05_31
+      description: '<p>Tests a CloudFront function.</p> <p>To test a function, you provide an <i>event object</i> that represents an HTTP request or response that your CloudFront distribution could receive in production. CloudFront runs the function, passing it the event object that you provided, and returns the function’s result (the modified event object) in the response. The response also contains function logs and error messages, if any exist. For more information about testing functions, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function">Testing functions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>To test a function, you provide the function’s name and version (<code>ETag</code> value) along with the event object. To get the function’s name and version, you can use <code>ListFunctions</code> and <code>DescribeFunction</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TestFunctionResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '481':
+          description: InvalidIfMatchVersion
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidIfMatchVersion'
+        '482':
+          description: NoSuchFunctionExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchFunctionExists'
+        '483':
+          description: TestFunctionFailed
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TestFunctionFailed'
+      parameters:
+        - name: Name
+          in: path
+          required: true
+          description: The name of the function that you are testing.
+          schema:
+            type: string
+        - name: If-Match
+          in: header
+          required: true
+          description: 'The current version (<code>ETag</code> value) of the function that you are testing, which you can get using <code>DescribeFunction</code>.'
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              required:
+                - EventObject
+              properties:
+                Stage:
+                  description: 'The stage of the function that you are testing, either <code>DEVELOPMENT</code> or <code>LIVE</code>.'
+                  type: string
+                  enum:
+                    - DEVELOPMENT
+                    - LIVE
+                EventObject:
+                  description: 'The event object to test the function with. For more information about the structure of the event object, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function">Testing functions</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+                  type: string
+                  maxLength: 40960
+                  format: password
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5686,6 +6258,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LambdaFunctionAssociations'
             - description: A complex type that contains zero or more Lambda function associations for a cache behavior.
+        FunctionAssociations:
+          allOf:
+            - $ref: '#/components/schemas/FunctionAssociations'
+            - description: A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the <code>LIVE</code> stage to associate them with a cache behavior.
         FieldLevelEncryptionId:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -5697,7 +6273,7 @@ components:
         CachePolicyId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: 'The unique identifier of the cache policy that is attached to the default cache behavior. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html">Using the managed cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+            - description: '<p>The unique identifier of the cache policy that is attached to the default cache behavior. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html">Using the managed cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>A <code>DefaultCacheBehavior</code> must include either a <code>CachePolicyId</code> or <code>ForwardedValues</code>. We recommend that you use a <code>CachePolicyId</code>.</p>'
         OriginRequestPolicyId:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -5706,7 +6282,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ForwardedValues'
             - deprecated: true
-              description: '<p>This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/working-with-policies.html">Working with policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you want to include values in the cache key, use a cache policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html">Using the managed cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy">Creating origin request policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html">Using the managed origin request policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.</p>'
+              description: '<p>This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/working-with-policies.html">Working with policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you want to include values in the cache key, use a cache policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html">Using the managed cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy">Creating origin request policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html">Using the managed origin request policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>A <code>DefaultCacheBehavior</code> must include either a <code>CachePolicyId</code> or <code>ForwardedValues</code>. We recommend that you use a <code>CachePolicyId</code>.</p> <p>A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.</p>'
         MinTTL:
           allOf:
             - $ref: '#/components/schemas/long'
@@ -5872,6 +6448,9 @@ components:
     TooManyDistributionsWithSingleFunctionARN: {}
     TooManyLambdaFunctionAssociations: {}
     InvalidLambdaFunctionAssociation: {}
+    TooManyDistributionsWithFunctionAssociations: {}
+    TooManyFunctionAssociations: {}
+    InvalidFunctionAssociation: {}
     InvalidOriginReadTimeout: {}
     InvalidOriginKeepaliveTimeout: {}
     NoSuchFieldLevelEncryptionConfig: {}
@@ -5884,6 +6463,8 @@ components:
     TooManyDistributionsAssociatedToKeyGroup: {}
     TooManyKeyGroupsAssociatedToDistribution: {}
     TrustedKeyGroupDoesNotExist: {}
+    NoSuchRealtimeLogConfig: {}
+    RealtimeLogConfigOwnerMismatch: {}
     CreateDistributionWithTagsResult:
       type: object
       properties:
@@ -5936,7 +6517,7 @@ components:
         Comment:
           allOf:
             - $ref: '#/components/schemas/CommentType'
-            - description: '<p>Any comments you want to include about the distribution.</p> <p>If you don''t want to specify a comment, include an empty <code>Comment</code> element.</p> <p>To delete an existing comment, update the distribution configuration and include an empty <code>Comment</code> element.</p> <p>To add or change a comment, update the distribution configuration and specify the new comment.</p>'
+            - description: An optional comment to describe the distribution. The comment cannot be longer than 128 characters.
         Logging:
           allOf:
             - $ref: '#/components/schemas/LoggingConfig'
@@ -6047,6 +6628,20 @@ components:
     TooManyFieldLevelEncryptionProfiles: {}
     TooManyFieldLevelEncryptionEncryptionEntities: {}
     TooManyFieldLevelEncryptionFieldPatterns: {}
+    CreateFunctionResult:
+      type: object
+      properties:
+        FunctionSummary:
+          allOf:
+            - $ref: '#/components/schemas/FunctionSummary'
+            - description: Contains configuration information and metadata about a CloudFront function.
+    FunctionRuntime:
+      type: string
+      enum:
+        - cloudfront-js-1.0
+    TooManyFunctions: {}
+    FunctionAlreadyExists: {}
+    FunctionSizeLimitExceeded: {}
     CreateInvalidationResult:
       type: object
       properties:
@@ -6106,6 +6701,7 @@ components:
             - $ref: '#/components/schemas/RealtimeMetricsSubscriptionStatus'
             - description: A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
       description: A subscription configuration for additional CloudWatch metrics.
+    UnsupportedOperation: {}
     CreateOriginRequestPolicyResult:
       type: object
       properties:
@@ -6312,6 +6908,8 @@ components:
     DistributionNotDisabled: {}
     FieldLevelEncryptionConfigInUse: {}
     FieldLevelEncryptionProfileInUse: {}
+    NoSuchFunctionExists: {}
+    FunctionInUse: {}
     NoSuchResource: {}
     ResourceInUse: {}
     DeleteMonitoringSubscriptionResult:
@@ -6319,10 +6917,16 @@ components:
       properties: {}
     OriginRequestPolicyInUse: {}
     PublicKeyInUse: {}
-    NoSuchRealtimeLogConfig: {}
     RealtimeLogConfigInUse: {}
     StreamingDistributionNotDisabled: {}
     NoSuchStreamingDistribution: {}
+    DescribeFunctionResult:
+      type: object
+      properties:
+        FunctionSummary:
+          allOf:
+            - $ref: '#/components/schemas/FunctionSummary'
+            - description: Contains configuration information and metadata about a CloudFront function.
     GetCachePolicyResult:
       type: object
       properties:
@@ -6397,6 +7001,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/FieldLevelEncryptionProfileConfig'
             - description: Return the field-level encryption profile configuration information.
+    GetFunctionResult:
+      type: object
+      properties:
+        FunctionCode:
+          allOf:
+            - $ref: '#/components/schemas/FunctionBlob'
+            - description: The function code of a CloudFront function.
     GetInvalidationResult:
       type: object
       properties:
@@ -6547,6 +7158,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/FieldLevelEncryptionProfileList'
             - description: Returns a list of the field-level encryption profiles that have been created in CloudFront for this account.
+    ListFunctionsResult:
+      type: object
+      properties:
+        FunctionList:
+          allOf:
+            - $ref: '#/components/schemas/FunctionList'
+            - description: A list of CloudFront functions.
     ListInvalidationsResult:
       type: object
       properties:
@@ -6601,6 +7219,13 @@ components:
             - $ref: '#/components/schemas/Tags'
             - description: ' A complex type that contains zero or more <code>Tag</code> elements.'
       description: ' The returned result of the corresponding request.'
+    PublishFunctionResult:
+      type: object
+      properties:
+        FunctionSummary:
+          allOf:
+            - $ref: '#/components/schemas/FunctionSummary'
+            - description: Contains configuration information and metadata about a CloudFront function.
     TagList:
       type: array
       items:
@@ -6608,6 +7233,14 @@ components:
           - $ref: '#/components/schemas/Tag'
           - xml:
               name: Tag
+    TestFunctionResult:
+      type: object
+      properties:
+        TestResult:
+          allOf:
+            - $ref: '#/components/schemas/TestResult'
+            - description: An object that represents the result of running the function with the provided event object.
+    TestFunctionFailed: {}
     TagKeyList:
       type: array
       items:
@@ -6653,6 +7286,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/FieldLevelEncryptionProfile'
             - description: Return the results of updating the profile.
+    UpdateFunctionResult:
+      type: object
+      properties:
+        FunctionSummary:
+          allOf:
+            - $ref: '#/components/schemas/FunctionSummary'
+            - description: Contains configuration information and metadata about a CloudFront function.
     UpdateKeyGroupResult:
       type: object
       properties:
@@ -6861,6 +7501,20 @@ components:
             - $ref: '#/components/schemas/LambdaFunctionAssociationList'
             - description: ' <b>Optional</b>: A complex type that contains <code>LambdaFunctionAssociation</code> items for this cache behavior. If <code>Quantity</code> is <code>0</code>, you can omit <code>Items</code>.'
       description: '<p>A complex type that specifies a list of Lambda functions associations for a cache behavior.</p> <p>If you want to invoke one or more Lambda functions triggered by requests that match the <code>PathPattern</code> of the cache behavior, specify the applicable values for <code>Quantity</code> and <code>Items</code>. Note that there can be up to 4 <code>LambdaFunctionAssociation</code> items in this list (one for each possible value of <code>EventType</code>) and each <code>EventType</code> can be associated with the Lambda function only once.</p> <p>If you don''t want to invoke any Lambda functions for the requests that match <code>PathPattern</code>, specify <code>0</code> for <code>Quantity</code> and omit <code>Items</code>. </p>'
+    FunctionAssociations:
+      type: object
+      required:
+        - Quantity
+      properties:
+        Quantity:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The number of CloudFront functions in the list.
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/FunctionAssociationList'
+            - description: The CloudFront functions that are associated with a cache behavior in a CloudFront distribution. CloudFront functions must be published to the <code>LIVE</code> stage to associate them with a cache behavior.
+      description: A list of CloudFront functions that are associated with a cache behavior in a CloudFront distribution. CloudFront functions must be published to the <code>LIVE</code> stage to associate them with a cache behavior.
     ForwardedValues:
       type: object
       required:
@@ -6925,6 +7579,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LambdaFunctionAssociations'
             - description: A complex type that contains zero or more Lambda function associations for a cache behavior.
+        FunctionAssociations:
+          allOf:
+            - $ref: '#/components/schemas/FunctionAssociations'
+            - description: A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the <code>LIVE</code> stage to associate them with a cache behavior.
         FieldLevelEncryptionId:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -6936,7 +7594,7 @@ components:
         CachePolicyId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: 'The unique identifier of the cache policy that is attached to this cache behavior. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html">Using the managed cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+            - description: '<p>The unique identifier of the cache policy that is attached to this cache behavior. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html">Using the managed cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>A <code>CacheBehavior</code> must include either a <code>CachePolicyId</code> or <code>ForwardedValues</code>. We recommend that you use a <code>CachePolicyId</code>.</p>'
         OriginRequestPolicyId:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -6945,7 +7603,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ForwardedValues'
             - deprecated: true
-              description: '<p>This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/working-with-policies.html">Working with policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you want to include values in the cache key, use a cache policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html">Using the managed cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy">Creating origin request policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html">Using the managed origin request policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.</p>'
+              description: '<p>This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/working-with-policies.html">Working with policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you want to include values in the cache key, use a cache policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html">Using the managed cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy">Creating origin request policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html">Using the managed origin request policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>A <code>CacheBehavior</code> must include either a <code>CachePolicyId</code> or <code>ForwardedValues</code>. We recommend that you use a <code>CachePolicyId</code>.</p> <p>A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.</p>'
         MinTTL:
           allOf:
             - $ref: '#/components/schemas/long'
@@ -6981,7 +7639,7 @@ components:
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A comment to describe the cache policy.
+            - description: A comment to describe the cache policy. The comment cannot be longer than 128 characters.
         Name:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -7191,7 +7849,7 @@ components:
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: 'Any comments you want to include about the origin access identity. '
+            - description: An optional comment to describe the origin access identity. The comment cannot be longer than 128 characters.
       description: 'Origin access identity configuration. Send a <code>GET</code> request to the <code>/<i>CloudFront API version</i>/CloudFront/identity ID/config</code> resource. '
     CloudFrontOriginAccessIdentity:
       type: object
@@ -7473,7 +8131,7 @@ components:
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: An optional comment about the configuration.
+            - description: An optional comment about the configuration. The comment cannot be longer than 128 characters.
         QueryArgProfileConfig:
           allOf:
             - $ref: '#/components/schemas/QueryArgProfileConfig'
@@ -7533,7 +8191,7 @@ components:
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: An optional comment for the field-level encryption profile.
+            - description: An optional comment for the field-level encryption profile. The comment cannot be longer than 128 characters.
         EncryptionEntities:
           allOf:
             - $ref: '#/components/schemas/EncryptionEntities'
@@ -7571,6 +8229,75 @@ components:
             - $ref: '#/components/schemas/FieldLevelEncryptionProfileConfig'
             - description: A complex data type that includes the profile name and the encryption entities for the field-level encryption profile.
       description: A complex data type for field-level encryption profiles.
+    FunctionName:
+      type: string
+      pattern: '^[a-zA-Z0-9-_]{1,64}$'
+      minLength: 1
+      maxLength: 64
+    FunctionConfig:
+      type: object
+      required:
+        - Comment
+        - Runtime
+      properties:
+        Comment:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A comment to describe the function.
+        Runtime:
+          allOf:
+            - $ref: '#/components/schemas/FunctionRuntime'
+            - description: The function’s runtime environment. The only valid value is <code>cloudfront-js-1.0</code>.
+      description: Contains configuration information about a CloudFront function.
+    FunctionBlob:
+      type: string
+      minLength: 1
+      maxLength: 40960
+      format: password
+    CreateFunctionRequest:
+      type: object
+      required:
+        - Name
+        - FunctionConfig
+        - FunctionCode
+      title: CreateFunctionRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/FunctionName'
+            - description: A name to identify the function.
+        FunctionConfig:
+          allOf:
+            - $ref: '#/components/schemas/FunctionConfig'
+            - description: 'Configuration information about the function, including an optional comment and the function’s runtime.'
+        FunctionCode:
+          allOf:
+            - $ref: '#/components/schemas/FunctionBlob'
+            - description: 'The function code. For more information about writing a CloudFront function, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html">Writing function code for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+    FunctionSummary:
+      type: object
+      required:
+        - Name
+        - FunctionConfig
+        - FunctionMetadata
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/FunctionName'
+            - description: The name of the CloudFront function.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The status of the CloudFront function.
+        FunctionConfig:
+          allOf:
+            - $ref: '#/components/schemas/FunctionConfig'
+            - description: Contains configuration information about a CloudFront function.
+        FunctionMetadata:
+          allOf:
+            - $ref: '#/components/schemas/FunctionMetadata'
+            - description: Contains metadata about a CloudFront function.
+      description: Contains configuration information and metadata about a CloudFront function.
     InvalidationBatch:
       type: object
       required:
@@ -7641,7 +8368,7 @@ components:
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A comment to describe the key group.
+            - description: A comment to describe the key group. The comment cannot be longer than 128 characters.
       description: '<p>A key group configuration.</p> <p>A key group contains a list of public keys that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">CloudFront signed URLs and signed cookies</a>.</p>'
     CreateKeyGroupRequest:
       type: object
@@ -7706,7 +8433,7 @@ components:
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A comment to describe the origin request policy.
+            - description: A comment to describe the origin request policy. The comment cannot be longer than 128 characters.
         Name:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -7778,7 +8505,7 @@ components:
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A comment to describe the public key.
+            - description: A comment to describe the public key. The comment cannot be longer than 128 characters.
       description: 'Configuration information about a public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.'
     CreatePublicKeyRequest:
       type: object
@@ -8083,6 +8810,10 @@ components:
       type: object
       title: DeleteFieldLevelEncryptionProfileRequest
       properties: {}
+    DeleteFunctionRequest:
+      type: object
+      title: DeleteFunctionRequest
+      properties: {}
     DeleteKeyGroupRequest:
       type: object
       title: DeleteKeyGroupRequest
@@ -8116,6 +8847,15 @@ components:
       title: DeleteStreamingDistributionRequest
       properties: {}
       description: The request to delete a streaming distribution.
+    FunctionStage:
+      type: string
+      enum:
+        - DEVELOPMENT
+        - LIVE
+    DescribeFunctionRequest:
+      type: object
+      title: DescribeFunctionRequest
+      properties: {}
     DistributionIdListSummary:
       type: array
       items:
@@ -8449,7 +9189,7 @@ components:
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: An optional comment for the field-level encryption profile summary.
+            - description: An optional comment for the field-level encryption profile summary. The comment cannot be longer than 128 characters.
       description: The field-level encryption profile summary.
     FieldLevelEncryptionSummary:
       type: object
@@ -8468,7 +9208,7 @@ components:
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: An optional comment about the field-level encryption item.
+            - description: An optional comment about the field-level encryption item. The comment cannot be longer than 128 characters.
         QueryArgProfileConfig:
           allOf:
             - $ref: '#/components/schemas/QueryArgProfileConfig'
@@ -8499,6 +9239,93 @@ components:
             - $ref: '#/components/schemas/QueryStringCacheKeysList'
             - description: 'A list that contains the query string parameters that you want CloudFront to use as a basis for caching for a cache behavior. If <code>Quantity</code> is 0, you can omit <code>Items</code>. '
       description: '<p>This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field.</p> <p>If you want to include query strings in the cache key, use <code>QueryStringsConfig</code> in a cache policy. See <code>CachePolicy</code>.</p> <p>If you want to send query strings to the origin but not include them in the cache key, use <code>QueryStringsConfig</code> in an origin request policy. See <code>OriginRequestPolicy</code>.</p> <p>A complex type that contains information about the query string parameters that you want CloudFront to use for caching for a cache behavior. </p>'
+    FunctionARN:
+      type: string
+      pattern: 'arn:aws:cloudfront::[0-9]{12}:function\/[a-zA-Z0-9-_]{1,64}$'
+      maxLength: 108
+    FunctionAssociation:
+      type: object
+      required:
+        - FunctionARN
+        - EventType
+      properties:
+        FunctionARN:
+          allOf:
+            - $ref: '#/components/schemas/FunctionARN'
+            - description: The Amazon Resource Name (ARN) of the function.
+        EventType:
+          allOf:
+            - $ref: '#/components/schemas/EventType'
+            - description: 'The event type of the function, either <code>viewer-request</code> or <code>viewer-response</code>. You cannot use origin-facing event types (<code>origin-request</code> and <code>origin-response</code>) with a CloudFront function.'
+      description: A CloudFront function that is associated with a cache behavior in a CloudFront distribution.
+    FunctionAssociationList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/FunctionAssociation'
+          - xml:
+              name: FunctionAssociation
+    FunctionEventObject:
+      type: string
+      maxLength: 40960
+      format: password
+    FunctionExecutionLogList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    FunctionSummaryList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/FunctionSummary'
+          - xml:
+              name: FunctionSummary
+    FunctionList:
+      type: object
+      required:
+        - MaxItems
+        - Quantity
+      properties:
+        NextMarker:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the <code>Marker</code> field of a subsequent request to continue listing functions where you left off.'
+        MaxItems:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The maximum number of functions requested.
+        Quantity:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The number of functions returned in the response.
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/FunctionSummaryList'
+            - description: Contains the functions in the list.
+      description: A list of CloudFront functions.
+    FunctionMetadata:
+      type: object
+      required:
+        - FunctionARN
+        - LastModifiedTime
+      properties:
+        FunctionARN:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.
+        Stage:
+          allOf:
+            - $ref: '#/components/schemas/FunctionStage'
+            - description: '<p>The stage that the function is in, either <code>DEVELOPMENT</code> or <code>LIVE</code>.</p> <p>When a function is in the <code>DEVELOPMENT</code> stage, you can test the function with <code>TestFunction</code>, and update it with <code>UpdateFunction</code>.</p> <p>When a function is in the <code>LIVE</code> stage, you can attach the function to a distribution’s cache behavior, using the function’s ARN.</p>'
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The date and time when the function was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The date and time when the function was most recently updated.
+      description: Contains metadata about a CloudFront function.
     GeoRestrictionType:
       type: string
       enum:
@@ -8574,6 +9401,10 @@ components:
     GetFieldLevelEncryptionRequest:
       type: object
       title: GetFieldLevelEncryptionRequest
+      properties: {}
+    GetFunctionRequest:
+      type: object
+      title: GetFunctionRequest
       properties: {}
     GetInvalidationRequest:
       type: object
@@ -8854,6 +9685,10 @@ components:
     ListFieldLevelEncryptionProfilesRequest:
       type: object
       title: ListFieldLevelEncryptionProfilesRequest
+      properties: {}
+    ListFunctionsRequest:
+      type: object
+      title: ListFunctionsRequest
       properties: {}
     ListInvalidationsRequest:
       type: object
@@ -9292,8 +10127,12 @@ components:
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A comment to describe the public key.
+            - description: A comment to describe the public key. The comment cannot be longer than 128 characters.
       description: Contains information about a public key.
+    PublishFunctionRequest:
+      type: object
+      title: PublishFunctionRequest
+      properties: {}
     QueryArgProfile:
       type: object
       required:
@@ -9500,6 +10339,44 @@ components:
       description: ' The request to add tags to a CloudFront resource.'
       xml:
         namespace: 'http://cloudfront.amazonaws.com/doc/2020-05-31/'
+    TestFunctionRequest:
+      type: object
+      required:
+        - EventObject
+      title: TestFunctionRequest
+      properties:
+        Stage:
+          allOf:
+            - $ref: '#/components/schemas/FunctionStage'
+            - description: 'The stage of the function that you are testing, either <code>DEVELOPMENT</code> or <code>LIVE</code>.'
+        EventObject:
+          allOf:
+            - $ref: '#/components/schemas/FunctionEventObject'
+            - description: 'The event object to test the function with. For more information about the structure of the event object, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function">Testing functions</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+    TestResult:
+      type: object
+      properties:
+        FunctionSummary:
+          allOf:
+            - $ref: '#/components/schemas/FunctionSummary'
+            - description: Contains configuration information and metadata about the CloudFront function that was tested.
+        ComputeUtilization:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The amount of time that the function took to run as a percentage of the maximum allowed time. For example, a compute utilization of 35 means that the function completed in 35% of the maximum allowed time.'
+        FunctionExecutionLogs:
+          allOf:
+            - $ref: '#/components/schemas/FunctionExecutionLogList'
+            - description: Contains the log lines that the function wrote (if any) when running the test.
+        FunctionErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'If the result of testing the function was an error, this field contains the error message.'
+        FunctionOutput:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The event object returned by the function. For more information about the structure of the event object, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/functions-event-structure.html">Event object structure</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+      description: Contains the result of testing a CloudFront function with <code>TestFunction</code>.
     TrustedKeyGroupIdList:
       type: array
       items:
@@ -9582,6 +10459,21 @@ components:
             - description: 'Request to update a field-level encryption profile. '
       xml:
         namespace: 'http://cloudfront.amazonaws.com/doc/2020-05-31/'
+    UpdateFunctionRequest:
+      type: object
+      required:
+        - FunctionConfig
+        - FunctionCode
+      title: UpdateFunctionRequest
+      properties:
+        FunctionConfig:
+          allOf:
+            - $ref: '#/components/schemas/FunctionConfig'
+            - description: Configuration information about the function.
+        FunctionCode:
+          allOf:
+            - $ref: '#/components/schemas/FunctionBlob'
+            - description: 'The function code. For more information about writing a CloudFront function, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html">Writing function code for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.'
     UpdateKeyGroupRequest:
       type: object
       required:

@@ -548,7 +548,7 @@ paths:
   /StartChangeSet:
     post:
       operationId: StartChangeSet
-      description: '<p>This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a <code>ResourceInUseException</code>.</p> <p>For example, you cannot start the ChangeSet described in the <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples">example</a> below because it contains two changes to execute the same change type (<code>AddRevisions</code>) against the same entity (<code>entity-id@1)</code>.</p>'
+      description: '<p>This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a <code>ResourceInUseException</code>.</p> <p>For example, you cannot start the ChangeSet described in the <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples">example</a> later in this topic, because it contains two changes to execute the same change type (<code>AddRevisions</code>) against the same entity (<code>entity-id@1)</code>.</p> <p>For more information about working with change sets, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets"> Working with change sets</a>.</p>'
       responses:
         '200':
           description: Success
@@ -744,7 +744,7 @@ components:
             - description: 'Returned if the change set is in <code>FAILED</code> status. Can be either <code>CLIENT_ERROR</code>, which means that there are issues with the request (see the <code>ErrorDetailList</code>), or <code>SERVER_FAULT</code>, which means that there is a problem in the system, and you should retry your request.'
         FailureDescription:
           allOf:
-            - $ref: '#/components/schemas/StringValue'
+            - $ref: '#/components/schemas/ExceptionMessageContent'
             - description: 'Returned if there is a failure on the change set, but that failure is not related to any of the changes in the request.'
         ChangeSet:
           allOf:
@@ -767,7 +767,7 @@ components:
             - description: The ARN associated to the unique identifier for the change set referenced in this request.
         LastModifiedDate:
           allOf:
-            - $ref: '#/components/schemas/StringValue'
+            - $ref: '#/components/schemas/DateTimeISO8601'
             - description: 'The last modified date of the entity, in ISO 8601 format (2018-02-27T13:45:22Z).'
         Details:
           allOf:
@@ -848,6 +848,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Json'
             - description: This object contains details specific to the change type of the requested change.
+        ChangeName:
+          allOf:
+            - $ref: '#/components/schemas/ChangeName'
+            - description: Optional name for the change.
       description: 'An object that contains the <code>ChangeType</code>, <code>Details</code>, and <code>Entity</code>.'
     ServiceQuotaExceededException: {}
     ARN:
@@ -887,12 +891,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/Identifier'
             - description: The identifier for the entity.
-      description: 'A product entity contains data that describes your product, its supported features, and how it can be used or launched by your customer. '
+      description: 'An entity contains data that describes your product, its supported features, and how it can be used or launched by your customer. '
     Json:
       type: string
       pattern: '^[\s]*\{[\s\S]*\}[\s]*$'
       minLength: 2
       maxLength: 16384
+    ChangeName:
+      type: string
+      pattern: '^[a-zA-Z]$'
+      minLength: 1
+      maxLength: 72
     ChangeSummary:
       type: object
       properties:
@@ -912,6 +921,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ErrorDetailList'
             - description: An array of <code>ErrorDetail</code> objects associated with the change.
+        ChangeName:
+          allOf:
+            - $ref: '#/components/schemas/ChangeName'
+            - description: Optional name for the change.
       description: This object is a container for common summary information about the change. The summary doesn't contain the whole change structure.
     ChangeSetDescription:
       type: array
@@ -997,8 +1010,11 @@ components:
       type: object
       title: DescribeChangeSetRequest
       properties: {}
-    StringValue:
+    ExceptionMessageContent:
       type: string
+      pattern: ^(.)+$
+      minLength: 1
+      maxLength: 2048
     DescribeEntityRequest:
       type: object
       title: DescribeEntityRequest
@@ -1013,12 +1029,22 @@ components:
       pattern: '^[\w\-@]+$'
       minLength: 1
       maxLength: 255
+    EntityNameString:
+      type: string
+      pattern: '^\\S+[\\S\\s]*'
+      minLength: 1
+      maxLength: 255
+    VisibilityValue:
+      type: string
+      pattern: '^[a-zA-Z]+$'
+      minLength: 1
+      maxLength: 64
     EntitySummary:
       type: object
       properties:
         Name:
           allOf:
-            - $ref: '#/components/schemas/StringValue'
+            - $ref: '#/components/schemas/EntityNameString'
             - description: The name for the entity. This value is not unique. It is defined by the seller.
         EntityType:
           allOf:
@@ -1034,27 +1060,32 @@ components:
             - description: The ARN associated with the unique identifier for the entity.
         LastModifiedDate:
           allOf:
-            - $ref: '#/components/schemas/StringValue'
+            - $ref: '#/components/schemas/DateTimeISO8601'
             - description: 'The last time the entity was published, using ISO 8601 format (2018-02-27T13:45:22Z).'
         Visibility:
           allOf:
-            - $ref: '#/components/schemas/StringValue'
+            - $ref: '#/components/schemas/VisibilityValue'
             - description: 'The visibility status of the entity to buyers. This value can be <code>Public</code> (everyone can view the entity), <code>Limited</code> (the entity is visible to limited accounts only), or <code>Restricted</code> (the entity was published and then unpublished and only existing buyers can view it). '
       description: 'This object is a container for common summary information about the entity. The summary doesn''t contain the whole entity structure, but it does contain information common across all entities.'
     EntitySummaryList:
       type: array
       items:
         $ref: '#/components/schemas/EntitySummary'
+    ErrorCodeString:
+      type: string
+      pattern: '^[a-zA-Z_]+$'
+      minLength: 1
+      maxLength: 72
     ErrorDetail:
       type: object
       properties:
         ErrorCode:
           allOf:
-            - $ref: '#/components/schemas/StringValue'
+            - $ref: '#/components/schemas/ErrorCodeString'
             - description: The error code that identifies the type of error.
         ErrorMessage:
           allOf:
-            - $ref: '#/components/schemas/StringValue'
+            - $ref: '#/components/schemas/ExceptionMessageContent'
             - description: The message for the error.
       description: Details about the error.
     FilterName:
@@ -1065,7 +1096,7 @@ components:
     ValueList:
       type: array
       items:
-        $ref: '#/components/schemas/StringValue'
+        $ref: '#/components/schemas/FilterValueContent'
       minItems: 1
       maxItems: 10
     FilterList:
@@ -1074,6 +1105,11 @@ components:
         $ref: '#/components/schemas/Filter'
       minItems: 1
       maxItems: 8
+    FilterValueContent:
+      type: string
+      pattern: ^(.)+$
+      minLength: 1
+      maxLength: 255
     Sort:
       type: object
       properties:
