@@ -702,7 +702,7 @@ paths:
   /#X-Amz-Target=MTurkRequesterServiceV20170117.GetAccountBalance:
     post:
       operationId: GetAccountBalance
-      description: The <code>GetAccountBalance</code> operation retrieves the amount of money in your Amazon Mechanical Turk account.
+      description: 'The <code>GetAccountBalance</code> operation retrieves the Prepaid HITs balance in your Amazon Mechanical Turk account if you are a Prepaid Requester. Alternatively, this operation will retrieve the remaining available AWS Billing usage if you have enabled AWS Billing. Note: If you have enabled AWS Billing and still have a remaining Prepaid HITs balance, this balance can be viewed on the My Account page in the Requester console.'
       responses:
         '200':
           description: Success
@@ -2058,22 +2058,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: ' The value of the Qualification. You can omit this value if you are using the presence or absence of the Qualification as the basis for a HIT requirement. '
-    ServiceFault:
-      type: object
-      properties:
-        Message:
-          $ref: '#/components/schemas/ExceptionMessage'
-        TurkErrorCode:
-          $ref: '#/components/schemas/TurkErrorCode'
-      description: Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.
-    RequestError:
-      type: object
-      properties:
-        Message:
-          $ref: '#/components/schemas/ExceptionMessage'
-        TurkErrorCode:
-          $ref: '#/components/schemas/TurkErrorCode'
-      description: Your request is invalid.
+    ServiceFault: {}
+    RequestError: {}
     ApproveAssignmentResponse:
       type: object
       properties: {}
@@ -3463,8 +3449,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/EventType'
-    ExceptionMessage:
-      type: string
     Qualification:
       type: object
       properties:
@@ -3760,8 +3744,6 @@ components:
             - $ref: '#/components/schemas/HITAccessActions'
             - description: ' Setting this attribute prevents Workers whose Qualifications do not meet this QualificationRequirement from taking the specified action. Valid arguments include "Accept" (Worker cannot accept the HIT, but can preview the HIT and see it in their search results), "PreviewAndAccept" (Worker cannot accept or preview the HIT, but can see the HIT in their search results), and "DiscoverPreviewAndAccept" (Worker cannot accept, preview, or see the HIT in their search results). It''s possible for you to create a HIT with multiple QualificationRequirements (which can have different values for the ActionGuarded attribute). In this case, the Worker is only permitted to perform an action when they have met all QualificationRequirements guarding the action. The actions in the order of least restrictive to most restrictive are Discover, Preview and Accept. For example, if a Worker meets all QualificationRequirements that are set to DiscoverPreviewAndAccept, but do not meet all requirements that are set with PreviewAndAccept, then the Worker will be able to Discover, i.e. see the HIT in their search result, but will not be able to Preview or Accept the HIT. ActionsGuarded should not be used in combination with the <code>RequiredToPreview</code> field. '
       description: ' The QualificationRequirement data structure describes a Qualification that a Worker must have before the Worker is allowed to accept a HIT. A requirement may optionally state that a Worker must have the Qualification in order to preview the HIT, or see the HIT in search results. '
-    TurkErrorCode:
-      type: string
     ReviewActionStatus:
       type: string
       enum:

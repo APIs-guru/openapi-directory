@@ -228,7 +228,7 @@ paths:
     post:
       deprecated: true
       operationId: AcceptInvitation
-      description: '<p>This method is deprecated. Instead, use <code>AcceptAdministratorInvitation</code>.</p> <p>Accepts the invitation to be a member account and be monitored by the Security Hub administrator account that the invitation was sent from.</p> <p>This operation is only used by member accounts that are not added through Organizations.</p> <p>When the member account accepts the invitation, permission is granted to the administrator account to view findings generated in the member account.</p>'
+      description: '<p>This method is deprecated. Instead, use <code>AcceptAdministratorInvitation</code>.</p> <p>The Security Hub console continues to use <code>AcceptInvitation</code>. It will eventually change to use <code>AcceptAdministratorInvitation</code>. Any IAM policies that specifically control access to this function must continue to use <code>AcceptInvitation</code>. You should also add <code>AcceptAdministratorInvitation</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>AcceptAdministratorInvitation</code>.</p> <p>Accepts the invitation to be a member account and be monitored by the Security Hub administrator account that the invitation was sent from.</p> <p>This operation is only used by member accounts that are not added through Organizations.</p> <p>When the member account accepts the invitation, permission is granted to the administrator account to view findings generated in the member account.</p>'
       responses:
         '200':
           description: Success
@@ -296,7 +296,7 @@ paths:
     get:
       deprecated: true
       operationId: GetMasterAccount
-      description: '<p>This method is deprecated. Instead, use <code>GetAdministratorAccount</code>.</p> <p>Provides the details for the Security Hub administrator account for the current member account.</p> <p>Can be used by both member accounts that are managed using Organizations and accounts that were invited manually.</p>'
+      description: '<p>This method is deprecated. Instead, use <code>GetAdministratorAccount</code>.</p> <p>The Security Hub console continues to use <code>GetMasterAccount</code>. It will eventually change to use <code>GetAdministratorAccount</code>. Any IAM policies that specifically control access to this function must continue to use <code>GetMasterAccount</code>. You should also add <code>GetAdministratorAccount</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>GetAdministratorAccount</code>.</p> <p>Provides the details for the Security Hub administrator account for the current member account.</p> <p>Can be used by both member accounts that are managed using Organizations and accounts that were invited manually.</p>'
       responses:
         '200':
           description: Success
@@ -2781,7 +2781,7 @@ paths:
     post:
       deprecated: true
       operationId: DisassociateFromMasterAccount
-      description: '<p>This method is deprecated. Instead, use <code>DisassociateFromAdministratorAccount</code>.</p> <p>Disassociates the current Security Hub member account from the associated administrator account.</p> <p>This operation is only used by accounts that are not part of an organization. For organization accounts, only the administrator account can disassociate a member account.</p>'
+      description: '<p>This method is deprecated. Instead, use <code>DisassociateFromAdministratorAccount</code>.</p> <p>The Security Hub console continues to use <code>DisassociateFromMasterAccount</code>. It will eventually change to use <code>DisassociateFromAdministratorAccount</code>. Any IAM policies that specifically control access to this function must continue to use <code>DisassociateFromMasterAccount</code>. You should also add <code>DisassociateFromAdministratorAccount</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>DisassociateFromAdministratorAccount</code>.</p> <p>Disassociates the current Security Hub member account from the associated administrator account.</p> <p>This operation is only used by accounts that are not part of an organization. For organization accounts, only the administrator account can disassociate a member account.</p>'
       responses:
         '200':
           description: Success
@@ -5876,7 +5876,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsApiGatewayEndpointConfiguration'
             - description: The endpoint configuration of the REST API.
-      description: contains information about a REST API in version 1 of Amazon API Gateway.
+      description: Contains information about a REST API in version 1 of Amazon API Gateway.
     AwsApiGatewayStageDetails:
       type: object
       properties:
@@ -7083,6 +7083,118 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>Indicates when the instance was launched.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: The details of an Amazon EC2 instance.
+    AwsEc2NetworkAclAssociation:
+      type: object
+      properties:
+        NetworkAclAssociationId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the association between the network ACL and the subnet.
+        NetworkAclId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the network ACL.
+        SubnetId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the subnet that is associated with the network ACL.
+      description: An association between the network ACL and a subnet.
+    AwsEc2NetworkAclAssociationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEc2NetworkAclAssociation'
+    AwsEc2NetworkAclEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEc2NetworkAclEntry'
+    AwsEc2NetworkAclDetails:
+      type: object
+      properties:
+        IsDefault:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether this is the default network ACL for the VPC.
+        NetworkAclId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the network ACL.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the AWS account that owns the network ACL.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the VPC for the network ACL.
+        Associations:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2NetworkAclAssociationList'
+            - description: Associations between the network ACL and subnets.
+        Entries:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2NetworkAclEntryList'
+            - description: The set of rules in the network ACL.
+      description: Contains details about an EC2 network access control list (ACL).
+    IcmpTypeCode:
+      type: object
+      properties:
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The ICMP code for which to deny or allow access. To deny or allow all codes, use the value -1.'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The ICMP type for which to deny or allow access. To deny or allow all types, use the value -1.'
+      description: An Internet Control Message Protocol (ICMP) type and code.
+    PortRangeFromTo:
+      type: object
+      properties:
+        From:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The first port in the port range.
+        To:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The last port in the port range.
+      description: A range of ports.
+    AwsEc2NetworkAclEntry:
+      type: object
+      properties:
+        CidrBlock:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The IPV4 network range for which to deny or allow access.
+        Egress:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the rule is an egress rule. An egress rule is a rule that applies to traffic that leaves the subnet.
+        IcmpTypeCode:
+          allOf:
+            - $ref: '#/components/schemas/IcmpTypeCode'
+            - description: The Internet Control Message Protocol (ICMP) type and code for which to deny or allow access.
+        Ipv6CidrBlock:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The IPV6 network range for which to deny or allow access.
+        PortRange:
+          allOf:
+            - $ref: '#/components/schemas/PortRangeFromTo'
+            - description: 'For TCP or UDP protocols, the range of ports that the rule applies to.'
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The protocol that the rule applies to. To deny or allow access to all protocols, use the value -1.'
+        RuleAction:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Whether the rule is used to allow access or deny access.
+        RuleNumber:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The rule number. The rules are processed in order by their number.
+      description: 'A rule for the network ACL. Each rule allows or denies access based on the IP address, traffic direction, port, and protocol.'
     AwsEc2NetworkInterfaceAttachment:
       type: object
       properties:
@@ -7327,6 +7439,66 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: 'The ID of the VPC peering connection, if applicable.'
       description: A relationship between a security group and a user.
+    Ipv6CidrBlockAssociationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Ipv6CidrBlockAssociation'
+    AwsEc2SubnetDetails:
+      type: object
+      properties:
+        AssignIpv6AddressOnCreation:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to assign an IPV6 address to a network interface that is created in this subnet.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Availability Zone for the subnet.
+        AvailabilityZoneId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the Availability Zone for the subnet.
+        AvailableIpAddressCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of available IPV4 addresses in the subnet. Does not include addresses for stopped instances.
+        CidrBlock:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The IPV4 CIDR block that is assigned to the subnet.
+        DefaultForAz:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether this subnet is the default subnet for the Availability Zone.
+        MapPublicIpOnLaunch:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether instances in this subnet receive a public IP address.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the AWS account that owns the subnet.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The current state of the subnet.
+        SubnetArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the subnet.
+        SubnetId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the subnet.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the VPC that contains the subnet.
+        Ipv6CidrBlockAssociationSet:
+          allOf:
+            - $ref: '#/components/schemas/Ipv6CidrBlockAssociationList'
+            - description: The IPV6 CIDR blocks that are associated with the subnet.
+      description: Contains information about a subnet in EC2.
     AwsEc2VolumeAttachment:
       type: object
       properties:
@@ -7387,10 +7559,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CidrBlockAssociation'
-    Ipv6CidrBlockAssociationList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Ipv6CidrBlockAssociation'
     AwsEc2VpcDetails:
       type: object
       properties:
@@ -7411,6 +7579,130 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The current state of the VPC.
       description: Details about an EC2 VPC.
+    AwsElasticBeanstalkEnvironmentEnvironmentLinks:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsElasticBeanstalkEnvironmentEnvironmentLink'
+    AwsElasticBeanstalkEnvironmentOptionSettings:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsElasticBeanstalkEnvironmentOptionSetting'
+    AwsElasticBeanstalkEnvironmentTier:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the environment tier.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The type of environment tier.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The version of the environment tier.
+      description: Contains information about the tier of the environment.
+    AwsElasticBeanstalkEnvironmentDetails:
+      type: object
+      properties:
+        ApplicationName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the application that is associated with the environment.
+        Cname:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The URL to the CNAME for this environment.
+        DateCreated:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The creation date for this environment.
+        DateUpdated:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The date when this environment was last modified.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A description of the environment.
+        EndpointUrl:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'For load-balanced, autoscaling environments, the URL to the load balancer. For single-instance environments, the IP address of the instance.'
+        EnvironmentArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the environment.
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the environment.
+        EnvironmentLinks:
+          allOf:
+            - $ref: '#/components/schemas/AwsElasticBeanstalkEnvironmentEnvironmentLinks'
+            - description: Links to other environments in the same group.
+        EnvironmentName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the environment.
+        OptionSettings:
+          allOf:
+            - $ref: '#/components/schemas/AwsElasticBeanstalkEnvironmentOptionSettings'
+            - description: The configuration setting for the environment.
+        PlatformArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the platform version for the environment.
+        SolutionStackName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the solution stack that is deployed with the environment.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The current operational status of the environment.
+        Tier:
+          allOf:
+            - $ref: '#/components/schemas/AwsElasticBeanstalkEnvironmentTier'
+            - description: The tier of the environment.
+        VersionLabel:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The application version of the environment.
+      description: Contains details about an Elastic Beanstalk environment.
+    AwsElasticBeanstalkEnvironmentEnvironmentLink:
+      type: object
+      properties:
+        EnvironmentName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the linked environment.
+        LinkName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the environment link.
+      description: Contains information about a link to another environment that is in the same group.
+    AwsElasticBeanstalkEnvironmentOptionSetting:
+      type: object
+      properties:
+        Namespace:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The type of resource that the configuration option is associated with.
+        OptionName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the option.
+        ResourceName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the resource.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The value of the configuration setting.
+      description: A configuration option setting for the environment.
     AwsElasticsearchDomainDomainEndpointOptions:
       type: object
       properties:
@@ -12151,10 +12443,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsEc2EipDetails'
             - description: Details about an Elastic IP address.
+        AwsEc2Subnet:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2SubnetDetails'
+            - description: Details about a subnet in EC2.
+        AwsEc2NetworkAcl:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2NetworkAclDetails'
+            - description: Details about an EC2 network access control list (ACL).
         AwsElbv2LoadBalancer:
           allOf:
             - $ref: '#/components/schemas/AwsElbv2LoadBalancerDetails'
             - description: Details about a load balancer.
+        AwsElasticBeanstalkEnvironment:
+          allOf:
+            - $ref: '#/components/schemas/AwsElasticBeanstalkEnvironmentDetails'
+            - description: Details about an Elastic Beanstalk environment.
         AwsElasticsearchDomain:
           allOf:
             - $ref: '#/components/schemas/AwsElasticsearchDomainDetails'

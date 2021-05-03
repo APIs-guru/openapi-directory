@@ -545,6 +545,109 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelArn}/memberships#operation=batch-create':
+    post:
+      operationId: BatchCreateChannelMembership
+      description: 'Adds a specified number of users to a channel. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchCreateChannelMembershipResponse'
+        '480':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+        '481':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel to which you're adding users.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: <p>The <code>AppInstanceUserArn</code> of the user that makes the API call.</p> <p/>
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - batch-create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - MemberArns
+              properties:
+                Type:
+                  description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.'
+                  type: string
+                  enum:
+                    - DEFAULT
+                    - HIDDEN
+                MemberArns:
+                  description: The ARNs of the members you want to add to the channel.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ChimeArn'
+                  minItems: 1
+                  maxItems: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/accounts/{accountId}/rooms/{roomId}/memberships#operation=batch-create':
     post:
       operationId: BatchCreateRoomMembership
@@ -1258,7 +1361,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListAccounts
-      description: 'Lists the Amazon Chime accounts under the administrator''s AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, toucan filter by the user''s email address, which returns one account result.'
+      description: 'Lists the Amazon Chime accounts under the administrator''s AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, you can filter by the user''s email address, which returns one account result.'
       responses:
         '200':
           description: Success
@@ -3201,7 +3304,7 @@ paths:
                   pattern: '^\+?[1-9]\d{1,14}$'
                   format: password
                 JoinToken:
-                  description: 'Token used by the Amazon Chime SDK attendee. Call the <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.htmlCreateAttendee">CreateAttendee</a> action to get a join token.'
+                  description: 'Token used by the Amazon Chime SDK attendee. Call the <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateAttendee.html">CreateAttendee</a> action to get a join token.'
                   type: string
                   pattern: '^[a-zA-Z0-9+/]+$'
                   minLength: 2
@@ -4361,12 +4464,12 @@ paths:
                 - ToPhoneNumber
               properties:
                 FromPhoneNumber:
-                  description: The phone number that a user calls from.
+                  description: The phone number that a user calls from. This is a phone number in your Amazon Chime phone number inventory.
                   type: string
                   pattern: '^\+?[1-9]\d{1,14}$'
                   format: password
                 ToPhoneNumber:
-                  description: The phone number that the user dials in order to connect to a meeting.
+                  description: The phone number that the service should call.
                   type: string
                   pattern: '^\+?[1-9]\d{1,14}$'
                   format: password
@@ -5001,7 +5104,7 @@ paths:
   '/accounts/{accountId}':
     delete:
       operationId: DeleteAccount
-      description: '<p>Deletes the specified Amazon Chime account. You must suspend all users before deleting <code>Team</code> account. You can use the <a>BatchSuspendUser</a> action to dodo.</p> <p>For <code>EnterpriseLWA</code> and <code>EnterpriseAD</code> accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended.</p> <p>Deleted accounts appear in your <code>Disabled</code> accounts list for 90 days. To restore deleted account from your <code>Disabled</code> accounts list, you must contact AWS Support.</p> <p> After 90 days, deleted accounts are permanently removed from your <code>Disabled</code> accounts list. </p>'
+      description: '<p>Deletes the specified Amazon Chime account. You must suspend all users before deleting <code>Team</code> account. You can use the <a>BatchSuspendUser</a> action to dodo.</p> <p>For <code>EnterpriseLWA</code> and <code>EnterpriseAD</code> accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended.</p> <p>Deleted accounts appear in your <code>Disabled</code> accounts list for 90 days. To restore deleted account from your <code>Disabled</code> accounts list, you must contact AWS Support.</p> <p>After 90 days, deleted accounts are permanently removed from your <code>Disabled</code> accounts list.</p>'
       responses:
         '204':
           description: Success
@@ -5961,7 +6064,7 @@ paths:
   '/meetings/{meetingId}/attendees/{attendeeId}':
     delete:
       operationId: DeleteAttendee
-      description: ' Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code> . Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
+      description: 'Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code>. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
       responses:
         '204':
           description: Success
@@ -6518,18 +6621,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnauthorizedClientException'
         '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
           description: ThrottledClientException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottledClientException'
-        '484':
+        '485':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '485':
+        '486':
           description: ServiceFailureException
           content:
             application/json:
@@ -7288,7 +7397,7 @@ paths:
   '/meetings/{meetingId}':
     delete:
       operationId: DeleteMeeting
-      description: 'Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its attendees are also deleted, clients connected to the meeting are disconnected, and clients can no longer join the meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: 'Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
       responses:
         '204':
           description: Success
@@ -7413,7 +7522,7 @@ paths:
   '/phone-numbers/{phoneNumberId}':
     delete:
       operationId: DeletePhoneNumber
-      description: <p>Moves the specified phone number into the <b>Deletionqueue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p> Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently. </p>
+      description: <p>Moves the specified phone number into the <b>Deletionqueue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p>Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>
       responses:
         '204':
           description: Success
@@ -9086,7 +9195,7 @@ paths:
   '/voice-connector-groups/{voiceConnectorGroupId}':
     delete:
       operationId: DeleteVoiceConnectorGroup
-      description: ' Deletes the specified Amazon Chime Voice Connector group. Any <code>VoiceConnectorItems</code> and phone numbers associated with the group must be removed before it can be deleted. '
+      description: Deletes the specified Amazon Chime Voice Connector group. Any <code>VoiceConnectorItems</code> and phone numbers associated with the group must be removed before it can be deleted.
       responses:
         '204':
           description: Success
@@ -9296,7 +9405,7 @@ paths:
                   minLength: 1
                   maxLength: 256
                 VoiceConnectorItems:
-                  description: ' The <code>VoiceConnectorItems</code> to associate with the group. '
+                  description: The <code>VoiceConnectorItems</code> to associate with the group.
                   type: array
                   items:
                     $ref: '#/components/schemas/VoiceConnectorItem'
@@ -13070,7 +13179,7 @@ paths:
   /channels#app-instance-arn:
     get:
       operationId: ListChannels
-      description: <p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p> <p class="title"> <b>Functionality &amp; restrictions</b> </p> <ul> <li> <p> Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account </p> </li> <li> <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the private channels in an account.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p> <p class="title"> <b>Functionality &amp; restrictions</b> </p> <ul> <li> <p>Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account.</p> </li> <li> <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the private channels in an account.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -13127,7 +13236,7 @@ paths:
         - name: privacy
           in: query
           required: false
-          description: ' The privacy setting. <code>PUBLIC</code> retrieves all the public channels. <code>PRIVATE</code> retrieves private channels. Only an <code>AppInstanceAdmin</code> can retrieve private channels. '
+          description: 'The privacy setting. <code>PUBLIC</code> retrieves all the public channels. <code>PRIVATE</code> retrieves private channels. Only an <code>AppInstanceAdmin</code> can retrieve private channels. '
           schema:
             type: string
             enum:
@@ -15168,6 +15277,22 @@ components:
             - description: The tag key-value pairs.
       description: 'The Amazon Chime SDK attendee fields to create, used with the BatchCreateAttendee action.'
     ResourceLimitExceededException: {}
+    BatchCreateChannelMembershipResponse:
+      type: object
+      properties:
+        BatchChannelMemberships:
+          allOf:
+            - $ref: '#/components/schemas/BatchChannelMemberships'
+            - description: The list of channel memberships in the response.
+        Errors:
+          allOf:
+            - $ref: '#/components/schemas/BatchCreateChannelMembershipErrors'
+            - description: 'If the action fails for one or more of the memberships in the request, a list of the memberships is returned, along with error codes and error messages.'
+    ChimeArn:
+      type: string
+      pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+      minLength: 5
+      maxLength: 1600
     BatchCreateRoomMembershipResponse:
       type: object
       properties:
@@ -15237,7 +15362,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CallingName'
             - description: The outbound calling name to update.
-      description: ' The phone number ID, product type, or calling name fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions. '
+      description: 'The phone number ID, product type, or calling name fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.'
     BatchUpdateUserResponse:
       type: object
       properties:
@@ -15266,7 +15391,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AlexaForBusinessMetadata'
             - description: The Alexa for Business metadata.
-      description: ' The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action. '
+      description: 'The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action.'
     CreateAccountResponse:
       type: object
       properties:
@@ -15519,7 +15644,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/VoiceConnectorItemPriority'
             - description: 'The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first.'
-      description: ' For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to which to route inbound calls. Includes priority configuration settings. Limit: 3 <code>VoiceConnectorItems</code> per Amazon Chime Voice Connector group. '
+      description: 'For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to which to route inbound calls. Includes priority configuration settings. Limit: 3 <code>VoiceConnectorItems</code> per Amazon Chime Voice Connector group.'
     DeleteAccountResponse:
       type: object
       properties: {}
@@ -16634,11 +16759,6 @@ components:
     Alpha2CountryCode:
       type: string
       pattern: '[A-Z]{2}'
-    ChimeArn:
-      type: string
-      pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
-      minLength: 5
-      maxLength: 1600
     NonEmptyResourceName:
       type: string
       pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -16928,6 +17048,28 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 10
+    Members:
+      type: array
+      items:
+        $ref: '#/components/schemas/Identity'
+    BatchChannelMemberships:
+      type: object
+      properties:
+        InvitedBy:
+          $ref: '#/components/schemas/Identity'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipType'
+            - description: The membership types set for the channel users.
+        Members:
+          allOf:
+            - $ref: '#/components/schemas/Members'
+            - description: The users successfully added to the request.
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel to which you're adding users.
+      description: 'The membership information, including member ARNs, the channel ARN, and membership types.'
     CreateAttendeeError:
       type: object
       properties:
@@ -16962,6 +17104,64 @@ components:
           allOf:
             - $ref: '#/components/schemas/CreateAttendeeRequestItemList'
             - description: The request containing the attendees to create.
+    ErrorCode:
+      type: string
+      enum:
+        - BadRequest
+        - Conflict
+        - Forbidden
+        - NotFound
+        - PreconditionFailed
+        - ResourceLimitExceeded
+        - ServiceFailure
+        - AccessDenied
+        - ServiceUnavailable
+        - Throttled
+        - Throttling
+        - Unauthorized
+        - Unprocessable
+        - VoiceConnectorGroupAssociationsExist
+        - PhoneNumberAssociationsExist
+    BatchCreateChannelMembershipError:
+      type: object
+      properties:
+        MemberArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the member that the service couldn't add.
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The error code.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The error message. '
+      description: 'A list of failed member ARNs, error codes, and error messages.'
+    BatchCreateChannelMembershipErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchCreateChannelMembershipError'
+    MemberArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChimeArn'
+      minItems: 1
+      maxItems: 100
+    BatchCreateChannelMembershipRequest:
+      type: object
+      required:
+        - MemberArns
+      title: BatchCreateChannelMembershipRequest
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipType'
+            - description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.'
+        MemberArns:
+          allOf:
+            - $ref: '#/components/schemas/MemberArns'
+            - description: The ARNs of the members you want to add to the channel.
     MembershipItemList:
       type: array
       items:
@@ -17674,7 +17874,7 @@ components:
         JoinToken:
           allOf:
             - $ref: '#/components/schemas/JoinTokenString'
-            - description: 'Token used by the Amazon Chime SDK attendee. Call the <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.htmlCreateAttendee">CreateAttendee</a> action to get a join token.'
+            - description: 'Token used by the Amazon Chime SDK attendee. Call the <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateAttendee.html">CreateAttendee</a> action to get a join token.'
     ExternalMeetingIdType:
       type: string
       minLength: 2
@@ -17746,7 +17946,7 @@ components:
         MediaRegion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' The Region in which you create the meeting. Available values: <code>af-south-1</code> , <code>ap-northeast-1</code> , <code>ap-northeast-2</code> , <code>ap-south-1</code> , <code>ap-southeast-1</code> , <code>ap-southeast-2</code> , <code>ca-central-1</code> , <code>eu-central-1</code> , <code>eu-north-1</code> , <code>eu-south-1</code> , <code>eu-west-1</code> , <code>eu-west-2</code> , <code>eu-west-3</code> , <code>sa-east-1</code> , <code>us-east-1</code> , <code>us-east-2</code> , <code>us-west-1</code> , <code>us-west-2</code> . '
+            - description: 'The Region in which you create the meeting. Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.'
       description: A meeting created using the Amazon Chime SDK.
     CreateMeetingWithAttendeesRequestItemList:
       type: array
@@ -18061,11 +18261,11 @@ components:
         FromPhoneNumber:
           allOf:
             - $ref: '#/components/schemas/E164PhoneNumber'
-            - description: The phone number that a user calls from.
+            - description: The phone number that a user calls from. This is a phone number in your Amazon Chime phone number inventory.
         ToPhoneNumber:
           allOf:
             - $ref: '#/components/schemas/E164PhoneNumber'
-            - description: The phone number that the user dials in order to connect to a meeting.
+            - description: The phone number that the service should call.
     SipMediaApplicationCall:
       type: object
       properties:
@@ -18622,24 +18822,6 @@ components:
             - $ref: '#/components/schemas/DNISEmergencyCallingConfigurationList'
             - description: The Dialed Number Identification Service (DNIS) emergency calling configuration details.
       description: The emergency calling configuration details associated with an Amazon Chime Voice Connector.
-    ErrorCode:
-      type: string
-      enum:
-        - BadRequest
-        - Conflict
-        - Forbidden
-        - NotFound
-        - PreconditionFailed
-        - ResourceLimitExceeded
-        - ServiceFailure
-        - AccessDenied
-        - ServiceUnavailable
-        - Throttled
-        - Throttling
-        - Unauthorized
-        - Unprocessable
-        - VoiceConnectorGroupAssociationsExist
-        - PhoneNumberAssociationsExist
     EventsConfiguration:
       type: object
       properties:
@@ -20019,7 +20201,7 @@ components:
         VoiceConnectorItems:
           allOf:
             - $ref: '#/components/schemas/VoiceConnectorItemList'
-            - description: ' The <code>VoiceConnectorItems</code> to associate with the group. '
+            - description: The <code>VoiceConnectorItems</code> to associate with the group.
     UpdateVoiceConnectorRequest:
       type: object
       required:
