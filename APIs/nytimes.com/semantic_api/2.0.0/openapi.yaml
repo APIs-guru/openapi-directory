@@ -4,7 +4,11 @@ servers:
   - url: https://api.nytimes.com/svc/semantic/v2/concept
 info:
   description: >
-    The Semantic API complements the Articles API. With the Semantic API, you get access to the long list of people, places, organizations and other locations, entities and descriptors that make up the controlled vocabulary used as metadata by The New York Times (sometimes referred to as Times Tags and used for Times Topics pages).
+    The Semantic API complements the Articles API. With the Semantic
+    API, you get access to the long list of people, places, organizations and
+    other locations, entities and descriptors that make up the controlled
+    vocabulary used as metadata by The New York Times (sometimes referred to as
+    Times Tags and used for Times Topics pages).
 
 
     The Semantic API uses concepts which are, by definition, terms in The New York Times controlled vocabulary. Like the way facets are used in the Articles API, concepts are a good way to uncover articles of interest in The New York Times archive, and at the same time, limit the scope and number of those articles. The Semantic API maps to external semantic data resources, in a fashion consistent with the idea of linked data. The Semantic API also provides combination and relationship information to other, similar concepts in The New York Times controlled vocabulary.
@@ -33,7 +37,10 @@ paths:
     get:
       parameters:
         - description: >
-            The type of the concept, used for Constructing a Semantic API Request by Concept Type and Specific Concept Name. The parameter is defined as a name-value pair, as in "concept_type=[nytd_geo|nytd_per|nytd_org|nytd_des]".
+            The type of the concept, used for Constructing a Semantic API
+            Request by Concept Type and Specific Concept Name. The parameter is
+            defined as a name-value pair, as in
+            "concept_type=[nytd_geo|nytd_per|nytd_org|nytd_des]".
           in: path
           name: concept-type
           required: true
@@ -45,14 +52,19 @@ paths:
               - nytd_des
             type: string
         - description: >
-            The name of the concept, used for Constructing a Semantic API Request by Concept Type and Specific Concept Name. The parameter is defined in the URI path, as the element immediately preceding ".json" like with "Baseball.json".
+            The name of the concept, used for Constructing a Semantic API
+            Request by Concept Type and Specific Concept Name. The parameter is
+            defined in the URI path, as the element immediately preceding
+            ".json" like with "Baseball.json".
           in: path
           name: specific-concept
           required: true
           schema:
             type: string
         - description: >
-            "all" or comma-separated list of specific optional fields: pages, ticker_symbol, links, taxonomy, combinations, geocodes, article_list, scope_notes, search_api_query
+            "all" or comma-separated list of specific optional fields: pages,
+            ticker_symbol, links, taxonomy, combinations, geocodes,
+            article_list, scope_notes, search_api_query
 
 
             Optional fields are returned in result_set. They are briefly explained here:
@@ -91,7 +103,11 @@ paths:
               - scope_notes
               - search_api_query
             type: string
-        - description: Precedes the search term string. Used in a Search Query. Except for &lt;specific_concept_name&gt;, Search Query will take the required parameters listed above (&lt;concept_type&gt;, &lt;concept_uri&gt;, &lt;article_uri&gt;) as an optional_parameter in addition to the query=&lt;query_term&gt;.
+        - description: Precedes the search term string. Used in a Search Query. Except for
+            &lt;specific_concept_name&gt;, Search Query will take the required
+            parameters listed above (&lt;concept_type&gt;, &lt;concept_uri&gt;,
+            &lt;article_uri&gt;) as an optional_parameter in addition to the
+            query=&lt;query_term&gt;.
           in: query
           name: query
           required: true
@@ -118,13 +134,19 @@ paths:
   /search.json:
     get:
       parameters:
-        - description: Precedes the search term string. Used in a Search Query. Except for &lt;specific_concept_name&gt;, Search Query will take the required parameters listed above (&lt;concept_type&gt;, &lt;concept_uri&gt;, &lt;article_uri&gt;) as an optional_parameter in addition to the query=&lt;query_term&gt;.
+        - description: Precedes the search term string. Used in a Search Query. Except for
+            &lt;specific_concept_name&gt;, Search Query will take the required
+            parameters listed above (&lt;concept_type&gt;, &lt;concept_uri&gt;,
+            &lt;article_uri&gt;) as an optional_parameter in addition to the
+            query=&lt;query_term&gt;.
           in: query
           name: query
           required: true
           schema:
             type: string
-        - description: Integer value for the index count from the first concept to the last concept, sorted alphabetically. Used in a Search Query. A Search Query will return up to 10 concepts in its results.
+        - description: Integer value for the index count from the first concept to the
+            last concept, sorted alphabetically. Used in a Search Query. A
+            Search Query will return up to 10 concepts in its results.
           in: query
           name: offset
           required: false
@@ -132,7 +154,9 @@ paths:
             default: 10
             type: integer
         - description: >
-            "all" or comma-separated list of specific optional fields: pages, ticker_symbol, links, taxonomy, combinations, geocodes, article_list, scope_notes, search_api_query
+            "all" or comma-separated list of specific optional fields: pages,
+            ticker_symbol, links, taxonomy, combinations, geocodes,
+            article_list, scope_notes, search_api_query
 
 
             Optional fields are returned in result_set. They are briefly explained here:

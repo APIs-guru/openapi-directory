@@ -3,7 +3,10 @@ servers:
   - url: http://api.nytimes.com/svc/news/v3
   - url: https://api.nytimes.com/svc/news/v3
 info:
-  description: With the Times Newswire API, you can get links and metadata for Times articles and blog posts as soon as they are published on NYTimes.com. The Times Newswire API provides an up-to-the-minute stream of published items.
+  description: With the Times Newswire API, you can get links and metadata for
+    Times articles and blog posts as soon as they are published on NYTimes.com.
+    The Times Newswire API provides an up-to-the-minute stream of published
+    items.
   termsOfService: http://developer.nytimes.com/tou
   title: Times Newswire API
   version: 3.0.0
@@ -28,7 +31,8 @@ paths:
   /content.json:
     get:
       parameters:
-        - description: The complete URL of a specific news item, URL-encoded or backslash-escaped
+        - description: The complete URL of a specific news item, URL-encoded or
+            backslash-escaped
           in: query
           name: url
           required: true

@@ -4,7 +4,11 @@ servers:
   - url: https://api.nytimes.com/svc/semantic/v2/geocodes
 info:
   description: >
-    The Geographic API extends the Semantic API, using a linked data approach to enhance location concepts used in The New York Times' controlled vocabulary and data resources which combine them with the GeoNames database, an authoritative and free to use database of global geographical places, names and features.
+    The Geographic API extends the Semantic API, using a linked data
+    approach to enhance location concepts used in The New York Times' controlled
+    vocabulary and data resources which combine them with the GeoNames database,
+    an authoritative and free to use database of global geographical places,
+    names and features.
   termsOfService: http://developer.nytimes.com/tou
   title: Geographic API
   version: 1.0.0
@@ -36,7 +40,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: >
+        - description: |
             The latitude of the specified place.
           in: query
           name: latitude
@@ -53,21 +57,29 @@ paths:
           required: false
           schema:
             type: integer
-        - description: Along with ne, forms a bounded box using the longitude and latitude coordinates specified as the southwest corner. The search results are limited to the resulting box. Two float values, separated by a comma `latitude,longitude` <br/> The ne parameter is required to use this parameter.
+        - description: Along with ne, forms a bounded box using the longitude and latitude
+            coordinates specified as the southwest corner. The search results
+            are limited to the resulting box. Two float values, separated by a
+            comma `latitude,longitude` <br/> The ne parameter is required to use
+            this parameter.
           in: query
           name: sw
           required: false
           schema:
             type: string
         - description: >
-            Search keywords to perform a text search on the fields: web_description, event_name and venue_name. 'AND' searches can be performed by wrapping query terms in quotes. If you do not specify a query, all results will be returned.
+            Search keywords to perform a text search on the fields:
+            web_description, event_name and venue_name. 'AND' searches can be
+            performed by wrapping query terms in quotes. If you do not specify a
+            query, all results will be returned.
           in: query
           name: query
           required: false
           schema:
             type: string
         - description: >
-            Filters search results based on the facets provided.  For more information on the values you can filter on, see Facets.
+            Filters search results based on the facets provided.  For more
+            information on the values you can filter on, see Facets.
           in: query
           name: filter
           required: false
@@ -79,7 +91,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: When facets is set to 1, a count of all facets will be included in the response.
+        - description: When facets is set to 1, a count of all facets will be included in
+            the response.
           in: query
           name: facets
           schema:
@@ -89,7 +102,17 @@ paths:
               - 1
             type: integer
         - description: >
-            Sorts your results on the fields specified. <br/> `sort_value1+[asc | desc],sort_value2+[asc|desc],[...]`<br/> Appending +asc to a facet or response will sort results on that value in ascending order. Appending +desc to a facet or response  will sort results in descending order. You can sort on multiple fields. You can sort on any facet. For the list of responses you can sort on, see the Sortable Field column in the Response table. <br/><br/>If you are doing a spatial search with the ll parameter, you can also sort by the distance from the center of the search: dist+[asc | desc] <br/> **Note:** either +asc or +desc is required when using the sort parameter.
+            Sorts your results on the fields specified. <br/> `sort_value1+[asc
+            | desc],sort_value2+[asc|desc],[...]`<br/> Appending +asc to a facet
+            or response will sort results on that value in ascending order.
+            Appending +desc to a facet or response  will sort results in
+            descending order. You can sort on multiple fields. You can sort on
+            any facet. For the list of responses you can sort on, see the
+            Sortable Field column in the Response table. <br/><br/>If you are
+            doing a spatial search with the ll parameter, you can also sort by
+            the distance from the center of the search: dist+[asc | desc] <br/>
+            **Note:** either +asc or +desc is required when using the sort
+            parameter.
           in: query
           name: sort
           schema:

@@ -3,7 +3,10 @@ servers:
   - url: http://api.nytimes.com/svc/suggest/v1
   - url: https://api.nytimes.com/svc/suggest/v1
 info:
-  description: With the TimesTags API, you can mine the riches of the New York Times tag set. The TimesTags service matches your query to the controlled vocabularies that fuel NYTimes.com metadata. You supply a string of characters, and the service returns a ranked list of suggested terms.
+  description: With the TimesTags API, you can mine the riches of the New York
+    Times tag set. The TimesTags service matches your query to the controlled
+    vocabularies that fuel NYTimes.com metadata. You supply a string of
+    characters, and the service returns a ranked list of suggested terms.
   termsOfService: http://developer.nytimes.com/tou
   title: TimesTags API
   version: 1.0.0
@@ -35,7 +38,10 @@ paths:
           schema:
             type: string
         - description: >
-            If you do not specify a value for filter (see the Optional Parameters), your query will be matched to tags in all four Times dictionaries: subject, geographic location, organization and person. To use more than one, separate with commas.
+            If you do not specify a value for filter (see the Optional
+            Parameters), your query will be matched to tags in all four Times
+            dictionaries: subject, geographic location, organization and person.
+            To use more than one, separate with commas.
           in: query
           name: filter
           required: false

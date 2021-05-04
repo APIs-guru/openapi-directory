@@ -2,7 +2,8 @@ openapi: 3.0.0
 servers:
   - url: https://api.nytimes.com/svc/books/v3
 info:
-  description: The Books API provides information about book reviews and The New York Times bestsellers lists.
+  description: The Books API provides information about book reviews and The New
+    York Times bestsellers lists.
   termsOfService: http://developer.nytimes.com/tou
   title: Books API
   version: 3.0.0
@@ -28,7 +29,8 @@ paths:
       operationId: GET_lists-format
       parameters:
         - description: >-
-            The name of the Times best-seller list. To get valid values, use a list names request.
+            The name of the Times best-seller list. To get valid values, use a
+            list names request.
 
 
             Be sure to replace spaces with hyphens (e.g., e-book-fiction or hardcover-fiction, not E-Book Fiction or Hardcover Fiction). (The parameter is not case sensitive.)
@@ -36,7 +38,8 @@ paths:
           name: list
           schema:
             type: string
-        - description: The number of weeks that the best seller has been on list-name, as of bestsellers-date
+        - description: The number of weeks that the best seller has been on list-name, as
+            of bestsellers-date
           in: query
           name: weeks-on-list
           schema:
@@ -51,7 +54,8 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: YYYY-MM-DD  The date the best-seller list was published on NYTimes.com (compare bestsellers-date)
+        - description: YYYY-MM-DD  The date the best-seller list was published on
+            NYTimes.com (compare bestsellers-date)
           in: query
           name: date
           schema:
@@ -75,7 +79,8 @@ paths:
           name: rank
           schema:
             type: integer
-        - description: The rank of the best seller on list-name one week prior to bestsellers-date
+        - description: The rank of the best seller on list-name one week prior to
+            bestsellers-date
           in: query
           name: rank-last-week
           schema:
@@ -113,7 +118,8 @@ paths:
                             author: Debbie Macomber
                             contributor: by Debbie Macomber
                             contributor_note: ""
-                            description: A mother and her daughter-in-law both leave unhappy marriages and take up with new men.
+                            description: A mother and her daughter-in-law both leave unhappy marriages and
+                              take up with new men.
                             price: 0
                             primary_isbn10: "0553391925"
                             primary_isbn13: "9780553391923"
@@ -243,7 +249,9 @@ paths:
           schema:
             type: string
         - description: >-
-            The author of the best seller. The author field does not include additional contributors (see Data Structure for more details about the author and contributor fields).
+            The author of the best seller. The author field does not include
+            additional contributors (see Data Structure for more details about
+            the author and contributor fields).
 
 
             When searching the author field, you can specify any combination of first, middle and last names.
@@ -255,7 +263,9 @@ paths:
           schema:
             type: string
         - description: >-
-            The author of the best seller, as well as other contributors such as the illustrator (to search or sort by author name only, use author instead).
+            The author of the best seller, as well as other contributors such
+            as the illustrator (to search or sort by author name only, use
+            author instead).
 
 
             When searching, you can specify any combination of first, middle and last names of any of the contributors.
@@ -275,7 +285,8 @@ paths:
           name: isbn
           schema:
             type: string
-        - description: The publisher's list price of the best seller, including decimal point
+        - description: The publisher's list price of the best seller, including decimal
+            point
           in: query
           name: price
           schema:
@@ -521,7 +532,11 @@ paths:
                               contributor: by Clive Cussler and Justin Scott
                               contributor_note: ""
                               created_date: 2016-03-10 12:00:22
-                              description: In the ninth book in this series, set in 1906, the New York detective Isaac Bell contends with a crime boss passing as a respectable businessman and a tycoon’s plot against President Theodore Roosevelt.
+                              description: In the ninth book in this series, set in 1906, the New York
+                                detective Isaac Bell contends with a crime boss
+                                passing as a respectable businessman and a
+                                tycoon’s plot against President Theodore
+                                Roosevelt.
                               price: 0
                               primary_isbn10: "0698406427"
                               primary_isbn13: "9780698406421"
@@ -622,7 +637,8 @@ paths:
           schema:
             type: integer
         - description: >-
-            The name of the Times best-seller list. To get valid values, use a list names request.
+            The name of the Times best-seller list. To get valid values, use a
+            list names request.
 
 
             Be sure to replace spaces with hyphens (e.g., e-book-fiction or hardcover-fiction, not E-Book Fiction or Hardcover Fiction). (The parameter is not case sensitive.)
@@ -649,7 +665,8 @@ paths:
           name: bestsellers-date
           schema:
             type: string
-        - description: The number of weeks that the best seller has been on list-name, as of bestsellers-date
+        - description: The number of weeks that the best seller has been on list-name, as
+            of bestsellers-date
           in: query
           name: weeks-on-list
           schema:
@@ -659,7 +676,8 @@ paths:
           name: rank
           schema:
             type: string
-        - description: The rank of the best seller on list-name one week prior to bestsellers-date
+        - description: The rank of the best seller on list-name one week prior to
+            bestsellers-date
           in: query
           name: rank-last-week
           schema:
@@ -670,7 +688,8 @@ paths:
           schema:
             multipleOf: 20
             type: integer
-        - description: The default is ASC (ascending). The sort-order parameter is used with the sort-by parameter — for details, see each request type.
+        - description: The default is ASC (ascending). The sort-order parameter is used
+            with the sort-by parameter — for details, see each request type.
           in: query
           name: sort-order
           schema:
@@ -701,7 +720,8 @@ paths:
                           contributor: by Andy Weir
                           contributor_note: ""
                           dagger: 0
-                          description: Separated from his crew, an astronaut embarks on a quest to stay alive on Mars. The basis of the movie.
+                          description: Separated from his crew, an astronaut embarks on a quest to stay
+                            alive on Mars. The basis of the movie.
                           first_chapter_link: ""
                           isbns:
                             - isbn10: "0804139024"
@@ -819,7 +839,8 @@ paths:
         required: true
         schema:
           type: string
-      - description: Name of the Best Sellers List. You can get the full list from /lists/names.json
+      - description: Name of the Best Sellers List. You can get the full list from
+          /lists/names.json
         in: path
         name: list
         required: true
@@ -830,17 +851,20 @@ paths:
       description: ""
       operationId: GET_reviews-format
       parameters:
-        - description: Searching by ISBN is the recommended method. You can enter 10- or 13-digit ISBNs.
+        - description: Searching by ISBN is the recommended method. You can enter 10- or
+            13-digit ISBNs.
           in: query
           name: isbn
           schema:
             type: integer
-        - description: You’ll need to enter the full title of the book. Spaces in the title will be converted into the characters %20.
+        - description: You’ll need to enter the full title of the book. Spaces in the
+            title will be converted into the characters %20.
           in: query
           name: title
           schema:
             type: string
-        - description: You’ll need to enter the author’s first and last name, separated by a space. This space will be converted into the characters %20.
+        - description: You’ll need to enter the author’s first and last name, separated by
+            a space. This space will be converted into the characters %20.
           in: query
           name: author
           schema:
@@ -865,7 +889,8 @@ paths:
                         isbn13:
                           - "9780307476463"
                         publication_dt: 2011-11-10
-                        summary: In “1Q84,” the Japanese novelist Haruki Murakami writes about characters in a Tokyo with two moons.
+                        summary: In “1Q84,” the Japanese novelist Haruki Murakami writes about
+                          characters in a Tokyo with two moons.
                         url: http://www.nytimes.com/2011/11/10/books/1q84-by-haruki-murakami-review.html
                     status: OK
               schema:
