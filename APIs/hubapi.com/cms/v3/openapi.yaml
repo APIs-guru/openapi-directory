@@ -4,6 +4,8 @@ servers:
 info:
   title: Domains
   version: v3
+  x-logo:
+    url: https://developers.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
   x-origin:
     - format: openapi
       url: https://api.hubspot.com/api-catalog-public/v1/apis/cms/v3/domains
@@ -728,3 +730,5 @@ components:
             content: Read from and write to my Content
           tokenUrl: https://api.hubapi.com/oauth/v1/token
       type: oauth2
+source:
+  url: {}
