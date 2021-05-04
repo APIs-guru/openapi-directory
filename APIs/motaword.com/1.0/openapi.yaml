@@ -715,6 +715,34 @@ paths:
           description: UserNotFound
       tags:
         - User
+  "/pam/profiles/client/{clientId}":
+    get:
+      description: Get the profile of a client for this client id
+      operationId: client
+      parameters:
+        - description: Client ID
+          in: path
+          name: clientId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientProfile"
+          description: Client profile
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ClientProfileNotFound
+      summary: Get the profile of a client for this client id
+      tags:
+        - Client
   /password:
     post:
       operationId: updatePassword
@@ -4104,7 +4132,7 @@ paths:
       tags:
         - User
   /users/available-vendors:
-    get:
+    post:
       description: Get a list of vendors available for the criteria given
       operationId: getAvailableVendors
       parameters:
@@ -5213,6 +5241,102 @@ components:
           description: The URL that received the callback.
           type: string
       type: object
+    ClientProfile:
+      properties:
+        account_creation_date:
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
+          format: date-time
+          type: string
+        client_project_count:
+          description: total project count that this client sent
+          type: number
+        corporate:
+          description: corporate name
+          type: string
+        corporate_id:
+          description: corporate id
+          type: number
+        corporate_user_count:
+          description: total user count in a corporation
+          type: number
+        frequent_file_extension:
+          description: the file extension for the files that usually this client sent
+          type: string
+        frequent_language_pairs:
+          description: frequent language pairs
+          items:
+            type: string
+          type: array
+        full_name:
+          description: full name of the client
+          type: string
+        growth:
+          description: The answer for the question "Is there any growth for this
+            corporate's spending". The values can be true, false or null if the
+            corporate is oour client for less than 6 months
+          type: boolean
+        is_complex:
+          description: the answer for the question "Is this client usually sent complex
+            projects?"
+          type: boolean
+        last_12_months_spending:
+          description: corporate's spending in twelve months
+          format: float
+          type: number
+        last_project:
+          description: the quote number for the last project of this client
+          type: number
+        last_project_time:
+          description: the creation date of the last project that is sent by this client
+          format: date-time
+          type: string
+        last_proofreaders:
+          description: list of prooofreaders for the target languages of last project
+          items:
+            $ref: "#/components/schemas/ProofreaderWithLanguage"
+          type: array
+        nps:
+          description: net promoter score info for this client
+          properties:
+            average:
+              description: information for all nps survey that this client completed
+              properties:
+                completed_surveys_count:
+                  description: total number of completed survey count by this client
+                  type: number
+                score:
+                  description: average score for all coompleted surveys
+                  format: float
+                  type: number
+              type: object
+            last:
+              description: last survey info
+              properties:
+                completion_date:
+                  description: last surveys completion date
+                  format: date-time
+                  type: string
+                score:
+                  description: score that the client gave us
+                  type: number
+              type: object
+          type: object
+        problems:
+          description: problems that is encountered with tthis client and/or with her
+            projects
+          items:
+            type: string
+          type: array
+        user_rank_in_project_count:
+          description: rank of the user in all corporate users for project count. If the
+            user is the most active user foor sending projects her rank is 1
+          type: number
+        user_rank_in_spending:
+          description: rank of the user in all corporate users for total spending. If the
+            user is the most active user for spending her rank is 1
+          type: number
+      type: object
     ClientProjectStat:
       properties:
         languages:
@@ -6127,6 +6251,23 @@ components:
           description: The number of translated strings by this translator.
           format: int64
           type: integer
+      type: object
+    ProofreaderWithLanguage:
+      properties:
+        full_name:
+          description: full name of the proofreader
+          type: string
+        id:
+          description: proofreader id
+          format: int64
+          type: number
+        language:
+          description: language code (i.e en-US)
+          type: string
+        vendor_link:
+          description: link to the vendor that can be only used in motaword admin
+            application
+          type: string
       type: object
     ReportFilter:
       properties:

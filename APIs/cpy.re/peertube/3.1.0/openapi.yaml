@@ -296,7 +296,8 @@ paths:
                   $ref: "#/components/schemas/PredefinedAbuseReasons"
                 reason:
                   description: Reason why the user reports this video
-                  minLength: 4
+                  maxLength: 3000
+                  minLength: 2
                   type: string
                 video:
                   properties:
@@ -352,6 +353,8 @@ paths:
               properties:
                 moderationComment:
                   description: Update the report comment visible only to the moderation team
+                  maxLength: 3000
+                  minLength: 2
                   type: string
                 state:
                   $ref: "#/components/schemas/AbuseStateSet"
@@ -396,6 +399,8 @@ paths:
               properties:
                 message:
                   description: Message to send
+                  maxLength: 3000
+                  minLength: 2
                   type: string
               required:
                 - message
@@ -524,6 +529,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/name"
         - $ref: "#/components/parameters/categoryOneOf"
+        - $ref: "#/components/parameters/isLive"
         - $ref: "#/components/parameters/tagsOneOf"
         - $ref: "#/components/parameters/tagsAllOf"
         - $ref: "#/components/parameters/licenceOneOf"
@@ -1375,6 +1381,7 @@ paths:
           schema:
             type: string
         - $ref: "#/components/parameters/categoryOneOf"
+        - $ref: "#/components/parameters/isLive"
         - $ref: "#/components/parameters/tagsOneOf"
         - $ref: "#/components/parameters/tagsAllOf"
         - $ref: "#/components/parameters/licenceOneOf"
@@ -1894,6 +1901,7 @@ paths:
     get:
       parameters:
         - $ref: "#/components/parameters/categoryOneOf"
+        - $ref: "#/components/parameters/isLive"
         - $ref: "#/components/parameters/tagsOneOf"
         - $ref: "#/components/parameters/tagsAllOf"
         - $ref: "#/components/parameters/licenceOneOf"
@@ -2307,6 +2315,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/channelHandle"
         - $ref: "#/components/parameters/categoryOneOf"
+        - $ref: "#/components/parameters/isLive"
         - $ref: "#/components/parameters/tagsOneOf"
         - $ref: "#/components/parameters/tagsAllOf"
         - $ref: "#/components/parameters/licenceOneOf"
@@ -2367,6 +2376,8 @@ paths:
                   type: string
                 displayName:
                   description: Video playlist display name
+                  maxLength: 120
+                  minLength: 1
                   type: string
                 privacy:
                   $ref: "#/components/schemas/VideoPlaylistPrivacySet"
@@ -2460,6 +2471,8 @@ paths:
                   type: string
                 displayName:
                   description: Video playlist display name
+                  maxLength: 120
+                  minLength: 1
                   type: string
                 privacy:
                   $ref: "#/components/schemas/VideoPlaylistPrivacySet"
@@ -2608,6 +2621,7 @@ paths:
     get:
       parameters:
         - $ref: "#/components/parameters/categoryOneOf"
+        - $ref: "#/components/parameters/isLive"
         - $ref: "#/components/parameters/tagsOneOf"
         - $ref: "#/components/parameters/tagsAllOf"
         - $ref: "#/components/parameters/licenceOneOf"
@@ -2733,6 +2747,8 @@ paths:
                   type: string
                 name:
                   description: Video name
+                  maxLength: 120
+                  minLength: 3
                   type: string
                 nsfw:
                   description: Whether or not this video contains sensitive content
@@ -2863,6 +2879,8 @@ paths:
                   type: string
                 name:
                   description: Live video/replay name
+                  maxLength: 120
+                  minLength: 3
                   type: string
                 nsfw:
                   description: Whether or not this live video/replay contains sensitive content
@@ -3055,6 +3073,8 @@ paths:
                   type: integer
                 name:
                   description: Video name
+                  maxLength: 120
+                  minLength: 3
                   type: string
                 nsfw:
                   description: Whether or not this video contains sensitive content
@@ -3229,6 +3249,8 @@ paths:
                   type: integer
                 name:
                   description: Video name
+                  maxLength: 120
+                  minLength: 3
                   type: string
                 nsfw:
                   description: Whether or not this video contains sensitive content
@@ -3708,6 +3730,13 @@ components:
           - example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
             format: uuid
             type: string
+    isLive:
+      description: whether or not the video is a live
+      in: query
+      name: isLive
+      required: false
+      schema:
+        type: boolean
     jobType:
       description: job type
       in: query
@@ -3972,27 +4001,22 @@ components:
           type: integer
         moderationComment:
           example: Decided to ban the server since it spams us regularly
+          maxLength: 3000
+          minLength: 2
           type: string
         predefinedReasons:
           $ref: "#/components/schemas/AbusePredefinedReasons"
         reason:
           example: The video is a spam
+          maxLength: 3000
+          minLength: 2
           type: string
         reporterAccount:
           $ref: "#/components/schemas/Account"
         state:
           $ref: "#/components/schemas/AbuseStateConstant"
         video:
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
-            uuid:
-              example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
-              format: uuid
-              type: string
-          type: object
+          $ref: "#/components/schemas/VideoInfo"
     AbuseMessage:
       properties:
         account:
@@ -4005,6 +4029,8 @@ components:
         id:
           type: integer
         message:
+          maxLength: 3000
+          minLength: 2
           type: string
     AbusePredefinedReasons:
       example:
@@ -5136,7 +5162,7 @@ components:
           nullable: true
           type: string
         category:
-          $ref: "#/components/schemas/VideoConstantNumber"
+          $ref: "#/components/schemas/VideoConstantNumber-Category"
         channel:
           $ref: "#/components/schemas/VideoChannelSummary"
         createdAt:
@@ -5161,14 +5187,16 @@ components:
         isLocal:
           type: boolean
         language:
-          $ref: "#/components/schemas/VideoConstantString"
+          $ref: "#/components/schemas/VideoConstantString-Language"
         licence:
-          $ref: "#/components/schemas/VideoConstantNumber"
+          $ref: "#/components/schemas/VideoConstantNumber-Licence"
         likes:
           example: 42
           type: integer
         name:
           example: What is PeerTube?
+          maxLength: 120
+          minLength: 3
           type: string
         nsfw:
           type: boolean
@@ -5217,6 +5245,8 @@ components:
           format: date-time
           type: string
         description:
+          maxLength: 10000
+          minLength: 3
           type: string
         dislikes:
           type: integer
@@ -5227,6 +5257,8 @@ components:
         likes:
           type: integer
         name:
+          maxLength: 120
+          minLength: 3
           type: string
         nsfw:
           type: boolean
@@ -5246,12 +5278,16 @@ components:
         captionPath:
           type: string
         language:
-          $ref: "#/components/schemas/VideoConstantString"
+          $ref: "#/components/schemas/VideoConstantString-Language"
     VideoChannel:
       properties:
         description:
+          maxLength: 1000
+          minLength: 3
           type: string
         displayName:
+          maxLength: 120
+          minLength: 1
           type: string
         isLocal:
           type: boolean
@@ -5264,19 +5300,31 @@ components:
               format: uuid
               type: string
           type: object
-    VideoChannelCreate:
+    VideoChannelCommon:
       properties:
         description:
+          maxLength: 1000
+          minLength: 3
           type: string
         displayName:
-          type: string
-        name:
+          maxLength: 120
+          minLength: 1
           type: string
         support:
           description: A text shown by default on all videos of this channel, to tell the
             audience how to support it
           example: Please support my work on <insert crowdfunding plateform>! <3
+          maxLength: 1000
+          minLength: 3
           type: string
+    VideoChannelCreate:
+      allOf:
+        - $ref: "#/components/schemas/VideoChannelCommon"
+        - properties:
+            name:
+              maxLength: 120
+              minLength: 1
+              type: string
       required:
         - name
         - displayName
@@ -5299,19 +5347,12 @@ components:
           format: url
           type: string
     VideoChannelUpdate:
-      properties:
-        bulkVideosSupportUpdate:
-          description: Update the support field for all videos of this channel
-          type: boolean
-        description:
-          type: string
-        displayName:
-          type: string
-        support:
-          description: A text shown by default on all videos of this channel, to tell the
-            audience how to support it
-          example: Please support my work on <insert crowdfunding plateform>! <3
-          type: string
+      allOf:
+        - $ref: "#/components/schemas/VideoChannelCommon"
+        - properties:
+            bulkVideosSupportUpdate:
+              description: Update the support field for all videos of this channel
+              type: boolean
     VideoComment:
       properties:
         account:
@@ -5324,6 +5365,8 @@ components:
         inReplyToCommentId:
           type: integer
         text:
+          maxLength: 10000
+          minLength: 1
           type: string
         threadId:
           type: integer
@@ -5369,15 +5412,27 @@ components:
       xml:
         name: channel
         wrapped: true
-    VideoConstantNumber:
+    VideoConstantNumber-Category:
       properties:
         id:
+          description: category id of the video (see
+            [/videos/categories](#tag/Video/paths/~1videos~1categories/get))
           type: integer
         label:
           type: string
-    VideoConstantString:
+    VideoConstantNumber-Licence:
       properties:
         id:
+          description: licence id of the video (see
+            [/videos/licences](#tag/Video/paths/~1videos~1licences/get))
+          type: integer
+        label:
+          type: string
+    VideoConstantString-Language:
+      properties:
+        id:
+          description: language id of the video (see
+            [/videos/languages](#tag/Video/paths/~1videos~1languages/get))
           type: string
         label:
           type: string
@@ -5415,7 +5470,11 @@ components:
                 - flowers
                 - gardening
               items:
+                maxLength: 30
+                minLength: 2
                 type: string
+              maxItems: 5
+              minItems: 1
               type: array
             trackerUrls:
               items:
@@ -5499,6 +5558,8 @@ components:
         id:
           type: integer
         name:
+          maxLength: 120
+          minLength: 3
           type: string
         uuid:
           example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
@@ -5520,8 +5581,12 @@ components:
           format: date-time
           type: string
         description:
+          maxLength: 1000
+          minLength: 3
           type: string
         displayName:
+          maxLength: 120
+          minLength: 1
           type: string
         id:
           type: integer

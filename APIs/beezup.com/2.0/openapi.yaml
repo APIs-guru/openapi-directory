@@ -210,6 +210,8 @@ tags:
     x-displayName: Reports
   - name: Analytics - Rules
     x-displayName: Rules
+  - name: Channel Catalogs - Legacy Tracking - Global
+    x-displayName: Global
 paths:
   /orders/v3/batches/changeOrders:
     post:
@@ -1180,6 +1182,28 @@ paths:
       summary: Get the Analytics API operation index
       tags:
         - Analytics - Global
+  /v2/user/analytics/reports/byday:
+    post:
+      description: Get the report by day for a StoreId
+      operationId: GetStoreReportByDayPerStore
+      requestBody:
+        $ref: "#/components/requestBodies/reportByDayRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/reportByDayPerStoreResponse"
+          description: Your reporting by day
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/StoreNotFoundResponse"
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: Get the report by day for a StoreId
+      tags:
+        - Analytics - Statistics
   /v2/user/analytics/tracking/status:
     get:
       description: |
@@ -1448,16 +1472,12 @@ paths:
         - Analytics - Statistics
   "/v2/user/analytics/{storeId}/reports/byday":
     post:
-      description: Get the report by day
+      description: Get the report by day for a StoreId
       operationId: GetStoreReportByDay
       parameters:
         - $ref: "#/components/parameters/storeIdOnlyGeneralParameters"
       requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/reportByDayRequest"
-        required: true
+        $ref: "#/components/requestBodies/reportByDayRequest"
       responses:
         "200":
           content:
@@ -1471,7 +1491,7 @@ paths:
           $ref: "#/components/responses/StoreNotFoundResponse"
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get the report by day
+      summary: Get the report by day for a StoreId
       tags:
         - Analytics - Statistics
   "/v2/user/analytics/{storeId}/reports/byproduct":
@@ -2135,22 +2155,25 @@ paths:
         - Catalogs - Global
   /v2/user/catalogs/importations:
     get:
-      operationId: Importation_GetReportingForAllStores
+      operationId: Importation_GetReportingsAllStores
       responses:
         "200":
           content:
             application/json:
               schema:
-                additionalProperties:
-                  $ref: "#/components/schemas/importationsResponse"
-                description: The key of the dictionary will be the store id
-                type: object
-          description: The last importation reportings for all store
+                $ref: "#/components/schemas/importationsPerStoreResponse"
+          description: The last importation reportings
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
+          description: UserId not found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get the latest catalog importation reporting for all stores
+      summary: Get the latest catalog importation reporting for all your stores
       tags:
-        - Catalogs - Global
+        - Catalogs - Importation Process
   "/v2/user/catalogs/{storeId}":
     get:
       description: The operation will give you all the operations you will be able to
@@ -3710,23 +3733,23 @@ paths:
       summary: Add a new channel catalog
       tags:
         - Channel Catalogs - Global
-  /v2/user/channelCatalogs/exclusionFilterOperators:
+  /v2/user/channelCatalogs/filterOperators:
     get:
-      operationId: GetChannelCatalogExclusionFilterOperators
+      operationId: GetChannelCatalogFilterOperators
       responses:
         "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: "#/components/schemas/exclusionFilterOperator"
+                  $ref: "#/components/schemas/filterOperator"
                 type: array
-          description: Channel catalog exclusion filter operator list
+          description: Channel catalog  filter operator list
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get channel catalog exclusion filter operators
+      summary: Get channel catalog filter operators
       tags:
-        - Channel Catalogs - Exclusion Filters
+        - Channel Catalogs - Global
   /v2/user/channelCatalogs/products:
     post:
       operationId: GetChannelCatalogProductByChannelCatalog
@@ -5405,6 +5428,74 @@ paths:
       summary: Zendesk token
       tags:
         - Customer - Security
+  /v2/user/legacyTracking/channelCatalogs/:
+    get:
+      operationId: GetLegacyTrackingChannelCatalogs
+      parameters:
+        - description: The store identifier
+          example: 04730364-9826-4ff3-92e4-51fccd02bf10
+          in: query
+          name: storeId
+          required: false
+          schema:
+            format: guid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/legacyTrackingChannelCatalogList"
+          description: OK
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: List all your current channel catalogs configured to use legacy
+        tracking format
+      tags:
+        - Channel Catalogs - Legacy Tracking - Global
+  "/v2/user/legacyTracking/channelCatalogs/{channelCatalogId}":
+    get:
+      operationId: GetLegacyTrackingChannelCatalog
+      parameters:
+        - $ref: "#/components/parameters/channelCatalogIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/legacyTrackingChannelCatalog"
+          description: Channel catalog configured to use legacy tracking format
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
+          description: Channel catalog not found or not authorized
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: Get the channel catalog configured to use legacy tracking format
+        information
+      tags:
+        - Channel Catalogs - Legacy Tracking - Global
+  "/v2/user/legacyTracking/channelCatalogs/{channelCatalogId}/migrate":
+    post:
+      operationId: MigrateLegacyTrackingChannelCatalog
+      parameters:
+        - $ref: "#/components/parameters/channelCatalogIdParameter"
+      responses:
+        "204":
+          description: Channel catalog migrated
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
+          description: Channel catalog not found or not authorized
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: Migrate a channel catalog to current tracking format
+      tags:
+        - Channel Catalogs - Legacy Tracking - Global
   /v2/user/lov/:
     get:
       operationId: GetUserLovIndex
@@ -7214,6 +7305,12 @@ components:
           schema:
             $ref: "#/components/schemas/orderListRequest"
       required: true
+    reportByDayRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/reportByDayRequest"
+      required: true
     setMerchantOrderInfoListRequest:
       content:
         application/json:
@@ -8068,19 +8165,6 @@ components:
       description: Indicate the operator you want to make on the columnId
       type: string
       x-lov: ProductColumnFilterOperatorName
-    BeezUP.Common.ProductFilters:
-      properties:
-        additionalProductFilters:
-          $ref: "#/components/schemas/BeezUP.Common.AdditionalProductFilters"
-        sku:
-          description: The product sku filter
-          example: M1234
-          type: string
-        title:
-          description: The product title filter
-          example: Refrigérateur
-          type: string
-      type: object
     BeezUP.Common.ProductId:
       description: The product identifier
       example: 578419df-1bbf-41a6-96fa-862e42182b67
@@ -9115,17 +9199,16 @@ components:
     categoryMappingState:
       description: The category mapping state of the channel catalog
       properties:
-        categorizedWithoutCostProductCount:
-          description: Indicates the categorized product count without cost defined on the
-            category
-          example: "42"
-          format: int32
-          type: integer
         status:
           $ref: "#/components/schemas/categoryMappingStatus"
         uncategorizedProductCount:
           description: Indicates the uncategorized product count
           example: "101"
+          format: int32
+          type: integer
+        withoutCategoryCostProductCount:
+          description: Indicates the count of products without cost defined
+          example: "42"
           format: int32
           type: integer
       type: object
@@ -9329,12 +9412,6 @@ components:
               type: boolean
             links:
               $ref: "#/components/schemas/channelCatalogLinks"
-            productCount:
-              description: The product count exported considering category mapping. Not all
-                filters have been applied.
-              example: "101"
-              format: int32
-              type: integer
             state:
               $ref: "#/components/schemas/channelCatalogState"
             storeId:
@@ -9360,7 +9437,6 @@ components:
             - channelCostSettings
             - channelCategorySettings
             - isMarketplace
-            - productCount
           type: object
     channelCatalogCategoryConfiguration:
       description: >
@@ -9652,8 +9728,8 @@ components:
           $ref: "#/components/schemas/links.AddChannelCatalogLink"
         beezUPColumns:
           $ref: "#/components/schemas/externalLinks.Catalog_GetBeezUPColumnsLink"
-        exclusionFilterOperators:
-          $ref: "#/components/schemas/links.GetChannelCatalogExclusionFilterOperatorsLink"
+        filterOperators:
+          $ref: "#/components/schemas/links.GetChannelCatalogFilterOperatorsLink"
         self:
           $ref: "#/components/schemas/links.GetChannelCatalogsLink"
       type: object
@@ -10154,6 +10230,45 @@ components:
             channel catalog identifier
           type: object
       type: object
+    channelCatalogProductFilters:
+      properties:
+        additionalProductFilters:
+          $ref: "#/components/schemas/BeezUP.Common.AdditionalProductFilters"
+        catalogEans:
+          description: The catalog product EAN filter (multiple values)
+          items:
+            type: string
+          type: array
+        catalogMpns:
+          description: The catalog product MPN filter (multiple values)
+          items:
+            type: string
+          type: array
+        catalogSkus:
+          description: The catalog product SKU filter (multiple values)
+          items:
+            type: string
+          type: array
+        channelEans:
+          description: The channel product EAN filter (multiple values)
+          items:
+            type: string
+          type: array
+        channelMpns:
+          description: The channel product MPN filter (multiple values)
+          items:
+            type: string
+          type: array
+        channelSkus:
+          description: The channel product SKU filter (multiple values)
+          items:
+            type: string
+          type: array
+        title:
+          description: The product title filter
+          example: Refrigérateur
+          type: string
+      type: object
     channelCatalogProductInfo:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.ProductBasicInfo"
@@ -10237,28 +10352,28 @@ components:
       description: The channel catalog products counters. For each counter you will
         have a count.
       properties:
-        disabledProductCountExcludingUncategorizedAndExcluded:
-          description: Disabled product count EXCLUDING uncategorized products AND
-            excluded products on existing products.
-          example: "50"
-          format: int32
-          type: integer
-        disabledProductCountIncludingUncategorizedAndExcluded:
-          description: Disabled product count INCLUDING uncategorized products AND
-            excluded products on existing products.
-          example: "66"
-          format: int32
-          type: integer
-        excludedProductCountExcludingUncategorized:
-          description: Excluded product count EXCLUDING uncategorized products on existing
+        disabledProductCountExcludingUncategorized:
+          description: Disabled product count EXCLUDING uncategorized products on existing
             products.
           example: "150"
           format: int32
           type: integer
-        excludedProductCountIncludingUncategorized:
-          description: Excluded product count INCLUDING uncategorized products on existing
+        disabledProductCountIncludingUncategorized:
+          description: Disabled product count INCLUDING uncategorized products on existing
             products.
           example: "169"
+          format: int32
+          type: integer
+        excludedProductCountExcludingUncategorizedAndDisabled:
+          description: Excluded product count EXCLUDING uncategorized products AND
+            disabled products on existing products.
+          example: "50"
+          format: int32
+          type: integer
+        excludedProductCountIncludingUncategorizedAndDisabled:
+          description: Excluded product count INCLUDING uncategorized products AND
+            disabled products on existing products.
+          example: "66"
           format: int32
           type: integer
         existingProductCount:
@@ -11430,6 +11545,10 @@ components:
     customColumn:
       description: The custom column configuration
       properties:
+        catalogColumnDependencies:
+          items:
+            $ref: "#/components/schemas/catalogColumnName"
+          type: array
         configuration:
           $ref: "#/components/schemas/columnConfiguration"
         id:
@@ -11775,7 +11894,7 @@ components:
         name:
           $ref: "#/components/schemas/exclusionFilterName"
         operatorName:
-          $ref: "#/components/schemas/exclusionFilterOperatorName"
+          $ref: "#/components/schemas/filterOperatorName"
         position:
           description: The position of the exclusion filter
           example: "1"
@@ -11792,6 +11911,7 @@ components:
         value:
           description: The value indicate by the user when the filter operation requires it.
           example: sony
+          maxLength: 4000
           type: string
       required:
         - name
@@ -11806,33 +11926,6 @@ components:
       description: The exclusion filter name
       example: Exclude sony products
       type: string
-    exclusionFilterOperator:
-      description: The exclusion filter operator
-      properties:
-        expectedChannelColumnDataType:
-          $ref: "#/components/schemas/exclusionFilterOperatorDataType"
-        expectedValueDataType:
-          $ref: "#/components/schemas/exclusionFilterOperatorDataType"
-        name:
-          $ref: "#/components/schemas/exclusionFilterOperatorName"
-        valueRequired:
-          description: This operator requires a value
-          example: "true"
-          type: boolean
-      type: object
-    exclusionFilterOperatorDataType:
-      default: string
-      description: Data type of the operator
-      enum:
-        - string
-        - number
-      example: string
-      type: string
-    exclusionFilterOperatorName:
-      description: The exclusion filter operator name
-      example: Contains
-      type: string
-      x-lov: ChannelCatalogExclusionFilterOperator
     exclusionFilters:
       description: The exclusion filter list
       items:
@@ -11944,6 +12037,33 @@ components:
         - Json
       example: Csv
       type: string
+    filterOperator:
+      description: The filter operator
+      properties:
+        expectedChannelColumnDataType:
+          $ref: "#/components/schemas/filterOperatorDataType"
+        expectedValueDataType:
+          $ref: "#/components/schemas/filterOperatorDataType"
+        name:
+          $ref: "#/components/schemas/filterOperatorName"
+        valueRequired:
+          description: This operator requires a value
+          example: "true"
+          type: boolean
+      type: object
+    filterOperatorDataType:
+      default: string
+      description: Data type of the operator
+      enum:
+        - string
+        - number
+      example: string
+      type: string
+    filterOperatorName:
+      description: The exclusion filter operator name
+      example: Contains
+      type: string
+      x-lov: ProductColumnFilterOperatorName
     firstName:
       description: Your first name
       example: Paul
@@ -12066,7 +12186,7 @@ components:
           minimum: 100
           type: integer
         productFilters:
-          $ref: "#/components/schemas/BeezUP.Common.ProductFilters"
+          $ref: "#/components/schemas/channelCatalogProductFilters"
       required:
         - pageNumber
         - pageSize
@@ -12102,7 +12222,7 @@ components:
       properties:
         errorCode:
           $ref: "#/components/schemas/errorCode"
-        userColumName:
+        userColumnName:
           $ref: "#/components/schemas/userColumName"
       type: object
     getImportationProductsReportRequestErrorCodes:
@@ -12128,6 +12248,8 @@ components:
           $ref: "#/components/schemas/getImportationReportResponseDiff"
         errors:
           $ref: "#/components/schemas/getImportationReportResponseErrors"
+        executionId:
+          $ref: "#/components/schemas/executionId"
         importationInfo:
           $ref: "#/components/schemas/getImportationReportResponseImportationInfo"
         productMetrics:
@@ -12135,10 +12257,8 @@ components:
         products:
           $ref: "#/components/schemas/getImportationReportResponseDiff"
       required:
+        - executionId
         - importationInfo
-        - columns
-        - categories
-        - products
         - errors
       type: object
     getImportationReportResponseDiff:
@@ -12158,6 +12278,8 @@ components:
       type: object
     getImportationReportResponseError:
       properties:
+        beezUPColumnName:
+          $ref: "#/components/schemas/BeezUP.Common.BeezUPColumnName"
         errorCode:
           $ref: "#/components/schemas/errorCode"
         productCount:
@@ -12611,6 +12733,10 @@ components:
           description: Indicate for each step of the importation the uris to look at
           type: object
       type: object
+    importationsPerStoreResponse:
+      additionalProperties:
+        $ref: "#/components/schemas/importationsResponse"
+      type: object
     importationsResponse:
       properties:
         importations:
@@ -12919,6 +13045,43 @@ components:
       description: Your last name
       example: Simon
       type: string
+    legacyTrackingChannelCatalog:
+      description: The channel catalog
+      properties:
+        links:
+          $ref: "#/components/schemas/legacyTrackingChannelCatalogLinks"
+      required:
+        - links
+      type: object
+    legacyTrackingChannelCatalogLinks:
+      description: Indicates the actions you can do on a channel catalog
+      properties:
+        migrate:
+          $ref: "#/components/schemas/links.MigrateLegacyTrackingChannelCatalogLink"
+        self:
+          $ref: "#/components/schemas/links.GetLegacyTrackingChannelCatalogLink"
+      required:
+        - self
+      type: object
+    legacyTrackingChannelCatalogList:
+      description: This is the index of the channel catalog API
+      properties:
+        channelCatalogs:
+          additionalProperties:
+            $ref: "#/components/schemas/legacyTrackingChannelCatalog"
+          description: The channel catalog list. The key is the channel catalog identifier
+          type: object
+        links:
+          $ref: "#/components/schemas/legacyTrackingChannelCatalogListLinks"
+      type: object
+    legacyTrackingChannelCatalogListLinks:
+      description: >
+        Indicates how global actions you can do like how to create a
+        channel catalog, exclusion filter operators, etc...
+      properties:
+        self:
+          $ref: "#/components/schemas/links.GetLegacyTrackingChannelCatalogsLink"
+      type: object
     link3:
       properties:
         allOptionalParamsProvided:
@@ -13537,12 +13700,6 @@ components:
         - example:
             href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categories
             method: GET
-    links.GetChannelCatalogExclusionFilterOperatorsLink:
-      allOf:
-        - $ref: "#/components/schemas/BeezUP.Common.Link3"
-        - example:
-            href: /v2/user/channelCatalogs/exclusionFilterOperators
-            method: GET
     links.GetChannelCatalogExclusionFiltersCopyLink:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
@@ -13566,6 +13723,12 @@ components:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
         - example:
             href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/exportations/history
+            method: GET
+    links.GetChannelCatalogFilterOperatorsLink:
+      allOf:
+        - $ref: "#/components/schemas/BeezUP.Common.Link3"
+        - example:
+            href: /v2/user/channelCatalogs/filterOperators
             method: GET
     links.GetChannelCatalogLink:
       allOf:
@@ -13630,6 +13793,18 @@ components:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
         - example:
             href: /v2/user/customer
+            method: GET
+    links.GetLegacyTrackingChannelCatalogLink:
+      allOf:
+        - $ref: "#/components/schemas/BeezUP.Common.Link3"
+        - example:
+            href: /v2/user/legacyTracking/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
+            method: GET
+    links.GetLegacyTrackingChannelCatalogsLink:
+      allOf:
+        - $ref: "#/components/schemas/BeezUP.Common.Link3"
+        - example:
+            href: /v2/user/legacyTracking/channelCatalogs
             method: GET
     links.GetMarketplaceAccountsSynchronizationLink:
       allOf:
@@ -14091,6 +14266,12 @@ components:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
         - example:
             href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/customColumns/5b56bb78-bc0b-485e-abd8-8db7eed995cb/map
+            method: POST
+    links.MigrateLegacyTrackingChannelCatalogLink:
+      allOf:
+        - $ref: "#/components/schemas/BeezUP.Common.Link3"
+        - example:
+            href: /v2/user/legacyTracking/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/migrate
             method: POST
     links.MoveDownRuleLink:
       allOf:
@@ -16343,6 +16524,8 @@ components:
       type: object
     productErrorCode:
       properties:
+        beezUPColumnName:
+          $ref: "#/components/schemas/BeezUP.Common.BeezUPColumnName"
         errorCode:
           $ref: "#/components/schemas/errorCode"
         errorMessage:
@@ -17171,6 +17354,11 @@ components:
           required:
             - channel
           type: object
+    reportByDayPerStoreResponse:
+      additionalProperties:
+        $ref: "#/components/schemas/reportByDayResponse"
+      description: The key is the StoreId.
+      type: object
     reportByDayRequest:
       properties:
         advancedFilters:
@@ -19022,3 +19210,6 @@ x-tagGroups:
       - Analytics - Optimisations
       - Analytics - Reports
       - Analytics - Rules
+  - name: Channel Catalogs - Legacy Tracking
+    tags:
+      - Channel Catalogs - Legacy Tracking - Global

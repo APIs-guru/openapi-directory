@@ -11965,6 +11965,12 @@ paths:
             items:
               type: string
             type: array
+        - description: Include equivalent ids in prefix filter
+          in: query
+          name: include_eqs
+          schema:
+            default: false
+            type: boolean
         - description: boost function e.g. pow(edges,0.334)
           explode: true
           in: query
@@ -12011,6 +12017,12 @@ paths:
           name: min_match
           schema:
             type: string
+        - description: Exclude grouping classes (classes with subclasses)
+          in: query
+          name: exclude_groups
+          schema:
+            default: false
+            type: boolean
         - description: set to true to use the minimal tokenizer, good for variants and
             genotypes
           in: query
@@ -12122,6 +12134,12 @@ paths:
             items:
               type: string
             type: array
+        - description: Include equivalent ids in prefix filter
+          in: query
+          name: include_eqs
+          schema:
+            default: false
+            type: boolean
         - description: boost function e.g. pow(edges,0.334)
           explode: true
           in: query
@@ -12168,6 +12186,12 @@ paths:
           name: min_match
           schema:
             type: string
+        - description: Exclude grouping classes (classes with subclasses)
+          in: query
+          name: exclude_groups
+          schema:
+            default: false
+            type: boolean
         - description: set to true to use the minimal tokenizer, good for variants and
             genotypes
           in: query
@@ -12713,6 +12737,11 @@ components:
       properties:
         category:
           description: node categories
+          items:
+            type: string
+          type: array
+        equivalent_ids:
+          description: Equivalent IDs
           items:
             type: string
           type: array

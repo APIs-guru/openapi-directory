@@ -2550,6 +2550,14 @@ components:
         state:
           type: string
       type: object
+    AppoinmentBookingFormsViewModel:
+      additionalProperties: false
+      properties:
+        bookingConfirmationPage:
+          type: string
+        bookingForm:
+          type: string
+      type: object
     AppointmentAuditViewModel:
       additionalProperties: false
       properties:
@@ -2686,6 +2694,8 @@ components:
           type: array
         bookedBy:
           type: string
+        bookingForms:
+          $ref: "#/components/schemas/AppoinmentBookingFormsViewModel"
         businessName:
           type: string
         calendarId:

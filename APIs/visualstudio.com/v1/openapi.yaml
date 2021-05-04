@@ -3102,8 +3102,6 @@ components:
         partitionKey:
           nullable: true
           type: string
-        partitionKeyType:
-          $ref: "#/components/schemas/PartitionKeyType"
         periodEnd:
           format: date-time
           type: string
@@ -3112,9 +3110,6 @@ components:
           type: string
         plan:
           $ref: "#/components/schemas/VsoPlanInfo"
-        planId:
-          nullable: true
-          type: string
         planIsDeleted:
           type: boolean
         usage:
@@ -3463,13 +3458,6 @@ components:
         partitionKey:
           nullable: true
           type: string
-        partitionKeyType:
-          $ref: "#/components/schemas/PartitionKeyType"
-        plan:
-          $ref: "#/components/schemas/VsoPlanInfo"
-        planId:
-          nullable: true
-          type: string
         time:
           format: date-time
           type: string
@@ -3657,12 +3645,6 @@ components:
         - 32 (ExportRunningEnvironmentError)
         - 33 (GitHubProxyError)
         - 34 (EnvironmentCreationIsNotAllowed)
-      format: int32
-      type: integer
-    PartitionKeyType:
-      enum:
-        - 0 (Plan)
-        - 1 (Environment)
       format: int32
       type: integer
     PersonalizationInfoBody:

@@ -1492,6 +1492,7 @@ paths:
 
 
 
+
           
         The error section in the body, represents the potential errors that may have occurred. Possible reasons:
           1. **Patient reference number is invalid**
@@ -2654,6 +2655,7 @@ paths:
               4. DIRECT - for authentication directly with the patient. e.g. Mobile App, SMS. In this case, the HIP/HIU is not expected to call subsequent /auth/confirm call. CM will do direct authentication with the User (e.g. Mobile App, SMS etc) and will notify requester
           2. **meta.expiry** conveys the expiry time of the token and the authentication session
           3. **NOTE**, only one of **X-HIP-ID** or **X-HIU-ID** will be sent as part of header, not both. 
+
 
 
 

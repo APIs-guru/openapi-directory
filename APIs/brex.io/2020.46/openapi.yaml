@@ -78,7 +78,7 @@ paths:
                 type: array
           description: List of announcements
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves announcement data
@@ -139,7 +139,7 @@ paths:
                 type: array
           description: Result of a lookup by ISIN number
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of stock exchange listings
@@ -196,7 +196,7 @@ paths:
                     type: boolean
           description: Result of a lookup by LEI number
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of companies
@@ -226,7 +226,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of companies from the official business register
@@ -256,7 +256,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of companies from the official business register
@@ -290,7 +290,7 @@ paths:
                 type: array
           description: List of monitor webhooks
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of registered notifications
@@ -313,7 +313,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1company~1notification~1list/get/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of registered notifications
@@ -356,7 +356,7 @@ paths:
                   - monitorStatus
           description: Successful webhook registration response
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Creates a new notification
@@ -379,7 +379,7 @@ paths:
         "200":
           description: Empty response body
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Deactivates an active notification
@@ -416,7 +416,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of companies from the KYC API company index
@@ -453,7 +453,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of companies from the KYC API company index
@@ -545,7 +545,7 @@ paths:
                 type: array
           description: List of companies
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of companies from the KYC API company index
@@ -591,7 +591,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1company~1announcement~1{id}/get/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves company announcements
@@ -620,7 +620,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves structured data extracted from a company document
@@ -710,7 +710,7 @@ paths:
                   - registrationNumber
           description: ""
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves company details
@@ -764,7 +764,7 @@ paths:
                   - timestamp
           description: Result of a basic EIN number verification
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Verifies an EIN number
@@ -805,7 +805,7 @@ paths:
                   - timestamp
           description: Result of a comprehensive EIN number verification
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Verifies EIN number and retrieves company data
@@ -906,7 +906,7 @@ paths:
                   - timestamp
           description: Result of a EIN reverse lookup
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of EIN numbers
@@ -942,7 +942,7 @@ paths:
                   - valid
           description: Denotes validity of checked IBAN
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Checks validity of an IBAN number
@@ -977,7 +977,7 @@ paths:
           description: Denotes validity of checked IBAN and provides comprehensive
             information
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Checks validity of an IBAN number
@@ -1036,7 +1036,7 @@ paths:
                   - validationStatus
           description: Result of a basic NIF verification
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Verifies a NIF number
@@ -1117,7 +1117,7 @@ paths:
                   - validationStatus
           description: Result of a comprehensive NIF verification
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Verifies a NIF number and retrieves company data
@@ -1154,7 +1154,7 @@ paths:
                 type: array
           description: View Pep Sanction Report monitors
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of monitor entries
@@ -1176,7 +1176,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1pepsanction~1monitor~1update~1{id}/post/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Deactive a pep sanction monitor
@@ -1229,7 +1229,7 @@ paths:
                     type: string
           description: View a monitor for a Pep Sanction Report
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Update details of active Pep Sanction monitor
@@ -1383,7 +1383,7 @@ paths:
                   - type
           description: Product details
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Orders a new Pep Sanction Check Report
@@ -1458,7 +1458,7 @@ paths:
                   - type
           description: Result of a PEP and sanctions list check
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Returns a json or pdf report
@@ -1489,7 +1489,7 @@ paths:
           $ref: "#/paths/~1api~1v1~1pepsanction~1order~1{type}~1{search}/post/responses/2\
             00"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a document availability result
@@ -1535,7 +1535,7 @@ paths:
                   - url
           description: Product with details like URI to purchase it
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Returns a catalog of products
@@ -1582,7 +1582,7 @@ paths:
                   - productOrderIdentity
           description: Details of configured product order notification
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Returns metadata for a notifier
@@ -1626,7 +1626,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1product~1notifier~1{notifierId}/get/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Creates a notifier for an order
@@ -1706,7 +1706,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1product~1order~1ubo/post/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Places a concierge order
@@ -1789,7 +1789,7 @@ paths:
                   - subjectValue
           description: Product order details
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Places a UBO order
@@ -1826,7 +1826,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1product~1order~1ubo/post/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Places a product order
@@ -1856,7 +1856,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1product~1order~1ubo/post/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Places a product order
@@ -1908,7 +1908,7 @@ paths:
                 type: array
           description: List of products
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Returns a list of products
@@ -1931,7 +1931,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1product~1order~1ubo/post/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Returns metadata for a order
@@ -1972,7 +1972,7 @@ paths:
         "200":
           $ref: "#/paths/~1api~1v1~1product~1order~1ubo/post/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Updates metadata of an order
@@ -2031,7 +2031,7 @@ paths:
                       - data
           description: Details for retrieval of a delivered product
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves the result of an order
@@ -2055,6 +2055,32 @@ paths:
                 type: array
           description: List of countries
         default:
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+      security:
+        - user_key: []
+      summary: Returns a list of countries
+      tags:
+        - v1-system
+  /api/v1/system/health:
+    get:
+      description: Returns the health information for the official business registers
+        based on usage.
+      operationId: HealthCheck
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    name:
+                      type: string
+                    status:
+                      type: string
+                type: array
+          description: List of the commercial registers and their health data
+        default:
           content:
             application/json:
               schema:
@@ -2075,7 +2101,8 @@ paths:
           description: Detailed information about the error
       security:
         - user_key: []
-      summary: Returns a list of countries
+      summary: Returns the health information for the official business registers
+        based on usage.
       tags:
         - v1-system
   /api/v1/system/pricelist:
@@ -2102,7 +2129,7 @@ paths:
                 type: array
           description: List of pricing rules
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Returns a list of products with prices
@@ -2151,7 +2178,7 @@ paths:
                   - possibleMatch
           description: Result of a basic TIN number check with company name
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Verifies a TIN number
@@ -2205,7 +2232,7 @@ paths:
           description: Result of a basic TIN number check with company name and the list
             of matched companies
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: EIN Name Lookup with TIN number and retrieves company data
@@ -2241,7 +2268,7 @@ paths:
                   - possibleMatch
           description: Result of a EIN name lookup with TIN number
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: EIN Name Lookup with TIN number
@@ -2300,7 +2327,7 @@ paths:
                   - validationStatus
           description: Denotes validity of checked VAT
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Returns a verification result
@@ -2346,7 +2373,7 @@ paths:
           $ref: "#/paths/~1api~1v1~1vat-verification~1basic-check~1{country}/post/respons\
             es/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Returns a verification result and company data
@@ -2403,7 +2430,7 @@ paths:
                   - level
           description: Denotes second level validity result of checked VAT
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Returns a level two verification result
@@ -2469,7 +2496,7 @@ paths:
                   - level
           description: Result of a VAT number reverse Lookup
         default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
       security:
         - user_key: []
       summary: Returns a list of vat numbers with additional data

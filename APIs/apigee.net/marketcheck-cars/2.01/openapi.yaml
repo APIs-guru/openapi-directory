@@ -101,8 +101,12 @@ paths:
         - $ref: "#/components/parameters/stock_no"
         - $ref: "#/components/parameters/last_seen_range"
         - $ref: "#/components/parameters/first_seen_range"
+        - $ref: "#/components/parameters/first_seen_at_source_range"
+        - $ref: "#/components/parameters/first_seen_at_mc_range"
         - $ref: "#/components/parameters/last_seen_days"
         - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/first_seen_at_source_days"
+        - $ref: "#/components/parameters/first_seen_at_mc_days"
         - $ref: "#/components/parameters/include_relevant_links"
       responses:
         "200":
@@ -1462,8 +1466,12 @@ paths:
         - $ref: "#/components/parameters/stock_no"
         - $ref: "#/components/parameters/last_seen_range"
         - $ref: "#/components/parameters/first_seen_range"
+        - $ref: "#/components/parameters/first_seen_at_source_range"
+        - $ref: "#/components/parameters/first_seen_at_mc_range"
         - $ref: "#/components/parameters/last_seen_days"
         - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/first_seen_at_source_days"
+        - $ref: "#/components/parameters/first_seen_at_mc_days"
         - $ref: "#/components/parameters/include_relevant_links"
       responses:
         "200":
@@ -1565,8 +1573,12 @@ paths:
         - $ref: "#/components/parameters/stock_no"
         - $ref: "#/components/parameters/last_seen_range"
         - $ref: "#/components/parameters/first_seen_range"
+        - $ref: "#/components/parameters/first_seen_at_source_range"
+        - $ref: "#/components/parameters/first_seen_at_mc_range"
         - $ref: "#/components/parameters/last_seen_days"
         - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/first_seen_at_source_days"
+        - $ref: "#/components/parameters/first_seen_at_mc_days"
         - $ref: "#/components/parameters/inventory_type"
         - description: Page number to fetch the results for the given criteria. Default is
             1.
@@ -1726,8 +1738,12 @@ paths:
         - $ref: "#/components/parameters/stock_no"
         - $ref: "#/components/parameters/last_seen_range"
         - $ref: "#/components/parameters/first_seen_range"
+        - $ref: "#/components/parameters/first_seen_at_source_range"
+        - $ref: "#/components/parameters/first_seen_at_mc_range"
         - $ref: "#/components/parameters/last_seen_days"
         - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/first_seen_at_source_days"
+        - $ref: "#/components/parameters/first_seen_at_mc_days"
         - $ref: "#/components/parameters/include_relevant_links"
       responses:
         "200":
@@ -1951,8 +1967,12 @@ paths:
         - $ref: "#/components/parameters/stock_no"
         - $ref: "#/components/parameters/last_seen_range"
         - $ref: "#/components/parameters/first_seen_range"
+        - $ref: "#/components/parameters/first_seen_at_source_range"
+        - $ref: "#/components/parameters/first_seen_at_mc_range"
         - $ref: "#/components/parameters/last_seen_days"
         - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/first_seen_at_source_days"
+        - $ref: "#/components/parameters/first_seen_at_mc_days"
         - $ref: "#/components/parameters/include_relevant_links"
       responses:
         "200":
@@ -2438,8 +2458,12 @@ paths:
         - $ref: "#/components/parameters/dom_range"
         - $ref: "#/components/parameters/last_seen_range"
         - $ref: "#/components/parameters/first_seen_range"
+        - $ref: "#/components/parameters/first_seen_at_source_range"
+        - $ref: "#/components/parameters/first_seen_at_mc_range"
         - $ref: "#/components/parameters/last_seen_days"
         - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/first_seen_at_source_days"
+        - $ref: "#/components/parameters/first_seen_at_mc_days"
         - $ref: "#/components/parameters/sort_by"
         - $ref: "#/components/parameters/sort_order"
         - $ref: "#/components/parameters/rows"
@@ -3998,6 +4022,84 @@ components:
             defaultMin: 12
             transformer: parseInt
             type: integer
+    first_seen_at_mc_days:
+      description: First seen at MC days range to filter listings with the first seen
+        at MC in the range given. Range to be given in the format - min-max e.g.
+        25-12
+      in: query
+      name: first_seen_at_mc_days
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: first_scraped_at_dts
+        transformConstraints:
+          - nowBound: true
+            transformer: parseDate
+            type: date
+    first_seen_at_mc_range:
+      description: First seen at MC date range to filter listings with the first seen
+        at MC in the range given. Range to be given in the format [YYYYMMDD] -
+        min-max e.g. 20190523-20190623
+      in: query
+      name: first_seen_at_mc_range
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: first_scraped_at_dts
+        transformConstraints:
+          - transformer: parseDate
+            type: date
+    first_seen_at_source_days:
+      description: First seen at source days range to filter listings with the first
+        seen at source in the range given. Range to be given in the format -
+        min-max e.g. 25-12
+      in: query
+      name: first_seen_at_source_days
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: relisted_at_date_dts
+        transformConstraints:
+          - nowBound: true
+            transformer: parseDate
+            type: date
+    first_seen_at_source_range:
+      description: First seen at source date range to filter listings with the first
+        seen at source in the range given. Range to be given in the format
+        [YYYYMMDD] - min-max e.g. 20190523-20190623
+      in: query
+      name: first_seen_at_source_range
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: relisted_at_date_dts
+        transformConstraints:
+          - transformer: parseDate
+            type: date
     first_seen_days:
       description: First seen days range to filter listings with the first seen in the
         range given. Range to be given in the format - min-max e.g. 25-12
@@ -6224,6 +6326,18 @@ components:
           type: integer
         first_seen_at_date:
           description: Listing first seen at first scraped date
+          type: string
+        first_seen_at_mc:
+          description: Listing first seen at first scraped at MC timestamp
+          type: integer
+        first_seen_at_mc_date:
+          description: Listing first seen at first scraped at MC date
+          type: string
+        first_seen_at_source:
+          description: Listing first seen at source relisted timestamp
+          type: integer
+        first_seen_at_source_date:
+          description: Listing first seen at source relisted date
           type: string
         heading:
           description: Listing title as displayed on the source website

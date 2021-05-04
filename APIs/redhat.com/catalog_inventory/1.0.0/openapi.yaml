@@ -302,66 +302,6 @@ paths:
       summary: Untag a ServiceInventory
       tags:
         - ServiceInventory
-  /service_offering_icons:
-    get:
-      description: Returns an array of ServiceOfferingIcon objects
-      operationId: listServiceOfferingIcons
-      parameters:
-        - $ref: "#/components/parameters/QueryLimit"
-        - $ref: "#/components/parameters/QueryOffset"
-        - $ref: "#/components/parameters/QueryFilter"
-        - $ref: "#/components/parameters/QuerySortBy"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceOfferingIconsCollection"
-          description: ServiceOfferingIcons collection
-      summary: List ServiceOfferingIcons
-      tags:
-        - ServiceOfferingIcon
-  "/service_offering_icons/{id}":
-    get:
-      description: Returns a ServiceOfferingIcon object
-      operationId: showServiceOfferingIcon
-      parameters:
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceOfferingIcon"
-          description: ServiceOfferingIcon info
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorNotFound"
-          description: Not found
-      summary: Show an existing ServiceOfferingIcon
-      tags:
-        - ServiceOfferingIcon
-  "/service_offering_icons/{id}/icon_data":
-    get:
-      description: Returns a ServiceOfferingIcon IconData
-      operationId: showServiceOfferingIconIconData
-      parameters:
-        - $ref: "#/components/parameters/ID"
-      responses:
-        "200":
-          content:
-            image/*:
-              schema:
-                format: binary
-                type: string
-          description: ServiceOfferingIcon IconData
-        "404":
-          description: Not found
-      summary: Show an existing ServiceOfferingIcon IconData
-      tags:
-        - ServiceOfferingIcon
   /service_offering_nodes:
     get:
       description: Returns an array of ServiceOfferingNode objects
@@ -805,6 +745,32 @@ paths:
                 $ref: "#/components/schemas/ErrorNotFound"
           description: Not found
       summary: List ServicePlans for Source
+      tags:
+        - Source
+  "/sources/{id}/tasks":
+    get:
+      description: Returns an array of Task objects
+      operationId: listSourceTasks
+      parameters:
+        - $ref: "#/components/parameters/QueryLimit"
+        - $ref: "#/components/parameters/QueryOffset"
+        - $ref: "#/components/parameters/QueryFilter"
+        - $ref: "#/components/parameters/QuerySortBy"
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TasksCollection"
+          description: Tasks collection
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorNotFound"
+          description: Not found
+      summary: List Tasks for Source
       tags:
         - Source
   /tags:
@@ -1415,8 +1381,6 @@ components:
           $ref: "#/components/schemas/ID"
         service_inventory_id:
           $ref: "#/components/schemas/ID"
-        service_offering_icon_id:
-          $ref: "#/components/schemas/ID"
         source_created_at:
           format: date-time
           readOnly: true
@@ -1793,6 +1757,11 @@ components:
           example: Result of Task Execution
           title: Result
           type: object
+        owner:
+          example: jdoe
+          readOnly: true
+          title: Owner
+          type: string
         source_id:
           $ref: "#/components/schemas/ID"
         state:

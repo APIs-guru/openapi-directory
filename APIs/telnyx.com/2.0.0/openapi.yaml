@@ -12,6 +12,7 @@ info:
   version: 2.0.0
   x-apisguru-categories:
     - telecom
+  x-endpoint-cost: light
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/team-telnyx/openapi/master/openapi/spec3.yml
@@ -305,6 +306,7 @@ paths:
       summary: List all addresses
       tags:
         - Addresses
+      x-endpoint-cost: medium
       x-latency-category: responsive
     post:
       description: Creates an address.
@@ -325,6 +327,7 @@ paths:
       summary: Creates an address
       tags:
         - Addresses
+      x-endpoint-cost: medium
       x-latency-category: responsive
   /addresses/actions/validate:
     post:
@@ -534,6 +537,7 @@ paths:
       summary: List available phone numbers
       tags:
         - Number Search
+      x-endpoint-cost: heavy
       x-group-parameters: "true"
       x-latency-category: responsive
   /balance:
@@ -650,6 +654,7 @@ paths:
       summary: List call control applications
       tags:
         - Call Control Applications
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: interactive
     post:
@@ -670,6 +675,7 @@ paths:
       summary: Create a call control application
       tags:
         - Call Control Applications
+      x-endpoint-cost: medium
       x-latency-category: interactive
   "/call_control_applications/{id}":
     delete:
@@ -2849,6 +2855,7 @@ paths:
       summary: List connections
       tags:
         - Connections
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
   "/connections/{id}":
@@ -2899,6 +2906,7 @@ paths:
       summary: List credential connections
       tags:
         - Credential Connections
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
     post:
@@ -2920,6 +2928,7 @@ paths:
       summary: Create a credential connection
       tags:
         - Credential Connections
+      x-endpoint-cost: medium
       x-latency-category: responsive
   "/credential_connections/{id}":
     delete:
@@ -3148,6 +3157,7 @@ paths:
       summary: List all Fax Applications
       tags:
         - Programmable Fax Applications
+      x-endpoint-cost: medium
       x-latency-category: responsive
     post:
       description: Creates a new Fax Application based on the parameters sent in the
@@ -3171,6 +3181,7 @@ paths:
       summary: Creates a Fax Application
       tags:
         - Programmable Fax Applications
+      x-endpoint-cost: medium
       x-latency-category: responsive
   "/fax_applications/{id}":
     delete:
@@ -3475,6 +3486,7 @@ paths:
       summary: List Fqdn connections
       tags:
         - FQDN Connections
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
     post:
@@ -3496,6 +3508,7 @@ paths:
       summary: Create an Fqdn connection
       tags:
         - FQDN Connections
+      x-endpoint-cost: medium
       x-latency-category: responsive
   "/fqdn_connections/{id}":
     delete:
@@ -3614,6 +3627,7 @@ paths:
       summary: List Fqdns
       tags:
         - FQDNs
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
     post:
@@ -3634,6 +3648,7 @@ paths:
       summary: Create an Fqdn
       tags:
         - FQDNs
+      x-endpoint-cost: medium
       x-latency-category: responsive
   "/fqdns/{id}":
     delete:
@@ -3711,6 +3726,7 @@ paths:
       summary: List Ip connections
       tags:
         - IP Connections
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
     post:
@@ -3732,6 +3748,7 @@ paths:
       summary: Create an Ip connection
       tags:
         - IP Connections
+      x-endpoint-cost: medium
       x-latency-category: responsive
   "/ip_connections/{id}":
     delete:
@@ -3844,6 +3861,7 @@ paths:
       summary: List Ips
       tags:
         - IPs
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
     post:
@@ -3864,6 +3882,7 @@ paths:
       summary: Create an Ip
       tags:
         - IPs
+      x-endpoint-cost: medium
       x-latency-category: responsive
   "/ips/{id}":
     delete:
@@ -3971,6 +3990,7 @@ paths:
       summary: Lists accounts managed by the current user.
       tags:
         - Managed Accounts
+      x-endpoint-cost: medium
       x-latency-category: responsive
     post:
       description: Create a new managed account owned by the authenticated user. You
@@ -3995,6 +4015,7 @@ paths:
       summary: Create a new managed account.
       tags:
         - Managed Accounts
+      x-endpoint-cost: medium
       x-latency-category: responsive
   "/managed_accounts/{id}":
     get:
@@ -4364,6 +4385,7 @@ paths:
       summary: List messaging profiles
       tags:
         - Messaging Profiles
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
     post:
@@ -4423,6 +4445,7 @@ paths:
       summary: Create a messaging profile
       tags:
         - Messaging Profiles
+      x-endpoint-cost: medium
       x-latency-category: responsive
   "/messaging_profiles/{id}":
     delete:
@@ -5184,6 +5207,7 @@ paths:
       summary: List number orders
       tags:
         - Number Orders
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
     post:
@@ -5217,6 +5241,7 @@ paths:
       summary: Create a number order
       tags:
         - Number Orders
+      x-endpoint-cost: heavy
       x-latency-category: responsive
   "/number_orders/{number_order_id}":
     get:
@@ -5439,6 +5464,7 @@ paths:
       summary: Get all outbound voice profiles
       tags:
         - Outbound Voice Profiles
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
     post:
@@ -5649,6 +5675,7 @@ paths:
       summary: List phone numbers
       tags:
         - Number Configurations
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
   /phone_numbers/csv_downloads:
@@ -5665,6 +5692,7 @@ paths:
       summary: List CSV downloads
       tags:
         - CSV Downloads
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
     post:
@@ -5677,6 +5705,7 @@ paths:
       summary: Create a CSV download
       tags:
         - CSV Downloads
+      x-endpoint-cost: medium
       x-latency-category: background
   "/phone_numbers/csv_downloads/{id}":
     get:
@@ -5696,6 +5725,7 @@ paths:
       summary: Retrieve a CSV download
       tags:
         - CSV Downloads
+      x-endpoint-cost: medium
       x-latency-category: background
   /phone_numbers/inbound_channels:
     get:
@@ -5732,6 +5762,7 @@ paths:
       summary: Retrieve your inbound channels
       tags:
         - Inbound Channels
+      x-endpoint-cost: medium
       x-latency-category: responsive
     patch:
       description: Update the inbound channels for the account
@@ -5804,6 +5835,7 @@ paths:
       summary: Update inbound channels
       tags:
         - Inbound Channels
+      x-endpoint-cost: medium
       x-latency-category: responsive
   /phone_numbers/jobs:
     get:
@@ -5839,6 +5871,7 @@ paths:
       summary: Lists the phone numbers jobs
       tags:
         - Number Background Jobs
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
   /phone_numbers/jobs/delete_phone_numbers:
@@ -6030,6 +6063,7 @@ paths:
       summary: List phone numbers with voice settings
       tags:
         - Number Configurations
+      x-endpoint-cost: medium
       x-group-parameters: "true"
       x-latency-category: responsive
   "/phone_numbers/{id}":
@@ -6045,6 +6079,7 @@ paths:
       summary: Delete a phone number
       tags:
         - Number Configurations
+      x-endpoint-cost: medium
       x-latency-category: responsive
     get:
       operationId: retrievePhoneNumber
@@ -6058,6 +6093,7 @@ paths:
       summary: Retrieve a phone number
       tags:
         - Number Configurations
+      x-endpoint-cost: medium
       x-latency-category: responsive
     patch:
       operationId: updatePhoneNumber
@@ -6078,6 +6114,7 @@ paths:
       summary: Update a phone number
       tags:
         - Number Configurations
+      x-endpoint-cost: medium
       x-latency-category: responsive
   "/phone_numbers/{id}/actions/enable_emergency":
     post:
@@ -6116,6 +6153,7 @@ paths:
       summary: Enable emergency for a phone number
       tags:
         - Number Configurations
+      x-endpoint-cost: medium
       x-latency-category: responsive
   "/phone_numbers/{id}/messaging":
     get:
@@ -6174,6 +6212,7 @@ paths:
       summary: Retrieve a phone number with voice settings
       tags:
         - Number Configurations
+      x-endpoint-cost: medium
       x-latency-category: responsive
     patch:
       operationId: updatePhoneNumberWithVoiceSettings
@@ -6194,6 +6233,7 @@ paths:
       summary: Update a phone number with voice settings
       tags:
         - Number Configurations
+      x-endpoint-cost: medium
       x-latency-category: responsive
   /phone_numbers_regulatory_requirements:
     get:
@@ -8155,6 +8195,7 @@ paths:
       summary: List all TeXML Applications
       tags:
         - TeXML Applications
+      x-endpoint-cost: medium
       x-latency-category: responsive
     post:
       description: Creates a TeXML Application.
@@ -8175,6 +8216,7 @@ paths:
       summary: Creates a TeXML Application
       tags:
         - TeXML Applications
+      x-endpoint-cost: medium
       x-latency-category: responsive
   "/texml_applications/{id}":
     delete:
@@ -9385,7 +9427,7 @@ components:
       name: phone_number
       required: true
       schema:
-        example: "+18665552368"
+        example: '"+18665552368"'
         type: string
     QueryIncludePhoneNumbers:
       description: Include the first 50 phone number objects in the results
@@ -9904,6 +9946,7 @@ components:
             properties:
               data:
                 $ref: "#/components/schemas/FaxApplication"
+            title: Fax Application Response
             type: object
       description: Successful response
     Forbidden:
@@ -9962,6 +10005,7 @@ components:
                 type: array
               meta:
                 $ref: "#/components/schemas/PaginationMeta"
+            title: Get All Fax Applications Response
             type: object
       description: Successful response
     GetAllPrivateWirelessGatewaysResponse:
@@ -10014,6 +10058,7 @@ components:
                 type: array
               meta:
                 $ref: "#/components/schemas/PaginationMeta"
+            title: Get All Texml Applications Response
             type: object
       description: Successful response
     GetFaxResponse:
@@ -10023,6 +10068,7 @@ components:
             properties:
               data:
                 $ref: "#/components/schemas/Fax"
+            title: Get Fax Response
             type: object
       description: Get fax response
     GetPrivateWirelessGatewayResponse:
@@ -10267,6 +10313,7 @@ components:
                   total_pages: 3
                   total_results: 3
                 type: object
+            title: List Faxes Response
             type: object
       description: List faxes response
     ListFqdnConnectionsResponse:
@@ -10769,6 +10816,7 @@ components:
             properties:
               data:
                 $ref: "#/components/schemas/NumberLookupRecord"
+            title: Number Lookup Response
             type: object
       description: Successful response
     NumberOrderDocumentResponse:
@@ -10942,6 +10990,7 @@ components:
               result:
                 example: ok
                 type: string
+            title: Refresh Fax Response
             type: object
       description: Refresh fax response
     RefreshRoomAccessTokenResponse:
@@ -11108,6 +11157,7 @@ components:
             properties:
               data:
                 $ref: "#/components/schemas/Fax"
+            title: Send Fax Response
             type: object
       description: Send fax response
     ShortCodeResponse:
@@ -11194,6 +11244,7 @@ components:
             properties:
               data:
                 $ref: "#/components/schemas/TexmlApplication"
+            title: Texml Application Response
             type: object
       description: Successful response
     UnauthorizedResponse:
@@ -18154,7 +18205,7 @@ components:
         stored_media_url:
           description: If store_media was set to true, this is a link to temporary
             location. Link expires after 7 days.
-          type: boolean
+          type: string
         to:
           description: The phone number, in E.164 format, the fax will be sent to or SIP URI
           example: "+13127367276"
@@ -23536,6 +23587,7 @@ components:
           enum:
             - Y
             - N
+            - ""
           example: Y
           type: string
         spid:
@@ -25413,6 +25465,8 @@ components:
             hold at maximum 1000 credentials.
           example: some_tag
           type: string
+      required:
+        - connection_id
       title: TelephonyCredentialCreate
       type: object
     TelephonyCredentialUpdate:

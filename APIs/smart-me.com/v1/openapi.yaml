@@ -2718,6 +2718,9 @@ components:
           items:
             $ref: "#/components/schemas/FolderMenuItem"
           type: array
+        Description:
+          description: The Description of the folder
+          type: string
         FolderType:
           description: The folder type of the item
           enum:

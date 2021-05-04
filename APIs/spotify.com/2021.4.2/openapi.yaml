@@ -6,7 +6,7 @@ info:
     name: sonallux
     url: https://github.com/sonallux/spotify-web-api
   title: Spotify Web API
-  version: 2021.4.19
+  version: 2021.5.1
   x-apisguru-categories:
     - media
   x-logo:
@@ -3316,6 +3316,22 @@ paths:
           required: false
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                ids:
+                  description: >-
+                    A JSON array of the [Spotify
+                    IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids).  
+
+                    A maximum of 50 items can be specified in one request. *Note: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored.*
+                  items:
+                    type: string
+                  type: array
+              type: object
+        required: false
       responses:
         "200":
           description: >-
@@ -3450,6 +3466,22 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                ids:
+                  description: >-
+                    A JSON array of the [Spotify
+                    IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids).  
+
+                    A maximum of 50 items can be specified in one request. *Note: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored.*
+                  items:
+                    type: string
+                  type: array
+              type: object
+        required: false
       responses:
         "200":
           description: On success, the HTTP status code in the response header is `200`
@@ -7700,7 +7732,7 @@ components:
       type: object
     SearchResponseObject:
       properties:
-        album:
+        albums:
           description: ""
           externalDocs:
             description: Find more info on the official Spotify Web API Reference
@@ -7736,7 +7768,7 @@ components:
               format: int32
               type: integer
           type: object
-        artist:
+        artists:
           description: ""
           externalDocs:
             description: Find more info on the official Spotify Web API Reference
@@ -7772,7 +7804,7 @@ components:
               format: int32
               type: integer
           type: object
-        episode:
+        episodes:
           description: ""
           externalDocs:
             description: Find more info on the official Spotify Web API Reference
@@ -7808,7 +7840,7 @@ components:
               format: int32
               type: integer
           type: object
-        playlist:
+        playlists:
           description: ""
           externalDocs:
             description: Find more info on the official Spotify Web API Reference
@@ -7844,7 +7876,7 @@ components:
               format: int32
               type: integer
           type: object
-        show:
+        shows:
           description: ""
           externalDocs:
             description: Find more info on the official Spotify Web API Reference
@@ -7880,7 +7912,7 @@ components:
               format: int32
               type: integer
           type: object
-        track:
+        tracks:
           description: ""
           externalDocs:
             description: Find more info on the official Spotify Web API Reference

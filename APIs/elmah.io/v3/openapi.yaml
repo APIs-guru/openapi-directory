@@ -463,6 +463,16 @@ paths:
         description: The message object to create.
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateMessageResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CreateMessageResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CreateMessageResult"
           description: Message was not created.
         "201":
           content:
@@ -745,6 +755,29 @@ paths:
         - UptimeChecks
 components:
   schemas:
+    Breadcrumb:
+      description: A breadcrumb represent a step preceding a log message.
+      properties:
+        action:
+          description: "An action representing the breadcrumb. You can set a custom action
+            or use one of the built-in: click, submit, navigation, request,
+            error."
+          type: string
+        dateTime:
+          description: The date and time in UTC of the breadcrumb. If no date and time is
+            provided, we will use the current date and time in UTC.
+          format: date-time
+          type: string
+        message:
+          description: A message representing the breadcrumb. This should elaborate on the
+            action.
+          type: string
+        severity:
+          description: "An enum value representing the severity of this breadcrumb. The
+            following values are allowed: Verbose, Debug, Information, Warning,
+            Error, Fatal."
+          type: string
+      type: object
     CreateBulkMessageResult:
       properties:
         location:
@@ -869,6 +902,11 @@ components:
             this if you have multiple applications and services logging to the
             same log
           type: string
+        breadcrumbs:
+          description: A list of breadcrumbs preceding this log message.
+          items:
+            $ref: "#/components/schemas/Breadcrumb"
+          type: array
         cookies:
           description: A key/value pair of cookies. This property only makes sense for
             logging messages related to web requests.
@@ -1074,6 +1112,11 @@ components:
             this if you have multiple applications and services logging to the
             same log
           type: string
+        breadcrumbs:
+          description: A list of breadcrumbs preceding this log message.
+          items:
+            $ref: "#/components/schemas/Breadcrumb"
+          type: array
         cookies:
           description: A key/value pair of cookies. This property only makes sense for
             logging messages related to web requests.
@@ -1202,6 +1245,11 @@ components:
             this if you have multiple applications and services logging to the
             same log
           type: string
+        breadcrumbs:
+          description: A list of breadcrumbs preceding this log message.
+          items:
+            $ref: "#/components/schemas/Breadcrumb"
+          type: array
         cookies:
           description: A key/value pair of cookies. This property only makes sense for
             logging messages related to web requests.

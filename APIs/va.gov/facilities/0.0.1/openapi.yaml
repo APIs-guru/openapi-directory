@@ -190,7 +190,9 @@ paths:
           examples:
             ids:
               description: ids
-              value: vha_688,vha_644
+              value:
+                - vha_688
+                - vha_644
           in: query
           name: ids
           schema:
@@ -226,7 +228,7 @@ paths:
           examples:
             coordinates:
               description: coordinates
-              value: 40
+              value: 56.7
           in: query
           name: lat
           schema:
@@ -237,7 +239,7 @@ paths:
           examples:
             coordinates:
               description: coordinates
-              value: -105
+              value: -123.4
           in: query
           name: long
           schema:
@@ -250,7 +252,11 @@ paths:
           examples:
             bbox:
               description: bbox
-              value: -105.4, 39.4, -104.5, 40.1
+              value:
+                - -105.4
+                - 39.4
+                - -104.5
+                - 40.1
           in: query
           name: bbox[]
           schema:
@@ -362,6 +368,9 @@ paths:
         "200":
           content:
             application/geo+json:
+              schema:
+                $ref: "#/components/schemas/GeoFacilitiesResponse"
+            application/json:
               schema:
                 $ref: "#/components/schemas/GeoFacilitiesResponse"
             application/vnd.geo+json:
@@ -570,7 +579,7 @@ paths:
           examples:
             coordinates:
               description: coordinates
-              value: 123.4
+              value: 56.7
           in: query
           name: lat
           schema:
@@ -580,7 +589,7 @@ paths:
           examples:
             coordinates:
               description: coordinates
-              value: 456.7
+              value: -123.4
           in: query
           name: lng
           schema:
@@ -667,25 +676,35 @@ paths:
 components:
   schemas:
     Address:
+      nullable: true
       properties:
         address_1:
           example: 50 Irving Street, Northwest
+          nullable: true
           type: string
         address_2:
+          example: Bldg 2
+          nullable: true
           type: string
         address_3:
+          example: Suite 7
+          nullable: true
           type: string
         city:
           example: Washington
+          nullable: true
           type: string
         state:
           example: DC
+          nullable: true
           type: string
         zip:
           example: 20422-0001
+          nullable: true
           type: string
       type: object
     Addresses:
+      nullable: true
       properties:
         mailing:
           $ref: "#/components/schemas/Address"
@@ -703,127 +722,194 @@ components:
         - errors
       type: object
     AppointmentPhoneNumber:
+      description: Phone number information for scheduling an appointment.
+      nullable: true
       properties:
         extension:
+          example: "71234"
+          nullable: true
           type: string
         label:
+          example: Main phone
+          nullable: true
           type: string
         number:
+          example: 937-268-6511
+          nullable: true
           type: string
         type:
+          example: tel
+          nullable: true
           type: string
       type: object
     DetailedService:
-      description: Detailed information of a facility service
+      description: Detailed information of a facility service.
+      nullable: true
       properties:
         appointment_leadin:
-          example: Your VA health care team will contact you if you...
+          description: Additional appointment information. May contain html / string
+            formatting characters.
+          example: Your VA health care team will contact you if you???re eligible to get a
+            vaccine during this time. As the supply of vaccine increases, we'll
+            work with our care teams to let Veterans know their options.
+          nullable: true
           type: string
         appointment_phones:
+          description: List of phone numbers related to scheduling appointments for this
+            service.
           items:
             $ref: "#/components/schemas/AppointmentPhoneNumber"
+          nullable: true
           type: array
         description_facility:
-          example: Facility description for vaccine availability for COVID-19
+          description: Deprecated until further notice.
+          example: "null"
+          nullable: true
           type: string
-        description_national:
-          $ref: "#/components/schemas/DetailedService"
-        description_system:
-          $ref: "#/components/schemas/DetailedService"
-        health_service_api_id:
-          $ref: "#/components/schemas/DetailedService"
         name:
+          description: Service name.
           example: COVID-19 vaccines
+          nullable: true
           type: string
         online_scheduling_available:
+          description: String detailing online scheduling availability.
           example: "True"
+          nullable: true
           type: string
         path:
+          description: URL to a page with additional details for this service within the
+            associated facility's health care system.
           example: https://www.boston.va.gov/services/covid-19-vaccines.asp
+          nullable: true
           type: string
         referral_required:
+          description: String detailing if referrals are required for the service.
           example: "False"
+          nullable: true
           type: string
         service_locations:
+          description: List of service locations.
           items:
             $ref: "#/components/schemas/DetailedServiceLocation"
+          nullable: true
           type: array
         walk_ins_accepted:
+          description: String detailing if walk-ins are accepted for the service.
           example: "True"
+          nullable: true
           type: string
       type: object
     DetailedServiceAddress:
+      description: Service location address.
+      nullable: true
       properties:
         address_line1:
           example: 50 Irving Street, Northwest
+          nullable: true
           type: string
         address_line2:
+          nullable: true
           type: string
         building_name_number:
+          description: Building name and/or number of service.
+          example: Baxter Building
+          nullable: true
           type: string
         city:
+          example: Washington
+          nullable: true
           type: string
         clinic_name:
+          description: Clinic name for service.
+          example: Baxter Clinic
+          nullable: true
           type: string
         country_code:
+          example: US
+          nullable: true
           type: string
         state:
-          example: NY
+          example: DC
+          nullable: true
           type: string
         wing_floor_or_room_number:
+          description: Wing, floor, or room number of service.
           example: Wing East
+          nullable: true
           type: string
         zip_code:
           example: 20422-0001
+          nullable: true
           type: string
       type: object
     DetailedServiceEmailContact:
+      description: Email contact information.
+      nullable: true
       properties:
         email_address:
           example: georgea@va.gov
+          nullable: true
           type: string
         email_label:
           example: George Anderson
+          nullable: true
           type: string
       type: object
     DetailedServiceHours:
       description: Standard hours of operation. Currently formatted as descriptive
         text suitable for display, with no guarantee of a standard parseable
         format. Hours of operation may vary due to holidays or other events.
+      nullable: true
       properties:
         Friday:
           example: 9AM-5PM
+          nullable: true
           type: string
         Monday:
           example: 9AM-5PM
+          nullable: true
           type: string
         Saturday:
           example: Closed
+          nullable: true
           type: string
         Sunday:
           example: Closed
+          nullable: true
           type: string
         Thursday:
           example: 9AM-5PM
+          nullable: true
           type: string
         Tuesday:
           example: 9AM-5PM
+          nullable: true
           type: string
         Wednesday:
           example: 9AM-5PM
+          nullable: true
           type: string
       type: object
     DetailedServiceLocation:
+      description: Details for a location offering a service.
+      nullable: true
       properties:
         additional_hours_info:
+          description: Additional information related to service location hours.
+          example: Location hours times may vary depending on staff availability
+          nullable: true
           type: string
         appointment_phones:
+          description: List of appointment phone information.
           items:
             $ref: "#/components/schemas/AppointmentPhoneNumber"
+          nullable: true
           type: array
         email_contacts:
+          description: List of email contact information.
           items:
             $ref: "#/components/schemas/DetailedServiceEmailContact"
+          nullable: true
           type: array
         facility_service_hours:
           $ref: "#/components/schemas/DetailedServiceHours"
@@ -909,21 +995,25 @@ components:
         - type
       type: object
     FacilityAttributes:
+      nullable: true
       properties:
         active_status:
           description: This field is deprecated and replaced with "operating_status".
           enum:
             - A
             - T
+          nullable: true
           type: string
         address:
           $ref: "#/components/schemas/Addresses"
         classification:
           example: VA Medical Center (VAMC)
+          nullable: true
           type: string
         detailed_services:
           items:
             $ref: "#/components/schemas/DetailedService"
+          nullable: true
           type: array
         facility_type:
           enum:
@@ -931,6 +1021,7 @@ components:
             - va_cemetery
             - va_health_facility
             - vet_center
+          example: va_health_facility
           type: string
         hours:
           $ref: "#/components/schemas/Hours"
@@ -946,6 +1037,7 @@ components:
           type: number
         mobile:
           example: false
+          nullable: true
           type: boolean
         name:
           example: Washington VA Medical Center
@@ -954,6 +1046,7 @@ components:
           $ref: "#/components/schemas/OperatingStatus"
         operational_hours_special_instructions:
           example: Administrative hours are Monday-Friday 8:00 a.m. to 4:30 p.m.
+          nullable: true
           type: string
         phone:
           $ref: "#/components/schemas/Phone"
@@ -963,11 +1056,13 @@ components:
           $ref: "#/components/schemas/Services"
         visn:
           example: "20"
+          nullable: true
           type: string
         wait_times:
           $ref: "#/components/schemas/WaitTimes"
         website:
           example: http://www.washingtondc.va.gov
+          nullable: true
           type: string
       required:
         - facility_type
@@ -1039,15 +1134,18 @@ components:
         - type
       type: object
     Geometry:
+      nullable: true
       properties:
         coordinates:
           example:
             - -77.0367761
             - 38.9004181
           items:
+            nullable: true
             type: number
           maxItems: 2
           minItems: 2
+          nullable: true
           type: array
         type:
           enum:
@@ -1061,38 +1159,49 @@ components:
       description: Standard hours of operation. Currently formatted as descriptive
         text suitable for display, with no guarantee of a standard parseable
         format. Hours of operation may vary due to holidays or other events.
+      nullable: true
       properties:
         friday:
           example: 9AM-5PM
+          nullable: true
           type: string
         monday:
           example: 9AM-5PM
+          nullable: true
           type: string
         saturday:
           example: Closed
+          nullable: true
           type: string
         sunday:
           example: Closed
+          nullable: true
           type: string
         thursday:
           example: 9AM-5PM
+          nullable: true
           type: string
         tuesday:
           example: 9AM-5PM
+          nullable: true
           type: string
         wednesday:
           example: 9AM-5PM
+          nullable: true
           type: string
       type: object
     Meta:
       description: JSON API-compliant object containing metadata about this response
+      nullable: true
       properties:
         band_version:
           example: APR2021
+          nullable: true
           type: string
       type: object
     Nearby:
       description: JSON API-compliant object describing a nearby VA facility
+      nullable: true
       properties:
         attributes:
           $ref: "#/components/schemas/NearbyAttributes"
@@ -1102,7 +1211,7 @@ components:
         type:
           enum:
             - NearbyFacility
-          example: nearby_facility
+          example: va_health_facility
           type: string
       required:
         - attributes
@@ -1110,6 +1219,7 @@ components:
         - type
       type: object
     NearbyAttributes:
+      nullable: true
       properties:
         max_time:
           example: 20
@@ -1139,12 +1249,15 @@ components:
         facility, which can be: Normal Hours and Services, Facility Notice,
         Limited Hours and/or Services, or Closed. This field replaces
         active_status."
+      example: NORMAL
+      nullable: true
       properties:
         additional_info:
           description: Details of facility notices for visitors, such as messages about
             parking lot closures or floor visitation information.
           maxLength: 300
           minLength: 0
+          nullable: true
           type: string
         code:
           description: Status codes indicate normal hours/services, limited
@@ -1156,6 +1269,7 @@ components:
             - LIMITED
             - CLOSED
           example: NORMAL
+          nullable: true
           type: string
       required:
         - code
@@ -1163,15 +1277,20 @@ components:
     PageLinks:
       properties:
         first:
+          nullable: true
           type: string
         last:
+          nullable: true
           type: string
         next:
+          nullable: true
           type: string
         prev:
+          nullable: true
           type: string
         related:
           description: /services/va_facilities/v0/facilities?id=vha_688
+          nullable: true
           type: string
         self:
           type: string
@@ -1204,45 +1323,53 @@ components:
       type: object
     PatientSatisfaction:
       description: Veteran-reported satisfaction scores for health care services
+      nullable: true
       properties:
         primary_care_routine:
           description: "% of Veterans who say they usually or always get an appointment
             when they need it at a primary care location."
           example: 0.85
           format: float
+          nullable: true
           type: number
         primary_care_urgent:
           description: "% of Veterans who say they usually or always get an appointment
             when they need care right away at a primary care location."
           example: 0.85
           format: float
+          nullable: true
           type: number
         specialty_care_routine:
           description: "% of Veterans who say they usually or always get an appointment
             when they need it at a specialty location."
           example: 0.85
           format: float
+          nullable: true
           type: number
         specialty_care_urgent:
           description: "% of Veterans who say they usually or always get an appointment
             when they need care right away at a specialty location."
           example: 0.85
           format: float
+          nullable: true
           type: number
       type: object
     PatientWaitTime:
       description: Expected wait times for new and established patients for a given
         health care service
+      nullable: true
       properties:
         established:
           description: Average number of days a patient who has already been to this
             location has to wait for a non-urgent appointment.
           example: 5
+          nullable: true
           type: number
         new:
           description: Average number of days a Veteran who hasn't been to this location
             has to wait for a non-urgent appointment.
           example: 10
+          nullable: true
           type: number
         service:
           enum:
@@ -1270,27 +1397,35 @@ components:
         - service
       type: object
     Phone:
+      nullable: true
       properties:
         after_hours:
           example: 202-555-1212
+          nullable: true
           type: string
         enrollment_coordinator:
           example: 202-555-1212
+          nullable: true
           type: string
         fax:
           example: 202-555-1212
+          nullable: true
           type: string
         main:
           example: 202-555-1212
+          nullable: true
           type: string
         mental_health_clinic:
           example: 202-555-1212
+          nullable: true
           type: string
         patient_advocate:
           example: 202-555-1212
+          nullable: true
           type: string
         pharmacy:
           example: 202-555-1212
+          nullable: true
           type: string
       type: object
     Properties:
@@ -1299,15 +1434,18 @@ components:
           enum:
             - A
             - T
+          nullable: true
           type: string
         address:
           $ref: "#/components/schemas/Addresses"
         classification:
           example: VA Medical Center (VAMC)
+          nullable: true
           type: string
         detailed_services:
           items:
             $ref: "#/components/schemas/DetailedService"
+          nullable: true
           type: array
         facility_type:
           enum:
@@ -1323,14 +1461,17 @@ components:
           type: string
         mobile:
           example: false
+          nullable: true
           type: boolean
         name:
           example: Washington VA Medical Center
+          nullable: true
           type: string
         operating_status:
           $ref: "#/components/schemas/OperatingStatus"
         operational_hours_special_instructions:
           example: Administrative hours are Monday-Friday 8:00 a.m. to 4:30 p.m.
+          nullable: true
           type: string
         phone:
           $ref: "#/components/schemas/Phone"
@@ -1340,11 +1481,13 @@ components:
           $ref: "#/components/schemas/Services"
         visn:
           example: "20"
+          nullable: true
           type: string
         wait_times:
           $ref: "#/components/schemas/WaitTimes"
         website:
           example: http://www.washingtondc.va.gov
+          nullable: true
           type: string
       required:
         - facility_type
@@ -1352,15 +1495,18 @@ components:
         - operating_status
       type: object
     Satisfaction:
+      nullable: true
       properties:
         effective_date:
           example: 2018-01-01
           format: date
+          nullable: true
           type: string
         health:
           $ref: "#/components/schemas/PatientSatisfaction"
       type: object
     Services:
+      nullable: true
       properties:
         benefits:
           items:
@@ -1381,7 +1527,9 @@ components:
               - UpdatingDirectDepositInformation
               - VAHomeLoanAssistance
               - VocationalRehabilitationAndEmploymentAssistance
+            nullable: true
             type: string
+          nullable: true
           type: array
         health:
           items:
@@ -1405,28 +1553,37 @@ components:
               - UrgentCare
               - Urology
               - WomensHealth
+            nullable: true
             type: string
+          nullable: true
           type: array
         last_updated:
           example: 2018-01-01
           format: date
+          nullable: true
           type: string
         other:
           items:
             enum:
               - OnlineScheduling
+            nullable: true
             type: string
+          nullable: true
           type: array
       type: object
     WaitTimes:
+      example: 10
+      nullable: true
       properties:
         effective_date:
           example: 2018-01-01
           format: date
+          nullable: true
           type: string
         health:
           items:
             $ref: "#/components/schemas/PatientWaitTime"
+          nullable: true
           type: array
       type: object
   securitySchemes:

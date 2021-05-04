@@ -671,7 +671,7 @@ paths:
       tags:
         - WebhookInstances
   "/webhook_instances/{guid}":
-    get:
+    delete:
       description: DELETE a specific WebhookInstance
       operationId: delete_webhook_instance
       parameters:

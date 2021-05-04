@@ -11580,7 +11580,6 @@ components:
           description: Specifies order comment
           type: string
         coupon_discount:
-          default: 0
           description: Specifies order's coupon discount
           type: number
         create_invoice:
@@ -11620,7 +11619,6 @@ components:
           description: Specifies order's  modification date
           type: string
         discount:
-          default: 0
           description: Specifies order's discount
           type: number
         external_source:
@@ -11633,7 +11631,6 @@ components:
           description: Create order with fulfillment status
           type: string
         gift_certificate_discount:
-          default: 0
           description: Discounts for order with gift certificates
           type: number
         id:
@@ -11988,6 +11985,9 @@ components:
           type: boolean
         shipment_id:
           description: Shipment id indicates the number of delivery
+          type: string
+        store_id:
+          description: Store Id
           type: string
         tracking_numbers:
           description: Defines shipment's tracking numbers that have to be added</br> How

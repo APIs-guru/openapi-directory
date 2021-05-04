@@ -3811,6 +3811,39 @@ definitions:
         format: string
         type: string
     type: object
+  OrderBillingAddress:
+    properties:
+      address:
+        description: Address of the Order's Billing Address
+        type: string
+      city:
+        description: City of the Order's Billing Address
+        type: string
+      country:
+        description: Country code of the Order's Billing Address (ISO 3166-1 alpha-2)
+        type: string
+      country_name:
+        description: Country name of the Order's Billing Address
+        type: string
+      municipality:
+        description: Municipality of the Order's Billing Address
+        type: string
+      name:
+        description: Name of the Order's Billing Address
+        type: string
+      postal:
+        description: Postal code of the Order's Billing Address
+        type: string
+      region:
+        description: Region code of the Order's Billing Address (Use the FIPS standard -
+          http://www.geonames.org/countries/)
+        type: string
+      street_number:
+        description: Street number of the Order's Billing Address
+        type: number
+      surname:
+        description: Surname of the Order's Billing Address
+        type: string
   OrderCreate:
     properties:
       order:
@@ -3893,7 +3926,7 @@ definitions:
         description: Additional information for the given Order
         type: string
       billing_address:
-        $ref: "#/definitions/BillingAddress"
+        $ref: "#/definitions/OrderBillingAddress"
       checkout_url:
         description: Store Checkout Order URL for the given Order
         type: string
@@ -3946,7 +3979,7 @@ definitions:
         format: float
         type: number
       shipping_address:
-        $ref: "#/definitions/ShippingAddress"
+        $ref: "#/definitions/OrderShippingAddress"
       shipping_discount:
         description: Shipping Discount value for the given order
         format: float
@@ -4114,6 +4147,45 @@ definitions:
         description: False if tax is not included on product price
         type: boolean
     type: object
+  OrderShippingAddress:
+    properties:
+      address:
+        description: Address of the Order's Shipping Address
+        type: string
+      city:
+        description: City of the Order's Shipping Address
+        type: string
+      country:
+        description: Country code of the Order's Shipping Address (ISO 3166-1 alpha-2)
+        type: string
+      country_name:
+        description: Country name of the Order's Shipping Address
+        type: string
+      latitude:
+        description: Latitude of the Order's Shipping Address
+        type: number
+      longitude:
+        description: Longitude of the Order's Shipping Address
+        type: number
+      municipality:
+        description: Municipality of the Order's Shipping Address
+        type: string
+      name:
+        description: Name of the Order's Shipping Address
+        type: string
+      postal:
+        description: Postal code of the Order's Shipping Address
+        type: string
+      region:
+        description: Region code of the Order's Shipping Address (Use the FIPS standard
+          - http://www.geonames.org/countries/)
+        type: string
+      street_number:
+        description: Street number of the Order's Shipping Address
+        type: number
+      surname:
+        description: Surname of the Order's Shipping Address
+        type: string
   OrderShippingTax:
     properties:
       country:

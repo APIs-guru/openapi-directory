@@ -5909,7 +5909,7 @@ components:
           additionalProperties: false
           description: A list of values that helps identify this response back to logs, so
             we can easily find faults.
-          nullable: false
+          nullable: true
           properties:
             errors:
               description: List of errors that may assist you in resolving the issues.
@@ -6849,7 +6849,7 @@ components:
           additionalProperties: false
           description: A list of values that helps identify this response back to logs, so
             we can easily find faults.
-          nullable: false
+          nullable: true
           properties:
             errors:
               description: List of errors that may assist you in resolving the issues.
@@ -6902,7 +6902,7 @@ components:
           additionalProperties: false
           description: A list of values that helps identify this response back to logs, so
             we can easily find faults .
-          nullable: false
+          nullable: true
           properties:
             errors:
               description: List of errors that may assist you in resolving the issues.
@@ -6979,7 +6979,7 @@ components:
           additionalProperties: false
           description: A list of values that helps identify this response back to logs, so
             we can easily find faults.
-          nullable: false
+          nullable: true
           properties:
             errors:
               description: List of errors that may assist you in resolving the issues.
@@ -7021,7 +7021,7 @@ components:
           additionalProperties: false
           description: A list of values that helps identify this response back to logs, so
             we can easily find faults.
-          nullable: false
+          nullable: true
           properties:
             errors:
               description: List of errors that may assist you in resolving the issues.
@@ -7582,7 +7582,7 @@ components:
           additionalProperties: false
           description: A list of values that helps identify this response back to logs, so
             we can easily find faults.
-          nullable: false
+          nullable: true
           properties:
             errors:
               description: List of errors that may assist you in resolving the issues.
@@ -8412,6 +8412,10 @@ components:
           description: The offers priority dictates the order and combination approach
             when multiple offers are executed together.
           nullable: false
+        qualifyingConditions:
+          $ref: "#/components/schemas/ConsumerOfferQualifyingConditions"
+          description: Conditions that must be met in order to get the offer.
+          nullable: true
         restaurantId:
           description: The unique identifier of the restaurant providing the offers.
           nullable: false
@@ -8483,6 +8487,39 @@ components:
         description: We�ll apply the discount at checkout
         header: Free item
         title: Nice! You get this free with your order
+    ConsumerOfferQualifyingConditions:
+      additionalProperties: false
+      example:
+        minimumOrderValue: 1000
+        qualifyingProductCategories:
+          - productCategoryId: Sides111
+        qualifyingProducts:
+          - productId: FrenchFriesBig1
+      properties:
+        minimumOrderValue:
+          description: The minimum order value required to be eligible for the Offer in
+            smallest unit of relevant currency.
+          format: integer
+          nullable: true
+          type: number
+        qualifyingProductCategories:
+          description: One of the products from category needed to be included in the
+            basket to make offer applicable
+          items:
+            $ref: "#/components/schemas/ConsumerOffersProductCategory"
+          minItems: 1
+          nullable: true
+          type: array
+        qualifyingProducts:
+          description: One of those products needed to be included in the basket to make
+            offer applicable
+          items:
+            $ref: "#/components/schemas/ConsumerOffersProduct"
+          minItems: 1
+          nullable: true
+          type: array
+      title: ConsumerOfferQualifyingConditions
+      type: object
     ConsumerOfferStampCardDiscount:
       additionalProperties: false
       properties:
@@ -8512,10 +8549,21 @@ components:
         - $ref: "#/components/schemas/ConsumerOffer"
         - additionalProperties: false
           properties:
+            productCategories:
+              description: >-
+                One of the products from category needed to be included in the
+                basket to make offer applicable.
+
+                The second occurrence of such product gets 100% discount
+              items:
+                $ref: "#/components/schemas/ConsumerOffersProductCategory"
+              minItems: 1
+              nullable: true
+              type: array
             products:
               description: >-
-                One of those products needed to be included in the collection of
-                products to make offer applicable.
+                One of those products needed to be included in the basket to make
+                offer applicable.
 
                 The second occurrence of such product gets 100% discount
               items:
@@ -8551,15 +8599,32 @@ components:
           properties:
             freeProduct:
               $ref: "#/components/schemas/ConsumerOffersProduct"
-              description: The product that gets 100% discount applied
+              deprecated: true
+              description: The product that gets 100% discount applied [Deprecated - use
+                freeProducts instead]
               nullable: false
+            freeProducts:
+              description: One or more of those products gets 100% discount applied
+              items:
+                $ref: "#/components/schemas/ConsumerOffersProduct"
+              minItems: 1
+              nullable: false
+              type: array
+            maximumRedemptions:
+              description: The maximum number of discounted items for this offer
+              format: integer
+              minimum: 1
+              nullable: false
+              type: number
             prompt:
               $ref: "#/components/schemas/ConsumerOfferPrompt"
               description: A prompt displayed to consumer
               nullable: false
             qualifyingProducts:
+              deprecated: true
               description: One of those products needed to be included in the collection of
-                products to make offer applicable
+                products to make offer applicable [Deprecated - use
+                qualifyingConditions instead]
               items:
                 $ref: "#/components/schemas/ConsumerOffersProduct"
               minItems: 1
@@ -8570,6 +8635,25 @@ components:
             - freeProduct
             - prompt
           type: object
+      example:
+        campaignId: freePotato
+        consumerSegment: All
+        freeProducts:
+          - id: PotatoId
+            preferableModifierIds:
+              - ketchupModifierId
+        maximumRedemptions: 1
+        offerId: 12345sd
+        offerType: FreeItem
+        prompt:
+          description: Potato for free when you order Ice Cream
+          title: Nice! You get this free with your order
+        qualifyingConditions:
+          qualifyingProducts:
+            - id: BigMacId
+            - id: DoubleBigMacId
+            - id: BigMacMenuId
+        restaurantId: 1234sd
     ConsumerOffer_Percent:
       allOf:
         - $ref: "#/components/schemas/ConsumerOffer"
@@ -8581,14 +8665,20 @@ components:
               nullable: false
               type: number
             qualifyingValue:
+              deprecated: true
               description: The minimum order value required to be eligible for the Offer in
-                smallest unit of relevant currency.
+                smallest unit of relevant currency. [Deprecated - use
+                qualifyingConditions instead]
               format: integer
               nullable: true
               type: number
           required:
             - amount
           type: object
+      example:
+        amount: 10
+        qualifyingConditions:
+          minimumOrderValue: 1500
     ConsumerOffer_StampCard:
       allOf:
         - $ref: "#/components/schemas/ConsumerOffer"
@@ -8721,9 +8811,34 @@ components:
             type: string
           nullable: true
           type: array
+        showModifiersSelectionDialog:
+          description: Determinate if modifiers selection dialog will be shown to customer.
+          type: boolean
       required:
         - id
       title: ConsumerOffersProduct
+      type: object
+    ConsumerOffersProductCategory:
+      additionalProperties: false
+      example:
+        categoryId: Pizza1234
+        categoryName: Pizza
+      properties:
+        categoryId:
+          description: The unique identifier of the product category.
+          type: string
+        categoryName:
+          description: The name of the product category.
+          type: string
+        preferableModifierIds:
+          description: The collection of preselected modifiers for the items in category.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+        - id
+      title: ConsumerOffersProductCategory
       type: object
     ConsumerOffersRequest:
       additionalProperties: false
@@ -8770,22 +8885,24 @@ components:
             consumerSegment: All
             offerId: 12345sd
             offerType: Percent
-            qualifyingValue: 15000
+            qualifyingConditions:
+              minimumOrderValue: 15000
             restaurantId: 1234sd
           - consumerSegment: All
-            freeProduct:
-              id: 6 Chicken Nuggets
-              preferableModifierIds:
-                - ketchupModifierId
+            freeProducts:
+              - id: 6 Chicken Nuggets
+                preferableModifierIds:
+                  - ketchupModifierId
             offerId: 345sd
             offerType: FreeItem
             prompt:
               description: 6 Nuggets for free when you order Big Mac
               title: Nice! You get this free with your order
-            qualifyingProducts:
-              - id: BigMacId
-              - id: DoubleBigMacId
-              - id: BigMacMenuId
+            qualifyingConditions:
+              qualifyingProducts:
+                - id: BigMacId
+                - id: DoubleBigMacId
+                - id: BigMacMenuId
             restaurantId: 1234sd
           - campaignId: freeIceCream
             consumerSegment: All

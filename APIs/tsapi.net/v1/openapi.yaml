@@ -11,6 +11,8 @@ info:
       url: https://api.tsapi.net/swagger/v1/swagger.json
       version: "3.0"
   x-providerName: tsapi.net
+security:
+  - basic: []
 paths:
   /Surveys:
     get:
@@ -34,47 +36,6 @@ paths:
                 type: array
           description: Success
       summary: Returns a list of available Surveys
-      tags:
-        - Surveys
-  "/Surveys/{surveyId}/Interviews":
-    get:
-      parameters:
-        - in: path
-          name: surveyId
-          required: true
-          schema:
-            format: uuid
-            type: string
-        - in: query
-          name: start
-          schema:
-            format: int32
-            type: integer
-        - in: query
-          name: maxLength
-          schema:
-            format: int32
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/Interview"
-                type: array
-            text/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/Interview"
-                type: array
-            text/plain:
-              schema:
-                items:
-                  $ref: "#/components/schemas/Interview"
-                type: array
-          description: Success
-      summary: Fetches some interview records for a specific survey
       tags:
         - Surveys
   "/Surveys/{surveyId}/Metadata":
@@ -107,46 +68,22 @@ components:
     AltLabel:
       additionalProperties: false
       properties:
-        mode:
+        lang:
           nullable: true
           type: string
+        mode:
+          allOf:
+            - $ref: "#/components/schemas/AltLabelMode"
         text:
           nullable: true
           type: string
       type: object
-    DataItem:
-      additionalProperties: false
-      properties:
-        ident:
-          nullable: true
-          type: string
-        values:
-          items:
-            type: string
-          nullable: true
-          type: array
-      type: object
-    HierarchicalInterview:
-      additionalProperties: false
-      properties:
-        dataItems:
-          items:
-            $ref: "#/components/schemas/DataItem"
-          nullable: true
-          type: array
-        hierarchicalInterviews:
-          items:
-            $ref: "#/components/schemas/HierarchicalInterview"
-          nullable: true
-          type: array
-        ident:
-          nullable: true
-          type: string
-        level:
-          allOf:
-            - $ref: "#/components/schemas/Level"
-          nullable: true
-      type: object
+    AltLabelMode:
+      enum:
+        - 1
+        - 2
+      format: int32
+      type: integer
     Hierarchy:
       additionalProperties: false
       properties:
@@ -162,23 +99,6 @@ components:
             - $ref: "#/components/schemas/ParentDetails"
           nullable: true
       type: object
-    Interview:
-      additionalProperties: false
-      properties:
-        dataItems:
-          items:
-            $ref: "#/components/schemas/DataItem"
-          nullable: true
-          type: array
-        hierarchicalInterviews:
-          items:
-            $ref: "#/components/schemas/HierarchicalInterview"
-          nullable: true
-          type: array
-        ident:
-          nullable: true
-          type: string
-      type: object
     Label:
       additionalProperties: false
       properties:
@@ -188,13 +108,6 @@ components:
           nullable: true
           type: array
         text:
-          nullable: true
-          type: string
-      type: object
-    Level:
-      additionalProperties: false
-      properties:
-        ident:
           nullable: true
           type: string
       type: object
@@ -209,6 +122,61 @@ components:
           type: string
         ordered:
           type: boolean
+      type: object
+    ParentType:
+      enum:
+        - 1
+        - 2
+        - 3
+      format: int32
+      type: integer
+    Question:
+      additionalProperties: false
+      properties:
+        ident:
+          nullable: true
+          type: string
+        label:
+          allOf:
+            - $ref: "#/components/schemas/Label"
+          nullable: true
+        maxResponses:
+          format: int32
+          type: integer
+        name:
+          nullable: true
+          type: string
+        parentType:
+          allOf:
+            - $ref: "#/components/schemas/ParentType"
+        questions:
+          items:
+            $ref: "#/components/schemas/Question"
+          nullable: true
+          type: array
+        type:
+          allOf:
+            - $ref: "#/components/schemas/VariableType"
+        use:
+          allOf:
+            - $ref: "#/components/schemas/UseType"
+        values:
+          allOf:
+            - $ref: "#/components/schemas/QuestionValues"
+          nullable: true
+      type: object
+    QuestionValues:
+      additionalProperties: false
+      properties:
+        range:
+          allOf:
+            - $ref: "#/components/schemas/ValueRange"
+          nullable: true
+        values:
+          items:
+            $ref: "#/components/schemas/Value"
+          nullable: true
+          type: array
       type: object
     SurveyDetail:
       additionalProperties: false
@@ -242,7 +210,7 @@ components:
           type: string
         variables:
           items:
-            $ref: "#/components/schemas/Variable"
+            $ref: "#/components/schemas/Question"
           nullable: true
           type: array
       type: object
@@ -260,23 +228,34 @@ components:
           type: string
         variables:
           items:
-            $ref: "#/components/schemas/Variable"
+            $ref: "#/components/schemas/Question"
           nullable: true
           type: array
       type: object
+    UseType:
+      enum:
+        - 1
+        - 2
+        - 3
+      format: int32
+      type: integer
     Value:
       additionalProperties: false
       properties:
         code:
           nullable: true
           type: string
+        ident:
+          nullable: true
+          type: string
+        label:
+          allOf:
+            - $ref: "#/components/schemas/Label"
+          nullable: true
         score:
           format: int32
           nullable: true
           type: integer
-        text:
-          nullable: true
-          type: string
       type: object
     ValueRange:
       additionalProperties: false
@@ -288,43 +267,20 @@ components:
           nullable: true
           type: string
       type: object
-    Variable:
-      additionalProperties: false
-      properties:
-        filter:
-          nullable: true
-          type: string
-        ident:
-          nullable: true
-          type: string
-        label:
-          allOf:
-            - $ref: "#/components/schemas/Label"
-          nullable: true
-        name:
-          nullable: true
-          type: string
-        type:
-          nullable: true
-          type: string
-        use:
-          nullable: true
-          type: string
-        values:
-          allOf:
-            - $ref: "#/components/schemas/VariableValues"
-          nullable: true
-      type: object
-    VariableValues:
-      additionalProperties: false
-      properties:
-        range:
-          allOf:
-            - $ref: "#/components/schemas/ValueRange"
-          nullable: true
-        values:
-          items:
-            $ref: "#/components/schemas/Value"
-          nullable: true
-          type: array
-      type: object
+    VariableType:
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+      format: int32
+      type: integer
+  securitySchemes:
+    basic:
+      description: Basic Authorization header using the Bearer scheme.
+      in: header
+      name: Authorization
+      type: apiKey

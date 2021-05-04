@@ -817,6 +817,53 @@ paths:
                       title: Action
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - actions
                 title: ActionsResponse
@@ -1125,6 +1172,53 @@ paths:
                       title: Certificate
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - certificates
                 title: CertificatesResponse
@@ -2047,6 +2141,53 @@ paths:
                       title: Action
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - actions
                 title: ActionsResponse
@@ -2755,6 +2896,53 @@ paths:
                       title: Firewall
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - firewalls
                 title: FirewallsResponse
@@ -3662,6 +3850,53 @@ paths:
                       title: Action
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - actions
                 title: ActionsResponse
@@ -3736,13 +3971,12 @@ paths:
                           - server
                           - label_selector
                         type: string
-                    required:
-                      - type
+                    title: FirewallApplyToResources
                     type: object
                   type: array
               required:
                 - apply_to
-              title: ApplyToResources
+              title: ApplyToResourcesRequest
               type: object
       responses:
         "201":
@@ -3843,6 +4077,53 @@ paths:
                       title: Action
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - actions
                 title: ActionsResponse
@@ -3915,13 +4196,12 @@ paths:
                           - server
                           - label_selector
                         type: string
-                    required:
-                      - type
+                    title: FirewallRemoveFromResources
                     type: object
                   type: array
               required:
                 - remove_from
-              title: RemoveFromResources
+              title: RemoveFromResourcesRequest
               type: object
       responses:
         "201":
@@ -4022,6 +4302,53 @@ paths:
                       title: Action
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - actions
                 title: ActionsResponse
@@ -4115,7 +4442,7 @@ paths:
                   type: array
               required:
                 - rules
-              title: SetRules
+              title: SetRulesRequest
               type: object
       responses:
         "201":
@@ -4228,6 +4555,53 @@ paths:
                       title: Action
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - actions
                 title: ActionsResponse
@@ -4526,6 +4900,53 @@ paths:
                         - created
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - floating_ips
                 type: object
@@ -5386,9 +5807,10 @@ paths:
                 server:
                   description: ID of the Server the Floating IP shall be assigned to
                   example: 42
-                  type: number
+                  type: integer
               required:
                 - server
+              title: AssignFloatingIPRequest
               type: object
       responses:
         "201":
@@ -5524,6 +5946,7 @@ paths:
               required:
                 - ip
                 - dns_ptr
+              title: ChangeDNSPTRRequest
               type: object
         description: >
           Select the IP address for which to change the DNS entry by passing
@@ -5656,6 +6079,7 @@ paths:
                   description: If true, prevents the Floating IP from being deleted
                   example: true
                   type: boolean
+              title: ChangeProtectionRequest
               type: object
       responses:
         "201":
@@ -6199,6 +6623,53 @@ paths:
                         - labels
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - images
                 type: object
@@ -6716,6 +7187,53 @@ paths:
                       title: Action
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - actions
                 title: ActionsResponse
@@ -7021,6 +7539,53 @@ paths:
                         - deprecated
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - isos
                 type: object
@@ -7602,82 +8167,85 @@ paths:
                                 example: 80
                                 type: integer
                               health_check:
-                                allOf:
-                                  - additionalProperties: false
+                                additionalProperties: false
+                                description: Service health check
+                                properties:
+                                  http:
+                                    additionalProperties: false
+                                    description: Additional configuration for protocol http
                                     properties:
-                                      http:
-                                        additionalProperties: false
-                                        description: Additional configuration for protocol http
-                                        properties:
-                                          domain:
-                                            description: Host header to send in the HTTP request. May not contain spaces,
-                                              percent or backslash symbols. Can
-                                              be null, in that case no host
-                                              header is sent.
-                                            example: example.com
-                                            nullable: true
-                                            type: string
-                                          path:
-                                            description: HTTP path to use for health checks
-                                            example: /
-                                            type: string
-                                          response:
-                                            description: String that must be contained in HTTP response in order to pass the
-                                              health check
-                                            example: '{"status": "ok"}'
-                                            type: string
-                                          status_codes:
-                                            description: List of returned HTTP status codes in order to pass the health
-                                              check. Supports the wildcards `?`
-                                              for exactly one character and `*`
-                                              for multiple ones. The default is
-                                              to pass the health check for any
-                                              status code between 2?? and 3??.
-                                            example:
-                                              - 2??
-                                              - 3??
-                                            items:
-                                              type: string
-                                            type: array
-                                          tls:
-                                            description: Use HTTPS for health check
-                                            example: false
-                                            type: boolean
-                                        required:
-                                          - domain
-                                          - path
-                                        type: object
-                                      interval:
-                                        description: Time interval in seconds health checks are performed
-                                        example: 15
-                                        type: integer
-                                      port:
-                                        description: Port the health check will be performed on
-                                        example: 4711
-                                        type: integer
-                                      protocol:
-                                        description: Type of the health check
-                                        enum:
-                                          - tcp
-                                          - http
-                                        example: http
+                                      domain:
+                                        description: Host header to send in the HTTP request. May not contain spaces,
+                                          percent or backslash symbols. Can be
+                                          null, in that case no host header is
+                                          sent.
+                                        example: example.com
+                                        nullable: true
                                         type: string
-                                      retries:
-                                        description: Unsuccessful retries needed until a target is considered unhealthy
-                                        example: 3
-                                        type: integer
-                                      timeout:
-                                        description: Time in seconds after an attempt is considered a timeout
-                                        example: 10
-                                        type: integer
+                                      path:
+                                        description: HTTP path to use for health checks
+                                        example: /
+                                        type: string
+                                      response:
+                                        description: String that must be contained in HTTP response in order to pass the
+                                          health check
+                                        example: '{"status": "ok"}'
+                                        type: string
+                                      status_codes:
+                                        description: List of returned HTTP status codes in order to pass the health
+                                          check. Supports the wildcards `?` for
+                                          exactly one character and `*` for
+                                          multiple ones. The default is to pass
+                                          the health check for any status code
+                                          between 2?? and 3??.
+                                        example:
+                                          - 2??
+                                          - 3??
+                                        items:
+                                          type: string
+                                        type: array
+                                      tls:
+                                        description: Use HTTPS for health check
+                                        example: false
+                                        type: boolean
                                     required:
-                                      - protocol
-                                      - port
-                                      - interval
-                                      - timeout
-                                      - retries
+                                      - domain
+                                      - path
                                     type: object
-                                  - description: Health check that belong to this service
+                                  interval:
+                                    description: Time interval in seconds health checks are performed
+                                    example: 15
+                                    type: integer
+                                  port:
+                                    description: Port the health check will be performed on
+                                    example: 4711
+                                    type: integer
+                                  protocol:
+                                    description: Type of the health check
+                                    enum:
+                                      - tcp
+                                      - http
+                                    example: http
+                                    type: string
+                                  retries:
+                                    description: Unsuccessful retries needed until a target is considered unhealthy;
+                                      an unhealthy target needs the same number
+                                      of successful retries to become healthy
+                                      again
+                                    example: 3
+                                    type: integer
+                                  timeout:
+                                    description: Time in seconds after an attempt is considered a timeout
+                                    example: 10
+                                    type: integer
+                                required:
+                                  - protocol
+                                  - port
+                                  - interval
+                                  - timeout
+                                  - retries
+                                title: LoadBalancerServiceHealthCheck
+                                type: object
                               http:
                                 description: Configuration option for protocols http and https
                                 properties:
@@ -7734,6 +8302,7 @@ paths:
                               - destination_port
                               - proxyprotocol
                               - health_check
+                            title: LoadBalancerService
                             type: object
                           type: array
                         targets:
@@ -7788,6 +8357,7 @@ paths:
                                     type: integer
                                 required:
                                   - id
+                                title: LoadBalancerTargetServer
                                 type: object
                               targets:
                                 description: List of selected targets
@@ -7834,6 +8404,7 @@ paths:
                                 type: boolean
                             required:
                               - type
+                            title: LoadBalancerTarget
                             type: object
                           type: array
                       required:
@@ -7854,6 +8425,53 @@ paths:
                         - included_traffic
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - load_balancers
                 type: object
@@ -7902,6 +8520,7 @@ paths:
                       type: string
                   required:
                     - type
+                  title: LoadBalancerAlgorithm
                   type: object
                 labels:
                   description: User-defined labels (key-value pairs)
@@ -7927,7 +8546,7 @@ paths:
                   description: ID of the network the Load Balancer should be attached to on
                     creation
                   example: 123
-                  type: number
+                  type: integer
                 network_zone:
                   description: Name of network zone
                   example: eu-central
@@ -7945,81 +8564,82 @@ paths:
                         example: 80
                         type: integer
                       health_check:
-                        allOf:
-                          - additionalProperties: false
+                        additionalProperties: false
+                        description: Service health check
+                        properties:
+                          http:
+                            additionalProperties: false
+                            description: Additional configuration for protocol http
                             properties:
-                              http:
-                                additionalProperties: false
-                                description: Additional configuration for protocol http
-                                properties:
-                                  domain:
-                                    description: Host header to send in the HTTP request. May not contain spaces,
-                                      percent or backslash symbols. Can be null,
-                                      in that case no host header is sent.
-                                    example: example.com
-                                    nullable: true
-                                    type: string
-                                  path:
-                                    description: HTTP path to use for health checks
-                                    example: /
-                                    type: string
-                                  response:
-                                    description: String that must be contained in HTTP response in order to pass the
-                                      health check
-                                    example: '{"status": "ok"}'
-                                    type: string
-                                  status_codes:
-                                    description: List of returned HTTP status codes in order to pass the health
-                                      check. Supports the wildcards `?` for
-                                      exactly one character and `*` for multiple
-                                      ones. The default is to pass the health
-                                      check for any status code between 2?? and
-                                      3??.
-                                    example:
-                                      - 2??
-                                      - 3??
-                                    items:
-                                      type: string
-                                    type: array
-                                  tls:
-                                    description: Use HTTPS for health check
-                                    example: false
-                                    type: boolean
-                                required:
-                                  - domain
-                                  - path
-                                type: object
-                              interval:
-                                description: Time interval in seconds health checks are performed
-                                example: 15
-                                type: integer
-                              port:
-                                description: Port the health check will be performed on
-                                example: 4711
-                                type: integer
-                              protocol:
-                                description: Type of the health check
-                                enum:
-                                  - tcp
-                                  - http
-                                example: http
+                              domain:
+                                description: Host header to send in the HTTP request. May not contain spaces,
+                                  percent or backslash symbols. Can be null, in
+                                  that case no host header is sent.
+                                example: example.com
+                                nullable: true
                                 type: string
-                              retries:
-                                description: Unsuccessful retries needed until a target is considered unhealthy
-                                example: 3
-                                type: integer
-                              timeout:
-                                description: Time in seconds after an attempt is considered a timeout
-                                example: 10
-                                type: integer
+                              path:
+                                description: HTTP path to use for health checks
+                                example: /
+                                type: string
+                              response:
+                                description: String that must be contained in HTTP response in order to pass the
+                                  health check
+                                example: '{"status": "ok"}'
+                                type: string
+                              status_codes:
+                                description: List of returned HTTP status codes in order to pass the health
+                                  check. Supports the wildcards `?` for exactly
+                                  one character and `*` for multiple ones. The
+                                  default is to pass the health check for any
+                                  status code between 2?? and 3??.
+                                example:
+                                  - 2??
+                                  - 3??
+                                items:
+                                  type: string
+                                type: array
+                              tls:
+                                description: Use HTTPS for health check
+                                example: false
+                                type: boolean
                             required:
-                              - protocol
-                              - port
-                              - interval
-                              - timeout
-                              - retries
+                              - domain
+                              - path
                             type: object
-                          - description: Health check that belong to this service
+                          interval:
+                            description: Time interval in seconds health checks are performed
+                            example: 15
+                            type: integer
+                          port:
+                            description: Port the health check will be performed on
+                            example: 4711
+                            type: integer
+                          protocol:
+                            description: Type of the health check
+                            enum:
+                              - tcp
+                              - http
+                            example: http
+                            type: string
+                          retries:
+                            description: Unsuccessful retries needed until a target is considered unhealthy;
+                              an unhealthy target needs the same number of
+                              successful retries to become healthy again
+                            example: 3
+                            type: integer
+                          timeout:
+                            description: Time in seconds after an attempt is considered a timeout
+                            example: 10
+                            type: integer
+                        required:
+                          - protocol
+                          - port
+                          - interval
+                          - timeout
+                          - retries
+                        title: LoadBalancerServiceHealthCheck
+                        type: object
                       http:
                         description: Configuration option for protocols http and https
                         properties:
@@ -8076,6 +8696,7 @@ paths:
                       - destination_port
                       - proxyprotocol
                       - health_check
+                    title: LoadBalancerService
                     type: object
                   type: array
                 targets:
@@ -8129,6 +8750,7 @@ paths:
                             type: integer
                         required:
                           - id
+                        title: LoadBalancerTargetServer
                         type: object
                       targets:
                         description: List of selected targets
@@ -8175,6 +8797,7 @@ paths:
                         type: boolean
                     required:
                       - type
+                    title: LoadBalancerTarget
                     type: object
                   type: array
               required:
@@ -8608,82 +9231,84 @@ paths:
                               example: 80
                               type: integer
                             health_check:
-                              allOf:
-                                - additionalProperties: false
+                              additionalProperties: false
+                              description: Service health check
+                              properties:
+                                http:
+                                  additionalProperties: false
+                                  description: Additional configuration for protocol http
                                   properties:
-                                    http:
-                                      additionalProperties: false
-                                      description: Additional configuration for protocol http
-                                      properties:
-                                        domain:
-                                          description: Host header to send in the HTTP request. May not contain spaces,
-                                            percent or backslash symbols. Can be
-                                            null, in that case no host header is
-                                            sent.
-                                          example: example.com
-                                          nullable: true
-                                          type: string
-                                        path:
-                                          description: HTTP path to use for health checks
-                                          example: /
-                                          type: string
-                                        response:
-                                          description: String that must be contained in HTTP response in order to pass the
-                                            health check
-                                          example: '{"status": "ok"}'
-                                          type: string
-                                        status_codes:
-                                          description: List of returned HTTP status codes in order to pass the health
-                                            check. Supports the wildcards `?`
-                                            for exactly one character and `*`
-                                            for multiple ones. The default is to
-                                            pass the health check for any status
-                                            code between 2?? and 3??.
-                                          example:
-                                            - 2??
-                                            - 3??
-                                          items:
-                                            type: string
-                                          type: array
-                                        tls:
-                                          description: Use HTTPS for health check
-                                          example: false
-                                          type: boolean
-                                      required:
-                                        - domain
-                                        - path
-                                      type: object
-                                    interval:
-                                      description: Time interval in seconds health checks are performed
-                                      example: 15
-                                      type: integer
-                                    port:
-                                      description: Port the health check will be performed on
-                                      example: 4711
-                                      type: integer
-                                    protocol:
-                                      description: Type of the health check
-                                      enum:
-                                        - tcp
-                                        - http
-                                      example: http
+                                    domain:
+                                      description: Host header to send in the HTTP request. May not contain spaces,
+                                        percent or backslash symbols. Can be
+                                        null, in that case no host header is
+                                        sent.
+                                      example: example.com
+                                      nullable: true
                                       type: string
-                                    retries:
-                                      description: Unsuccessful retries needed until a target is considered unhealthy
-                                      example: 3
-                                      type: integer
-                                    timeout:
-                                      description: Time in seconds after an attempt is considered a timeout
-                                      example: 10
-                                      type: integer
+                                    path:
+                                      description: HTTP path to use for health checks
+                                      example: /
+                                      type: string
+                                    response:
+                                      description: String that must be contained in HTTP response in order to pass the
+                                        health check
+                                      example: '{"status": "ok"}'
+                                      type: string
+                                    status_codes:
+                                      description: List of returned HTTP status codes in order to pass the health
+                                        check. Supports the wildcards `?` for
+                                        exactly one character and `*` for
+                                        multiple ones. The default is to pass
+                                        the health check for any status code
+                                        between 2?? and 3??.
+                                      example:
+                                        - 2??
+                                        - 3??
+                                      items:
+                                        type: string
+                                      type: array
+                                    tls:
+                                      description: Use HTTPS for health check
+                                      example: false
+                                      type: boolean
                                   required:
-                                    - protocol
-                                    - port
-                                    - interval
-                                    - timeout
-                                    - retries
+                                    - domain
+                                    - path
                                   type: object
-                                - description: Health check that belong to this service
+                                interval:
+                                  description: Time interval in seconds health checks are performed
+                                  example: 15
+                                  type: integer
+                                port:
+                                  description: Port the health check will be performed on
+                                  example: 4711
+                                  type: integer
+                                protocol:
+                                  description: Type of the health check
+                                  enum:
+                                    - tcp
+                                    - http
+                                  example: http
+                                  type: string
+                                retries:
+                                  description: Unsuccessful retries needed until a target is considered unhealthy;
+                                    an unhealthy target needs the same number of
+                                    successful retries to become healthy again
+                                  example: 3
+                                  type: integer
+                                timeout:
+                                  description: Time in seconds after an attempt is considered a timeout
+                                  example: 10
+                                  type: integer
+                              required:
+                                - protocol
+                                - port
+                                - interval
+                                - timeout
+                                - retries
+                              title: LoadBalancerServiceHealthCheck
+                              type: object
                             http:
                               description: Configuration option for protocols http and https
                               properties:
@@ -8740,6 +9365,7 @@ paths:
                             - destination_port
                             - proxyprotocol
                             - health_check
+                          title: LoadBalancerService
                           type: object
                         type: array
                       targets:
@@ -8794,6 +9420,7 @@ paths:
                                   type: integer
                               required:
                                 - id
+                              title: LoadBalancerTargetServer
                               type: object
                             targets:
                               description: List of selected targets
@@ -8840,6 +9467,7 @@ paths:
                               type: boolean
                           required:
                             - type
+                          title: LoadBalancerTarget
                           type: object
                         type: array
                     required:
@@ -9138,82 +9766,84 @@ paths:
                               example: 80
                               type: integer
                             health_check:
-                              allOf:
-                                - additionalProperties: false
+                              additionalProperties: false
+                              description: Service health check
+                              properties:
+                                http:
+                                  additionalProperties: false
+                                  description: Additional configuration for protocol http
                                   properties:
-                                    http:
-                                      additionalProperties: false
-                                      description: Additional configuration for protocol http
-                                      properties:
-                                        domain:
-                                          description: Host header to send in the HTTP request. May not contain spaces,
-                                            percent or backslash symbols. Can be
-                                            null, in that case no host header is
-                                            sent.
-                                          example: example.com
-                                          nullable: true
-                                          type: string
-                                        path:
-                                          description: HTTP path to use for health checks
-                                          example: /
-                                          type: string
-                                        response:
-                                          description: String that must be contained in HTTP response in order to pass the
-                                            health check
-                                          example: '{"status": "ok"}'
-                                          type: string
-                                        status_codes:
-                                          description: List of returned HTTP status codes in order to pass the health
-                                            check. Supports the wildcards `?`
-                                            for exactly one character and `*`
-                                            for multiple ones. The default is to
-                                            pass the health check for any status
-                                            code between 2?? and 3??.
-                                          example:
-                                            - 2??
-                                            - 3??
-                                          items:
-                                            type: string
-                                          type: array
-                                        tls:
-                                          description: Use HTTPS for health check
-                                          example: false
-                                          type: boolean
-                                      required:
-                                        - domain
-                                        - path
-                                      type: object
-                                    interval:
-                                      description: Time interval in seconds health checks are performed
-                                      example: 15
-                                      type: integer
-                                    port:
-                                      description: Port the health check will be performed on
-                                      example: 4711
-                                      type: integer
-                                    protocol:
-                                      description: Type of the health check
-                                      enum:
-                                        - tcp
-                                        - http
-                                      example: http
+                                    domain:
+                                      description: Host header to send in the HTTP request. May not contain spaces,
+                                        percent or backslash symbols. Can be
+                                        null, in that case no host header is
+                                        sent.
+                                      example: example.com
+                                      nullable: true
                                       type: string
-                                    retries:
-                                      description: Unsuccessful retries needed until a target is considered unhealthy
-                                      example: 3
-                                      type: integer
-                                    timeout:
-                                      description: Time in seconds after an attempt is considered a timeout
-                                      example: 10
-                                      type: integer
+                                    path:
+                                      description: HTTP path to use for health checks
+                                      example: /
+                                      type: string
+                                    response:
+                                      description: String that must be contained in HTTP response in order to pass the
+                                        health check
+                                      example: '{"status": "ok"}'
+                                      type: string
+                                    status_codes:
+                                      description: List of returned HTTP status codes in order to pass the health
+                                        check. Supports the wildcards `?` for
+                                        exactly one character and `*` for
+                                        multiple ones. The default is to pass
+                                        the health check for any status code
+                                        between 2?? and 3??.
+                                      example:
+                                        - 2??
+                                        - 3??
+                                      items:
+                                        type: string
+                                      type: array
+                                    tls:
+                                      description: Use HTTPS for health check
+                                      example: false
+                                      type: boolean
                                   required:
-                                    - protocol
-                                    - port
-                                    - interval
-                                    - timeout
-                                    - retries
+                                    - domain
+                                    - path
                                   type: object
-                                - description: Health check that belong to this service
+                                interval:
+                                  description: Time interval in seconds health checks are performed
+                                  example: 15
+                                  type: integer
+                                port:
+                                  description: Port the health check will be performed on
+                                  example: 4711
+                                  type: integer
+                                protocol:
+                                  description: Type of the health check
+                                  enum:
+                                    - tcp
+                                    - http
+                                  example: http
+                                  type: string
+                                retries:
+                                  description: Unsuccessful retries needed until a target is considered unhealthy;
+                                    an unhealthy target needs the same number of
+                                    successful retries to become healthy again
+                                  example: 3
+                                  type: integer
+                                timeout:
+                                  description: Time in seconds after an attempt is considered a timeout
+                                  example: 10
+                                  type: integer
+                              required:
+                                - protocol
+                                - port
+                                - interval
+                                - timeout
+                                - retries
+                              title: LoadBalancerServiceHealthCheck
+                              type: object
                             http:
                               description: Configuration option for protocols http and https
                               properties:
@@ -9270,6 +9900,7 @@ paths:
                             - destination_port
                             - proxyprotocol
                             - health_check
+                          title: LoadBalancerService
                           type: object
                         type: array
                       targets:
@@ -9324,6 +9955,7 @@ paths:
                                   type: integer
                               required:
                                 - id
+                              title: LoadBalancerTargetServer
                               type: object
                             targets:
                               description: List of selected targets
@@ -9370,6 +10002,7 @@ paths:
                               type: boolean
                           required:
                             - type
+                          title: LoadBalancerTarget
                           type: object
                         type: array
                     required:
@@ -9771,82 +10404,84 @@ paths:
                               example: 80
                               type: integer
                             health_check:
-                              allOf:
-                                - additionalProperties: false
+                              additionalProperties: false
+                              description: Service health check
+                              properties:
+                                http:
+                                  additionalProperties: false
+                                  description: Additional configuration for protocol http
                                   properties:
-                                    http:
-                                      additionalProperties: false
-                                      description: Additional configuration for protocol http
-                                      properties:
-                                        domain:
-                                          description: Host header to send in the HTTP request. May not contain spaces,
-                                            percent or backslash symbols. Can be
-                                            null, in that case no host header is
-                                            sent.
-                                          example: example.com
-                                          nullable: true
-                                          type: string
-                                        path:
-                                          description: HTTP path to use for health checks
-                                          example: /
-                                          type: string
-                                        response:
-                                          description: String that must be contained in HTTP response in order to pass the
-                                            health check
-                                          example: '{"status": "ok"}'
-                                          type: string
-                                        status_codes:
-                                          description: List of returned HTTP status codes in order to pass the health
-                                            check. Supports the wildcards `?`
-                                            for exactly one character and `*`
-                                            for multiple ones. The default is to
-                                            pass the health check for any status
-                                            code between 2?? and 3??.
-                                          example:
-                                            - 2??
-                                            - 3??
-                                          items:
-                                            type: string
-                                          type: array
-                                        tls:
-                                          description: Use HTTPS for health check
-                                          example: false
-                                          type: boolean
-                                      required:
-                                        - domain
-                                        - path
-                                      type: object
-                                    interval:
-                                      description: Time interval in seconds health checks are performed
-                                      example: 15
-                                      type: integer
-                                    port:
-                                      description: Port the health check will be performed on
-                                      example: 4711
-                                      type: integer
-                                    protocol:
-                                      description: Type of the health check
-                                      enum:
-                                        - tcp
-                                        - http
-                                      example: http
+                                    domain:
+                                      description: Host header to send in the HTTP request. May not contain spaces,
+                                        percent or backslash symbols. Can be
+                                        null, in that case no host header is
+                                        sent.
+                                      example: example.com
+                                      nullable: true
                                       type: string
-                                    retries:
-                                      description: Unsuccessful retries needed until a target is considered unhealthy
-                                      example: 3
-                                      type: integer
-                                    timeout:
-                                      description: Time in seconds after an attempt is considered a timeout
-                                      example: 10
-                                      type: integer
+                                    path:
+                                      description: HTTP path to use for health checks
+                                      example: /
+                                      type: string
+                                    response:
+                                      description: String that must be contained in HTTP response in order to pass the
+                                        health check
+                                      example: '{"status": "ok"}'
+                                      type: string
+                                    status_codes:
+                                      description: List of returned HTTP status codes in order to pass the health
+                                        check. Supports the wildcards `?` for
+                                        exactly one character and `*` for
+                                        multiple ones. The default is to pass
+                                        the health check for any status code
+                                        between 2?? and 3??.
+                                      example:
+                                        - 2??
+                                        - 3??
+                                      items:
+                                        type: string
+                                      type: array
+                                    tls:
+                                      description: Use HTTPS for health check
+                                      example: false
+                                      type: boolean
                                   required:
-                                    - protocol
-                                    - port
-                                    - interval
-                                    - timeout
-                                    - retries
+                                    - domain
+                                    - path
                                   type: object
-                                - description: Health check that belong to this service
+                                interval:
+                                  description: Time interval in seconds health checks are performed
+                                  example: 15
+                                  type: integer
+                                port:
+                                  description: Port the health check will be performed on
+                                  example: 4711
+                                  type: integer
+                                protocol:
+                                  description: Type of the health check
+                                  enum:
+                                    - tcp
+                                    - http
+                                  example: http
+                                  type: string
+                                retries:
+                                  description: Unsuccessful retries needed until a target is considered unhealthy;
+                                    an unhealthy target needs the same number of
+                                    successful retries to become healthy again
+                                  example: 3
+                                  type: integer
+                                timeout:
+                                  description: Time in seconds after an attempt is considered a timeout
+                                  example: 10
+                                  type: integer
+                              required:
+                                - protocol
+                                - port
+                                - interval
+                                - timeout
+                                - retries
+                              title: LoadBalancerServiceHealthCheck
+                              type: object
                             http:
                               description: Configuration option for protocols http and https
                               properties:
@@ -9903,6 +10538,7 @@ paths:
                             - destination_port
                             - proxyprotocol
                             - health_check
+                          title: LoadBalancerService
                           type: object
                         type: array
                       targets:
@@ -9957,6 +10593,7 @@ paths:
                                   type: integer
                               required:
                                 - id
+                              title: LoadBalancerTargetServer
                               type: object
                             targets:
                               description: List of selected targets
@@ -10003,6 +10640,7 @@ paths:
                               type: boolean
                           required:
                             - type
+                          title: LoadBalancerTarget
                           type: object
                         type: array
                     required:
@@ -10176,6 +10814,53 @@ paths:
                       title: Action
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - actions
                 title: ActionsResponse
@@ -10215,80 +10900,82 @@ paths:
                   example: 80
                   type: integer
                 health_check:
-                  allOf:
-                    - additionalProperties: false
+                  additionalProperties: false
+                  description: Service health check
+                  properties:
+                    http:
+                      additionalProperties: false
+                      description: Additional configuration for protocol http
                       properties:
-                        http:
-                          additionalProperties: false
-                          description: Additional configuration for protocol http
-                          properties:
-                            domain:
-                              description: Host header to send in the HTTP request. May not contain spaces,
-                                percent or backslash symbols. Can be null, in
-                                that case no host header is sent.
-                              example: example.com
-                              nullable: true
-                              type: string
-                            path:
-                              description: HTTP path to use for health checks
-                              example: /
-                              type: string
-                            response:
-                              description: String that must be contained in HTTP response in order to pass the
-                                health check
-                              example: '{"status": "ok"}'
-                              type: string
-                            status_codes:
-                              description: List of returned HTTP status codes in order to pass the health
-                                check. Supports the wildcards `?` for exactly
-                                one character and `*` for multiple ones. The
-                                default is to pass the health check for any
-                                status code between 2?? and 3??.
-                              example:
-                                - 2??
-                                - 3??
-                              items:
-                                type: string
-                              type: array
-                            tls:
-                              description: Use HTTPS for health check
-                              example: false
-                              type: boolean
-                          required:
-                            - domain
-                            - path
-                          type: object
-                        interval:
-                          description: Time interval in seconds health checks are performed
-                          example: 15
-                          type: integer
-                        port:
-                          description: Port the health check will be performed on
-                          example: 4711
-                          type: integer
-                        protocol:
-                          description: Type of the health check
-                          enum:
-                            - tcp
-                            - http
-                          example: http
+                        domain:
+                          description: Host header to send in the HTTP request. May not contain spaces,
+                            percent or backslash symbols. Can be null, in that
+                            case no host header is sent.
+                          example: example.com
+                          nullable: true
                           type: string
-                        retries:
-                          description: Unsuccessful retries needed until a target is considered unhealthy
-                          example: 3
-                          type: integer
-                        timeout:
-                          description: Time in seconds after an attempt is considered a timeout
-                          example: 10
-                          type: integer
+                        path:
+                          description: HTTP path to use for health checks
+                          example: /
+                          type: string
+                        response:
+                          description: String that must be contained in HTTP response in order to pass the
+                            health check
+                          example: '{"status": "ok"}'
+                          type: string
+                        status_codes:
+                          description: List of returned HTTP status codes in order to pass the health
+                            check. Supports the wildcards `?` for exactly one
+                            character and `*` for multiple ones. The default is
+                            to pass the health check for any status code between
+                            2?? and 3??.
+                          example:
+                            - 2??
+                            - 3??
+                          items:
+                            type: string
+                          type: array
+                        tls:
+                          description: Use HTTPS for health check
+                          example: false
+                          type: boolean
                       required:
-                        - protocol
-                        - port
-                        - interval
-                        - timeout
-                        - retries
+                        - domain
+                        - path
                       type: object
-                    - description: Health check that belong to this service
+                    interval:
+                      description: Time interval in seconds health checks are performed
+                      example: 15
+                      type: integer
+                    port:
+                      description: Port the health check will be performed on
+                      example: 4711
+                      type: integer
+                    protocol:
+                      description: Type of the health check
+                      enum:
+                        - tcp
+                        - http
+                      example: http
+                      type: string
+                    retries:
+                      description: Unsuccessful retries needed until a target is considered unhealthy;
+                        an unhealthy target needs the same number of successful
+                        retries to become healthy again
+                      example: 3
+                      type: integer
+                    timeout:
+                      description: Time in seconds after an attempt is considered a timeout
+                      example: 10
+                      type: integer
+                  required:
+                    - protocol
+                    - port
+                    - interval
+                    - timeout
+                    - retries
+                  title: LoadBalancerServiceHealthCheck
+                  type: object
                 http:
                   description: Configuration option for protocols http and https
                   properties:
@@ -10345,6 +11032,7 @@ paths:
                 - destination_port
                 - proxyprotocol
                 - health_check
+              title: LoadBalancerService
               type: object
       responses:
         "201":
@@ -11878,80 +12566,82 @@ paths:
                   example: 80
                   type: integer
                 health_check:
-                  allOf:
-                    - additionalProperties: false
+                  additionalProperties: false
+                  description: Service health check
+                  properties:
+                    http:
+                      additionalProperties: false
+                      description: Additional configuration for protocol http
                       properties:
-                        http:
-                          additionalProperties: false
-                          description: Additional configuration for protocol http
-                          properties:
-                            domain:
-                              description: Host header to send in the HTTP request. May not contain spaces,
-                                percent or backslash symbols. Can be null, in
-                                that case no host header is sent.
-                              example: example.com
-                              nullable: true
-                              type: string
-                            path:
-                              description: HTTP path to use for health checks
-                              example: /
-                              type: string
-                            response:
-                              description: String that must be contained in HTTP response in order to pass the
-                                health check
-                              example: '{"status": "ok"}'
-                              type: string
-                            status_codes:
-                              description: List of returned HTTP status codes in order to pass the health
-                                check. Supports the wildcards `?` for exactly
-                                one character and `*` for multiple ones. The
-                                default is to pass the health check for any
-                                status code between 2?? and 3??.
-                              example:
-                                - 2??
-                                - 3??
-                              items:
-                                type: string
-                              type: array
-                            tls:
-                              description: Use HTTPS for health check
-                              example: false
-                              type: boolean
-                          required:
-                            - domain
-                            - path
-                          type: object
-                        interval:
-                          description: Time interval in seconds health checks are performed
-                          example: 15
-                          type: integer
-                        port:
-                          description: Port the health check will be performed on
-                          example: 4711
-                          type: integer
-                        protocol:
-                          description: Type of the health check
-                          enum:
-                            - tcp
-                            - http
-                          example: http
+                        domain:
+                          description: Host header to send in the HTTP request. May not contain spaces,
+                            percent or backslash symbols. Can be null, in that
+                            case no host header is sent.
+                          example: example.com
+                          nullable: true
                           type: string
-                        retries:
-                          description: Unsuccessful retries needed until a target is considered unhealthy
-                          example: 3
-                          type: integer
-                        timeout:
-                          description: Time in seconds after an attempt is considered a timeout
-                          example: 10
-                          type: integer
+                        path:
+                          description: HTTP path to use for health checks
+                          example: /
+                          type: string
+                        response:
+                          description: String that must be contained in HTTP response in order to pass the
+                            health check
+                          example: '{"status": "ok"}'
+                          type: string
+                        status_codes:
+                          description: List of returned HTTP status codes in order to pass the health
+                            check. Supports the wildcards `?` for exactly one
+                            character and `*` for multiple ones. The default is
+                            to pass the health check for any status code between
+                            2?? and 3??.
+                          example:
+                            - 2??
+                            - 3??
+                          items:
+                            type: string
+                          type: array
+                        tls:
+                          description: Use HTTPS for health check
+                          example: false
+                          type: boolean
                       required:
-                        - protocol
-                        - port
-                        - interval
-                        - timeout
-                        - retries
+                        - domain
+                        - path
                       type: object
-                    - description: Health check that belong to this service
+                    interval:
+                      description: Time interval in seconds health checks are performed
+                      example: 15
+                      type: integer
+                    port:
+                      description: Port the health check will be performed on
+                      example: 4711
+                      type: integer
+                    protocol:
+                      description: Type of the health check
+                      enum:
+                        - tcp
+                        - http
+                      example: http
+                      type: string
+                    retries:
+                      description: Unsuccessful retries needed until a target is considered unhealthy;
+                        an unhealthy target needs the same number of successful
+                        retries to become healthy again
+                      example: 3
+                      type: integer
+                    timeout:
+                      description: Time in seconds after an attempt is considered a timeout
+                      example: 10
+                      type: integer
+                  required:
+                    - protocol
+                    - port
+                    - interval
+                    - timeout
+                    - retries
+                  title: LoadBalancerServiceHealthCheck
+                  type: object
                 http:
                   description: Configuration option for protocols http and https
                   properties:
@@ -12008,6 +12698,7 @@ paths:
                 - destination_port
                 - proxyprotocol
                 - health_check
+              title: LoadBalancerService
               type: object
       responses:
         "201":
@@ -12523,6 +13214,53 @@ paths:
             application/json:
               schema:
                 properties:
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                   networks:
                     items:
                       properties:
@@ -13372,6 +14110,53 @@ paths:
                       title: Action
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - actions
                 title: ActionsResponse
@@ -14911,6 +15696,53 @@ paths:
             application/json:
               schema:
                 properties:
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                   servers:
                     items:
                       properties:
@@ -15286,6 +16118,7 @@ paths:
                                       - pending
                                     example: applied
                                     type: string
+                                title: ServerPublicNetFirewall
                                 type: object
                               type: array
                             floating_ips:
@@ -16312,6 +17145,7 @@ paths:
                                     - pending
                                   example: applied
                                   type: string
+                              title: ServerPublicNetFirewall
                               type: object
                             type: array
                           floating_ips:
@@ -16548,7 +17382,7 @@ paths:
           name: id
           required: true
           schema:
-            type: string
+            type: integer
       responses:
         "200":
           content:
@@ -17026,6 +17860,7 @@ paths:
                                     - pending
                                   example: applied
                                   type: string
+                              title: ServerPublicNetFirewall
                               type: object
                             type: array
                           floating_ips:
@@ -17260,7 +18095,7 @@ paths:
           name: id
           required: true
           schema:
-            type: string
+            type: integer
       requestBody:
         content:
           application/json:
@@ -17658,6 +18493,7 @@ paths:
                                     - pending
                                   example: applied
                                   type: string
+                              title: ServerPublicNetFirewall
                               type: object
                             type: array
                           floating_ips:
@@ -18024,6 +18860,53 @@ paths:
                       title: Action
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - actions
                 title: ActionsResponse
@@ -21274,6 +22157,53 @@ paths:
             application/json:
               schema:
                 properties:
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                   ssh_keys:
                     items:
                       properties:
@@ -21601,6 +22531,53 @@ paths:
             application/json:
               schema:
                 properties:
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                   volumes:
                     items:
                       properties:
@@ -21627,52 +22604,51 @@ paths:
                           example: /dev/disk/by-id/scsi-0HC_Volume_4711
                           type: string
                         location:
-                          allOf:
-                            - properties:
-                                city:
-                                  description: City the Location is closest to
-                                  example: Falkenstein
-                                  type: string
-                                country:
-                                  description: ISO 3166-1 alpha-2 code of the country the Location resides in
-                                  example: DE
-                                  type: string
-                                description:
-                                  description: Description of the Location
-                                  example: Falkenstein DC Park 1
-                                  type: string
-                                id:
-                                  description: ID of the Location
-                                  example: 1
-                                  type: number
-                                latitude:
-                                  description: Latitude of the city closest to the Location
-                                  example: 50.47612
-                                  type: number
-                                longitude:
-                                  description: Longitude of the city closest to the Location
-                                  example: 12.370071
-                                  type: number
-                                name:
-                                  description: Unique identifier of the Location
-                                  example: fsn1
-                                  type: string
-                                network_zone:
-                                  description: Name of network zone this Location resides in
-                                  example: eu-central
-                                  type: string
-                              required:
-                                - id
-                                - name
-                                - description
-                                - country
-                                - city
-                                - latitude
-                                - longitude
-                                - network_zone
-                              type: object
-                            - description: Location of the Volume. Volume can only be attached to Servers in
-                                the same Location.
+                          description: Location of the Volume. Volume can only be attached to Servers in
+                            the same Location.
+                          properties:
+                            city:
+                              description: City the Location is closest to
+                              example: Falkenstein
+                              type: string
+                            country:
+                              description: ISO 3166-1 alpha-2 code of the country the Location resides in
+                              example: DE
+                              type: string
+                            description:
+                              description: Description of the Location
+                              example: Falkenstein DC Park 1
+                              type: string
+                            id:
+                              description: ID of the Location
+                              example: 1
+                              type: number
+                            latitude:
+                              description: Latitude of the city closest to the Location
+                              example: 50.47612
+                              type: number
+                            longitude:
+                              description: Longitude of the city closest to the Location
+                              example: 12.370071
+                              type: number
+                            name:
+                              description: Unique identifier of the Location
+                              example: fsn1
+                              type: string
+                            network_zone:
+                              description: Name of network zone this Location resides in
+                              example: eu-central
+                              type: string
+                          required:
+                            - id
+                            - name
+                            - description
+                            - country
+                            - city
+                            - latitude
+                            - longitude
+                            - network_zone
+                          type: object
                         name:
                           description: Name of the Volume
                           example: database-storage
@@ -21795,7 +22771,7 @@ paths:
                 size:
                   description: Size of the Volume in GB
                   example: 42
-                  type: number
+                  type: integer
               required:
                 - size
                 - name
@@ -22040,52 +23016,51 @@ paths:
                         example: /dev/disk/by-id/scsi-0HC_Volume_4711
                         type: string
                       location:
-                        allOf:
-                          - properties:
-                              city:
-                                description: City the Location is closest to
-                                example: Falkenstein
-                                type: string
-                              country:
-                                description: ISO 3166-1 alpha-2 code of the country the Location resides in
-                                example: DE
-                                type: string
-                              description:
-                                description: Description of the Location
-                                example: Falkenstein DC Park 1
-                                type: string
-                              id:
-                                description: ID of the Location
-                                example: 1
-                                type: number
-                              latitude:
-                                description: Latitude of the city closest to the Location
-                                example: 50.47612
-                                type: number
-                              longitude:
-                                description: Longitude of the city closest to the Location
-                                example: 12.370071
-                                type: number
-                              name:
-                                description: Unique identifier of the Location
-                                example: fsn1
-                                type: string
-                              network_zone:
-                                description: Name of network zone this Location resides in
-                                example: eu-central
-                                type: string
-                            required:
-                              - id
-                              - name
-                              - description
-                              - country
-                              - city
-                              - latitude
-                              - longitude
-                              - network_zone
-                            type: object
-                          - description: Location of the Volume. Volume can only be attached to Servers in
-                              the same Location.
+                        description: Location of the Volume. Volume can only be attached to Servers in
+                          the same Location.
+                        properties:
+                          city:
+                            description: City the Location is closest to
+                            example: Falkenstein
+                            type: string
+                          country:
+                            description: ISO 3166-1 alpha-2 code of the country the Location resides in
+                            example: DE
+                            type: string
+                          description:
+                            description: Description of the Location
+                            example: Falkenstein DC Park 1
+                            type: string
+                          id:
+                            description: ID of the Location
+                            example: 1
+                            type: number
+                          latitude:
+                            description: Latitude of the city closest to the Location
+                            example: 50.47612
+                            type: number
+                          longitude:
+                            description: Longitude of the city closest to the Location
+                            example: 12.370071
+                            type: number
+                          name:
+                            description: Unique identifier of the Location
+                            example: fsn1
+                            type: string
+                          network_zone:
+                            description: Name of network zone this Location resides in
+                            example: eu-central
+                            type: string
+                        required:
+                          - id
+                          - name
+                          - description
+                          - country
+                          - city
+                          - latitude
+                          - longitude
+                          - network_zone
+                        type: object
                       name:
                         description: Name of the Volume
                         example: database-storage
@@ -22200,52 +23175,51 @@ paths:
                         example: /dev/disk/by-id/scsi-0HC_Volume_4711
                         type: string
                       location:
-                        allOf:
-                          - properties:
-                              city:
-                                description: City the Location is closest to
-                                example: Falkenstein
-                                type: string
-                              country:
-                                description: ISO 3166-1 alpha-2 code of the country the Location resides in
-                                example: DE
-                                type: string
-                              description:
-                                description: Description of the Location
-                                example: Falkenstein DC Park 1
-                                type: string
-                              id:
-                                description: ID of the Location
-                                example: 1
-                                type: number
-                              latitude:
-                                description: Latitude of the city closest to the Location
-                                example: 50.47612
-                                type: number
-                              longitude:
-                                description: Longitude of the city closest to the Location
-                                example: 12.370071
-                                type: number
-                              name:
-                                description: Unique identifier of the Location
-                                example: fsn1
-                                type: string
-                              network_zone:
-                                description: Name of network zone this Location resides in
-                                example: eu-central
-                                type: string
-                            required:
-                              - id
-                              - name
-                              - description
-                              - country
-                              - city
-                              - latitude
-                              - longitude
-                              - network_zone
-                            type: object
-                          - description: Location of the Volume. Volume can only be attached to Servers in
-                              the same Location.
+                        description: Location of the Volume. Volume can only be attached to Servers in
+                          the same Location.
+                        properties:
+                          city:
+                            description: City the Location is closest to
+                            example: Falkenstein
+                            type: string
+                          country:
+                            description: ISO 3166-1 alpha-2 code of the country the Location resides in
+                            example: DE
+                            type: string
+                          description:
+                            description: Description of the Location
+                            example: Falkenstein DC Park 1
+                            type: string
+                          id:
+                            description: ID of the Location
+                            example: 1
+                            type: number
+                          latitude:
+                            description: Latitude of the city closest to the Location
+                            example: 50.47612
+                            type: number
+                          longitude:
+                            description: Longitude of the city closest to the Location
+                            example: 12.370071
+                            type: number
+                          name:
+                            description: Unique identifier of the Location
+                            example: fsn1
+                            type: string
+                          network_zone:
+                            description: Name of network zone this Location resides in
+                            example: eu-central
+                            type: string
+                        required:
+                          - id
+                          - name
+                          - description
+                          - country
+                          - city
+                          - latitude
+                          - longitude
+                          - network_zone
+                        type: object
                       name:
                         description: Name of the Volume
                         example: database-storage
@@ -22384,52 +23358,51 @@ paths:
                         example: /dev/disk/by-id/scsi-0HC_Volume_4711
                         type: string
                       location:
-                        allOf:
-                          - properties:
-                              city:
-                                description: City the Location is closest to
-                                example: Falkenstein
-                                type: string
-                              country:
-                                description: ISO 3166-1 alpha-2 code of the country the Location resides in
-                                example: DE
-                                type: string
-                              description:
-                                description: Description of the Location
-                                example: Falkenstein DC Park 1
-                                type: string
-                              id:
-                                description: ID of the Location
-                                example: 1
-                                type: number
-                              latitude:
-                                description: Latitude of the city closest to the Location
-                                example: 50.47612
-                                type: number
-                              longitude:
-                                description: Longitude of the city closest to the Location
-                                example: 12.370071
-                                type: number
-                              name:
-                                description: Unique identifier of the Location
-                                example: fsn1
-                                type: string
-                              network_zone:
-                                description: Name of network zone this Location resides in
-                                example: eu-central
-                                type: string
-                            required:
-                              - id
-                              - name
-                              - description
-                              - country
-                              - city
-                              - latitude
-                              - longitude
-                              - network_zone
-                            type: object
-                          - description: Location of the Volume. Volume can only be attached to Servers in
-                              the same Location.
+                        description: Location of the Volume. Volume can only be attached to Servers in
+                          the same Location.
+                        properties:
+                          city:
+                            description: City the Location is closest to
+                            example: Falkenstein
+                            type: string
+                          country:
+                            description: ISO 3166-1 alpha-2 code of the country the Location resides in
+                            example: DE
+                            type: string
+                          description:
+                            description: Description of the Location
+                            example: Falkenstein DC Park 1
+                            type: string
+                          id:
+                            description: ID of the Location
+                            example: 1
+                            type: number
+                          latitude:
+                            description: Latitude of the city closest to the Location
+                            example: 50.47612
+                            type: number
+                          longitude:
+                            description: Longitude of the city closest to the Location
+                            example: 12.370071
+                            type: number
+                          name:
+                            description: Unique identifier of the Location
+                            example: fsn1
+                            type: string
+                          network_zone:
+                            description: Name of network zone this Location resides in
+                            example: eu-central
+                            type: string
+                        required:
+                          - id
+                          - name
+                          - description
+                          - country
+                          - city
+                          - latitude
+                          - longitude
+                          - network_zone
+                        type: object
                       name:
                         description: Name of the Volume
                         example: database-storage
@@ -22630,6 +23603,53 @@ paths:
                       title: Action
                       type: object
                     type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is
+                              the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last
+                              one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the
+                              first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this
+                              query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
                 required:
                   - actions
                 title: ActionsResponse
