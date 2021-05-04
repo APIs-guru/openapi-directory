@@ -292,7 +292,9 @@ paths:
   "/authorize/{service_id}/{application_id}":
     get:
       description: >
-        __In most cases the authorize link is provided in the ``/connections`` endpoint. Normally you don't need to manually generate these links.__
+        __In most cases the authorize link is provided in the
+        ``/connections`` endpoint. Normally you don't need to manually generate
+        these links.__
 
 
         Use this endpoint to authenticate a user with a connector. It will return a 302 redirect to the downstream connector ednpoints.
@@ -317,7 +319,8 @@ paths:
   /connections:
     get:
       description: >
-        This endpoint includes all the configured integrations and contains the needed assets
+        This endpoint includes all the configured integrations and contains
+        the needed assets
 
         to build an integrations page where your users can install integrations.
 
@@ -337,7 +340,8 @@ paths:
       tags:
         - Connections
     patch:
-      description: Used to update settings and API keys (only services that don't support OAuth 2.0)
+      description: Used to update settings and API keys (only services that don't
+        support OAuth 2.0)
       operationId: connectionsBulkUpdate
       requestBody:
         content:
@@ -403,7 +407,9 @@ paths:
   "/revoke/{service_id}/{application_id}":
     get:
       description: >
-        __In most cases the authorize link is provided in the ``/connections`` endpoint. Normally you don't need to manually generate these links.__
+        __In most cases the authorize link is provided in the
+        ``/connections`` endpoint. Normally you don't need to manually generate
+        these links.__
 
 
         Use this endpoint to revoke an existing OAuth connector.
@@ -428,7 +434,8 @@ paths:
   /sessions:
     post:
       description: >
-        Making a POST request to this endpoint will initiate a Hosted Vault session. Redirect the consumer to the returned
+        Making a POST request to this endpoint will initiate a Hosted Vault
+        session. Redirect the consumer to the returned
 
         url to allow temporary access to manage their integrations and settings.
 
@@ -484,7 +491,8 @@ components:
       schema:
         type: integer
     redirect_uri:
-      description: URL to redirect back to after authorization. When left empty the default configured redirect uri will be used.
+      description: URL to redirect back to after authorization. When left empty the
+        default configured redirect uri will be used.
       example: https://yoursaasapp.com/integrations
       in: query
       name: redirect_uri
@@ -500,7 +508,10 @@ components:
       schema:
         type: string
     state:
-      description: An opaque value the applications adds to the initial request that the authorization server includes when redirecting the back to the application. This value must be used by the application to prevent CSRF attacks.
+      description: An opaque value the applications adds to the initial request that
+        the authorization server includes when redirecting the back to the
+        application. This value must be used by the application to prevent CSRF
+        attacks.
       in: query
       name: state
       schema:
@@ -667,7 +678,8 @@ components:
           example: http://example.org/docs/errors/#ERR-01234
           type: string
         message:
-          example: Session has expired at unix time 1385243766. The current unix time is 1385848532.
+          example: Session has expired at unix time 1385243766. The current unix time is
+            1385848532.
           type: string
         title:
           example: OAuthException

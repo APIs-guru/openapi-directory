@@ -1260,7 +1260,9 @@ components:
       schema:
         type: string
     x-apideck-service-id:
-      description: Provide the service id you want to call (e.g., pipedrive). See the full list in the connector section. Only needed when a consumer has activated multiple integrations for a Unified API.
+      description: Provide the service id you want to call (e.g., pipedrive). See the
+        full list in the connector section. Only needed when a consumer has
+        activated multiple integrations for a Unified API.
       in: header
       name: x-apideck-service-id
       schema:
@@ -1272,7 +1274,8 @@ components:
           schema:
             properties:
               detail:
-                description: Contains parameter or domain specific information related to the error and why it occured.
+                description: Contains parameter or domain specific information related to the
+                  error and why it occured.
                 example:
                   missing:
                     - - foobar: required
@@ -1280,7 +1283,8 @@ components:
                   - type: string
                   - type: object
               error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+                description: Contains an explanation of the status_code as defined in HTTP/1.1
+                  standard (RFC 7231)
                 example: Bad Request
                 type: string
               message:
@@ -1308,11 +1312,13 @@ components:
           schema:
             properties:
               detail:
-                description: Contains parameter or domain specific information related to the error and why it occured.
+                description: Contains parameter or domain specific information related to the
+                  error and why it occured.
                 example: "Could not find widget with id: '123'"
                 type: string
               error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+                description: Contains an explanation of the status_code as defined in HTTP/1.1
+                  standard (RFC 7231)
                 example: Not Found
                 type: string
               message:
@@ -1338,13 +1344,16 @@ components:
           schema:
             properties:
               detail:
-                description: Contains parameter or domain specific information related to the error and why it occured.
-                example: Failed to retrieve Widget tokenUrl from 'components.securitySchemes.oauth2.flows'
+                description: Contains parameter or domain specific information related to the
+                  error and why it occured.
+                example: Failed to retrieve Widget tokenUrl from
+                  'components.securitySchemes.oauth2.flows'
                 oneOf:
                   - type: string
                   - type: object
               error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+                description: Contains an explanation of the status_code as defined in HTTP/1.1
+                  standard (RFC 7231)
                 example: Not Implemented
                 type: string
               message:
@@ -1370,11 +1379,13 @@ components:
           schema:
             properties:
               detail:
-                description: Contains parameter or domain specific information related to the error and why it occured.
+                description: Contains parameter or domain specific information related to the
+                  error and why it occured.
                 example: You have reached your limit of 2000
                 type: string
               error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+                description: Contains an explanation of the status_code as defined in HTTP/1.1
+                  standard (RFC 7231)
                 example: Payment Required
                 type: string
               message:
@@ -1400,13 +1411,15 @@ components:
           schema:
             properties:
               detail:
-                description: Contains parameter or domain specific information related to the error and why it occured.
+                description: Contains parameter or domain specific information related to the
+                  error and why it occured.
                 example: Failed to generate valid JWT Session. Verify applicationId is correct
                 oneOf:
                   - type: string
                   - type: object
               error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+                description: Contains an explanation of the status_code as defined in HTTP/1.1
+                  standard (RFC 7231)
                 example: Unauthorized
                 type: string
               message:
@@ -1432,11 +1445,13 @@ components:
           schema:
             properties:
               detail:
-                description: Contains parameter or domain specific information related to the error and why it occured.
+                description: Contains parameter or domain specific information related to the
+                  error and why it occured.
                 example: State did not include unified_api
                 type: string
               error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+                description: Contains an explanation of the status_code as defined in HTTP/1.1
+                  standard (RFC 7231)
                 example: Unprocessable Entity
                 type: string
               message:
@@ -1460,13 +1475,15 @@ components:
     Error:
       properties:
         detail:
-          description: Contains parameter or domain specific information related to the error and why it occured.
+          description: Contains parameter or domain specific information related to the
+            error and why it occured.
           example: "Missing Header: x-apideck-consumer-id"
           oneOf:
             - type: string
             - type: object
         error:
-          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          description: Contains an explanation of the status_code as defined in HTTP/1.1
+            standard (RFC 7231)
           example: Bad Request
           type: string
         message:
@@ -1538,7 +1555,8 @@ components:
         custom_fields:
           $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
         description:
-          example: A crm that works for you, so you can spend time on relationships instead of data.
+          example: A crm that works for you, so you can spend time on relationships
+            instead of data.
           type: string
         email_domain:
           example: spacex.com
@@ -1643,7 +1661,8 @@ components:
         custom_fields:
           $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
         description:
-          example: A crm that works for you, so you can spend time on relationships instead of data.
+          example: A crm that works for you, so you can spend time on relationships
+            instead of data.
           type: string
         email_domain:
           example: spacex.com
@@ -1731,7 +1750,8 @@ components:
             custom_fields:
               $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
             description:
-              example: A crm that works for you, so you can spend time on relationships instead of data.
+              example: A crm that works for you, so you can spend time on relationships
+                instead of data.
               type: string
             emails:
               $ref: "#/components/schemas/contactsAdd/properties/emails"
@@ -2901,7 +2921,9 @@ components:
         custom_fields:
           $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
         description:
-          example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
+          example: Opportunities are created for People and Companies that are interested
+            in buying your products or services. Create Opportunities for People
+            and Companies to move them through one of your Pipelines.
           minLength: 1
           type: string
         lead_id:
@@ -3043,7 +3065,9 @@ components:
         custom_fields:
           $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
         description:
-          example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
+          example: Opportunities are created for People and Companies that are interested
+            in buying your products or services. Create Opportunities for People
+            and Companies to move them through one of your Pipelines.
           minLength: 1
           type: string
         lead_id:
@@ -3187,7 +3211,9 @@ components:
               readOnly: true
               type: string
             description:
-              example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
+              example: Opportunities are created for People and Companies that are interested
+                in buying your products or services. Create Opportunities for
+                People and Companies to move them through one of your Pipelines.
               minLength: 1
               type: string
             id:
@@ -3291,7 +3317,8 @@ components:
   securitySchemes:
     apiKey:
       description: >
-        To use API you have to sign up and get your own API key. Unify API accounts have sandbox mode and live mode API keys. 
+        To use API you have to sign up and get your own API key. Unify API
+        accounts have sandbox mode and live mode API keys. 
 
         To change modes just use the appropriate key to get a live or test object. You can find your API keys on the unify settings of your Apideck app.
 
