@@ -64,7 +64,7 @@ servers:
           - sa-east-1
           - me-south-1
         default: us-east-1
-    description: The FinSpace multi-region endpoint
+    description: The FinSpace Data multi-region endpoint
   - url: 'https://finspace-api.{region}.amazonaws.com'
     variables:
       region:
@@ -94,7 +94,7 @@ servers:
           - sa-east-1
           - me-south-1
         default: us-east-1
-    description: The FinSpace multi-region endpoint
+    description: The FinSpace Data multi-region endpoint
   - url: 'http://finspace-api.{region}.amazonaws.com.cn'
     variables:
       region:
@@ -103,7 +103,7 @@ servers:
           - cn-north-1
           - cn-northwest-1
         default: cn-north-1
-    description: The FinSpace endpoint for China (Beijing) and China (Ningxia)
+    description: The FinSpace Data endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://finspace-api.{region}.amazonaws.com.cn'
     variables:
       region:
@@ -112,7 +112,7 @@ servers:
           - cn-north-1
           - cn-northwest-1
         default: cn-north-1
-    description: The FinSpace endpoint for China (Beijing) and China (Ningxia)
+    description: The FinSpace Data endpoint for China (Beijing) and China (Ningxia)
 paths:
   '/datasets/{datasetId}/changesets':
     post:

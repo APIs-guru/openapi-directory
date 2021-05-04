@@ -1015,7 +1015,7 @@ paths:
   /phone-numbers#operation=batch-update:
     post:
       operationId: BatchUpdatePhoneNumber
-      description: '<p> Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code> . For example, you can update either the product type or the calling name. </p> <p>For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>'
+      description: '<p>Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code>. For example, you can update the product type or the calling name.</p> <p>For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the US, you must use the Amazon Chime SIP Media Application Dial-In product type.</p> <p>Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>'
       responses:
         '200':
           description: Success
@@ -3447,7 +3447,7 @@ paths:
   /phone-number-orders:
     post:
       operationId: CreatePhoneNumberOrder
-      description: 'Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.'
+      description: 'Creates an order for phone numbers to be provisioned. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the US, you must use the Amazon Chime SIP Media Application Dial-In product type.'
       responses:
         '201':
           description: Success
@@ -3520,6 +3520,7 @@ paths:
                   enum:
                     - BusinessCalling
                     - VoiceConnector
+                    - SipMediaApplicationDialIn
                 E164PhoneNumbers:
                   description: 'List of phone numbers, in E.164 format.'
                   type: array
@@ -7522,7 +7523,7 @@ paths:
   '/phone-numbers/{phoneNumberId}':
     delete:
       operationId: DeletePhoneNumber
-      description: <p>Moves the specified phone number into the <b>Deletionqueue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p>Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>
+      description: <p>Moves the specified phone number into the <b>Deletion queue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p>Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>
       responses:
         '204':
           description: Success
@@ -7644,7 +7645,7 @@ paths:
             type: string
     post:
       operationId: UpdatePhoneNumber
-      description: '<p>Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action.</p> <p>For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>'
+      description: '<p>Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action.</p> <p>For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type.</p> <p>Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>'
       responses:
         '200':
           description: Success
@@ -7714,6 +7715,7 @@ paths:
                   enum:
                     - BusinessCalling
                     - VoiceConnector
+                    - SipMediaApplicationDialIn
                 CallingName:
                   description: The outbound calling name associated with the phone number.
                   type: string
@@ -12937,7 +12939,7 @@ paths:
   '/channels/{channelArn}/messages':
     get:
       operationId: ListChannelMessages
-      description: '<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order .</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order.</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
       responses:
         '200':
           description: Success
@@ -13547,6 +13549,7 @@ paths:
             enum:
               - BusinessCalling
               - VoiceConnector
+              - SipMediaApplicationDialIn
         - name: filter-name
           in: query
           required: false
@@ -13591,6 +13594,78 @@ paths:
             type: string
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /phone-number-countries#product-type:
+    get:
+      operationId: ListSupportedPhoneNumberCountries
+      description: Lists supported phone number countries.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSupportedPhoneNumberCountriesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: product-type
+          in: query
+          required: true
+          description: The phone number product type.
+          schema:
+            type: string
+            enum:
+              - BusinessCalling
+              - VoiceConnector
+              - SipMediaApplicationDialIn
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -14422,7 +14497,7 @@ paths:
   /search#type=phone-numbers:
     get:
       operationId: SearchAvailablePhoneNumbers
-      description: Searches phone numbers that can be ordered.
+      description: 'Searches for phone numbers that can be ordered. For US numbers, provide at least one of the following search filters: <code>AreaCode</code>, <code>City</code>, <code>State</code>, or <code>TollFreePrefix</code>. If you provide <code>City</code>, you must also provide <code>State</code>. Numbers outside the US only support the <code>PhoneNumberType</code> filter, which you must use.'
       responses:
         '200':
           description: Success
@@ -14476,36 +14551,46 @@ paths:
         - name: area-code
           in: query
           required: false
-          description: The area code used to filter results.
+          description: The area code used to filter results. Only applies to the US.
           schema:
             type: string
         - name: city
           in: query
           required: false
-          description: The city used to filter results.
+          description: The city used to filter results. Only applies to the US.
           schema:
             type: string
         - name: country
           in: query
           required: false
-          description: The country used to filter results.
+          description: 'The country used to filter results. Defaults to the US Format: ISO 3166-1 alpha-2.'
           schema:
             type: string
+            pattern: '[A-Z]{2}'
         - name: state
           in: query
           required: false
-          description: The state used to filter results.
+          description: The state used to filter results. Required only if you provide <code>City</code>. Only applies to the US.
           schema:
             type: string
         - name: toll-free-prefix
           in: query
           required: false
-          description: The toll-free prefix that you use to filter results.
+          description: The toll-free prefix that you use to filter results. Only applies to the US.
           schema:
             type: string
             pattern: ^8(00|33|44|55|66|77|88)$
             minLength: 3
             maxLength: 3
+        - name: phone-number-type
+          in: query
+          required: false
+          description: The phone number type used to filter results. Required for non-US numbers.
+          schema:
+            type: string
+            enum:
+              - Local
+              - TollFree
         - name: max-results
           in: query
           required: false
@@ -14517,9 +14602,21 @@ paths:
         - name: next-token
           in: query
           required: false
-          description: The token to use to retrieve the next page of results.
+          description: The token used to retrieve the next page of results.
           schema:
             type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: type
           in: query
           required: true
@@ -15686,7 +15783,7 @@ components:
         ChannelBan:
           allOf:
             - $ref: '#/components/schemas/ChannelBan'
-            - description: The the details of the ban.
+            - description: The details of the ban.
     DescribeChannelMembershipResponse:
       type: object
       properties:
@@ -16248,6 +16345,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextTokenString'
             - description: The token to use to retrieve the next page of results.
+    ListSupportedPhoneNumberCountriesResponse:
+      type: object
+      properties:
+        PhoneNumberCountries:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberCountriesList'
+            - description: The supported phone number countries.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -16503,6 +16607,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/E164PhoneNumberList'
             - description: 'List of phone numbers, in E.164 format.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token used to retrieve the next page of search results.
     SendChannelMessageResponse:
       type: object
       properties:
@@ -17991,6 +18099,7 @@ components:
       enum:
         - BusinessCalling
         - VoiceConnector
+        - SipMediaApplicationDialIn
     CreatePhoneNumberOrderRequest:
       type: object
       required:
@@ -18918,6 +19027,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/E164PhoneNumber'
             - description: 'The phone number, in E.164 format.'
+        Country:
+          allOf:
+            - $ref: '#/components/schemas/Alpha2CountryCode'
+            - description: 'The phone number country. Format: ISO 3166-1 alpha-2.'
         Type:
           allOf:
             - $ref: '#/components/schemas/PhoneNumberType'
@@ -19383,6 +19496,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SipRule'
+    ListSupportedPhoneNumberCountriesRequest:
+      type: object
+      title: ListSupportedPhoneNumberCountriesRequest
+      properties: {}
+    PhoneNumberCountriesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PhoneNumberCountry'
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
@@ -19652,6 +19773,22 @@ components:
             - $ref: '#/components/schemas/Iso8601Timestamp'
             - description: 'The timestamp of the phone number association, in ISO 8601 format.'
       description: 'The phone number associations, such as Amazon Chime account ID, Amazon Chime user ID, Amazon Chime Voice Connector ID, or Amazon Chime Voice Connector group ID.'
+    PhoneNumberCountry:
+      type: object
+      properties:
+        CountryCode:
+          allOf:
+            - $ref: '#/components/schemas/Alpha2CountryCode'
+            - description: 'The phone number country code. Format: ISO 3166-1 alpha-2.'
+        SupportedPhoneNumberTypes:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberTypeList'
+            - description: 'The supported phone number types. '
+      description: The phone number country.
+    PhoneNumberTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PhoneNumberType'
     PhoneNumberError:
       type: object
       properties:

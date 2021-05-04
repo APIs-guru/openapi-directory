@@ -602,7 +602,7 @@ paths:
   '/accounts/health/resource-collection/{ResourceCollectionType}':
     get:
       operationId: DescribeResourceCollectionHealth
-      description: ' Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. '
+      description: ' Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. '
       responses:
         '200':
           description: Success
@@ -638,11 +638,12 @@ paths:
         - name: ResourceCollectionType
           in: path
           required: true
-          description: ' An AWS resource collection type. This type specifies how analyzed AWS resources are defined. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. '
+          description: ' An AWS resource collection type. This type specifies how analyzed AWS resources are defined. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. '
           schema:
             type: string
             enum:
               - AWS_CLOUD_FORMATION
+              - AWS_SERVICE
         - name: NextToken
           in: query
           required: false
@@ -760,10 +761,139 @@ paths:
                   properties:
                     OpsCenter:
                       $ref: '#/components/schemas/OpsCenterIntegrationConfig'
+  /cost-estimation:
+    get:
+      operationId: GetCostEstimation
+      description: 'Returns an estimate of the monthly cost for DevOps Guru to analyze your AWS resources. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html">Estimate your Amazon DevOps Guru costs</a> and <a href="http://aws.amazon.com/devops-guru/pricing/">Amazon DevOps Guru pricing</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCostEstimationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          schema:
+            type: string
+            pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: StartCostEstimation
+      description: Starts the creation of an estimate of the monthly cost to analyze your AWS resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartCostEstimationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceCollection
+              properties:
+                ResourceCollection:
+                  description: 'Information about a filter used to specify which AWS resources are analyzed to create a monthly DevOps Guru cost estimate. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html">Estimate your Amazon DevOps Guru costs</a> and <a href="http://aws.amazon.com/devops-guru/pricing/">Amazon DevOps Guru pricing</a>. '
+                  type: object
+                  properties:
+                    CloudFormation:
+                      allOf:
+                        - $ref: '#/components/schemas/CloudFormationCostEstimationResourceCollectionFilter'
+                        - description: An object that specifies the CloudFormation stack that defines the AWS resources used to create a monthly estimate for DevOps Guru.
+                ClientToken:
+                  description: The idempotency token used to identify each cost estimate request.
+                  type: string
+                  pattern: '^[a-zA-Z0-9]+[a-zA-Z0-9-]*$'
+                  minLength: 1
+                  maxLength: 100
   '/resource-collections/{ResourceCollectionType}':
     get:
       operationId: GetResourceCollection
-      description: ' Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. '
+      description: ' Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. '
       responses:
         '200':
           description: Success
@@ -810,6 +940,7 @@ paths:
             type: string
             enum:
               - AWS_CLOUD_FORMATION
+              - AWS_SERVICE
         - name: NextToken
           in: query
           required: false
@@ -1197,6 +1328,21 @@ paths:
                   pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
                   minLength: 36
                   maxLength: 36
+                Locale:
+                  description: A locale that specifies the language to use for recommendations.
+                  type: string
+                  enum:
+                    - DE_DE
+                    - EN_US
+                    - EN_GB
+                    - ES_ES
+                    - FR_FR
+                    - IT_IT
+                    - JA_JP
+                    - KO_KR
+                    - PT_BR
+                    - ZH_CN
+                    - ZH_TW
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1354,6 +1500,10 @@ paths:
                         - description: ' An array of status values used to search for insights. '
                     ResourceCollection:
                       $ref: '#/components/schemas/ResourceCollection'
+                    ServiceCollection:
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceCollection'
+                        - description: A collection of the names of AWS services.
                 MaxResults:
                   description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                   type: integer
@@ -1382,7 +1532,7 @@ paths:
   /resource-collections:
     put:
       operationId: UpdateResourceCollection
-      description: ' Updates the collection of resources that DevOps Guru analyzes. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. This method also creates the IAM role required for you to use DevOps Guru. '
+      description: ' Updates the collection of resources that DevOps Guru analyzes. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. This method also creates the IAM role required for you to use DevOps Guru. '
       responses:
         '200':
           description: Success
@@ -1444,7 +1594,7 @@ paths:
                     CloudFormation:
                       allOf:
                         - $ref: '#/components/schemas/UpdateCloudFormationCollectionFilter'
-                        - description: ' An collection of AWS CloudFormation stacks. '
+                        - description: ' An collection of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1578,11 +1728,11 @@ components:
         ProactiveAnomaly:
           allOf:
             - $ref: '#/components/schemas/ProactiveAnomaly'
-            - description: ' An <code>ReactiveAnomaly</code> object that represents the requested anomaly. '
+            - description: ' A <code>ReactiveAnomaly</code> object that represents the requested anomaly. '
         ReactiveAnomaly:
           allOf:
             - $ref: '#/components/schemas/ReactiveAnomaly'
-            - description: ' An <code>ProactiveAnomaly</code> object that represents the requested anomaly. '
+            - description: ' A <code>ProactiveAnomaly</code> object that represents the requested anomaly. '
     DescribeFeedbackResponse:
       type: object
       properties:
@@ -1594,11 +1744,11 @@ components:
         ProactiveInsight:
           allOf:
             - $ref: '#/components/schemas/ProactiveInsight'
-            - description: ' An <code>ProactiveInsight</code> object that represents the requested insight. '
+            - description: ' A <code>ProactiveInsight</code> object that represents the requested insight. '
         ReactiveInsight:
           allOf:
             - $ref: '#/components/schemas/ReactiveInsight'
-            - description: ' An <code>ReactiveInsight</code> object that represents the requested insight. '
+            - description: ' A <code>ReactiveInsight</code> object that represents the requested insight. '
     DescribeResourceCollectionHealthResponse:
       type: object
       required:
@@ -1608,6 +1758,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CloudFormationHealths'
             - description: ' The returned <code>CloudFormationHealthOverview</code> object that contains an <code>InsightHealthOverview</code> object with the requested system health information. '
+        Service:
+          allOf:
+            - $ref: '#/components/schemas/ServiceHealths'
+            - description: An array of <code>ServiceHealth</code> objects that describes the health of the AWS services associated with the resources in the collection.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/UuidNextToken'
@@ -1617,13 +1771,40 @@ components:
       properties:
         ServiceIntegration:
           $ref: '#/components/schemas/ServiceIntegrationConfig'
+    GetCostEstimationResponse:
+      type: object
+      properties:
+        ResourceCollection:
+          allOf:
+            - $ref: '#/components/schemas/CostEstimationResourceCollectionFilter'
+            - description: The collection of the AWS resources used to create your monthly DevOps Guru cost estimate.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CostEstimationStatus'
+            - description: 'The status of creating this cost estimate. If it''s still in progress, the status <code>ONGOING</code> is returned. If it is finished, the status <code>COMPLETED</code> is returned.'
+        Costs:
+          allOf:
+            - $ref: '#/components/schemas/ServiceResourceCosts'
+            - description: An array of <code>ResourceCost</code> objects that each contains details about the monthly cost estimate to analyze one of your AWS resources.
+        TimeRange:
+          allOf:
+            - $ref: '#/components/schemas/CostEstimationTimeRange'
+            - description: The start and end time of the cost estimation.
+        TotalCost:
+          allOf:
+            - $ref: '#/components/schemas/Cost'
+            - description: The estimated monthly cost to analyze the AWS resources. This value is the sum of the estimated costs to analyze each resource in the <code>Costs</code> object in this response.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     GetResourceCollectionResponse:
       type: object
       properties:
         ResourceCollection:
           allOf:
             - $ref: '#/components/schemas/ResourceCollectionFilter'
-            - description: ' The requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. '
+            - description: ' The requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. '
         NextToken:
           allOf:
             - $ref: '#/components/schemas/UuidNextToken'
@@ -1703,8 +1884,8 @@ components:
         CloudFormation:
           allOf:
             - $ref: '#/components/schemas/CloudFormationCollection'
-            - description: ' An array of the names of AWS CloudFormation stacks. The stacks define AWS resources that DevOps Guru analyzes. '
-      description: ' A collection of AWS resources supported by DevOps Guru. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. '
+            - description: ' An array of the names of AWS CloudFormation stacks. The stacks define AWS resources that DevOps Guru analyzes. You can specify up to 500 AWS CloudFormation stacks. '
+      description: ' A collection of AWS resources supported by DevOps Guru. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. '
     ListInsightsResponse:
       type: object
       properties:
@@ -1823,6 +2004,25 @@ components:
         $ref: '#/components/schemas/InsightStatus'
       minItems: 0
       maxItems: 2
+    ServiceCollection:
+      type: object
+      properties:
+        ServiceNames:
+          allOf:
+            - $ref: '#/components/schemas/ServiceNames'
+            - description: An array of strings that each specifies the name of an AWS service.
+      description: A collection of the names of AWS services.
+    StartCostEstimationResponse:
+      type: object
+      properties: {}
+    CloudFormationCostEstimationResourceCollectionFilter:
+      type: object
+      properties:
+        StackNames:
+          allOf:
+            - $ref: '#/components/schemas/CostEstimationStackNames'
+            - description: An array of CloudFormation stack names. Its size is fixed at 1 item.
+      description: 'Information about an AWS CloudFormation stack used to create a monthly cost estimate for DevOps Guru to analyze AWS resources. The maximum number of stacks you can specify for a cost estimate is one. The estimate created is for the cost to analyze the AWS resources defined by the stack. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>.'
     UpdateResourceCollectionResponse:
       type: object
       properties: {}
@@ -1832,8 +2032,8 @@ components:
         StackNames:
           allOf:
             - $ref: '#/components/schemas/UpdateStackNames'
-            - description: ' An array of the name of stacks to update. '
-      description: ' Contains the names of AWS CloudFormation stacks used to update a collection of stacks. '
+            - description: ' An array of the names of the AWS CloudFormation stacks to update. You can specify up to 500 AWS CloudFormation stacks. '
+      description: ' Contains the names of AWS CloudFormation stacks used to update a collection of stacks. You can specify up to 500 AWS CloudFormation stacks.'
     UpdateServiceIntegrationResponse:
       type: object
       properties: {}
@@ -1931,6 +2131,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NotificationChannel'
+    ClientToken:
+      type: string
+      pattern: '^[a-zA-Z0-9]+[a-zA-Z0-9-]*$'
+      minLength: 1
+      maxLength: 100
     StackNames:
       type: array
       items:
@@ -1942,7 +2147,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/StackNames'
             - description: ' An array of CloudFormation stack names. '
-      description: ' Information about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
+      description: ' Information about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
     CloudFormationCollectionFilter:
       type: object
       properties:
@@ -1950,7 +2155,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/StackNames'
             - description: ' An array of CloudFormation stack names. '
-      description: ' Information about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
+      description: ' Information about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
+    CostEstimationStackNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/StackName'
+      minItems: 1
+      maxItems: 1
     StackName:
       type: string
       pattern: '^[a-zA-Z*]+[a-zA-Z0-9-]*$'
@@ -2055,6 +2266,41 @@ components:
             - $ref: '#/components/schemas/CloudWatchMetricsDimensionValue'
             - description: ' The value of the CloudWatch dimension. '
       description: ' The dimension of a Amazon CloudWatch metric that is used when DevOps Guru analyzes the resources in your account for operational problems and anomalous behavior. A dimension is a name/value pair that is part of the identity of a metric. A metric can have up to 10 dimensions. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension">Dimensions</a> in the <i>Amazon CloudWatch User Guide</i>. '
+    Cost:
+      type: number
+      format: double
+    CostEstimationResourceCollectionFilter:
+      type: object
+      properties:
+        CloudFormation:
+          allOf:
+            - $ref: '#/components/schemas/CloudFormationCostEstimationResourceCollectionFilter'
+            - description: An object that specifies the CloudFormation stack that defines the AWS resources used to create a monthly estimate for DevOps Guru.
+      description: 'Information about a filter used to specify which AWS resources are analyzed to create a monthly DevOps Guru cost estimate. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html">Estimate your Amazon DevOps Guru costs</a> and <a href="http://aws.amazon.com/devops-guru/pricing/">Amazon DevOps Guru pricing</a>. '
+    CostEstimationServiceResourceCount:
+      type: integer
+    CostEstimationServiceResourceState:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+    CostEstimationStatus:
+      type: string
+      enum:
+        - ONGOING
+        - COMPLETED
+    CostEstimationTimeRange:
+      type: object
+      properties:
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time of the cost estimation.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The end time of the cost estimation.
+      description: The time range of a cost estimation.
     DescribeAccountHealthRequest:
       type: object
       title: DescribeAccountHealthRequest
@@ -2243,6 +2489,7 @@ components:
       type: string
       enum:
         - AWS_CLOUD_FORMATION
+        - AWS_SERVICE
     UuidNextToken:
       type: string
       pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
@@ -2252,6 +2499,10 @@ components:
       type: object
       title: DescribeResourceCollectionHealthRequest
       properties: {}
+    ServiceHealths:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceHealth'
     DescribeServiceIntegrationRequest:
       type: object
       title: DescribeServiceIntegrationRequest
@@ -2355,6 +2606,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Event'
+    GetCostEstimationRequest:
+      type: object
+      title: GetCostEstimationRequest
+      properties: {}
+    ServiceResourceCosts:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceResourceCost'
     GetResourceCollectionRequest:
       type: object
       title: GetResourceCollectionRequest
@@ -2365,7 +2624,7 @@ components:
         CloudFormation:
           allOf:
             - $ref: '#/components/schemas/CloudFormationCollectionFilter'
-            - description: ' Information about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
+            - description: ' Information about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
       description: ' Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru. '
     InsightName:
       type: string
@@ -2544,6 +2803,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/UuidNextToken'
             - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+    Locale:
+      type: string
+      enum:
+        - DE_DE
+        - EN_US
+        - EN_GB
+        - ES_ES
+        - FR_FR
+        - IT_IT
+        - JA_JP
+        - KO_KR
+        - PT_BR
+        - ZH_CN
+        - ZH_TW
     ListRecommendationsRequest:
       type: object
       required:
@@ -2558,6 +2831,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/UuidNextToken'
             - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+        Locale:
+          allOf:
+            - $ref: '#/components/schemas/Locale'
+            - description: A locale that specifies the language to use for recommendations.
     Recommendations:
       type: array
       items:
@@ -2660,6 +2937,10 @@ components:
           $ref: '#/components/schemas/PredictionTimeRange'
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
+        ServiceCollection:
+          allOf:
+            - $ref: '#/components/schemas/ServiceCollection'
+            - description: A collection of the names of AWS services.
       description: 'Details about a proactive insight. This object is returned by <code>DescribeInsight.</code> '
     PutFeedbackRequest:
       type: object
@@ -2720,6 +3001,10 @@ components:
           $ref: '#/components/schemas/InsightTimeRange'
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
+        ServiceCollection:
+          allOf:
+            - $ref: '#/components/schemas/ServiceCollection'
+            - description: A collection of the names of AWS services.
       description: ' Information about a reactive insight. This object is returned by <code>DescribeInsight.</code> '
     RecommendationDescription:
       type: string
@@ -2845,7 +3130,7 @@ components:
         Resources:
           allOf:
             - $ref: '#/components/schemas/RecommendationRelatedEventResources'
-            - description: ' A <code>ResourceCollection</code> object that contains arrays of the names of AWS CloudFormation stacks. '
+            - description: ' A <code>ResourceCollection</code> object that contains arrays of the names of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. '
       description: ' Information about an event that is related to a recommendation. '
     RecommendationRelatedEventResourceName:
       type: string
@@ -2867,6 +3152,11 @@ components:
       type: object
       title: RemoveNotificationChannelRequest
       properties: {}
+    ResourceType:
+      type: string
+      pattern: '^[a-zA-Z]+[a-zA-Z0-9-_:]*$'
+      minLength: 1
+      maxLength: 256
     SearchInsightsFilters:
       type: object
       properties:
@@ -2880,6 +3170,10 @@ components:
             - description: ' An array of status values used to search for insights. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
+        ServiceCollection:
+          allOf:
+            - $ref: '#/components/schemas/ServiceCollection'
+            - description: A collection of the names of AWS services.
       description: ' Specifies one or more severity values and one or more status values that are used to search for insights. '
     SearchInsightsMaxResults:
       type: integer
@@ -2912,11 +3206,105 @@ components:
           allOf:
             - $ref: '#/components/schemas/InsightType'
             - description: ' The type of insights you are searching for (<code>REACTIVE</code> or <code>PROACTIVE</code>). '
+    ServiceNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceName'
+    ServiceName:
+      type: string
+      enum:
+        - API_GATEWAY
+        - APPLICATION_ELB
+        - AUTO_SCALING_GROUP
+        - CLOUD_FRONT
+        - DYNAMO_DB
+        - EC2
+        - ECS
+        - EKS
+        - ELASTIC_BEANSTALK
+        - ELASTI_CACHE
+        - ELB
+        - ES
+        - KINESIS
+        - LAMBDA
+        - NAT_GATEWAY
+        - NETWORK_ELB
+        - RDS
+        - REDSHIFT
+        - ROUTE_53
+        - S3
+        - SAGE_MAKER
+        - SNS
+        - SQS
+        - STEP_FUNCTIONS
+        - SWF
+    ServiceInsightHealth:
+      type: object
+      properties:
+        OpenProactiveInsights:
+          allOf:
+            - $ref: '#/components/schemas/NumOpenProactiveInsights'
+            - description: The number of open proactive insights in the AWS service
+        OpenReactiveInsights:
+          allOf:
+            - $ref: '#/components/schemas/NumOpenReactiveInsights'
+            - description: The number of open reactive insights in the AWS service
+      description: Contains the number of open proactive and reactive insights in an analyzed AWS service.
+    ServiceHealth:
+      type: object
+      properties:
+        ServiceName:
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: The name of the AWS service.
+        Insight:
+          allOf:
+            - $ref: '#/components/schemas/ServiceInsightHealth'
+            - description: Represents the health of an AWS service. This is a <code>ServiceInsightHealth</code> that contains the number of open proactive and reactive insights for this service.
+      description: Represents the health of an AWS service.
+    ServiceResourceCost:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: The type of the AWS resource.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/CostEstimationServiceResourceState'
+            - description: 'The state of the resource. The resource is <code>ACTIVE</code> if it produces metrics, events, or logs within an hour, otherwise it is <code>INACTIVE</code>. You pay for the number of active AWS resource hours analyzed for each resource. Inactive resources are not charged. '
+        Count:
+          allOf:
+            - $ref: '#/components/schemas/CostEstimationServiceResourceCount'
+            - description: The number of active resources analyzed for this service to create a monthly cost estimate.
+        UnitCost:
+          allOf:
+            - $ref: '#/components/schemas/Cost'
+            - description: 'The price per hour to analyze the resources in the service. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html">Estimate your Amazon DevOps Guru costs</a> and <a href="http://aws.amazon.com/devops-guru/pricing/">Amazon DevOps Guru pricing</a>.'
+        Cost:
+          allOf:
+            - $ref: '#/components/schemas/Cost'
+            - description: The total estimated monthly cost to analyze the active resources for this resource.
+      description: 'An object that contains information about the estimated monthly cost to analyze an AWS resource. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html">Estimate your Amazon DevOps Guru costs</a> and <a href="http://aws.amazon.com/devops-guru/pricing/">Amazon DevOps Guru pricing</a>.'
     TopicArn:
       type: string
       pattern: '^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\d{12}:[^:]+$'
       minLength: 36
       maxLength: 1024
+    StartCostEstimationRequest:
+      type: object
+      required:
+        - ResourceCollection
+      title: StartCostEstimationRequest
+      properties:
+        ResourceCollection:
+          allOf:
+            - $ref: '#/components/schemas/CostEstimationResourceCollectionFilter'
+            - description: The collection of AWS resources used to create a monthly DevOps Guru cost estimate.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The idempotency token used to identify each cost estimate request.
     UpdateStackNames:
       type: array
       items:
@@ -2934,7 +3322,7 @@ components:
         CloudFormation:
           allOf:
             - $ref: '#/components/schemas/UpdateCloudFormationCollectionFilter'
-            - description: ' An collection of AWS CloudFormation stacks. '
+            - description: ' An collection of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. '
       description: ' Contains information used to update a collection of AWS resources. '
     UpdateResourceCollectionRequest:
       type: object
