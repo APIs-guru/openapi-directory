@@ -478,6 +478,50 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
+  "/v1/{entitlement}:lookupOffer":
+    get:
+      description: "Returns the requested Offer resource. Possible error codes: *
+        PERMISSION_DENIED: The entitlement doesn't belong to the reseller. *
+        INVALID_ARGUMENT: Required request parameters are missing or invalid. *
+        NOT_FOUND: Entitlement or offer was not found. Return value: The Offer
+        resource."
+      operationId: cloudchannel.accounts.customers.entitlements.lookupOffer
+      parameters:
+        - description: "Required. The resource name of the entitlement to retrieve the
+            Offer. Entitlement uses the format:
+            accounts/{account_id}/customers/{customer_id}/entitlements/{entitle\
+            ment_id}"
+          in: path
+          name: entitlement
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudChannelV1Offer"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/apps.order
+          Oauth2c:
+            - https://www.googleapis.com/auth/apps.order
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}":
     delete:
       description: Deletes a long-running operation. This method indicates that the
@@ -2354,6 +2398,7 @@ components:
             - RENEWAL_SETTING_CHANGED
             - PAID_SERVICE_STARTED
             - LICENSE_ASSIGNMENT_CHANGED
+            - LICENSE_CAP_CHANGED
           type: string
       type: object
     GoogleCloudChannelV1ListChannelPartnerLinksResponse:
@@ -3347,6 +3392,7 @@ components:
             - RENEWAL_SETTING_CHANGED
             - PAID_SERVICE_STARTED
             - LICENSE_ASSIGNMENT_CHANGED
+            - LICENSE_CAP_CHANGED
           type: string
       type: object
     GoogleCloudChannelV1alpha1OperationMetadata:

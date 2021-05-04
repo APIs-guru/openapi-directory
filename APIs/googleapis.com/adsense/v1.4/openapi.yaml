@@ -24,9 +24,9 @@ info:
     - format: google
       url: https://adsense.googleapis.com/$discovery/rest?version=v1.4
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: adsense
-  x-preferred: false
 externalDocs:
   url: https://developers.google.com/adsense/management/
 tags:
@@ -46,17 +46,14 @@ paths:
       description: List all accounts available to this AdSense account.
       operationId: adsense.accounts.list
       parameters:
-        - description: The maximum number of accounts to include in the response, used for
-            paging.
+        - description: The maximum number of accounts to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through accounts. To retrieve
-            the next page, set this parameter to the value of "nextPageToken"
-            from the previous response.
+        - description: A continuation token, used to page through accounts. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -140,17 +137,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of ad clients to include in the response, used
-            for paging.
+        - description: The maximum number of ad clients to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through ad clients. To retrieve
-            the next page, set this parameter to the value of "nextPageToken"
-            from the previous response.
+        - description: A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -251,17 +245,14 @@ paths:
           name: includeInactive
           schema:
             type: boolean
-        - description: The maximum number of ad units to include in the response, used for
-            paging.
+        - description: The maximum number of ad units to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through ad units. To retrieve
-            the next page, set this parameter to the value of "nextPageToken"
-            from the previous response.
+        - description: A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -294,8 +285,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}":
     get:
-      description: Gets the specified ad unit in the specified ad client for the
-        specified account.
+      description: Gets the specified ad unit in the specified ad client for the specified account.
       operationId: adsense.accounts.adunits.get
       parameters:
         - description: Account to which the ad client belongs.
@@ -414,17 +404,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of custom channels to include in the response,
-            used for paging.
+        - description: The maximum number of custom channels to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through custom channels. To
-            retrieve the next page, set this parameter to the value of
-            "nextPageToken" from the previous response.
+        - description: A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -457,8 +444,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/customchannels":
     get:
-      description: List all custom channels in the specified ad client for the
-        specified account.
+      description: List all custom channels in the specified ad client for the specified account.
       operationId: adsense.accounts.customchannels.list
       parameters:
         - description: Account to which the ad client belongs.
@@ -473,17 +459,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of custom channels to include in the response,
-            used for paging.
+        - description: The maximum number of custom channels to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through custom channels. To
-            retrieve the next page, set this parameter to the value of
-            "nextPageToken" from the previous response.
+        - description: A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -516,8 +499,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}":
     get:
-      description: Get the specified custom channel from the specified ad client for
-        the specified account.
+      description: Get the specified custom channel from the specified ad client for the specified account.
       operationId: adsense.accounts.customchannels.get
       parameters:
         - description: Account to which the ad client belongs.
@@ -592,17 +574,14 @@ paths:
           name: includeInactive
           schema:
             type: boolean
-        - description: The maximum number of ad units to include in the response, used for
-            paging.
+        - description: The maximum number of ad units to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through ad units. To retrieve
-            the next page, set this parameter to the value of "nextPageToken"
-            from the previous response.
+        - description: A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -635,8 +614,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/urlchannels":
     get:
-      description: List all URL channels in the specified ad client for the specified
-        account.
+      description: List all URL channels in the specified ad client for the specified account.
       operationId: adsense.accounts.urlchannels.list
       parameters:
         - description: Account to which the ad client belongs.
@@ -651,17 +629,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of URL channels to include in the response, used
-            for paging.
+        - description: The maximum number of URL channels to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through URL channels. To
-            retrieve the next page, set this parameter to the value of
-            "nextPageToken" from the previous response.
+        - description: A continuation token, used to page through URL channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -703,10 +678,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The locale to use for translating alert messages. The account
-            locale will be used if this is not supplied. The AdSense default
-            (English) will be used if the supplied locale is invalid or
-            unsupported.
+        - description: The locale to use for translating alert messages. The account locale will be used if this is not supplied. The AdSense default (English) will be used if the supplied locale is invalid or unsupported.
           in: query
           name: locale
           schema:
@@ -739,8 +711,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/alerts/{alertId}":
     delete:
-      description: Dismiss (delete) the specified alert from the specified publisher
-        AdSense account.
+      description: Dismiss (delete) the specified alert from the specified publisher AdSense account.
       operationId: adsense.accounts.alerts.delete
       parameters:
         - description: Account which contains the ad unit.
@@ -812,9 +783,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/reports":
     get:
-      description: Generate an AdSense report based on the report request sent in the
-        query parameters. Returns the result as JSON; to retrieve output in CSV
-        format specify "alt=csv" as a query parameter.
+      description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
       operationId: adsense.accounts.reports.generate
       parameters:
         - description: Account upon which to report.
@@ -823,8 +792,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Start of the date range to report on in "YYYY-MM-DD" format,
-            inclusive.
+        - description: Start of the date range to report on in "YYYY-MM-DD" format, inclusive.
           in: query
           name: startDate
           required: true
@@ -836,8 +804,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional currency to use when reporting on monetary metrics.
-            Defaults to the account's currency if not set.
+        - description: Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set.
           in: query
           name: currency
           schema:
@@ -860,8 +827,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Optional locale to use for translating report output to a local
-            language. Defaults to "en_US" if not specified.
+        - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
           schema:
@@ -882,10 +848,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: The name of a dimension or metric to sort the resulting report on,
-            optionally prefixed with "+" to sort ascending or "-" to sort
-            descending. If no prefix is specified, the column is sorted
-            ascending.
+        - description: The name of a dimension or metric to sort the resulting report on, optionally prefixed with "+" to sort ascending or "-" to sort descending. If no prefix is specified, the column is sorted ascending.
           explode: true
           in: query
           name: sort
@@ -901,8 +864,7 @@ paths:
             maximum: 5000
             minimum: 0
             type: integer
-        - description: Whether the report should be generated in the AdSense account's
-            local timezone. If false default PST/PDT timezone will be used.
+        - description: Whether the report should be generated in the AdSense account's local timezone. If false default PST/PDT timezone will be used.
           in: query
           name: useTimezoneReporting
           schema:
@@ -944,17 +906,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of saved reports to include in the response,
-            used for paging.
+        - description: The maximum number of saved reports to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 100
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through saved reports. To
-            retrieve the next page, set this parameter to the value of
-            "nextPageToken" from the previous response.
+        - description: A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -987,8 +946,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/reports/{savedReportId}":
     get:
-      description: Generate an AdSense report based on the saved report ID sent in the
-        query parameters.
+      description: Generate an AdSense report based on the saved report ID sent in the query parameters.
       operationId: adsense.accounts.reports.saved.generate
       parameters:
         - description: Account to which the saved reports belong.
@@ -1003,8 +961,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional locale to use for translating report output to a local
-            language. Defaults to "en_US" if not specified.
+        - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
           schema:
@@ -1060,17 +1017,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of saved ad styles to include in the response,
-            used for paging.
+        - description: The maximum number of saved ad styles to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through saved ad styles. To
-            retrieve the next page, set this parameter to the value of
-            "nextPageToken" from the previous response.
+        - description: A continuation token, used to page through saved ad styles. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -1149,17 +1103,14 @@ paths:
       description: List all ad clients in this AdSense account.
       operationId: adsense.adclients.list
       parameters:
-        - description: The maximum number of ad clients to include in the response, used
-            for paging.
+        - description: The maximum number of ad clients to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through ad clients. To retrieve
-            the next page, set this parameter to the value of "nextPageToken"
-            from the previous response.
+        - description: A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -1206,17 +1157,14 @@ paths:
           name: includeInactive
           schema:
             type: boolean
-        - description: The maximum number of ad units to include in the response, used for
-            paging.
+        - description: The maximum number of ad units to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through ad units. To retrieve
-            the next page, set this parameter to the value of "nextPageToken"
-            from the previous response.
+        - description: A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -1350,17 +1298,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of custom channels to include in the response,
-            used for paging.
+        - description: The maximum number of custom channels to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through custom channels. To
-            retrieve the next page, set this parameter to the value of
-            "nextPageToken" from the previous response.
+        - description: A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -1393,8 +1338,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/adclients/{adClientId}/customchannels":
     get:
-      description: List all custom channels in the specified ad client for this
-        AdSense account.
+      description: List all custom channels in the specified ad client for this AdSense account.
       operationId: adsense.customchannels.list
       parameters:
         - description: Ad client for which to list custom channels.
@@ -1403,17 +1347,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of custom channels to include in the response,
-            used for paging.
+        - description: The maximum number of custom channels to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through custom channels. To
-            retrieve the next page, set this parameter to the value of
-            "nextPageToken" from the previous response.
+        - description: A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -1509,17 +1450,14 @@ paths:
           name: includeInactive
           schema:
             type: boolean
-        - description: The maximum number of ad units to include in the response, used for
-            paging.
+        - description: The maximum number of ad units to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through ad units. To retrieve
-            the next page, set this parameter to the value of "nextPageToken"
-            from the previous response.
+        - description: A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -1552,8 +1490,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/adclients/{adClientId}/urlchannels":
     get:
-      description: List all URL channels in the specified ad client for this AdSense
-        account.
+      description: List all URL channels in the specified ad client for this AdSense account.
       operationId: adsense.urlchannels.list
       parameters:
         - description: Ad client for which to list URL channels.
@@ -1562,17 +1499,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of URL channels to include in the response, used
-            for paging.
+        - description: The maximum number of URL channels to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through URL channels. To
-            retrieve the next page, set this parameter to the value of
-            "nextPageToken" from the previous response.
+        - description: A continuation token, used to page through URL channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -1608,10 +1542,7 @@ paths:
       description: List the alerts for this AdSense account.
       operationId: adsense.alerts.list
       parameters:
-        - description: The locale to use for translating alert messages. The account
-            locale will be used if this is not supplied. The AdSense default
-            (English) will be used if the supplied locale is invalid or
-            unsupported.
+        - description: The locale to use for translating alert messages. The account locale will be used if this is not supplied. The AdSense default (English) will be used if the supplied locale is invalid or unsupported.
           in: query
           name: locale
           schema:
@@ -1644,8 +1575,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/alerts/{alertId}":
     delete:
-      description: Dismiss (delete) the specified alert from the publisher's AdSense
-        account.
+      description: Dismiss (delete) the specified alert from the publisher's AdSense account.
       operationId: adsense.alerts.delete
       parameters:
         - description: Alert to delete.
@@ -1764,13 +1694,10 @@ paths:
       - $ref: "#/components/parameters/userIp"
   /reports:
     get:
-      description: Generate an AdSense report based on the report request sent in the
-        query parameters. Returns the result as JSON; to retrieve output in CSV
-        format specify "alt=csv" as a query parameter.
+      description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
       operationId: adsense.reports.generate
       parameters:
-        - description: Start of the date range to report on in "YYYY-MM-DD" format,
-            inclusive.
+        - description: Start of the date range to report on in "YYYY-MM-DD" format, inclusive.
           in: query
           name: startDate
           required: true
@@ -1791,8 +1718,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Optional currency to use when reporting on monetary metrics.
-            Defaults to the account's currency if not set.
+        - description: Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set.
           in: query
           name: currency
           schema:
@@ -1815,8 +1741,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Optional locale to use for translating report output to a local
-            language. Defaults to "en_US" if not specified.
+        - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
           schema:
@@ -1837,10 +1762,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: The name of a dimension or metric to sort the resulting report on,
-            optionally prefixed with "+" to sort ascending or "-" to sort
-            descending. If no prefix is specified, the column is sorted
-            ascending.
+        - description: The name of a dimension or metric to sort the resulting report on, optionally prefixed with "+" to sort ascending or "-" to sort descending. If no prefix is specified, the column is sorted ascending.
           explode: true
           in: query
           name: sort
@@ -1856,8 +1778,7 @@ paths:
             maximum: 5000
             minimum: 0
             type: integer
-        - description: Whether the report should be generated in the AdSense account's
-            local timezone. If false default PST/PDT timezone will be used.
+        - description: Whether the report should be generated in the AdSense account's local timezone. If false default PST/PDT timezone will be used.
           in: query
           name: useTimezoneReporting
           schema:
@@ -1893,17 +1814,14 @@ paths:
       description: List all saved reports in this AdSense account.
       operationId: adsense.reports.saved.list
       parameters:
-        - description: The maximum number of saved reports to include in the response,
-            used for paging.
+        - description: The maximum number of saved reports to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 100
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through saved reports. To
-            retrieve the next page, set this parameter to the value of
-            "nextPageToken" from the previous response.
+        - description: A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -1936,8 +1854,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/reports/{savedReportId}":
     get:
-      description: Generate an AdSense report based on the saved report ID sent in the
-        query parameters.
+      description: Generate an AdSense report based on the saved report ID sent in the query parameters.
       operationId: adsense.reports.saved.generate
       parameters:
         - description: The saved report to retrieve.
@@ -1946,8 +1863,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional locale to use for translating report output to a local
-            language. Defaults to "en_US" if not specified.
+        - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
           schema:
@@ -1997,17 +1913,14 @@ paths:
       description: List all saved ad styles in the user's account.
       operationId: adsense.savedadstyles.list
       parameters:
-        - description: The maximum number of saved ad styles to include in the response,
-            used for paging.
+        - description: The maximum number of saved ad styles to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: A continuation token, used to page through saved ad styles. To
-            retrieve the next page, set this parameter to the value of
-            "nextPageToken" from the previous response.
+        - description: A continuation token, used to page through saved ad styles. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -2093,9 +2006,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -2113,8 +2024,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must
-        not exceed 40 characters.
+      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -2168,9 +2078,7 @@ components:
           description: Kind of list this is, in this case adsense#accounts.
           type: string
         nextPageToken:
-          description: Continuation token used to page through accounts. To retrieve the
-            next page of results, set the next request's "pageToken" value to
-            this.
+          description: Continuation token used to page through accounts. To retrieve the next page of results, set the next request's "pageToken" value to this.
           type: string
       type: object
     AdClient:
@@ -2186,8 +2094,7 @@ components:
           description: Kind of resource this is, in this case adsense#adClient.
           type: string
         productCode:
-          description: This ad client's product code, which corresponds to the
-            PRODUCT_CODE report dimension.
+          description: This ad client's product code, which corresponds to the PRODUCT_CODE report dimension.
           type: string
         supportsReporting:
           description: Whether this ad client supports being reported on.
@@ -2208,9 +2115,7 @@ components:
           description: Kind of list this is, in this case adsense#adClients.
           type: string
         nextPageToken:
-          description: Continuation token used to page through ad clients. To retrieve the
-            next page of results, set the next request's "pageToken" value to
-            this.
+          description: Continuation token used to page through ad clients. To retrieve the next page of results, set the next request's "pageToken" value to this.
           type: string
       type: object
     AdCode:
@@ -2232,9 +2137,7 @@ components:
     AdStyle:
       properties:
         colors:
-          description: The colors which are included in the style. These are represented
-            as six hexadecimal characters, similar to HTML color codes, but
-            without the leading hash.
+          description: The colors which are included in the style. These are represented as six hexadecimal characters, similar to HTML color codes, but without the leading hash.
           properties:
             background:
               description: The color of the ad background.
@@ -2253,8 +2156,7 @@ components:
               type: string
           type: object
         corners:
-          description: "The style of the corners in the ad (deprecated: never populated,
-            ignored)."
+          description: "The style of the corners in the ad (deprecated: never populated, ignored)."
           type: string
         font:
           description: The font which is included in the style.
@@ -2274,12 +2176,10 @@ components:
     AdUnit:
       properties:
         code:
-          description: Identity code of this ad unit, not necessarily unique across ad
-            clients.
+          description: Identity code of this ad unit, not necessarily unique across ad clients.
           type: string
         contentAdsSettings:
-          description: Settings specific to content ads (AFC) and highend mobile content
-            ads (AFMC - deprecated).
+          description: Settings specific to content ads (AFC) and highend mobile content ads (AFMC - deprecated).
           properties:
             backupOption:
               description: The backup option to be used in instances where no ad is available.
@@ -2288,8 +2188,7 @@ components:
                   description: Color to use when type is set to COLOR.
                   type: string
                 type:
-                  description: Type of the backup option. Possible values are BLANK, COLOR and
-                    URL.
+                  description: Type of the backup option. Possible values are BLANK, COLOR and URL.
                   type: string
                 url:
                   description: URL to use when type is set to URL.
@@ -2312,13 +2211,11 @@ components:
               description: The position of the ads relative to the feed entries.
               type: string
             frequency:
-              description: The frequency at which ads should appear in the feed (i.e. every N
-                entries).
+              description: The frequency at which ads should appear in the feed (i.e. every N entries).
               format: int32
               type: integer
             minimumWordCount:
-              description: The minimum length an entry should be in order to have attached
-                ads.
+              description: The minimum length an entry should be in order to have attached ads.
               format: int32
               type: integer
             type:
@@ -2326,9 +2223,7 @@ components:
               type: string
           type: object
         id:
-          description: Unique identifier of this ad unit. This should be considered an
-            opaque identifier; it is not safe to rely on it being in any
-            particular format.
+          description: Unique identifier of this ad unit. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
           type: string
         kind:
           default: adsense#adUnit
@@ -2354,18 +2249,14 @@ components:
           description: Name of this ad unit.
           type: string
         savedStyleId:
-          description: ID of the saved ad style which holds this ad unit's style
-            information.
+          description: ID of the saved ad style which holds this ad unit's style information.
           type: string
         status:
-          description: >-
+          description: |-
             Status of this ad unit. Possible values are:
-
             NEW: Indicates that the ad unit was created within the last seven days and does not yet have any activity associated with it.
 
-
             ACTIVE: Indicates that there has been activity on this ad unit in the last seven days.
-
 
             INACTIVE: Indicates that there has been no activity on this ad unit in the last seven days.
           type: string
@@ -2385,17 +2276,13 @@ components:
           description: Kind of list this is, in this case adsense#adUnits.
           type: string
         nextPageToken:
-          description: Continuation token used to page through ad units. To retrieve the
-            next page of results, set the next request's "pageToken" value to
-            this.
+          description: Continuation token used to page through ad units. To retrieve the next page of results, set the next request's "pageToken" value to this.
           type: string
       type: object
     AdsenseReportsGenerateResponse:
       properties:
         averages:
-          description: The averages of the report. This is the same length as any other
-            row in the report; cells corresponding to dimension columns are
-            empty.
+          description: The averages of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.
           items:
             type: string
           type: array
@@ -2403,21 +2290,17 @@ components:
           description: The requested end date in yyyy-mm-dd format.
           type: string
         headers:
-          description: The header information of the columns requested in the report. This
-            is a list of headers; one for each dimension in the request,
-            followed by one for each metric in the request.
+          description: The header information of the columns requested in the report. This is a list of headers; one for each dimension in the request, followed by one for each metric in the request.
           items:
             properties:
               currency:
-                description: The currency of this column. Only present if the header type is
-                  METRIC_CURRENCY.
+                description: The currency of this column. Only present if the header type is METRIC_CURRENCY.
                 type: string
               name:
                 description: The name of the header.
                 type: string
               type:
-                description: The type of the header; one of DIMENSION, METRIC_TALLY,
-                  METRIC_RATIO, or METRIC_CURRENCY.
+                description: The type of the header; one of DIMENSION, METRIC_TALLY, METRIC_RATIO, or METRIC_CURRENCY.
                 type: string
             type: object
           type: array
@@ -2426,10 +2309,7 @@ components:
           description: Kind this is, in this case adsense#report.
           type: string
         rows:
-          description: The output rows of the report. Each row is a list of cells; one for
-            each dimension in the request, followed by one for each metric in
-            the request. The dimension cells contain strings, and the metric
-            cells contain numbers.
+          description: The output rows of the report. Each row is a list of cells; one for each dimension in the request, followed by one for each metric in the request. The dimension cells contain strings, and the metric cells contain numbers.
           items:
             items:
               type: string
@@ -2439,14 +2319,11 @@ components:
           description: The requested start date in yyyy-mm-dd format.
           type: string
         totalMatchedRows:
-          description: The total number of rows matched by the report request. Fewer rows
-            may be returned in the response due to being limited by the row
-            count requested or the report row limit.
+          description: The total number of rows matched by the report request. Fewer rows may be returned in the response due to being limited by the row count requested or the report row limit.
           format: int64
           type: string
         totals:
-          description: The totals of the report. This is the same length as any other row
-            in the report; cells corresponding to dimension columns are empty.
+          description: The totals of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.
           items:
             type: string
           type: array
@@ -2459,9 +2336,7 @@ components:
     Alert:
       properties:
         id:
-          description: Unique identifier of this alert. This should be considered an
-            opaque identifier; it is not safe to rely on it being in any
-            particular format.
+          description: Unique identifier of this alert. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
           type: string
         isDismissible:
           description: Whether this alert can be dismissed.
@@ -2477,10 +2352,7 @@ components:
           description: "Severity of this alert. Possible values: INFO, WARNING, SEVERE."
           type: string
         type:
-          description: "Type of this alert. Possible values: SELF_HOLD,
-            MIGRATED_TO_BILLING3, ADDRESS_PIN_VERIFICATION,
-            PHONE_PIN_VERIFICATION, CORPORATE_ENTITY, GRAYLISTED_PUBLISHER,
-            API_HOLD."
+          description: "Type of this alert. Possible values: SELF_HOLD, MIGRATED_TO_BILLING3, ADDRESS_PIN_VERIFICATION, PHONE_PIN_VERIFICATION, CORPORATE_ENTITY, GRAYLISTED_PUBLISHER, API_HOLD."
           type: string
       type: object
     Alerts:
@@ -2498,13 +2370,10 @@ components:
     CustomChannel:
       properties:
         code:
-          description: Code of this custom channel, not necessarily unique across ad
-            clients.
+          description: Code of this custom channel, not necessarily unique across ad clients.
           type: string
         id:
-          description: Unique identifier of this custom channel. This should be considered
-            an opaque identifier; it is not safe to rely on it being in any
-            particular format.
+          description: Unique identifier of this custom channel. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
           type: string
         kind:
           default: adsense#customChannel
@@ -2523,13 +2392,7 @@ components:
               description: The external description of the channel.
               type: string
             location:
-              description: "The locations in which ads appear. (Only valid for content and
-                mobile content ads (deprecated)). Acceptable values for content
-                ads are: TOP_LEFT, TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT,
-                MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER,
-                BOTTOM_RIGHT, MULTIPLE_LOCATIONS. Acceptable values for mobile
-                content ads (deprecated) are: TOP, MIDDLE, BOTTOM,
-                MULTIPLE_LOCATIONS."
+              description: "The locations in which ads appear. (Only valid for content and mobile content ads (deprecated)). Acceptable values for content ads are: TOP_LEFT, TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT, MULTIPLE_LOCATIONS. Acceptable values for mobile content ads (deprecated) are: TOP, MIDDLE, BOTTOM, MULTIPLE_LOCATIONS."
               type: string
             siteLanguage:
               description: The language of the sites ads will be displayed on.
@@ -2551,9 +2414,7 @@ components:
           description: Kind of list this is, in this case adsense#customChannels.
           type: string
         nextPageToken:
-          description: Continuation token used to page through custom channels. To
-            retrieve the next page of results, set the next request's
-            "pageToken" value to this.
+          description: Continuation token used to page through custom channels. To retrieve the next page of results, set the next request's "pageToken" value to this.
           type: string
       type: object
     Metadata:
@@ -2583,16 +2444,13 @@ components:
           description: The currency code for the amount to be paid.
           type: string
         paymentDate:
-          description: The date this payment was/will be credited to the user, or none if
-            the payment threshold has not been met.
+          description: The date this payment was/will be credited to the user, or none if the payment threshold has not been met.
           type: string
       type: object
     Payments:
       properties:
         items:
-          description: The list of Payments for the account. One or both of a) the
-            account's most recent payment; and b) the account's upcoming
-            payment.
+          description: The list of Payments for the account. One or both of a) the account's most recent payment; and b) the account's upcoming payment.
           items:
             $ref: "#/components/schemas/Payment"
           type: array
@@ -2604,48 +2462,34 @@ components:
     ReportingMetadataEntry:
       properties:
         compatibleDimensions:
-          description: For metrics this is a list of dimension IDs which the metric is
-            compatible with, for dimensions it is a list of compatibility groups
-            the dimension belongs to.
+          description: For metrics this is a list of dimension IDs which the metric is compatible with, for dimensions it is a list of compatibility groups the dimension belongs to.
           items:
             type: string
           type: array
         compatibleMetrics:
-          description: The names of the metrics the dimension or metric this reporting
-            metadata entry describes is compatible with.
+          description: The names of the metrics the dimension or metric this reporting metadata entry describes is compatible with.
           items:
             type: string
           type: array
         id:
-          description: Unique identifier of this reporting metadata entry, corresponding
-            to the name of the appropriate dimension or metric.
+          description: Unique identifier of this reporting metadata entry, corresponding to the name of the appropriate dimension or metric.
           type: string
         kind:
           default: adsense#reportingMetadataEntry
-          description: Kind of resource this is, in this case
-            adsense#reportingMetadataEntry.
+          description: Kind of resource this is, in this case adsense#reportingMetadataEntry.
           type: string
         requiredDimensions:
-          description: The names of the dimensions which the dimension or metric this
-            reporting metadata entry describes requires to also be present in
-            order for the report to be valid. Omitting these will not cause an
-            error or warning, but may result in data which cannot be correctly
-            interpreted.
+          description: The names of the dimensions which the dimension or metric this reporting metadata entry describes requires to also be present in order for the report to be valid. Omitting these will not cause an error or warning, but may result in data which cannot be correctly interpreted.
           items:
             type: string
           type: array
         requiredMetrics:
-          description: The names of the metrics which the dimension or metric this
-            reporting metadata entry describes requires to also be present in
-            order for the report to be valid. Omitting these will not cause an
-            error or warning, but may result in data which cannot be correctly
-            interpreted.
+          description: The names of the metrics which the dimension or metric this reporting metadata entry describes requires to also be present in order for the report to be valid. Omitting these will not cause an error or warning, but may result in data which cannot be correctly interpreted.
           items:
             type: string
           type: array
         supportedProducts:
-          description: The codes of the projects supported by the dimension or metric this
-            reporting metadata entry describes.
+          description: The codes of the projects supported by the dimension or metric this reporting metadata entry describes.
           items:
             type: string
           type: array
@@ -2656,9 +2500,7 @@ components:
           $ref: "#/components/schemas/AdStyle"
           description: The AdStyle itself.
         id:
-          description: Unique identifier of this saved ad style. This should be considered
-            an opaque identifier; it is not safe to rely on it being in any
-            particular format.
+          description: Unique identifier of this saved ad style. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
           type: string
         kind:
           default: adsense#savedAdStyle
@@ -2683,9 +2525,7 @@ components:
           description: Kind of list this is, in this case adsense#savedAdStyles.
           type: string
         nextPageToken:
-          description: Continuation token used to page through ad units. To retrieve the
-            next page of results, set the next request's "pageToken" value to
-            this.
+          description: Continuation token used to page through ad units. To retrieve the next page of results, set the next request's "pageToken" value to this.
           type: string
       type: object
     SavedReport:
@@ -2716,25 +2556,20 @@ components:
           description: Kind of list this is, in this case adsense#savedReports.
           type: string
         nextPageToken:
-          description: Continuation token used to page through saved reports. To retrieve
-            the next page of results, set the next request's "pageToken" value
-            to this.
+          description: Continuation token used to page through saved reports. To retrieve the next page of results, set the next request's "pageToken" value to this.
           type: string
       type: object
     UrlChannel:
       properties:
         id:
-          description: Unique identifier of this URL channel. This should be considered an
-            opaque identifier; it is not safe to rely on it being in any
-            particular format.
+          description: Unique identifier of this URL channel. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
           type: string
         kind:
           default: adsense#urlChannel
           description: Kind of resource this is, in this case adsense#urlChannel.
           type: string
         urlPattern:
-          description: 'URL Pattern of this URL channel. Does not include "http://" or
-            "https://". Example: www.example.com/home'
+          description: 'URL Pattern of this URL channel. Does not include "http://" or "https://". Example: www.example.com/home'
           type: string
       type: object
     UrlChannels:
@@ -2752,9 +2587,7 @@ components:
           description: Kind of list this is, in this case adsense#urlChannels.
           type: string
         nextPageToken:
-          description: Continuation token used to page through URL channels. To retrieve
-            the next page of results, set the next request's "pageToken" value
-            to this.
+          description: Continuation token used to page through URL channels. To retrieve the next page of results, set the next request's "pageToken" value to this.
           type: string
       type: object
   securitySchemes:

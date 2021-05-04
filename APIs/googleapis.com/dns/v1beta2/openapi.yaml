@@ -2368,6 +2368,7 @@ components:
           $ref: "#/components/schemas/ResponseHeader"
         kind:
           default: dns#managedZoneOperationsListResponse
+          description: Type of resource.
           type: string
         nextPageToken:
           description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. This lets you retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
@@ -2401,6 +2402,11 @@ components:
       type: object
     ManagedZonePrivateVisibilityConfig:
       properties:
+        gkeClusters:
+          description: The list of Google Kubernetes Engine clusters that can see this zone.
+          items:
+            $ref: "#/components/schemas/ManagedZonePrivateVisibilityConfigGKECluster"
+          type: array
         kind:
           default: dns#managedZonePrivateVisibilityConfig
           type: string
@@ -2409,6 +2415,15 @@ components:
           items:
             $ref: "#/components/schemas/ManagedZonePrivateVisibilityConfigNetwork"
           type: array
+      type: object
+    ManagedZonePrivateVisibilityConfigGKECluster:
+      properties:
+        gkeClusterName:
+          description: "The resource name of the cluster to bind this ManagedZone to. This should be specified in the format like: projects/*/locations/*/clusters/*. This is referenced from GKE projects.locations.clusters.get API: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters/get"
+          type: string
+        kind:
+          default: dns#managedZonePrivateVisibilityConfigGKECluster
+          type: string
       type: object
     ManagedZonePrivateVisibilityConfigNetwork:
       properties:
@@ -2637,11 +2652,23 @@ components:
           description: Maximum allowed number of DnsKeys per ManagedZone.
           format: int32
           type: integer
+        gkeClustersPerManagedZone:
+          description: Maximum allowed number of GKE clusters to which a privately scoped zone can be attached.
+          format: int32
+          type: integer
+        gkeClustersPerResponsePolicy:
+          description: Maximum allowed number of GKE clusters per response policy.
+          format: int32
+          type: integer
         kind:
           default: dns#quota
           type: string
         managedZones:
           description: Maximum allowed number of managed zones in the project.
+          format: int32
+          type: integer
+        managedZonesPerGkeCluster:
+          description: Maximum allowed number of managed zones which can be attached to a GKE cluster.
           format: int32
           type: integer
         managedZonesPerNetwork:
@@ -2782,6 +2809,11 @@ components:
         description:
           description: User-provided description for this Response Policy.
           type: string
+        gkeClusters:
+          description: The list of Google Kubernetes Engine clusters to which this response policy is applied.
+          items:
+            $ref: "#/components/schemas/ResponsePolicyGKECluster"
+          type: array
         id:
           description: Unique identifier for the resource; defined by the server (output only).
           format: int64
@@ -2796,6 +2828,15 @@ components:
           type: array
         responsePolicyName:
           description: User assigned name for this Response Policy.
+          type: string
+      type: object
+    ResponsePolicyGKECluster:
+      properties:
+        gkeClusterName:
+          description: "The resource name of the cluster to bind this response policy to. This should be specified in the format like: projects/*/locations/*/clusters/*. This is referenced from GKE projects.locations.clusters.get API: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters/get"
+          type: string
+        kind:
+          default: dns#responsePolicyGKECluster
           type: string
       type: object
     ResponsePolicyNetwork:

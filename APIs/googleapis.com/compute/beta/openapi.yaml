@@ -26974,6 +26974,61 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+    patch:
+      description: Patches the specified ServiceAttachment resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
+      operationId: compute.serviceAttachments.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The region scoping this request and should conform to RFC1035.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The resource id of the ServiceAttachment to patch. It should conform to RFC1035 resource name or be a string form on an unsigned long number.
+          in: path
+          name: serviceAttachment
+          required: true
+          schema:
+            type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceAttachment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - serviceAttachments
   "/projects/{project}/regions/{region}/sslCertificates":
     get:
       description: Retrieves the list of SslCertificate resources available to the specified project in the specified region.
@@ -41267,6 +41322,15 @@ components:
         machineType:
           description: Specifies type of machine (name only) which has fixed number of vCPUs and fixed amount of memory. This also includes specifying custom machine type following custom-NUMBER_OF_CPUS-AMOUNT_OF_MEMORY pattern.
           type: string
+        maintenanceFreezeDurationHours:
+          description: Specifies the number of hours after reservation creation where instances using the reservation won't be scheduled for maintenance.
+          format: int32
+          type: integer
+        maintenanceInterval:
+          description: For more information about maintenance intervals, see Setting maintenance intervals.
+          enum:
+            - PERIODIC
+          type: string
         minCpuPlatform:
           description: Minimum cpu platform the reservation.
           type: string
@@ -41553,7 +41617,7 @@ components:
         autoscalingPolicy:
           $ref: "#/components/schemas/AutoscalingPolicy"
           description: |-
-            The configuration parameters for the autoscaling algorithm. You can define one or more of the policies for an autoscaler: cpuUtilization, customMetricUtilizations, and loadBalancingUtilization.
+            The configuration parameters for the autoscaling algorithm. You can define one or more signals for an autoscaler: cpuUtilization, customMetricUtilizations, and loadBalancingUtilization.
 
             If none of these are specified, the default will be to autoscale based on cpuUtilization to 0.6 or 60%.
         creationTimestamp:
@@ -42179,6 +42243,9 @@ components:
           items:
             $ref: "#/components/schemas/BackendBucketCdnPolicyBypassCacheOnRequestHeader"
           type: array
+        cacheKeyPolicy:
+          $ref: "#/components/schemas/BackendBucketCdnPolicyCacheKeyPolicy"
+          description: The CacheKeyPolicy for this CdnPolicy.
         cacheMode:
           description: |-
             Specifies the cache setting for all responses from this backend. The possible values are:
@@ -42237,6 +42304,20 @@ components:
         headerName:
           description: The header field name to match on when bypassing cache. Values are case-insensitive.
           type: string
+      type: object
+    BackendBucketCdnPolicyCacheKeyPolicy:
+      description: Message containing what to include in the cache key for a request for Cloud CDN.
+      properties:
+        includeHttpHeaders:
+          description: Allows HTTP request headers (by name) to be used in the cache key.
+          items:
+            type: string
+          type: array
+        queryStringWhitelist:
+          description: Names of query string parameters to include in cache keys. All other parameters will be excluded. '&' and '=' will be percent encoded and not treated as delimiters.
+          items:
+            type: string
+          type: array
       type: object
     BackendBucketCdnPolicyNegativeCachingPolicy:
       description: Specify CDN TTLs for response error codes.
@@ -43215,6 +43296,16 @@ components:
         includeHost:
           description: If true, requests to different hosts will be cached separately.
           type: boolean
+        includeHttpHeaders:
+          description: Allows HTTP request headers (by name) to be used in the cache key.
+          items:
+            type: string
+          type: array
+        includeNamedCookies:
+          description: Allows HTTP cookies (by name) to be used in the cache key. The name=value pair will be used in the cache key Cloud CDN generates.
+          items:
+            type: string
+          type: array
         includeProtocol:
           description: If true, http and https requests will be cached separately.
           type: boolean
@@ -45219,11 +45310,6 @@ components:
           items:
             type: string
           type: array
-        targetSecureLabels:
-          description: A list of secure labels that controls which instances the firewall rule applies to. If targetSecureLabel are specified, then the firewall rule applies only to instances in the VPC network that have one of those secure labels. targetSecureLabel may not be set at the same time as targetServiceAccounts. If neither targetServiceAccounts nor targetSecureLabel are specified, the firewall rule applies to all instances on the specified network. Maximum number of target label values allowed is 256.
-          items:
-            type: string
-          type: array
         targetServiceAccounts:
           description: A list of service accounts indicating the sets of instances that are applied with this rule.
           items:
@@ -45245,11 +45331,6 @@ components:
           type: array
         srcIpRanges:
           description: CIDR IP address range. Maximum number of source CIDR IP ranges allowed is 256.
-          items:
-            type: string
-          type: array
-        srcSecureLabels:
-          description: List of firewall label values, which should be matched at the source of the traffic. Maximum number of source label values allowed is 256.
           items:
             type: string
           type: array
@@ -49711,7 +49792,7 @@ components:
           type: string
         ipsecInternalAddresses:
           description: |-
-            URL of addresses that have been reserved for the interconnect attachment, Used only for interconnect attachment that has the encryption option as IPSEC. The addresses must be RFC 1918 IP address ranges. When creating HA VPN gateway over the interconnect attachment, if the attachment is configured to use an RFC 1918 IP address, then the VPN gateway?s IP address will be allocated from the IP address range specified here. For example, if the HA VPN gateway?s interface 0 is paired to this interconnect attachment, then an RFC 1918 IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this interconnect attachment. If this field is not specified for interconnect attachment that has encryption option as IPSEC, later on when creating HA VPN gateway on this interconnect attachment, the HA VPN gateway's IP address will be allocated from regional external IP address pool.
+            URL of addresses that have been reserved for the interconnect attachment, Used only for interconnect attachment that has the encryption option as IPSEC. The addresses must be RFC 1918 IP address ranges. When creating HA VPN gateway over the interconnect attachment, if the attachment is configured to use an RFC 1918 IP address, then the VPN gateway's IP address will be allocated from the IP address range specified here. For example, if the HA VPN gateway's interface 0 is paired to this interconnect attachment, then an RFC 1918 IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this interconnect attachment. If this field is not specified for interconnect attachment that has encryption option as IPSEC, later on when creating HA VPN gateway on this interconnect attachment, the HA VPN gateway's IP address will be allocated from regional external IP address pool.
             Not currently available in all Interconnect locations.
           items:
             type: string
@@ -54880,6 +54961,7 @@ components:
             - COMMITTED_LICENSES
             - COMMITTED_LOCAL_SSD_TOTAL_GB
             - COMMITTED_MEMORY_OPTIMIZED_CPUS
+            - COMMITTED_N2A_CPUS
             - COMMITTED_N2D_CPUS
             - COMMITTED_N2_CPUS
             - COMMITTED_NVIDIA_A100_GPUS
@@ -54919,6 +55001,7 @@ components:
             - M1_CPUS
             - M2_CPUS
             - MACHINE_IMAGES
+            - N2A_CPUS
             - N2D_CPUS
             - N2_CPUS
             - NETWORKS
@@ -57601,6 +57684,15 @@ components:
         locationHint:
           description: An opaque location hint used to place the instance close to other resources. This field is for use by internal tools that use the public API.
           type: string
+        maintenanceFreezeDurationHours:
+          description: Specifies the number of hours after VM instance creation where the VM won't be scheduled for maintenance.
+          format: int32
+          type: integer
+        maintenanceInterval:
+          description: For more information about maintenance intervals, see Setting maintenance intervals.
+          enum:
+            - PERIODIC
+          type: string
         minNodeCpus:
           description: The minimum number of virtual CPUs this instance will consume when running on a sole-tenant node.
           format: int32
@@ -58041,12 +58133,23 @@ components:
           description: The connection preference of service attachment. The value can be set to ACCEPT_AUTOMATIC. An ACCEPT_AUTOMATIC service attachment is one that always accepts the connection from consumer forwarding rules.
           enum:
             - ACCEPT_AUTOMATIC
+            - ACCEPT_MANUAL
             - CONNECTION_PREFERENCE_UNSPECIFIED
           type: string
+        consumerAcceptLists:
+          description: Projects that are allowed to connect to this service attachment.
+          items:
+            $ref: "#/components/schemas/ServiceAttachmentConsumerProjectLimit"
+          type: array
         consumerForwardingRules:
           description: "[Output Only] An array of forwarding rules for all the consumers connected to this service attachment."
           items:
             $ref: "#/components/schemas/ServiceAttachmentConsumerForwardingRule"
+          type: array
+        consumerRejectLists:
+          description: Projects that are not allowed to connect to this service attachment. The project can be specified using its id or number.
+          items:
+            type: string
           type: array
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
@@ -58057,6 +58160,10 @@ components:
         enableProxyProtocol:
           description: If true, enable the proxy protocol which is for supplying client TCP/IP address data in TCP connections that traverse proxies on their way to destination servers.
           type: boolean
+        fingerprint:
+          description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a ServiceAttachment. An up-to-date fingerprint must be provided in order to patch/update the ServiceAttachment; otherwise, the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve the ServiceAttachment.
+          format: byte
+          type: string
         id:
           description: "[Output Only] The unique identifier for the resource type. The server generates this identifier."
           format: uint64
@@ -58209,6 +58316,16 @@ components:
             - PENDING
             - REJECTED
             - STATUS_UNSPECIFIED
+          type: string
+      type: object
+    ServiceAttachmentConsumerProjectLimit:
+      properties:
+        connectionLimit:
+          description: The value of the limit to set.
+          format: uint32
+          type: integer
+        projectIdOrNum:
+          description: The project id or number for the project to set the limit for.
           type: string
       type: object
     ServiceAttachmentList:
@@ -59348,7 +59465,7 @@ components:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
         state:
-          description: "[Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY CREATING: Subnetwork is provisioning DELETING: Subnetwork is being deleted UPDATING: Subnetwork is being updated"
+          description: "[Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY"
           enum:
             - DRAINING
             - READY
@@ -59619,7 +59736,7 @@ components:
           type: boolean
       type: object
     Subsetting:
-      description: Subsetting options to make L4 ILB support any number of backend instances
+      description: Subsetting configuration for this BackendService. Currently this is applicable only for Internal TCP/UDP load balancing and Internal HTTP(S) load balancing.
       properties:
         policy:
           enum:

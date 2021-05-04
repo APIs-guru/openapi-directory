@@ -2713,10 +2713,10 @@ components:
         calendar:
           additionalProperties:
             $ref: "#/components/schemas/ColorDefinition"
-            description: A calendar color defintion.
+            description: A calendar color definition.
           description: A global palette of calendar colors, mapping from the color ID to
             its definition. A calendarListEntry resource refers to one of these
-            color IDs in its color field. Read-only.
+            color IDs in its colorId field. Read-only.
           type: object
         event:
           additionalProperties:
@@ -2724,7 +2724,7 @@ components:
             description: An event color definition.
           description: A global palette of event colors, mapping from the color ID to its
             definition. An event resource may refer to one of these color IDs in
-            its color field. Read-only.
+            its colorId field. Read-only.
           type: object
         kind:
           default: calendar#colors
@@ -2744,15 +2744,15 @@ components:
 
             Can be used by developers to keep track of conferences, should not be displayed to users.
 
-            Values for solution types:  
+            The ID value is formed differently for each conference solution type: `
 
-            - "eventHangout": unset.
+            - eventHangout: ID is not set.
 
-            - "eventNamedHangout": the name of the Hangout.
+            - eventNamedHangout: ID is the name of the Hangout.
 
-            - "hangoutsMeet": the 10-letter meeting code, for example "aaa-bbbb-ccc".
+            - hangoutsMeet: ID is the 10-letter meeting code, for example aaa-bbbb-ccc.
 
-            - "addOn": defined by 3P conference provider.  Optional.
+            - addOn: ID is defined by the third-party provider.  Optional.
           type: string
         conferenceSolution:
           $ref: "#/components/schemas/ConferenceSolution"

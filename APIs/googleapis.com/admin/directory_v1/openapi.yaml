@@ -5531,7 +5531,15 @@ components:
         recentUsers:
           description: List of recent device users, in descending order, by last login time.
           items:
-            $ref: "#/components/schemas/RecentUsers"
+            description: List of recent device users, in descending order, by last login time.
+            properties:
+              email:
+                description: The user's email address. This is only present if the user type is `USER_TYPE_MANAGED`.
+                type: string
+              type:
+                description: The type of the user.
+                type: string
+            type: object
           type: array
         screenshotFiles:
           description: List of screenshot files to download. Type is always "SCREENSHOT_FILE". (Read-only)
@@ -6421,16 +6429,6 @@ components:
         kind:
           default: admin#directory#privileges
           description: The type of the API resource. This is always `admin#directory#privileges`.
-          type: string
-      type: object
-    RecentUsers:
-      description: List of recent device users, in descending order, by last login time.
-      properties:
-        email:
-          description: The user's email address. This is only present if the user type is `USER_TYPE_MANAGED`.
-          type: string
-        type:
-          description: The type of the user.
           type: string
       type: object
     Role:

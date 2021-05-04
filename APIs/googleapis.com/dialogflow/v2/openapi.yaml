@@ -2556,6 +2556,17 @@ components:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in ExportAgentRequest.
           type: string
       type: object
+    GoogleCloudDialogflowCxV3ExportFlowResponse:
+      description: The response message for Flows.ExportFlow.
+      properties:
+        flowContent:
+          description: Uncompressed raw byte content for flow.
+          format: byte
+          type: string
+        flowUri:
+          description: The URI to a file containing the exported flow. This field is populated only if `flow_uri` is specified in ExportFlowRequest.
+          type: string
+      type: object
     GoogleCloudDialogflowCxV3ExportTestCasesMetadata:
       description: Metadata returned for the TestCases.ExportTestCases long running operation.
       properties: {}
@@ -2709,6 +2720,13 @@ components:
           items:
             $ref: "#/components/schemas/GoogleRpcStatus"
           type: array
+      type: object
+    GoogleCloudDialogflowCxV3ImportFlowResponse:
+      description: The response message for Flows.ImportFlow.
+      properties:
+        flow:
+          description: "The unique identifier of the new flow. Format: `projects//locations//agents//flows/`."
+          type: string
       type: object
     GoogleCloudDialogflowCxV3ImportTestCasesMetadata:
       description: Metadata returned for the TestCases.ImportTestCases long running operation.
@@ -3534,6 +3552,17 @@ components:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in ExportAgentRequest.
           type: string
       type: object
+    GoogleCloudDialogflowCxV3beta1ExportFlowResponse:
+      description: The response message for Flows.ExportFlow.
+      properties:
+        flowContent:
+          description: Uncompressed raw byte content for flow.
+          format: byte
+          type: string
+        flowUri:
+          description: The URI to a file containing the exported flow. This field is populated only if `flow_uri` is specified in ExportFlowRequest.
+          type: string
+      type: object
     GoogleCloudDialogflowCxV3beta1ExportTestCasesMetadata:
       description: Metadata returned for the TestCases.ExportTestCases long running operation.
       properties: {}
@@ -3687,6 +3716,13 @@ components:
           items:
             $ref: "#/components/schemas/GoogleRpcStatus"
           type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1ImportFlowResponse:
+      description: The response message for Flows.ImportFlow.
+      properties:
+        flow:
+          description: "The unique identifier of the new flow. Format: `projects//locations//agents//flows/`."
+          type: string
       type: object
     GoogleCloudDialogflowCxV3beta1ImportTestCasesMetadata:
       description: Metadata returned for the TestCases.ImportTestCases long running operation.
@@ -5193,7 +5229,7 @@ components:
       description: "Custom conversation models used in agent assist feature. Supported feature: ARTICLE_SUGGESTION, SMART_COMPOSE, SMART_REPLY."
       properties:
         model:
-          description: "Required. Conversation model resource name. Format: `projects//conversationModels/`."
+          description: "Conversation model resource name. Format: `projects//conversationModels/`."
           type: string
       type: object
     GoogleCloudDialogflowV2HumanAgentAssistantConfigMessageAnalysisConfig:
@@ -8288,7 +8324,7 @@ components:
           type: string
       type: object
     GoogleTypeLatLng:
-      description: An object that represents a latitude/longitude pair. This is expressed as a pair of doubles to represent degrees latitude and degrees longitude. Unless specified otherwise, this must conform to the WGS84 standard. Values must be within normalized ranges.
+      description: An object that represents a latitude/longitude pair. This is expressed as a pair of doubles to represent degrees latitude and degrees longitude. Unless specified otherwise, this object must conform to the WGS84 standard. Values must be within normalized ranges.
       properties:
         latitude:
           description: The latitude in degrees. It must be in the range [-90.0, +90.0].

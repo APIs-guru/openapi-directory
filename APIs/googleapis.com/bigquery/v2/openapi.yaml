@@ -356,7 +356,8 @@ paths:
   "/projects/{projectId}/datasets/{datasetId}/models":
     get:
       description: Lists all models in the specified dataset. Requires the READER
-        dataset role.
+        dataset role. After retrieving the list of models, you can get
+        information about a particular model by calling the models.get method.
       operationId: bigquery.models.list
       parameters:
         - description: Required. Project ID of the models to list.

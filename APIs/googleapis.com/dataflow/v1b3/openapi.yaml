@@ -4965,6 +4965,11 @@ components:
     ParameterMetadata:
       description: Metadata for a specific parameter.
       properties:
+        customMetadata:
+          additionalProperties:
+            type: string
+          description: Optional. Additional metadata for describing this parameter.
+          type: object
         helpText:
           description: Required. The help text to display for the parameter.
           type: string
@@ -5578,6 +5583,9 @@ components:
           items:
             $ref: "#/components/schemas/PubsubSnapshotMetadata"
           type: array
+        region:
+          description: Cloud region where this snapshot lives in, e.g., "us-central1".
+          type: string
         sourceJobId:
           description: The job this snapshot was created from.
           type: string

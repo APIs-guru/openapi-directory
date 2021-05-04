@@ -36114,7 +36114,7 @@ components:
         autoscalingPolicy:
           $ref: "#/components/schemas/AutoscalingPolicy"
           description: |-
-            The configuration parameters for the autoscaling algorithm. You can define one or more of the policies for an autoscaler: cpuUtilization, customMetricUtilizations, and loadBalancingUtilization.
+            The configuration parameters for the autoscaling algorithm. You can define one or more signals for an autoscaler: cpuUtilization, customMetricUtilizations, and loadBalancingUtilization.
 
             If none of these are specified, the default will be to autoscale based on cpuUtilization to 0.6 or 60%.
         creationTimestamp:
@@ -39519,11 +39519,6 @@ components:
           items:
             type: string
           type: array
-        targetSecureLabels:
-          description: A list of secure labels that controls which instances the firewall rule applies to. If targetSecureLabel are specified, then the firewall rule applies only to instances in the VPC network that have one of those secure labels. targetSecureLabel may not be set at the same time as targetServiceAccounts. If neither targetServiceAccounts nor targetSecureLabel are specified, the firewall rule applies to all instances on the specified network. Maximum number of target label values allowed is 256.
-          items:
-            type: string
-          type: array
         targetServiceAccounts:
           description: A list of service accounts indicating the sets of instances that are applied with this rule.
           items:
@@ -39545,11 +39540,6 @@ components:
           type: array
         srcIpRanges:
           description: CIDR IP address range. Maximum number of source CIDR IP ranges allowed is 256.
-          items:
-            type: string
-          type: array
-        srcSecureLabels:
-          description: List of firewall label values, which should be matched at the source of the traffic. Maximum number of source label values allowed is 256.
           items:
             type: string
           type: array
@@ -41843,13 +41833,6 @@ components:
           items:
             $ref: "#/components/schemas/NetworkInterface"
           type: array
-        postKeyRevocationActionType:
-          description: PostKeyRevocationActionType of the instance.
-          enum:
-            - NOOP
-            - POST_KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED
-            - SHUTDOWN
-          type: string
         privateIpv6GoogleAccess:
           description: The private IPv6 google access type for the VM. If not specified, use  INHERIT_FROM_SUBNETWORK as default.
           enum:
@@ -43276,13 +43259,6 @@ components:
           items:
             $ref: "#/components/schemas/NetworkInterface"
           type: array
-        postKeyRevocationActionType:
-          description: PostKeyRevocationActionType of the instance.
-          enum:
-            - NOOP
-            - POST_KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED
-            - SHUTDOWN
-          type: string
         privateIpv6GoogleAccess:
           description: The private IPv6 google access type for VMs. If not specified, use  INHERIT_FROM_SUBNETWORK as default.
           enum:
@@ -43835,7 +43811,7 @@ components:
           type: string
         ipsecInternalAddresses:
           description: |-
-            URL of addresses that have been reserved for the interconnect attachment, Used only for interconnect attachment that has the encryption option as IPSEC. The addresses must be RFC 1918 IP address ranges. When creating HA VPN gateway over the interconnect attachment, if the attachment is configured to use an RFC 1918 IP address, then the VPN gateway?s IP address will be allocated from the IP address range specified here. For example, if the HA VPN gateway?s interface 0 is paired to this interconnect attachment, then an RFC 1918 IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this interconnect attachment. If this field is not specified for interconnect attachment that has encryption option as IPSEC, later on when creating HA VPN gateway on this interconnect attachment, the HA VPN gateway's IP address will be allocated from regional external IP address pool.
+            URL of addresses that have been reserved for the interconnect attachment, Used only for interconnect attachment that has the encryption option as IPSEC. The addresses must be RFC 1918 IP address ranges. When creating HA VPN gateway over the interconnect attachment, if the attachment is configured to use an RFC 1918 IP address, then the VPN gateway's IP address will be allocated from the IP address range specified here. For example, if the HA VPN gateway's interface 0 is paired to this interconnect attachment, then an RFC 1918 IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this interconnect attachment. If this field is not specified for interconnect attachment that has encryption option as IPSEC, later on when creating HA VPN gateway on this interconnect attachment, the HA VPN gateway's IP address will be allocated from regional external IP address pool.
             Not currently available in all Interconnect locations.
           items:
             type: string
@@ -48754,6 +48730,7 @@ components:
             - COMMITTED_LICENSES
             - COMMITTED_LOCAL_SSD_TOTAL_GB
             - COMMITTED_MEMORY_OPTIMIZED_CPUS
+            - COMMITTED_N2A_CPUS
             - COMMITTED_N2D_CPUS
             - COMMITTED_N2_CPUS
             - COMMITTED_NVIDIA_A100_GPUS
@@ -48793,6 +48770,7 @@ components:
             - M1_CPUS
             - M2_CPUS
             - MACHINE_IMAGES
+            - N2A_CPUS
             - N2D_CPUS
             - N2_CPUS
             - NETWORKS
@@ -52464,7 +52442,7 @@ components:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
         state:
-          description: "[Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY CREATING: Subnetwork is provisioning DELETING: Subnetwork is being deleted UPDATING: Subnetwork is being updated"
+          description: "[Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY"
           enum:
             - DRAINING
             - READY

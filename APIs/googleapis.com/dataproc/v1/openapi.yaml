@@ -1515,6 +1515,43 @@ components:
           format: double
           type: number
       type: object
+    BatchOperationMetadata:
+      description: Metadata describing the Batch operation.
+      properties:
+        batch:
+          description: Name of the batch for the operation.
+          type: string
+        batchUuid:
+          description: Batch UUID for the operation.
+          type: string
+        createTime:
+          description: The time when the operation was created.
+          format: google-datetime
+          type: string
+        description:
+          description: Short description of the operation.
+          type: string
+        doneTime:
+          description: The time when the operation was finished.
+          format: google-datetime
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels associated with the operation.
+          type: object
+        operationType:
+          description: The operation type.
+          enum:
+            - BATCH_OPERATION_TYPE_UNSPECIFIED
+            - BATCH
+          type: string
+        warnings:
+          description: Warnings encountered during operation execution.
+          items:
+            type: string
+          type: array
+      type: object
     Binding:
       description: Associates members with a role.
       properties:

@@ -3364,6 +3364,9 @@ components:
         desiredAddonsConfig:
           $ref: "#/components/schemas/AddonsConfig"
           description: Configurations for the various addons available to run in the cluster.
+        desiredAutopilot:
+          $ref: "#/components/schemas/Autopilot"
+          description: The desired Autopilot configuration for the cluster.
         desiredBinaryAuthorization:
           $ref: "#/components/schemas/BinaryAuthorization"
           description: The desired configuration options for the Binary Authorization feature.
@@ -5065,7 +5068,7 @@ components:
           $ref: "#/components/schemas/ReleaseChannel"
           description: The release channel of the version. If empty, it means a non-channel release.
         resource:
-          description: Optional. Optional relative path to the resource. For example, the relative path of the node pool.
+          description: Optional relative path to the resource. For example, the relative path of the node pool.
           type: string
         resourceType:
           description: The resource type of the release version.

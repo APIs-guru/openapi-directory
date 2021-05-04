@@ -3364,6 +3364,54 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orderreturns
+  "/{merchantId}/orderreturns/{returnId}/labels":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Links a return shipping label to a return id. You can only create one return label per return id. Since the label is sent to the buyer, the linked return label cannot be updated or deleted. If you try to create multiple return shipping labels for a single return id, every create request except the first will fail.
+      operationId: content.orderreturns.labels.create
+      parameters:
+        - description: Required. The merchant the Return Shipping Label belongs to.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: Required. Provide the Google-generated merchant order return ID.
+          in: path
+          name: returnId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnShippingLabel"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnShippingLabel"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - orderreturns
   "/{merchantId}/orderreturns/{returnId}/process":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -7149,13 +7197,16 @@ components:
           description: 'Action to perform for this link. The `"request"` action is only available to select merchants. Acceptable values are: - "`approve`" - "`remove`" - "`request`" '
           type: string
         linkType:
-          description: 'Type of the link between the two accounts. Acceptable values are: - "`channelPartner`" - "`eCommercePlatform`" '
+          description: 'Type of the link between the two accounts. Acceptable values are: - "`channelPartner`" - "`eCommercePlatform`" - "`paymentServiceProvider`" '
           type: string
         linkedAccountId:
           description: The ID of the linked account.
           type: string
+        paymentServiceProviderLinkInfo:
+          $ref: "#/components/schemas/PaymentServiceProviderLinkInfo"
+          description: Additional information required for `paymentServiceProvider` link type.
         services:
-          description: ' Acceptable values are: - "`shoppingAdsProductManagement`" - "`shoppingActionsProductManagement`" - "`shoppingActionsOrderManagement`" '
+          description: ' Acceptable values are: - "`shoppingAdsProductManagement`" - "`shoppingActionsProductManagement`" - "`shoppingActionsOrderManagement`" - "`paymentProcessing`" '
           items:
             type: string
           type: array
@@ -7419,11 +7470,16 @@ components:
         country:
           description: The CLDR country code of the carrier (e.g., "US"). Always present.
           type: string
+        eddServices:
+          description: A list of services supported for EDD (Estimated Delivery Date) calculation. This is the list of valid values for WarehouseBasedDeliveryTime.carrierService.
+          items:
+            type: string
+          type: array
         name:
           description: The name of the carrier (e.g., `"UPS"`). Always present.
           type: string
         services:
-          description: A list of supported services (e.g., `"ground"`) for that carrier. Contains at least one service.
+          description: A list of supported services (e.g., `"ground"`) for that carrier. Contains at least one service. This is the list of valid values for CarrierRate.carrierService.
           items:
             type: string
           type: array
@@ -8030,6 +8086,11 @@ components:
         transitTimeTable:
           $ref: "#/components/schemas/TransitTable"
           description: Transit time table, number of business days spent in transit based on row and column dimensions. Either `{min,max}TransitTimeInDays` or `transitTimeTable` can be set, but not both.
+        warehouseBasedDeliveryTimes:
+          description: Indicates that the delivery time should be calculated per warehouse (shipping origin location) based on the settings of the selected carrier. When set, no other transit time related field in DeliveryTime should be set.
+          items:
+            $ref: "#/components/schemas/WarehouseBasedDeliveryTime"
+          type: array
       type: object
     Error:
       description: An error returned by the API.
@@ -8451,7 +8512,7 @@ components:
     LinkService:
       properties:
         service:
-          description: 'Service provided to or by the linked account. Acceptable values are: - "`shoppingActionsOrderManagement`" - "`shoppingActionsProductManagement`" - "`shoppingAdsProductManagement`" '
+          description: 'Service provided to or by the linked account. Acceptable values are: - "`shoppingActionsOrderManagement`" - "`shoppingActionsProductManagement`" - "`shoppingAdsProductManagement`" - "`paymentProcessing`" '
           type: string
         status:
           description: 'Status of the link Acceptable values are: - "`active`" - "`inactive`" - "`pending`" '
@@ -10326,6 +10387,16 @@ components:
       description: Request message for the PauseProgram method.
       properties: {}
       type: object
+    PaymentServiceProviderLinkInfo:
+      description: Additional information required for PAYMENT_SERVICE_PROVIDER link type.
+      properties:
+        externalAccountBusinessCountry:
+          description: The business country of the merchant account as identified by the third party service provider.
+          type: string
+        externalAccountId:
+          description: The id used by the third party service provider to identify the merchant.
+          type: string
+      type: object
     PickupCarrierService:
       properties:
         carrierName:
@@ -12081,6 +12152,19 @@ components:
           description: 'State of the shipment. Acceptable values are: - "`completed`" - "`new`" - "`shipped`" - "`undeliverable`" - "`pending`" '
           type: string
       type: object
+    ReturnShippingLabel:
+      description: Return shipping label for a Buy on Google merchant-managed return.
+      properties:
+        carrier:
+          description: Name of the carrier.
+          type: string
+        labelUri:
+          description: The URL for the return shipping label in PDF format
+          type: string
+        trackingId:
+          description: The tracking id of this return label.
+          type: string
+      type: object
     ReturnaddressCustomBatchRequest:
       properties:
         entries:
@@ -12887,6 +12971,30 @@ components:
           type: string
         subtableName:
           description: The name of a subtable. Can only be set in table cells (i.e., not for single values), and only if all other fields are not set.
+          type: string
+      type: object
+    WarehouseBasedDeliveryTime:
+      properties:
+        carrier:
+          description: Required. Carrier, such as `"UPS"` or `"Fedex"`. The list of supported carriers can be retrieved via the `listSupportedCarriers` method.
+          type: string
+        carrierService:
+          description: Required. Carrier service, such as `"ground"` or `"2 days"`. The list of supported services for a carrier can be retrieved via the `listSupportedCarriers` method. The name of the service must be in the eddSupportedServices list.
+          type: string
+        originAdministrativeArea:
+          description: Required. Shipping origin's state.
+          type: string
+        originCity:
+          description: Required. Shipping origin's city.
+          type: string
+        originCountry:
+          description: Required. Shipping origin's country represented as a [CLDR territory code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml).
+          type: string
+        originPostalCode:
+          description: Required. Shipping origin.
+          type: string
+        originStreetAddress:
+          description: Shipping origin's street address.
           type: string
       type: object
     Weight:

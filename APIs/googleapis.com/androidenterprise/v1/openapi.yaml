@@ -3385,6 +3385,9 @@ components:
         webApps:
           $ref: "#/components/schemas/AdministratorWebTokenSpecWebApps"
           description: Options for displaying the Web Apps page.
+        zeroTouch:
+          $ref: "#/components/schemas/AdministratorWebTokenSpecZeroTouch"
+          description: Options for displaying the Zero Touch page.
       type: object
     AdministratorWebTokenSpecManagedConfigurations:
       properties:
@@ -3418,6 +3421,13 @@ components:
       properties:
         enabled:
           description: Whether the Web Apps page is displayed. Default is true.
+          type: boolean
+      type: object
+    AdministratorWebTokenSpecZeroTouch:
+      properties:
+        enabled:
+          description: Whether zero-touch embedded UI is usable with this token. If
+            enabled, the admin can link zero-touch customers to this enterprise.
           type: boolean
       type: object
     AppRestrictionsSchema:

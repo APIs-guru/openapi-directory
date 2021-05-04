@@ -103,9 +103,9 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing Feature.
-      operationId: gkehub.projects.locations.global.features.patch
+      operationId: gkehub.projects.locations.features.patch
       parameters:
-        - description: The Feature resource name in the format `projects/*/locations/global/features/*`.
+        - description: The Feature resource name in the format `projects/*/locations/*/features/*`.
           in: path
           name: name
           required: true
@@ -289,9 +289,9 @@ paths:
   "/v1alpha/{parent}/features":
     get:
       description: Lists Features in a given project and location.
-      operationId: gkehub.projects.locations.global.features.list
+      operationId: gkehub.projects.locations.features.list
       parameters:
-        - description: The parent (project and location) where the Features will be listed. Specified in the format `projects/*/locations/global`.
+        - description: The parent (project and location) where the Features will be listed. Specified in the format `projects/*/locations/*`.
           in: path
           name: parent
           required: true
@@ -345,9 +345,9 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Adds a new Feature.
-      operationId: gkehub.projects.locations.global.features.create
+      operationId: gkehub.projects.locations.features.create
       parameters:
-        - description: The parent (project and location) where the Feature will be created. Specified in the format `projects/*/locations/global`.
+        - description: The parent (project and location) where the Feature will be created. Specified in the format `projects/*/locations/*`.
           in: path
           name: parent
           required: true
@@ -1134,7 +1134,7 @@ components:
           readOnly: true
           type: object
         name:
-          description: Output only. The full, unique name of this Feature resource in the format `projects/*/locations/global/features/*`.
+          description: Output only. The full, unique name of this Feature resource in the format `projects/*/locations/*/features/*`.
           readOnly: true
           type: string
         resourceState:
@@ -1302,6 +1302,13 @@ components:
     MultiClusterIngressFeatureSpec:
       description: FeatureSpec contains the input for the MultiClusterIngress feature.
       properties:
+        billing:
+          description: Customer's billing structure
+          enum:
+            - BILLING_UNSPECIFIED
+            - PAY_AS_YOU_GO
+            - ANTHOS_LICENSE
+          type: string
         configMembership:
           description: "Fully-qualified Membership name which hosts the MultiClusterIngress CRD. Example: `projects/foo-proj/locations/global/memberships/bar`"
           type: string

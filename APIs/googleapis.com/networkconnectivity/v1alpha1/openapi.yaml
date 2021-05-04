@@ -181,7 +181,7 @@ paths:
           schema:
             type: string
         - description: The maximum number of results to return. If not set, the service
-            will select a default.
+            selects a default.
           in: query
           name: pageSize
           schema:
@@ -1275,7 +1275,9 @@ components:
           description: Immutable. The name of a Hub resource.
           type: string
         spokes:
-          description: Output only. A list of the URIs of all attached spokes
+          description: Output only. A list of the URIs of all attached spokes. This field
+            is deprecated and will not be included in future API versions. Call
+            ListSpokes on each region instead.
           items:
             type: string
           readOnly: true

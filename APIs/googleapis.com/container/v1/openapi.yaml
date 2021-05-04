@@ -3268,6 +3268,9 @@ components:
         desiredAddonsConfig:
           $ref: "#/components/schemas/AddonsConfig"
           description: Configurations for the various addons available to run in the cluster.
+        desiredAutopilot:
+          $ref: "#/components/schemas/Autopilot"
+          description: The desired Autopilot configuration for the cluster.
         desiredBinaryAuthorization:
           $ref: "#/components/schemas/BinaryAuthorization"
           description: The desired configuration options for the Binary Authorization feature.

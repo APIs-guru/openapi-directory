@@ -2738,16 +2738,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. List of environments that will be attached to the
-            instance during creation.
-          explode: true
-          in: query
-          name: environments
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
       requestBody:
         content:
           application/json:
@@ -7241,8 +7231,10 @@ components:
             internet.
           type: string
         runtimeLocation:
-          description: Cloud Platform location for the runtime instance. Defaults to
-            `us-west1-a`.
+          description: Cloud Platform location for the runtime instance. Defaults to zone
+            `us-west1-a`. If a region is provided, `EVAL` organizations will use
+            the region for automatically selecting a zone for the runtime
+            instance.
           type: string
       type: object
     GoogleCloudApigeeV1Query:
@@ -8154,6 +8146,13 @@ components:
             host. Value must be between 1 and 65535, inclusive.
           format: int32
           type: integer
+        protocol:
+          description: Immutable. The protocol used by this TargetServer.
+          enum:
+            - PROTOCOL_UNSPECIFIED
+            - HTTP
+            - GRPC
+          type: string
         sSLInfo:
           $ref: "#/components/schemas/GoogleCloudApigeeV1TlsInfo"
           description: Optional. Specifies TLS configuration info for this TargetServer.
@@ -8175,6 +8174,13 @@ components:
           description: Port number for the target server.
           format: int32
           type: integer
+        protocol:
+          description: The protocol used by this target server.
+          enum:
+            - PROTOCOL_UNSPECIFIED
+            - HTTP
+            - GRPC
+          type: string
         tlsInfo:
           $ref: "#/components/schemas/GoogleCloudApigeeV1TlsInfoConfig"
           description: TLS settings for the target server.

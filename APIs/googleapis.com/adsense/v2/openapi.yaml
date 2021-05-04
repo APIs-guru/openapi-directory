@@ -6,8 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The AdSense Management API allows publishers to access their
-    inventory and run earnings and performance reports.
+  description: The AdSense Management API allows publishers to access their inventory and run earnings and performance reports.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -25,9 +24,9 @@ info:
     - format: google
       url: https://adsense.googleapis.com/$discovery/rest?version=v2
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: adsense
-  x-preferred: true
 externalDocs:
   url: http://code.google.com/apis/adsense/management/
 tags:
@@ -38,17 +37,12 @@ paths:
       description: Lists all accounts available to this user.
       operationId: adsense.accounts.list
       parameters:
-        - description: The maximum number of accounts to include in the response, used for
-            paging. If unspecified, at most 10000 accounts will be returned. The
-            maximum value is 10000; values above 10000 will be coerced to 10000.
+        - description: The maximum number of accounts to include in the response, used for paging. If unspecified, at most 10000 accounts will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListAccounts` call. Provide
-            this to retrieve the subsequent page. When paginating, all other
-            parameters provided to `ListAccounts` must match the call that
-            provided the page token.
+        - description: A page token, received from a previous `ListAccounts` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListAccounts` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -88,22 +82,18 @@ paths:
       description: Generates an ad hoc report.
       operationId: adsense.accounts.reports.generate
       parameters:
-        - description: "Required. The account which owns the collection of reports.
-            Format: accounts/{account}"
+        - description: "Required. The account which owns the collection of reports. Format: accounts/{account}"
           in: path
           name: account
           required: true
           schema:
             type: string
-        - description: The [ISO-4217 currency
-            code](https://en.wikipedia.org/wiki/ISO_4217) to use when reporting
-            on monetary metrics. Defaults to the account's currency if not set.
+        - description: The [ISO-4217 currency code](https://en.wikipedia.org/wiki/ISO_4217) to use when reporting on monetary metrics. Defaults to the account's currency if not set.
           in: query
           name: currencyCode
           schema:
             type: string
-        - description: Date range of the report, if unset the range will be considered
-            CUSTOM.
+        - description: Date range of the report, if unset the range will be considered CUSTOM.
           in: query
           name: dateRange
           schema:
@@ -171,21 +161,17 @@ paths:
               type: string
             type: array
           style: form
-        - description: Day of a month. Must be from 1 to 31 and valid for the year and
-            month, or 0 to specify a year by itself or a year and month where
-            the day isn't significant.
+        - description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
           in: query
           name: endDate.day
           schema:
             type: integer
-        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year
-            without a month and day.
+        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
           in: query
           name: endDate.month
           schema:
             type: integer
-        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date
-            without a year.
+        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           in: query
           name: endDate.year
           schema:
@@ -199,23 +185,12 @@ paths:
               type: string
             type: array
           style: form
-        - description: The language to use for translating report output. If unspecified,
-            this defaults to English ("en"). If the given language is not
-            supported, report output will be returned in English. The language
-            is specified as an [IETF BCP-47 language
-            code](https://en.wikipedia.org/wiki/IETF_language_tag).
+        - description: The language to use for translating report output. If unspecified, this defaults to English ("en"). If the given language is not supported, report output will be returned in English. The language is specified as an [IETF BCP-47 language code](https://en.wikipedia.org/wiki/IETF_language_tag).
           in: query
           name: languageCode
           schema:
             type: string
-        - description: The maximum number of rows of report data to return. Reports
-            producing more rows than the requested limit will be truncated. If
-            unset, this defaults to 100,000 rows for `Reports.GenerateReport`
-            and 1,000,000 rows for `Reports.GenerateCsvReport`, which are also
-            the maximum values permitted here. Report truncation can be
-            identified (for `Reports.GenerateReport` only) by comparing the
-            number of rows returned to the value returned in
-            `total_matched_rows`.
+        - description: The maximum number of rows of report data to return. Reports producing more rows than the requested limit will be truncated. If unset, this defaults to 100,000 rows for `Reports.GenerateReport` and 1,000,000 rows for `Reports.GenerateCsvReport`, which are also the maximum values permitted here. Report truncation can be identified (for `Reports.GenerateReport` only) by comparing the number of rows returned to the value returned in `total_matched_rows`.
           in: query
           name: limit
           schema:
@@ -263,10 +238,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: The name of a dimension or metric to sort the resulting report on,
-            can be prefixed with "+" to sort ascending or "-" to sort
-            descending. If no prefix is specified, the column is sorted
-            ascending.
+        - description: The name of a dimension or metric to sort the resulting report on, can be prefixed with "+" to sort ascending or "-" to sort descending. If no prefix is specified, the column is sorted ascending.
           explode: true
           in: query
           name: orderBy
@@ -275,10 +247,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Timezone in which to generate the report. If unspecified, this
-            defaults to the account timezone. For more information, see
-            [changing the time zone of your
-            reports](https://support.google.com/adsense/answer/9830725).
+        - description: Timezone in which to generate the report. If unspecified, this defaults to the account timezone. For more information, see [changing the time zone of your reports](https://support.google.com/adsense/answer/9830725).
           in: query
           name: reportingTimeZone
           schema:
@@ -287,21 +256,17 @@ paths:
               - ACCOUNT_TIME_ZONE
               - GOOGLE_TIME_ZONE
             type: string
-        - description: Day of a month. Must be from 1 to 31 and valid for the year and
-            month, or 0 to specify a year by itself or a year and month where
-            the day isn't significant.
+        - description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
           in: query
           name: startDate.day
           schema:
             type: integer
-        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year
-            without a month and day.
+        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
           in: query
           name: startDate.month
           schema:
             type: integer
-        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date
-            without a year.
+        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           in: query
           name: startDate.year
           schema:
@@ -341,22 +306,18 @@ paths:
       description: Generates a csv formatted ad hoc report.
       operationId: adsense.accounts.reports.generateCsv
       parameters:
-        - description: "Required. The account which owns the collection of reports.
-            Format: accounts/{account}"
+        - description: "Required. The account which owns the collection of reports. Format: accounts/{account}"
           in: path
           name: account
           required: true
           schema:
             type: string
-        - description: The [ISO-4217 currency
-            code](https://en.wikipedia.org/wiki/ISO_4217) to use when reporting
-            on monetary metrics. Defaults to the account's currency if not set.
+        - description: The [ISO-4217 currency code](https://en.wikipedia.org/wiki/ISO_4217) to use when reporting on monetary metrics. Defaults to the account's currency if not set.
           in: query
           name: currencyCode
           schema:
             type: string
-        - description: Date range of the report, if unset the range will be considered
-            CUSTOM.
+        - description: Date range of the report, if unset the range will be considered CUSTOM.
           in: query
           name: dateRange
           schema:
@@ -424,21 +385,17 @@ paths:
               type: string
             type: array
           style: form
-        - description: Day of a month. Must be from 1 to 31 and valid for the year and
-            month, or 0 to specify a year by itself or a year and month where
-            the day isn't significant.
+        - description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
           in: query
           name: endDate.day
           schema:
             type: integer
-        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year
-            without a month and day.
+        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
           in: query
           name: endDate.month
           schema:
             type: integer
-        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date
-            without a year.
+        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           in: query
           name: endDate.year
           schema:
@@ -452,23 +409,12 @@ paths:
               type: string
             type: array
           style: form
-        - description: The language to use for translating report output. If unspecified,
-            this defaults to English ("en"). If the given language is not
-            supported, report output will be returned in English. The language
-            is specified as an [IETF BCP-47 language
-            code](https://en.wikipedia.org/wiki/IETF_language_tag).
+        - description: The language to use for translating report output. If unspecified, this defaults to English ("en"). If the given language is not supported, report output will be returned in English. The language is specified as an [IETF BCP-47 language code](https://en.wikipedia.org/wiki/IETF_language_tag).
           in: query
           name: languageCode
           schema:
             type: string
-        - description: The maximum number of rows of report data to return. Reports
-            producing more rows than the requested limit will be truncated. If
-            unset, this defaults to 100,000 rows for `Reports.GenerateReport`
-            and 1,000,000 rows for `Reports.GenerateCsvReport`, which are also
-            the maximum values permitted here. Report truncation can be
-            identified (for `Reports.GenerateReport` only) by comparing the
-            number of rows returned to the value returned in
-            `total_matched_rows`.
+        - description: The maximum number of rows of report data to return. Reports producing more rows than the requested limit will be truncated. If unset, this defaults to 100,000 rows for `Reports.GenerateReport` and 1,000,000 rows for `Reports.GenerateCsvReport`, which are also the maximum values permitted here. Report truncation can be identified (for `Reports.GenerateReport` only) by comparing the number of rows returned to the value returned in `total_matched_rows`.
           in: query
           name: limit
           schema:
@@ -516,10 +462,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: The name of a dimension or metric to sort the resulting report on,
-            can be prefixed with "+" to sort ascending or "-" to sort
-            descending. If no prefix is specified, the column is sorted
-            ascending.
+        - description: The name of a dimension or metric to sort the resulting report on, can be prefixed with "+" to sort ascending or "-" to sort descending. If no prefix is specified, the column is sorted ascending.
           explode: true
           in: query
           name: orderBy
@@ -528,10 +471,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Timezone in which to generate the report. If unspecified, this
-            defaults to the account timezone. For more information, see
-            [changing the time zone of your
-            reports](https://support.google.com/adsense/answer/9830725).
+        - description: Timezone in which to generate the report. If unspecified, this defaults to the account timezone. For more information, see [changing the time zone of your reports](https://support.google.com/adsense/answer/9830725).
           in: query
           name: reportingTimeZone
           schema:
@@ -540,21 +480,17 @@ paths:
               - ACCOUNT_TIME_ZONE
               - GOOGLE_TIME_ZONE
             type: string
-        - description: Day of a month. Must be from 1 to 31 and valid for the year and
-            month, or 0 to specify a year by itself or a year and month where
-            the day isn't significant.
+        - description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
           in: query
           name: startDate.day
           schema:
             type: integer
-        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year
-            without a month and day.
+        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
           in: query
           name: startDate.month
           schema:
             type: integer
-        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date
-            without a year.
+        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           in: query
           name: startDate.year
           schema:
@@ -635,8 +571,7 @@ paths:
       description: Gets the AdSense code for a given ad unit.
       operationId: adsense.accounts.adclients.adunits.getAdcode
       parameters:
-        - description: "Required. Name of the adunit for which to get the adcode. Format:
-            accounts/{account}/adclients/{adclient}/adunits/{adunit}"
+        - description: "Required. Name of the adunit for which to get the adcode. Format: accounts/{account}/adclients/{adclient}/adunits/{adunit}"
           in: path
           name: name
           required: true
@@ -677,22 +612,18 @@ paths:
       description: Generates a saved report.
       operationId: adsense.accounts.reports.saved.generate
       parameters:
-        - description: "Required. Name of the saved report. Format:
-            accounts/{account}/reports/{report}"
+        - description: "Required. Name of the saved report. Format: accounts/{account}/reports/{report}"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: The [ISO-4217 currency
-            code](https://en.wikipedia.org/wiki/ISO_4217) to use when reporting
-            on monetary metrics. Defaults to the account's currency if not set.
+        - description: The [ISO-4217 currency code](https://en.wikipedia.org/wiki/ISO_4217) to use when reporting on monetary metrics. Defaults to the account's currency if not set.
           in: query
           name: currencyCode
           schema:
             type: string
-        - description: Date range of the report, if unset the range will be considered
-            CUSTOM.
+        - description: Date range of the report, if unset the range will be considered CUSTOM.
           in: query
           name: dateRange
           schema:
@@ -706,38 +637,27 @@ paths:
               - LAST_7_DAYS
               - LAST_30_DAYS
             type: string
-        - description: Day of a month. Must be from 1 to 31 and valid for the year and
-            month, or 0 to specify a year by itself or a year and month where
-            the day isn't significant.
+        - description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
           in: query
           name: endDate.day
           schema:
             type: integer
-        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year
-            without a month and day.
+        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
           in: query
           name: endDate.month
           schema:
             type: integer
-        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date
-            without a year.
+        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           in: query
           name: endDate.year
           schema:
             type: integer
-        - description: The language to use for translating report output. If unspecified,
-            this defaults to English ("en"). If the given language is not
-            supported, report output will be returned in English. The language
-            is specified as an [IETF BCP-47 language
-            code](https://en.wikipedia.org/wiki/IETF_language_tag).
+        - description: The language to use for translating report output. If unspecified, this defaults to English ("en"). If the given language is not supported, report output will be returned in English. The language is specified as an [IETF BCP-47 language code](https://en.wikipedia.org/wiki/IETF_language_tag).
           in: query
           name: languageCode
           schema:
             type: string
-        - description: Timezone in which to generate the report. If unspecified, this
-            defaults to the account timezone. For more information, see
-            [changing the time zone of your
-            reports](https://support.google.com/adsense/answer/9830725).
+        - description: Timezone in which to generate the report. If unspecified, this defaults to the account timezone. For more information, see [changing the time zone of your reports](https://support.google.com/adsense/answer/9830725).
           in: query
           name: reportingTimeZone
           schema:
@@ -746,21 +666,17 @@ paths:
               - ACCOUNT_TIME_ZONE
               - GOOGLE_TIME_ZONE
             type: string
-        - description: Day of a month. Must be from 1 to 31 and valid for the year and
-            month, or 0 to specify a year by itself or a year and month where
-            the day isn't significant.
+        - description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
           in: query
           name: startDate.day
           schema:
             type: integer
-        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year
-            without a month and day.
+        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
           in: query
           name: startDate.month
           schema:
             type: integer
-        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date
-            without a year.
+        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           in: query
           name: startDate.year
           schema:
@@ -800,22 +716,18 @@ paths:
       description: Generates a csv formatted saved report.
       operationId: adsense.accounts.reports.saved.generateCsv
       parameters:
-        - description: "Required. Name of the saved report. Format:
-            accounts/{account}/reports/{report}"
+        - description: "Required. Name of the saved report. Format: accounts/{account}/reports/{report}"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: The [ISO-4217 currency
-            code](https://en.wikipedia.org/wiki/ISO_4217) to use when reporting
-            on monetary metrics. Defaults to the account's currency if not set.
+        - description: The [ISO-4217 currency code](https://en.wikipedia.org/wiki/ISO_4217) to use when reporting on monetary metrics. Defaults to the account's currency if not set.
           in: query
           name: currencyCode
           schema:
             type: string
-        - description: Date range of the report, if unset the range will be considered
-            CUSTOM.
+        - description: Date range of the report, if unset the range will be considered CUSTOM.
           in: query
           name: dateRange
           schema:
@@ -829,38 +741,27 @@ paths:
               - LAST_7_DAYS
               - LAST_30_DAYS
             type: string
-        - description: Day of a month. Must be from 1 to 31 and valid for the year and
-            month, or 0 to specify a year by itself or a year and month where
-            the day isn't significant.
+        - description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
           in: query
           name: endDate.day
           schema:
             type: integer
-        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year
-            without a month and day.
+        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
           in: query
           name: endDate.month
           schema:
             type: integer
-        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date
-            without a year.
+        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           in: query
           name: endDate.year
           schema:
             type: integer
-        - description: The language to use for translating report output. If unspecified,
-            this defaults to English ("en"). If the given language is not
-            supported, report output will be returned in English. The language
-            is specified as an [IETF BCP-47 language
-            code](https://en.wikipedia.org/wiki/IETF_language_tag).
+        - description: The language to use for translating report output. If unspecified, this defaults to English ("en"). If the given language is not supported, report output will be returned in English. The language is specified as an [IETF BCP-47 language code](https://en.wikipedia.org/wiki/IETF_language_tag).
           in: query
           name: languageCode
           schema:
             type: string
-        - description: Timezone in which to generate the report. If unspecified, this
-            defaults to the account timezone. For more information, see
-            [changing the time zone of your
-            reports](https://support.google.com/adsense/answer/9830725).
+        - description: Timezone in which to generate the report. If unspecified, this defaults to the account timezone. For more information, see [changing the time zone of your reports](https://support.google.com/adsense/answer/9830725).
           in: query
           name: reportingTimeZone
           schema:
@@ -869,21 +770,17 @@ paths:
               - ACCOUNT_TIME_ZONE
               - GOOGLE_TIME_ZONE
             type: string
-        - description: Day of a month. Must be from 1 to 31 and valid for the year and
-            month, or 0 to specify a year by itself or a year and month where
-            the day isn't significant.
+        - description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
           in: query
           name: startDate.day
           schema:
             type: integer
-        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year
-            without a month and day.
+        - description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
           in: query
           name: startDate.month
           schema:
             type: integer
-        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date
-            without a year.
+        - description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           in: query
           name: startDate.year
           schema:
@@ -923,25 +820,18 @@ paths:
       description: Lists all the ad clients available in an account.
       operationId: adsense.accounts.adclients.list
       parameters:
-        - description: "Required. The account which owns the collection of ad clients.
-            Format: accounts/{account}"
+        - description: "Required. The account which owns the collection of ad clients. Format: accounts/{account}"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of ad clients to include in the response, used
-            for paging. If unspecified, at most 10000 ad clients will be
-            returned. The maximum value is 10000; values above 10000 will be
-            coerced to 10000.
+        - description: The maximum number of ad clients to include in the response, used for paging. If unspecified, at most 10000 ad clients will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListAdClients` call.
-            Provide this to retrieve the subsequent page. When paginating, all
-            other parameters provided to `ListAdClients` must match the call
-            that provided the page token.
+        - description: A page token, received from a previous `ListAdClients` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListAdClients` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -981,24 +871,18 @@ paths:
       description: Lists all ad units under a specified account and ad client.
       operationId: adsense.accounts.adclients.adunits.list
       parameters:
-        - description: "Required. The ad client which owns the collection of ad units.
-            Format: accounts/{account}/adclients/{adclient}"
+        - description: "Required. The ad client which owns the collection of ad units. Format: accounts/{account}/adclients/{adclient}"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of ad units to include in the response, used for
-            paging. If unspecified, at most 10000 ad units will be returned. The
-            maximum value is 10000; values above 10000 will be coerced to 10000.
+        - description: The maximum number of ad units to include in the response, used for paging. If unspecified, at most 10000 ad units will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListAdUnits` call. Provide
-            this to retrieve the subsequent page. When paginating, all other
-            parameters provided to `ListAdUnits` must match the call that
-            provided the page token.
+        - description: A page token, received from a previous `ListAdUnits` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListAdUnits` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -1038,18 +922,13 @@ paths:
       description: Lists all the alerts available in an account.
       operationId: adsense.accounts.alerts.list
       parameters:
-        - description: "Required. The account which owns the collection of alerts. Format:
-            accounts/{account}"
+        - description: "Required. The account which owns the collection of alerts. Format: accounts/{account}"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The language to use for translating alert messages. If unspecified,
-            this defaults to the user's display language. If the given language
-            is not supported, alerts will be returned in English. The language
-            is specified as an [IETF BCP-47 language
-            code](https://en.wikipedia.org/wiki/IETF_language_tag).
+        - description: The language to use for translating alert messages. If unspecified, this defaults to the user's display language. If the given language is not supported, alerts will be returned in English. The language is specified as an [IETF BCP-47 language code](https://en.wikipedia.org/wiki/IETF_language_tag).
           in: query
           name: languageCode
           schema:
@@ -1089,25 +968,18 @@ paths:
       description: Lists all the custom channels available in an ad client.
       operationId: adsense.accounts.adclients.customchannels.list
       parameters:
-        - description: "Required. The ad client which owns the collection of custom
-            channels. Format: accounts/{account}/adclients/{adclient}"
+        - description: "Required. The ad client which owns the collection of custom channels. Format: accounts/{account}/adclients/{adclient}"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of custom channels to include in the response,
-            used for paging. If unspecified, at most 10000 custom channels will
-            be returned. The maximum value is 10000; values above 10000 will be
-            coerced to 10000.
+        - description: The maximum number of custom channels to include in the response, used for paging. If unspecified, at most 10000 custom channels will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListCustomChannels` call.
-            Provide this to retrieve the subsequent page. When paginating, all
-            other parameters provided to `ListCustomChannels` must match the
-            call that provided the page token.
+        - description: A page token, received from a previous `ListCustomChannels` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListCustomChannels` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -1147,8 +1019,7 @@ paths:
       description: Lists all the payments available for an account.
       operationId: adsense.accounts.payments.list
       parameters:
-        - description: "Required. The account which owns the collection of payments.
-            Format: accounts/{account}"
+        - description: "Required. The account which owns the collection of payments. Format: accounts/{account}"
           in: path
           name: parent
           required: true
@@ -1189,24 +1060,18 @@ paths:
       description: Lists saved reports.
       operationId: adsense.accounts.reports.saved.list
       parameters:
-        - description: "Required. The account which owns the collection of reports.
-            Format: accounts/{account}"
+        - description: "Required. The account which owns the collection of reports. Format: accounts/{account}"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of reports to include in the response, used for
-            paging. If unspecified, at most 10000 reports will be returned. The
-            maximum value is 10000; values above 10000 will be coerced to 10000.
+        - description: The maximum number of reports to include in the response, used for paging. If unspecified, at most 10000 reports will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListPayments` call. Provide
-            this to retrieve the subsequent page. When paginating, all other
-            parameters provided to `ListPayments` must match the call that
-            provided the page token.
+        - description: A page token, received from a previous `ListPayments` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListPayments` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -1246,24 +1111,18 @@ paths:
       description: Lists all the sites available in an account.
       operationId: adsense.accounts.sites.list
       parameters:
-        - description: "Required. The account which owns the collection of sites. Format:
-            accounts/{account}"
+        - description: "Required. The account which owns the collection of sites. Format: accounts/{account}"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of sites to include in the response, used for
-            paging. If unspecified, at most 10000 sites will be returned. The
-            maximum value is 10000; values above 10000 will be coerced to 10000.
+        - description: The maximum number of sites to include in the response, used for paging. If unspecified, at most 10000 sites will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListSites` call. Provide
-            this to retrieve the subsequent page. When paginating, all other
-            parameters provided to `ListSites` must match the call that provided
-            the page token.
+        - description: A page token, received from a previous `ListSites` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListSites` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -1303,25 +1162,18 @@ paths:
       description: Lists active url channels.
       operationId: adsense.accounts.adclients.urlchannels.list
       parameters:
-        - description: "Required. The ad client which owns the collection of url channels.
-            Format: accounts/{account}/adclients/{adclient}"
+        - description: "Required. The ad client which owns the collection of url channels. Format: accounts/{account}/adclients/{adclient}"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of url channels to include in the response, used
-            for paging. If unspecified, at most 10000 url channels will be
-            returned. The maximum value is 10000; values above 10000 will be
-            coerced to 10000.
+        - description: The maximum number of url channels to include in the response, used for paging. If unspecified, at most 10000 url channels will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListUrlChannels` call.
-            Provide this to retrieve the subsequent page. When paginating, all
-            other parameters provided to `ListUrlChannels` must match the call
-            that provided the page token.
+        - description: A page token, received from a previous `ListUrlChannels` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListUrlChannels` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -1361,24 +1213,18 @@ paths:
       description: Lists all accounts directly managed by the given AdSense account.
       operationId: adsense.accounts.listChildAccounts
       parameters:
-        - description: "Required. The parent account, which owns the child accounts.
-            Format: accounts/{account}"
+        - description: "Required. The parent account, which owns the child accounts. Format: accounts/{account}"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of accounts to include in the response, used for
-            paging. If unspecified, at most 10000 accounts will be returned. The
-            maximum value is 10000; values above 10000 will be coerced to 10000.
+        - description: The maximum number of accounts to include in the response, used for paging. If unspecified, at most 10000 accounts will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListAccounts` call. Provide
-            this to retrieve the subsequent page. When paginating, all other
-            parameters provided to `ListAccounts` must match the call that
-            provided the page token.
+        - description: A page token, received from a previous `ListAccounts` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListAccounts` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -1418,26 +1264,18 @@ paths:
       description: Lists all the ad units available for a custom channel.
       operationId: adsense.accounts.adclients.customchannels.listLinkedAdUnits
       parameters:
-        - description: "Required. The custom channel which owns the collection of ad
-            units. Format:
-            accounts/{account}/adclients/{adclient}/customchannels/{customchann\
-            el}"
+        - description: "Required. The custom channel which owns the collection of ad units. Format: accounts/{account}/adclients/{adclient}/customchannels/{customchannel}"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of ad units to include in the response, used for
-            paging. If unspecified, at most 10000 ad units will be returned. The
-            maximum value is 10000; values above 10000 will be coerced to 10000.
+        - description: The maximum number of ad units to include in the response, used for paging. If unspecified, at most 10000 ad units will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListLinkedAdUnits` call.
-            Provide this to retrieve the subsequent page. When paginating, all
-            other parameters provided to `ListLinkedAdUnits` must match the call
-            that provided the page token.
+        - description: A page token, received from a previous `ListLinkedAdUnits` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListLinkedAdUnits` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -1477,26 +1315,18 @@ paths:
       description: Lists all the custom channels available for an ad unit.
       operationId: adsense.accounts.adclients.adunits.listLinkedCustomChannels
       parameters:
-        - description: "Required. The ad unit which owns the collection of custom
-            channels. Format:
-            accounts/{account}/adclients/{adclient}/adunits/{adunit}"
+        - description: "Required. The ad unit which owns the collection of custom channels. Format: accounts/{account}/adclients/{adclient}/adunits/{adunit}"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of custom channels to include in the response,
-            used for paging. If unspecified, at most 10000 custom channels will
-            be returned. The maximum value is 10000; values above 10000 will be
-            coerced to 10000.
+        - description: The maximum number of custom channels to include in the response, used for paging. If unspecified, at most 10000 custom channels will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListLinkedCustomChannels`
-            call. Provide this to retrieve the subsequent page. When paginating,
-            all other parameters provided to `ListLinkedCustomChannels` must
-            match the call that provided the page token.
+        - description: A page token, received from a previous `ListLinkedCustomChannels` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListLinkedCustomChannels` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -1571,9 +1401,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1591,9 +1419,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -1627,9 +1453,7 @@ components:
           description: "Resource name of the account. Format: accounts/pub-[0-9]+"
           type: string
         pendingTasks:
-          description: Output only. Outstanding tasks that need to be completed as part of
-            the sign-up process for a new account. e.g.
-            "billing-profile-creation", "phone-pin-verification".
+          description: Output only. Outstanding tasks that need to be completed as part of the sign-up process for a new account. e.g. "billing-profile-creation", "phone-pin-verification".
           items:
             type: string
           readOnly: true
@@ -1640,70 +1464,53 @@ components:
           type: boolean
         timeZone:
           $ref: "#/components/schemas/TimeZone"
-          description: The account time zone, as used by reporting. For more information,
-            see [changing the time zone of your
-            reports](https://support.google.com/adsense/answer/9830725).
+          description: The account time zone, as used by reporting. For more information, see [changing the time zone of your reports](https://support.google.com/adsense/answer/9830725).
       type: object
     AdClient:
-      description: Representation of an ad client. An ad client represents a user's
-        subscription with a specific AdSense product.
+      description: Representation of an ad client. An ad client represents a user's subscription with a specific AdSense product.
       properties:
         name:
-          description: "Resource name of the ad client. Format:
-            accounts/{account}/adclient/{adclient}"
+          description: "Resource name of the ad client. Format: accounts/{account}/adclient/{adclient}"
           type: string
         productCode:
-          description: Output only. Product code of the ad client. For example, "AFC" for
-            AdSense for Content.
+          description: Output only. Product code of the ad client. For example, "AFC" for AdSense for Content.
           readOnly: true
           type: string
         reportingDimensionId:
-          description: Output only. Unique ID of the ad client as used in the
-            `AD_CLIENT_ID` reporting dimension. Present only if the ad client
-            supports reporting.
+          description: Output only. Unique ID of the ad client as used in the `AD_CLIENT_ID` reporting dimension. Present only if the ad client supports reporting.
           readOnly: true
           type: string
       type: object
     AdClientAdCode:
-      description: Representation of the AdSense code for a given ad client. For more
-        information, see [About the AdSense
-        code](https://support.google.com/adsense/answer/9274634).
+      description: Representation of the AdSense code for a given ad client. For more information, see [About the AdSense code](https://support.google.com/adsense/answer/9274634).
       properties:
         adCode:
-          description: Output only. The AdSense code snippet to add to the head of an HTML
-            page.
+          description: Output only. The AdSense code snippet to add to the head of an HTML page.
           readOnly: true
           type: string
         ampBody:
-          description: Output only. The AdSense code snippet to add to the body of an AMP
-            page.
+          description: Output only. The AdSense code snippet to add to the body of an AMP page.
           readOnly: true
           type: string
         ampHead:
-          description: Output only. The AdSense code snippet to add to the head of an AMP
-            page.
+          description: Output only. The AdSense code snippet to add to the head of an AMP page.
           readOnly: true
           type: string
       type: object
     AdUnit:
-      description: Representation of an ad unit. An ad unit represents a saved ad unit
-        with a specific set of ad settings that have been customized within an
-        account.
+      description: Representation of an ad unit. An ad unit represents a saved ad unit with a specific set of ad settings that have been customized within an account.
       properties:
         contentAdsSettings:
           $ref: "#/components/schemas/ContentAdsSettings"
           description: Settings specific to content ads (AFC).
         displayName:
-          description: Display name of the ad unit, as provided when the ad unit was
-            created.
+          description: Display name of the ad unit, as provided when the ad unit was created.
           type: string
         name:
-          description: "Resource name of the ad unit. Format:
-            accounts/{account}/adclient/{adclient}/adunits/{adunit}"
+          description: "Resource name of the ad unit. Format: accounts/{account}/adclient/{adclient}/adunits/{adunit}"
           type: string
         reportingDimensionId:
-          description: Output only. Unique ID of the ad unit as used in the `AD_UNIT_ID`
-            reporting dimension.
+          description: Output only. Unique ID of the ad unit as used in the `AD_UNIT_ID` reporting dimension.
           readOnly: true
           type: string
         state:
@@ -1718,8 +1525,7 @@ components:
       description: Representation of the AdSense code for a given ad unit.
       properties:
         adCode:
-          description: Output only. The AdSense code snippet to add to the body of an HTML
-            page.
+          description: Output only. The AdSense code snippet to add to the body of an HTML page.
           readOnly: true
           type: string
       type: object
@@ -1727,13 +1533,11 @@ components:
       description: Representation of an alert.
       properties:
         message:
-          description: Output only. The localized alert message. This may contain HTML
-            markup, such as phrase elements or links.
+          description: Output only. The localized alert message. This may contain HTML markup, such as phrase elements or links.
           readOnly: true
           type: string
         name:
-          description: "Resource name of the alert. Format:
-            accounts/{account}/alerts/{alert}"
+          description: "Resource name of the alert. Format: accounts/{account}/alerts/{alert}"
           type: string
         severity:
           description: Output only. Severity of this alert.
@@ -1745,9 +1549,7 @@ components:
           readOnly: true
           type: string
         type:
-          description: Output only. Type of alert. This identifies the broad type of this
-            alert, and provides a stable machine-readable identifier that will
-            not be translated. For example, "payment-hold".
+          description: Output only. Type of alert. This identifies the broad type of this alert, and provides a stable machine-readable identifier that will not be translated. For example, "payment-hold".
           readOnly: true
           type: string
       type: object
@@ -1755,8 +1557,7 @@ components:
       description: Cell representation.
       properties:
         value:
-          description: Value in the cell. The dimension cells contain strings, and the
-            metric cells contain numbers.
+          description: Value in the cell. The dimension cells contain strings, and the metric cells contain numbers.
           type: string
       type: object
     ContentAdsSettings:
@@ -1783,41 +1584,26 @@ components:
           description: Display name of the custom channel.
           type: string
         name:
-          description: "Resource name of the custom channel. Format:
-            accounts/{account}/adclients/{adclient}/customchannels/{customchann\
-            el}"
+          description: "Resource name of the custom channel. Format: accounts/{account}/adclients/{adclient}/customchannels/{customchannel}"
           type: string
         reportingDimensionId:
-          description: Output only. Unique ID of the custom channel as used in the
-            `CUSTOM_CHANNEL_ID` reporting dimension.
+          description: Output only. Unique ID of the custom channel as used in the `CUSTOM_CHANNEL_ID` reporting dimension.
           readOnly: true
           type: string
       type: object
     Date:
-      description: "Represents a whole or partial calendar date, such as a birthday.
-        The time of day and time zone are either specified elsewhere or are
-        insignificant. The date is relative to the Gregorian Calendar. This can
-        represent one of the following: * A full date, with non-zero year,
-        month, and day values * A month and day value, with a zero year, such as
-        an anniversary * A year on its own, with zero month and day values * A
-        year and month value, with a zero day, such as a credit card expiration
-        date Related types are google.type.TimeOfDay and
-        `google.protobuf.Timestamp`."
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
       properties:
         day:
-          description: Day of a month. Must be from 1 to 31 and valid for the year and
-            month, or 0 to specify a year by itself or a year and month where
-            the day isn't significant.
+          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
           format: int32
           type: integer
         month:
-          description: Month of a year. Must be from 1 to 12, or 0 to specify a year
-            without a month and day.
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
           format: int32
           type: integer
         year:
-          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date
-            without a year.
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           format: int32
           type: integer
       type: object
@@ -1825,9 +1611,7 @@ components:
       description: The header information of the columns requested in the report.
       properties:
         currencyCode:
-          description: The [ISO-4217 currency
-            code](https://en.wikipedia.org/wiki/ISO_4217) of this column. Only
-            present if the header type is METRIC_CURRENCY.
+          description: The [ISO-4217 currency code](https://en.wikipedia.org/wiki/ISO_4217) of this column. Only present if the header type is METRIC_CURRENCY.
           type: string
         name:
           description: Required. Name of the header.
@@ -1845,36 +1629,17 @@ components:
           type: string
       type: object
     HttpBody:
-      description: "Message that represents an arbitrary HTTP body. It should only be
-        used for payload formats that can't be represented as JSON, such as raw
-        binary or an HTML page. This message can be used both in streaming and
-        non-streaming API methods in the request as well as the response. It can
-        be used as a top-level request field, which is convenient if one wants
-        to extract parameters from either the URL or HTTP template into the
-        request fields and also want access to the raw HTTP body. Example:
-        message GetResourceRequest { // A unique request id. string request_id =
-        1; // The raw HTTP body is bound to this field. google.api.HttpBody
-        http_body = 2; } service ResourceService { rpc
-        GetResource(GetResourceRequest) returns (google.api.HttpBody); rpc
-        UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty); }
-        Example with streaming methods: service CaldavService { rpc
-        GetCalendar(stream google.api.HttpBody) returns (stream
-        google.api.HttpBody); rpc UpdateCalendar(stream google.api.HttpBody)
-        returns (stream google.api.HttpBody); } Use of this type only changes
-        how the request and response bodies are handled, all other features will
-        continue to work unchanged."
+      description: "Message that represents an arbitrary HTTP body. It should only be used for payload formats that can't be represented as JSON, such as raw binary or an HTML page. This message can be used both in streaming and non-streaming API methods in the request as well as the response. It can be used as a top-level request field, which is convenient if one wants to extract parameters from either the URL or HTTP template into the request fields and also want access to the raw HTTP body. Example: message GetResourceRequest { // A unique request id. string request_id = 1; // The raw HTTP body is bound to this field. google.api.HttpBody http_body = 2; } service ResourceService { rpc GetResource(GetResourceRequest) returns (google.api.HttpBody); rpc UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty); } Example with streaming methods: service CaldavService { rpc GetCalendar(stream google.api.HttpBody) returns (stream google.api.HttpBody); rpc UpdateCalendar(stream google.api.HttpBody) returns (stream google.api.HttpBody); } Use of this type only changes how the request and response bodies are handled, all other features will continue to work unchanged."
       properties:
         contentType:
-          description: The HTTP Content-Type header value specifying the content type of
-            the body.
+          description: The HTTP Content-Type header value specifying the content type of the body.
           type: string
         data:
           description: The HTTP request/response body as raw binary.
           format: byte
           type: string
         extensions:
-          description: Application specific response metadata. Must be set in the first
-            response for streaming APIs.
+          description: Application specific response metadata. Must be set in the first response for streaming APIs.
           items:
             additionalProperties:
               description: Properties of the object. Contains field @type with type URL.
@@ -1890,9 +1655,7 @@ components:
             $ref: "#/components/schemas/Account"
           type: array
         nextPageToken:
-          description: Continuation token used to page through accounts. To retrieve the
-            next page of the results, set the next request's "page_token" value
-            to this.
+          description: Continuation token used to page through accounts. To retrieve the next page of the results, set the next request's "page_token" value to this.
           type: string
       type: object
     ListAdClientsResponse:
@@ -1904,9 +1667,7 @@ components:
             $ref: "#/components/schemas/AdClient"
           type: array
         nextPageToken:
-          description: Continuation token used to page through ad clients. To retrieve the
-            next page of the results, set the next request's "page_token" value
-            to this.
+          description: Continuation token used to page through ad clients. To retrieve the next page of the results, set the next request's "page_token" value to this.
           type: string
       type: object
     ListAdUnitsResponse:
@@ -1918,9 +1679,7 @@ components:
             $ref: "#/components/schemas/AdUnit"
           type: array
         nextPageToken:
-          description: Continuation token used to page through ad units. To retrieve the
-            next page of the results, set the next request's "page_token" value
-            to this.
+          description: Continuation token used to page through ad units. To retrieve the next page of the results, set the next request's "page_token" value to this.
           type: string
       type: object
     ListAlertsResponse:
@@ -1941,9 +1700,7 @@ components:
             $ref: "#/components/schemas/Account"
           type: array
         nextPageToken:
-          description: Continuation token used to page through accounts. To retrieve the
-            next page of the results, set the next request's "page_token" value
-            to this.
+          description: Continuation token used to page through accounts. To retrieve the next page of the results, set the next request's "page_token" value to this.
           type: string
       type: object
     ListCustomChannelsResponse:
@@ -1955,9 +1712,7 @@ components:
             $ref: "#/components/schemas/CustomChannel"
           type: array
         nextPageToken:
-          description: Continuation token used to page through alerts. To retrieve the
-            next page of the results, set the next request's "page_token" value
-            to this.
+          description: Continuation token used to page through alerts. To retrieve the next page of the results, set the next request's "page_token" value to this.
           type: string
       type: object
     ListLinkedAdUnitsResponse:
@@ -1969,9 +1724,7 @@ components:
             $ref: "#/components/schemas/AdUnit"
           type: array
         nextPageToken:
-          description: Continuation token used to page through ad units. To retrieve the
-            next page of the results, set the next request's "page_token" value
-            to this.
+          description: Continuation token used to page through ad units. To retrieve the next page of the results, set the next request's "page_token" value to this.
           type: string
       type: object
     ListLinkedCustomChannelsResponse:
@@ -1983,9 +1736,7 @@ components:
             $ref: "#/components/schemas/CustomChannel"
           type: array
         nextPageToken:
-          description: Continuation token used to page through alerts. To retrieve the
-            next page of the results, set the next request's "page_token" value
-            to this.
+          description: Continuation token used to page through alerts. To retrieve the next page of the results, set the next request's "page_token" value to this.
           type: string
       type: object
     ListPaymentsResponse:
@@ -2001,9 +1752,7 @@ components:
       description: Response definition for the saved reports list rpc.
       properties:
         nextPageToken:
-          description: Continuation token used to page through reports. To retrieve the
-            next page of the results, set the next request's "page_token" value
-            to this.
+          description: Continuation token used to page through reports. To retrieve the next page of the results, set the next request's "page_token" value to this.
           type: string
         savedReports:
           description: The reports returned in this list response.
@@ -2015,9 +1764,7 @@ components:
       description: Response definition for the sites list rpc.
       properties:
         nextPageToken:
-          description: Continuation token used to page through sites. To retrieve the next
-            page of the results, set the next request's "page_token" value to
-            this.
+          description: Continuation token used to page through sites. To retrieve the next page of the results, set the next request's "page_token" value to this.
           type: string
         sites:
           description: The sites returned in this list response.
@@ -2029,9 +1776,7 @@ components:
       description: Response definition for the url channels list rpc.
       properties:
         nextPageToken:
-          description: Continuation token used to page through url channels. To retrieve
-            the next page of the results, set the next request's "page_token"
-            value to this.
+          description: Continuation token used to page through url channels. To retrieve the next page of the results, set the next request's "page_token" value to this.
           type: string
         urlChannels:
           description: The url channels returned in this list response.
@@ -2040,26 +1785,18 @@ components:
           type: array
       type: object
     Payment:
-      description: Representation of an unpaid or paid payment. See [Payment timelines
-        for AdSense](https://support.google.com/adsense/answer/7164703) for more
-        information about payments.
+      description: Representation of an unpaid or paid payment. See [Payment timelines for AdSense](https://support.google.com/adsense/answer/7164703) for more information about payments.
       properties:
         amount:
-          description: Output only. The amount of unpaid or paid earnings, as a formatted
-            string, including the currency. E.g. "¥1,235 JPY", "$1,234.57",
-            "£87.65".
+          description: Output only. The amount of unpaid or paid earnings, as a formatted string, including the currency. E.g. "¥1,235 JPY", "$1,234.57", "£87.65".
           readOnly: true
           type: string
         date:
           $ref: "#/components/schemas/Date"
-          description: Output only. For paid earnings, the date that the payment was
-            credited. For unpaid earnings, this field is empty. Payment dates
-            are always returned in the billing timezone (America/Los_Angeles).
+          description: Output only. For paid earnings, the date that the payment was credited. For unpaid earnings, this field is empty. Payment dates are always returned in the billing timezone (America/Los_Angeles).
           readOnly: true
         name:
-          description: "Resource name of the payment. Format:
-            accounts/{account}/payments/unpaid for unpaid (current) earnings.
-            accounts/{account}/payments/yyyy-MM-dd for paid earnings."
+          description: "Resource name of the payment. Format: accounts/{account}/payments/unpaid for unpaid (current) earnings. accounts/{account}/payments/yyyy-MM-dd for paid earnings."
           type: string
       type: object
     ReportResult:
@@ -2067,22 +1804,17 @@ components:
       properties:
         averages:
           $ref: "#/components/schemas/Row"
-          description: The averages of the report. This is the same length as any other
-            row in the report; cells corresponding to dimension columns are
-            empty.
+          description: The averages of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.
         endDate:
           $ref: "#/components/schemas/Date"
           description: Required. End date of the range (inclusive).
         headers:
-          description: The header information; one for each dimension in the request,
-            followed by one for each metric in the request.
+          description: The header information; one for each dimension in the request, followed by one for each metric in the request.
           items:
             $ref: "#/components/schemas/Header"
           type: array
         rows:
-          description: The output rows of the report. Each row is a list of cells; one for
-            each dimension in the request, followed by one for each metric in
-            the request.
+          description: The output rows of the report. Each row is a list of cells; one for each dimension in the request, followed by one for each metric in the request.
           items:
             $ref: "#/components/schemas/Row"
           type: array
@@ -2095,11 +1827,9 @@ components:
           type: string
         totals:
           $ref: "#/components/schemas/Row"
-          description: The totals of the report. This is the same length as any other row
-            in the report; cells corresponding to dimension columns are empty.
+          description: The totals of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.
         warnings:
-          description: Any warnings associated with generation of the report. These
-            warnings are always returned in English.
+          description: Any warnings associated with generation of the report. These warnings are always returned in English.
           items:
             type: string
           type: array
@@ -2117,8 +1847,7 @@ components:
       description: Representation of a saved report.
       properties:
         name:
-          description: "Resource name of the report. Format:
-            accounts/{account}/reports/{report}"
+          description: "Resource name of the report. Format: accounts/{account}/reports/{report}"
           type: string
         title:
           description: Report title as specified by publisher.
@@ -2131,16 +1860,13 @@ components:
           description: Whether auto ads is turned on for the site.
           type: boolean
         domain:
-          description: Domain (or subdomain) of the site, e.g. "example.com" or
-            "www.example.com". This is used in the `OWNED_SITE_DOMAIN_NAME`
-            reporting dimension.
+          description: Domain (or subdomain) of the site, e.g. "example.com" or "www.example.com". This is used in the `OWNED_SITE_DOMAIN_NAME` reporting dimension.
           type: string
         name:
           description: "Resource name of a site. Format: accounts/{account}/sites/{site}"
           type: string
         reportingDimensionId:
-          description: Output only. Unique ID of the site as used in the `OWNED_SITE_ID`
-            reporting dimension.
+          description: Output only. Unique ID of the site as used in the `OWNED_SITE_ID` reporting dimension.
           readOnly: true
           type: string
         state:
@@ -2155,8 +1881,7 @@ components:
           type: string
       type: object
     TimeZone:
-      description: Represents a time zone from the [IANA Time Zone
-        Database](https://www.iana.org/time-zones).
+      description: Represents a time zone from the [IANA Time Zone Database](https://www.iana.org/time-zones).
       properties:
         id:
           description: IANA Time Zone Database time zone, e.g. "America/New_York".
@@ -2166,23 +1891,17 @@ components:
           type: string
       type: object
     UrlChannel:
-      description: Representation of a URL channel. URL channels allow you to track
-        the performance of particular pages in your site; see [URL
-        channels](https://support.google.com/adsense/answer/2923836) for more
-        information.
+      description: Representation of a URL channel. URL channels allow you to track the performance of particular pages in your site; see [URL channels](https://support.google.com/adsense/answer/2923836) for more information.
       properties:
         name:
-          description: "Resource name of the URL channel. Format:
-            accounts/{account}/adclient/{adclient}/urlchannels/{urlchannel}"
+          description: "Resource name of the URL channel. Format: accounts/{account}/adclient/{adclient}/urlchannels/{urlchannel}"
           type: string
         reportingDimensionId:
-          description: Output only. Unique ID of the custom channel as used in the
-            `URL_CHANNEL_ID` reporting dimension.
+          description: Output only. Unique ID of the custom channel as used in the `URL_CHANNEL_ID` reporting dimension.
           readOnly: true
           type: string
         uriPattern:
-          description: 'URI pattern of the channel. Does not include "http://" or
-            "https://". Example: www.example.com/home'
+          description: 'URI pattern of the channel. Does not include "http://" or "https://". Example: www.example.com/home'
           type: string
       type: object
   securitySchemes:

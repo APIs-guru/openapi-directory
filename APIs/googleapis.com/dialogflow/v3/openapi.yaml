@@ -309,10 +309,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Exports the specified agent to a binary file.
-      operationId: dialogflow.projects.locations.agents.export
+      description: Exports the specified flow to a binary file. Note that resources (e.g. intents, entities, webhooks) that the flow references will also be exported.
+      operationId: dialogflow.projects.locations.agents.flows.export
       parameters:
-        - description: "Required. The name of the agent to export. Format: `projects//locations//agents/`."
+        - description: "Required. The name of the flow to export. Format: `projects//locations//agents//flows/`."
           in: path
           name: name
           required: true
@@ -322,7 +322,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ExportAgentRequest"
+              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ExportFlowRequest"
       responses:
         "200":
           content:
@@ -1137,6 +1137,52 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Flow"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v3/{parent}/flows:import":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Imports the specified flow to the specified agent from a binary file.
+      operationId: dialogflow.projects.locations.agents.flows.import
+      parameters:
+        - description: "Required. The agent to import the flow into. Format: `projects//locations//agents/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ImportFlowRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -2272,6 +2318,11 @@ components:
         startFlow:
           description: "Immutable. Name of the start flow in this agent. A start flow will be automatically created when the agent is created, and can only be deleted by deleting the agent. Format: `projects//locations//agents//flows/`."
           type: string
+        supportedLanguageCodes:
+          description: The list of all languages supported by the agent (except for the `default_language_code`).
+          items:
+            type: string
+          type: array
         timeZone:
           description: Required. The time zone of the agent from the [time zone database](https://www.iana.org/time-zones), e.g., America/New_York, Europe/Paris.
           type: string
@@ -2740,6 +2791,9 @@ components:
         agentUri:
           description: Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to export the agent to. The format of this URI must be `gs:///`. If left unspecified, the serialized agent is returned inline.
           type: string
+        environment:
+          description: "Optional. Environment name. If not set, draft environment is assumed. Format: `projects//locations//agents//environments/`."
+          type: string
       type: object
     GoogleCloudDialogflowCxV3ExportAgentResponse:
       description: The response message for Agents.ExportAgent.
@@ -2750,6 +2804,27 @@ components:
           type: string
         agentUri:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in ExportAgentRequest.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3ExportFlowRequest:
+      description: The request message for Flows.ExportFlow.
+      properties:
+        flowUri:
+          description: Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to export the flow to. The format of this URI must be `gs:///`. If left unspecified, the serialized flow is returned inline.
+          type: string
+        includeReferencedFlows:
+          description: Optional. Whether to export flows referenced by the specified flow.
+          type: boolean
+      type: object
+    GoogleCloudDialogflowCxV3ExportFlowResponse:
+      description: The response message for Flows.ExportFlow.
+      properties:
+        flowContent:
+          description: Uncompressed raw byte content for flow.
+          format: byte
+          type: string
+        flowUri:
+          description: The URI to a file containing the exported flow. This field is populated only if `flow_uri` is specified in ExportFlowRequest.
           type: string
       type: object
     GoogleCloudDialogflowCxV3ExportTestCasesMetadata:
@@ -2999,6 +3074,31 @@ components:
           items:
             $ref: "#/components/schemas/GoogleRpcStatus"
           type: array
+      type: object
+    GoogleCloudDialogflowCxV3ImportFlowRequest:
+      description: The request message for Flows.ImportFlow.
+      properties:
+        flowContent:
+          description: Uncompressed raw byte content for flow.
+          format: byte
+          type: string
+        flowUri:
+          description: The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to import flow from. The format of this URI must be `gs:///`.
+          type: string
+        importOption:
+          description: Flow import mode. If not specified, `KEEP` is assumed.
+          enum:
+            - IMPORT_OPTION_UNSPECIFIED
+            - KEEP
+            - FALLBACK
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3ImportFlowResponse:
+      description: The response message for Flows.ImportFlow.
+      properties:
+        flow:
+          description: "The unique identifier of the new flow. Format: `projects//locations//agents//flows/`."
+          type: string
       type: object
     GoogleCloudDialogflowCxV3ImportTestCasesMetadata:
       description: Metadata returned for the TestCases.ImportTestCases long running operation.
@@ -3593,7 +3693,7 @@ components:
         payload:
           additionalProperties:
             description: Properties of the object.
-          description: This field can be used to pass custom data into the webhook associated with the agent. Arbitrary JSON objects are supported.
+          description: 'This field can be used to pass custom data into the webhook associated with the agent. Arbitrary JSON objects are supported. Some integrations that query a Dialogflow agent may provide additional information in the payload. In particular, for the Dialogflow Phone Gateway integration, this field has the form: { "telephony": { "caller_id": "+18558363987" } } '
           type: object
         sessionEntityTypes:
           description: Additional session entity types to replace or extend developer entity types with. The entity synonyms apply to all languages and persist for the session of this query.
@@ -4677,6 +4777,17 @@ components:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in ExportAgentRequest.
           type: string
       type: object
+    GoogleCloudDialogflowCxV3beta1ExportFlowResponse:
+      description: The response message for Flows.ExportFlow.
+      properties:
+        flowContent:
+          description: Uncompressed raw byte content for flow.
+          format: byte
+          type: string
+        flowUri:
+          description: The URI to a file containing the exported flow. This field is populated only if `flow_uri` is specified in ExportFlowRequest.
+          type: string
+      type: object
     GoogleCloudDialogflowCxV3beta1ExportTestCasesMetadata:
       description: Metadata returned for the TestCases.ExportTestCases long running operation.
       properties: {}
@@ -4830,6 +4941,13 @@ components:
           items:
             $ref: "#/components/schemas/GoogleRpcStatus"
           type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1ImportFlowResponse:
+      description: The response message for Flows.ImportFlow.
+      properties:
+        flow:
+          description: "The unique identifier of the new flow. Format: `projects//locations//agents//flows/`."
+          type: string
       type: object
     GoogleCloudDialogflowCxV3beta1ImportTestCasesMetadata:
       description: Metadata returned for the TestCases.ImportTestCases long running operation.
@@ -8039,7 +8157,7 @@ components:
           type: string
       type: object
     GoogleTypeLatLng:
-      description: An object that represents a latitude/longitude pair. This is expressed as a pair of doubles to represent degrees latitude and degrees longitude. Unless specified otherwise, this must conform to the WGS84 standard. Values must be within normalized ranges.
+      description: An object that represents a latitude/longitude pair. This is expressed as a pair of doubles to represent degrees latitude and degrees longitude. Unless specified otherwise, this object must conform to the WGS84 standard. Values must be within normalized ranges.
       properties:
         latitude:
           description: The latitude in degrees. It must be in the range [-90.0, +90.0].
