@@ -3646,6 +3646,8 @@ components:
             - description: ' The name of the new framework returned by the <code>CreateAssessmentFramework</code> API. '
     CreateAssessmentFrameworkControlSet:
       type: object
+      required:
+        - name
       properties:
         name:
           allOf:
@@ -3984,6 +3986,8 @@ components:
             - description: ' The name of the specified framework. '
     UpdateAssessmentFrameworkControlSet:
       type: object
+      required:
+        - name
       properties:
         id:
           allOf:
@@ -5605,7 +5609,7 @@ components:
         assessmentReportSelection:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' Specifies whether the evidence is inclded in the assessment report. '
+            - description: ' Specifies whether the evidence is included in the assessment report. '
       description: ' A record that contains the information needed to demonstrate compliance with the requirements specified by a control. Examples of evidence include change activity triggered by a user, or a system configuration snapshot. '
     EvidenceAttributeKey:
       type: string

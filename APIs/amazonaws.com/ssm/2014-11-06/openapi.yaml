@@ -8155,7 +8155,11 @@ components:
         ApplyOnlyAtCronInterval:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
-            - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
+            - description: 'By default, when you create a new association, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
+        CalendarNames:
+          allOf:
+            - $ref: '#/components/schemas/CalendarNameOrARNList'
+            - description: 'The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents you want to gate your associations under. The associations only run when that Change Calendar is open. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar">AWS Systems Manager Change Calendar</a>.'
         TargetLocations:
           allOf:
             - $ref: '#/components/schemas/TargetLocations'
@@ -12214,6 +12218,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
             - description: '<p>By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you update it. This parameter is not supported for rate expressions.</p> <p>Also, if you specified this option when you created the association, you can reset it. To do so, specify the <code>no-apply-only-at-cron-interval</code> parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.</p>'
+        CalendarNames:
+          allOf:
+            - $ref: '#/components/schemas/CalendarNameOrARNList'
+            - description: 'The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents you want to gate your associations under. The associations only run when that Change Calendar is open. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar">AWS Systems Manager Change Calendar</a>.'
         TargetLocations:
           allOf:
             - $ref: '#/components/schemas/TargetLocations'
@@ -13048,7 +13056,7 @@ components:
     ApproveAfterDays:
       type: integer
       minimum: 0
-      maximum: 100
+      maximum: 360
     DocumentARN:
       type: string
       pattern: '^[a-zA-Z0-9_\-.:/]{3,128}$'
@@ -13203,6 +13211,10 @@ components:
       enum:
         - AUTO
         - MANUAL
+    CalendarNameOrARNList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CalendarNameOrARN'
     TargetLocations:
       type: array
       items:
@@ -13300,6 +13312,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
             - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
+        CalendarNames:
+          allOf:
+            - $ref: '#/components/schemas/CalendarNameOrARNList'
+            - description: 'The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents your associations are gated under. The associations only run when that Change Calendar is open. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar">AWS Systems Manager Change Calendar</a>.'
         TargetLocations:
           allOf:
             - $ref: '#/components/schemas/TargetLocations'
@@ -13615,6 +13631,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
             - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
+        CalendarNames:
+          allOf:
+            - $ref: '#/components/schemas/CalendarNameOrARNList'
+            - description: 'The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents your associations are gated under. The associations for this version only run when that Change Calendar is open. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar">AWS Systems Manager Change Calendar</a>.'
         TargetLocations:
           allOf:
             - $ref: '#/components/schemas/TargetLocations'
@@ -14258,10 +14278,6 @@ components:
       type: string
     CalendarNameOrARN:
       type: string
-    CalendarNameOrARNList:
-      type: array
-      items:
-        $ref: '#/components/schemas/CalendarNameOrARN'
     CalendarState:
       type: string
       enum:
@@ -15013,6 +15029,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
             - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
+        CalendarNames:
+          allOf:
+            - $ref: '#/components/schemas/CalendarNameOrARNList'
+            - description: 'The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents your associations are gated under. The associations only run when that Change Calendar is open. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar">AWS Systems Manager Change Calendar</a>.'
         TargetLocations:
           allOf:
             - $ref: '#/components/schemas/TargetLocations'
@@ -16139,7 +16159,7 @@ components:
       description: 'The EffectivePatch structure defines metadata about a patch along with the approval state of the patch in a particular patch baseline. The approval state includes information about whether the patch is currently approved, due to be approved by a rule, explicitly approved, or explicitly rejected and the date the patch was or will be approved.'
     ExecutionRoleName:
       type: string
-      pattern: '[\w+=,.@-]+'
+      pattern: '[\w+=,.@/-]+'
       minLength: 1
       maxLength: 64
     Fault:

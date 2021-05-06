@@ -2902,6 +2902,15 @@ components:
 
                             <p>Details for SASL/SCRAM client authentication.</p>
                          
+        Iam:
+          allOf:
+            - $ref: '#/components/schemas/Iam'
+            - xml:
+                name: iam
+              description: |2-
+
+                            <p>Indicates whether IAM access control is enabled.</p>
+                         
       description: |2-
 
                     <p>Details for client authentication using SASL.</p>
@@ -3298,6 +3307,15 @@ components:
               description: |2-
 
                             <p>A string containing one or more DNS names (or IP) and Sasl Scram port pairs.</p>
+                         
+        BootstrapBrokerStringSaslIam:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bootstrapBrokerStringSaslIam
+              description: |2-
+
+                            <p>A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.</p>
                          
     GetCompatibleKafkaVersionsResponse:
       type: object
@@ -5082,6 +5100,22 @@ components:
       description: |2-
 
                     <p>Details for SASL/SCRAM client authentication.</p>
+                 
+    Iam:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: enabled
+              description: |2-
+
+                            <p>Indicates whether IAM access control is enabled.</p>
+                         
+      description: |2-
+
+                    <p>Details for IAM access control.</p>
                  
     NodeType:
       type: string

@@ -1459,6 +1459,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=KinesisAnalytics_20180523.RollbackApplication:
+    post:
+      operationId: RollbackApplication
+      description: '<p>Reverts the application to the previous running version. You can roll back an application if you suspect it is stuck in a transient status. </p> <p>You can roll back an application only if it is in the <code>UPDATING</code> or <code>AUTOSCALING</code> status.</p> <p>When you rollback an application, it loads state data from the last successful snapshot. If the application has no snapshots, Kinesis Data Analytics rejects the rollback request.</p> <p>This action is not supported for Kinesis Data Analytics for SQL applications.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RollbackApplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '485':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RollbackApplicationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - KinesisAnalytics_20180523.RollbackApplication
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=KinesisAnalytics_20180523.StartApplication:
     post:
       operationId: StartApplication
@@ -1932,7 +2001,6 @@ components:
       type: object
       required:
         - ApplicationName
-        - CurrentApplicationVersionId
         - CloudWatchLoggingOption
       title: AddApplicationCloudWatchLoggingOptionRequest
       properties:
@@ -1943,11 +2011,15 @@ components:
         CurrentApplicationVersionId:
           allOf:
             - $ref: '#/components/schemas/ApplicationVersionId'
-            - description: The version ID of the Kinesis Data Analytics application. You can retrieve the application version ID using <a>DescribeApplication</a>.
+            - description: The version ID of the Kinesis Data Analytics application. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>.You can retrieve the application version ID using <a>DescribeApplication</a>.
         CloudWatchLoggingOption:
           allOf:
             - $ref: '#/components/schemas/CloudWatchLoggingOption'
             - description: 'Provides the Amazon CloudWatch log stream Amazon Resource Name (ARN). '
+        ConditionalToken:
+          allOf:
+            - $ref: '#/components/schemas/ConditionalToken'
+            - description: A value you use to implement strong concurrency for application updates. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>.
     ResourceNotFoundException: {}
     ResourceInUseException: {}
     InvalidArgumentException: {}
@@ -1984,7 +2056,7 @@ components:
         CurrentApplicationVersionId:
           allOf:
             - $ref: '#/components/schemas/ApplicationVersionId'
-            - description: The current version of your application. You can use the <a>DescribeApplication</a> operation to find the current application version.
+            - description: The current version of your application. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>.You can use the <a>DescribeApplication</a> operation to find the current application version.
         Input:
           allOf:
             - $ref: '#/components/schemas/Input'
@@ -2025,7 +2097,7 @@ components:
         CurrentApplicationVersionId:
           allOf:
             - $ref: '#/components/schemas/ApplicationVersionId'
-            - description: 'The version of the application to which you want to add the input processing configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.'
+            - description: 'The version of the application to which you want to add the input processing configuration. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.'
         InputId:
           allOf:
             - $ref: '#/components/schemas/Id'
@@ -2064,7 +2136,7 @@ components:
         CurrentApplicationVersionId:
           allOf:
             - $ref: '#/components/schemas/ApplicationVersionId'
-            - description: 'The version of the application to which you want to add the output configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. '
+            - description: 'The version of the application to which you want to add the output configuration. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. '
         Output:
           allOf:
             - $ref: '#/components/schemas/Output'
@@ -2123,7 +2195,6 @@ components:
       type: object
       required:
         - ApplicationName
-        - CurrentApplicationVersionId
         - VpcConfiguration
       title: AddApplicationVpcConfigurationRequest
       properties:
@@ -2134,11 +2205,15 @@ components:
         CurrentApplicationVersionId:
           allOf:
             - $ref: '#/components/schemas/ApplicationVersionId'
-            - description: 'The version of the application to which you want to add the VPC configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.'
+            - description: 'The version of the application to which you want to add the VPC configuration. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.'
         VpcConfiguration:
           allOf:
             - $ref: '#/components/schemas/VpcConfiguration'
             - description: Description of the VPC to add to the application.
+        ConditionalToken:
+          allOf:
+            - $ref: '#/components/schemas/ConditionalToken'
+            - description: A value you use to implement strong concurrency for application updates. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>.
     CreateApplicationResponse:
       type: object
       required:
@@ -2268,7 +2343,6 @@ components:
       type: object
       required:
         - ApplicationName
-        - CurrentApplicationVersionId
         - CloudWatchLoggingOptionId
       title: DeleteApplicationCloudWatchLoggingOptionRequest
       properties:
@@ -2279,11 +2353,15 @@ components:
         CurrentApplicationVersionId:
           allOf:
             - $ref: '#/components/schemas/ApplicationVersionId'
-            - description: The version ID of the application. You can retrieve the application version ID using <a>DescribeApplication</a>.
+            - description: The version ID of the application. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You can retrieve the application version ID using <a>DescribeApplication</a>.
         CloudWatchLoggingOptionId:
           allOf:
             - $ref: '#/components/schemas/Id'
             - description: 'The <code>CloudWatchLoggingOptionId</code> of the Amazon CloudWatch logging option to delete. You can get the <code>CloudWatchLoggingOptionId</code> by using the <a>DescribeApplication</a> operation. '
+        ConditionalToken:
+          allOf:
+            - $ref: '#/components/schemas/ConditionalToken'
+            - description: A value you use to implement strong concurrency for application updates. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>.
     DeleteApplicationInputProcessingConfigurationResponse:
       type: object
       properties:
@@ -2415,7 +2493,6 @@ components:
       type: object
       required:
         - ApplicationName
-        - CurrentApplicationVersionId
         - VpcConfigurationId
       title: DeleteApplicationVpcConfigurationRequest
       properties:
@@ -2426,11 +2503,15 @@ components:
         CurrentApplicationVersionId:
           allOf:
             - $ref: '#/components/schemas/ApplicationVersionId'
-            - description: The current application version ID. You can retrieve the application version ID using <a>DescribeApplication</a>.
+            - description: The current application version ID. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>.You can retrieve the application version ID using <a>DescribeApplication</a>.
         VpcConfigurationId:
           allOf:
             - $ref: '#/components/schemas/Id'
             - description: The ID of the VPC configuration to delete.
+        ConditionalToken:
+          allOf:
+            - $ref: '#/components/schemas/ConditionalToken'
+            - description: A value you use to implement strong concurrency for application updates. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>.
     DescribeApplicationResponse:
       type: object
       required:
@@ -2597,6 +2678,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/KinesisAnalyticsARN'
             - description: The ARN of the application for which to retrieve tags.
+    RollbackApplicationResponse:
+      type: object
+      required:
+        - ApplicationDetail
+      properties:
+        ApplicationDetail:
+          $ref: '#/components/schemas/ApplicationDetail'
+    RollbackApplicationRequest:
+      type: object
+      required:
+        - ApplicationName
+        - CurrentApplicationVersionId
+      title: RollbackApplicationRequest
+      properties:
+        ApplicationName:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The name of the application.
+        CurrentApplicationVersionId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: The current application version ID. You can retrieve the application version ID using <a>DescribeApplication</a>.
     StartApplicationResponse:
       type: object
       properties: {}
@@ -2681,7 +2784,6 @@ components:
       type: object
       required:
         - ApplicationName
-        - CurrentApplicationVersionId
       title: UpdateApplicationRequest
       properties:
         ApplicationName:
@@ -2691,7 +2793,7 @@ components:
         CurrentApplicationVersionId:
           allOf:
             - $ref: '#/components/schemas/ApplicationVersionId'
-            - description: The current application version ID. You can retrieve the application version ID using <a>DescribeApplication</a>.
+            - description: The current application version ID. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>.You can retrieve the application version ID using <a>DescribeApplication</a>.
         ApplicationConfigurationUpdate:
           allOf:
             - $ref: '#/components/schemas/ApplicationConfigurationUpdate'
@@ -2708,6 +2810,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CloudWatchLoggingOptionUpdates'
             - description: 'Describes application Amazon CloudWatch logging option updates. You can only update existing CloudWatch logging options with this action. To add a new CloudWatch logging option, use <a>AddApplicationCloudWatchLoggingOption</a>.'
+        ConditionalToken:
+          allOf:
+            - $ref: '#/components/schemas/ConditionalToken'
+            - description: A value you use to implement strong concurrency for application updates. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>.
     UpdateApplicationMaintenanceConfigurationResponse:
       type: object
       properties:
@@ -2753,6 +2859,11 @@ components:
             - $ref: '#/components/schemas/LogStreamARN'
             - description: The ARN of the CloudWatch log to receive application messages.
       description: 'Provides a description of Amazon CloudWatch logging options, including the log stream Amazon Resource Name (ARN). '
+    ConditionalToken:
+      type: string
+      pattern: '[a-zA-Z0-9-_+/=]+'
+      minLength: 1
+      maxLength: 512
     ResourceARN:
       type: string
       pattern: 'arn:.*'
@@ -3309,6 +3420,7 @@ components:
         - AUTOSCALING
         - FORCE_STOPPING
         - MAINTENANCE
+        - ROLLING_BACK
     Timestamp:
       type: string
       format: date-time
@@ -3384,6 +3496,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApplicationMaintenanceConfigurationDescription'
             - description: Describes the time window for automatic application maintenance.
+        ApplicationVersionUpdatedFrom:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: The previous application version before the latest application update. <a>RollbackApplication</a> reverts the application to this version.
+        ApplicationVersionRolledBackFrom:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: 'If you reverted the application using <a>RollbackApplication</a>, the application version when <code>RollbackApplication</code> was called.'
+        ConditionalToken:
+          allOf:
+            - $ref: '#/components/schemas/ConditionalToken'
+            - description: A value you use to implement strong concurrency for application updates.
       description: 'Describes the application, including the application Amazon Resource Name (ARN), status, latest version, and input and output configurations.'
     ApplicationMaintenanceWindowStartTime:
       type: string
