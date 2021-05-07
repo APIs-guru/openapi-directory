@@ -450,7 +450,7 @@ paths:
                 KmsKeyArn:
                   description: The ARN of the KMS key to use to encrypt your data.
                   type: string
-                  pattern: 'arn:aws.*:kms:.*:[0-9]{12}:key/.*'
+                  pattern: 'arn:aws.*:kms:.*:[0-9]{12}:key/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}'
                   minLength: 20
                   maxLength: 2048
                 Tags:
@@ -697,7 +697,7 @@ paths:
   /DeleteAnomalyDetector:
     post:
       operationId: DeleteAnomalyDetector
-      description: 'Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts. '
+      description: Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts.
       responses:
         '200':
           description: Success
@@ -767,7 +767,7 @@ paths:
   /DescribeAlert:
     post:
       operationId: DescribeAlert
-      description: Describes an alert.
+      description: '<p>Describes an alert.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>'
       responses:
         '200':
           description: Success
@@ -923,7 +923,7 @@ paths:
   /DescribeAnomalyDetector:
     post:
       operationId: DescribeAnomalyDetector
-      description: Describes a detector.
+      description: '<p>Describes a detector.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>'
       responses:
         '200':
           description: Success
@@ -987,7 +987,7 @@ paths:
   /DescribeMetricSet:
     post:
       operationId: DescribeMetricSet
-      description: Describes a dataset.
+      description: '<p>Describes a dataset.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>'
       responses:
         '200':
           description: Success
@@ -1103,7 +1103,7 @@ paths:
                 AnomalyGroupId:
                   description: The ID of the anomaly group.
                   type: string
-                  pattern: '^[a-zA-Z0-9][a-zA-Z0-9\-_]*'
+                  pattern: '[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}'
                   maxLength: 63
                 AnomalyDetectorArn:
                   description: The Amazon Resource Name (ARN) of the anomaly detector.
@@ -1296,7 +1296,7 @@ paths:
   /ListAlerts:
     post:
       operationId: ListAlerts
-      description: Lists the alerts attached to a detector.
+      description: '<p>Lists the alerts attached to a detector.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>'
       responses:
         '200':
           description: Success
@@ -1381,7 +1381,7 @@ paths:
   /ListAnomalyDetectors:
     post:
       operationId: ListAnomalyDetectors
-      description: Lists the detectors in the current AWS Region.
+      description: '<p>Lists the detectors in the current AWS Region.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>'
       responses:
         '200':
           description: Success
@@ -1624,7 +1624,7 @@ paths:
                 AnomalyGroupId:
                   description: The ID of the anomaly group.
                   type: string
-                  pattern: '^[a-zA-Z0-9][a-zA-Z0-9\-_]*'
+                  pattern: '[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}'
                   maxLength: 63
                 MetricName:
                   description: The name of the measure field.
@@ -1653,7 +1653,7 @@ paths:
   /ListMetricSets:
     post:
       operationId: ListMetricSets
-      description: Lists the datasets in the current AWS Region.
+      description: '<p>Lists the datasets in the current AWS Region.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>'
       responses:
         '200':
           description: Success
@@ -2030,7 +2030,7 @@ paths:
                 KmsKeyArn:
                   description: The Amazon Resource Name (ARN) of an AWS KMS encryption key.
                   type: string
-                  pattern: 'arn:aws.*:kms:.*:[0-9]{12}:key/.*'
+                  pattern: 'arn:aws.*:kms:.*:[0-9]{12}:key/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}'
                   minLength: 20
                   maxLength: 2048
                 AnomalyDetectorDescription:
@@ -2264,7 +2264,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: THe ARN of the IAM role that has access to the target SNS topic.
+            - description: The ARN of the IAM role that has access to the target SNS topic.
         SnsTopicArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -2373,7 +2373,7 @@ components:
         FlowName:
           allOf:
             - $ref: '#/components/schemas/FlowName'
-            - description: The name of the flow.
+            - description: ' name of the flow.'
       description: Details about an Amazon AppFlow flow datasource.
     CloudWatchConfig:
       type: object
@@ -2613,7 +2613,7 @@ components:
             - description: The pagination token that's included if more results are available.
     UUID:
       type: string
-      pattern: '^[a-zA-Z0-9][a-zA-Z0-9\-_]*'
+      pattern: '[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}'
       maxLength: 63
     TimeSeriesId:
       type: string
@@ -3197,7 +3197,7 @@ components:
             - description: 'A list of <a href="https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html">tags</a> to apply to the alert.'
     KmsKeyArn:
       type: string
-      pattern: 'arn:aws.*:kms:.*:[0-9]{12}:key/.*'
+      pattern: 'arn:aws.*:kms:.*:[0-9]{12}:key/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}'
       minLength: 20
       maxLength: 2048
     CreateAnomalyDetectorRequest:
