@@ -8,14 +8,14 @@ info:
     in Postman account with ease.
 
 
-    The easiest way to get started with the API is to click the [_Run in Postman_](https://www.getpostman.com/docs/run_button_ux) button present at the top of the documentation page and use the Postman App to send requests.
+    The easiest way to get started with the API is to click the **fork** button to fork this collection to your own workspace and use Postman to send requests.
 
 
 
     # Overview
 
 
-    1. You need a valid <a href="#authentication">API Key</a> to send requests to the API endpoints. You can get your key from the [integrations dashboard](https://go.postman.co/integrations/services/pm_pro_api).
+    1. You need a valid <a href="#authentication">API Key</a> to send requests to the API endpoints. You can get your key from the [integrations dashboard](https://go.postman.co/settings/me/api-keys).
 
 
     1. The API has an access <a href="#rate-limits">rate limit</a> applied to it.
@@ -127,19 +127,20 @@ info:
     # Terms of Use
 
 
-    For information on API terms of use and privacy, refer to our policy document at [https://www.getpostman.com/licenses/privacy](https://www.getpostman.com/licenses/privacy)
+    For information on API terms of use and privacy, refer to our terms at [http://postman.com/legal/terms/](http://postman.com/legal/terms/) and our privacy policy at [https://www.postman.com/legal/privacy-policy/](https://www.postman.com/legal/privacy-policy/).
+
 
 
     # API Reference
-  title: Postman API (OpenAPI)
-  version: 1.0.1
+  title: Postman API
+  version: 1.20.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
     url: https://www.vectorlogo.zone/logos/getpostman/getpostman-ar21.svg
   x-origin:
     - format: openapi
-      url: https://gist.githubusercontent.com/MikeRalphson/f5dd7e7e712a4f2caa8f1783f1053dbc/raw/b7d80bdda3497d7d4496c69d2444b170da00a5cf/postman-api.yaml
+      url: https://gist.githubusercontent.com/MikeRalphson/f5dd7e7e712a4f2caa8f1783f1053dbc/raw/05fb7ae8b877b37d93413a0b8183bf60c2e1bdfe/postman-api.yaml
       version: "3.0"
   x-providerName: getpostman.com
 tags:
@@ -167,6 +168,13 @@ tags:
       - `mock`
       - `monitor`
     name: Relations
+  - description: >-
+      With webhooks you can trigger a collection at a specific time with
+      your own custom payload which can then be accessed in the collection.
+
+
+      Learn more about webhooks in our [learning center](https://learning.postman.com/docs/designing-and-developing-your-api/monitoring-your-api/integrations-for-alerts/).
+    name: Webhooks
 paths:
   /apis:
     get:
@@ -178,94 +186,91 @@ paths:
 
 
         > Requires <a href="#authentication">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.
-      operationId: getAllApis
+      operationId: getAllApIs
       parameters:
-        - in: query
+        - description: Only return APIs that are inside the given workspace.
+          in: query
           name: workspace
           schema:
             example: "{{workspaceId}}"
             type: string
+        - description: Only return APIs that have been updated after this time. Time is
+            represented using the ISO 8601 date and time format.
+          in: query
+          name: since
+          schema:
+            example: "{{since}}"
+            type: string
+        - description: Only return APIs that have been updated before this time. Time is
+            represented using the ISO 8601 date and time format.
+          in: query
+          name: until
+          schema:
+            example: "{{until}}"
+            type: string
+        - description: Only return APIs that have been created by the user ID represented
+            by the given value.
+          in: query
+          name: createdBy
+          schema:
+            example: "{{createdBy}}"
+            type: string
+        - description: Only return APIs that have been updated by the user ID represented
+            by the given value.
+          in: query
+          name: updatedBy
+          schema:
+            example: "{{updatedBy}}"
+            type: string
+        - description: Only return APIs with the corresponding privacy state. Public APIs
+            have the isPublic value true; private APIs have the isPublic value
+            false.
+          in: query
+          name: isPublic
+          schema:
+            example: "{{isPublic}}"
+            type: string
+        - description: Only return APIs whose name includes the given value. Matching is
+            case insensitive.
+          in: query
+          name: name
+          schema:
+            example: "{{name}}"
+            type: string
+        - description: Only return APIs whose summary includes the given value. Matching
+            is case insensitive.
+          in: query
+          name: summary
+          schema:
+            example: "{{summary}}"
+            type: string
+        - description: Only return APIs whose description includes the given value.
+            Matching is case insensitive.
+          in: query
+          name: description
+          schema:
+            example: "{{description}}"
+            type: string
+        - description: The value of sort can be one of the names of the fields included in
+            the response.
+          in: query
+          name: sort
+          schema:
+            example: "{{sort}}"
+            type: string
+        - description: The sorting direction, which can be ascending or descending. The
+            value can be asc to specify an ascending direction or desc to
+            specify a descending direction. If none is specified, the default
+            sorting direction is descending for timestamp and numeric fields and
+            ascending otherwise. An ID is not considered a numeric field.
+          in: query
+          name: direction
+          schema:
+            example: "{{direction}}"
+            type: string
       responses:
         "200":
-          content:
-            application/json:
-              examples:
-                Get all APIs:
-                  value:
-                    apis:
-                      - createdAt: 2019-02-12 19:34:49
-                        createdBy: "5665"
-                        description: This is a description.
-                        id: 387c2863-6ee3-4a56-8210-225f774edade
-                        name: Sync API
-                        summary: This is a summary
-                        updatedAt: 2019-02-12 19:34:49
-                      - createdAt: 2019-02-12 19:34:49
-                        createdBy: "5665"
-                        description: This is a description.
-                        id: 387c2863-6ee3-4a56-8210-225f774edade
-                        name: Sync API
-                        summary: This is a summary
-                        updatedAt: 2019-02-12 19:34:49
-                      - createdAt: 2019-02-12 19:34:49
-                        createdBy: "5665"
-                        description: This is a description.
-                        id: 387c2863-6ee3-4a56-8210-225f774edhdh
-                        name: Sync API 2
-                        summary: This is a summary
-                        updatedAt: 2019-02-12 19:34:49
-              schema:
-                properties:
-                  apis:
-                    example:
-                      - createdAt: 2019-02-12 19:34:49
-                        createdBy: "5665"
-                        description: This is a description.
-                        id: 387c2863-6ee3-4a56-8210-225f774edade
-                        name: Sync API
-                        summary: This is a summary
-                        updatedAt: 2019-02-12 19:34:49
-                      - createdAt: 2019-02-12 19:34:49
-                        createdBy: "5665"
-                        description: This is a description.
-                        id: 387c2863-6ee3-4a56-8210-225f774edade
-                        name: Sync API
-                        summary: This is a summary
-                        updatedAt: 2019-02-12 19:34:49
-                      - createdAt: 2019-02-12 19:34:49
-                        createdBy: "5665"
-                        description: This is a description.
-                        id: 387c2863-6ee3-4a56-8210-225f774edhdh
-                        name: Sync API 2
-                        summary: This is a summary
-                        updatedAt: 2019-02-12 19:34:49
-                    items:
-                      properties:
-                        createdAt:
-                          example: 2019-02-12 19:34:49
-                          type: string
-                        createdBy:
-                          example: "5665"
-                          type: string
-                        description:
-                          example: This is a description.
-                          type: string
-                        id:
-                          example: 387c2863-6ee3-4a56-8210-225f774edade
-                          type: string
-                        name:
-                          example: Sync API
-                          type: string
-                        summary:
-                          example: This is a summary
-                          type: string
-                        updatedAt:
-                          example: 2019-02-12 19:34:49
-                          type: string
-                      type: object
-                    type: array
-                type: object
-          description: Get all APIs
+          description: ""
       summary: Get all APIs
       tags:
         - API
@@ -293,9 +298,9 @@ paths:
           application/json:
             example:
               api:
-                description: This is a consolidated description.
-                name: Consolidated Sync Service API
-                summary: Consolidated This is supposed to be a short summary.
+                description: This is description.
+                name: Sync Service API
+                summary: This is supposed to be a short summary.
             schema:
               properties:
                 api:
@@ -567,21 +572,6 @@ paths:
               schema:
                 properties:
                   versions:
-                    example:
-                      - createdAt: 2019-02-12 19:34:49
-                        createdBy: "5665"
-                        description: Description
-                        id: 024660a6-c837-46ca-91d8-7e8dd7c669de
-                        name: "0.1"
-                        summary: Summary
-                        updatedAt: 2019-02-12 19:34:49
-                      - createdAt: 2019-02-12 19:34:49
-                        createdBy: "5665"
-                        description: Description
-                        id: 00932d3b-20f1-454f-a77e-38b4023163ea
-                        name: "0.2"
-                        summary: Summary
-                        updatedAt: 2019-02-12 19:34:49
                     items:
                       properties:
                         createdAt:
@@ -821,8 +811,6 @@ paths:
                         example: "0.1"
                         type: string
                       schema:
-                        example:
-                          - 3484cd1e-e00d-4c39-aea4-539663afe898
                         items:
                           example: 3484cd1e-e00d-4c39-aea4-539663afe898
                           type: string
@@ -957,15 +945,6 @@ paths:
               schema:
                 properties:
                   contracttest:
-                    example:
-                      - collectionId: 7732157-a8bcd149-2b01-4b4c-8c14-c7d05be77745
-                        id: 2a9b8fa8-88b7-4b86-8372-8e3f6f6e07f2
-                        name: C test
-                        updatedAt: 2019-08-29T10:18:11.000Z
-                      - collectionId: 7332157-a8bcd143-2b01-4b12-8c14-c7d05be77725
-                        id: 521b0486-ab91-4d3a-9189-43c9380a0533
-                        name: C1
-                        updatedAt: 2019-08-29T11:40:39.000Z
                     items:
                       properties:
                         collectionId:
@@ -1030,15 +1009,6 @@ paths:
               schema:
                 properties:
                   documentation:
-                    example:
-                      - collectionId: 7732157-a8bcd149-2b01-4b4c-8c14-c7d05be77745
-                        id: 2a9b8fa8-88b7-4b86-8372-8e3f6f6e07f2
-                        name: C test
-                        updatedAt: 2019-08-29T10:18:11.000Z
-                      - collectionId: 7332157-a8bcd143-2b01-4b12-8c14-c7d05be77725
-                        id: 521b0486-ab91-4d3a-9189-43c9380a0533
-                        name: C1
-                        updatedAt: 2019-08-29T11:40:39.000Z
                     items:
                       properties:
                         collectionId:
@@ -1101,13 +1071,6 @@ paths:
               schema:
                 properties:
                   environment:
-                    example:
-                      - id: 2a9b8fa8-88b7-4b86-8372-8e3f6f6e07f2
-                        name: C test
-                        updatedAt: 2019-08-29T10:18:11.000Z
-                      - id: 521b0486-ab91-4d3a-9189-43c9380a0533
-                        name: C1
-                        updatedAt: 2019-08-29T11:40:39.000Z
                     items:
                       properties:
                         id:
@@ -1169,15 +1132,6 @@ paths:
               schema:
                 properties:
                   integrationtest:
-                    example:
-                      - collectionId: 7732157-a8bcd149-2b01-4b4c-8c14-c7d05be77745
-                        id: 2a9b8fa8-88b7-4b86-8372-8e3f6f6e07f2
-                        name: C test
-                        updatedAt: 2019-08-29T10:18:11.000Z
-                      - collectionId: 7332157-a8bcd143-2b01-4b12-8c14-c7d05be77725
-                        id: 521b0486-ab91-4d3a-9189-43c9380a0533
-                        name: C1
-                        updatedAt: 2019-08-29T11:40:39.000Z
                     items:
                       properties:
                         collectionId:
@@ -1242,15 +1196,6 @@ paths:
               schema:
                 properties:
                   monitor:
-                    example:
-                      - id: 2a9b8fa8-88b7-4b86-8372-8e3f6f6e07f2
-                        monitorId: 7732157-a8bcd149-2b01-4b4c-8c14-c7d05be77745
-                        name: C test
-                        updatedAt: 2019-08-29T10:18:11.000Z
-                      - id: 521b0486-ab91-4d3a-9189-43c9380a0533
-                        monitorId: 7332157-a8bcd143-2b01-4b12-8c14-c7d05be77725
-                        name: C1
-                        updatedAt: 2019-08-29T11:40:39.000Z
                     items:
                       properties:
                         id:
@@ -1467,30 +1412,21 @@ paths:
             schema:
               properties:
                 contracttest:
-                  example:
-                    - collection-uid-1
                   items:
                     example: collection-uid-1
                     type: string
                   type: array
                 documentation:
-                  example:
-                    - collection-uid-3
                   items:
                     example: collection-uid-3
                     type: string
                   type: array
                 mock:
-                  example:
-                    - mock-uid-1
                   items:
                     example: mock-uid-1
                     type: string
                   type: array
                 testsuite:
-                  example:
-                    - collection-uid-1
-                    - collection-uid-2
                   items:
                     example: collection-uid-1
                     type: string
@@ -1513,23 +1449,16 @@ paths:
               schema:
                 properties:
                   contracttest:
-                    example:
-                      - 5bcece87-ca4b-4e75-a967-2a6845626164
                     items:
                       example: 5bcece87-ca4b-4e75-a967-2a6845626164
                       type: string
                     type: array
                   documentation:
-                    example:
-                      - 2084eba6-a17b-4751-8f03-ea60f30ba19c
                     items:
                       example: 2084eba6-a17b-4751-8f03-ea60f30ba19c
                       type: string
                     type: array
                   testsuite:
-                    example:
-                      - e525fa71-035e-4620-acda-ce878524f1e7
-                      - 17a974b2-ce79-4b95-9d3f-217d6ff7e979
                     items:
                       example: e525fa71-035e-4620-acda-ce878524f1e7
                       type: string
@@ -2284,8 +2213,6 @@ paths:
                   example: My generated collection
                   type: string
                 relations:
-                  example:
-                    - type: contracttest
                   items:
                     properties:
                       type:
@@ -2319,9 +2246,6 @@ paths:
                         type: string
                     type: object
                   relations:
-                    example:
-                      - id: 4b40f06a-5a6a-448f-bfcd-a6dbcb68da22
-                        type: contracttest
                     items:
                       properties:
                         id:
@@ -2369,15 +2293,6 @@ paths:
               schema:
                 properties:
                   testsuite:
-                    example:
-                      - collectionId: 7732157-a8bcd149-2b01-4b4c-8c14-c7d05be77745
-                        id: 2a9b8fa8-88b7-4b86-8372-8e3f6f6e07f2
-                        name: C test
-                        updatedAt: 2019-08-29T10:18:11.000Z
-                      - collectionId: 7332157-a8bcd143-2b01-4b12-8c14-c7d05be77725
-                        id: 521b0486-ab91-4d3a-9189-43c9380a0533
-                        name: C1
-                        updatedAt: 2019-08-29T11:40:39.000Z
                     items:
                       properties:
                         collectionId:
@@ -2411,6 +2326,87 @@ paths:
         required: true
         schema:
           type: string
+  "/apis/{apiId}/versions/{apiVersionId}/{entityType}/{entityId}/syncWithSchema":
+    parameters:
+      - description: Id of the API
+        in: path
+        name: apiId
+        required: true
+        schema:
+          example: "{{apiId}}"
+          type: string
+      - description: Id of the API version
+        in: path
+        name: apiVersionId
+        required: true
+        schema:
+          example: "{{apiVersionId}}"
+          type: string
+      - description: Relation type (e.g documentation, contracttest, integrationtest,
+          testsuite, mock, monitor)
+        in: path
+        name: entityType
+        required: true
+        schema:
+          example: "{{entityType}}"
+          type: string
+      - description: Relation id
+        in: path
+        name: entityId
+        required: true
+        schema:
+          example: "{{entityId}}"
+          type: string
+    put:
+      description: >-
+        This call allows you to keep the relation in sync with the API
+        schema.
+
+
+
+        > Requires <a href="#authentication">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.
+      operationId: syncRelationsWithSchema
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Successful sync:
+                  value:
+                    success: true
+              schema:
+                properties:
+                  success:
+                    example: true
+                    type: boolean
+                type: object
+          description: Successful sync
+        "400":
+          content:
+            application/json:
+              examples:
+                Failed to sync:
+                  value:
+                    error:
+                      message: Unable to validate. Only the OpenAPI 3.0 schema format is supported.
+                      name: validationFailed
+              schema:
+                properties:
+                  error:
+                    properties:
+                      message:
+                        example: Unable to validate. Only the OpenAPI 3.0 schema format is supported.
+                        type: string
+                      name:
+                        example: validationFailed
+                        type: string
+                    type: object
+                type: object
+          description: Failed to sync
+      summary: Sync relations with schema
+      tags:
+        - API
+        - Relations
   /collections:
     get:
       description: >-
@@ -2448,19 +2444,6 @@ paths:
               schema:
                 properties:
                   collections:
-                    example:
-                      - id: dac5eac9-148d-a32e-b76b-3edee9da28f7
-                        name: Cloud API
-                        owner: "631643"
-                        uid: 631643-dac5eac9-148d-a32e-b76b-3edee9da28f7
-                      - id: f2e66c2e-5297-e4a5-739e-20cbb90900e3
-                        name: Sample Collection
-                        owner: "631643"
-                        uid: 631643-f2e66c2e-5297-e4a5-739e-20cbb90900e3
-                      - id: f695cab7-6878-eb55-7943-ad88e1ccfd65
-                        name: Postman Echo
-                        owner: "631643"
-                        uid: 631643-f695cab7-6878-eb55-7943-ad88e1ccfd65
                     items:
                       properties:
                         id:
@@ -2543,40 +2526,9 @@ paths:
                           type: string
                       type: object
                     item:
-                      example:
-                        - item:
-                            - name: Sample POST Request
-                              request:
-                                body:
-                                  mode: raw
-                                  raw: '{"data": "123"}'
-                                description: This is a sample POST Request
-                                header:
-                                  - key: Content-Type
-                                    value: application/json
-                                method: POST
-                                url: https://postman-echo.com/post
-                          name: This is a folder
-                        - name: Sample GET Request
-                          request:
-                            description: This is a sample GET Request
-                            method: GET
-                            url: https://postman-echo/get
                       items:
                         properties:
                           item:
-                            example:
-                              - name: Sample POST Request
-                                request:
-                                  body:
-                                    mode: raw
-                                    raw: '{"data": "123"}'
-                                  description: This is a sample POST Request
-                                  header:
-                                    - key: Content-Type
-                                      value: application/json
-                                  method: POST
-                                  url: https://postman-echo.com/post
                             items:
                               properties:
                                 name:
@@ -2597,9 +2549,6 @@ paths:
                                       example: This is a sample POST Request
                                       type: string
                                     header:
-                                      example:
-                                        - key: Content-Type
-                                          value: application/json
                                       items:
                                         properties:
                                           key:
@@ -2622,18 +2571,6 @@ paths:
                           name:
                             example: This is a folder
                             type: string
-                          request:
-                            properties:
-                              description:
-                                example: This is a sample GET Request
-                                type: string
-                              method:
-                                example: GET
-                                type: string
-                              url:
-                                example: https://postman-echo/get
-                                type: string
-                            type: object
                         type: object
                       type: array
                   type: object
@@ -2643,7 +2580,7 @@ paths:
           content:
             application/json:
               examples:
-                Collection Created:
+                Create Collection in a Workspace:
                   value:
                     collection:
                       id: 2412a72c-1d8e-491b-aced-93809c0e94e9
@@ -2664,7 +2601,7 @@ paths:
                         type: string
                     type: object
                 type: object
-          description: Collection Created
+          description: Create Collection in a Workspace
         "400":
           content:
             application/json:
@@ -2941,60 +2878,9 @@ paths:
                             type: string
                         type: object
                       item:
-                        example:
-                          - event:
-                              - listen: test
-                                script:
-                                  exec: >+
-                                    var responseJSON;
-
-                                    try {
-                                        tests["Body contains headers"] = responseBody.has("headers");
-                                        responseJSON = JSON.parse(responseBody);
-                                        tests["Header contains host"] = "host" in responseJSON.headers;
-                                        tests["Header contains test parameter sent as part of request header"] = "my-sample-header" in responseJSON.headers;
-                                    }
-
-                                    catch (e) { }
-
-
-
-                                  type: text/javascript
-                            id: 82ee981b-e19f-962a-401e-ea34ebfb4848
-                            name: Request Headers
-                            request:
-                              body:
-                                formdata: []
-                                mode: formdata
-                              description: ""
-                              header:
-                                - description: ""
-                                  key: my-sample-header
-                                  value: Lorem ipsum dolor sit amet
-                              method: GET
-                              url: https://echo.getpostman.com/headers
-                            response: []
                         items:
                           properties:
                             event:
-                              example:
-                                - listen: test
-                                  script:
-                                    exec: >+
-                                      var responseJSON;
-
-                                      try {
-                                          tests["Body contains headers"] = responseBody.has("headers");
-                                          responseJSON = JSON.parse(responseBody);
-                                          tests["Header contains host"] = "host" in responseJSON.headers;
-                                          tests["Header contains test parameter sent as part of request header"] = "my-sample-header" in responseJSON.headers;
-                                      }
-
-                                      catch (e) { }
-
-
-
-                                    type: text/javascript
                               items:
                                 properties:
                                   listen:
@@ -3035,7 +2921,6 @@ paths:
                                 body:
                                   properties:
                                     formdata:
-                                      example: []
                                       items: {}
                                       type: array
                                     mode:
@@ -3046,10 +2931,6 @@ paths:
                                   example: ""
                                   type: string
                                 header:
-                                  example:
-                                    - description: ""
-                                      key: my-sample-header
-                                      value: Lorem ipsum dolor sit amet
                                   items:
                                     properties:
                                       description:
@@ -3071,13 +2952,11 @@ paths:
                                   type: string
                               type: object
                             response:
-                              example: []
                               items: {}
                               type: array
                           type: object
                         type: array
                       variables:
-                        example: []
                         items: {}
                         type: array
                     type: object
@@ -3157,40 +3036,9 @@ paths:
                           type: string
                       type: object
                     item:
-                      example:
-                        - item:
-                            - name: Sample POST Request
-                              request:
-                                body:
-                                  mode: raw
-                                  raw: '{"data": "123"}'
-                                description: This is a sample POST Request
-                                header:
-                                  - key: Content-Type
-                                    value: application/json
-                                method: POST
-                                url: https://postman-echo.com/post
-                          name: This is a folder
-                        - name: Sample GET Request
-                          request:
-                            description: This is a sample GET Request
-                            method: GET
-                            url: https://postman-echo/get
                       items:
                         properties:
                           item:
-                            example:
-                              - name: Sample POST Request
-                                request:
-                                  body:
-                                    mode: raw
-                                    raw: '{"data": "123"}'
-                                  description: This is a sample POST Request
-                                  header:
-                                    - key: Content-Type
-                                      value: application/json
-                                  method: POST
-                                  url: https://postman-echo.com/post
                             items:
                               properties:
                                 name:
@@ -3211,9 +3059,6 @@ paths:
                                       example: This is a sample POST Request
                                       type: string
                                     header:
-                                      example:
-                                        - key: Content-Type
-                                          value: application/json
                                       items:
                                         properties:
                                           key:
@@ -3236,18 +3081,6 @@ paths:
                           name:
                             example: This is a folder
                             type: string
-                          request:
-                            properties:
-                              description:
-                                example: This is a sample GET Request
-                                type: string
-                              method:
-                                example: GET
-                                type: string
-                              url:
-                                example: https://postman-echo/get
-                                type: string
-                            type: object
                         type: object
                       type: array
                   type: object
@@ -3283,24 +3116,26 @@ paths:
           content:
             application/json:
               examples:
-                Malformed Request:
+                Collection ID Mismatch:
                   value:
                     error:
-                      message: "Missing required property: name at info"
-                      name: malformedRequestError
+                      message: The collection ID in the path does not match the collection ID in the
+                        request body.
+                      name: collectionMismatchError
               schema:
                 properties:
                   error:
                     properties:
                       message:
-                        example: "Missing required property: name at info"
+                        example: The collection ID in the path does not match the collection ID in the
+                          request body.
                         type: string
                       name:
-                        example: malformedRequestError
+                        example: collectionMismatchError
                         type: string
                     type: object
                 type: object
-          description: Malformed Request
+          description: Collection ID Mismatch
         "403":
           content:
             application/json:
@@ -3392,15 +3227,6 @@ paths:
               schema:
                 properties:
                   environments:
-                    example:
-                      - id: 357668d2-84f1-2264-438b-113095359f80
-                        name: Postman Cloud API
-                        owner: "631643"
-                        uid: 631643-357668d2-84f1-2264-438b-113095359f80
-                      - id: 84a119b6-f4b1-9120-5f11-a73b17818d70
-                        name: Postman Cloud API.template
-                        owner: "631643"
-                        uid: 631643-84a119b6-f4b1-9120-5f11-a73b17818d70
                     items:
                       properties:
                         id:
@@ -3496,11 +3322,6 @@ paths:
                       example: Sample Environment Name (required)
                       type: string
                     values:
-                      example:
-                        - key: variable_name_1
-                          value: The value of the variable
-                        - key: variable_name_2
-                          value: ""
                       items:
                         properties:
                           key:
@@ -3518,7 +3339,7 @@ paths:
           content:
             application/json:
               examples:
-                Create Environment in a Workspace:
+                Successful Response:
                   value:
                     environment:
                       id: f158266e-306b-4702-a2b9-e4ede7878b7a
@@ -3539,7 +3360,7 @@ paths:
                         type: string
                     type: object
                 type: object
-          description: Create Environment in a Workspace
+          description: Successful Response
         "400":
           content:
             application/json:
@@ -3657,12 +3478,6 @@ paths:
                         example: Postman Cloud API.template
                         type: string
                       values:
-                        example:
-                          - enabled: true
-                            hovered: false
-                            key: postman_api_key
-                            type: text
-                            value: ""
                         items:
                           properties:
                             enabled:
@@ -3780,11 +3595,6 @@ paths:
                       example: New Name
                       type: string
                     values:
-                      example:
-                        - key: name
-                          value: Bruce Wayne
-                        - key: occupation
-                          value: Vigilante
                       items:
                         properties:
                           key:
@@ -3867,56 +3677,37 @@ paths:
       operationId: importExportedData
       requestBody:
         content:
-          multipart/form-data:
-            schema:
-              properties:
-                file:
-                  description: File containing the exported collections or environments
-                  format: binary
-                  type: string
-                type:
-                  example: file
-                  type: string
-              type: object
+          application/octet-stream: {}
       responses:
         "200":
           content:
             application/json:
               examples:
-                "Success: Import the exported file":
+                "Success: Import to a specific workspace with workspace ID passed as a query parameter":
                   value:
                     collections:
-                      - id: c74f2169-0c59-49f6-b04f-fdec4aba3db3
-                        name: demo
-                        uid: 2282-c74f2169-0c59-49f6-b04f-fdec4aba3db3
-                      - id: 49b08197-6b3d-4957-88d3-dbba0e3ee6a0
-                        name: demo
-                        uid: 2282-49b08197-6b3d-4957-88d3-dbba0e3ee6a0
+                      - id: b31be584-1b1e-4444-b581-761edf88fe77
+                        name: Swagger Petstore
+                        uid: 2282-b31be584-1b1e-4444-b581-761edf88fe77
               schema:
                 properties:
                   collections:
-                    example:
-                      - id: c74f2169-0c59-49f6-b04f-fdec4aba3db3
-                        name: demo
-                        uid: 2282-c74f2169-0c59-49f6-b04f-fdec4aba3db3
-                      - id: 49b08197-6b3d-4957-88d3-dbba0e3ee6a0
-                        name: demo
-                        uid: 2282-49b08197-6b3d-4957-88d3-dbba0e3ee6a0
                     items:
                       properties:
                         id:
-                          example: c74f2169-0c59-49f6-b04f-fdec4aba3db3
+                          example: b31be584-1b1e-4444-b581-761edf88fe77
                           type: string
                         name:
-                          example: demo
+                          example: Swagger Petstore
                           type: string
                         uid:
-                          example: 2282-c74f2169-0c59-49f6-b04f-fdec4aba3db3
+                          example: 2282-b31be584-1b1e-4444-b581-761edf88fe77
                           type: string
                       type: object
                     type: array
                 type: object
-          description: "Success: Import the exported file"
+          description: "Success: Import to a specific workspace with workspace ID passed
+            as a query parameter"
         "400":
           content:
             application/json:
@@ -4060,14 +3851,6 @@ paths:
                                   example: listPets
                                   type: string
                                 parameters:
-                                  example:
-                                    - description: limit
-                                      in: query
-                                      name: limit
-                                      required: false
-                                      schema:
-                                        format: int32
-                                        type: integer
                                   items:
                                     properties:
                                       description:
@@ -4122,9 +3905,6 @@ paths:
                                                           type: object
                                                       type: object
                                                     required:
-                                                      example:
-                                                        - code
-                                                        - message
                                                       items:
                                                         example: code
                                                         type: string
@@ -4144,8 +3924,6 @@ paths:
                           type: object
                       type: object
                     servers:
-                      example:
-                        - url: http://petstore.swagger.io/v1
                       items:
                         properties:
                           url:
@@ -4163,40 +3941,31 @@ paths:
           content:
             application/json:
               examples:
-                "Success: Import a file":
+                "Success: Import to a specific workspace with workspace ID passed as a query parameter":
                   value:
                     collections:
-                      - id: c74f2169-0c59-49f6-b04f-fdec4aba3db3
-                        name: demo
-                        uid: 2282-c74f2169-0c59-49f6-b04f-fdec4aba3db3
-                      - id: 49b08197-6b3d-4957-88d3-dbba0e3ee6a0
-                        name: demo
-                        uid: 2282-49b08197-6b3d-4957-88d3-dbba0e3ee6a0
+                      - id: b31be584-1b1e-4444-b581-761edf88fe77
+                        name: Swagger Petstore
+                        uid: 2282-b31be584-1b1e-4444-b581-761edf88fe77
               schema:
                 properties:
                   collections:
-                    example:
-                      - id: c74f2169-0c59-49f6-b04f-fdec4aba3db3
-                        name: demo
-                        uid: 2282-c74f2169-0c59-49f6-b04f-fdec4aba3db3
-                      - id: 49b08197-6b3d-4957-88d3-dbba0e3ee6a0
-                        name: demo
-                        uid: 2282-49b08197-6b3d-4957-88d3-dbba0e3ee6a0
                     items:
                       properties:
                         id:
-                          example: c74f2169-0c59-49f6-b04f-fdec4aba3db3
+                          example: b31be584-1b1e-4444-b581-761edf88fe77
                           type: string
                         name:
-                          example: demo
+                          example: Swagger Petstore
                           type: string
                         uid:
-                          example: 2282-c74f2169-0c59-49f6-b04f-fdec4aba3db3
+                          example: 2282-b31be584-1b1e-4444-b581-761edf88fe77
                           type: string
                       type: object
                     type: array
                 type: object
-          description: "Success: Import a file"
+          description: "Success: Import to a specific workspace with workspace ID passed
+            as a query parameter"
         "400":
           content:
             application/json:
@@ -4235,8 +4004,10 @@ paths:
   /me:
     get:
       description: >-
-        The `/me` endpoint allows you to fetch relevant information
-        pertaining to the API Key being used.
+        the `/me` Postman API endpoint lets you access information about
+        the authenticated user. You can retrieve the authenticated user's
+        username, full name, e-mail address, and any other available
+        information.
 
 
         > Requires <a href="#authentication">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.
@@ -4248,14 +4019,88 @@ paths:
               examples:
                 Valid Response:
                   value:
+                    operations:
+                      - limit: 1000000
+                        name: mock_usage
+                        overage: 0
+                        usage: 2382
+                      - limit: 10000000
+                        name: monitor_request_runs
+                        overage: 0
+                        usage: 49492
+                      - limit: 5000000
+                        name: documenter_public_views
+                        overage: 0
+                        usage: 120232
+                      - limit: 1000000
+                        name: api_usage
+                        overage: 0
+                        usage: 1345
+                      - limit: 25
+                        name: custom_domains
+                        overage: 0
+                        usage: 1
+                      - limit: 1
+                        name: custom_authentication_methods
+                        overage: 0
+                        usage: 1
+                      - limit: 10000
+                        name: serverless_requests
+                        overage: 0
+                        usage: 0
+                      - limit: 5000
+                        name: integrations
+                        overage: 0
+                        usage: 145
+                      - limit: 1000000
+                        name: cloud_agent_requests
+                        overage: 0
+                        usage: 23823
                     user:
+                      avatar: https://www.gravatar.com/avatar/e1f3994f2632af3d1c8c2dcc168a10e6
+                      email: janedoe@example.com
+                      fullName: Jane Doe
                       id: "631643"
+                      isPublic: false
+                      username: janedoe
               schema:
                 properties:
+                  operations:
+                    items:
+                      properties:
+                        limit:
+                          example: 1000000
+                          type: number
+                        name:
+                          example: mock_usage
+                          type: string
+                        overage:
+                          example: 0
+                          type: number
+                        usage:
+                          example: 2382
+                          type: number
+                      type: object
+                    type: array
                   user:
                     properties:
+                      avatar:
+                        example: https://www.gravatar.com/avatar/e1f3994f2632af3d1c8c2dcc168a10e6
+                        type: string
+                      email:
+                        example: janedoe@example.com
+                        type: string
+                      fullName:
+                        example: Jane Doe
+                        type: string
                       id:
                         example: "631643"
+                        type: string
+                      isPublic:
+                        example: false
+                        type: boolean
+                      username:
+                        example: janedoe
                         type: string
                     type: object
                 type: object
@@ -4293,18 +4138,6 @@ paths:
               schema:
                 properties:
                   mocks:
-                    example:
-                      - collection: 1679925-39fee52f-b806-3ffa-1173-00a6f5b183dc
-                        environment: 1679925-0b9e9f15-3208-a2b1-22e0-d58392f01524
-                        id: 0fca2246-c108-41f5-8454-cc032def329f
-                        mockUrl: https://0fca2246-c108-41f5-8454-cc032def329f.mock.pstmn.io
-                        owner: "1679925"
-                        uid: 1679925-0fca2246-c108-41f5-8454-cc032def329f
-                      - collection: 1679925-37294bb0-e27b-5e52-93ae-c07dd445216d
-                        id: 2c624389-705a-4e66-9777-05314b431796
-                        mockUrl: https://2c624389-705a-4e66-9777-05314b431796.mock.pstmn.io
-                        owner: "1679925"
-                        uid: 1679925-2c624389-705a-4e66-9777-05314b431796
                     items:
                       properties:
                         collection:
@@ -4368,7 +4201,7 @@ paths:
           content:
             application/json:
               examples:
-                Create Mock in a Workspace:
+                Successful Response:
                   value:
                     mock:
                       collection: 1679925-39fee52f-b806-3ffa-1173-00a6f5b183dc
@@ -4401,7 +4234,7 @@ paths:
                         type: string
                     type: object
                 type: object
-          description: Create Mock in a Workspace
+          description: Successful Response
       summary: Create Mock
       tags:
         - Mocks
@@ -4575,7 +4408,6 @@ paths:
                       config:
                         properties:
                           headers:
-                            example: []
                             items: {}
                             type: array
                           matchBody:
@@ -4719,19 +4551,6 @@ paths:
               schema:
                 properties:
                   monitors:
-                    example:
-                      - id: 1e6b6c77-2031-42d0-9948-76d7251b2dd1
-                        name: Batman & Sherlock Holmes Monitor
-                        owner: "5852"
-                        uid: 5852-1e6b6c77-2031-42d0-9948-76d7251b2dd1
-                      - id: 1e6b6cb7-f13d-4000-acb7-0695757174a8
-                        name: Team Level Monitor
-                        owner: "5886"
-                        uid: 5886-1e6b6cb7-f13d-4000-acb7-0695757174a8
-                      - id: 1e6b6cc1-c760-48e0-968f-4bfaeeae9af1
-                        name: Postman Echo Monitor
-                        owner: "5852"
-                        uid: 5852-1e6b6cc1-c760-48e0-968f-4bfaeeae9af1
                     items:
                       properties:
                         id:
@@ -4832,7 +4651,7 @@ paths:
           content:
             application/json:
               examples:
-                Monitor Created:
+                Create Monitor in a Workspace:
                   value:
                     monitor:
                       id: 1e6b6dfd-7ba4-4590-9ee1-5948102d7797
@@ -4853,19 +4672,18 @@ paths:
                         type: string
                     type: object
                 type: object
-          description: Monitor Created
+          description: Create Monitor in a Workspace
         "400":
           content:
             application/json:
               examples:
-                Invalid Environment UID:
+                Parameter Missing:
                   value:
                     error:
                       details:
-                        param: environment
-                        uid: 8a4c21ea-2a36-40d1-a82d-d717fac9d6ef
-                      message: The specified uid is invalid.
-                      name: invalidUidError
+                        param: monitor
+                      message: Parameter is missing in the request.
+                      name: paramMissingError
               schema:
                 properties:
                   error:
@@ -4873,21 +4691,18 @@ paths:
                       details:
                         properties:
                           param:
-                            example: environment
-                            type: string
-                          uid:
-                            example: 8a4c21ea-2a36-40d1-a82d-d717fac9d6ef
+                            example: monitor
                             type: string
                         type: object
                       message:
-                        example: The specified uid is invalid.
+                        example: Parameter is missing in the request.
                         type: string
                       name:
-                        example: invalidUidError
+                        example: paramMissingError
                         type: string
                     type: object
                 type: object
-          description: Invalid Environment UID
+          description: Parameter Missing
       summary: Create Monitor
       tags:
         - Monitors
@@ -5003,7 +4818,6 @@ paths:
                         example: 5852-8d05dd85-222c-1452-553b-e76a531b71ed
                         type: string
                       distribution:
-                        example: []
                         items: {}
                         type: array
                       environmentUid:
@@ -5048,8 +4862,6 @@ paths:
                       notifications:
                         properties:
                           onError:
-                            example:
-                              - email: john.appleseed@example.com
                             items:
                               properties:
                                 email:
@@ -5058,8 +4870,6 @@ paths:
                               type: object
                             type: array
                           onFailure:
-                            example:
-                              - email: john.appleseed@example.com
                             items:
                               properties:
                                 email:
@@ -5361,98 +5171,8 @@ paths:
                   run:
                     properties:
                       executions:
-                        example:
-                          - id: 1
-                            item:
-                              id: b5e8d7dd-909c-4ba7-aef4-8609bc50b586
-                              name: Sample POST Request
-                            request:
-                              body:
-                                contentLength: 18
-                                mode: raw
-                              headers:
-                                accept: "*/*"
-                                accept-encoding: gzip, deflate
-                                content-length: 18
-                                content-type: application/json
-                              method: POST
-                              timestamp: 2016-12-04T14:30:26.025Z
-                              url: echo.getpostman.com/post
-                            response:
-                              body:
-                                contentLength: 298
-                              code: 200
-                              headers:
-                                connection: keep-alive
-                                content-encoding: gzip
-                                content-type: application/json
-                                date: Sun, 04 Dec 2016 14:30:26 GMT
-                                transfer-encoding: chunked
-                              responseSize: 298
-                              responseTime: 26
-                          - assertions:
-                              Status code is 400: false
-                            id: 2
-                            item:
-                              id: f790d046-755d-44f5-a416-b825e18dfd9d
-                              name: Sample GET Request
-                            request:
-                              body:
-                                contentLength: 0
-                                mode: formdata
-                              headers:
-                                accept: "*/*"
-                                accept-encoding: gzip, deflate
-                              method: GET
-                              timestamp: 2016-12-04T14:30:26.093Z
-                              url: echo.getpostman.com/get
-                            response:
-                              body:
-                                contentLength: 280
-                              code: 200
-                              headers:
-                                connection: keep-alive
-                                content-encoding: gzip
-                                content-type: application/json
-                                date: Sun, 04 Dec 2016 14:30:26 GMT
-                                transfer-encoding: chunked
-                              responseSize: 280
-                              responseTime: 46
-                          - id: 3
-                            item:
-                              id: 336e6e17-6d3e-4b8f-a48f-b7e75cf13afb
-                              name: This is the second request
-                            request:
-                              body:
-                                contentLength: 0
-                                mode: formdata
-                              headers:
-                                accept: "*/*"
-                                accept-encoding: gzip, deflate
-                                content-length: 18
-                              method: POST
-                              timestamp: 2016-12-04T14:30:26.477Z
-                              url: echo.getpostman.com/post
-                            response:
-                              body:
-                                contentLength: 345
-                              code: 200
-                              headers:
-                                connection: keep-alive
-                                content-encoding: gzip
-                                content-type: application/json
-                                date: Sun, 04 Dec 2016 14:30:26 GMT
-                                transfer-encoding: chunked
-                              responseSize: 345
-                              responseTime: 9
                         items:
                           properties:
-                            assertions:
-                              properties:
-                                Status code is 400:
-                                  example: false
-                                  type: boolean
-                              type: object
                             id:
                               example: 1
                               type: number
@@ -5540,12 +5260,6 @@ paths:
                           type: object
                         type: array
                       failures:
-                        example:
-                          - assertion:
-                              Status code is 400: false
-                            executionId: 2
-                            message: Expected 'Status code is 400' to be truthy
-                            name: AssertionError
                         items:
                           properties:
                             assertion:
@@ -5616,6 +5330,54 @@ paths:
       summary: Run a Monitor
       tags:
         - Monitors
+  /webhooks:
+    post:
+      description: >-
+        Create a webhook that triggers a collection with your custom
+        payload.
+
+
+        You can specify the webhook name and the collection to trigger by using the following attributes of the `webhook` object on your JSON body:
+
+
+        * `name`: the name of the webhook that you're creating.
+
+        * `collection`: the ID of the collection that you want to trigger once this webhook is called.
+
+
+        Once created, the webhook URL can be retrieved by accessing the `webhookUrl` attribute of the `webhook` object on the response JSON payload.
+      operationId: createWebhook
+      parameters:
+        - in: query
+          name: workspace
+          schema:
+            example: "{{workspace_id}}"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              webhook:
+                collection: "{{collection_id}}"
+                name: "{{webhook_name}}"
+            schema:
+              properties:
+                webhook:
+                  properties:
+                    collection:
+                      example: "{{collection_id}}"
+                      type: string
+                    name:
+                      example: "{{webhook_name}}"
+                      type: string
+                  type: object
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Create Webhook
+      tags:
+        - Webhooks
   /workspaces:
     get:
       description: >-
@@ -5647,13 +5409,6 @@ paths:
               schema:
                 properties:
                   workspaces:
-                    example:
-                      - id: 4e6d34c2-cfdb-4b33-8868-12a875bebda3
-                        name: My Workspace
-                        type: personal
-                      - id: f8801e9e-03a4-4c7b-b31e-5db5cd771696
-                        name: Team workspace
-                        type: team
                     items:
                       properties:
                         id:
@@ -5709,10 +5464,6 @@ paths:
                 workspace:
                   properties:
                     collections:
-                      example:
-                        - id: e1fc3c38-a0b8-44a3-bd44-d753a96b2e9d
-                          name: Straw hats
-                          uid: 8154-e1fc3c38-a0b8-44a3-bd44-d753a96b2e9d
                       items:
                         properties:
                           id:
@@ -5730,10 +5481,6 @@ paths:
                       example: Some description
                       type: string
                     environments:
-                      example:
-                        - id: 83a1aaa2-a204-4bd8-9b92-4d486918906b
-                          name: env
-                          uid: 8154-83a1aaa2-a204-4bd8-9b92-4d486918906b
                       items:
                         properties:
                           id:
@@ -5748,8 +5495,6 @@ paths:
                         type: object
                       type: array
                     mocks:
-                      example:
-                        - id: cda672ef-1375-40e9-baee-e20ece8d7b65
                       items:
                         properties:
                           id:
@@ -5758,8 +5503,6 @@ paths:
                         type: object
                       type: array
                     monitors:
-                      example:
-                        - id: 1e889bd2-3862-4be0-b2c2-9b1fe9673aec
                       items:
                         properties:
                           id:
@@ -5896,13 +5639,6 @@ paths:
                   workspace:
                     properties:
                       collections:
-                        example:
-                          - id: 7c31b469-bd43-4411-9283-6d397855ee0e
-                            name: Mock demo - collection
-                            uid: 1234-7c31b469-bd43-4411-9283-6d397855ee0e
-                          - id: 356fe068-a0f8-4f31-b34d-d12149eac681
-                            name: Mock demo - response code
-                            uid: 1234-356fe068-a0f8-4f31-b34d-d12149eac681
                         items:
                           properties:
                             id:
@@ -5920,13 +5656,6 @@ paths:
                         example: Demos.
                         type: string
                       environments:
-                        example:
-                          - id: 423fd955-a9c8-47cd-9ab0-09a6a575c4be
-                            name: Mock demo - CNX
-                            uid: 1234-423fd955-a9c8-47cd-9ab0-09a6a575c4be
-                          - id: 24c45c84-5147-4c15-bb9a-c3186b81d3cc
-                            name: Mock Demo - response code
-                            uid: 1234-24c45c84-5147-4c15-bb9a-c3186b81d3cc
                         items:
                           properties:
                             id:
@@ -6025,10 +5754,6 @@ paths:
                 workspace:
                   properties:
                     collections:
-                      example:
-                        - id: e1fc3c38-a0b8-44a3-bd44-d753a96b2e9d
-                          name: Straw hats
-                          uid: 8154-e1fc3c38-a0b8-44a3-bd44-d753a96b2e9d
                       items:
                         properties:
                           id:
@@ -6046,10 +5771,6 @@ paths:
                       example: Some description
                       type: string
                     environments:
-                      example:
-                        - id: 83a1aaa2-a204-4bd8-9b92-4d486918906b
-                          name: env
-                          uid: 8154-83a1aaa2-a204-4bd8-9b92-4d486918906b
                       items:
                         properties:
                           id:
@@ -6064,8 +5785,6 @@ paths:
                         type: object
                       type: array
                     mocks:
-                      example:
-                        - id: cda672ef-1375-40e9-baee-e20ece8d7b65
                       items:
                         properties:
                           id:
@@ -6074,8 +5793,6 @@ paths:
                         type: object
                       type: array
                     monitors:
-                      example:
-                        - id: 1e889bd2-3862-4be0-b2c2-9b1fe9673aec
                       items:
                         properties:
                           id:
