@@ -4367,6 +4367,11 @@ components:
             queries."
           format: int64
           type: string
+        ddlDestinationTable:
+          $ref: "#/components/schemas/TableReference"
+          description: "[Output-only] The DDL destination table. Present only for ALTER
+            TABLE RENAME TO queries. Note that ddl_target_table is used just for
+            its type information."
         ddlOperationPerformed:
           description: 'The DDL operation performed, possibly dependent on the
             pre-existence of the DDL target. Possible values (new values might

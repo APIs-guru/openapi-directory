@@ -46,6 +46,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. Etag of the Secret. The request succeeds if it matches the etag of the currently stored secret object. If the etag is omitted, the request succeeds.
+          in: query
+          name: etag
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -809,11 +814,17 @@ components:
       type: object
     DestroySecretVersionRequest:
       description: Request message for SecretManagerService.DestroySecretVersion.
-      properties: {}
+      properties:
+        etag:
+          description: Optional. Etag of the SecretVersion. The request succeeds if it matches the etag of the currently stored secret version object. If the etag is omitted, the request succeeds.
+          type: string
       type: object
     DisableSecretVersionRequest:
       description: Request message for SecretManagerService.DisableSecretVersion.
-      properties: {}
+      properties:
+        etag:
+          description: Optional. Etag of the SecretVersion. The request succeeds if it matches the etag of the currently stored secret version object. If the etag is omitted, the request succeeds.
+          type: string
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
@@ -821,7 +832,10 @@ components:
       type: object
     EnableSecretVersionRequest:
       description: Request message for SecretManagerService.EnableSecretVersion.
-      properties: {}
+      properties:
+        etag:
+          description: Optional. Etag of the SecretVersion. The request succeeds if it matches the etag of the currently stored secret version object. If the etag is omitted, the request succeeds.
+          type: string
       type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
@@ -990,6 +1004,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        etag:
+          description: Optional. Etag of the currently stored Secret.
+          type: string
         expireTime:
           description: Optional. Timestamp in UTC when the Secret is scheduled to expire. This is always provided on output, regardless of what was sent on input.
           format: google-datetime
@@ -1038,6 +1055,10 @@ components:
         destroyTime:
           description: Output only. The time this SecretVersion was destroyed. Only present if state is DESTROYED.
           format: google-datetime
+          readOnly: true
+          type: string
+        etag:
+          description: Output only. Etag of the currently stored SecretVersion.
           readOnly: true
           type: string
         name:

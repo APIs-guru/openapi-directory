@@ -692,13 +692,13 @@ components:
           description: Name of a Cloud SQL instance.
           type: string
         externalIp:
-          description: External IP address of Cloud SQL instance.
+          description: External IP address of a Cloud SQL instance.
           type: string
         internalIp:
-          description: Internal IP address of Cloud SQL instance.
+          description: Internal IP address of a Cloud SQL instance.
           type: string
         networkUri:
-          description: URI of a Cloud SQL instance network or empty string if instance does not have one.
+          description: URI of a Cloud SQL instance network or empty string if the instance does not have one.
           type: string
         region:
           description: Region in which the Cloud SQL instance is running.
@@ -976,19 +976,19 @@ components:
           type: string
       type: object
     GKEMasterInfo:
-      description: For display only. Metadata associated with a Google Kubernetes Engine cluster master.
+      description: For display only. Metadata associated with a Google Kubernetes Engine (GKE) cluster master.
       properties:
         clusterNetworkUri:
-          description: URI of a Google Kubernetes Engine cluster network.
+          description: URI of a GKE cluster network.
           type: string
         clusterUri:
-          description: URI of a Google Kubernetes Engine cluster.
+          description: URI of a GKE cluster.
           type: string
         externalIp:
-          description: External IP address of a Google Kubernetes Engine cluster master.
+          description: External IP address of a GKE cluster master.
           type: string
         internalIp:
-          description: Internal IP address of a Google Kubernetes Engine cluster master.
+          description: Internal IP address of a GKE cluster master.
           type: string
       type: object
     InstanceInfo:
@@ -1408,52 +1408,52 @@ components:
       properties:
         abort:
           $ref: "#/components/schemas/AbortInfo"
-          description: Display info of the final state "abort" and reason.
+          description: Display information of the final state "abort" and reason.
         causesDrop:
           description: This is a step that leads to the final state Drop.
           type: boolean
         cloudSqlInstance:
           $ref: "#/components/schemas/CloudSQLInstanceInfo"
-          description: Display info of a Cloud SQL instance.
+          description: Display information of a Cloud SQL instance.
         deliver:
           $ref: "#/components/schemas/DeliverInfo"
-          description: Display info of the final state "deliver" and reason.
+          description: Display information of the final state "deliver" and reason.
         description:
           description: A description of the step. Usually this is a summary of the state.
           type: string
         drop:
           $ref: "#/components/schemas/DropInfo"
-          description: Display info of the final state "drop" and reason.
+          description: Display information of the final state "drop" and reason.
         endpoint:
           $ref: "#/components/schemas/EndpointInfo"
-          description: Display info of the source and destination under analysis. The endpoint info in an intermediate state may differ with the initial input, as it might be modified by state like NAT, or Connection Proxy.
+          description: Display information of the source and destination under analysis. The endpoint information in an intermediate state may differ with the initial input, as it might be modified by state like NAT, or Connection Proxy.
         firewall:
           $ref: "#/components/schemas/FirewallInfo"
-          description: Display info of a Compute Engine firewall rule.
+          description: Display information of a Compute Engine firewall rule.
         forward:
           $ref: "#/components/schemas/ForwardInfo"
-          description: Display info of the final state "forward" and reason.
+          description: Display information of the final state "forward" and reason.
         forwardingRule:
           $ref: "#/components/schemas/ForwardingRuleInfo"
-          description: Display info of a Compute Engine forwarding rule.
+          description: Display information of a Compute Engine forwarding rule.
         gkeMaster:
           $ref: "#/components/schemas/GKEMasterInfo"
-          description: Display info of a Google Kubernetes Engine cluster master.
+          description: Display information of a Google Kubernetes Engine cluster master.
         instance:
           $ref: "#/components/schemas/InstanceInfo"
-          description: Display info of a Compute Engine instance.
+          description: Display information of a Compute Engine instance.
         loadBalancer:
           $ref: "#/components/schemas/LoadBalancerInfo"
-          description: Display info of the load balancers.
+          description: Display information of the load balancers.
         network:
           $ref: "#/components/schemas/NetworkInfo"
-          description: Display info of a GCP network.
+          description: Display information of a Google Cloud network.
         projectId:
           description: Project ID that contains the configuration this step is validating.
           type: string
         route:
           $ref: "#/components/schemas/RouteInfo"
-          description: Display info of a Compute Engine route.
+          description: Display information of a Compute Engine route.
         state:
           description: Each step is in one of the pre-defined states.
           enum:
@@ -1483,10 +1483,10 @@ components:
           type: string
         vpnGateway:
           $ref: "#/components/schemas/VpnGatewayInfo"
-          description: Display info of a Compute Engine VPN gateway.
+          description: Display information of a Compute Engine VPN gateway.
         vpnTunnel:
           $ref: "#/components/schemas/VpnTunnelInfo"
-          description: Display info of a Compute Engine VPN tunnel.
+          description: Display information of a Compute Engine VPN tunnel.
       type: object
     TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.
@@ -1531,7 +1531,7 @@ components:
           description: URI of a Compute Engine network where the VPN gateway is configured.
           type: string
         region:
-          description: Name of a GCP region where this VPN gateway is configured.
+          description: Name of a Google Cloud region where this VPN gateway is configured.
           type: string
         uri:
           description: URI of a VPN gateway.
@@ -1550,7 +1550,7 @@ components:
           description: URI of a Compute Engine network where the VPN tunnel is configured.
           type: string
         region:
-          description: Name of a GCP region where this VPN tunnel is configured.
+          description: Name of a Google Cloud region where this VPN tunnel is configured.
           type: string
         remoteGateway:
           description: URI of a VPN gateway at remote end of the tunnel.

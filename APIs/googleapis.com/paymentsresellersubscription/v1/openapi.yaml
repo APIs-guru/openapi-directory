@@ -380,8 +380,9 @@ paths:
           schema:
             type: string
         - description: Required. Identifies the subscription resource on the Partner side.
-            If a subscription was previously created with the same
-            subscription_id, we will directly return that one.
+            The value is restricted to 63 ASCII characters at the maximum. If a
+            subscription was previously created with the same subscription_id,
+            we will directly return that one.
           in: query
           name: subscriptionId
           schema:
@@ -431,8 +432,9 @@ paths:
           schema:
             type: string
         - description: Required. Identifies the subscription resource on the Partner side.
-            If a subscription was previously created with the same
-            subscription_id, we will directly return that one.
+            The value is restricted to 63 ASCII characters at the maximum. If a
+            subscription was previously created with the same subscription_id,
+            we will directly return that one.
           in: query
           name: subscriptionId
           schema:
@@ -550,6 +552,7 @@ components:
             - CANCELLATION_REASON_ACCIDENTAL_PURCHASE
             - CANCELLATION_REASON_PAST_DUE
             - CANCELLATION_REASON_ACCOUNT_CLOSED
+            - CANCELLATION_REASON_UPGRADE_DOWNGRADE
             - CANCELLATION_REASON_OTHER
           type: string
       type: object
@@ -785,7 +788,8 @@ components:
           readOnly: true
           type: string
         partnerUserToken:
-          description: Required. Identifier of the end-user in partner’s system.
+          description: Required. Identifier of the end-user in partner’s system. The value
+            is restricted to 63 ASCII characters at the maximum.
           type: string
         products:
           description: Required. Resource name that identifies one or more subscription
@@ -845,6 +849,7 @@ components:
             - CANCELLATION_REASON_ACCIDENTAL_PURCHASE
             - CANCELLATION_REASON_PAST_DUE
             - CANCELLATION_REASON_ACCOUNT_CLOSED
+            - CANCELLATION_REASON_UPGRADE_DOWNGRADE
             - CANCELLATION_REASON_OTHER
           type: string
       type: object

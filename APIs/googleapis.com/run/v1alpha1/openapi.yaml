@@ -480,7 +480,7 @@ components:
           type: string
         valueFrom:
           $ref: "#/components/schemas/EnvVarSource"
-          description: "Cloud Run fully managed: not supported Cloud Run on GKE: supported Source for the environment variable's value. Cannot be used if value is not empty. +optional"
+          description: "Cloud Run fully managed: supported Source for the environment variable's value. Only supports secret_key_ref. Cloud Run for Anthos: supported Source for the environment variable's value. Cannot be used if value is not empty. +optional"
       type: object
     EnvVarSource:
       description: "Cloud Run fully managed: not supported Cloud Run on GKE: supported EnvVarSource represents a source for the value of an EnvVar."
@@ -490,7 +490,7 @@ components:
           description: "Cloud Run fully managed: not supported Cloud Run on GKE: supported Selects a key of a ConfigMap. +optional"
         secretKeyRef:
           $ref: "#/components/schemas/SecretKeySelector"
-          description: "Cloud Run fully managed: not supported Cloud Run on GKE: supported Selects a key of a secret in the pod's namespace +optional"
+          description: "Cloud Run fully managed: supported. Selects a key (version) of a secret in Secret Manager. Cloud Run for Anthos: supported. Selects a key of a secret in the pod's namespace. +optional"
       type: object
     ExecAction:
       description: ExecAction describes a "run in container" action.
@@ -741,14 +741,14 @@ components:
       description: Maps a string key to a path within a volume.
       properties:
         key:
-          description: The key to project.
+          description: "Cloud Run fully managed: supported The Cloud Secret Manager secret version. Can be 'latest' for the latest value or an integer for a specific version. Cloud Run for Anthos: supported The key to project."
           type: string
         mode:
           description: Mode bits to use on this file, must be a value between 0 and 0777. If not specified, the volume defaultMode will be used. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. +optional
           format: int32
           type: integer
         path:
-          description: The relative path of the file to map the key to. May not be an absolute path. May not contain the path element '..'. May not start with the string '..'.
+          description: "Cloud Run fully managed: supported Cloud Run for Anthos: supported The relative path of the file to map the key to. May not be an absolute path. May not contain the path element '..'. May not start with the string '..'."
           type: string
       type: object
     Lifecycle:
@@ -978,16 +978,16 @@ components:
           type: boolean
       type: object
     SecretKeySelector:
-      description: "Cloud Run fully managed: not supported Cloud Run on GKE: supported SecretKeySelector selects a key of a Secret."
+      description: "Cloud Run fully managed: supported Cloud Run on GKE: supported SecretKeySelector selects a key of a Secret."
       properties:
         key:
-          description: "Cloud Run fully managed: not supported Cloud Run on GKE: supported The key of the secret to select from. Must be a valid secret key."
+          description: "Cloud Run fully managed: supported A Cloud Secret Manager secret version. Must be 'latest' for the latest version or an integer for a specific version. Cloud Run for Anthos: supported The key of the secret to select from. Must be a valid secret key."
           type: string
         localObjectReference:
           $ref: "#/components/schemas/LocalObjectReference"
           description: This field should not be used directly as it is meant to be inlined directly into the message. Use the "name" field instead.
         name:
-          description: "Cloud Run fully managed: not supported Cloud Run on GKE: supported The name of the secret in the pod's namespace to select from."
+          description: "Cloud Run fully managed: supported The name of the secret in Cloud Secret Manager. By default, the secret is assumed to be in the same project. If the secret is in another project, you must define an alias. An alias definition has the form: :projects//secrets/. If multiple alias definitions are needed, they must be separated by commas. The alias definitions must be set on the run.googleapis.com/secrets annotation. Cloud Run for Anthos: supported The name of the secret in the pod's namespace to select from."
           type: string
         optional:
           description: "Cloud Run fully managed: not supported Cloud Run on GKE: supported Specify whether the Secret or its key must be defined +optional"
@@ -1001,7 +1001,7 @@ components:
           format: int32
           type: integer
         items:
-          description: If unspecified, each key-value pair in the Data field of the referenced Secret will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the Secret, the volume setup will error unless it is marked optional.
+          description: "Cloud Run fully managed: supported If unspecified, the volume will expose a file whose name is the secret_name. If specified, the key will be used as the version to fetch from Cloud Secret Manager and the path will be the name of the file exposed in the volume. When items are defined, they must specify a key and a path. Cloud Run for Anthos: supported If unspecified, each key-value pair in the Data field of the referenced Secret will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the Secret, the volume setup will error unless it is marked optional."
           items:
             $ref: "#/components/schemas/KeyToPath"
           type: array
@@ -1009,7 +1009,7 @@ components:
           description: Specify whether the Secret or its keys must be defined.
           type: boolean
         secretName:
-          description: Name of the secret in the container's namespace to use.
+          description: "Cloud Run fully managed: supported The name of the secret in Cloud Secret Manager. By default, the secret is assumed to be in the same project. If the secret is in another project, you must define an alias. An alias definition has the form: :projects//secrets/. If multiple alias definitions are needed, they must be separated by commas. The alias definitions must be set on the run.googleapis.com/secrets annotation. Cloud Run for Anthos: supported Name of the secret in the container's namespace to use."
           type: string
       type: object
     SecurityContext:

@@ -728,7 +728,7 @@ components:
           description: The detailed content which caused the error on importing a catalog item.
           type: string
         gcsPath:
-          description: GCS file path of the import source. Can be set for batch operation error.
+          description: Cloud Storage file path of the import source. Can be set for batch operation error.
           type: string
         lineNumber:
           description: Line number of the content in file. Should be empty for permission or batch operation error.
@@ -1181,7 +1181,7 @@ components:
           type: string
       type: object
     GoogleCloudRetailV2UserEvent:
-      description: "UserEvent captures all metadata information Retail API needs to know about how end users interact with customers' website. Next tag: 22"
+      description: UserEvent captures all metadata information Retail API needs to know about how end users interact with customers' website.
       properties:
         attributes:
           additionalProperties:

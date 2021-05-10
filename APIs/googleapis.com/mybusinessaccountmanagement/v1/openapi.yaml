@@ -112,45 +112,6 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v1/locations/{locationsId}:transferLocation":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Moves a location from an account that the user owns to another
-        account that the same user administers. The user must be an owner of the
-        account the location is currently associated with and must also be at
-        least a manager of the destination account.
-      operationId: mybusinessaccountmanagement.locations.transferLocation
-      parameters:
-        - in: path
-          name: locationsId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TransferLocationRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
-          description: Successful response
-      tags:
-        - locations
   "/v1/{name}":
     delete:
       description: Removes the specified admin as a manager of the specified location.
@@ -319,6 +280,47 @@ paths:
           description: Successful response
       tags:
         - accounts
+  "/v1/{name}:transfer":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Moves a location from an account that the user owns to another
+        account that the same user administers. The user must be an owner of the
+        account the location is currently associated with and must also be at
+        least a manager of the destination account.
+      operationId: mybusinessaccountmanagement.locations.transfer
+      parameters:
+        - description: Required. The name of the location to transfer.
+            `locations/{location_id}`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferLocationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      tags:
+        - locations
   "/v1/{parent}/admins":
     get:
       description: Lists all of the admins for the specified location.
@@ -842,9 +844,5 @@ components:
         destinationAccount:
           description: Required. Name of the account resource to transfer the location to
             (for example, "accounts/{account}").
-          type: string
-        name:
-          description: Required. The name of the location to transfer.
-            `locations/{location_id}`.
           type: string
       type: object

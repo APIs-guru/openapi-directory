@@ -70,6 +70,15 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. View for the returned GameServerCluster objects. When `FULL` is specified, the `cluster_state` field is also returned in the GameServerCluster object, which includes the state of the referenced Kubernetes cluster such as versions and provider info. The default/unset value is GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which does not return the `cluster_state` field.
+          in: query
+          name: view
+          schema:
+            enum:
+              - GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
       responses:
         "200":
           content:
@@ -662,6 +671,15 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: Optional. View for the returned GameServerCluster objects. When `FULL` is specified, the `cluster_state` field is also returned in the GameServerCluster object, which includes the state of the referenced Kubernetes cluster such as versions and provider info. The default/unset value is GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which does not return the `cluster_state` field.
+          in: query
+          name: view
+          schema:
+            enum:
+              - GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
       responses:
         "200":
           content:
@@ -754,6 +772,15 @@ paths:
           in: query
           name: previewTime
           schema:
+            type: string
+        - description: Optional. This field is deprecated, preview will always return KubernetesClusterState.
+          in: query
+          name: view
+          schema:
+            enum:
+              - GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
             type: string
       requestBody:
         content:
@@ -1449,6 +1476,10 @@ components:
             - P3
             - P4
           type: string
+        clusterState:
+          $ref: "#/components/schemas/KubernetesClusterState"
+          description: Output only. The state of the Kubernetes cluster, this will be available if 'view' is set to `FULL` in the relevant List/Get/Preview request.
+          readOnly: true
         connectionInfo:
           $ref: "#/components/schemas/GameServerClusterConnectionInfo"
           description: The game server cluster connection information. This information is used to manage game server clusters.
@@ -1603,6 +1634,43 @@ components:
       properties:
         membership:
           description: "The full or partial name of a GKE Hub membership, using one of the following forms: * `https://gkehub.googleapis.com/v1beta1/projects/{project_id}/locations/global/memberships/{membership_id}` * `projects/{project_id}/locations/global/memberships/{membership_id}` * `{membership_id}` If project is not specified, the project of the GameServerCluster resource is used to generate the full name of the GKE Hub membership."
+          type: string
+      type: object
+    KubernetesClusterState:
+      description: The state of the Kubernetes cluster.
+      properties:
+        agonesVersionInstalled:
+          description: Output only. The version of Agones currently installed in the registered Kubernetes cluster.
+          readOnly: true
+          type: string
+        agonesVersionTargeted:
+          description: Output only. The version of Agones that is targeted to be installed in the cluster.
+          readOnly: true
+          type: string
+        installationState:
+          description: Output only. The state for the installed versions of Agones/Kubernetes.
+          enum:
+            - INSTALLATION_STATE_UNSPECIFIED
+            - AGONES_KUBERNETES_VERSION_SUPPORTED
+            - AGONES_VERSION_UNSUPPORTED
+            - AGONES_KUBERNETES_VERSION_UNSUPPORTED
+            - AGONES_VERSION_UNRECOGNIZED
+            - KUBERNETES_VERSION_UNRECOGNIZED
+            - VERSION_VERIFICATION_FAILED
+            - AGONES_NOT_INSTALLED
+          readOnly: true
+          type: string
+        kubernetesVersionInstalled:
+          description: Output only. The version of Kubernetes that is currently used in the registered Kubernetes cluster (as detected by the Cloud Game Servers service).
+          readOnly: true
+          type: string
+        provider:
+          description: Output only. The cloud provider type reported by the first node's providerID in the list of nodes on the Kubernetes endpoint. On Kubernetes platforms that support zero-node clusters (like GKE-on-GCP), the provider type will be empty.
+          readOnly: true
+          type: string
+        versionInstalledErrorMessage:
+          description: Output only. The detailed error message for the installed versions of Agones/Kubernetes.
+          readOnly: true
           type: string
       type: object
     LabelSelector:
@@ -1861,6 +1929,10 @@ components:
     PreviewCreateGameServerClusterResponse:
       description: Response message for GameServerClustersService.PreviewCreateGameServerCluster.
       properties:
+        clusterState:
+          $ref: "#/components/schemas/KubernetesClusterState"
+          description: Output only. The state of the Kubernetes cluster in preview, this will be available if 'view' is set to `FULL` in the relevant List/Get/Preview request.
+          readOnly: true
         etag:
           description: The ETag of the game server cluster.
           type: string

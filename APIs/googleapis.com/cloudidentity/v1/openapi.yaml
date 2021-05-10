@@ -121,7 +121,7 @@ paths:
         - devices
   /v1/groups:
     get:
-      description: Lists the `Group`s under a customer or namespace.
+      description: Lists the `Group` resources under a customer or namespace.
       operationId: cloudidentity.groups.list
       parameters:
         - description: The maximum number of results to return. Note that the number of results returned may be less than this value even if there are more available results. To fetch all results, clients must continue calling this method repeatedly until the response no longer contains a `next_page_token`. If unspecified, defaults to 200 for `View.BASIC` and to 50 for `View.FULL`. Must not be greater than 1000 for `View.BASIC` or 500 for `View.FULL`.
@@ -134,7 +134,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Required. The parent resource under which to list all `Group`s. Must be of the form `identitysources/{identity_source_id}` for external- identity-mapped groups or `customers/{customer_id}` for Google Groups.
+        - description: Required. The parent resource under which to list all `Group` resources. Must be of the form `identitysources/{identity_source_id}` for external- identity-mapped groups or `customers/{customer_id}` for Google Groups. The `customer_id` must begin with "C" (for example, 'C046psxkn').
           in: query
           name: parent
           schema:
@@ -269,7 +269,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1/groups:search:
     get:
-      description: Searches for `Group`s matching a specified query.
+      description: Searches for `Group` resources matching a specified query.
       operationId: cloudidentity.groups.search
       parameters:
         - description: The maximum number of results to return. Note that the number of results returned may be less than this value even if there are more available results. To fetch all results, clients must continue calling this method repeatedly until the response no longer contains a `next_page_token`. If unspecified, defaults to 200 for `GroupView.BASIC` and 50 for `GroupView.FULL`. Must not be greater than 1000 for `GroupView.BASIC` or 500 for `GroupView.FULL`.
@@ -282,7 +282,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Required. The search query. Must be specified in [Common Expression Language](https://opensource.google/projects/cel). May only contain equality operators on the parent and inclusion operators on labels (e.g., `parent == 'customers/{customer_id}' && 'cloudidentity.googleapis.com/groups.discussion_forum' in labels`).
+        - description: Required. The search query. Must be specified in [Common Expression Language](https://opensource.google/projects/cel). May only contain equality operators on the parent and inclusion operators on labels (e.g., `parent == 'customers/{customer_id}' && 'cloudidentity.googleapis.com/groups.discussion_forum' in labels`). The `customer_id` must begin with "C" (for example, 'C046psxkn').
           in: query
           name: query
           schema:
@@ -1027,7 +1027,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: "Required. A CEL expression that MUST include member specification AND label(s). This is a `required` field. Users can search on label attributes of groups. CONTAINS match ('in') is supported on labels. Certain groups are uniquely identified by both a 'member_key_id' and a 'member_key_namespace', which requires an additional query input: 'member_key_namespace'. Example query: `member_key_id == 'member_key_id_value' && in labels`"
+        - description: "Required. A CEL expression that MUST include member specification AND label(s). This is a `required` field. Users can search on label attributes of groups. CONTAINS match ('in') is supported on labels. Identity-mapped groups are uniquely identified by both a `member_key_id` and a `member_key_namespace`, which requires an additional query input: `member_key_namespace`. Example query: `member_key_id == 'member_key_id_value' && in labels`"
           in: query
           name: query
           schema:
@@ -1689,7 +1689,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the DeviceUser in format: `devices/{device_id}/deviceUsers/{user_id}`, where user_id is the ID of the user associated with the user session."
+          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the DeviceUser in format: `devices/{device_id}/deviceUsers/{device_user_id}`, where `device_user_id` uniquely identifies a user's use of a device."
           readOnly: true
           type: string
         passwordState:
@@ -1809,14 +1809,14 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: 'Required. One or more label entries that apply to the Group. Currently supported labels contain a key with an empty value. Google Groups are the default type of group and have a label with a key of `cloudidentity.googleapis.com/groups.discussion_forum` and an empty value. Existing Google Groups can have an additional label with a key of `cloudidentity.googleapis.com/groups.security` and an empty value added to them. **This is an immutable change and the security label cannot be removed once added.** Dynamic groups have a label with a key of `cloudidentity.googleapis.com/groups.dynamic`. Identity-mapped groups for Cloud Search have a label with a key of `system/groups/external` and an empty value. Examples: {"cloudidentity.googleapis.com/groups.discussion_forum": ""} or {"system/groups/external": ""}.'
+          description: Required. One or more label entries that apply to the Group. Currently supported labels contain a key with an empty value. Google Groups are the default type of group and have a label with a key of `cloudidentity.googleapis.com/groups.discussion_forum` and an empty value. Existing Google Groups can have an additional label with a key of `cloudidentity.googleapis.com/groups.security` and an empty value added to them. **This is an immutable change and the security label cannot be removed once added.** Dynamic groups have a label with a key of `cloudidentity.googleapis.com/groups.dynamic`. Identity-mapped groups for Cloud Search have a label with a key of `system/groups/external` and an empty value.
           type: object
         name:
           description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Group`. Shall be of the form `groups/{group_id}`.
           readOnly: true
           type: string
         parent:
-          description: Required. Immutable. The resource name of the entity under which this `Group` resides in the Cloud Identity resource hierarchy. Must be of the form `identitysources/{identity_source_id}` for external- identity-mapped groups or `customers/{customer_id}` for Google Groups.
+          description: Required. Immutable. The resource name of the entity under which this `Group` resides in the Cloud Identity resource hierarchy. Must be of the form `identitysources/{identity_source_id}` for external- identity-mapped groups or `customers/{customer_id}` for Google Groups. The `customer_id` must begin with "C" (for example, 'C046psxkn').
           type: string
         updateTime:
           description: Output only. The time when the `Group` was last updated.
@@ -1897,7 +1897,7 @@ components:
       description: Message representing a transitive membership of a group.
       properties:
         member:
-          description: Resource name for this member if member is a GROUP, otherwise it is empty.
+          description: Resource name for this member.
           type: string
         preferredMemberKey:
           description: Entity key has an id and a namespace. In case of discussion forums, the id will be an email address without a namespace.
@@ -1945,6 +1945,7 @@ components:
             - USER
             - SERVICE_ACCOUNT
             - GROUP
+            - SHARED_DRIVE
             - OTHER
           readOnly: true
           type: string
@@ -2029,7 +2030,7 @@ components:
       description: The response message for GroupsService.SearchGroups.
       properties:
         groups:
-          description: The `Group`s that match the search query.
+          description: The `Group` resources that match the search query.
           items:
             $ref: "#/components/schemas/Group"
           type: array
@@ -2090,7 +2091,7 @@ components:
       description: The details of an update to a `MembershipRole`.
       properties:
         fieldMask:
-          description: The fully-qualified names of fields to update. May only contain the field `expiry_detail`.
+          description: The fully-qualified names of fields to update. May only contain the field `expiry_detail.expire_time`.
           format: google-fieldmask
           type: string
         membershipRole:
@@ -2131,7 +2132,7 @@ components:
             https://www.googleapis.com/auth/cloud-identity.devices.lookup: See your device details
             https://www.googleapis.com/auth/cloud-identity.groups: See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group
             https://www.googleapis.com/auth/cloud-identity.groups.readonly: See any Cloud Identity Groups that you can access, including group members and their emails
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -2142,6 +2143,6 @@ components:
             https://www.googleapis.com/auth/cloud-identity.devices.lookup: See your device details
             https://www.googleapis.com/auth/cloud-identity.groups: See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group
             https://www.googleapis.com/auth/cloud-identity.groups.readonly: See any Cloud Identity Groups that you can access, including group members and their emails
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

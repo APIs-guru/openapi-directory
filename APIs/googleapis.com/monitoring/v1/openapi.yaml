@@ -122,6 +122,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: If set, validate the request and preview the review, but do not actually save it.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
       requestBody:
         content:
           application/json:
@@ -214,6 +219,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: If set, validate the request and preview the review, but do not actually save it.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
       requestBody:
         content:
           application/json:

@@ -459,6 +459,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/cursor/{subscription}:commitCursor":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Updates the committed cursor.
+      operationId: pubsublite.cursor.projects.locations.subscriptions.commitCursor
+      parameters:
+        - description: The subscription for which to update the cursor.
+          in: path
+          name: subscription
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CommitCursorRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommitCursorResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - cursor
   "/v1/topicStats/{topic}:computeHeadCursor":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -641,6 +683,23 @@ components:
             and <= 32.
           format: int32
           type: integer
+      type: object
+    CommitCursorRequest:
+      description: Request for CommitCursor.
+      properties:
+        cursor:
+          $ref: "#/components/schemas/Cursor"
+          description: The new value for the committed cursor.
+        partition:
+          description: The partition for which to update the cursor. Partitions are zero
+            indexed, so `partition` must be in the range [0,
+            topic.num_partitions).
+          format: int64
+          type: string
+      type: object
+    CommitCursorResponse:
+      description: Response for CommitCursor.
+      properties: {}
       type: object
     ComputeHeadCursorRequest:
       description: Compute the current head cursor for a partition.

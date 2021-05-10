@@ -163,6 +163,15 @@ paths:
           name: systemId
           schema:
             type: string
+        - description: The view configures whether to retrieve security keys information.
+          in: query
+          name: view
+          schema:
+            enum:
+              - LOGIN_PROFILE_VIEW_UNSPECIFIED
+              - BASIC
+              - SECURITY_KEY
+            type: string
       responses:
         "200":
           content:
@@ -228,6 +237,15 @@ paths:
           in: query
           name: projectId
           schema:
+            type: string
+        - description: The view configures whether to retrieve security keys information.
+          in: query
+          name: view
+          schema:
+            enum:
+              - LOGIN_PROFILE_VIEW_UNSPECIFIED
+              - BASIC
+              - SECURITY_KEY
             type: string
       requestBody:
         content:

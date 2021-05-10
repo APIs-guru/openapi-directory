@@ -2126,10 +2126,11 @@ components:
             type: string
           type: array
         emailAddress:
-          description: Email address of the user to link
+          description: Immutable. Email address of the user to link
           type: string
         name:
-          description: "Example format: properties/1234/userLinks/5678"
+          description: "Output only. Example format: properties/1234/userLinks/5678"
+          readOnly: true
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaWebDataStream:
