@@ -18,7 +18,7 @@ info:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
   title: Item Feed Service
-  version: v1_beta.25.0
+  version: v1_beta.26.0
   x-apisguru-categories:
     - ecommerce
   x-logo:
@@ -198,7 +198,7 @@ paths:
           schema:
             $ref: "#/definitions/ItemResponse"
         "400":
-          description: Bad Request
+          description: Bad request
           x-response-codes:
             errors:
               "13000":
@@ -311,7 +311,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "13006":
@@ -615,7 +615,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "13006":
@@ -870,7 +870,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal Server Error
+          description: Internal server error
           x-response-codes:
             errors:
               "13006":
@@ -1927,6 +1927,9 @@ definitions:
           Fetch Land Free Ship W\\\\ Tracking&quot; &quot;Marvel Legends HULK
           8\\&quot; Figure Avengers Age of Ultron Studios 6\\&quot;
           Series&quot;"
+        type: string
+      tyreLabelImageUrl:
+        description: The URL to the image that shows the information on the tyre label.
         type: string
       unitPrice:
         description: "This is the price per unit for the item. Some European countries

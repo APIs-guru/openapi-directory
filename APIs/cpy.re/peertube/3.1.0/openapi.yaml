@@ -11,10 +11,8 @@ info:
     name: PeerTube Community
     url: https://joinpeertube.org
   description: >
-    # Introduction
-
-
-    The PeerTube API is built on HTTP(S) and is RESTful. You can use your favorite
+    The PeerTube API is built on HTTP(S) and is RESTful. You can use
+    your favorite
 
     HTTP/REST library for your programming language to use PeerTube. The spec API is fully compatible with
 
@@ -30,17 +28,19 @@ info:
     - [Kotlin](https://framagit.org/framasoft/peertube/clients/kotlin)
 
 
-    See the [Quick Start guide](https://docs.joinpeertube.org/api-rest-getting-started) so you can play with the PeerTube API.
+    See the [REST API quick start](https://docs.joinpeertube.org/api-rest-getting-started) for a few
+
+    examples of using with the PeerTube API.
 
 
     # Authentication
 
 
-    When you sign up for an account, you are given the possibility to generate
+    When you sign up for an account on a PeerTube instance, you are given the possibility
 
-    sessions, and authenticate using this session token. One session token can
+    to generate sessions on it, and authenticate there using a session token. Only __one
 
-    currently be used at a time.
+    session token can currently be used at a time__.
 
 
     ## Roles
@@ -69,6 +69,50 @@ info:
     }
 
     ```
+
+
+    # Rate limits
+
+
+    We are rate-limiting all endpoints of PeerTube's API. Custom values can be configured
+
+    by administrators:
+
+
+    | Endpoint                | Calls            | Time frame                |
+
+    |-------------------------|------------------|---------------------------|
+
+    | `/*`                    | 50               | 10 seconds                |
+
+    | `POST /users/token`     | 15               | 5 minutes                 |
+
+    | `POST /users/register`  | 2¹               | 5 minutes                 |
+
+    | `POST /users/ask-send-verify-email` | 3    | 5 minutes                 |
+
+
+    Depending on the endpoint, ¹failed requests are not taken into account. A service
+
+    limit is announced by a `429 Too Many Requests` status code.
+
+
+    You can get details about the current state of your rate limit by reading the
+
+    following headers:
+
+
+    | Header                  | Description                                                |
+
+    |-------------------------|------------------------------------------------------------|
+
+    | X-RateLimit-Limit       | Number of max requests allowed in the current time period  |
+
+    | X-RateLimit-Remaining   | Number of remaining requests in the current time period    |
+
+    | X-RateLimit-Reset       | Timestamp of end of current time period as UNIX timestamp  |
+
+    | Retry-After             | Seconds to delay after the first `429` is received         |
   license:
     name: AGPLv3.0
     url: https://github.com/Chocobozzz/PeerTube/blob/master/LICENSE
@@ -778,6 +822,69 @@ paths:
       summary: Set instance runtime configuration
       tags:
         - Config
+  "/feeds/subscriptions.{format}":
+    get:
+      parameters:
+        - description: format expected (we focus on making `rss` the most featureful ; it
+            serves [Media RSS](https://www.rssboard.org/media-rss))
+          in: path
+          name: format
+          required: true
+          schema:
+            enum:
+              - xml
+              - rss
+              - rss2
+              - atom
+              - atom1
+              - json
+              - json1
+            type: string
+        - description: limit listing to a specific account
+          in: query
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: private token allowing access
+          in: query
+          name: token
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/nsfw"
+        - $ref: "#/components/parameters/filter"
+      responses:
+        "204":
+          content:
+            application/atom+xml:
+              schema:
+                $ref: "#/components/schemas/VideosForXML"
+            application/json:
+              schema:
+                type: object
+            application/rss+xml:
+              schema:
+                $ref: "#/components/schemas/VideosForXML"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/VideosForXML"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/VideosForXML"
+          description: successful operation
+          headers:
+            Cache-Control:
+              schema:
+                default: max-age=900
+                type: string
+        "406":
+          description: accept header unsupported
+      summary: List videos of subscriptions tied to a token
+      tags:
+        - Feeds
+        - Account
   "/feeds/video-comments.{format}":
     get:
       parameters:
@@ -825,18 +932,33 @@ paths:
         "204":
           content:
             application/atom+xml:
+              examples:
+                nightly:
+                  externalValue: https://peertube2.cpy.re/feeds/video-comments.atom?filter=local
               schema:
                 $ref: "#/components/schemas/VideoCommentsForXML"
             application/json:
+              examples:
+                nightly:
+                  externalValue: https://peertube2.cpy.re/feeds/video-comments.json?filter=local
               schema:
                 type: object
             application/rss+xml:
+              examples:
+                nightly:
+                  externalValue: https://peertube2.cpy.re/feeds/video-comments.rss?filter=local
               schema:
                 $ref: "#/components/schemas/VideoCommentsForXML"
             application/xml:
+              examples:
+                nightly:
+                  externalValue: https://peertube2.cpy.re/feeds/video-comments.xml?filter=local
               schema:
                 $ref: "#/components/schemas/VideoCommentsForXML"
             text/xml:
+              examples:
+                nightly:
+                  externalValue: https://peertube2.cpy.re/feeds/video-comments.xml?filter=local
               schema:
                 $ref: "#/components/schemas/VideoCommentsForXML"
           description: successful operation
@@ -854,13 +976,6 @@ paths:
           description: video, video channel or account not found
         "406":
           description: accept header unsupported
-      servers:
-        - description: Live Test Server (live data - latest nightly version)
-          url: https://peertube2.cpy.re
-        - description: Live Test Server (live data - latest RC version)
-          url: https://peertube3.cpy.re
-        - description: Live Test Server (live data - stable version)
-          url: https://peertube.cpy.re
       summary: List comments on videos
       tags:
         - Feeds
@@ -909,12 +1024,21 @@ paths:
         "204":
           content:
             application/atom+xml:
+              examples:
+                nightly:
+                  externalValue: https://peertube2.cpy.re/feeds/videos.atom?filter=local
               schema:
                 $ref: "#/components/schemas/VideosForXML"
             application/json:
+              examples:
+                nightly:
+                  externalValue: https://peertube2.cpy.re/feeds/videos.json?filter=local
               schema:
                 type: object
             application/rss+xml:
+              examples:
+                nightly:
+                  externalValue: https://peertube2.cpy.re/feeds/videos.rss?filter=local
               schema:
                 $ref: "#/components/schemas/VideosForXML"
             application/xml:
@@ -924,6 +1048,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/VideosForXML"
             text/xml:
+              examples:
+                nightly:
+                  externalValue: https://peertube2.cpy.re/feeds/videos.xml?filter=local
               schema:
                 $ref: "#/components/schemas/VideosForXML"
           description: successful operation
@@ -936,13 +1063,6 @@ paths:
           description: video channel or account not found
         "406":
           description: accept header unsupported
-      servers:
-        - description: Live Test Server (live data - latest nightly version)
-          url: https://peertube2.cpy.re
-        - description: Live Test Server (live data - latest RC version)
-          url: https://peertube3.cpy.re
-        - description: Live Test Server (live data - stable version)
-          url: https://peertube.cpy.re
       summary: List videos
       tags:
         - Feeds
@@ -2402,7 +2522,7 @@ paths:
                       id:
                         type: integer
                       uuid:
-                        type: string
+                        $ref: "#/components/schemas/UUIDv4"
                     type: object
                 type: object
           description: successful operation
@@ -3727,9 +3847,7 @@ components:
           - example: 42
             minimum: 0
             type: integer
-          - example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
-            format: uuid
-            type: string
+          - $ref: "#/components/schemas/UUIDv4"
     isLive:
       description: whether or not the video is a live
       in: query
@@ -5003,6 +5121,13 @@ components:
             videoQuotaDaily:
               type: integer
           type: object
+    UUIDv4:
+      example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
+      format: uuid
+      maxLength: 36
+      minLength: 36
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+      type: string
     UpdateMe:
       properties:
         autoPlayVideo:
@@ -5166,14 +5291,28 @@ components:
         channel:
           $ref: "#/components/schemas/VideoChannelSummary"
         createdAt:
+          description: time at which the video object was first drafted
+          example: 2017-10-01T10:52:46.396Z
           format: date-time
           type: string
         description:
+          description: >
+            truncated description of the video, written in Markdown.
+
+            Resolve `descriptionPath` to get the full description of maximum `10000` characters.
+          example: >
+            **[Want to help to translate this
+            video?](https://weblate.framasoft.org/projects/what-is-peertube-video/)**\r\n\r\n
+
+            **Take back the control of your videos! [#JoinPeertube](https://joinpeertube.org)**\r\n*A decentralized video hosting network, based on fr...
+          maxLength: 250
+          minLength: 3
           type: string
         dislikes:
           example: 7
           type: integer
         duration:
+          description: duration of the video in seconds
           example: 1419
           type: integer
         embedPath:
@@ -5201,6 +5340,9 @@ components:
         nsfw:
           type: boolean
         originallyPublishedAt:
+          description: used to represent a date of first publication, prior to the
+            practical publication date of `publishedAt`
+          example: 2010-10-01T10:52:46.396Z
           format: date-time
           type: string
         previewPath:
@@ -5209,6 +5351,10 @@ components:
         privacy:
           $ref: "#/components/schemas/VideoPrivacyConstant"
         publishedAt:
+          description: time at which the video was marked as ready for playback (with
+            restrictions depending on `privacy`). Usually set after a `state`
+            evolution.
+          example: 2018-10-01T10:52:46.396Z
           format: date-time
           type: string
         scheduledUpdate:
@@ -5221,6 +5367,8 @@ components:
           example: /static/thumbnails/a65bc12f-9383-462e-81ae-8207e8b434ee.jpg
           type: string
         updatedAt:
+          description: last time the video's metadata was modified
+          example: 2021-05-04T08:01:01.502Z
           format: date-time
           type: string
         userHistory:
@@ -5230,9 +5378,7 @@ components:
               type: integer
           type: object
         uuid:
-          example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
-          format: uuid
-          type: string
+          $ref: "#/components/schemas/UUIDv4"
         views:
           example: 1337
           type: integer
@@ -5266,9 +5412,7 @@ components:
           format: date-time
           type: string
         uuid:
-          example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
-          format: uuid
-          type: string
+          $ref: "#/components/schemas/UUIDv4"
         videoId:
           type: integer
         views:
@@ -5296,9 +5440,7 @@ components:
             id:
               type: integer
             uuid:
-              example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
-              format: uuid
-              type: string
+              $ref: "#/components/schemas/UUIDv4"
           type: object
     VideoChannelCommon:
       properties:
@@ -5447,23 +5589,38 @@ components:
             commentsEnabled:
               type: boolean
             descriptionPath:
+              description: path at which to get the full description of maximum `10000`
+                characters
+              example: /api/v1/videos/9c9de5e8-0a1e-484a-b099-e80766180a6d/description
               type: string
             downloadEnabled:
               type: boolean
             files:
-              description: WebTorrent/raw video files. Can be empty if WebTorrent is disabled
-                on the server. In this case, video files will be in the
-                "streamingPlaylists[].files" property
+              description: >
+                WebTorrent/raw video files. If WebTorrent is disabled on the
+                server:
+
+
+                - field will be empty
+
+                - video files will be found in `streamingPlaylists[].files` field
               items:
                 $ref: "#/components/schemas/VideoFile"
               type: array
             streamingPlaylists:
+              description: |
+                HLS playlists/manifest files. If HLS is disabled on the server:
+
+                - field will be empty
+                - video files will be found in `files` field
               items:
                 $ref: "#/components/schemas/VideoStreamingPlaylists"
               type: array
             support:
               description: A text tell the audience how to support the video creator
               example: Please support my work on <insert crowdfunding plateform>! <3
+              maxLength: 1000
+              minLength: 3
               type: string
             tags:
               example:
@@ -5562,9 +5719,7 @@ components:
           minLength: 3
           type: string
         uuid:
-          example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
-          format: uuid
-          type: string
+          $ref: "#/components/schemas/UUIDv4"
     VideoListResponse:
       properties:
         data:
@@ -5604,9 +5759,7 @@ components:
           format: date-time
           type: string
         uuid:
-          example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
-          format: uuid
-          type: string
+          $ref: "#/components/schemas/UUIDv4"
         videoChannel:
           $ref: "#/components/schemas/VideoChannelSummary"
         videoLength:
@@ -5682,9 +5835,7 @@ components:
           format: url
           type: string
         uuid:
-          example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
-          format: uuid
-          type: string
+          $ref: "#/components/schemas/UUIDv4"
     VideoResolutionConstant:
       properties:
         id:
@@ -5717,16 +5868,30 @@ components:
         label:
           type: string
     VideoStreamingPlaylists:
+      allOf:
+        - properties:
+            id:
+              type: integer
+            type:
+              description: |
+                Playlist type:
+                - `1`: HLS
+              enum:
+                - 1
+              type: integer
+          type: object
+        - $ref: "#/components/schemas/VideoStreamingPlaylists-HLS"
+    VideoStreamingPlaylists-HLS:
       properties:
         files:
-          description: Video files associated to this playlist. The difference with the
-            root "files" property is that these files are fragmented, so they
-            can be used in this streaming playlist (HLS etc)
+          description: >
+            Video files associated to this playlist.
+
+
+            The difference with the root `files` property is that these files are fragmented, so they can be used in this streaming playlist (HLS, etc.)
           items:
             $ref: "#/components/schemas/VideoFile"
           type: array
-        id:
-          type: integer
         playlistUrl:
           format: url
           type: string
@@ -5741,11 +5906,6 @@ components:
         segmentsSha256Url:
           format: url
           type: string
-        type:
-          description: Playlist type (HLS = `1`)
-          enum:
-            - 1
-          type: integer
     VideoUploadResponse:
       properties:
         video:
@@ -5754,9 +5914,7 @@ components:
               example: 8
               type: integer
             uuid:
-              example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
-              format: uuid
-              type: string
+              $ref: "#/components/schemas/UUIDv4"
           type: object
     VideosForXML:
       items:
@@ -5883,18 +6041,16 @@ components:
         wrapped: true
   securitySchemes:
     OAuth2:
-      description: >
-        In the header: *Authorization: Bearer <token\>*
-
-
+      description: |
         Authenticating via OAuth requires the following steps:
+        - Have an activated account
+        - [Generate](https://docs.joinpeertube.org/api-rest-getting-started) a
+        Bearer Token for that account at `/api/v1/users/token`
+        - Make authenticated requests, putting *Authorization: Bearer <token\>*
+        - Profit, depending on the role assigned to the account
 
-
-        - Have an account with sufficient authorization levels
-
-        - [Generate](https://docs.joinpeertube.org/api-rest-getting-started) a Bearer Token
-
-        - Make Authenticated Requests
+        Note that the __access token is valid for 1 day__ and, and is given
+        along with a __refresh token valid for 2 weeks__.
       flows:
         password:
           scopes:

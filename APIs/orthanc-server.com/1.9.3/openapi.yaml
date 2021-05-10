@@ -12,7 +12,7 @@ info:
     up-to-date anymore
     ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).
   title: Orthanc API
-  version: 1.9.2
+  version: 1.9.3
   x-apisguru-categories:
     - collaboration
   x-origin:
@@ -2396,9 +2396,9 @@ paths:
                   information about the reported jobs (if `expand` argument is
                   provided)
                 example:
-                  - 7a09255e-84f9-4ac8-8f63-81a674ad130e
-                  - 7b065aae-0255-4e51-bdfc-d3273d1c5e78
-                  - e093b29c-8ac1-4d25-9d9b-2fa73bd408cd
+                  - 28c9f653-b8e3-476c-8237-794905f4711d
+                  - 2fc02948-0e5d-472e-a6d2-2e3af2275cc1
+                  - 3ab8820c-f757-4eb1-8305-4d554c989077
                   - ...
           description: ""
       summary: List jobs
@@ -10537,22 +10537,22 @@ paths:
           content:
             text/plain:
               example: |
-                orthanc_count_instances 2552 1619185717552
-                orthanc_count_patients 8 1619185717552
-                orthanc_count_series 26 1619185717552
-                orthanc_count_studies 8 1619185717552
-                orthanc_dicom_cache_count 58 1619172290641
-                orthanc_dicom_cache_size 50.601326 1619172290641
-                orthanc_disk_size_mb 1018.65021 1619185717552
-                orthanc_jobs_completed 4 1619185717552
-                orthanc_jobs_failed 0 1619185717552
-                orthanc_jobs_pending 0 1619185717552
-                orthanc_jobs_running 0 1619185717552
-                orthanc_jobs_success 4 1619185717552
-                orthanc_rest_api_active_requests 1 1619185717552
-                orthanc_rest_api_duration_ms 4519 1619185710153
-                orthanc_storage_read_duration_ms 0 1619185717053
-                orthanc_uncompressed_size_mb 1018.65021 1619185717552
+                orthanc_count_instances 2552 1620382972570
+                orthanc_count_patients 8 1620382972570
+                orthanc_count_series 26 1620382972570
+                orthanc_count_studies 8 1620382972570
+                orthanc_dicom_cache_count 180 1620341242884
+                orthanc_dicom_cache_size 89.929306 1620341242884
+                orthanc_disk_size_mb 1018.65021 1620382972570
+                orthanc_jobs_completed 10 1620382972570
+                orthanc_jobs_failed 0 1620382972570
+                orthanc_jobs_pending 0 1620382972570
+                orthanc_jobs_running 0 1620382972570
+                orthanc_jobs_success 10 1620382972570
+                orthanc_rest_api_active_requests 1 1620382972570
+                orthanc_rest_api_duration_ms 6078 1620382966006
+                orthanc_storage_read_duration_ms 346 1620382962068
+                orthanc_uncompressed_size_mb 1018.65021 1620382972570
           description: ""
       summary: Get usage metrics
       tags:
@@ -10566,7 +10566,7 @@ paths:
         "200":
           content:
             text/plain:
-              example: 20210423T134837
+              example: 20210507T102252
               schema:
                 description: The UTC time
           description: ""
@@ -10582,7 +10582,7 @@ paths:
         "200":
           content:
             text/plain:
-              example: 20210423T134837
+              example: 20210507T102253
               schema:
                 description: The local time
           description: ""

@@ -5186,6 +5186,12 @@ paths:
                             default: true
                             description: Compute list of changes (repaired reports) per rule
                             type: boolean
+                          rudder_compute_dyngroups_max_parallelism:
+                            default: "1"
+                            description: Set the parallelism to compute dynamic group, as a number of thread
+                              (i.e. 4), or a multiplicative of the number of
+                              core (x0.5)
+                            type: string
                           rudder_generation_compute_dyngroups:
                             default: true
                             description: Recompute all dynamic groups at the start of policy generation
@@ -5210,7 +5216,7 @@ paths:
                               seconds
                             type: integer
                           rudder_generation_max_parallelism:
-                            default: "0.5"
+                            default: x0.5
                             description: Set the policy generation parallelism, either as an number of
                               thread (i.e. 4), or a multiplicative of the number
                               of core (x0.5)
@@ -5359,7 +5365,7 @@ paths:
                   action:
                     description: The id of the action
                     enum:
-                      - modifySetting
+                      - modifyAllowedNetworks
                     type: string
                   data:
                     description: Information about the allowed_networks settings
@@ -5374,6 +5380,9 @@ paths:
                     required:
                       - settings
                     type: object
+                  id:
+                    description: The id of the modified node
+                    type: string
                   result:
                     description: Result of the request
                     enum:
@@ -5391,10 +5400,11 @@ paths:
         - Settings
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            https://rudder.example.com/rudder/api/latest/settings/allowed_netwo\
-            rks/root --data '{\"allowed_networks\": [\"192.168.1.0/24\",
-            \"192.168.2.0/24\"]}'"
+          source: >
+            curl --header "X-API-Token: yourToken" --header  "Content-Type:
+            application/json" --request POST
+            https://rudder.example.com/rudder/api/latest/settings/allowed_networks/root
+            --data '{"allowed_networks": ["192.168.1.0/24", "192.168.2.0/24"]}'
   "/settings/allowed_networks/{nodeId}/diff":
     post:
       description: Add or delete allowed networks for a policy server

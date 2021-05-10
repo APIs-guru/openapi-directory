@@ -31102,20 +31102,8 @@ paths:
       externalDocs:
         description: Range Requests
         url: https://tools.ietf.org/html/rfc7233
-      operationId: uploadFileAsBinaryPublic_1
+      operationId: uploadFileAsMultipartPublic_1
       parameters:
-        - description: Date time format (cf. [RFC
-            3339](https://www.ietf.org/rfc/rfc3339.txt) &
-            [leettime.de](http://leettime.de/))
-          in: header
-          name: X-Sds-Date-Format
-          schema:
-            enum:
-              - UTC
-              - LOCAL
-              - OFFSET
-              - EPOCH
-              - LEET
         - description: Access key
           in: path
           name: access_key
@@ -31137,6 +31125,18 @@ paths:
           required: false
           schema:
             type: string
+        - description: Date time format (cf. [RFC
+            3339](https://www.ietf.org/rfc/rfc3339.txt) &
+            [leettime.de](http://leettime.de/))
+          in: header
+          name: X-Sds-Date-Format
+          schema:
+            enum:
+              - UTC
+              - LOCAL
+              - OFFSET
+              - EPOCH
+              - LEET
       requestBody:
         content:
           multipart/form-data:
@@ -31148,6 +31148,12 @@ paths:
               type: object
         description: File
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChunkUploadResponse"
+          description: default response
         "201":
           content:
             application/json:
@@ -31209,9 +31215,7 @@ paths:
                     errorCode: -80037
                     message: Bad Request
               schema:
-                oneOf:
-                  - $ref: "#/components/schemas/ChunkUploadResponse"
-                  - $ref: "#/components/schemas/ErrorResponse"
+                $ref: "#/components/schemas/ErrorResponse"
           description: Bad Request
         "404":
           content:
@@ -31238,9 +31242,7 @@ paths:
                     errorCode: -50501
                     message: Not Found
               schema:
-                oneOf:
-                  - $ref: "#/components/schemas/ChunkUploadResponse"
-                  - $ref: "#/components/schemas/ErrorResponse"
+                $ref: "#/components/schemas/ErrorResponse"
           description: Not Found
         "406":
           content:
@@ -31258,9 +31260,7 @@ paths:
                         value/errorCode"
                     message: Not Acceptable
               schema:
-                oneOf:
-                  - $ref: "#/components/schemas/ChunkUploadResponse"
-                  - $ref: "#/components/schemas/ErrorResponse"
+                $ref: "#/components/schemas/ErrorResponse"
           description: Not Acceptable
         "412":
           content:
@@ -31277,9 +31277,7 @@ paths:
                     errorCode: -90030
                     message: Precondition Failed
               schema:
-                oneOf:
-                  - $ref: "#/components/schemas/ChunkUploadResponse"
-                  - $ref: "#/components/schemas/ErrorResponse"
+                $ref: "#/components/schemas/ErrorResponse"
           description: Precondition Failed
         "507":
           content:
@@ -31326,9 +31324,7 @@ paths:
                     errorCode: -90201
                     message: Insufficient Storage
               schema:
-                oneOf:
-                  - $ref: "#/components/schemas/ChunkUploadResponse"
-                  - $ref: "#/components/schemas/ErrorResponse"
+                $ref: "#/components/schemas/ErrorResponse"
           description: Insufficient Storage
       security: []
       summary: Upload file

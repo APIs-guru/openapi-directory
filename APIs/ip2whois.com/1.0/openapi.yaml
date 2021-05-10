@@ -31,6 +31,12 @@ paths:
           required: true
           schema:
             type: string
+        - description: Returns the API response in json (default) or xml format.
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:

@@ -177,7 +177,7 @@ paths:
           links:
             paginate:
               description: Pagination through curated lists.
-              operationId: getBestPodcasts
+              operationId: getCuratedPodcasts
               parameters:
                 page: $response.body#/next_page_number
         "401":
@@ -372,7 +372,7 @@ paths:
             type: string
           style: simple
         - description: Episode id.
-          example: 914a9deafa5340eeaa2859c77f275799
+          example: 254444fa6cf64a43a95292a70eb6869b
           explode: false
           in: path
           name: id
@@ -560,7 +560,7 @@ paths:
       summary: Fetch a list of supported languages for podcasts
       tags:
         - Directory API
-  /playlists/:
+  /playlists:
     get:
       description: >
         This endpoint returns same data as listennotes.com/listen under
@@ -1143,7 +1143,7 @@ paths:
 
         The PRO plan allows to see up to 300 search results (or `offset` < 300) per query.
 
-        The ENTERPRISE plan allows to see up to 10,000 search results ( or `offset` < 10000) per query.
+        The ENTERPRISE plan allows to see up to 10,000 search results (or `offset` < 10000) per query.
       operationId: search
       parameters:
         - description: Get API Key on listennotes.com/api

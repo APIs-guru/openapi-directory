@@ -13,7 +13,7 @@ info:
   description: The Plaid REST API. Please see https://plaid.com/docs/api for more details.
   termsOfService: https://plaid.com/legal/
   title: The Plaid API
-  version: 2020-09-14_1.8.0
+  version: 2020-09-14_1.15.1
   x-apisguru-categories:
     - financial
   x-origin:
@@ -71,9 +71,9 @@ paths:
                           current: 110
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "0000"
                         name: Plaid Checking
                         official_name: Plaid Gold Standard 0% Interest Checking
@@ -82,12 +82,12 @@ paths:
                       - account_id: dVzbVMLjrxTnLjX4G66XUp5GLklm4oiZy88yK
                         balances:
                           available:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           current: 410
                           iso_currency_code: USD
                           limit: 2000
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "3333"
                         name: Plaid Credit Card
                         official_name: Plaid Diamond 12.5% APR Interest Credit Card
@@ -96,17 +96,17 @@ paths:
                       - account_id: Pp1Vpkl9w8sajvK6oEEKtr7vZxBnGpf7LxxLE
                         balances:
                           available:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           current: 65262
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "7777"
                         name: Plaid Student Loan
                         official_name:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         subtype: student
                         type: loan
                     item:
@@ -120,9 +120,9 @@ paths:
                         - liabilities
                         - transactions
                       consent_expiration_time:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       error:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       institution_id: ins_3
                       item_id: eVBnVMp7zdTJLkRNr33Rs6zr7KNJqBFL9DrE6
                       update_type: background
@@ -136,10 +136,14 @@ paths:
         - plaid
   /accounts/get:
     post:
-      description: The `/accounts/get`  endpoint can be used to retrieve information
+      description: >-
+        The `/accounts/get`  endpoint can be used to retrieve information
         for any linked Item. Note that some information is nullable. Plaid will
         only return active bank accounts, i.e. accounts that are not closed and
         are capable of carrying a balance.
+
+
+        This endpoint retrieves cached information, rather than extracting fresh information from the institution. As a result, balances returned may not be up-to-date; for realtime balance information, use `/accounts/balance/get` instead.
       externalDocs:
         url: /api/accounts/#accountsget
       operationId: accountsGet
@@ -172,9 +176,9 @@ paths:
                           current: 110
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "0000"
                         name: Plaid Checking
                         official_name: Plaid Gold Standard 0% Interest Checking
@@ -183,33 +187,33 @@ paths:
                       - account_id: 6PdjjRP6LmugpBy5NgQvUqpRXMWxzktg3rwrk
                         balances:
                           available:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           current: 23631.9805
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "6666"
                         name: Plaid 401k
                         official_name:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         subtype: 401k
                         type: investment
                       - account_id: XMBvvyMGQ1UoLbKByoMqH3nXMj84ALSdE5B58
                         balances:
                           available:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           current: 65262
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "7777"
                         name: Plaid Student Loan
                         official_name:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         subtype: student
                         type: loan
                     item:
@@ -222,9 +226,9 @@ paths:
                         - assets
                         - auth
                       consent_expiration_time:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       error:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       institution_id: ins_117650
                       item_id: DWVAAPWq4RHGlEaNyGKRTAnPLaEmo8Cvq7na6
                       update_type: background
@@ -240,6 +244,34 @@ paths:
                 $ref: "#/components/schemas/Error"
           description: Error response.
       summary: Retrieve accounts
+      tags:
+        - plaid
+  /application/get:
+    post:
+      description: Allows financial institutions to retrieve information about Plaid
+        clients for the purpose of building control-tower experiences
+      operationId: applicationGet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationGetRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationGetResponse"
+          description: success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error response.
+      summary: Retrieve information about a Plaid application
       tags:
         - plaid
   /asset_report/audit_copy/create:
@@ -467,26 +499,26 @@ paths:
                                 current: 210
                                 iso_currency_code: USD
                                 limit:
-                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                  $ref: "#/components/schemas/AccountSubtype/enum/66"
                                 unofficial_currency_code:
-                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                  $ref: "#/components/schemas/AccountSubtype/enum/66"
                               days_available: 3
                               historical_balances:
                                 - current: 210
                                   date: 2020-06-04
                                   iso_currency_code: USD
                                   unofficial_currency_code:
-                                    $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                    $ref: "#/components/schemas/AccountSubtype/enum/66"
                                 - current: 210
                                   date: 2020-06-03
                                   iso_currency_code: USD
                                   unofficial_currency_code:
-                                    $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                    $ref: "#/components/schemas/AccountSubtype/enum/66"
                                 - current: 210
                                   date: 2020-06-02
                                   iso_currency_code: USD
                                   unofficial_currency_code:
-                                    $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                    $ref: "#/components/schemas/AccountSubtype/enum/66"
                               mask: "1111"
                               name: Plaid Saving
                               official_name: Plaid Silver Standard 0.1% Interest Saving
@@ -529,26 +561,26 @@ paths:
                                       primary: false
                                       type: mobile
                               ownership_type:
-                                $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                $ref: "#/components/schemas/AccountSubtype/enum/66"
                               subtype: savings
                               transactions: []
                               type: depository
                             - account_id: BxBXxLj1m4HMXBm9WZJyUg9XLd4rKEhw8Pb1J
                               balances:
                                 available:
-                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                  $ref: "#/components/schemas/AccountSubtype/enum/66"
                                 current: 56302.06
                                 iso_currency_code: USD
                                 limit:
-                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                  $ref: "#/components/schemas/AccountSubtype/enum/66"
                                 unofficial_currency_code:
-                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                  $ref: "#/components/schemas/AccountSubtype/enum/66"
                               days_available: 3
                               historical_balances: []
                               mask: "8888"
                               name: Plaid Mortgage
                               official_name:
-                                $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                $ref: "#/components/schemas/AccountSubtype/enum/66"
                               owners:
                                 - addresses:
                                     - data:
@@ -588,37 +620,37 @@ paths:
                                       primary: false
                                       type: mobile
                               ownership_type:
-                                $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                $ref: "#/components/schemas/AccountSubtype/enum/66"
                               subtype: mortgage
                               transactions: []
                               type: loan
                             - account_id: dVzbVMLjrxTnLjX4G66XUp5GLklm4oiZy88yK
                               balances:
                                 available:
-                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                  $ref: "#/components/schemas/AccountSubtype/enum/66"
                                 current: 410
                                 iso_currency_code: USD
                                 limit:
-                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                  $ref: "#/components/schemas/AccountSubtype/enum/66"
                                 unofficial_currency_code:
-                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                  $ref: "#/components/schemas/AccountSubtype/enum/66"
                               days_available: 3
                               historical_balances:
                                 - current: 410
                                   date: 2020-06-04
                                   iso_currency_code: USD
                                   unofficial_currency_code:
-                                    $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                    $ref: "#/components/schemas/AccountSubtype/enum/66"
                                 - current: 410
                                   date: 2020-06-03
                                   iso_currency_code: USD
                                   unofficial_currency_code:
-                                    $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                    $ref: "#/components/schemas/AccountSubtype/enum/66"
                                 - current: 410
                                   date: 2020-06-02
                                   iso_currency_code: USD
                                   unofficial_currency_code:
-                                    $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                    $ref: "#/components/schemas/AccountSubtype/enum/66"
                               mask: "3333"
                               name: Plaid Credit Card
                               official_name: Plaid Diamond 12.5% APR Interest Credit Card
@@ -661,7 +693,7 @@ paths:
                                       primary: false
                                       type: mobile
                               ownership_type:
-                                $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                $ref: "#/components/schemas/AccountSubtype/enum/66"
                               subtype: credit card
                               transactions: []
                               type: credit
@@ -827,9 +859,9 @@ paths:
                           current: 110
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "9606"
                         name: Plaid Checking
                         official_name: Plaid Gold Checking
@@ -845,9 +877,9 @@ paths:
                         - assets
                         - auth
                       consent_expiration_time:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       error:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       institution_id: ins_117650
                       item_id: DWVAAPWq4RHGlEaNyGKRTAnPLaEmo8Cvq7na6
                       update_type: background
@@ -993,7 +1025,7 @@ paths:
                       description: Testing2
                       direction: outbound
                       failure_reason:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       id: 460cbe92-2dcc-8eae-5ad6-b37d0ec90fd9
                       iso_currency_code: USD
                       metadata:
@@ -1050,9 +1082,9 @@ paths:
                         event_id: 1
                         event_type: receiver_pending
                         failure_reason:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         origination_account_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         receiver_details:
                           available_balance: positive
                         timestamp: 2020-08-06T17:27:15Z
@@ -1101,11 +1133,11 @@ paths:
                         event_id: 1
                         event_type: pending
                         failure_reason:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         origination_account_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         receiver_details:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         timestamp: 2020-08-06T17:27:15Z
                     request_id: mdqfuVxeoza6mhu
               schema:
@@ -1338,7 +1370,7 @@ paths:
     post:
       description: This endpoint provides an alternative to `/deposit_switch/create`
         for customers who have not yet fully integrated with Plaid Exchange.
-        Like `/deposit_switch/create`, it created a deposit switch entity that
+        Like `/deposit_switch/create`, it creates a deposit switch entity that
         will be persisted throughout the lifecycle of the switch.
       externalDocs:
         url: /api/products#deposit_switchaltcreate
@@ -1348,6 +1380,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/DepositSwitchAltCreateRequest"
+        required: true
       responses:
         "200":
           content:
@@ -1416,7 +1449,7 @@ paths:
                   value:
                     account_has_multiple_allocations: true
                     amount_allocated:
-                      $ref: "#/components/schemas/AccountSubtype/enum/65"
+                      $ref: "#/components/schemas/AccountSubtype/enum/66"
                     date_completed: 2019-11-01
                     date_created: 2019-11-01
                     deposit_switch_id: LjDyMfMkVpqLmEm1VR7bQikR3BX5hEMdRAkq1
@@ -1498,7 +1531,7 @@ paths:
                           street: 1098 Harrison St
                         confidence_score: 1
                         employer_id: emp_1
-                        name: Plaid Technologies Inc
+                        name: Plaid Inc.
                     request_id: ixTBLZGvhD4NnmB
               schema:
                 $ref: "#/components/schemas/EmployersSearchResponse"
@@ -1541,9 +1574,9 @@ paths:
                           current: 110
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "0000"
                         name: Plaid Checking
                         official_name: Plaid Gold Standard 0% Interest Checking
@@ -1593,9 +1626,9 @@ paths:
                           current: 210
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "1111"
                         name: Plaid Saving
                         official_name: Plaid Silver Standard 0.1% Interest Saving
@@ -1650,9 +1683,9 @@ paths:
                         - liabilities
                         - transactions
                       consent_expiration_time:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       error:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       institution_id: ins_3
                       item_id: eVBnVMp7zdTJLkRNr33Rs6zr7KNJqBFL9DrE6
                       update_type: background
@@ -1754,7 +1787,7 @@ paths:
                 example-1:
                   value:
                     account_id:
-                      $ref: "#/components/schemas/AccountSubtype/enum/65"
+                      $ref: "#/components/schemas/AccountSubtype/enum/66"
                     employee:
                       address:
                         city: SAN FRANCISCO
@@ -1776,7 +1809,7 @@ paths:
                     ytd_earnings:
                       gross_earnings: 59375
                       net_earnings:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
               schema:
                 $ref: "#/components/schemas/IncomeVerificationPaystubGetResponse"
           description: OK
@@ -2001,7 +2034,7 @@ paths:
                           last_status_change: 2019-02-15T15:53:00Z
                           status: HEALTHY
                         logo:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         primary_color: "#004966"
                         transactions_updates:
                           breakdown:
@@ -2100,9 +2133,9 @@ paths:
                           current: 43200
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "4444"
                         name: Plaid Money Market
                         official_name: Plaid Platinum Standard 1.85% Interest Money Market
@@ -2111,113 +2144,112 @@ paths:
                       - account_id: JqMLm4rJwpF6gMPJwBqdh9ZjjPvvpDcb7kDK1
                         balances:
                           available:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           current: 320.76
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "5555"
                         name: Plaid IRA
                         official_name:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         subtype: ira
                         type: investment
                       - account_id: k67E4xKvMlhmleEa4pg9hlwGGNnnEeixPolGm
                         balances:
                           available:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           current: 23631.9805
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "6666"
                         name: Plaid 401k
                         official_name:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         subtype: 401k
                         type: investment
                     holdings:
                       - account_id: JqMLm4rJwpF6gMPJwBqdh9ZjjPvvpDcb7kDK1
                         cost_basis: 1
                         institution_price: 1
-                        institution_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        institution_price_as_of: 2021-04-13
                         institution_value: 0.01
                         iso_currency_code: USD
                         quantity: 0.01
                         security_id: d6ePmbPxgWCWmMVv66q9iPV94n91vMtov5Are
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - account_id: k67E4xKvMlhmleEa4pg9hlwGGNnnEeixPolGm
                         cost_basis: 1.5
                         institution_price: 2.11
                         institution_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_value: 2.11
                         iso_currency_code: USD
                         quantity: 1
                         security_id: KDwjlXj1Rqt58dVvmzRguxJybmyQL8FgeWWAy
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - account_id: k67E4xKvMlhmleEa4pg9hlwGGNnnEeixPolGm
                         cost_basis: 10
                         institution_price: 10.42
                         institution_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_value: 20.84
                         iso_currency_code: USD
                         quantity: 2
                         security_id: NDVQrXQoqzt5v3bAe8qRt4A7mK7wvZCLEBBJk
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - account_id: JqMLm4rJwpF6gMPJwBqdh9ZjjPvvpDcb7kDK1
                         cost_basis: 0.01
                         institution_price: 0.011
                         institution_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_value: 110
                         iso_currency_code: USD
                         quantity: 10000
                         security_id: 8E4L9XLl6MudjEpwPAAgivmdZRdBPJuvMPlPb
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - account_id: k67E4xKvMlhmleEa4pg9hlwGGNnnEeixPolGm
                         cost_basis: 23
                         institution_price: 27
                         institution_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_value: 636.309
                         iso_currency_code: USD
                         quantity: 23.567
                         security_id: JDdP7XPMklt5vwPmDN45t3KAoWAPmjtpaW7DP
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - account_id: k67E4xKvMlhmleEa4pg9hlwGGNnnEeixPolGm
                         cost_basis: 15
                         institution_price: 13.73
                         institution_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_value: 1373.6865
                         iso_currency_code: USD
                         quantity: 100.05
                         security_id: nnmo8doZ4lfKNEDe3mPJipLGkaGw3jfPrpxoN
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - account_id: k67E4xKvMlhmleEa4pg9hlwGGNnnEeixPolGm
                         cost_basis: 1
                         institution_price: 1
                         institution_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_value: 12345.67
                         iso_currency_code: USD
                         quantity: 12345.67
                         security_id: d6ePmbPxgWCWmMVv66q9iPV94n91vMtov5Are
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                     item:
                       available_products:
                         - balance
@@ -2229,9 +2261,9 @@ paths:
                         - auth
                         - investments
                       consent_expiration_time:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       error:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       institution_id: ins_3
                       item_id: 4z9LPae1nRHWy8pvg9jrsgbRP4ZNQvIdbLq7g
                       update_type: background
@@ -2239,135 +2271,134 @@ paths:
                     request_id: l68wb8zpS0hqmsJ
                     securities:
                       - close_price: 0.011
-                        close_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        close_price_as_of: 2021-04-13
                         cusip:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         is_cash_equivalent: false
                         isin:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         iso_currency_code: USD
                         name: Nflx Feb 01'18 $355 Call
                         proxy_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         security_id: 8E4L9XLl6MudjEpwPAAgivmdZRdBPJuvMPlPb
                         sedol:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         ticker_symbol: NFLX180201C00355000
                         type: derivative
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - close_price: 27
                         close_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         cusip: "577130834"
                         institution_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         is_cash_equivalent: false
                         isin: US5771308344
                         iso_currency_code: USD
                         name: Matthews Pacific Tiger Fund Insti Class
                         proxy_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         security_id: JDdP7XPMklt5vwPmDN45t3KAoWAPmjtpaW7DP
                         sedol:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         ticker_symbol: MIPTX
                         type: mutual fund
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - close_price: 2.11
                         close_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         cusip: 00448Q201
                         institution_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         is_cash_equivalent: false
                         isin: US00448Q2012
                         iso_currency_code: USD
                         name: Achillion Pharmaceuticals Inc.
                         proxy_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         security_id: KDwjlXj1Rqt58dVvmzRguxJybmyQL8FgeWWAy
                         sedol:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         ticker_symbol: ACHN
                         type: equity
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - close_price: 10.42
                         close_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         cusip: "258620103"
                         institution_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         is_cash_equivalent: false
                         isin: US2586201038
                         iso_currency_code: USD
                         name: DoubleLine Total Return Bond Fund
                         proxy_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         security_id: NDVQrXQoqzt5v3bAe8qRt4A7mK7wvZCLEBBJk
                         sedol:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         ticker_symbol: DBLTX
                         type: mutual fund
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - close_price: 1
                         close_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         cusip:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         is_cash_equivalent: true
                         isin:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         iso_currency_code: USD
                         name: U S Dollar
                         proxy_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         security_id: d6ePmbPxgWCWmMVv66q9iPV94n91vMtov5Are
                         sedol:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         ticker_symbol: USD
                         type: cash
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - close_price: 13.73
                         close_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         cusip:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_id: ins_3
                         institution_security_id: NHX105509
                         is_cash_equivalent: false
                         isin:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         iso_currency_code: USD
                         name: NH PORTFOLIO 1055 (FIDELITY INDEX)
                         proxy_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         security_id: nnmo8doZ4lfKNEDe3mPJipLGkaGw3jfPrpxoN
                         sedol:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         ticker_symbol: NHX105509
                         type: etf
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
               schema:
                 $ref: "#/components/schemas/InvestmentsHoldingsGetResponse"
           description: OK
@@ -2408,9 +2439,9 @@ paths:
                           current: 110
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "0000"
                         name: Plaid Checking
                         official_name: Plaid Gold Standard 0% Interest Checking
@@ -2419,40 +2450,40 @@ paths:
                       - account_id: KqZZMoZmBWHJlz7yKaZjHZb78VNpaxfVa7e5z
                         balances:
                           available:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           current: 320.76
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "5555"
                         name: Plaid IRA
                         official_name:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         subtype: ira
                         type: investment
                       - account_id: rz99ex9ZQotvnjXdgQLEsR81e3ArPgulVWjGj
                         balances:
                           available:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           current: 23631.9805
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "6666"
                         name: Plaid 401k
                         official_name:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         subtype: 401k
                         type: investment
                     investment_transactions:
                       - account_id: rz99ex9ZQotvnjXdgQLEsR81e3ArPgulVWjGj
                         amount: -8.72
                         cancel_transaction_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         date: 2020-05-29
                         fees: 0
                         investment_transaction_id: oq99Pz97joHQem4BNjXECev1E4B6L6sRzwANW
@@ -2464,27 +2495,27 @@ paths:
                         subtype: dividend
                         type: cash
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - account_id: rz99ex9ZQotvnjXdgQLEsR81e3ArPgulVWjGj
                         amount: -1289.01
                         cancel_transaction_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         date: 2020-05-28
                         fees: 7.99
                         investment_transaction_id: pK99jB9e7mtwjA435GpVuMvmWQKVbVFLWme57
                         iso_currency_code: USD
                         name: SELL Matthews Pacific Tiger Fund Insti Class
                         price: 27.53
-                        quantity: 47.74104242992852
+                        quantity: -47.74104242992852
                         security_id: JDdP7XPMklt5vwPmDN45t3KAoWAPmjtpaW7DP
                         subtype: sell
                         type: sell
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - account_id: rz99ex9ZQotvnjXdgQLEsR81e3ArPgulVWjGj
                         amount: 7.7
                         cancel_transaction_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         date: 2020-05-27
                         fees: 7.99
                         investment_transaction_id: LKoo1ko93wtreBwM7yQnuQ3P5DNKbKSPRzBNv
@@ -2496,7 +2527,7 @@ paths:
                         subtype: buy
                         type: buy
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                     item:
                       available_products:
                         - assets
@@ -2507,9 +2538,9 @@ paths:
                         - auth
                         - investments
                       consent_expiration_time:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       error:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       institution_id: ins_12
                       item_id: 8Mqq5rqQ7Pcxq9MGDv3JULZ6yzZDLMCwoxGDq
                       update_type: background
@@ -2518,67 +2549,67 @@ paths:
                     securities:
                       - close_price: 27
                         close_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         cusip: "577130834"
                         institution_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         is_cash_equivalent: false
                         isin: US5771308344
                         iso_currency_code: USD
                         name: Matthews Pacific Tiger Fund Insti Class
                         proxy_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         security_id: JDdP7XPMklt5vwPmDN45t3KAoWAPmjtpaW7DP
                         sedol:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         ticker_symbol: MIPTX
                         type: mutual fund
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - close_price: 10.42
                         close_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         cusip: "258620103"
                         institution_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         is_cash_equivalent: false
                         isin: US2586201038
                         iso_currency_code: USD
                         name: DoubleLine Total Return Bond Fund
                         proxy_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         security_id: NDVQrXQoqzt5v3bAe8qRt4A7mK7wvZCLEBBJk
                         sedol:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         ticker_symbol: DBLTX
                         type: mutual fund
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       - close_price: 34.73
                         close_price_as_of:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         cusip: 84470P109
                         institution_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         institution_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         is_cash_equivalent: false
                         isin: US84470P1093
                         iso_currency_code: USD
                         name: Southside Bancshares Inc.
                         proxy_security_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         security_id: eW4jmnjd6AtjxXVrjmj6SX1dNEdZp3Cy8RnRQ
                         sedol:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         ticker_symbol: SBSI
                         type: equity
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                     total_investment_transactions: 3
               schema:
                 $ref: "#/components/schemas/InvestmentsTransactionsGetResponse"
@@ -2646,9 +2677,9 @@ paths:
                         - identity
                         - transactions
                       consent_expiration_time:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       error:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       institution_id: ins_109508
                       item_id: Ed6bjNrDLJfGvZWwnkQlfxwoNz54B5C97ejBr
                       update_type: background
@@ -2789,7 +2820,10 @@ paths:
         and cannot be used to access any data that was associated with the Item.
 
 
-        Note that in the Development environment, issuing an `/item/remove`  request will not decrement your live credential count.
+        Note that in the Development environment, issuing an `/item/remove`  request will not decrement your live credential count. To increase your credential account in Development, contact Support.
+
+
+        Also note that for certain OAuth-based institutions, an Item removed via `/item/remove` may still show as an active connection in the institution's OAuth permission manager.
       externalDocs:
         url: /api/items/#itemremove
       operationId: itemRemove
@@ -2852,9 +2886,9 @@ paths:
                         - assets
                         - auth
                       consent_expiration_time:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       error:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       institution_id: ins_117650
                       item_id: DWVAAPWq4RHGlEaNyGKRTAnPLaEmo8Cvq7na6
                       update_type: background
@@ -2907,9 +2941,9 @@ paths:
                           current: 110
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "0000"
                         name: Plaid Checking
                         official_name: Plaid Gold Standard 0% Interest Checking
@@ -2918,12 +2952,12 @@ paths:
                       - account_id: dVzbVMLjrxTnLjX4G66XUp5GLklm4oiZy88yK
                         balances:
                           available:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           current: 410
                           iso_currency_code: USD
                           limit: 2000
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "3333"
                         name: Plaid Credit Card
                         official_name: Plaid Diamond 12.5% APR Interest Credit Card
@@ -2932,33 +2966,33 @@ paths:
                       - account_id: Pp1Vpkl9w8sajvK6oEEKtr7vZxBnGpf7LxxLE
                         balances:
                           available:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           current: 65262
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "7777"
                         name: Plaid Student Loan
                         official_name:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         subtype: student
                         type: loan
                       - account_id: BxBXxLj1m4HMXBm9WZJyUg9XLd4rKEhw8Pb1J
                         balances:
                           available:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           current: 56302.06
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "8888"
                         name: Plaid Mortgage
                         official_name:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         subtype: mortgage
                         type: loan
                     item:
@@ -2972,9 +3006,9 @@ paths:
                         - liabilities
                         - transactions
                       consent_expiration_time:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       error:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       institution_id: ins_3
                       item_id: eVBnVMp7zdTJLkRNr33Rs6zr7KNJqBFL9DrE6
                       update_type: background
@@ -3002,7 +3036,6 @@ paths:
                           is_overdue: false
                           last_payment_amount: 168.25
                           last_payment_date: 2019-05-22
-                          last_statement_balance: 1708.77
                           last_statement_issue_date: 2019-05-28
                           minimum_payment_amount: 20
                           next_payment_due_date: 2020-05-28
@@ -3045,7 +3078,6 @@ paths:
                           is_overdue: false
                           last_payment_amount: 138.05
                           last_payment_date: 2019-04-22
-                          last_statement_balance: 138.05
                           last_statement_issue_date: 2019-04-28
                           loan_name: Consolidation
                           loan_status:
@@ -3157,7 +3189,7 @@ paths:
                         - auth
                       language: en
                       redirect_uri:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       webhook: https://www.example.com/webhook
                     request_id: u0ydFs493XjyTYn
               schema:
@@ -3342,9 +3374,6 @@ paths:
 
 
         The endpoint is idempotent: if a developer has already made a request with the same payment details, Plaid will return the same `recipient_id`.
-
-
-        In the Sandbox environment, you can use the `/payment_initiation/recipient/create` endpoint to generate recipients. Programmatic recipient creation in the Development and Production environments can be done after approval by Plaid's Compliance team. [Contact Sales](https://plaid.com/contact/)for approval.
       externalDocs:
         url: /api/products/#payment_initiationrecipientcreate
       operationId: paymentInitiationRecipientCreate
@@ -3491,12 +3520,12 @@ paths:
                 example-1:
                   value:
                     account:
-                      account_id: QKKzevvp33HxPWpoqn6rI13BxW4awNSjnw4xv
+                      account_id: vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D
                       balances:
                         available: 100
                         current: 110
                         limit:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       mask: "0000"
                       name: Plaid Checking
                       official_name: Plaid Gold Checking
@@ -3565,7 +3594,7 @@ paths:
                         available: 100
                         current: 110
                         limit:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       mask: "0000"
                       name: Plaid Checking
                       official_name: Plaid Gold Checking
@@ -3606,9 +3635,9 @@ paths:
                         current: 110
                         iso_currency_code: USD
                         limit:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                       mask: "0000"
                       name: Plaid Checking
                       official_name: Plaid Gold Standard 0% Interest Checking
@@ -3718,6 +3747,39 @@ paths:
                 $ref: "#/components/schemas/ProcessorTokenCreateResponse"
           description: OK
       summary: Create processor token
+      tags:
+        - plaid
+  /sandbox/bank_transfer/fire_webhook:
+    post:
+      description: Use the `/sandbox/bank_transfer/fire_webhook` endpoint to manually
+        trigger a Bank Transfers webhook in the Sandbox environment.
+      externalDocs:
+        url: /api/sandbox/#sandboxbank_transferfire_webhook
+      operationId: sandboxBankTransferFireWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SandboxBankTransferFireWebhookRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example-1:
+                  value:
+                    request_id: mdqfuVxeoza6mhu
+              schema:
+                $ref: "#/components/schemas/SandboxBankTransferFireWebhookResponse"
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error response
+      summary: Manually fire a Bank Transfer webhook
       tags:
         - plaid
   /sandbox/bank_transfer/simulate:
@@ -3969,6 +4031,9 @@ paths:
         Due to the potentially large number of transactions associated with an Item, results are paginated. Manipulate the `count` and `offset` parameters in conjunction with the `total_transactions` response body field to fetch all available transactions.
 
 
+        Data returned by `/transactions/get` will be the data available for the Item as of the most recent successful check for new transactions. Plaid typically checks for new data multiple times a day, but these checks may occur less frequently, such as once a day, depending on the institution. An Item's `status.transactions.last_successful_update` field will show the timestamp of the most recent successful update. To force Plaid to check for new transactions, you can use the `/transactions/refresh` endpoint.
+
+
         Note that data may not be immediately available to `/transactions/get`. Plaid will begin to prepare transactions data upon Item link, if Link was initialized with `transactions`, or upon the first call to `/transactions/get`, if it wasn't. To be alerted when transaction data is ready to be fetched, listen for the [`INITIAL_UPDATE`](/docs/api/webhooks#transactions-initial_update) and [`HISTORICAL_UPDATE`](/docs/api/webhooks#transactions-historical_update) webhooks. If no transaction history is ready when `/transactions/get` is called, it will return a `PRODUCT_NOT_READY` error.
       externalDocs:
         url: /api/products/#transactionsget
@@ -3994,9 +4059,9 @@ paths:
                           current: 110
                           iso_currency_code: USD
                           limit:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           unofficial_currency_code:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         mask: "0000"
                         name: Plaid Checking
                         official_name: Plaid Gold Standard 0% Interest Checking
@@ -4013,9 +4078,9 @@ paths:
                         - liabilities
                         - transactions
                       consent_expiration_time:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       error:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       institution_id: ins_3
                       item_id: eVBnVMp7zdTJLkRNr33Rs6zr7KNJqBFL9DrE6
                       update_type: background
@@ -4025,18 +4090,18 @@ paths:
                     transactions:
                       - account_id: BxBXxLj1m4HMXBm9WZZmCWVbPjX16EHwv99vp
                         account_owner:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         amount: 2307.21
                         authorized_date: 2017-01-27
                         authorized_datetime:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         category:
                           - Shops
                           - Computers and Electronics
                         category_id: "19013000"
                         date: 2017-01-29
                         datetime:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         iso_currency_code: USD
                         location:
                           address: 300 Post St
@@ -4052,30 +4117,30 @@ paths:
                         payment_channel: in store
                         payment_meta:
                           by_order_of:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           payee:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           payer:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           payment_method:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           payment_processor:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           ppd_id:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           reason:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                           reference_number:
-                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                            $ref: "#/components/schemas/AccountSubtype/enum/66"
                         pending: false
                         pending_transaction_id:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         transaction_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
                         transaction_id: lPNjeW1nR6CDn5okmGQ6hEpMo4lLNoSrzqDje
                         transaction_type: place
                         unofficial_currency_code:
-                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          $ref: "#/components/schemas/AccountSubtype/enum/66"
               schema:
                 $ref: "#/components/schemas/TransactionsGetResponse"
           description: OK
@@ -4167,7 +4232,7 @@ paths:
                       created_at: 1560466150
                       crv: P-256
                       expired_at:
-                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        $ref: "#/components/schemas/AccountSubtype/enum/66"
                       kid: bfbd5111-8e33-4643-8ced-b2e642a72f3c
                       kty: EC
                       use: sig
@@ -4250,11 +4315,15 @@ components:
       title: ACHClass
       type: string
     APIClientID:
-      description: Your Plaid API `client_id`.
+      description: Your Plaid API `client_id`. The `client_id` is required and may be
+        provided either in the `PLAID-CLIENT-ID` header or as part of a request
+        body.
       title: ClientID
       type: string
     APISecret:
-      description: Your Plaid API `secret`.
+      description: Your Plaid API `secret`. The `secret` is required and may be
+        provided either in the `PLAID-SECRET` header or as part of a request
+        body.
       title: APISecret
       type: string
     APR:
@@ -4380,6 +4449,16 @@ components:
             `unofficial_currency_code` is non-null.
           nullable: true
           type: string
+        last_updated_datetime:
+          description: >-
+            Timestamp in ISO-8601 format (`YYYY-MM-DDTHH:mm:ssZ`) indicating
+            the last time that the balance for the given account has been
+            updated.
+
+
+            This is currently only provided when the `min_last_updated_datetime` is passed when calling `/accounts/balance/get` for `ins_128026` (Capital One).
+          nullable: true
+          type: string
         limit:
           description: >-
             For `credit`-type accounts, this represents the credit limit.
@@ -4421,6 +4500,9 @@ components:
 
 
             The `account_id` can also change if the `access_token` is deleted and the same credentials that were used to generate that `access_token` are used to generate a new `access_token` on a later date. In that case, the new `account_id` will be different from the old `account_id`.
+
+
+            If an account with a specific `account_id` disappears instead of changing, the account is likely closed. Closed accounts are not returned by the Plaid API.
 
 
             Like all Plaid identifiers, the `account_id` is case sensitive.
@@ -4586,6 +4668,7 @@ components:
         - money market
         - prepaid
         - auto
+        - business
         - commercial
         - construction
         - consumer
@@ -4674,6 +4757,19 @@ components:
           items:
             type: string
           type: array
+        min_last_updated_datetime:
+          description: >-
+            Timestamp in ISO-8601 format (`YYYY-MM-DDTHH:mm:ssZ`) indicating
+            the oldest acceptable balance when making a request to
+            `/accounts/balance/get`.
+
+
+            If the balance that is pulled for `ins_128026` (Capital One) is older than the given timestamp, an `INVALID_REQUEST` error with the code of `LAST_UPDATED_DATETIME_OUT_OF_RANGE` will be returned with the most recent timestamp for the requested account contained in the response.
+
+
+            This field is only used when the institution is `ins_128026` (Capital One), in which case a value must be provided or an `INVALID_REQUEST` error with the code of `INVALID_FIELD` will be returned. For all other institutions, this field is ignored.
+          format: date-time
+          type: string
       type: object
     AccountsGetRequest:
       description: AccountsGetRequest defines the request schema for `/accounts/get`
@@ -4769,26 +4865,66 @@ components:
         - country
       title: AddressData
       type: object
-    Amount:
-      additionalProperties: true
-      description: A payment amount.
+    Application:
+      description: Metadata about the application
       properties:
-        currency:
-          description: The ISO-4217 currency code of the payment. For standing orders,
-            `"GBP"` must be used.
-          enum:
-            - GBP
-            - EUR
+        application_id:
+          $ref: "#/components/schemas/ApplicationID"
+        application_url:
+          description: The URL for the application's website
+          nullable: true
           type: string
-        value:
-          description: The amount of the payment. Must contain at most two digits of
-            precision e.g. `1.23`. Minimum accepted value is `1`.
-          type: number
+        logo:
+          description: A URL that links to the application logo image.
+          nullable: true
+          type: string
+        name:
+          description: The name of the application
+          type: string
+        reason_for_access:
+          description: A string provided by the connected app stating why they use their
+            respective enabled products.
+          nullable: true
+          type: string
       required:
-        - currency
-        - value
-      title: Amount
+        - application_id
+        - created_at
+        - name
+        - logo
+        - application_url
+        - reason_for_access
       type: object
+    ApplicationGetRequest:
+      description: ApplicationGetResponse defines the schema for `/application/get`
+      properties:
+        application_id:
+          $ref: "#/components/schemas/ApplicationID"
+        client_id:
+          $ref: "#/components/schemas/APIClientID"
+        secret:
+          $ref: "#/components/schemas/APISecret"
+      required:
+        - client_id
+        - secret
+        - application_id
+      type: object
+    ApplicationGetResponse:
+      description: The request ID associated with this call.
+      properties:
+        application:
+          $ref: "#/components/schemas/Application"
+        request_id:
+          $ref: "#/components/schemas/RequestID"
+      required:
+        - request_id
+        - application
+      type: object
+    ApplicationID:
+      description: This field will map to the application ID that is returned from
+        /item/applications/list, or provided to the institution in an oauth
+        redirect.
+      title: ApplicationID
+      type: string
     AssetReport:
       additionalProperties: true
       description: An object representing an Asset Report
@@ -5274,7 +5410,7 @@ components:
           asset_report_id: 47dfc92b-bba3-4583-809e-ce871b321f05
           error:
             display_message:
-              $ref: "#/components/schemas/AccountSubtype/enum/65"
+              $ref: "#/components/schemas/AccountSubtype/enum/66"
             error_code: PRODUCT_NOT_ENABLED
             error_message: "the 'assets' product is not enabled for the following access
               tokens: access-sandbox-fb88b20c-7b74-4197-8d01-0ab122dad0bc.
@@ -5392,9 +5528,9 @@ components:
       type: object
     AutomaticallyVerifiedWebhook:
       additionalProperties: true
-      description: Fired when an Item is verified via micro-deposits. We recommend
-        communicating to your users when this event is received to notify them
-        that their account is verified and ready for use.
+      description: Fired when an Item is verified via automated micro-deposits. We
+        recommend communicating to your users when this event is received to
+        notify them that their account is verified and ready for use.
       properties:
         account_id:
           description: The `account_id` of the account associated with the webhook
@@ -6004,7 +6140,6 @@ components:
 
         - Maximum value length of 500 characters
       maxProperties: 50
-      nullable: true
       title: BankTransferMetadata
       type: object
     BankTransferMigrateAccountRequest:
@@ -6116,6 +6251,27 @@ components:
         - legal_name
       title: BankTransferUser
       type: object
+    BankTransfersEventsUpdateWebhook:
+      additionalProperties: true
+      description: Fired when new bank transfer events are available. Receiving this
+        webhook indicates you should fetch the new events from
+        `/bank_transfer/event/sync`.
+      properties:
+        webhook_code:
+          description: "`BANK_TRANSFERS_EVENTS_UPDATE`"
+          type: string
+        webhook_type:
+          description: "`BANK_TRANSFERS`"
+          type: string
+      required:
+        - webhook_type
+        - webhook_code
+      title: BankTransfersEventsUpdateWebhook
+      type: object
+      x-examples:
+        example-1:
+          webhook_code: BANK_TRANSFERS_EVENTS_UPDATE
+          webhook_type: BANK_TRANSFERS
     CategoriesGetRequest:
       description: CategoriesGetRequest defines the request schema for `/categories/get`
       type: object
@@ -6226,10 +6382,6 @@ components:
           description: The date of the last payment. Dates are returned in an ISO 8601
             format (YYYY-MM-DD). Availability for this field is limited.
           type: string
-        last_statement_balance:
-          description: The outstanding balance on the last statement. Availability for
-            this field is limited.
-          type: number
         last_statement_issue_date:
           description: The date of the last statement. Dates are returned in an ISO 8601
             format (YYYY-MM-DD).
@@ -6246,7 +6398,6 @@ components:
         - aprs
         - last_payment_amount
         - last_payment_date
-        - last_statement_balance
         - last_statement_issue_date
         - minimum_payment_amount
         - next_payment_due_date
@@ -6293,7 +6444,7 @@ components:
       x-examples:
         example-1:
           error:
-            $ref: "#/components/schemas/AccountSubtype/enum/65"
+            $ref: "#/components/schemas/AccountSubtype/enum/66"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           new_transactions: 3
           webhook_code: DEFAULT_UPDATE
@@ -6791,6 +6942,7 @@ components:
           description: A broad categorization of the error. Safe for programatic use.
           enum:
             - INVALID_REQUEST
+            - INVALID_RESULT
             - INVALID_INPUT
             - INSTITUTION_ERROR
             - RATE_LIMIT_EXCEEDED
@@ -6823,6 +6975,45 @@ components:
         - request_id
       title: Error
       type: object
+    ExternalPaymentOptions:
+      additionalProperties: true
+      description: Additional payment options
+      nullable: true
+      properties:
+        bacs:
+          $ref: "#/components/schemas/PaymentInitiationOptionalRestrictionBacs"
+          nullable: true
+        iban:
+          description: The International Bank Account Number (IBAN) for the payer's
+            account. If provided, the end user will be able to send payments
+            only from the specified bank account.
+          nullable: true
+          type: string
+        request_refund_details:
+          description: When true Plaid will attempt to request refund details from the
+            payee's financal institution.  Support varies between financial
+            institutions and will not always be available.  If we are able to
+            request refund details the details will be available in the
+            `/payment/get` response.
+          nullable: true
+          type: boolean
+      title: PaymentOptions
+      type: object
+    ExternalPaymentRefundDetails:
+      nullable: true
+      properties:
+        bacs:
+          $ref: "#/components/schemas/NullableRecipientBACS"
+          nullable: true
+        iban:
+          description: The International Bank Account Number (IBAN) for the account.
+          nullable: true
+          type: string
+        name:
+          description: The name of the account holder.
+          type: string
+      title: ExternalPaymentRefundDetails
+      type: object
     ExternalPaymentSchedule:
       additionalProperties: true
       description: The schedule that the payment will be executed on. If a schedule is
@@ -6841,9 +7032,7 @@ components:
           format: date
           type: string
         interval:
-          description: The frequency interval of the payment. Valid values are `"WEEKLY"`
-            or `"MONTHLY"`.
-          type: string
+          $ref: "#/components/schemas/PaymentScheduleInterval"
         interval_execution_day:
           description: >-
             The day of the interval on which to schedule the payment.
@@ -6853,7 +7042,7 @@ components:
 
 
             If the payment interval is monthly, `interval_execution_day` should be an integer indicating which day of the month to make the payment on. Integers from 1 to 28 can be used to make a payment on that day of the month. Negative integers from -1 to -5 can be used to make a payment relative to the end of the month. To make a payment on the last day of the month, use -1; to make the payment on the second-to-last day, use -2, and so on.
-          type: number
+          type: integer
         start_date:
           description: >-
             A date in ISO 8601 format (YYYY-MM-DD). Standing order payments
@@ -6981,7 +7170,7 @@ components:
       x-examples:
         example-1:
           error:
-            $ref: "#/components/schemas/AccountSubtype/enum/65"
+            $ref: "#/components/schemas/AccountSubtype/enum/66"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           new_transactions: 231
           webhook_code: HISTORICAL_UPDATE
@@ -7002,6 +7191,7 @@ components:
           type: number
         institution_price_as_of:
           description: The date at which `institution_price` was current.
+          format: date
           nullable: true
           type: string
         institution_value:
@@ -7075,7 +7265,7 @@ components:
       x-examples:
         example-1:
           error:
-            $ref: "#/components/schemas/AccountSubtype/enum/65"
+            $ref: "#/components/schemas/AccountSubtype/enum/66"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           new_holdings: 19
           updated_holdings: 0
@@ -7462,7 +7652,7 @@ components:
       x-examples:
         example-1:
           error:
-            $ref: "#/components/schemas/AccountSubtype/enum/65"
+            $ref: "#/components/schemas/AccountSubtype/enum/66"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           new_transactions: 19
           webhook_code: INITIAL_UPDATE
@@ -7490,6 +7680,8 @@ components:
           description: Indicates that the institution has an OAuth login flow. This is
             primarily relevant to institutions with European country codes.
           type: boolean
+        payment_initiation_metadata:
+          $ref: "#/components/schemas/PaymentInitiationMetadata"
         primary_color:
           description: Hexadecimal representation of the primary color used by the
             institution
@@ -7649,6 +7841,11 @@ components:
 
             Note that Plaid does not own any of the logos shared by the API and that by accessing or using these logos, you agree that you are doing so at your own risk and will, if necessary, obtain all required permissions from the appropriate rights holders and adhere to any applicable usage guidelines. Plaid disclaims all express or implied warranties with respect to the logos.
           type: boolean
+        include_payment_initiation_metadata:
+          default: false
+          description: When `true`, returns metadata related to the Payment Initiation
+            product indicating which payment configurations are supported.
+          type: boolean
         include_status:
           default: false
           description: If `true`, the response will include status information about the
@@ -7708,6 +7905,11 @@ components:
 
             Note that Plaid does not own any of the logos shared by the API, and that by accessing or using these logos, you agree that you are doing so at your own risk and will, if necessary, obtain all required permissions from the appropriate rights holders and adhere to any applicable usage guidelines. Plaid disclaims all express or implied warranties with respect to the logos.
           type: boolean
+        include_payment_initiation_metadata:
+          default: false
+          description: When `true`, returns metadata related to the Payment Initiation
+            product indicating which payment configurations are supported.
+          type: boolean
         oauth:
           description: Limit results to institutions with or without OAuth login flows.
             This is primarily relevant to institutions with European country
@@ -7719,7 +7921,9 @@ components:
             $ref: "#/components/schemas/Products"
           type: array
         routing_numbers:
-          description: Specify an array of routing numbers to filter institutions.
+          description: Specify an array of routing numbers to filter institutions. The
+            response will only return institutions that match all of the routing
+            numbers in the array.
           items:
             type: string
           type: array
@@ -7737,7 +7941,7 @@ components:
         request_id:
           $ref: "#/components/schemas/RequestID"
         total:
-          description: The number of institutions returned
+          description: The total number of institutions available via this endpoint
           type: integer
       required:
         - institutions
@@ -7764,6 +7968,16 @@ components:
             $ref: "#/components/schemas/AccountSubtype"
           type: array
       title: InstitutionsSearchAccountFilter
+      type: object
+    InstitutionsSearchPaymentInitiationOptions:
+      additionalProperties: true
+      description: Additional options that will be used to filter institutions by
+        various Payment Initiation configurations.
+      nullable: true
+      properties:
+        payment_id:
+          description: A unique ID identifying the payment
+          type: string
       type: object
     InstitutionsSearchRequest:
       description: InstitutionsSearchRequest defines the request schema for
@@ -7802,17 +8016,22 @@ components:
     InstitutionsSearchRequestOptions:
       description: An optional object to filter `/institutions/search` results.
       properties:
-        account_filter:
-          $ref: "#/components/schemas/InstitutionsSearchAccountFilter"
         include_optional_metadata:
           description: When true, return the institution's homepage URL, logo and primary
-            brand color. Learn more
+            brand color.
+          type: boolean
+        include_payment_initiation_metadata:
+          default: false
+          description: When `true`, returns metadata related to the Payment Initiation
+            product indicating which payment configurations are supported.
           type: boolean
         oauth:
           description: Limit results to institutions with or without OAuth login flows.
             This is primarily relevant to institutions with European country
             codes
           type: boolean
+        payment_initiation:
+          $ref: "#/components/schemas/InstitutionsSearchPaymentInitiationOptions"
       type: object
     InstitutionsSearchResponse:
       additionalProperties: true
@@ -8058,6 +8277,9 @@ components:
             cash-only movements unassociated with securities.
           type: number
         cancel_transaction_id:
+          deprecated: true
+          description: A legacy field formerly used internally by Plaid to identify
+            certain canceled transactions.
           nullable: true
           type: string
         date:
@@ -8221,7 +8443,7 @@ components:
         example-1:
           canceled_investments_transactions: 0
           error:
-            $ref: "#/components/schemas/AccountSubtype/enum/65"
+            $ref: "#/components/schemas/AccountSubtype/enum/66"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           new_investments_transactions: 16
           webhook_code: DEFAULT_UPDATE
@@ -8391,7 +8613,7 @@ components:
             consent expiration time.
 
 
-            Note - This is only relevant for European institutions subject to PSD2 regulations mandating a 90-day consent window. For all other institutions, this field will be null.
+            Note - This is only relevant for certain OAuth-based institutions. For all other institutions, this field will be null.
           nullable: true
           type: string
         error:
@@ -8484,7 +8706,7 @@ components:
         example-1:
           error:
             display_message:
-              $ref: "#/components/schemas/AccountSubtype/enum/65"
+              $ref: "#/components/schemas/AccountSubtype/enum/66"
             error_code: ITEM_LOGIN_REQUIRED
             error_message: the login details of this item have changed (credentials, MFA, or
               required user action) and a user login is required to update this
@@ -8512,8 +8734,6 @@ components:
       description: ItemGetResponse defines the response schema for `/item/get` and
         `/item/webhook/update`
       properties:
-        access_token:
-          $ref: "#/components/schemas/NullableAccessToken"
         item:
           $ref: "#/components/schemas/Item"
         request_id:
@@ -8607,7 +8827,7 @@ components:
       x-examples:
         example-1:
           error:
-            $ref: "#/components/schemas/AccountSubtype/enum/65"
+            $ref: "#/components/schemas/AccountSubtype/enum/66"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           webhook_code: PRODUCT_READY
           webhook_type: INCOME
@@ -8838,6 +9058,53 @@ components:
         - id
       title: JWTHeader
       type: object
+    LiabilitiesDefaultUpdateWebhook:
+      description: The webhook of type `LIABILITIES` and code `DEFAULT_UPDATE` will be
+        fired when new or updated liabilities have been detected on a
+        liabilities item.
+      properties:
+        account_ids_with_new_liabilities:
+          description: An array of `account_id`'s for accounts that contain new liabilities.
+          items:
+            type: string
+          type: array
+        account_ids_with_updated_liabilities:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: >
+            An object with keys of `account_id`'s that are mapped to their
+            respective liabilities fields that changed.
+
+
+            Example: `{ "53068f27dedc572a19000029": ["past_amount_due"] }`
+          type: object
+        error:
+          $ref: "#/components/schemas/Error"
+        item_id:
+          $ref: "#/components/schemas/ItemId"
+        webhook_code:
+          description: "`DEFAULT_UPDATE`"
+          type: string
+        webhook_type:
+          description: "`LIABILITIES`"
+          type: string
+      title: LiabilitiesDefaultUpdateWebhook
+      type: object
+      x-examples:
+        example-1:
+          account_ids_with_new_liabilities:
+            - 52a52b17cf2bc3b430000067
+            - 5307fe1ec4e5adc356000009
+          account_ids_with_updated_liabilities:
+            53068f27dedc572a19000029:
+              - past_amount_due
+          error:
+            $ref: "#/components/schemas/AccountSubtype/enum/66"
+          item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
+          webhook_code: DEFAULT_UPDATE
+          webhook_type: LIABILITIES
     LiabilitiesGetRequest:
       description: LiabilitiesGetRequest defines the request schema for `/liabilities/get`
       properties:
@@ -8949,21 +9216,15 @@ components:
           description: Override the `last_payment_amount` field. Can only be set if `type`
             is `credit`.
           type: number
-        last_statement_balance:
-          description: Override the `last_statement_balance` field. Can only be set if
-            `type` is `credit`.
-          type: number
         loan_name:
           description: Override the `loan_name` field. Can only be set if `type` is
             `student`.
           type: string
         loan_status:
-          description: Override the `loan_status` field. Can only be set if `type` is
-            `student`.
-          type: string
+          $ref: "#/components/schemas/StudentLoanStatus"
         minimum_payment_amount:
           description: Override the `minimum_payment_amount` field. Can only be set if
-            `type` is `credit`.
+            `type` is `credit` or `student`.
           type: number
         nominal_apr:
           description: The interest rate on the loan as a percentage. Can only be set if
@@ -8981,9 +9242,7 @@ components:
           description: The original loan principal. Can only be set if `type` is `student`.
           type: number
         pslf_status:
-          description: Override the `pslf_status` field. Can only be set if `type` is
-            `student`.
-          type: string
+          $ref: "#/components/schemas/PSLFStatus"
         purchase_apr:
           description: The purchase APR percentage value. For simplicity, this is the only
             interest rate used to calculate interest charges. Can only be set if
@@ -9015,6 +9274,7 @@ components:
           type: number
         type:
           description: The type of the liability object, either `credit` or `student`.
+            Mortgages are not currently supported in the custom Sandbox.
           type: string
       required:
         - type
@@ -9023,7 +9283,6 @@ components:
         - balance_transfer_apr
         - special_apr
         - last_payment_amount
-        - last_statement_balance
         - minimum_payment_amount
         - is_overdue
         - origination_date
@@ -9093,10 +9352,13 @@ components:
             added to the Allowed Android package names setting on the [developer
             dashboard](https://dashboard.plaid.com/team/api). "
           type: string
+        auth:
+          $ref: "#/components/schemas/LinkTokenCreateRequestAuth"
         client_id:
           $ref: "#/components/schemas/APIClientID"
         client_name:
           description: The name of your application, as it should be displayed in Link.
+            Maximum length of 30 characters.
           type: string
         country_codes:
           description: >-
@@ -9119,6 +9381,8 @@ components:
           type: array
         deposit_switch:
           $ref: "#/components/schemas/LinkTokenCreateRequestDepositSwitch"
+        income_verification:
+          $ref: "#/components/schemas/LinkTokenCreateRequestIncomeVerification"
         institution_id:
           deprecated: true
           description: Used for certain legacy use cases
@@ -9248,6 +9512,20 @@ components:
               $ref: "#/components/schemas/AccountSubtypes"
           type: object
       type: object
+    LinkTokenCreateRequestAuth:
+      description: Specifies options for initializing Link for use with the Auth
+        product. This field is currently only required if using the Flexible
+        Auth product (currently in closed beta).
+      properties:
+        flow_type:
+          description: The optional Auth flow to use. Currently only used to enable
+            Flexible Auth.
+          enum:
+            - FLEXIBLE_AUTH
+          type: string
+      required:
+        - flow_type
+      type: object
     LinkTokenCreateRequestDepositSwitch:
       description: Specifies options for initializing Link for use with the Deposit
         Switch (beta) product. This field is required if `deposit_switch` is
@@ -9307,6 +9585,7 @@ components:
         date_of_birth:
           description: To be provided in the format "yyyy-mm-dd". This field is optional
             and will support not-yet-implemented functionality for new products.
+          format: date-time
           type: string
         email_address:
           description: The user's email address. This field is optional, but required to
@@ -9457,6 +9736,9 @@ components:
         auto:
           description: Auto loan
           type: string
+        business:
+          description: Business loan
+          type: string
         commercial:
           description: Commercial loan
           type: string
@@ -9489,6 +9771,7 @@ components:
           type: string
       required:
         - auto
+        - business
         - commercial
         - construction
         - consumer
@@ -10139,10 +10422,15 @@ components:
       description: The amount and currency of a payment
       properties:
         currency:
-          description: The ISO-4217 currency code of the payment amount
+          description: The ISO-4217 currency code of the payment. For standing orders,
+            `"GBP"` must be used.
+          enum:
+            - GBP
+            - EUR
           type: string
         value:
-          description: The payment amount
+          description: The amount of the payment. Must contain at most two digits of
+            precision e.g. `1.23`. Minimum accepted value is `1`.
           type: number
       required:
         - currency
@@ -10175,14 +10463,53 @@ components:
           type: array
       title: PaymentInitiationAddress
       type: object
+    PaymentInitiationMetadata:
+      additionalProperties: true
+      description: Metadata that captures what specific payment configurations an
+        institution supports when making Payment Initiation requests.
+      nullable: true
+      properties:
+        maximum_payment_amount:
+          additionalProperties:
+            type: string
+          description: >
+            A mapping of currency to maximum payment amount (denominated in the
+            smallest unit of currency) supported by the insitution.
+
+
+            Example: `{"GBP": "10000"}`
+          type: object
+        standing_order_metadata:
+          $ref: "#/components/schemas/PaymentInitiationStandingOrderMetadata"
+        supports_international_payments:
+          description: Indicates whether the institution supports payments from a
+            different country.
+          type: boolean
+        supports_refund_details:
+          description: Indicates whether the institution supports returning refund details
+            when initiating a payment.
+          type: boolean
+      title: PaymentInitiationMetadata
+      type: object
+    PaymentInitiationOptionalRestrictionBacs:
+      allOf:
+        - $ref: "#/components/schemas/RecipientBACS"
+        - additionalProperties: true
+          description: An optional object used to restrict the accounts used for payments.
+            If provided, the end user will be able to send payments only from
+            the specified bank account.
+          type: object
+      nullable: true
     PaymentInitiationPaymentCreateRequest:
       description: PaymentInitiationPaymentCreateRequest defines the request schema
         for `/payment_initiation/payment/create`
       properties:
         amount:
-          $ref: "#/components/schemas/Amount"
+          $ref: "#/components/schemas/PaymentAmount"
         client_id:
           $ref: "#/components/schemas/APIClientID"
+        options:
+          $ref: "#/components/schemas/ExternalPaymentOptions"
         recipient_id:
           description: The ID of the recipient the payment is for.
           type: string
@@ -10249,9 +10576,16 @@ components:
           type: string
         amount:
           $ref: "#/components/schemas/PaymentAmount"
+        bacs:
+          $ref: "#/components/schemas/NullableRecipientBACS"
+          nullable: true
+        iban:
+          nullable: true
+          type: string
         last_status_update:
           description: The date and time of the last time the `status` was updated, in IS0
             8601 format
+          format: date-time
           type: string
         payment_id:
           description: The ID of the payment. Like all Plaid identifiers, the `payment_id`
@@ -10263,6 +10597,9 @@ components:
         reference:
           description: A reference for the payment.
           type: string
+        refund_details:
+          $ref: "#/components/schemas/ExternalPaymentRefundDetails"
+          nullable: true
         request_id:
           $ref: "#/components/schemas/RequestID"
         schedule:
@@ -10314,6 +10651,8 @@ components:
         - recipient_id
         - reference
         - last_status_update
+        - bacs
+        - iban
       type: object
     PaymentInitiationPaymentListRequest:
       description: PaymentInitiationPaymentListRequest defines the request schema for
@@ -10327,10 +10666,12 @@ components:
             specified, a maximum of 10 payments will be returned, beginning with
             the most recent payment before the cursor (if specified).
           maximum: 200
+          nullable: true
           type: integer
         cursor:
           description: A string in RFC 3339 format (i.e. "2019-12-06T22:35:49Z"). Only
             payments created before the cursor will be returned.
+          nullable: true
           type: string
         secret:
           $ref: "#/components/schemas/APISecret"
@@ -10344,6 +10685,8 @@ components:
           description: The value that, when used as the optional `cursor` parameter to
             `/payment_initiation/payment/list`, will return the next unreturned
             payment as its first payment.
+          format: date-time
+          nullable: true
           type: string
         payments:
           description: An array of payments that have been created, associated with the
@@ -10384,6 +10727,7 @@ components:
         payment_token_expiration_time:
           description: The date and time at which the token will expire, in ISO 8601
             format. A `payment_token` expires after 15 minutes.
+          format: date-time
           type: string
         request_id:
           $ref: "#/components/schemas/RequestID"
@@ -10391,42 +10735,6 @@ components:
         - payment_token
         - payment_token_expiration_time
         - request_id
-      type: object
-    PaymentInitiationRecipient:
-      additionalProperties: true
-      description: Information about a payment recipient configured for the Payment
-        Initiation product
-      properties:
-        address:
-          $ref: "#/components/schemas/PaymentInitiationAddress"
-        bacs:
-          additionalProperties: true
-          nullable: true
-          properties:
-            account:
-              type: string
-            sort_code:
-              type: string
-          required:
-            - account
-            - sort_code
-          type: object
-        iban:
-          description: The International Bank Account Number (IBAN) for the recipient.
-          nullable: true
-          type: string
-        name:
-          description: The name of the recipient
-          type: string
-        recipient_id:
-          description: The ID of the recipient. Like all Plaid identifiers, the
-            `recipient_id` is case sensitive.
-          type: string
-      required:
-        - recipient_id
-        - name
-        - address
-      title: PaymentInitiationRecipient
       type: object
     PaymentInitiationRecipientCreateRequest:
       description: PaymentInitiationRecipientCreateRequest defines the request schema
@@ -10436,11 +10744,13 @@ components:
           $ref: "#/components/schemas/PaymentInitiationAddress"
         bacs:
           $ref: "#/components/schemas/NullableRecipientBACS"
+          nullable: true
         client_id:
           $ref: "#/components/schemas/APIClientID"
         iban:
           description: The International Bank Account Number (IBAN) for the recipient. If
             BACS data is not provided, an IBAN is required.
+          nullable: true
           type: string
         name:
           description: The name of the recipient
@@ -10502,7 +10812,6 @@ components:
       required:
         - recipient_id
         - name
-        - iban
         - request_id
       type: object
     PaymentInitiationRecipientListRequest:
@@ -10522,13 +10831,37 @@ components:
         recipients:
           description: An array of payment recipients created for Payment Initiation
           items:
-            $ref: "#/components/schemas/PaymentInitiationRecipient"
+            $ref: "#/components/schemas/PaymentInitiationRecipientGetResponse"
           type: array
         request_id:
           $ref: "#/components/schemas/RequestID"
       required:
         - recipients
         - request_id
+      type: object
+    PaymentInitiationStandingOrderMetadata:
+      additionalProperties: true
+      description: Metadata specifically related to valid Payment Initiation standing
+        order configurations for the institution.
+      nullable: true
+      properties:
+        supports_standing_order_end_date:
+          description: Indicates whether the institution supports closed-ended standing
+            orders by providing an end date.
+          type: boolean
+        supports_standing_order_negative_execution_days:
+          description: This is only applicable to `MONTHLY` standing orders. Indicates
+            whether the institution supports negative integers (-1 to -5) for
+            setting up a `MONTHLY` standing order relative to the end of the
+            month.
+          type: boolean
+        valid_standing_order_intervals:
+          description: A list of the valid standing order intervals supported by the
+            institution.
+          items:
+            $ref: "#/components/schemas/PaymentScheduleInterval"
+          type: array
+      title: PaymentInitiationStandingOrderMetadata
       type: object
     PaymentMeta:
       additionalProperties: true
@@ -10537,7 +10870,7 @@ components:
         transaction was not an inter-bank transfer, all fields will be `null`.
 
 
-        If the `transaction` object was returned by a Transactions endpoint such as `/transactions/get`, the `payment_meta` key will always appear, but no data elements are guaranteed. If the `transaction` object was returned by an Assets endpoint such as `/asset_report/get/` or `/asset_report/pdf/get`, this field will only appear in an Asset Report with Insights.
+        If the `transactions` object was returned by a Transactions endpoint such as `/transactions/get`, the `payment_meta` key will always appear, but no data elements are guaranteed. If the `transactions` object was returned by an Assets endpoint such as `/asset_report/get/` or `/asset_report/pdf/get`, this field will only appear in an Asset Report with Insights.
       properties:
         by_order_of:
           description: The party initiating a wire transfer. Will be `null` if the
@@ -10575,6 +10908,13 @@ components:
           type: string
       title: payment_meta
       type: object
+    PaymentScheduleInterval:
+      description: The frequency interval of the payment.
+      enum:
+        - WEEKLY
+        - MONTHLY
+      title: PaymentScheduleInterval
+      type: string
     PaymentStatusUpdateWebhook:
       additionalProperties: true
       description: Fired when the status of a payment has changed.
@@ -10706,7 +11046,7 @@ components:
           adjusted_reference: Account Funding 99
           adjusted_start_date: 2017-09-15
           error:
-            $ref: "#/components/schemas/AccountSubtype/enum/65"
+            $ref: "#/components/schemas/AccountSubtype/enum/66"
           new_payment_status: PAYMENT_STATUS_INITIATED
           old_payment_status: PAYMENT_STATUS_PROCESSING
           original_reference: Account Funding 99744
@@ -11008,7 +11348,7 @@ components:
             `"check"`, `"checkbook"`, `"circle"`, `"drivewealth"`, `"dwolla"`,
             `"galileo"`, "`interactive_brokers`", `"modern_treasury"`,
             `"ocrolus"`, `"prime_trust"`, `"rize"`, `"sila_money"`, `"unit"`,
-            `"velox"`, `"vesta"`, `"vopay"`, `"wyre"`
+            `"vesta"`, `"vopay"`, `"wyre"`
           type: string
         secret:
           $ref: "#/components/schemas/APISecret"
@@ -11111,6 +11451,7 @@ components:
         - credit_details
         - income
         - deposit_switch
+        - standing_orders
       title: Products
       type: string
     ProjectedIncomeSummaryFieldNumber:
@@ -11171,7 +11512,7 @@ components:
       x-examples:
         example-1:
           display_message:
-            $ref: "#/components/schemas/AccountSubtype/enum/65"
+            $ref: "#/components/schemas/AccountSubtype/enum/66"
           error_code: RECAPTCHA_REQUIRED
           error_message: This request requires additional verification. Please resubmit
             the request after completing the challenge
@@ -11198,6 +11539,31 @@ components:
         sensitive.
       title: RequestID
       type: string
+    SandboxBankTransferFireWebhookRequest:
+      description: SandboxBankTransferFireWebhookRequest defines the request schema
+        for `/sandbox/bank_transfer/fire_webhook`
+      properties:
+        client_id:
+          $ref: "#/components/schemas/APIClientID"
+        secret:
+          $ref: "#/components/schemas/APISecret"
+        webhook:
+          description: The URL to which the webhook should be sent.
+          type: string
+      required:
+        - webhook
+      title: SandboxBankTransferFireWebhookRequest
+      type: object
+    SandboxBankTransferFireWebhookResponse:
+      description: SandboxBankTransferFireWebhookResponse defines the response schema
+        for `/sandbox/bank_transfer/fire_webhook`
+      properties:
+        request_id:
+          $ref: "#/components/schemas/RequestID"
+      required:
+        - request_id
+      title: SandboxBankTransferFireWebhookResponse
+      type: object
     SandboxBankTransferSimulateRequest:
       description: SandboxBankTransferSimulateRequest defines the request schema for
         `/sandbox/bank_transfer/simulate`
@@ -11263,6 +11629,7 @@ components:
           type: string
       required:
         - access_token
+        - webhook_code
       type: object
     SandboxItemFireWebhookResponse:
       additionalProperties: true
@@ -11468,6 +11835,7 @@ components:
         close_price_as_of:
           description: Date for which `close_price` is accurate. Always `null` if
             `close_price` is `null`.
+          format: date
           nullable: true
           type: string
         cusip:
@@ -11826,7 +12194,9 @@ components:
           nullable: true
           type: string
         account_number:
-          description: The account number of the loan.
+          description: The account number of the loan. For some institutions, this may be
+            a masked version of the number (e.g., the last 4 digits instead of
+            the entire number).
           nullable: true
           type: string
         disbursement_dates:
@@ -11864,12 +12234,6 @@ components:
             format (YYYY-MM-DD).
           nullable: true
           type: string
-        last_statement_balance:
-          description: "The outstanding balance on the last statement. This field could
-            also be interpreted as the next payment due. Availability for this
-            field is limited. "
-          nullable: true
-          type: number
         last_statement_issue_date:
           description: The date of the last statement. Dates are returned in an ISO 8601
             format (YYYY-MM-DD).
@@ -12070,7 +12434,7 @@ components:
             [Categories](https://plaid.com/docs/#category-overview).
 
 
-            If the `transaction` object was returned by an Assets endpoint such as `/asset_report/get/` or `/asset_report/pdf/get`, this field will only appear in an Asset Report with Insights.
+            If the `transactions` object was returned by an Assets endpoint such as `/asset_report/get/` or `/asset_report/pdf/get`, this field will only appear in an Asset Report with Insights.
           items:
             type: string
           nullable: true
@@ -12081,7 +12445,7 @@ components:
             [Categories](https://plaid.com/docs/#category-overview).
 
 
-            If the `transaction` object was returned by an Assets endpoint such as `/asset_report/get/` or `/asset_report/pdf/get`, this field will only appear in an Asset Report with Insights.
+            If the `transactions` object was returned by an Assets endpoint such as `/asset_report/get/` or `/asset_report/pdf/get`, this field will only appear in an Asset Report with Insights.
           type: string
         date:
           description: For pending transactions, the date that the transaction occurred;
@@ -12113,7 +12477,7 @@ components:
             The merchant name or transaction description.
 
 
-            If the `transaction` object was returned by a Transactions endpoint such as `/transactions/get`, this field will always appear. If the `transaction` object was returned by an Assets endpoint such as `/asset_report/get/` or `/asset_report/pdf/get`, this field will only appear in an Asset Report with Insights.
+            If the `transactions` object was returned by a Transactions endpoint such as `/transactions/get`, this field will always appear. If the `transactions` object was returned by an Assets endpoint such as `/asset_report/get/` or `/asset_report/pdf/get`, this field will only appear in an Asset Report with Insights.
           type: string
         payment_channel:
           description: |
@@ -12247,7 +12611,7 @@ components:
         - purchase
         - standing order
         - transfer
-        - $ref: "#/components/schemas/AccountSubtype/enum/65"
+        - $ref: "#/components/schemas/AccountSubtype/enum/66"
       nullable: true
       title: transaction_code
       type: string
@@ -12291,22 +12655,22 @@ components:
         currency:
           description: The ISO-4217 format currency code for the transaction.
           type: string
-        description:
-          description: The transaction description.
-          type: string
-        posted_date:
+        date_posted:
           description: The date the transaction posted, in ISO8601 (YYYY-MM-DD) format
           type: string
-        transaction_date:
+        date_transacted:
           description: The date of the transaction, in ISO8601 (YYYY-MM-DD) format.
             Transaction dates in the past or present will result in posted
             transactions; transaction dates in the future will result in pending
             transactions. Transactions in Sandbox will move from pending to
             posted once their transaction date has been reached.
           type: string
+        description:
+          description: The transaction description.
+          type: string
       required:
-        - transaction_date
-        - posted_date
+        - date_transacted
+        - date_posted
         - amount
         - description
       title: TransactionOverride
@@ -12454,7 +12818,7 @@ components:
       x-examples:
         example-1:
           error:
-            $ref: "#/components/schemas/AccountSubtype/enum/65"
+            $ref: "#/components/schemas/AccountSubtype/enum/66"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           removed_transactions:
             - yBVBEwrPyJs8GvR77N7QTxnGg6wG74H7dEDN6
@@ -12661,8 +13025,8 @@ components:
           webhook_type: ITEM
     VerificationExpiredWebhook:
       additionalProperties: true
-      description: Fired when an Item was not verified via micro-deposits after ten
-        days since the micro-deposit was made.
+      description: Fired when an Item was not verified via automated micro-deposits
+        after ten days since the automated micro-deposit was made.
       properties:
         account_id:
           description: The `account_id` of the account associated with the webhook
@@ -12741,7 +13105,7 @@ components:
         example-1:
           cause:
             display_message:
-              $ref: "#/components/schemas/AccountSubtype/enum/65"
+              $ref: "#/components/schemas/AccountSubtype/enum/66"
             error_code: PRODUCTS_NOT_SUPPORTED
             error_message: "The following products are not supported by this institution:
               Identity"
@@ -12778,7 +13142,7 @@ components:
       x-examples:
         example-1:
           error:
-            $ref: "#/components/schemas/AccountSubtype/enum/65"
+            $ref: "#/components/schemas/AccountSubtype/enum/66"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           new_webhook_url: https://plaid.com/example/webhook
           webhook_code: WEBHOOK_UPDATE_ACKNOWLEDGED

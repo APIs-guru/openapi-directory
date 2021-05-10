@@ -942,7 +942,7 @@ paths:
                         types:
                           - Marketplace
               schema:
-                $ref: "#/components/schemas/channelInfoList"
+                $ref: "#/components/schemas/publicChannelInfoList"
           description: The channel list for one country
         "304":
           $ref: "#/components/responses/304_NotModified"
@@ -10610,53 +10610,109 @@ components:
       type: object
     channelInfo:
       properties:
-        homeUrl:
-          description: The channel home url
-          example: http://www.amazon.fr
-          format: uri
+        beezUPOffer:
+          description: Indicate the BeezUP offer
+          example: First month free
           type: string
-        logoUrl:
-          description: The channel logo url
-          example: http://beezupcdn.blob.core.windows.net/comparators/Amazon%2520Direct%2520FRA.png
-          format: uri
+        channelDescription:
+          description: Indicae a description to the channel
+          example: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia
+            dolorum, animi voluptatibus maiores, assumenda maxime illum, labore
+            quae quas ducimus laudantium provident veritatis doloremque
+            dignissimos eum. Error magni illum autem.
           type: string
-        name:
-          description: The channel name
-          example: Amazon Direct FRA
-          type: string
-        sectors:
-          description: The sector list related to a channel
-          example:
-            - BRICOLAGE
-            - INFO
-            - GENERALIST
-          items:
-            type: string
-          type: array
-        types:
-          description: The type list related to a channel
-          example:
-            - Marketplace
-          items:
-            type: string
-          type: array
-      required:
-        - name
-        - homeUrl
-        - logoUrl
-        - types
-      type: object
-    channelInfoList:
-      properties:
-        channels:
-          items:
-            $ref: "#/components/schemas/channelInfo"
-          type: array
-        links:
+        channelId:
+          $ref: "#/components/schemas/BeezUP.Common.ChannelId"
+        channelLogoUrl:
+          $ref: "#/components/schemas/BeezUP.Common.HttpUrl"
+        channelName:
+          $ref: "#/components/schemas/BeezUP.Common.ChannelName"
+        details:
           properties:
-            self:
-              $ref: "#/components/schemas/links.GetChannelsLink"
+            businessModel:
+              description: The business model of the channel
+              example: CPC
+              type: string
+            category:
+              description: The channel category
+              example: "NULL"
+              type: string
+            channelType:
+              description: The channel type
+              example: Comparator
+              type: string
+            costs:
+              description: The cost's description of the channel
+              example: CPC variation from 0.10€ to 0.20€
+              type: string
+            homeUrl:
+              description: The home url of the channel
+              example: http://www.achetezfacile.com
+              format: uri
+              type: string
+            subscriptionLink:
+              description: The subscription link to the channel
+              example: |
+                By Email at : stephanie.gregis@m6.fr
+              type: string
+            trackingType:
+              description: The tracking type
+              example: Redirect
+              type: string
           type: object
+        keyNumbers:
+          properties:
+            categories:
+              description: The estimated category count of the channel
+              example: NC
+              type: string
+            products:
+              description: The estimated product count of the channel
+              example: 1M
+              type: string
+            stores:
+              description: The estimated store count of the channel
+              example: "3000"
+              type: string
+            viewsPerMonth:
+              description: The estimated view count per month of the channel
+              example: 3M
+              type: string
+          type: object
+        salesContact:
+          properties:
+            email:
+              description: Indicate the sales contact email
+              example: stephanie.gregis@m6.fr
+              format: email
+              type: string
+            name:
+              description: Indicate the BeezUP offer
+              example: Stéphanie Gregis
+              type: string
+            phoneNumber:
+              description: The sales contact phone number
+              example: 0033 6 08 87 85 45
+              type: string
+          type: object
+        technicalContact:
+          properties:
+            email:
+              description: The technical contact email
+              example: pierre.guedon@m6.fr
+              type: string
+            name:
+              description: The technical contact name
+              example: Pierre Guédon
+              type: string
+            phoneNumber:
+              description: The technical contact phone number
+              example: NC
+              type: string
+          type: object
+      required:
+        - channelId
+        - channelName
       type: object
     channelRootCategory:
       description: Get channel first level category list
@@ -16799,6 +16855,56 @@ components:
               $ref: "#/components/schemas/links.GetPublicListOfValuesLink"
             self:
               $ref: "#/components/schemas/links.GetChannelsIndexLink"
+          type: object
+      type: object
+    publicChannelInfo:
+      properties:
+        homeUrl:
+          description: The channel home url
+          example: http://www.amazon.fr
+          format: uri
+          type: string
+        logoUrl:
+          description: The channel logo url
+          example: http://beezupcdn.blob.core.windows.net/comparators/Amazon%2520Direct%2520FRA.png
+          format: uri
+          type: string
+        name:
+          description: The channel name
+          example: Amazon Direct FRA
+          type: string
+        sectors:
+          description: The sector list related to a channel
+          example:
+            - BRICOLAGE
+            - INFO
+            - GENERALIST
+          items:
+            type: string
+          type: array
+        types:
+          description: The type list related to a channel
+          example:
+            - Marketplace
+          items:
+            type: string
+          type: array
+      required:
+        - name
+        - homeUrl
+        - logoUrl
+        - types
+      type: object
+    publicChannelInfoList:
+      properties:
+        channels:
+          items:
+            $ref: "#/components/schemas/publicChannelInfo"
+          type: array
+        links:
+          properties:
+            self:
+              $ref: "#/components/schemas/links.GetChannelsLink"
           type: object
       type: object
     publicListOfValuesResponse:

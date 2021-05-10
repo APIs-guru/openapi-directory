@@ -47,6 +47,12 @@ tags:
     name: Credentials
   - description: Call Control debugging
     name: Debugging
+  - description: Documents required documentation for international numbers and
+      porting orders
+    name: Document Requirements
+  - description: Documents the various types of documents required for international
+      numbers and porting orders
+    name: Document Types
   - description: Documents
     name: Documents
   - description: FQDN connection operations
@@ -111,8 +117,8 @@ tags:
     name: Reporting
   - description: Rooms operations.
     name: Rooms
-  - description: Rooms Access Tokens operations.
-    name: Rooms Access Tokens
+  - description: Rooms Client Tokens operations.
+    name: Rooms Client Tokens
   - description: SIM Card Groups operations
     name: SIM Card Groups
   - description: SIM Cards operations
@@ -3026,6 +3032,42 @@ paths:
       tags:
         - Documents
       x-latency-category: responsive
+  /document_requirements:
+    get:
+      description: List all document requirements with filtering, sorting, and pagination
+      operationId: listDocumentRequirements
+      parameters:
+        - $ref: "#/components/parameters/DocReqsCountryFilter"
+        - $ref: "#/components/parameters/DocReqsPhoneNumberTypeFilter"
+        - $ref: "#/components/parameters/DocReqsActionFilter"
+        - $ref: "#/components/parameters/DocReqsDocumentRequirementsSort"
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          $ref: "#/components/responses/ListDocumentRequirementsResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: List all document requirements
+      tags:
+        - Document Requirements
+      x-latency-category: responsive
+  /document_types:
+    get:
+      description: List all document types ordered by created_at descending
+      operationId: docReqsListDocumentTypes
+      parameters:
+        - $ref: "#/components/parameters/DocReqsDocumentTypeNameFilter"
+        - $ref: "#/components/parameters/DocReqsDocumentTypesSort"
+      responses:
+        "200":
+          $ref: "#/components/responses/DocReqsListDocumentTypesResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: List all document types
+      tags:
+        - Document Types
+      x-latency-category: responsive
   /documents:
     get:
       description: List all documents ordered by created_at descending.
@@ -3483,7 +3525,7 @@ paths:
           description: Unauthorized
         "404":
           description: Resource not found
-      summary: List Fqdn connections
+      summary: List FQDN connections
       tags:
         - FQDN Connections
       x-endpoint-cost: medium
@@ -3505,7 +3547,7 @@ paths:
           $ref: "#/components/responses/FqdnConnectionResponse"
         "422":
           description: Bad request
-      summary: Create an Fqdn connection
+      summary: Create an FQDN connection
       tags:
         - FQDN Connections
       x-endpoint-cost: medium
@@ -3530,7 +3572,7 @@ paths:
           description: Resource not found
         "422":
           description: Bad request
-      summary: Delete an Fqdn connection
+      summary: Delete an FQDN connection
       tags:
         - FQDN Connections
       x-latency-category: responsive
@@ -3553,7 +3595,7 @@ paths:
           description: Resource not found
         "422":
           description: Bad request
-      summary: Retrieve an Fqdn connection
+      summary: Retrieve an FQDN connection
       tags:
         - FQDN Connections
       x-latency-category: responsive
@@ -3583,7 +3625,7 @@ paths:
           description: Resource not found
         "422":
           description: Bad request
-      summary: Update an Fqdn connection
+      summary: Update an FQDN connection
       tags:
         - FQDN Connections
       x-latency-category: responsive
@@ -3624,7 +3666,7 @@ paths:
           description: Bad request
         "401":
           description: Unauthorized
-      summary: List Fqdns
+      summary: List FQDNs
       tags:
         - FQDNs
       x-endpoint-cost: medium
@@ -3645,7 +3687,7 @@ paths:
           description: Bad request
         "401":
           description: Unauthorized
-      summary: Create an Fqdn
+      summary: Create an FQDN
       tags:
         - FQDNs
       x-endpoint-cost: medium
@@ -3663,7 +3705,7 @@ paths:
           description: Bad request
         "401":
           description: Unauthorized
-      summary: Delete an Fqdn
+      summary: Delete an FQDN
       tags:
         - FQDNs
       x-latency-category: responsive
@@ -3679,7 +3721,7 @@ paths:
           description: Bad request
         "401":
           description: Unauthorized
-      summary: Retrieve an Fqdn
+      summary: Retrieve an FQDN
       tags:
         - FQDNs
       x-latency-category: responsive
@@ -3700,7 +3742,7 @@ paths:
           description: Bad request
         "401":
           description: Unauthorized
-      summary: Update an Fqdn
+      summary: Update an FQDN
       tags:
         - FQDNs
       x-latency-category: responsive
@@ -7412,17 +7454,12 @@ paths:
       operationId: DeleteRoom
       parameters:
         - description: The unique identifier of a room.
-          in: query
-          name: id
+          in: path
+          name: room_id
           required: true
           schema:
             example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
             format: uuid
-            type: string
-        - in: path
-          name: room_id
-          required: true
-          schema:
             type: string
       responses:
         "204":
@@ -7455,13 +7492,13 @@ paths:
         - Rooms
       x-endpoint-cost: light
       x-latency-category: responsive
-  "/rooms/{room_id}/actions/create_access_token":
+  "/rooms/{room_id}/actions/generate_join_client_token":
     post:
-      description: Synchronously create an Access Token to join a Room. Access Token
-        is necessary to join a Telnyx Room. Access Token will expire after
-        `ttl_secs`, a Refresh Token is also provided to refresh an Access Token,
-        the Refresh Token expires after `refresh_token_ttl_secs`.
-      operationId: CreateRoomAccessToken
+      description: Synchronously create an Client Token to join a Room. Client Token
+        is necessary to join a Telnyx Room. Client Token will expire after
+        `token_ttl_secs`, a Refresh Token is also provided to refresh a Client
+        Token, the Refresh Token expires after `refresh_token_ttl_secs`.
+      operationId: CreateRoomClientToken
       parameters:
         - description: The unique identifier of a room.
           in: path
@@ -7475,25 +7512,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateRoomAccessTokenRequest"
-        description: Parameters that can be defined during Room Access Token creation.
+              $ref: "#/components/schemas/CreateRoomClientTokenRequest"
+        description: Parameters that can be defined during Room Client Token creation.
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateRoomAccessTokenResponse"
+          $ref: "#/components/responses/CreateRoomClientTokenResponse"
         "403":
           $ref: "#/components/responses/Forbidden"
-      summary: Create Access Token to join a room
+      summary: Create Client Token to join a room
       tags:
-        - Rooms Access Tokens
+        - Rooms Client Tokens
       x-endpoint-cost: medium
       x-latency-category: responsive
-  "/rooms/{room_id}/actions/refresh_access_token":
+  "/rooms/{room_id}/actions/refresh_client_token":
     post:
-      description: Synchronously refresh an Access Token to join a Room. Access Token
-        is necessary to join a Telnyx Room. Access Token will expire after
-        `ttl_secs`.
-      operationId: RefreshRoomAccessToken
+      description: Synchronously refresh an Client Token to join a Room. Client Token
+        is necessary to join a Telnyx Room. Client Token will expire after
+        `token_ttl_secs`.
+      operationId: RefreshRoomClientToken
       parameters:
         - description: The unique identifier of a room.
           in: path
@@ -7507,18 +7544,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RefreshRoomAccessTokenRequest"
-        description: Parameters that can be defined during Room Access Token refresh.
+              $ref: "#/components/schemas/RefreshRoomClientTokenRequest"
+        description: Parameters that can be defined during Room Client Token refresh.
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/RefreshRoomAccessTokenResponse"
+          $ref: "#/components/responses/RefreshRoomClientTokenResponse"
         "403":
           $ref: "#/components/responses/Forbidden"
       security: []
-      summary: Refresh Access Token to join a room
+      summary: Refresh Client Token to join a room
       tags:
-        - Rooms Access Tokens
+        - Rooms Client Tokens
       x-endpoint-cost: light
       x-latency-category: responsive
   /short_codes:
@@ -8974,6 +9011,80 @@ components:
           - voice
         example: webhook
         type: string
+    DocReqsActionFilter:
+      description: Filters requirements to those applying to a specific action.
+      in: query
+      name: filter[action]
+      schema:
+        enum:
+          - ordering
+          - porting
+        example: porting
+        type: string
+    DocReqsCountryFilter:
+      description: Filters results to those applying to a 2-character (ISO 3166-1
+        alpha-2) country code
+      in: query
+      name: filter[country_code]
+      schema:
+        example: US
+        type: string
+    DocReqsDocumentRequirementsSort:
+      description: Specifies the sort order for results. If you want to sort by a
+        field in ascending order, include it as a sort parameter. If you want to
+        sort in descending order, prepend a `-` in front of the field name.
+      in: query
+      name: sort[]
+      required: false
+      schema:
+        enum:
+          - action
+          - country_code
+          - locality
+          - phone_number_type
+        example: country_code
+        type: string
+    DocReqsDocumentTypeId:
+      description: Uniquely identifies the document_type record
+      example: a38c217a-8019-48f8-bff6-0fdd9939075b
+      in: path
+      name: id
+      required: true
+      schema:
+        format: uuid
+        type: string
+    DocReqsDocumentTypeNameFilter:
+      description: Filters document types to those whose name contains a certain string.
+      in: query
+      name: filter[name][contains]
+      schema:
+        example: utility bill
+        type: string
+    DocReqsDocumentTypesSort:
+      description: Specifies the sort order for results. If you want to sort by a
+        field in ascending order, include it as a sort parameter. If you want to
+        sort in descending order, prepend a `-` in front of the field name.
+      in: query
+      name: sort[]
+      required: false
+      schema:
+        enum:
+          - created_at
+          - name
+          - updated_at
+        example: country_code
+        type: string
+    DocReqsPhoneNumberTypeFilter:
+      description: Filters results to those applying to a specific `phone_number_type`
+      in: query
+      name: filter[phone_number_type]
+      schema:
+        enum:
+          - local
+          - national
+          - toll-free
+        example: local
+        type: string
     DocServiceDocumentIdFilter:
       description: Identifies the associated document to filter on.
       in: query
@@ -9427,7 +9538,7 @@ components:
       name: phone_number
       required: true
       schema:
-        example: '"+18665552368"'
+        example: "+18665552368"
         type: string
     QueryIncludePhoneNumbers:
       description: Include the first 50 phone number objects in the results
@@ -9756,33 +9867,33 @@ components:
                 $ref: "#/components/schemas/PrivateWirelessGateway"
             type: object
       description: Successful response
-    CreateRoomAccessTokenResponse:
+    CreateRoomClientTokenResponse:
       content:
         application/json:
           schema:
             properties:
               data:
                 example:
-                  access_token: eyJhbGciOiJFZDI1NTE5IiwidHlwIjoiSldUIn0.eyJhdWQiOiJ0ZWxueXhfYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjE5MDk0Mjk1LCJncmFudHMiOlt7ImFjdGlvbnMiOlsiam9pbiJdLCJyZXNvdXJjZXMiOlsidGVsbnl4OnZpZGVvOnJvb21zOjllMmEwY2JlLWNlNjYtNDExZS1hMWFjLTQ2OGYwYjEwM2M5YSJdLCJzdWJqZWN0cyI6WyJ0ZWxueXg6dXNlcnM6NzgyYjJjYmUtODQ2Ni00ZTNmLWE0ZDMtOTc4MWViNTc3ZTUwIl19XSwiZ3JhbnRzX3ZlcnNpb24iOiIxLjAuMCIsImlhdCI6MTYxOTA5MzY5NSwiaXNzIjoidGVsbnl4X2FjY2Vzc190b2tlbiIsImp0aSI6IjllNjIyOTA2LTc1ZTctNDBiNi1iOTAwLTc1NGIxZjNlZDMyZiIsIm5iZiI6MTYxOTA5MzY5NCwic3ViIjoibnVsbCIsInR5cCI6ImFjY2VzcyJ9.1JGK9PyHkTtoP_iMu-8TzXH_fhmnsDtZZOAJLDzLW6DDtAb80wZ93l1VH5yNx5tFqwIFG0t48dRiBKWlW-nzDA
-                  access_token_expires_at: 2021-04-22T12:24:55Z
                   refresh_token: eyJhbGciOiJFZDI1NTE5IiwidHlwIjoiSldUIn0.eyJhdWQiOiJ0ZWxueXhfYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjE5MDkzNzA1LCJncmFudHMiOlt7ImFjdGlvbnMiOlsiam9pbiJdLCJyZXNvdXJjZXMiOlsidGVsbnl4OnZpZGVvOnJvb21zOjllMmEwY2JlLWNlNjYtNDExZS1hMWFjLTQ2OGYwYjEwM2M5YSJdLCJzdWJqZWN0cyI6WyJ0ZWxueXg6dXNlcnM6NzgyYjJjYmUtODQ2Ni00ZTNmLWE0ZDMtOTc4MWViNTc3ZTUwIl19XSwiZ3JhbnRzX3ZlcnNpb24iOiIxLjAuMCIsImlhdCI6MTYxOTA5MzY5NSwiaXNzIjoidGVsbnl4X2FjY2Vzc190b2tlbiIsImp0aSI6ImQ3OWJlMzhjLWFkNTQtNGQ5ZC1hODc4LWExNjVjNTk0MGQwNyIsIm5iZiI6MTYxOTA5MzY5NCwic3ViIjoibnVsbCIsInR5cCI6InJlZnJlc2gifQ.FHsp7KlVXn1E5tTUiKZzmQ4of39gi57AakeQeqI0oAa8hzjFMVb0RGj-mxWTvHVen4GpgsUW_epqqaxK16viCA
                   refresh_token_expires_at: 2021-04-22T12:15:05Z
+                  token: eyJhbGciOiJFZDI1NTE5IiwidHlwIjoiSldUIn0.eyJhdWQiOiJ0ZWxueXhfYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjE5MDk0Mjk1LCJncmFudHMiOlt7ImFjdGlvbnMiOlsiam9pbiJdLCJyZXNvdXJjZXMiOlsidGVsbnl4OnZpZGVvOnJvb21zOjllMmEwY2JlLWNlNjYtNDExZS1hMWFjLTQ2OGYwYjEwM2M5YSJdLCJzdWJqZWN0cyI6WyJ0ZWxueXg6dXNlcnM6NzgyYjJjYmUtODQ2Ni00ZTNmLWE0ZDMtOTc4MWViNTc3ZTUwIl19XSwiZ3JhbnRzX3ZlcnNpb24iOiIxLjAuMCIsImlhdCI6MTYxOTA5MzY5NSwiaXNzIjoidGVsbnl4X2FjY2Vzc190b2tlbiIsImp0aSI6IjllNjIyOTA2LTc1ZTctNDBiNi1iOTAwLTc1NGIxZjNlZDMyZiIsIm5iZiI6MTYxOTA5MzY5NCwic3ViIjoibnVsbCIsInR5cCI6ImFjY2VzcyJ9.1JGK9PyHkTtoP_iMu-8TzXH_fhmnsDtZZOAJLDzLW6DDtAb80wZ93l1VH5yNx5tFqwIFG0t48dRiBKWlW-nzDA
+                  token_expires_at: 2021-04-22T12:24:55Z
                 properties:
-                  access_token:
-                    example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0ZWxueXhfdGVsZXBob255IiwiZXhwIjoxNTkwMDEwMTQzLCJpYXQiOjE1ODc1OTA5NDMsImlzcyI6InRlbG55eF90ZWxlcGhvbnkiLCJqdGkiOiJiOGM3NDgzNy1kODllLTRhNjUtOWNmMi0zNGM3YTZmYTYwYzgiLCJuYmYiOjE1ODc1OTA5NDIsInN1YiI6IjVjN2FjN2QwLWRiNjUtNGYxMS05OGUxLWVlYzBkMWQ1YzZhZSIsInRlbF90b2tlbiI6InJqX1pra1pVT1pNeFpPZk9tTHBFVUIzc2lVN3U2UmpaRmVNOXMtZ2JfeENSNTZXRktGQUppTXlGMlQ2Q0JSbWxoX1N5MGlfbGZ5VDlBSThzRWlmOE1USUlzenl6U2xfYURuRzQ4YU81MHlhSEd1UlNZYlViU1ltOVdJaVEwZz09IiwidHlwIjoiYWNjZXNzIn0.gNEwzTow5MLLPLQENytca7pUN79PmPj6FyqZWW06ZeEmesxYpwKh0xRtA0TzLh6CDYIRHrI8seofOO0YFGDhpQ
-                    format: jwt
-                    type: string
-                  access_token_expires_at:
-                    description: ISO 8601 timestamp when the access token expires.
-                    example: 2021-03-26T17:51:59Z
-                    format: datetime
-                    type: string
                   refresh_token:
                     example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0ZWxueXhfdGVsZXBob255IiwiZXhwIjoxNTkwMDEwMTQzLCJpYXQiOjE1ODc1OTA5NDMsImlzcyI6InRlbG55eF90ZWxlcGhvbnkiLCJqdGkiOiJiOGM3NDgzNy1kODllLTRhNjUtOWNmMi0zNGM3YTZmYTYwYzgiLCJuYmYiOjE1ODc1OTA5NDIsInN1YiI6IjVjN2FjN2QwLWRiNjUtNGYxMS05OGUxLWVlYzBkMWQ1YzZhZSIsInRlbF90b2tlbiI6InJqX1pra1pVT1pNeFpPZk9tTHBFVUIzc2lVN3U2UmpaRmVNOXMtZ2JfeENSNTZXRktGQUppTXlGMlQ2Q0JSbWxoX1N5MGlfbGZ5VDlBSThzRWlmOE1USUlzenl6U2xfYURuRzQ4YU81MHlhSEd1UlNZYlViU1ltOVdJaVEwZz09IiwidHlwIjoiYWNjZXNzIn0.gNEwzTow5MLLPLQENytca7pUN79PmPj6FyqZWW06ZeEmesxYpwKh0xRtA0TzLh6CDYIRHrI8seofOO0YFGDhpQ
                     format: jwt
                     type: string
                   refresh_token_expires_at:
                     description: ISO 8601 timestamp when the refresh token expires.
+                    example: 2021-03-26T17:51:59Z
+                    format: datetime
+                    type: string
+                  token:
+                    example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0ZWxueXhfdGVsZXBob255IiwiZXhwIjoxNTkwMDEwMTQzLCJpYXQiOjE1ODc1OTA5NDMsImlzcyI6InRlbG55eF90ZWxlcGhvbnkiLCJqdGkiOiJiOGM3NDgzNy1kODllLTRhNjUtOWNmMi0zNGM3YTZmYTYwYzgiLCJuYmYiOjE1ODc1OTA5NDIsInN1YiI6IjVjN2FjN2QwLWRiNjUtNGYxMS05OGUxLWVlYzBkMWQ1YzZhZSIsInRlbF90b2tlbiI6InJqX1pra1pVT1pNeFpPZk9tTHBFVUIzc2lVN3U2UmpaRmVNOXMtZ2JfeENSNTZXRktGQUppTXlGMlQ2Q0JSbWxoX1N5MGlfbGZ5VDlBSThzRWlmOE1USUlzenl6U2xfYURuRzQ4YU81MHlhSEd1UlNZYlViU1ltOVdJaVEwZz09IiwidHlwIjoiYWNjZXNzIn0.gNEwzTow5MLLPLQENytca7pUN79PmPj6FyqZWW06ZeEmesxYpwKh0xRtA0TzLh6CDYIRHrI8seofOO0YFGDhpQ
+                    format: jwt
+                    type: string
+                  token_expires_at:
+                    description: ISO 8601 timestamp when the access token expires.
                     example: 2021-03-26T17:51:59Z
                     format: datetime
                     type: string
@@ -9916,6 +10027,17 @@ components:
                 $ref: "#/components/schemas/WdrReport"
             type: object
       description: Successful response
+    DocReqsListDocumentTypesResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/DocReqsDocumentTypeList"
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            type: object
+      description: Successful response
     DocServiceDocumentResponse:
       content:
         application/json:
@@ -9962,7 +10084,7 @@ components:
             properties:
               data:
                 $ref: "#/components/schemas/FqdnConnection"
-            title: Fqdn Connection Response
+            title: FQDN Connection Response
             type: object
       description: Successful response with details about an FQDN connection.
     FqdnResponse:
@@ -9972,7 +10094,7 @@ components:
             properties:
               data:
                 $ref: "#/components/schemas/Fqdn"
-            title: Fqdn Response
+            title: FQDN Response
             type: object
       description: Successful response with details about an FQDN connection.
     GenericErrorResponse:
@@ -10297,6 +10419,17 @@ components:
                 $ref: "#/components/schemas/PaginationMeta"
             type: object
       description: Successful response
+    ListDocumentRequirementsResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/DocumentRequirementList"
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            type: object
+      description: Successful response
     ListFaxesResponse:
       content:
         application/json:
@@ -10327,7 +10460,7 @@ components:
                 type: array
               meta:
                 $ref: "#/components/schemas/PaginationMeta"
-            title: List Fqdn Connections Response
+            title: List FQDN Connections Response
             type: object
       description: Successful response with a list of FQDN connections.
     ListFqdnsResponse:
@@ -10341,7 +10474,7 @@ components:
                 type: array
               meta:
                 $ref: "#/components/schemas/PaginationMeta"
-            title: List Fqdns Response
+            title: List FQDNs Response
             type: object
       description: Successful response with a list of FQDN connections.
     ListIpConnectionsResponse:
@@ -10993,7 +11126,7 @@ components:
             title: Refresh Fax Response
             type: object
       description: Refresh fax response
-    RefreshRoomAccessTokenResponse:
+    RefreshRoomClientTokenResponse:
       content:
         application/json:
           schema:
@@ -16101,7 +16234,7 @@ components:
           type: integer
       required:
         - connection_name
-      title: Create Fqdn Connection Request
+      title: Create FQDN Connection Request
     CreateFqdnRequest:
       example:
         connection_id: "1516447646313612565"
@@ -16133,7 +16266,7 @@ components:
         - fqdn
         - dns_record_type
         - connection_id
-      title: Create Fqdn Request
+      title: Create FQDN Request
       type: object
     CreateInboundIpRequest:
       example:
@@ -17045,21 +17178,21 @@ components:
         - phone_numbers
       title: CreatePortingOrder
       type: object
-    CreateRoomAccessTokenRequest:
+    CreateRoomClientTokenRequest:
       properties:
         refresh_token_ttl_secs:
           default: 3600
           description: The time to live in seconds of the Refresh Token, after that time
-            the Refresh Token is invalid and can't be used to refresh Access
+            the Refresh Token is invalid and can't be used to refresh Client
             Token.
           example: 3600
           maximum: 86400
           minimum: 60
           type: integer
-        ttl_secs:
+        token_ttl_secs:
           default: 600
-          description: The time to live in seconds of the Access Token, after that time
-            the Access Token is invalid and can't be used to join a Room.
+          description: The time to live in seconds of the Client Token, after that time
+            the Client Token is invalid and can't be used to join a Room.
           example: 600
           maximum: 3600
           minimum: 10
@@ -17902,6 +18035,66 @@ components:
         - data
       title: DeleteVerifyProfileResponse
       type: object
+    DocReqsDocumentType:
+      properties:
+        acceptance_criteria:
+          description: Specifies objective criteria for acceptance
+          properties:
+            locality_limit:
+              description: Specifies geography-based acceptance criteria
+              example: Issued by the same country that the phone number belongs to
+              readOnly: false
+              type: string
+            time_limit:
+              description: Specifies time-based acceptance criteria
+              example: Current and not expired
+              readOnly: false
+              type: string
+          type: object
+        created_at:
+          description: ISO 8601 formatted date-time indicating when the resource was
+            created.
+          example: 2021-04-09T22:25:27.521Z
+          readOnly: true
+          type: string
+        description:
+          description: Describes the document type
+          example: Proves the customer has a physical address in the same locality as the
+            phone number
+          readOnly: false
+          type: string
+        example:
+          description: Provides one or more examples of acceptable documents
+          example: Utility bill, internet bill, phone bill, or lease
+          readOnly: false
+          type: string
+        id:
+          description: Identifies the associated document
+          example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: A short descriptive name for this document_type
+          example: Proof of Address
+          readOnly: true
+          type: string
+        record_type:
+          description: Identifies the type of the resource
+          example: document_type
+          readOnly: true
+          type: string
+        updated_at:
+          description: ISO 8601 formatted date-time indicating when the resource was last
+            updated.
+          example: 2021-04-12T20:20:20.020Z
+          readOnly: true
+          type: string
+      type: object
+    DocReqsDocumentTypeList:
+      items:
+        $ref: "#/components/schemas/DocReqsDocumentType"
+      type: array
     DocServiceDocument:
       allOf:
         - $ref: "#/components/schemas/DocServiceRecord"
@@ -18041,6 +18234,49 @@ components:
           type: string
       title: Document
       type: object
+    DocumentRequirement:
+      properties:
+        acceptance_criteria:
+          description: Additional requirements
+          properties:
+            locality_limit:
+              description: Indicates geography-based acceptance criterium
+              example: within locality of phone number desired
+              readOnly: true
+              type: string
+            time_limit:
+              description: Indicates a time-based acceptance criterium
+              example: no older than 45 days from submission
+              readOnly: true
+              type: string
+          readOnly: true
+          type: object
+        description:
+          description: Describes the requirement in more detail
+          example: This proves the customer has a physical address in the same locality of
+            the desired phone number
+          readOnly: true
+          type: string
+        example:
+          description: Describes an acceptable document that would meet the requirement
+          example: Utility bill, internet bill, phone bill, or lease
+          readOnly: true
+          type: string
+        name:
+          description: A short name for the document requirement
+          example: Proof of Address
+          readOnly: true
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: document_requirement
+          readOnly: true
+          type: string
+      type: object
+    DocumentRequirementList:
+      items:
+        $ref: "#/components/schemas/DocumentRequirement"
+      type: array
     DtmfType:
       default: RFC 2833
       description: Sets the type of DTMF digits sent from Telnyx to this Connection.
@@ -18941,7 +19177,7 @@ components:
           type: integer
       required:
         - connection_name
-      title: Fqdn Connection
+      title: FQDN Connection
       type: object
     FqdnConnectionTransportProtocol:
       default: UDP
@@ -19431,7 +19667,7 @@ components:
           default: 90
           description: "Time(sec) before aborting if call is unanswered (min: 1, max: 600)."
           type: integer
-      title: Inbound Fqdn
+      title: Inbound FQDN
       type: object
     InboundIp:
       example:
@@ -24251,16 +24487,16 @@ components:
         - sip_address
       title: Refer request
       type: object
-    RefreshRoomAccessTokenRequest:
+    RefreshRoomClientTokenRequest:
       properties:
         refresh_token:
           example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0ZWxueXhfdGVsZXBob255IiwiZXhwIjoxNTkwMDEwMTQzLCJpYXQiOjE1ODc1OTA5NDMsImlzcyI6InRlbG55eF90ZWxlcGhvbnkiLCJqdGkiOiJiOGM3NDgzNy1kODllLTRhNjUtOWNmMi0zNGM3YTZmYTYwYzgiLCJuYmYiOjE1ODc1OTA5NDIsInN1YiI6IjVjN2FjN2QwLWRiNjUtNGYxMS05OGUxLWVlYzBkMWQ1YzZhZSIsInRlbF90b2tlbiI6InJqX1pra1pVT1pNeFpPZk9tTHBFVUIzc2lVN3U2UmpaRmVNOXMtZ2JfeENSNTZXRktGQUppTXlGMlQ2Q0JSbWxoX1N5MGlfbGZ5VDlBSThzRWlmOE1USUlzenl6U2xfYURuRzQ4YU81MHlhSEd1UlNZYlViU1ltOVdJaVEwZz09IiwidHlwIjoiYWNjZXNzIn0.gNEwzTow5MLLPLQENytca7pUN79PmPj6FyqZWW06ZeEmesxYpwKh0xRtA0TzLh6CDYIRHrI8seofOO0YFGDhpQ
           format: jwt
           type: string
-        ttl_secs:
+        token_ttl_secs:
           default: 600
-          description: The time to live in seconds of the Access Token, after that time
-            the Access Token is invalid and can't be used to join a Room.
+          description: The time to live in seconds of the Client Token, after that time
+            the Client Token is invalid and can't be used to join a Room.
           example: 600
           maximum: 3600
           minimum: 10
@@ -24492,6 +24728,7 @@ components:
         created_at: 2021-04-16T09:46:20.954863Z
         id: 7b61621f-62e0-4aad-ab11-9fd19e272e73
         max_participants: 50
+        record_type: room
         unique_name: My Room
         updated_at: 2021-04-16T10:24:55.962200Z
       properties:
@@ -24509,6 +24746,10 @@ components:
           description: Maximum participants allowed in the room.
           example: 50
           type: integer
+        record_type:
+          example: room
+          readOnly: true
+          type: string
         unique_name:
           description: The unique (within the Telnyx account scope) name of the room.
           example: My room
@@ -26572,7 +26813,7 @@ components:
           minimum: 0
           nullable: true
           type: integer
-      title: Update Fqdn Connection Request
+      title: Update FQDN Connection Request
     UpdateFqdnRequest:
       example:
         connection_id: "1516447646313612565"
@@ -26600,7 +26841,7 @@ components:
           example: 5060
           nullable: true
           type: integer
-      title: Update Fqdn Request
+      title: Update FQDN Request
       type: object
     UpdateIpConnectionRequest:
       example:

@@ -9,7 +9,7 @@ info:
   description: |
     The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.
 
-    > Date: 07 April, 2021
+    > Date: 05 May, 2021
     >
     > [What's New](https://meraki.io/whats-new/)
 
@@ -21,7 +21,7 @@ info:
 
     [Meraki Homepage](https://www.meraki.com)
   title: Meraki Dashboard API
-  version: 1.8.0
+  version: 1.9.0
   x-apisguru-categories:
     - iot
     - enterprise
@@ -68,6 +68,7 @@ tags:
   - name: apnsCert
   - name: applicationCategories
   - name: applicationUsage
+  - name: applications
   - name: bgp
   - name: billing
   - name: bluetooth
@@ -208,7 +209,6 @@ tags:
   - name: trafficHistory
   - name: trafficShaping
   - name: uplink
-  - name: uplinkBandwidth
   - name: uplinkSelection
   - name: uplinks
   - name: uplinksLossAndLatency
@@ -812,6 +812,13 @@ paths:
               mqttBrokerId: "1234"
               senseEnabled: true
             properties:
+              audioDetection:
+                description: The details of the audio detection config.
+                properties:
+                  enabled:
+                    description: Boolean indicating if audio detection is enabled(true) or disabled(false) on the camera
+                    type: boolean
+                type: object
               detectionModelId:
                 description: The ID of the object detection model
                 type: string
@@ -1234,7 +1241,9 @@ paths:
           description: Successful operation
           examples:
             application/json:
-              - description: Miles's phone
+              - adaptivePolicyGroup:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                description: Miles's phone
                 dhcpHostname: MilesPhone
                 id: k74272e
                 ip: 1.2.3.4
@@ -1676,6 +1685,16 @@ paths:
                   systemName: MS350-24X - Test
                 portId: "1"
                 powerUsageInWh: 55.9
+                secureConnect:
+                  active: true
+                  authenticationStatus: Authentication in progress
+                  configOverrides:
+                    allowedVlans: all
+                    type: trunk
+                    vlan: 12
+                    voiceVlan:
+                      $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                  enabled: true
                 speed: 10 Gbps
                 status: Connected
                 trafficInKbps:
@@ -1687,6 +1706,7 @@ paths:
                   sent: 23008
                   total: 40867
                 warnings:
+                  - SecureConnect authentication in progress
                   - PoE port was denied power
                   - High proportion of CRC errors
           schema:
@@ -6031,119 +6051,6 @@ paths:
         - configure
         - trafficShaping
         - rules
-  "/networks/{networkId}/appliance/trafficShaping/uplinkBandwidth":
-    get:
-      description: Returns the uplink bandwidth settings for your MX network.
-      operationId: getNetworkApplianceTrafficShapingUplinkBandwidth
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          type: string
-      responses:
-        "200":
-          description: Successful operation
-          examples:
-            application/json:
-              bandwidthLimits:
-                cellular:
-                  limitDown: 51200
-                  limitUp: 51200
-                wan1:
-                  limitDown: 1000000
-                  limitUp: 1000000
-                wan2:
-                  limitDown: 1000000
-                  limitUp: 1000000
-          schema:
-            type: object
-      summary: Returns the uplink bandwidth settings for your MX network.
-      tags:
-        - appliance
-        - configure
-        - trafficShaping
-        - uplinkBandwidth
-    put:
-      description: Updates the uplink bandwidth settings for your MX network.
-      operationId: updateNetworkApplianceTrafficShapingUplinkBandwidth
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          type: string
-        - in: body
-          name: updateNetworkApplianceTrafficShapingUplinkBandwidth
-          schema:
-            example:
-              bandwidthLimits:
-                cellular:
-                  limitDown: 51200
-                  limitUp: 51200
-                wan1:
-                  limitDown: 1000000
-                  limitUp: 1000000
-                wan2:
-                  limitDown: 1000000
-                  limitUp: 1000000
-            properties:
-              bandwidthLimits:
-                description: A mapping of uplinks to their bandwidth settings (be sure to check which uplinks are supported for your network)
-                properties:
-                  cellular:
-                    description: The bandwidth settings for the 'cellular' uplink
-                    properties:
-                      limitDown:
-                        description: The maximum download limit (integer, in Kbps). null indicates no limit
-                        type: integer
-                      limitUp:
-                        description: The maximum upload limit (integer, in Kbps). null indicates no limit
-                        type: integer
-                    type: object
-                  wan1:
-                    description: The bandwidth settings for the 'wan1' uplink
-                    properties:
-                      limitDown:
-                        description: The maximum download limit (integer, in Kbps). null indicates no limit
-                        type: integer
-                      limitUp:
-                        description: The maximum upload limit (integer, in Kbps). null indicates no limit
-                        type: integer
-                    type: object
-                  wan2:
-                    description: The bandwidth settings for the 'wan2' uplink
-                    properties:
-                      limitDown:
-                        description: The maximum download limit (integer, in Kbps). null indicates no limit
-                        type: integer
-                      limitUp:
-                        description: The maximum upload limit (integer, in Kbps). null indicates no limit
-                        type: integer
-                    type: object
-                type: object
-            type: object
-      responses:
-        "200":
-          description: Successful operation
-          examples:
-            application/json:
-              bandwidthLimits:
-                cellular:
-                  limitDown: 51200
-                  limitUp: 51200
-                wan1:
-                  limitDown: 1000000
-                  limitUp: 1000000
-                wan2:
-                  limitDown: 1000000
-                  limitUp: 1000000
-          schema:
-            type: object
-      summary: Updates the uplink bandwidth settings for your MX network.
-      tags:
-        - appliance
-        - configure
-        - trafficShaping
-        - uplinkBandwidth
   "/networks/{networkId}/appliance/trafficShaping/uplinkSelection":
     get:
       description: Show uplink selection settings for an MX network
@@ -7732,7 +7639,7 @@ paths:
                 description: Create redundant video backup using Cloud Archive. Can be either true or false. Defaults to false.
                 type: boolean
               maxRetentionDays:
-                description: The maximum number of days for which the data will be stored, or 'null' to keep data until storage space runs out. If the former, it can be one of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 30, 60, 90] days
+                description: The maximum number of days for which the data will be stored, or 'null' to keep data until storage space runs out. If the former, it can be one of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 30, 60, 90] days.
                 type: integer
               motionBasedRetentionEnabled:
                 description: Deletes footage older than 3 days in which no motion was detected. Can be either true or false. Defaults to false.
@@ -7985,7 +7892,7 @@ paths:
                 description: Create redundant video backup using Cloud Archive. Can be either true or false. Defaults to false.
                 type: boolean
               maxRetentionDays:
-                description: The maximum number of days for which the data will be stored, or 'null' to keep data until storage space runs out. If the former, it can be one of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 30, 60, 90] days
+                description: The maximum number of days for which the data will be stored, or 'null' to keep data until storage space runs out. If the former, it can be one of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 30, 60, 90] days.
                 type: integer
               motionBasedRetentionEnabled:
                 description: Deletes footage older than 3 days in which no motion was detected. Can be either true or false. Defaults to false.
@@ -8513,7 +8420,9 @@ paths:
           description: Successful operation
           examples:
             application/json:
-              - description: Miles's phone
+              - adaptivePolicyGroup:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                description: Miles's phone
                 firstSeen: 1518365681
                 groupPolicy8021x: Student_Access
                 id: k74272e
@@ -8525,6 +8434,7 @@ paths:
                 manufacturer: Apple
                 notes: My client note
                 os: iOS
+                recentDeviceConnection: Wired
                 recentDeviceMac: 00:11:22:33:44:55
                 recentDeviceName: My AP
                 recentDeviceSerial: Q234-ABCD-5678
@@ -8632,6 +8542,51 @@ paths:
         - monitor
         - clients
         - applicationUsage
+  "/networks/{networkId}/clients/overview":
+    get:
+      description: Return overview statistics for network clients
+      operationId: getNetworkClientsOverview
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - description: The beginning of the timespan for the data. The maximum lookback period is 31 days from today.
+          in: query
+          name: t0
+          type: string
+        - description: The end of the timespan for the data. t1 can be a maximum of 31 days after t0.
+          in: query
+          name: t1
+          type: string
+        - description: The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 1 day.
+          format: float
+          in: query
+          name: timespan
+          type: number
+        - description: "The time resolution in seconds for returned data. The valid resolutions are: 7200, 86400, 604800, 2592000. The default is 604800."
+          in: query
+          name: resolution
+          type: integer
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              - counts:
+                  total: 100
+                  withHeavyUsage: 2
+                usages:
+                  average: 2048
+                  withHeavyUsageAverage: 5345
+          schema:
+            type: object
+      summary: Return overview statistics for network clients
+      tags:
+        - networks
+        - monitor
+        - clients
+        - overview
   "/networks/{networkId}/clients/provision":
     post:
       description: Provisions a client with a name and policy. Clients can be provisioned before they associate to the network.
@@ -22608,11 +22563,10 @@ paths:
                 description: The name of the Identity PSK
                 type: string
               passphrase:
-                description: The passphrase for client authentication
+                description: The passphrase for client authentication. If left blank, one will be auto-generated.
                 type: string
             required:
               - name
-              - passphrase
               - groupPolicyId
             type: object
       responses:
@@ -22742,6 +22696,134 @@ paths:
         - configure
         - ssids
         - identityPsks
+  "/networks/{networkId}/wireless/ssids/{number}/schedules":
+    get:
+      description: List the outage schedule for the SSID
+      operationId: getNetworkWirelessSsidSchedules
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: path
+          name: number
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              enabled: true
+              ranges:
+                - endDay: Tuesday
+                  endTime: 05:00
+                  startDay: Tuesday
+                  startTime: 01:00
+                - endDay: monday
+                  endTime: 05:00
+                  startDay: Fri
+                  startTime: 19:00
+          schema:
+            type: object
+      summary: List the outage schedule for the SSID
+      tags:
+        - wireless
+        - configure
+        - ssids
+        - schedules
+    put:
+      description: Update the outage schedule for the SSID
+      operationId: updateNetworkWirelessSsidSchedules
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: path
+          name: number
+          required: true
+          type: string
+        - in: body
+          name: updateNetworkWirelessSsidSchedules
+          schema:
+            example:
+              enabled: true
+              ranges:
+                - endDay: Tuesday
+                  endTime: 05:00
+                  startDay: Tuesday
+                  startTime: 01:00
+                - endDay: monday
+                  endTime: 05:00
+                  startDay: Fri
+                  startTime: 19:00
+            properties:
+              enabled:
+                description: If true, the SSID outage schedule is enabled.
+                type: boolean
+              ranges:
+                description: List of outage ranges. Has a start date and time, and end date and time. If this parameter is passed in along with rangesInSeconds parameter, this will take precedence.
+                items:
+                  properties:
+                    endDay:
+                      description: Day of when the outage ends. Can be either full day name, or three letter abbreviation
+                      type: string
+                    endTime:
+                      description: 24 hour time when the outage ends.
+                      type: string
+                    startDay:
+                      description: Day of when the outage starts. Can be either full day name, or three letter abbreviation.
+                      type: string
+                    startTime:
+                      description: 24 hour time when the outage starts.
+                      type: string
+                  required:
+                    - startDay
+                    - startTime
+                    - endDay
+                    - endTime
+                  type: object
+                type: array
+              rangesInSeconds:
+                description: List of outage ranges in seconds since Sunday at Midnight. Has a start and end. If this parameter is passed in along with the ranges parameter, ranges will take precedence.
+                items:
+                  properties:
+                    end:
+                      description: Seconds since Sunday at midnight when that outage range ends.
+                      type: integer
+                    start:
+                      description: Seconds since Sunday at midnight when the outage range starts.
+                      type: integer
+                  required:
+                    - start
+                    - end
+                  type: object
+                type: array
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              enabled: true
+              ranges:
+                - endDay: Tuesday
+                  endTime: 05:00
+                  startDay: Tuesday
+                  startTime: 01:00
+                - endDay: monday
+                  endTime: 05:00
+                  startDay: Fri
+                  startTime: 19:00
+          schema:
+            type: object
+      summary: Update the outage schedule for the SSID
+      tags:
+        - wireless
+        - configure
+        - ssids
+        - schedules
   "/networks/{networkId}/wireless/ssids/{number}/splash/settings":
     get:
       description: Display the splash page settings for the given SSID
@@ -28495,6 +28577,38 @@ paths:
         - monitor
         - webhooks
         - logs
+  "/organizations/{organization_id}/insight/applications":
+    get:
+      description: List all Insight tracked applications
+      operationId: getOrganizationInsightApplications
+      parameters:
+        - in: path
+          name: organization_id
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              - applicationId: "19.12"
+                name: Meraki HTTPS
+                thresholds:
+                  byNetwork:
+                    - goodput: 50000
+                      networkId: N_12345678
+                      responseDuration: 1000
+                    - goodput: 3000
+                      networkId: L_23456789
+                      responseDuration: 4000
+                  type: smart
+          schema:
+            type: object
+      summary: List all Insight tracked applications
+      tags:
+        - insight
+        - configure
+        - applications
 x-batchable-actions:
   - group: Alternate management interface
     operation: update
@@ -28692,10 +28806,6 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/appliance/ports/{portId}
     summary: Update the per-port VLAN settings for a single MX port.
-  - group: MX uplink setting
-    operation: update
-    resource: /networks/{networkId}/appliance/trafficShaping/uplinkBandwidth
-    summary: Updates the uplink bandwidth settings for your MX network.
   - group: Management interface settings
     operation: update
     resource: /devices/{serial}/managementInterface
@@ -28876,6 +28986,10 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/wireless/ssids/{number}/deviceTypeGroupPolicies
     summary: Update the device type group policies for the SSID
+  - group: Ssid outage schedule
+    operation: update
+    resource: /networks/{networkId}/wireless/ssids/{number}/schedules
+    summary: Update the outage schedule for the SSID
   - group: Ssid splash settings
     operation: update
     resource: /networks/{networkId}/wireless/ssids/{number}/splash/settings

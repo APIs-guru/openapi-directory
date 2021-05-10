@@ -4178,6 +4178,62 @@ paths:
         - external_events
       x-authentication:
         - site
+  "/external_events/{id}":
+    get:
+      description: Show External Event
+      operationId: GetExternalEventsId
+      parameters:
+        - description: External Event ID.
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+          x-ms-summary: External Event ID.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExternalEventEntity"
+          description: The ExternalEvents object.
+          x-ms-summary: The ExternalEvents object.
+        "400":
+          description: Bad Request
+          x-ms-summary: Bad Request
+        "401":
+          description: Unauthorized
+          x-ms-summary: Unauthorized
+        "403":
+          description: Forbidden
+          x-ms-summary: Forbidden
+        "404":
+          description: Not Found
+          x-ms-summary: Not Found
+        "405":
+          description: Method Not Allowed
+          x-ms-summary: Method Not Allowed
+        "409":
+          description: Conflict
+          x-ms-summary: Conflict
+        "412":
+          description: Precondition Failed
+          x-ms-summary: Precondition Failed
+        "422":
+          description: Unprocessable Entity
+          x-ms-summary: Unprocessable Entity
+        "423":
+          description: Locked
+          x-ms-summary: Locked
+        "429":
+          description: Too Many Requests
+          x-ms-summary: Too Many Requests
+      summary: Show External Event
+      tags:
+        - external_events
+      x-authentication:
+        - site
   "/file_actions/begin_upload/{path}":
     post:
       description: Begin file upload
@@ -18969,6 +19025,11 @@ components:
             - saml_login
           example: ""
           type: string
+        id:
+          description: Event ID
+          example: 1
+          format: int32
+          type: integer
         status:
           description: Status of event.
           enum:

@@ -17888,16 +17888,19 @@ paths:
                     for Billing to learn more. This is the default behavior.
 
 
+                    Use `default_incomplete` to create Subscriptions with `status=incomplete` when the first invoice requires payment, otherwise start as active. Subscriptions transition to `status=active` when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to `status=expired_incomplete`, which is a terminal state.
+
+
                     Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's first invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not create a subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
 
 
                     `pending_if_incomplete` is only used with updates and cannot be passed when creating a subscription.
                   enum:
                     - allow_incomplete
+                    - default_incomplete
                     - error_if_incomplete
                     - pending_if_incomplete
                   type: string
-                  x-stripeBypassValidation: true
                 pending_invoice_item_interval:
                   anyOf:
                     - properties:
@@ -18468,16 +18471,19 @@ paths:
                     for Billing to learn more. This is the default behavior.
 
 
+                    Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.
+
+
                     Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).
 
 
                     Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
                   enum:
                     - allow_incomplete
+                    - default_incomplete
                     - error_if_incomplete
                     - pending_if_incomplete
                   type: string
-                  x-stripeBypassValidation: true
                 pending_invoice_item_interval:
                   anyOf:
                     - properties:
@@ -31331,6 +31337,17 @@ paths:
                         - enum:
                             - ""
                           type: string
+                    afterpay_clearpay:
+                      anyOf:
+                        - properties:
+                            reference:
+                              maxLength: 128
+                              type: string
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
                     alipay:
                       anyOf:
                         - properties: {}
@@ -31411,6 +31428,14 @@ paths:
                               type: string
                               x-stripeBypassValidation: true
                           title: payment_intent_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    card_present:
+                      anyOf:
+                        - properties: {}
+                          title: payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -32125,6 +32150,17 @@ paths:
                         - enum:
                             - ""
                           type: string
+                    afterpay_clearpay:
+                      anyOf:
+                        - properties:
+                            reference:
+                              maxLength: 128
+                              type: string
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
                     alipay:
                       anyOf:
                         - properties: {}
@@ -32205,6 +32241,14 @@ paths:
                               type: string
                               x-stripeBypassValidation: true
                           title: payment_intent_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    card_present:
+                      anyOf:
+                        - properties: {}
+                          title: payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -33069,6 +33113,17 @@ paths:
                         - enum:
                             - ""
                           type: string
+                    afterpay_clearpay:
+                      anyOf:
+                        - properties:
+                            reference:
+                              maxLength: 128
+                              type: string
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
                     alipay:
                       anyOf:
                         - properties: {}
@@ -33149,6 +33204,14 @@ paths:
                               type: string
                               x-stripeBypassValidation: true
                           title: payment_intent_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    card_present:
+                      anyOf:
+                        - properties: {}
+                          title: payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -36627,6 +36690,15 @@ paths:
           required: false
           schema:
             type: integer
+          style: form
+        - description: Only return early fraud warnings for charges that were created by
+            the PaymentIntent specified by this PaymentIntent ID.
+          in: query
+          name: payment_intent
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
           style: form
         - description: A cursor for use in pagination. `starting_after` is an object ID
             that defines your place in the list. For instance, if you make a
@@ -42078,16 +42150,19 @@ paths:
                     for Billing to learn more. This is the default behavior.
 
 
+                    Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.
+
+
                     Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).
 
 
                     Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
                   enum:
                     - allow_incomplete
+                    - default_incomplete
                     - error_if_incomplete
                     - pending_if_incomplete
                   type: string
-                  x-stripeBypassValidation: true
                 price:
                   description: The ID of the price object.
                   maxLength: 5000
@@ -42388,16 +42463,19 @@ paths:
                     for Billing to learn more. This is the default behavior.
 
 
+                    Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.
+
+
                     Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).
 
 
                     Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
                   enum:
                     - allow_incomplete
+                    - default_incomplete
                     - error_if_incomplete
                     - pending_if_incomplete
                   type: string
-                  x-stripeBypassValidation: true
                 price:
                   description: The ID of the price object.
                   maxLength: 5000
@@ -43854,7 +43932,8 @@ paths:
             [incomplete
             payment](https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses).
             Passing in a value of `all` will return subscriptions of all
-            statuses.
+            statuses. If no value is supplied, all subscriptions that have not
+            been canceled are returned.
           in: query
           name: status
           required: false
@@ -44219,16 +44298,19 @@ paths:
                     for Billing to learn more. This is the default behavior.
 
 
+                    Use `default_incomplete` to create Subscriptions with `status=incomplete` when the first invoice requires payment, otherwise start as active. Subscriptions transition to `status=active` when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to `status=expired_incomplete`, which is a terminal state.
+
+
                     Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's first invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not create a subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
 
 
                     `pending_if_incomplete` is only used with updates and cannot be passed when creating a subscription.
                   enum:
                     - allow_incomplete
+                    - default_incomplete
                     - error_if_incomplete
                     - pending_if_incomplete
                   type: string
-                  x-stripeBypassValidation: true
                 pending_invoice_item_interval:
                   anyOf:
                     - properties:
@@ -44773,16 +44855,19 @@ paths:
                     for Billing to learn more. This is the default behavior.
 
 
+                    Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.
+
+
                     Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).
 
 
                     Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
                   enum:
                     - allow_incomplete
+                    - default_incomplete
                     - error_if_incomplete
                     - pending_if_incomplete
                   type: string
-                  x-stripeBypassValidation: true
                 pending_invoice_item_interval:
                   anyOf:
                     - properties:
@@ -51801,7 +51886,7 @@ components:
               - $ref: "#/components/schemas/payment_intent"
         payment_method_options:
           anyOf:
-            - $ref: "#/components/schemas/checkout_session_payment_method_options_for_payment"
+            - $ref: "#/components/schemas/checkout_session_payment_method_options"
           description: Payment-method-specific configuration for the PaymentIntent or
             SetupIntent of this CheckoutSession.
           nullable: true
@@ -51908,12 +51993,70 @@ components:
         - subscription
         - total_details
       x-resourceId: checkout.session
-    checkout_session_payment_method_options_for_payment:
+    checkout_acss_debit_mandate_options:
       description: ""
-      properties: {}
-      title: CheckoutSessionPaymentMethodOptionsForPayment
+      properties:
+        custom_mandate_url:
+          description: A URL for custom mandate text
+          maxLength: 5000
+          type: string
+        interval_description:
+          description: Description of the interval. Only required if 'payment_schedule'
+            parmeter is 'interval' or 'combined'.
+          maxLength: 5000
+          nullable: true
+          type: string
+        payment_schedule:
+          description: Payment schedule for the mandate.
+          enum:
+            - combined
+            - interval
+            - sporadic
+          nullable: true
+          type: string
+        transaction_type:
+          description: Transaction type of the mandate.
+          enum:
+            - business
+            - personal
+          nullable: true
+          type: string
+      title: CheckoutAcssDebitMandateOptions
       type: object
       x-expandableFields: []
+    checkout_acss_debit_payment_method_options:
+      description: ""
+      properties:
+        currency:
+          description: Currency supported by the bank account. Returned when the Session
+            is in `setup` mode.
+          enum:
+            - cad
+            - usd
+          type: string
+        mandate_options:
+          $ref: "#/components/schemas/checkout_acss_debit_mandate_options"
+        verification_method:
+          description: Bank account verification method.
+          enum:
+            - automatic
+            - instant
+            - microdeposits
+          type: string
+          x-stripeBypassValidation: true
+      title: CheckoutAcssDebitPaymentMethodOptions
+      type: object
+      x-expandableFields:
+        - mandate_options
+    checkout_session_payment_method_options:
+      description: ""
+      properties:
+        acss_debit:
+          $ref: "#/components/schemas/checkout_acss_debit_payment_method_options"
+      title: CheckoutSessionPaymentMethodOptions
+      type: object
+      x-expandableFields:
+        - acss_debit
     connect_collection_transfer:
       description: ""
       properties:
@@ -61384,12 +61527,16 @@ components:
       properties:
         acss_debit:
           $ref: "#/components/schemas/payment_intent_payment_method_options_acss_debit"
+        afterpay_clearpay:
+          $ref: "#/components/schemas/payment_method_options_afterpay_clearpay"
         alipay:
           $ref: "#/components/schemas/payment_method_options_alipay"
         bancontact:
           $ref: "#/components/schemas/payment_method_options_bancontact"
         card:
           $ref: "#/components/schemas/payment_intent_payment_method_options_card"
+        card_present:
+          $ref: "#/components/schemas/payment_method_options_card_present"
         oxxo:
           $ref: "#/components/schemas/payment_method_options_oxxo"
         p24:
@@ -61402,9 +61549,11 @@ components:
       type: object
       x-expandableFields:
         - acss_debit
+        - afterpay_clearpay
         - alipay
         - bancontact
         - card
+        - card_present
         - oxxo
         - p24
         - sepa_debit
@@ -61440,9 +61589,9 @@ components:
             For more information, see the [installments integration guide](https://stripe.com/docs/payments/installments).
           nullable: true
         network:
-          description: Selected network to process this PaymentIntent on. Depends on the
-            available networks of the card attached to the PaymentIntent. Can be
-            only set confirm-time.
+          description: Selected network to process this payment intent on. Depends on the
+            available networks of the card attached to the payment intent. Can
+            be only set confirm-time.
           enum:
             - amex
             - cartes_bancaires
@@ -62245,7 +62394,12 @@ components:
       x-expandableFields: []
     payment_method_details_afterpay_clearpay:
       description: ""
-      properties: {}
+      properties:
+        reference:
+          description: Order identifier shown to the customer in Afterpay’s online portal.
+          maxLength: 5000
+          nullable: true
+          type: string
       title: payment_method_details_afterpay_clearpay
       type: object
       x-expandableFields: []
@@ -63586,6 +63740,22 @@ components:
       title: payment_method_interac_present
       type: object
       x-expandableFields: []
+    payment_method_options_afterpay_clearpay:
+      description: ""
+      properties:
+        reference:
+          description: >-
+            Order identifier shown to the customer in Afterpay’s online portal.
+            We recommend using a value that helps you answer any questions a
+            customer might have about
+
+            the payment. The identifier is limited to 128 characters and may contain only letters, digits, underscores, backslashes and dashes.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: payment_method_options_afterpay_clearpay
+      type: object
+      x-expandableFields: []
     payment_method_options_alipay:
       description: ""
       properties: {}
@@ -63633,6 +63803,12 @@ components:
       x-expandableFields:
         - available_plans
         - plan
+    payment_method_options_card_present:
+      description: ""
+      properties: {}
+      title: payment_method_options_card_present
+      type: object
+      x-expandableFields: []
     payment_method_options_oxxo:
       description: ""
       properties:
@@ -65513,6 +65689,16 @@ components:
           enum:
             - radar.early_fraud_warning
           type: string
+        payment_intent:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/payment_intent"
+          description: ID of the Payment Intent this early fraud warning is for,
+            optionally expanded.
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/payment_intent"
       required:
         - actionable
         - charge
@@ -65525,6 +65711,7 @@ components:
       type: object
       x-expandableFields:
         - charge
+        - payment_intent
       x-resourceId: radar.early_fraud_warning
     radar.value_list:
       description: >-

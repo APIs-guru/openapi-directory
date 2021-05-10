@@ -23,12 +23,12 @@ info:
     - XML Schema Definition
 
 
-    **Important**: The Apicurio Registry REST API is available from `http://MY-REGISTRY-URL/api` by default. Therefore you must prefix all API operation paths with `/api` in this case. For example: `/api/ids/{globalId}`.
+    **Important**: The Apicurio Registry REST API is available from `http://MY-REGISTRY-URL/apis/registry/v2` by default. Therefore you must prefix all API operation paths with `../apis/registry/v2` in this case. For example: `../apis/registry/v2/ids/globalIds/{globalId}`.
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
   title: Apicurio Registry API [v2]
-  version: 2.0.0-SNAPSHOT
+  version: 2.0.1-SNAPSHOT
   x-apisguru-categories:
     - developer_tools
   x-origin:
@@ -56,20 +56,20 @@ tags:
     name: Versions
   - description: |-
       Rules can be configured on a per-artifact basis, allowing for different approaches
-      to content evolution for each artifact.  These rules will override any global rules
-      that have been configured.  This section contains the operations used to manage a
+      to content evolution for each artifact.  These rules override any global rules
+      that have been configured. This section contains the operations used to manage a
       single artifact's rules.
     name: Artifact rules
   - description: |-
       Global rules can be configured in the registry to govern how artifact content can 
-      evolve over time (as artifact content is **updated**). Global rules will be applied 
+      evolve over time (as artifact content is **updated**). Global rules are applied 
       whenever an artifact is added to the registry, and also whenever an artifact's 
-      content is updated (only if that artifact doesn't have its own specific rules 
+      content is updated (only if that artifact does not have its own specific rules 
       configured). This section describes the operations used to manage the global rules.
     name: Global rules
   - description: "The search API is used to browse or find artifacts in the registry. This section describes the operations for searching for artifacts and versions. "
     name: Search
-  - description: Application functionality that is only accessible to admin users.  Includes things like Logging and Global Rules.
+  - description: Application functionality that is only accessible to admin users.  Includes logging, global rules, and export/import of registry data.
     name: Admin
   - description: System level functionality, including versioning and status information.
     name: System
@@ -81,7 +81,9 @@ paths:
       responses:
         "200":
           content:
-            application/zip: {}
+            application/zip:
+              schema:
+                $ref: "#/components/schemas/FileContent"
           description: Response when the export is successful.
         "500":
           $ref: "#/components/responses/ServerError"
@@ -95,7 +97,9 @@ paths:
       operationId: importData
       requestBody:
         content:
-          application/zip: {}
+          application/zip:
+            schema:
+              $ref: "#/components/schemas/FileContent"
         description: The ZIP file representing the previously exported registry data.
         required: true
       responses:
@@ -403,7 +407,7 @@ paths:
       tags:
         - Artifacts
     parameters:
-      - description: Unique ID of an Artifact Group.
+      - description: Unique ID of an artifact group.
         in: path
         name: groupId
         required: true
@@ -541,6 +545,8 @@ paths:
                                   type: array
                             description: All widgets
                         summary: Get widgets
+            schema:
+              $ref: "#/components/schemas/FileContent"
         description: |
           The content of the artifact being created. This is often, but not always, JSON data
           representing one of the supported artifact types:
@@ -605,44 +611,7 @@ paths:
       operationId: getLatestArtifact
       responses:
         "200":
-          content:
-            application/graphql: {}
-            application/json:
-              examples:
-                OpenAPI:
-                  value:
-                    info:
-                      description: An example API design using OpenAPI.
-                      title: Empty API
-                      version: 1.0.0
-                    openapi: 3.0.2
-            application/x-protobuf:
-              examples:
-                Protobuf Example:
-                  value: |-
-                    message SearchResponse {
-                      repeated Result result = 1;
-                    }
-
-                    message Result {
-                      required string url = 1;
-                      optional string title = 2;
-                      repeated string snippets = 3;
-                    }
-            application/x-protobuffer:
-              examples:
-                Protobuffer Example:
-                  value: |-
-                    message SearchResponse {
-                      repeated Result result = 1;
-                    }
-
-                    message Result {
-                      required string url = 1;
-                      optional string title = 2;
-                      repeated string snippets = 3;
-                    }
-          description: The most recent version of the artifact.
+          $ref: "#/components/responses/ArtifactContent"
         "404":
           $ref: "#/components/responses/NotFound"
         "500":
@@ -651,13 +620,13 @@ paths:
       tags:
         - Artifacts
     parameters:
-      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+      - description: The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts.
         in: path
         name: groupId
         required: true
         schema:
           $ref: "#/components/schemas/GroupId"
-      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
@@ -728,6 +697,8 @@ paths:
                                   type: array
                             description: All widgets
                         summary: Get widgets
+            schema:
+              $ref: "#/components/schemas/FileContent"
         description: |
           The new content of the artifact being updated. This is often, but not always, JSON data
           representing one of the supported artifact types:
@@ -786,13 +757,13 @@ paths:
       tags:
         - Metadata
     parameters:
-      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+      - description: The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts.
         in: path
         name: groupId
         required: true
         schema:
           $ref: "#/components/schemas/GroupId"
-      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
@@ -819,9 +790,9 @@ paths:
             type: boolean
       requestBody:
         content:
-          application/json:
+          "*/*":
             examples:
-              OpenAPI Example:
+              OpenAPI:
                 value:
                   components:
                     schemas:
@@ -855,6 +826,8 @@ paths:
                                   type: array
                             description: All widgets
                         summary: Get widgets
+            schema:
+              $ref: "#/components/schemas/FileContent"
         description: The content of an artifact version.
         required: true
       responses:
@@ -883,7 +856,7 @@ paths:
       operationId: updateArtifactMetaData
       requestBody:
         content:
-          "*/*":
+          application/json:
             schema:
               $ref: "#/components/schemas/EditableMetaData"
         description: Updated artifact metadata.
@@ -949,13 +922,13 @@ paths:
       tags:
         - Artifact rules
     parameters:
-      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+      - description: The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts.
         in: path
         name: groupId
         required: true
         schema:
           $ref: "#/components/schemas/GroupId"
-      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
@@ -1043,13 +1016,13 @@ paths:
       tags:
         - Artifact rules
     parameters:
-      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+      - description: The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts.
         in: path
         name: groupId
         required: true
         schema:
           $ref: "#/components/schemas/GroupId"
-      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
@@ -1100,13 +1073,13 @@ paths:
     summary: Manage the configuration of a single artifact rule.
   "/groups/{groupId}/artifacts/{artifactId}/state":
     parameters:
-      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+      - description: The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts.
         in: path
         name: groupId
         required: true
         schema:
           $ref: "#/components/schemas/GroupId"
-      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
@@ -1144,13 +1117,13 @@ paths:
     summary: Manage the state of an artifact.
   "/groups/{groupId}/artifacts/{artifactId}/test":
     parameters:
-      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+      - description: The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts.
         in: path
         name: groupId
         required: true
         schema:
           $ref: "#/components/schemas/GroupId"
-      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
@@ -1181,7 +1154,9 @@ paths:
       operationId: testUpdateArtifact
       requestBody:
         content:
-          "*/*": {}
+          "*/*":
+            schema:
+              $ref: "#/components/schemas/FileContent"
         description: |
           The content of the artifact being tested. This is often, but not always, JSON data
           representing one of the supported artifact types:
@@ -1256,13 +1231,13 @@ paths:
       tags:
         - Versions
     parameters:
-      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+      - description: The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts.
         in: path
         name: groupId
         required: true
         schema:
           $ref: "#/components/schemas/GroupId"
-      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
@@ -1332,6 +1307,8 @@ paths:
                                   type: array
                             description: All widgets
                         summary: Get widgets
+            schema:
+              $ref: "#/components/schemas/FileContent"
         description: |
           The content of the artifact version being created. This is often, but not always, JSON data
           representing one of the supported artifact types:
@@ -1380,44 +1357,7 @@ paths:
       operationId: getArtifactVersion
       responses:
         "200":
-          content:
-            application/graphql: {}
-            application/json:
-              examples:
-                OpenAPI:
-                  value:
-                    info:
-                      description: An example API design using OpenAPI.
-                      title: Empty API
-                      version: 1.0.0
-                    openapi: 3.0.2
-            application/x-protobuf:
-              examples:
-                Protobuf Example:
-                  value: |-
-                    message SearchResponse {
-                      repeated Result result = 1;
-                    }
-
-                    message Result {
-                      required string url = 1;
-                      optional string title = 2;
-                      repeated string snippets = 3;
-                    }
-            application/x-protobuffer:
-              examples:
-                Protobuffer Example:
-                  value: |-
-                    message SearchResponse {
-                      repeated Result result = 1;
-                    }
-
-                    message Result {
-                      required string url = 1;
-                      optional string title = 2;
-                      repeated string snippets = 3;
-                    }
-          description: The content of the artifact version.
+          $ref: "#/components/responses/ArtifactContent"
         "404":
           $ref: "#/components/responses/NotFound"
         "500":
@@ -1426,13 +1366,13 @@ paths:
       tags:
         - Versions
     parameters:
-      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+      - description: The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts.
         in: path
         name: groupId
         required: true
         schema:
           $ref: "#/components/schemas/GroupId"
-      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
@@ -1494,13 +1434,13 @@ paths:
       tags:
         - Metadata
     parameters:
-      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+      - description: The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts.
         in: path
         name: groupId
         required: true
         schema:
           $ref: "#/components/schemas/GroupId"
-      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
@@ -1543,13 +1483,13 @@ paths:
     summary: Manage the metadata for a single version of an artifact in the registry.
   "/groups/{groupId}/artifacts/{artifactId}/versions/{version}/state":
     parameters:
-      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+      - description: The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts.
         in: path
         name: groupId
         required: true
         schema:
           $ref: "#/components/schemas/GroupId"
-      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
@@ -1605,43 +1545,11 @@ paths:
       operationId: getContentByHash
       responses:
         "200":
-          content:
-            application/json:
-              examples:
-                OpenAPI Example:
-                  value:
-                    info:
-                      description: An example API design using OpenAPI.
-                      title: Empty API
-                      version: 1.0.0
-                    openapi: 3.0.2
-            application/x-protobuf:
-              examples:
-                Protobuf Example:
-                  value: |-
-                    message SearchResponse {
-                      repeated Result result = 1;
-                    }
-
-                    message Result {
-                      required string url = 1;
-                      optional string title = 2;
-                      repeated string snippets = 3;
-                    }
-            application/x-protobuffer:
-              examples:
-                Protobuffer Example:
-                  value: |-
-                    message SearchResponse {
-                      repeated Result result = 1;
-                    }
-
-                    message Result {
-                      required string url = 1;
-                      optional string title = 2;
-                      repeated string snippets = 3;
-                    }
-          description: The content of the artifact version.
+          $ref: "#/components/responses/ArtifactContent"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
       summary: Get artifact content by SHA-256 hash
       tags:
         - Artifacts
@@ -1667,43 +1575,11 @@ paths:
       operationId: getContentById
       responses:
         "200":
-          content:
-            application/json:
-              examples:
-                OpenAPI Example:
-                  value:
-                    info:
-                      description: An example API design using OpenAPI.
-                      title: Empty API
-                      version: 1.0.0
-                    openapi: 3.0.2
-            application/x-protobuf:
-              examples:
-                Protobuf Example:
-                  value: |-
-                    message SearchResponse {
-                      repeated Result result = 1;
-                    }
-
-                    message Result {
-                      required string url = 1;
-                      optional string title = 2;
-                      repeated string snippets = 3;
-                    }
-            application/x-protobuffer:
-              examples:
-                Protobuffer Example:
-                  value: |-
-                    message SearchResponse {
-                      repeated Result result = 1;
-                    }
-
-                    message Result {
-                      required string url = 1;
-                      optional string title = 2;
-                      repeated string snippets = 3;
-                    }
-          description: The content of the artifact version.
+          $ref: "#/components/responses/ArtifactContent"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
       summary: Get artifact content by ID
       tags:
         - Artifacts
@@ -1729,43 +1605,11 @@ paths:
       operationId: getContentByGlobalId
       responses:
         "200":
-          content:
-            application/json:
-              examples:
-                OpenAPI Example:
-                  value:
-                    info:
-                      description: An example API design using OpenAPI.
-                      title: Empty API
-                      version: 1.0.0
-                    openapi: 3.0.2
-            application/x-protobuf:
-              examples:
-                Protobuf Example:
-                  value: |-
-                    message SearchResponse {
-                      repeated Result result = 1;
-                    }
-
-                    message Result {
-                      required string url = 1;
-                      optional string title = 2;
-                      repeated string snippets = 3;
-                    }
-            application/x-protobuffer:
-              examples:
-                Protobuffer Example:
-                  value: |-
-                    message SearchResponse {
-                      repeated Result result = 1;
-                    }
-
-                    message Result {
-                      required string url = 1;
-                      optional string title = 2;
-                      repeated string snippets = 3;
-                    }
-          description: The content of the artifact version.
+          $ref: "#/components/responses/ArtifactContent"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
       summary: Get artifact by global ID
       tags:
         - Artifacts
@@ -1913,7 +1757,9 @@ paths:
             type: string
       requestBody:
         content:
-          "*/*": {}
+          "*/*":
+            schema:
+              $ref: "#/components/schemas/FileContent"
         description: The content to search for.
         required: true
       responses:
@@ -1945,6 +1791,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/SystemInfo"
           description: On success, returns the system information.
+        "500":
+          $ref: "#/components/responses/ServerError"
       summary: Get system information
       tags:
         - System
@@ -1952,6 +1800,20 @@ paths:
   x-codegen-contextRoot: /apis/registry/v2
 components:
   responses:
+    ArtifactContent:
+      content:
+        "*/*":
+          examples:
+            OpenAPI:
+              value:
+                info:
+                  description: An example API design using OpenAPI.
+                  title: Empty API
+                  version: 1.0.0
+                openapi: 3.0.2
+          schema:
+            $ref: "#/components/schemas/FileContent"
+      description: The content of one version of one artifact.
     BadRequest:
       content:
         application/json:
@@ -2009,7 +1871,7 @@ components:
       description: Common response for all operations that can fail with an unexpected server error.
   schemas:
     ArtifactId:
-      description: The ID of a single Artifact.
+      description: The ID of a single artifact.
       example: '"example-artifact"'
       type: string
     ArtifactMetaData:
@@ -2189,8 +2051,12 @@ components:
           type: string
       title: Root Type for Error
       type: object
+    FileContent:
+      format: binary
+      type: string
+      x-codegen-inline: true
     GroupId:
-      description: An id of a single Artifact Group.
+      description: An ID of a single artifact group.
       example: '"my-group"'
       type: string
     IfExists:

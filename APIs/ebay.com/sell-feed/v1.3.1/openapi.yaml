@@ -16,7 +16,7 @@ info:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
   title: Feed API
-  version: v1.3.0
+  version: v1.3.1
   x-apisguru-categories:
     - ecommerce
   x-logo:
@@ -2147,7 +2147,7 @@ paths:
   "/task/{task_id}/upload_file":
     post:
       description: "This method associates the specified file with the specified task
-        ID and uploads the input file. After the file has been uploaded the
+        ID and uploads the input file. After the file has been uploaded, the
         processing of the file begins. Reports often take time to generate and
         it's common for this method to return an HTTP status of 202, which
         indicates the report is being generated. Use the getTask with the task
@@ -2157,13 +2157,12 @@ paths:
         been processed and the order report can be downloaded. If there are
         errors, they will be indicated in the report file. For details of how
         this method is used in the upload flow, see Working with Order Feeds in
-        the Selling Integration Guide. Note: With respect to LMS, this method
-        applies to all feed types except LMS_ORDER_REPORT and
+        the Selling Integration Guide. Note: This method applies to all File
+        Exchange feed types and LMS feed types except LMS_ORDER_REPORT and
         LMS_ACTIVE_INVENTORY_REPORT. See LMS API Feeds in the Selling
-        Integration Guide. Note: If uploading a file using multipart/form-data,
-        disregard setting the Content-Type header to 'application/json' (as
-        noted below in the HTTP request headers), but instead include the
-        Content-Type header with its value set to 'multipart/form-data'."
+        Integration Guide and File Exchange FeedTypes in the File Exchange
+        Migration Guide. Note: You must use a Content-Type header with its value
+        set to &quot;multipart/form-data&quot;. See Samples for information."
       operationId: uploadFile
       parameters:
         - description: The task_id associated with the file that will be uploaded. This ID

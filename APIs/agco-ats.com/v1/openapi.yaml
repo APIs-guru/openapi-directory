@@ -15716,7 +15716,8 @@ components:
           description: Read-Only. True if voucher has been deleted.
           type: boolean
         Email:
-          description: The email address. Required for Internal Vouchers
+          description: The order number. Required for Commercial Vouchers. Not supported
+            for other Vouchers.
           type: string
         ExpirationDate:
           description: The expiration date of the voucher. Required for Temporary Vouchers.
@@ -15741,7 +15742,7 @@ components:
           format: date-time
           type: string
         Purpose:
-          description: Required for Internal Vouchers
+          description: Required for Internal Vouchers. Not supported for other Vouchers.
           type: string
         Type:
           description: The type of voucher. Commercial is the default if not specified.

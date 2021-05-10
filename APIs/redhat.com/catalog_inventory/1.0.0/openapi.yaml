@@ -599,6 +599,24 @@ paths:
       summary: Show an existing Source
       tags:
         - Source
+  "/sources/{id}/incremental_refresh":
+    patch:
+      description: Incremental Refresh a source object
+      operationId: incrementalRefreshSource
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "204":
+          description: Updated, no content
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+        "429":
+          description: Too many requests
+      summary: Incremental Refresh an existing Source
+      tags:
+        - Source
   "/sources/{id}/refresh":
     patch:
       description: Refresh a source object
@@ -1725,6 +1743,10 @@ components:
       properties:
         archived_at:
           format: date-time
+          readOnly: true
+          type: string
+        child_task_id:
+          format: uuid
           readOnly: true
           type: string
         completed_at:

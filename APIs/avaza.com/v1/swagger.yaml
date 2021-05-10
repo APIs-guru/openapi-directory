@@ -2116,7 +2116,7 @@ paths:
         by Task Title
       operationId: TaskLookup
       parameters:
-        - description: (optional) The ProjectID to use when filtering Tasks
+        - description: (required) The ProjectID to use when filtering Tasks
           format: int32
           in: query
           name: projectID
@@ -2904,6 +2904,8 @@ paths:
 definitions:
   AccountDetails:
     properties:
+      AccountEmail:
+        type: string
       AccountID:
         format: int32
         type: integer

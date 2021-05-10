@@ -66,9 +66,23 @@ paths:
                 type: object
           description: VAForms index response
         "401":
-          description: Invalid authentication credentials
-        "404":
-          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: Invalid authentication credentials
+                    type: string
+          description: Unauthorized
+        "429":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: API rate limit exceeded
+                    type: string
+          description: Too many requests
       security:
         - apikey: []
       summary: All VA Forms
@@ -99,9 +113,39 @@ paths:
                 type: object
           description: VaForm response
         "401":
-          description: Invalid authentication credentials
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: Invalid authentication credentials
+                    type: string
+          description: Unauthorized
         "404":
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        message:
+                          example: Form not found
+                          type: string
+                    type: array
+                required:
+                  - errors
+                type: object
           description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: API rate limit exceeded
+                    type: string
+          description: Too many requests
       security:
         - apikey: []
       summary: Find form by form name

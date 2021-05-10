@@ -1,11 +1,11 @@
 openapi: 3.0.0
 servers:
   - description: Production URL for the UK API
-    url: https://uk.api.just-eat.io/
+    url: https://uk.api.just-eat.io
   - description: Production URL for the DK, ES, IE, IT and NO API
-    url: https://i18n.api.just-eat.io/
+    url: https://i18n.api.just-eat.io
   - description: Production URL for the AU and NZ API
-    url: https://aus.api.just-eat.io/
+    url: https://aus.api.just-eat.io
 info:
   contact:
     x-twitter: JustEatUK
@@ -148,6 +148,505 @@ paths:
         - Attempted Delivery Webhooks
         - publicly-accessible
       x-status: Stable
+  "/checkout/{tenant}/{checkoutId}":
+    get:
+      description: |
+        Get the details required to fulfil an order, which includes:
+          - The restaurant selling the items to be purchased
+          - The customer making the purchase
+          - How, where and when the items will be received by the customer
+          - Instructions about the order
+      parameters:
+        - description: |
+            A two-character country code. 
+
+            The following countries are supported:
+              - United Kingdom (UK)
+              - Australia (AU)
+              - New Zealand (NZ)
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+        - description: A unique identifier for a checkout. This is currently a Basket Id.
+          in: path
+          name: checkoutId
+          required: true
+          schema:
+            type: string
+        - description: Allows the server to identify the application making the request.
+          in: header
+          name: User-Agent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                customer:
+                  firstName: Joe
+                  lastName: Bloggs
+                  phoneNumber: "+447111111111"
+                fulfilment:
+                  location:
+                    address:
+                      administrativeArea: Somerset
+                      lines:
+                        - 1 Bristol Road
+                      locality: Bristol
+                      postalCode: BS1 1AA
+                    geolocation:
+                      latitude: 1
+                      longitude: -1
+                  time:
+                    asap: false
+                    scheduled:
+                      from: 2020-01-01T00:30:00.000Z
+                      to: 2020-01-01T00:30:00.000Z
+                isFulfillable: true
+                issues:
+                  - code: RESTAURANT_NOT_TAKING_ORDERS
+                  - additionalSpendRequired: 100
+                    code: MINIMUM_ORDER_VALUE_NOT_MET
+                    currency: GBP
+                    minimumOrderValue: 1000
+                restaurant:
+                  availabilityId: "5678"
+                  id: "1234"
+                serviceType: delivery
+              schema:
+                $ref: "#/components/schemas/CheckoutGetResponse"
+          description: "OK : Request has succeeded."
+          headers:
+            cache-control:
+              description: Response caching must not be applied.
+              schema:
+                enum:
+                  - no-store
+                type: string
+        "400":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: The tenant is invalid
+                      errorCode: TENANT_INVALID
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutGet400Error"
+          description: "BAD REQUEST : Cannot process the request due to error by client."
+        "401":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Authentication required to access this resource
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "UNAUTHORIZED : Missing authentication credentials to access target
+            resource."
+        "403":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Access to the resource is forbidden
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "FORBIDDEN : Not authorised to access target resource."
+        "404":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: The tenant is not supported
+                      errorCode: TENANT_NOT_SUPPORTED
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/Checkout404Error"
+          description: "NOT FOUND : Target resource could not be found."
+        "409":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: The checkout is in an invalid state
+                      errorCode: CHECKOUT_INVALID
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/Checkout409Error"
+          description: "CONFLICT : Request not completed as it conflicts with target
+            resource."
+        "429":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Couldn't complete request
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "TOO MANY REQUESTS : Request not completed as server has received
+            too many requests in a given amount of time."
+        "500":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Internal Server Error
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "INTERNAL SERVER ERROR : Error on server preventing request from
+            being fulfilled."
+        "503":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Couldn't complete request
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "SERVICE UNAVAILABLE : Server currently unable to fulfil the
+            request. The request can be retried."
+      security:
+        - Bearer: []
+      summary: Get Checkout
+      tags:
+        - Checkout
+        - publicly-accessible
+      x-status: Stable
+    patch:
+      description: |
+        Update the details required to fulfil an order, which includes:
+          - The customer making the purchase
+          - Where and when the items will be received by the customer
+          - Instructions about the order
+      parameters:
+        - description: |
+            A two-character country code. 
+
+            The following countries are supported:
+              - United Kingdom (UK)
+              - Australia (AU)
+              - New Zealand (NZ)
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+        - description: A unique identifier for a checkout. This is currently a Basket Id.
+          in: path
+          name: checkoutId
+          required: true
+          schema:
+            type: string
+        - description: Allows the server to identify the application making the request.
+          in: header
+          name: User-Agent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              - op: add
+                path: /customer
+                value:
+                  dateOfBirth: 1980-01-30
+                  phoneNumber: "+447111111111"
+            schema:
+              $ref: "#/components/schemas/CheckoutUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                isFulfillable: true
+                issues:
+                  - code: RESTAURANT_NOT_TAKING_ORDERS
+                  - additionalSpendRequired: 100
+                    code: MINIMUM_ORDER_VALUE_NOT_MET
+                    currency: GBP
+                    minimumOrderValue: 1000
+              schema:
+                $ref: "#/components/schemas/CheckoutUpdateResponse"
+          description: "OK : Request has succeeded."
+          headers:
+            cache-control:
+              description: Response caching must not be applied.
+              schema:
+                enum:
+                  - no-store
+                type: string
+        "400":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: The tenant is invalid
+                      errorCode: TENANT_INVALID
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutUpdate400Error"
+          description: "BAD REQUEST : Cannot process the request due to error by client."
+        "401":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Authentication required to access this resource
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "UNAUTHORIZED : Missing authentication credentials to access target
+            resource."
+        "403":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Access to the resource is forbidden
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "FORBIDDEN : Not authorised to access target resource."
+        "404":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: The tenant is not supported
+                      errorCode: TENANT_NOT_SUPPORTED
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/Checkout404Error"
+          description: "NOT FOUND : Target resource could not be found."
+        "409":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: The checkout is in an invalid state
+                      errorCode: CHECKOUT_INVALID
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/Checkout409Error"
+          description: "CONFLICT : Request not completed as it conflicts with target
+            resource."
+        "429":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Couldn't complete request
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "TOO MANY REQUESTS : Request not completed as server has received
+            too many requests in a given amount of time."
+        "500":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Internal Server Error
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "INTERNAL SERVER ERROR : Error on server preventing request from
+            being fulfilled."
+        "503":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Couldn't complete request
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "SERVICE UNAVAILABLE : Server currently unable to fulfil the
+            request. The request can be retried."
+      security:
+        - Bearer: []
+      summary: Update Checkout
+      tags:
+        - Checkout
+        - publicly-accessible
+      x-status: Stable
+  "/checkout/{tenant}/{checkoutId}/fulfilment/availabletimes":
+    get:
+      description: Gets a collection of times for when an order can be fulfilled.
+      parameters:
+        - description: |
+            A two-character country code. 
+
+            The following countries are supported:
+              - United Kingdom (UK)
+              - Australia (AU)
+              - New Zealand (NZ)
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+        - description: A unique identifier for a checkout. This is currently a Basket Id.
+          in: path
+          name: checkoutId
+          required: true
+          schema:
+            type: string
+        - description: Allows the server to identify the application making the request.
+          in: header
+          name: User-Agent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                asapAvailable: true
+                times:
+                  - from: 2020-01-01T00:30:00.000Z
+                    to: 2020-01-01T00:45:00.000Z
+                  - from: 2020-01-01T00:45:00.000Z
+                    to: 2020-01-01T01:00:00.000Z
+              schema:
+                $ref: "#/components/schemas/GetAvailableFulfilmentTimesResponse"
+          description: "OK : Request has succeeded."
+          headers:
+            cache-control:
+              description: Response caching must not be applied.
+              schema:
+                enum:
+                  - no-store
+                type: string
+        "400":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: The tenant is invalid
+                      errorCode: TENANT_INVALID
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutGet400Error"
+          description: "BAD REQUEST : Cannot process the request due to error by client."
+        "404":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: The tenant is not supported
+                      errorCode: TENANT_NOT_SUPPORTED
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/Checkout404Error"
+          description: "NOT FOUND : Target resource could not be found."
+        "409":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: The fulfilment time bands are in an invalid state
+                      errorCode: FULFILMENT_TIME_BANDS_INVALID
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/AvailableFulfilmentTimes409Error"
+          description: "CONFLICT : Request not completed as it conflicts with target
+            resource."
+        "429":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Couldn't complete request
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "TOO MANY REQUESTS : Request not completed as server has received
+            too many requests in a given amount of time."
+        "500":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Internal Server Error
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "INTERNAL SERVER ERROR : Error on server preventing request from
+            being fulfilled."
+        "503":
+          content:
+            application/json:
+              example:
+                fault:
+                  errors:
+                    - description: Couldn't complete request
+                  faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                  traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/CheckoutDefaultError"
+          description: "SERVICE UNAVAILABLE : Server currently unable to fulfil the
+            request. The request can be retried."
+      summary: Get Available Fulfilment Times
+      tags:
+        - Checkout
+        - publicly-accessible
+      x-status: Stable
   "/consumers/{tenant}":
     get:
       description: Currently this operation only supports retrieving a count of
@@ -175,9 +674,9 @@ paths:
             enum:
               - registered
             type: string
-        - description: Returns the number of consumers that matches the emailAddress and
-            accountType. The query value should be empty, e.g.
-            /consumers/uk/?emailAddress=someone@email.com&accountType=registered&count.
+        - description: Returns the number of consumers that matches the `emailAddress` and
+            `accountType`. The query value should be empty, e.g.
+            `/consumers/uk/?emailAddress=someone@email.com&accountType=registered&count`.
           in: query
           name: count
           required: true
@@ -241,8 +740,8 @@ paths:
     post:
       description: Creates a consumer for the given tenant.
       parameters:
-        - description: The identifier for the tenant. The only supported tenants are uk,
-            au and nz
+        - description: The identifier for the tenant. The only supported tenants are `uk`,
+            `au` and `nz`
           in: path
           name: tenant
           required: true
@@ -690,8 +1189,12 @@ paths:
           schema:
             type: string
         - description: Restaurant IDs which fees are requested for. e.g.
-            ?restaurantIds=1,2,3,4
-          example: 1,2,3,4
+            `?restaurantIds=1,2,3,4`
+          example:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
           explode: false
           in: query
           name: restaurantIds
@@ -722,7 +1225,9 @@ paths:
         - description: Point to which delivery is required (latitude, longitude). Supply
             this where possible as support for zone-only based lookups will be
             removed in future.
-          example: 51.3851513,-2.0841275
+          example:
+            - 51.3851513
+            - -2.0841275
           explode: false
           in: query
           name: latlong
@@ -1034,8 +1539,8 @@ paths:
             text/plain:
               examples:
                 response:
-                  value: "Restaurant(s) are already assigned to pools : {RestaurantId:55474,
-                    PoolId:cccebb96452349b799b71a7adc51df66}"
+                  value: "Restaurant(s) are already assigned to pools : `{RestaurantId:55474,
+                    PoolId:cccebb96452349b799b71a7adc51df66}`"
           description: A restaurant in your request already belongs to another pool
         "500":
           content:
@@ -1097,8 +1602,8 @@ paths:
             text/plain:
               examples:
                 response:
-                  value: "Restaurant(s) are already assigned to pools : {RestaurantId:55474,
-                    PoolId:cccebb96452349b799b71a7adc51df66}"
+                  value: "Restaurant(s) are already assigned to pools : `{RestaurantId:55474,
+                    PoolId:cccebb96452349b799b71a7adc51df66}`"
           description: A restaurant in your request already belongs to another pool
         "500":
           content:
@@ -1620,28 +2125,28 @@ paths:
                       properties:
                         code:
                           description: <p>Each code should be selected from the following list of valid
-                            reasons.</p><table><tr><th>code</th><th>explantation</th></tr><tr><td>outside_hours</td><td>Delivery
+                            reasons.</p><table><tr><th>code</th><th>explanation</th></tr><tr><td>`outside_hours`</td><td>Delivery
                             partner is closed and not accepting
-                            requests.</td></tr><tr><td>too_busy</td><td>Delivery
+                            requests.</td></tr><tr><td>`too_busy`</td><td>Delivery
                             partner does not have enough capacity to accept this
-                            request.</td></tr><tr><td>too_far</td><td>The
+                            request.</td></tr><tr><td>`too_far`</td><td>The
                             customer is too far away from the restaurant, either
                             by time or
-                            distance.</td></tr><tr><td>not_supported</td><td>Delivery
+                            distance.</td></tr><tr><td>`not_supported`</td><td>Delivery
                             partner is currently unable to deliver to the
                             customer's
-                            location.</td></tr><tr><td>bad_address</td><td>The
+                            location.</td></tr><tr><td>`bad_address`</td><td>The
                             order contains an address that could not be
                             processed or
-                            understood.</td></tr><tr><td>bad_request</td><td>The
+                            understood.</td></tr><tr><td>`bad_request`</td><td>The
                             order format is invalid or the order contains
                             required data or information that cannot be
-                            processed.</td></tr><tr><td>restaurant_not_configured</td><td>Delivery
+                            processed.</td></tr><tr><td>`restaurant_not_configured`</td><td>Delivery
                             partner is not configured to accept requests for
                             given
-                            restaurant.</td></tr><tr><td>duplicate</td><td>The
+                            restaurant.</td></tr><tr><td>`duplicate`</td><td>The
                             request has already been processed
-                            before.</td></tr><tr><td>other</td><td>Any
+                            before.</td></tr><tr><td>`other`</td><td>Any
                             validation failure or unexpected error not covered
                             by the above codes.</td></tr></table>
                           enum:
@@ -1698,8 +2203,7 @@ paths:
       description: Create order
       parameters:
         - description: The api version to use. Version 2.0 is the only available version.
-          example:
-            x-je-api-version: 2
+          example: 2
           in: header
           name: x-je-api-version
           required: false
@@ -1734,7 +2238,7 @@ paths:
                     type: string
                 type: object
           description: Conflict - you've already told us about an order with this
-            OrderReference
+            `OrderReference`
       summary: Create order
       tags:
         - Order API
@@ -1917,8 +2421,8 @@ paths:
         will arrive at the restaurant the more likely it is that driver arrival
         and order preparation will be aligned. </p> <p> In other tenants (Not
         UK):Note that if set for a given order, this Eta will NOT be overridden
-        by any other at restaurant Etas provided in DriverAssigned or
-        DriverLocation requests</p> <p>This value is significant since it
+        by any other at restaurant ETAs provided in `DriverAssigned` or
+        `DriverLocation` requests</p> <p>This value is significant since it
         informs when a restaurant is instructed to start preparing food. When
         the time remaining between current time and the estimated time of
         arrival becomes less than the restaurant's configured preparation time,
@@ -1995,9 +2499,9 @@ paths:
         - publicly-accessible
   "/orders/{orderId}/deliverystate/driverlocation":
     put:
-      description: <p>Just Eat requires all delivery partners to send regular
-        driverlocation callbacks, that record the GPS location of the drivers
-        assigned to each order</p><p>Partners should aim to supply this callback
+      description: <p>Just Eat requires all delivery partners to send regular driver
+        location callbacks, that record the GPS location of the drivers assigned
+        to each order</p><p>Partners should aim to supply this callback
         approximately every 10 seconds.</p><p>Please provide an up-to-date ETA
         for when the driver will reach the restaurant in this request - this
         value is significant since it informs when a restaurant is instructed to
@@ -2269,7 +2773,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
+        - description: Containing a partner issued API key e.g. `JE-API-KEY ABCDE123456789`
           in: header
           name: Authorization
           required: true
@@ -2362,7 +2866,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
+        - description: Containing a partner issued API key e.g. `JE-API-KEY ABCDE123456789`
           in: header
           name: Authorization
           required: true
@@ -2454,7 +2958,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
+        - description: Containing a partner issued API key e.g. `JE-API-KEY ABCDE123456789`
           in: header
           name: Authorization
           required: true
@@ -3265,7 +3769,7 @@ paths:
                 faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
               schema:
                 $ref: "#/components/schemas/4XXErrorSchema"
-          description: No deal groups found for given tenant, restaurantId and itemId.
+          description: No deal groups found for given `tenant`, `restaurantId` and `itemId`.
         "500":
           $ref: "#/components/responses/500ErrorResponse"
       summary: Get all menu item deal groups
@@ -3349,8 +3853,8 @@ paths:
                 faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
               schema:
                 $ref: "#/components/schemas/4XXErrorSchema"
-          description: No deal item variations found for given tenant, restaurantId,
-            itemId and dealGroupId.
+          description: No deal item variations found for given `tenant`, `restaurantId`,
+            `itemId` and `dealGroupId`.
         "500":
           $ref: "#/components/responses/500ErrorResponse"
       summary: Get all deal item variations for a deal group
@@ -3427,7 +3931,8 @@ paths:
                 faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
               schema:
                 $ref: "#/components/schemas/4XXErrorSchema"
-          description: No modifier groups found for given tenant, restaurantId and itemId.
+          description: No modifier groups found for given `tenant`, `restaurantId` and
+            `itemId`.
         "500":
           $ref: "#/components/responses/500ErrorResponse"
       summary: Get all menu item modifier groups
@@ -3504,7 +4009,7 @@ paths:
                 faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
               schema:
                 $ref: "#/components/schemas/4XXErrorSchema"
-          description: No variations found for given tenant, restaurantId and itemId.
+          description: No variations found for given `tenant`, `restaurantId` and `itemId`.
         "500":
           $ref: "#/components/responses/500ErrorResponse"
       summary: Get all menu item variations
@@ -4166,7 +4671,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
+        - description: Containing a partner issued API key e.g. `JE-API-KEY ABCDE123456789`
           in: header
           name: Authorization
           required: true
@@ -4380,7 +4885,7 @@ paths:
               - Collection
             type: string
         - description: OAuth2 token issued for logged in restaurant OR API token for third
-            party, in the format Bearer {api_key}
+            party, in the format `Bearer {api_key}`
           in: header
           name: Authorization
           required: true
@@ -4548,7 +5053,9 @@ paths:
             search.\r
 
             Specify the coordinates as latitude,longitude."
-          example: 51.501285,-0.1424422
+          example:
+            - 51.501285
+            - -0.1424422
           explode: false
           in: query
           name: latlong
@@ -4696,7 +5203,9 @@ paths:
             search.\r
 
             Specify the coordinates as latitude,longitude."
-          example: 51.501285,-0.1424422
+          example:
+            - 51.501285
+            - -0.1424422
           explode: false
           in: query
           name: latlong
@@ -4947,7 +5456,7 @@ paths:
       description: If the customer hasn't answered the door to collect the order, then
         an attempted delivery event can be created using this endpoint.
       parameters:
-        - description: Request tenant eg uk.
+        - description: Request tenant e.g. uk.
           in: path
           name: tenant
           required: true
@@ -4959,7 +5468,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
+        - description: Containing a partner issued API key e.g. `JE-API-KEY ABCDE123456789`
           in: header
           name: Authorization
           required: true
@@ -4995,7 +5504,7 @@ paths:
       description: If the customer responds, then you can trigger the redelivery of an
         order through this endpoint
       parameters:
-        - description: Request tenant eg uk.
+        - description: Request tenant e.g. uk.
           in: path
           name: tenant
           required: true
@@ -5007,7 +5516,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
+        - description: Containing a partner issued API key e.g. `JE-API-KEY ABCDE123456789`
           in: header
           name: Authorization
           required: true
@@ -5087,6 +5596,17 @@ components:
             traceId: H3TKh4QSJUSwVBCBqEtkKw==
           schema:
             $ref: "#/components/schemas/500ErrorSchema"
+      description: Internal Server Error
+    503ServiceUnavailableResponse:
+      content:
+        application/json:
+          example:
+            errors:
+              - description: Service Unavailable
+            faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
+            traceId: H3TKh4QSJUSwVBCBqEtkKw==
+          schema:
+            $ref: "#/components/schemas/5XXErrorSchema"
       description: Service Unavailable
       headers:
         Retry-After:
@@ -5423,13 +5943,13 @@ components:
         restaurantId: 1234sd
       properties:
         offers:
-          description: A Collection of Active Offers for RestaurantId
+          description: A Collection of Active Offers for `RestaurantId`
           items:
             $ref: "#/components/schemas/ActiveConsumerOffer"
           nullable: true
           type: array
         restaurantId:
-          description: The RestaurantId applicable to the Offer
+          description: The `RestaurantId` applicable to the Offer
           example: 1234567ds
           nullable: true
           type: string
@@ -5556,7 +6076,7 @@ components:
           nullable: true
           type: string
         countryCode:
-          description: 2-letter ISO code this ticket is about.
+          description: 2 letter ISO code this ticket is about.
           example: gb
           nullable: true
           type: string
@@ -6044,7 +6564,7 @@ components:
         - Viewed
         - RefundAccepted
         - RefundRefused
-      type: integer
+      type: string
     BadItemClaimUpdate:
       additionalProperties: false
       properties:
@@ -6505,10 +7025,10 @@ components:
       additionalProperties: false
       properties:
         canRequestCompensation:
-          description: Can the restaurant claim compenesation for this cancellation
+          description: Can the restaurant claim compensation for this cancellation
           type: boolean
         hasRequestedCompensation:
-          description: Has the restaurant claimed compenesation for this cancellation
+          description: Has the restaurant claimed compensation for this cancellation
           type: boolean
         initiatedBy:
           $ref: "#/components/schemas/CancellationInitiatedBy"
@@ -6533,7 +7053,7 @@ components:
         - Restaurant
         - Customer
         - System
-      type: integer
+      type: string
     CancellationQueryResponse:
       additionalProperties: false
       properties:
@@ -6658,7 +7178,7 @@ components:
         - Unknown
         - Compensation
         - Fee
-      type: integer
+      type: string
     CategoriesResponse:
       description: Categories of products for given restaurant.
       items:
@@ -7561,9 +8081,9 @@ components:
           description: The result of payment attempt. 2xxxx = successful payment. 4xxxxx =
             validation error, 5xxxx = server error
           enum:
-            - 20000
-            - 40000
-            - 50000
+            - "20000"
+            - "40000"
+            - "50000"
           type: string
         tenant:
           description: The tenant associated with the consumer.
@@ -8160,7 +8680,7 @@ components:
         - CancelledUnacknowledged
         - CancelledDismissed
         - Complete
-      type: integer
+      type: string
     CodeType:
       description: ""
       enum:
@@ -8235,7 +8755,7 @@ components:
           description: >-
             Allows passing in additional authentication related information for
             the `password` grant type - the following  are special proprietary
-            acr_values:
+            `acr_values`:
 
             - `idp:name_of_idp` bypasses the login/home realm screen and forwards the user directly to the selected identity provider (if allowed per client configuration)
 
@@ -8624,7 +9144,7 @@ components:
               deprecated: true
               description: One of those products needed to be included in the collection of
                 products to make offer applicable [Deprecated - use
-                qualifyingConditions instead]
+                `qualifyingConditions` instead]
               items:
                 $ref: "#/components/schemas/ConsumerOffersProduct"
               minItems: 1
@@ -8668,7 +9188,7 @@ components:
               deprecated: true
               description: The minimum order value required to be eligible for the Offer in
                 smallest unit of relevant currency. [Deprecated - use
-                qualifyingConditions instead]
+                `qualifyingConditions` instead]
               format: integer
               nullable: true
               type: number
@@ -8711,7 +9231,7 @@ components:
         quantity: 1
       properties:
         productId:
-          description: The ProductId of basket item.
+          description: The `ProductId` of basket item.
           nullable: true
           type: string
         quantity:
@@ -8812,7 +9332,8 @@ components:
           nullable: true
           type: array
         showModifiersSelectionDialog:
-          description: Determinate if modifiers selection dialog will be shown to customer.
+          description: Determinate if modifiers selection dialogue will be shown to
+            customer.
           type: boolean
       required:
         - id
@@ -8913,12 +9434,12 @@ components:
               - id: FishFoodId
               - id: ChocFudgeBrownieId
             prompt:
-              description: Get 2 for 1 on Any IceCream Company's 465ml
+              description: Get 2 for 1 on Any Ice Cream Company's 465ml
               title: Nice! You get this free with your order
             restaurantId: 1234sd
       properties:
         offers:
-          description: Provide applicable consumer offers based on provided restaurantId
+          description: Provide applicable consumer offers based on provided `restaurantId`
             and basket content.
           items:
             $ref: "#/components/schemas/ConsumerOffer"
@@ -10155,7 +10676,7 @@ components:
           - friendly
       properties:
         additionalComment:
-          description: An additional freefrom comment accompanying the feedback
+          description: An additional free form comment accompanying the feedback
           maxLength: 210
           nullable: true
           type: string
@@ -10174,32 +10695,33 @@ components:
     CourierStatus:
       description: The courier application status. A courier could have one of these
         status associated with their application, here is a brief example of
-        each status. <p>ON-BOARDING - Courier is actively trying to be
+        each status. <p>`ON-BOARDING` - Courier is actively trying to be
         on-boarded and will progress through the courier on-boarding
-        program</p><p>STALLED - Courier has not proceeded with a step inside the
-        courier on-boarding program for 14 days and will not to proceed
-        further</p><p>SURPLUS - Zone has been closed for On-boarding; courier
-        cannot proceed until zone on-boarding re-opens</p><p>ACTIVE - Courier
+        program</p><p>`STALLED` - Courier has not proceeded with a step inside
+        the courier on-boarding program for 14 days and will not to proceed
+        further</p><p>`SURPLUS` - Zone has been closed for On-boarding; courier
+        cannot proceed until zone on-boarding re-opens</p><p>`ACTIVE` - Courier
         has interacted with the app within the last two weeks and will be
         automatically scheduled based on their availability, receive
-        notifications and may complete orders</p><p>INACTIVE - Courier has not
+        notifications and may complete orders</p><p>`INACTIVE` - Courier has not
         interacted with the app for at least two weeks, and will not be
         scheduled for shifts. May interact with the app to convert their status
         to active, and be eligible for shifts and
-        deliveries</p><p>RELIABILITY_ISSUES - No longer in use, historically
+        deliveries</p><p>`RELIABILITY_ISSUES` - No longer in use, historically
         account was suspended due to frequent flakes or rejected
-        orders</p><p>VEHICLE_ISSUES - Account suspended due to reported vehicle
-        problems, but may reactivate by contacting courier
-        support</p><p>INCIDENT_ISSUES - Account suspended indefinitely due to
+        orders</p><p>`VEHICLE_ISSUES` - Account suspended due to reported
+        vehicle problems, but may reactivate by contacting courier
+        support</p><p>`INCIDENT_ISSUES` - Account suspended indefinitely due to
         significant concern (used exclusively by Incidents
-        team)</p><p>OTHER_ACCOUNT_ISSUES - General account suspension, usually
+        team)</p><p>`OTHER_ACCOUNT_ISSUES` - General account suspension, usually
         in connection with problems not categorised under regular courier
-        status</p><p>EXPIRED_DOCUMENTS - General account suspension, typically
-        for expired right to work documentation</p><p>REJECTED - Applicant did
-        not meet minimum requirements for access to the network</p><p>WITHDRAWN
-        - Applicant decided not to proceed with onboarding</p><p>BANNED -
-        Courier’s access to the network was revoked following
-        escalation</p><p>LEFT_NETWORK - Courier voluntarily left the network</p>
+        status</p><p>`EXPIRED_DOCUMENTS` - General account suspension, typically
+        for expired right to work documentation</p><p>`REJECTED` - Applicant did
+        not meet minimum requirements for access to the
+        network</p><p>`WITHDRAWN` - Applicant decided not to proceed with
+        onboarding</p><p>`BANNED` - Courier’s access to the network was revoked
+        following escalation</p><p>`LEFT_NETWORK` - Courier voluntarily left the
+        network</p>
       enum:
         - ONBOARDING
         - STALLED
@@ -10501,7 +11023,7 @@ components:
           description: Whether the menu item has any allergens
           type: boolean
         Labels:
-          description: Lables of the Menu Item
+          description: Labels of the Menu Item
           items:
             type: string
           type: array
@@ -10546,7 +11068,7 @@ components:
           nullable: true
           type: string
         countryCode:
-          description: 2-letter ISO code for the country this ticket is about.
+          description: 2 letter ISO code for the country this ticket is about.
           example: gb
           nullable: true
           type: string
@@ -10820,7 +11342,7 @@ components:
           nullable: true
           type: string
         country:
-          description: 2-letter ISO code of the country this pertains to. Will be inferred
+          description: 2 letter ISO code of the country this pertains to. Will be inferred
             from queried API.
           example: gb
           nullable: true
@@ -10840,7 +11362,7 @@ components:
           example: slack:1
           type: string
         language:
-          description: 2-letter ISO code of the language for the ticket. Will be inferred
+          description: 2 letter ISO code of the language for the ticket. Will be inferred
             from queried API.
           example: en
           nullable: true
@@ -11589,7 +12111,7 @@ components:
           type: object
         smallOrderCharge:
           description: delivery charge for orders that has order value less then
-            minimumOrder
+            `minimumOrder`
           properties:
             currency:
               description: Currency code in ISO 4217 format
@@ -11626,12 +12148,12 @@ components:
           format: int32
           type: integer
         unboundedZone:
-          description: geo json representation of delivery zone
+          description: json representation of delivery zone
           properties:
             coordinates:
               description: geographical polygon
                 https://tools.ietf.org/html/rfc7946#section-3.1.4. It might
-                conist from multiple linear rings
+                consist from multiple linear rings
               items:
                 properties:
                   coordinates:
@@ -11749,7 +12271,7 @@ components:
         restaurantId: 12345
       properties:
         availabilities:
-          description: Availabilities of the restaruant
+          description: Availabilities of the restaurant
           items:
             $ref: "#/components/schemas/DiscoveryResponseAvailabilities"
           type: array
@@ -11789,7 +12311,7 @@ components:
         - Failed
         - FailedAcknowledged
         - FailedDismissed
-      type: integer
+      type: string
     ExperimentContext:
       example:
         Client: Web
@@ -12132,7 +12654,7 @@ components:
         modals:
           additionalProperties:
             $ref: "#/components/schemas/FlowStep"
-          description: Dictionary of strings to FlowStepResponses
+          description: Dictionary of strings to `FlowStepResponses`
           type: object
         stepResponse:
           properties:
@@ -12199,12 +12721,12 @@ components:
       example:
         fields:
           Content-Type: application/pdf
-          Policy: eyJleHBpcmF0aW9uIjoiMjAyMC0wNC0yM1Q
+          Policy: ...redacted...
           X-Amz-Algorithm: AWS4-HMAC-SHA256
-          X-Amz-Credential: ASIASJNB7IVS47FJSQMG/20200423/eu-west-1/s3/aws4_request
+          X-Amz-Credential: ...redacted...
           X-Amz-Date: 20200423T120247Z
-          X-Amz-Security-Token: IQoJb3JpZ2luX2VjECEaCWV1LXdlc
-          X-Amz-Signature: b60aea62a92ea3c960e370e1799d2e430bf0e4e40
+          X-Amz-Security-Token: ...redacted...
+          X-Amz-Signature: ...redacted...
           bucket: qa28-presigned-post-data
           key: 3c816agk9cpvahl_menu.pdf
         url: https://s3.eu-west-1.amazonaws.com/qa28-presigned-post-data
@@ -12216,7 +12738,7 @@ components:
               description: Content-Type of uploaded file
               type: string
             Policy:
-              description: The Base64-encoded security policy that describes what is permitted
+              description: The Base64 encoded security policy that describes what is permitted
                 in the request
               type: string
             X-Amz-Algorithm:
@@ -12224,7 +12746,7 @@ components:
               type: string
             X-Amz-Credential:
               description: a string of the following form
-                <aws-access-key-id>/<date>/<aws-region>/<aws-service>/aws4_request
+                `<aws-access-key-id>/<date>/<aws-region>/<aws-service>/aws4_request`
               type: string
             X-Amz-Date:
               description: The date value specified in the ISO8601 formatted string.
@@ -12403,7 +12925,7 @@ components:
               zoneId: "2"
       properties:
         deliveryZones:
-          description: restaurant delivery zones. Maximum deliveryZones response size
+          description: restaurant delivery zones. Maximum `deliveryZones` response size
             should be less than 20KB
           items:
             $ref: "#/components/schemas/DeliveryZone"
@@ -12980,7 +13502,7 @@ components:
       properties:
         acceptedAmount:
           description: The monetary amount of compensation granted, in cents/pence.
-            Required when isAccepted = true.
+            Required when `isAccepted = true`.
           type: integer
         isAccepted:
           description: Flag to indicate whether a compensation request has been accepted
@@ -12993,15 +13515,15 @@ components:
         rejectedReasonCode:
           description: >-
             
-            - BadTraffic : The driver was stuck in heavy traffic, sorry.
+            - `BadTraffic` : The driver was stuck in heavy traffic, sorry.
 
-            - BadWeather : The bad weather was delaying our deliveries, sorry.
+            - `BadWeather` : The bad weather was delaying our deliveries, sorry.
 
-            - BusierThanExpected : Our restaurant was busier than we expected.
+            - `BusierThanExpected` : Our restaurant was busier than we expected.
 
-            - CompensatedWithItem : We gave you something from the menu free of charge to make up for it.
+            - `CompensatedWithItem` : We gave you something from the menu free of charge to make up for it.
 
-            - NoReason : We're really sorry your order was late. We hope you enjoyed your food.
+            - `NoReason` : We're really sorry your order was late. We hope you enjoyed your food.
           enum:
             - BadTraffic
             - BadWeather
@@ -13031,9 +13553,9 @@ components:
         lateOrderStatus:
           description: Reason to adding minutes
           enum:
-            - None,
-            - Preparing,
-            - OnItsWay,
+            - None
+            - Preparing
+            - OnItsWay
             - Delivered
           nullable: true
           type: string
@@ -14028,7 +14550,7 @@ components:
         restaurantId: "100059"
       properties:
         currency:
-          description: The currency of the items on the menu in ISO 4217 format, ie GBP,
+          description: The currency of the items on the menu in ISO 4217 format, i.e. GBP,
             EUR or AUD
           type: string
         description:
@@ -14214,10 +14736,10 @@ components:
             - Edit
             - Delete
             - None
-          format: int32
-          type: integer
+          format: string
+          type: string
         Labels:
-          description: Lables for the menu item
+          description: Labels for the menu item
           items:
             type: string
           type: array
@@ -14780,7 +15302,7 @@ components:
           type: string
         ids:
           deprecated: true
-          description: Depricated, not in use
+          description: Deprecated, not in use
           items:
             format: int32
             type: integer
@@ -14851,7 +15373,7 @@ components:
         - Viewed
         - RefundAccepted
         - RefundRefused
-      type: integer
+      type: string
     Modifier:
       properties:
         MaximumAdditionalModifiers:
@@ -15486,9 +16008,9 @@ components:
             not intended to be used by clients.
           type: string
         duration:
-          description: Either a timespan in the HH:mm format or 'untilTomorrow' (this will
-            be the next day at 4:30am +/- 10 minutes local time). Note if both
-            duration and endDate are specified duration takes precedence.
+          description: Either a timespan in the HH:mm format or `untilTomorrow` (this will
+            be the next day at 4:30 am +/- 10 minutes local time). Note if both
+            duration and `endDate` are specified duration takes precedence.
           type: string
         endDate:
           description: ISO 8601 format of the end datetime of the offline event.
@@ -15505,7 +16027,7 @@ components:
           type: string
         restaurantIds:
           description: A comma separated list of the IDs of the restaurants to include in
-            the offline event. No limit to the number acccepted by the endpoint,
+            the offline event. No limit to the number accepted by the endpoint,
             but unexpected behaviour mat occur at more than 500 IDs.
           type: string
         startDate:
@@ -15613,8 +16135,8 @@ components:
         geoPosition:
           allOf:
             - $ref: "#/components/schemas/OrderGeoPosition"
-          description: Geo Position object containing latitude and longitude values for
-            the customer's order address
+          description: Geoposition object containing latitude and longitude values for the
+            customer's order address
           nullable: true
         name:
           description: The customer's name.
@@ -15822,14 +16344,14 @@ components:
           type: string
       type: object
     OrderGeoPosition:
-      description: Geo Position object containing latitude and longitude values.
+      description: Geoposition object containing latitude and longitude values.
       properties:
         latitude:
-          description: The latitude value of the customer's Geo Position.
+          description: The latitude value of the customer's Geoposition.
           format: decimal
           type: number
         longitude:
-          description: The longitude value of the customer's Geo Position.
+          description: The longitude value of the customer's Geoposition.
           format: decimal
           type: number
       type: object
@@ -15953,7 +16475,7 @@ components:
       additionalProperties: false
       properties:
         ComparisonOperator:
-          description: The comparison operator (eg >, <, ==)
+          description: The comparison operator (e.g. >, <, ==)
           nullable: true
           type: string
         NumberOfOrders:
@@ -16220,7 +16742,7 @@ components:
         - Collection
         - Delivery
         - Unknown
-      type: integer
+      type: string
     OrderpadMenuItem:
       additionalProperties: false
       properties:
@@ -16739,7 +17261,7 @@ components:
           nullable: true
           type: string
         feeText:
-          description: Type of fee (spanner, card, servicecharge)
+          description: Type of fee (`spanner`, `card`, `servicecharge`)
           nullable: true
           type: string
         isCashPayment:
@@ -17221,7 +17743,7 @@ components:
               properties:
                 cancellableAfterDate:
                   description: The UTC date and time after which this placement may be cancelled.
-                    Available if the status code is "inNonCancellablePeriod".
+                    Available if the status code is `inNonCancellablePeriod`.
                   format: date-time
                   nullable: false
                   type: string
@@ -17428,6 +17950,7 @@ components:
       additionalProperties: true
       example:
         deliveryArea: NW6
+        inAllowList: true
         weeklyBudget:
           maximumAllowable: 100000
           minimumAllowable: 500
@@ -17438,6 +17961,11 @@ components:
           description: The postcode or location that is available for starting a placement.
           nullable: false
           type: string
+        inAllowList:
+          description: Indicates whether this placement is in the allow list for
+            self-service purchase by the restaurant partner.
+          nullable: false
+          type: boolean
         weeklyBudget:
           additionalProperties: true
           description: Contains information about the required weekly budget for this
@@ -17906,7 +18434,7 @@ components:
           nullable: true
           type: string
         token:
-          description: Created uthentication token
+          description: Created authentication token
           nullable: true
           type: string
         userId:
@@ -18034,9 +18562,9 @@ components:
             paymentType: Cash
             selected: false
           - cardTypes:
-              - Visa
-              - MasterCard
-              - Amex
+              - VISA
+              - MASTERCARD
+              - AMEX
             paymentType: Card
             selected: false
         feeConfig:
@@ -18096,7 +18624,7 @@ components:
           description: Is it RDS restaurant
           type: boolean
         logoUrl:
-          description: Logo Url
+          description: Logo URL
           nullable: true
           type: string
         name:
@@ -18144,7 +18672,7 @@ components:
                 type: number
               minimumAmount:
                 description: The minimum order value (excluding fees) when this fee band
-                  applies. The fee with the highest minimumAmount that is less
+                  applies. The fee with the highest `minimumAmount` that is less
                   than or equal to order value applies. This is in the smallest
                   unit of local currency (e.g. pence).
                 format: integer
@@ -18171,7 +18699,7 @@ components:
           type: string
         geoPosition:
           $ref: "#/components/schemas/RestaurantDetailsLocationPosition"
-          description: Geo position of the restaurant
+          description: Geoposition of the restaurant
         postalCode:
           description: Post code of the restaurant
           type: string
@@ -18183,7 +18711,7 @@ components:
           type: string
       type: object
     RestaurantDetailsLocationPosition:
-      description: Geo position of the restaurant in GeoJSON format
+      description: Geoposition of the restaurant in GeoJSON format
       properties:
         coordinates:
           description: longitude and latitude
@@ -18262,7 +18790,7 @@ components:
                   usedFor:
                     description: Type of email contacts
                     items:
-                      description: Array containing labels specifieing email
+                      description: Array containing labels specifying email
                       enum:
                         - Default
                         - Invoice
@@ -18284,7 +18812,7 @@ components:
                   usedFor:
                     description: Type of phone number contacts
                     items:
-                      description: Array containing labels specifieing phone number
+                      description: Array containing labels specifying phone number
                       enum:
                         - Default
                         - Owner
@@ -18414,7 +18942,7 @@ components:
           nullable: true
           type: string
         geoLocation:
-          description: Restaurant geo location
+          description: Restaurant geolocation
           nullable: true
           oneOf:
             - $ref: "#/components/schemas/GeoLocation"
@@ -18574,7 +19102,7 @@ components:
       properties:
         AllowRestaurantOverride:
           description: Whether a restaurant should be allowed to reverse this offline
-            status change through calls to the Resturant Events endpoints.
+            status change through calls to the Restaurant Events endpoints.
           nullable: true
           type: boolean
         IsOffline:
@@ -18653,10 +19181,10 @@ components:
             name: Pizza and drink
             quantity: 1
             subItems:
-              - description: classic pizza Margarita
+              - description: classic pizza Margherita
                 itemId: mp1
                 itemType: MealPart
-                name: Margarita
+                name: Margherita
                 quantity: 1
                 subItems: []
                 synonym: Medium
@@ -19352,7 +19880,7 @@ components:
           nullable: false
           type: string
         url:
-          description: Url for complete info of this restaurant at https://www.findsmiley.dk
+          description: URL for complete info of this restaurant at https://www.findsmiley.dk
           nullable: false
           type: string
       type: object
@@ -19408,7 +19936,7 @@ components:
             - $ref: "#/components/schemas/OrdersData"
       type: object
     ReverseGeocodingResponse:
-      description: Best guess address for passed lat long
+      description: Best guess address for passed lat-long
       example:
         geometry:
           coordinates:
@@ -19944,7 +20472,7 @@ components:
             restaurants:
               additionalProperties:
                 $ref: "#/components/schemas/RestaurantDeliveryFees"
-              description: Dictionary of restaurantIds to delivery fees.
+              description: Dictionary of `restaurantIds` to delivery fees.
               type: object
           type: object
         promotedPlacement:
@@ -19961,7 +20489,7 @@ components:
             restaurants:
               additionalProperties:
                 $ref: "#/components/schemas/RestaurantPromotedPlacementInfo"
-              description: Dictionary of restaurantIds to promoted placement info.
+              description: Dictionary of `restaurantIds` to promoted placement info.
               type: object
           type: object
       type: object
@@ -20343,7 +20871,7 @@ components:
               in the restaurant's time zone which can be obtained by converting
               `location.geoPosition` value from [the restaurant's
               details](#operation/GetRestaurantDetails) using a lookup API such
-              as  timezonedb.com.
+              as `timezonedb.com`.
             pattern: ^([0-1]\d|2[0-3]):[0-5]\d$:[0-5]\d$
             type: string
           start:
@@ -20351,7 +20879,7 @@ components:
               restaurant's time zone which can be obtained by converting
               `location.geoPosition` value from [the restaurant's
               details](#operation/GetRestaurantDetails) using a lookup API such
-              as  timezonedb.com.
+              as `timezonedb.com`.
             pattern: ^([0-1]\d|2[0-3]):[0-5]\d$:[0-5]\d$
             type: string
         type: object
@@ -21157,7 +21685,7 @@ components:
           description: Id
           type: string
         Labels:
-          description: Lables
+          description: Labels
           items:
             type: string
           type: array
@@ -21330,8 +21858,8 @@ components:
         geoPosition:
           allOf:
             - $ref: "#/components/schemas/OrderGeoPosition"
-          description: Geo Position object containing latitude and longitude values for
-            the customer's order address
+          description: Geoposition object containing latitude and longitude values for the
+            customer's order address
           nullable: true
         name:
           description: The customer's name.
@@ -21634,7 +22162,7 @@ components:
           oneOf:
             - $ref: "#/components/schemas/ConsumerStatus"
         ServiceType:
-          description: The service type for the voucher (eg Delivery, collection)
+          description: The service type for the voucher (e.g. Delivery, collection)
           nullable: true
           oneOf:
             - $ref: "#/components/schemas/ServiceType"
@@ -21715,8 +22243,9 @@ components:
           description: The name of the variation.
           type: string
         type:
-          description: Denotes the type of variation, "Variation" if there's multiple
-            variations of the parent menuitem, "NoVariation" if there's only one
+          description: Denotes the type of variation, `Variation` if there's multiple
+            variations of the parent `menuitem`, `NoVariation` if there's only
+            one
           enum:
             - noVariation
             - variation
@@ -22665,7 +23194,7 @@ components:
               format: double
               type: number
             Discount:
-              description: The discount amount, used in conjunction with DiscountType.
+              description: The discount amount, used in conjunction with `DiscountType`.
               example: 4.78
               format: double
               type: number
@@ -22675,7 +23204,7 @@ components:
                 description: Discount data
                 properties:
                   Discount:
-                    description: The discount amount, used in conjunction with DiscountType.
+                    description: The discount amount, used in conjunction with `DiscountType`.
                     example: 10
                     format: int32
                     type: number
@@ -22698,7 +23227,7 @@ components:
                 type: object
               type: array
             GroupedBasketItems:
-              description: Groupped basket items
+              description: Grouped basket items
               items:
                 description: An item in the Basket.
                 properties:
@@ -22711,7 +23240,7 @@ components:
                         format: double
                         type: number
                       Discounts:
-                        description: Any discounts applied to this specfic item.
+                        description: Any discounts applied to this specific item.
                         items:
                           description: Discount data
                           properties:
@@ -22807,7 +23336,7 @@ components:
                         example: 1
                         type: string
                       MultiBuyDiscounts:
-                        description: Any multi-purchase discounts appled to this item.
+                        description: Any multi-purchase discounts applied to this item.
                         items:
                           description: Multi-purchase discount data
                           properties:
@@ -22915,12 +23444,12 @@ components:
                     example: 1
                     type: string
                   OrderSubId:
-                    description: Order SubId
+                    description: Order `SubId`
                     example: 0
                     format: int32
                     type: number
                   Quantity:
-                    description: The quanity of Basket Items requested.
+                    description: The quantity of Basket Items requested.
                     example: 2
                     format: int32
                     type: number
@@ -23004,15 +23533,15 @@ components:
               type: string
             PhoneMaskingCode:
               description: Code to use when calling customer phone masked number
-                (DisplayPhoneNumber) about this order. Null if phone masking not
-                enabled
+                (`DisplayPhoneNumber`) about this order. Null if phone masking
+                not enabled
               example: 444333222
               type: string
             PhoneNumber:
               description: The customer's unmasked phone number. Please don't expose this to
                 drivers, instead use this number to provide your own phone
                 masking number or use the JustEat masked number
-                'DisplayPhoneNumber' below
+                `DisplayPhoneNumber` below
               example: "018727863"
               type: string
             Postcode:
@@ -23048,7 +23577,7 @@ components:
           description: The unique identifier for an order within the country. You can
             provide this ID whenever sending requests related to the order. Note
             that further messages from Just Eat relating to this order may not
-            use this same identifier, use OrderId for a more consistent
+            use this same identifier, use `OrderId` for a more consistent
             identifier.
           example: 348322088
           type: string
@@ -23061,7 +23590,7 @@ components:
           properties:
             DueDate:
               deprecated: true
-              description: Ignore - use DueDateWithUtcOffset.
+              description: Ignore - use `DueDateWithUtcOffset`.
               format: date-time
               type: string
             DueDateWithUtcOffset:
@@ -23071,7 +23600,7 @@ components:
               type: string
             InitialDueDate:
               deprecated: true
-              description: Ignore - use IntialDueDateWithUtcOffset.
+              description: Ignore - use `IntialDueDateWithUtcOffset`.
               format: date-time
               type: string
             InitialDueDateWithUtcOffset:
@@ -23191,7 +23720,7 @@ components:
               example: London
               type: string
             DispatchMethod:
-              description: DispatchMethod to use.
+              description: "`DispatchMethod` to use."
               example: Phone
               type: string
             EmailAddress:
@@ -25407,7 +25936,7 @@ components:
           items:
             properties:
               CloseTime:
-                description: The close time (HH:mm) (Wide clock, ie, if before start it is
+                description: The close time (HH:mm) (Wide clock, i.e. if before start it is
                   following day)
                 type: string
               Closed:
@@ -25575,7 +26104,7 @@ components:
         Message:
           deprecated: true
           description: This field should not be used but has been left in the callback for
-            backwards compatability purposes
+            backwards compatibility purposes
           type: string
         RestaurantReference:
           description: The JUST EAT Restaurant Id
@@ -25842,8 +26371,8 @@ components:
       openIdConnectUrl: https://adfs.just-eat.com/adfs/.well-known/openid-configuration
       type: openIdConnect
     restaurantsignup_jwt:
-      bearerFormat: JWT token with payload RestaurantId and Role [RestaurantRead |
-        VerifyEmail | RestaurantWrite | FullAccess | DocumentRead]
+      bearerFormat: JWT token with payload `RestaurantId` and Role `[RestaurantRead |
+        VerifyEmail | RestaurantWrite | FullAccess | DocumentRead]`
       description: Bearer token authentication using a JSON Web Token (JWT), used by
         the restaurant sign up system
       scheme: bearer

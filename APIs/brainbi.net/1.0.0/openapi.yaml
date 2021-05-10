@@ -27,7 +27,28 @@ tags:
   - name: Orders
   - name: OrderLines
   - name: SEO
+  - name: IoT (beta)
 paths:
+  /api/analyze/pricing:
+    get:
+      description: "To update a product, please use the listed attributes listed
+        underneath. "
+      operationId: "[beta]ScrapeProduct"
+      parameters:
+        - in: query
+          name: url
+          schema:
+            example: https://www.otto.de/p/mans-world-strickfleecejacke-mit-modischen-ziernaehten-569636495/
+            type: string
+      requestBody:
+        content:
+          application/octet-stream: {}
+      responses:
+        "200":
+          description: ""
+      summary: "[BETA] Scrape Product"
+      tags:
+        - Products
   /api/customers:
     get:
       description: This resource lists all cusomters that are currently saved in your
