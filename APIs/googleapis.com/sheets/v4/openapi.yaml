@@ -340,8 +340,7 @@ paths:
             type: string
         - description: How dates, times, and durations should be represented in the
             output. This is ignored if value_render_option is FORMATTED_VALUE.
-            The default dateTime render option is
-            [DateTimeRenderOption.SERIAL_NUMBER].
+            The default dateTime render option is SERIAL_NUMBER.
           in: query
           name: dateTimeRenderOption
           schema:
@@ -363,7 +362,7 @@ paths:
               - COLUMNS
             type: string
         - description: How values should be represented in the output. The default render
-            option is ValueRenderOption.FORMATTED_VALUE.
+            option is FORMATTED_VALUE.
           in: query
           name: valueRenderOption
           schema:
@@ -443,7 +442,7 @@ paths:
         - description: Determines how dates, times, and durations in the response should
             be rendered. This is ignored if response_value_render_option is
             FORMATTED_VALUE. The default dateTime render option is
-            DateTimeRenderOption.SERIAL_NUMBER.
+            SERIAL_NUMBER.
           in: query
           name: responseDateTimeRenderOption
           schema:
@@ -452,7 +451,7 @@ paths:
               - FORMATTED_STRING
             type: string
         - description: Determines how values in the response should be rendered. The
-            default render option is ValueRenderOption.FORMATTED_VALUE.
+            default render option is FORMATTED_VALUE.
           in: query
           name: responseValueRenderOption
           schema:
@@ -554,7 +553,7 @@ paths:
         - description: Determines how dates, times, and durations in the response should
             be rendered. This is ignored if response_value_render_option is
             FORMATTED_VALUE. The default dateTime render option is
-            [DateTimeRenderOption.SERIAL_NUMBER].
+            SERIAL_NUMBER.
           in: query
           name: responseDateTimeRenderOption
           schema:
@@ -563,7 +562,7 @@ paths:
               - FORMATTED_STRING
             type: string
         - description: Determines how values in the response should be rendered. The
-            default render option is ValueRenderOption.FORMATTED_VALUE.
+            default render option is FORMATTED_VALUE.
           in: query
           name: responseValueRenderOption
           schema:
@@ -788,8 +787,7 @@ paths:
             type: string
         - description: How dates, times, and durations should be represented in the
             output. This is ignored if value_render_option is FORMATTED_VALUE.
-            The default dateTime render option is
-            [DateTimeRenderOption.SERIAL_NUMBER].
+            The default dateTime render option is SERIAL_NUMBER.
           in: query
           name: dateTimeRenderOption
           schema:
@@ -1610,7 +1608,8 @@ components:
             also set, this field takes precedence.
         textFormat:
           $ref: "#/components/schemas/TextFormat"
-          description: Text formatting options for baseline value.
+          description: Text formatting options for baseline value. The link field is not
+            supported.
       type: object
     BasicChartAxis:
       description: An axis of the chart. A chart may not have more than one axis per
@@ -1619,7 +1618,7 @@ components:
         format:
           $ref: "#/components/schemas/TextFormat"
           description: The format of the title. Only valid if the axis is not associated
-            with the domain.
+            with the domain. The link field is not supported.
         position:
           description: The position of this axis.
           enum:
@@ -1921,8 +1920,7 @@ components:
         dateTimeRenderOption:
           description: How dates, times, and durations should be represented in the
             output. This is ignored if value_render_option is FORMATTED_VALUE.
-            The default dateTime render option is
-            [DateTimeRenderOption.SERIAL_NUMBER].
+            The default dateTime render option is SERIAL_NUMBER.
           enum:
             - SERIAL_NUMBER
             - FORMATTED_STRING
@@ -1940,7 +1938,7 @@ components:
           type: string
         valueRenderOption:
           description: How values should be represented in the output. The default render
-            option is ValueRenderOption.FORMATTED_VALUE.
+            option is FORMATTED_VALUE.
           enum:
             - FORMATTED_VALUE
             - UNFORMATTED_VALUE
@@ -2015,7 +2013,7 @@ components:
         updatedSpreadsheet:
           $ref: "#/components/schemas/Spreadsheet"
           description: The spreadsheet after updates were applied. This is only set if
-            [BatchUpdateSpreadsheetRequest.include_spreadsheet_in_response] is
+            BatchUpdateSpreadsheetRequest.include_spreadsheet_in_response is
             `true`.
       type: object
     BatchUpdateValuesByDataFilterRequest:
@@ -2041,14 +2039,14 @@ components:
           description: Determines how dates, times, and durations in the response should
             be rendered. This is ignored if response_value_render_option is
             FORMATTED_VALUE. The default dateTime render option is
-            DateTimeRenderOption.SERIAL_NUMBER.
+            SERIAL_NUMBER.
           enum:
             - SERIAL_NUMBER
             - FORMATTED_STRING
           type: string
         responseValueRenderOption:
           description: Determines how values in the response should be rendered. The
-            default render option is ValueRenderOption.FORMATTED_VALUE.
+            default render option is FORMATTED_VALUE.
           enum:
             - FORMATTED_VALUE
             - UNFORMATTED_VALUE
@@ -2114,14 +2112,14 @@ components:
           description: Determines how dates, times, and durations in the response should
             be rendered. This is ignored if response_value_render_option is
             FORMATTED_VALUE. The default dateTime render option is
-            DateTimeRenderOption.SERIAL_NUMBER.
+            SERIAL_NUMBER.
           enum:
             - SERIAL_NUMBER
             - FORMATTED_STRING
           type: string
         responseValueRenderOption:
           description: Determines how values in the response should be rendered. The
-            default render option is ValueRenderOption.FORMATTED_VALUE.
+            default render option is FORMATTED_VALUE.
           enum:
             - FORMATTED_VALUE
             - UNFORMATTED_VALUE
@@ -2347,8 +2345,8 @@ components:
             group_ids must also be specified. This field is optional.
         bubbleTextStyle:
           $ref: "#/components/schemas/TextFormat"
-          description: The format of the text inside the bubbles. Strikethrough and
-            underline are not supported.
+          description: The format of the text inside the bubbles. Strikethrough,
+            underline, and link are not supported.
         domain:
           $ref: "#/components/schemas/ChartData"
           description: The data containing the bubble x-values. These values locate the
@@ -2438,7 +2436,7 @@ components:
           $ref: "#/components/schemas/DataSourceFormula"
           description: Output only. Information about a data source formula on the cell.
             The field is set if user_entered_value is a formula referencing some
-            DATA_SOURCE sheet, e.g `=SUM(DataSheet!Column)`.
+            DATA_SOURCE sheet, e.g. `=SUM(DataSheet!Column)`.
           readOnly: true
         dataSourceTable:
           $ref: "#/components/schemas/DataSourceTable"
@@ -2472,7 +2470,10 @@ components:
           description: A hyperlink this cell points to, if any. If the cell contains
             multiple hyperlinks, this field will be empty. This field is
             read-only. To set it, use a `=HYPERLINK` formula in the
-            userEnteredValue.formulaValue field.
+            userEnteredValue.formulaValue field. A cell-level link can also be
+            set from the userEnteredFormat.textFormat field. Alternatively, set
+            a hyperlink in the textFormatRun.format.link field that spans the
+            entire cell.
           type: string
         note:
           description: Any note on the cell.
@@ -2550,7 +2551,9 @@ components:
         textFormat:
           $ref: "#/components/schemas/TextFormat"
           description: The format of the text in the cell (unless overridden by a format
-            run).
+            run). Setting a cell-level link will clear the cell's existing
+            links. Setting a link in a format run will clear the cell-level
+            link.
         textRotation:
           $ref: "#/components/schemas/TextRotation"
           description: The rotation applied to text in a cell
@@ -2792,8 +2795,8 @@ components:
           type: string
         subtitleTextFormat:
           $ref: "#/components/schemas/TextFormat"
-          description: The subtitle text format. Strikethrough and underline are not
-            supported.
+          description: The subtitle text format. Strikethrough, underline, and link are
+            not supported.
         subtitleTextPosition:
           $ref: "#/components/schemas/TextPosition"
           description: The subtitle text position. This field is optional.
@@ -2802,7 +2805,8 @@ components:
           type: string
         titleTextFormat:
           $ref: "#/components/schemas/TextFormat"
-          description: The title text format. Strikethrough and underline are not supported.
+          description: The title text format. Strikethrough, underline, and link are not
+            supported.
         titleTextPosition:
           $ref: "#/components/schemas/TextPosition"
           description: The title text position. This field is optional.
@@ -3170,7 +3174,8 @@ components:
           type: string
         textFormat:
           $ref: "#/components/schemas/TextFormat"
-          description: The text format used for the data label.
+          description: The text format used for the data label. The link field is not
+            supported.
         type:
           description: The type of the data label.
           enum:
@@ -3671,9 +3676,8 @@ components:
       description: Deletes the requested sheet.
       properties:
         sheetId:
-          description: The ID of the sheet to delete. If the sheet is of
-            SheetType.DATA_SOURCE type, the associated DataSource is also
-            deleted.
+          description: The ID of the sheet to delete. If the sheet is of DATA_SOURCE type,
+            the associated DataSource is also deleted.
           format: int32
           type: integer
       type: object
@@ -4031,8 +4035,8 @@ components:
           description: Represents a formula.
           type: string
         numberValue:
-          description: 'Represents a double value. Note: Dates, Times and DateTimes are
-            represented as doubles in "serial number" format.'
+          description: "Represents a double value. Note: Dates, Times and DateTimes are
+            represented as doubles in SERIAL_NUMBER format."
           format: double
           type: number
         stringValue:
@@ -4544,7 +4548,8 @@ components:
             is optional. If not specified, default positioning is used.
         textFormat:
           $ref: "#/components/schemas/TextFormat"
-          description: Text formatting options for key value.
+          description: Text formatting options for key value. The link field is not
+            supported.
       type: object
     LineStyle:
       description: Properties that describe the style of a line.
@@ -5850,7 +5855,8 @@ components:
           type: string
         textFormat:
           $ref: "#/components/schemas/TextFormat"
-          description: The text format of title in the slicer.
+          description: The text format of title in the slicer. The link field is not
+            supported.
         title:
           description: The title of the slicer.
           type: string
@@ -6286,7 +6292,8 @@ components:
             colors as well.
         textFormat:
           $ref: "#/components/schemas/TextFormat"
-          description: The text format for all labels on the chart.
+          description: The text format for all labels on the chart. The link field is not
+            supported.
       type: object
     TrimWhitespaceRequest:
       description: Trims the whitespace (such as spaces, tabs, or new lines) in every

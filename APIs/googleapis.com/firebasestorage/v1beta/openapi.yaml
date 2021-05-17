@@ -319,6 +319,11 @@ components:
         name:
           description: Resource name of the bucket.
           type: string
+        reconciling:
+          description: Output only. Represents whether a bucket is being moved to a new
+            location, in which case reconciling is set to true.
+          readOnly: true
+          type: boolean
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining

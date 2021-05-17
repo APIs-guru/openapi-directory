@@ -3280,6 +3280,13 @@ components:
         desiredDatabaseEncryption:
           $ref: "#/components/schemas/DatabaseEncryption"
           description: Configuration of etcd encryption.
+        desiredDatapathProvider:
+          description: The desired datapath provider for the cluster.
+          enum:
+            - DATAPATH_PROVIDER_UNSPECIFIED
+            - LEGACY_DATAPATH
+            - ADVANCED_DATAPATH
+          type: string
         desiredDefaultSnatStatus:
           $ref: "#/components/schemas/DefaultSnatStatus"
           description: The desired status of whether to disable default sNAT for this cluster.
@@ -3785,6 +3792,13 @@ components:
     NetworkConfig:
       description: NetworkConfig reports the relative names of network & subnetwork.
       properties:
+        datapathProvider:
+          description: The desired datapath provider for this cluster. By default, uses the IPTables-based kube-proxy implementation.
+          enum:
+            - DATAPATH_PROVIDER_UNSPECIFIED
+            - LEGACY_DATAPATH
+            - ADVANCED_DATAPATH
+          type: string
         defaultSnatStatus:
           $ref: "#/components/schemas/DefaultSnatStatus"
           description: Whether the cluster disables default in-node sNAT rules. In-node sNAT rules will be disabled when default_snat_status is disabled. When disabled is set to false, default IP masquerade rules will be applied to the nodes to prevent sNAT on cluster internal traffic.
@@ -4775,6 +4789,26 @@ components:
           description: The desired workload metadata config for the node pool.
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
+          type: string
+      type: object
+    UpgradeAvailableEvent:
+      description: UpgradeAvailableEvent is a notification sent to customers when a new available version is released.
+      properties:
+        releaseChannel:
+          $ref: "#/components/schemas/ReleaseChannel"
+          description: The release channel of the version. If empty, it means a non-channel release.
+        resource:
+          description: Optional relative path to the resource. For example, the relative path of the node pool.
+          type: string
+        resourceType:
+          description: The resource type of the release version.
+          enum:
+            - UPGRADE_RESOURCE_TYPE_UNSPECIFIED
+            - MASTER
+            - NODE_POOL
+          type: string
+        version:
+          description: The release version available for upgrade.
           type: string
       type: object
     UpgradeEvent:

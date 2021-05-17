@@ -912,7 +912,7 @@ components:
           type: string
       type: object
     ConfigManagementMembershipSpec:
-      description: Configuration for a single cluster. Intended to parallel the ConfigManagement CR.
+      description: "**Anthos Config Management**: Configuration for a single cluster. Intended to parallel the ConfigManagement CR."
       properties:
         binauthz:
           $ref: "#/components/schemas/ConfigManagementBinauthzConfig"
@@ -931,7 +931,7 @@ components:
           type: string
       type: object
     ConfigManagementMembershipState:
-      description: State for Anthos Config Management
+      description: "**Anthos Config Management**: State for a single cluster."
       properties:
         binauthzState:
           $ref: "#/components/schemas/ConfigManagementBinauthzState"
@@ -1270,7 +1270,7 @@ components:
           description: The high-level state of this Feature for a single membership.
       type: object
     MeteringMembershipState:
-      description: Metering per-Membership Feature State.
+      description: "**Metering**: Per-Membership Feature State."
       properties:
         lastMeasurementTime:
           description: The time stamp of the most recent measurement of the number of vCPUs in the cluster.
@@ -1282,7 +1282,7 @@ components:
           type: number
       type: object
     MultiClusterIngressFeatureSpec:
-      description: FeatureSpec contains the input for the MultiClusterIngress feature.
+      description: "**Multi-cluster Ingress**: The configuration for the MultiClusterIngress feature."
       properties:
         billing:
           description: Customer's billing structure

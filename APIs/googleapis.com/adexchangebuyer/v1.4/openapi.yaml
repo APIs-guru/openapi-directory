@@ -3042,13 +3042,13 @@ components:
           description: Programmatic contact for the publisher profile.
           type: string
         publisherAppIds:
-          description: The list of app IDs represented in this pubisher profile. Empty if this is a parent profile. Deprecated in favor of publisher_app.
+          description: The list of app IDs represented in this publisher profile. Empty if this is a parent profile. Deprecated in favor of publisher_app.
           items:
             format: int64
             type: string
           type: array
         publisherApps:
-          description: The list of apps represented in this pubisher profile. Empty if this is a parent profile.
+          description: The list of apps represented in this publisher profile. Empty if this is a parent profile.
           items:
             $ref: "#/components/schemas/MobileApplication"
           type: array

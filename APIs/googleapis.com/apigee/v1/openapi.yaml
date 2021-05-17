@@ -5927,6 +5927,7 @@ components:
             - CREATING
             - ACTIVE
             - DELETING
+            - UPDATING
           readOnly: true
           type: string
       type: object
@@ -6041,6 +6042,7 @@ components:
             - CREATING
             - ACTIVE
             - DELETING
+            - UPDATING
           readOnly: true
           type: string
       type: object
@@ -6371,6 +6373,7 @@ components:
             - CREATING
             - ACTIVE
             - DELETING
+            - UPDATING
           readOnly: true
           type: string
       type: object
@@ -7102,6 +7105,7 @@ components:
             - CREATING
             - ACTIVE
             - DELETING
+            - UPDATING
           readOnly: true
           type: string
         subscriptionType:
@@ -7713,7 +7717,9 @@ components:
             $ref: "#/components/schemas/GoogleCloudApigeeV1UpdateError"
           type: array
         jsonSpec:
-          description: The json content of the resource revision.
+          description: The json content of the resource revision. Large specs should be
+            sent individually via the spec field to avoid hitting request size
+            limits.
           type: string
         replicas:
           description: The number of replicas that have successfully loaded this revision.

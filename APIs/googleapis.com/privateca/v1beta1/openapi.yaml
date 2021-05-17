@@ -2359,9 +2359,14 @@ components:
         reconciliation.
       properties:
         deleteResource:
-          description: If set to TRUE, the resource has to be deleted. When using this
-            bit, the CLH should fail the operation.
+          description: DEPRECATED. Use exclusive_action instead.
           type: boolean
+        exclusiveAction:
+          enum:
+            - UNKNOWN_REPAIR_ACTION
+            - DELETE
+            - RETRY
+          type: string
       type: object
     RestoreCertificateAuthorityRequest:
       description: Request message for

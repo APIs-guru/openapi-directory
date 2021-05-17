@@ -1172,9 +1172,14 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.
+        - description: "The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'. (Default: 'drive')"
           in: query
           name: space
+          schema:
+            type: string
+        - description: "The type of items which the IDs can be used for. Supported values are 'files' and 'shortcuts'. Note that 'shortcuts' are only supported in the drive 'space'. (Default: 'files')"
+          in: query
+          name: type
           schema:
             type: string
       responses:
@@ -5278,6 +5283,7 @@ components:
             description: A mapping from export format to URL
             type: string
           description: Links for exporting Docs Editors files to specific formats.
+          readOnly: true
           type: object
         fileExtension:
           description: The final component of fullFileExtension with trailing text that does not appear to be part of the extension removed. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.
@@ -5942,7 +5948,7 @@ components:
           description: The original filename when this revision was created. This will only be populated on files with content stored in Drive.
           type: string
         pinned:
-          description: Whether this revision is pinned to prevent automatic purging. This will only be populated and can only be modified on files with content stored in Drive, excluding Docs Editors files. Revisions can also be pinned when they are created through the drive.files.insert/update/copy by using the pinned query parameter. Pinned revisions are stored indefinitely using additional storage quota, up to a maximum of 200 revisions.
+          description: Whether this revision is pinned to prevent automatic purging. If not set, the revision is automatically purged 30 days after newer content is uploaded. This field can only be modified on files with content stored in Drive, excluding Docs Editors files. Revisions can also be pinned when they are created through the drive.files.insert/update/copy by using the pinned query parameter. Pinned revisions are stored indefinitely using additional storage quota, up to a maximum of 200 revisions.
           type: boolean
         publishAuto:
           description: Whether subsequent revisions will be automatically republished. This is only populated and can only be modified for Docs Editors files.

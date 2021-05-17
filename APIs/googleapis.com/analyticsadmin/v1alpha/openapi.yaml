@@ -441,6 +441,50 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
+  "/v1alpha/{name}:archive":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Archives a CustomMetric on a property.
+      operationId: analyticsadmin.properties.customMetrics.archive
+      parameters:
+        - description: "Required. The name of the CustomMetric to archive. Example format:
+            properties/1234/customMetrics/5678"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaArchiveCustomMetricReque\
+                st"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleProtobufEmpty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+      tags:
+        - properties
   "/v1alpha/{parent}/androidAppDataStreams":
     get:
       description: Returns child android app streams under the specified parent
@@ -503,6 +547,267 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1alpha/{parent}/conversionEvents":
+    get:
+      description: Returns a list of conversion events in the specified parent
+        property. Returns an empty list if no conversion events are found.
+      operationId: analyticsadmin.properties.conversionEvents.list
+      parameters:
+        - description: "Required. The resource name of the parent property. Example:
+            'properties/123'"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of resources to return. If unspecified, at most
+            50 resources will be returned. The maximum value is 200; (higher
+            values will be coerced to the maximum)
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListConversionEvents` call.
+            Provide this to retrieve the subsequent page. When paginating, all
+            other parameters provided to `ListConversionEvents` must match the
+            call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListConversionEventsResp\
+                  onse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a conversion event with the specified attributes.
+      operationId: analyticsadmin.properties.conversionEvents.create
+      parameters:
+        - description: "Required. The resource name of the parent property where this
+            conversion event will be created. Format: properties/123"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaConversionEvent"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaConversionEvent"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+      tags:
+        - properties
+  "/v1alpha/{parent}/customDimensions":
+    get:
+      description: Lists CustomDimensions on a property.
+      operationId: analyticsadmin.properties.customDimensions.list
+      parameters:
+        - description: "Required. Example format: properties/1234"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of resources to return. If unspecified, at most
+            50 resources will be returned. The maximum value is 200 (higher
+            values will be coerced to the maximum).
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListCustomDimensions` call.
+            Provide this to retrieve the subsequent page. When paginating, all
+            other parameters provided to `ListCustomDimensions` must match the
+            call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListCustomDimensionsResp\
+                  onse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a CustomDimension.
+      operationId: analyticsadmin.properties.customDimensions.create
+      parameters:
+        - description: "Required. Example format: properties/1234"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaCustomDimension"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaCustomDimension"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+      tags:
+        - properties
+  "/v1alpha/{parent}/customMetrics":
+    get:
+      description: Lists CustomMetrics on a property.
+      operationId: analyticsadmin.properties.customMetrics.list
+      parameters:
+        - description: "Required. Example format: properties/1234"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of resources to return. If unspecified, at most
+            50 resources will be returned. The maximum value is 200 (higher
+            values will be coerced to the maximum).
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListCustomMetrics` call.
+            Provide this to retrieve the subsequent page. When paginating, all
+            other parameters provided to `ListCustomMetrics` must match the call
+            that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListCustomMetricsRespons\
+                  e"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a CustomMetric.
+      operationId: analyticsadmin.properties.customMetrics.create
+      parameters:
+        - description: "Required. Example format: properties/1234"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaCustomMetric"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaCustomMetric"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+      tags:
+        - properties
   "/v1alpha/{parent}/firebaseLinks":
     get:
       description: Lists FirebaseLinks on a property. Properties can have at most one
@@ -1340,6 +1645,14 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleAnalyticsAdminV1alphaArchiveCustomDimensionRequest:
+      description: Request message for ArchiveCustomDimension RPC.
+      properties: {}
+      type: object
+    GoogleAnalyticsAdminV1alphaArchiveCustomMetricRequest:
+      description: Request message for ArchiveCustomMetric RPC.
+      properties: {}
+      type: object
     GoogleAnalyticsAdminV1alphaAuditUserLink:
       description: Read-only resource used to summarize a principal's effective roles.
       properties:
@@ -1495,6 +1808,15 @@ components:
         androidAppDataStream:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAndroidAppDataStream"
           description: A snapshot of an AndroidAppDataStream resource in change history.
+        conversionEvent:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaConversionEvent"
+          description: A snapshot of a ConversionEvent resource in change history.
+        customDimension:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaCustomDimension"
+          description: A snapshot of a CustomDimension resource in change history.
+        customMetric:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaCustomMetric"
+          description: A snapshot of a CustomMetric resource in change history.
         firebaseLink:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaFirebaseLink"
           description: A snapshot of a FirebaseLink resource in change history.
@@ -1550,6 +1872,30 @@ components:
             an error.
           type: string
       type: object
+    GoogleAnalyticsAdminV1alphaConversionEvent:
+      description: A conversion event in a Google Analytics property.
+      properties:
+        createTime:
+          description: Output only. Time when this conversion event was created in the
+            property.
+          format: google-datetime
+          readOnly: true
+          type: string
+        eventName:
+          description: "Immutable. The event name for this conversion event. Examples:
+            'click', 'purchase'"
+          type: string
+        isDeletable:
+          description: Output only. If set, this event can currently be deleted via
+            DeleteConversionEvent.
+          readOnly: true
+          type: boolean
+        name:
+          description: "Output only. Resource name of this conversion event. Format:
+            properties/{property}/conversionEvents/{conversion_event}"
+          readOnly: true
+          type: string
+      type: object
     GoogleAnalyticsAdminV1alphaCreateUserLinkRequest:
       description: Request message for CreateUserLink RPC. Users can have multiple
         email addresses associated with their Google account, and one of these
@@ -1569,6 +1915,94 @@ components:
         userLink:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaUserLink"
           description: Required. The user link to create.
+      type: object
+    GoogleAnalyticsAdminV1alphaCustomDimension:
+      description: A definition for a CustomDimension.
+      properties:
+        description:
+          description: Optional. Description for this custom dimension. Max length of 150
+            characters.
+          type: string
+        disallowAdsPersonalization:
+          description: Optional. If set to true, sets this dimension as NPA and excludes
+            it from ads personalization. This is currently only supported by
+            user-scoped custom dimensions.
+          type: boolean
+        displayName:
+          description: Required. Display name for this custom dimension as shown in the
+            Analytics UI. Max length of 82 characters, alphanumeric plus space
+            and underscore starting with a letter. Legacy system-generated
+            display names may contain square brackets, but updates to this field
+            will never permit square brackets.
+          type: string
+        name:
+          description: "Output only. Resource name for this CustomDimension resource.
+            Format: properties/{property}/customDimensions/{customDimension}"
+          readOnly: true
+          type: string
+        parameterName:
+          description: Required. Immutable. Tagging parameter name for this custom
+            dimension. If this is a user-scoped dimension, then this is the user
+            property name. If this is an event-scoped dimension, then this is
+            the event parameter name. May only contain alphanumeric and
+            underscore characters, starting with a letter. Max length of 24
+            characters for user-scoped dimensions, 40 characters for
+            event-scoped dimensions.
+          type: string
+        scope:
+          description: Required. Immutable. The scope of this dimension.
+          enum:
+            - DIMENSION_SCOPE_UNSPECIFIED
+            - EVENT
+            - USER
+          type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaCustomMetric:
+      description: A definition for a custom metric.
+      properties:
+        description:
+          description: Optional. Description for this custom dimension. Max length of 150
+            characters.
+          type: string
+        displayName:
+          description: Required. Display name for this custom metric as shown in the
+            Analytics UI. Max length of 82 characters, alphanumeric plus space
+            and underscore starting with a letter. Legacy system-generated
+            display names may contain square brackets, but updates to this field
+            will never permit square brackets.
+          type: string
+        measurementUnit:
+          description: Required. Immutable. The type for the custom metric's value.
+          enum:
+            - MEASUREMENT_UNIT_UNSPECIFIED
+            - STANDARD
+            - CURRENCY
+            - FEET
+            - METERS
+            - KILOMETERS
+            - MILES
+            - MILLISECONDS
+            - SECONDS
+            - MINUTES
+            - HOURS
+          type: string
+        name:
+          description: "Output only. Resource name for this CustomMetric resource. Format:
+            properties/{property}/customMetrics/{customMetric}"
+          readOnly: true
+          type: string
+        parameterName:
+          description: Required. Immutable. Tagging name for this custom metric. If this
+            is an event-scoped metric, then this is the event parameter name.
+            May only contain alphanumeric and underscore charactes, starting
+            with a letter. Max length of 40 characters for event-scoped metrics.
+          type: string
+        scope:
+          description: Required. Immutable. The scope of this custom metric.
+          enum:
+            - METRIC_SCOPE_UNSPECIFIED
+            - EVENT
+          type: string
       type: object
     GoogleAnalyticsAdminV1alphaDataSharingSettings:
       description: A resource message representing data sharing settings of a Google
@@ -1821,6 +2255,45 @@ components:
             caller.
           items:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAndroidAppDataStream"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next
+            page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaListConversionEventsResponse:
+      description: Response message for ListConversionEvents RPC.
+      properties:
+        conversionEvents:
+          description: The requested conversion events
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaConversionEvent"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next
+            page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaListCustomDimensionsResponse:
+      description: Response message for ListCustomDimensions RPC.
+      properties:
+        customDimensions:
+          description: List of CustomDimensions.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaCustomDimension"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next
+            page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaListCustomMetricsResponse:
+      description: Response message for ListCustomMetrics RPC.
+      properties:
+        customMetrics:
+          description: List of CustomMetrics.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaCustomMetric"
           type: array
         nextPageToken:
           description: A token, which can be sent as `page_token` to retrieve the next
@@ -2088,6 +2561,9 @@ components:
               - IOS_APP_DATA_STREAM
               - FIREBASE_LINK
               - GOOGLE_ADS_LINK
+              - CONVERSION_EVENT
+              - CUSTOM_DIMENSION
+              - CUSTOM_METRIC
             type: string
           type: array
       type: object

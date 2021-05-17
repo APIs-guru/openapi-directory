@@ -633,7 +633,7 @@ components:
       properties: {}
       type: object
     CloudAuditLoggingFeatureSpec:
-      description: Spec for Audit Logging Allowlisting.
+      description: "**Cloud Audit Logging**: Spec for Audit Logging Allowlisting."
       properties:
         allowlistedServiceAccounts:
           description: Service account that should be allowlisted to send the audit logs; eg cloudauditlogging@gcp-project.iam.gserviceaccount.com. These accounts must already exist, but do not need to have any permissions granted to them. The customer's entitlements will be checked prior to allowlisting (i.e. the customer must be an Anthos customer.)
@@ -927,7 +927,7 @@ components:
           type: string
       type: object
     ConfigManagementMembershipSpec:
-      description: Configuration for a single cluster. Intended to parallel the ConfigManagement CR.
+      description: "**Anthos Config Management**: Configuration for a single cluster. Intended to parallel the ConfigManagement CR."
       properties:
         binauthz:
           $ref: "#/components/schemas/ConfigManagementBinauthzConfig"
@@ -946,7 +946,7 @@ components:
           type: string
       type: object
     ConfigManagementMembershipState:
-      description: State for Anthos Config Management
+      description: "**Anthos Config Management**: State for a single cluster."
       properties:
         binauthzState:
           $ref: "#/components/schemas/ConfigManagementBinauthzState"
@@ -1288,7 +1288,7 @@ components:
           description: The high-level state of this Feature for a single membership.
       type: object
     MeteringMembershipState:
-      description: Metering per-Membership Feature State.
+      description: "**Metering**: Per-Membership Feature State."
       properties:
         lastMeasurementTime:
           description: The time stamp of the most recent measurement of the number of vCPUs in the cluster.
@@ -1300,7 +1300,7 @@ components:
           type: number
       type: object
     MultiClusterIngressFeatureSpec:
-      description: FeatureSpec contains the input for the MultiClusterIngress feature.
+      description: "**Multi-cluster Ingress**: The configuration for the MultiClusterIngress feature."
       properties:
         billing:
           description: Customer's billing structure
@@ -1431,7 +1431,7 @@ components:
           description: Represents the specific type of a message.
       type: object
     ServiceMeshFeatureState:
-      description: FeatureState describes the state of the Service Mesh Hub Feature as analyzed by the Service Mesh Hub Controller, for the whole Hub.
+      description: "**Service Mesh**: State for the whole Hub, as analyzed by the Service Mesh Hub Controller."
       properties:
         analysisMessages:
           description: Output only. Results of running Service Mesh analyzers.
@@ -1441,7 +1441,7 @@ components:
           type: array
       type: object
     ServiceMeshMembershipState:
-      description: MembershipState describes the state of the Service Mesh Hub Feature as analyzed by the Service Mesh Hub Controller, for single Membership.
+      description: "**Service Mesh**: State for a single Membership, as analyzed by the Service Mesh Hub Controller."
       properties:
         analysisMessages:
           description: Output only. Results of running Service Mesh analyzers.

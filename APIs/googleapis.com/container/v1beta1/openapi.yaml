@@ -3389,6 +3389,9 @@ components:
         desiredDefaultSnatStatus:
           $ref: "#/components/schemas/DefaultSnatStatus"
           description: The desired status of whether to disable default sNAT for this cluster.
+        desiredDnsConfig:
+          $ref: "#/components/schemas/DNSConfig"
+          description: DNSConfig contains clusterDNS config for this cluster.
         desiredImageType:
           description: 'The desired image type for the node pool. NOTE: Set the "desired_node_pool" field as well.'
           type: string
@@ -3536,6 +3539,27 @@ components:
           type: string
         zone:
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the parent field.
+          type: string
+      type: object
+    DNSConfig:
+      description: DNSConfig contains the desired set of options for configuring clusterDNS.
+      properties:
+        clusterDns:
+          description: cluster_dns indicates which in-cluster DNS provider should be used.
+          enum:
+            - PROVIDER_UNSPECIFIED
+            - PLATFORM_DEFAULT
+            - CLOUD_DNS
+          type: string
+        clusterDnsDomain:
+          description: cluster_dns_domain is the suffix used for all cluster service records.
+          type: string
+        clusterDnsScope:
+          description: cluster_dns_scope indicates the scope of access to cluster DNS records.
+          enum:
+            - DNS_SCOPE_UNSPECIFIED
+            - CLUSTER_SCOPE
+            - VPC_SCOPE
           type: string
       type: object
     DailyMaintenanceWindow:
@@ -3986,6 +4010,9 @@ components:
         defaultSnatStatus:
           $ref: "#/components/schemas/DefaultSnatStatus"
           description: Whether the cluster disables default in-node sNAT rules. In-node sNAT rules will be disabled when default_snat_status is disabled. When disabled is set to false, default IP masquerade rules will be applied to the nodes to prevent sNAT on cluster internal traffic.
+        dnsConfig:
+          $ref: "#/components/schemas/DNSConfig"
+          description: DNSConfig contains clusterDNS config for this cluster.
         enableIntraNodeVisibility:
           description: Whether Intra-node visibility is enabled for this cluster. This makes same node pod to pod traffic visible for VPC network.
           type: boolean

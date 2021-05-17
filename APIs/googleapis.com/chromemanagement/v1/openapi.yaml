@@ -60,7 +60,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: Token to specify the next page in the list.
+        - description: Token to specify the page of the request to be returned.
           in: query
           name: pageToken
           schema:
@@ -129,7 +129,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: Token to specify next page in the list.
+        - description: Token to specify the page of the request to be returned.
           in: query
           name: pageToken
           schema:
@@ -214,7 +214,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: Token to specify the next page in the list.
+        - description: Token to specify the page of the request to be returned.
           in: query
           name: pageToken
           schema:
@@ -375,7 +375,7 @@ components:
             $ref: "#/components/schemas/GoogleChromeManagementV1BrowserVersion"
           type: array
         nextPageToken:
-          description: Token to specify the next page in the list.
+          description: Token to specify the next page of the request.
           type: string
         totalSize:
           description: Total number browser versions matching request.
@@ -391,7 +391,7 @@ components:
             $ref: "#/components/schemas/GoogleChromeManagementV1InstalledApp"
           type: array
         nextPageToken:
-          description: Token to specify next page in the list.
+          description: Token to specify the next page of the request.
           type: string
         totalSize:
           description: Total number of installed apps matching request.
@@ -421,7 +421,7 @@ components:
             $ref: "#/components/schemas/GoogleChromeManagementV1Device"
           type: array
         nextPageToken:
-          description: Token to specify the next page in the list.
+          description: Token to specify the next page of the request.
           type: string
         totalSize:
           description: Total number of devices matching request.

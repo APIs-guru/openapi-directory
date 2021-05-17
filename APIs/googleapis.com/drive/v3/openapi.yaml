@@ -912,9 +912,14 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.
+        - description: "The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'. (Default: 'drive')"
           in: query
           name: space
+          schema:
+            type: string
+        - description: "The type of items which the IDs can be used for. Supported values are 'files' and 'shortcuts'. Note that 'shortcuts' are only supported in the drive 'space'. (Default: 'files')"
+          in: query
+          name: type
           schema:
             type: string
       responses:
@@ -3217,6 +3222,7 @@ components:
             description: A mapping from export format to URL
             type: string
           description: Links for exporting Docs Editors files to specific formats.
+          readOnly: true
           type: object
         fileExtension:
           description: The final component of fullFileExtension. This is only available for files with binary content in Google Drive.

@@ -590,6 +590,49 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - topicStats
+  "/v1/topicStats/{topic}:computeTimeCursor":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Compute the corresponding cursor for a publish or event time in a
+        topic partition.
+      operationId: pubsublite.topicStats.projects.locations.topics.computeTimeCursor
+      parameters:
+        - description: Required. The topic for which we should compute the cursor.
+          in: path
+          name: topic
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ComputeTimeCursorRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ComputeTimeCursorResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - topicStats
 components:
   parameters:
     _.xgafv:
@@ -761,6 +804,30 @@ components:
           format: google-datetime
           type: string
       type: object
+    ComputeTimeCursorRequest:
+      description: Compute the corresponding cursor for a publish or event time in a
+        topic partition.
+      properties:
+        partition:
+          description: Required. The partition for which we should compute the cursor.
+          format: int64
+          type: string
+        target:
+          $ref: "#/components/schemas/TimeTarget"
+          description: Required. The target publish or event time. Specifying a future
+            time will return an unset cursor.
+      type: object
+    ComputeTimeCursorResponse:
+      description: Response containing the cursor corresponding to a publish or event
+        time in a topic partition.
+      properties:
+        cursor:
+          $ref: "#/components/schemas/Cursor"
+          description: If present, the cursor references the first message with time
+            greater than or equal to the specified target time. If such a
+            message cannot be found, the cursor will be unset (i.e. `cursor` is
+            not present).
+      type: object
     Cursor:
       description: A cursor that describes the position of a message within a topic
         partition.
@@ -913,6 +980,25 @@ components:
           description: "The name of the topic this subscription is attached to. Structured
             like:
             projects/{project_number}/locations/{location}/topics/{topic_id}"
+          type: string
+      type: object
+    TimeTarget:
+      description: A target publish or event time. Can be used for seeking to or
+        retrieving the corresponding cursor.
+      properties:
+        eventTime:
+          description: Request the cursor of the first message with event time greater
+            than or equal to `event_time`. If messages are missing an event
+            time, the publish time is used as a fallback. As event times are
+            user supplied, subsequent messages may have event times less than
+            `event_time` and should be filtered by the client, if necessary.
+          format: google-datetime
+          type: string
+        publishTime:
+          description: Request the cursor of the first message with publish time greater
+            than or equal to `publish_time`. All messages thereafter are
+            guaranteed to have publish times >= `publish_time`.
+          format: google-datetime
           type: string
       type: object
     Topic:

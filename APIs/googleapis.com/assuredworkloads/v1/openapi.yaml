@@ -468,6 +468,9 @@ components:
     GoogleCloudAssuredworkloadsV1WorkloadResourceSettings:
       description: Represent the custom settings for the resources to be created.
       properties:
+        displayName:
+          description: User-assigned resource display name. If not empty it will be used to create a resource with the specified name.
+          type: string
         resourceId:
           description: Resource identifier. For a project this represents project_id. If the project is already taken, the workload creation will fail.
           type: string
@@ -505,6 +508,11 @@ components:
         parent:
           description: Optional. The parent of the workload.
           type: string
+        resourceSettings:
+          description: Optional. Resource properties in the input that are used for creating/customizing workload resources.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings"
+          type: array
       type: object
     GoogleCloudAssuredworkloadsV1beta1Workload:
       description: An Workload object for managing highly regulated workloads of cloud customers.
@@ -632,6 +640,9 @@ components:
     GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings:
       description: Represent the custom settings for the resources to be created.
       properties:
+        displayName:
+          description: User-assigned resource display name. If not empty it will be used to create a resource with the specified name.
+          type: string
         resourceId:
           description: Resource identifier. For a project this represents project_id. If the project is already taken, the workload creation will fail.
           type: string

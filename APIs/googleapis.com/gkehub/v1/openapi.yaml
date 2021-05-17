@@ -283,7 +283,7 @@ paths:
         - projects
   "/v1/{name}:generateConnectManifest":
     get:
-      description: Generates the manifest for deployment of the GKE connect agent.
+      description: Generates the manifest for deployment of the GKE connect agent. **This method is used internally by Google-provided libraries.** Most clients should not need to call this method directly.
       operationId: gkehub.projects.locations.memberships.generateConnectManifest
       parameters:
         - description: Required. The Membership resource name the Agent will associate with, in the format `projects/*/locations/*/memberships/*`.
@@ -406,7 +406,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Adds a new Membership.
+      description: Creates a new Membership. **This is currently only supported for GKE clusters on Google Cloud**. To register other clusters, follow the instructions at https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster.
       operationId: gkehub.projects.locations.memberships.create
       parameters:
         - description: Required. The parent (project and location) where the Memberships will be created. Specified in the format `projects/*/locations/*`.
