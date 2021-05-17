@@ -296,6 +296,46 @@ paths:
       summary: Update Config
       tags:
         - Configs
+  "/v1/configs/{configId}/deleted-settings":
+    get:
+      description: This endpoint returns the list of Feature Flags and Settings that
+        were deleted from the given Config.
+      operationId: get-deleted-settings
+      parameters:
+        - description: The identifier of the Config.
+          in: path
+          name: configId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SettingModel-haljson"
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SettingModel"
+                type: array
+          description: ""
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
+      summary: List Deleted Settings
+      tags:
+        - Audit logs
   "/v1/configs/{configId}/environments/{environmentId}":
     get:
       description: This endpoint returns the SDK Key for your Config in a specified

@@ -323,6 +323,56 @@ paths:
       summary: Fetch a log by its ID.
       tags:
         - Logs
+  "/v3/logs/{id}/_disable":
+    post:
+      operationId: Logs_Disable
+      parameters:
+        - description: The ID of the log to disable.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Log was disabled.
+        "401":
+          description: API key not valid or no access to resource.
+        "402":
+          description: Tried to call the logs API but the trial expired.
+        "404":
+          description: Log not found.
+        "429":
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
+      summary: Disable a log by its ID.
+      tags:
+        - Logs
+  "/v3/logs/{id}/_enable":
+    post:
+      operationId: Logs_Enable
+      parameters:
+        - description: The ID of the log to enable.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Log was enabled.
+        "401":
+          description: API key not valid or no access to resource.
+        "402":
+          description: Tried to call the logs API but the trial expired.
+        "404":
+          description: Log not found.
+        "429":
+          description: A maximum of 500 requests per minute and 3600 requests per hour are
+            permitted
+      summary: Enable a log by its ID.
+      tags:
+        - Logs
   "/v3/messages/{logId}":
     delete:
       operationId: Messages_DeleteAll
@@ -1091,6 +1141,12 @@ components:
             green, lightgreen, lime, yellow, orange, deeporange,
             red, pink, purple, deeppurple, blue, lightblue"
           type: string
+        disabled:
+          description: "Returns true if the log is currently disabled. A log can be
+            disabled either through the API\r
+
+            or in the elmah.io UI."
+          type: boolean
         environmentName:
           description: "Environment name this log is in or \"Other\" if not in an
             environment.\r

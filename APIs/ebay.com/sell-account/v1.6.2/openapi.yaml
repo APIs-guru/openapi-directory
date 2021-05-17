@@ -2470,28 +2470,21 @@ components:
             $ref: "#/components/schemas/FulfillmentPolicy"
           type: array
         href:
-          description: The URI of the current page of results from the result set.
+          description: This field is for future use.
           type: string
         limit:
-          description: The number of items returned on a single page from the result set.
+          description: This field is for future use.
           format: int32
           type: integer
         next:
-          description: "The URI for the following page of results. This value is returned
-            only if there is an additional page of results to display from the
-            result set. Max length: 2048"
+          description: This field is for future use.
           type: string
         offset:
-          description: "The number of results skipped in the result set before listing the
-            first returned result. Note: The items in a paginated result set use
-            a zero-based list where the first item in the list has an offset of
-            0."
+          description: This field is for future use.
           format: int32
           type: integer
         prev:
-          description: "The URI for the preceding page of results. This value is returned
-            only if there is a previous page of results to display from the
-            result set. Max length: 2048"
+          description: This field is for future use.
           type: string
         total:
           description: The total number of items retrieved in the result set. If no items
@@ -2944,22 +2937,17 @@ components:
       description: The response payload for payment policy requests.
       properties:
         href:
-          description: The URI of the current page of results from the result set.
+          description: This field is for future use.
           type: string
         limit:
-          description: The number of items returned on a single page from the result set.
+          description: This field is for future use.
           format: int32
           type: integer
         next:
-          description: "The URI for the following page of results. This value is returned
-            only if there is an additional page of results to display from the
-            result set. Max length: 2048"
+          description: This field is for future use.
           type: string
         offset:
-          description: "The number of results skipped in the result set before listing the
-            first returned result. Note: The items in a paginated result set use
-            a zero-based list where the first item in the list has an offset of
-            0."
+          description: This field is for future use.
           format: int32
           type: integer
         paymentPolicies:
@@ -2968,9 +2956,7 @@ components:
             $ref: "#/components/schemas/PaymentPolicy"
           type: array
         prev:
-          description: "The URI for the preceding page of results. This value is returned
-            only if there is a previous page of results to display from the
-            result set. Max length: 2048"
+          description: This field is for future use.
           type: string
         total:
           description: The total number of items retrieved in the result set. If no items
@@ -3602,29 +3588,21 @@ components:
       description: The response payload for return policy requests.
       properties:
         href:
-          description: The URI of the current page of results from the result set.
+          description: This field is for future use.
           type: string
         limit:
-          description: The number of items returned on a single page from the result set.
+          description: This field is for future use.
           format: int32
           type: integer
         next:
-          description: "The URI for the following page of results. This value is returned
-            only if there is an additional page of results to display from the
-            result set. Max length: 2048"
+          description: This field is for future use.
           type: string
         offset:
-          description: "The number of results skipped in the result set before listing the
-            first returned result. This value is set in the request with the
-            offset query parameter. Note: The items in a paginated result set
-            use a zero-based list where the first item in the list has an offset
-            of 0."
+          description: This field is for future use.
           format: int32
           type: integer
         prev:
-          description: "The URI for the preceding page of results. This value is returned
-            only if there is a previous page of results to display from the
-            result set. Max length: 2048"
+          description: This field is for future use.
           type: string
         returnPolicies:
           description: A list of the seller's return policies.
@@ -4230,7 +4208,7 @@ components:
           description: "Note: DO NOT USE THIS FIELD. Shipping surcharges for shipping
             service options can no longer be set with fulfillment business
             policies. To set a shipping surcharge for a shipping service option,
-            only the Shipping rate tables tool in My eBay can be used. . The
+            only the Shipping rate tables tool in My eBay can be used. The
             shipping surcharge applicable to the domestic shipping service."
       type: object
     TimeDuration:

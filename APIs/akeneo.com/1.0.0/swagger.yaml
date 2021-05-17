@@ -116,6 +116,14 @@ parameters:
     name: with_attribute_options
     required: false
     type: boolean
+  with_completenesses:
+    default: false
+    description: Return product completenesses in the response. (Only available on
+      SaaS platforms)
+    in: query
+    name: with_completenesses
+    required: false
+    type: boolean
   with_count:
     default: false
     description: Return the count of products in the response. Be carefull with
@@ -502,7 +510,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1:
     get:
       description: This endpoint allows you to get the list of all the available
@@ -574,7 +582,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/asset-categories:
     get:
       description: This endpoint allows you to get a list of PAM asset categories. PAM
@@ -1789,7 +1797,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/asset-families/{asset_family_code}/assets":
     get:
       description: This endpoint allows you to get a list of assets of a given asset
@@ -2077,7 +2085,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update and/or create several assets of
         one given asset family at once. Learn more about the <a
@@ -2365,7 +2373,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/asset-families/{asset_family_code}/assets/{code}":
     delete:
       description: This endpoint allows you to delete a given asset. This endpoint is
@@ -2425,7 +2433,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     get:
       description: This endpoint allows you to get the information about a given asset
         for a given asset family. This endpoint is case sensitive on the asset
@@ -2566,7 +2574,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given asset of a given asset
         family. Learn more about the <a
@@ -2742,7 +2750,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/asset-families/{asset_family_code}/attributes":
     get:
       description: This endpoint allows you to get the list of attributes of a given
@@ -2993,7 +3001,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/asset-families/{asset_family_code}/attributes/{attribute_code}/options":
     get:
       description: This endpoint allows you to get a list of attribute options for a
@@ -3093,7 +3101,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/asset-families/{asset_family_code}/attributes/{attribute_code}/options/{code}":
     get:
       description: This endpoint allows you to get the information about a given asset
@@ -3198,7 +3206,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given option for a given
         attribute and a given asset family. Learn more about the <a
@@ -3322,7 +3330,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/asset-families/{asset_family_code}/attributes/{code}":
     get:
       description: This endpoint allows you to get the information about a given
@@ -3558,7 +3566,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given attribute for a given
         asset family. Note that if the attribute does not already exist for the
@@ -3811,7 +3819,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/asset-families/{code}":
     get:
       description: This endpoint allows you to get the information about a given asset
@@ -4124,7 +4132,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given asset family. Note that
         if the asset family does not already exist, it creates it.
@@ -4453,7 +4461,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/asset-media-files:
     post:
       description: This endpoint allows you to create a new media file and associate
@@ -4545,7 +4553,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/asset-media-files/{code}":
     get:
       description: This endpoint allows you to download a given media file that is
@@ -4602,7 +4610,7 @@ paths:
         - "3.2"
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/asset-tags:
     get:
       description: This endpoint allows you to get a list of PAM asset tags. PAM asset
@@ -7389,7 +7397,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update and/or create several
         association types at once.
@@ -7544,7 +7552,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     post:
       description: This endpoint allows you to create a new association type.
       operationId: association_types_post
@@ -7685,7 +7693,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/association-types/{code}":
     get:
       description: This endpoint allows you to get the information about a given
@@ -7809,7 +7817,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given association type. Know
         more about <a href="/documentation/update.html#update-behavior">Update
@@ -7966,7 +7974,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/attribute-groups:
     get:
       description: This endpoint allows you to get a list of attribute groups.
@@ -8209,7 +8217,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update and/or create several attribute
         groups at once.
@@ -8371,7 +8379,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     post:
       description: This endpoint allows you to create a new attribute group.
       operationId: attribute_groups_post
@@ -8519,7 +8527,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/attribute-groups/{code}":
     get:
       description: This endpoint allows you to get the information about a given
@@ -8650,7 +8658,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given attribute group. Know
         more about <a href="/documentation/update.html#update-behavior">Update
@@ -8814,7 +8822,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/attributes:
     get:
       description: This endpoint allows you to get a list of attributes. Attributes
@@ -9322,7 +9330,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update and/or create several attributes
         at once.
@@ -9684,7 +9692,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     post:
       description: This endpoint allows you to create a new attribute.
       operationId: post_attributes
@@ -10034,7 +10042,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/attributes/{attribute_code}/options":
     get:
       description: This endpoint allows you to get a list of attribute options.
@@ -10259,7 +10267,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update several attribute options at once.
       operationId: patch_attributes__attribute_code__options
@@ -10416,7 +10424,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     post:
       description: This endpoint allows you to create a new attribute option.
       operationId: post_attributes__attribute_code__options
@@ -10559,7 +10567,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/attributes/{attribute_code}/options/{code}":
     get:
       description: This endpoint allows you to get the information about a given
@@ -10685,7 +10693,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given attribute option. Know
         more about <a href="/documentation/update.html#update-behavior">Update
@@ -10844,7 +10852,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/attributes/{code}":
     get:
       description: This endpoint allows you to get the information about a given attribute.
@@ -11176,7 +11184,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given attribute. Know more
         about <a href="/documentation/update.html#update-behavior">Update
@@ -11542,7 +11550,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/categories:
     get:
       description: This endpoint allows you to get a list of categories. Categories
@@ -11598,6 +11606,7 @@ paths:
                     fr_FR: Collection hiver
                   parent:
                     $ref: "#/definitions/Product/example/parent"
+                  updated: 2021-05-21T11:32:00+02:00
                 - _links:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/categories/woman
@@ -11607,6 +11616,7 @@ paths:
                     en_US: Woman
                     fr_FR: Femme
                   parent: winter_collection
+                  updated: 2021-04-21T10:41:02+02:00
                 - _links:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/categories/man
@@ -11616,6 +11626,7 @@ paths:
                     en_US: Man
                     fr_FR: Homme
                   parent: winter_collection
+                  updated: 2021-03-02T12:59:59+02:00
                 - _links:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/categories/kids
@@ -11625,6 +11636,7 @@ paths:
                     en_US: Kids
                     fr_FR: Enfant
                   parent: winter_collection
+                  updated: 2021-01-03T12:40:00+02:00
                 - _links:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/categories/summer_collection
@@ -11635,6 +11647,7 @@ paths:
                     fr_FR: Collection été
                   parent:
                     $ref: "#/definitions/Product/example/parent"
+                  updated: 2021-04-04T09:42:00+02:00
             _links:
               first:
                 href: https://demo.akeneo.com/api/rest/v1/categories?page=1&limit=5
@@ -11703,6 +11716,7 @@ paths:
                                   fr_FR: Collection hiver
                                 parent:
                                   $ref: "#/definitions/Product/example/parent"
+                                updated: 2021-05-22T12:48:00+02:00
                               properties:
                                 code:
                                   description: Category code
@@ -11726,6 +11740,11 @@ paths:
                                     category code. &#10;&bull; If equal to an
                                     existing category code, it cannot reference
                                     itself."
+                                updated:
+                                  description: Date of the last update
+                                  format: dateTime
+                                  type: string
+                                  x-read-only: true
                               required:
                                 - code
                               type: object
@@ -11789,7 +11808,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update several categories at once.
       operationId: patch_categories
@@ -11804,6 +11823,7 @@ paths:
                 fr_FR: Collection hiver
               parent:
                 $ref: "#/definitions/Product/example/parent"
+              updated: 2021-05-22T12:48:00+02:00
             properties:
               code:
                 description: Category code
@@ -11826,6 +11846,11 @@ paths:
                 x-validation-rules: "&bull; It is either equal to `null` or to an existing
                   category code. &#10;&bull; If equal to an existing category
                   code, it cannot reference itself."
+              updated:
+                description: Date of the last update
+                format: dateTime
+                type: string
+                x-read-only: true
             required:
               - code
             type: object
@@ -11937,7 +11962,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     post:
       description: This endpoint allows you to create a new category.
       operationId: post_categories
@@ -11952,6 +11977,7 @@ paths:
                 fr_FR: Collection hiver
               parent:
                 $ref: "#/definitions/Product/example/parent"
+              updated: 2021-05-22T12:48:00+02:00
             properties:
               code:
                 description: Category code
@@ -11974,6 +12000,11 @@ paths:
                 x-validation-rules: "&bull; It is either equal to `null` or to an existing
                   category code. &#10;&bull; If equal to an existing category
                   code, it cannot reference itself."
+              updated:
+                description: Date of the last update
+                format: dateTime
+                type: string
+                x-read-only: true
             required:
               - code
             type: object
@@ -12074,7 +12105,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/categories/{code}":
     get:
       description: This endpoint allows you to get the information about a given category.
@@ -12096,6 +12127,7 @@ paths:
                 fr_FR: Collection hiver
               parent:
                 $ref: "#/definitions/Product/example/parent"
+              updated: 2021-05-22T12:48:00+02:00
             properties:
               code:
                 description: Category code
@@ -12118,6 +12150,11 @@ paths:
                 x-validation-rules: "&bull; It is either equal to `null` or to an existing
                   category code. &#10;&bull; If equal to an existing category
                   code, it cannot reference itself."
+              updated:
+                description: Date of the last update
+                format: dateTime
+                type: string
+                x-read-only: true
             required:
               - code
             type: object
@@ -12193,7 +12230,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given category. Know more
         about <a href="/documentation/update.html#update-behavior">Update
@@ -12217,6 +12254,7 @@ paths:
                 fr_FR: Collection hiver
               parent:
                 $ref: "#/definitions/Product/example/parent"
+              updated: 2021-05-22T12:48:00+02:00
             properties:
               code:
                 description: Category code
@@ -12239,6 +12277,11 @@ paths:
                 x-validation-rules: "&bull; It is either equal to `null` or to an existing
                   category code. &#10;&bull; If equal to an existing category
                   code, it cannot reference itself."
+              updated:
+                description: Date of the last update
+                format: dateTime
+                type: string
+                x-read-only: true
             required:
               - code
             type: object
@@ -12346,7 +12389,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/channels:
     get:
       description: This endpoint allows you to get a list of channels. Channels are
@@ -12633,7 +12676,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update and/or create several channels
         at once.
@@ -12820,7 +12863,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     post:
       description: This endpoint allows you to create a new channel.
       operationId: channels_post
@@ -12992,7 +13035,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/channels/{code}":
     get:
       description: This endpoint allows you to get the information about a given channel.
@@ -13147,7 +13190,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given channel. Know more about
         <a href="/documentation/update.html#update-behavior">Update
@@ -13335,7 +13378,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/currencies:
     get:
       description: This endpoint allows you to get a list of currencies. Currencies
@@ -13519,7 +13562,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/currencies/{code}":
     get:
       description: This endpoint allows you to get the information about a given currency.
@@ -13619,7 +13662,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/families:
     get:
       description: This endpoint allows you to get a list of families. Families are
@@ -13934,7 +13977,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update and/or create several families
         at once.
@@ -14135,7 +14178,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     post:
       description: This endpoint allows you to create a new family.
       operationId: post_families
@@ -14324,7 +14367,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/families/{code}":
     get:
       description: This endpoint allows you to get the information about a given family.
@@ -14495,7 +14538,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given family. Know more about
         <a href="/documentation/update.html#update-behavior">Update
@@ -14700,7 +14743,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/families/{family_code}/variants":
     get:
       description: This endpoint allows you to get a list of family variants. Family
@@ -14961,7 +15004,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update and/or create several family
         variants at once, for a given family.
@@ -15169,7 +15212,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     post:
       description: This endpoint allows you to create a family variant.
       operationId: post_families__family_code__variants
@@ -15362,7 +15405,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/families/{family_code}/variants/{code}":
     get:
       description: This endpoint allows you to get the information about a given
@@ -15538,7 +15581,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given family variant. Know
         more about <a href="/documentation/update.html#update-behavior">Update
@@ -15747,7 +15790,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/locales:
     get:
       description: This endpoint allows you to get a list of locales. Locales are
@@ -15942,7 +15985,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/locales/{code}":
     get:
       description: This endpoint allows you to get the information about a given locale.
@@ -16044,7 +16087,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/measure-families:
     get:
       description: This endpoint allows you to get a list of measure families. Measure
@@ -16251,7 +16294,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/measure-families/{code}":
     get:
       description: This endpoint allows you to get the information about a given
@@ -16379,7 +16422,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/measurement-families:
     get:
       description: This endpoint allows you to get a list of measurement families.
@@ -16575,7 +16618,7 @@ paths:
         - Measurement family
       x-versions:
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update and/or create several
         measurement families at once.
@@ -16833,7 +16876,7 @@ paths:
         - Measurement family
       x-versions:
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/media-files:
     get:
       description: This endpoint allows you to get a list of media files that are used
@@ -17066,7 +17109,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     post:
       description: This endpoint allows you to create a new media file and associate
         it to an attribute value of a given product or product model.
@@ -17202,7 +17245,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/media-files/{code}":
     get:
       description: This endpoint allows you to get the information about a given media
@@ -17339,7 +17382,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/media-files/{code}/download":
     get:
       description: This endpoint allows you to download a given media file that is
@@ -17412,7 +17455,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/product-models:
     get:
       description: This endpoint allows you to get a list of product models. Product
@@ -17963,7 +18006,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update and/or create several product
         models at once. Learn more about <a
@@ -18307,7 +18350,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     post:
       description: This endpoint allows you to create a new product model. In the
         Enterprise Edition, since the v2.3, permissions based on your user
@@ -18611,7 +18654,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/product-models/{code}":
     get:
       description: This endpoint allows you to get the information about a given
@@ -18897,7 +18940,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given product model. Learn
         more about <a href="/documentation/update.html#update-behavior">Update
@@ -19203,7 +19246,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/product-models/{code}/draft":
     get:
       description: This endpoint allows you to get the information about a given
@@ -19504,7 +19547,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/product-models/{code}/proposal":
     post:
       description: This endpoint allows you to submit a product model draft for approval.
@@ -19597,7 +19640,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/products:
     get:
       description: This endpoint allows you to get a list of products. Products are
@@ -19697,6 +19740,13 @@ paths:
           name: with_quality_scores
           required: false
           type: boolean
+        - default: false
+          description: Return product completenesses in the response. (Only available on
+            SaaS platforms)
+          in: query
+          name: with_completenesses
+          required: false
+          type: boolean
       responses:
         "200":
           description: Return products paginated
@@ -19714,6 +19764,19 @@ paths:
                         - sunglasses
                   categories:
                     - summer_collection
+                  completenesses:
+                    - data: 20
+                      locale: en_US
+                      scope: ecommerce
+                    - data: 30
+                      locale: fr_FR
+                      scope: ecommerce
+                    - data: 55
+                      locale: en_US
+                      scope: tablet
+                    - data: 70
+                      locale: fr_FR
+                      scope: tablet
                   created: 2016-06-23T18:24:44+02:00
                   enabled: true
                   family: tshirt
@@ -19827,6 +19890,19 @@ paths:
                         - sunglasses
                   categories:
                     - summer_collection
+                  completenesses:
+                    - data: 20
+                      locale: en_US
+                      scope: ecommerce
+                    - data: 30
+                      locale: fr_FR
+                      scope: ecommerce
+                    - data: 55
+                      locale: en_US
+                      scope: tablet
+                    - data: 70
+                      locale: fr_FR
+                      scope: tablet
                   created: 2016-06-23T18:24:44+02:00
                   enabled: true
                   family: caps
@@ -19841,10 +19917,10 @@ paths:
                     - data: B
                       locale: fr_FR
                       scope: ecommerce
-                    - data: C
+                    - data: D
                       locale: en_US
                       scope: tablet
-                    - data: D
+                    - data: E
                       locale: fr_FR
                       scope: tablet
                   quantified_associations: {}
@@ -19900,6 +19976,7 @@ paths:
                   associations: {}
                   categories:
                     - winter_collection
+                  completenesses: {}
                   created: 2016-06-23T11:24:44+02:00
                   enabled: true
                   family:
@@ -19914,13 +19991,13 @@ paths:
                   values: {}
             _links:
               first:
-                href: https://demo.akeneo.com/api/rest/v1/products?page=1&limit=3
+                href: https://demo.akeneo.com/api/rest/v1/products?page=1&limit=3&with_quality_scores=true&with_completenesses=true&with_attribute_options=true
               next:
-                href: https://demo.akeneo.com/api/rest/v1/products?page=4&limit=3
+                href: https://demo.akeneo.com/api/rest/v1/products?page=4&limit=3&with_quality_scores=true&with_completenesses=true&with_attribute_options=true
               previous:
-                href: https://demo.akeneo.com/api/rest/v1/products?page=2&limit=3
+                href: https://demo.akeneo.com/api/rest/v1/products?page=2&limit=3&with_quality_scores=true&with_completenesses=true&with_attribute_options=true
               self:
-                href: https://demo.akeneo.com/api/rest/v1/products?page=3&limit=3
+                href: https://demo.akeneo.com/api/rest/v1/products?page=3&limit=3&with_quality_scores=true&with_completenesses=true&with_attribute_options=true
             current_page: 3
           schema:
             allOf:
@@ -19982,6 +20059,19 @@ paths:
                                       - sunglass
                                 categories:
                                   - summer_collection
+                                completenesses:
+                                  - data: 10
+                                    locale: en_US
+                                    scope: ecommerce
+                                  - data: 20
+                                    locale: fr_FR
+                                    scope: ecommerce
+                                  - data: 30
+                                    locale: en_US
+                                    scope: tablet
+                                  - data: 40
+                                    locale: fr_FR
+                                    scope: tablet
                                 created: 2016-06-23T18:24:44+02:00
                                 enabled: true
                                 family: tshirt
@@ -20126,6 +20216,14 @@ paths:
                                   type: array
                                   x-validation-rules: Each string of the array is equal to an existing category
                                     code
+                                completenesses:
+                                  description: Product completenesses for each channel/locale combination (only
+                                    available on SaaS platforms, and when the
+                                    "with_completenesses" query parameter is set
+                                    to "true")
+                                  type: object
+                                  x-immutable: true
+                                  x-read-only: true
                                 created:
                                   description: Date of creation
                                   format: dateTime
@@ -20134,7 +20232,7 @@ paths:
                                   x-read-only: true
                                 enabled:
                                   default: true
-                                  description: Whether the product is enable
+                                  description: Whether the product is enabled
                                   type: boolean
                                 family:
                                   default: null only in the case of a non variant product
@@ -20351,7 +20449,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update and/or create several products
         at once. Learn more about <a
@@ -20375,6 +20473,19 @@ paths:
                     - sunglass
               categories:
                 - summer_collection
+              completenesses:
+                - data: 10
+                  locale: en_US
+                  scope: ecommerce
+                - data: 20
+                  locale: fr_FR
+                  scope: ecommerce
+                - data: 30
+                  locale: en_US
+                  scope: tablet
+                - data: 40
+                  locale: fr_FR
+                  scope: tablet
               created: 2016-06-23T18:24:44+02:00
               enabled: true
               family: tshirt
@@ -20516,6 +20627,13 @@ paths:
                   type: string
                 type: array
                 x-validation-rules: Each string of the array is equal to an existing category code
+              completenesses:
+                description: Product completenesses for each channel/locale combination (only
+                  available on SaaS platforms, and when the
+                  "with_completenesses" query parameter is set to "true")
+                type: object
+                x-immutable: true
+                x-read-only: true
               created:
                 description: Date of creation
                 format: dateTime
@@ -20524,7 +20642,7 @@ paths:
                 x-read-only: true
               enabled:
                 default: true
-                description: Whether the product is enable
+                description: Whether the product is enabled
                 type: boolean
               family:
                 default: null only in the case of a non variant product
@@ -20765,7 +20883,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     post:
       description: This endpoint allows you to create a new product. In the Enterprise
         Edition, since the v2.0, permissions based on your user groups are
@@ -20784,6 +20902,19 @@ paths:
                     - sunglass
               categories:
                 - summer_collection
+              completenesses:
+                - data: 10
+                  locale: en_US
+                  scope: ecommerce
+                - data: 20
+                  locale: fr_FR
+                  scope: ecommerce
+                - data: 30
+                  locale: en_US
+                  scope: tablet
+                - data: 40
+                  locale: fr_FR
+                  scope: tablet
               created: 2016-06-23T18:24:44+02:00
               enabled: true
               family: tshirt
@@ -20925,6 +21056,13 @@ paths:
                   type: string
                 type: array
                 x-validation-rules: Each string of the array is equal to an existing category code
+              completenesses:
+                description: Product completenesses for each channel/locale combination (only
+                  available on SaaS platforms, and when the
+                  "with_completenesses" query parameter is set to "true")
+                type: object
+                x-immutable: true
+                x-read-only: true
               created:
                 description: Date of creation
                 format: dateTime
@@ -20933,7 +21071,7 @@ paths:
                 x-read-only: true
               enabled:
                 default: true
-                description: Whether the product is enable
+                description: Whether the product is enabled
                 type: boolean
               family:
                 default: null only in the case of a non variant product
@@ -21162,7 +21300,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/products/{code}":
     delete:
       description: This endpoint allows you to delete a given product. In the
@@ -21234,7 +21372,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     get:
       description: This endpoint allows you to get the information about a given
         product. In the Entreprise Edition, since the v2.0, permissions based on
@@ -21260,6 +21398,13 @@ paths:
           name: with_quality_scores
           required: false
           type: boolean
+        - default: false
+          description: Return product completenesses in the response. (Only available on
+            SaaS platforms)
+          in: query
+          name: with_completenesses
+          required: false
+          type: boolean
       responses:
         "200":
           description: OK
@@ -21273,6 +21418,19 @@ paths:
                     - sunglass
               categories:
                 - summer_collection
+              completenesses:
+                - data: 10
+                  locale: en_US
+                  scope: ecommerce
+                - data: 20
+                  locale: fr_FR
+                  scope: ecommerce
+                - data: 30
+                  locale: en_US
+                  scope: tablet
+                - data: 40
+                  locale: fr_FR
+                  scope: tablet
               created: 2016-06-23T18:24:44+02:00
               enabled: true
               family: tshirt
@@ -21414,6 +21572,13 @@ paths:
                   type: string
                 type: array
                 x-validation-rules: Each string of the array is equal to an existing category code
+              completenesses:
+                description: Product completenesses for each channel/locale combination (only
+                  available on SaaS platforms, and when the
+                  "with_completenesses" query parameter is set to "true")
+                type: object
+                x-immutable: true
+                x-read-only: true
               created:
                 description: Date of creation
                 format: dateTime
@@ -21422,7 +21587,7 @@ paths:
                 x-read-only: true
               enabled:
                 default: true
-                description: Whether the product is enable
+                description: Whether the product is enabled
                 type: boolean
               family:
                 default: null only in the case of a non variant product
@@ -21626,7 +21791,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given product. Learn more
         about <a href="/documentation/update.html#update-behavior">Update
@@ -21655,6 +21820,19 @@ paths:
                     - sunglass
               categories:
                 - summer_collection
+              completenesses:
+                - data: 10
+                  locale: en_US
+                  scope: ecommerce
+                - data: 20
+                  locale: fr_FR
+                  scope: ecommerce
+                - data: 30
+                  locale: en_US
+                  scope: tablet
+                - data: 40
+                  locale: fr_FR
+                  scope: tablet
               created: 2016-06-23T18:24:44+02:00
               enabled: true
               family: tshirt
@@ -21796,6 +21974,13 @@ paths:
                   type: string
                 type: array
                 x-validation-rules: Each string of the array is equal to an existing category code
+              completenesses:
+                description: Product completenesses for each channel/locale combination (only
+                  available on SaaS platforms, and when the
+                  "with_completenesses" query parameter is set to "true")
+                type: object
+                x-immutable: true
+                x-read-only: true
               created:
                 description: Date of creation
                 format: dateTime
@@ -21804,7 +21989,7 @@ paths:
                 x-read-only: true
               enabled:
                 default: true
-                description: Whether the product is enable
+                description: Whether the product is enabled
                 type: boolean
               family:
                 default: null only in the case of a non variant product
@@ -22025,7 +22210,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/products/{code}/draft":
     get:
       description: This endpoint allows you to get the information about a given draft.
@@ -22049,6 +22234,19 @@ paths:
                     - sunglass
               categories:
                 - summer_collection
+              completenesses:
+                - data: 10
+                  locale: en_US
+                  scope: ecommerce
+                - data: 20
+                  locale: fr_FR
+                  scope: ecommerce
+                - data: 30
+                  locale: en_US
+                  scope: tablet
+                - data: 40
+                  locale: fr_FR
+                  scope: tablet
               created: 2016-06-23T18:24:44+02:00
               enabled: true
               family: tshirt
@@ -22190,6 +22388,13 @@ paths:
                   type: string
                 type: array
                 x-validation-rules: Each string of the array is equal to an existing category code
+              completenesses:
+                description: Product completenesses for each channel/locale combination (only
+                  available on SaaS platforms, and when the
+                  "with_completenesses" query parameter is set to "true")
+                type: object
+                x-immutable: true
+                x-read-only: true
               created:
                 description: Date of creation
                 format: dateTime
@@ -22198,7 +22403,7 @@ paths:
                 x-read-only: true
               enabled:
                 default: true
-                description: Whether the product is enable
+                description: Whether the product is enabled
                 type: boolean
               family:
                 default: null only in the case of a non variant product
@@ -22402,7 +22607,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/products/{code}/proposal":
     post:
       description: This endpoint allows you to submit a draft for approval.
@@ -22495,7 +22700,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/published-products:
     get:
       description: This endpoint allows you to get a list of published products.
@@ -23038,7 +23243,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/published-products/{code}":
     get:
       description: This endpoint allows you to get the information about a given
@@ -23289,7 +23494,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/reference-entities:
     get:
       description: This endpoint allows you to get a list of reference entities.
@@ -23466,7 +23671,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   /api/rest/v1/reference-entities-media-files:
     post:
       description: This endpoint allows you to create a new media file and associate
@@ -23559,7 +23764,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/reference-entities-media-files/{code}":
     get:
       description: This endpoint allows you to download a given media file that is
@@ -23616,7 +23821,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/reference-entities/{code}":
     get:
       description: This endpoint allows you to get the information about a given
@@ -23740,7 +23945,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given reference entity. Note
         that if the reference entity does not already exist, it creates it.
@@ -23857,7 +24062,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/reference-entities/{reference_entity_code}/attributes":
     get:
       description: This endpoint allows you to get the list of attributes of a given
@@ -24107,7 +24312,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/reference-entities/{reference_entity_code}/attributes/{attribute_code}/options":
     get:
       description: This endpoint allows you to get a list of attribute options for a
@@ -24208,7 +24413,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/reference-entities/{reference_entity_code}/attributes/{attribute_code}/options/{code}":
     get:
       description: This endpoint allows you to get the information about a given
@@ -24314,7 +24519,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given option for a given
         attribute and a given reference entity. Learn more about <a
@@ -24438,7 +24643,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/reference-entities/{reference_entity_code}/attributes/{code}":
     get:
       description: This endpoint allows you to get the information about a given
@@ -24661,7 +24866,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given attribute for a given
         renference entity. Note that if the attribute does not already exist for
@@ -24901,7 +25106,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/reference-entities/{reference_entity_code}/records":
     get:
       description: This endpoint allows you to get a list of records of a given
@@ -25213,7 +25418,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update and/or create several records of
         one given reference entity at once. Learn more about <a
@@ -25504,7 +25709,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
   "/api/rest/v1/reference-entities/{reference_entity_code}/records/{code}":
     get:
       description: This endpoint allows you to get the information about a given
@@ -25654,7 +25859,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
     patch:
       description: This endpoint allows you to update a given record of a given
         renference entity. Learn more about <a
@@ -25823,7 +26028,7 @@ paths:
         - 3.x
         - "4.0"
         - "5.0"
-        - Serenity
+        - SaaS
 definitions:
   AssetAttributeList:
     items:
@@ -27122,6 +27327,7 @@ definitions:
         fr_FR: Collection hiver
       parent:
         $ref: "#/definitions/Product/example/parent"
+      updated: 2021-05-22T12:48:00+02:00
     properties:
       code:
         description: Category code
@@ -27143,6 +27349,11 @@ definitions:
         x-validation-rules: "&bull; It is either equal to `null` or to an existing
           category code. &#10;&bull; If equal to an existing category code, it
           cannot reference itself."
+      updated:
+        description: Date of the last update
+        format: dateTime
+        type: string
+        x-read-only: true
     required:
       - code
     type: object
@@ -27166,6 +27377,7 @@ definitions:
             fr_FR: Collection hiver
           parent:
             $ref: "#/definitions/Product/example/parent"
+          updated: 2021-05-22T12:48:00+02:00
         properties:
           code:
             description: Category code
@@ -27187,6 +27399,11 @@ definitions:
             x-validation-rules: "&bull; It is either equal to `null` or to an existing
               category code. &#10;&bull; If equal to an existing category code,
               it cannot reference itself."
+          updated:
+            description: Date of the last update
+            format: dateTime
+            type: string
+            x-read-only: true
         required:
           - code
         type: object
@@ -28814,6 +29031,19 @@ definitions:
             - sunglass
       categories:
         - summer_collection
+      completenesses:
+        - data: 10
+          locale: en_US
+          scope: ecommerce
+        - data: 20
+          locale: fr_FR
+          scope: ecommerce
+        - data: 30
+          locale: en_US
+          scope: tablet
+        - data: 40
+          locale: fr_FR
+          scope: tablet
       created: 2016-06-23T18:24:44+02:00
       enabled: true
       family: tshirt
@@ -28953,6 +29183,13 @@ definitions:
           type: string
         type: array
         x-validation-rules: Each string of the array is equal to an existing category code
+      completenesses:
+        description: Product completenesses for each channel/locale combination (only
+          available on SaaS platforms, and when the "with_completenesses" query
+          parameter is set to "true")
+        type: object
+        x-immutable: true
+        x-read-only: true
       created:
         description: Date of creation
         format: dateTime
@@ -28961,7 +29198,7 @@ definitions:
         x-read-only: true
       enabled:
         default: true
-        description: Whether the product is enable
+        description: Whether the product is enabled
         type: boolean
       family:
         default: null only in the case of a non variant product
@@ -29115,6 +29352,19 @@ definitions:
                 - sunglass
           categories:
             - summer_collection
+          completenesses:
+            - data: 10
+              locale: en_US
+              scope: ecommerce
+            - data: 20
+              locale: fr_FR
+              scope: ecommerce
+            - data: 30
+              locale: en_US
+              scope: tablet
+            - data: 40
+              locale: fr_FR
+              scope: tablet
           created: 2016-06-23T18:24:44+02:00
           enabled: true
           family: tshirt
@@ -29256,6 +29506,13 @@ definitions:
               type: string
             type: array
             x-validation-rules: Each string of the array is equal to an existing category code
+          completenesses:
+            description: Product completenesses for each channel/locale combination (only
+              available on SaaS platforms, and when the "with_completenesses"
+              query parameter is set to "true")
+            type: object
+            x-immutable: true
+            x-read-only: true
           created:
             description: Date of creation
             format: dateTime
@@ -29264,7 +29521,7 @@ definitions:
             x-read-only: true
           enabled:
             default: true
-            description: Whether the product is enable
+            description: Whether the product is enabled
             type: boolean
           family:
             default: null only in the case of a non variant product

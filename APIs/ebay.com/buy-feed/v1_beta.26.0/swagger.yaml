@@ -7,13 +7,14 @@ info:
   contact:
     name: eBay Inc,
     x-twitter: ebay
-  description: The Feed API provides the ability to download TSV_GZIP feed files
-    containing eBay items and an hourly snapshot file of the items that have
-    changed within an hour for a specific category, date and marketplace. In
-    addition to the API, there is an open source Feed SDK written in Java that
-    downloads, combines files into a single file when needed, and unzips the
-    entire feed file. It also lets you specify field filters to curate the items
-    in the file.
+  description: "Note: This is a (Limited Release) API available only to select
+    developers approved by business units. The Feed API provides the ability to
+    download TSV_GZIP feed files containing eBay items and an hourly snapshot
+    file of the items that have changed within an hour for a specific category,
+    date and marketplace. In addition to the API, there is an open source Feed
+    SDK written in Java that downloads, combines files into a single file when
+    needed, and unzips the entire feed file. It also lets you specify field
+    filters to curate the items in the file."
   license:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
@@ -198,7 +199,7 @@ paths:
           schema:
             $ref: "#/definitions/ItemResponse"
         "400":
-          description: Bad request
+          description: Bad Request
           x-response-codes:
             errors:
               "13000":
@@ -770,7 +771,7 @@ paths:
           schema:
             $ref: "#/definitions/ItemSnapshotResponse"
         "400":
-          description: Bad request
+          description: Bad Request
           x-response-codes:
             errors:
               "13000":
@@ -870,7 +871,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "13006":

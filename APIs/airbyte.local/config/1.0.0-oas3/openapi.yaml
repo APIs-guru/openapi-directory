@@ -228,7 +228,7 @@ paths:
           description: Successful operation
         "422":
           $ref: "#/components/responses/InvalidInput"
-      summary: Updated a connection status
+      summary: Update a connection
       tags:
         - connection
   /v1/deployment/export:
@@ -677,6 +677,114 @@ paths:
       summary: Returns the openapi specification
       tags:
         - openapi
+  /v1/operations/create:
+    post:
+      operationId: createOperation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OperationCreate"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationRead"
+          description: Successful operation
+        "422":
+          $ref: "#/components/responses/InvalidInput"
+      summary: Create an operation to be applied as part of a connection pipeline
+      tags:
+        - operation
+  /v1/operations/delete:
+    post:
+      operationId: deleteOperation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OperationIdRequestBody"
+        required: true
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+        "404":
+          description: Operation not found
+        "422":
+          $ref: "#/components/responses/InvalidInput"
+      summary: Delete an operation
+      tags:
+        - operation
+  /v1/operations/get:
+    post:
+      operationId: getOperation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OperationIdRequestBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationRead"
+          description: Successful operation
+        "404":
+          description: Operation not found
+        "422":
+          $ref: "#/components/responses/InvalidInput"
+      summary: Returns an operation
+      tags:
+        - operation
+  /v1/operations/list:
+    post:
+      description: List operations for connection.
+      operationId: listOperationsForConnection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConnectionIdRequestBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationReadList"
+          description: Successful operation
+        "404":
+          description: Connection not found
+        "422":
+          $ref: "#/components/responses/InvalidInput"
+      summary: Returns all operations for a connection.
+      tags:
+        - operation
+  /v1/operations/update:
+    post:
+      operationId: updateOperation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OperationUpdate"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationRead"
+          description: Successful operation
+        "422":
+          $ref: "#/components/responses/InvalidInput"
+      summary: Update an operation
+      tags:
+        - operation
   /v1/scheduler/destinations/check_connection:
     post:
       operationId: executeDestinationCheckConnection
@@ -1425,6 +1533,10 @@ components:
         name:
           description: Optional name of the connection
           type: string
+        operationIds:
+          items:
+            $ref: "#/components/schemas/OperationId"
+          type: array
         prefix:
           description: Prefix that will be prepended to the name of each stream when it is
             written to the destination.
@@ -1460,6 +1572,10 @@ components:
           $ref: "#/components/schemas/DestinationId"
         name:
           type: string
+        operationIds:
+          items:
+            $ref: "#/components/schemas/OperationId"
+          type: array
         prefix:
           description: Prefix that will be prepended to the name of each stream when it is
             written to the destination.
@@ -1521,6 +1637,10 @@ components:
       properties:
         connectionId:
           $ref: "#/components/schemas/ConnectionId"
+        operationIds:
+          items:
+            $ref: "#/components/schemas/OperationId"
+          type: array
         prefix:
           description: Prefix that will be prepended to the name of each stream when it is
             written to the destination.
@@ -1909,6 +2029,95 @@ components:
       enum:
         - slack
       type: string
+    OperationCreate:
+      properties:
+        name:
+          type: string
+        operatorConfiguration:
+          $ref: "#/components/schemas/OperatorConfiguration"
+      required:
+        - name
+        - operatorConfiguration
+      type: object
+    OperationId:
+      format: uuid
+      type: string
+    OperationIdRequestBody:
+      properties:
+        OperationId:
+          $ref: "#/components/schemas/OperationId"
+      required:
+        - OperationId
+      type: object
+    OperationRead:
+      properties:
+        name:
+          type: string
+        operationId:
+          $ref: "#/components/schemas/OperationId"
+        operatorConfiguration:
+          $ref: "#/components/schemas/OperatorConfiguration"
+      required:
+        - operationId
+        - name
+        - operatorConfiguration
+      type: object
+    OperationReadList:
+      properties:
+        operations:
+          items:
+            $ref: "#/components/schemas/OperationRead"
+          type: array
+      required:
+        - operations
+      type: object
+    OperationUpdate:
+      properties:
+        name:
+          type: string
+        operationId:
+          $ref: "#/components/schemas/OperationId"
+        operatorConfiguration:
+          $ref: "#/components/schemas/OperatorConfiguration"
+      required:
+        - operationId
+        - name
+        - operatorConfiguration
+      type: object
+    OperatorConfiguration:
+      properties:
+        dbt:
+          $ref: "#/components/schemas/OperatorDbt"
+        normalization:
+          $ref: "#/components/schemas/OperatorNormalization"
+        operatorType:
+          $ref: "#/components/schemas/OperatorType"
+      required:
+        - operatorType
+      type: object
+    OperatorDbt:
+      properties:
+        dbtArguments:
+          type: string
+        dockerImage:
+          type: string
+        gitRepoUrl:
+          type: string
+      required:
+        - gitRepoUrl
+      type: object
+    OperatorNormalization:
+      properties:
+        option:
+          enum:
+            - basic
+          type: string
+      type: object
+    OperatorType:
+      enum:
+        - normalization
+        - dbt
+      type: string
     SlackNotificationConfiguration:
       properties:
         webhook:
@@ -2182,6 +2391,12 @@ components:
           $ref: "#/components/schemas/JobStatus"
         name:
           type: string
+        operationIds:
+          items:
+            $ref: "#/components/schemas/OperationId"
+          type: array
+        operations:
+          $ref: "#/components/schemas/OperationReadList"
         prefix:
           type: string
         schedule:

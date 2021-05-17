@@ -407,6 +407,30 @@ paths:
       summary: Balances
       tags:
         - Stromkonto (Ledger)
+  /stromkonto/choices:
+    get:
+      description: |
+        Signable choices (contract changes) for customer.
+      operationId: stromkontoChoices
+      parameters:
+        - description: Ethereum style address referencing a valid account alias (never use
+            Stromkonto directly!).
+          in: query
+          name: account
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Balance"
+                type: array
+          description: Success
+      summary: Selectable Choices for customer
+      tags:
+        - Stromkonto (Ledger)
   /stromkonto/login:
     post:
       description: >

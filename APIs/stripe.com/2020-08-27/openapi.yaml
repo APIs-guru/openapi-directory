@@ -339,7 +339,11 @@ paths:
                       maxLength: 5000
                       type: string
                     support_url:
-                      type: string
+                      anyOf:
+                        - type: string
+                        - enum:
+                            - ""
+                          type: string
                     url:
                       maxLength: 5000
                       type: string
@@ -3865,7 +3869,11 @@ paths:
                       maxLength: 5000
                       type: string
                     support_url:
-                      type: string
+                      anyOf:
+                        - type: string
+                        - enum:
+                            - ""
+                          type: string
                     url:
                       maxLength: 5000
                       type: string
@@ -4823,7 +4831,11 @@ paths:
                       maxLength: 5000
                       type: string
                     support_url:
-                      type: string
+                      anyOf:
+                        - type: string
+                        - enum:
+                            - ""
+                          type: string
                     url:
                       maxLength: 5000
                       type: string
@@ -13301,8 +13313,9 @@ paths:
                     `amount_off` parameter (required if `amount_off` is passed).
                   type: string
                 duration:
-                  description: Specifies how long the discount will be in effect. Can be
-                    `forever`, `once`, or `repeating`.
+                  description: Specifies how long the discount will be in effect if used on a
+                    subscription. Can be `forever`, `once`, or `repeating`.
+                    Defaults to `once`.
                   enum:
                     - forever
                     - once
@@ -13363,10 +13376,8 @@ paths:
                     be applied to new customers.
                   format: unix-time
                   type: integer
-              required:
-                - duration
               type: object
-        required: true
+        required: false
       responses:
         "200":
           content:
@@ -33379,6 +33390,65 @@ paths:
               schema:
                 $ref: "#/components/schemas/error"
           description: Error response.
+  "/v1/payment_intents/{intent}/verify_microdeposits":
+    post:
+      description: <p>Verifies microdeposits on a PaymentIntent object.</p>
+      operationId: PostPaymentIntentsIntentVerifyMicrodeposits
+      parameters:
+        - in: path
+          name: intent
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              amounts:
+                explode: true
+                style: deepObject
+              expand:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                amounts:
+                  description: Two positive integers, in *cents*, equal to the values of the
+                    microdeposits sent to the bank account.
+                  items:
+                    type: integer
+                  type: array
+                client_secret:
+                  description: The client secret of the PaymentIntent.
+                  maxLength: 5000
+                  type: string
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+              required:
+                - amounts
+                - client_secret
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/payment_intent"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
   /v1/payment_methods:
     get:
       description: <p>Returns a list of PaymentMethods for a given Customer</p>
@@ -40388,6 +40458,65 @@ paths:
               schema:
                 $ref: "#/components/schemas/error"
           description: Error response.
+  "/v1/setup_intents/{intent}/verify_microdeposits":
+    post:
+      description: <p>Verifies microdeposits on a SetupIntent object.</p>
+      operationId: PostSetupIntentsIntentVerifyMicrodeposits
+      parameters:
+        - in: path
+          name: intent
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              amounts:
+                explode: true
+                style: deepObject
+              expand:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                amounts:
+                  description: Two positive integers, in *cents*, equal to the values of the
+                    microdeposits sent to the bank account.
+                  items:
+                    type: integer
+                  type: array
+                client_secret:
+                  description: The client secret of the SetupIntent.
+                  maxLength: 5000
+                  type: string
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+              required:
+                - amounts
+                - client_secret
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/setup_intent"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
   /v1/sigma/scheduled_query_runs:
     get:
       description: <p>Returns a list of scheduled query runs.</p>
@@ -45406,7 +45535,10 @@ paths:
                   description: The id of the location that this connection token is scoped to. If
                     specified the connection token will only be usable with
                     readers assigned to that location, otherwise the connection
-                    token will be usable with all readers.
+                    token will be usable with all readers. Note that location
+                    scoping only applies to internet-connected readers. For more
+                    details, see [the docs on scoping connection
+                    tokens](https://stripe.com/docs/terminal/readers/fleet-management#connection-tokens).
                   maxLength: 5000
                   type: string
               type: object
@@ -49137,25 +49269,28 @@ components:
       description: ""
       properties:
         current_deadline:
-          description: The date the fields in `currently_due` must be collected by to keep
-            the capability enabled for the account.
+          description: Date by which the fields in `currently_due` must be collected to
+            keep the capability enabled for the account. These fields may
+            disable the capability sooner if the next threshold is reached
+            before they are collected.
           format: unix-time
           nullable: true
           type: integer
         currently_due:
-          description: The fields that need to be collected to keep the capability
-            enabled. If not collected by the `current_deadline`, these fields
-            appear in `past_due` as well, and the capability is disabled.
+          description: Fields that need to be collected to keep the capability enabled. If
+            not collected by `current_deadline`, these fields appear in
+            `past_due` as well, and the capability is disabled.
           items:
             maxLength: 5000
             type: string
           type: array
         disabled_reason:
           description: >-
-            If the capability is disabled, this string describes why. Possible
-            values are `requirement.fields_needed`, `pending.onboarding`,
-            `pending.review`, `rejected_fraud`, `rejected.unsupported_business`
-            or `rejected.other`.
+            If the capability is disabled, this string describes why. Can be
+            `requirements.past_due`, `requirements.pending_verification`,
+            `listed`, `platform_paused`, `rejected.fraud`, `rejected.listed`,
+            `rejected.terms_of_service`, `rejected.other`, `under_review`, or
+            `other`.
 
 
             `rejected.unsupported_business` means that the account's business is not supported by the capability. For example, payment methods may restrict the businesses they support in their terms of service:
@@ -49169,32 +49304,31 @@ components:
           nullable: true
           type: string
         errors:
-          description: The fields that are `currently_due` and need to be collected again
-            because validation or verification failed for some reason.
+          description: Fields that are `currently_due` and need to be collected again
+            because validation or verification failed.
           items:
             $ref: "#/components/schemas/account_requirements_error"
           type: array
         eventually_due:
-          description: The fields that need to be collected assuming all volume thresholds
-            are reached. As they become required, these fields appear in
-            `currently_due` as well, and the `current_deadline` is set.
+          description: Fields that need to be collected assuming all volume thresholds are
+            reached. As they become required, they appear in `currently_due` as
+            well, and `current_deadline` becomes set.
           items:
             maxLength: 5000
             type: string
           type: array
         past_due:
-          description: The fields that weren't collected by the `current_deadline`. These
-            fields need to be collected to enable the capability for the
-            account.
+          description: Fields that weren't collected by `current_deadline`. These fields
+            need to be collected to enable the capability on the account.
           items:
             maxLength: 5000
             type: string
           type: array
         pending_verification:
           description: Fields that may become required depending on the results of
-            verification or review. An empty array unless an asynchronous
-            verification is pending. If verification fails, the fields in this
-            array become required and move to `currently_due` or `past_due`.
+            verification or review. Will be an empty array unless an
+            asynchronous verification is pending. If verification fails, these
+            fields become required and move to `currently_due` or `past_due`.
           items:
             maxLength: 5000
             type: string
@@ -49368,16 +49502,15 @@ components:
       description: ""
       properties:
         current_deadline:
-          description: The date the fields in `currently_due` must be collected by to keep
-            payouts enabled for the account. These fields might block payouts
-            sooner if the next threshold is reached before these fields are
-            collected.
+          description: Date by which the fields in `currently_due` must be collected to
+            keep the account enabled. These fields may disable the account
+            sooner if the next threshold is reached before they are collected.
           format: unix-time
           nullable: true
           type: integer
         currently_due:
-          description: The fields that need to be collected to keep the account enabled.
-            If not collected by the `current_deadline`, these fields appear in
+          description: Fields that need to be collected to keep the account enabled. If
+            not collected by `current_deadline`, these fields appear in
             `past_due` as well, and the account is disabled.
           items:
             maxLength: 5000
@@ -49385,33 +49518,33 @@ components:
           nullable: true
           type: array
         disabled_reason:
-          description: If the account is disabled, this string describes why the account
-            can’t create charges or receive payouts. Can be
+          description: If the account is disabled, this string describes why. Can be
             `requirements.past_due`, `requirements.pending_verification`,
-            `rejected.fraud`, `rejected.terms_of_service`, `rejected.listed`,
-            `rejected.other`, `listed`, `under_review`, or `other`.
+            `listed`, `platform_paused`, `rejected.fraud`, `rejected.listed`,
+            `rejected.terms_of_service`, `rejected.other`, `under_review`, or
+            `other`.
           maxLength: 5000
           nullable: true
           type: string
         errors:
-          description: The fields that are `currently_due` and need to be collected again
-            because validation or verification failed for some reason.
+          description: Fields that are `currently_due` and need to be collected again
+            because validation or verification failed.
           items:
             $ref: "#/components/schemas/account_requirements_error"
           nullable: true
           type: array
         eventually_due:
-          description: The fields that need to be collected assuming all volume thresholds
-            are reached. As they become required, these fields appear in
-            `currently_due` as well, and the `current_deadline` is set.
+          description: Fields that need to be collected assuming all volume thresholds are
+            reached. As they become required, they appear in `currently_due` as
+            well, and `current_deadline` becomes set.
           items:
             maxLength: 5000
             type: string
           nullable: true
           type: array
         past_due:
-          description: The fields that weren't collected by the `current_deadline`. These
-            fields need to be collected to re-enable the account.
+          description: Fields that weren't collected by `current_deadline`. These fields
+            need to be collected to enable the account.
           items:
             maxLength: 5000
             type: string
@@ -49419,9 +49552,9 @@ components:
           type: array
         pending_verification:
           description: Fields that may become required depending on the results of
-            verification or review. An empty array unless an asynchronous
-            verification is pending. If verification fails, the fields in this
-            array become required and move to `currently_due` or `past_due`.
+            verification or review. Will be an empty array unless an
+            asynchronous verification is pending. If verification fails, these
+            fields become required and move to `currently_due` or `past_due`.
           items:
             maxLength: 5000
             type: string
@@ -54777,8 +54910,11 @@ components:
             - business_logo
             - customer_signature
             - dispute_evidence
+            - document_provider_identity_document
+            - finance_report_run
             - identity_document
             - pci_document
+            - sigma_scheduled_query
             - tax_document_user_upload
           type: string
           x-stripeBypassValidation: true
@@ -62396,7 +62532,7 @@ components:
       description: ""
       properties:
         reference:
-          description: Order identifier shown to the customer in Afterpay’s online portal.
+          description: Order identifier shown to the merchant in Afterpay’s online portal.
           maxLength: 5000
           nullable: true
           type: string
@@ -63745,7 +63881,7 @@ components:
       properties:
         reference:
           description: >-
-            Order identifier shown to the customer in Afterpay’s online portal.
+            Order identifier shown to the merchant in Afterpay’s online portal.
             We recommend using a value that helps you answer any questions a
             customer might have about
 
@@ -64753,32 +64889,31 @@ components:
             type: string
           type: array
         errors:
-          description: The fields that are `currently_due` and need to be collected again
-            because validation or verification failed for some reason.
+          description: Fields that are `currently_due` and need to be collected again
+            because validation or verification failed.
           items:
             $ref: "#/components/schemas/account_requirements_error"
           type: array
         eventually_due:
           description: Fields that need to be collected assuming all volume thresholds are
-            reached. As fields are needed, they are moved to `currently_due` and
-            the account's `current_deadline` is set.
+            reached. As they become required, they appear in `currently_due` as
+            well, and the account's `current_deadline` becomes set.
           items:
             maxLength: 5000
             type: string
           type: array
         past_due:
           description: Fields that weren't collected by the account's `current_deadline`.
-            These fields need to be collected to enable payouts for the person's
-            account.
+            These fields need to be collected to enable the person's account.
           items:
             maxLength: 5000
             type: string
           type: array
         pending_verification:
           description: Fields that may become required depending on the results of
-            verification or review. An empty array unless an asynchronous
-            verification is pending. If verification fails, the fields in this
-            array become required and move to `currently_due` or `past_due`.
+            verification or review. Will be an empty array unless an
+            asynchronous verification is pending. If verification fails, these
+            fields become required and move to `currently_due` or `past_due`.
           items:
             maxLength: 5000
             type: string
@@ -70307,6 +70442,9 @@ components:
       properties:
         location:
           description: The id of the location that this connection token is scoped to.
+            Note that location scoping only applies to internet-connected
+            readers. For more details, see [the docs on scoping connection
+            tokens](https://stripe.com/docs/terminal/readers/fleet-management#connection-tokens).
           maxLength: 5000
           type: string
         object:

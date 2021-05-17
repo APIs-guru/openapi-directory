@@ -15520,6 +15520,21 @@ components:
       required:
         - self
       type: object
+    orderHarvestErrorValue:
+      properties:
+        errorMessage:
+          type: string
+        technicalCodePropertyName:
+          type: string
+      required:
+        - technicalCodePropertyName
+        - errorMessage
+      type: object
+    orderHarvestErrors:
+      additionalProperties:
+        $ref: "#/components/schemas/orderHarvestErrorValue"
+      description: The key is the OrderMetaInfo.
+      type: object
     orderHeader:
       description: Describe the basic information related to an order. All properties
         with the prefix order_ are translated in the list of values

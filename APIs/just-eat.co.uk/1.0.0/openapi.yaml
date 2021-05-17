@@ -2727,35 +2727,6 @@ paths:
       tags:
         - Order Acceptance API
         - publicly-accessible
-  "/orders/{orderId}/status":
-    put:
-      deprecated: true
-      description: Set Order status
-      parameters:
-        - in: path
-          name: orderId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: partnerId
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/order-status-request"
-        required: true
-      responses:
-        "200":
-          description: OK
-      summary: Set Order status
-      tags:
-        - Order Acceptance API
-        - publicly-accessible
-      x-status: Deprecated
   "/orders/{tenant}/{orderId}/consumerqueries/lateorder/restaurantresponse":
     post:
       description: If a customer has requested an update on the status of a late
@@ -5912,10 +5883,6 @@ components:
       type: object
     ActiveConsumerOffer:
       additionalProperties: false
-      discriminator:
-        mapping:
-          Percent: "#/components/schemas/Percent"
-        propertyName: $type
       properties:
         Type:
           description: Contains the offer data type name
@@ -5934,10 +5901,12 @@ components:
         offers:
           - Type: Percent
             amount: 20
+            maxQualifyingValue: 45000
             offerId: 12345sd
             qualifyingValue: 15000
           - Type: Percent
             amount: 15
+            maxQualifyingValue: 70000
             offerId: 45sd345
             qualifyingValue: 35000
         restaurantId: 1234sd
@@ -5945,7 +5914,13 @@ components:
         offers:
           description: A Collection of Active Offers for `RestaurantId`
           items:
-            $ref: "#/components/schemas/ActiveConsumerOffer"
+            discriminator:
+              mapping:
+                Percent: "#/components/schemas/Percent"
+              propertyName: Type
+            oneOf:
+              - $ref: "#/components/schemas/ActiveConsumerOffer"
+              - $ref: "#/components/schemas/Percent"
           nullable: true
           type: array
         restaurantId:
@@ -6643,17 +6618,13 @@ components:
           type: array
       type: object
     BadRequestMarketingResponse:
-      allOf:
-        - $ref: "#/components/schemas/MarketingErrorResponse"
-        - additionalProperties: false
-          description: 400 Bad Request Returned
-          example:
-            errors:
-              - description: Bad Request
-                errorCode: "400"
-            faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
-            message: Unable to process the request.
-          type: object
+      description: 400 Bad Request Returned
+      example:
+        errors:
+          - description: Bad Request
+            errorCode: "400"
+        faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+        message: Unable to process the request.
     BasketErrorResponse:
       description: The error object returned when an operation fails
       properties:
@@ -7276,9 +7247,9 @@ components:
     ChangeRestaurantContactsRequest:
       description: Request containing new restaurant and owner contact details
       example:
-        ownerMobileNumber: 14151231234
+        ownerMobileNumber: "+14151231234"
         restaurantEmailAddress: super-kebab@gmail.com
-        restaurantPhoneNumber: 14151231234
+        restaurantPhoneNumber: "+14151231234"
       properties:
         ownerMobileNumber:
           description: Restaurant owner mobile phone number in E.164 format.
@@ -8382,49 +8353,6 @@ components:
         - isFulfillable
         - issues
       type: object
-    Claim:
-      description: Claim representation
-      example:
-        affectedItems:
-          - additionalContext: Potato skin was damaged
-            decision: Rejected
-            id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
-            name: Potato skin
-            quantity: 1
-            reference: productid%4t56574596
-            totalClaimed: 1900
-            unitPrice: 2000
-          - additionalContext: Pizza was damaged too
-            decision: Accepted
-            id: 123iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
-            name: Pizza
-            quantity: 1
-            reference: productid%t5y6574596
-            totalClaimed: 1900
-            unitPrice: 2000
-        currency: GBP
-        expirationDate: 2020-05-22T14:22:11.1053368+00:00
-        friendlyOrderReference: "451226580"
-        id: 2f749442-a62a-abcd-8623-04202878e034
-        issueType: Damaged
-        orderId: r23tqoxdoeupdx9w8evorw
-        resolution:
-          decision: PartiallyAccepted
-          resolvedChannel: PartnerCentre
-          resolvedDate: 2020-05-28T06:40:48.1053368+00:00
-          totalClaimedAccepted: 1900
-        response:
-          items:
-            - decision: Rejected
-              id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
-            - decision: Accepted
-              id: 123iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
-        state: Closed
-        submittedDate: 2020-05-20T14:22:11.1053368+00:00
-        totalClaimed: 3800
-      oneOf:
-        - $ref: "#/components/schemas/OrderClaim"
-      type: object
     ClaimResolution:
       description: Representation of the decision made about a claim
       example:
@@ -8432,6 +8360,7 @@ components:
         resolvedChannel: PartnerCentre
         resolvedDate: 2020-05-28T06:40:48.1053368+00:00
         totalClaimedAccepted: 1900
+      nullable: true
       properties:
         decision:
           description: Indicates whether the claim is accepted, partially accepted or
@@ -8455,8 +8384,7 @@ components:
           type: number
       type: object
     ClaimResponse:
-      allOf:
-        - $ref: "#/components/schemas/Claim"
+      $ref: "#/components/schemas/OrderClaim"
       description: Response containing a single claim
       example:
         affectedItems:
@@ -8525,7 +8453,7 @@ components:
           - affectedItems:
               - additionalContext:
                   $ref: "#/components/schemas/ValidationError/example/customState"
-                decision: Open
+                decision: NotDecided
                 id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
                 name: Potato skin
                 quantity: 1
@@ -8534,7 +8462,7 @@ components:
                 unitPrice: 2000
               - additionalContext:
                   $ref: "#/components/schemas/ValidationError/example/customState"
-                decision: Open
+                decision: NotDecided
                 id: 123iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
                 name: Pizza
                 quantity: 1
@@ -8655,8 +8583,9 @@ components:
             totalClaimed: 1900
       properties:
         claims:
-          $ref: "#/components/schemas/Claim"
           description: Array with claims
+          items:
+            $ref: "#/components/schemas/OrderClaim"
           type: array
       type: object
     ClientOrderState:
@@ -8741,14 +8670,12 @@ components:
         - Delivered
       type: string
     ConflictMarketingResponse:
-      allOf:
-        - $ref: "#/components/schemas/MarketingErrorResponse"
-        - additionalProperties: false
-          description: 409 Conflict Returned
-          example:
-            faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
-            message: A marketing campaign already exists with this configuration
-          type: object
+      $ref: "#/components/schemas/MarketingErrorResponse"
+      additionalProperties: false
+      description: 409 Conflict Returned
+      example:
+        faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+        message: A marketing campaign already exists with this configuration
     ConnectTokenRequest:
       properties:
         acr_values:
@@ -8903,13 +8830,6 @@ components:
       type: object
     ConsumerOffer:
       additionalProperties: false
-      discriminator:
-        mapping:
-          Bogof: "#/components/schemas/ConsumerOffer_Bogof"
-          FreeItem: "#/components/schemas/ConsumerOffer_FreeItem"
-          Percent: "#/components/schemas/ConsumerOffer_Percent"
-          StampCard: "#/components/schemas/ConsumerOffer_StampCard"
-        propertyName: offerType
       properties:
         campaignId:
           description: The unique identifier of the offer campaign.
@@ -9012,9 +8932,9 @@ components:
       example:
         minimumOrderValue: 1000
         qualifyingProductCategories:
-          - productCategoryId: Sides111
+          - categoryId: Sides111
         qualifyingProducts:
-          - productId: FrenchFriesBig1
+          - id: FrenchFriesBig1
       properties:
         minimumOrderValue:
           description: The minimum order value required to be eligible for the Offer in
@@ -9226,7 +9146,6 @@ components:
     ConsumerOffersBasketItem:
       additionalProperties: false
       example:
-        id: 1234c
         productId: BRGR123
         quantity: 1
       properties:
@@ -9246,9 +9165,17 @@ components:
       example:
         applicableDateTimeUtc: 2020-04-20T16:20:00.000Z
         restaurantIds:
-          - 1234cc
+          - 123456cc
           - 123456aa
           - 12335bb
+          - 12335dd
+          - 12335ee
+          - 12335ff
+          - 12335gg
+          - 12335hh
+          - 12335ii
+          - 12335jj
+          - 12335kk
       properties:
         applicableDateTimeUtc:
           description: >-
@@ -9358,14 +9285,14 @@ components:
           nullable: true
           type: array
       required:
-        - id
+        - categoryId
       title: ConsumerOffersProductCategory
       type: object
     ConsumerOffersRequest:
       additionalProperties: false
       example:
         applicableDateTimeUtc: 2020-04-20T16:20:00.000Z
-        consumerOfferBasket:
+        consumerOffersBasket:
           basketItems:
             - productId: BRGR123
               quantity: 1
@@ -9385,9 +9312,8 @@ components:
           nullable: true
           type: string
         consumerOffersBasket:
+          $ref: "#/components/schemas/ConsumerOffersBasket"
           description: The consumer basket content
-          oneOf:
-            - $ref: "#/components/schemas/ConsumerOffersBasket"
         restaurantId:
           description: The identifier of the restaurant.
           minLength: 1
@@ -9401,11 +9327,13 @@ components:
       description: Holder of consumer offers
       example:
         offers:
-          - amount: 20
-            campaignId: CheekyTuesday
+          - campaignId: CheekyTuesday
             consumerSegment: All
             offerId: 12345sd
             offerType: Percent
+            priority:
+              type: Stackable
+              value: 1
             qualifyingConditions:
               minimumOrderValue: 15000
             restaurantId: 1234sd
@@ -9416,6 +9344,9 @@ components:
                   - ketchupModifierId
             offerId: 345sd
             offerType: FreeItem
+            priority:
+              type: Stackable
+              value: 1
             prompt:
               description: 6 Nuggets for free when you order Big Mac
               title: Nice! You get this free with your order
@@ -9429,6 +9360,9 @@ components:
             consumerSegment: All
             offerId: 345345sd
             offerType: Bogof
+            priority:
+              type: Stackable
+              value: 1
             products:
               - id: CookieDoughId
               - id: FishFoodId
@@ -9442,7 +9376,18 @@ components:
           description: Provide applicable consumer offers based on provided `restaurantId`
             and basket content.
           items:
-            $ref: "#/components/schemas/ConsumerOffer"
+            discriminator:
+              mapping:
+                Bogof: "#/components/schemas/ConsumerOffer_Bogof"
+                FreeItem: "#/components/schemas/ConsumerOffer_FreeItem"
+                Percent: "#/components/schemas/ConsumerOffer_Percent"
+                StampCard: "#/components/schemas/ConsumerOffer_StampCard"
+              propertyName: offerType
+            oneOf:
+              - $ref: "#/components/schemas/ConsumerOffer_FreeItem"
+              - $ref: "#/components/schemas/ConsumerOffer_Percent"
+              - $ref: "#/components/schemas/ConsumerOffer_StampCard"
+              - $ref: "#/components/schemas/ConsumerOffer_Bogof"
           type: array
       title: ConsumerOffersResponse
       type: object
@@ -10885,14 +10830,14 @@ components:
             suffice the demand of that particular delivery zone.</p>
       type: object
     CreateAttemptedDeliveryQuery:
+      example:
+        ReasonCode: ProblemWithAddress
       properties:
         ReasonCode:
           description: The reason the attempted delivery event was created
           enum:
             - ProblemWithAddress
             - NoAnswer
-          example:
-            ReasonCode: ProblemWithAddress|NoAnswer
           type: string
       type: object
     CreateCancellationQuery:
@@ -11133,14 +11078,14 @@ components:
         daysOfWeek:
           - Monday
           - Friday
-        endDate: 2019-09-03T00:00:00Z
+        endDate: 2019-09-03
         endTime: 13:00:00
         offerDescription: This is offer description
         offerTemplateId: 333
         qualifyingValue:
           currency: GBP
           value: 1000
-        startDate: 2019-08-06T00:00:00Z
+        startDate: 2019-08-06
         startTime: 12:00:00
       properties:
         daysOfWeek:
@@ -11503,11 +11448,10 @@ components:
         experimentEvents:
           - id: EX-1742
             name: bandit_exp_new_carousels_2
-            parentId:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            parentId: "1234567890"
             platform: optimizely_fullstack
             variantName: variant_d
-            version: 1
+            version: "1"
         helpSessionId: helpsessionid
         personalisation:
           callRestaurantAction:
@@ -11515,18 +11459,13 @@ components:
             buttonEvent:
               action: click_call_restaurant
               category: engagement
-              label:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              value:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              label: call restaurant
+              value: 0
             buttonType: Primary
-            data:
-              $ref: "#/components/schemas/ValidationError/example/customState"
-            department:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            data: {}
+            department: LiveChat
             id: CallRestaurant
-            notes:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            notes: note
             postText: []
             preText: []
             title: Call the restaurant
@@ -11537,16 +11476,12 @@ components:
                 action: click_cancel_order
                 category: engagement
                 label: helpflow
-                value:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+                value: 0
               buttonType: Secondary
-              data:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              department:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              data: {}
+              department: LiveChat
               id: Cancel
-              notes:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              notes: note
               postText: []
               preText: []
               title: I want to cancel my order
@@ -11556,16 +11491,12 @@ components:
                 action: click_bad_item
                 category: engagement
                 label: helpflow
-                value:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+                value: 0
               buttonType: Secondary
-              data:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              department:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              data: {}
+              department: LiveChat
               id: BadItem
-              notes:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              notes: note
               postText: []
               preText: []
               title: I'm unhappy with my order
@@ -11576,18 +11507,13 @@ components:
             buttonEvent:
               action: click_open_chatbot
               category: engagement
-              label:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              value:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              label: open chatbot
+              value: 0
             buttonType: Primary
-            data:
-              $ref: "#/components/schemas/ValidationError/example/customState"
-            department:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            data: {}
+            department: LiveChat
             id: StartChatBot
-            notes:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            notes: note
             postText: []
             preText: []
             title: Chat to us
@@ -11596,18 +11522,13 @@ components:
             buttonEvent:
               action: click_email_justeat
               category: engagement
-              label:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              value:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              label: email justeat
+              value: 0
             buttonType: Secondary
-            data:
-              $ref: "#/components/schemas/ValidationError/example/customState"
-            department:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            data: {}
+            department: LiveChat
             id: EmailJustEat
-            notes:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            notes: note
             postText: []
             preText: []
             title: Email our happy helpers
@@ -11616,18 +11537,13 @@ components:
             buttonEvent:
               action: click_call_justeat
               category: engagement
-              label:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              value:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              label: call justeat
+              value: 0
             buttonType: Secondary
-            data:
-              $ref: "#/components/schemas/ValidationError/example/customState"
-            department:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            data: {}
+            department: LiveChat
             id: PhoneJustEat
-            notes:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            notes: note
             postText: []
             preText: []
             title: Phone a human
@@ -11691,7 +11607,7 @@ components:
           transactionData_orderStatus: Accepted
         helpSessionId: helpsessionid
         order:
-          friendlyReference: 1234567890
+          friendlyReference: "1234567890"
           id: alphanumericid
           status:
             dateText: 11:48
@@ -11710,18 +11626,13 @@ components:
             buttonEvent:
               action: click_call_restaurant
               category: engagement
-              label:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              value:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              label: call restaurant
+              value: 0
             buttonType: Primary
-            data:
-              $ref: "#/components/schemas/ValidationError/example/customState"
-            department:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            data: {}
+            department: LiveChat
             id: CallRestaurant
-            notes:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            notes: note
             postText: []
             preText: []
             title: Call the restaurant
@@ -11732,16 +11643,12 @@ components:
                 action: click_cancel_order
                 category: engagement
                 label: helpflow
-                value:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+                value: 0
               buttonType: Secondary
-              data:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              department:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              data: {}
+              department: LiveChat
               id: Cancel
-              notes:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              notes: note
               postText: []
               preText: []
               title: I want to cancel my order
@@ -11751,16 +11658,12 @@ components:
                 action: click_bad_item
                 category: engagement
                 label: helpflow
-                value:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+                value: 0
               buttonType: Secondary
-              data:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              department:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              data: {}
+              department: LiveChat
               id: BadItem
-              notes:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              notes: note
               postText: []
               preText: []
               title: I'm unhappy with my order
@@ -11782,11 +11685,9 @@ components:
             buttonType: Primary
             data:
               $ref: "#/components/schemas/ValidationError/example/customState"
-            department:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            department: LiveChat
             id: StartChatBot
-            notes:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            notes: note
             postText: []
             preText: []
             title: Chat to us
@@ -11802,11 +11703,9 @@ components:
             buttonType: Secondary
             data:
               $ref: "#/components/schemas/ValidationError/example/customState"
-            department:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            department: LiveChat
             id: EmailJustEat
-            notes:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            notes: note
             postText: []
             preText: []
             title: Email our happy helpers
@@ -11822,11 +11721,9 @@ components:
             buttonType: Secondary
             data:
               $ref: "#/components/schemas/ValidationError/example/customState"
-            department:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            department: LiveChat
             id: PhoneJustEat
-            notes:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            notes: note
             postText: []
             preText: []
             title: Phone a human
@@ -12124,6 +12021,9 @@ components:
         zoneId:
           description: Id of assigned zone
           type: string
+        zoneName:
+          description: Name of assigned zone
+          type: string
       type: object
     DeliveryZone:
       example:
@@ -12195,7 +12095,7 @@ components:
               - canPreOrder: false
                 isOpen: true
                 nextAvailability:
-                  - AvailableFrom: 2020-01-01T07:20:00Z
+                  AvailableFrom: 2020-01-01T07:20:00Z
                 serviceType: Delivery
             cuisines:
               - name: Pizza
@@ -12223,10 +12123,8 @@ components:
             accepting orders
           type: boolean
         nextAvailability:
-          allOf:
-            - $ref: "#/components/schemas/DiscoveryResponseAvailability"
+          $ref: "#/components/schemas/DiscoveryResponseAvailability"
           description: When the restaurant is next available
-          type: object
         serviceType:
           description: The type of service the restaurant availability is
           enum:
@@ -12258,7 +12156,7 @@ components:
           - canPreOrder: false
             isOpen: true
             nextAvailability:
-              - AvailableFrom: 2020-01-01T07:20:00Z
+              AvailableFrom: 2020-01-01T07:20:00Z
             serviceType: Delivery
         cuisines:
           - name: Pizza
@@ -12268,7 +12166,7 @@ components:
           - name: Halal
             seoName: halal
         name: Example Restaurant
-        restaurantId: 12345
+        restaurantId: "12345"
       properties:
         availabilities:
           description: Availabilities of the restaurant
@@ -12398,8 +12296,7 @@ components:
           type: string
         Partition:
           description: Experiment partition.
-          properties: {}
-          type: object
+          type: string
         Version:
           description: Version number of the experiment.
           format: int32
@@ -12574,6 +12471,27 @@ components:
       example:
         modals: {}
         stepResponse:
+          closeButton:
+            action: /uk/flows/close
+            buttonEvent:
+              action: form_cancel_order
+              category: engagement
+              label: close
+              value: 0
+            buttonType: CloseButton
+            data: {}
+            department: LiveChat
+            event:
+              dataLayer:
+                screenName: /cancel-order/self-cancel-charged
+                transactionData_dateDiff: -3600
+                transactionData_delay: -1800
+            id: EndFlow
+            notes: note
+            postText: []
+            preText: []
+            title: Close
+            type: EndFlow
           data:
             actions:
               - action: /uk/flows/cancellation/1234/confirm?reasonCode=cust_cancelled_changed_mind&flowId=XXX
@@ -12585,8 +12503,7 @@ components:
                 buttonType: Primary
                 data:
                   $ref: "#/components/schemas/ValidationError/example/customState"
-                department:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+                department: LiveChat
                 id: ConfirmCancel
                 notes:
                   $ref: "#/components/schemas/ValidationError/example/customState"
@@ -12600,13 +12517,10 @@ components:
                   action: form_cancel_order
                   category: engagement
                   label: close
-                  value:
-                    $ref: "#/components/schemas/ValidationError/example/customState"
+                  value: 0
                 buttonType: Secondary
-                data:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
-                department:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+                data: {}
+                department: LiveChat
                 id: EndFlow
                 notes:
                   $ref: "#/components/schemas/ValidationError/example/customState"
@@ -12619,32 +12533,6 @@ components:
                 come to £5.50.
               - We are unable to offer a full refund because the restaurant has
                 already started preparing your food.
-            closeButton:
-              action:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              buttonEvent:
-                action: form_cancel_order
-                category: engagement
-                label: close
-                value:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
-              buttonType: CloseButton
-              data:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              department:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              id: EndFlow
-              notes:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              postText: []
-              preText: []
-              title: Close
-              type: EndFlow
-            event:
-              dataLayer:
-                screenName: /cancel-order/self-cancel-charged
-                transactionData_dateDiff: -3600
-                transactionData_delay: -1800
             header: Are you sure you want to cancel this order?
             iconType:
               $ref: "#/components/schemas/ValidationError/example/customState"
@@ -12854,33 +12742,34 @@ components:
     GetDeliveryFeesResponse:
       example:
         deliveryFees:
-          items:
-            - deliveryCharge:
-                currency: GBP
-                value: 100
-              freeDelivery:
-                currency: GBP
-                value: 1000
-              minimumOrder:
-                currency: GBP
-                value: 500
-              smallOrderCharge:
-                currency: GBP
-                value: 200
-              zoneId: "1"
-            - deliveryCharge:
-                currency: GBP
-                value: 200
-              freeDelivery:
-                currency: GBP
-                value: 2000
-              minimumOrder:
-                currency: GBP
-                value: 500
-              smallOrderCharge:
-                currency: GBP
-                value: 300
-              zoneId: "2"
+          - deliveryCharge:
+              currency: GBP
+              value: 100
+            freeDelivery:
+              currency: GBP
+              value: 1000
+            minimumOrder:
+              currency: GBP
+              value: 500
+            smallOrderCharge:
+              currency: GBP
+              value: 200
+            zoneId: "1"
+            zoneName: Zone 1
+          - deliveryCharge:
+              currency: GBP
+              value: 200
+            freeDelivery:
+              currency: GBP
+              value: 2000
+            minimumOrder:
+              currency: GBP
+              value: 500
+            smallOrderCharge:
+              currency: GBP
+              value: 300
+            zoneId: "2"
+            zoneName: Zone 2
       properties:
         deliveryFees:
           description: restaurant delivery fees
@@ -12892,37 +12781,36 @@ components:
     GetDeliveryZonesResponse:
       example:
         deliveryZones:
-          items:
-            - deliveryMinutes: 5
-              unboundedZone:
-                items:
-                  - coordinates:
-                      $ref: "#/components/schemas/ValidationError/example/customState"
-                    items:
-                      - latitude: 57.159200668
-                        longitude: -2.08593559299993
-                      - latitude: 57.459200668
-                        longitude: -2.18593559299993
-                      - latitude: 57.159200668
-                        longitude: -2.28593559299993
-                      - latitude: 57.159200668
-                        longitude: -2.08593559299993
-              zoneId: "1"
-            - deliveryMinutes: 7
-              unboundedZone:
-                items:
-                  - coordinates:
-                      $ref: "#/components/schemas/ValidationError/example/customState"
-                    items:
-                      - latitude: 57.159200668
-                        longitude: -2.08593559299993
-                      - latitude: 57.459200668
-                        longitude: -2.18593559299993
-                      - latitude: 57.159200668
-                        longitude: -2.28593559299993
-                      - latitude: 57.159200668
-                        longitude: -2.08593559299993
-              zoneId: "2"
+          - deliveryMinutes: 5
+            unboundedZone:
+              items:
+                - coordinates:
+                    $ref: "#/components/schemas/ValidationError/example/customState"
+                  items:
+                    - latitude: 57.159200668
+                      longitude: -2.08593559299993
+                    - latitude: 57.459200668
+                      longitude: -2.18593559299993
+                    - latitude: 57.159200668
+                      longitude: -2.28593559299993
+                    - latitude: 57.159200668
+                      longitude: -2.08593559299993
+            zoneId: "1"
+          - deliveryMinutes: 7
+            unboundedZone:
+              items:
+                - coordinates:
+                    $ref: "#/components/schemas/ValidationError/example/customState"
+                  items:
+                    - latitude: 57.159200668
+                      longitude: -2.08593559299993
+                    - latitude: 57.459200668
+                      longitude: -2.18593559299993
+                    - latitude: 57.159200668
+                      longitude: -2.28593559299993
+                    - latitude: 57.159200668
+                      longitude: -2.08593559299993
+            zoneId: "2"
       properties:
         deliveryZones:
           description: restaurant delivery zones. Maximum `deliveryZones` response size
@@ -13111,8 +12999,8 @@ components:
     IgnoredRestaurantIds:
       example:
         ignoredRestaurantIds:
-          - 123
-          - 456
+          - "123"
+          - "456"
       properties:
         ignoredRestaurantIds:
           description: A list of restaurant ids that were present in a request but were
@@ -13133,17 +13021,14 @@ components:
           type: string
       type: object
     InternalServerErrorMarketingResponse:
-      allOf:
-        - $ref: "#/components/schemas/MarketingErrorResponse"
-        - additionalProperties: false
-          description: 500 Internal Server Error Returned
-          example:
-            errors:
-              - description: Internal Server Error
-                errorCode: "500"
-            faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
-            message: Something has gone wrong, please try again later.
-          type: object
+      $ref: "#/components/schemas/MarketingErrorResponse"
+      description: 500 Internal Server Error Returned
+      example:
+        errors:
+          - description: Internal Server Error
+            errorCode: "500"
+        faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+        message: Something has gone wrong, please try again later.
     InvalidProduct:
       properties:
         Name:
@@ -13164,6 +13049,7 @@ components:
       properties:
         additionalContext:
           description: Comment giving additional context
+          nullable: true
           type: string
         decision:
           description: Indicates whether decision on the claimed item was made and what
@@ -13210,13 +13096,13 @@ components:
       example:
         discountPercentage: 100
         modifierGroups:
-          - minimumChoices: 1
-            modifierGroupId: modifier111
-            modifiers:
-              - maximumAdditionalModifiers: 0
-                modifierId: NoSugar11
-                quantity: 1
-                totalPrice: 0
+          - MinimumChoices: 1
+            ModifierGroupId: modifier111
+            Modifiers:
+              - MaximumAdditionalModifiers: 0
+                ModifierId: NoSugar11
+                Quantity: 1
+                TotalPrice: 0
         productId: Lemonade1234
       properties:
         discountPercentage:
@@ -13242,13 +13128,13 @@ components:
         itemDiscounts:
           - discountPercentage: 100
             modifierGroups:
-              - minimumChoices: 1
-                modifierGroupId: modifier111
-                modifiers:
-                  - maximumAdditionalModifiers: 0
-                    modifierId: NoSugar11
-                    quantity: 1
-                    totalPrice: 0
+              - MinimumChoices: 1
+                ModifierGroupId: modifier111
+                Modifiers:
+                  - MaximumAdditionalModifiers: 0
+                    ModifierId: NoSugar11
+                    Quantity: 1
+                    TotalPrice: 0
             productId: Lemonade1234
         title: Get free lemonade
       properties:
@@ -13313,7 +13199,7 @@ components:
           description: The courier's balance regarding the job. When cash orders happen
             usually the courier pays out of his pocket, that would add credit to
             him until he's paid in full.
-          example: 0L
+          example: 0
           format: integer
           type: number
         courierId:
@@ -13347,7 +13233,7 @@ components:
             deliver job as the job of delivering the order to the customer.
         orderNumber:
           description: Incrementing number generated for each particular order.
-          example: 10113045
+          example: "10113045"
           type: string
         paymentType:
           $ref: "#/components/schemas/SyncPaymentType"
@@ -13632,16 +13518,16 @@ components:
       example:
         offlineItems:
           - id: "111"
-            nextAvailableAt: 2021-01-01T05:00:00.0000000
+            nextAvailableAt: 2021-01-01T05:00:00.0000000Z
             type: variation
           - id: "222"
-            nextAvailableAt: 2021-01-01T05:00:00.0000000
+            nextAvailableAt: 2021-01-01T05:00:00.0000000Z
             type: variation
           - id: "888"
-            nextAvailableAt: 2021-01-01T05:00:00.0000000
+            nextAvailableAt: 2021-01-01T05:00:00.0000000Z
             type: modifier
           - id: "999"
-            nextAvailableAt: 2021-01-01T05:00:00.0000000
+            nextAvailableAt: 2021-01-01T05:00:00.0000000Z
             type: modifier
         paging:
           cursors:
@@ -13784,7 +13670,16 @@ components:
       type: object
       x-abstract: true
     MarketingReportResponse:
-      additionalProperties: false
+      additionalProperties:
+        properties:
+          dataExtractionDateUTC:
+            description: The UTC datetime that the report data was extracted from BigQuery
+            format: date-time
+            type: string
+          reportData:
+            description: Report data as JSON object
+            nullable: true
+        type: object
       description: The report data and the extraction date
       example:
         orders-per-month:
@@ -13799,14 +13694,6 @@ components:
           dataExtractionDateUTC: 2019-09-03T13:10:05Z
           reportData: "[{'month':3,'year':2019,'unique_customer_count':630},{'month':4,'y\
             ear':2019,'unique_customer_count':583}]"
-      properties:
-        dataExtractionDateUTC:
-          description: The UTC datetime that the report data was extracted from BigQuery
-          format: date-time
-          type: string
-        reportData:
-          description: Report data as JSON object
-          nullable: true
       type: object
     MarketplaceRank:
       description: The marketplace rank object used to build a Ranking for a given
@@ -14511,18 +14398,49 @@ components:
         name: My Restaurant
         restaurantId: "100059"
     MenuAllEditsResponse:
+      description: All pending changes
       example:
         - CategoryId: "1"
           CategoryName: Pizzas
           Description: It's a pizza
-          EditType: 1
-          Labels: Vegetarian
+          EditType: Add
+          Labels:
+            - Vegetarian
           MenuItemId: "123"
           MenuItemName: Cheese Pizza
           OptionGroups:
-            - $ref: "#/components/schemas/ValidationError/example/customState"
+            - Id: "1"
+              MaxChoices: 1
+              MinChoices: 1
+              Modifiers:
+                - Id: "9"
+                  Name: Gluten-free
+                  Variations:
+                    - AdditionPrice: 1.5
+                      ModifierGroupId: "1"
+                      Selected: true
+                      VariationId: "4"
+                      VariationName: Large
+                    - AdditionPrice: 1.3
+                      ModifierGroupId: "1"
+                      Selected: true
+                      VariationId: "5"
+                      VariationName: Small
+              Name: Bases
           PreferenceGroups:
-            - $ref: "#/components/schemas/ValidationError/example/customState"
+            - Id: "12"
+              MaxChoices: 1
+              MinChoices: 0
+              Modifiers:
+                - Id: "9"
+                  Name: Ham
+                  Variations:
+                    - AdditionPrice: 0.5
+                      ModifierGroupId: "12"
+                      Selected: true
+                      VariationId: "4"
+                      VariationName: Large
+              Name: Meats
           ReceiptNumber: 321a
           Variations:
             - Id: "32"
@@ -14534,14 +14452,10 @@ components:
                 - "32"
               Price: 12.32
               Type: ???
-      properties:
-        Items:
-          description: All pending changes
-          items:
-            $ref: "#/components/schemas/MenuEditResponse"
-          type: array
-          uniqueItems: false
-      type: object
+      items:
+        $ref: "#/components/schemas/MenuEditResponse"
+      type: array
+      uniqueItems: false
     MenuBase:
       example:
         currency: GBP
@@ -14646,7 +14560,7 @@ components:
         CategoryId: "1"
         CategoryName: Pizzas
         Description: Cheesy pizza
-        EditType: 1
+        EditType: Add
         Labels:
           - Vegetarian
         MenuItemId: "12"
@@ -15104,8 +15018,8 @@ components:
       example:
         MenuItemId: "1"
         PreferenceGroupsIds:
-          - "4"
-          - "5"
+          - 4
+          - 5
         UnitsOfferedInDealGroup: 3
         VariationId: "9"
       properties:
@@ -15496,17 +15410,14 @@ components:
           uniqueItems: false
       type: object
     NotFoundMarketingResponse:
-      allOf:
-        - $ref: "#/components/schemas/MarketingErrorResponse"
-        - additionalProperties: false
-          description: 404 Not Found Returned
-          example:
-            errors:
-              - description: Campaign Not found
-                errorCode: "404"
-            faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
-            message: The requested resource could not found.
-          type: object
+      $ref: "#/components/schemas/MarketingErrorResponse"
+      description: 404 Not Found Returned
+      example:
+        errors:
+          - description: Campaign Not found
+            errorCode: "404"
+        faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+        message: The requested resource could not found.
     Nutritional:
       example:
         alcohol:
@@ -15924,7 +15835,7 @@ components:
           - "777"
           - "888"
           - "999"
-        nextAvailableAt: 2021-01-01T05:00:00.0000000
+        nextAvailableAt: 2021-01-01T05:00:00.0000000Z
         variationIds:
           - "111"
           - "222"
@@ -15952,7 +15863,7 @@ components:
     OfflineItemsResponse:
       example:
         id: "111"
-        nextAvailableAt: 2021-01-01T05:00:00.0000000
+        nextAvailableAt: 2021-01-01T05:00:00.0000000Z
         type: variation
       properties:
         id:
@@ -15996,7 +15907,7 @@ components:
         name: Out of Chicken
         reason: No more chicken in stock.
         restaurantIds: "12345"
-        startDate: 2020-01-16T09:00:00
+        startDate: 2020-01-16T09:00:00Z
       properties:
         allowRestaurantOverride:
           description: Whether a restaurant should be allowed to delete this event,
@@ -16016,6 +15927,7 @@ components:
           description: ISO 8601 format of the end datetime of the offline event.
           format: date-time
           minLength: 1
+          nullable: true
           type: string
         legacyTempOfflineType:
           $ref: "#/components/schemas/LegacyTempOfflineStatus"
@@ -16191,7 +16103,7 @@ components:
           type: boolean
         orderNumber:
           description: Order number for the cancelled order.
-          example: 10113445
+          example: "10113445"
           type: string
         restaurantName:
           description: Restaurant name for the cancelled order.
@@ -16276,16 +16188,11 @@ components:
           description: Just Eat order identifier
           type: string
         resolution:
-          allOf:
-            - $ref: "#/components/schemas/ClaimResolution"
+          $ref: "#/components/schemas/ClaimResolution"
           description: Representation of the claim resolution
-          nullable: true
-          type: object
         restaurantResponse:
-          allOf:
-            - $ref: "#/components/schemas/OrderClaimRestaurantResponse"
+          $ref: "#/components/schemas/OrderClaimRestaurantResponse"
           description: Restaurant response on the claim
-          nullable: true
           type: object
         state:
           description: Indicates whether a decision about the claim was made
@@ -16313,6 +16220,7 @@ components:
         justification:
           comments: The food was packed properly
           reason: Other
+      nullable: true
       properties:
         decision:
           description: Decision on the claim
@@ -17601,6 +17509,7 @@ components:
         NextAvailableAt:
           description: Time when product will be brought back online.
           format: date-time
+          nullable: true
           type: string
         Price:
           description: The price of this Product.
@@ -17682,6 +17591,7 @@ components:
           - resume
           - cancel
         deliveryArea: NW6
+        placementId: "100005"
         purchaseDate: 2021-01-01T14:45:00Z
         status:
           pause:
@@ -17709,6 +17619,10 @@ components:
           type: array
         deliveryArea:
           description: The postcode or location that the placement applies to.
+          nullable: false
+          type: string
+        placementId:
+          description: The unique identifier of the placement.
           nullable: false
           type: string
         purchaseDate:
@@ -17835,6 +17749,7 @@ components:
             - recommended
           type: object
       required:
+        - placementId
         - deliveryArea
         - purchaseDate
         - weeklyBudget
@@ -17852,6 +17767,7 @@ components:
               - resume
               - cancel
             deliveryArea: NW6
+            placementId: "100001"
             purchaseDate: 2021-01-01T14:45:00Z
             status:
               pause:
@@ -17872,6 +17788,7 @@ components:
               - pause
               - cancel
             deliveryArea: NW5
+            placementId: "100002"
             purchaseDate: 2021-01-01T14:47:34Z
             status:
               budget:
@@ -17886,6 +17803,7 @@ components:
               - adjustBudget
               - undoCancel
             deliveryArea: NW4
+            placementId: "100003"
             purchaseDate: 2021-01-01T14:51:12Z
             status:
               placement:
@@ -17902,6 +17820,8 @@ components:
               - pause
               - cancel
             deliveryArea: NW3
+            placementId: "100004"
+            purchaseDate: 2021-01-01T14:51:12Z
             status:
               budget:
                 code: budgetExhausted
@@ -18010,21 +17930,25 @@ components:
         placements:
           - deliveryArea: NW6
             weeklyBudget:
+              maximumAllowable: 100000
               minimumAllowable: 500
               minimumRecommended: 1000
               recommended: 13000
           - deliveryArea: NW5
             weeklyBudget:
+              maximumAllowable: 100000
               minimumAllowable: 500
               minimumRecommended: 1000
               recommended: 14000
           - deliveryArea: NW4
             weeklyBudget:
+              maximumAllowable: 100000
               minimumAllowable: 500
               minimumRecommended: 1000
               recommended: 14000
           - deliveryArea: NW3
             weeklyBudget:
+              maximumAllowable: 100000
               minimumAllowable: 500
               minimumRecommended: 1000
               recommended: 14000
@@ -18055,13 +17979,44 @@ components:
             $ref: "#/components/schemas/PromotedPlacementAvailablePlacement"
           type: array
       type: object
+    PromotedPlacementCancelPlacementRequest:
+      example:
+        cancellationEffective: atEndOfWeek
+      oneOf:
+        - additionalProperties: true
+          nullable: false
+          properties:
+            cancellationEffective:
+              description: When the cancellation should take effect.
+              enum:
+                - atEndOfWeek
+              type: string
+          required:
+            - cancellationEffective
+          type: object
+        - additionalProperties: true
+          nullable: false
+          properties:
+            cancellationEffective:
+              description: When the cancellation should take effect.
+              enum:
+                - atSpecifiedTime
+              type: string
+            cancellationTime:
+              description: The UTC time at which the cancellation should take effect.
+              format: date-time
+              type: string
+          required:
+            - cancellationEffective
+            - cancellationTime
+          type: object
     PromotedPlacementCandidateRestaurant:
       additionalProperties: true
       example:
         metadata:
           key: value
         rank: 1
-        restaurantId: 1234
+        restaurantId: "1234"
       properties:
         rank:
           description: The relative rank of this candidate restaurant in relation to
@@ -18077,11 +18032,11 @@ components:
       example:
         candidateRestaurants:
           - rank: 1
-            restaurantId: 1234
+            restaurantId: "1234"
           - rank: 2
-            restaurantId: 4567
+            restaurantId: "4567"
           - rank: 3
-            restaurantId: 3245
+            restaurantId: "3245"
         metadata:
           availableFilteredPositions: 2
           availableUnfilteredPositions: 5
@@ -18487,25 +18442,12 @@ components:
       type: object
     RestaurantCapabilitiesPaymentTypeItem:
       example:
-        - paymentType: ApplePay
-          selected: true
-          voucherAvailable: true
-        - paymentType: GooglePay
-          selected: false
-        - paymentType: PayPal
-          selected: false
-          token: token123
-        - paymentType: VCO
-          selected: false
-        - maxOrderValueCents: 5000
-          paymentType: Cash
-          selected: false
-        - cardTypes:
-            - VISA
-            - MASTERCARD
-            - AMEX
-          paymentType: Card
-          selected: false
+        cardTypes:
+          - VISA
+          - MASTERCARD
+          - AMEX
+        paymentType: Card
+        selected: false
       properties:
         cardTypes:
           description: List of card types (only applies to `Card` payment type)
@@ -18855,7 +18797,7 @@ components:
       items:
         example:
           etaAtRestaurant: 1
-          restaurantId: 1
+          restaurantId: "1"
         properties:
           etaAtRestaurant:
             description: Your best estimation in minutes
@@ -19020,17 +18962,17 @@ components:
           - accountBalance: 123540
             createdDate: 2020-09-29T09:26:09.930Z
             currencyCode: GBP
-            endDate: 2020-09-27T00:00:00.000Z
+            endDate: 2020-09-27
             id: i9999999
             invoiceAmount: 5421
-            startDate: 2020-09-21T00:00:00.000Z
+            startDate: 2020-09-21
           - accountBalance: 167980
             createdDate: 2020-09-22T11:00:32.800Z
             currencyCode: GBP
-            endDate: 2020-09-20T00:00:00.000Z
+            endDate: 2020-09-20
             id: i8888888
             invoiceAmount: 6798
-            startDate: 2020-09-14T00:00:00.000Z
+            startDate: 2020-09-14
         paging:
           cursors:
             after: fewyNzQyOGI3OHYt
@@ -19350,7 +19292,7 @@ components:
         orders:
           - currencyCode: GBP
             deliveryPrice: 200
-            friendlyId: 821367535
+            friendlyId: "821367535"
             id: rtvtgo0wwugmiiikdpzvsg
             orderPrice: 2099
             orderStatus: Completed
@@ -19359,7 +19301,7 @@ components:
             serviceType: Delivery
           - currencyCode: GBP
             deliveryPrice: 0
-            friendlyId: 829022736
+            friendlyId: "829022736"
             id: uerbbymdfkxdecduuerbby
             orderPrice: 99900
             orderStatus: Cancelled
@@ -19595,7 +19537,7 @@ components:
           - approvedRestaurantComments: Thank you very much for positive feedback
             customerComments: Extremely good food and service
             customerName: Steve
-            friendlyOrderId: 123456789
+            friendlyOrderId: "123456789"
             id: uimpewidbrjyxcweiqtoe
             rateDate: 2020-10-18T17:42:38.000Z
             ratingAverage: 5.66
@@ -19603,7 +19545,7 @@ components:
           - approvedRestaurantComments: We are sorry
             customerComments: Coffee poured all over my food
             customerName: Lucy
-            friendlyOrderId: 123456790
+            friendlyOrderId: "123456790"
             id: tytyhjdbrhgjfxcweigfht
             rateDate: 2020-10-19T18:00:45.000Z
             ratingAverage: 2.33
@@ -20297,8 +20239,8 @@ components:
           restaurants:
             "102215":
               bands:
-                fee: 100
-                minimumAmount: 0
+                - fee: 100
+                  minimumAmount: 0
               minimumOrderValue: 0
               restaurantId: "102215"
         promotedPlacement:
@@ -20314,12 +20256,14 @@ components:
           items:
             properties:
               Cuisines:
-                properties:
-                  Name:
-                    type: string
-                  SeoName:
-                    type: string
-                type: object
+                items:
+                  properties:
+                    Name:
+                      type: string
+                    SeoName:
+                      type: string
+                  type: object
+                type: array
               Id:
                 type: string
               Name:
@@ -20394,6 +20338,7 @@ components:
             ResultCount:
               type: number
             SearchedTerms:
+              nullable: true
               type: object
             TagDetails:
               items:
@@ -20517,6 +20462,7 @@ components:
         City:
           type: string
         CollectionMenuId:
+          nullable: true
           type: number
         CuisineTypes:
           items:
@@ -20565,6 +20511,7 @@ components:
         DeliveryEtaMinutes:
           properties:
             Approximate:
+              nullable: true
               type: number
             RangeLower:
               type: number
@@ -20577,21 +20524,24 @@ components:
           format: date-time
           type: string
         DeliveryOpeningTimeLocal:
-          format: date-time
-          type: string
+          $ref: "#/components/schemas/local-date-time"
         DeliveryOpeningTimeUtc:
           format: date-time
+          nullable: true
           type: string
         DeliveryStartTime:
           format: date-time
           type: string
         DeliveryTime:
+          nullable: true
           type: number
         DeliveryTimeMinutes:
+          nullable: true
           type: number
         DeliveryWorkingTimeMinutes:
           type: number
         DeliveryZipcode:
+          nullable: true
           type: string
         Description:
           type: string
@@ -20600,13 +20550,14 @@ components:
         DriveInfoCalculated:
           type: boolean
         HygieneRating:
+          nullable: true
           type: number
         Id:
           type: number
         IsBrand:
           type: boolean
         IsCloseBy:
-          type: string
+          type: boolean
         IsCollection:
           type: boolean
         IsDelivery:
@@ -20636,8 +20587,7 @@ components:
         IsTestRestaurant:
           type: boolean
         LastUpdated:
-          format: date-time
-          type: string
+          $ref: "#/components/schemas/local-date-time"
         Latitude:
           type: number
         Logo:
@@ -20656,24 +20606,26 @@ components:
         Name:
           type: string
         NewnessDate:
-          format: date-time
-          type: string
+          $ref: "#/components/schemas/local-date-time"
         NumberOfRatings:
           type: number
         OfferPercent:
           type: number
         Offers:
-          type: object
+          items:
+            additionalProperties: true
+            type: object
+          type: array
         OpeningTime:
           format: date-time
           type: string
         OpeningTimeIso:
-          format: date-time
-          type: string
+          $ref: "#/components/schemas/local-date-time"
         OpeningTimeLocal:
-          type: string
+          $ref: "#/components/schemas/local-date-time"
         OpeningTimeUtc:
           format: date-time
+          nullable: true
           type: string
         OpeningTimes:
           items:
@@ -20720,12 +20672,15 @@ components:
         ShowSmiley:
           type: boolean
         SmileyDate:
+          nullable: true
           type: object
         SmileyElite:
           type: boolean
         SmileyResult:
+          nullable: true
           type: object
         SmileyUrl:
+          nullable: true
           type: object
         SponsoredPosition:
           type: number
@@ -21386,16 +21341,9 @@ components:
         payload:
           description: JSON data specific to the Debugging Event. More details -
             https://www.twilio.com/docs/usage/troubleshooting/debugging-event-webhooks#payload
-          example:
-            error_code: 13227
-            more_info:
-              ErrorCode: 13227
-              LogLevel: WARN
-              Msg: No International Permission.
-            resource_sid: CAxxxx
-            service_sid: SSxxxx
-            webhook:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+          example: "{resource_sid: CAxxxx, service_sid: SSxxxx, error_code: 13227
+            ,webhook: null, more_info: {  Msg : No International Permission. ,
+            ErrorCode : 13227 , LogLevel : WARN }}"
           type: string
         payloadType:
           description: Type of the payload
@@ -21509,13 +21457,13 @@ components:
         - $ref: "#/components/schemas/MarketingErrorResponse"
         - additionalProperties: false
           description: 401 Unauthorised Returned
-          example:
-            errors:
-              - description: Unauthorised
-                errorCode: "401"
-            faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
-            message: Unauthorised
           type: object
+      example:
+        errors:
+          - description: Unauthorised
+            errorCode: "401"
+        faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+        message: Unauthorised
     UpdateAddedDeal:
       properties:
         Date:
@@ -22072,7 +22020,7 @@ components:
         errorCode: NotEmptyValidator
         errorMessage: TestProperty is empty
         formattedMessageArguments: []
-        formattedMessagePlaceholderValues:
+        formattedMessagePlaceHolderValues:
           PropertyName: User Role
           PropertyValue:
             $ref: "#/components/schemas/ValidationError/example/customState"
@@ -22083,9 +22031,11 @@ components:
       properties:
         attemptedValue:
           description: The property value that caused the failure
+          nullable: true
           type: string
         customState:
           description: Custom state associated with the failure
+          nullable: true
           type: string
         errorCode:
           description: The error code
@@ -22107,6 +22057,7 @@ components:
           type: string
         resourceName:
           description: The resource name used for building the message
+          nullable: true
           type: string
         severity:
           description: Severity of a validation rule. Will always be 0 (Error).
@@ -23014,7 +22965,7 @@ components:
       example:
         OrderId: wiej234idf09i29jijgf4
         Reason: Customer did not answer the door
-        RestaurantId: "110230"
+        RestaurantId: 110230
         Tenant: uk
       properties:
         OrderId:
@@ -23333,7 +23284,7 @@ components:
                         type: array
                       MenuCardNumber:
                         description: Menu card number.
-                        example: 1
+                        example: "1"
                         type: string
                       MultiBuyDiscounts:
                         description: Any multi-purchase discounts applied to this item.
@@ -23420,7 +23371,7 @@ components:
                               type: number
                             UnitPrice:
                               description: The unit price of the accessory.
-                              example: Coca-Cola Original Taste
+                              example: 0.1
                               format: double
                               type: number
                           type: object
@@ -23441,7 +23392,7 @@ components:
                     type: number
                   MenuCardNumber:
                     description: Menu card number.
-                    example: 1
+                    example: "1"
                     type: string
                   OrderSubId:
                     description: Order `SubId`
@@ -23502,7 +23453,7 @@ components:
               type: string
             Id:
               description: The JUST EAT Customer Id.
-              example: 123456
+              example: "123456"
               type: string
             Latitude:
               description: Customer address latitude. Will be 0 if not provided.
@@ -23535,7 +23486,7 @@ components:
               description: Code to use when calling customer phone masked number
                 (`DisplayPhoneNumber`) about this order. Null if phone masking
                 not enabled
-              example: 444333222
+              example: "444333222"
               type: string
             PhoneNumber:
               description: The customer's unmasked phone number. Please don't expose this to
@@ -23570,7 +23521,7 @@ components:
             in any UI or receipts to identify the order to the customer, driver
             or restaurant. This identifier is not guaranteed to be globally
             unique.
-          example: 348322088
+          example: "348322088"
           type: string
         Id:
           deprecated: true
@@ -23579,7 +23530,7 @@ components:
             that further messages from Just Eat relating to this order may not
             use this same identifier, use `OrderId` for a more consistent
             identifier.
-          example: 348322088
+          example: "348322088"
           type: string
         IsAMiniFistPumpOrder:
           deprecated: true
@@ -23729,7 +23680,7 @@ components:
               type: string
             Id:
               description: Unique ID of the Restaurant.
-              example: 123456
+              example: "123456"
               type: string
             Latitude:
               description: Restaurant address latitude. Will be 0 if not provided.
@@ -23799,14 +23750,12 @@ components:
           description: The email address of the consumer
           type: string
         updates:
+          $ref: "#/components/schemas/consumerMarketingPreference"
           description: Collection of marketing channel subscription updates
-          items:
-            $ref: "#/components/schemas/consumerMarketingPreference"
-          type: array
       type: object
     create-attempted-delivery:
       example:
-        ReasonCode: problem_with_address|no_answer
+        ReasonCode: problem_with_address
       properties:
         ReasonCode:
           description: The reason the attempted delivery event was created
@@ -24356,14 +24305,7 @@ components:
           type: string
         headers:
           additionalProperties:
-            properties:
-              headerName:
-                description: The name of the header
-                type: string
-              headerValue:
-                description: The value of the header
-                type: string
-            type: object
+            type: string
           description: Headers that will be passed when calling S3
           type: object
         href:
@@ -24553,7 +24495,9 @@ components:
       type: object
     fulfilment-v2:
       example:
-        Method: Delivery|Collection
+        DueAsap: false
+        DueDate: 2020-01-01T09:00:00.000Z
+        Method: Delivery
       properties:
         DueAsap:
           description: If food should be delivered ASAP
@@ -24812,6 +24756,11 @@ components:
       required:
         - Type
       type: object
+    local-date-time:
+      description: A local date time object, conforming to `ISO-8601`, but with only a
+        partial time representation and no time offset.
+      pattern: ^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?$
+      type: string
     location:
       description: GeoLocation object containing latitude and longitude values.
       example:
@@ -25616,14 +25565,14 @@ components:
           - Type: delivery
             Value: 3.5
         Lines:
-          LastCardDigits: 1234
-          Paid: true
-          ServiceFee: 0
-          Type: card
-          Value: 19.95
+          - LastCardDigits: "1234"
+            Paid: true
+            ServiceFee: 0
+            Type: Card
+            Value: 19.95
         Tips:
-          Type: driver
-          Value: 2.5
+          - Type: driver
+            Value: 2.5
       properties:
         Fees:
           items:
@@ -25664,7 +25613,7 @@ components:
       type: object
     resolve-attempted-delivery-cancel:
       example:
-        ReasonCode: new_address_not_within_area|unable_to_reprepare|driver_not_available|area_unsafe|customer_doesnt_want_anymore
+        ReasonCode: new_address_not_within_area
       properties:
         ReasonCode:
           description: The reason the order has been cancelled
@@ -25679,7 +25628,7 @@ components:
     resolve-attempted-delivery-redeliver:
       example:
         NewDueDate: 2018-03-10T14:45:28Z
-        Status: driver_at_address|repreparing
+        Status: driver_at_address
       properties:
         NewDueDate:
           description: Updated due date for delivery of the order
@@ -26214,18 +26163,9 @@ components:
       description: Represents list of last four segmentation statuses, sorted reverse
         chronologically by assessment date.
       example:
-        - dateAssessed: 2019-12-31T00:00:00Z
-          hasLocalLegendCriteriaBeenMet: true
-          status: 1
-        - dateAssessed: 2019-09-30T00:00:00Z
-          hasLocalLegendCriteriaBeenMet: false
-          status: 1
-        - dateAssessed: 2019-06-30T00:00:00Z
-          hasLocalLegendCriteriaBeenMet: false
-          status: 2
-        - dateAssessed: 2019-03-31T00:00:00Z
-          hasLocalLegendCriteriaBeenMet: false
-          status: 3
+        dateAssessed: 2019-12-31T00:00:00Z
+        hasLocalLegendCriteriaBeenMet: true
+        status: 1
       properties:
         dateAssessed:
           description: Date and time when the segmentation assessment was made

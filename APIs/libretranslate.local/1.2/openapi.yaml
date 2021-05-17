@@ -30,6 +30,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/error-response"
           description: Invalid request
+        "403":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/error-response"
+          description: Banned
         "429":
           content:
             "*/*":
@@ -113,6 +119,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/error-response"
           description: Invalid request
+        "403":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/error-response"
+          description: Banned
         "429":
           content:
             "*/*":

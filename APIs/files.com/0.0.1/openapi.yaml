@@ -17914,6 +17914,7 @@ components:
 
         Use the following steps to complete an export:
 
+
         1. Initiate the export by using the Create Action Notification Export endpoint. Non Site Admins must query by folder or path.
 
         2. Using the `id` from the response to step 1, poll the Show Action Notification Export endpoint. Check the `status` field until it is `ready`.
@@ -20723,6 +20724,10 @@ components:
           description: Top bar text color
           example: "#ffffff"
           type: string
+        contact_name:
+          description: Site main contact name
+          example: John Doe
+          type: string
         created_at:
           description: Time this site was created
           example: 2000-01-01T01:00:00Z
@@ -20923,6 +20928,10 @@ components:
           description: Allow users to use Office for the web?
           example: true
           type: boolean
+        oncehub_link:
+          description: Link to scheduling a meeting with our Sales team
+          example: https://go.oncehub.com/files
+          type: string
         opt_out_global:
           description: Use servers in the USA only?
           example: true

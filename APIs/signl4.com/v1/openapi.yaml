@@ -8336,6 +8336,7 @@ components:
         - 3
         - 4
         - 5
+        - 6
         - 1000
       format: int32
       type: integer
@@ -8449,6 +8450,11 @@ components:
     OverviewEvent:
       additionalProperties: false
       properties:
+        acknowledgedAlerts:
+          items:
+            type: string
+          nullable: true
+          type: array
         alertId:
           nullable: true
           type: string

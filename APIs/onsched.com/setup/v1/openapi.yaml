@@ -2728,6 +2728,83 @@ paths:
       summary: Creates a new resource object.
       tags:
         - Resources
+  "/setup/v1/resources/allocation/{id}":
+    delete:
+      description: Deletes a resource allocation.
+      parameters:
+        - description: Valid id of a resource allocation object
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceBlockViewModel"
+          description: Success
+      summary: Delete a resource allocation object
+      tags:
+        - Resources
+    put:
+      description: Updates a resource allocation. Refer to the details in the POST
+        resource allocation for setting each of the required parameters.
+      parameters:
+        - description: Valid id of a resource allocation object
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ResourceAllocationUpdateModel"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResourceAllocationUpdateModel"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/ResourceAllocationUpdateModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ResourceAllocationUpdateModel"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceBlockViewModel"
+          description: Success
+      summary: Update a resource allocation
+      tags:
+        - Resources
+  "/setup/v1/resources/allocations/{id}":
+    get:
+      description: ""
+      parameters:
+        - description: Valid id of a resource allocation object
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceAllocationViewModel"
+          description: Success
+      summary: Update a resource allocation
+      tags:
+        - Resources
   "/setup/v1/resources/block/{id}":
     delete:
       description: Deletes a resource block.
@@ -3028,6 +3105,177 @@ paths:
                 $ref: "#/components/schemas/ResourceViewModel"
           description: Success
       summary: Updates a resource object.
+      tags:
+        - Resources
+  "/setup/v1/resources/{id}/allocation":
+    post:
+      description: "Creates a new resource allocation. You must specify a
+        StartDateTime and EndDateTime.\r
+
+        A reason for the block is optional. This reason will display in
+        the OnSched Portal Calendar.\r
+
+        \r
+
+        Resource allocations can be set to specific time ranges or for
+        the whole day. \r
+
+        \r
+
+        Resource allocations can repeat for a specific date range
+        instance or set to repeat at a specified frequency.\r
+
+        The frequency can be set to a value of D,W,M,Y for Day, Week,
+        Month, or Year respecitively. \r
+
+        \r
+
+        Daily allocations will repeat for each day of the week for the
+        date range specified.\r
+
+        \r
+
+        Weekly allocations will repeat only on the specified days of the
+        week for the date range specified. For a weekly block\r
+
+        you must also specify the weekdays. Weekdays are expressed as a
+        string of digits with each single digit in the string representing a
+        day\r
+
+        of the week. The possible values are 0,1,2,3,4,5,6 where
+        0=Sunday, 1=Monday, 2=Tuesday, 3=Wed, 4=Thursday, 5=Friday,
+        6=Saturday.\r
+
+        For example a repeat weekly entry with weekdays 24 repeats each
+        week on Tuesday and Thursday.\r
+
+        \r
+
+        Use the interval property to specify the interval that the
+        allocation repeats. For example an interval of 2 for a weekly allocation
+        means that\r
+
+        the allocation will repeat every second week beginning at the
+        day specified. A daily allocation with an interval of 10 means the
+        allocation will\r
+
+        repeat every 10 days. The interval property applies to all
+        repeat frequencies.\r
+
+        \r
+
+        Monthly allocations repeat either on the day of the month
+        specified in the month day property or on the day of the week and week
+        of the month specified by\r
+
+        the start date. For example, repeat every 3rd friday of each
+        month, repeat on the 21st day of the month.\r
+
+        \r
+
+        Repeat allocations will end on the date specified by the end
+        date. You can specify 9999-12-31 in \r
+
+        the EndDate field to indicate the repeating block should
+        continue indefinitely."
+      parameters:
+        - description: Valid id of a resource object
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ResourceAllocationInputModel"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResourceAllocationInputModel"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/ResourceAllocationInputModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ResourceAllocationInputModel"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceBlockViewModel"
+          description: Success
+      summary: Create a new resource allocation
+      tags:
+        - Resources
+  "/setup/v1/resources/{id}/allocations":
+    get:
+      description: "Resource allocations allow you to specify explicitly the times you
+        are available as opposed to \r
+
+        generating resource availability from the times that are not
+        unavailable.\r
+
+        \r
+
+        The results are returned in pages. Use the offset and limit
+        parameters to control the page start and size. Default offset is 0, and
+        limit is 20.\r
+
+        Use the other query parameters to optionally filter the results
+        list."
+      parameters:
+        - description: The id of the resource to list allocations
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+        - description: Format yyyy-mm-dd. Filter allocations on/after startDate
+          in: query
+          name: startDate
+          schema:
+            default: ""
+            format: date-time
+            nullable: true
+            type: string
+        - description: Format yyyy-mm-dd. Filter on/before endDate
+          in: query
+          name: endDate
+          schema:
+            default: ""
+            format: date-time
+            nullable: true
+            type: string
+        - description: Starting row of page, default 0
+          in: query
+          name: offset
+          schema:
+            format: int32
+            type: integer
+        - description: Page limit, default 20. Maximum 100.
+          in: query
+          name: limit
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceAllocationListViewModel"
+          description: resource allocation objects
+        "400":
+          description: Missing or invalid values in the request
+        "401":
+          description: Authorization error.
+        "404":
+          description: Resource was not found
+      summary: Returns a list of resource allocations.
       tags:
         - Resources
   "/setup/v1/resources/{id}/availability":
@@ -3574,27 +3822,6 @@ paths:
       summary: Uploads a resource image
       tags:
         - Resources
-  "/setup/v1/service/block/{id}":
-    delete:
-      description: Deletes a service block.
-      parameters:
-        - description: Valid id of a service block object
-          in: path
-          name: id
-          required: true
-          schema:
-            default: ""
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResourceBlockViewModel"
-          description: Success
-      summary: Delete a service block object
-      tags:
-        - Services
   /setup/v1/services:
     get:
       description: "The results are returned in pages. Use the offset and limit
@@ -3757,6 +3984,26 @@ paths:
       tags:
         - Services
   "/setup/v1/services/block/{id}":
+    delete:
+      description: Deletes a service block.
+      parameters:
+        - description: Valid id of a service block object
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceBlockViewModel"
+          description: Success
+      summary: Delete a service block object
+      tags:
+        - Services
     put:
       description: Updates a resource block. Refer to the details in the POST resource
         block for setting each of the required parameters.
@@ -6585,6 +6832,115 @@ components:
           type: string
         weekdays:
           type: string
+      type: object
+    ResourceAllocationInputModel:
+      additionalProperties: false
+      properties:
+        allDay:
+          nullable: true
+          type: boolean
+        endDate:
+          format: date-time
+          nullable: true
+          type: string
+        endTime:
+          format: int32
+          type: integer
+        reason:
+          type: string
+        repeat:
+          $ref: "#/components/schemas/RepeatInputModel"
+        repeats:
+          nullable: true
+          type: boolean
+        startDate:
+          format: date-time
+          nullable: true
+          type: string
+        startTime:
+          format: int32
+          type: integer
+      type: object
+    ResourceAllocationListViewModel:
+      additionalProperties: false
+      properties:
+        count:
+          format: int32
+          type: integer
+        data:
+          items:
+            $ref: "#/components/schemas/ResourceAllocationViewModel"
+          type: array
+        hasMore:
+          type: boolean
+        object:
+          type: string
+        total:
+          format: int32
+          type: integer
+        url:
+          type: string
+      type: object
+    ResourceAllocationUpdateModel:
+      additionalProperties: false
+      properties:
+        allDay:
+          nullable: true
+          type: boolean
+        endDate:
+          format: date-time
+          nullable: true
+          type: string
+        endTime:
+          format: int32
+          type: integer
+        reason:
+          type: string
+        repeat:
+          $ref: "#/components/schemas/RepeatInputModel"
+        repeats:
+          nullable: true
+          type: boolean
+        startDate:
+          format: date-time
+          nullable: true
+          type: string
+        startTime:
+          format: int32
+          type: integer
+      type: object
+    ResourceAllocationViewModel:
+      additionalProperties: false
+      properties:
+        businessId:
+          format: int32
+          type: integer
+        endDate:
+          format: date-time
+          type: string
+        endTime:
+          format: int32
+          type: integer
+        id:
+          format: int32
+          type: integer
+        object:
+          type: string
+        reason:
+          type: string
+        repeat:
+          $ref: "#/components/schemas/RepeatViewModel"
+        repeats:
+          type: boolean
+        resourceId:
+          format: int32
+          type: integer
+        startDate:
+          format: date-time
+          type: string
+        startTime:
+          format: int32
+          type: integer
       type: object
     ResourceAvailabilityViewModel:
       additionalProperties: false

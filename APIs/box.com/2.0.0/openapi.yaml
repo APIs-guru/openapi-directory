@@ -19522,6 +19522,13 @@ components:
             - item_name_invalid
           example: item_name_invalid
           type: string
+        context_info:
+          description: |-
+            A free-form object that contains additional context
+            about the error. The possible fields are defined on
+            a per-endpoint basis.
+          nullable: true
+          type: object
         help_url:
           description: A URL that links to more information about why this error occurred.
           example: http://developers.box.com/docs/#errors

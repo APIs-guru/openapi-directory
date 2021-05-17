@@ -5243,6 +5243,10 @@ paths:
                             default: true
                             description: Store all compliance levels in database
                             type: boolean
+                          rudder_verify_certificates:
+                            default: false
+                            description: Enforce certificate validation in all HTTPS calls
+                            type: boolean
                           run_frequency:
                             description: Agent run schedule - time between agent runs (in minutes)
                             example: 5
@@ -5421,13 +5425,13 @@ paths:
                     add:
                       description: List of networks to add to existing allowed networks for that
                         server
-                      example: '{ "add": ["162.168.2.0/24], ... }'
+                      example: '{ "add": ["162.168.2.0/24] }'
                       items: {}
                       type: array
                     delete:
                       description: List of networks to remove from existing allowed networks for that
                         server
-                      example: '{ "delete":["162.168.1.0/24"], ... }'
+                      example: '{ "delete": ["162.168.1.0/24"] }'
                       items: {}
                       type: array
                   type: object
@@ -8032,6 +8036,12 @@ components:
           properties:
             description: Node properties in "key":"value" format, where "key" is a string,
               and "value" is either a string, a json array, or a json object.
+              The following example shows you three example of &#58; &#173; a
+              json array on the example of "tags":[ "some", "tags" ] &#173; a
+              simple string on the example of "env":"prod" &#173; a complex json
+              object on the example of "vars":{ "var1":"value1", "var2":"value2"
+              } They are optional and can be used in any combination as long the
+              keys are unique within the properties object.
             properties:
               env:
                 example: prod

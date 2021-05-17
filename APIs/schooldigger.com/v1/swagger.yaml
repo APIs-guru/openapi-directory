@@ -138,6 +138,12 @@ paths:
           name: sortBy
           required: false
           type: string
+        - description: "If sortBy is 'rank', this boolean determines if districts with no
+            rank are included in the result (optional, default: false)"
+          in: query
+          name: includeUnrankedDistrictsInRankSort
+          required: false
+          type: boolean
         - description: Your API app id
           in: query
           name: appID
@@ -470,6 +476,12 @@ paths:
           name: sortBy
           required: false
           type: string
+        - description: "If sortBy is 'rank', this boolean determines if schools with no
+            rank are included in the result (optional, default: false)"
+          in: query
+          name: includeUnrankedSchoolsInRankSort
+          required: false
+          type: boolean
         - description: Your API app id
           in: query
           name: appID

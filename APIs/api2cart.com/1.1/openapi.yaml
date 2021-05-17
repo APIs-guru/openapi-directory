@@ -4194,7 +4194,7 @@ paths:
         - category
   /category.list.json:
     get:
-      description: Get list of categories from store. Returns 4 categories by default.
+      description: Get list of categories from store.
       operationId: CategoryList
       parameters:
         - description: This parameter sets the number from which you want to get entities
@@ -5468,7 +5468,7 @@ paths:
         - order
   /order.list.json:
     get:
-      description: Get list of orders from store. Returns 4 orders by default.
+      description: Get list of orders from store.
       operationId: OrderList
       parameters:
         - description: Retrieves orders specified by customer id

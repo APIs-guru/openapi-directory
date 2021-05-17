@@ -485,12 +485,12 @@ paths:
           required: true
           type: string
         - description: 'Optional JSON MetaData that contains callback-payload, path or
-            format, ex: {"path" : <path for the sub resource>, "format":
-            <json/csv>, "callback-payload":<json>}. path - is passed to the
-            endpoint for bulk loading the data into a nested object. Optional
-            JSON Metadata that contains identifierFieldName, action, listId or
-            campaignId. The identifierField name is used for upserts and the
-            optional fields like listId or campaignId. Example:
+            format, ex: {"path" :&lt;path for the sub resource&gt;, "format":
+            &lt;json/csv&gt;, "callback-payload":&lt;json&gt;}. path - is passed
+            to the endpoint for bulk loading the data into a nested object.
+            Optional JSON Metadata that contains identifierFieldName, action,
+            listId or campaignId. The identifierField name is used for upserts
+            and the optional fields like listId or campaignId. Example:
             {"listId":"1014","action":"upsert"}. If the Upload format is JSON
             pass metadata as {"format":"json"}. callback-payload - is passed
             back in bulk job notification '
