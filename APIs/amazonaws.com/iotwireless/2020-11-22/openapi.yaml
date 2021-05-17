@@ -1507,6 +1507,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/RfRegion'
                         - description: The frequency band (RFRegion) value.
+                    JoinEuiFilters:
+                      $ref: '#/components/schemas/JoinEuiFilters'
+                    NetIdFilters:
+                      $ref: '#/components/schemas/NetIdFilters'
+                    SubBands:
+                      $ref: '#/components/schemas/SubBands'
                 Tags:
                   description: The tags to attach to the new wireless gateway. Tags are metadata that you can use to manage a resource.
                   type: array
@@ -2590,6 +2596,20 @@ paths:
                   description: A new description of the resource.
                   type: string
                   maxLength: 2048
+                JoinEuiFilters:
+                  description: A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/JoinEuiRange'
+                  minItems: 0
+                  maxItems: 3
+                NetIdFilters:
+                  description: A list of NetId values that are used by LoRa gateways to filter the uplink frames.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/NetId'
+                  minItems: 0
+                  maxItems: 10
   '/wireless-gateway-task-definitions/{Id}':
     delete:
       operationId: DeleteWirelessGatewayTaskDefinition
@@ -3856,6 +3876,27 @@ components:
     GatewayEui:
       type: string
       pattern: '^(([0-9A-Fa-f]{2}-){7}|([0-9A-Fa-f]{2}:){7}|([0-9A-Fa-f]{2}\s){7}|([0-9A-Fa-f]{2}){7})([0-9A-Fa-f]{2})$'
+    JoinEuiFilters:
+      type: array
+      description: A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.
+      items:
+        $ref: '#/components/schemas/JoinEuiRange'
+      minItems: 0
+      maxItems: 3
+    NetIdFilters:
+      type: array
+      description: A list of NetId values that are used by LoRa gateways to filter the uplink frames.
+      items:
+        $ref: '#/components/schemas/NetId'
+      minItems: 0
+      maxItems: 10
+    SubBands:
+      type: array
+      description: A list of integer indicating which sub bands are supported by LoRa gateway.
+      items:
+        $ref: '#/components/schemas/SubBand'
+      minItems: 0
+      maxItems: 8
     CreateWirelessGatewayTaskResponse:
       type: object
       properties:
@@ -4333,6 +4374,17 @@ components:
     UpdateWirelessGatewayResponse:
       type: object
       properties: {}
+    JoinEuiRange:
+      type: array
+      description: 'A pair of join EUI describing a range [BegEui, EndEui], both ends are inclusive.'
+      items:
+        $ref: '#/components/schemas/JoinEui'
+      minItems: 2
+      maxItems: 2
+    NetId:
+      type: string
+      pattern: '[a-fA-F0-9]{6}'
+      description: LoRaWAN network ID.
     DevAddr:
       type: string
       pattern: '[a-fA-F0-9]{8}'
@@ -4807,6 +4859,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/RfRegion'
             - description: The frequency band (RFRegion) value.
+        JoinEuiFilters:
+          $ref: '#/components/schemas/JoinEuiFilters'
+        NetIdFilters:
+          $ref: '#/components/schemas/NetIdFilters'
+        SubBands:
+          $ref: '#/components/schemas/SubBands'
       description: LoRaWANGateway object.
     CreateWirelessGatewayRequest:
       type: object
@@ -5626,6 +5684,11 @@ components:
             - $ref: '#/components/schemas/AppServerPrivateKey'
             - description: The new Sidewalk application server private key.
       description: Sidewalk update.
+    SubBand:
+      type: integer
+      description: A subset of supported frequency channels in a certain RFRegion.
+      minimum: 1
+      maximum: 8
     TagValue:
       type: string
       minLength: 0
@@ -5716,6 +5779,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Description'
             - description: A new description of the resource.
+        JoinEuiFilters:
+          $ref: '#/components/schemas/JoinEuiFilters'
+        NetIdFilters:
+          $ref: '#/components/schemas/NetIdFilters'
     UpdateWirelessGatewayTaskEntry:
       type: object
       properties:

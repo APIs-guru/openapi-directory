@@ -3,7 +3,7 @@ info:
   version: '2014-11-06'
   x-release: v4
   title: Amazon Simple Systems Manager (SSM)
-  description: '<fullname>AWS Systems Manager</fullname> <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon Elastic Compute Cloud instance (EC2 instance), or any on-premises server or virtual machine (VM) in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/">AWS Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html">Setting up AWS Systems Manager</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>For information about other API actions you can perform on EC2 instances, see the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/">Amazon EC2 API Reference</a>. For information about how to use a Query API, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html">Making API requests</a>. </p>'
+  description: '<fullname>AWS Systems Manager</fullname> <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon Elastic Compute Cloud instance (EC2 instance), or any on-premises server or virtual machine (VM) in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/">AWS Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html">Setting up AWS Systems Manager</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p class="title"> <b>Related resources</b> </p> <ul> <li> <p>For information about how to use a Query API, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html">Making API requests</a>. </p> </li> <li> <p>For information about other API actions you can perform on EC2 instances, see the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/">Amazon EC2 API Reference</a>.</p> </li> <li> <p>For information about AWS AppConfig, a capability of Systems Manager, see the <a href="https://docs.aws.amazon.com/appconfig/latest/userguide/">AWS AppConfig User Guide</a> and the <a href="https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/">AWS AppConfig API Reference</a>.</p> </li> <li> <p>For information about AWS Incident Manager, a capability of Systems Manager, see the <a href="https://docs.aws.amazon.com/incident-manager/latest/userguide/">AWS Incident Manager User Guide</a> and the <a href="https://docs.aws.amazon.com/incident-manager/latest/APIReference/">AWS Incident Manager API Reference</a>.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -169,6 +169,69 @@ paths:
             type: string
             enum:
               - AmazonSSM.AddTagsToResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.AssociateOpsItemRelatedItem:
+    post:
+      operationId: AssociateOpsItemRelatedItem
+      description: 'Associates a related resource to a Systems Manager OpsCenter OpsItem. For example, you can associate an Incident Manager incident or analysis with an OpsItem. Incident Manager is a capability of AWS Systems Manager.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateOpsItemRelatedItemResponse'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: OpsItemNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsItemNotFoundException'
+        '482':
+          description: OpsItemLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsItemLimitExceededException'
+        '483':
+          description: OpsItemInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsItemInvalidParameterException'
+        '484':
+          description: OpsItemRelatedItemAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsItemRelatedItemAlreadyExistsException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateOpsItemRelatedItemRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.AssociateOpsItemRelatedItem
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3474,6 +3537,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.DisassociateOpsItemRelatedItem:
+    post:
+      operationId: DisassociateOpsItemRelatedItem
+      description: 'Deletes the association between an OpsItem and a related resource. For example, this API action can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of AWS Systems Manager.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateOpsItemRelatedItemResponse'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: OpsItemRelatedItemAssociationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsItemRelatedItemAssociationNotFoundException'
+        '482':
+          description: OpsItemNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsItemNotFoundException'
+        '483':
+          description: OpsItemInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsItemInvalidParameterException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateOpsItemRelatedItemRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.DisassociateOpsItemRelatedItem
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonSSM.GetAutomationExecution:
     post:
       operationId: GetAutomationExecution
@@ -5536,6 +5656,63 @@ paths:
             type: string
             enum:
               - AmazonSSM.ListOpsItemEvents
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.ListOpsItemRelatedItems:
+    post:
+      operationId: ListOpsItemRelatedItems
+      description: Lists all related-item resources associated with an OpsItem.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOpsItemRelatedItemsResponse'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: OpsItemInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsItemInvalidParameterException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOpsItemRelatedItemsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.ListOpsItemRelatedItems
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -8006,6 +8183,42 @@ components:
     InternalServerError: {}
     TooManyTagsError: {}
     TooManyUpdates: {}
+    AssociateOpsItemRelatedItemResponse:
+      type: object
+      properties:
+        AssociationId:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemAssociationId'
+            - description: The association ID.
+    AssociateOpsItemRelatedItemRequest:
+      type: object
+      required:
+        - OpsItemId
+        - AssociationType
+        - ResourceType
+        - ResourceUri
+      title: AssociateOpsItemRelatedItemRequest
+      properties:
+        OpsItemId:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemId'
+            - description: The ID of the OpsItem to which you want to associate a resource as a related item.
+        AssociationType:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemAssociationType'
+            - description: The type of association that you want to create between an OpsItem and a resource. OpsCenter supports <code>IsParentOf</code> and <code>RelatesTo</code> association types.
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemAssociationResourceType'
+            - description: '<p>The type of resource that you want to associate with an OpsItem. OpsCenter supports the following types:</p> <p> <code>AWS::SSMIncidents::IncidentRecord</code>: an Incident Manager incident. Incident Manager is a capability of AWS Systems Manager.</p> <p> <code>AWS::SSM::Document</code>: a Systems Manager (SSM) document.</p>'
+        ResourceUri:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemAssociationResourceUri'
+            - description: The Amazon Resource Name (ARN) of the AWS resource that you want to associate with the OpsItem.
+    OpsItemNotFoundException: {}
+    OpsItemLimitExceededException: {}
+    OpsItemInvalidParameterException: {}
+    OpsItemRelatedItemAlreadyExistsException: {}
     CancelCommandResult:
       type: object
       properties: {}
@@ -8224,6 +8437,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentName'
             - description: '<p>A name for the Systems Manager document.</p> <important> <p>You can''t use the following strings as document name prefixes. These are reserved by AWS for use as document name prefixes:</p> <ul> <li> <p> <code>aws-</code> </p> </li> <li> <p> <code>amazon</code> </p> </li> <li> <p> <code>amzn</code> </p> </li> </ul> </important>'
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DocumentDisplayName'
+            - description: An optional field where you can specify a friendly name for the Systems Manager document. This value can differ for each version of the document. You can update this value at a later time using the <a>UpdateDocument</a> action.
         VersionName:
           allOf:
             - $ref: '#/components/schemas/DocumentVersionName'
@@ -8392,8 +8609,6 @@ components:
             - $ref: '#/components/schemas/DateTime'
             - description: The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type <code>/aws/changerequest</code>.
     OpsItemAlreadyExistsException: {}
-    OpsItemLimitExceededException: {}
-    OpsItemInvalidParameterException: {}
     CreateOpsMetadataResult:
       type: object
       properties:
@@ -9011,7 +9226,7 @@ components:
         ReverseOrder:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: A boolean that indicates whether to list step executions in reverse order by start time. The default value is 'false'.
+            - description: Indicates whether to list step executions in reverse order by start time. The default value is 'false'.
     AutomationExecutionNotFoundException: {}
     DescribeAvailablePatchesResult:
       type: object
@@ -9862,6 +10077,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/SessionFilterList'
             - description: One or more filters to limit the type of sessions returned by the request.
+    DisassociateOpsItemRelatedItemResponse:
+      type: object
+      properties: {}
+    DisassociateOpsItemRelatedItemRequest:
+      type: object
+      required:
+        - OpsItemId
+        - AssociationId
+      title: DisassociateOpsItemRelatedItemRequest
+      properties:
+        OpsItemId:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemId'
+            - description: The ID of the OpsItem for which you want to delete an association between the OpsItem and a related resource.
+        AssociationId:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemAssociationId'
+            - description: The ID of the association for which you want to delete an association between the OpsItem and a related resource.
+    OpsItemRelatedItemAssociationNotFoundException: {}
     GetAutomationExecutionResult:
       type: object
       properties:
@@ -10088,6 +10322,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentARN'
             - description: The name of the Systems Manager document.
+        CreatedDate:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date the Systems Manager document was created.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DocumentDisplayName'
+            - description: 'The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.'
         VersionName:
           allOf:
             - $ref: '#/components/schemas/DocumentVersionName'
@@ -10565,7 +10807,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpsItemId'
             - description: The ID of the OpsItem that you want to get.
-    OpsItemNotFoundException: {}
     GetOpsMetadataResult:
       type: object
       properties:
@@ -11296,6 +11537,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'A token to start the list. Use this token to get the next set of results. '
+    ListOpsItemRelatedItemsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
+        Summaries:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemSummaries'
+            - description: A list of related-item resources for the specified OpsItem.
+    ListOpsItemRelatedItemsRequest:
+      type: object
+      title: ListOpsItemRelatedItemsRequest
+      properties:
+        OpsItemId:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemId'
+            - description: The ID of the OpsItem for which you want to list all related-item resources.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemsFilters'
+            - description: 'One or more OpsItem filters. Use a filter to return a more specific list of results. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemsMaxResults'
+            - description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next set of items to return. (You received this token from a previous call.)
     ListOpsMetadataResult:
       type: object
       properties:
@@ -12281,7 +12553,11 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/DocumentName'
-            - description: The name of the document that you want to update.
+            - description: The name of the Systems Manager document that you want to update.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DocumentDisplayName'
+            - description: 'The friendly name of the Systems Manager document that you want to update. This value can differ for each version of the document. If you do not specify a value for this parameter in your request, the existing value is applied to the new document version.'
         VersionName:
           allOf:
             - $ref: '#/components/schemas/DocumentVersionName'
@@ -13057,6 +13333,17 @@ components:
       type: integer
       minimum: 0
       maximum: 360
+    OpsItemId:
+      type: string
+      pattern: '^(oi)-[0-9a-f]{12}$'
+    OpsItemRelatedItemAssociationType:
+      type: string
+    OpsItemRelatedItemAssociationResourceType:
+      type: string
+    OpsItemRelatedItemAssociationResourceUri:
+      type: string
+    OpsItemRelatedItemAssociationId:
+      type: string
     DocumentARN:
       type: string
       pattern: '^[a-zA-Z0-9_\-.:/]{3,128}$'
@@ -15050,6 +15337,10 @@ components:
       items:
         $ref: '#/components/schemas/DocumentRequires'
       minItems: 1
+    DocumentDisplayName:
+      type: string
+      pattern: '^[\w\.\-\:\/ ]*$'
+      maxLength: 1024
     DocumentVersionName:
       type: string
       pattern: '^[a-zA-Z0-9_\-.]{1,128}$'
@@ -15066,6 +15357,8 @@ components:
         - DeploymentStrategy
         - ChangeCalendar
         - Automation.ChangeTemplate
+        - ProblemAnalysis
+        - ProblemAnalysisTemplate
     DocumentFormat:
       type: string
       enum:
@@ -15095,6 +15388,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentARN'
             - description: The name of the Systems Manager document.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DocumentDisplayName'
+            - description: 'The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.'
         VersionName:
           allOf:
             - $ref: '#/components/schemas/DocumentVersionName'
@@ -15229,7 +15526,7 @@ components:
       type: string
       pattern: '[\s\S]*\S[\s\S]*'
       minLength: 1
-      maxLength: 1024
+      maxLength: 2048
     OpsItemType:
       type: string
     OpsItemOperationalData:
@@ -15765,6 +16062,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentARN'
             - description: The name of the Systems Manager document.
+        CreatedDate:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date the Systems Manager document was created.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DocumentDisplayName'
+            - description: 'An optional field where you can specify a friendly name for the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.'
         Owner:
           allOf:
             - $ref: '#/components/schemas/DocumentOwner'
@@ -15992,6 +16297,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentName'
             - description: The document name.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DocumentDisplayName'
+            - description: 'The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.'
         DocumentVersion:
           allOf:
             - $ref: '#/components/schemas/DocumentVersion'
@@ -16360,9 +16669,6 @@ components:
             - $ref: '#/components/schemas/S3Region'
             - description: The Region where the S3 bucket is located.
       description: '<p>Information about an S3 bucket to write instance-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
-    OpsItemId:
-      type: string
-      pattern: '^(oi)-[0-9a-f]{12}$'
     OpsItem:
       type: object
       properties:
@@ -17390,6 +17696,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/OpsItemEventSummary'
+    OpsItemRelatedItemsFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/OpsItemRelatedItemsFilter'
+    OpsItemRelatedItemsMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    OpsItemRelatedItemSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/OpsItemRelatedItemSummary'
     ListOpsMetadataMaxResults:
       type: integer
       minimum: 1
@@ -18141,7 +18459,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateTime'
             - description: The date and time the OpsItem event was created.
-      description: Summary information about an OpsItem event.
+      description: Summary information about an OpsItem event or that associated an OpsItem with a related item.
     OpsItemIdentity:
       type: object
       properties:
@@ -18224,6 +18542,78 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/String'
+    OpsItemRelatedItemSummary:
+      type: object
+      properties:
+        OpsItemId:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemId'
+            - description: The OpsItem ID.
+        AssociationId:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemAssociationId'
+            - description: The association ID.
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemAssociationResourceType'
+            - description: The resource type.
+        AssociationType:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemAssociationType'
+            - description: The association type.
+        ResourceUri:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemAssociationResourceUri'
+            - description: The Amazon Resource Name (ARN) of the related-item resource.
+        CreatedBy:
+          $ref: '#/components/schemas/OpsItemIdentity'
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time the related-item association was created.
+        LastModifiedBy:
+          $ref: '#/components/schemas/OpsItemIdentity'
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time the related-item association was last updated.
+      description: Summary information about related-item resources for an OpsItem.
+    OpsItemRelatedItemsFilterKey:
+      type: string
+      enum:
+        - ResourceType
+        - AssociationId
+        - ResourceUri
+    OpsItemRelatedItemsFilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/OpsItemRelatedItemsFilterValue'
+    OpsItemRelatedItemsFilterOperator:
+      type: string
+      enum:
+        - Equal
+    OpsItemRelatedItemsFilter:
+      type: object
+      required:
+        - Key
+        - Values
+        - Operator
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemsFilterKey'
+            - description: 'The name of the filter key. Supported values include <code>ResourceUri</code>, <code>ResourceType</code>, or <code>AssociationId</code>.'
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemsFilterValues'
+            - description: The values for the filter.
+        Operator:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemRelatedItemsFilterOperator'
+            - description: The operator used by the filter call. The only supported operator is <code>EQUAL</code>.
+      description: 'Describes a filter for a specific list of related-item resources. '
+    OpsItemRelatedItemsFilterValue:
+      type: string
     OpsItemSummary:
       type: object
       properties:

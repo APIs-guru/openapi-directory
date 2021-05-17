@@ -232,7 +232,7 @@ paths:
   /#X-Amz-Target=Transcribe.CreateVocabulary:
     post:
       operationId: CreateVocabulary
-      description: 'Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file. '
+      description: Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file.
       responses:
         '200':
           description: Success
@@ -1423,7 +1423,7 @@ paths:
   /#X-Amz-Target=Transcribe.StartTranscriptionJob:
     post:
       operationId: StartTranscriptionJob
-      description: 'Starts an asynchronous job to transcribe speech to text. '
+      description: Starts an asynchronous job to transcribe speech to text.
       responses:
         '200':
           description: Success
@@ -1844,7 +1844,7 @@ components:
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
-            - description: The language code of the vocabulary entries.
+            - description: 'The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see <a>what-is-transcribe</a>.'
         Phrases:
           allOf:
             - $ref: '#/components/schemas/Phrases'
@@ -1852,7 +1852,7 @@ components:
         VocabularyFileUri:
           allOf:
             - $ref: '#/components/schemas/Uri'
-            - description: '<p>The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is </p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Custom Vocabularies</a>.</p>'
+            - description: '<p>The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is </p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary">Custom Vocabularies</a>.</p>'
     CreateVocabularyFilterResponse:
       type: object
       properties:
@@ -2356,6 +2356,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MedicalTranscriptionSetting'
             - description: Optional settings for the medical transcription job.
+        ContentIdentificationType:
+          allOf:
+            - $ref: '#/components/schemas/MedicalContentIdentificationType'
+            - description: 'You can configure Amazon Transcribe Medical to label content in the transcription output. If you specify <code>PHI</code>, Amazon Transcribe Medical labels the personal health information (PHI) that it identifies in the transcription output.'
         Specialty:
           allOf:
             - $ref: '#/components/schemas/Specialty'
@@ -2385,7 +2389,7 @@ components:
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
-            - description: The language code for the language used in the input media file.
+            - description: '<p>The language code for the language used in the input media file.</p> <p>To transcribe speech in Modern Standard Arabic (ar-SA), your audio or video file must be encoded at a sample rate of 16000 Hz or higher.</p>'
         MediaSampleRateHertz:
           allOf:
             - $ref: '#/components/schemas/MediaSampleRateHertz'
@@ -2505,7 +2509,7 @@ components:
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
-            - description: The language code of the vocabulary entries.
+            - description: 'The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see <a>what-is-transcribe</a>.'
         Phrases:
           allOf:
             - $ref: '#/components/schemas/Phrases'
@@ -2789,6 +2793,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MedicalTranscriptionSetting'
             - description: Object that contains object.
+        ContentIdentificationType:
+          allOf:
+            - $ref: '#/components/schemas/MedicalContentIdentificationType'
+            - description: 'Shows the type of content that you''ve configured Amazon Transcribe Medical to identify in a transcription job. If the value is <code>PHI</code>, you''ve configured the job to identify personal health information (PHI) in the transcription output.'
         Specialty:
           allOf:
             - $ref: '#/components/schemas/Specialty'
@@ -2964,6 +2972,10 @@ components:
       type: integer
       minimum: 8000
       maximum: 48000
+    MedicalContentIdentificationType:
+      type: string
+      enum:
+        - PHI
     MedicalTranscript:
       type: object
       properties:
@@ -3048,6 +3060,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Specialty'
             - description: The medical specialty of the transcription job. <code>Primary care</code> is the only valid value.
+        ContentIdentificationType:
+          allOf:
+            - $ref: '#/components/schemas/MedicalContentIdentificationType'
+            - description: 'Shows the type of information you''ve configured Amazon Transcribe Medical to identify in a transcription job. If the value is <code>PHI</code>, you''ve configured the transcription job to identify personal health information (PHI).'
         Type:
           allOf:
             - $ref: '#/components/schemas/Type'

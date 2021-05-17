@@ -1261,6 +1261,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=KinesisAnalytics_20180523.DescribeApplicationVersion:
+    post:
+      operationId: DescribeApplicationVersion
+      description: '<p>Provides a detailed description of a specified version of the application. To see a list of all the versions of an application, invoke the <a>ListApplicationVersions</a> operation.</p> <note> <p>This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeApplicationVersionResponse'
+        '480':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeApplicationVersionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - KinesisAnalytics_20180523.DescribeApplicationVersion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=KinesisAnalytics_20180523.DiscoverInputSchema:
     post:
       operationId: DiscoverInputSchema
@@ -1361,6 +1412,57 @@ paths:
             type: string
             enum:
               - KinesisAnalytics_20180523.ListApplicationSnapshots
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=KinesisAnalytics_20180523.ListApplicationVersions:
+    post:
+      operationId: ListApplicationVersions
+      description: '<p>Lists all the versions for the specified application, including versions that were rolled back. The response also includes a summary of the configuration associated with each version.</p> <p>To get the complete description of a specific application version, invoke the <a>DescribeApplicationVersion</a> operation.</p> <note> <p>This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationVersionsResponse'
+        '480':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListApplicationVersionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - KinesisAnalytics_20180523.ListApplicationVersions
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1870,7 +1972,7 @@ paths:
   /#X-Amz-Target=KinesisAnalytics_20180523.UpdateApplicationMaintenanceConfiguration:
     post:
       operationId: UpdateApplicationMaintenanceConfiguration
-      description: 'Updates the configuration for the automatic maintenance that Kinesis Data Analytics performs on the application. For information about automatic application maintenance, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/maintenance.html">Kinesis Data Analytics for Apache Flink Maintenance</a>.'
+      description: '<p>Updates the maintenance configuration of the Kinesis Data Analytics application. </p> <p>You can invoke this operation on an application that is in one of the two following states: <code>READY</code> or <code>RUNNING</code>. If you invoke it when the application is in a state other than these two states, it throws a <code>ResourceInUseException</code>. The service makes use of the updated configuration the next time it schedules maintenance for the application. If you invoke this operation after the service schedules maintenance, the service will apply the configuration update the next time it schedules maintenance for the application. This means that you might not see the maintenance configuration update applied to the maintenance process that follows a successful invocation of this operation, but to the following maintenance process instead.</p> <p>To see the current maintenance configuration of your application, invoke the <a>DescribeApplication</a> operation.</p> <p>For information about application maintenance, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/maintenance.html">Kinesis Data Analytics for Apache Flink Maintenance</a>.</p> <note> <p>This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2559,6 +2661,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/SnapshotName'
             - description: The identifier of an application snapshot. You can retrieve this value using .
+    DescribeApplicationVersionResponse:
+      type: object
+      properties:
+        ApplicationVersionDetail:
+          $ref: '#/components/schemas/ApplicationDetail'
+    DescribeApplicationVersionRequest:
+      type: object
+      required:
+        - ApplicationName
+        - ApplicationVersionId
+      title: DescribeApplicationVersionRequest
+      properties:
+        ApplicationName:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The name of the application for which you want to get the version description.
+        ApplicationVersionId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: The ID of the application version for which you want to get the description.
     DiscoverInputSchemaResponse:
       type: object
       properties:
@@ -2636,6 +2758,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from. '
+    ListApplicationVersionsResponse:
+      type: object
+      properties:
+        ApplicationVersionSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionSummaries'
+            - description: '<p>A list of the application versions and the associated configuration summaries. The list includes application versions that were rolled back.</p> <p>To get the complete description of a specific application version, invoke the <a>DescribeApplicationVersion</a> operation.</p>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The pagination token for the next set of results, or <code>null</code> if there are no additional results. To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the AWS Command Line Interface''s Pagination Options</a>.'
+    ListApplicationVersionsRequest:
+      type: object
+      required:
+        - ApplicationName
+      title: ListApplicationVersionsRequest
+      properties:
+        ApplicationName:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The name of the application for which you want to list all versions.
+        Limit:
+          allOf:
+            - $ref: '#/components/schemas/ListApplicationVersionsInputLimit'
+            - description: The maximum number of versions to list in this invocation of the operation.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the AWS Command Line Interface''s Pagination Options</a>.'
     ListApplicationsResponse:
       type: object
       required:
@@ -2835,7 +2986,7 @@ components:
         ApplicationName:
           allOf:
             - $ref: '#/components/schemas/ApplicationName'
-            - description: The name of the application for which you want to update the maintenance time window.
+            - description: The name of the application for which you want to update the maintenance configuration.
         ApplicationMaintenanceConfigurationUpdate:
           allOf:
             - $ref: '#/components/schemas/ApplicationMaintenanceConfigurationUpdate'
@@ -3421,6 +3572,7 @@ components:
         - FORCE_STOPPING
         - MAINTENANCE
         - ROLLING_BACK
+        - ROLLED_BACK
     Timestamp:
       type: string
       format: date-time
@@ -3433,12 +3585,12 @@ components:
         ApplicationMaintenanceWindowStartTime:
           allOf:
             - $ref: '#/components/schemas/ApplicationMaintenanceWindowStartTime'
-            - description: The start time for the automatic maintenance window.
+            - description: The start time for the maintenance window.
         ApplicationMaintenanceWindowEndTime:
           allOf:
             - $ref: '#/components/schemas/ApplicationMaintenanceWindowEndTime'
-            - description: The end time for the automatic maintenance window.
-      description: Describes the time window for automatic application maintenance.
+            - description: The end time for the maintenance window.
+      description: The details of the maintenance configuration for the application.
     ApplicationDetail:
       type: object
       required:
@@ -3495,7 +3647,7 @@ components:
         ApplicationMaintenanceConfigurationDescription:
           allOf:
             - $ref: '#/components/schemas/ApplicationMaintenanceConfigurationDescription'
-            - description: Describes the time window for automatic application maintenance.
+            - description: The details of the maintenance configuration for the application.
         ApplicationVersionUpdatedFrom:
           allOf:
             - $ref: '#/components/schemas/ApplicationVersionId'
@@ -3508,6 +3660,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConditionalToken'
             - description: A value you use to implement strong concurrency for application updates.
+        ApplicationVersionRolledBackTo:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: The version to which you want to roll back the application.
       description: 'Describes the application, including the application Amazon Resource Name (ARN), status, latest version, and input and output configurations.'
     ApplicationMaintenanceWindowStartTime:
       type: string
@@ -3527,8 +3683,8 @@ components:
         ApplicationMaintenanceWindowStartTimeUpdate:
           allOf:
             - $ref: '#/components/schemas/ApplicationMaintenanceWindowStartTime'
-            - description: The updated start time for the automatic maintenance window.
-      description: Describes the updated time window for automatic application maintenance.
+            - description: The updated start time for the maintenance window.
+      description: Describes the updated maintenance configuration for the application.
     ApplicationRestoreType:
       type: string
       enum:
@@ -3590,6 +3746,25 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ApplicationSummary'
+    ApplicationVersionSummary:
+      type: object
+      required:
+        - ApplicationVersionId
+        - ApplicationStatus
+      properties:
+        ApplicationVersionId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: The ID of the application version. Kinesis Data Analytics updates the <code>ApplicationVersionId</code> each time you update the application.
+        ApplicationStatus:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationStatus'
+            - description: The status of the application.
+      description: The summary of the application version.
+    ApplicationVersionSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationVersionSummary'
     AuthorizedUrl:
       type: string
       minLength: 1
@@ -4462,6 +4637,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SnapshotDetails'
+    ListApplicationVersionsInputLimit:
+      type: integer
+      minimum: 1
+      maximum: 50
     ListApplicationsInputLimit:
       type: integer
       minimum: 1

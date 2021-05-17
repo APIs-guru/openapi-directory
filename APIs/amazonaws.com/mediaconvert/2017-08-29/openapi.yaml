@@ -423,6 +423,12 @@ paths:
                         - xml:
                             name: inputs
                           description: Use Inputs (inputs) to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output.
+                    KantarWatermark:
+                      allOf:
+                        - $ref: '#/components/schemas/KantarWatermarkSettings'
+                        - xml:
+                            name: kantarWatermark
+                          description: 'Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.'
                     MotionImageInserter:
                       allOf:
                         - $ref: '#/components/schemas/MotionImageInserter'
@@ -722,6 +728,12 @@ paths:
                         - xml:
                             name: inputs
                           description: 'Use Inputs (inputs) to define the source file used in the transcode job. There can only be one input in a job template.  Using the API, you can include multiple inputs when referencing a job template.'
+                    KantarWatermark:
+                      allOf:
+                        - $ref: '#/components/schemas/KantarWatermarkSettings'
+                        - xml:
+                            name: kantarWatermark
+                          description: 'Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.'
                     MotionImageInserter:
                       allOf:
                         - $ref: '#/components/schemas/MotionImageInserter'
@@ -984,7 +996,7 @@ paths:
                         - $ref: '#/components/schemas/VideoDescription'
                         - xml:
                             name: videoDescription
-                          description: VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of  VideoDescription per output.
+                          description: VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of VideoDescription per output.
                 tags:
                   description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
                   type: object
@@ -1533,6 +1545,12 @@ paths:
                         - xml:
                             name: inputs
                           description: 'Use Inputs (inputs) to define the source file used in the transcode job. There can only be one input in a job template.  Using the API, you can include multiple inputs when referencing a job template.'
+                    KantarWatermark:
+                      allOf:
+                        - $ref: '#/components/schemas/KantarWatermarkSettings'
+                        - xml:
+                            name: kantarWatermark
+                          description: 'Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.'
                     MotionImageInserter:
                       allOf:
                         - $ref: '#/components/schemas/MotionImageInserter'
@@ -1796,7 +1814,7 @@ paths:
                         - $ref: '#/components/schemas/VideoDescription'
                         - xml:
                             name: videoDescription
-                          description: VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of  VideoDescription per output.
+                          description: VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of VideoDescription per output.
   '/2017-08-29/queues/{name}':
     delete:
       operationId: DeleteQueue
@@ -2495,6 +2513,88 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Input'
+    KantarWatermarkSettings:
+      type: object
+      properties:
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max20'
+            - xml:
+                name: channelName
+              description: Provide an audio channel name from your Kantar audio license.
+        ContentReference:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max50PatternAZAZ09'
+            - xml:
+                name: contentReference
+              description: Specify a unique identifier for Kantar to use for this piece of content.
+        CredentialsSecretName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max512PatternAZAZ09'
+            - xml:
+                name: credentialsSecretName
+              description: 'Provide the name of the AWS Secrets Manager secret where your Kantar credentials are stored. Note that your MediaConvert service role must provide access to this secret. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/granting-permissions-for-mediaconvert-to-access-secrets-manager-secret.html. For instructions on creating a secret, see https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html, in the AWS Secrets Manager User Guide.'
+        FileOffset:
+          allOf:
+            - $ref: '#/components/schemas/__doubleMin0'
+            - xml:
+                name: fileOffset
+              description: 'Optional. Specify an offset, in whole seconds, from the start of your output and the beginning of the watermarking. When you don''t specify an offset, Kantar defaults to zero.'
+        KantarLicenseId:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max2147483647'
+            - xml:
+                name: kantarLicenseId
+              description: Provide your Kantar license ID number. You should get this number from Kantar.
+        KantarServerUrl:
+          allOf:
+            - $ref: '#/components/schemas/__stringPatternHttpsKantarmediaCom'
+            - xml:
+                name: kantarServerUrl
+              description: Provide the HTTPS endpoint to the Kantar server. You should get this endpoint from Kantar.
+        LogDestination:
+          allOf:
+            - $ref: '#/components/schemas/__stringPatternS3'
+            - xml:
+                name: logDestination
+              description: 'Optional. Specify the Amazon S3 bucket where you want MediaConvert to store your Kantar watermark XML logs. When you don''t specify a bucket, MediaConvert doesn''t save these logs. Note that your MediaConvert service role must provide access to this location. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html'
+        Metadata3:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max50'
+            - xml:
+                name: metadata3
+              description: 'You can optionally use this field to specify the first timestamp that Kantar embeds during watermarking. Kantar suggests that you be very cautious when using this Kantar feature, and that you use it only on channels that are managed specifically for use with this feature by your Audience Measurement Operator. For more information about this feature, contact Kantar technical support.'
+        Metadata4:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max50'
+            - xml:
+                name: metadata4
+              description: Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.
+        Metadata5:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max50'
+            - xml:
+                name: metadata5
+              description: Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.
+        Metadata6:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max50'
+            - xml:
+                name: metadata6
+              description: Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.
+        Metadata7:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max50'
+            - xml:
+                name: metadata7
+              description: Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.
+        Metadata8:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max50'
+            - xml:
+                name: metadata8
+              description: Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.
+      description: 'Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.'
     MotionImageInserter:
       type: object
       properties:
@@ -5063,6 +5163,24 @@ components:
             - xml:
                 name: backgroundOpacity
               description: Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match.
+        DdsHandling:
+          allOf:
+            - $ref: '#/components/schemas/DvbddsHandling'
+            - xml:
+                name: ddsHandling
+              description: 'Specify how MediaConvert handles the display definition segment (DDS). Keep the default, None (NONE), to exclude the DDS from this set of captions. Choose No display window (NO_DISPLAY_WINDOW) to have MediaConvert include the DDS but not include display window data. In this case, MediaConvert writes that information to the page composition segment (PCS) instead. Choose Specify (SPECIFIED) to have MediaConvert set up the display window based on the values that you specify in related job settings. For video resolutions that are 576 pixels or smaller in height, MediaConvert doesn''t include the DDS, regardless of the value you choose for DDS handling (ddsHandling). In this case, it doesn''t write the display window data to the PCS either. Related settings: Use the settings DDS x-coordinate (ddsXCoordinate) and DDS y-coordinate (ddsYCoordinate) to specify the offset between the top left corner of the display window and the top left corner of the video frame. All burn-in and DVB-Sub font settings must match.'
+        DdsXCoordinate:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max2147483647'
+            - xml:
+                name: ddsXCoordinate
+              description: 'Use this setting, along with DDS y-coordinate (ddsYCoordinate), to specify the upper left corner of the display definition segment (DDS) display window. With this setting, specify the distance, in pixels, between the left side of the frame and the left side of the DDS display window. Keep the default value, 0, to have MediaConvert automatically choose this offset. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). MediaConvert uses these values to determine whether to write page position data to the DDS or to the page composition segment (PCS). All burn-in and DVB-Sub font settings must match.'
+        DdsYCoordinate:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max2147483647'
+            - xml:
+                name: ddsYCoordinate
+              description: 'Use this setting, along with DDS x-coordinate (ddsXCoordinate), to specify the upper left corner of the display definition segment (DDS) display window. With this setting, specify the distance, in pixels, between the top of the frame and the top of the DDS display window. Keep the default value, 0, to have MediaConvert automatically choose this offset. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). MediaConvert uses these values to determine whether to write page position data to the DDS or to the page composition segment (PCS). All burn-in and DVB-Sub font settings must match.'
         FontColor:
           allOf:
             - $ref: '#/components/schemas/DvbSubtitleFontColor'
@@ -5097,6 +5215,12 @@ components:
             - xml:
                 name: fontSize
               description: A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match.
+        Height:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1Max2147483647'
+            - xml:
+                name: height
+              description: 'Specify the height, in pixels, of this set of DVB-Sub captions. The default value is 576 pixels. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). All burn-in and DVB-Sub font settings must match.'
         OutlineColor:
           allOf:
             - $ref: '#/components/schemas/DvbSubtitleOutlineColor'
@@ -5147,6 +5271,12 @@ components:
             - xml:
                 name: teletextSpacing
               description: Only applies to jobs with input captions in Teletext or STL formats. Specify whether the spacing between letters in your captions is set by the captions grid or varies depending on letter width. Choose fixed grid to conform to the spacing specified in the captions file more accurately. Choose proportional to make the text easier to read if the captions are closed caption.
+        Width:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1Max2147483647'
+            - xml:
+                name: width
+              description: 'Specify the width, in pixels, of this set of DVB-Sub captions. The default value is 720 pixels. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). All burn-in and DVB-Sub font settings must match.'
         XPosition:
           allOf:
             - $ref: '#/components/schemas/__integerMin0Max2147483647'
@@ -6304,6 +6434,12 @@ components:
             - xml:
                 name: audioPids
               description: 'Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation.'
+        MaxPcrInterval:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max500'
+            - xml:
+                name: maxPcrInterval
+              description: 'Specify the maximum time, in milliseconds, between Program Clock References (PCRs) inserted into the transport stream.'
         NielsenId3:
           allOf:
             - $ref: '#/components/schemas/M3u8NielsenId3'
@@ -6548,6 +6684,12 @@ components:
             - xml:
                 name: inputs
               description: Use Inputs (inputs) to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output.
+        KantarWatermark:
+          allOf:
+            - $ref: '#/components/schemas/KantarWatermarkSettings'
+            - xml:
+                name: kantarWatermark
+              description: 'Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.'
         MotionImageInserter:
           allOf:
             - $ref: '#/components/schemas/MotionImageInserter'
@@ -6883,6 +7025,12 @@ components:
             - xml:
                 name: inputs
               description: 'Use Inputs (inputs) to define the source file used in the transcode job. There can only be one input in a job template.  Using the API, you can include multiple inputs when referencing a job template.'
+        KantarWatermark:
+          allOf:
+            - $ref: '#/components/schemas/KantarWatermarkSettings'
+            - xml:
+                name: kantarWatermark
+              description: 'Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.'
         MotionImageInserter:
           allOf:
             - $ref: '#/components/schemas/MotionImageInserter'
@@ -7098,7 +7246,7 @@ components:
             - $ref: '#/components/schemas/VideoDescription'
             - xml:
                 name: videoDescription
-              description: VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of  VideoDescription per output.
+              description: VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of VideoDescription per output.
       description: Settings for preset
     CreatePresetRequest:
       type: object
@@ -7806,6 +7954,13 @@ components:
       description: |-
         Specifies the color of the rectangle behind the captions.
         All burn-in and DVB-Sub font settings must match.
+    DvbddsHandling:
+      type: string
+      enum:
+        - NONE
+        - SPECIFIED
+        - NO_DISPLAY_WINDOW
+      description: 'Specify how MediaConvert handles the display definition segment (DDS). Keep the default, None (NONE), to exclude the DDS from this set of captions. Choose No display window (NO_DISPLAY_WINDOW) to have MediaConvert include the DDS but not include display window data. In this case, MediaConvert writes that information to the page composition segment (PCS) instead. Choose Specify (SPECIFIED) to have MediaConvert set up the display window based on the values that you specify in related job settings. For video resolutions that are 576 pixels or smaller in height, MediaConvert doesn''t include the DDS, regardless of the value you choose for DDS handling (ddsHandling). In this case, it doesn''t write the display window data to the PCS either. Related settings: Use the settings DDS x-coordinate (ddsXCoordinate) and DDS y-coordinate (ddsYCoordinate) to specify the offset between the top left corner of the display window and the top left corner of the video frame. All burn-in and DVB-Sub font settings must match.'
     DvbSubtitleFontColor:
       type: string
       enum:
@@ -9749,6 +9904,12 @@ components:
             - xml:
                 name: rotate
               description: 'Use Rotate (InputRotate) to specify how the service rotates your video. You can choose automatic rotation or specify a rotation. You can specify a clockwise rotation of 0, 90, 180, or 270 degrees. If your input video container is .mov or .mp4 and your input has rotation metadata, you can choose Automatic to have the service rotate your video according to the rotation specified in the metadata. The rotation must be within one degree of 90, 180, or 270 degrees. If the rotation metadata specifies any other rotation, the service will default to no rotation. By default, the service does no rotation, even if your input video has rotation metadata. The service doesn''t pass through rotation metadata.'
+        SampleRange:
+          allOf:
+            - $ref: '#/components/schemas/InputSampleRange'
+            - xml:
+                name: sampleRange
+              description: 'Use this setting when your input video codec is AVC-Intra. Ignore this setting for all other inputs. If the sample range metadata in your input video is accurate, or if you don''t know about sample range, keep the default value, Follow (FOLLOW), for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata.'
       description: Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector.
     Input:
       type: object
@@ -9914,6 +10075,13 @@ components:
         - DEGREES_270
         - AUTO
       description: 'Use Rotate (InputRotate) to specify how the service rotates your video. You can choose automatic rotation or specify a rotation. You can specify a clockwise rotation of 0, 90, 180, or 270 degrees. If your input video container is .mov or .mp4 and your input has rotation metadata, you can choose Automatic to have the service rotate your video according to the rotation specified in the metadata. The rotation must be within one degree of 90, 180, or 270 degrees. If the rotation metadata specifies any other rotation, the service will default to no rotation. By default, the service does no rotation, even if your input video has rotation metadata. The service doesn''t pass through rotation metadata.'
+    InputSampleRange:
+      type: string
+      enum:
+        - FOLLOW
+        - FULL_RANGE
+        - LIMITED_RANGE
+      description: 'Use this setting when your input video codec is AVC-Intra. Ignore this setting for all other inputs. If the sample range metadata in your input video is accurate, or if you don''t know about sample range, keep the default value, Follow (FOLLOW), for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata.'
     InputTemplate:
       type: object
       properties:
@@ -10182,6 +10350,27 @@ components:
         - CREATION_DATE
         - SYSTEM
       description: 'Optional. When you request a list of job templates, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don''t specify, the service will list them by name.'
+    __stringMin1Max20:
+      type: string
+      minLength: 1
+      maxLength: 20
+    __stringMin1Max50PatternAZAZ09:
+      type: string
+      pattern: '^[a-zA-Z0-9_\/_+=.@-]*$'
+      minLength: 1
+      maxLength: 50
+    __stringMin1Max512PatternAZAZ09:
+      type: string
+      pattern: '^[a-zA-Z0-9_\/_+=.@-]*$'
+      minLength: 1
+      maxLength: 512
+    __stringPatternHttpsKantarmediaCom:
+      type: string
+      pattern: '^https:\/\/.*.kantarmedia.com$'
+    __stringMin1Max50:
+      type: string
+      minLength: 1
+      maxLength: 50
     __integerMin1Max20:
       type: integer
       minimum: 1
@@ -11059,14 +11248,6 @@ components:
       type: integer
       minimum: 0
       maximum: 0
-    __stringMin1Max20:
-      type: string
-      minLength: 1
-      maxLength: 20
-    __stringMin1Max50:
-      type: string
-      minLength: 1
-      maxLength: 50
     __stringPattern0xAFaF0908190908:
       type: string
       pattern: '(^0x[A-Fa-f0-9]{0,8}$|^[1-9][0-9]{0,8}$)'
@@ -11291,7 +11472,7 @@ components:
             - $ref: '#/components/schemas/VideoDescription'
             - xml:
                 name: videoDescription
-              description: VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of  VideoDescription per output.
+              description: VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of VideoDescription per output.
       description: 'Each output in your job is a collection of settings that describes how you want MediaConvert to encode a single output file or stream. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/create-outputs.html.'
     __listOf__integerMinNegative60Max6:
       type: array
@@ -11315,7 +11496,7 @@ components:
             - $ref: '#/components/schemas/__listOf__doubleMinNegative60Max6'
             - xml:
                 name: inputChannelsFineTune
-              description: 'Use this setting to specify your remix values when they have a decimal component, such as  -10.312, 0.08, or 4.9. MediaConvert rounds your remixing values to the nearest thousandth.'
+              description: 'Use this setting to specify your remix values when they have a decimal component, such as -10.312, 0.08, or 4.9. MediaConvert rounds your remixing values to the nearest thousandth.'
       description: OutputChannel mapping settings.
     VideoDetail:
       type: object

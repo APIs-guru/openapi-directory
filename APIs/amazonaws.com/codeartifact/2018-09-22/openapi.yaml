@@ -601,7 +601,7 @@ paths:
             maxLength: 12
     get:
       operationId: DescribeDomain
-      description: ' Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainDescription.html"> <code>DomainDescription</code> </a> object that contains information about the requested domain. '
+      description: ' Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainDescription.html">DomainDescription</a> object that contains information about the requested domain. '
       responses:
         '200':
           description: Success
@@ -1384,7 +1384,7 @@ paths:
   /v1/package/version#domain&repository&format&package&version:
     get:
       operationId: DescribePackageVersion
-      description: ' Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html"> <code>PackageVersionDescription</code> </a> object that contains information about the requested package version. '
+      description: ' Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html">PackageVersionDescription</a> object that contains information about the requested package version. '
       responses:
         '200':
           description: Success
@@ -1505,7 +1505,7 @@ paths:
   /v1/package/versions/dispose#domain&repository&format&package:
     post:
       operationId: DisposePackageVersions
-      description: '<p> Deletes the assets in package versions and sets the package versions'' status to <code>Disposed</code>. A disposed package version cannot be restored in your repository because its assets are deleted. </p> <p> To view all disposed package versions in a repository, use <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html"> <code>ListPackageVersions</code> </a> and set the <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax"> <code>status</code> </a> parameter to <code>Disposed</code>. </p> <p> To view information about a disposed package version, use <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html"> <code>DescribePackageVersion</code> </a>.. </p>'
+      description: '<p> Deletes the assets in package versions and sets the package versions'' status to <code>Disposed</code>. A disposed package version cannot be restored in your repository because its assets are deleted. </p> <p> To view all disposed package versions in a repository, use <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html">ListPackageVersions</a> and set the <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax">status</a> parameter to <code>Disposed</code>. </p> <p> To view information about a disposed package version, use <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html">DescribePackageVersion</a>. </p>'
       responses:
         '200':
           description: Success
@@ -2316,7 +2316,7 @@ paths:
   /v1/package/version/assets#domain&repository&format&package&version:
     post:
       operationId: ListPackageVersionAssets
-      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html"> <code>AssetSummary</code> </a> objects for assets in a package version. '
+      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html">AssetSummary</a> objects for assets in a package version. '
       responses:
         '200':
           description: Success
@@ -2460,7 +2460,7 @@ paths:
   /v1/package/version/dependencies#domain&repository&format&package&version:
     post:
       operationId: ListPackageVersionDependencies
-      description: ' Returns the direct dependencies for a package version. The dependencies are returned as <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html"> <code>PackageDependency</code> </a> objects. CodeArtifact extracts the dependencies for a package version from the metadata file for the package format (for example, the <code>package.json</code> file for npm packages and the <code>pom.xml</code> file for Maven). Any package version dependencies that are not listed in the configuration file are not returned. '
+      description: ' Returns the direct dependencies for a package version. The dependencies are returned as <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html">PackageDependency</a> objects. CodeArtifact extracts the dependencies for a package version from the metadata file for the package format (for example, the <code>package.json</code> file for npm packages and the <code>pom.xml</code> file for Maven). Any package version dependencies that are not listed in the configuration file are not returned. '
       responses:
         '200':
           description: Success
@@ -2584,7 +2584,7 @@ paths:
   /v1/package/versions#domain&repository&format&package:
     post:
       operationId: ListPackageVersions
-      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html"> <code>PackageVersionSummary</code> </a> objects for package versions in a repository that match the request parameters. '
+      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html">PackageVersionSummary</a> objects for package versions in a repository that match the request parameters. '
       responses:
         '200':
           description: Success
@@ -2740,7 +2740,7 @@ paths:
   /v1/packages#domain&repository:
     post:
       operationId: ListPackages
-      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html"> <code>PackageSummary</code> </a> objects for packages in a repository that match the request parameters. '
+      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html">PackageSummary</a> objects for packages in a repository that match the request parameters. '
       responses:
         '200':
           description: Success
@@ -2875,7 +2875,7 @@ paths:
   /v1/repositories:
     post:
       operationId: ListRepositories
-      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html"> <code>RepositorySummary</code> </a> objects. Each <code>RepositorySummary</code> contains information about a repository in the specified AWS account and that matches the input parameters. '
+      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html">RepositorySummary</a> objects. Each <code>RepositorySummary</code> contains information about a repository in the specified AWS account and that matches the input parameters. '
       responses:
         '200':
           description: Success
@@ -2957,7 +2957,7 @@ paths:
   /v1/domain/repositories#domain:
     post:
       operationId: ListRepositoriesInDomain
-      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html"> <code>RepositorySummary</code> </a> objects. Each <code>RepositorySummary</code> contains information about a repository in the specified domain and that matches the input parameters. '
+      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html">RepositorySummary</a> objects. Each <code>RepositorySummary</code> contains information about a repository in the specified domain and that matches the input parameters. '
       responses:
         '200':
           description: Success
@@ -3639,7 +3639,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/RepositoryName'
             - description: ' The name of an upstream repository. '
-      description: ' Information about an upstream repository. A list of <code>UpstreamRepository</code> objects is an input parameter to <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_CreateRepository.html"> <code>CreateRepository</code> </a> and <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdateRepository.html"> <code>UpdateRepository</code> </a>. '
+      description: ' Information about an upstream repository. A list of <code>UpstreamRepository</code> objects is an input parameter to <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_CreateRepository.html">CreateRepository</a> and <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdateRepository.html">UpdateRepository</a>. '
     DeleteDomainResult:
       type: object
       properties:
@@ -3825,7 +3825,7 @@ components:
         assets:
           allOf:
             - $ref: '#/components/schemas/AssetSummaryList'
-            - description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html"> <code>AssetSummary</code> </a> objects. '
+            - description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html">AssetSummary</a> objects. '
     ListPackageVersionDependenciesResult:
       type: object
       properties:
@@ -3856,7 +3856,7 @@ components:
         dependencies:
           allOf:
             - $ref: '#/components/schemas/PackageDependencyList'
-            - description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html"> <code>PackageDependency</code> </a> objects. '
+            - description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html">PackageDependency</a> objects. '
     ListPackageVersionsResult:
       type: object
       properties:
@@ -3879,7 +3879,7 @@ components:
         versions:
           allOf:
             - $ref: '#/components/schemas/PackageVersionSummaryList'
-            - description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html"> <code>PackageVersionSummary</code> </a> objects. '
+            - description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html">PackageVersionSummary</a> objects. '
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -3890,7 +3890,7 @@ components:
         packages:
           allOf:
             - $ref: '#/components/schemas/PackageSummaryList'
-            - description: ' The list of returned <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html"> <code>PackageSummary</code> </a> objects. '
+            - description: ' The list of returned <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html">PackageSummary</a> objects. '
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -3901,7 +3901,7 @@ components:
         repositories:
           allOf:
             - $ref: '#/components/schemas/RepositorySummaryList'
-            - description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html"> <code>RepositorySummary</code> </a> objects. '
+            - description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html">RepositorySummary</a> objects. '
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -4396,7 +4396,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: ' The key used to encrypt the domain. '
-      description: ' Information about a domain, including its name, Amazon Resource Name (ARN), and status. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListDomains.html"> <code>ListDomains</code> </a> operation returns a list of <code>DomainSummary</code> objects. '
+      description: ' Information about a domain, including its name, Amazon Resource Name (ARN), and status. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListDomains.html">ListDomains</a> operation returns a list of <code>DomainSummary</code> objects. '
     DomainSummaryList:
       type: array
       items:
@@ -4580,7 +4580,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PackageName'
             - description: ' The name of the package. '
-      description: ' Details about a package, including its format, namespace, and name. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackages.html"> <code>ListPackages</code> </a> operation returns a list of <code>PackageSummary</code> objects. '
+      description: ' Details about a package, including its format, namespace, and name. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackages.html">ListPackages</a> operation returns a list of <code>PackageSummary</code> objects. '
     String255:
       type: string
       minLength: 1
@@ -4624,7 +4624,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PackageVersionStatus'
             - description: '<p> A string that contains the status of the package version. It can be one of the following: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
-      description: ' Details about a package version, including its status, version, and revision. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html"> <code>ListPackageVersions</code> </a> operation returns a list of <code>PackageVersionSummary</code> objects. '
+      description: ' Details about a package version, including its status, version, and revision. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html">ListPackageVersions</a> operation returns a list of <code>PackageVersionSummary</code> objects. '
     PolicyDocument:
       type: string
       minLength: 1
@@ -4717,7 +4717,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Description'
             - description: ' The description of the repository. '
-      description: ' Details about a repository, including its Amazon Resource Name (ARN), description, and domain information. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListRepositories.html"> <code>ListRepositories</code> </a> operation returns a list of <code>RepositorySummary</code> objects. '
+      description: ' Details about a repository, including its Amazon Resource Name (ARN), description, and domain information. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListRepositories.html">ListRepositories</a> operation returns a list of <code>RepositorySummary</code> objects. '
     SuccessfulPackageVersionInfo:
       type: object
       properties:

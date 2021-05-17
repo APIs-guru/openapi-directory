@@ -206,7 +206,7 @@ paths:
               type: object
               properties:
                 Tags:
-                  description: 'The tags to assign to the new behavior graph. For each tag, you provide the tag key and the tag value.'
+                  description: 'The tags to assign to the new behavior graph. You can add up to 50 tags. For each tag, you provide the tag key and the tag value. Each tag key can contain up to 128 characters. Each tag value can contain up to 256 characters.'
                   type: object
                   minProperties: 1
                   maxProperties: 50
@@ -279,7 +279,7 @@ paths:
                   description: 'if set to <code>true</code>, then the member accounts do not receive email notifications. By default, this is set to <code>false</code>, and the member accounts receive email notifications.'
                   type: boolean
                 Accounts:
-                  description: 'The list of AWS accounts to invite to become member accounts in the behavior graph. For each invited account, the account list contains the account identifier and the AWS account root user email address.'
+                  description: 'The list of AWS accounts to invite to become member accounts in the behavior graph. You can invite up to 50 accounts at a time. For each invited account, the account list contains the account identifier and the AWS account root user email address.'
                   type: array
                   items:
                     $ref: '#/components/schemas/Account'
@@ -391,7 +391,7 @@ paths:
                   type: string
                   pattern: '^arn:aws[-\w]{0,10}?:detective:[-\w]{2,20}?:\d{12}?:graph:[abcdef\d]{32}?$'
                 AccountIds:
-                  description: The list of AWS account identifiers for the member accounts to delete from the behavior graph.
+                  description: The list of AWS account identifiers for the member accounts to delete from the behavior graph. You can delete up to 50 member accounts at a time.
                   type: array
                   items:
                     $ref: '#/components/schemas/AccountId'
@@ -503,7 +503,7 @@ paths:
                   type: string
                   pattern: '^arn:aws[-\w]{0,10}?:detective:[-\w]{2,20}?:\d{12}?:graph:[abcdef\d]{32}?$'
                 AccountIds:
-                  description: <p>The list of AWS account identifiers for the member account for which to return member details.</p> <p>You cannot use <code>GetMembers</code> to retrieve information about member accounts that were removed from the behavior graph.</p>
+                  description: <p>The list of AWS account identifiers for the member account for which to return member details. You can request details for up to 50 member accounts at a time.</p> <p>You cannot use <code>GetMembers</code> to retrieve information about member accounts that were removed from the behavior graph.</p>
                   type: array
                   items:
                     $ref: '#/components/schemas/AccountId'
@@ -803,7 +803,7 @@ paths:
                 - Tags
               properties:
                 Tags:
-                  description: The tag values to assign to the behavior graph.
+                  description: 'The tags to assign to the behavior graph. You can add up to 50 tags. For each tag, you provide the tag key and the tag value. Each tag key can contain up to 128 characters. Each tag value can contain up to 256 characters.'
                   type: object
                   minProperties: 1
                   maxProperties: 50
@@ -968,7 +968,7 @@ paths:
         - name: tagKeys
           in: query
           required: true
-          description: The tag keys of the tags to remove from the behavior graph.
+          description: The tag keys of the tags to remove from the behavior graph. You can remove up to 50 tags at a time.
           schema:
             type: array
             items:
@@ -1142,7 +1142,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: The tag values that are assigned to the behavior graph.
+            - description: The tag values that are assigned to the behavior graph. The request returns up to 50 tag values.
     TagResourceResponse:
       type: object
       properties: {}
@@ -1201,7 +1201,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags to assign to the new behavior graph. For each tag, you provide the tag key and the tag value.'
+            - description: 'The tags to assign to the new behavior graph. You can add up to 50 tags. For each tag, you provide the tag key and the tag value. Each tag key can contain up to 128 characters. Each tag value can contain up to 256 characters.'
     EmailMessage:
       type: string
       minLength: 1
@@ -1228,7 +1228,7 @@ components:
         Accounts:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: 'The list of AWS accounts to invite to become member accounts in the behavior graph. For each invited account, the account list contains the account identifier and the AWS account root user email address.'
+            - description: 'The list of AWS accounts to invite to become member accounts in the behavior graph. You can invite up to 50 accounts at a time. For each invited account, the account list contains the account identifier and the AWS account root user email address.'
     MemberDetailList:
       type: array
       items:
@@ -1261,7 +1261,7 @@ components:
         AccountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIdList'
-            - description: The list of AWS account identifiers for the member accounts to delete from the behavior graph.
+            - description: The list of AWS account identifiers for the member accounts to delete from the behavior graph. You can delete up to 50 member accounts at a time.
     DisassociateMembershipRequest:
       type: object
       required:
@@ -1286,7 +1286,7 @@ components:
         AccountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIdList'
-            - description: <p>The list of AWS account identifiers for the member account for which to return member details.</p> <p>You cannot use <code>GetMembers</code> to retrieve information about member accounts that were removed from the behavior graph.</p>
+            - description: <p>The list of AWS account identifiers for the member account for which to return member details. You can request details for up to 50 member accounts at a time.</p> <p>You cannot use <code>GetMembers</code> to retrieve information about member accounts that were removed from the behavior graph.</p>
     Timestamp:
       type: string
       format: date-time
@@ -1475,7 +1475,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: The tag values to assign to the behavior graph.
+            - description: 'The tags to assign to the behavior graph. You can add up to 50 tags. For each tag, you provide the tag key and the tag value. Each tag key can contain up to 128 characters. Each tag value can contain up to 256 characters.'
     UnprocessedReason:
       type: string
     UnprocessedAccount:

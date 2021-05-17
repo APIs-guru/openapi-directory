@@ -462,6 +462,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/IntegerClass'
                         - description: The number of warm nodes in the cluster.
+                    ColdStorageOptions:
+                      allOf:
+                        - $ref: '#/components/schemas/ColdStorageOptions'
+                        - description: Specifies the <code>ColdStorageOptions</code> configuration for an Elasticsearch domain.
                 EBSOptions:
                   description: 'Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.'
                   type: object
@@ -1315,6 +1319,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/IntegerClass'
                         - description: The number of warm nodes in the cluster.
+                    ColdStorageOptions:
+                      allOf:
+                        - $ref: '#/components/schemas/ColdStorageOptions'
+                        - description: Specifies the <code>ColdStorageOptions</code> configuration for an Elasticsearch domain.
                 EBSOptions:
                   description: 'Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.'
                   type: object
@@ -3372,6 +3380,16 @@ components:
       enum:
         - ultrawarm1.medium.elasticsearch
         - ultrawarm1.large.elasticsearch
+    ColdStorageOptions:
+      type: object
+      required:
+        - Enabled
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: True to enable cold storage for an Elasticsearch domain.
+      description: Specifies settings for cold storage.
     VolumeType:
       type: string
       enum:
@@ -4480,6 +4498,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntegerClass'
             - description: The number of warm nodes in the cluster.
+        ColdStorageOptions:
+          allOf:
+            - $ref: '#/components/schemas/ColdStorageOptions'
+            - description: Specifies the <code>ColdStorageOptions</code> configuration for an Elasticsearch domain.
       description: 'Specifies the configuration for the domain cluster, such as the type and number of instances.'
     EBSOptions:
       type: object

@@ -922,6 +922,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeAggregateComplianceByConfigRulesRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -979,6 +991,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeAggregateComplianceByConformancePacksRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1030,6 +1054,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeAggregationAuthorizationsRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1081,6 +1117,12 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeComplianceByConfigRuleRequest'
       parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1126,6 +1168,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeComplianceByResourceRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1177,6 +1231,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeConfigRuleEvaluationStatusRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1222,6 +1288,12 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeConfigRulesRequest'
       parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1279,6 +1351,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeConfigurationAggregatorSourcesStatusRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1336,6 +1420,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeConfigurationAggregatorsRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1477,6 +1573,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeConformancePackComplianceRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1528,6 +1636,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeConformancePackStatusRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1585,6 +1705,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeConformancePacksRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1720,6 +1852,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeOrganizationConfigRuleStatusesRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1777,6 +1921,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeOrganizationConfigRulesRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1834,6 +1990,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeOrganizationConformancePackStatusesRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1891,6 +2059,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeOrganizationConformancePacksRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1942,6 +2122,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribePendingAggregationRequestsRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2146,6 +2338,12 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeRetentionConfigurationsRequest'
       parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2203,6 +2401,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetAggregateComplianceDetailsByConfigRuleRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2260,6 +2470,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetAggregateConfigRuleComplianceSummaryRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2317,6 +2539,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetAggregateConformancePackComplianceSummaryRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2374,6 +2608,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetAggregateDiscoveredResourceCountsRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2482,6 +2728,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetComplianceDetailsByConfigRuleRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2521,6 +2779,12 @@ paths:
             schema:
               $ref: '#/components/schemas/GetComplianceDetailsByResourceRequest'
       parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2650,6 +2914,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetConformancePackComplianceDetailsRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2701,6 +2977,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetConformancePackComplianceSummaryRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2752,6 +3040,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetDiscoveredResourceCountsRequest'
       parameters:
+        - name: limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2809,6 +3109,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetOrganizationConfigRuleDetailedStatusRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2866,6 +3178,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetOrganizationConformancePackDetailedStatusRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -3049,6 +3373,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListAggregateDiscoveredResourcesRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -3106,6 +3442,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListDiscoveredResourcesRequest'
       parameters:
+        - name: limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -3220,6 +3568,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListTagsForResourceRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -4134,7 +4494,7 @@ paths:
             schema:
               $ref: '#/components/schemas/SelectAggregateResourceConfigRequest'
       parameters:
-        - name: MaxResults
+        - name: Limit
           in: query
           schema:
             type: string
@@ -4197,6 +4557,18 @@ paths:
             schema:
               $ref: '#/components/schemas/SelectResourceConfigRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
