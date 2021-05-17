@@ -211,7 +211,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: Request the list of all the Device Advisor test suites.
+          description: The maximum number of results to return at once.
           schema:
             type: integer
             minimum: 1
@@ -219,7 +219,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: Requests the Device Advisor test suites next token.
+          description: A token used to get the next set of results.
           schema:
             type: string
             maxLength: 2000
@@ -250,10 +250,10 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Deletes a Device Advisor test suite with defined suite Id.
+          description: Suite definition Id of the test suite to be deleted.
           schema:
             type: string
-            minLength: 36
+            minLength: 12
             maxLength: 36
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -295,15 +295,15 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Requests suite definition Id with GetSuiteDefinition API call.
+          description: Suite definition Id of the test suite to get.
           schema:
             type: string
-            minLength: 36
+            minLength: 12
             maxLength: 36
         - name: suiteDefinitionVersion
           in: query
           required: false
-          description: Requests the suite definition version of a test suite.
+          description: Suite definition version of the test suite to get.
           schema:
             type: string
             minLength: 2
@@ -334,10 +334,10 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Updates a Device Advisor test suite with suite definition id.
+          description: Suite definition Id of the test suite to be updated.
           schema:
             type: string
-            minLength: 36
+            minLength: 12
             maxLength: 36
       requestBody:
         required: true
@@ -403,18 +403,18 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Requests the information about Device Advisor test suite run based on suite definition Id.
+          description: Suite definition Id for the test suite run.
           schema:
             type: string
-            minLength: 36
+            minLength: 12
             maxLength: 36
         - name: suiteRunId
           in: path
           required: true
-          description: Requests the information about Device Advisor test suite run based on suite run Id.
+          description: Suite run Id for the test suite run.
           schema:
             type: string
-            minLength: 36
+            minLength: 12
             maxLength: 36
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -457,18 +457,18 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Device Advisor suite definition Id.
+          description: Suite definition Id of the test suite.
           schema:
             type: string
-            minLength: 36
+            minLength: 12
             maxLength: 36
         - name: suiteRunId
           in: path
           required: true
-          description: Device Advisor suite run Id.
+          description: Suite run Id of the test suite run.
           schema:
             type: string
-            minLength: 36
+            minLength: 12
             maxLength: 36
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -505,15 +505,15 @@ paths:
         - name: suiteDefinitionId
           in: query
           required: false
-          description: Lists the runs of the specified Device Advisor test suite based on suite definition Id.
+          description: Lists the test suite runs of the specified test suite based on suite definition Id.
           schema:
             type: string
-            minLength: 36
+            minLength: 12
             maxLength: 36
         - name: suiteDefinitionVersion
           in: query
           required: false
-          description: Lists the runs of the specified Device Advisor test suite based on suite definition version.
+          description: Must be passed along with suiteDefinitionId. Lists the test suite runs of the specified test suite based on suite definition version.
           schema:
             type: string
             minLength: 2
@@ -521,7 +521,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: MaxResults for list suite run API request.
+          description: The maximum number of results to return at once.
           schema:
             type: integer
             minimum: 1
@@ -529,7 +529,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: Next pagination token for list suite run request.
+          description: A token to retrieve the next set of results.
           schema:
             type: string
             maxLength: 2000
@@ -640,53 +640,6 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/String256'
-  /testCases:
-    get:
-      operationId: ListTestCases
-      description: Lists all the test cases in the test suite.
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListTestCasesResponse'
-        '480':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-      parameters:
-        - name: intendedForQualification
-          in: query
-          required: false
-          description: Lists all the qualification test cases in the test suite.
-          schema:
-            type: boolean
-        - name: maxResults
-          in: query
-          required: false
-          description: Requests the test cases max results.
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 50
-        - name: nextToken
-          in: query
-          required: false
-          description: Requests the test cases next token.
-          schema:
-            type: string
-            maxLength: 2000
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/suiteDefinitions/{suiteDefinitionId}/suiteRuns':
     post:
       operationId: StartSuiteRun
@@ -720,10 +673,10 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Request to start suite run based on suite definition Id.
+          description: Suite definition Id of the test suite.
           schema:
             type: string
-            minLength: 36
+            minLength: 12
             maxLength: 36
       requestBody:
         required: true
@@ -733,7 +686,7 @@ paths:
               type: object
               properties:
                 suiteDefinitionVersion:
-                  description: Request to start suite run based on suite definition version.
+                  description: Suite definition version of the test suite.
                   type: string
                   minLength: 2
                   maxLength: 255
@@ -745,10 +698,6 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DeviceUnderTest'
                         - description: Gets the primary device for suite run.
-                    secondaryDevice:
-                      allOf:
-                        - $ref: '#/components/schemas/DeviceUnderTest'
-                        - description: Gets the secondary device for suite run.
                     selectedTestList:
                       allOf:
                         - $ref: '#/components/schemas/SelectedTestList'
@@ -760,6 +709,60 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/String256'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/suiteDefinitions/{suiteDefinitionId}/suiteRuns/{suiteRunId}/stop':
+    post:
+      operationId: StopSuiteRun
+      description: Stops a Device Advisor test suite run that is currently running.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopSuiteRunResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: suiteDefinitionId
+          in: path
+          required: true
+          description: Suite definition Id of the test suite run to be stopped.
+          schema:
+            type: string
+            minLength: 12
+            maxLength: 36
+        - name: suiteRunId
+          in: path
+          required: true
+          description: Suite run Id of the test suite run to be stopped.
+          schema:
+            type: string
+            minLength: 12
+            maxLength: 36
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -930,7 +933,7 @@ components:
         suiteDefinitionId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Gets suite definition Id with GetSuiteDefinition API call.
+            - description: Suite definition Id of the suite definition.
         suiteDefinitionArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
@@ -938,23 +941,23 @@ components:
         suiteDefinitionVersion:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionVersion'
-            - description: Gets suite definition version with GetSuiteDefinition API call.
+            - description: Suite definition version of the suite definition.
         latestVersion:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionVersion'
-            - description: Gets latest suite definition version with GetSuiteDefinition API call.
+            - description: Latest suite definition version of the suite definition.
         suiteDefinitionConfiguration:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionConfiguration'
-            - description: Gets the suite configuration with GetSuiteDefinition API call.
+            - description: Suite configuration of the suite definition.
         createdAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Gets the timestamp of the time suite was created with GetSuiteDefinition API call.
+            - description: Date (in Unix epoch time) when the suite definition was created.
         lastModifiedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Gets the timestamp of the time suite was modified with GetSuiteDefinition API call.
+            - description: Date (in Unix epoch time) when the suite definition was last modified.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -966,15 +969,15 @@ components:
         suiteDefinitionId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Gets the information about Device Advisor test suite run based on suite definition Id.
+            - description: Suite definition Id for the test suite run.
         suiteDefinitionVersion:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionVersion'
-            - description: Gets the information about Device Advisor test suite run based on suite definition version.
+            - description: Suite definition version for the test suite run.
         suiteRunId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Gets the information about Device Advisor test suite run based on suite run Id.
+            - description: Suite run Id for the test suite run.
         suiteRunArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
@@ -982,27 +985,27 @@ components:
         suiteRunConfiguration:
           allOf:
             - $ref: '#/components/schemas/SuiteRunConfiguration'
-            - description: Gets the information about Device Advisor test suite run based on suite configuration.
+            - description: Suite run configuration for the test suite run.
         testResult:
           allOf:
             - $ref: '#/components/schemas/TestResult'
-            - description: Gets the information about Device Advisor test suite run based on test case runs.
+            - description: Test results for the test suite run.
         startTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Gets the information about Device Advisor test suite run based on start time.
+            - description: Date (in Unix epoch time) when the test suite run was started.
         endTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Gets the information about Device Advisor test suite run based on end time.
+            - description: Date (in Unix epoch time) when the test suite run ended.
         status:
           allOf:
             - $ref: '#/components/schemas/SuiteRunStatus'
-            - description: Gets the information about Device Advisor test suite run based on its status.
+            - description: Status for the test suite run.
         errorReason:
           allOf:
             - $ref: '#/components/schemas/ErrorReason'
-            - description: Gets the information about Device Advisor test suite run based on error.
+            - description: Error reason for any test suite run failure.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -1013,29 +1016,29 @@ components:
         qualificationReportDownloadUrl:
           allOf:
             - $ref: '#/components/schemas/QualificationReportDownloadUrl'
-            - description: Gets the download URL of the qualification report.
+            - description: Download URL of the qualification report.
     ListSuiteDefinitionsResponse:
       type: object
       properties:
         suiteDefinitionInformationList:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionInformationList'
-            - description: Lists test suite information using List suite definition.
+            - description: An array of objects that provide summaries of information about the suite definitions in the list.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
-            - description: Creates a Device Advisor test suite.
+            - description: A token used to get the next set of results.
     ListSuiteRunsResponse:
       type: object
       properties:
         suiteRunsList:
           allOf:
             - $ref: '#/components/schemas/SuiteRunsList'
-            - description: Lists the runs of the specified Device Advisor test suite.
+            - description: An array of objects that provide summaries of information about the suite runs in the list.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
-            - description: Next pagination token for list suite run response.
+            - description: A token to retrieve the next set of results.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -1043,40 +1046,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags attached to the IoT Device Advisor resource.
-    ListTestCasesResponse:
-      type: object
-      properties:
-        categories:
-          allOf:
-            - $ref: '#/components/schemas/TestCategory'
-            - description: Gets the category of test case.
-        rootGroupConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/TestConfiguration'
-            - description: Gets the configuration of root test group.
-        groupConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/TestConfiguration'
-            - description: Gets the configuration of test group.
-        nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: Test cases next token response.
     StartSuiteRunResponse:
       type: object
       properties:
         suiteRunId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Starts a Device Advisor test suite run based on suite Run Id.
+            - description: Suite Run Id of the started suite run.
         suiteRunArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Starts a Device Advisor test suite run based on suite run arn.
+            - description: Amazon resource name of the started suite run.
         createdAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Starts a Device Advisor test suite run based on suite create time.
+            - description: Date (in Unix epoch time) when the suite run was created.
     DeviceUnderTest:
       type: object
       properties:
@@ -1096,6 +1080,9 @@ components:
       minItems: 0
       maxItems: 100
     ConflictException: {}
+    StopSuiteRunResponse:
+      type: object
+      properties: {}
     TagResourceResponse:
       type: object
       properties: {}
@@ -1112,31 +1099,27 @@ components:
         suiteDefinitionId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Updates a Device Advisor test suite with suite UUID.
+            - description: Suite definition Id of the updated test suite.
         suiteDefinitionArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Updates a Device Advisor test suite with Amazon Resource name.
+            - description: Amazon Resource name of the updated test suite.
         suiteDefinitionName:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionName'
-            - description: Updates a Device Advisor test suite with suite definition name.
+            - description: Suite definition name of the updated test suite.
         suiteDefinitionVersion:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionVersion'
-            - description: Updates a Device Advisor test suite with suite definition version.
+            - description: Suite definition version of the updated test suite.
         createdAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Updates a Device Advisor test suite with TimeStamp of when it was created.
+            - description: Timestamp of when the test suite was created.
         lastUpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Updates a Device Advisor test suite with TimeStamp of when it was updated.
-    CategoryName:
-      type: string
-    ConfigString:
-      type: string
+            - description: Timestamp of when the test suite was updated.
     SuiteDefinitionConfiguration:
       type: object
       properties:
@@ -1181,7 +1164,7 @@ components:
             - description: The tags to be attached to the suite definition.
     UUID:
       type: string
-      minLength: 36
+      minLength: 12
       maxLength: 36
     Timestamp:
       type: string
@@ -1219,10 +1202,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/DeviceUnderTest'
             - description: Gets the primary device for suite run.
-        secondaryDevice:
-          allOf:
-            - $ref: '#/components/schemas/DeviceUnderTest'
-            - description: Gets the secondary device for suite run.
         selectedTestList:
           allOf:
             - $ref: '#/components/schemas/SelectedTestList'
@@ -1244,13 +1223,15 @@ components:
         - CANCELED
         - PENDING
         - RUNNING
+        - STOPPING
+        - STOPPED
         - PASS_WITH_WARNINGS
         - ERROR
     GroupName:
       type: string
     TestCaseRuns:
       type: array
-      description: Show each group result.
+      description: Tests under each group result.
       items:
         $ref: '#/components/schemas/TestCaseRun'
     GroupResult:
@@ -1259,19 +1240,19 @@ components:
         groupId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Show Group Result Id.
+            - description: Group result Id.
         groupName:
           allOf:
             - $ref: '#/components/schemas/GroupName'
-            - description: Show Group Result Name.
+            - description: Group Result Name.
         tests:
           allOf:
             - $ref: '#/components/schemas/TestCaseRuns'
-            - description: Show Group Result.
+            - description: Tests under Group Result.
       description: Show Group Result.
     GroupResultList:
       type: array
-      description: how Group Result list.
+      description: Group Result list.
       items:
         $ref: '#/components/schemas/GroupResult'
     MaxResults:
@@ -1301,18 +1282,6 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
-    ListTestCasesRequest:
-      type: object
-      title: ListTestCasesRequest
-      properties: {}
-    TestCategory:
-      type: array
-      items:
-        $ref: '#/components/schemas/TestCaseCategory'
-    TestConfiguration:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/ConfigString'
     LogUrl:
       type: string
     StartSuiteRunRequest:
@@ -1322,11 +1291,11 @@ components:
         suiteDefinitionVersion:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionVersion'
-            - description: Request to start suite run based on suite definition version.
+            - description: Suite definition version of the test suite.
         suiteRunConfiguration:
           allOf:
             - $ref: '#/components/schemas/SuiteRunConfiguration'
-            - description: Request to start suite run based on suite configuration.
+            - description: Suite run configuration.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -1339,32 +1308,38 @@ components:
         - CANCELED
         - PENDING
         - RUNNING
+        - STOPPING
+        - STOPPED
         - PASS_WITH_WARNINGS
         - ERROR
+    StopSuiteRunRequest:
+      type: object
+      title: StopSuiteRunRequest
+      properties: {}
     SuiteDefinitionInformation:
       type: object
       properties:
         suiteDefinitionId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Get suite definition Id.
+            - description: Suite definition Id of the test suite.
         suiteDefinitionName:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionName'
-            - description: Get test suite name.
+            - description: Suite name of the test suite.
         defaultDevices:
           allOf:
             - $ref: '#/components/schemas/DeviceUnderTestList'
-            - description: Specifies the devices under test.
+            - description: Specifies the devices under test for the test suite.
         intendedForQualification:
           allOf:
             - $ref: '#/components/schemas/IntendedForQualificationBoolean'
-            - description: Gets the test suites which will be used for qualification.
+            - description: Specifies if the test suite is intended for qualification.
         createdAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Gets the information of when the test suite was created.
-      description: Get suite definition information.
+            - description: Date (in Unix epoch time) when the test suite was created.
+      description: Information about the suite definition.
     SuiteRunResultCount:
       type: integer
       minimum: 0
@@ -1375,44 +1350,44 @@ components:
         suiteDefinitionId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Get suite run information based on suite definition Id.
+            - description: Suite definition Id of the suite run.
         suiteDefinitionVersion:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionVersion'
-            - description: Get suite run information based on suite definition version.
+            - description: Suite definition version of the suite run.
         suiteDefinitionName:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionName'
-            - description: Get suite run information based on suite definition name.
+            - description: Suite definition name of the suite run.
         suiteRunId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Get suite run information based on suite run Id.
+            - description: Suite run Id of the suite run.
         createdAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Get suite run information based on time suite was created.
+            - description: Date (in Unix epoch time) when the suite run was created.
         startedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Get suite run information based on start time of the run.
+            - description: Date (in Unix epoch time) when the suite run was started.
         endAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Get suite run information based on end time of the run.
+            - description: Date (in Unix epoch time) when the suite run ended.
         status:
           allOf:
             - $ref: '#/components/schemas/SuiteRunStatus'
-            - description: Get suite run information based on test run status.
+            - description: Status of the suite run.
         passed:
           allOf:
             - $ref: '#/components/schemas/SuiteRunResultCount'
-            - description: Get suite run information based on result of the test suite run.
+            - description: Number of test cases that passed in the suite run.
         failed:
           allOf:
             - $ref: '#/components/schemas/SuiteRunResultCount'
-            - description: Get suite run information based on result of the test suite run.
-      description: Get suite run information.
+            - description: Number of test cases that failed in the suite run.
+      description: Information about the suite run.
     TagKeyList:
       type: array
       items:
@@ -1429,54 +1404,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags to be attached to the IoT Device Advisor resource.
-    TestCaseName:
-      type: string
-    TestCaseDefinition:
-      type: object
-      properties:
-        id:
-          allOf:
-            - $ref: '#/components/schemas/TestCaseName'
-            - description: Provides test case definition Id.
-        testCaseVersion:
-          allOf:
-            - $ref: '#/components/schemas/TestCaseVersion'
-            - description: Provides test case definition version.
-      description: Provides test case definition.
-    TestCase:
-      type: object
-      properties:
-        name:
-          allOf:
-            - $ref: '#/components/schemas/TestCaseName'
-            - description: Shows test case name.
-        configuration:
-          allOf:
-            - $ref: '#/components/schemas/TestConfiguration'
-            - description: Shows test case configuration.
-        test:
-          allOf:
-            - $ref: '#/components/schemas/TestCaseDefinition'
-            - description: Specifies a test.
-      description: Shows tests in a test group.
-    TestCaseList:
-      type: array
-      items:
-        $ref: '#/components/schemas/TestCase'
-    TestCaseCategory:
-      type: object
-      properties:
-        name:
-          allOf:
-            - $ref: '#/components/schemas/CategoryName'
-            - description: Lists all the tests name in the specified category.
-        tests:
-          allOf:
-            - $ref: '#/components/schemas/TestCaseList'
-            - description: Lists all the tests in the specified category.
-      description: Gets the test case category.
-    TestCaseVersion:
-      type: string
     TestCaseDefinitionName:
       type: string
     Warnings:

@@ -115,6 +115,82 @@ servers:
     description: The AWS MediaConnect endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/v1/flows/{flowArn}/mediaStreams':
+    post:
+      operationId: AddFlowMediaStreams
+      description: 'Adds media streams to an existing flow. After you add a media stream to a flow, you can associate it with a source and/or an output that uses the ST 2110 JPEG XS or CDI protocol.'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddFlowMediaStreamsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the flow.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - mediaStreams
+              properties:
+                mediaStreams:
+                  description: The media streams that you want to add to the flow.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AddMediaStreamRequest'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/flows/{flowArn}/outputs':
     post:
       operationId: AddFlowOutputs
@@ -414,6 +490,11 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/GrantEntitlementRequest'
+                mediaStreams:
+                  description: The media streams that you want to add to the flow. You can associate these media streams with sources and outputs on the flow.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AddMediaStreamRequest'
                 name:
                   description: The name of the flow.
                   type: string
@@ -462,6 +543,18 @@ paths:
                         - xml:
                             name: maxLatency
                           description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+                    MaxSyncBuffer:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: maxSyncBuffer
+                          description: The size of the buffer (in milliseconds) to use to sync incoming source data.
+                    MediaStreamSourceConfigurations:
+                      allOf:
+                        - $ref: '#/components/schemas/__listOfMediaStreamSourceConfigurationRequest'
+                        - xml:
+                            name: mediaStreamSourceConfigurations
+                          description: 'The media streams that are associated with the source, and the parameters for those associations.'
                     MinLatency:
                       allOf:
                         - $ref: '#/components/schemas/__integer'
@@ -1344,6 +1437,172 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
+  '/v1/flows/{flowArn}/mediaStreams/{mediaStreamName}':
+    delete:
+      operationId: RemoveFlowMediaStream
+      description: Removes a media stream from a flow. This action is only available if the media stream is not associated with a source or output.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveFlowMediaStreamResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the flow.
+          schema:
+            type: string
+        - name: mediaStreamName
+          in: path
+          required: true
+          description: The name of the media stream that you want to remove.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateFlowMediaStream
+      description: Updates an existing media stream.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFlowMediaStreamResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the flow.
+          schema:
+            type: string
+        - name: mediaStreamName
+          in: path
+          required: true
+          description: The name of the media stream that you want to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                attributes:
+                  description: Attributes that are related to the media stream.
+                  type: object
+                  properties:
+                    Fmtp:
+                      allOf:
+                        - $ref: '#/components/schemas/FmtpRequest'
+                        - xml:
+                            name: fmtp
+                          description: The settings that you want to use to define the media stream.
+                    Lang:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: lang
+                          description: 'The audio language, in a format that is recognized by the receiver.'
+                clockRate:
+                  description: 'The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000.'
+                  type: integer
+                description:
+                  description: Description
+                  type: string
+                mediaStreamType:
+                  description: The type of media stream.
+                  type: string
+                  enum:
+                    - video
+                    - audio
+                    - ancillary-data
+                videoFormat:
+                  description: The resolution of the video.
+                  type: string
   '/v1/flows/{flowArn}/outputs/{outputArn}':
     delete:
       operationId: RemoveFlowOutput
@@ -1550,6 +1809,11 @@ paths:
                 maxLatency:
                   description: The maximum latency in milliseconds for Zixi-based streams.
                   type: integer
+                mediaStreamOutputConfigurations:
+                  description: 'The media streams that are associated with the output, and the parameters for those associations.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MediaStreamOutputConfigurationRequest'
                 minLatency:
                   description: 'The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.'
                   type: integer
@@ -1565,6 +1829,8 @@ paths:
                     - rtp
                     - zixi-pull
                     - rist
+                    - st2110-jpegxs
+                    - cdi
                     - srt-listener
                 remoteId:
                   description: The remote ID for the Zixi-pull stream.
@@ -1792,6 +2058,14 @@ paths:
                 maxLatency:
                   description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
                   type: integer
+                maxSyncBuffer:
+                  description: The size of the buffer (in milliseconds) to use to sync incoming source data.
+                  type: integer
+                mediaStreamSourceConfigurations:
+                  description: 'The media streams that are associated with the source, and the parameters for those associations.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MediaStreamSourceConfigurationRequest'
                 minLatency:
                   description: 'The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.'
                   type: integer
@@ -1804,12 +2078,14 @@ paths:
                     - rtp
                     - zixi-pull
                     - rist
+                    - st2110-jpegxs
+                    - cdi
                     - srt-listener
                 streamId:
                   description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
                   type: string
                 vpcInterfaceName:
-                  description: The name of the VPC Interface to configure this Source with.
+                  description: The name of the VPC interface to use for this source.
                   type: string
                 whitelistCidr:
                   description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
@@ -2312,6 +2588,77 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AddFlowMediaStreamsResponse:
+      type: object
+      properties:
+        FlowArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: flowArn
+              description: The ARN of the flow that you added media streams to.
+        MediaStreams:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMediaStream'
+            - xml:
+                name: mediaStreams
+              description: The media streams that you added to the flow.
+    AddMediaStreamRequest:
+      type: object
+      required:
+        - MediaStreamType
+        - MediaStreamId
+        - MediaStreamName
+      properties:
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/MediaStreamAttributesRequest'
+            - xml:
+                name: attributes
+              description: The attributes that you want to assign to the new media stream.
+        ClockRate:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: clockRate
+              description: 'The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: description
+              description: A description that can help you quickly identify what your media stream is used for.
+        MediaStreamId:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: mediaStreamId
+              description: A unique identifier for the media stream.
+        MediaStreamName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: mediaStreamName
+              description: A name that helps you distinguish one media stream from another.
+        MediaStreamType:
+          allOf:
+            - $ref: '#/components/schemas/MediaStreamType'
+            - xml:
+                name: mediaStreamType
+              description: The type of media stream.
+        VideoFormat:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: videoFormat
+              description: The resolution of the video.
+      description: The media stream that you want to add to the flow.
+    BadRequestException: {}
+    InternalServerErrorException: {}
+    ForbiddenException: {}
+    NotFoundException: {}
+    ServiceUnavailableException: {}
+    TooManyRequestsException: {}
     AddFlowOutputsResponse:
       type: object
       properties:
@@ -2362,6 +2709,12 @@ components:
             - xml:
                 name: maxLatency
               description: The maximum latency in milliseconds for Zixi-based streams.
+        MediaStreamOutputConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMediaStreamOutputConfigurationRequest'
+            - xml:
+                name: mediaStreamOutputConfigurations
+              description: 'The media streams that are associated with the output, and the parameters for those associations.'
         MinLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -2412,12 +2765,6 @@ components:
               description: The name of the VPC interface attachment to use for this output.
       description: The output that you want to add to this flow.
     AddFlowOutputs420Exception: {}
-    BadRequestException: {}
-    InternalServerErrorException: {}
-    ForbiddenException: {}
-    NotFoundException: {}
-    ServiceUnavailableException: {}
-    TooManyRequestsException: {}
     AddFlowSourcesResponse:
       type: object
       properties:
@@ -2472,6 +2819,18 @@ components:
             - xml:
                 name: maxLatency
               description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+        MaxSyncBuffer:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxSyncBuffer
+              description: The size of the buffer (in milliseconds) to use to sync incoming source data.
+        MediaStreamSourceConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMediaStreamSourceConfigurationRequest'
+            - xml:
+                name: mediaStreamSourceConfigurations
+              description: 'The media streams that are associated with the source, and the parameters for those associations.'
         MinLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -2538,6 +2897,12 @@ components:
             - xml:
                 name: name
               description: The name of the VPC Interface. This value must be unique within the current flow.
+        NetworkInterfaceType:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInterfaceType'
+            - xml:
+                name: networkInterfaceType
+              description: 'The type of network interface. If this value is not included in the request, MediaConnect uses ENA as the networkInterfaceType.'
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2671,6 +3036,10 @@ components:
       type: string
     __integer:
       type: integer
+    __listOfMediaStreamSourceConfigurationRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaStreamSourceConfigurationRequest'
     Protocol:
       type: string
       enum:
@@ -2679,6 +3048,8 @@ components:
         - rtp
         - zixi-pull
         - rist
+        - st2110-jpegxs
+        - cdi
         - srt-listener
     State:
       type: string
@@ -2823,6 +3194,21 @@ components:
             - $ref: '#/components/schemas/Reservation'
             - xml:
                 name: reservation
+    RemoveFlowMediaStreamResponse:
+      type: object
+      properties:
+        FlowArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: flowArn
+              description: The Amazon Resource Name (ARN) of the flow.
+        MediaStreamName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: mediaStreamName
+              description: The name of the media stream that was removed.
     RemoveFlowOutputResponse:
       type: object
       properties:
@@ -2954,6 +3340,67 @@ components:
         - speke
         - static-key
         - srt-password
+    UpdateFlowMediaStreamResponse:
+      type: object
+      properties:
+        FlowArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: flowArn
+              description: The ARN of the flow that is associated with the media stream that you updated.
+        MediaStream:
+          allOf:
+            - $ref: '#/components/schemas/MediaStream'
+            - xml:
+                name: mediaStream
+              description: The media stream that you updated.
+    FmtpRequest:
+      type: object
+      properties:
+        ChannelOrder:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: channelOrder
+              description: The format of the audio channel.
+        Colorimetry:
+          allOf:
+            - $ref: '#/components/schemas/Colorimetry'
+            - xml:
+                name: colorimetry
+              description: The format that is used for the representation of color.
+        ExactFramerate:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: exactFramerate
+              description: 'The frame rate for the video stream, in frames/second. For example: 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate.'
+        Par:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: par
+              description: The pixel aspect ratio (PAR) of the video.
+        Range:
+          allOf:
+            - $ref: '#/components/schemas/Range'
+            - xml:
+                name: range
+              description: The encoding range of the video.
+        ScanMode:
+          allOf:
+            - $ref: '#/components/schemas/ScanMode'
+            - xml:
+                name: scanMode
+              description: The type of compression that was used to smooth the video’s appearance.
+        Tcs:
+          allOf:
+            - $ref: '#/components/schemas/Tcs'
+            - xml:
+                name: tcs
+              description: The transfer characteristic system (TCS) that is used in the video.
+      description: The settings that you want to use to define the media stream.
     UpdateFlowOutputResponse:
       type: object
       properties:
@@ -2969,6 +3416,37 @@ components:
             - xml:
                 name: output
               description: The new settings of the output that you updated.
+    MediaStreamOutputConfigurationRequest:
+      type: object
+      required:
+        - MediaStreamName
+        - EncodingName
+      properties:
+        DestinationConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfDestinationConfigurationRequest'
+            - xml:
+                name: destinationConfigurations
+              description: The transport parameters that you want to associate with the media stream.
+        EncodingName:
+          allOf:
+            - $ref: '#/components/schemas/EncodingName'
+            - xml:
+                name: encodingName
+              description: 'The format that will be used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.'
+        EncodingParameters:
+          allOf:
+            - $ref: '#/components/schemas/EncodingParametersRequest'
+            - xml:
+                name: encodingParameters
+              description: A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.
+        MediaStreamName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: mediaStreamName
+              description: The name of the media stream that is associated with the output.
+      description: 'The media stream that you want to associate with the output, and the parameters for that association.'
     UpdateFlowSourceResponse:
       type: object
       properties:
@@ -2984,6 +3462,52 @@ components:
             - xml:
                 name: source
               description: The settings for the source of the flow.
+    MediaStreamSourceConfigurationRequest:
+      type: object
+      required:
+        - MediaStreamName
+        - EncodingName
+      properties:
+        EncodingName:
+          allOf:
+            - $ref: '#/components/schemas/EncodingName'
+            - xml:
+                name: encodingName
+              description: 'The format you want to use to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.'
+        InputConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfInputConfigurationRequest'
+            - xml:
+                name: inputConfigurations
+              description: The transport parameters that you want to associate with the media stream.
+        MediaStreamName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: mediaStreamName
+              description: The name of the media stream.
+      description: The definition of a media stream that you want to associate with the source.
+    __listOfAddMediaStreamRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/AddMediaStreamRequest'
+    AddFlowMediaStreamsRequest:
+      type: object
+      required:
+        - MediaStreams
+      title: AddFlowMediaStreamsRequest
+      properties:
+        MediaStreams:
+          allOf:
+            - $ref: '#/components/schemas/__listOfAddMediaStreamRequest'
+            - xml:
+                name: mediaStreams
+              description: The media streams that you want to add to the flow.
+      description: A request to add media streams to the flow.
+    __listOfMediaStream:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaStream'
     __listOfAddOutputRequest:
       type: array
       items:
@@ -3047,10 +3571,36 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/VpcInterface'
+    MediaStreamAttributesRequest:
+      type: object
+      properties:
+        Fmtp:
+          allOf:
+            - $ref: '#/components/schemas/FmtpRequest'
+            - xml:
+                name: fmtp
+              description: The settings that you want to use to define the media stream.
+        Lang:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: lang
+              description: 'The audio language, in a format that is recognized by the receiver.'
+      description: Attributes that are related to the media stream.
+    MediaStreamType:
+      type: string
+      enum:
+        - video
+        - audio
+        - ancillary-data
     __listOf__string:
       type: array
       items:
         $ref: '#/components/schemas/__string'
+    __listOfMediaStreamOutputConfigurationRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaStreamOutputConfigurationRequest'
     VpcInterfaceAttachment:
       type: object
       properties:
@@ -3061,6 +3611,16 @@ components:
                 name: vpcInterfaceName
               description: The name of the VPC interface to use for this output.
       description: The settings for attaching a VPC interface to an output.
+    Colorimetry:
+      type: string
+      enum:
+        - BT601
+        - BT709
+        - BT2020
+        - BT2100
+        - ST2065-1
+        - ST2065-3
+        - XYZ
     __listOfGrantEntitlementRequest:
       type: array
       items:
@@ -3098,6 +3658,12 @@ components:
             - xml:
                 name: entitlements
               description: The entitlements that you want to grant on a flow.
+        MediaStreams:
+          allOf:
+            - $ref: '#/components/schemas/__listOfAddMediaStreamRequest'
+            - xml:
+                name: mediaStreams
+              description: The media streams that you want to add to the flow. You can associate these media streams with sources and outputs on the flow.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3173,6 +3739,12 @@ components:
             - xml:
                 name: flowArn
               description: 'The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.'
+        MediaStreams:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMediaStream'
+            - xml:
+                name: mediaStreams
+              description: 'The media streams that are associated with the flow. After you associate a media stream with a source, you can also associate it with outputs on the flow.'
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3408,10 +3980,146 @@ components:
                 name: start
               description: The day and time that the reservation becomes active. You set this value when you purchase the offering.
       description: 'A pricing agreement for a discounted rate for a specific outbound bandwidth that your MediaConnect account will use each month over a specific time period. The discounted rate in the reservation applies to outbound bandwidth for all flows from your account until your account reaches the amount of bandwidth in your reservation. If you use more outbound bandwidth than the agreed upon amount in a single month, the overage is charged at the on-demand rate.'
+    Interface:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the VPC interface.
+      description: The VPC interface that is used for the media stream associated with the source or output.
+    DestinationConfiguration:
+      type: object
+      required:
+        - DestinationIp
+        - DestinationPort
+        - Interface
+        - OutboundIp
+      properties:
+        DestinationIp:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: destinationIp
+              description: The IP address where contents of the media stream will be sent.
+        DestinationPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: destinationPort
+              description: The port to use when the content of the media stream is distributed to the output.
+        Interface:
+          allOf:
+            - $ref: '#/components/schemas/Interface'
+            - xml:
+                name: interface
+              description: The VPC interface that is used for the media stream associated with the output.
+        OutboundIp:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: outboundIp
+              description: The IP address that the receiver requires in order to establish a connection with the flow. This value is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the CDI or ST 2110 JPEG XS protocol.
+      description: The transport parameters that are associated with an outbound media stream.
+    InterfaceRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the VPC interface.
+      description: The VPC interface that you want to designate where the media stream is coming from or going to.
+    DestinationConfigurationRequest:
+      type: object
+      required:
+        - DestinationIp
+        - DestinationPort
+        - Interface
+      properties:
+        DestinationIp:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: destinationIp
+              description: The IP address where you want MediaConnect to send contents of the media stream.
+        DestinationPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: destinationPort
+              description: The port that you want MediaConnect to use when it distributes the media stream to the output.
+        Interface:
+          allOf:
+            - $ref: '#/components/schemas/InterfaceRequest'
+            - xml:
+                name: interface
+              description: The VPC interface that you want to use for the media stream associated with the output.
+      description: The transport parameters that you want to associate with an outbound media stream.
     DurationUnits:
       type: string
       enum:
         - MONTHS
+    EncoderProfile:
+      type: string
+      enum:
+        - main
+        - high
+    EncodingName:
+      type: string
+      enum:
+        - jxsv
+        - raw
+        - smpte291
+        - pcm
+    __double:
+      type: number
+      format: double
+    EncodingParameters:
+      type: object
+      required:
+        - EncoderProfile
+        - CompressionFactor
+      properties:
+        CompressionFactor:
+          allOf:
+            - $ref: '#/components/schemas/__double'
+            - xml:
+                name: compressionFactor
+              description: 'A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive.'
+        EncoderProfile:
+          allOf:
+            - $ref: '#/components/schemas/EncoderProfile'
+            - xml:
+                name: encoderProfile
+              description: 'A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol.'
+      description: A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.
+    EncodingParametersRequest:
+      type: object
+      required:
+        - EncoderProfile
+        - CompressionFactor
+      properties:
+        CompressionFactor:
+          allOf:
+            - $ref: '#/components/schemas/__double'
+            - xml:
+                name: compressionFactor
+              description: 'A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive.'
+        EncoderProfile:
+          allOf:
+            - $ref: '#/components/schemas/EncoderProfile'
+            - xml:
+                name: encoderProfile
+              description: 'A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, if at least one source on the flow uses the CDI protocol.'
+      description: A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.
     EntitlementStatus:
       type: string
       enum:
@@ -3513,6 +4221,12 @@ components:
             - xml:
                 name: ingestPort
               description: The port that the flow will be listening on for incoming content.
+        MediaStreamSourceConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMediaStreamSourceConfiguration'
+            - xml:
+                name: mediaStreamSourceConfigurations
+              description: 'The media streams that are associated with the source, and the parameters for those associations.'
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3536,7 +4250,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: vpcInterfaceName
-              description: The name of the VPC Interface this Source is configured with.
+              description: The name of the VPC interface that is used for this source.
         WhitelistCidr:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3544,6 +4258,76 @@ components:
                 name: whitelistCidr
               description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
       description: The settings for the source of the flow.
+    Range:
+      type: string
+      enum:
+        - NARROW
+        - FULL
+        - FULLPROTECT
+    ScanMode:
+      type: string
+      enum:
+        - progressive
+        - interlace
+        - progressive-segmented-frame
+    Tcs:
+      type: string
+      enum:
+        - SDR
+        - PQ
+        - HLG
+        - LINEAR
+        - BT2100LINPQ
+        - BT2100LINHLG
+        - ST2065-1
+        - ST428-1
+        - DENSITY
+    Fmtp:
+      type: object
+      properties:
+        ChannelOrder:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: channelOrder
+              description: The format of the audio channel.
+        Colorimetry:
+          allOf:
+            - $ref: '#/components/schemas/Colorimetry'
+            - xml:
+                name: colorimetry
+              description: The format that is used for the representation of color.
+        ExactFramerate:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: exactFramerate
+              description: 'The frame rate for the video stream, in frames/second. For example: 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate.'
+        Par:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: par
+              description: The pixel aspect ratio (PAR) of the video.
+        Range:
+          allOf:
+            - $ref: '#/components/schemas/Range'
+            - xml:
+                name: range
+              description: The encoding range of the video.
+        ScanMode:
+          allOf:
+            - $ref: '#/components/schemas/ScanMode'
+            - xml:
+                name: scanMode
+              description: The type of compression that was used to smooth the video’s appearance
+        Tcs:
+          allOf:
+            - $ref: '#/components/schemas/Tcs'
+            - xml:
+                name: tcs
+              description: The transfer characteristic system (TCS) that is used in the video.
+      description: FMTP
     GrantFlowEntitlementsRequest:
       type: object
       required:
@@ -3557,6 +4341,51 @@ components:
                 name: entitlements
               description: The list of entitlements that you want to grant.
       description: A request to grant entitlements on a flow.
+    InputConfiguration:
+      type: object
+      required:
+        - InputPort
+        - InputIp
+        - Interface
+      properties:
+        InputIp:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: inputIp
+              description: The IP address that the flow listens on for incoming content for a media stream.
+        InputPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: inputPort
+              description: The port that the flow listens on for an incoming media stream.
+        Interface:
+          allOf:
+            - $ref: '#/components/schemas/Interface'
+            - xml:
+                name: interface
+              description: The VPC interface where the media stream comes in from.
+      description: The transport parameters that are associated with an incoming media stream.
+    InputConfigurationRequest:
+      type: object
+      required:
+        - InputPort
+        - Interface
+      properties:
+        InputPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: inputPort
+              description: The port that you want the flow to listen on for an incoming media stream.
+        Interface:
+          allOf:
+            - $ref: '#/components/schemas/InterfaceRequest'
+            - xml:
+                name: interface
+              description: The VPC interface that you want to use for the incoming media stream.
+      description: The transport parameters that you want to associate with an incoming media stream.
     MaxResults:
       type: integer
       minimum: 1
@@ -3678,6 +4507,158 @@ components:
                 name: status
               description: The current status of the flow.
       description: 'Provides a summary of a flow, including its ARN, Availability Zone, and source type.'
+    MediaStreamAttributes:
+      type: object
+      required:
+        - Fmtp
+      properties:
+        Fmtp:
+          allOf:
+            - $ref: '#/components/schemas/Fmtp'
+            - xml:
+                name: fmtp
+              description: A set of parameters that define the media stream.
+        Lang:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: lang
+              description: 'The audio language, in a format that is recognized by the receiver.'
+      description: Attributes that are related to the media stream.
+    MediaStream:
+      type: object
+      required:
+        - MediaStreamType
+        - MediaStreamId
+        - MediaStreamName
+        - Fmt
+      properties:
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/MediaStreamAttributes'
+            - xml:
+                name: attributes
+              description: Attributes that are related to the media stream.
+        ClockRate:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: clockRate
+              description: The sample rate for the stream. This value is measured in Hz.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: description
+              description: A description that can help you quickly identify what your media stream is used for.
+        Fmt:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: fmt
+              description: 'The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver.'
+        MediaStreamId:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: mediaStreamId
+              description: A unique identifier for the media stream.
+        MediaStreamName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: mediaStreamName
+              description: A name that helps you distinguish one media stream from another.
+        MediaStreamType:
+          allOf:
+            - $ref: '#/components/schemas/MediaStreamType'
+            - xml:
+                name: mediaStreamType
+              description: The type of media stream.
+        VideoFormat:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: videoFormat
+              description: The resolution of the video.
+      description: 'A single track or stream of media that contains video, audio, or ancillary data. After you add a media stream to a flow, you can associate it with sources and outputs on that flow, as long as they use the CDI protocol or the ST 2110 JPEG XS protocol. Each source or output can consist of one or many media streams.'
+    __listOfDestinationConfiguration:
+      type: array
+      items:
+        $ref: '#/components/schemas/DestinationConfiguration'
+    MediaStreamOutputConfiguration:
+      type: object
+      required:
+        - MediaStreamName
+        - EncodingName
+      properties:
+        DestinationConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfDestinationConfiguration'
+            - xml:
+                name: destinationConfigurations
+              description: The transport parameters that are associated with each outbound media stream.
+        EncodingName:
+          allOf:
+            - $ref: '#/components/schemas/EncodingName'
+            - xml:
+                name: encodingName
+              description: 'The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.'
+        EncodingParameters:
+          allOf:
+            - $ref: '#/components/schemas/EncodingParameters'
+            - xml:
+                name: encodingParameters
+              description: Encoding parameters
+        MediaStreamName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: mediaStreamName
+              description: The name of the media stream.
+      description: 'The media stream that is associated with the output, and the parameters for that association.'
+    __listOfDestinationConfigurationRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/DestinationConfigurationRequest'
+    __listOfInputConfiguration:
+      type: array
+      items:
+        $ref: '#/components/schemas/InputConfiguration'
+    MediaStreamSourceConfiguration:
+      type: object
+      required:
+        - MediaStreamName
+        - EncodingName
+      properties:
+        EncodingName:
+          allOf:
+            - $ref: '#/components/schemas/EncodingName'
+            - xml:
+                name: encodingName
+              description: 'The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.'
+        InputConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfInputConfiguration'
+            - xml:
+                name: inputConfigurations
+              description: The transport parameters that are associated with an incoming media stream.
+        MediaStreamName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: mediaStreamName
+              description: The name of the media stream.
+      description: 'The media stream that is associated with the source, and the parameters for that association.'
+    __listOfInputConfigurationRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/InputConfigurationRequest'
+    NetworkInterfaceType:
+      type: string
+      enum:
+        - ena
+        - efa
     PriceUnits:
       type: string
       enum:
@@ -3700,6 +4681,10 @@ components:
                 name: resourceType
               description: The type of resource and the unit that is being billed for.
       description: 'A definition of what is being billed for, including the type and amount.'
+    __listOfMediaStreamOutputConfiguration:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaStreamOutputConfiguration'
     Transport:
       type: object
       required:
@@ -3723,6 +4708,12 @@ components:
             - xml:
                 name: maxLatency
               description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+        MaxSyncBuffer:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxSyncBuffer
+              description: The size of the buffer (in milliseconds) to use to sync incoming source data.
         MinLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -3802,6 +4793,12 @@ components:
             - xml:
                 name: mediaLiveInputArn
               description: The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant only for outputs that were added by creating a MediaLive input.
+        MediaStreamOutputConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMediaStreamOutputConfiguration'
+            - xml:
+                name: mediaStreamOutputConfigurations
+              description: The configuration for each media stream that is associated with the output.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3853,6 +4850,10 @@ components:
                 name: start
               description: 'The date and time that you want the reservation to begin, in Coordinated Universal Time (UTC). You can specify any date and time between 12:00am on the first day of the current month to the current time on today''s date, inclusive. Specify the start in a 24-hour notation. Use the following format: YYYY-MM-DDTHH:mm:SSZ, where T and Z are literal characters. For example, to specify 11:30pm on March 5, 2020, enter 2020-03-05T23:30:00Z.'
       description: A request to purchase a offering.
+    RemoveFlowMediaStreamRequest:
+      type: object
+      title: RemoveFlowMediaStreamRequest
+      properties: {}
     RemoveFlowOutputRequest:
       type: object
       title: RemoveFlowOutputRequest
@@ -3880,6 +4881,10 @@ components:
       type: object
       title: RevokeFlowEntitlementRequest
       properties: {}
+    __listOfMediaStreamSourceConfiguration:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaStreamSourceConfiguration'
     StartFlowRequest:
       type: object
       title: StartFlowRequest
@@ -4007,6 +5012,41 @@ components:
                 name: subscribers
               description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
       description: The entitlement fields that you want to update.
+    UpdateFlowMediaStreamRequest:
+      type: object
+      title: UpdateFlowMediaStreamRequest
+      properties:
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/MediaStreamAttributesRequest'
+            - xml:
+                name: attributes
+              description: The attributes that you want to assign to the media stream.
+        ClockRate:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: clockRate
+              description: 'The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: description
+              description: Description
+        MediaStreamType:
+          allOf:
+            - $ref: '#/components/schemas/MediaStreamType'
+            - xml:
+                name: mediaStreamType
+              description: The type of media stream.
+        VideoFormat:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: videoFormat
+              description: The resolution of the video.
+      description: The fields that you want to update in the media stream.
     UpdateFlowOutputRequest:
       type: object
       title: UpdateFlowOutputRequest
@@ -4041,6 +5081,12 @@ components:
             - xml:
                 name: maxLatency
               description: The maximum latency in milliseconds for Zixi-based streams.
+        MediaStreamOutputConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMediaStreamOutputConfigurationRequest'
+            - xml:
+                name: mediaStreamOutputConfigurations
+              description: 'The media streams that are associated with the output, and the parameters for those associations.'
         MinLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -4134,6 +5180,18 @@ components:
             - xml:
                 name: maxLatency
               description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+        MaxSyncBuffer:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxSyncBuffer
+              description: The size of the buffer (in milliseconds) to use to sync incoming source data.
+        MediaStreamSourceConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMediaStreamSourceConfigurationRequest'
+            - xml:
+                name: mediaStreamSourceConfigurations
+              description: 'The media streams that are associated with the source, and the parameters for those associations.'
         MinLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -4157,7 +5215,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: vpcInterfaceName
-              description: The name of the VPC Interface to configure this Source with.
+              description: The name of the VPC interface to use for this source.
         WhitelistCidr:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -4168,6 +5226,7 @@ components:
     VpcInterface:
       type: object
       required:
+        - NetworkInterfaceType
         - NetworkInterfaceIds
         - SubnetId
         - SecurityGroupIds
@@ -4186,6 +5245,12 @@ components:
             - xml:
                 name: networkInterfaceIds
               description: IDs of the network interfaces created in customer's account by MediaConnect.
+        NetworkInterfaceType:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInterfaceType'
+            - xml:
+                name: networkInterfaceType
+              description: The type of network interface.
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/__string'

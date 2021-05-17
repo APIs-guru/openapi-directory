@@ -1150,7 +1150,7 @@ paths:
         - name: NumCacheNodes
           in: query
           required: false
-          description: '<p>The initial number of cache nodes that the cluster has.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.</p> <p>If you need more than 20 nodes for your Memcached cluster, please fill out the ElastiCache Limit Increase Request form at <a href="http://aws.amazon.com/contact-us/elasticache-node-limit-request/">http://aws.amazon.com/contact-us/elasticache-node-limit-request/</a>.</p>'
+          description: '<p>The initial number of cache nodes that the cluster has.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.</p> <p>If you need more than 40 nodes for your Memcached cluster, please fill out the ElastiCache Limit Increase Request form at <a href="http://aws.amazon.com/contact-us/elasticache-node-limit-request/">http://aws.amazon.com/contact-us/elasticache-node-limit-request/</a>.</p>'
           schema:
             type: integer
         - name: CacheNodeType
@@ -2427,7 +2427,7 @@ paths:
         - name: UserGroupIds
           in: query
           required: false
-          description: The list of user groups to associate with the replication group.
+          description: The user group to associate with the replication group.
           schema:
             type: array
             items:
@@ -9097,7 +9097,7 @@ paths:
         - name: UserGroupIdsToAdd
           in: query
           required: false
-          description: A list of user group IDs.
+          description: The user group you are associating with the replication group.
           schema:
             type: array
             items:
@@ -9105,7 +9105,7 @@ paths:
         - name: UserGroupIdsToRemove
           in: query
           required: false
-          description: 'A list of users groups to remove, meaning the users in the group no longer can access thereplication group.'
+          description: 'The user group to remove, meaning the users in the group no longer can access the replication group.'
           schema:
             type: array
             items:
@@ -12888,7 +12888,7 @@ components:
         NumCacheNodes:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: '<p>The initial number of cache nodes that the cluster has.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.</p> <p>If you need more than 20 nodes for your Memcached cluster, please fill out the ElastiCache Limit Increase Request form at <a href="http://aws.amazon.com/contact-us/elasticache-node-limit-request/">http://aws.amazon.com/contact-us/elasticache-node-limit-request/</a>.</p>'
+            - description: '<p>The initial number of cache nodes that the cluster has.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.</p> <p>If you need more than 40 nodes for your Memcached cluster, please fill out the ElastiCache Limit Increase Request form at <a href="http://aws.amazon.com/contact-us/elasticache-node-limit-request/">http://aws.amazon.com/contact-us/elasticache-node-limit-request/</a>.</p>'
         CacheNodeType:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -13272,7 +13272,7 @@ components:
         UserGroupIds:
           allOf:
             - $ref: '#/components/schemas/UserGroupIdListInput'
-            - description: The list of user groups to associate with the replication group.
+            - description: The user group to associate with the replication group.
         LogDeliveryConfigurations:
           allOf:
             - $ref: '#/components/schemas/LogDeliveryConfigurationRequestList'
@@ -14646,11 +14646,11 @@ components:
         UserGroupIdsToAdd:
           allOf:
             - $ref: '#/components/schemas/UserGroupIdList'
-            - description: A list of user group IDs.
+            - description: The user group you are associating with the replication group.
         UserGroupIdsToRemove:
           allOf:
             - $ref: '#/components/schemas/UserGroupIdList'
-            - description: 'A list of users groups to remove, meaning the users in the group no longer can access thereplication group.'
+            - description: 'The user group to remove, meaning the users in the group no longer can access the replication group.'
         RemoveUserGroups:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
