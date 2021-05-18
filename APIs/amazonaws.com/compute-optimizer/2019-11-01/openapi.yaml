@@ -277,6 +277,87 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ComputeOptimizerService.ExportEBSVolumeRecommendations:
+    post:
+      operationId: ExportEBSVolumeRecommendations
+      description: '<p>Exports optimization recommendations for Amazon EBS volumes.</p> <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata in a JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html">Exporting Recommendations</a> in the <i>Compute Optimizer User Guide</i>.</p> <p>You can have only one Amazon EBS volume export job in progress per AWS Region.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportEBSVolumeRecommendationsResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportEBSVolumeRecommendationsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.ExportEBSVolumeRecommendations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ComputeOptimizerService.ExportEC2InstanceRecommendations:
     post:
       operationId: ExportEC2InstanceRecommendations
@@ -350,6 +431,87 @@ paths:
             type: string
             enum:
               - ComputeOptimizerService.ExportEC2InstanceRecommendations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ComputeOptimizerService.ExportLambdaFunctionRecommendations:
+    post:
+      operationId: ExportLambdaFunctionRecommendations
+      description: '<p>Exports optimization recommendations for AWS Lambda functions.</p> <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata in a JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html">Exporting Recommendations</a> in the <i>Compute Optimizer User Guide</i>.</p> <p>You can have only one Lambda function export job in progress per AWS Region.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportLambdaFunctionRecommendationsResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportLambdaFunctionRecommendationsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.ExportLambdaFunctionRecommendations
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -910,7 +1072,7 @@ paths:
   /#X-Amz-Target=ComputeOptimizerService.UpdateEnrollmentStatus:
     post:
       operationId: UpdateEnrollmentStatus
-      description: '<p>Updates the enrollment (opt in and opt out) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is a management account of an organization, this action can also be used to enroll member accounts within the organization.</p> <p>You must have the appropriate permissions to opt in to Compute Optimizer, to view its recommendations, and to opt out. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/ug/security-iam.html">Controlling access with AWS Identity and Access Management</a> in the <i>Compute Optimizer User Guide</i>.</p> <p>When you opt in, Compute Optimizer automatically creates a Service-Linked Role in your account to access its data. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/ug/using-service-linked-roles.html">Using Service-Linked Roles for AWS Compute Optimizer</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+      description: '<p>Updates the enrollment (opt in and opt out) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is a management account of an organization, this action can also be used to enroll member accounts within the organization.</p> <p>You must have the appropriate permissions to opt in to Compute Optimizer, to view its recommendations, and to opt out. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html">Controlling access with AWS Identity and Access Management</a> in the <i>AWS Compute Optimizer User Guide</i>.</p> <p>When you opt in, Compute Optimizer automatically creates a Service-Linked Role in your account to access its data. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/using-service-linked-roles.html">Using Service-Linked Roles for AWS Compute Optimizer</a> in the <i>AWS Compute Optimizer User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1107,8 +1269,45 @@ components:
         includeMemberAccounts:
           allOf:
             - $ref: '#/components/schemas/IncludeMemberAccounts'
-            - description: '<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>This parameter cannot be specified together with the account IDs parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>'
+            - description: '<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer, and trusted access for Compute Optimizer must be enabled in the organization account. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and AWS Organizations trusted access</a> in the <i>AWS Compute Optimizer User Guide</i>.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>This parameter cannot be specified together with the account IDs parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>'
     LimitExceededException: {}
+    ExportEBSVolumeRecommendationsResponse:
+      type: object
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: '<p>The identification number of the export job.</p> <p>Use the <code>DescribeRecommendationExportJobs</code> action, and specify the job ID to view the status of an export job.</p>'
+        s3Destination:
+          $ref: '#/components/schemas/S3Destination'
+    ExportEBSVolumeRecommendationsRequest:
+      type: object
+      required:
+        - s3DestinationConfig
+      title: ExportEBSVolumeRecommendationsRequest
+      properties:
+        accountIds:
+          allOf:
+            - $ref: '#/components/schemas/AccountIds'
+            - description: '<p>The IDs of the AWS accounts for which to export Amazon EBS volume recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member account for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/EBSFilters'
+            - description: An array of objects that describe a filter to export a more specific set of Amazon EBS volume recommendations.
+        fieldsToExport:
+          allOf:
+            - $ref: '#/components/schemas/ExportableVolumeFields'
+            - description: 'The recommendations data to include in the export file. For more information about the fields that can be exported, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files">Exported files</a> in the <i>Compute Optimizer User Guide</i>.'
+        s3DestinationConfig:
+          $ref: '#/components/schemas/S3DestinationConfig'
+        fileFormat:
+          allOf:
+            - $ref: '#/components/schemas/FileFormat'
+            - description: <p>The format of the export file.</p> <p>The only export file format currently supported is <code>Csv</code>.</p>
+        includeMemberAccounts:
+          allOf:
+            - $ref: '#/components/schemas/IncludeMemberAccounts'
+            - description: '<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer, and trusted access for Compute Optimizer must be enabled in the organization account. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and AWS Organizations trusted access</a> in the <i>AWS Compute Optimizer User Guide</i>.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>This parameter cannot be specified together with the account IDs parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>'
     ExportEC2InstanceRecommendationsResponse:
       type: object
       properties:
@@ -1149,7 +1348,44 @@ components:
         includeMemberAccounts:
           allOf:
             - $ref: '#/components/schemas/IncludeMemberAccounts'
-            - description: '<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>'
+            - description: '<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer, and trusted access for Compute Optimizer must be enabled in the organization account. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and AWS Organizations trusted access</a> in the <i>AWS Compute Optimizer User Guide</i>.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>'
+    ExportLambdaFunctionRecommendationsResponse:
+      type: object
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: '<p>The identification number of the export job.</p> <p>Use the <code>DescribeRecommendationExportJobs</code> action, and specify the job ID to view the status of an export job.</p>'
+        s3Destination:
+          $ref: '#/components/schemas/S3Destination'
+    ExportLambdaFunctionRecommendationsRequest:
+      type: object
+      required:
+        - s3DestinationConfig
+      title: ExportLambdaFunctionRecommendationsRequest
+      properties:
+        accountIds:
+          allOf:
+            - $ref: '#/components/schemas/AccountIds'
+            - description: '<p>The IDs of the AWS accounts for which to export Lambda function recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member account for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionRecommendationFilters'
+            - description: An array of objects that describe a filter to export a more specific set of Lambda function recommendations.
+        fieldsToExport:
+          allOf:
+            - $ref: '#/components/schemas/ExportableLambdaFunctionFields'
+            - description: 'The recommendations data to include in the export file. For more information about the fields that can be exported, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files">Exported files</a> in the <i>Compute Optimizer User Guide</i>.'
+        s3DestinationConfig:
+          $ref: '#/components/schemas/S3DestinationConfig'
+        fileFormat:
+          allOf:
+            - $ref: '#/components/schemas/FileFormat'
+            - description: <p>The format of the export file.</p> <p>The only export file format currently supported is <code>Csv</code>.</p>
+        includeMemberAccounts:
+          allOf:
+            - $ref: '#/components/schemas/IncludeMemberAccounts'
+            - description: '<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer, and trusted access for Compute Optimizer must be enabled in the organization account. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and AWS Organizations trusted access</a> in the <i>AWS Compute Optimizer User Guide</i>.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>This parameter cannot be specified together with the account IDs parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>'
     GetAutoScalingGroupRecommendationsResponse:
       type: object
       properties:
@@ -1405,7 +1641,7 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/Status'
-            - description: '<p>The new enrollment status of the account.</p> <p>The following status options are available:</p> <ul> <li> <p> <code>Active</code> - Opts in your account to the Compute Optimizer service. Compute Optimizer begins analyzing the configuration and utilization metrics of your AWS resources after you opt in. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/ug/metrics.html">Metrics analyzed by AWS Compute Optimizer</a> in the <i>Compute Optimizer User Guide</i>.</p> </li> <li> <p> <code>Inactive</code> - Opts out your account from the Compute Optimizer service. Your account''s recommendations and related metrics data will be deleted from Compute Optimizer after you opt out.</p> </li> </ul> <note> <p>The <code>Pending</code> and <code>Failed</code> options cannot be used to update the enrollment status of an account. They are returned in the response of a request to update the enrollment status of an account.</p> </note>'
+            - description: '<p>The new enrollment status of the account.</p> <p>The following status options are available:</p> <ul> <li> <p> <code>Active</code> - Opts in your account to the Compute Optimizer service. Compute Optimizer begins analyzing the configuration and utilization metrics of your AWS resources after you opt in. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html">Metrics analyzed by AWS Compute Optimizer</a> in the <i>AWS Compute Optimizer User Guide</i>.</p> </li> <li> <p> <code>Inactive</code> - Opts out your account from the Compute Optimizer service. Your account''s recommendations and related metrics data will be deleted from Compute Optimizer after you opt out.</p> </li> </ul> <note> <p>The <code>Pending</code> and <code>Failed</code> options cannot be used to update the enrollment status of an account. They are returned in the response of a request to update the enrollment status of an account.</p> </note>'
         includeMemberAccounts:
           allOf:
             - $ref: '#/components/schemas/IncludeMemberAccounts'
@@ -1693,10 +1929,22 @@ components:
             - $ref: '#/components/schemas/S3Destination'
             - description: 'An object that describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and object keys of a recommendations export file, and its associated metadata file.'
       description: Describes the destination of the recommendations export and metadata files.
+    ExportableVolumeFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportableVolumeField'
     ExportableInstanceFields:
       type: array
       items:
         $ref: '#/components/schemas/ExportableInstanceField'
+    LambdaFunctionRecommendationFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/LambdaFunctionRecommendationFilter'
+    ExportableLambdaFunctionFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportableLambdaFunctionField'
     ExportableAutoScalingGroupField:
       type: string
       enum:
@@ -1772,6 +2020,58 @@ components:
         - RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice
         - RecommendationsSourcesRecommendationSourceArn
         - RecommendationsSourcesRecommendationSourceType
+        - LastRefreshTimestamp
+    ExportableLambdaFunctionField:
+      type: string
+      enum:
+        - AccountId
+        - FunctionArn
+        - FunctionVersion
+        - Finding
+        - FindingReasonCodes
+        - NumberOfInvocations
+        - UtilizationMetricsDurationMaximum
+        - UtilizationMetricsDurationAverage
+        - UtilizationMetricsMemoryMaximum
+        - UtilizationMetricsMemoryAverage
+        - LookbackPeriodInDays
+        - CurrentConfigurationMemorySize
+        - CurrentConfigurationTimeout
+        - CurrentCostTotal
+        - CurrentCostAverage
+        - RecommendationOptionsConfigurationMemorySize
+        - RecommendationOptionsCostLow
+        - RecommendationOptionsCostHigh
+        - RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound
+        - RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound
+        - RecommendationOptionsProjectedUtilizationMetricsDurationExpected
+        - LastRefreshTimestamp
+    ExportableVolumeField:
+      type: string
+      enum:
+        - AccountId
+        - VolumeArn
+        - Finding
+        - UtilizationMetricsVolumeReadOpsPerSecondMaximum
+        - UtilizationMetricsVolumeWriteOpsPerSecondMaximum
+        - UtilizationMetricsVolumeReadBytesPerSecondMaximum
+        - UtilizationMetricsVolumeWriteBytesPerSecondMaximum
+        - LookbackPeriodInDays
+        - CurrentConfigurationVolumeType
+        - CurrentConfigurationVolumeBaselineIOPS
+        - CurrentConfigurationVolumeBaselineThroughput
+        - CurrentConfigurationVolumeBurstIOPS
+        - CurrentConfigurationVolumeBurstThroughput
+        - CurrentConfigurationVolumeSize
+        - CurrentMonthlyPrice
+        - RecommendationOptionsConfigurationVolumeType
+        - RecommendationOptionsConfigurationVolumeBaselineIOPS
+        - RecommendationOptionsConfigurationVolumeBaselineThroughput
+        - RecommendationOptionsConfigurationVolumeBurstIOPS
+        - RecommendationOptionsConfigurationVolumeBurstThroughput
+        - RecommendationOptionsConfigurationVolumeSize
+        - RecommendationOptionsMonthlyPrice
+        - RecommendationOptionsPerformanceRisk
         - LastRefreshTimestamp
     FailureReason:
       type: string
@@ -1849,10 +2149,6 @@ components:
       type: string
     MemberAccountsEnrolled:
       type: boolean
-    LambdaFunctionRecommendationFilters:
-      type: array
-      items:
-        $ref: '#/components/schemas/LambdaFunctionRecommendationFilter'
     LambdaFunctionRecommendations:
       type: array
       items:
@@ -2227,6 +2523,8 @@ components:
       enum:
         - Ec2Instance
         - AutoScalingGroup
+        - EbsVolume
+        - LambdaFunction
     RecommendationExportJob:
       type: object
       properties:

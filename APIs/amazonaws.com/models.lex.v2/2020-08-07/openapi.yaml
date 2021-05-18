@@ -184,7 +184,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
     parameters:
@@ -263,7 +263,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale that will be deleted. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale that will be deleted. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
     get:
@@ -328,7 +328,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The unique identifier of the locale to describe. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>. '
+          description: 'The unique identifier of the locale to describe. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>. '
           schema:
             type: string
     put:
@@ -399,7 +399,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale to update. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale to update. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
       requestBody:
@@ -895,7 +895,7 @@ paths:
                 - nluIntentConfidenceThreshold
               properties:
                 localeId:
-                  description: 'The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+                  description: 'The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
                   type: string
                 description:
                   description: A description of the bot locale. Use this to help identify the bot locale in lists.
@@ -1191,6 +1191,182 @@ paths:
                 nextToken:
                   description: 'If the response to the <code>ListBotVersion</code> operation contains more results than specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.'
                   type: string
+  /exports/:
+    put:
+      operationId: CreateExport
+      description: '<p>Creates a zip archive containing the contents of a bot or a bot locale. The archive contains a directory structure that contains JSON files that define the bot.</p> <p>You can create an archive that contains the complete definition of a bot, or you can specify that the archive contain only the definition of a single bot locale.</p> <p>For more information about exporting bots, and about the structure of the export archive, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/importing-exporting.html"> Importing and exporting bots </a> </p>'
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateExportResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - resourceSpecification
+                - fileFormat
+              properties:
+                resourceSpecification:
+                  description: 'Provides information about the bot or bot locale that you want to export. You can specify the <code>botExportSpecification</code> or the <code>botLocaleExportSpecification</code>, but not both.'
+                  type: object
+                  properties:
+                    botExportSpecification:
+                      allOf:
+                        - $ref: '#/components/schemas/BotExportSpecification'
+                        - description: Parameters for exporting a bot.
+                    botLocaleExportSpecification:
+                      allOf:
+                        - $ref: '#/components/schemas/BotLocaleExportSpecification'
+                        - description: Parameters for exporting a bot locale.
+                fileFormat:
+                  description: The file format of the bot or bot locale definition files.
+                  type: string
+                  enum:
+                    - LexJson
+                filePassword:
+                  description: 'An password to use to encrypt the exported archive. Using a password is optional, but you should encrypt the archive to protect the data in transit between Amazon Lex and your local computer.'
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListExports
+      description: Lists the exports for a bot or bot locale. Exports are kept in the list for 7 days.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExportsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                botId:
+                  description: The unique identifier that Amazon Lex assigned to the bot.
+                  type: string
+                  pattern: '^[0-9a-zA-Z]+$'
+                  minLength: 10
+                  maxLength: 10
+                botVersion:
+                  description: 'The version of the bot to list exports for. '
+                  type: string
+                  pattern: '^(DRAFT|[0-9]+)$'
+                  minLength: 1
+                  maxLength: 5
+                sortBy:
+                  description: Provides information about sorting a list of exports.
+                  type: object
+                  properties:
+                    attribute:
+                      allOf:
+                        - $ref: '#/components/schemas/ExportSortAttribute'
+                        - description: The export field to use for sorting.
+                    order:
+                      allOf:
+                        - $ref: '#/components/schemas/SortOrder'
+                        - description: The order to sort the list.
+                filters:
+                  description: Provides the specification of a filter used to limit the exports in the response to only those that match the filter specification. You can only specify one filter and one string to filter on.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ExportFilter'
+                  minItems: 1
+                  maxItems: 1
+                maxResults:
+                  description: 'The maximum number of exports to return in each page of results. If there are fewer results than the max page size, only the actual number of results are returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: 'If the response from the <code>ListExports</code> operation contans more results that specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.'
+                  type: string
   '/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/':
     put:
       operationId: CreateIntent
@@ -1260,7 +1436,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale where this intent is used. All of the bots, slot types, and slots used by the intent must have the same locale.'
+          description: 'The identifier of the language and locale where this intent is used. All of the bots, slot types, and slots used by the intent must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
       requestBody:
@@ -1421,7 +1597,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale of the intents to list. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale of the intents to list. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
         - name: maxResults
@@ -1539,7 +1715,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale that the slot will be used in. The string must match one of the supported locales. All of the bots, intents, slot types used by the slot must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale that the slot will be used in. The string must match one of the supported locales. All of the bots, intents, slot types used by the slot must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
         - name: intentId
@@ -1673,7 +1849,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale of the slots to list. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale of the slots to list. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
         - name: intentId
@@ -1800,7 +1976,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale that the slot type will be used in. The string must match one of the supported locales. All of the bots, intents, and slots used by the slot type must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale that the slot type will be used in. The string must match one of the supported locales. All of the bots, intents, and slots used by the slot type must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
       requestBody:
@@ -1910,7 +2086,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale of the slot types to list. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale of the slot types to list. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
         - name: maxResults
@@ -1959,6 +2135,56 @@ paths:
                 nextToken:
                   description: 'If the response from the <code>ListSlotTypes</code> operation contains more results than specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.'
                   type: string
+  /createuploadurl/:
+    post:
+      operationId: CreateUploadUrl
+      description: 'Gets a pre-signed S3 write URL that you use to upload the zip archive when importing a bot or a bot locale. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUploadUrlResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/bots/{botId}/':
     delete:
       operationId: DeleteBot
@@ -2573,6 +2799,281 @@ paths:
             pattern: '^[0-9]+$'
             minLength: 1
             maxLength: 5
+  '/exports/{exportId}/':
+    delete:
+      operationId: DeleteExport
+      description: Removes a previous export and the associated files stored in an S3 bucket.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteExportResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: exportId
+          in: path
+          required: true
+          description: The unique identifier of the export to delete.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeExport
+      description: Gets information about a specific export.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeExportResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: exportId
+          in: path
+          required: true
+          description: The unique identifier of the export to describe.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+    put:
+      operationId: UpdateExport
+      description: Updates the password used to encrypt an export zip archive.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateExportResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: exportId
+          in: path
+          required: true
+          description: The unique identifier Amazon Lex assigned to the export.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filePassword:
+                  description: The new password to use to encrypt the export zip archive.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+  '/imports/{importId}/':
+    delete:
+      operationId: DeleteImport
+      description: Removes a previous import and the associated file stored in an S3 bucket.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteImportResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: importId
+          in: path
+          required: true
+          description: The unique identifier of the import to delete.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeImport
+      description: Gets information about a specific import.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeImportResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: importId
+          in: path
+          required: true
+          description: The unique identifier of the import to describe.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
   '/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/':
     delete:
       operationId: DeleteIntent
@@ -2647,7 +3148,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale where the bot will be deleted. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale where the bot will be deleted. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
     parameters:
@@ -2729,7 +3230,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale of the intent to describe. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale of the intent to describe. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
     put:
@@ -2809,7 +3310,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale where this intent is used. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale where this intent is used. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
       requestBody:
@@ -2985,7 +3486,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale that the slot will be deleted from. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale that the slot will be deleted from. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
         - name: intentId
@@ -3076,7 +3577,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale of the slot to describe. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale of the slot to describe. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
         - name: intentId
@@ -3165,7 +3666,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale that contains the slot. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale that contains the slot. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
         - name: intentId
@@ -3309,7 +3810,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale that the slot type will be deleted from. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale that the slot type will be deleted from. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
         - name: skipResourceInUseCheck
@@ -3397,7 +3898,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale of the slot type to describe. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale of the slot type to describe. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
     put:
@@ -3477,7 +3978,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale that contains the slot type. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale that contains the slot type. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
       requestBody:
@@ -3562,7 +4063,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale of the intents to list. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale of the intents to list. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
         - name: maxResults
@@ -3651,7 +4152,7 @@ paths:
         - name: localeId
           in: path
           required: true
-          description: 'The identifier of the language and locale of the slot types to list. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+          description: 'The identifier of the language and locale of the slot types to list. The string must match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
           schema:
             type: string
         - name: maxResults
@@ -3701,6 +4202,190 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /imports/:
+    post:
+      operationId: ListImports
+      description: Lists the imports for a bot or bot locale. Imports are kept in the list for 7 days.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImportsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                botId:
+                  description: The unique identifier that Amazon Lex assigned to the bot.
+                  type: string
+                  pattern: '^[0-9a-zA-Z]+$'
+                  minLength: 10
+                  maxLength: 10
+                botVersion:
+                  description: The version of the bot to list imports for.
+                  type: string
+                  pattern: ^DRAFT$
+                  minLength: 5
+                  maxLength: 5
+                sortBy:
+                  description: Provides information for sorting a list of imports.
+                  type: object
+                  properties:
+                    attribute:
+                      allOf:
+                        - $ref: '#/components/schemas/ImportSortAttribute'
+                        - description: The export field to use for sorting.
+                    order:
+                      allOf:
+                        - $ref: '#/components/schemas/SortOrder'
+                        - description: The order to sort the list.
+                filters:
+                  description: Provides the specification of a filter used to limit the bots in the response to only those that match the filter specification. You can only specify one filter and one string to filter on.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ImportFilter'
+                  minItems: 1
+                  maxItems: 1
+                maxResults:
+                  description: 'The maximum number of imports to return in each page of results. If there are fewer results than the max page size, only the actual number of results are returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: 'If the response from the <code>ListImports</code> operation contains more results than specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: StartImport
+      description: Starts importing a bot or bot locale from a zip archive that you uploaded to an S3 bucket.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartImportResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - importId
+                - resourceSpecification
+                - mergeStrategy
+              properties:
+                importId:
+                  description: The unique identifier for the import. It is included in the response from the operation.
+                  type: string
+                  pattern: '^[0-9a-zA-Z]+$'
+                  minLength: 10
+                  maxLength: 10
+                resourceSpecification:
+                  description: 'Provides information about the bot or bot locale that you want to import. You can sepcifiy the <code>botImportSpecification</code> or the <code>botLocaleImportSpecification</code>, but not both.'
+                  type: object
+                  properties:
+                    botImportSpecification:
+                      allOf:
+                        - $ref: '#/components/schemas/BotImportSpecification'
+                        - description: Parameters for importing a bot.
+                    botLocaleImportSpecification:
+                      allOf:
+                        - $ref: '#/components/schemas/BotLocaleImportSpecification'
+                        - description: Parameters for importing a bot locale.
+                mergeStrategy:
+                  description: The strategy to use when there is a name conflict between the imported resource and an existing resource. When the merge strategy is <code>FailOnConflict</code> existing resources are not overwritten and the import fails.
+                  type: string
+                  enum:
+                    - Overwrite
+                    - FailOnConflict
+                filePassword:
+                  description: The password used to encrypt the zip archive that contains the bot or bot locale definition. You should always encrypt the zip archive to protect it during transit between your site and Amazon Lex.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
   '/tags/{resourceARN}':
     get:
       operationId: ListTagsForResource
@@ -4155,6 +4840,65 @@ components:
             - $ref: '#/components/schemas/BotVersion'
             - description: The version of a bot used for a bot locale.
       description: The version of a bot used for a bot locale.
+    CreateExportResponse:
+      type: object
+      properties:
+        exportId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: An identifier for a specific request to create an export.
+        resourceSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ExportResourceSpecification'
+            - description: 'A description of the type of resource that was exported, either a bot or a bot locale.'
+        fileFormat:
+          allOf:
+            - $ref: '#/components/schemas/ImportExportFileFormat'
+            - description: The file format used for the bot or bot locale definition files.
+        exportStatus:
+          allOf:
+            - $ref: '#/components/schemas/ExportStatus'
+            - description: 'The status of the export. When the status is <code>Completed</code>, you can use the operation to get the pre-signed S3 URL link to your exported bot or bot locale.'
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the request to export a bot was created.
+    BotExportSpecification:
+      type: object
+      required:
+        - botId
+        - botVersion
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The identifier of the bot assigned by Amazon Lex.
+        botVersion:
+          allOf:
+            - $ref: '#/components/schemas/BotVersion'
+            - description: The version of the bot that was exported. This will be either <code>DRAFT</code> or the version number.
+      description: Provided the identity of a the bot that was exported.
+    BotLocaleExportSpecification:
+      type: object
+      required:
+        - botId
+        - botVersion
+        - localeId
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The identifier of the bot to create the locale for.
+        botVersion:
+          allOf:
+            - $ref: '#/components/schemas/BotVersion'
+            - description: The version of the bot to export.
+        localeId:
+          allOf:
+            - $ref: '#/components/schemas/LocaleId'
+            - description: The identifier of the language and locale to export. The string must match one of the locales in the bot.
+      description: Provides the bot locale parameters required for exporting a bot locale.
+    ResourceNotFoundException: {}
     CreateIntentResponse:
       type: object
       properties:
@@ -4464,6 +5208,17 @@ components:
             - $ref: '#/components/schemas/RegexPattern'
             - description: '<p>A regular expression used to validate the value of a slot.</p> <p> Use a standard regular expression. Amazon Lex supports the following characters in the regular expression: </p> <ul> <li> <p>A-Z, a-z</p> </li> <li> <p>0-9</p> </li> <li> <p>Unicode characters ("\ u&lt;Unicode&gt;")</p> </li> </ul> <p> Represent Unicode characters with four digits, for example "\u0041" or "\u005A". </p> <p> The following regular expression operators are not supported: </p> <ul> <li> <p>Infinite repeaters: *, +, or {x,} with no upper bound.</p> </li> <li> <p>Wild card (.)</p> </li> </ul>'
       description: Provides a regular expression used to validate the value of a slot.
+    CreateUploadUrlResponse:
+      type: object
+      properties:
+        importId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: An identifier for a unique import job. Use it when you call the operation.
+        uploadUrl:
+          allOf:
+            - $ref: '#/components/schemas/PresignedS3Url'
+            - description: A pre-signed S3 write URL. Upload the zip archive file that contains the definition of your bot or bot locale.
     DeleteBotResponse:
       type: object
       properties:
@@ -4524,6 +5279,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/BotStatus'
             - description: 'The current status of the bot. '
+    DeleteExportResponse:
+      type: object
+      properties:
+        exportId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the deleted export.
+        exportStatus:
+          allOf:
+            - $ref: '#/components/schemas/ExportStatus'
+            - description: 'The current status of the deletion. When the deletion is complete, the export will no longer be returned by the operation and calls to the with the export identifier will fail.'
+    DeleteImportResponse:
+      type: object
+      properties:
+        importId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the deleted import.
+        importStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImportStatus'
+            - description: 'The current status of the deletion. When the deletion is complete, the import will no longer be returned by the operation and calls to the with the import identifier will fail.'
     DescribeBotResponse:
       type: object
       properties:
@@ -4563,7 +5340,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: A timestamp of the date and time that the bot was last updated.
-    ResourceNotFoundException: {}
     DescribeBotAliasResponse:
       type: object
       properties:
@@ -4719,6 +5495,80 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: A timestamp of the date and time that the bot version was created.
+    DescribeExportResponse:
+      type: object
+      properties:
+        exportId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the described export.
+        resourceSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ExportResourceSpecification'
+            - description: 'The bot, bot ID, and optional locale ID of the exported bot or bot locale.'
+        fileFormat:
+          allOf:
+            - $ref: '#/components/schemas/ImportExportFileFormat'
+            - description: The file format used in the files that describe the bot or bot locale.
+        exportStatus:
+          allOf:
+            - $ref: '#/components/schemas/ExportStatus'
+            - description: The status of the export. When the status is <code>Complete</code> the export archive file is available for download.
+        failureReasons:
+          allOf:
+            - $ref: '#/components/schemas/FailureReasons'
+            - description: 'If the <code>exportStatus</code> is failed, contains one or more reasons why the export could not be completed.'
+        downloadUrl:
+          allOf:
+            - $ref: '#/components/schemas/PresignedS3Url'
+            - description: A pre-signed S3 URL that points to the bot or bot locale archive. The URL is only available for 5 minutes after calling the <code>DescribeExport</code> operation.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the export was created.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last date and time that the export was updated.
+    DescribeImportResponse:
+      type: object
+      properties:
+        importId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the described import.
+        resourceSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ImportResourceSpecification'
+            - description: The specifications of the imported bot or bot locale.
+        importedResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ImportedResourceId'
+            - description: The unique identifier that Amazon Lex assigned to the resource created by the import.
+        importedResourceName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the imported resource.
+        mergeStrategy:
+          allOf:
+            - $ref: '#/components/schemas/MergeStrategy'
+            - description: The strategy used when there was a name conflict between the imported resource and an existing resource. When the merge strategy is <code>FailOnConflict</code> existing resources are not overwritten and the import fails.
+        importStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImportStatus'
+            - description: The status of the import process. When the status is <code>Completed</code> the resource is imported and ready for use.
+        failureReasons:
+          allOf:
+            - $ref: '#/components/schemas/FailureReasons'
+            - description: 'If the <code>importStatus</code> field is <code>Failed</code>, this provides one or more reasons for the failture.'
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the import was created.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the import was last updated.
     DescribeIntentResponse:
       type: object
       properties:
@@ -5047,6 +5897,92 @@ components:
       type: string
       enum:
         - SlotTypeSignature
+    ListExportsResponse:
+      type: object
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier assigned to the bot by Amazon Lex.
+        botVersion:
+          allOf:
+            - $ref: '#/components/schemas/BotVersion'
+            - description: The version of the bot that was exported.
+        exportSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ExportSummaryList'
+            - description: 'Summary information for the exports that meet the filter criteria specified in the request. The length of the list is specified in the <code>maxResults</code> parameter. If there are more exports available, the <code>nextToken</code> field contains a token to get the next page of results.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token that indicates whether there are more results to return in a response to the <code>ListExports</code> operation. If the <code>nextToken</code> field is present, you send the contents as the <code>nextToken</code> parameter of a <code>ListExports</code> operation request to get the next page of results.'
+    ExportSortAttribute:
+      type: string
+      enum:
+        - LastUpdatedDateTime
+    ExportFilter:
+      type: object
+      required:
+        - name
+        - values
+        - operator
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ExportFilterName'
+            - description: The name of the field to use for filtering.
+        values:
+          allOf:
+            - $ref: '#/components/schemas/FilterValues'
+            - description: The values to use to fileter the response.
+        operator:
+          allOf:
+            - $ref: '#/components/schemas/ExportFilterOperator'
+            - description: The operator to use for the filter. Specify EQ when the <code>ListExports</code> operation should return only resource types that equal the specified value. Specify CO when the <code>ListExports</code> operation should return resource types that contain the specified value.
+      description: Filtes the response form the operation
+    ListImportsResponse:
+      type: object
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier assigned by Amazon Lex to the bot.
+        botVersion:
+          allOf:
+            - $ref: '#/components/schemas/DraftBotVersion'
+            - description: The version of the bot that was imported. It will always be <code>DRAFT</code>.
+        importSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ImportSummaryList'
+            - description: 'Summary information for the imports that meet the filter criteria specified in the request. The length of the list is specified in the <code>maxResults</code> parameter. If there are more imports available, the <code>nextToken</code> field contains a token to get the next page of results.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token that indicates whether there are more results to return in a response to the <code>ListImports</code> operation. If the <code>nextToken</code> field is present, you send the contents as the <code>nextToken</code> parameter of a <code>ListImports</code> operation request to get the next page of results.'
+    ImportSortAttribute:
+      type: string
+      enum:
+        - LastUpdatedDateTime
+    ImportFilter:
+      type: object
+      required:
+        - name
+        - values
+        - operator
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ImportFilterName'
+            - description: The name of the field to use for filtering.
+        values:
+          allOf:
+            - $ref: '#/components/schemas/FilterValues'
+            - description: The values to use to filter the response.
+        operator:
+          allOf:
+            - $ref: '#/components/schemas/ImportFilterOperator'
+            - description: The operator to use for the filter. Specify EQ when the <code>ListImports</code> operation should return only resource types that equal the specified value. Specify CO when the <code>ListImports</code> operation should return resource types that contain the specified value.
+      description: Filters the response from the operation.
     ListIntentsResponse:
       type: object
       properties:
@@ -5202,6 +6138,85 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags associated with a resource.
+    StartImportResponse:
+      type: object
+      properties:
+        importId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: A unique identifier for the import.
+        resourceSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ImportResourceSpecification'
+            - description: The parameters used when importing the bot or bot locale.
+        mergeStrategy:
+          allOf:
+            - $ref: '#/components/schemas/MergeStrategy'
+            - description: The strategy used when there was a name conflict between the imported resource and an existing resource. When the merge strategy is <code>FailOnConflict</code> existing resources are not overwritten and the import fails.
+        importStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImportStatus'
+            - description: The current status of the import. When the status is <code>Complete</code> the bot or bot alias is ready to use.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the import request was created.
+    BotImportSpecification:
+      type: object
+      required:
+        - botName
+        - roleArn
+        - dataPrivacy
+      properties:
+        botName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name that Amazon Lex should use for the bot.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM role used to build and run the bot.
+        dataPrivacy:
+          $ref: '#/components/schemas/DataPrivacy'
+        idleSessionTTLInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/SessionTTL'
+            - description: '<p>The time, in seconds, that Amazon Lex should keep information about a user''s conversation with the bot. </p> <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Lex deletes any data provided before the timeout.</p> <p>You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.</p>'
+        botTags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'A list of tags to add to the bot. You can only add tags when you import a bot. You can''t use the <code>UpdateBot</code> operation to update tags. To update tags, use the <code>TagResource</code> operation.'
+        testBotAliasTags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'A list of tags to add to the test alias for a bot. You can only add tags when you import a bot. You can''t use the <code>UpdateAlias</code> operation to update tags. To update tags on the test alias, use the <code>TagResource</code> operation.'
+      description: Provides the bot parameters required for importing a bot.
+    BotLocaleImportSpecification:
+      type: object
+      required:
+        - botId
+        - botVersion
+        - localeId
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The identifier of the bot to import the locale to.
+        botVersion:
+          allOf:
+            - $ref: '#/components/schemas/DraftBotVersion'
+            - description: The version of the bot to import the locale to. This can only be the <code>DRAFT</code> version of the bot.
+        localeId:
+          allOf:
+            - $ref: '#/components/schemas/LocaleId'
+            - description: 'The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
+        nluIntentConfidenceThreshold:
+          allOf:
+            - $ref: '#/components/schemas/ConfidenceThreshold'
+            - description: '<p>Determines the threshold where Amazon Lex will insert the <code>AMAZON.FallbackIntent</code>, <code>AMAZON.KendraSearchIntent</code>, or both when returning alternative intents. <code>AMAZON.FallbackIntent</code> and <code>AMAZON.KendraSearchIntent</code> are only inserted if they are configured for the bot. </p> <p>For example, suppose a bot is configured with the confidence threshold of 0.80 and the <code>AMAZON.FallbackIntent</code>. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the <code>PostText</code> operation would be:</p> <ul> <li> <p> <code>AMAZON.FallbackIntent</code> </p> </li> <li> <p> <code>IntentA</code> </p> </li> <li> <p> <code>IntentB</code> </p> </li> <li> <p> <code>IntentC</code> </p> </li> </ul>'
+        voiceSettings:
+          $ref: '#/components/schemas/VoiceSettings'
+      description: Provides the bot locale parameters required for importing a bot locale.
     TagResourceResponse:
       type: object
       properties: {}
@@ -5343,6 +6358,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: A timestamp of the date and time that the locale was last updated.
+    UpdateExportResponse:
+      type: object
+      properties:
+        exportId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier Amazon Lex assigned to the export.
+        resourceSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ExportResourceSpecification'
+            - description: 'A description of the type of resource that was exported, either a bot or a bot locale.'
+        fileFormat:
+          allOf:
+            - $ref: '#/components/schemas/ImportExportFileFormat'
+            - description: The file format used for the files that define the resource.
+        exportStatus:
+          allOf:
+            - $ref: '#/components/schemas/ExportStatus'
+            - description: The status of the export. When the status is <code>Completed</code> the export archive is available for download.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the export was created.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the export was last updated.
     UpdateIntentResponse:
       type: object
       properties:
@@ -5683,6 +6725,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BotAliasSummary'
+    Id:
+      type: string
+      pattern: '^[0-9a-zA-Z]+$'
+      minLength: 10
+      maxLength: 10
     BotFilterName:
       type: string
       enum:
@@ -5704,6 +6751,33 @@ components:
         $ref: '#/components/schemas/BotFilter'
       minItems: 1
       maxItems: 1
+    RoleArn:
+      type: string
+      pattern: '^arn:aws:iam::[0-9]{12}:role/.*$'
+      minLength: 32
+      maxLength: 2048
+    DataPrivacy:
+      type: object
+      required:
+        - childDirected
+      properties:
+        childDirected:
+          allOf:
+            - $ref: '#/components/schemas/ChildDirected'
+            - description: 'For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children''s Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href="https://aws.amazon.com/lex/faqs#data-security">Amazon Lex FAQ</a>.'
+      description: 'By default, data stored by Amazon Lex is encrypted. The <code>DataPrivacy</code> structure provides settings that determine how Amazon Lex handles special cases of securing the data for your bot. '
+    SessionTTL:
+      type: integer
+      minimum: 60
+      maximum: 86400
+    TagMap:
+      type: object
+      minProperties: 0
+      maxProperties: 200
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    LocaleId:
+      type: string
     BotLocaleFilterName:
       type: string
       enum:
@@ -5740,6 +6814,26 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BotLocaleHistoryEvent'
+    DraftBotVersion:
+      type: string
+      pattern: ^DRAFT$
+      minLength: 5
+      maxLength: 5
+    ConfidenceThreshold:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 1
+    VoiceSettings:
+      type: object
+      required:
+        - voiceId
+      properties:
+        voiceId:
+          allOf:
+            - $ref: '#/components/schemas/VoiceId'
+            - description: The identifier of the Amazon Polly voice to use.
+      description: Defines settings for using an Amazon Polly voice to communicate with a user.
     BotLocaleSortBy:
       type: object
       required:
@@ -5765,8 +6859,7 @@ components:
         - Failed
         - Deleting
         - NotBuilt
-    LocaleId:
-      type: string
+        - Importing
     LocaleName:
       type: string
     BotLocaleSummary:
@@ -5825,11 +6918,7 @@ components:
         - Deleting
         - Failed
         - Versioning
-    Id:
-      type: string
-      pattern: '^[0-9a-zA-Z]+$'
-      minLength: 10
-      maxLength: 10
+        - Importing
     NumericalBotVersion:
       type: string
       pattern: '^[0-9]+$'
@@ -5917,11 +7006,6 @@ components:
         $ref: '#/components/schemas/BotVersionSummary'
     BoxedBoolean:
       type: boolean
-    DraftBotVersion:
-      type: string
-      pattern: ^DRAFT$
-      minLength: 5
-      maxLength: 5
     BuildBotLocaleRequest:
       type: object
       title: BuildBotLocaleRequest
@@ -6072,11 +7156,6 @@ components:
             - $ref: '#/components/schemas/CodeHookInterfaceVersion'
             - description: The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.
       description: Specifies a Lambda function that verifies requests to a bot or fulfilles the user's request to a bot.
-    ConfidenceThreshold:
-      type: number
-      format: double
-      minimum: 0
-      maximum: 1
     ContextTimeToLiveInSeconds:
       type: integer
       minimum: 5
@@ -6107,12 +7186,6 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: Sets whether Amazon Lex uses Amazon Comprehend to detect the sentiment of user utterances.
       description: Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.
-    TagMap:
-      type: object
-      minProperties: 0
-      maxProperties: 200
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
     CreateBotAliasRequest:
       type: object
       required:
@@ -6145,16 +7218,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'A list of tags to add to the bot alias. You can only add tags when you create an alias, you can''t use the <code>UpdateBotAlias</code> operation to update the tags on a bot alias. To update tags, use the <code>TagResource</code> operation.'
-    VoiceSettings:
-      type: object
-      required:
-        - voiceId
-      properties:
-        voiceId:
-          allOf:
-            - $ref: '#/components/schemas/VoiceId'
-            - description: The identifier of the Amazon Polly voice to use.
-      description: Defines settings for using an Amazon Polly voice to communicate with a user.
     CreateBotLocaleRequest:
       type: object
       required:
@@ -6165,7 +7228,7 @@ components:
         localeId:
           allOf:
             - $ref: '#/components/schemas/LocaleId'
-            - description: 'The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.'
+            - description: 'The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.'
         description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -6178,25 +7241,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/VoiceSettings'
             - description: The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.
-    RoleArn:
-      type: string
-      pattern: '^arn:aws:iam::[0-9]{12}:role/.*$'
-      minLength: 32
-      maxLength: 2048
-    DataPrivacy:
-      type: object
-      required:
-        - childDirected
-      properties:
-        childDirected:
-          allOf:
-            - $ref: '#/components/schemas/ChildDirected'
-            - description: 'For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children''s Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href="https://aws.amazon.com/lex/faqs#data-security">Amazon Lex FAQ</a>.'
-      description: 'By default, data stored by Amazon Lex is encrypted. The <code>DataPrivacy</code> structure provides settings that determine how Amazon Lex handles special cases of securing the data for your bot. '
-    SessionTTL:
-      type: integer
-      minimum: 60
-      maximum: 86400
     CreateBotRequest:
       type: object
       required:
@@ -6248,6 +7292,53 @@ components:
           allOf:
             - $ref: '#/components/schemas/BotVersionLocaleSpecification'
             - description: 'Specifies the locales that Amazon Lex adds to this version. You can choose the <code>Draft</code> version or any other previously published version for each locale. When you specify a source version, the locale data is copied from the source version to the new version.'
+    ExportResourceSpecification:
+      type: object
+      properties:
+        botExportSpecification:
+          allOf:
+            - $ref: '#/components/schemas/BotExportSpecification'
+            - description: Parameters for exporting a bot.
+        botLocaleExportSpecification:
+          allOf:
+            - $ref: '#/components/schemas/BotLocaleExportSpecification'
+            - description: Parameters for exporting a bot locale.
+      description: 'Provides information about the bot or bot locale that you want to export. You can specify the <code>botExportSpecification</code> or the <code>botLocaleExportSpecification</code>, but not both.'
+    ImportExportFileFormat:
+      type: string
+      enum:
+        - LexJson
+    ImportExportFilePassword:
+      type: string
+      minLength: 1
+      maxLength: 1024
+      format: password
+    CreateExportRequest:
+      type: object
+      required:
+        - resourceSpecification
+        - fileFormat
+      title: CreateExportRequest
+      properties:
+        resourceSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ExportResourceSpecification'
+            - description: 'Specifies the type of resource to export, either a bot or a bot locale. You can only specify one type of resource to export.'
+        fileFormat:
+          allOf:
+            - $ref: '#/components/schemas/ImportExportFileFormat'
+            - description: The file format of the bot or bot locale definition files.
+        filePassword:
+          allOf:
+            - $ref: '#/components/schemas/ImportExportFilePassword'
+            - description: 'An password to use to encrypt the exported archive. Using a password is optional, but you should encrypt the archive to protect the data in transit between Amazon Lex and your local computer.'
+    ExportStatus:
+      type: string
+      enum:
+        - InProgress
+        - Completed
+        - Failed
+        - Deleting
     DialogCodeHookSettings:
       type: object
       required:
@@ -6482,6 +7573,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/SlotTypeSignature'
             - description: '<p>The built-in slot type used as a parent of this slot type. When you define a parent slot type, the new slot type has the configuration of the parent slot type.</p> <p>Only <code>AMAZON.AlphaNumeric</code> is supported.</p>'
+    CreateUploadUrlRequest:
+      type: object
+      title: CreateUploadUrlRequest
+      properties: {}
+    PresignedS3Url:
+      type: string
+      minLength: 1
+      maxLength: 1024
     CustomPayloadValue:
       type: string
       minLength: 1
@@ -6514,6 +7613,21 @@ components:
       type: object
       title: DeleteBotVersionRequest
       properties: {}
+    DeleteExportRequest:
+      type: object
+      title: DeleteExportRequest
+      properties: {}
+    DeleteImportRequest:
+      type: object
+      title: DeleteImportRequest
+      properties: {}
+    ImportStatus:
+      type: string
+      enum:
+        - InProgress
+        - Completed
+        - Failed
+        - Deleting
     DeleteIntentRequest:
       type: object
       title: DeleteIntentRequest
@@ -6548,6 +7662,36 @@ components:
       type: object
       title: DescribeBotVersionRequest
       properties: {}
+    DescribeExportRequest:
+      type: object
+      title: DescribeExportRequest
+      properties: {}
+    DescribeImportRequest:
+      type: object
+      title: DescribeImportRequest
+      properties: {}
+    ImportResourceSpecification:
+      type: object
+      properties:
+        botImportSpecification:
+          allOf:
+            - $ref: '#/components/schemas/BotImportSpecification'
+            - description: Parameters for importing a bot.
+        botLocaleImportSpecification:
+          allOf:
+            - $ref: '#/components/schemas/BotLocaleImportSpecification'
+            - description: Parameters for importing a bot locale.
+      description: 'Provides information about the bot or bot locale that you want to import. You can sepcifiy the <code>botImportSpecification</code> or the <code>botLocaleImportSpecification</code>, but not both.'
+    ImportedResourceId:
+      type: string
+      pattern: '^([0-9a-zA-Z_])+$'
+      minLength: 5
+      maxLength: 10
+    MergeStrategy:
+      type: string
+      enum:
+        - Overwrite
+        - FailOnConflict
     DescribeIntentRequest:
       type: object
       title: DescribeIntentRequest
@@ -6564,6 +7708,68 @@ components:
       type: object
       title: DescribeSlotTypeRequest
       properties: {}
+    ExportFilterName:
+      type: string
+      enum:
+        - ExportResourceType
+    ExportFilterOperator:
+      type: string
+      enum:
+        - CO
+        - EQ
+    ExportFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportFilter'
+      minItems: 1
+      maxItems: 1
+    ExportSortBy:
+      type: object
+      required:
+        - attribute
+        - order
+      properties:
+        attribute:
+          allOf:
+            - $ref: '#/components/schemas/ExportSortAttribute'
+            - description: The export field to use for sorting.
+        order:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: The order to sort the list.
+      description: Provides information about sorting a list of exports.
+    ExportSummary:
+      type: object
+      properties:
+        exportId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier that Amazon Lex assigned to the export.
+        resourceSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ExportResourceSpecification'
+            - description: Information about the bot or bot locale that was exported.
+        fileFormat:
+          allOf:
+            - $ref: '#/components/schemas/ImportExportFileFormat'
+            - description: The file format used in the export files.
+        exportStatus:
+          allOf:
+            - $ref: '#/components/schemas/ExportStatus'
+            - description: The status of the export. When the status is <code>Completed</code> the export is ready to download.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the export was created.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the export was last updated.
+      description: 'Provides summary information about an export in an export list. '
+    ExportSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportSummary'
     FailureReason:
       type: string
     FilterValue:
@@ -6593,6 +7799,72 @@ components:
             - $ref: '#/components/schemas/ButtonsList'
             - description: A list of buttons that should be displayed on the response card. The arrangement of the buttons is determined by the platform that displays the button.
       description: '<p>A card that is shown to the user by a messaging platform. You define the contents of the card, the card is displayed by the platform. </p> <p>When you use a response card, the response from the user is constrained to the text associated with a button on the card.</p>'
+    ImportFilterName:
+      type: string
+      enum:
+        - ImportResourceType
+    ImportFilterOperator:
+      type: string
+      enum:
+        - CO
+        - EQ
+    ImportFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportFilter'
+      minItems: 1
+      maxItems: 1
+    ImportSortBy:
+      type: object
+      required:
+        - attribute
+        - order
+      properties:
+        attribute:
+          allOf:
+            - $ref: '#/components/schemas/ImportSortAttribute'
+            - description: The export field to use for sorting.
+        order:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: The order to sort the list.
+      description: Provides information for sorting a list of imports.
+    ImportSummary:
+      type: object
+      properties:
+        importId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier that Amazon Lex assigned to the import.
+        importedResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ImportedResourceId'
+            - description: The unique identifier that Amazon Lex assigned to the imported resource.
+        importedResourceName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name that you gave the imported resource.
+        importStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImportStatus'
+            - description: The status of the resource. When the status is <code>Completed</code> the resource is ready to build.
+        mergeStrategy:
+          allOf:
+            - $ref: '#/components/schemas/MergeStrategy'
+            - description: The strategy used to merge existing bot or bot locale definitions with the imported definition.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the import was created.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the import was last updated.
+      description: Provides summary information about an import in an import list.
+    ImportSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportSummary'
     IntentFilterName:
       type: string
       enum:
@@ -6775,6 +8047,62 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'If the response from the <code>ListBuiltInSlotTypes</code> operation contains more results than specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.'
+    ListExportsRequest:
+      type: object
+      title: ListExportsRequest
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier that Amazon Lex assigned to the bot.
+        botVersion:
+          allOf:
+            - $ref: '#/components/schemas/BotVersion'
+            - description: 'The version of the bot to list exports for. '
+        sortBy:
+          allOf:
+            - $ref: '#/components/schemas/ExportSortBy'
+            - description: Determines the field that the list of exports is sorted by. You can sort by the <code>LastUpdatedDateTime</code> field in ascending or descending order.
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/ExportFilters'
+            - description: Provides the specification of a filter used to limit the exports in the response to only those that match the filter specification. You can only specify one filter and one string to filter on.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of exports to return in each page of results. If there are fewer results than the max page size, only the actual number of results are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response from the <code>ListExports</code> operation contans more results that specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.'
+    ListImportsRequest:
+      type: object
+      title: ListImportsRequest
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier that Amazon Lex assigned to the bot.
+        botVersion:
+          allOf:
+            - $ref: '#/components/schemas/DraftBotVersion'
+            - description: The version of the bot to list imports for.
+        sortBy:
+          allOf:
+            - $ref: '#/components/schemas/ImportSortBy'
+            - description: Determines the field that the list of imports is sorted by. You can sort by the <code>LastUpdatedDateTime</code> field in ascending or descending order.
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/ImportFilters'
+            - description: Provides the specification of a filter used to limit the bots in the response to only those that match the filter specification. You can only specify one filter and one string to filter on.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of imports to return in each page of results. If there are fewer results than the max page size, only the actual number of results are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response from the <code>ListImports</code> operation contains more results than specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.'
     ListIntentsRequest:
       type: object
       title: ListIntentsRequest
@@ -7096,6 +8424,30 @@ components:
         $ref: '#/components/schemas/SampleValue'
       minItems: 1
       maxItems: 10000
+    StartImportRequest:
+      type: object
+      required:
+        - importId
+        - resourceSpecification
+        - mergeStrategy
+      title: StartImportRequest
+      properties:
+        importId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier for the import. It is included in the response from the operation.
+        resourceSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ImportResourceSpecification'
+            - description: Parameters for creating the bot or bot locale.
+        mergeStrategy:
+          allOf:
+            - $ref: '#/components/schemas/MergeStrategy'
+            - description: The strategy to use when there is a name conflict between the imported resource and an existing resource. When the merge strategy is <code>FailOnConflict</code> existing resources are not overwritten and the import fails.
+        filePassword:
+          allOf:
+            - $ref: '#/components/schemas/ImportExportFilePassword'
+            - description: The password used to encrypt the zip archive that contains the bot or bot locale definition. You should always encrypt the zip archive to protect it during transit between your site and Amazon Lex.
     StillWaitingResponseFrequency:
       type: integer
       minimum: 1
@@ -7246,6 +8598,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/SessionTTL'
             - description: '<p>The time, in seconds, that Amazon Lex should keep information about a user''s conversation with the bot.</p> <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Lex deletes any data provided before the timeout.</p> <p>You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.</p>'
+    UpdateExportRequest:
+      type: object
+      title: UpdateExportRequest
+      properties:
+        filePassword:
+          allOf:
+            - $ref: '#/components/schemas/ImportExportFilePassword'
+            - description: The new password to use to encrypt the export zip archive.
     UpdateIntentRequest:
       type: object
       required:

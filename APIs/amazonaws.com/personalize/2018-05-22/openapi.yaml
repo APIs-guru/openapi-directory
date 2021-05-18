@@ -4100,6 +4100,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoMLConfig'
             - description: The <a>AutoMLConfig</a> object containing a list of recipes to search when AutoML is performed.
+        optimizationObjective:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationObjective'
+            - description: 'Describes the additional objective for the solution, such as maximizing streaming minutes or increasing revenue. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html">Optimizing a solution</a>.'
       description: Describes the configuration properties for the solution.
     TrainingMode:
       type: string
@@ -4959,6 +4963,10 @@ components:
             - $ref: '#/components/schemas/IntegerMaxValue'
             - description: The maximum allowable value for the hyperparameter.
       description: Provides the name and range of an integer-valued hyperparameter.
+    ItemAttribute:
+      type: string
+      minLength: 1
+      maxLength: 150
     NextToken:
       type: string
       maxLength: 1300
@@ -4993,6 +5001,25 @@ components:
     MetricValue:
       type: number
       format: double
+    ObjectiveSensitivity:
+      type: string
+      enum:
+        - LOW
+        - MEDIUM
+        - HIGH
+        - 'OFF'
+    OptimizationObjective:
+      type: object
+      properties:
+        itemAttribute:
+          allOf:
+            - $ref: '#/components/schemas/ItemAttribute'
+            - description: 'The numerical metadata column in an Items dataset related to the optimization objective. For example, VIDEO_LENGTH (to maximize streaming minutes), or PRICE (to maximize revenue).'
+        objectiveSensitivity:
+          allOf:
+            - $ref: '#/components/schemas/ObjectiveSensitivity'
+            - description: Specifies how Amazon Personalize balances the importance of your optimization objective versus relevance.
+      description: 'Describes the additional objective for the solution, such as maximizing streaming minutes or increasing revenue. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html">Optimizing a solution</a>.'
     PerformHPO:
       type: boolean
     RecipeType:
