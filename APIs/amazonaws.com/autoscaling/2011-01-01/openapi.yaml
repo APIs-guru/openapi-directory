@@ -3,7 +3,7 @@ info:
   version: '2011-01-01'
   x-release: v4
   title: Auto Scaling
-  description: '<fullname>Amazon EC2 Auto Scaling</fullname> <p>Amazon EC2 Auto Scaling is designed to automatically launch or terminate EC2 instances based on user-defined scaling policies, scheduled actions, and health checks. Use this service with AWS Auto Scaling, Amazon CloudWatch, and Elastic Load Balancing.</p> <p>For more information, including information about granting IAM users required permissions for Amazon EC2 Auto Scaling actions, see the <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">Amazon EC2 Auto Scaling User Guide</a>.</p>'
+  description: '<fullname>Amazon EC2 Auto Scaling</fullname> <p>Amazon EC2 Auto Scaling is designed to automatically launch or terminate EC2 instances based on user-defined scaling policies, scheduled actions, and health checks.</p> <p>For more information about Amazon EC2 Auto Scaling, see the <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">Amazon EC2 Auto Scaling User Guide</a>. For information about granting IAM users required permissions for calls to Amazon EC2 Auto Scaling, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/ec2-auto-scaling-api-permissions.html">Granting IAM users required permissions for Amazon EC2 Auto Scaling resources</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -2271,7 +2271,7 @@ paths:
         - name: ForceDelete
           in: query
           required: false
-          description: 'Specifies that the warm pool is to be deleted along with all instances associated with the warm pool, without waiting for all instances to be terminated. This parameter also deletes any outstanding lifecycle actions associated with the warm pool instances.'
+          description: 'Specifies that the warm pool is to be deleted along with all of its associated instances, without waiting for all instances to be terminated. This parameter also deletes any outstanding lifecycle actions associated with the warm pool instances.'
           schema:
             type: boolean
         - name: Action
@@ -2501,7 +2501,7 @@ paths:
     get:
       x-aws-operation-name: DescribeAutoScalingGroups
       operationId: GET_DescribeAutoScalingGroups
-      description: Describes one or more Auto Scaling groups.
+      description: '<p>Describes one or more Auto Scaling groups.</p> <p>This operation returns information about instances in Auto Scaling groups. To retrieve information about the instances in a warm pool, you must call the <a>DescribeWarmPool</a> API. </p>'
       responses:
         '200':
           description: Success
@@ -2568,7 +2568,7 @@ paths:
     post:
       x-aws-operation-name: DescribeAutoScalingGroups
       operationId: POST_DescribeAutoScalingGroups
-      description: Describes one or more Auto Scaling groups.
+      description: '<p>Describes one or more Auto Scaling groups.</p> <p>This operation returns information about instances in Auto Scaling groups. To retrieve information about the instances in a warm pool, you must call the <a>DescribeWarmPool</a> API. </p>'
       responses:
         '200':
           description: Success
@@ -3675,7 +3675,7 @@ paths:
         - name: PolicyTypes
           in: query
           required: false
-          description: 'One or more policy types. The valid values are <code>SimpleScaling</code>, <code>StepScaling</code>, and <code>TargetTrackingScaling</code>.'
+          description: 'One or more policy types. The valid values are <code>SimpleScaling</code>, <code>StepScaling</code>, <code>TargetTrackingScaling</code>, and <code>PredictiveScaling</code>.'
           schema:
             type: array
             items:
@@ -5243,6 +5243,116 @@ paths:
             type: string
             enum:
               - '2011-01-01'
+  /#Action=GetPredictiveScalingForecast:
+    get:
+      x-aws-operation-name: GetPredictiveScalingForecast
+      operationId: GET_GetPredictiveScalingForecast
+      description: '<p>Retrieves the forecast data for a predictive scaling policy.</p> <p>Load forecasts are predictions of the hourly load values using historical load data from CloudWatch and an analysis of historical trends. Capacity forecasts are represented as predicted values for the minimum capacity that is needed on an hourly basis, based on the hourly load forecast.</p> <p>A minimum of 24 hours of data is required to create the initial forecasts. However, having a full 14 days of historical data results in more accurate forecasts.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html">Predictive scaling for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetPredictiveScalingForecastAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: query
+          required: true
+          description: The name of the Auto Scaling group.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+            x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: PolicyName
+          in: query
+          required: true
+          description: The name of the policy.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+            x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: StartTime
+          in: query
+          required: true
+          description: 'The inclusive start time of the time range for the forecast data to get. At most, the date and time can be one year before the current date and time.'
+          schema:
+            type: string
+            format: date-time
+        - name: EndTime
+          in: query
+          required: true
+          description: '<p>The exclusive end time of the time range for the forecast data to get. The maximum time duration between the start and end time is 30 days. </p> <p>Although this parameter can accept a date and time that is more than two days in the future, the availability of forecast data has limits. Amazon EC2 Auto Scaling only issues forecasts for periods of two days in advance.</p>'
+          schema:
+            type: string
+            format: date-time
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetPredictiveScalingForecast
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2011-01-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetPredictiveScalingForecast
+      operationId: POST_GetPredictiveScalingForecast
+      description: '<p>Retrieves the forecast data for a predictive scaling policy.</p> <p>Load forecasts are predictions of the hourly load values using historical load data from CloudWatch and an analysis of historical trends. Capacity forecasts are represented as predicted values for the minimum capacity that is needed on an hourly basis, based on the hourly load forecast.</p> <p>A minimum of 24 hours of data is required to create the initial forecasts. However, having a full 14 days of historical data results in more accurate forecasts.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html">Predictive scaling for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetPredictiveScalingForecastAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GetPredictiveScalingForecastType'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetPredictiveScalingForecast
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2011-01-01'
   /#Action=PutLifecycleHook:
     get:
       x-aws-operation-name: PutLifecycleHook
@@ -5520,7 +5630,7 @@ paths:
     get:
       x-aws-operation-name: PutScalingPolicy
       operationId: GET_PutScalingPolicy
-      description: '<p>Creates or updates a scaling policy for an Auto Scaling group.</p> <p>For more information about using scaling policies to scale your Auto Scaling group, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html">Target tracking scaling policies</a> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html">Step and simple scaling policies</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      description: '<p>Creates or updates a scaling policy for an Auto Scaling group. Scaling policies are used to scale an Auto Scaling group based on configurable metrics. If no policies are defined, the dynamic scaling and predictive scaling features are not used. </p> <p>For more information about using dynamic scaling, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html">Target tracking scaling policies</a> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html">Step and simple scaling policies</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>For more information about using predictive scaling, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html">Predictive scaling for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>You can view the scaling policies for an Auto Scaling group using the <a>DescribePolicies</a> API call. If you are no longer using a scaling policy, you can delete it by calling the <a>DeletePolicy</a> API.</p>'
       responses:
         '200':
           description: Success
@@ -5568,7 +5678,7 @@ paths:
         - name: PolicyType
           in: query
           required: false
-          description: '<p>One of the following policy types: </p> <ul> <li> <p> <code>TargetTrackingScaling</code> </p> </li> <li> <p> <code>StepScaling</code> </p> </li> <li> <p> <code>SimpleScaling</code> (default)</p> </li> </ul>'
+          description: '<p>One of the following policy types: </p> <ul> <li> <p> <code>TargetTrackingScaling</code> </p> </li> <li> <p> <code>StepScaling</code> </p> </li> <li> <p> <code>SimpleScaling</code> (default)</p> </li> <li> <p> <code>PredictiveScaling</code> </p> </li> </ul>'
           schema:
             type: string
             minLength: 1
@@ -5634,7 +5744,7 @@ paths:
         - name: TargetTrackingConfiguration
           in: query
           required: false
-          description: '<p>A target tracking scaling policy. Includes support for predefined or customized metrics.</p> <p>The following predefined metrics are available:</p> <ul> <li> <p> <code>ASGAverageCPUUtilization</code> </p> </li> <li> <p> <code>ASGAverageNetworkIn</code> </p> </li> <li> <p> <code>ASGAverageNetworkOut</code> </p> </li> <li> <p> <code>ALBRequestCountPerTarget</code> </p> </li> </ul> <p>If you specify <code>ALBRequestCountPerTarget</code> for the metric, you must specify the <code>ResourceLabel</code> parameter with the <code>PredefinedMetricSpecification</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html">TargetTrackingConfiguration</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.</p> <p>Required if the policy type is <code>TargetTrackingScaling</code>.</p>'
+          description: '<p>A target tracking scaling policy. Provides support for predefined or customized metrics.</p> <p>The following predefined metrics are available:</p> <ul> <li> <p> <code>ASGAverageCPUUtilization</code> </p> </li> <li> <p> <code>ASGAverageNetworkIn</code> </p> </li> <li> <p> <code>ASGAverageNetworkOut</code> </p> </li> <li> <p> <code>ALBRequestCountPerTarget</code> </p> </li> </ul> <p>If you specify <code>ALBRequestCountPerTarget</code> for the metric, you must specify the <code>ResourceLabel</code> parameter with the <code>PredefinedMetricSpecification</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html">TargetTrackingConfiguration</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.</p> <p>Required if the policy type is <code>TargetTrackingScaling</code>.</p>'
           schema:
             type: object
             required:
@@ -5663,6 +5773,36 @@ paths:
           description: 'Indicates whether the scaling policy is enabled or disabled. The default is enabled. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html">Disabling a scaling policy for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
           schema:
             type: boolean
+        - name: PredictiveScalingConfiguration
+          in: query
+          required: false
+          description: '<p>A predictive scaling policy. Provides support for only predefined metrics.</p> <p>Predictive scaling works with CPU utilization, network in/out, and the Application Load Balancer request count.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PredictiveScalingConfiguration.html">PredictiveScalingConfiguration</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.</p> <p>Required if the policy type is <code>PredictiveScaling</code>.</p>'
+          schema:
+            type: object
+            required:
+              - MetricSpecifications
+            properties:
+              MetricSpecifications:
+                allOf:
+                  - $ref: '#/components/schemas/PredictiveScalingMetricSpecifications'
+                  - description: '<p>This structure includes the metrics and target utilization to use for predictive scaling. </p> <p>This is an array, but we currently only support a single metric specification. That is, you can specify a target value and a single metric pair, or a target value and one scaling metric and one load metric.</p>'
+              Mode:
+                allOf:
+                  - $ref: '#/components/schemas/PredictiveScalingMode'
+                  - description: The predictive scaling mode. Defaults to <code>ForecastOnly</code> if not specified.
+              SchedulingBufferTime:
+                allOf:
+                  - $ref: '#/components/schemas/PredictiveScalingSchedulingBufferTime'
+                  - description: '<p>The amount of time, in seconds, by which the instance launch time can be advanced. For example, the forecast says to add capacity at 10:00 AM, and you choose to pre-launch instances by 5 minutes. In that case, the instances will be launched at 9:55 AM. The intention is to give resources time to be provisioned. It can take a few minutes to launch an EC2 instance. The actual amount of time required depends on several factors, such as the size of the instance and whether there are startup scripts to complete. </p> <p>The value must be less than the forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds if not specified. </p>'
+              MaxCapacityBreachBehavior:
+                allOf:
+                  - $ref: '#/components/schemas/PredictiveScalingMaxCapacityBreachBehavior'
+                  - description: '<p>Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity of the Auto Scaling group. Defaults to <code>HonorMaxCapacity</code> if not specified.</p> <p>The following are possible values:</p> <ul> <li> <p> <code>HonorMaxCapacity</code> - Amazon EC2 Auto Scaling cannot scale out capacity higher than the maximum capacity. The maximum capacity is enforced as a hard limit. </p> </li> <li> <p> <code>IncreaseMaxCapacity</code> - Amazon EC2 Auto Scaling can scale out capacity higher than the maximum capacity when the forecast capacity is close to or exceeds the maximum capacity. The upper limit is determined by the forecasted capacity and the value for <code>MaxCapacityBuffer</code>.</p> </li> </ul>'
+              MaxCapacityBuffer:
+                allOf:
+                  - $ref: '#/components/schemas/PredictiveScalingMaxCapacityBuffer'
+                  - description: '<p>The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. The value is specified as a percentage relative to the forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer, such that if the forecast capacity is 50, and the maximum capacity is 40, then the effective maximum capacity is 55.</p> <p>If set to 0, Amazon EC2 Auto Scaling may scale capacity higher than the maximum capacity to equal but not exceed forecast capacity. </p> <p>Required if the <code>MaxCapacityBreachBehavior</code> property is set to <code>IncreaseMaxCapacity</code>, and cannot be used otherwise.</p>'
+            description: Represents a predictive scaling policy configuration to use with Amazon EC2 Auto Scaling.
         - name: Action
           in: query
           required: true
@@ -5688,7 +5828,7 @@ paths:
     post:
       x-aws-operation-name: PutScalingPolicy
       operationId: POST_PutScalingPolicy
-      description: '<p>Creates or updates a scaling policy for an Auto Scaling group.</p> <p>For more information about using scaling policies to scale your Auto Scaling group, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html">Target tracking scaling policies</a> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html">Step and simple scaling policies</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      description: '<p>Creates or updates a scaling policy for an Auto Scaling group. Scaling policies are used to scale an Auto Scaling group based on configurable metrics. If no policies are defined, the dynamic scaling and predictive scaling features are not used. </p> <p>For more information about using dynamic scaling, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html">Target tracking scaling policies</a> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html">Step and simple scaling policies</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>For more information about using predictive scaling, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html">Predictive scaling for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>You can view the scaling policies for an Auto Scaling group using the <a>DescribePolicies</a> API call. If you are no longer using a scaling policy, you can delete it by calling the <a>DeletePolicy</a> API.</p>'
       responses:
         '200':
           description: Success
@@ -5738,7 +5878,7 @@ paths:
     get:
       x-aws-operation-name: PutScheduledUpdateGroupAction
       operationId: GET_PutScheduledUpdateGroupAction
-      description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>You can view the scheduled actions for an Auto Scaling group using the <a>DescribeScheduledActions</a> API call. If you are no longer using a scheduled action, you can delete it by calling the <a>DeleteScheduledAction</a> API.</p>'
       responses:
         '200':
           description: Success
@@ -5861,7 +6001,7 @@ paths:
     post:
       x-aws-operation-name: PutScheduledUpdateGroupAction
       operationId: POST_PutScheduledUpdateGroupAction
-      description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>You can view the scheduled actions for an Auto Scaling group using the <a>DescribeScheduledActions</a> API call. If you are no longer using a scheduled action, you can delete it by calling the <a>DeleteScheduledAction</a> API.</p>'
       responses:
         '200':
           description: Success
@@ -5907,7 +6047,7 @@ paths:
     get:
       x-aws-operation-name: PutWarmPool
       operationId: GET_PutWarmPool
-      description: '<p>Adds a warm pool to the specified Auto Scaling group. A warm pool is a pool of pre-initialized EC2 instances that sits alongside the Auto Scaling group. Whenever your application needs to scale out, the Auto Scaling group can draw on the warm pool to meet its new desired capacity. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html">Warm pools for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>This operation must be called from the Region in which the Auto Scaling group was created. This operation cannot be called on an Auto Scaling group that has a mixed instances policy or a launch template or launch configuration that requests Spot Instances.</p> <p>You can view the instances in the warm pool using the <a>DescribeWarmPool</a> API call. If you are no longer using a warm pool, you can delete it by calling the <a>DeleteWarmPool</a> API.</p>'
+      description: '<p>Creates or updates a warm pool for the specified Auto Scaling group. A warm pool is a pool of pre-initialized EC2 instances that sits alongside the Auto Scaling group. Whenever your application needs to scale out, the Auto Scaling group can draw on the warm pool to meet its new desired capacity. For more information and example configurations, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html">Warm pools for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>This operation must be called from the Region in which the Auto Scaling group was created. This operation cannot be called on an Auto Scaling group that has a mixed instances policy or a launch template or launch configuration that requests Spot Instances.</p> <p>You can view the instances in the warm pool using the <a>DescribeWarmPool</a> API call. If you are no longer using a warm pool, you can delete it by calling the <a>DeleteWarmPool</a> API.</p>'
       responses:
         '200':
           description: Success
@@ -5940,7 +6080,7 @@ paths:
         - name: MaxGroupPreparedCapacity
           in: query
           required: false
-          description: '<p>Specifies the total maximum number of instances that are allowed to be in the warm pool or in any state except <code>Terminated</code> for the Auto Scaling group. This is an optional property. Specify it only if the warm pool size should not be determined by the difference between the group''s maximum capacity and its desired capacity. </p> <important> <p>Amazon EC2 Auto Scaling will launch and maintain either the difference between the group''s maximum capacity and its desired capacity, if a value for <code>MaxGroupPreparedCapacity</code> is not specified, or the difference between the <code>MaxGroupPreparedCapacity</code> and the desired capacity, if a value for <code>MaxGroupPreparedCapacity</code> is specified. </p> <p>The size of the warm pool is dynamic. Only when <code>MaxGroupPreparedCapacity</code> and <code>MinSize</code> are set to the same value does the warm pool have an absolute size.</p> </important> <p>If the desired capacity of the Auto Scaling group is higher than the <code>MaxGroupPreparedCapacity</code>, the capacity of the warm pool is 0. To remove a value that you previously set, include the property but specify -1 for the value. </p>'
+          description: '<p>Specifies the maximum number of instances that are allowed to be in the warm pool or in any state except <code>Terminated</code> for the Auto Scaling group. This is an optional property. Specify it only if you do not want the warm pool size to be determined by the difference between the group''s maximum capacity and its desired capacity. </p> <important> <p>If a value for <code>MaxGroupPreparedCapacity</code> is not specified, Amazon EC2 Auto Scaling launches and maintains the difference between the group''s maximum capacity and its desired capacity. If you specify a value for <code>MaxGroupPreparedCapacity</code>, Amazon EC2 Auto Scaling uses the difference between the <code>MaxGroupPreparedCapacity</code> and the desired capacity instead. </p> <p>The size of the warm pool is dynamic. Only when <code>MaxGroupPreparedCapacity</code> and <code>MinSize</code> are set to the same value does the warm pool have an absolute size.</p> </important> <p>If the desired capacity of the Auto Scaling group is higher than the <code>MaxGroupPreparedCapacity</code>, the capacity of the warm pool is 0, unless you specify a value for <code>MinSize</code>. To remove a value that you previously set, include the property but specify -1 for the value. </p>'
           schema:
             type: integer
             minimum: -1
@@ -5954,7 +6094,7 @@ paths:
         - name: PoolState
           in: query
           required: false
-          description: 'Sets the instance state to transition to after the lifecycle hooks finish. Valid values are: <code>Stopped</code> (default) or <code>Running</code>.'
+          description: Sets the instance state to transition to after the lifecycle actions are complete. Default is <code>Stopped</code>.
           schema:
             type: string
             enum:
@@ -5985,7 +6125,7 @@ paths:
     post:
       x-aws-operation-name: PutWarmPool
       operationId: POST_PutWarmPool
-      description: '<p>Adds a warm pool to the specified Auto Scaling group. A warm pool is a pool of pre-initialized EC2 instances that sits alongside the Auto Scaling group. Whenever your application needs to scale out, the Auto Scaling group can draw on the warm pool to meet its new desired capacity. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html">Warm pools for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>This operation must be called from the Region in which the Auto Scaling group was created. This operation cannot be called on an Auto Scaling group that has a mixed instances policy or a launch template or launch configuration that requests Spot Instances.</p> <p>You can view the instances in the warm pool using the <a>DescribeWarmPool</a> API call. If you are no longer using a warm pool, you can delete it by calling the <a>DeleteWarmPool</a> API.</p>'
+      description: '<p>Creates or updates a warm pool for the specified Auto Scaling group. A warm pool is a pool of pre-initialized EC2 instances that sits alongside the Auto Scaling group. Whenever your application needs to scale out, the Auto Scaling group can draw on the warm pool to meet its new desired capacity. For more information and example configurations, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html">Warm pools for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>This operation must be called from the Region in which the Auto Scaling group was created. This operation cannot be called on an Auto Scaling group that has a mixed instances policy or a launch template or launch configuration that requests Spot Instances.</p> <p>You can view the instances in the warm pool using the <a>DescribeWarmPool</a> API call. If you are no longer using a warm pool, you can delete it by calling the <a>DeleteWarmPool</a> API.</p>'
       responses:
         '200':
           description: Success
@@ -7938,6 +8078,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/Activities'
             - description: The activities related to moving instances out of <code>Standby</code> mode.
+    GetPredictiveScalingForecastAnswer:
+      type: object
+      required:
+        - LoadForecast
+        - CapacityForecast
+        - UpdateTime
+      properties:
+        LoadForecast:
+          allOf:
+            - $ref: '#/components/schemas/LoadForecasts'
+            - description: The load forecast.
+        CapacityForecast:
+          allOf:
+            - $ref: '#/components/schemas/CapacityForecast'
+            - description: The capacity forecast.
+        UpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/TimestampType'
+            - description: The time the forecast was made.
     PutLifecycleHookAnswer:
       type: object
       properties: {}
@@ -8025,6 +8184,27 @@ components:
       format: double
     DisableScaleIn:
       type: boolean
+    PredictiveScalingMetricSpecifications:
+      type: array
+      items:
+        $ref: '#/components/schemas/PredictiveScalingMetricSpecification'
+    PredictiveScalingMode:
+      type: string
+      enum:
+        - ForecastAndScale
+        - ForecastOnly
+    PredictiveScalingSchedulingBufferTime:
+      type: integer
+      minimum: 0
+    PredictiveScalingMaxCapacityBreachBehavior:
+      type: string
+      enum:
+        - HonorMaxCapacity
+        - IncreaseMaxCapacity
+    PredictiveScalingMaxCapacityBuffer:
+      type: integer
+      minimum: 0
+      maximum: 100
     PutWarmPoolAnswer:
       type: object
       properties: {}
@@ -8281,6 +8461,8 @@ components:
       type: integer
     AutoScalingGroupDesiredCapacity:
       type: integer
+    AutoScalingGroupPredictedCapacity:
+      type: integer
     Cooldown:
       type: integer
     AvailabilityZones:
@@ -8331,7 +8513,7 @@ components:
         MaxGroupPreparedCapacity:
           allOf:
             - $ref: '#/components/schemas/MaxGroupPreparedCapacity'
-            - description: The total maximum number of instances that are allowed to be in the warm pool or in any state except <code>Terminated</code> for the Auto Scaling group.
+            - description: The maximum number of instances that are allowed to be in the warm pool or in any state except <code>Terminated</code> for the Auto Scaling group.
         MinSize:
           allOf:
             - $ref: '#/components/schemas/WarmPoolMinSize'
@@ -8339,7 +8521,7 @@ components:
         PoolState:
           allOf:
             - $ref: '#/components/schemas/WarmPoolState'
-            - description: 'The instance state to transition to after the lifecycle actions are complete: <code>Stopped</code> or <code>Running</code>.'
+            - description: The instance state to transition to after the lifecycle actions are complete.
         Status:
           allOf:
             - $ref: '#/components/schemas/WarmPoolStatus'
@@ -8391,6 +8573,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoScalingGroupDesiredCapacity'
             - description: The desired size of the group.
+        PredictedCapacity:
+          allOf:
+            - $ref: '#/components/schemas/AutoScalingGroupPredictedCapacity'
+            - description: The predicted capacity of the group when it has a predictive scaling policy.
         DefaultCooldown:
           allOf:
             - $ref: '#/components/schemas/Cooldown'
@@ -8663,6 +8849,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
+    PredictiveScalingForecastTimestamps:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimestampType'
+    PredictiveScalingForecastValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricScale'
+    CapacityForecast:
+      type: object
+      required:
+        - Timestamps
+        - Values
+      properties:
+        Timestamps:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingForecastTimestamps'
+            - description: 'The time stamps for the data points, in UTC format.'
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingForecastValues'
+            - description: The values of the data points.
+      description: 'A <code>GetPredictiveScalingForecast</code> call returns the capacity forecast for a predictive scaling policy. This structure includes the data points for that capacity forecast, along with the timestamps of those data points. '
     NonZeroIntPercent:
       type: integer
       minimum: 1
@@ -9059,7 +9268,7 @@ components:
         ForceDelete:
           allOf:
             - $ref: '#/components/schemas/ForceDelete'
-            - description: 'Specifies that the warm pool is to be deleted along with all instances associated with the warm pool, without waiting for all instances to be terminated. This parameter also deletes any outstanding lifecycle actions associated with the warm pool instances.'
+            - description: 'Specifies that the warm pool is to be deleted along with all of its associated instances, without waiting for all instances to be terminated. This parameter also deletes any outstanding lifecycle actions associated with the warm pool instances.'
     MaxNumberOfAutoScalingGroups:
       type: integer
     MaxNumberOfLaunchConfigurations:
@@ -9232,7 +9441,7 @@ components:
         PolicyTypes:
           allOf:
             - $ref: '#/components/schemas/PolicyTypes'
-            - description: 'One or more policy types. The valid values are <code>SimpleScaling</code>, <code>StepScaling</code>, and <code>TargetTrackingScaling</code>.'
+            - description: 'One or more policy types. The valid values are <code>SimpleScaling</code>, <code>StepScaling</code>, <code>TargetTrackingScaling</code>, and <code>PredictiveScaling</code>.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -9518,6 +9727,35 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/XmlString'
+    LoadForecasts:
+      type: array
+      items:
+        $ref: '#/components/schemas/LoadForecast'
+    GetPredictiveScalingForecastType:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - PolicyName
+        - StartTime
+        - EndTime
+      title: GetPredictiveScalingForecastType
+      properties:
+        AutoScalingGroupName:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
+            - description: The name of the Auto Scaling group.
+        PolicyName:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
+            - description: The name of the policy.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/TimestampType'
+            - description: 'The inclusive start time of the time range for the forecast data to get. At most, the date and time can be one year before the current date and time.'
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/TimestampType'
+            - description: '<p>The exclusive end time of the time range for the forecast data to get. The maximum time duration between the start and end time is 30 days. </p> <p>Although this parameter can accept a date and time that is more than two days in the future, the availability of forecast data has limits. Amazon EC2 Auto Scaling only issues forecasts for periods of two days in advance.</p>'
     GlobalTimeout:
       type: integer
     HeartbeatTimeout:
@@ -9611,11 +9849,11 @@ components:
         LivePoolProgress:
           allOf:
             - $ref: '#/components/schemas/InstanceRefreshLivePoolProgress'
-            - description: Indicates the progress of an instance fresh on instances that are in the Auto Scaling group.
+            - description: Indicates the progress of an instance refresh on instances that are in the Auto Scaling group.
         WarmPoolProgress:
           allOf:
             - $ref: '#/components/schemas/InstanceRefreshWarmPoolProgress'
-            - description: Indicates the progress of an instance fresh on instances that are in the warm pool.
+            - description: Indicates the progress of an instance refresh on instances that are in the warm pool.
       description: Reports the progress of an instance refresh on an Auto Scaling group that has a warm pool. This includes separate details for instances in the warm pool and instances in the Auto Scaling group (the live pool).
     InstanceRefresh:
       type: object
@@ -9647,7 +9885,7 @@ components:
         PercentageComplete:
           allOf:
             - $ref: '#/components/schemas/IntPercent'
-            - description: 'The percentage of the instance refresh that is complete. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance''s health status and warm-up time. When the instance''s health status changes to healthy and the specified warm-up time passes, the instance is considered updated and added to the percentage complete.'
+            - description: 'The percentage of the instance refresh that is complete. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance''s health status and warm-up time. When the instance''s health status changes to healthy and the specified warm-up time passes, the instance is considered updated and is added to the percentage complete.'
         InstancesToUpdate:
           allOf:
             - $ref: '#/components/schemas/InstancesToUpdate'
@@ -9663,24 +9901,24 @@ components:
         PercentageComplete:
           allOf:
             - $ref: '#/components/schemas/IntPercent'
-            - description: 'The percentage of instances in the Auto Scaling group that have been replaced. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance''s health status and warm-up time. When the instance''s health status changes to healthy and the specified warm-up time passes, the instance is considered updated and added to the percentage complete.'
+            - description: 'The percentage of instances in the Auto Scaling group that have been replaced. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance''s health status and warm-up time. When the instance''s health status changes to healthy and the specified warm-up time passes, the instance is considered updated and is added to the percentage complete.'
         InstancesToUpdate:
           allOf:
             - $ref: '#/components/schemas/InstancesToUpdate'
             - description: The number of instances remaining to update.
-      description: Reports the progress of an instance fresh on instances that are in the Auto Scaling group.
+      description: Reports the progress of an instance refresh on instances that are in the Auto Scaling group.
     InstanceRefreshWarmPoolProgress:
       type: object
       properties:
         PercentageComplete:
           allOf:
             - $ref: '#/components/schemas/IntPercent'
-            - description: 'The percentage of instances in the warm pool that have been replaced. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance''s health status and warm-up time. When the instance''s health status changes to healthy and the specified warm-up time passes, the instance is considered updated and added to the percentage complete.'
+            - description: 'The percentage of instances in the warm pool that have been replaced. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance''s health status and warm-up time. When the instance''s health status changes to healthy and the specified warm-up time passes, the instance is considered updated and is added to the percentage complete.'
         InstancesToUpdate:
           allOf:
             - $ref: '#/components/schemas/InstancesToUpdate'
             - description: The number of instances remaining to update.
-      description: Reports the progress of an instance fresh on instances that are in the warm pool.
+      description: Reports the progress of an instance refresh on instances that are in the warm pool.
     OnDemandBaseCapacity:
       type: integer
     OnDemandPercentageAboveBaseCapacity:
@@ -9905,6 +10143,48 @@ components:
             - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: '<p>The state of the target group.</p> <ul> <li> <p> <code>Adding</code> - The Auto Scaling instances are being registered with the target group.</p> </li> <li> <p> <code>Added</code> - All Auto Scaling instances are registered with the target group.</p> </li> <li> <p> <code>InService</code> - At least one Auto Scaling instance passed an ELB health check.</p> </li> <li> <p> <code>Removing</code> - The Auto Scaling instances are being deregistered from the target group. If connection draining is enabled, Elastic Load Balancing waits for in-flight requests to complete before deregistering the instances.</p> </li> <li> <p> <code>Removed</code> - All Auto Scaling instances are deregistered from the target group.</p> </li> </ul>'
       description: '<p>Describes the state of a target group.</p> <p>If you attach a target group to an existing Auto Scaling group, the initial state is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. If EC2 health checks are enabled instead, the target group remains in the <code>Added</code> state.</p>'
+    PredictiveScalingMetricSpecification:
+      type: object
+      required:
+        - TargetValue
+      properties:
+        TargetValue:
+          allOf:
+            - $ref: '#/components/schemas/MetricScale'
+            - description: Specifies the target utilization.
+        PredefinedMetricPairSpecification:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingPredefinedMetricPair'
+            - description: The metric pair specification from which Amazon EC2 Auto Scaling determines the appropriate scaling metric and load metric to use.
+        PredefinedScalingMetricSpecification:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingPredefinedScalingMetric'
+            - description: The scaling metric specification.
+        PredefinedLoadMetricSpecification:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingPredefinedLoadMetric'
+            - description: The load metric specification.
+      description: '<p>This structure specifies the metrics and target utilization settings for a predictive scaling policy. </p> <p>You must specify either a metric pair, or a load metric and a scaling metric individually. Specifying a metric pair instead of individual metrics provides a simpler way to configure metrics for a scaling policy. You choose the metric pair, and the policy automatically knows the correct sum and average statistics to use for the load metric and the scaling metric.</p> <p>Example</p> <ul> <li> <p>You create a predictive scaling policy and specify <code>ALBRequestCount</code> as the value for the metric pair and <code>1000.0</code> as the target value. For this type of metric, you must provide the metric dimension for the corresponding target group, so you also provide a resource label for the Application Load Balancer target group that is attached to your Auto Scaling group.</p> </li> <li> <p>The number of requests the target group receives per minute provides the load metric, and the request count averaged between the members of the target group provides the scaling metric. In CloudWatch, this refers to the <code>RequestCount</code> and <code>RequestCountPerTarget</code> metrics, respectively.</p> </li> <li> <p>For optimal use of predictive scaling, you adhere to the best practice of using a dynamic scaling policy to automatically scale between the minimum capacity and maximum capacity in response to real-time changes in resource utilization.</p> </li> <li> <p>Amazon EC2 Auto Scaling consumes data points for the load metric over the last 14 days and creates an hourly load forecast for predictive scaling. (A minimum of 24 hours of data is required.)</p> </li> <li> <p>After creating the load forecast, Amazon EC2 Auto Scaling determines when to reduce or increase the capacity of your Auto Scaling group in each hour of the forecast period so that the average number of requests received by each instance is as close to 1000 requests per minute as possible at all times.</p> </li> </ul>'
+    LoadForecast:
+      type: object
+      required:
+        - Timestamps
+        - Values
+        - MetricSpecification
+      properties:
+        Timestamps:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingForecastTimestamps'
+            - description: 'The time stamps for the data points, in UTC format.'
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingForecastValues'
+            - description: The values of the data points.
+        MetricSpecification:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingMetricSpecification'
+            - description: The metric specification for the load forecast.
+      description: 'A <code>GetPredictiveScalingForecast</code> call returns the load forecast for a predictive scaling policy. This structure includes the data points for that load forecast, along with the timestamps of those data points and the metric specification. '
     MaxGroupPreparedCapacity:
       type: integer
       minimum: -1
@@ -9977,6 +10257,95 @@ components:
         $ref: '#/components/schemas/ScalingPolicy'
     PolicyIncrement:
       type: integer
+    PredefinedLoadMetricType:
+      type: string
+      enum:
+        - ASGTotalCPUUtilization
+        - ASGTotalNetworkIn
+        - ASGTotalNetworkOut
+        - ALBTargetGroupRequestCount
+    PredefinedMetricPairType:
+      type: string
+      enum:
+        - ASGCPUUtilization
+        - ASGNetworkIn
+        - ASGNetworkOut
+        - ALBRequestCount
+    PredefinedScalingMetricType:
+      type: string
+      enum:
+        - ASGAverageCPUUtilization
+        - ASGAverageNetworkIn
+        - ASGAverageNetworkOut
+        - ALBRequestCountPerTarget
+    PredictiveScalingConfiguration:
+      type: object
+      required:
+        - MetricSpecifications
+      properties:
+        MetricSpecifications:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingMetricSpecifications'
+            - description: '<p>This structure includes the metrics and target utilization to use for predictive scaling. </p> <p>This is an array, but we currently only support a single metric specification. That is, you can specify a target value and a single metric pair, or a target value and one scaling metric and one load metric.</p>'
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingMode'
+            - description: The predictive scaling mode. Defaults to <code>ForecastOnly</code> if not specified.
+        SchedulingBufferTime:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingSchedulingBufferTime'
+            - description: '<p>The amount of time, in seconds, by which the instance launch time can be advanced. For example, the forecast says to add capacity at 10:00 AM, and you choose to pre-launch instances by 5 minutes. In that case, the instances will be launched at 9:55 AM. The intention is to give resources time to be provisioned. It can take a few minutes to launch an EC2 instance. The actual amount of time required depends on several factors, such as the size of the instance and whether there are startup scripts to complete. </p> <p>The value must be less than the forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds if not specified. </p>'
+        MaxCapacityBreachBehavior:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingMaxCapacityBreachBehavior'
+            - description: '<p>Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity of the Auto Scaling group. Defaults to <code>HonorMaxCapacity</code> if not specified.</p> <p>The following are possible values:</p> <ul> <li> <p> <code>HonorMaxCapacity</code> - Amazon EC2 Auto Scaling cannot scale out capacity higher than the maximum capacity. The maximum capacity is enforced as a hard limit. </p> </li> <li> <p> <code>IncreaseMaxCapacity</code> - Amazon EC2 Auto Scaling can scale out capacity higher than the maximum capacity when the forecast capacity is close to or exceeds the maximum capacity. The upper limit is determined by the forecasted capacity and the value for <code>MaxCapacityBuffer</code>.</p> </li> </ul>'
+        MaxCapacityBuffer:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingMaxCapacityBuffer'
+            - description: '<p>The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. The value is specified as a percentage relative to the forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer, such that if the forecast capacity is 50, and the maximum capacity is 40, then the effective maximum capacity is 55.</p> <p>If set to 0, Amazon EC2 Auto Scaling may scale capacity higher than the maximum capacity to equal but not exceed forecast capacity. </p> <p>Required if the <code>MaxCapacityBreachBehavior</code> property is set to <code>IncreaseMaxCapacity</code>, and cannot be used otherwise.</p>'
+      description: Represents a predictive scaling policy configuration to use with Amazon EC2 Auto Scaling.
+    PredictiveScalingPredefinedMetricPair:
+      type: object
+      required:
+        - PredefinedMetricType
+      properties:
+        PredefinedMetricType:
+          allOf:
+            - $ref: '#/components/schemas/PredefinedMetricPairType'
+            - description: 'Indicates which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric. For example, if the metric type is <code>ASGCPUUtilization</code>, the Auto Scaling group''s total CPU metric is used as the load metric, and the average CPU metric is used for the scaling metric.'
+        ResourceLabel:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen1023'
+            - description: '<p>A label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group. You can''t specify a resource label unless the target group is attached to the Auto Scaling group.</p> <p>You create the resource label by appending the final portion of the load balancer ARN and the final portion of the target group ARN into a single value, separated by a forward slash (/). The format of the resource label is:</p> <p> <code>app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d</code>.</p> <p>Where:</p> <ul> <li> <p>app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN</p> </li> <li> <p>targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.</p> </li> </ul> <p>To find the ARN for an Application Load Balancer, use the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html">DescribeLoadBalancers</a> API operation. To find the ARN for the target group, use the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>'
+      description: 'Represents a metric pair for a predictive scaling policy. '
+    PredictiveScalingPredefinedScalingMetric:
+      type: object
+      required:
+        - PredefinedMetricType
+      properties:
+        PredefinedMetricType:
+          allOf:
+            - $ref: '#/components/schemas/PredefinedScalingMetricType'
+            - description: The metric type.
+        ResourceLabel:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen1023'
+            - description: '<p>A label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group. You can''t specify a resource label unless the target group is attached to the Auto Scaling group.</p> <p>You create the resource label by appending the final portion of the load balancer ARN and the final portion of the target group ARN into a single value, separated by a forward slash (/). The format of the resource label is:</p> <p> <code>app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d</code>.</p> <p>Where:</p> <ul> <li> <p>app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN</p> </li> <li> <p>targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.</p> </li> </ul> <p>To find the ARN for an Application Load Balancer, use the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html">DescribeLoadBalancers</a> API operation. To find the ARN for the target group, use the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>'
+      description: '<p>Describes a scaling metric for a predictive scaling policy.</p> <p>When returned in the output of <code>DescribePolicies</code>, it indicates that a predictive scaling policy uses individually specified load and scaling metrics instead of a metric pair.</p>'
+    PredictiveScalingPredefinedLoadMetric:
+      type: object
+      required:
+        - PredefinedMetricType
+      properties:
+        PredefinedMetricType:
+          allOf:
+            - $ref: '#/components/schemas/PredefinedLoadMetricType'
+            - description: The metric type.
+        ResourceLabel:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen1023'
+            - description: '<p>A label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group. You can''t specify a resource label unless the target group is attached to the Auto Scaling group.</p> <p>You create the resource label by appending the final portion of the load balancer ARN and the final portion of the target group ARN into a single value, separated by a forward slash (/). The format of the resource label is:</p> <p> <code>app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d</code>.</p> <p>Where:</p> <ul> <li> <p>app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN</p> </li> <li> <p>targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.</p> </li> </ul> <p>To find the ARN for an Application Load Balancer, use the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html">DescribeLoadBalancers</a> API operation. To find the ARN for the target group, use the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>'
+      description: '<p>Describes a load metric for a predictive scaling policy.</p> <p>When returned in the output of <code>DescribePolicies</code>, it indicates that a predictive scaling policy uses individually specified load and scaling metrics instead of a metric pair.</p>'
     ProcessNames:
       type: array
       items:
@@ -10104,7 +10473,7 @@ components:
         PolicyType:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen64'
-            - description: '<p>One of the following policy types: </p> <ul> <li> <p> <code>TargetTrackingScaling</code> </p> </li> <li> <p> <code>StepScaling</code> </p> </li> <li> <p> <code>SimpleScaling</code> (default)</p> </li> </ul>'
+            - description: '<p>One of the following policy types: </p> <ul> <li> <p> <code>TargetTrackingScaling</code> </p> </li> <li> <p> <code>StepScaling</code> </p> </li> <li> <p> <code>SimpleScaling</code> (default)</p> </li> <li> <p> <code>PredictiveScaling</code> </p> </li> </ul>'
         AdjustmentType:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen255'
@@ -10140,11 +10509,15 @@ components:
         TargetTrackingConfiguration:
           allOf:
             - $ref: '#/components/schemas/TargetTrackingConfiguration'
-            - description: '<p>A target tracking scaling policy. Includes support for predefined or customized metrics.</p> <p>The following predefined metrics are available:</p> <ul> <li> <p> <code>ASGAverageCPUUtilization</code> </p> </li> <li> <p> <code>ASGAverageNetworkIn</code> </p> </li> <li> <p> <code>ASGAverageNetworkOut</code> </p> </li> <li> <p> <code>ALBRequestCountPerTarget</code> </p> </li> </ul> <p>If you specify <code>ALBRequestCountPerTarget</code> for the metric, you must specify the <code>ResourceLabel</code> parameter with the <code>PredefinedMetricSpecification</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html">TargetTrackingConfiguration</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.</p> <p>Required if the policy type is <code>TargetTrackingScaling</code>.</p>'
+            - description: '<p>A target tracking scaling policy. Provides support for predefined or customized metrics.</p> <p>The following predefined metrics are available:</p> <ul> <li> <p> <code>ASGAverageCPUUtilization</code> </p> </li> <li> <p> <code>ASGAverageNetworkIn</code> </p> </li> <li> <p> <code>ASGAverageNetworkOut</code> </p> </li> <li> <p> <code>ALBRequestCountPerTarget</code> </p> </li> </ul> <p>If you specify <code>ALBRequestCountPerTarget</code> for the metric, you must specify the <code>ResourceLabel</code> parameter with the <code>PredefinedMetricSpecification</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html">TargetTrackingConfiguration</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.</p> <p>Required if the policy type is <code>TargetTrackingScaling</code>.</p>'
         Enabled:
           allOf:
             - $ref: '#/components/schemas/ScalingPolicyEnabled'
             - description: 'Indicates whether the scaling policy is enabled or disabled. The default is enabled. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html">Disabling a scaling policy for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
+        PredictiveScalingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingConfiguration'
+            - description: '<p>A predictive scaling policy. Provides support for only predefined metrics.</p> <p>Predictive scaling works with CPU utilization, network in/out, and the Application Load Balancer request count.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PredictiveScalingConfiguration.html">PredictiveScalingConfiguration</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.</p> <p>Required if the policy type is <code>PredictiveScaling</code>.</p>'
     PutScheduledUpdateGroupActionType:
       type: object
       required:
@@ -10213,7 +10586,7 @@ components:
         MaxGroupPreparedCapacity:
           allOf:
             - $ref: '#/components/schemas/MaxGroupPreparedCapacity'
-            - description: '<p>Specifies the total maximum number of instances that are allowed to be in the warm pool or in any state except <code>Terminated</code> for the Auto Scaling group. This is an optional property. Specify it only if the warm pool size should not be determined by the difference between the group''s maximum capacity and its desired capacity. </p> <important> <p>Amazon EC2 Auto Scaling will launch and maintain either the difference between the group''s maximum capacity and its desired capacity, if a value for <code>MaxGroupPreparedCapacity</code> is not specified, or the difference between the <code>MaxGroupPreparedCapacity</code> and the desired capacity, if a value for <code>MaxGroupPreparedCapacity</code> is specified. </p> <p>The size of the warm pool is dynamic. Only when <code>MaxGroupPreparedCapacity</code> and <code>MinSize</code> are set to the same value does the warm pool have an absolute size.</p> </important> <p>If the desired capacity of the Auto Scaling group is higher than the <code>MaxGroupPreparedCapacity</code>, the capacity of the warm pool is 0. To remove a value that you previously set, include the property but specify -1 for the value. </p>'
+            - description: '<p>Specifies the maximum number of instances that are allowed to be in the warm pool or in any state except <code>Terminated</code> for the Auto Scaling group. This is an optional property. Specify it only if you do not want the warm pool size to be determined by the difference between the group''s maximum capacity and its desired capacity. </p> <important> <p>If a value for <code>MaxGroupPreparedCapacity</code> is not specified, Amazon EC2 Auto Scaling launches and maintains the difference between the group''s maximum capacity and its desired capacity. If you specify a value for <code>MaxGroupPreparedCapacity</code>, Amazon EC2 Auto Scaling uses the difference between the <code>MaxGroupPreparedCapacity</code> and the desired capacity instead. </p> <p>The size of the warm pool is dynamic. Only when <code>MaxGroupPreparedCapacity</code> and <code>MinSize</code> are set to the same value does the warm pool have an absolute size.</p> </important> <p>If the desired capacity of the Auto Scaling group is higher than the <code>MaxGroupPreparedCapacity</code>, the capacity of the warm pool is 0, unless you specify a value for <code>MinSize</code>. To remove a value that you previously set, include the property but specify -1 for the value. </p>'
         MinSize:
           allOf:
             - $ref: '#/components/schemas/WarmPoolMinSize'
@@ -10221,7 +10594,7 @@ components:
         PoolState:
           allOf:
             - $ref: '#/components/schemas/WarmPoolState'
-            - description: 'Sets the instance state to transition to after the lifecycle hooks finish. Valid values are: <code>Stopped</code> (default) or <code>Running</code>.'
+            - description: Sets the instance state to transition to after the lifecycle actions are complete. Default is <code>Stopped</code>.
     RecordLifecycleActionHeartbeatType:
       type: object
       required:
@@ -10287,7 +10660,7 @@ components:
         PolicyType:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen64'
-            - description: '<p>One of the following policy types: </p> <ul> <li> <p> <code>TargetTrackingScaling</code> </p> </li> <li> <p> <code>StepScaling</code> </p> </li> <li> <p> <code>SimpleScaling</code> (default)</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html">Target tracking scaling policies</a> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html">Step and simple scaling policies</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+            - description: '<p>One of the following policy types: </p> <ul> <li> <p> <code>TargetTrackingScaling</code> </p> </li> <li> <p> <code>StepScaling</code> </p> </li> <li> <p> <code>SimpleScaling</code> (default)</p> </li> <li> <p> <code>PredictiveScaling</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html">Target tracking scaling policies</a> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html">Step and simple scaling policies</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
         AdjustmentType:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen255'
@@ -10332,6 +10705,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ScalingPolicyEnabled'
             - description: Indicates whether the policy is enabled (<code>true</code>) or disabled (<code>false</code>).
+        PredictiveScalingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/PredictiveScalingConfiguration'
+            - description: A predictive scaling policy.
       description: Describes a scaling policy.
     ScalingProcessQuery:
       type: object

@@ -13186,6 +13186,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListUserTagsRequest'
       parameters:
+        - name: MaxItems
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
