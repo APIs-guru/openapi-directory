@@ -1646,6 +1646,369 @@ paths:
                 nextToken:
                   description: 'If the response from the <code>ListIntents</code> operation contains more results than specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.'
                   type: string
+  '/policy/{resourceArn}/':
+    post:
+      operationId: CreateResourcePolicy
+      description: Creates a new resource policy with the specified policy statements.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateResourcePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - policy
+              properties:
+                policy:
+                  description: '<p>A resource policy to add to the resource. The policy is a JSON structure that contains one or more statements that define the policy. The policy must follow the IAM syntax. For more information about the contents of a JSON policy document, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html"> IAM JSON policy reference </a>. </p> <p>If the policy isn''t valid, Amazon Lex returns a validation exception.</p>'
+                  type: string
+                  minLength: 2
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteResourcePolicy
+      description: 'Removes an existing policy from a bot or bot alias. If the resource doesn''t have a policy attached, Amazon Lex returns an exception.'
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResourcePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the bot or bot alias that has the resource policy attached.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+        - name: expectedRevisionId
+          in: query
+          required: false
+          description: '<p>The identifier of the revision to edit. If this ID doesn''t match the current revision number, Amazon Lex returns an exception</p> <p>If you don''t specify a revision ID, Amazon Lex will delete the current policy.</p>'
+          schema:
+            type: string
+            pattern: '^[0-9]+$'
+            minLength: 1
+            maxLength: 5
+    get:
+      operationId: DescribeResourcePolicy
+      description: Gets the resource policy and policy revision for a bot or bot alias.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeResourcePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+    put:
+      operationId: UpdateResourcePolicy
+      description: 'Replaces the existing resource policy for a bot or bot alias with a new one. If the policy doesn''t exist, Amazon Lex returns an exception.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResourcePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+        - name: expectedRevisionId
+          in: query
+          required: false
+          description: '<p>The identifier of the revision of the policy to update. If this revision ID doesn''t match the current revision ID, Amazon Lex throws an exception.</p> <p>If you don''t specify a revision, Amazon Lex overwrites the contents of the policy with the new values.</p>'
+          schema:
+            type: string
+            pattern: '^[0-9]+$'
+            minLength: 1
+            maxLength: 5
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - policy
+              properties:
+                policy:
+                  description: '<p>A resource policy to add to the resource. The policy is a JSON structure that contains one or more statements that define the policy. The policy must follow the IAM syntax. For more information about the contents of a JSON policy document, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html"> IAM JSON policy reference </a>. </p> <p>If the policy isn''t valid, Amazon Lex returns a validation exception.</p>'
+                  type: string
+                  minLength: 2
+  '/policy/{resourceArn}/statements/':
+    post:
+      operationId: CreateResourcePolicyStatement
+      description: '<p>Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn''t exist, a new policy is created.</p> <p>You can create a resource policy statement that allows cross-account access.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateResourcePolicyStatementResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+        - name: expectedRevisionId
+          in: query
+          required: false
+          description: '<p>The identifier of the revision of the policy to edit. If this revision ID doesn''t match the current revision ID, Amazon Lex throws an exception.</p> <p>If you don''t specify a revision, Amazon Lex overwrites the contents of the policy with the new values.</p>'
+          schema:
+            type: string
+            pattern: '^[0-9]+$'
+            minLength: 1
+            maxLength: 5
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - statementId
+                - effect
+                - principal
+                - action
+              properties:
+                statementId:
+                  description: 'The name of the statement. The ID is the same as the <code>Sid</code> IAM property. The statement name must be unique within the policy. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_sid.html">IAM JSON policy elements: Sid</a>. '
+                  type: string
+                  pattern: '^([0-9a-zA-Z][_-]?)+$'
+                  minLength: 1
+                  maxLength: 100
+                effect:
+                  description: Determines whether the statement allows or denies access to the resource.
+                  type: string
+                  enum:
+                    - Allow
+                    - Deny
+                principal:
+                  description: 'An IAM principal, such as an IAM users, IAM roles, or AWS services that is allowed or denied access to a resource. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">AWS JSON policy elements: Principal</a>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Principal'
+                action:
+                  description: 'The Amazon Lex action that this policy either allows or denies. The action must apply to the resource type of the specified ARN. For more information, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonlexv2.html"> Actions, resources, and condition keys for Amazon Lex V2</a>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Operation'
+                condition:
+                  description: '<p>Specifies a condition when the policy is in effect. If the principal of the policy is a service principal, you must provide two condition blocks, one with a SourceAccount global condition key and one with a SourceArn global condition key.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html">IAM JSON policy elements: Condition </a>.</p>'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 10
+                  additionalProperties:
+                    $ref: '#/components/schemas/ConditionKeyValueMap'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/':
     put:
       operationId: CreateSlot
@@ -3412,6 +3775,76 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/QueryFilterString'
                         - description: 'A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query. The filter is in the format defined by Amazon Kendra. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/filtering.html">Filtering queries</a>.'
+  '/policy/{resourceArn}/statements/{statementId}/':
+    delete:
+      operationId: DeleteResourcePolicyStatement
+      description: 'Deletes a policy statement from a resource policy. If you delete the last statement from a policy, the policy is deleted. If you specify a statement ID that doesn''t exist in the policy, or if the bot or bot alias doesn''t have a policy attached, Amazon Lex returns an exception.'
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResourcePolicyStatementResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+        - name: statementId
+          in: path
+          required: true
+          description: The name of the statement (SID) to delete from the policy.
+          schema:
+            type: string
+            pattern: '^([0-9a-zA-Z][_-]?)+$'
+            minLength: 1
+            maxLength: 100
+        - name: expectedRevisionId
+          in: query
+          required: false
+          description: '<p>The identifier of the revision of the policy to delete the statement from. If this revision ID doesn''t match the current revision ID, Amazon Lex throws an exception.</p> <p>If you don''t specify a revision, Amazon Lex removes the current contents of the statement. </p>'
+          schema:
+            type: string
+            pattern: '^[0-9]+$'
+            minLength: 1
+            maxLength: 5
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/{slotId}/':
     delete:
       operationId: DeleteSlot
@@ -5048,6 +5481,51 @@ components:
       type: string
       minLength: 1
       maxLength: 5000
+    CreateResourcePolicyResponse:
+      type: object
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy was attached to.
+        revisionId:
+          allOf:
+            - $ref: '#/components/schemas/RevisionId'
+            - description: 'The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.'
+    CreateResourcePolicyStatementResponse:
+      type: object
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+        revisionId:
+          allOf:
+            - $ref: '#/components/schemas/RevisionId'
+            - description: 'The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.'
+    Principal:
+      type: object
+      properties:
+        service:
+          allOf:
+            - $ref: '#/components/schemas/ServicePrincipal'
+            - description: The name of the AWS service that should allowed or denied access to an Amazon Lex action.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalArn'
+            - description: The Amazon Resource Name (ARN) of the principal.
+      description: 'The IAM principal that you allowing or denying access to an Amazon Lex action. You must provide a <code>service</code> or an <code>arn</code>, but not both in the same statement. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html"> AWS JSON policy elements: Principal </a>.'
+    Operation:
+      type: string
+      pattern: 'lex:[a-zA-Z*]+$'
+      minLength: 5
+      maxLength: 50
+    ConditionKeyValueMap:
+      type: object
+      minProperties: 0
+      maxProperties: 10
+      additionalProperties:
+        $ref: '#/components/schemas/ConditionValue'
     CreateSlotResponse:
       type: object
       properties:
@@ -5301,6 +5779,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImportStatus'
             - description: 'The current status of the deletion. When the deletion is complete, the import will no longer be returned by the operation and calls to the with the import identifier will fail.'
+    DeleteResourcePolicyResponse:
+      type: object
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy was deleted from.
+        revisionId:
+          allOf:
+            - $ref: '#/components/schemas/RevisionId'
+            - description: 'The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.'
+    DeleteResourcePolicyStatementResponse:
+      type: object
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy statement was removed from.
+        revisionId:
+          allOf:
+            - $ref: '#/components/schemas/RevisionId'
+            - description: 'The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.'
     DescribeBotResponse:
       type: object
       properties:
@@ -5644,6 +6144,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: A timestamp of the date and time that the intent was last updated.
+    DescribeResourcePolicyResponse:
+      type: object
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/Policy'
+            - description: 'The JSON structure that contains the resource policy. For more information about the contents of a JSON policy document, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html"> IAM JSON policy reference </a>.'
+        revisionId:
+          allOf:
+            - $ref: '#/components/schemas/RevisionId'
+            - description: 'The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.'
     DescribeSlotResponse:
       type: object
       properties:
@@ -6475,6 +6990,17 @@ components:
             - $ref: '#/components/schemas/Id'
             - description: The unique identifier of the slot.
       description: Sets the priority that Amazon Lex should use when eliciting slot values from a user.
+    UpdateResourcePolicyResponse:
+      type: object
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+        revisionId:
+          allOf:
+            - $ref: '#/components/schemas/RevisionId'
+            - description: 'The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.'
     UpdateSlotResponse:
       type: object
       properties:
@@ -7156,6 +7682,23 @@ components:
             - $ref: '#/components/schemas/CodeHookInterfaceVersion'
             - description: The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.
       description: Specifies a Lambda function that verifies requests to a bot or fulfilles the user's request to a bot.
+    ConditionKey:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ConditionValue:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ConditionMap:
+      type: object
+      minProperties: 0
+      maxProperties: 10
+      additionalProperties:
+        $ref: '#/components/schemas/ConditionKeyValueMap'
+    ConditionOperator:
+      type: string
+      minLength: 1
     ContextTimeToLiveInSeconds:
       type: integer
       minimum: 5
@@ -7464,6 +8007,66 @@ components:
           allOf:
             - $ref: '#/components/schemas/KendraConfiguration'
             - description: Configuration information required to use the <code>AMAZON.KendraSearchIntent</code> intent to connect to an Amazon Kendra index. The <code>AMAZON.KendraSearchIntent</code> intent is called when Amazon Lex can't determine another intent to invoke.
+    Policy:
+      type: string
+      minLength: 2
+    CreateResourcePolicyRequest:
+      type: object
+      required:
+        - policy
+      title: CreateResourcePolicyRequest
+      properties:
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/Policy'
+            - description: '<p>A resource policy to add to the resource. The policy is a JSON structure that contains one or more statements that define the policy. The policy must follow the IAM syntax. For more information about the contents of a JSON policy document, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html"> IAM JSON policy reference </a>. </p> <p>If the policy isn''t valid, Amazon Lex returns a validation exception.</p>'
+    RevisionId:
+      type: string
+      pattern: '^[0-9]+$'
+      minLength: 1
+      maxLength: 5
+    Effect:
+      type: string
+      enum:
+        - Allow
+        - Deny
+    PrincipalList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Principal'
+    OperationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Operation'
+    CreateResourcePolicyStatementRequest:
+      type: object
+      required:
+        - statementId
+        - effect
+        - principal
+        - action
+      title: CreateResourcePolicyStatementRequest
+      properties:
+        statementId:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: 'The name of the statement. The ID is the same as the <code>Sid</code> IAM property. The statement name must be unique within the policy. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_sid.html">IAM JSON policy elements: Sid</a>. '
+        effect:
+          allOf:
+            - $ref: '#/components/schemas/Effect'
+            - description: Determines whether the statement allows or denies access to the resource.
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalList'
+            - description: 'An IAM principal, such as an IAM users, IAM roles, or AWS services that is allowed or denied access to a resource. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">AWS JSON policy elements: Principal</a>.'
+        action:
+          allOf:
+            - $ref: '#/components/schemas/OperationList'
+            - description: 'The Amazon Lex action that this policy either allows or denies. The action must apply to the resource type of the specified ARN. For more information, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonlexv2.html"> Actions, resources, and condition keys for Amazon Lex V2</a>.'
+        condition:
+          allOf:
+            - $ref: '#/components/schemas/ConditionMap'
+            - description: '<p>Specifies a condition when the policy is in effect. If the principal of the policy is a service principal, you must provide two condition blocks, one with a SourceAccount global condition key and one with a SourceArn global condition key.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html">IAM JSON policy elements: Condition </a>.</p>'
     SlotValueElicitationSetting:
       type: object
       required:
@@ -7632,6 +8235,14 @@ components:
       type: object
       title: DeleteIntentRequest
       properties: {}
+    DeleteResourcePolicyRequest:
+      type: object
+      title: DeleteResourcePolicyRequest
+      properties: {}
+    DeleteResourcePolicyStatementRequest:
+      type: object
+      title: DeleteResourcePolicyStatementRequest
+      properties: {}
     DeleteSlotRequest:
       type: object
       title: DeleteSlotRequest
@@ -7700,6 +8311,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SlotPriority'
+    DescribeResourcePolicyRequest:
+      type: object
+      title: DescribeResourcePolicyRequest
+      properties: {}
     DescribeSlotRequest:
       type: object
       title: DescribeSlotRequest
@@ -8287,6 +8902,16 @@ components:
       type: string
       minLength: 1
       maxLength: 1000
+    ServicePrincipal:
+      type: string
+      pattern: '^[0-9a-zA-Z_.]+$'
+      minLength: 15
+      maxLength: 1024
+    PrincipalArn:
+      type: string
+      pattern: '^arn:aws:iam::[0-9]{12}:(root|(user|role)/.*)$'
+      minLength: 30
+      maxLength: 1024
     PriorityValue:
       type: integer
       minimum: 0
@@ -8660,6 +9285,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/KendraConfiguration'
             - description: New configuration settings for connecting to an Amazon Kendra index.
+    UpdateResourcePolicyRequest:
+      type: object
+      required:
+        - policy
+      title: UpdateResourcePolicyRequest
+      properties:
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/Policy'
+            - description: '<p>A resource policy to add to the resource. The policy is a JSON structure that contains one or more statements that define the policy. The policy must follow the IAM syntax. For more information about the contents of a JSON policy document, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html"> IAM JSON policy reference </a>. </p> <p>If the policy isn''t valid, Amazon Lex returns a validation exception.</p>'
     UpdateSlotRequest:
       type: object
       required:
