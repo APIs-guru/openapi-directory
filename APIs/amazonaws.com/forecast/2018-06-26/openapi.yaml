@@ -876,7 +876,7 @@ paths:
   /#X-Amz-Target=AmazonForecast.DeleteResourceTree:
     post:
       operationId: DeleteResourceTree
-      description: '<p>Deletes an entire resource tree. This operation will delete the parent resource and its child resources.</p> <p>Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource.</p> <p>Amazon Forecast resources possess the following parent-child resource hierarchies:</p> <ul> <li> <p> <b>Dataset Group</b>: predictors, predictor backtest export jobs, forecasts, forecast export jobs</p> </li> <li> <p> <b>Dataset</b>: dataset import jobs</p> </li> <li> <p> <b>Predictor</b>: predictor backtest export jobs, forecasts, forecast export jobs</p> </li> <li> <p> <b>Forecast</b>: forecast export jobs</p> </li> </ul> <note> <p> <code>DeleteResourceTree</code> will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3. </p> </note>'
+      description: '<p>Deletes an entire resource tree. This operation will delete the parent resource and its child resources.</p> <p>Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource.</p> <p>Amazon Forecast resources possess the following parent-child resource hierarchies:</p> <ul> <li> <p> <b>Dataset</b>: dataset import jobs</p> </li> <li> <p> <b>Dataset Group</b>: predictors, predictor backtest export jobs, forecasts, forecast export jobs</p> </li> <li> <p> <b>Predictor</b>: predictor backtest export jobs, forecasts, forecast export jobs</p> </li> <li> <p> <b>Forecast</b>: forecast export jobs</p> </li> </ul> <note> <p> <code>DeleteResourceTree</code> will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3. </p> </note>'
       responses:
         '200':
           description: Success
@@ -3504,19 +3504,19 @@ components:
         Count:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The number of values in the field.
+            - description: 'The number of values in the field. If the response value is -1, refer to <code>CountLong</code>.'
         CountDistinct:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The number of distinct values in the field.
+            - description: 'The number of distinct values in the field. If the response value is -1, refer to <code>CountDistinctLong</code>.'
         CountNull:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The number of null values in the field.
+            - description: 'The number of null values in the field. If the response value is -1, refer to <code>CountNullLong</code>.'
         CountNan:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The number of NAN (not a number) values in the field.
+            - description: 'The number of NAN (not a number) values in the field. If the response value is -1, refer to <code>CountNanLong</code>.'
         Min:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3533,6 +3533,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/Double'
             - description: 'For a numeric field, the standard deviation.'
+        CountLong:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The number of values in the field. <code>CountLong</code> is used instead of <code>Count</code> if the value is greater than 2,147,483,647.'
+        CountDistinctLong:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The number of distinct values in the field. <code>CountDistinctLong</code> is used instead of <code>CountDistinct</code> if the value is greater than 2,147,483,647.'
+        CountNullLong:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The number of null values in the field. <code>CountNullLong</code> is used instead of <code>CountNull</code> if the value is greater than 2,147,483,647.'
+        CountNanLong:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The number of NAN (not a number) values in the field. <code>CountNanLong</code> is used instead of <code>CountNan</code> if the value is greater than 2,147,483,647.'
       description: Provides statistics for each data field imported into to an Amazon Forecast dataset with the <a>CreateDatasetImportJob</a> operation.
     FilterConditionString:
       type: string

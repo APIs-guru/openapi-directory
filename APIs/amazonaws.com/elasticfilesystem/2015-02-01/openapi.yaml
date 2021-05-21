@@ -3,7 +3,7 @@ info:
   version: '2015-02-01'
   x-release: v4
   title: Amazon Elastic File System
-  description: '<fullname>Amazon Elastic File System</fullname> <p>Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use with Amazon EC2 instances in the AWS Cloud. With Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you add and remove files, so your applications have the storage they need, when they need it. For more information, see the <a href="https://docs.aws.amazon.com/efs/latest/ug/api-reference.html">User Guide</a>.</p>'
+  description: '<fullname>Amazon Elastic File System</fullname> <p>Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use with Amazon EC2 instances in the AWS Cloud. With Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you add and remove files, so your applications have the storage they need, when they need it. For more information, see the <a href="https://docs.aws.amazon.com/efs/latest/ug/api-reference.html">Amazon Elastic File System API Reference</a> and the <a href="https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html">Amazon Elastic File System User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -372,9 +372,9 @@ paths:
                   description: 'A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don''t specify a CMK, then the default CMK for Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system. '
                   type: boolean
                 KmsKeyId:
-                  description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a non-default CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p> <important> <p>EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS file systems.</p> </important>'
+                  description: '<p>The ID of the AWS KMS CMK that you want to use to protect the encrypted file system. This parameter is only required if you want to use a non-default KMS key. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p> <important> <p>EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS keys with EFS file systems.</p> </important>'
                   type: string
-                  pattern: '^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\d{12}:((key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(alias/[a-zA-Z0-9/_-]+))))$'
+                  pattern: '^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|mrk-[0-9a-f]{32}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\d{12}:((key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(key/mrk-[0-9a-f]{32})|(alias/[a-zA-Z0-9/_-]+))))$'
                   maxLength: 2048
                 ThroughputMode:
                   description: '<p>Specifies the throughput mode for the file system, either <code>bursting</code> or <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughputInMibps</code>. After you create the file system, you can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes, as long as it’s been more than 24 hours since the last decrease or throughput mode change. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput">Specifying throughput with provisioned mode</a> in the <i>Amazon EFS User Guide</i>. </p> <p>Default is <code>bursting</code>.</p>'
@@ -688,7 +688,7 @@ paths:
     post:
       deprecated: true
       operationId: CreateTags
-      description: '<p>Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the <code>Name</code> tag to your file system, Amazon EFS returns it in the response to the <a>DescribeFileSystems</a> operation. </p> <p>This operation requires permission for the <code>elasticfilesystem:CreateTags</code> action.</p>'
+      description: '<note> <p>DEPRECATED - CreateTags is deprecated and not maintained. Please use the API action to create tags for EFS resources.</p> </note> <p>Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the <code>Name</code> tag to your file system, Amazon EFS returns it in the response to the <a>DescribeFileSystems</a> operation. </p> <p>This operation requires permission for the <code>elasticfilesystem:CreateTags</code> action.</p>'
       responses:
         '204':
           description: Success
@@ -1103,7 +1103,7 @@ paths:
     post:
       deprecated: true
       operationId: DeleteTags
-      description: '<p>Deletes the specified tags from a file system. If the <code>DeleteTags</code> request includes a tag key that doesn''t exist, Amazon EFS ignores it and doesn''t cause an error. For more information about tags and related restrictions, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> <p>This operation requires permissions for the <code>elasticfilesystem:DeleteTags</code> action.</p>'
+      description: '<note> <p>DEPRECATED - DeleteTags is deprecated and not maintained. Please use the API action to remove tags from EFS resources.</p> </note> <p>Deletes the specified tags from a file system. If the <code>DeleteTags</code> request includes a tag key that doesn''t exist, Amazon EFS ignores it and doesn''t cause an error. For more information about tags and related restrictions, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> <p>This operation requires permissions for the <code>elasticfilesystem:DeleteTags</code> action.</p>'
       responses:
         '204':
           description: Success
@@ -1158,6 +1158,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-02-01/account-preferences:
+    get:
+      operationId: DescribeAccountPreferences
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAccountPreferencesResponse'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                NextToken:
+                  description: Token used for pagination.
+                  type: string
+                  pattern: .+
+                  minLength: 1
+                  maxLength: 128
+                MaxResults:
+                  description: Max results used for pagination.
+                  type: integer
+                  minimum: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutAccountPreferences
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutAccountPreferencesResponse'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceIdType
+              properties:
+                ResourceIdType:
+                  description: A preference indicating a choice to use 63bit/32bit IDs for all applicable resources.
+                  type: string
+                  enum:
+                    - LONG_ID
+                    - SHORT_ID
   '/2015-02-01/file-systems/{FileSystemId}/backup-policy':
     get:
       operationId: DescribeBackupPolicy
@@ -1281,7 +1356,7 @@ paths:
                     Status:
                       allOf:
                         - $ref: '#/components/schemas/Status'
-                        - description: <p>Describes the status of the file system's backup policy.</p> <ul> <li> <p> <b> <code>ENABLED</code> </b> - EFS is automatically backing up the file system.&gt;</p> </li> <li> <p> <b> <code>ENABLING</code> </b> - EFS is turning on automatic backups for the file system.</p> </li> <li> <p> <b> <code>DISABLED</code> </b> - automatic back ups are turned off for the file system.</p> </li> <li> <p> <b> <code>DISABLING</code> </b> - EFS is turning off automatic backups for the file system.</p> </li> </ul>
+                        - description: <p>Describes the status of the file system's backup policy.</p> <ul> <li> <p> <b> <code>ENABLED</code> </b> - EFS is automatically backing up the file system.</p> </li> <li> <p> <b> <code>ENABLING</code> </b> - EFS is turning on automatic backups for the file system.</p> </li> <li> <p> <b> <code>DISABLED</code> </b> - automatic back ups are turned off for the file system.</p> </li> <li> <p> <b> <code>DISABLING</code> </b> - EFS is turning off automatic backups for the file system.</p> </li> </ul>
   '/2015-02-01/file-systems/{FileSystemId}/lifecycle-configuration':
     get:
       operationId: DescribeLifecycleConfiguration
@@ -1507,7 +1582,7 @@ paths:
     get:
       deprecated: true
       operationId: DescribeTags
-      description: '<p>Returns the tags associated with a file system. The order of tags returned in the response of one <code>DescribeTags</code> call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified. </p> <p> This operation requires permissions for the <code>elasticfilesystem:DescribeTags</code> action. </p>'
+      description: '<note> <p>DEPRECATED - The DeleteTags action is deprecated and not maintained. Please use the API action to remove tags from EFS resources.</p> </note> <p>Returns the tags associated with a file system. The order of tags returned in the response of one <code>DescribeTags</code> call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified. </p> <p> This operation requires permissions for the <code>elasticfilesystem:DescribeTags</code> action. </p>'
       responses:
         '200':
           description: Success
@@ -1621,7 +1696,7 @@ paths:
         - name: NextToken
           in: query
           required: false
-          description: You can use <code>NextToken</code> in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.
+          description: (Optional) You can use <code>NextToken</code> in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.
           schema:
             type: string
             pattern: .+
@@ -1670,7 +1745,7 @@ paths:
         - name: ResourceId
           in: path
           required: true
-          description: 'The ID specifying the EFS resource that you want to create a tag for. '
+          description: The ID specifying the EFS resource that you want to create a tag for.
           schema:
             type: string
             pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:(access-point/fsap|file-system/fs)-[0-9a-f]{8,40}|fs(ap)?-[0-9a-f]{8,40})$'
@@ -1685,7 +1760,7 @@ paths:
                 - Tags
               properties:
                 Tags:
-                  description: <p/>
+                  description: An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value pair.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -1857,7 +1932,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagValue'
             - description: The value of the tag key.
-      description: 'A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:<code> + - = . _ : /</code> '
+      description: 'A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:<code> + - = . _ : /</code>.'
     Uid:
       type: integer
       minimum: 0
@@ -2094,6 +2169,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/Token'
             - description: Present if there are more access points than returned in the response. You can use the NextMarker in the subsequent request to fetch the additional descriptions.
+    DescribeAccountPreferencesResponse:
+      type: object
+      properties:
+        ResourceIdPreference:
+          $ref: '#/components/schemas/ResourceIdPreference'
+        NextToken:
+          $ref: '#/components/schemas/Token'
     BackupPolicyDescription:
       type: object
       properties:
@@ -2225,6 +2307,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Token'
             - description: ' <code>NextToken</code> is present if the response payload is paginated. You can use <code>NextToken</code> in a subsequent request to fetch the next page of access point descriptions.'
+    PutAccountPreferencesResponse:
+      type: object
+      properties:
+        ResourceIdPreference:
+          $ref: '#/components/schemas/ResourceIdPreference'
     Status:
       type: string
       enum:
@@ -2330,7 +2417,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/Status'
-            - description: <p>Describes the status of the file system's backup policy.</p> <ul> <li> <p> <b> <code>ENABLED</code> </b> - EFS is automatically backing up the file system.&gt;</p> </li> <li> <p> <b> <code>ENABLING</code> </b> - EFS is turning on automatic backups for the file system.</p> </li> <li> <p> <b> <code>DISABLED</code> </b> - automatic back ups are turned off for the file system.</p> </li> <li> <p> <b> <code>DISABLING</code> </b> - EFS is turning off automatic backups for the file system.</p> </li> </ul>
+            - description: <p>Describes the status of the file system's backup policy.</p> <ul> <li> <p> <b> <code>ENABLED</code> </b> - EFS is automatically backing up the file system.</p> </li> <li> <p> <b> <code>ENABLING</code> </b> - EFS is turning on automatic backups for the file system.</p> </li> <li> <p> <b> <code>DISABLED</code> </b> - automatic back ups are turned off for the file system.</p> </li> <li> <p> <b> <code>DISABLING</code> </b> - EFS is turning off automatic backups for the file system.</p> </li> </ul>
       description: 'The backup policy for the file system used to create automatic daily backups. If status has a value of <code>ENABLED</code>, the file system is being automatically backed up. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups">Automatic backups</a>.'
     BypassPolicyLockoutSafetyCheck:
       type: boolean
@@ -2375,7 +2462,7 @@ components:
       type: boolean
     KmsKeyId:
       type: string
-      pattern: '^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\d{12}:((key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(alias/[a-zA-Z0-9/_-]+))))$'
+      pattern: '^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|mrk-[0-9a-f]{32}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\d{12}:((key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(key/mrk-[0-9a-f]{32})|(alias/[a-zA-Z0-9/_-]+))))$'
       maxLength: 2048
     ThroughputMode:
       type: string
@@ -2407,7 +2494,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
-            - description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a non-default CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p> <important> <p>EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS file systems.</p> </important>'
+            - description: '<p>The ID of the AWS KMS CMK that you want to use to protect the encrypted file system. This parameter is only required if you want to use a non-default KMS key. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p> <important> <p>EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS keys with EFS file systems.</p> </important>'
         ThroughputMode:
           allOf:
             - $ref: '#/components/schemas/ThroughputMode'
@@ -2545,6 +2632,21 @@ components:
       type: object
       title: DescribeAccessPointsRequest
       properties: {}
+    DescribeAccountPreferencesRequest:
+      type: object
+      title: DescribeAccountPreferencesRequest
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/Token'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+    ResourceIdPreference:
+      type: object
+      properties:
+        ResourceIdType:
+          $ref: '#/components/schemas/ResourceIdType'
+        Resources:
+          $ref: '#/components/schemas/Resources'
     DescribeBackupPolicyRequest:
       type: object
       title: DescribeBackupPolicyRequest
@@ -2671,6 +2773,20 @@ components:
       type: string
     VpcId:
       type: string
+    ResourceIdType:
+      type: string
+      enum:
+        - LONG_ID
+        - SHORT_ID
+      description: A preference indicating a choice to use 63bit/32bit IDs for all applicable resources.
+    PutAccountPreferencesRequest:
+      type: object
+      required:
+        - ResourceIdType
+      title: PutAccountPreferencesRequest
+      properties:
+        ResourceIdType:
+          $ref: '#/components/schemas/ResourceIdType'
     PutBackupPolicyRequest:
       type: object
       required:
@@ -2705,6 +2821,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/LifecyclePolicies'
             - description: An array of <code>LifecyclePolicy</code> objects that define the file system's <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object tells lifecycle management when to transition files from the Standard storage class to the Infrequent Access storage class.
+    Resource:
+      type: string
+      enum:
+        - FILE_SYSTEM
+        - MOUNT_TARGET
+      description: 'An EFS resource, for example a file system or a mount target.'
+    Resources:
+      type: array
+      description: EFS resources to which a preference applies to.
+      items:
+        $ref: '#/components/schemas/Resource'
     TagResourceRequest:
       type: object
       required:
@@ -2714,7 +2841,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: <p/>
+            - description: An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value pair.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
