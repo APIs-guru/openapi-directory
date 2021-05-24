@@ -5548,6 +5548,15 @@ paths:
                 UnapplyCustomPermissions:
                   description: A flag that you use to indicate that you want to remove all custom permissions from this user. Using this parameter resets the user to the state it was in before a custom permissions profile was applied. This parameter defaults to NULL and it doesn't accept any other value.
                   type: boolean
+                ExternalLoginFederationProviderType:
+                  description: '<p>The type of supported external login provider that provides identity to let a user federate into QuickSight with an associated AWS Identity and Access Management (IAM) role. The type of supported external login provider can be one of the following.</p> <ul> <li> <p> <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com. When choosing the <code>COGNITO</code> provider type, don’t use the "CustomFederationProviderUrl" parameter which is only needed when the external provider is custom.</p> </li> <li> <p> <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider. When choosing <code>CUSTOM_OIDC</code> type, use the <code>CustomFederationProviderUrl</code> parameter to provide the custom OIDC provider URL.</p> </li> <li> <p> <code>NONE</code>: This clears all the previously saved external login information for a user. Use <code> <a>DescribeUser</a> </code> API to check the external login information.</p> </li> </ul>'
+                  type: string
+                CustomFederationProviderUrl:
+                  description: The URL of the custom OpenID Connect (OIDC) provider that provides identity to let a user federate into QuickSight with an associated AWS Identity and Access Management (IAM) role. This parameter should only be used when <code>ExternalLoginFederationProviderType</code> parameter is set to <code>CUSTOM_OIDC</code>.
+                  type: string
+                ExternalLoginId:
+                  description: The identity ID for a user in the external login provider.
+                  type: string
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/user-principals/{PrincipalId}':
     delete:
       operationId: DeleteUserByPrincipalId
@@ -8964,6 +8973,15 @@ paths:
                   pattern: '^[a-zA-Z0-9+=,.@_-]+$'
                   minLength: 1
                   maxLength: 64
+                ExternalLoginFederationProviderType:
+                  description: '<p>The type of supported external login provider that provides identity to let a user federate into Amazon QuickSight with an associated AWS Identity and Access Management (IAM) role. The type of supported external login provider can be one of the following.</p> <ul> <li> <p> <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com. When choosing the <code>COGNITO</code> provider type, don’t use the "CustomFederationProviderUrl" parameter which is only needed when the external provider is custom.</p> </li> <li> <p> <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider. When choosing <code>CUSTOM_OIDC</code> type, use the <code>CustomFederationProviderUrl</code> parameter to provide the custom OIDC provider URL.</p> </li> </ul>'
+                  type: string
+                CustomFederationProviderUrl:
+                  description: The URL of the custom OpenID Connect (OIDC) provider that provides identity to let a user federate into QuickSight with an associated AWS Identity and Access Management (IAM) role. This parameter should only be used when <code>ExternalLoginFederationProviderType</code> parameter is set to <code>CUSTOM_OIDC</code>.
+                  type: string
+                ExternalLoginId:
+                  description: The identity ID for a user in the external login provider.
+                  type: string
   '/accounts/{AwsAccountId}/restore/analyses/{AnalysisId}':
     post:
       operationId: RestoreAnalysis
@@ -14184,6 +14202,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoleName'
             - description: The custom permissions profile associated with this user.
+        ExternalLoginFederationProviderType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The type of supported external login provider that provides identity to let the user federate into Amazon QuickSight with an associated IAM role. The type can be one of the following.</p> <ul> <li> <p> <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com.</p> </li> <li> <p> <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider.</p> </li> </ul>'
+        ExternalLoginFederationProviderUrl:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL of the external login provider.
+        ExternalLoginId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identity ID for the user in the external login provider.
       description: 'A registered user of Amazon QuickSight. '
     Double:
       type: number
@@ -14860,6 +14890,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoleName'
             - description: '<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user''s access by restricting access the following operations:</p> <ul> <li> <p>Create and update data sources</p> </li> <li> <p>Create and update datasets</p> </li> <li> <p>Create and update email reports</p> </li> <li> <p>Subscribe to email reports</p> </li> </ul> <p>To add custom permissions to an existing user, use <code> <a>UpdateUser</a> </code> instead.</p> <p>A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the QuickSight console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of permissions to a QuickSight user. </p> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts in QuickSight (admin, author, reader).</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>'
+        ExternalLoginFederationProviderType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The type of supported external login provider that provides identity to let a user federate into Amazon QuickSight with an associated AWS Identity and Access Management (IAM) role. The type of supported external login provider can be one of the following.</p> <ul> <li> <p> <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com. When choosing the <code>COGNITO</code> provider type, don’t use the "CustomFederationProviderUrl" parameter which is only needed when the external provider is custom.</p> </li> <li> <p> <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider. When choosing <code>CUSTOM_OIDC</code> type, use the <code>CustomFederationProviderUrl</code> parameter to provide the custom OIDC provider URL.</p> </li> </ul>'
+        CustomFederationProviderUrl:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL of the custom OpenID Connect (OIDC) provider that provides identity to let a user federate into QuickSight with an associated AWS Identity and Access Management (IAM) role. This parameter should only be used when <code>ExternalLoginFederationProviderType</code> parameter is set to <code>CUSTOM_OIDC</code>.
+        ExternalLoginId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identity ID for a user in the external login provider.
     RelationalTableCatalog:
       type: string
       maxLength: 256
@@ -15632,5 +15674,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: A flag that you use to indicate that you want to remove all custom permissions from this user. Using this parameter resets the user to the state it was in before a custom permissions profile was applied. This parameter defaults to NULL and it doesn't accept any other value.
+        ExternalLoginFederationProviderType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The type of supported external login provider that provides identity to let a user federate into QuickSight with an associated AWS Identity and Access Management (IAM) role. The type of supported external login provider can be one of the following.</p> <ul> <li> <p> <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com. When choosing the <code>COGNITO</code> provider type, don’t use the "CustomFederationProviderUrl" parameter which is only needed when the external provider is custom.</p> </li> <li> <p> <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider. When choosing <code>CUSTOM_OIDC</code> type, use the <code>CustomFederationProviderUrl</code> parameter to provide the custom OIDC provider URL.</p> </li> <li> <p> <code>NONE</code>: This clears all the previously saved external login information for a user. Use <code> <a>DescribeUser</a> </code> API to check the external login information.</p> </li> </ul>'
+        CustomFederationProviderUrl:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL of the custom OpenID Connect (OIDC) provider that provides identity to let a user federate into QuickSight with an associated AWS Identity and Access Management (IAM) role. This parameter should only be used when <code>ExternalLoginFederationProviderType</code> parameter is set to <code>CUSTOM_OIDC</code>.
+        ExternalLoginId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identity ID for a user in the external login provider.
 security:
   - hmac: []

@@ -3579,6 +3579,26 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DimensionValuesWithAttributes'
+    DiskResourceUtilization:
+      type: object
+      properties:
+        DiskReadOpsPerSecond:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The maximum number of read operations per second. '
+        DiskWriteOpsPerSecond:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The maximum number of write operations per second. '
+        DiskReadBytesPerSecond:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The maximum read throughput operations per second. '
+        DiskWriteBytesPerSecond:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The maximum write throughput operations per second. '
+      description: ' The field that contains a list of disk (local storage) metrics associated with the current instance. '
     EBSResourceUtilization:
       type: object
       properties:
@@ -3677,6 +3697,26 @@ components:
             - $ref: '#/components/schemas/GenericString'
             - description: ' Number of VCPU cores in the AWS instance type.'
       description: ' Details on the Amazon EC2 Resource.'
+    NetworkResourceUtilization:
+      type: object
+      properties:
+        NetworkInBytesPerSecond:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The network ingress throughput utilization measured in Bytes per second. '
+        NetworkOutBytesPerSecond:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The network outgress throughput utilization measured in Bytes per second. '
+        NetworkPacketsInPerSecond:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The network ingress packets measured in packets per second. '
+        NetworkPacketsOutPerSecond:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The network outgress packets measured in packets per second. '
+      description: ' The network field that contains a list of network metrics associated with the current instance. '
     EC2ResourceUtilization:
       type: object
       properties:
@@ -3696,6 +3736,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/EBSResourceUtilization'
             - description: ' The EBS field that contains a list of EBS metrics associated with the current instance. '
+        DiskResourceUtilization:
+          allOf:
+            - $ref: '#/components/schemas/DiskResourceUtilization'
+            - description: ' The field that contains a list of disk (local storage) metrics associated with the current instance. '
+        NetworkResourceUtilization:
+          allOf:
+            - $ref: '#/components/schemas/NetworkResourceUtilization'
+            - description: ' The network field that contains a list of network metrics associated with the current instance. '
       description: ' Utilization metrics of the instance. '
     OfferingClass:
       type: string
@@ -3786,6 +3834,29 @@ components:
             - $ref: '#/components/schemas/MatchOptions'
             - description: The match options that you can use to filter your results. <code>MatchOptions</code> is only applicable for actions related to Cost Category. The default values for <code>MatchOptions</code> are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.
       description: '<p>The values that are available for a tag.</p> <p>If <code>Values</code> and <code>Key</code> are not specified, the <code>ABSENT</code> <code>MatchOption</code> is applied to all tags. That is, filtering on resources with no tags.</p> <p>If <code>Values</code> is provided and <code>Key</code> is not specified, the <code>ABSENT</code> <code>MatchOption</code> is applied to the tag <code>Key</code> only. That is, filtering on resources without the given tag key.</p>'
+    FindingReasonCode:
+      type: string
+      enum:
+        - CPU_OVER_PROVISIONED
+        - CPU_UNDER_PROVISIONED
+        - MEMORY_OVER_PROVISIONED
+        - MEMORY_UNDER_PROVISIONED
+        - EBS_THROUGHPUT_OVER_PROVISIONED
+        - EBS_THROUGHPUT_UNDER_PROVISIONED
+        - EBS_IOPS_OVER_PROVISIONED
+        - EBS_IOPS_UNDER_PROVISIONED
+        - NETWORK_BANDWIDTH_OVER_PROVISIONED
+        - NETWORK_BANDWIDTH_UNDER_PROVISIONED
+        - NETWORK_PPS_OVER_PROVISIONED
+        - NETWORK_PPS_UNDER_PROVISIONED
+        - DISK_IOPS_OVER_PROVISIONED
+        - DISK_IOPS_UNDER_PROVISIONED
+        - DISK_THROUGHPUT_OVER_PROVISIONED
+        - DISK_THROUGHPUT_UNDER_PROVISIONED
+    FindingReasonCodes:
+      type: array
+      items:
+        $ref: '#/components/schemas/FindingReasonCode'
     ForecastResult:
       type: object
       properties:
@@ -4363,6 +4434,18 @@ components:
         - BETWEEN
     OnDemandCostOfRIHoursUsed:
       type: string
+    PlatformDifference:
+      type: string
+      enum:
+        - HYPERVISOR
+        - NETWORK_INTERFACE
+        - STORAGE_INTERFACE
+        - INSTANCE_STORE_AVAILABILITY
+        - VIRTUALIZATION_TYPE
+    PlatformDifferences:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlatformDifference'
     PurchasedHours:
       type: string
     PurchasedUnits:
@@ -4626,6 +4709,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TerminateRecommendationDetail'
             - description: Details for termination recommendations.
+        FindingReasonCodes:
+          allOf:
+            - $ref: '#/components/schemas/FindingReasonCodes'
+            - description: ' The list of possible reasons why the recommendation is generated such as under or over utilization of specific metrics (for example, CPU, Memory, Network). '
       description: Recommendations to rightsize resources.
     RootCause:
       type: object
@@ -4987,6 +5074,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceUtilization'
             - description: ' Expected utilization metrics for target instance type.'
+        PlatformDifferences:
+          allOf:
+            - $ref: '#/components/schemas/PlatformDifferences'
+            - description: ' Explains the actions you might need to take in order to successfully migrate your workloads from the current instance type to the recommended instance type. '
       description: ' Details on recommended instance.'
     UtilizationByTime:
       type: object
