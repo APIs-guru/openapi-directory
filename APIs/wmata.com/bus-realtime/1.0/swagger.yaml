@@ -475,36 +475,46 @@ paths:
         "200":
           description: Default response type.
           examples:
-            application/json:
-              Predictions:
-                - DirectionNum: "0"
-                  DirectionText: North to Bwi - Thurgood Marshall Airport
-                  Minutes: 8
-                  RouteID: B30
-                  TripID: "6794838"
-                  VehicleID: "6217"
-                - DirectionNum: "1"
-                  DirectionText: South to Greenbelt Station
-                  Minutes: 37
-                  RouteID: B30
-                  TripID: "6794868"
-                  VehicleID: "6217"
-                - DirectionNum: "0"
-                  DirectionText: North to Bwi - Thurgood Marshall Airport
-                  Minutes: 48
-                  RouteID: B30
-                  TripID: "6794839"
-                  VehicleID: "6213"
-                - DirectionNum: "1"
-                  DirectionText: South to Greenbelt Station
-                  Minutes: 77
-                  RouteID: B30
-                  TripID: "6794869"
-                  VehicleID: "6213"
-              StopName: Bwi Airport + Stop 2
+            application/json: >-
+              {
+                  "Predictions": [
+                      {
+                          "DirectionNum": "0",
+                          "DirectionText": "North to Bwi - Thurgood Marshall Airport",
+                          "Minutes": 8,
+                          "RouteID": "B30",
+                          "TripID": "6794838",
+                          "VehicleID": "6217"
+                      },
+                      {
+                          "DirectionNum": "1",
+                          "DirectionText": "South to Greenbelt Station",
+                          "Minutes": 37,
+                          "RouteID": "B30",
+                          "TripID": "6794868",
+                          "VehicleID": "6217"
+                      },
+                      {
+                          "DirectionNum": "0",
+                          "DirectionText": "North to Bwi - Thurgood Marshall Airport",
+                          "Minutes": 48,
+                          "RouteID": "B30",
+                          "TripID": "6794839",
+                          "VehicleID": "6213"
+                      },
+                      {
+                          "DirectionNum": "1",
+                          "DirectionText": "South to Greenbelt Station",
+                          "Minutes": 77,
+                          "RouteID": "B30",
+                          "TripID": "6794869",
+                          "VehicleID": "6213"
+                      }
+                  ],
+                  "StopName": "Bwi Airport + Stop 2"
+              }
         "400":
           description: Response from invalid Stop ID.
           examples:
-            application/json:
-              Message: Stop Id not specified, invalid, or does not exist.
+            application/json: '{"Message":"Stop Id not specified, invalid, or does not exist."}'
       summary: JSON - Next Buses

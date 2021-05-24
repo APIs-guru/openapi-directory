@@ -672,60 +672,15 @@ paths:
         "200":
           description: Default return code.
           examples:
-            application/json:
-              Trains:
-                - Car: "6"
-                  Destination: SilvrSpg
-                  DestinationCode: B08
-                  DestinationName: Silver Spring
-                  Group: "1"
-                  Line: RD
-                  LocationCode: A01
-                  LocationName: Metro Center
-                  Min: "3"
-                - Car: "6"
-                  Destination: Grsvnor
-                  DestinationCode: A11
-                  DestinationName: Grosvenor-Strathmore
-                  Group: "2"
-                  Line: RD
-                  LocationCode: A01
-                  LocationName: Metro Center
-                  Min: "4"
-                - Car: "6"
-                  Destination: Shady Gr
-                  DestinationCode: A15
-                  DestinationName: Shady Grove
-                  Group: "2"
-                  Line: RD
-                  LocationCode: A01
-                  LocationName: Metro Center
-                  Min: "6"
-                - Car: "8"
-                  Destination: Glenmont
-                  DestinationCode: B11
-                  DestinationName: Glenmont
-                  Group: "1"
-                  Line: RD
-                  LocationCode: A01
-                  LocationName: Metro Center
-                  Min: "8"
-                - Car: "6"
-                  Destination: SilvrSpg
-                  DestinationCode: B08
-                  DestinationName: Silver Spring
-                  Group: "1"
-                  Line: RD
-                  LocationCode: A01
-                  LocationName: Metro Center
-                  Min: "9"
-                - Car: "6"
-                  Destination: Grsvnor
-                  DestinationCode: A11
-                  DestinationName: Grosvenor-Strathmore
-                  Group: "2"
-                  Line: RD
-                  LocationCode: A01
-                  LocationName: Metro Center
-                  Min: "9"
+            application/json: '{"Trains":[{"Car":"6","Destination":"SilvrSpg","DestinationCode":"B08","DestinationName":"Silver
+              Spring","Group":"1","Line":"RD","LocationCode":"A01","LocationName":"Metro
+              Center","Min":"3"},{"Car":"6","Destination":"Grsvnor","DestinationCode":"A11","DestinationName":"Grosvenor-Strathmore","Group":"2","Line":"RD","LocationCode":"A01","LocationName":"Metro
+              Center","Min":"4"},{"Car":"6","Destination":"Shady
+              Gr","DestinationCode":"A15","DestinationName":"Shady
+              Grove","Group":"2","Line":"RD","LocationCode":"A01","LocationName":"Metro
+              Center","Min":"6"},{"Car":"8","Destination":"Glenmont","DestinationCode":"B11","DestinationName":"Glenmont","Group":"1","Line":"RD","LocationCode":"A01","LocationName":"Metro
+              Center","Min":"8"},{"Car":"6","Destination":"SilvrSpg","DestinationCode":"B08","DestinationName":"Silver
+              Spring","Group":"1","Line":"RD","LocationCode":"A01","LocationName":"Metro
+              Center","Min":"9"},{"Car":"6","Destination":"Grsvnor","DestinationCode":"A11","DestinationName":"Grosvenor-Strathmore","Group":"2","Line":"RD","LocationCode":"A01","LocationName":"Metro
+              Center","Min":"9"}]}'
       summary: JSON - Next Trains

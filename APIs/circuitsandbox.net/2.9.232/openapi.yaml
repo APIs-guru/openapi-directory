@@ -5329,7 +5329,7 @@ paths:
       description: |-
         Search for users based on an email address or username
         OauthScopes: READ_USER
-      operationId: getUsers
+      operationId: searchUser
       parameters:
         - description: Search for a user by name
           in: query
@@ -5672,7 +5672,7 @@ paths:
       description: |-
         Gets the authenticated user's profile information.
         OauthScopes: READ_USER_PROFILE
-      operationId: adminV1GetUserByQuery
+      operationId: getProfile
       responses:
         "200":
           content:
@@ -5840,7 +5840,7 @@ paths:
       description: |-
         Gets the profile information of the user with the given ID.
         OauthScopes: READ_USER
-      operationId: adminV1GetUserRestHandlerDeprecated
+      operationId: getUserById
       parameters:
         - description: The unique ID or the email address of the user to fetch
           in: path

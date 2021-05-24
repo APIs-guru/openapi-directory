@@ -336,7 +336,8 @@ paths:
           required: false
           type: string
         - description: "Search for schools at this level. Valid values: 'Elementary',
-            'Middle', 'High', 'Alt', 'Private' (optional)"
+            'Middle', 'High', 'Alt', 'Public', 'Private' (optional). 'Public'
+            returns all Elementary, Middle, High and Alternative schools"
           in: query
           name: level
           required: false

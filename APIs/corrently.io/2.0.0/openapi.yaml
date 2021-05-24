@@ -241,8 +241,21 @@ paths:
                     type: object
                   matrix:
                     description: Device switching recommendation.
-                    items: {}
-                    type: array
+                    properties:
+                      h0:
+                        description: Indicates number of hours a device should run
+                        properties:
+                          avg_1:
+                            description: device should run in 1 hour
+                            type: string
+                          avg_2:
+                            description: device should run in 2 hours
+                            type: string
+                          avg_3:
+                            description: device should run in 3 hour
+                            type: string
+                        type: object
+                    type: object
                 type: object
           description: Success
       summary: Prediction
@@ -587,14 +600,16 @@ paths:
           content:
             application/json:
               schema:
-                x-wim_started:
-                  description: Starting time of process
-                  example: 1615914297977
-                  type: integer
-                x-wim_status:
-                  description: Latest Status
-                  example: Erfolgreiche Prüfung
-                  type: string
+                properties:
+                  wim_started:
+                    description: Starting time of process
+                    example: 1615914297977
+                    type: integer
+                  wim_status:
+                    description: Latest Status
+                    example: Erfolgreiche Prüfung
+                    type: string
+                type: object
           description: Success
       summary: WiM Proess Informtion
       tags:

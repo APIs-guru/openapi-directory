@@ -946,20 +946,24 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/json:
-              BusIncidents:
-                - DateUpdated: 2014-10-28T08:13:03
-                  Description: "90, 92, X1, X2, X9: Due to traffic congestion at 8th & H St NE,
-                    buses are experiencing up to 20 minute delays in both
-                    directions."
-                  IncidentID: 32297013-57B6-467F-BC6B-93DFA4115652
-                  IncidentType: Delay
-                  RoutesAffected:
-                    - "90"
-                    - "92"
-                    - X1
-                    - X2
-                    - X9
+            application/json: >-
+              {
+                  "BusIncidents": [
+                      {
+                          "DateUpdated": "2014-10-28T08:13:03",
+                          "Description": "90, 92, X1, X2, X9: Due to traffic congestion at 8th & H St NE, buses are experiencing up to 20 minute delays in both directions.",
+                          "IncidentID": "32297013-57B6-467F-BC6B-93DFA4115652",
+                          "IncidentType": "Delay",
+                          "RoutesAffected": [
+                              "90",
+                              "92",
+                              "X1",
+                              "X2",
+                              "X9"
+                          ]
+                      }
+                  ]
+              }
       summary: JSON - Bus Incidents
   /json/ElevatorIncidents:
     get:
@@ -1218,21 +1222,26 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/json:
-              ElevatorIncidents:
-                - DateOutOfServ: 2014-10-27T15:17:00
-                  DateUpdated: 2014-10-28T06:28:30
-                  DisplayOrder: 0
-                  EstimatedReturnToService: 2014-10-30T23:59:59
-                  LocationDescription: Escalator between mezzanine and platform to Shady Grove
-                  StationCode: A03
-                  StationName: Dupont Circle, Q Street Entrance
-                  SymptomCode: null
-                  SymptomDescription: Service Call
-                  TimeOutOfService: "1517"
-                  UnitName: A03N04
-                  UnitStatus: null
-                  UnitType: ESCALATOR
+            application/json: >-
+              {
+                  "ElevatorIncidents": [
+                      {
+                          "DateOutOfServ": "2014-10-27T15:17:00",
+                          "DateUpdated": "2014-10-28T06:28:30",
+                          "DisplayOrder": 0,
+                          "EstimatedReturnToService": "2014-10-30T23:59:59",
+                          "LocationDescription": "Escalator between mezzanine and platform to Shady Grove",
+                          "StationCode": "A03",
+                          "StationName": "Dupont Circle, Q Street Entrance",
+                          "SymptomCode": null,
+                          "SymptomDescription": "Service Call",
+                          "TimeOutOfService": "1517",
+                          "UnitName": "A03N04",
+                          "UnitStatus": null,
+                          "UnitType": "ESCALATOR"
+                      }
+                  ]
+              }
       summary: JSON - Elevator/Escalator Outages
   /json/Incidents:
     get:
@@ -1472,17 +1481,21 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/json:
-              Incidents:
-                - DateUpdated: 2010-07-29T14:21:28
-                  DelaySeverity: null
-                  Description: "Red Line: Expect residual delays to Glenmont due to an earlier
-                    signal problem outside Forest Glen."
-                  EmergencyText: null
-                  EndLocationFullName: null
-                  IncidentID: 3754F8B2-A0A6-494E-A4B5-82C9E72DFA74
-                  IncidentType: Delay
-                  LinesAffected: RD;
-                  PassengerDelay: 0
-                  StartLocationFullName: null
+            application/json: >-
+              {
+                  "Incidents": [
+                      {
+                          "DateUpdated": "2010-07-29T14:21:28",
+                          "DelaySeverity": null,
+                          "Description": "Red Line: Expect residual delays to Glenmont due to an earlier signal problem outside Forest Glen.",
+                          "EmergencyText": null,
+                          "EndLocationFullName": null,
+                          "IncidentID": "3754F8B2-A0A6-494E-A4B5-82C9E72DFA74",
+                          "IncidentType": "Delay",
+                          "LinesAffected": "RD;",
+                          "PassengerDelay": 0,
+                          "StartLocationFullName": null
+                      }
+                  ]
+              }
       summary: JSON - Rail Incidents

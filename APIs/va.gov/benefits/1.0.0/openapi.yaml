@@ -1168,8 +1168,13 @@ components:
           example: 21-22
           type: string
         fileNumber:
-          description: VA file number or SSN, 8 or 9 numeric characters, no hyphens,
-            spaces, or punctuation
+          description: The Veteran's file number is exactly 9 digits with no alpha
+            characters, hyphens, spaces or punctuation. In most cases, this is
+            the Veteran's SSN but may also be an 8 digit BIRL number. If no file
+            number has been established or if it is unknown, the application
+            should use the Veteran's SSN and the file number will be associated
+            with the submission later in the process. Incorrect file numbers can
+            cause delays.
           example: "999887777"
           pattern: ^\d{8,9}$
           type: string
@@ -1178,12 +1183,18 @@ components:
           example: MyVSO
           type: string
         veteranFirstName:
-          description: Veteran first name
+          description: Veteran first name. Cannot be missing or empty or longer than 50
+            characters. Only upper/lower case letters, hyphens(-), and
+            forward-slash(/) allowed.
           example: Jane
+          pattern: ^[a-zA-Z\-\/]{1,50}$
           type: string
         veteranLastName:
-          description: Veteran last name
-          example: Doe
+          description: Veteran last name. Cannot be missing or empty or longer than 50
+            characters. Only upper/lower case letters, hyphens(-), and
+            forward-slash(/) allowed.
+          example: Doe-Smith
+          pattern: ^[a-zA-Z\-\/]{1,50}$
           type: string
         zipCode:
           description: Veteran zip code. Either five digits (XXXXX) or five digits then

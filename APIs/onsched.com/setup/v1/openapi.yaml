@@ -6283,6 +6283,17 @@ components:
 
             FriendlyId's are limited to maximum of 64 characters."
           type: string
+        maxCapacity:
+          format: int32
+          nullable: true
+          type: integer
+        maxGroupSize:
+          description: "GroupSize Limits the number of people that can come\r
+
+            along on a single appointment"
+          format: int32
+          nullable: true
+          type: integer
         name:
           type: string
         phone:
@@ -6338,6 +6349,14 @@ components:
           type: string
         friendlyId:
           type: string
+        maxCapacity:
+          format: int32
+          nullable: true
+          type: integer
+        maxGroupSize:
+          format: int32
+          nullable: true
+          type: integer
         name:
           type: string
         phone:

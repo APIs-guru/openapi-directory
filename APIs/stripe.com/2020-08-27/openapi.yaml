@@ -10076,7 +10076,7 @@ paths:
               additionalProperties: false
               properties:
                 configuration:
-                  description: The
+                  description: The ID of an existing
                     [configuration](https://stripe.com/docs/api/customer_portal/configuration)
                     to use for this session, describing its functionality and
                     features. If not specified, the session uses the default
@@ -13303,8 +13303,6 @@ paths:
                         maxLength: 5000
                         type: string
                       type: array
-                  required:
-                    - products
                   title: applies_to_params
                   type: object
                 currency:
@@ -19972,8 +19970,9 @@ paths:
                   description: "The ID of the file. The file's `purpose` must be one of the
                     following: `business_icon`, `business_logo`,
                     `customer_signature`, `dispute_evidence`,
-                    `finance_report_run`, `pci_document`,
-                    `sigma_scheduled_query`, or `tax_document_user_upload`."
+                    `finance_report_run`, `identity_document_downloadable`,
+                    `pci_document`, `selfie`, `sigma_scheduled_query`, or
+                    `tax_document_user_upload`."
                   maxLength: 5000
                   type: string
                 metadata:
@@ -20199,7 +20198,9 @@ paths:
               - document_provider_identity_document
               - finance_report_run
               - identity_document
+              - identity_document_downloadable
               - pci_document
+              - selfie
               - sigma_scheduled_query
               - tax_document_user_upload
             maxLength: 5000
@@ -20401,6 +20402,682 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/file"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  /v1/identity/verification_reports:
+    get:
+      description: <p>List all verification reports.</p>
+      operationId: GetIdentityVerificationReports
+      parameters:
+        - explode: true
+          in: query
+          name: created
+          required: false
+          schema:
+            anyOf:
+              - properties:
+                  gt:
+                    type: integer
+                  gte:
+                    type: integer
+                  lt:
+                    type: integer
+                  lte:
+                    type: integer
+                title: range_query_specs
+                type: object
+              - type: integer
+          style: deepObject
+        - description: A cursor for use in pagination. `ending_before` is an object ID
+            that defines your place in the list. For instance, if you make a
+            list request and receive 100 objects, starting with `obj_bar`, your
+            subsequent call can include `ending_before=obj_bar` in order to
+            fetch the previous page of the list.
+          in: query
+          name: ending_before
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+        - description: Specifies which fields in the response should be expanded.
+          explode: true
+          in: query
+          name: expand
+          required: false
+          schema:
+            items:
+              maxLength: 5000
+              type: string
+            type: array
+          style: deepObject
+        - description: A limit on the number of objects to be returned. Limit can range
+            between 1 and 100, and the default is 10.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: A cursor for use in pagination. `starting_after` is an object ID
+            that defines your place in the list. For instance, if you make a
+            list request and receive 100 objects, ending with `obj_foo`, your
+            subsequent call can include `starting_after=obj_foo` in order to
+            fetch the next page of the list.
+          in: query
+          name: starting_after
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+        - description: Only return VerificationReports of this type
+          in: query
+          name: type
+          required: false
+          schema:
+            enum:
+              - document
+              - id_number
+            type: string
+            x-stripeBypassValidation: true
+          style: form
+        - description: Only return VerificationReports created by this VerificationSession
+            ID. It is allowed to provide a VerificationIntent ID.
+          in: query
+          name: verification_session
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                properties:
+                  data:
+                    items:
+                      $ref: "#/components/schemas/identity.verification_report"
+                    type: array
+                  has_more:
+                    description: True if this list has another page of items after this one that can
+                      be fetched.
+                    type: boolean
+                  object:
+                    description: String representing the object's type. Objects of the same type
+                      share the same value. Always has the value `list`.
+                    enum:
+                      - list
+                    type: string
+                  url:
+                    description: The URL where this list can be accessed.
+                    maxLength: 5000
+                    pattern: ^/v1/identity/verification_reports
+                    type: string
+                required:
+                  - data
+                  - has_more
+                  - object
+                  - url
+                type: object
+                x-expandableFields:
+                  - data
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  "/v1/identity/verification_reports/{report}":
+    get:
+      description: <p>Retrieves an existing VerificationReport</p>
+      operationId: GetIdentityVerificationReportsReport
+      parameters:
+        - description: Specifies which fields in the response should be expanded.
+          explode: true
+          in: query
+          name: expand
+          required: false
+          schema:
+            items:
+              maxLength: 5000
+              type: string
+            type: array
+          style: deepObject
+        - in: path
+          name: report
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/identity.verification_report"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  /v1/identity/verification_sessions:
+    get:
+      description: <p>List all verification sessions. Can optionally provide a status
+        to return only VerificationSessions with that status. Can optionally
+        specify a query filter on created timestamp.</p>
+      operationId: GetIdentityVerificationSessions
+      parameters:
+        - explode: true
+          in: query
+          name: created
+          required: false
+          schema:
+            anyOf:
+              - properties:
+                  gt:
+                    type: integer
+                  gte:
+                    type: integer
+                  lt:
+                    type: integer
+                  lte:
+                    type: integer
+                title: range_query_specs
+                type: object
+              - type: integer
+          style: deepObject
+        - description: A cursor for use in pagination. `ending_before` is an object ID
+            that defines your place in the list. For instance, if you make a
+            list request and receive 100 objects, starting with `obj_bar`, your
+            subsequent call can include `ending_before=obj_bar` in order to
+            fetch the previous page of the list.
+          in: query
+          name: ending_before
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+        - description: Specifies which fields in the response should be expanded.
+          explode: true
+          in: query
+          name: expand
+          required: false
+          schema:
+            items:
+              maxLength: 5000
+              type: string
+            type: array
+          style: deepObject
+        - description: A limit on the number of objects to be returned. Limit can range
+            between 1 and 100, and the default is 10.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: A cursor for use in pagination. `starting_after` is an object ID
+            that defines your place in the list. For instance, if you make a
+            list request and receive 100 objects, ending with `obj_foo`, your
+            subsequent call can include `starting_after=obj_foo` in order to
+            fetch the next page of the list.
+          in: query
+          name: starting_after
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+        - description: Only return VerificationSessions with this status.
+          in: query
+          name: status
+          required: false
+          schema:
+            enum:
+              - canceled
+              - processing
+              - requires_input
+              - verified
+            type: string
+          style: form
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                properties:
+                  data:
+                    items:
+                      $ref: "#/components/schemas/identity.verification_session"
+                    type: array
+                  has_more:
+                    description: True if this list has another page of items after this one that can
+                      be fetched.
+                    type: boolean
+                  object:
+                    description: String representing the object's type. Objects of the same type
+                      share the same value. Always has the value `list`.
+                    enum:
+                      - list
+                    type: string
+                  url:
+                    description: The URL where this list can be accessed.
+                    maxLength: 5000
+                    pattern: ^/v1/identity/verification_sessions
+                    type: string
+                required:
+                  - data
+                  - has_more
+                  - object
+                  - url
+                type: object
+                x-expandableFields:
+                  - data
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+    post:
+      description: <p>Create a new VerificationSession to begin the verification
+        process.</p>
+      operationId: PostIdentityVerificationSessions
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              expand:
+                explode: true
+                style: deepObject
+              metadata:
+                explode: true
+                style: deepObject
+              options:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+                metadata:
+                  additionalProperties:
+                    type: string
+                  description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that
+                    you can attach to an object. This can be useful for storing
+                    additional information about the object in a structured
+                    format. Individual keys can be unset by posting an empty
+                    value to them. All keys can be unset by posting an empty
+                    value to `metadata`.
+                  type: object
+                options:
+                  description: An optional hash of configuration options for each verification
+                    rule that is requested
+                  properties:
+                    document:
+                      anyOf:
+                        - properties:
+                            allowed_types:
+                              items:
+                                enum:
+                                  - driving_license
+                                  - id_card
+                                  - passport
+                                type: string
+                              type: array
+                            require_id_number:
+                              type: boolean
+                            require_live_capture:
+                              type: boolean
+                            require_matching_selfie:
+                              type: boolean
+                          title: document_options
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                  title: session_options_param
+                  type: object
+                return_url:
+                  description: The URL the user will be redirected to after Stripe collects the
+                    required identity information.
+                  type: string
+                type:
+                  description: The primary type of verification being performed with this Session.
+                  enum:
+                    - document
+                    - id_number
+                  type: string
+                  x-stripeBypassValidation: true
+              required:
+                - type
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/identity.verification_session"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  "/v1/identity/verification_sessions/{session}":
+    get:
+      description: >-
+        <p>Retrieves an existing VerificationSession. When the session
+        <code>status</code> is <code>requires_input</code>, this method
+        guarantees
+
+        that the redirect <code>url</code> is fresh: if your user has previously visited this session, a new <code>url</code> will be returned.
+
+        Before redirecting your user to Stripe, ensure that you have just Created or Retrieved the VerificationSession;
+
+        never cache or store the <code>url</code>.</p>
+      operationId: GetIdentityVerificationSessionsSession
+      parameters:
+        - description: Specifies which fields in the response should be expanded.
+          explode: true
+          in: query
+          name: expand
+          required: false
+          schema:
+            items:
+              maxLength: 5000
+              type: string
+            type: array
+          style: deepObject
+        - in: path
+          name: session
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/identity.verification_session"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+    post:
+      description: <p>Update properties on a VerificationSession</p>
+      operationId: PostIdentityVerificationSessionsSession
+      parameters:
+        - in: path
+          name: session
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              expand:
+                explode: true
+                style: deepObject
+              metadata:
+                explode: true
+                style: deepObject
+              options:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+                metadata:
+                  additionalProperties:
+                    type: string
+                  description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that
+                    you can attach to an object. This can be useful for storing
+                    additional information about the object in a structured
+                    format. Individual keys can be unset by posting an empty
+                    value to them. All keys can be unset by posting an empty
+                    value to `metadata`.
+                  type: object
+                options:
+                  description: New configuration options.
+                  properties:
+                    document:
+                      anyOf:
+                        - properties:
+                            allowed_types:
+                              items:
+                                enum:
+                                  - driving_license
+                                  - id_card
+                                  - passport
+                                type: string
+                              type: array
+                            require_id_number:
+                              type: boolean
+                            require_live_capture:
+                              type: boolean
+                            require_matching_selfie:
+                              type: boolean
+                          title: document_options
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                  title: session_options_param
+                  type: object
+                type:
+                  description: New verification type.
+                  enum:
+                    - document
+                    - id_number
+                  type: string
+                  x-stripeBypassValidation: true
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/identity.verification_session"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  "/v1/identity/verification_sessions/{session}/cancel":
+    post:
+      description: >-
+        <p>Mark a VerificationSession as canceled.</p>
+
+
+        <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
+
+        finishes before cancelling it.</p>
+      operationId: PostIdentityVerificationSessionsSessionCancel
+      parameters:
+        - in: path
+          name: session
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              expand:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/identity.verification_session"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  "/v1/identity/verification_sessions/{session}/redact":
+    post:
+      description: >-
+        <p>Redact a VerificationSession to delete all collected information
+        from Stripe.
+
+        This will redact the VerificationSession and all objects related to it, including
+
+        VerificationReports, Events, Files, request logs, etc. This redaction process may
+
+        take up to four days. When the redaction process is in progress, the
+
+        VerificationSession’s <code>redaction.status</code> field will be set to <code>processing</code>; when
+
+        the process is finished, it will change to <code>redacted</code>.</p>
+
+
+        <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API,
+
+        but all the fields that contain personal data will be replaced by the string
+
+        <code>[redacted]</code> or a similar placeholder. The <code>metadata</code> field will also be erased.
+
+        Redacted objects cannot be updated or used for any purpose.</p>
+
+
+        <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
+
+        finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
+
+        state will automatically <a href="/docs/api/verification_sessions/cancel">cancel</a> it.</p>
+
+
+        <p>An <a href="/docs/api/events/types#event_types-identity.verification_session.redacted"><code>identity.verification_session.redacted</code></a>
+
+        webhook will be sent when a VerificationSession is redacted.</p>
+      operationId: PostIdentityVerificationSessionsSessionRedact
+      parameters:
+        - in: path
+          name: session
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              expand:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/identity.verification_session"
           description: Successful response.
         default:
           content:
@@ -33390,65 +34067,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/error"
           description: Error response.
-  "/v1/payment_intents/{intent}/verify_microdeposits":
-    post:
-      description: <p>Verifies microdeposits on a PaymentIntent object.</p>
-      operationId: PostPaymentIntentsIntentVerifyMicrodeposits
-      parameters:
-        - in: path
-          name: intent
-          required: true
-          schema:
-            maxLength: 5000
-            type: string
-          style: simple
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            encoding:
-              amounts:
-                explode: true
-                style: deepObject
-              expand:
-                explode: true
-                style: deepObject
-            schema:
-              additionalProperties: false
-              properties:
-                amounts:
-                  description: Two positive integers, in *cents*, equal to the values of the
-                    microdeposits sent to the bank account.
-                  items:
-                    type: integer
-                  type: array
-                client_secret:
-                  description: The client secret of the PaymentIntent.
-                  maxLength: 5000
-                  type: string
-                expand:
-                  description: Specifies which fields in the response should be expanded.
-                  items:
-                    maxLength: 5000
-                    type: string
-                  type: array
-              required:
-                - amounts
-                - client_secret
-              type: object
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/payment_intent"
-          description: Successful response.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/error"
-          description: Error response.
   /v1/payment_methods:
     get:
       description: <p>Returns a list of PaymentMethods for a given Customer</p>
@@ -40445,65 +41063,6 @@ paths:
                   type: string
               type: object
         required: false
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/setup_intent"
-          description: Successful response.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/error"
-          description: Error response.
-  "/v1/setup_intents/{intent}/verify_microdeposits":
-    post:
-      description: <p>Verifies microdeposits on a SetupIntent object.</p>
-      operationId: PostSetupIntentsIntentVerifyMicrodeposits
-      parameters:
-        - in: path
-          name: intent
-          required: true
-          schema:
-            maxLength: 5000
-            type: string
-          style: simple
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            encoding:
-              amounts:
-                explode: true
-                style: deepObject
-              expand:
-                explode: true
-                style: deepObject
-            schema:
-              additionalProperties: false
-              properties:
-                amounts:
-                  description: Two positive integers, in *cents*, equal to the values of the
-                    microdeposits sent to the bank account.
-                  items:
-                    type: integer
-                  type: array
-                client_secret:
-                  description: The client secret of the SetupIntent.
-                  maxLength: 5000
-                  type: string
-                expand:
-                  description: Specifies which fields in the response should be expanded.
-                  items:
-                    maxLength: 5000
-                    type: string
-                  type: array
-              required:
-                - amounts
-                - client_secret
-              type: object
-        required: true
       responses:
         "200":
           content:
@@ -49328,7 +49887,7 @@ components:
           description: Fields that may become required depending on the results of
             verification or review. Will be an empty array unless an
             asynchronous verification is pending. If verification fails, these
-            fields become required and move to `currently_due` or `past_due`.
+            fields move to `eventually_due`, `currently_due`, or `past_due`.
           items:
             maxLength: 5000
             type: string
@@ -49554,7 +50113,7 @@ components:
           description: Fields that may become required depending on the results of
             verification or review. Will be an empty array unless an
             asynchronous verification is pending. If verification fails, these
-            fields become required and move to `currently_due` or `past_due`.
+            fields move to `eventually_due`, `currently_due`, or `past_due`.
           items:
             maxLength: 5000
             type: string
@@ -51881,7 +52440,8 @@ components:
           anyOf:
             - $ref: "#/components/schemas/payment_pages_checkout_session_customer_details"
           description: The customer details including the customer's tax exempt status and
-            the customer's tax IDs.
+            the customer's tax IDs. Only present on Sessions in `payment` or
+            `subscription` mode.
           nullable: true
         customer_email:
           description: >-
@@ -54913,7 +55473,9 @@ components:
             - document_provider_identity_document
             - finance_report_run
             - identity_document
+            - identity_document_downloadable
             - pci_document
+            - selfie
             - sigma_scheduled_query
             - tax_document_user_upload
           type: string
@@ -55059,6 +55621,682 @@ components:
       title: FinancialReportingFinanceReportRunRunParameters
       type: object
       x-expandableFields: []
+    gelato_data_document_report_date_of_birth:
+      description: Point in Time
+      properties:
+        day:
+          description: Numerical day between 1 and 31.
+          nullable: true
+          type: integer
+        month:
+          description: Numerical month between 1 and 12.
+          nullable: true
+          type: integer
+        year:
+          description: The four-digit year.
+          nullable: true
+          type: integer
+      title: GelatoDataDocumentReportDateOfBirth
+      type: object
+      x-expandableFields: []
+    gelato_data_document_report_expiration_date:
+      description: Point in Time
+      properties:
+        day:
+          description: Numerical day between 1 and 31.
+          nullable: true
+          type: integer
+        month:
+          description: Numerical month between 1 and 12.
+          nullable: true
+          type: integer
+        year:
+          description: The four-digit year.
+          nullable: true
+          type: integer
+      title: GelatoDataDocumentReportExpirationDate
+      type: object
+      x-expandableFields: []
+    gelato_data_document_report_issued_date:
+      description: Point in Time
+      properties:
+        day:
+          description: Numerical day between 1 and 31.
+          nullable: true
+          type: integer
+        month:
+          description: Numerical month between 1 and 12.
+          nullable: true
+          type: integer
+        year:
+          description: The four-digit year.
+          nullable: true
+          type: integer
+      title: GelatoDataDocumentReportIssuedDate
+      type: object
+      x-expandableFields: []
+    gelato_data_id_number_report_date:
+      description: Point in Time
+      properties:
+        day:
+          description: Numerical day between 1 and 31.
+          nullable: true
+          type: integer
+        month:
+          description: Numerical month between 1 and 12.
+          nullable: true
+          type: integer
+        year:
+          description: The four-digit year.
+          nullable: true
+          type: integer
+      title: GelatoDataIdNumberReportDate
+      type: object
+      x-expandableFields: []
+    gelato_data_verified_outputs_date:
+      description: Point in Time
+      properties:
+        day:
+          description: Numerical day between 1 and 31.
+          nullable: true
+          type: integer
+        month:
+          description: Numerical month between 1 and 12.
+          nullable: true
+          type: integer
+        year:
+          description: The four-digit year.
+          nullable: true
+          type: integer
+      title: GelatoDataVerifiedOutputsDate
+      type: object
+      x-expandableFields: []
+    gelato_document_report:
+      description: Result from a document check
+      properties:
+        address:
+          anyOf:
+            - $ref: "#/components/schemas/address"
+          description: Address as it appears in the document.
+          nullable: true
+        dob:
+          anyOf:
+            - $ref: "#/components/schemas/gelato_data_document_report_date_of_birth"
+          description: Date of birth as it appears in the document.
+          nullable: true
+        error:
+          anyOf:
+            - $ref: "#/components/schemas/gelato_document_report_error"
+          description: Details on the verification error. Present when status is
+            `unverified`.
+          nullable: true
+        expiration_date:
+          anyOf:
+            - $ref: "#/components/schemas/gelato_data_document_report_expiration_date"
+          description: Expiration date of the document.
+          nullable: true
+        files:
+          description: Array of [File](https://stripe.com/docs/api/files) ids containing
+            images for this document.
+          items:
+            maxLength: 5000
+            type: string
+          nullable: true
+          type: array
+        first_name:
+          description: First name as it appears in the document.
+          maxLength: 5000
+          nullable: true
+          type: string
+        issued_date:
+          anyOf:
+            - $ref: "#/components/schemas/gelato_data_document_report_issued_date"
+          description: Issued date of the document.
+          nullable: true
+        issuing_country:
+          description: Issuing country of the document.
+          maxLength: 5000
+          nullable: true
+          type: string
+        last_name:
+          description: Last name as it appears in the document.
+          maxLength: 5000
+          nullable: true
+          type: string
+        number:
+          description: Document ID number.
+          maxLength: 5000
+          nullable: true
+          type: string
+        status:
+          description: Status of this `document` check.
+          enum:
+            - unverified
+            - verified
+          type: string
+          x-stripeBypassValidation: true
+        type:
+          description: Type of the document.
+          enum:
+            - driving_license
+            - id_card
+            - passport
+          nullable: true
+          type: string
+      required:
+        - status
+      title: GelatoDocumentReport
+      type: object
+      x-expandableFields:
+        - address
+        - dob
+        - error
+        - expiration_date
+        - issued_date
+    gelato_document_report_error:
+      description: ""
+      properties:
+        code:
+          description: A short machine-readable string giving the reason for the
+            verification failure.
+          enum:
+            - document_expired
+            - document_type_not_supported
+            - document_unverified_other
+          nullable: true
+          type: string
+        reason:
+          description: A human-readable message giving the reason for the failure. These
+            messages can be shown to your users.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: GelatoDocumentReportError
+      type: object
+      x-expandableFields: []
+    gelato_id_number_report:
+      description: Result from an id_number check
+      properties:
+        dob:
+          anyOf:
+            - $ref: "#/components/schemas/gelato_data_id_number_report_date"
+          description: Date of birth.
+          nullable: true
+        error:
+          anyOf:
+            - $ref: "#/components/schemas/gelato_id_number_report_error"
+          description: Details on the verification error. Present when status is
+            `unverified`.
+          nullable: true
+        first_name:
+          description: First name.
+          maxLength: 5000
+          nullable: true
+          type: string
+        id_number:
+          description: ID number.
+          maxLength: 5000
+          nullable: true
+          type: string
+        id_number_type:
+          description: Type of ID number.
+          enum:
+            - br_cpf
+            - sg_nric
+            - us_ssn
+          nullable: true
+          type: string
+        last_name:
+          description: Last name.
+          maxLength: 5000
+          nullable: true
+          type: string
+        status:
+          description: Status of this `id_number` check.
+          enum:
+            - unverified
+            - verified
+          type: string
+          x-stripeBypassValidation: true
+      required:
+        - status
+      title: GelatoIdNumberReport
+      type: object
+      x-expandableFields:
+        - dob
+        - error
+    gelato_id_number_report_error:
+      description: ""
+      properties:
+        code:
+          description: A short machine-readable string giving the reason for the
+            verification failure.
+          enum:
+            - id_number_insufficient_document_data
+            - id_number_mismatch
+            - id_number_unverified_other
+          nullable: true
+          type: string
+        reason:
+          description: A human-readable message giving the reason for the failure. These
+            messages can be shown to your users.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: GelatoIdNumberReportError
+      type: object
+      x-expandableFields: []
+    gelato_report_document_options:
+      description: ""
+      properties:
+        allowed_types:
+          description: Restrict the list of allowed document type to these types.
+          items:
+            enum:
+              - driving_license
+              - id_card
+              - passport
+            type: string
+          type: array
+        require_id_number:
+          description: Require that the user provide an id number which will be verified.
+          type: boolean
+        require_live_capture:
+          description: Require that the user capture documents live with their webcam or
+            phone camera.
+          type: boolean
+        require_matching_selfie:
+          description: Require that the user provide a selfie to compare against the
+            document photo.
+          type: boolean
+      title: GelatoReportDocumentOptions
+      type: object
+      x-expandableFields: []
+    gelato_report_id_number_options:
+      description: ""
+      properties: {}
+      title: GelatoReportIdNumberOptions
+      type: object
+      x-expandableFields: []
+    gelato_selfie_report:
+      description: Result from a selfie check
+      properties:
+        document:
+          description: ID of the [File](https://stripe.com/docs/api/files) holding the
+            image of the identity document used in this check.
+          maxLength: 5000
+          nullable: true
+          type: string
+        error:
+          anyOf:
+            - $ref: "#/components/schemas/gelato_selfie_report_error"
+          description: Details on the verification error. Present when status is
+            `unverified`.
+          nullable: true
+        selfie:
+          description: ID of the [File](https://stripe.com/docs/api/files) holding the
+            image of the selfie used in this check.
+          maxLength: 5000
+          nullable: true
+          type: string
+        status:
+          description: Status of this `selfie` check.
+          enum:
+            - unverified
+            - verified
+          type: string
+          x-stripeBypassValidation: true
+      required:
+        - status
+      title: GelatoSelfieReport
+      type: object
+      x-expandableFields:
+        - error
+    gelato_selfie_report_error:
+      description: ""
+      properties:
+        code:
+          description: A short machine-readable string giving the reason for the
+            verification failure.
+          enum:
+            - selfie_document_missing_photo
+            - selfie_face_mismatch
+            - selfie_manipulated
+            - selfie_unverified_other
+          nullable: true
+          type: string
+        reason:
+          description: A human-readable message giving the reason for the failure. These
+            messages can be shown to your users.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: GelatoSelfieReportError
+      type: object
+      x-expandableFields: []
+    gelato_session_document_options:
+      description: ""
+      properties:
+        allowed_types:
+          description: Restrict the list of allowed document type to these types.
+          items:
+            enum:
+              - driving_license
+              - id_card
+              - passport
+            type: string
+          type: array
+        require_id_number:
+          description: Require that the user provide an id number which will be verified.
+          type: boolean
+        require_live_capture:
+          description: Require that the user capture documents live with their webcam or
+            phone camera.
+          type: boolean
+        require_matching_selfie:
+          description: Require that the user provide a selfie to compare against the
+            document photo.
+          type: boolean
+      title: GelatoSessionDocumentOptions
+      type: object
+      x-expandableFields: []
+    gelato_session_id_number_options:
+      description: ""
+      properties: {}
+      title: GelatoSessionIdNumberOptions
+      type: object
+      x-expandableFields: []
+    gelato_session_last_error:
+      description: Shows last VerificationSession error
+      properties:
+        code:
+          description: A short machine-readable string giving the reason for the
+            verification or user-session failure.
+          enum:
+            - abandoned
+            - consent_declined
+            - country_not_supported
+            - device_not_supported
+            - document_expired
+            - document_type_not_supported
+            - document_unverified_other
+            - id_number_insufficient_document_data
+            - id_number_mismatch
+            - id_number_unverified_other
+            - selfie_document_missing_photo
+            - selfie_face_mismatch
+            - selfie_manipulated
+            - selfie_unverified_other
+            - under_supported_age
+          nullable: true
+          type: string
+        reason:
+          description: A human-readable message giving the reason for the failure. These
+            messages can be shown to your users.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: GelatoSessionLastError
+      type: object
+      x-expandableFields: []
+    gelato_verification_report_options:
+      description: ""
+      properties:
+        document:
+          $ref: "#/components/schemas/gelato_report_document_options"
+        id_number:
+          $ref: "#/components/schemas/gelato_report_id_number_options"
+      title: GelatoVerificationReportOptions
+      type: object
+      x-expandableFields:
+        - document
+        - id_number
+    gelato_verification_session_options:
+      description: ""
+      properties:
+        document:
+          $ref: "#/components/schemas/gelato_session_document_options"
+        id_number:
+          $ref: "#/components/schemas/gelato_session_id_number_options"
+      title: GelatoVerificationSessionOptions
+      type: object
+      x-expandableFields:
+        - document
+        - id_number
+    gelato_verified_outputs:
+      description: ""
+      properties:
+        address:
+          anyOf:
+            - $ref: "#/components/schemas/address"
+          description: Verified address of the user.
+          nullable: true
+        dob:
+          anyOf:
+            - $ref: "#/components/schemas/gelato_data_verified_outputs_date"
+          description: Verified date of birth of the user.
+          nullable: true
+        first_name:
+          description: Verified first name of the user.
+          maxLength: 5000
+          nullable: true
+          type: string
+        id_number:
+          description: Verified national id number of the user.
+          maxLength: 5000
+          nullable: true
+          type: string
+        id_number_type:
+          description: Country / type of verified national id number.
+          enum:
+            - br_cpf
+            - sg_nric
+            - us_ssn
+          nullable: true
+          type: string
+        last_name:
+          description: Verified last name of the user.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: GelatoVerifiedOutputs
+      type: object
+      x-expandableFields:
+        - address
+        - dob
+    identity.verification_report:
+      description: >-
+        A VerificationReport is the result of an attempt to collect and
+        verify data from a user.
+
+        The collection of verification checks performed is determined from the `type` and `options`
+
+        parameters used. You can find the result of each verification check performed in the
+
+        appropriate sub-resource: `document`, `id_number`, `selfie`.
+
+
+        Each VerificationReport contains a copy of any data collected by the user as well as
+
+        reference IDs which can be used to access collected images through the [FileUpload](https://stripe.com/docs/api/files)
+
+        API. To configure and create VerificationReports, use the
+
+        [VerificationSession](https://stripe.com/docs/api/identity/verification_sessions) API.
+
+
+        Related guides: [Accessing verification results](https://stripe.com/docs/identity/verification-sessions#results).
+      properties:
+        created:
+          description: Time at which the object was created. Measured in seconds since the
+            Unix epoch.
+          format: unix-time
+          type: integer
+        document:
+          $ref: "#/components/schemas/gelato_document_report"
+        id:
+          description: Unique identifier for the object.
+          maxLength: 5000
+          type: string
+        id_number:
+          $ref: "#/components/schemas/gelato_id_number_report"
+        livemode:
+          description: Has the value `true` if the object exists in live mode or the value
+            `false` if the object exists in test mode.
+          type: boolean
+        object:
+          description: String representing the object's type. Objects of the same type
+            share the same value.
+          enum:
+            - identity.verification_report
+          type: string
+        options:
+          $ref: "#/components/schemas/gelato_verification_report_options"
+        selfie:
+          $ref: "#/components/schemas/gelato_selfie_report"
+        type:
+          description: Type of report.
+          enum:
+            - document
+            - id_number
+          type: string
+          x-stripeBypassValidation: true
+        verification_session:
+          description: ID of the VerificationSession that created this report.
+          maxLength: 5000
+          nullable: true
+          type: string
+      required:
+        - created
+        - id
+        - livemode
+        - object
+        - options
+        - type
+      title: GelatoVerificationReport
+      type: object
+      x-expandableFields:
+        - document
+        - id_number
+        - options
+        - selfie
+      x-resourceId: identity.verification_report
+    identity.verification_session:
+      description: >-
+        A VerificationSession is the starting-point for a verification flow
+        that will collect and verify data on your users.
+
+        Each VerificationSesssion has a URL which provides access to Stripe’s hosted identity verification UI. When you direct your users
+
+        to the link, Stripe will collect personal information and verify it. You can retrieve the VerificationSession later to
+
+        see the status of the checks performed and access any data collected from your users.
+      properties:
+        client_secret:
+          description: This string value can be passed to stripe.js to embed a
+            verification flow directly into your app.
+          maxLength: 5000
+          nullable: true
+          type: string
+        created:
+          description: Time at which the object was created. Measured in seconds since the
+            Unix epoch.
+          format: unix-time
+          type: integer
+        id:
+          description: Unique identifier for the object.
+          maxLength: 5000
+          type: string
+        last_error:
+          anyOf:
+            - $ref: "#/components/schemas/gelato_session_last_error"
+          description: Hash of details on the last error encountered in the verification
+            process.
+          nullable: true
+        last_verification_report:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/identity.verification_report"
+          description: Link to the most recent completed VerificationReport for this
+            Session.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/identity.verification_report"
+        livemode:
+          description: Has the value `true` if the object exists in live mode or the value
+            `false` if the object exists in test mode.
+          type: boolean
+        metadata:
+          additionalProperties:
+            maxLength: 500
+            type: string
+          description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that
+            you can attach to an object. This can be useful for storing
+            additional information about the object in a structured format.
+          type: object
+        object:
+          description: String representing the object's type. Objects of the same type
+            share the same value.
+          enum:
+            - identity.verification_session
+          type: string
+        options:
+          $ref: "#/components/schemas/gelato_verification_session_options"
+        redaction:
+          anyOf:
+            - $ref: "#/components/schemas/verification_session_redaction"
+          description: Redaction status of this VerificationSession. If the
+            VerificationSession is not redacted, this field will be null.
+          nullable: true
+        status:
+          description: Status of this VerificationSession. Read more about each
+            [VerificationSession
+            status](https://stripe.com/docs/identity/how-sessions-work).
+          enum:
+            - canceled
+            - processing
+            - requires_input
+            - verified
+          type: string
+        type:
+          description: Type of report requested.
+          enum:
+            - document
+            - id_number
+          type: string
+          x-stripeBypassValidation: true
+        url:
+          description: Link to the Stripe-hosted identity verification portal that you can
+            send a user to for verification.
+          maxLength: 5000
+          nullable: true
+          type: string
+        verified_outputs:
+          anyOf:
+            - $ref: "#/components/schemas/gelato_verified_outputs"
+          description: Hash of verified data about this person that results from a
+            successful verification report.
+          nullable: true
+      required:
+        - created
+        - id
+        - livemode
+        - metadata
+        - object
+        - options
+        - status
+        - type
+      title: GelatoVerificationSession
+      type: object
+      x-expandableFields:
+        - last_error
+        - last_verification_report
+        - options
+        - redaction
+        - verified_outputs
+      x-resourceId: identity.verification_session
     inventory:
       description: ""
       properties:
@@ -64913,7 +66151,7 @@ components:
           description: Fields that may become required depending on the results of
             verification or review. Will be an empty array unless an
             asynchronous verification is pending. If verification fails, these
-            fields become required and move to `currently_due` or `past_due`.
+            fields move to `eventually_due`, `currently_due`, or `past_due`.
           items:
             maxLength: 5000
             type: string
@@ -71423,6 +72661,21 @@ components:
       x-expandableFields:
         - period
       x-resourceId: usage_record_summary
+    verification_session_redaction:
+      description: ""
+      properties:
+        status:
+          description: Indicates whether this object and its related objects have been
+            redacted or not.
+          enum:
+            - processing
+            - redacted
+          type: string
+      required:
+        - status
+      title: verification_session_redaction
+      type: object
+      x-expandableFields: []
     webhook_endpoint:
       description: >-
         You can configure [webhook

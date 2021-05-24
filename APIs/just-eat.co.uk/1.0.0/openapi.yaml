@@ -19166,7 +19166,6 @@ components:
           items: 2066
           vouchers: 0
         orderStatus: Cancelled
-        orderType: Delivery
         paymentInfo:
           fees:
             - type: Card
@@ -19186,6 +19185,7 @@ components:
         previousJustEatOrderCount: 3
         previousRestaurantOrderCount: 1
         promptAsap: false
+        serviceType: Delivery
         statusReason: RejectedByRestaurant
         transactionReference: 123334567667989
       properties:
@@ -19237,11 +19237,6 @@ components:
           enum:
             - Completed
             - Cancelled
-        orderType:
-          description: Type of order (collection or delivery)
-          enum:
-            - Delivery
-            - Collection
         paymentInfo:
           $ref: "#/components/schemas/RestaurantOrderPaymentInfo"
           description: Information about a payment
@@ -19266,6 +19261,12 @@ components:
           description: The flag that shows whether the customer awaits an order as soon as
             possible
           type: boolean
+        serviceType:
+          description: Type of service (collection, delivery or dine-in)
+          enum:
+            - Delivery
+            - Collection
+            - DineIn
         statusReason:
           description: The reason for the order's status, if known
           enum:
@@ -19308,6 +19309,15 @@ components:
             paymentType: Cash
             placedDate: 2020-01-02T19:20:00.000Z
             serviceType: Collection
+          - currencyCode: GBP
+            deliveryPrice: 0
+            friendlyId: "829022737"
+            id: dfssd3efsferr4rgfdgf
+            orderPrice: 54400
+            orderStatus: Completed
+            paymentType: Cash
+            placedDate: 2020-01-02T20:45:00.000Z
+            serviceType: DineIn
         paging:
           cursors:
             after: NDMyNzQyODI3OTQw
@@ -19440,11 +19450,12 @@ components:
         count: 27
         currencyCode: GBP
         totalCardOrderValue: 92059
-        totalCashOrderValue: 7003
+        totalCashOrderValue: 7934
         totalCollectionOrderValue: 22241
-        totalDeliveryOrderValue: 77721
+        totalDeliveryOrderValue: 66621
         totalDeliveryPriceValue: 70
-        totalOrderValue: 99962
+        totalDineInOrderValue: 11131
+        totalOrderValue: 99993
       properties:
         count:
           description: Total number of all orders for date range
@@ -19471,6 +19482,10 @@ components:
           type: number
         totalDeliveryPriceValue:
           description: Total delivery price value for date range
+          format: int32
+          type: number
+        totalDineInOrderValue:
+          description: Total value of dine-in orders for date range
           format: int32
           type: number
         totalOrderValue:
@@ -19513,10 +19528,11 @@ components:
           format: date-time
           type: string
         serviceType:
-          description: Type of service (collection or delivery)
+          description: Type of service (collection, delivery or dine-in)
           enum:
             - Collection
             - Delivery
+            - DineIn
       type: object
     RestaurantPromotedPlacementInfo:
       example:
@@ -19922,6 +19938,184 @@ components:
         type:
           description: type of primitive
           type: string
+      type: object
+    ReviewComment:
+      additionalProperties: false
+      description: Details for a review comment
+      example:
+        comment: Yum!
+        processed: true
+        showText: false
+      properties:
+        comment:
+          description: Comment left by customer/restaurant
+          nullable: true
+          type: string
+        processed:
+          description: Will be false until processed by an agent/automation
+          type: boolean
+        showText:
+          description: Text for the review comment will be hidden until it has been passed
+            as OK. E.g. ensuring it doesn't contains swear words
+          type: boolean
+      type: object
+    ReviewManagementData:
+      additionalProperties: false
+      description: A customer review for an order
+      example:
+        customerCity: London
+        customerComment:
+          comment: Very tasty!
+          processed: true
+          showText: true
+        customerDisplayName: John
+        customerEmail: example@example.com
+        hideFromSite: false
+        orderDate: 2021-05-14T12:00:00.000Z
+        orderNumber: "1234"
+        processed: true
+        ratings:
+          delivery: 6
+          quality: 6
+          service: 6
+        restaurantComment:
+          comment: Thank you :-)
+          processed: true
+          showText: true
+        restaurantId: "1234"
+        restaurantName: Tasty Snacks
+        reviewDate: 2021-05-14T17:00:00.000Z
+        reviewId: abc1234
+        tenant: uk
+      properties:
+        customerCity:
+          description: The customers city
+          nullable: true
+          type: string
+        customerComment:
+          $ref: "#/components/schemas/ReviewComment"
+        customerDisplayName:
+          description: Customer name shown on the public site. Forename only to avoid
+            disclosing PII
+          nullable: true
+          type: string
+        customerEmail:
+          description: The customers email
+          format: email
+          nullable: true
+          type: string
+        hideFromSite:
+          description: This review is suspect (e.g. a restaurant self-reviewing) so don't
+            display it on the public site
+          type: boolean
+        orderDate:
+          description: When order was placed
+          format: date-time
+          type: string
+        orderNumber:
+          description: The user friendly order number
+          type: string
+        processed:
+          description: Flag used to indicate that this review has passed through the
+            validation process.
+          type: boolean
+        ratings:
+          $ref: "#/components/schemas/ReviewScores"
+        restaurantComment:
+          $ref: "#/components/schemas/ReviewComment"
+        restaurantId:
+          description: The restaurant partner Id
+          type: string
+        restaurantName:
+          description: The display name for the restaurant
+          nullable: true
+          type: string
+        reviewDate:
+          description: When the review was submitted
+          format: date-time
+          type: string
+        reviewId:
+          description: Identifier for ratings - will be equivalent to `RatingCode`
+          nullable: true
+          type: string
+        tenant:
+          description: A valid country code, e.g. "uk"
+          nullable: true
+          type: string
+      type: object
+    ReviewManagementPagedList:
+      additionalProperties: false
+      description: Represents a page of reviews plus data about the overall result
+        set. E.g. total number of results for the search.
+      example:
+        paging:
+          total: 555
+        reviews:
+          - customerCity: London
+            customerComment:
+              comment: Very tasty!
+              processed: true
+              showText: true
+            customerDisplayName: John
+            customerEmail: example@example.com
+            hideFromSite: false
+            orderDate: 2021-05-14T12:00:00.000Z
+            orderNumber: "1234"
+            processed: true
+            ratings:
+              delivery: 6
+              quality: 6
+              service: 6
+            restaurantComment:
+              comment: Thank you :-)
+              processed: true
+              showText: true
+            restaurantId: "1234"
+            restaurantName: Tasty Snacks
+            reviewDate: 2021-05-14T17:00:00.000Z
+            reviewId: abc1234
+            tenant: uk
+      properties:
+        paging:
+          $ref: "#/components/schemas/ReviewManagementPaging"
+        reviews:
+          description: The current page of reviews
+          items:
+            $ref: "#/components/schemas/ReviewManagementData"
+          nullable: true
+          type: array
+      type: object
+    ReviewManagementPaging:
+      additionalProperties: false
+      description: Meta data for a set of reviews
+      example:
+        total: 77
+      properties:
+        total:
+          description: The total number of reviews for the current search
+          format: int32
+          type: integer
+      type: object
+    ReviewScores:
+      additionalProperties: false
+      description: The star ratings given by a customer
+      example:
+        delivery: 4
+        quality: 2
+        service: 3
+      properties:
+        delivery:
+          description: The delivery rating
+          format: int32
+          type: integer
+        quality:
+          description: The food quality rating
+          format: int32
+          type: integer
+        service:
+          description: The restaurant service rating
+          format: int32
+          type: integer
       type: object
     RichMediaImageBatchResponse:
       example:

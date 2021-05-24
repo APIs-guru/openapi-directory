@@ -340,6 +340,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Requested format unacceptable
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: API rate limit exceeded
       security:
         - apikey: []
       summary: Query facilities by location or IDs, with optional filters
@@ -406,6 +412,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Requested format unacceptable
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: API rate limit exceeded
       security:
         - apikey: []
       summary: Bulk download information for all facilities
@@ -467,6 +479,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Requested format unacceptable
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: API rate limit exceeded
       security:
         - apikey: []
       summary: Retrieve a specific facility by ID
@@ -512,6 +530,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Requested format unacceptable
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: API rate limit exceeded
       security:
         - apikey: []
       summary: Bulk download of all facility IDs
@@ -667,6 +691,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Requested format unacceptable
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: API rate limit exceeded
       security:
         - apikey: []
       summary: Retrieve all VA health facilities reachable by driving within the
@@ -1045,7 +1075,7 @@ components:
         operating_status:
           $ref: "#/components/schemas/OperatingStatus"
         operational_hours_special_instructions:
-          example: Administrative hours are Monday-Friday 8:00 a.m. to 4:30 p.m.
+          example: Normal business hours are Monday through Friday, 8:00 a.m. to 4:30 p.m.
           nullable: true
           type: string
         phone:

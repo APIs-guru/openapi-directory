@@ -4620,26 +4620,42 @@ paths:
   "/repositories/{workspace}/{repo_slug}/diff/{spec}":
     get:
       description: |-
-        Produces a raw, git-style diff for either a single commit (diffed
-        against its first parent), or a revspec of 2 commits (e.g.
-        `3a8b42..9ff173` where the first commit represents the source and the
-        second commit the destination).
+        Produces a raw git-style diff.
 
-        In case of the latter (diffing a revspec), a 3-way diff, or merge diff,
-        is computed. This shows the changes introduced by the left branch
-        (`3a8b42` in our example) as compared againt the right branch
-        (`9ff173`).
+        #### Single commit spec
 
-        This is equivalent to merging the left branch into the right branch and
-        then computing the diff of the merge commit against its first parent
-        (the right branch). This follows the same behavior as pull requests
-        that also show this style of 3-way, or merge diff.
+        If the `spec` argument to this API is a single commit, the diff is
+        produced against the first parent of the specified commit.
+
+        #### Two commit spec
+
+        Two commits separated by `..` may be provided as the `spec`, e.g.,
+        `3a8b42..9ff173`. When two commits are provided and the `merge` query
+        parameter is true or absent, this API produces a 3-way diff, also
+        referred to as a merge diff. This is equivalent to merging the left
+        branch into the right branch and then computing the diff of the merge
+        commit against its first parent (the right branch). These diffs have
+        the same behavior as pull requests that show the 3-way diff, such as
+        the [Bitbucket Cloud Pull
+        Request](https://blog.developer.atlassian.com/a-better-pull-request/).
+        For a simple git-style diff, add `merge=false` to the query.
+
+        The two commits are interpreted as follows:
+
+        * First commit: the commit containing the changes we wish to preview
+        * Second commit: the commit representing the state to which we want to
+          compare the first commit
+        * **Note**: This is the opposite of the order used in `git diff`.
+
+        #### Comparison to patches
 
         While similar to patches, diffs:
 
         * Don't have a commit header (username, commit message, etc)
         * Support the optional `path=foo/bar.py` query param to filter
           the diff to just that one file diff
+
+        #### Response
 
         The raw diff is returned as-is, in whatever encoding the files in the
         repository use. It is not decoded into unicode. As such, the
@@ -4738,16 +4754,56 @@ paths:
   "/repositories/{workspace}/{repo_slug}/diffstat/{spec}":
     get:
       description: >-
-        Returns the diff stat for the specified commit.
+        Produces a response in JSON format with a record for every path
+
+        modified, including information on the type of the change and the
+
+        number of lines added and removed.
 
 
-        Diff stat responses contain a record for every path modified by the
-
-        commit and lists the number of lines added and removed for each file.
+        #### Single commit spec
 
 
+        If the `spec` argument to this API is a single commit, the diff is
 
-        Example:
+        produced against the first parent of the specified commit.
+
+
+        #### Two commit spec
+
+
+        Two commits separated by `..` may be provided as the `spec`, e.g.,
+
+        `3a8b42..9ff173`. When two commits are provided and the `merge` query
+
+        parameter is true or absent, this API produces a 3-way diff, also
+
+        referred to as a merge diff. This is equivalent to merging the left
+
+        branch into the right branch and then computing the diff of the merge
+
+        commit against its first parent (the right branch). These diffs have
+
+        the same behavior as pull requests that show the 3-way diff, such as
+
+        the [Bitbucket Cloud Pull
+
+        Request](https://blog.developer.atlassian.com/a-better-pull-request/).
+
+        For a simple git-style diff, add `merge=false` to the query.
+
+
+        The two commits are interpreted as follows:
+
+
+        * First commit: the commit containing the changes we wish to preview
+
+        * Second commit: the commit representing the state to which we want to
+          compare the first commit
+        * **Note**: This is the opposite of the order used in `git diff`.
+
+
+        #### Sample output
 
         ```
 
@@ -12012,7 +12068,7 @@ paths:
         authorization.
 
 
-        For Git, the branch name should not include any prefixes (e.g.
+        The branch name should not include any prefixes (e.g.
 
         refs/heads). This endpoint does support using short hash prefixes for
 
@@ -12021,11 +12077,6 @@ paths:
         prefix is ambiguous. Using a full commit hash is the preferred
 
         approach.
-
-
-        For Mercurial, the authenticated user making this call is the author of
-
-        the new branch commit and the date is current datetime of the call.
       responses:
         "201":
           content:
@@ -12126,10 +12177,8 @@ paths:
         The main branch is not allowed to be deleted and will return a 400
         response.
 
-        For Git, the branch name should not include any prefixes (e.g.
-        refs/heads). For Mercurial, this closes all open heads on the branch,
-        sets the author of the commit to the authenticated caller, and changes
-        the date to the datetime of the call.
+        The branch name should not include any prefixes (e.g.
+        refs/heads).
       responses:
         "204":
           description: Indicates that the specified branch was successfully deleted.
@@ -12280,9 +12329,6 @@ paths:
 
                 For Git, the branch name should not include any prefixes (e.g.
                 refs/heads).
-
-                For Mercurial, the response will include an additional field that lists
-                the open heads.
       responses:
         "200":
           content:
@@ -20880,7 +20926,12 @@ components:
               type: string
             merge_strategies:
               description: Available merge strategies for pull requests targeting this branch.
-              items: {}
+              items:
+                enum:
+                  - merge_commit
+                  - squash
+                  - fast_forward
+                type: string
               type: array
           title: Branch
           type: object
@@ -21107,6 +21158,7 @@ components:
                 - allow_auto_merge_when_builds_pass
                 - delete
                 - require_all_dependencies_merged
+                - require_commits_behind
                 - require_no_changes_requested
                 - push
                 - require_passing_builds_to_merge
@@ -21139,12 +21191,7 @@ components:
               minItems: 0
               type: array
             value:
-              description: 'Value with kind-specific semantics: "require_approvals_to_merge"
-                uses it to require a minimum number of approvals on a PR;
-                "require_default_reviewer_approvals_to_merge" uses it to require
-                a minimum number of approvals from default reviewers on a PR;
-                "require_passing_builds_to_merge" uses it to require a minimum
-                number of passing builds.'
+              description: <staticmethod object at 0x7f66ce3fb9d0>
               type: integer
           required:
             - kind
@@ -22759,8 +22806,7 @@ components:
           type: integer
         pagelen:
           description: Current number of objects on the existing page. The default value
-            is 10 with 100 being the maximum allowed value. Individual APIs may
-            enforce different values.
+            is 500 with 5000 being the maximum allowed value.
           minimum: 1
           type: integer
         previous:
@@ -25877,7 +25923,6 @@ components:
               $ref: "#/components/schemas/project"
             scm:
               enum:
-                - hg
                 - git
               type: string
             size:
@@ -26016,7 +26061,6 @@ components:
             scm:
               description: The DVCS used to store the snippet.
               enum:
-                - hg
                 - git
               type: string
             title:
@@ -30442,4 +30486,4 @@ x-radar-pages:
     icon: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMjU3LjMxNjMgMTYyLjU5OTQiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGlzb2xhdGlvbjogaXNvbGF0ZTsKICAgICAgfQoKICAgICAgLmNscy0yIHsKICAgICAgICBmaWxsOiAjMzQ0NTYzOwogICAgICB9CgogICAgICAuY2xzLTMgewogICAgICAgIGZpbGw6ICMxZGI5ZDQ7CiAgICAgIH0KCiAgICAgIC5jbHMtNCB7CiAgICAgICAgZmlsbDogIzAwNTdkODsKICAgICAgfQoKICAgICAgLmNscy01LCAuY2xzLTcsIC5jbHMtOSB7CiAgICAgICAgbWl4LWJsZW5kLW1vZGU6IG11bHRpcGx5OwogICAgICB9CgogICAgICAuY2xzLTUgewogICAgICAgIGZpbGw6IHVybCgjTjc1KTsKICAgICAgfQoKICAgICAgLmNscy02IHsKICAgICAgICBmaWxsOiAjMDA2NWZmOwogICAgICB9CgogICAgICAuY2xzLTcgewogICAgICAgIGZpbGw6IHVybCgjTjc1LTIpOwogICAgICB9CgogICAgICAuY2xzLTggewogICAgICAgIGZpbGw6IHVybCgjbGluZWFyLWdyYWRpZW50KTsKICAgICAgfQoKICAgICAgLmNscy05IHsKICAgICAgICBmaWxsOiB1cmwoI043NS0zKTsKICAgICAgfQoKICAgICAgLmNscy0xMCB7CiAgICAgICAgZmlsbDogdXJsKCNUMjAwLVQ3NSk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Ik43NSIgeDE9Ii0yMTg5LjU1NiIgeTE9IjI4MDguMjI4NCIgeDI9Ii0yMDkxLjE1NTEiIHkyPSIyODA4LjIyODQiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMC4xNjgxLCAwLjk4NTgsIDAuOTg1OCwgLTAuMTY4MSwgLTIzNzMuNzM2LCAyNzIyLjEyNzgpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2U1ZThlYyIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNWU4ZWMiIHN0b3Atb3BhY2l0eT0iMC4xIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJONzUtMiIgZGF0YS1uYW1lPSJONzUiIHgxPSItMjE2OC41OTQ3IiB5MT0iMjkzNS4wNTU2IiB4Mj0iLTIwNzAuMTkzNyIgeTI9IjI5MzUuMDU1NiIgeGxpbms6aHJlZj0iI043NSIvPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQiIHgxPSIxOTAuMzU0NyIgeTE9IjE1OS45NjciIHgyPSIyNTkuOTQ4NyIgeTI9IjkwLjM3MyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzNDQ1NjMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWU2Yzg0Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJONzUtMyIgZGF0YS1uYW1lPSJONzUiIHgxPSItMjI1Ny4zOTc3IiB5MT0iMjg4NC4yMjYzIiB4Mj0iLTIxNTguOTk2NyIgeTI9IjI4ODQuMjI2MyIgeGxpbms6aHJlZj0iI043NSIvPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJUMjAwLVQ3NSIgeDE9IjEyNi4wMjU3IiB5MT0iODUuMTA4IiB4Mj0iMTk1LjYxOTciIHkyPSIxNS41MTQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjM2RjN2RjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzljZTNlZSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHRpdGxlPkFkZCBPbiBCbG9ja3MgMjwvdGl0bGU+CiAgPGcgY2xhc3M9ImNscy0xIj4KICAgIDxnIGlkPSJMYXllcl8yIiBkYXRhLW5hbWU9IkxheWVyIDIiPgogICAgICA8ZyBpZD0iT2JqZWN0cyI+CiAgICAgICAgPHJlY3QgaWQ9Il9SZWN0YW5nbGVfIiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTIiIHg9IjEyOC42NTgxIiB5PSI4Ny43NDA1IiB3aWR0aD0iNjQuMzI5MSIgaGVpZ2h0PSI3NC44NTkiLz4KICAgICAgICA8cmVjdCBpZD0iX1JlY3RhbmdsZV8yIiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTMiIHg9IjY0LjMyOTEiIHk9IjEyLjg4MTUiIHdpZHRoPSI2NC4zMjkxIiBoZWlnaHQ9Ijc0Ljg1OSIvPgogICAgICAgIDxyZWN0IGlkPSJfUmVjdGFuZ2xlXzMiIGRhdGEtbmFtZT0iJmx0O1JlY3RhbmdsZSZndDsiIGNsYXNzPSJjbHMtNCIgeT0iODcuNzQwNSIgd2lkdGg9IjY0LjMyOTEiIGhlaWdodD0iNzQuODU5Ii8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNjQuMzI5MSw4Ny43NEg1OC42NTIzYTYyLjc4NzcsNjIuNzg3NywwLDAsMC0yNC41Njg0LDIwLjc2MjFjLTguMjYwNywxMi4xOTYtNC4zNDM3LDE4LjI0MTUtMTEuNjYzNywzMS42Mzk1QzE2LjUxLDE1MC45Niw4LjA1MSwxNTcuODIsMCwxNjIuNTU2di4wNDM1aDY0LjMyOVoiLz4KICAgICAgICA8cmVjdCBpZD0iX1JlY3RhbmdsZV80IiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTYiIHg9IjY0LjMyOTEiIHk9Ijg3Ljc0MDUiIHdpZHRoPSI2NC4zMjkxIiBoZWlnaHQ9Ijc0Ljg1OSIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTE5Mi45ODcyLDg3Ljc0SDE4My4zNDNhNjIuNzg3Nyw2Mi43ODc3LDAsMCwwLTI0LjU2ODQsMjAuNzYyMWMtOC4yNjA3LDEyLjE5Ni00LjM0MzgsMTguMjQxNS0xMS42NjM3LDMxLjYzOTVhNTYuNzI0Niw1Ni43MjQ2LDAsMCwxLTE4LjQ1MjcsMTkuOTF2Mi41NDc0aDY0LjMyOVoiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTgiIHg9IjE5Mi45ODcyIiB5PSI4Ny43NDA1IiB3aWR0aD0iNjQuMzI5MSIgaGVpZ2h0PSI3NC44NTkiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTkiIGQ9Ik0xMjguNjU4MiwxMi44ODE1SDExNi41OUE2MS45NjQ2LDYxLjk2NDYsMCwwLDAsMTAxLjMyMzMsMjguMjE1QzkzLjA2MjUsNDAuNDEwOSw5Ni45Nzk0LDQ2LjQ1NjUsODkuNjYsNTkuODU0NCw4My4wMzE2LDcxLjk4NTcsNzMuMTk3LDc5LjE1MTQsNjQuMzI5MSw4My45MTA4djMuODNoNjQuMzI5MVoiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTEwIiB4PSIxMjguNjU4MSIgeT0iMTIuODgxNSIgd2lkdGg9IjY0LjMyOTEiIGhlaWdodD0iNzQuODU5Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy00IiB4PSIxMC4xNjA1IiB5PSI3NC44NTkiIHdpZHRoPSIyNC43NTM2IiBoZWlnaHQ9IjEyLjg4MTUiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTQiIHg9IjUxLjk1MjMiIHk9Ijc0Ljg1OSIgd2lkdGg9IjI0Ljc1MzYiIGhlaWdodD0iMTIuODgxNSIvPgogICAgICAgIDxyZWN0IGNsYXNzPSJjbHMtNCIgeD0iOTMuNzQ0MSIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIxMzguODE4NiIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIxODAuNjEwNCIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIyMjIuNDAyMiIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSI3NC40ODk1IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSIxMTYuMjgxNCIgd2lkdGg9IjI0Ljc1MzYiIGhlaWdodD0iMTIuODgxNSIvPgogICAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMyIgeD0iMTU4LjA3MzIiIHdpZHRoPSIyNC43NTM2IiBoZWlnaHQ9IjEyLjg4MTUiLz4KICAgICAgPC9nPgogICAgPC9nPgogIDwvZz4KPC9zdmc+Cg==
     key: bb-connect
     title: Atlassian Connect
-x-revision: 5a8127d5aaf1
+x-revision: 8755eee9eb55

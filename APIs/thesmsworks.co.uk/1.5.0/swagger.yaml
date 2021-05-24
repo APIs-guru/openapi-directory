@@ -259,7 +259,7 @@ paths:
     x-swagger-router-controller: smpp-client
   /message/send:
     post:
-      description: Sends an SMS message
+      description: Send an SMS Message
       parameters:
         - description: Message properties
           in: body
@@ -286,7 +286,7 @@ paths:
         - messages
   /messages:
     post:
-      description: Get messages matching your search criteria
+      description: Retrieve up to 1000 messages matching your search criteria
       operationId: getMessages
       parameters:
         - in: body

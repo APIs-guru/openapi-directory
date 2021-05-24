@@ -53,7 +53,7 @@ paths:
       parameters:
         - description: The ID to use for the project, which will become the final
             component of the project's resource name. This value should be at
-            most 63 characters, and valid characters are /[a-z][0-9]-./.
+            most 80 characters, and valid characters are /[a-z][0-9]-./.
           in: query
           name: project_id
           schema:
@@ -185,7 +185,7 @@ paths:
           schema:
             type: string
         - description: The ID to use for the api, which will become the final component of
-            the api's resource name. This value should be at most 63 characters,
+            the api's resource name. This value should be at most 80 characters,
             and valid characters are /[a-z][0-9]-./.
           in: query
           name: api_id
@@ -349,7 +349,7 @@ paths:
             type: string
         - description: The ID to use for the version, which will become the final
             component of the version's resource name. This value should be at
-            most 63 characters, and valid characters are /[a-z][0-9]-./.
+            most 80 characters, and valid characters are /[a-z][0-9]-./.
           in: query
           name: api_version_id
           schema:
@@ -542,7 +542,7 @@ paths:
           schema:
             type: string
         - description: The ID to use for the spec, which will become the final component
-            of the spec's resource name. This value should be at most 63
+            of the spec's resource name. This value should be at most 80
             characters, and valid characters are /[a-z][0-9]-./.
           in: query
           name: api_spec_id
@@ -938,7 +938,7 @@ paths:
             type: string
         - description: The ID to use for the artifact, which will become the final
             component of the artifact's resource name. This value should be at
-            most 63 characters, and valid characters are /[a-z][0-9]-./.
+            most 80 characters, and valid characters are /[a-z][0-9]-./.
           in: query
           name: artifact_id
           schema:

@@ -6,7 +6,7 @@ info:
     name: sonallux
     url: https://github.com/sonallux/spotify-web-api
   title: Spotify Web API
-  version: 2021.5.1
+  version: 2021.5.20
   x-apisguru-categories:
     - media
   x-logo:
@@ -6318,6 +6318,10 @@ components:
           type: string
         restrictions:
           $ref: "#/components/schemas/AlbumRestrictionObject"
+        total_tracks:
+          description: The total number of tracks in the album.
+          format: int32
+          type: integer
         tracks:
           description: The tracks of the album.
           externalDocs:
@@ -8205,6 +8209,10 @@ components:
           type: string
         restrictions:
           $ref: "#/components/schemas/AlbumRestrictionObject"
+        total_tracks:
+          description: The total number of tracks in the album.
+          format: int32
+          type: integer
         type:
           description: 'The object type: "album"'
           type: string

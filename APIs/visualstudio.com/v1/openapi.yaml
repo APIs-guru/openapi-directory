@@ -1455,24 +1455,11 @@ paths:
           schema:
             format: uuid
             type: string
-      requestBody:
-        content:
-          application/*+json:
-            schema:
-              nullable: true
-              type: string
-          application/json:
-            schema:
-              nullable: true
-              type: string
-          application/json-patch+json:
-            schema:
-              nullable: true
-              type: string
-          text/json:
-            schema:
-              nullable: true
-              type: string
+        - in: query
+          name: deletionType
+          schema:
+            nullable: true
+            type: string
       responses:
         "204":
           description: Success
@@ -1496,7 +1483,6 @@ paths:
           name: environmentId
           required: true
           schema:
-            format: uuid
             type: string
       responses:
         "200":
@@ -2966,6 +2952,164 @@ paths:
           description: Success
       tags:
         - Subscriptions
+  "/api/v1/Tenant/{tenantId}":
+    delete:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Tenant
+    get:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenantInfoResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/TenantInfoResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/TenantInfoResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Tenant
+    put:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Tenant
   /api/v1/UserSubscriptions:
     delete:
       parameters:
@@ -2991,6 +3135,1002 @@ paths:
           description: Success
       tags:
         - UserSubscriptions
+  "/api/v1/tenant/{tenantId}/Pool/{poolName}":
+    delete:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Pool
+    get:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PoolResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PoolResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PoolResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Pool
+    patch:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdatePoolBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdatePoolBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdatePoolBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdatePoolBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PoolResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PoolResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PoolResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Pool
+    put:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdatePoolBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdatePoolBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdatePoolBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdatePoolBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PoolResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PoolResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PoolResult"
+          description: Success
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PoolResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PoolResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PoolResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Pool
+  "/api/v1/tenant/{tenantId}/PoolGroup/{poolGroupName}":
+    delete:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolGroupName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - PoolGroup
+    get:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolGroupName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PoolGroupResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PoolGroupResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PoolGroupResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - PoolGroup
+    patch:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolGroupName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdatePoolGroupBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePoolGroupBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/UpdatePoolGroupBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePoolGroupBody"
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - PoolGroup
+    put:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolGroupName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreatePoolGroupBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePoolGroupBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/CreatePoolGroupBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreatePoolGroupBody"
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - PoolGroup
+  "/api/v1/tenant/{tenantId}/pool/{poolName}/Vm":
+    get:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/VMResult"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/VMResult"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/VMResult"
+                type: array
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Vm
+  "/api/v1/tenant/{tenantId}/pool/{poolName}/Vm/{vmName}":
+    delete:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: vmName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Vm
+    get:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: vmName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VMResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/VMResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/VMResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Vm
+    put:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: vmName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ClaimVMBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClaimVMBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/ClaimVMBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ClaimVMBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VMResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/VMResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/VMResult"
+          description: Success
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VMResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/VMResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/VMResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Vm
+  "/api/v1/tenant/{tenantId}/pool/{poolName}/Vm/{vmName}/start":
+    post:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: vmName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Vm
+  "/api/v1/tenant/{tenantId}/pool/{poolName}/Vm/{vmName}/stop":
+    post:
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: poolName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: vmName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          description: Server Error
+        "503":
+          description: Server Error
+      tags:
+        - Vm
   /health:
     get:
       responses:
@@ -3142,6 +4282,14 @@ components:
         workloadType:
           nullable: true
           type: string
+      type: object
+    ClaimVMBody:
+      additionalProperties: false
+      properties:
+        user:
+          $ref: "#/components/schemas/UserIdentity"
+      required:
+        - user
       type: object
     CloudEnvironmentFolderBody:
       additionalProperties: false
@@ -3395,6 +4543,45 @@ components:
           nullable: true
           type: string
       type: object
+    CreateOrUpdatePoolBody:
+      additionalProperties: false
+      properties:
+        domainUserCredentials:
+          $ref: "#/components/schemas/DomainUserCredentials"
+        hotPoolSettings:
+          $ref: "#/components/schemas/HotPoolSettings"
+        poolGroupName:
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        userGroupName:
+          nullable: true
+          type: string
+        vmSpecs:
+          $ref: "#/components/schemas/VMSpecs"
+      required:
+        - poolGroupName
+        - vmSpecs
+      type: object
+    CreatePoolGroupBody:
+      additionalProperties: false
+      properties:
+        displayName:
+          type: string
+        region:
+          $ref: "#/components/schemas/AzureLocation"
+        tags:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+      required:
+        - displayName
+        - region
+      type: object
     DelegateIdentity:
       additionalProperties: false
       properties:
@@ -3407,6 +4594,23 @@ components:
         username:
           nullable: true
           type: string
+      type: object
+    DomainUserCredentials:
+      additionalProperties: false
+      properties:
+        domain:
+          type: string
+        organizationalUnit:
+          nullable: true
+          type: string
+        passwordSecretIdentifier:
+          type: string
+        userName:
+          type: string
+      required:
+        - domain
+        - passwordSecretIdentifier
+        - userName
       type: object
     EnvironmentBillingInfo:
       additionalProperties: false
@@ -3543,6 +4747,13 @@ components:
         timeStamp:
           format: date-time
           type: string
+      type: object
+    HotPoolSettings:
+      additionalProperties: false
+      properties:
+        size:
+          format: int32
+          type: integer
       type: object
     IdentityBody:
       additionalProperties: false
@@ -3798,6 +5009,45 @@ components:
           nullable: true
           type: string
       type: object
+    PoolGroupResult:
+      additionalProperties: false
+      properties:
+        displayName:
+          nullable: true
+          type: string
+        region:
+          $ref: "#/components/schemas/AzureLocation"
+        tags:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+      type: object
+    PoolResult:
+      additionalProperties: false
+      properties:
+        domainUserCredentials:
+          $ref: "#/components/schemas/DomainUserCredentials"
+        hotPoolSettings:
+          $ref: "#/components/schemas/HotPoolSettings"
+        poolGroupName:
+          type: string
+        provisioningStatus:
+          $ref: "#/components/schemas/ProvisioningStatusResult"
+        tags:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        userGroupName:
+          nullable: true
+          type: string
+        vmSpecs:
+          $ref: "#/components/schemas/VMSpecs"
+      required:
+        - poolGroupName
+        - vmSpecs
+      type: object
     ProblemDetails:
       additionalProperties: {}
       properties:
@@ -3817,6 +5067,26 @@ components:
         type:
           nullable: true
           type: string
+      type: object
+    ProvisioningStatusResult:
+      additionalProperties: false
+      properties:
+        completedSteps:
+          format: int32
+          nullable: true
+          type: integer
+        currentStepDescription:
+          nullable: true
+          type: string
+        isReady:
+          type: boolean
+        operationStartedTimeUtc:
+          nullable: true
+          type: string
+        totalSteps:
+          format: int32
+          nullable: true
+          type: integer
       type: object
     RPSubscriptionNotification:
       additionalProperties: false
@@ -4108,6 +5378,13 @@ components:
           nullable: true
           type: string
       type: object
+    TenantInfoResult:
+      additionalProperties: false
+      properties:
+        id:
+          format: uuid
+          type: string
+      type: object
     UnfilteredCloudEnvironmentResult:
       additionalProperties: false
       properties:
@@ -4214,6 +5491,84 @@ components:
           nullable: true
           type: string
       type: object
+    UpdatePoolGroupBody:
+      additionalProperties: false
+      properties:
+        displayName:
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+      required:
+        - displayName
+      type: object
+    UserIdentity:
+      additionalProperties: false
+      properties:
+        userPrincipalName:
+          type: string
+      required:
+        - userPrincipalName
+      type: object
+    VMConnectionInfo:
+      additionalProperties: false
+      properties:
+        connectionType:
+          $ref: "#/components/schemas/VMConnectionType"
+        liveShareWorkspaceId:
+          nullable: true
+          type: string
+      type: object
+    VMConnectionType:
+      enum:
+        - 0 (LiveShare)
+        - 1 (WVD)
+      format: int32
+      type: integer
+    VMDiskType:
+      enum:
+        - 0 (StandardHDD)
+        - 1 (StandardSSD)
+        - 2 (PremiumSSD)
+      format: int32
+      type: integer
+    VMResult:
+      additionalProperties: false
+      properties:
+        connection:
+          $ref: "#/components/schemas/VMConnectionInfo"
+        provisioningStatus:
+          $ref: "#/components/schemas/ProvisioningStatusResult"
+        status:
+          $ref: "#/components/schemas/VMStatus"
+      type: object
+    VMSpecs:
+      additionalProperties: false
+      properties:
+        diskType:
+          $ref: "#/components/schemas/VMDiskType"
+        imageResourceId:
+          type: string
+        size:
+          type: string
+        subnetResourceId:
+          type: string
+      required:
+        - diskType
+        - imageResourceId
+        - size
+        - subnetResourceId
+      type: object
+    VMStatus:
+      enum:
+        - 0 (Provisioning)
+        - 1 (Ready)
+        - 2 (Stopped)
+        - 3 (Deleted)
+      format: int32
+      type: integer
     VnetProperties:
       additionalProperties: false
       properties:
