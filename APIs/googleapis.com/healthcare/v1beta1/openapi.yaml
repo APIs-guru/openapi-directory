@@ -3099,6 +3099,15 @@ components:
         documentContent:
           description: document_content is a document to be annotated.
           type: string
+        licensedVocabularies:
+          description: A list of licensed vocabularies to use in the request, in addition to the default unlicensed vocabularies.
+          items:
+            enum:
+              - LICENSED_VOCABULARY_UNSPECIFIED
+              - ICD10CM
+              - SNOMEDCT_US
+            type: string
+          type: array
       type: object
     AnalyzeEntitiesResponse:
       description: Includes recognized entity mentions and relationships between them.
@@ -4747,7 +4756,7 @@ components:
       properties:
         gcsDestination:
           $ref: "#/components/schemas/GoogleCloudHealthcareV1beta1ConsentGcsDestination"
-          description: The Cloud Storage destination. The Cloud Healthcare API service account must have the `roles/storage.objectAdmin` Cloud IAM role for this Cloud Storage location.
+          description: "The Cloud Storage destination. The Cloud Healthcare API service account must have the `roles/storage.objectAdmin` Cloud IAM role for this Cloud Storage location. The object name is in the following format: query-accessible-data-result-{operation_id}.txt where each line contains a single data_id."
         requestAttributes:
           additionalProperties:
             type: string
@@ -4758,6 +4767,10 @@ components:
             type: string
           description: Optional. The values of resource attributes associated with the type of resources being requested. If no values are specified, then all resource types are included in the output.
           type: object
+      type: object
+    QueryAccessibleDataResponse:
+      description: Response for successful QueryAccessibleData operations. This structure is included in the response upon operation completion.
+      properties: {}
       type: object
     RedactConfig:
       description: Define how to redact sensitive values. Default behaviour is erase. For example, "My name is Jane." becomes "My name is ."

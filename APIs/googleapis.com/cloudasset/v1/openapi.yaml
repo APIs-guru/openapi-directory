@@ -133,7 +133,7 @@ paths:
       description: Lists assets with time and resource types and returns paged results in response.
       operationId: cloudasset.assets.list
       parameters:
-        - description: 'Required. Name of the organization or project the assets belong to. Format: "organizations/[organization-number]" (such as "organizations/123"), "projects/[project-number]" (such as "projects/my-project-id"), or "projects/[project-id]" (such as "projects/12345").'
+        - description: 'Required. Name of the organization or project the assets belong to. Format: "organizations/[organization-number]" (such as "organizations/123"), "projects/[project-id]" (such as "projects/my-project-id"), or "projects/[project-number]" (such as "projects/12345").'
           in: path
           name: parent
           required: true
@@ -377,6 +377,57 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - v1
+  "/v1/{resource}:analyzeMove":
+    get:
+      description: Analyze moving a resource to a specified destination without kicking off the actual move. The analysis is best effort depending on the user's permissions of viewing different hierarchical policies and configurations. The policies and configuration are subject to change before the actual resource migration takes place.
+      operationId: cloudasset.analyzeMove
+      parameters:
+        - description: Required. Name of the resource to perform the analysis against. Only GCP Project are supported as of today. Hence, this can only be Project ID (such as "projects/my-project-id") or a Project Number (such as "projects/12345").
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: Required. Name of the GCP Folder or Organization to reparent the target resource. The analysis will be performed against hypothetically moving the resource to this specified desitination parent. This can only be a Folder number (such as "folders/123") or an Organization number (such as "organizations/123").
+          in: query
+          name: destinationParent
+          schema:
+            type: string
+        - description: Analysis view indicating what information should be included in the analysis response. If unspecified, the default view is FULL.
+          in: query
+          name: view
+          schema:
+            enum:
+              - ANALYSIS_VIEW_UNSPECIFIED
+              - FULL
+              - BASIC
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyzeMoveResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - v1
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{scope}:analyzeIamPolicy":
     get:
       description: Analyzes IAM policies to answer which identities have what accesses on which resources.
@@ -596,7 +647,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: 'Optional. A comma separated list of fields specifying the sorting order of the results. The default order is ascending. Add " DESC" after the field name to indicate descending order. Redundant space characters are ignored. Example: "location DESC, name". Only string fields in the response are sortable, including `name`, `displayName`, `description`, `location`. All the other fields such as repeated fields (e.g., `networkTags`), map fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`) are not supported.'
+        - description: 'Optional. A comma-separated list of fields specifying the sorting order of the results. The default order is ascending. Add " DESC" after the field name to indicate descending order. Redundant space characters are ignored. Example: "location DESC, name". Only singular primitive fields in the response are sortable: * name * assetType * project * displayName * description * location * kmsKey * createTime * updateTime * state * parentFullResourceName * parentAssetType All the other fields such as repeated fields (e.g., `networkTags`), map fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`) are not supported.'
           in: query
           name: orderBy
           schema:
@@ -759,6 +810,15 @@ components:
           description: The service account impersonation analysis if AnalyzeIamPolicyRequest.analyze_service_account_impersonation is enabled.
           items:
             $ref: "#/components/schemas/IamPolicyAnalysis"
+          type: array
+      type: object
+    AnalyzeMoveResponse:
+      description: The response message for resource move analysis.
+      properties:
+        moveAnalysis:
+          description: The list of analyses returned from performing the intended resource move analysis. The analysis is grouped by different Cloud services.
+          items:
+            $ref: "#/components/schemas/MoveAnalysis"
           type: array
       type: object
     Asset:
@@ -1823,6 +1883,40 @@ components:
           items:
             $ref: "#/components/schemas/Feed"
           type: array
+      type: object
+    MoveAnalysis:
+      description: A message to group the analysis information.
+      properties:
+        analysis:
+          $ref: "#/components/schemas/MoveAnalysisResult"
+          description: Analysis result of moving the target resource.
+        displayName:
+          description: The user friendly display name of the analysis. E.g. IAM, Organization Policy etc.
+          type: string
+        error:
+          $ref: "#/components/schemas/Status"
+          description: Description of error encountered when performing the analysis.
+      type: object
+    MoveAnalysisResult:
+      description: An analysis result including blockers and warnings.
+      properties:
+        blockers:
+          description: Blocking information that would prevent the target resource from moving to the specified destination at runtime.
+          items:
+            $ref: "#/components/schemas/MoveImpact"
+          type: array
+        warnings:
+          description: Warning information indicating that moving the target resource to the specified destination might be unsafe. This can include important policy information and configuration changes, but will not block moves at runtime.
+          items:
+            $ref: "#/components/schemas/MoveImpact"
+          type: array
+      type: object
+    MoveImpact:
+      description: A message to group impacts of moving the target resource.
+      properties:
+        detail:
+          description: User friendly impact detail in a free form message.
+          type: string
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.

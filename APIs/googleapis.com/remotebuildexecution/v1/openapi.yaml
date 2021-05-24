@@ -799,6 +799,7 @@ components:
             - CONFIG_NONE
             - CONFIG_MATCH
             - CONFIG_MISMATCH
+            - CONFIG_MISSING_CONTAINER
           type: string
         dockerCacheHit:
           description: Indicates whether we are using a cached Docker image (true) or had to pull the Docker image (false) for this command.
@@ -881,6 +882,7 @@ components:
             - LOCAL_CONTAINER_MANAGER_NOT_RUNNING
             - DOCKER_IMAGE_VPCSC_PERMISSION_DENIED
             - WORKING_DIR_NOT_RELATIVE
+            - DOCKER_MISSING_CONTAINER
           type: string
         message:
           description: The error message.
@@ -896,6 +898,29 @@ components:
           $ref: "#/components/schemas/GoogleDevtoolsRemotebuildbotResourceUsageStat"
         memoryUsage:
           $ref: "#/components/schemas/GoogleDevtoolsRemotebuildbotResourceUsageStat"
+        totalDiskIoStats:
+          $ref: "#/components/schemas/GoogleDevtoolsRemotebuildbotResourceUsageIOStats"
+      type: object
+    GoogleDevtoolsRemotebuildbotResourceUsageIOStats:
+      properties:
+        readBytesCount:
+          format: uint64
+          type: string
+        readCount:
+          format: uint64
+          type: string
+        readTimeMs:
+          format: uint64
+          type: string
+        writeBytesCount:
+          format: uint64
+          type: string
+        writeCount:
+          format: uint64
+          type: string
+        writeTimeMs:
+          format: uint64
+          type: string
       type: object
     GoogleDevtoolsRemotebuildbotResourceUsageStat:
       properties:

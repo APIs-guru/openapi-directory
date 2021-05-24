@@ -489,7 +489,9 @@ components:
         sizeType:
           description: The size type of the product. For more information, see
             https://support.google.com/manufacturers/answer/6124116#sizetype.
-          type: string
+          items:
+            type: string
+          type: array
         suggestedRetailPrice:
           $ref: "#/components/schemas/Price"
           description: The suggested retail price (MSRP) of the product. For more

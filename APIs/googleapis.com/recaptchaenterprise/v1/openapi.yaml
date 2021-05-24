@@ -104,7 +104,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The mask to control which field of the key get updated.
+        - description: Optional. The mask to control which fields of the key get updated.
             If the mask is not present, all fields will be updated.
           in: query
           name: updateMask
@@ -192,7 +192,10 @@ paths:
     post:
       description: Migrates an existing key from reCAPTCHA to reCAPTCHA Enterprise.
         Once a key is migrated, it can be used from either product. SiteVerify
-        requests will be billed as CreateAssessment calls.
+        requests are billed as CreateAssessment calls. You must be authenticated
+        as one of the current owners of the reCAPTCHA Site Key, and your user
+        must have the reCAPTCHA Enterprise Admin IAM role in the destination
+        project.
       operationId: recaptchaenterprise.projects.keys.migrate
       parameters:
         - description: Required. The name of the key to be migrated, in the format

@@ -40908,6 +40908,13 @@ components:
     AccessConfig:
       description: An access configuration attached to an instance's network interface. Only one access config per instance is supported.
       properties:
+        externalIpv6:
+          description: "[Output Only] The first IPv6 address of the external IPv6 range associated with this instance, prefix length is stored in externalIpv6PrefixLength in ipv6AccessConfig. The field is output only, an IPv6 address from a subnetwork associated with the instance will be allocated dynamically."
+          type: string
+        externalIpv6PrefixLength:
+          description: "[Output Only] The prefix length of the external IPv6 range."
+          format: int32
+          type: integer
         kind:
           default: compute#accessConfig
           description: "[Output Only] Type of the resource. Always compute#accessConfig for access configs."
@@ -40939,6 +40946,7 @@ components:
           default: ONE_TO_ONE_NAT
           description: The type of configuration. The default and only option is ONE_TO_ONE_NAT.
           enum:
+            - DIRECT_IPV6
             - ONE_TO_ONE_NAT
           type: string
       type: object
@@ -42436,14 +42444,6 @@ components:
           description: Cloud CDN configuration for this BackendService. Only available for  external HTTP(S) Load Balancing.
         circuitBreakers:
           $ref: "#/components/schemas/CircuitBreakers"
-          description: |-
-            Settings controlling the volume of connections to a backend service. If not set, this feature is considered disabled.
-
-            This field is applicable to either:  
-            - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. 
-            - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED.  
-
-            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         connectionDraining:
           $ref: "#/components/schemas/ConnectionDraining"
         connectionTrackingPolicy:
@@ -42546,6 +42546,7 @@ components:
           description: |-
             Specifies the default maximum duration (timeout) for streams to this service. Duration is computed from the beginning of the stream until the response has been completely processed, including all retries. A stream that does not complete in this duration is closed.
             If not specified, there will be no timeout limit, i.e. the maximum duration is infinite.
+            This value can be overridden in the PathMatcher configuration of the UrlMap that references this backend service.
             This field is only allowed when the loadBalancingScheme of the backend service is INTERNAL_SELF_MANAGED.
         name:
           description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
@@ -42594,6 +42595,7 @@ components:
             - SSL
             - TCP
             - UDP
+            - UNSPECIFIED
           type: string
         region:
           description: "[Output Only] URL of the region where the regional backend service resides. This field is not applicable to global backend services. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
@@ -42634,7 +42636,7 @@ components:
         subsetting:
           $ref: "#/components/schemas/Subsetting"
         timeoutSec:
-          description: The backend service timeout has a different meaning depending on the type of load balancer. For more information see,  Backend service settings The default is 30 seconds. The full range of timeout values allowed is 1 - 2,147,483,647 seconds.
+          description: Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. Instead, use maxStreamDuration.
           format: int32
           type: integer
       type: object
@@ -43240,6 +43242,7 @@ components:
           type: string
       type: object
     BulkInsertInstanceResource:
+      description: A transient resource used in compute.instances.bulkInsert and compute.regionInstances.bulkInsert and compute.regionInstances.recommendLocations. This resource is not persisted anywhere, it is used only for processing the requests.
       properties:
         count:
           description: The maximum number of instances to create.
@@ -43330,11 +43333,11 @@ components:
           $ref: "#/components/schemas/Duration"
           description: The timeout for new network connections to hosts.
         maxConnections:
-          description: The maximum number of connections to the backend service. If not specified, there is no limit.
+          description: Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           format: int32
           type: integer
         maxPendingRequests:
-          description: The maximum number of pending requests allowed to the backend service. If not specified, there is no limit.
+          description: Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           format: int32
           type: integer
         maxRequests:
@@ -43342,11 +43345,11 @@ components:
           format: int32
           type: integer
         maxRequestsPerConnection:
-          description: Maximum requests for a single connection to the backend service. This parameter is respected by both the HTTP/1.1 and HTTP/2 implementations. If not specified, there is no limit. Setting this parameter to 1 will effectively disable keep alive.
+          description: Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           format: int32
           type: integer
         maxRetries:
-          description: The maximum number of parallel retries allowed to the backend cluster. If not specified, the default is 1.
+          description: Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           format: int32
           type: integer
       type: object
@@ -45406,27 +45409,30 @@ components:
           description: |-
             The IP protocol to which this rule applies.
 
-            For protocol forwarding, valid options are TCP, UDP, ESP, AH, SCTP and ICMP.
+            For protocol forwarding, valid options are TCP, UDP, ESP, AH, SCTP, ICMP and L3_DEFAULT.
 
             The valid IP protocols are different for different load balancing products:  
-            - Internal TCP/UDP Load Balancing: The load balancing scheme is INTERNAL, and one of TCP, UDP or ALL is valid. 
+            - Internal TCP/UDP Load Balancing: The load balancing scheme is INTERNAL, and one of TCP, UDP or L3_DEFAULT is valid. 
             - Traffic Director: The load balancing scheme is INTERNAL_SELF_MANAGED, and only TCP is valid.  
             - Internal HTTP(S) Load Balancing: The load balancing scheme is INTERNAL_MANAGED, and only TCP is valid. 
             - HTTP(S), SSL Proxy, and TCP Proxy Load Balancing: The load balancing scheme is EXTERNAL and only TCP is valid. 
-            - Network Load Balancing: The load balancing scheme is EXTERNAL, and one of TCP or UDP is valid.
+            - Network Load Balancing: The load balancing scheme is EXTERNAL, and one of TCP, UDP or L3_DEFAULT is valid.
           enum:
             - AH
             - ESP
             - ICMP
+            - L3_DEFAULT
             - SCTP
             - TCP
             - UDP
           type: string
         allPorts:
           description: |-
-            This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. This field cannot be used with port or portRange fields.
+            This field is used along with the backend_service field for Internal TCP/UDP Load Balancing or Network Load Balancing, or with the target field for internal and external TargetInstance.
 
-            When the load balancing scheme is INTERNAL and protocol is TCP/UDP, specify this field to allow packets addressed to any ports will be forwarded to the backends configured with this forwarding rule.
+            You can only use one of ports and port_range, or allPorts. The three are mutually exclusive.
+
+            For TCP, UDP and SCTP traffic, packets addressed to any ports will be forwarded to the target or backendService.
           type: boolean
         allowGlobalAccess:
           description: This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. If the field is set to TRUE, clients can access ILB from all regions. Otherwise only allows access from clients in the same region as the internal load balancer.
@@ -45536,9 +45542,15 @@ components:
           type: string
         portRange:
           description: |-
-            This field can be used only if: * Load balancing scheme is one of EXTERNAL,  INTERNAL_SELF_MANAGED or INTERNAL_MANAGED, and * IPProtocol is one of TCP, UDP, or SCTP.
+            This field can be used only if:  
+            - Load balancing scheme is one of EXTERNAL,  INTERNAL_SELF_MANAGED or INTERNAL_MANAGED 
+            - IPProtocol is one of TCP, UDP, or SCTP.  
 
-            Packets addressed to ports in the specified range will be forwarded to target or  backend_service. You can only use one of ports, port_range, or allPorts. The three are mutually exclusive. Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint port ranges.
+            Packets addressed to ports in the specified range will be forwarded to target or  backend_service.
+
+            You can only use one of ports, port_range, or allPorts. The three are mutually exclusive.
+
+            Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint ports.
 
             Some types of forwarding target have constraints on the acceptable ports:  
             - TargetHttpProxy: 80, 8080 
@@ -45556,7 +45568,7 @@ components:
 
             You can specify a list of up to five ports, which can be non-contiguous.
 
-            For Internal TCP/UDP Load Balancing, if you specify allPorts, you should not specify ports.
+            Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint ports.
 
             For more information, see [Port specifications](/load-balancing/docs/forwarding-rule-concepts#port_specifications).
           items:
@@ -45565,6 +45577,14 @@ components:
         pscConnectionId:
           description: "[Output Only] The PSC connection id of the PSC Forwarding Rule."
           format: uint64
+          type: string
+        pscConnectionStatus:
+          enum:
+            - ACCEPTED
+            - CLOSED
+            - PENDING
+            - REJECTED
+            - STATUS_UNSPECIFIED
           type: string
         region:
           description: "[Output Only] URL of the region where the regional forwarding rule resides. This field is not applicable to global forwarding rules. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
@@ -46290,7 +46310,7 @@ components:
           format: byte
           type: string
         healthChecks:
-          description: List of URLs to the HealthCheck resources. Must have at least one HealthCheck, and not more than 10. HealthCheck resources must have portSpecification=USE_SERVING_PORT. For regional HealthCheckService, the HealthCheck must be regional and in the same region. For global HealthCheckService, HealthCheck must be global. Mix of regional and global HealthChecks is not supported. Multiple regional HealthChecks must belong to the same region. Regional HealthChecks</code? must belong to the same region as zones of NEGs.
+          description: List of URLs to the HealthCheck resources. Must have at least one HealthCheck, and not more than 10. HealthCheck resources must have portSpecification=USE_SERVING_PORT or portSpecification=USE_FIXED_PORT. For regional HealthCheckService, the HealthCheck must be regional and in the same region. For global HealthCheckService, HealthCheck must be global. Mix of regional and global HealthChecks is not supported. Multiple regional HealthChecks must belong to the same region. Regional HealthChecks must belong to the same region as zones of NEGs.
           items:
             type: string
           type: array
@@ -46645,6 +46665,7 @@ components:
           description: |-
             The HTTP status code used to abort the request.
             The value must be between 200 and 599 inclusive.
+            For gRPC protocol, the gRPC status code is mapped to HTTP status code according to this  mapping table. HTTP status 200 is mapped to gRPC status UNKNOWN. Injecting an OK status is currently not supported by Traffic Director.
           format: uint32
           type: integer
         percentage:
@@ -46994,7 +47015,7 @@ components:
             If not specified, will use the timeout set in HttpRouteAction. If timeout in HttpRouteAction is not set, will use the largest timeout among all backend services associated with the route.
         retryConditions:
           description: |-
-            Specfies one or more conditions when this retry rule applies. Valid values are:  
+            Specifies one or more conditions when this retry rule applies. Valid values are:  
             - 5xx: Loadbalancer will attempt a retry if the backend service responds with any 5xx response code, or if the backend service does not respond at all, example: disconnects, reset, read timeout, connection failure, and refused streams. 
             - gateway-error: Similar to 5xx, but only applies to response codes 502, 503 or 504.
             - 
@@ -47021,7 +47042,6 @@ components:
           description: |-
             The specification for fault injection introduced into traffic to test the resiliency of clients to backend service failure. As part of fault injection, when clients send requests to a backend service, delays can be introduced by Loadbalancer on a percentage of requests before sending those request to the backend service. Similarly requests from clients can be aborted by the Loadbalancer for a percentage of requests.
             timeout and retry_policy will be ignored by clients that are configured with a fault_injection_policy.
-            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
         maxStreamDuration:
           $ref: "#/components/schemas/Duration"
           description: |-
@@ -47384,7 +47404,14 @@ components:
               pattern: "[a-f0-9]{40}"
               type: string
             source:
-              description: The full Google Cloud Storage URL where the disk image is stored. You must provide either this property or the sourceDisk property but not both.
+              description: |-
+                The full Google Cloud Storage URL where the disk image is stored.
+
+                In order to create an image, you must provide the full or partial URL of one of the following:  
+                - The rawDisk.source URL  
+                - The sourceDisk URL  
+                - The sourceImage URL  
+                - The sourceSnapshot URL
               type: string
           type: object
         satisfiesPzs:
@@ -47398,10 +47425,16 @@ components:
           description: Set the secure boot keys of shielded instance.
         sourceDisk:
           description: |-
-            URL of the source disk used to create this image. This can be a full or valid partial URL. You must provide either this property or the rawDisk.source property but not both to create an image. For example, the following are valid values:  
+            URL of the source disk used to create this image. For example, the following are valid values:  
             - https://www.googleapis.com/compute/v1/projects/project/zones/zone/disks/disk 
             - projects/project/zones/zone/disks/disk 
-            - zones/zone/disks/disk
+            - zones/zone/disks/disk 
+
+            In order to create an image, you must provide the full or partial URL of one of the following:  
+            - The rawDisk.source URL  
+            - The sourceDisk URL  
+            - The sourceImage URL  
+            - The sourceSnapshot URL
           type: string
         sourceDiskEncryptionKey:
           $ref: "#/components/schemas/CustomerEncryptionKey"
@@ -47414,10 +47447,10 @@ components:
             URL of the source image used to create this image.
 
             In order to create an image, you must provide the full or partial URL of one of the following:  
-            - The selfLink URL  
-            - This property  
             - The rawDisk.source URL  
-            - The sourceDisk URL
+            - The sourceDisk URL  
+            - The sourceImage URL  
+            - The sourceSnapshot URL
           type: string
         sourceImageEncryptionKey:
           $ref: "#/components/schemas/CustomerEncryptionKey"
@@ -47430,11 +47463,10 @@ components:
             URL of the source snapshot used to create this image.
 
             In order to create an image, you must provide the full or partial URL of one of the following:  
-            - The selfLink URL  
-            - This property 
-            - The sourceImage URL  
             - The rawDisk.source URL  
-            - The sourceDisk URL
+            - The sourceDisk URL  
+            - The sourceImage URL  
+            - The sourceSnapshot URL
           type: string
         sourceSnapshotEncryptionKey:
           $ref: "#/components/schemas/CustomerEncryptionKey"
@@ -48052,6 +48084,8 @@ components:
       type: object
     InstanceGroupManager:
       description: |-
+        Whether the instance is a standby. Properties of a standby instance comparing to the regular instance: ========================================================================= | regular | standby ========================================================================= managed by IGM? | yes | yes added to the IG? | yes | yes counts towards IGM's target size? | yes | no taken into account by Autoscaler? | yes | no receives traffic from LB? | yes | no =========================================================================
+
         Represents a Managed Instance Group resource.
 
         An instance group is a collection of VM instances that you can manage as a single entity. For more information, read Instance groups.
@@ -50730,7 +50764,7 @@ components:
     LocationPolicyLocation:
       properties:
         preference:
-          description: "Preference for a given locaction: ALLOW or DENY."
+          description: "Preference for a given location: ALLOW or DENY."
           enum:
             - ALLOW
             - DENY
@@ -52013,6 +52047,20 @@ components:
           description: Fingerprint hash of contents stored in this network interface. This field will be ignored when inserting an Instance or adding a NetworkInterface. An up-to-date fingerprint must be provided in order to update the NetworkInterface. The request will fail with error 400 Bad Request if the fingerprint is not provided, or 412 Precondition Failed if the fingerprint is out of date.
           format: byte
           type: string
+        ipv6AccessConfigs:
+          description: An array of IPv6 access configurations for this interface. Currently, only one IPv6 access config, DIRECT_IPV6, is supported. If there is no ipv6AccessConfig specified, then this instance will have no external IPv6 Internet access.
+          items:
+            $ref: "#/components/schemas/AccessConfig"
+          type: array
+        ipv6AccessType:
+          description: |-
+            [Output Only] One of EXTERNAL, INTERNAL to indicate whether the IP can be accessed from the Internet. This field is always inherited from its subnetwork.
+
+            Valid only if stackType is IPV4_IPV6.
+          enum:
+            - EXTERNAL
+            - UNSPECIFIED_IPV6_ACCESS_TYPE
+          type: string
         ipv6Address:
           description: "[Output Only] An IPv6 internal network address for this network interface."
           type: string
@@ -52041,6 +52089,16 @@ components:
             - GVNIC
             - UNSPECIFIED_NIC_TYPE
             - VIRTIO_NET
+          type: string
+        stackType:
+          description: |-
+            The stack type for this network interface to identify whether the IPv6 feature is enabled or not. If not specified, IPV4_ONLY will be used.
+
+            This field can be both set at instance creation and update network interface operations.
+          enum:
+            - IPV4_IPV6
+            - IPV4_ONLY
+            - UNSPECIFIED_STACK_TYPE
           type: string
         subnetwork:
           description: |-
@@ -55042,8 +55100,10 @@ components:
             - ROUTERS
             - ROUTES
             - SECURITY_POLICIES
+            - SECURITY_POLICIES_PER_REGION
             - SECURITY_POLICY_CEVAL_RULES
             - SECURITY_POLICY_RULES
+            - SECURITY_POLICY_RULES_PER_REGION
             - SNAPSHOTS
             - SSD_TOTAL_GB
             - SSL_CERTIFICATES
@@ -57673,7 +57733,7 @@ components:
           type: string
       type: object
     Scheduling:
-      description: "Sets the scheduling options for an Instance. NextID: 20"
+      description: "Sets the scheduling options for an Instance. NextID: 21"
       properties:
         automaticRestart:
           description: |-
@@ -58401,7 +58461,7 @@ components:
       type: object
     ServiceAttachmentsScopedList:
       properties:
-        resources:
+        serviceAttachments:
           description: A list of ServiceAttachments contained in this scope.
           items:
             $ref: "#/components/schemas/ServiceAttachment"
@@ -59392,6 +59452,9 @@ components:
         enableFlowLogs:
           description: Whether to enable flow logging for this subnetwork. If this field is not explicitly set, it will not appear in get listings. If not set the default behavior is to disable flow logging. This field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
           type: boolean
+        externalIpv6Prefix:
+          description: "[Output Only] The range of external IPv6 addresses that are owned by this subnetwork."
+          type: string
         fingerprint:
           description: |-
             Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a Subnetwork. An up-to-date fingerprint must be provided in order to update the Subnetwork, otherwise the request will fail with error 412 conditionNotMet.
@@ -59408,6 +59471,12 @@ components:
           type: string
         ipCidrRange:
           description: The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 100.64.0.0/10. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported. This field is set at resource creation time. The range can be any range listed in the Valid ranges list. The range can be expanded after creation using expandIpCidrRange.
+          type: string
+        ipv6AccessType:
+          description: The access type of IPv6 address this subnet holds. It's immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack. If the ipv6_type is EXTERNAL then this subnet cannot enable direct path.
+          enum:
+            - EXTERNAL
+            - UNSPECIFIED_IPV6_ACCESS_TYPE
           type: string
         ipv6CidrRange:
           description: "[Output Only] The range of internal IPv6 addresses that are owned by this subnetwork."
@@ -59463,6 +59532,16 @@ components:
           type: array
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
+          type: string
+        stackType:
+          description: |-
+            The stack type for this subnet to identify whether the IPv6 feature is enabled or not. If not specified IPV4_ONLY will be used.
+
+            This field can be both set at resource creation time and updated using patch.
+          enum:
+            - IPV4_IPV6
+            - IPV4_ONLY
+            - UNSPECIFIED_STACK_TYPE
           type: string
         state:
           description: "[Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY"
@@ -60247,7 +60326,7 @@ components:
     TargetHttpsProxiesSetSslCertificatesRequest:
       properties:
         sslCertificates:
-          description: New set of SslCertificate resources to associate with this TargetHttpsProxy resource. Currently exactly one SslCertificate resource must be specified.
+          description: New set of SslCertificate resources to associate with this TargetHttpsProxy resource. At least one SSL certificate must be specified. Currently, you may specify up to 15 SSL certificates.
           items:
             type: string
           type: array
@@ -60342,7 +60421,7 @@ components:
             Note: This field currently has no impact.
           type: string
         sslCertificates:
-          description: URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. Currently, you may specify up to 15 SSL certificates.
+          description: URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. Currently, you may specify up to 15 SSL certificates. sslCertificates do not apply when the load balancing scheme is set to INTERNAL_SELF_MANAGED.
           items:
             type: string
           type: array
@@ -61114,7 +61193,7 @@ components:
     TargetSslProxiesSetSslCertificatesRequest:
       properties:
         sslCertificates:
-          description: New set of URLs to SslCertificate resources to associate with this TargetSslProxy. Currently exactly one ssl certificate must be specified.
+          description: New set of URLs to SslCertificate resources to associate with this TargetSslProxy. At least one SSL certificate must be specified. Currently, you may specify up to 15 SSL certificates.
           items:
             type: string
           type: array
@@ -61156,7 +61235,7 @@ components:
           description: URL to the BackendService resource.
           type: string
         sslCertificates:
-          description: URLs to SslCertificate resources that are used to authenticate connections to Backends. At least one SSL certificate must be specified. Currently, you may specify up to 15 SSL certificates.
+          description: URLs to SslCertificate resources that are used to authenticate connections to Backends. At least one SSL certificate must be specified. Currently, you may specify up to 15 SSL certificates. sslCertificates do not apply when the load balancing scheme is set to INTERNAL_SELF_MANAGED.
           items:
             type: string
           type: array

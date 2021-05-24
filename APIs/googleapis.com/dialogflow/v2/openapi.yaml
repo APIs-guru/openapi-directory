@@ -1634,7 +1634,7 @@ paths:
       description: Returns the list of all intents in the specified agent.
       operationId: dialogflow.projects.locations.agent.intents.list
       parameters:
-        - description: "Required. The agent to list all intents from. Format: `projects//agent`."
+        - description: "Required. The agent to list all intents from. Format: `projects//agent` or `projects//locations//agent`. Alternatively, you can specify the environment to list intents for. Format: `projects//agent/environments/` or `projects//locations//agent/environments/`. Note: training phrases of the intents will not be returned for non-draft environment."
           in: path
           name: parent
           required: true
@@ -4627,7 +4627,7 @@ components:
       properties:
         detectIntentResponse:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2DetectIntentResponse"
-          description: Response of the Dialogflow Sessions.DetectIntent call.
+          description: Required. Response of the Dialogflow Sessions.DetectIntent call.
       type: object
     GoogleCloudDialogflowV2BatchCreateEntitiesRequest:
       description: The request message for EntityTypes.BatchCreateEntities.

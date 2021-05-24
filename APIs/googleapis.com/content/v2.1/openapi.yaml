@@ -1400,7 +1400,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of links to return in the response, used for pagination.
+        - description: The maximum number of links to return in the response, used for pagination. The minimum allowed value is 5 results per page. If provided value is lower than 5, it will be automatically increased to 5.
           in: query
           name: maxResults
           schema:
@@ -4758,6 +4758,46 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates an existing product in your Merchant Center account. Only updates attributes provided in the request.
+      operationId: content.products.update
+      parameters:
+        - description: The ID of the account that contains the product. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The REST ID of the product for which to update.
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: The list of product attributes to be updated. Attributes specified in the update mask without a value specified in the body will be deleted from the product. Only top-level product attributes can be updated. If not defined, product attributes with set values will be updated and other attributes will stay unchanged.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - products
   "/{merchantId}/products/{productId}/localinventory":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -9512,7 +9552,7 @@ components:
           $ref: "#/components/schemas/PriceAmount"
           description: The shipping fee of the order; this value should be set to zero in the case of free shipping.
         deliveryPostalCode:
-          description: Required. The delivery postal code, as a continuous string without spaces or dashes, e.g. "95016".
+          description: Required. The delivery postal code, as a continuous string without spaces or dashes, e.g. "95016". This field will be anonymized in returned OrderTrackingSignal creation response.
           type: string
         deliveryRegionCode:
           description: Required. The [CLDR territory code] (http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) for the shipping destination.
@@ -9530,7 +9570,7 @@ components:
           $ref: "#/components/schemas/DateTime"
           description: Required. The time when the order was created on the merchant side. Include the year and timezone string, if available.
         orderId:
-          description: Required. The ID of the order on the merchant side.
+          description: Required. The ID of the order on the merchant side. This field will be hashed in returned OrderTrackingSignal creation response.
           type: string
         orderTrackingSignalId:
           description: Output only. The ID that uniquely identifies this order tracking signal.
@@ -9579,7 +9619,7 @@ components:
           format: int64
           type: string
         shipmentId:
-          description: Required. The shipment ID.
+          description: Required. The shipment ID. This field will be hashed in returned OrderTrackingSignal creation response.
           type: string
       type: object
     OrderTrackingSignalShippingInfo:
@@ -9601,13 +9641,13 @@ components:
           $ref: "#/components/schemas/DateTime"
           description: "The latest delivery promised time. Include the year and timezone string, if available. This field is required, if one of the following fields is absent: tracking_id or carrier_name."
         originPostalCode:
-          description: The origin postal code, as a continuous string without spaces or dashes, e.g. "95016".
+          description: The origin postal code, as a continuous string without spaces or dashes, e.g. "95016". This field will be anonymized in returned OrderTrackingSignal creation response.
           type: string
         originRegionCode:
           description: The [CLDR territory code] (http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) for the shipping origin.
           type: string
         shipmentId:
-          description: Required. The shipment ID.
+          description: Required. The shipment ID. This field will be hashed in returned OrderTrackingSignal creation response.
           type: string
         shippedTime:
           $ref: "#/components/schemas/DateTime"
@@ -9774,7 +9814,10 @@ components:
     OrderreturnsLineItem:
       properties:
         lineItemId:
-          description: The ID of the line item. This value is assigned by Google when an order is created.
+          description: The ID of the line item. This value is assigned by Google when an order is created. Either lineItemId or productId is required.
+          type: string
+        productId:
+          description: The ID of the product to cancel. This is the REST ID used in the products service. Either lineItemId or productId is required.
           type: string
         quantity:
           description: The quantity of this line item.
@@ -10770,7 +10813,7 @@ components:
           type: string
       type: object
     Product:
-      description: " Required product attributes are primarily defined by the products data specification. See the Products Data Specification Help Center article for information. Some attributes are country-specific, so make sure you select the appropriate country in the drop-down selector at the top of the page. Product data. After inserting, updating, or deleting a product, it may take several minutes before changes take effect."
+      description: " Required product attributes are primarily defined by the products data specification. See the Products Data Specification Help Center article for information. Product data. After inserting, updating, or deleting a product, it may take several minutes before changes take effect."
       properties:
         additionalImageLinks:
           description: Additional URLs of images of the item.
@@ -11305,13 +11348,17 @@ components:
           format: uint64
           type: string
         method:
-          description: 'The method of the batch entry. Acceptable values are: - "`delete`" - "`get`" - "`insert`" '
+          description: 'The method of the batch entry. Acceptable values are: - "`delete`" - "`get`" - "`insert`" - "`update`" '
           type: string
         product:
           $ref: "#/components/schemas/Product"
           description: The product to insert. Only required if the method is `insert`.
         productId:
           description: The ID of the product to get or delete. Only defined if the method is `get` or `delete`.
+          type: string
+        updateMask:
+          description: The list of product attributes to be updated. Attributes specified in the update mask without a value specified in the body will be deleted from the product. Only top-level product attributes can be updated. If not defined, product attributes with set values will be updated and other attributes will stay unchanged. Only defined if the method is `update`.
+          format: google-fieldmask
           type: string
       type: object
     ProductsCustomBatchResponse:
@@ -11645,7 +11692,7 @@ components:
           type: string
         buyboxWinningProductStats:
           $ref: "#/components/schemas/RepricingProductReportBuyboxWinningProductStats"
-          description: Stats specific to buybox winning rules for product report.
+          description: Stats specific to buybox winning rules for product report (deprecated).
         date:
           $ref: "#/components/schemas/Date"
           description: Date of the stats in this report. The report starts and ends according to the merchant's timezone.
@@ -11804,7 +11851,7 @@ components:
       properties:
         buyboxWinningRuleStats:
           $ref: "#/components/schemas/RepricingRuleReportBuyboxWinningRuleStats"
-          description: Stats specific to buybox winning rules for rule report.
+          description: Stats specific to buybox winning rules for rule report (deprecated).
         date:
           $ref: "#/components/schemas/Date"
           description: Date of the stats in this report. The report starts and ends according to the merchant's timezone.

@@ -724,6 +724,11 @@ components:
         address:
           description: "Optional. An IPv4 or IPv6 address. Service Directory rejects bad addresses like: * `8.8.8` * `8.8.8.8:53` * `test:bad:address` * `[::1]` * `[::1]:8080` Limited to 45 characters."
           type: string
+        createTime:
+          description: Output only. The timestamp when the endpoint was created.
+          format: google-datetime
+          readOnly: true
+          type: string
         metadata:
           additionalProperties:
             type: string
@@ -739,6 +744,11 @@ components:
           description: Optional. Service Directory rejects values outside of `[0, 65535]`.
           format: int32
           type: integer
+        updateTime:
+          description: Output only. The timestamp when the endpoint was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
       type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
@@ -845,6 +855,11 @@ components:
     Namespace:
       description: A container for services. Namespaces allow administrators to group services together and define permissions for a collection of services.
       properties:
+        createTime:
+          description: Output only. The timestamp when the namespace was created.
+          format: google-datetime
+          readOnly: true
+          type: string
         labels:
           additionalProperties:
             type: string
@@ -852,6 +867,11 @@ components:
           type: object
         name:
           description: Immutable. The resource name for the namespace in the format `projects/*/locations/*/namespaces/*`.
+          type: string
+        updateTime:
+          description: Output only. The timestamp when the namespace was last updated.
+          format: google-datetime
+          readOnly: true
           type: string
       type: object
     Policy:
@@ -891,6 +911,11 @@ components:
     Service:
       description: An individual service. A service contains a name and optional metadata. A service must exist before endpoints can be added to it.
       properties:
+        createTime:
+          description: Output only. The timestamp when the service was created.
+          format: google-datetime
+          readOnly: true
+          type: string
         endpoints:
           description: Output only. Endpoints associated with this service. Returned on LookupService.ResolveService. Control plane clients should use RegistrationService.ListEndpoints.
           items:
@@ -904,6 +929,11 @@ components:
           type: object
         name:
           description: Immutable. The resource name for the service in the format `projects/*/locations/*/namespaces/*/services/*`.
+          type: string
+        updateTime:
+          description: "Output only. The timestamp when the service was last updated. Note: endpoints being created/deleted/updated within the service are not considered service updates for the purpose of this timestamp."
+          format: google-datetime
+          readOnly: true
           type: string
       type: object
     SetIamPolicyRequest:

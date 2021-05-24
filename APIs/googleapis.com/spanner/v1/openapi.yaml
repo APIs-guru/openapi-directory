@@ -35,6 +35,7 @@ externalDocs:
   url: https://cloud.google.com/spanner/
 tags:
   - name: projects
+  - name: scans
 paths:
   "/v1/{database}":
     delete:
@@ -458,6 +459,74 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
+  "/v1/{name}/scans":
+    get:
+      description: Request a specific scan with Database-specific data for Cloud Key
+        Visualizer.
+      operationId: spanner.projects.instances.databases.getScans
+      parameters:
+        - description: Required. The unique name of the scan containing the requested
+            information, specific to the Database service implementing this
+            interface.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The upper bound for the time range to retrieve Scan data for.
+          in: query
+          name: endTime
+          schema:
+            type: string
+        - description: These fields restrict the Database-specific information returned in
+            the `Scan.data` field. If a `View` is provided that does not include
+            the `Scan.data` field, these are ignored. This range of time must be
+            entirely contained within the defined time range of the targeted
+            scan. The lower bound for the time range to retrieve Scan data for.
+          in: query
+          name: startTime
+          schema:
+            type: string
+        - description: Specifies which parts of the Scan should be returned in the
+            response. Note, if left unspecified, the FULL view is assumed.
+          in: query
+          name: view
+          schema:
+            enum:
+              - VIEW_UNSPECIFIED
+              - SUMMARY
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Scan"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/spanner.data
+          Oauth2c:
+            - https://www.googleapis.com/auth/spanner.data
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -507,6 +576,77 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
+  "/v1/{parent}":
+    get:
+      description: Return available scans given a Database-specific resource name.
+      operationId: spanner.scans.list
+      parameters:
+        - description: Required. The unique name of the parent resource, specific to the
+            Database service implementing this interface.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: A filter expression to restrict the results based on information
+            present in the available Scan collection. The filter applies to all
+            fields within the Scan message except for `data`.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if
+            any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Specifies which parts of the Scan should be returned in the
+            response. Note, only the SUMMARY view (the default) is currently
+            supported for ListScans.
+          in: query
+          name: view
+          schema:
+            enum:
+              - VIEW_UNSPECIFIED
+              - SUMMARY
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListScansResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/spanner.data
+          Oauth2c:
+            - https://www.googleapis.com/auth/spanner.data
+      tags:
+        - scans
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/backupOperations":
     get:
       description: Lists the backup long-running operations in the given instance. A
@@ -2214,6 +2354,30 @@ components:
           format: int64
           type: string
       type: object
+    ContextValue:
+      description: A message representing context for a KeyRangeInfo, including a
+        label, value, unit, and severity.
+      properties:
+        label:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The label for the context value. e.g. "latency".
+        severity:
+          description: The severity of this context.
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - INFO
+            - WARNING
+            - ERROR
+            - FATAL
+          type: string
+        unit:
+          description: The unit of the context value.
+          type: string
+        value:
+          description: The value for the context.
+          format: float
+          type: number
+      type: object
     CreateBackupMetadata:
       description: Metadata type for the operation returned by CreateBackup.
       properties:
@@ -2392,6 +2556,47 @@ components:
         table:
           description: Required. The table whose rows will be deleted.
           type: string
+      type: object
+    DerivedMetric:
+      description: A message representing a derived metric.
+      properties:
+        denominator:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The name of the denominator metric. e.g. "rows".
+        numerator:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The name of the numerator metric. e.g. "latency".
+      type: object
+    DiagnosticMessage:
+      description: A message representing the key visualizer diagnostic messages.
+      properties:
+        info:
+          $ref: "#/components/schemas/LocalizedString"
+          description: Information about this diagnostic information.
+        metric:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The metric.
+        metricSpecific:
+          description: Whether this message is specific only for the current metric. By
+            default Diagnostics are shown for all metrics, regardless which
+            metric is the currently selected metric in the UI. However
+            occasionally a metric will generate so many messages that the
+            resulting visual clutter becomes overwhelming. In this case setting
+            this to true, will show the diagnostic messages for that metric only
+            if it is the currently selected metric.
+          type: boolean
+        severity:
+          description: The severity of the diagnostic message.
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - INFO
+            - WARNING
+            - ERROR
+            - FATAL
+          type: string
+        shortMessage:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The short message.
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining
@@ -2667,6 +2872,31 @@ components:
           format: int32
           type: integer
       type: object
+    IndexedHotKey:
+      description: A message representing a (sparse) collection of hot keys for
+        specific key buckets.
+      properties:
+        sparseHotKeys:
+          additionalProperties:
+            format: int32
+            type: integer
+          description: A (sparse) mapping from key bucket index to the index of the
+            specific hot row key for that key bucket. The index of the hot row
+            key can be translated to the actual row key via the
+            ScanData.VisualizationData.indexed_keys repeated field.
+          type: object
+      type: object
+    IndexedKeyRangeInfos:
+      description: A message representing a (sparse) collection of KeyRangeInfos for
+        specific key buckets.
+      properties:
+        keyRangeInfos:
+          additionalProperties:
+            $ref: "#/components/schemas/KeyRangeInfos"
+          description: A (sparse) mapping from key bucket index to the KeyRangeInfos for
+            that key bucket.
+          type: object
+      type: object
     Instance:
       description: An isolated set of Cloud Spanner resources on which databases can
         be hosted.
@@ -2814,6 +3044,57 @@ components:
           items: {}
           type: array
       type: object
+    KeyRangeInfo:
+      description: A message representing information for a key range (possibly one key).
+      properties:
+        contextValues:
+          description: The list of context values for this key range.
+          items:
+            $ref: "#/components/schemas/ContextValue"
+          type: array
+        endKeyIndex:
+          description: The index of the end key in indexed_keys.
+          format: int32
+          type: integer
+        info:
+          $ref: "#/components/schemas/LocalizedString"
+          description: Information about this key range, for all metrics.
+        keysCount:
+          description: The number of keys this range covers.
+          format: int64
+          type: string
+        metric:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The name of the metric. e.g. "latency".
+        startKeyIndex:
+          description: The index of the start key in indexed_keys.
+          format: int32
+          type: integer
+        unit:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The unit of the metric. This is an unstructured field and will be
+            mapped as is to the user.
+        value:
+          description: The value of the metric.
+          format: float
+          type: number
+      type: object
+    KeyRangeInfos:
+      description: A message representing a list of specific information for multiple
+        key ranges.
+      properties:
+        infos:
+          description: The list individual KeyRangeInfos.
+          items:
+            $ref: "#/components/schemas/KeyRangeInfo"
+          type: array
+        totalSize:
+          description: The total size of the list of all KeyRangeInfos. This may be larger
+            than the number of repeated messages above. If that is the case,
+            this number may be used to determine how many are not being shown.
+          format: int32
+          type: integer
+      type: object
     KeySet:
       description: "`KeySet` defines a collection of Cloud Spanner keys and/or key
         ranges. All the keys are expected to be in the same table or index. The
@@ -2953,6 +3234,19 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
       type: object
+    ListScansResponse:
+      description: Response method from the ListScans method.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are
+            no more results in the list.
+          type: string
+        scans:
+          description: Available scans based on the list query parameters.
+          items:
+            $ref: "#/components/schemas/Scan"
+          type: array
+      type: object
     ListSessionsResponse:
       description: The response for ListSessions.
       properties:
@@ -2964,6 +3258,103 @@ components:
           description: The list of requested sessions.
           items:
             $ref: "#/components/schemas/Session"
+          type: array
+      type: object
+    LocalizedString:
+      description: A message representing a user-facing string whose value may need to
+        be translated before being displayed.
+      properties:
+        args:
+          additionalProperties:
+            type: string
+          description: A map of arguments used when creating the localized message. Keys
+            represent parameter names which may be used by the localized version
+            when substituting dynamic values.
+          type: object
+        message:
+          description: The canonical English version of this message. If no token is
+            provided or the front-end has no message associated with the token,
+            this text will be displayed as-is.
+          type: string
+        token:
+          description: The token identifying the message, e.g. 'METRIC_READ_CPU'. This
+            should be unique within the service.
+          type: string
+      type: object
+    Metric:
+      description: A message representing the actual monitoring data, values for each
+        key bucket over time, of a metric.
+      properties:
+        aggregation:
+          description: The aggregation function used to aggregate each key bucket
+          enum:
+            - AGGREGATION_UNSPECIFIED
+            - MAX
+            - SUM
+          type: string
+        category:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The category of the metric, e.g. "Activity", "Alerts", "Reads", etc.
+        derived:
+          $ref: "#/components/schemas/DerivedMetric"
+          description: The references to numerator and denominator metrics for a derived
+            metric.
+        displayLabel:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The displayed label of the metric.
+        hasNonzeroData:
+          description: Whether the metric has any non-zero data.
+          type: boolean
+        hotValue:
+          description: The value that is considered hot for the metric. On a per metric
+            basis hotness signals high utilization and something that might
+            potentially be a cause for concern by the end user. hot_value is
+            used to calibrate and scale visual color scales.
+          format: float
+          type: number
+        indexedHotKeys:
+          additionalProperties:
+            $ref: "#/components/schemas/IndexedHotKey"
+          description: The (sparse) mapping from time index to an IndexedHotKey message,
+            representing those time intervals for which there are hot keys.
+          type: object
+        indexedKeyRangeInfos:
+          additionalProperties:
+            $ref: "#/components/schemas/IndexedKeyRangeInfos"
+          description: The (sparse) mapping from time interval index to an
+            IndexedKeyRangeInfos message, representing those time intervals for
+            which there are informational messages concerning key ranges.
+          type: object
+        info:
+          $ref: "#/components/schemas/LocalizedString"
+          description: Information about the metric.
+        matrix:
+          $ref: "#/components/schemas/MetricMatrix"
+          description: The data for the metric as a matrix.
+        unit:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The unit of the metric.
+        visible:
+          description: Whether the metric is visible to the end user.
+          type: boolean
+      type: object
+    MetricMatrix:
+      description: A message representing a matrix of floats.
+      properties:
+        rows:
+          description: The rows of the matrix.
+          items:
+            $ref: "#/components/schemas/MetricMatrixRow"
+          type: array
+      type: object
+    MetricMatrixRow:
+      description: A message representing a row of a matrix of floats.
+      properties:
+        cols:
+          description: The columns of the row.
+          items:
+            format: float
+            type: number
           type: array
       type: object
     Mutation:
@@ -3391,6 +3782,34 @@ components:
           format: int32
           type: integer
       type: object
+    PrefixNode:
+      description: A message representing a key prefix node in the key prefix
+        hierarchy. for eg. Bigtable keyspaces are lexicographically ordered
+        mappings of keys to values. Keys often have a shared prefix structure
+        where users use the keys to organize data. Eg ///employee In this case
+        Keysight will possibly use one node for a company and reuse it for all
+        employees that fall under the company. Doing so improves legibility in
+        the UI.
+      properties:
+        dataSourceNode:
+          description: Whether this corresponds to a data_source name.
+          type: boolean
+        depth:
+          description: The depth in the prefix hierarchy.
+          format: int32
+          type: integer
+        endIndex:
+          description: The index of the end key bucket of the range that this node spans.
+          format: int32
+          type: integer
+        startIndex:
+          description: The index of the start key bucket of the range that this node spans.
+          format: int32
+          type: integer
+        word:
+          description: The string represented by the prefix node.
+          type: string
+      type: object
     QueryOptions:
       description: Query optimizer configuration.
       properties:
@@ -3780,6 +4199,53 @@ components:
         transactionId:
           description: Required. The transaction to roll back.
           format: byte
+          type: string
+      type: object
+    Scan:
+      description: Scan is a structure which describes Cloud Key Visualizer scan
+        information.
+      properties:
+        details:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Additional information provided by the implementer.
+          type: object
+        endTime:
+          description: The upper bound for when the scan is defined.
+          format: google-datetime
+          type: string
+        name:
+          description: The unique name of the scan, specific to the Database service
+            implementing this interface.
+          type: string
+        scanData:
+          $ref: "#/components/schemas/ScanData"
+          description: Output only. Cloud Key Visualizer scan data. Note, this field is
+            not available to the ListScans method.
+          readOnly: true
+        startTime:
+          description: A range of time (inclusive) for when the scan is defined. The lower
+            bound for when the scan is defined.
+          format: google-datetime
+          type: string
+      type: object
+    ScanData:
+      description: ScanData contains Cloud Key Visualizer scan data used by the caller
+        to construct a visualization.
+      properties:
+        data:
+          $ref: "#/components/schemas/VisualizationData"
+          description: Cloud Key Visualizer scan data. The range of time this information
+            covers is captured via the above time range fields. Note, this field
+            is not available to the ListScans method.
+        endTime:
+          description: The upper bound for when the contained data is defined.
+          format: google-datetime
+          type: string
+        startTime:
+          description: A range of time (inclusive) for when the contained data is defined.
+            The lower bound for when the contained data is defined.
+          format: google-datetime
           type: string
       type: object
     Session:
@@ -4302,6 +4768,59 @@ components:
           description: Required. The instance to update, which must always include the
             instance name. Otherwise, only fields mentioned in field_mask need
             be included.
+      type: object
+    VisualizationData:
+      properties:
+        dataSourceEndToken:
+          description: The token signifying the end of a data_source.
+          type: string
+        dataSourceSeparatorToken:
+          description: The token delimiting a datasource name from the rest of a key in a
+            data_source.
+          type: string
+        diagnosticMessages:
+          description: The list of messages (info, alerts, ...)
+          items:
+            $ref: "#/components/schemas/DiagnosticMessage"
+          type: array
+        endKeyStrings:
+          description: We discretize the entire keyspace into buckets. Assuming each
+            bucket has an inclusive keyrange and covers keys from k(i) ... k(n).
+            In this case k(n) would be an end key for a given range.
+            end_key_string is the collection of all such end keys
+          items:
+            type: string
+          type: array
+        hasPii:
+          description: Whether this scan contains PII.
+          type: boolean
+        indexedKeys:
+          description: Keys of key ranges that contribute significantly to a given metric
+            Can be thought of as heavy hitters.
+          items:
+            type: string
+          type: array
+        keySeparator:
+          description: The token delimiting the key prefixes.
+          type: string
+        keyUnit:
+          description: "The unit for the key: e.g. 'key' or 'chunk'."
+          enum:
+            - KEY_UNIT_UNSPECIFIED
+            - KEY
+            - CHUNK
+          type: string
+        metrics:
+          description: The list of data objects for each metric.
+          items:
+            $ref: "#/components/schemas/Metric"
+          type: array
+        prefixNodes:
+          description: The list of extracted key prefix nodes used in the key prefix
+            hierarchy.
+          items:
+            $ref: "#/components/schemas/PrefixNode"
+          type: array
       type: object
     Write:
       description: Arguments to insert, update, insert_or_update, and replace operations.

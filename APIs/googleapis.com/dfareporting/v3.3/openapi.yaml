@@ -19,7 +19,7 @@ info:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
       url: https://dfareporting.googleapis.com/$discovery/rest?version=v3.3
@@ -12273,6 +12273,7 @@ components:
               - CLICK_TAG_IN_GWD
               - CLICK_TAG_HARD_CODED
               - SVG_INVALID
+              - CLICK_TAG_IN_RICH_MEDIA
             type: string
           type: array
       type: object
@@ -16760,6 +16761,7 @@ components:
             - SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT
             - ACCOUNT_ALWAYS
             - SUBACCOUNT_AND_ACCOUNT_ALWAYS
+            - USER_PROFILE_ONLY
           type: string
         id:
           description: ID of this user role permission.

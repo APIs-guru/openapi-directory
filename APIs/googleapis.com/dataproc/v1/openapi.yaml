@@ -1532,7 +1532,7 @@ components:
           description: Short description of the operation.
           type: string
         doneTime:
-          description: The time when the operation was finished.
+          description: The time when the operation finished.
           format: google-datetime
           type: string
         labels:
@@ -1806,7 +1806,7 @@ components:
           type: string
       type: object
     ConfidentialInstanceConfig:
-      description: "Confidential Instance Config for clusters using Confidential VMs (https://cloud.google.com/compute/confidential-vm/docs) NEXT ID: 2"
+      description: Confidential Instance Config for clusters using Confidential VMs (https://cloud.google.com/compute/confidential-vm/docs)
       properties:
         enableConfidentialCompute:
           description: Optional. Defines whether the instance should have confidential compute enabled.
@@ -1884,7 +1884,7 @@ components:
       properties:
         confidentialInstanceConfig:
           $ref: "#/components/schemas/ConfidentialInstanceConfig"
-          description: Optional. Confidential Instance Config for clusters using Confidential VMs (https://cloud.google.com/compute/confidential-vm/docs)
+          description: Optional. Confidential Instance Config for clusters using Confidential VMs (https://cloud.google.com/compute/confidential-vm/docs).
         internalIpOnly:
           description: Optional. If true, all instances in the cluster will only have internal IP addresses. By default, clusters are not restricted to internal IP addresses, and will have ephemeral external IP addresses assigned to each instance. This internal_ip_only restriction can only be enabled for subnetwork enabled networks, and all off-cluster dependencies must be configured to be accessible without external IP addresses.
           type: boolean

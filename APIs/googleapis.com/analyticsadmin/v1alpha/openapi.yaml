@@ -328,12 +328,15 @@ paths:
         - accounts
   "/v1alpha/{name}":
     delete:
-      description: Deletes a web stream on a property.
-      operationId: analyticsadmin.properties.webDataStreams.delete
+      description: Deletes target MeasurementProtocolSecret.
+      operationId: analyticsadmin.properties.webDataStreams.measurementProtocolSecrets.delete
       parameters:
-        - description: 'Required. The name of the web data stream to delete. Format:
-            properties/{property_id}/webDataStreams/{stream_id} Example:
-            "properties/123/webDataStreams/456"'
+        - description: "Required. The name of the MeasurementProtocolSecret to delete.
+            Format:
+            properties/{property}/webDataStreams/{webDataStream}/measurementPro\
+            tocolSecrets/{measurementProtocolSecret} Note: Any type of stream
+            (WebDataStream, IosAppDataStream, AndroidAppDataStream) may be a
+            parent."
           in: path
           name: name
           required: true
@@ -354,14 +357,15 @@ paths:
       tags:
         - properties
     get:
-      description: Returns the Site Tag for the specified web stream. Site Tags are
-        immutable singletons.
-      operationId: analyticsadmin.properties.webDataStreams.getGlobalSiteTag
+      description: Lookup for a single "GA4" MeasurementProtocolSecret.
+      operationId: analyticsadmin.properties.webDataStreams.measurementProtocolSecrets.get
       parameters:
-        - description: 'Required. The name of the site tag to lookup. Note that site tags
-            are singletons and do not have unique IDs. Format:
-            properties/{property_id}/webDataStreams/{stream_id}/globalSiteTag
-            Example: "properties/123/webDataStreams/456/globalSiteTag"'
+        - description: "Required. The name of the measurement protocol secret to lookup.
+            Format:
+            properties/{property}/webDataStreams/{webDataStream}/measurementPro\
+            tocolSecrets/{measurementProtocolSecret} Note: Any type of stream
+            (WebDataStream, IosAppDataStream, AndroidAppDataStream) may be a
+            parent."
           in: path
           name: name
           required: true
@@ -372,7 +376,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaGlobalSiteTag"
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaMeasurementProtocolSecre\
+                  t"
           description: Successful response
       security:
         - Oauth2:
@@ -398,24 +403,19 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the singleton enhanced measurement settings for this web
-        stream. Note that the stream must enable enhanced measurement for these
-        settings to take effect.
-      operationId: analyticsadmin.properties.webDataStreams.updateEnhancedMeasurementSettings
+      description: Updates a measurement protocol secret.
+      operationId: analyticsadmin.properties.webDataStreams.measurementProtocolSecrets.patch
       parameters:
-        - description: 'Output only. Resource name of this Data Stream. Format:
-            properties/{property_id}/webDataStreams/{stream_id}/enhancedMeasurementSettings
-            Example:
-            "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"'
+        - description: "Output only. Resource name of this secret. This secret may be a
+            child of any type of stream. Format:
+            properties/{property}/webDataStreams/{webDataStream}/measurementPro\
+            tocolSecrets/{measurementProtocolSecret}"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Required. The list of fields to be updated. Field names must be in
-            snake case (e.g., "field_to_update"). Omitted fields will not be
-            updated. To replace the entire entity, use one path with the string
-            "*" to match all fields.
+        - description: The list of fields to be updated. Omitted fields will not be updated.
           in: query
           name: updateMask
           schema:
@@ -424,15 +424,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaEnhancedMeasurementSetti\
-                ngs"
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaMeasurementProtocolSecre\
+                t"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaEnhancedMeasurementSetti\
-                  ngs"
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaMeasurementProtocolSecre\
+                  t"
           description: Successful response
       security:
         - Oauth2:
@@ -1044,6 +1044,103 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1alpha/{parent}/measurementProtocolSecrets":
+    get:
+      description: Returns child MeasurementProtocolSecrets under the specified parent
+        Property.
+      operationId: analyticsadmin.properties.webDataStreams.measurementProtocolSecrets.list
+      parameters:
+        - description: "Required. The resource name of the parent stream. Any type of
+            stream (WebDataStream, IosAppDataStream, AndroidAppDataStream) may
+            be a parent. Format:
+            properties/{property}/webDataStreams/{webDataStream}/measurementPro\
+            tocolSecrets"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of resources to return. If unspecified, at most
+            10 resources will be returned. The maximum value is 10. Higher
+            values will be coerced to the maximum.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous
+            `ListMeasurementProtocolSecrets` call. Provide this to retrieve the
+            subsequent page. When paginating, all other parameters provided to
+            `ListMeasurementProtocolSecrets` must match the call that provided
+            the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListMeasurementProtocolS\
+                  ecretsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a measurement protocol secret.
+      operationId: analyticsadmin.properties.webDataStreams.measurementProtocolSecrets.create
+      parameters:
+        - description: "Required. The parent resource where this secret will be created.
+            Any type of stream (WebDataStream, IosAppDataStream,
+            AndroidAppDataStream) may be a parent. Format:
+            properties/{property}/webDataStreams/{webDataStream}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaMeasurementProtocolSecre\
+                t"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaMeasurementProtocolSecre\
+                  t"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+      tags:
+        - properties
   "/v1alpha/{parent}/userLinks":
     get:
       description: Lists all user links on an account or property.
@@ -1823,9 +1920,16 @@ components:
         googleAdsLink:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaGoogleAdsLink"
           description: A snapshot of a GoogleAdsLink resource in change history.
+        googleSignalsSettings:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaGoogleSignalsSettings"
+          description: A snapshot of a GoogleSignalsSettings resource in change history.
         iosAppDataStream:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaIosAppDataStream"
           description: A snapshot of an IosAppDataStream resource in change history.
+        measurementProtocolSecret:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaMeasurementProtocolSecre\
+            t"
+          description: A snapshot of a MeasurementProtocolSecret resource in change history.
         property:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaProperty"
           description: A snapshot of a Property resource in change history.
@@ -2188,6 +2292,31 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleAnalyticsAdminV1alphaGoogleSignalsSettings:
+      description: Settings values for Google Signals. This is a singleton resource.
+      properties:
+        consent:
+          description: Output only. Terms of Service acceptance.
+          enum:
+            - GOOGLE_SIGNALS_CONSENT_UNSPECIFIED
+            - GOOGLE_SIGNALS_CONSENT_CONSENTED
+            - GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED
+          readOnly: true
+          type: string
+        name:
+          description: 'Output only. Resource name of this setting. Format:
+            properties/{property_id}/googleSignalsSettings Example:
+            "properties/1000/googleSignalsSettings"'
+          readOnly: true
+          type: string
+        state:
+          description: Status of this setting.
+          enum:
+            - GOOGLE_SIGNALS_STATE_UNSPECIFIED
+            - GOOGLE_SIGNALS_ENABLED
+            - GOOGLE_SIGNALS_DISABLED
+          type: string
+      type: object
     GoogleAnalyticsAdminV1alphaIosAppDataStream:
       description: A resource message representing a Google Analytics IOS app stream.
       properties:
@@ -2342,6 +2471,20 @@ components:
             page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
+    GoogleAnalyticsAdminV1alphaListMeasurementProtocolSecretsResponse:
+      description: Response message for ListMeasurementProtocolSecret RPC
+      properties:
+        measurementProtocolSecrets:
+          description: A list of secrets for the parent stream specified in the request.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaMeasurementProtocolSecre\
+              t"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next
+            page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     GoogleAnalyticsAdminV1alphaListPropertiesResponse:
       description: Response message for ListProperties RPC.
       properties:
@@ -2383,6 +2526,26 @@ components:
           items:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaWebDataStream"
           type: array
+      type: object
+    GoogleAnalyticsAdminV1alphaMeasurementProtocolSecret:
+      description: A secret value used for sending hits to Measurement Protocol.
+      properties:
+        displayName:
+          description: Required. Human-readable display name for this secret.
+          type: string
+        name:
+          description: "Output only. Resource name of this secret. This secret may be a
+            child of any type of stream. Format:
+            properties/{property}/webDataStreams/{webDataStream}/measurementPro\
+            tocolSecrets/{measurementProtocolSecret}"
+          readOnly: true
+          type: string
+        secretValue:
+          description: Output only. The measurement protocol secret value. Pass this value
+            to the api_secret field of the Measurement Protocol API when sending
+            hits to this secret's parent property.
+          readOnly: true
+          type: string
       type: object
     GoogleAnalyticsAdminV1alphaProperty:
       description: A resource message representing a Google Analytics GA4 property.
@@ -2561,7 +2724,9 @@ components:
               - IOS_APP_DATA_STREAM
               - FIREBASE_LINK
               - GOOGLE_ADS_LINK
+              - GOOGLE_SIGNALS_SETTINGS
               - CONVERSION_EVENT
+              - MEASUREMENT_PROTOCOL_SECRET
               - CUSTOM_DIMENSION
               - CUSTOM_METRIC
             type: string

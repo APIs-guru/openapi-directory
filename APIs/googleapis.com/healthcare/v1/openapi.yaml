@@ -206,6 +206,7 @@ paths:
               - RAW_ONLY
               - PARSED_ONLY
               - FULL
+              - SCHEMATIZED_ONLY
               - BASIC
             type: string
       responses:
@@ -1983,6 +1984,7 @@ paths:
               - RAW_ONLY
               - PARSED_ONLY
               - FULL
+              - SCHEMATIZED_ONLY
               - BASIC
             type: string
       responses:
@@ -3673,6 +3675,10 @@ components:
             type: string
           description: Optional. The values of resource attributes associated with the type of resources being requested. If no values are specified, then all resource types are included in the output.
           type: object
+      type: object
+    QueryAccessibleDataResponse:
+      description: Response for successful QueryAccessibleData operations. This structure is included in the response upon operation completion.
+      properties: {}
       type: object
     RedactConfig:
       description: Define how to redact sensitive values. Default behaviour is erase. For example, "My name is Jane." becomes "My name is ."
