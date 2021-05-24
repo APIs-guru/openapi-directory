@@ -9,7 +9,7 @@ info:
     url: https://support.1password.com/
   description: REST API interface for 1Password Connect.
   title: 1Password Connect
-  version: 0.5.0
+  version: 1.1.1
   x-apisguru-categories:
     - security
   x-origin:
@@ -76,6 +76,13 @@ paths:
   /vaults:
     get:
       operationId: GetVaults
+      parameters:
+        - description: Filter the Vault collection based on Vault name using SCIM eq filter
+          in: query
+          name: filter
+          schema:
+            example: name eq "Some Vault Name"
+            type: string
       responses:
         "200":
           content:
@@ -650,6 +657,7 @@ components:
             - DENY
           type: string
         timestamp:
+          description: The time at which the request was processed by the server.
           format: date-time
           readOnly: true
           type: string
@@ -757,6 +765,7 @@ components:
           enum:
             - LOGIN
             - PASSWORD
+            - API_CREDENTIAL
             - SERVER
             - DATABASE
             - CREDIT_CARD
@@ -789,24 +798,27 @@ components:
           format: uuid
           readOnly: true
           type: string
+        state:
+          enum:
+            - ARCHIVED
+            - DELETED
+          readOnly: true
+          type: string
         tags:
           items:
             type: string
           type: array
         title:
           type: string
-        trashed:
-          default: false
-          type: boolean
         updatedAt:
           format: date-time
           readOnly: true
           type: string
         urls:
           example:
-            - primary: true
-              url: https://example.com
-            - url: https://example.org
+            - href: https://example.com
+              primary: true
+            - href: https://example.org
           items:
             properties:
               href:
@@ -843,7 +855,7 @@ components:
             type: string
           path:
             description: An RFC6901 JSON Pointer pointing to the Item document, an Item
-              Attribute, an Item Field by Field ID, or an Item Field Attribute
+              Attribute, and Item Field by Field ID, or an Item Field Attribute
             example: /fields/vy09gd8EXAMPLE/label
             type: string
           value: {}

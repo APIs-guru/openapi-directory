@@ -13,7 +13,7 @@ info:
     url: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   termsOfService: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   title: Twitter API v2
-  version: "2.10"
+  version: "2.11"
   x-apisguru-categories:
     - social
   x-logo:
@@ -111,6 +111,7 @@ paths:
         - $ref: "#/components/parameters/MediaFieldsParameter"
         - $ref: "#/components/parameters/PlaceFieldsParameter"
         - $ref: "#/components/parameters/PollFieldsParameter"
+        - $ref: "#/components/parameters/BackfillMinutesRequestParameter"
       responses:
         "200":
           content:
@@ -343,6 +344,7 @@ paths:
         - $ref: "#/components/parameters/MediaFieldsParameter"
         - $ref: "#/components/parameters/PlaceFieldsParameter"
         - $ref: "#/components/parameters/PollFieldsParameter"
+        - $ref: "#/components/parameters/BackfillMinutesRequestParameter"
       responses:
         "200":
           content:
@@ -503,6 +505,29 @@ paths:
       summary: Hide replies
       tags:
         - Tweets
+  "/2/tweets/{id}/liking_users":
+    get:
+      description: Returns a list of users that have liked the provided Tweet ID
+      operationId: tweetsIdLikingUsers
+      parameters:
+        - description: The ID of the Tweet for which to return results
+          in: path
+          name: id
+          required: true
+          schema:
+            $ref: "#/components/schemas/TweetID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TweetsLikingUsersLookupResponse"
+          description: The request was successful
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      summary: Returns user objects that have liked the provided Tweet ID
+      tags:
+        - Users
   /2/users:
     get:
       description: This endpoint returns information about users. Specify users by their ID.
@@ -639,6 +664,46 @@ paths:
       tags:
         - Users
   "/2/users/{id}/blocking":
+    get:
+      description: Returns a list of users that are blocked by the provided user ID
+      operationId: usersIdBlocking
+      parameters:
+        - description: The ID of the user for whom to return results
+          in: path
+          name: id
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - description: The maximum number of results
+          in: query
+          name: max_results
+          required: false
+          schema:
+            format: int32
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: This value is populated by passing the 'next_token' or
+            'previous_token' returned in a request to paginate through results.
+          in: query
+          name: pagination_token
+          required: false
+          schema:
+            maxLength: 16
+            minLength: 16
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersBlockingLookupResponse"
+          description: The request was successful
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      summary: Returns user objects that are blocked by provided user ID
+      tags:
+        - Users
     post:
       description: Causes the user (in the path) to block the target user. The user
         (in the path) must match the user context authorizing the request
@@ -793,6 +858,65 @@ paths:
       summary: Follow User
       tags:
         - Users
+  "/2/users/{id}/liked_tweets":
+    get:
+      description: Returns a list of Tweets liked by the provided User ID
+      operationId: usersIdLikedTweets
+      parameters:
+        - description: The ID of the User to list the liked Tweets of
+          in: path
+          name: id
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - $ref: "#/components/parameters/MaxResultsRequestParameter"
+        - $ref: "#/components/parameters/PaginationTokenRequestParameter"
+        - $ref: "#/components/parameters/TweetExpansionsParameter"
+        - $ref: "#/components/parameters/TweetFieldsParameter"
+        - $ref: "#/components/parameters/UserFieldsParameter"
+        - $ref: "#/components/parameters/MediaFieldsParameter"
+        - $ref: "#/components/parameters/PlaceFieldsParameter"
+        - $ref: "#/components/parameters/PollFieldsParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: "#/components/schemas/Tweet"
+                    minItems: 1
+                    type: array
+                  errors:
+                    items:
+                      $ref: "#/components/schemas/Problem"
+                    minItems: 1
+                    type: array
+                  includes:
+                    $ref: "#/components/schemas/Expansions"
+                  meta:
+                    properties:
+                      next_token:
+                        description: The next token
+                        pattern: ^[a-zA-Z0-9]+$
+                        type: string
+                      previous_token:
+                        description: The previous token
+                        pattern: ^[a-zA-Z0-9]+$
+                        type: string
+                      result_count:
+                        description: Number of Tweets in result set
+                        format: int32
+                        type: integer
+                    type: object
+                type: object
+          description: The request was successful
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      summary: Returns Tweet objects liked by the provided User ID
+      tags:
+        - Tweets
   "/2/users/{id}/likes":
     post:
       description: Causes the user (in the path) to like the specified tweet. The user
@@ -992,6 +1116,11 @@ paths:
         - Users
 components:
   parameters:
+    BackfillMinutesRequestParameter:
+      in: query
+      name: BackfillMinutesRequestParameter
+      schema:
+        type: string
     EndTimeRequestParameter:
       description: YYYY-MM-DDTHH:mm:ssZ. The latest UTC timestamp to which the Tweets
         will be provided. The until_id parameter takes precedence if it is also
@@ -2534,6 +2663,26 @@ components:
         - copyright
         - country_codes
       type: object
+    TweetsLikingUsersLookupResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/User"
+          type: array
+        errors:
+          items:
+            $ref: "#/components/schemas/Problem"
+          minItems: 1
+          type: array
+        includes:
+          $ref: "#/components/schemas/Expansions"
+        meta:
+          properties:
+            result_count:
+              description: The number of user results returned in this response
+              type: integer
+          type: object
+      type: object
     URL:
       description: A validly formatted URL.
       example: https://developer.twitter.com/en/docs/twitter-api
@@ -2754,6 +2903,34 @@ components:
           type: string
       required:
         - country_codes
+      type: object
+    UsersBlockingLookupResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/User"
+          type: array
+        errors:
+          items:
+            $ref: "#/components/schemas/Problem"
+          minItems: 1
+          type: array
+        includes:
+          $ref: "#/components/schemas/Expansions"
+        meta:
+          properties:
+            next_token:
+              description: The next token
+              pattern: ^[a-zA-Z0-9]+$
+              type: string
+            previous_token:
+              description: The previous token
+              pattern: ^[a-zA-Z0-9]+$
+              type: string
+            result_count:
+              description: The number of user results returned in this response
+              type: integer
+          type: object
       type: object
     UsersBlockingMutationResponse:
       properties:
