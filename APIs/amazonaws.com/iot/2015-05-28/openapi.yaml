@@ -486,7 +486,7 @@ paths:
                 - target
               properties:
                 target:
-                  description: 'The <a href="https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html">identity</a> to which the policy is attached.'
+                  description: 'The <a href="https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html">identity</a> to which the policy is attached. For example, a thing group or a certificate.'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2844,7 +2844,7 @@ paths:
   '/domainConfigurations/{domainConfigurationName}':
     post:
       operationId: CreateDomainConfiguration
-      description: <p>Creates a domain configuration.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>
+      description: Creates a domain configuration.
       responses:
         '200':
           description: Success
@@ -2969,7 +2969,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeleteDomainConfiguration
-      description: <p>Deletes the specified domain configuration.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>
+      description: Deletes the specified domain configuration.
       responses:
         '200':
           description: Success
@@ -3025,7 +3025,7 @@ paths:
             maxLength: 128
     get:
       operationId: DescribeDomainConfiguration
-      description: <p>Gets summary information about a domain configuration.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>
+      description: Gets summary information about a domain configuration.
       responses:
         '200':
           description: Success
@@ -3081,7 +3081,7 @@ paths:
             maxLength: 128
     put:
       operationId: UpdateDomainConfiguration
-      description: <p>Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>
+      description: Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.
       responses:
         '200':
           description: Success
@@ -3495,12 +3495,12 @@ paths:
                     $ref: '#/components/schemas/TargetArn'
                   minItems: 1
                 documentSource:
-                  description: An S3 link to the job document.
+                  description: '<p>An S3 link to the job document. Required if you don''t specify a value for <code>document</code>.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>'
                   type: string
                   minLength: 1
                   maxLength: 1350
                 document:
-                  description: '<p>The job document.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>'
+                  description: The job document. Required if you don't specify a value for <code>documentSource</code>.
                   type: string
                   maxLength: 32768
                 description:
@@ -3565,6 +3565,12 @@ paths:
                   pattern: '[a-zA-Z0-9_-]+'
                   minLength: 1
                   maxLength: 64
+                jobTemplateArn:
+                  description: The ARN of the job template used to create the job.
+                  type: string
+                  pattern: '^arn:[!-~]+$'
+                  minLength: 1
+                  maxLength: 1600
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3785,6 +3791,226 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/InProgressTimeoutInMinutes'
                         - description: 'Specifies the amount of time, in minutes, this device has to finish execution of this job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress timer can''t be updated and will apply to all job executions for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and switch to the terminal <code>TIMED_OUT</code> status.'
+  '/job-templates/{jobTemplateId}':
+    put:
+      operationId: CreateJobTemplate
+      description: Creates a job template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateJobTemplateResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: jobTemplateId
+          in: path
+          required: true
+          description: 'A unique identifier for the job template. We recommend using a UUID. Alpha-numeric characters, "-", and "_" are valid for use here.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - description
+              properties:
+                jobArn:
+                  description: The ARN of the job to use as the basis for the job template.
+                  type: string
+                documentSource:
+                  description: '<p>An S3 link to the job document to use in the template. Required if you don''t specify a value for <code>document</code>.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>'
+                  type: string
+                  minLength: 1
+                  maxLength: 1350
+                document:
+                  description: The job document. Required if you don't specify a value for <code>documentSource</code>.
+                  type: string
+                  maxLength: 32768
+                description:
+                  description: A description of the job document.
+                  type: string
+                  pattern: '[^\p{C}]+'
+                  maxLength: 2028
+                presignedUrlConfig:
+                  description: Configuration for pre-signed S3 URLs.
+                  type: object
+                  properties:
+                    roleArn:
+                      allOf:
+                        - $ref: '#/components/schemas/RoleArn'
+                        - description: The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.
+                    expiresInSec:
+                      allOf:
+                        - $ref: '#/components/schemas/ExpiresInSec'
+                        - description: 'How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the default value is 3600 seconds. Pre-signed URLs are generated when Jobs receives an MQTT request for the job document.'
+                jobExecutionsRolloutConfig:
+                  description: Allows you to create a staged rollout of a job.
+                  type: object
+                  properties:
+                    maximumPerMinute:
+                      allOf:
+                        - $ref: '#/components/schemas/MaxJobExecutionsPerMin'
+                        - description: 'The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.'
+                    exponentialRate:
+                      allOf:
+                        - $ref: '#/components/schemas/ExponentialRolloutRate'
+                        - description: The rate of increase for a job rollout. This parameter allows you to define an exponential rate for a job rollout.
+                abortConfig:
+                  description: The criteria that determine when and how a job abort takes place.
+                  type: object
+                  properties:
+                    criteriaList:
+                      allOf:
+                        - $ref: '#/components/schemas/AbortCriteriaList'
+                        - description: The list of criteria that determine when and how to abort the job.
+                timeoutConfig:
+                  description: 'Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.'
+                  type: object
+                  properties:
+                    inProgressTimeoutInMinutes:
+                      allOf:
+                        - $ref: '#/components/schemas/InProgressTimeoutInMinutes'
+                        - description: 'Specifies the amount of time, in minutes, this device has to finish execution of this job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress timer can''t be updated and will apply to all job executions for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and switch to the terminal <code>TIMED_OUT</code> status.'
+                tags:
+                  description: Metadata that can be used to manage the job template.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteJobTemplate
+      description: Deletes the specified job template.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: jobTemplateId
+          in: path
+          required: true
+          description: The unique identifier of the job template to delete.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 64
+    get:
+      operationId: DescribeJobTemplate
+      description: Returns information about a job template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeJobTemplateResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: jobTemplateId
+          in: path
+          required: true
+          description: The unique identifier of the job template.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 64
   /keys-and-certificate:
     post:
       operationId: CreateKeysAndCertificate
@@ -11996,7 +12222,7 @@ paths:
   /domainConfigurations:
     get:
       operationId: ListDomainConfigurations
-      description: <p>Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>
+      description: Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.
       responses:
         '200':
           description: Success
@@ -12296,6 +12522,58 @@ paths:
           in: query
           required: false
           description: The token to retrieve the next set of results.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /job-templates:
+    get:
+      operationId: ListJobTemplates
+      description: Returns a list of job templates.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListJobTemplatesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return in the list.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to use to return the next set of results in the list.
           schema:
             type: string
     parameters:
@@ -16468,7 +16746,6 @@ components:
     MaxJobExecutionsPerMin:
       type: integer
       minimum: 1
-      maximum: 1000
     ExponentialRolloutRate:
       type: object
       required:
@@ -16496,6 +16773,18 @@ components:
       minItems: 1
     InProgressTimeoutInMinutes:
       type: integer
+    CreateJobTemplateResponse:
+      type: object
+      properties:
+        jobTemplateArn:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateArn'
+            - description: The ARN of the job template.
+        jobTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateId'
+            - description: The unique identifier of the job template.
+    ConflictException: {}
     CreateKeysAndCertificateResponse:
       type: object
       properties:
@@ -17504,6 +17793,41 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobExecution'
             - description: Information about the job execution.
+    DescribeJobTemplateResponse:
+      type: object
+      properties:
+        jobTemplateArn:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateArn'
+            - description: The ARN of the job template.
+        jobTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateId'
+            - description: The unique identifier of the job template.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/JobDescription'
+            - description: A description of the job template.
+        documentSource:
+          allOf:
+            - $ref: '#/components/schemas/JobDocumentSource'
+            - description: An S3 link to the job document.
+        document:
+          allOf:
+            - $ref: '#/components/schemas/JobDocument'
+            - description: The job document.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/DateType'
+            - description: 'The time, in seconds since the epoch, when the job template was created.'
+        presignedUrlConfig:
+          $ref: '#/components/schemas/PresignedUrlConfig'
+        jobExecutionsRolloutConfig:
+          $ref: '#/components/schemas/JobExecutionsRolloutConfig'
+        abortConfig:
+          $ref: '#/components/schemas/AbortConfig'
+        timeoutConfig:
+          $ref: '#/components/schemas/TimeoutConfig'
     DescribeMitigationActionResponse:
       type: object
       properties:
@@ -18260,6 +18584,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobExecutionSummaryForThingList'
             - description: A list of job execution summaries.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next set of results, or <b>null</b> if there are no additional results.'
+    ListJobTemplatesResponse:
+      type: object
+      properties:
+        jobTemplates:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateSummaryList'
+            - description: A list of objects that contain information about the job templates.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -20049,7 +20384,7 @@ components:
         target:
           allOf:
             - $ref: '#/components/schemas/PolicyTarget'
-            - description: 'The <a href="https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html">identity</a> to which the policy is attached.'
+            - description: 'The <a href="https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html">identity</a> to which the policy is attached. For example, a thing group or a certificate.'
     Principal:
       type: string
     AttachPrincipalPolicyRequest:
@@ -21705,6 +22040,11 @@ components:
             - $ref: '#/components/schemas/InProgressTimeoutInMinutes'
             - description: 'Specifies the amount of time, in minutes, this device has to finish execution of this job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress timer can''t be updated and will apply to all job executions for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and switch to the terminal <code>TIMED_OUT</code> status.'
       description: 'Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.'
+    JobTemplateArn:
+      type: string
+      pattern: '^arn:[!-~]+$'
+      minLength: 1
+      maxLength: 1600
     CreateJobRequest:
       type: object
       required:
@@ -21718,11 +22058,11 @@ components:
         documentSource:
           allOf:
             - $ref: '#/components/schemas/JobDocumentSource'
-            - description: An S3 link to the job document.
+            - description: '<p>An S3 link to the job document. Required if you don''t specify a value for <code>document</code>.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>'
         document:
           allOf:
             - $ref: '#/components/schemas/JobDocument'
-            - description: '<p>The job document.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>'
+            - description: The job document. Required if you don't specify a value for <code>documentSource</code>.
         description:
           allOf:
             - $ref: '#/components/schemas/JobDescription'
@@ -21755,6 +22095,49 @@ components:
           allOf:
             - $ref: '#/components/schemas/NamespaceId'
             - description: '<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>'
+        jobTemplateArn:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateArn'
+            - description: The ARN of the job template used to create the job.
+    JobTemplateId:
+      type: string
+      pattern: '[a-zA-Z0-9_-]+'
+      minLength: 1
+      maxLength: 64
+    CreateJobTemplateRequest:
+      type: object
+      required:
+        - description
+      title: CreateJobTemplateRequest
+      properties:
+        jobArn:
+          allOf:
+            - $ref: '#/components/schemas/JobArn'
+            - description: The ARN of the job to use as the basis for the job template.
+        documentSource:
+          allOf:
+            - $ref: '#/components/schemas/JobDocumentSource'
+            - description: '<p>An S3 link to the job document to use in the template. Required if you don''t specify a value for <code>document</code>.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>'
+        document:
+          allOf:
+            - $ref: '#/components/schemas/JobDocument'
+            - description: The job document. Required if you don't specify a value for <code>documentSource</code>.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/JobDescription'
+            - description: A description of the job document.
+        presignedUrlConfig:
+          $ref: '#/components/schemas/PresignedUrlConfig'
+        jobExecutionsRolloutConfig:
+          $ref: '#/components/schemas/JobExecutionsRolloutConfig'
+        abortConfig:
+          $ref: '#/components/schemas/AbortConfig'
+        timeoutConfig:
+          $ref: '#/components/schemas/TimeoutConfig'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Metadata that can be used to manage the job template.
     CreateKeysAndCertificateRequest:
       type: object
       title: CreateKeysAndCertificateRequest
@@ -22432,6 +22815,10 @@ components:
       type: object
       title: DeleteJobRequest
       properties: {}
+    DeleteJobTemplateRequest:
+      type: object
+      title: DeleteJobTemplateRequest
+      properties: {}
     DeleteMitigationActionRequest:
       type: object
       title: DeleteMitigationActionRequest
@@ -22885,7 +23272,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/NamespaceId'
             - description: '<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>'
+        jobTemplateArn:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateArn'
+            - description: The ARN of the job template used to create the job.
       description: The <code>Job</code> object contains details about a job.
+    DescribeJobTemplateRequest:
+      type: object
+      title: DescribeJobTemplateRequest
+      properties: {}
     DescribeMitigationActionRequest:
       type: object
       title: DescribeMitigationActionRequest
@@ -23277,7 +23672,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ServiceType'
             - description: The type of service delivered by the endpoint.
-      description: '<p>The summary of a domain configuration. A domain configuration specifies custom IoT-specific information about a domain. A domain configuration can be associated with an AWS-managed domain (for example, dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a default endpoint.</p> <ul> <li> <p>Data</p> </li> <li> <p>Jobs</p> </li> <li> <p>CredentialProvider</p> </li> </ul> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>'
+      description: '<p>The summary of a domain configuration. A domain configuration specifies custom IoT-specific information about a domain. A domain configuration can be associated with an AWS-managed domain (for example, dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a default endpoint.</p> <ul> <li> <p>Data</p> </li> <li> <p>Jobs</p> </li> <li> <p>CredentialProvider</p> </li> </ul>'
     DomainConfigurations:
       type: array
       items:
@@ -24108,6 +24503,30 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/JobSummary'
+    JobTemplateSummary:
+      type: object
+      properties:
+        jobTemplateArn:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateArn'
+            - description: The ARN of the job template.
+        jobTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateId'
+            - description: The unique identifier of the job template.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/JobDescription'
+            - description: A description of the job template.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/DateType'
+            - description: 'The time, in seconds since the epoch, when the job template was created.'
+      description: An object that contains information about the job template.
+    JobTemplateSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobTemplateSummary'
     JsonDocument:
       type: string
     Key:
@@ -24295,6 +24714,10 @@ components:
     ListJobExecutionsForThingRequest:
       type: object
       title: ListJobExecutionsForThingRequest
+      properties: {}
+    ListJobTemplatesRequest:
+      type: object
+      title: ListJobTemplatesRequest
       properties: {}
     ListJobsRequest:
       type: object
