@@ -274,7 +274,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: An optional comment to describe the origin access identity. The comment cannot be longer than 128 characters.
+                        - description: A comment to describe the origin access identity. The comment cannot be longer than 128 characters.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4080,7 +4080,7 @@ paths:
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: An optional comment to describe the origin access identity. The comment cannot be longer than 128 characters.
+                        - description: A comment to describe the origin access identity. The comment cannot be longer than 128 characters.
   '/2020-05-31/distribution/{Id}/config':
     get:
       operationId: GetDistributionConfig2020_05_31
@@ -7849,7 +7849,7 @@ components:
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: An optional comment to describe the origin access identity. The comment cannot be longer than 128 characters.
+            - description: A comment to describe the origin access identity. The comment cannot be longer than 128 characters.
       description: 'Origin access identity configuration. Send a <code>GET</code> request to the <code>/<i>CloudFront API version</i>/CloudFront/identity ID/config</code> resource. '
     CloudFrontOriginAccessIdentity:
       type: object

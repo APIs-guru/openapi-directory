@@ -1668,7 +1668,7 @@ paths:
   /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListServices:
     post:
       operationId: ListServices
-      description: Lists the services that are running in a specified cluster.
+      description: 'Returns a list of services. You can filter the results by cluster, launch type, and scheduling strategy.'
       responses:
         '200':
           description: Success
@@ -1920,7 +1920,7 @@ paths:
   /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTasks:
     post:
       operationId: ListTasks
-      description: '<p>Returns a list of tasks for a specified cluster. You can filter the results by family name, by a particular container instance, or by the desired status of the task with the <code>family</code>, <code>containerInstance</code>, and <code>desiredStatus</code> parameters.</p> <p>Recently stopped tasks might appear in the returned results. Currently, stopped tasks appear in the returned results for at least one hour. </p>'
+      description: '<p>Returns a list of tasks. You can filter the results by cluster, task definition family, container instance, launch type, what IAM principal started the task, or by the desired status of the task.</p> <p>Recently stopped tasks might appear in the returned results. Currently, stopped tasks appear in the returned results for at least one hour.</p>'
       responses:
         '200':
           description: Success
@@ -3572,7 +3572,7 @@ components:
         launchType:
           allOf:
             - $ref: '#/components/schemas/LaunchType'
-            - description: '<p>The launch type on which to run your service. The accepted values are <code>FARGATE</code> and <code>EC2</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS launch types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>When a value of <code>FARGATE</code> is specified, your tasks are launched on AWS Fargate On-Demand infrastructure. To use Fargate Spot, you must use a capacity provider strategy with the <code>FARGATE_SPOT</code> capacity provider.</p> <p>When a value of <code>EC2</code> is specified, your tasks are launched on Amazon EC2 instances registered to your cluster.</p> <p>If a <code>launchType</code> is specified, the <code>capacityProviderStrategy</code> parameter must be omitted.</p>'
+            - description: '<p>The infrastructure on which to run your service. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS launch types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>The <code>FARGATE</code> launch type runs your tasks on AWS Fargate On-Demand infrastructure.</p> <note> <p>Fargate Spot infrastructure is available for use but a capacity provider strategy must be used. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html">AWS Fargate capacity providers</a> in the <i>Amazon ECS User Guide for AWS Fargate</i>.</p> </note> <p>The <code>EC2</code> launch type runs your tasks on Amazon EC2 instances registered to your cluster.</p> <p>The <code>EXTERNAL</code> launch type runs your tasks on your on-premise server or virtual machine (VM) capacity registered to your cluster.</p> <p>A service can use either a launch type or a capacity provider strategy. If a <code>launchType</code> is specified, the <code>capacityProviderStrategy</code> parameter must be omitted.</p>'
         capacityProviderStrategy:
           allOf:
             - $ref: '#/components/schemas/CapacityProviderStrategy'
@@ -4499,7 +4499,7 @@ components:
         cluster:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The short name or full Amazon Resource Name (ARN) of the cluster that hosts the services to list. If you do not specify a cluster, the default cluster is assumed.'
+            - description: 'The short name or full Amazon Resource Name (ARN) of the cluster to use when filtering the <code>ListServices</code> results. If you do not specify a cluster, the default cluster is assumed.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4511,11 +4511,11 @@ components:
         launchType:
           allOf:
             - $ref: '#/components/schemas/LaunchType'
-            - description: The launch type for the services to list.
+            - description: The launch type to use when filtering the <code>ListServices</code> results.
         schedulingStrategy:
           allOf:
             - $ref: '#/components/schemas/SchedulingStrategy'
-            - description: The scheduling strategy for services to list.
+            - description: The scheduling strategy to use when filtering the <code>ListServices</code> results.
     ListTagsForResourceResponse:
       type: object
       example:
@@ -4634,15 +4634,15 @@ components:
         cluster:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The short name or full Amazon Resource Name (ARN) of the cluster that hosts the tasks to list. If you do not specify a cluster, the default cluster is assumed.'
+            - description: 'The short name or full Amazon Resource Name (ARN) of the cluster to use when filtering the <code>ListTasks</code> results. If you do not specify a cluster, the default cluster is assumed.'
         containerInstance:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The container instance ID or full ARN of the container instance with which to filter the <code>ListTasks</code> results. Specifying a <code>containerInstance</code> limits the results to tasks that belong to that container instance.
+            - description: The container instance ID or full ARN of the container instance to use when filtering the <code>ListTasks</code> results. Specifying a <code>containerInstance</code> limits the results to tasks that belong to that container instance.
         family:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the family with which to filter the <code>ListTasks</code> results. Specifying a <code>family</code> limits the results to tasks that belong to that family.
+            - description: The name of the task definition family to use when filtering the <code>ListTasks</code> results. Specifying a <code>family</code> limits the results to tasks that belong to that family.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4658,15 +4658,15 @@ components:
         serviceName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the service with which to filter the <code>ListTasks</code> results. Specifying a <code>serviceName</code> limits the results to tasks that belong to that service.
+            - description: The name of the service to use when filtering the <code>ListTasks</code> results. Specifying a <code>serviceName</code> limits the results to tasks that belong to that service.
         desiredStatus:
           allOf:
             - $ref: '#/components/schemas/DesiredStatus'
-            - description: '<p>The task desired status with which to filter the <code>ListTasks</code> results. Specifying a <code>desiredStatus</code> of <code>STOPPED</code> limits the results to tasks that Amazon ECS has set the desired status to <code>STOPPED</code>. This can be useful for debugging tasks that are not starting properly or have died or finished. The default status filter is <code>RUNNING</code>, which shows tasks that Amazon ECS has set the desired status to <code>RUNNING</code>.</p> <note> <p>Although you can filter results based on a desired status of <code>PENDING</code>, this does not return any results. Amazon ECS never sets the desired status of a task to that value (only a task''s <code>lastStatus</code> may have a value of <code>PENDING</code>).</p> </note>'
+            - description: '<p>The task desired status to use when filtering the <code>ListTasks</code> results. Specifying a <code>desiredStatus</code> of <code>STOPPED</code> limits the results to tasks that Amazon ECS has set the desired status to <code>STOPPED</code>. This can be useful for debugging tasks that are not starting properly or have died or finished. The default status filter is <code>RUNNING</code>, which shows tasks that Amazon ECS has set the desired status to <code>RUNNING</code>.</p> <note> <p>Although you can filter results based on a desired status of <code>PENDING</code>, this does not return any results. Amazon ECS never sets the desired status of a task to that value (only a task''s <code>lastStatus</code> may have a value of <code>PENDING</code>).</p> </note>'
         launchType:
           allOf:
             - $ref: '#/components/schemas/LaunchType'
-            - description: The launch type for services to list.
+            - description: The launch type to use when filtering the <code>ListTasks</code> results.
     PutAccountSettingResponse:
       type: object
       example:
@@ -4982,7 +4982,7 @@ components:
         launchType:
           allOf:
             - $ref: '#/components/schemas/LaunchType'
-            - description: '<p>The launch type on which to run your task. The accepted values are <code>FARGATE</code> and <code>EC2</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>When a value of <code>FARGATE</code> is specified, your tasks are launched on AWS Fargate On-Demand infrastructure. To use Fargate Spot, you must use a capacity provider strategy with the <code>FARGATE_SPOT</code> capacity provider.</p> <p>When a value of <code>EC2</code> is specified, your tasks are launched on Amazon EC2 instances registered to your cluster.</p> <p>If a <code>launchType</code> is specified, the <code>capacityProviderStrategy</code> parameter must be omitted.</p>'
+            - description: '<p>The infrastructure on which to run your standalone task. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS launch types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>The <code>FARGATE</code> launch type runs your tasks on AWS Fargate On-Demand infrastructure.</p> <note> <p>Fargate Spot infrastructure is available for use but a capacity provider strategy must be used. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html">AWS Fargate capacity providers</a> in the <i>Amazon ECS User Guide for AWS Fargate</i>.</p> </note> <p>The <code>EC2</code> launch type runs your tasks on Amazon EC2 instances registered to your cluster.</p> <p>The <code>EXTERNAL</code> launch type runs your tasks on your on-premise server or virtual machine (VM) capacity registered to your cluster.</p> <p>A task can use either a launch type or a capacity provider strategy. If a <code>launchType</code> is specified, the <code>capacityProviderStrategy</code> parameter must be omitted.</p>'
         networkConfiguration:
           allOf:
             - $ref: '#/components/schemas/NetworkConfiguration'
@@ -5937,6 +5937,7 @@ components:
       enum:
         - EC2
         - FARGATE
+        - EXTERNAL
     CompatibilityList:
       type: array
       items:
@@ -6584,6 +6585,7 @@ components:
       enum:
         - EC2
         - FARGATE
+        - EXTERNAL
     DeploymentConfiguration:
       type: object
       properties:
@@ -6678,7 +6680,7 @@ components:
         launchType:
           allOf:
             - $ref: '#/components/schemas/LaunchType'
-            - description: 'The launch type on which your service is running. If no value is specified, it will default to <code>EC2</code>. Valid values include <code>EC2</code> and <code>FARGATE</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+            - description: 'The infrastructure on which your service is running. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS launch types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
         capacityProviderStrategy:
           allOf:
             - $ref: '#/components/schemas/CapacityProviderStrategy'
@@ -7986,7 +7988,7 @@ components:
         launchType:
           allOf:
             - $ref: '#/components/schemas/LaunchType'
-            - description: 'The launch type on which your task is running. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+            - description: 'The infrastructure on which your task is running. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS launch types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
         memory:
           allOf:
             - $ref: '#/components/schemas/String'

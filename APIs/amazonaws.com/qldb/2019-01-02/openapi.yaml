@@ -278,10 +278,11 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 PermissionsMode:
-                  description: The permissions mode to assign to the ledger that you want to create.
+                  description: '<p>The permissions mode to assign to the ledger that you want to create. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have <code>SendCommand</code> permissions for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to <code>SendCommand</code> API permissions for the ledger.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>'
                   type: string
                   enum:
                     - ALLOW_ALL
+                    - STANDARD
                 DeletionProtection:
                   description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
                   type: boolean
@@ -1179,6 +1180,62 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/ledgers/{name}/permissions-mode':
+    patch:
+      operationId: UpdateLedgerPermissionsMode
+      description: Updates the permissions mode of a ledger.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateLedgerPermissionsModeResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the ledger.
+          schema:
+            type: string
+            pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+            minLength: 1
+            maxLength: 32
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - PermissionsMode
+              properties:
+                PermissionsMode:
+                  description: '<p>The permissions mode to assign to the ledger. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have <code>SendCommand</code> permissions for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to <code>SendCommand</code> API permissions for the ledger.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>'
+                  type: string
+                  enum:
+                    - ALLOW_ALL
+                    - STANDARD
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -1260,6 +1317,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)'
+        PermissionsMode:
+          allOf:
+            - $ref: '#/components/schemas/PermissionsMode'
+            - description: The permissions mode of the ledger that you created.
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/DeletionProtection'
@@ -1306,6 +1367,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)'
+        PermissionsMode:
+          allOf:
+            - $ref: '#/components/schemas/PermissionsMode'
+            - description: The permissions mode of the ledger.
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/DeletionProtection'
@@ -1484,6 +1549,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/DeletionProtection'
             - description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+    UpdateLedgerPermissionsModeResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/LedgerName'
+            - description: The name of the ledger.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the ledger.
+        PermissionsMode:
+          allOf:
+            - $ref: '#/components/schemas/PermissionsMode'
+            - description: The current permissions mode of the ledger.
     LedgerName:
       type: string
       pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
@@ -1508,6 +1588,7 @@ components:
       type: string
       enum:
         - ALLOW_ALL
+        - STANDARD
     DeletionProtection:
       type: boolean
     CreateLedgerRequest:
@@ -1528,7 +1609,7 @@ components:
         PermissionsMode:
           allOf:
             - $ref: '#/components/schemas/PermissionsMode'
-            - description: The permissions mode to assign to the ledger that you want to create.
+            - description: '<p>The permissions mode to assign to the ledger that you want to create. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have <code>SendCommand</code> permissions for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to <code>SendCommand</code> API permissions for the ledger.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>'
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/DeletionProtection'
@@ -1905,6 +1986,16 @@ components:
       type: object
       title: UntagResourceRequest
       properties: {}
+    UpdateLedgerPermissionsModeRequest:
+      type: object
+      required:
+        - PermissionsMode
+      title: UpdateLedgerPermissionsModeRequest
+      properties:
+        PermissionsMode:
+          allOf:
+            - $ref: '#/components/schemas/PermissionsMode'
+            - description: '<p>The permissions mode to assign to the ledger. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have <code>SendCommand</code> permissions for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to <code>SendCommand</code> API permissions for the ledger.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>'
     UpdateLedgerRequest:
       type: object
       title: UpdateLedgerRequest
