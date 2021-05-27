@@ -417,6 +417,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateTestGridProjectResult'
         '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
           description: InternalServiceException
           content:
             application/json:
@@ -4440,6 +4452,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ArgumentException'
         '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
           description: InternalServiceException
           content:
             application/json:
@@ -4887,13 +4905,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceDescription'
             - description: Human-readable description of the project.
+        vpcConfig:
+          allOf:
+            - $ref: '#/components/schemas/TestGridVpcConfig'
+            - description: The VPC security groups and subnets that are attached to a project.
     InternalServiceException: {}
     CreateTestGridUrlResult:
       type: object
       properties:
         url:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/SensitiveString'
             - description: 'A signed URL, expiring in <a>CreateTestGridUrlRequest$expiresInSeconds</a> seconds, to be passed to a <code>RemoteWebDriver</code>. '
         expires:
           allOf:
@@ -6420,6 +6442,9 @@ components:
       description: 'The result of the purchase offering (for example, success or failure).'
     PurchaseOfferingRequest:
       type: object
+      required:
+        - offeringId
+        - quantity
       title: PurchaseOfferingRequest
       properties:
         offeringId:
@@ -6461,6 +6486,9 @@ components:
       description: The result of a renewal offering.
     RenewOfferingRequest:
       type: object
+      required:
+        - offeringId
+        - quantity
       title: RenewOfferingRequest
       properties:
         offeringId:
@@ -6839,6 +6867,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceDescription'
             - description: Human-readable description for the project.
+        vpcConfig:
+          allOf:
+            - $ref: '#/components/schemas/TestGridVpcConfig'
+            - description: The VPC security groups and subnets that are attached to a project.
     UpdateUploadResult:
       type: object
       properties:
@@ -7398,6 +7430,26 @@ components:
       pattern: .*\S.*
       minLength: 1
       maxLength: 2048
+    TestGridVpcConfig:
+      type: object
+      required:
+        - securityGroupIds
+        - subnetIds
+        - vpcId
+      properties:
+        securityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIds'
+            - description: A list of VPC security group IDs in your Amazon VPC.
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: A list of VPC subnet IDs in your Amazon VPC.
+        vpcId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ID of the Amazon VPC.
+      description: The VPC security groups and subnets that are attached to a project.
     TestGridProject:
       type: object
       properties:
@@ -7413,6 +7465,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: A human-readable description for the project.
+        vpcConfig:
+          allOf:
+            - $ref: '#/components/schemas/TestGridVpcConfig'
+            - description: The VPC security groups and subnets that are attached to a project.
         created:
           allOf:
             - $ref: '#/components/schemas/DateTime'
@@ -7427,6 +7483,9 @@ components:
       type: integer
       minimum: 60
       maximum: 86400
+    SensitiveString:
+      type: string
+      format: password
     DateTime:
       type: string
       format: date-time
@@ -7490,7 +7549,7 @@ components:
             - description: '<p>The upload''s status.</p> <p>Must be one of the following values:</p> <ul> <li> <p>FAILED</p> </li> <li> <p>INITIALIZED</p> </li> <li> <p>PROCESSING</p> </li> <li> <p>SUCCEEDED</p> </li> </ul>'
         url:
           allOf:
-            - $ref: '#/components/schemas/URL'
+            - $ref: '#/components/schemas/SensitiveURL'
             - description: The presigned Amazon S3 URL that was used to store a file using a PUT request.
         metadata:
           allOf:
@@ -7746,6 +7805,10 @@ components:
         $ref: '#/components/schemas/String'
     DeviceFilter:
       type: object
+      required:
+        - attribute
+        - operator
+        - values
       properties:
         attribute:
           allOf:
@@ -8505,6 +8568,11 @@ components:
             - $ref: '#/components/schemas/CurrencyCode'
             - description: 'The currency code of a monetary amount. For example, <code>USD</code> means U.S. dollars.'
       description: A number that represents the monetary amount for an offering or transaction.
+    NonEmptyString:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 4096
     OfferingIdentifier:
       type: string
       minLength: 32
@@ -8748,6 +8816,23 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/String'
+    SecurityGroupIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+      minItems: 1
+      maxItems: 5
+    SensitiveURL:
+      type: string
+      minLength: 0
+      maxLength: 2048
+      format: password
+    SubnetIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+      minItems: 1
+      maxItems: 8
     TagKey:
       type: string
       minLength: 1
@@ -8819,7 +8904,7 @@ components:
             - description: The kind of artifact.
         url:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/SensitiveString'
             - description: A semi-stable URL to the content of the object.
       description: <p>Artifacts are video and other files that are produced in the process of running a browser in an automated context. </p> <note> <p>Video elements might be broken up into multiple artifacts as they grow in size during creation. </p> </note>
     UniqueProblem:

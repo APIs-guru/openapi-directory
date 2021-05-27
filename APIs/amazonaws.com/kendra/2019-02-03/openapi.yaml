@@ -259,6 +259,71 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.ClearQuerySuggestions:
+    post:
+      operationId: ClearQuerySuggestions
+      description: '<p>Clears existing query suggestions from an index.</p> <p>This deletes existing suggestions only, not the queries in the query log. After you clear suggestions, Amazon Kendra learns new suggestions based on new queries added to the query log from the time you cleared suggestions. If you do not see any new suggestions, then please allow Amazon Kendra to collect enough queries to learn new suggestions.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClearQuerySuggestionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.ClearQuerySuggestions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSKendraFrontendService.CreateDataSource:
     post:
       operationId: CreateDataSource
@@ -482,6 +547,81 @@ paths:
             type: string
             enum:
               - AWSKendraFrontendService.CreateIndex
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.CreateQuerySuggestionsBlockList:
+    post:
+      operationId: CreateQuerySuggestionsBlockList
+      description: '<p>Creates a block list to exlcude certain queries from suggestions.</p> <p>Any query that contains words or phrases specified in the block list is blocked or filtered out from being shown as a suggestion.</p> <p>You need to provide the file location of your block list text file in your S3 bucket. In your text file, enter each block word or phrase on a separate line.</p> <p>For information on the current quota limits for block lists, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas for Amazon Kendra</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateQuerySuggestionsBlockListResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateQuerySuggestionsBlockListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.CreateQuerySuggestionsBlockList
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -760,6 +900,71 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.DeleteQuerySuggestionsBlockList:
+    post:
+      operationId: DeleteQuerySuggestionsBlockList
+      description: <p>Deletes a block list used for query suggestions for an index.</p> <p>A deleted block list might not take effect right away. Amazon Kendra needs to refresh the entire suggestions list to add back the queries that were previously blocked.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteQuerySuggestionsBlockListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.DeleteQuerySuggestionsBlockList
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSKendraFrontendService.DeleteThesaurus:
     post:
       operationId: DeleteThesaurus
@@ -1014,6 +1219,132 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.DescribeQuerySuggestionsBlockList:
+    post:
+      operationId: DescribeQuerySuggestionsBlockList
+      description: <p>Describes a block list used for query suggestions for an index.</p> <p>This is used to check the current settings that are applied to a block list.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeQuerySuggestionsBlockListResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeQuerySuggestionsBlockListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.DescribeQuerySuggestionsBlockList
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.DescribeQuerySuggestionsConfig:
+    post:
+      operationId: DescribeQuerySuggestionsConfig
+      description: <p>Describes the settings of query suggestions for an index.</p> <p>This is used to check the current settings applied to query suggestions.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeQuerySuggestionsConfigResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeQuerySuggestionsConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.DescribeQuerySuggestionsConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSKendraFrontendService.DescribeThesaurus:
     post:
       operationId: DescribeThesaurus
@@ -1069,6 +1400,81 @@ paths:
             type: string
             enum:
               - AWSKendraFrontendService.DescribeThesaurus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.GetQuerySuggestions:
+    post:
+      operationId: GetQuerySuggestions
+      description: Fetches the queries that are suggested to your users.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuerySuggestionsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetQuerySuggestionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.GetQuerySuggestions
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1357,6 +1763,69 @@ paths:
             type: string
             enum:
               - AWSKendraFrontendService.ListIndices
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.ListQuerySuggestionsBlockLists:
+    post:
+      operationId: ListQuerySuggestionsBlockLists
+      description: '<p>Lists the block lists used for query suggestions for an index.</p> <p>For information on the current quota limits for block lists, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas for Amazon Kendra</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListQuerySuggestionsBlockListsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListQuerySuggestionsBlockListsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.ListQuerySuggestionsBlockLists
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2027,6 +2496,136 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.UpdateQuerySuggestionsBlockList:
+    post:
+      operationId: UpdateQuerySuggestionsBlockList
+      description: '<p>Updates a block list used for query suggestions for an index.</p> <p>Updates to a block list might not take effect right away. Amazon Kendra needs to refresh the entire suggestions list to apply any updates to the block list. Other changes not related to the block list apply immediately.</p> <p>If a block list is updating, then you need to wait for the first update to finish before submitting another update.</p> <p>Amazon Kendra supports partial updates, so you only need to provide the fields you want to update.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateQuerySuggestionsBlockListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.UpdateQuerySuggestionsBlockList
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.UpdateQuerySuggestionsConfig:
+    post:
+      operationId: UpdateQuerySuggestionsConfig
+      description: '<p>Updates the settings of query suggestions for an index.</p> <p>Amazon Kendra supports partial updates, so you only need to provide the fields you want to update.</p> <p>If an update is currently processing (i.e. ''happening''), you need to wait for the update to finish before making another update.</p> <p>Updates to query suggestions settings might not take effect right away. The time for your updated settings to take effect depends on the updates made and the number of search queries in your index.</p> <p>You can still enable/disable query suggestions at any time.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateQuerySuggestionsConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.UpdateQuerySuggestionsConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSKendraFrontendService.UpdateThesaurus:
     post:
       operationId: UpdateThesaurus
@@ -2199,8 +2798,18 @@ components:
         Documents:
           allOf:
             - $ref: '#/components/schemas/DocumentList'
-            - description: '<p>One or more documents to add to the index. </p> <p>Documents have the following file size limits.</p> <ul> <li> <p>5 MB total size for inline documents</p> </li> <li> <p>50 MB total size for files from an S3 bucket</p> </li> <li> <p>5 MB extracted text for any file</p> </li> </ul> <p>For more information about file size and transaction per second quotas, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas</a>.</p>'
+            - description: '<p>One or more documents to add to the index.</p> <p>Documents can include custom attributes. For example, ''DataSourceId'' and ''DataSourceSyncJobId'' are custom attributes that provide information on the synchronization of documents running on a data source. Note, ''DataSourceSyncJobId'' could be an optional custom attribute as Amazon Kendra will use the ID of a running sync job.</p> <p>Documents have the following file size limits.</p> <ul> <li> <p>5 MB total size for inline documents</p> </li> <li> <p>50 MB total size for files from an S3 bucket</p> </li> <li> <p>5 MB extracted text for any file</p> </li> </ul> <p>For more information about file size and transaction per second quotas, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas</a>.</p>'
     ServiceQuotaExceededException: {}
+    ClearQuerySuggestionsRequest:
+      type: object
+      required:
+        - IndexId
+      title: ClearQuerySuggestionsRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index you want to clear query suggestions from.
     CreateDataSourceResponse:
       type: object
       required:
@@ -2353,6 +2962,50 @@ components:
           allOf:
             - $ref: '#/components/schemas/UserContextPolicy'
             - description: '<p>The user context policy.</p> <dl> <dt>ATTRIBUTE_FILTER</dt> <dd> <p>All indexed content is searchable and displayable for all users. If there is an access control list, it is ignored. You can filter on user and group attributes. </p> </dd> <dt>USER_TOKEN</dt> <dd> <p>Enables SSO and token-based user access control. All documents with no access control and all documents accessible to the user will be searchable and displayable. </p> </dd> </dl>'
+    CreateQuerySuggestionsBlockListResponse:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListId'
+            - description: The unique identifier of the created block list.
+    CreateQuerySuggestionsBlockListRequest:
+      type: object
+      required:
+        - IndexId
+        - Name
+        - SourceS3Path
+        - RoleArn
+      title: CreateQuerySuggestionsBlockListRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index you want to create a query suggestions block list for.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListName'
+            - description: '<p>A user friendly name for the block list.</p> <p>For example, the block list named ''offensive-words'' includes all offensive words that could appear in user queries and need to be blocked from suggestions.</p>'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: '<p>A user-friendly description for the block list.</p> <p>For example, the description "List of all offensive words that can appear in user queries and need to be blocked from suggestions."</p>'
+        SourceS3Path:
+          allOf:
+            - $ref: '#/components/schemas/S3Path'
+            - description: '<p>The S3 path to your block list text file in your S3 bucket.</p> <p>Each block word or phrase should be on a separate line in a text file.</p> <p>For information on the current quota limits for block lists, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas for Amazon Kendra</a>.</p>'
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientTokenName'
+            - description: A token that you provide to identify the request to create a query suggestions block list.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: <p>The IAM (Identity and Access Management) role used by Amazon Kendra to access the block list text file in your S3 bucket.</p> <p>You need permissions to the role ARN (Amazon Resource Name). The role needs S3 read permissions to your file in S3 and needs to give STS (Security Token Service) assume role permissions to Amazon Kendra.</p>
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A tag that you can assign to a block list that categorizes the block list.
     CreateThesaurusResponse:
       type: object
       properties:
@@ -2437,6 +3090,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexId'
             - description: The identifier of the index to delete.
+    DeleteQuerySuggestionsBlockListRequest:
+      type: object
+      required:
+        - IndexId
+        - Id
+      title: DeleteQuerySuggestionsBlockListRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the you want to delete a block list from.
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListId'
+            - description: The unique identifier of the block list that needs to be deleted.
     DeleteThesaurusRequest:
       type: object
       required:
@@ -2651,6 +3319,121 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexId'
             - description: The name of the index to describe.
+    DescribeQuerySuggestionsBlockListResponse:
+      type: object
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: Shows the identifier of the index for the block list.
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListId'
+            - description: Shows the unique identifier of the block list.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListName'
+            - description: Shows the name of the block list.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: Shows the description for the block list.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListStatus'
+            - description: Shows whether the current status of the block list is <code>ACTIVE</code> or <code>INACTIVE</code>.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: Shows the error message with details when there are issues in processing the block list.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Shows the date-time a block list for query suggestions was last created.
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Shows the date-time a block list for query suggestions was last updated.
+        SourceS3Path:
+          allOf:
+            - $ref: '#/components/schemas/S3Path'
+            - description: '<p>Shows the current S3 path to your block list text file in your S3 bucket.</p> <p>Each block word or phrase should be on a separate line in a text file.</p> <p>For information on the current quota limits for block lists, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas for Amazon Kendra</a>.</p>'
+        ItemCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'Shows the current number of valid, non-empty words or phrases in the block list text file.'
+        FileSizeBytes:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: Shows the current size of the block list text file in S3.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: <p>Shows the current IAM (Identity and Access Management) role used by Amazon Kendra to access the block list text file in S3.</p> <p>The role needs S3 read permissions to your file in S3 and needs to give STS (Security Token Service) assume role permissions to Amazon Kendra.</p>
+    DescribeQuerySuggestionsBlockListRequest:
+      type: object
+      required:
+        - IndexId
+        - Id
+      title: DescribeQuerySuggestionsBlockListRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index for the block list.
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListId'
+            - description: The unique identifier of the block list.
+    DescribeQuerySuggestionsConfigResponse:
+      type: object
+      properties:
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/Mode'
+            - description: '<p>Shows whether query suggestions are currently in <code>ENABLED</code> mode or <code>LEARN_ONLY</code> mode.</p> <p>By default, Amazon Kendra enables query suggestions.<code>LEARN_ONLY</code> turns off query suggestions for your users. You can change the mode using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html">UpdateQuerySuggestionsConfig</a> operation.</p>'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsStatus'
+            - description: <p>Shows whether the status of query suggestions settings is currently Active or Updating.</p> <p>Active means the current settings apply and Updating means your changed settings are in the process of applying.</p>
+        QueryLogLookBackWindowInDays:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Shows how recent your queries are in your query log time window (in days).
+        IncludeQueriesWithoutUserInformation:
+          allOf:
+            - $ref: '#/components/schemas/ObjectBoolean'
+            - description: Shows whether Amazon Kendra uses all queries or only uses queries that include user information to generate query suggestions.
+        MinimumNumberOfQueryingUsers:
+          allOf:
+            - $ref: '#/components/schemas/MinimumNumberOfQueryingUsers'
+            - description: Shows the minimum number of unique users who must search a query in order for the query to be eligible to suggest to your users.
+        MinimumQueryCount:
+          allOf:
+            - $ref: '#/components/schemas/MinimumQueryCount'
+            - description: Shows the minimum number of times a query must be searched in order for the query to be eligible to suggest to your users.
+        LastSuggestionsBuildTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Shows the date-time query suggestions for an index was last updated.
+        LastClearTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: '<p>Shows the date-time query suggestions for an index was last cleared.</p> <p>After you clear suggestions, Amazon Kendra learns new suggestions based on new queries added to the query log from the time you cleared suggestions. Amazon Kendra only considers re-occurences of a query from the time you cleared suggestions. </p>'
+        TotalSuggestionsCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>Shows the current total count of query suggestions for an index.</p> <p>This count can change when you update your query suggestions settings, if you filter out certain queries from suggestions using a block list, and as the query log accumulates more queries for Amazon Kendra to learn from.</p>'
+    DescribeQuerySuggestionsConfigRequest:
+      type: object
+      required:
+        - IndexId
+      title: DescribeQuerySuggestionsConfigRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index you want to describe query suggestions settings for.
     DescribeThesaurusResponse:
       type: object
       properties:
@@ -2719,6 +3502,36 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexId'
             - description: The identifier of the index associated with the thesaurus to describe.
+    GetQuerySuggestionsResponse:
+      type: object
+      properties:
+        QuerySuggestionsId:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsId'
+            - description: The unique identifier for a list of query suggestions for an index.
+        Suggestions:
+          allOf:
+            - $ref: '#/components/schemas/SuggestionList'
+            - description: A list of query suggestions for an index.
+    GetQuerySuggestionsRequest:
+      type: object
+      required:
+        - IndexId
+        - QueryText
+      title: GetQuerySuggestionsRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index you want to get query suggestions from.
+        QueryText:
+          allOf:
+            - $ref: '#/components/schemas/SuggestionQueryText'
+            - description: <p>The text of a user's query to generate query suggestions.</p> <p>A query is suggested if the query prefix matches what a user starts to type as their query.</p> <p>Amazon Kendra does not show any suggestions if a user types fewer than two characters or more than 60 characters. A query must also have at least one search result and contain at least one word of more than four characters.</p>
+        MaxSuggestionsCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum number of query suggestions you want to show to your users.
     ListDataSourceSyncJobsResponse:
       type: object
       properties:
@@ -2842,6 +3655,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResultsIntegerForListIndicesRequest'
             - description: The maximum number of data sources to return.
+    ListQuerySuggestionsBlockListsResponse:
+      type: object
+      properties:
+        BlockListSummaryItems:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListSummaryItems'
+            - description: '<p>Summary items for a block list.</p> <p>This includes summary items on the block list ID, block list name, when the block list was created, when the block list was last updated, and the count of block words/phrases in the block list.</p> <p>For information on the current quota limits for block lists, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas for Amazon Kendra</a>.</p>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of block lists.'
+    ListQuerySuggestionsBlockListsRequest:
+      type: object
+      required:
+        - IndexId
+      title: ListQuerySuggestionsBlockListsRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: '<p>The identifier of the index for a list of all block lists that exist for that index.</p> <p>For information on the current quota limits for block lists, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas for Amazon Kendra</a>.</p>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of block lists (<code>BlockListSummaryItems</code>).'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsIntegerForListQuerySuggestionsBlockLists'
+            - description: The maximum number of block lists to return.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -3131,6 +3973,67 @@ components:
           allOf:
             - $ref: '#/components/schemas/UserContextPolicy'
             - description: The user user token context policy.
+    UpdateQuerySuggestionsBlockListRequest:
+      type: object
+      required:
+        - IndexId
+        - Id
+      title: UpdateQuerySuggestionsBlockListRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index for a block list.
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListId'
+            - description: The unique identifier of a block list.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListName'
+            - description: The name of a block list.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description for a block list.
+        SourceS3Path:
+          allOf:
+            - $ref: '#/components/schemas/S3Path'
+            - description: '<p>The S3 path where your block list text file sits in S3.</p> <p>If you update your block list and provide the same path to the block list text file in S3, then Amazon Kendra reloads the file to refresh the block list. Amazon Kendra does not automatically refresh your block list. You need to call the <code>UpdateQuerySuggestionsBlockList</code> API to refresh you block list.</p> <p>If you update your block list, then Amazon Kendra asynchronously refreshes all query suggestions with the latest content in the S3 file. This means changes might not take effect immediately.</p>'
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The IAM (Identity and Access Management) role used to access the block list text file in S3.
+    UpdateQuerySuggestionsConfigRequest:
+      type: object
+      required:
+        - IndexId
+      title: UpdateQuerySuggestionsConfigRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index you want to update query suggestions settings for.
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/Mode'
+            - description: '<p>Set the mode to <code>ENABLED</code> or <code>LEARN_ONLY</code>.</p> <p>By default, Amazon Kendra enables query suggestions. <code>LEARN_ONLY</code> mode allows you to turn off query suggestions. You can to update this at any time.</p> <p>In <code>LEARN_ONLY</code> mode, Amazon Kendra continues to learn from new queries to keep suggestions up to date for when you are ready to switch to ENABLED mode again.</p>'
+        QueryLogLookBackWindowInDays:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>How recent your queries are in your query log time window.</p> <p>The time window is the number of days from current day to past days.</p> <p>By default, Amazon Kendra sets this to 180.</p>'
+        IncludeQueriesWithoutUserInformation:
+          allOf:
+            - $ref: '#/components/schemas/ObjectBoolean'
+            - description: '<p> <code>TRUE</code> to include queries without user information (i.e. all queries, irrespective of the user), otherwise <code>FALSE</code> to only include queries with user information.</p> <p>If you pass user information to Amazon Kendra along with the queries, you can set this flag to <code>FALSE</code> and instruct Amazon Kendra to only consider queries with user information.</p> <p>If you set to <code>FALSE</code>, Amazon Kendra only considers queries searched at least <code>MinimumQueryCount</code> times across <code>MinimumNumberOfQueryingUsers</code> unique users for suggestions.</p> <p>If you set to <code>TRUE</code>, Amazon Kendra ignores all user information and learns from all queries.</p>'
+        MinimumNumberOfQueryingUsers:
+          allOf:
+            - $ref: '#/components/schemas/MinimumNumberOfQueryingUsers'
+            - description: '<p>The minimum number of unique users who must search a query in order for the query to be eligible to suggest to your users.</p> <p>Increasing this number might decrease the number of suggestions. However, this ensures a query is searched by many users and is truly popular to suggest to users.</p> <p>How you tune this setting depends on your specific needs.</p>'
+        MinimumQueryCount:
+          allOf:
+            - $ref: '#/components/schemas/MinimumQueryCount'
+            - description: '<p>The the minimum number of times a query must be searched in order to be eligible to suggest to your users.</p> <p>Decreasing this number increases the number of suggestions. However, this affects the quality of suggestions as it sets a low bar for a query to be considered popular to suggest to users.</p> <p>How you tune this setting depends on your specific needs.</p>'
     UpdateThesaurusRequest:
       type: object
       required:
@@ -3321,7 +4224,6 @@ components:
       type: object
       required:
         - DataSourceId
-        - DataSourceSyncJobId
       properties:
         DataSourceId:
           allOf:
@@ -3330,7 +4232,7 @@ components:
         DataSourceSyncJobId:
           allOf:
             - $ref: '#/components/schemas/DataSourceSyncJobId'
-            - description: The ID of the sync job that is running on the data source.
+            - description: '<p>The ID of the sync job that is running on the data source.</p> <p>If the ID of a sync job is not provided and there is a sync job running, then the ID of this sync job is used and metrics are generated for this sync job.</p> <p>If the ID of a sync job is not provided and there is no sync job running, then no metrics are generated and documents are indexed/deleted at the index level without sync job metrics included.</p>'
       description: Maps a particular data source sync job to a particular data source.
     BatchDeleteDocumentResponseFailedDocuments:
       type: array
@@ -3975,6 +4877,16 @@ components:
       enum:
         - ATTRIBUTE_FILTER
         - USER_TOKEN
+    QuerySuggestionsBlockListName:
+      type: string
+      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+      minLength: 1
+      maxLength: 100
+    QuerySuggestionsBlockListId:
+      type: string
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9-]*'
+      minLength: 36
+      maxLength: 36
     ThesaurusName:
       type: string
       pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
@@ -4001,11 +4913,11 @@ components:
         InclusionPatterns:
           allOf:
             - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-            - description: '<p>A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href="https://en.wikipedia.org/wiki/Glob_(programming)">glob (programming)</a> in <i>Wikipedia</i>.</p>'
+            - description: '<p>A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed.</p> <p>Some <a href="https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters">examples</a> are:</p> <ul> <li> <p> <i>*.txt</i> will include all text files in a directory (files with the extension .txt).</p> </li> <li> <p> <i>**/*.txt</i> will include all text files in a directory and its subdirectories.</p> </li> <li> <p> <i>*tax*</i> will include all files in a directory that contain ''tax'' in the file name, such as ''tax'', ''taxes'', ''income_tax''.</p> </li> </ul>'
         ExclusionPatterns:
           allOf:
             - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-            - description: '<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href="https://en.wikipedia.org/wiki/Glob_(programming)">glob (programming)</a> in <i>Wikipedia</i>.</p>'
+            - description: '<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed.</p> <p>Some <a href="https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters">examples</a> are:</p> <ul> <li> <p> <i>*.png , *.jpg</i> will exclude all PNG and JPEG image files in a directory (files with the extensions .png and .jpg).</p> </li> <li> <p> <i>*internal*</i> will exclude all files in a directory that contain ''internal'' in the file name, such as ''internal'', ''internal_only'', ''company_internal''.</p> </li> <li> <p> <i>**/*internal*</i> will exclude all internal-related files in a directory and its subdirectories.</p> </li> </ul>'
         DocumentsMetadataConfiguration:
           $ref: '#/components/schemas/DocumentsMetadataConfiguration'
         AccessControlListConfiguration:
@@ -4453,6 +5365,39 @@ components:
             - $ref: '#/components/schemas/TextDocumentStatistics'
             - description: The number of text documents indexed.
       description: Provides information about the number of documents and the number of questions and answers in an index.
+    QuerySuggestionsBlockListStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - CREATING
+        - DELETING
+        - UPDATING
+        - ACTIVE_BUT_UPDATE_FAILED
+        - FAILED
+    Integer:
+      type: integer
+    Long:
+      type: integer
+    Mode:
+      type: string
+      enum:
+        - ENABLED
+        - LEARN_ONLY
+    QuerySuggestionsStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - UPDATING
+    ObjectBoolean:
+      type: boolean
+    MinimumNumberOfQueryingUsers:
+      type: integer
+      minimum: 1
+      maximum: 10000
+    MinimumQueryCount:
+      type: integer
+      minimum: 1
+      maximum: 10000
     ThesaurusStatus:
       type: string
       enum:
@@ -4462,8 +5407,6 @@ components:
         - UPDATING
         - ACTIVE_BUT_UPDATE_FAILED
         - FAILED
-    Long:
-      type: integer
     Title:
       type: string
     DocumentAttributeList:
@@ -4545,8 +5488,6 @@ components:
       type: string
       minLength: 1
       maxLength: 2048
-    Integer:
-      type: integer
     DocumentAttributeValueCountPair:
       type: object
       properties:
@@ -4790,6 +5731,17 @@ components:
       pattern: '^\P{C}*.\P{C}*$'
       minLength: 1
       maxLength: 2048
+    SuggestionQueryText:
+      type: string
+      pattern: '^\P{C}*$'
+    QuerySuggestionsId:
+      type: string
+      minLength: 1
+      maxLength: 36
+    SuggestionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Suggestion'
     GroupAttributeField:
       type: string
       pattern: '^\P{C}*$'
@@ -4989,6 +5941,14 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    MaxResultsIntegerForListQuerySuggestionsBlockLists:
+      type: integer
+      minimum: 1
+      maximum: 100
+    QuerySuggestionsBlockListSummaryItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/QuerySuggestionsBlockListSummary'
     MaxResultsIntegerForListThesauriRequest:
       type: integer
       minimum: 1
@@ -5170,6 +6130,34 @@ components:
             - $ref: '#/components/schemas/FeedbackToken'
             - description: 'A token that identifies a particular result from a particular query. Use this token to provide click-through feedback for the result. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html"> Submitting feedback </a>.'
       description: '<p>A single query result.</p> <p>A query result contains information about a document returned by the query. This includes the original location of the document, a list of attributes assigned to the document, and relevant text from the document that satisfies the query.</p>'
+    QuerySuggestionsBlockListSummary:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListId'
+            - description: The identifier of a block list.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListName'
+            - description: The name of the block list.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/QuerySuggestionsBlockListStatus'
+            - description: The status of the block list.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date-time summary information for a query suggestions block list was last created.
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date-time the block list was last updated.
+        ItemCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of items in the block list file.
+      description: '<p>Summary information on a query suggestions block list.</p> <p>This includes information on the block list ID, block list name, when the block list was created, when the block list was last updated, and the count of block words/phrases in the block list.</p> <p>For information on the current quota limits for block lists, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas for Amazon Kendra</a>.</p>'
     ValueImportanceMap:
       type: object
       additionalProperties:
@@ -5221,7 +6209,7 @@ components:
         DocumentTitleFieldName:
           allOf:
             - $ref: '#/components/schemas/DataSourceFieldName'
-            - description: The name of the column in the Salesforce FeedItem table that contains the title of the document. This is typically the <code>Title</code> collumn.
+            - description: The name of the column in the Salesforce FeedItem table that contains the title of the document. This is typically the <code>Title</code> column.
         FieldMappings:
           allOf:
             - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
@@ -5496,6 +6484,54 @@ components:
       pattern: '[\-0-9a-zA-Z]+'
       minLength: 1
       maxLength: 200
+    SuggestionValue:
+      type: object
+      properties:
+        Text:
+          allOf:
+            - $ref: '#/components/schemas/SuggestionTextWithHighlights'
+            - description: The <code>SuggestionTextWithHighlights</code> structure that contains the query suggestion text and highlights.
+      description: The <code>SuggestionTextWithHighlights</code> structure information.
+    Suggestion:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ResultId'
+            - description: The unique UUID (universally unique identifier) of a single query suggestion.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/SuggestionValue'
+            - description: <p>The value for the unique UUID (universally unique identifier) of a single query suggestion.</p> <p>The value is the text string of a suggestion.</p>
+      description: A single query suggestion.
+    SuggestionHighlight:
+      type: object
+      properties:
+        BeginOffset:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The zero-based location in the response string where the highlight starts.
+        EndOffset:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The zero-based location in the response string where the highlight ends.
+      description: The text highlights for a single query suggestion.
+    SuggestionHighlightList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SuggestionHighlight'
+    SuggestionTextWithHighlights:
+      type: object
+      properties:
+        Text:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The query suggestion text to display to the user.
+        Highlights:
+          allOf:
+            - $ref: '#/components/schemas/SuggestionHighlightList'
+            - description: The beginning and end of the query suggestion text that should be highlighted.
+      description: Provides text and information about where to highlight the query suggestion text.
     TagKey:
       type: string
       minLength: 1

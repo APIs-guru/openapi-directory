@@ -1297,6 +1297,24 @@ paths:
                   enum:
                     - IAM
                     - SSO
+                notificationSenderEmail:
+                  description: '<p>The email address that sends alarm notifications.</p> <important> <p>If you use the AWS IoT Events managed AWS Lambda function to manage your emails, you must <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html">verify the sender email address in Amazon SES</a>.</p> </important>'
+                  type: string
+                  pattern: '[^@]+@[^@]+'
+                  minLength: 1
+                  maxLength: 255
+                alarms:
+                  description: 'Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .'
+                  type: object
+                  properties:
+                    alarmRoleArn:
+                      allOf:
+                        - $ref: '#/components/schemas/ARN'
+                        - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IAM role that allows the alarm to perform actions and access AWS resources, including AWS IoT Events.'
+                    notificationLambdaArn:
+                      allOf:
+                        - $ref: '#/components/schemas/ARN'
+                        - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the AWS Lambda function that manages alarm notifications. For more information, see <a href="https://docs.aws.amazon.com/">Managing alarm notifications</a> in the <i>AWS IoT Events Developer Guide</i>.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2603,6 +2621,24 @@ paths:
                   pattern: '\S{36,64}'
                   minLength: 36
                   maxLength: 64
+                notificationSenderEmail:
+                  description: The email address that sends alarm notifications.
+                  type: string
+                  pattern: '[^@]+@[^@]+'
+                  minLength: 1
+                  maxLength: 255
+                alarms:
+                  description: 'Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .'
+                  type: object
+                  properties:
+                    alarmRoleArn:
+                      allOf:
+                        - $ref: '#/components/schemas/ARN'
+                        - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IAM role that allows the alarm to perform actions and access AWS resources, including AWS IoT Events.'
+                    notificationLambdaArn:
+                      allOf:
+                        - $ref: '#/components/schemas/ARN'
+                        - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the AWS Lambda function that manages alarm notifications. For more information, see <a href="https://docs.aws.amazon.com/">Managing alarm notifications</a> in the <i>AWS IoT Events Developer Guide</i>.'
   '/projects/{projectId}':
     delete:
       operationId: DeleteProject
@@ -4816,6 +4852,11 @@ components:
       type: string
       enum:
         - PNG
+    ARN:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 1600
     CreateProjectResponse:
       type: object
       required:
@@ -5235,6 +5276,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/AuthMode'
             - description: The service to use to authenticate users to the portal.
+        notificationSenderEmail:
+          allOf:
+            - $ref: '#/components/schemas/Email'
+            - description: The email address that sends alarm notifications.
+        alarms:
+          allOf:
+            - $ref: '#/components/schemas/Alarms'
+            - description: Contains the configuration information of an alarm created in a AWS IoT SiteWise Monitor portal.
     DescribeProjectResponse:
       type: object
       required:
@@ -5647,11 +5696,6 @@ components:
     UpdateProjectResponse:
       type: object
       properties: {}
-    ARN:
-      type: string
-      pattern: .*
-      minLength: 1
-      maxLength: 1600
     AccessPolicySummary:
       type: object
       required:
@@ -5788,6 +5832,20 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AggregatedValue'
+    Alarms:
+      type: object
+      required:
+        - alarmRoleArn
+      properties:
+        alarmRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IAM role that allows the alarm to perform actions and access AWS resources, including AWS IoT Events.'
+        notificationLambdaArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the AWS Lambda function that manages alarm notifications. For more information, see <a href="https://docs.aws.amazon.com/">Managing alarm notifications</a> in the <i>AWS IoT Events Developer Guide</i>.'
+      description: 'Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .'
     AmazonResourceName:
       type: string
       minLength: 1
@@ -6771,6 +6829,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/AuthMode'
             - description: '<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso">Enabling AWS SSO</a> in the <i>AWS IoT SiteWise User Guide</i>. This option is only available in AWS Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. This option is only available in the China Regions.</p> </li> </ul> <p>You can''t change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>'
+        notificationSenderEmail:
+          allOf:
+            - $ref: '#/components/schemas/Email'
+            - description: '<p>The email address that sends alarm notifications.</p> <important> <p>If you use the AWS IoT Events managed AWS Lambda function to manage your emails, you must <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html">verify the sender email address in Amazon SES</a>.</p> </important>'
+        alarms:
+          allOf:
+            - $ref: '#/components/schemas/Alarms'
+            - description: 'Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .'
     Url:
       type: string
       pattern: '^(http|https)\://\S+'
@@ -7628,6 +7694,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+        notificationSenderEmail:
+          allOf:
+            - $ref: '#/components/schemas/Email'
+            - description: The email address that sends alarm notifications.
+        alarms:
+          allOf:
+            - $ref: '#/components/schemas/Alarms'
+            - description: 'Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .'
     UpdateProjectRequest:
       type: object
       required:

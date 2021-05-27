@@ -115,6 +115,195 @@ servers:
     description: The AWS IoT Events endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /alarm-models:
+    post:
+      operationId: CreateAlarmModel
+      description: 'Creates an alarm model to monitor an AWS IoT Events input attribute. You can use the alarm to get notified when the value is outside a specified range. For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/create-alarms.html">Create an alarm model</a> in the <i>AWS IoT Events Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAlarmModelResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - alarmModelName
+                - roleArn
+                - alarmRule
+              properties:
+                alarmModelName:
+                  description: A unique name that helps you identify the alarm model. You can't change this name after you create the alarm model.
+                  type: string
+                  pattern: '^[a-zA-Z0-9_-]+$'
+                  minLength: 1
+                  maxLength: 128
+                alarmModelDescription:
+                  description: A description that tells you what the alarm model detects.
+                  type: string
+                  maxLength: 128
+                roleArn:
+                  description: 'The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 2048
+                tags:
+                  description: '<p>A list of key-value pairs that contain metadata for the alarm model. The tags help you manage the alarm model. For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/tagging-iotevents.html">Tagging your AWS IoT Events resources</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>You can create up to 50 tags for one alarm model.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                key:
+                  description: 'An input attribute used as a key to create an alarm. AWS IoT Events routes <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html">inputs</a> associated with this key to the alarm.'
+                  type: string
+                  pattern: '^((`[\w\- ]+`)|([\w\-]+))(\.((`[\w- ]+`)|([\w\-]+)))*$'
+                  minLength: 1
+                  maxLength: 128
+                severity:
+                  description: A non-negative integer that reflects the severity level of the alarm.
+                  type: integer
+                  minimum: 0
+                  maximum: 2147483647
+                alarmRule:
+                  description: Defines when your alarm is invoked.
+                  type: object
+                  properties:
+                    simpleRule:
+                      allOf:
+                        - $ref: '#/components/schemas/SimpleRule'
+                        - description: A rule that compares an input property value to a threshold value with a comparison operator.
+                alarmNotification:
+                  description: Contains information about one or more notification actions.
+                  type: object
+                  properties:
+                    notificationActions:
+                      allOf:
+                        - $ref: '#/components/schemas/NotificationActions'
+                        - description: Contains the notification settings of an alarm model. The settings apply to all alarms that were created based on this alarm model.
+                alarmEventActions:
+                  description: Contains information about one or more alarm actions.
+                  type: object
+                  properties:
+                    alarmActions:
+                      allOf:
+                        - $ref: '#/components/schemas/AlarmActions'
+                        - description: Specifies one or more supported actions to receive notifications when the alarm state changes.
+                alarmCapabilities:
+                  description: Contains the configuration information of alarm state changes.
+                  type: object
+                  properties:
+                    initializationConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/InitializationConfiguration'
+                        - description: Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model.
+                    acknowledgeFlow:
+                      allOf:
+                        - $ref: '#/components/schemas/AcknowledgeFlow'
+                        - description: Specifies whether to get notified for alarm state changes.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListAlarmModels
+      description: Lists the alarm models that you created. The operation returns only the metadata associated with each alarm model.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAlarmModelsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: The token that you can use to return the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
   /detector-models:
     post:
       operationId: CreateDetectorModel
@@ -413,6 +602,245 @@ paths:
             type: integer
             minimum: 1
             maximum: 250
+  '/alarm-models/{alarmModelName}':
+    delete:
+      operationId: DeleteAlarmModel
+      description: Deletes an alarm model. Any alarm instances that were created based on this alarm model are also deleted. This action can't be undone.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAlarmModelResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: alarmModelName
+          in: path
+          required: true
+          description: The name of the alarm model.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeAlarmModel
+      description: 'Retrieves information about an alarm model. If you don''t specify a value for the <code>alarmModelVersion</code> parameter, the latest version is returned.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAlarmModelResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: alarmModelName
+          in: path
+          required: true
+          description: The name of the alarm model.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 128
+        - name: version
+          in: query
+          required: false
+          description: The version of the alarm model.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+    post:
+      operationId: UpdateAlarmModel
+      description: Updates an alarm model. Any alarms that were created based on the previous version are deleted and then created again as new data arrives.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAlarmModelResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: alarmModelName
+          in: path
+          required: true
+          description: The name of the alarm model.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - roleArn
+                - alarmRule
+              properties:
+                alarmModelDescription:
+                  description: The description of the alarm model.
+                  type: string
+                  maxLength: 128
+                roleArn:
+                  description: 'The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 2048
+                severity:
+                  description: A non-negative integer that reflects the severity level of the alarm.
+                  type: integer
+                  minimum: 0
+                  maximum: 2147483647
+                alarmRule:
+                  description: Defines when your alarm is invoked.
+                  type: object
+                  properties:
+                    simpleRule:
+                      allOf:
+                        - $ref: '#/components/schemas/SimpleRule'
+                        - description: A rule that compares an input property value to a threshold value with a comparison operator.
+                alarmNotification:
+                  description: Contains information about one or more notification actions.
+                  type: object
+                  properties:
+                    notificationActions:
+                      allOf:
+                        - $ref: '#/components/schemas/NotificationActions'
+                        - description: Contains the notification settings of an alarm model. The settings apply to all alarms that were created based on this alarm model.
+                alarmEventActions:
+                  description: Contains information about one or more alarm actions.
+                  type: object
+                  properties:
+                    alarmActions:
+                      allOf:
+                        - $ref: '#/components/schemas/AlarmActions'
+                        - description: Specifies one or more supported actions to receive notifications when the alarm state changes.
+                alarmCapabilities:
+                  description: Contains the configuration information of alarm state changes.
+                  type: object
+                  properties:
+                    initializationConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/InitializationConfiguration'
+                        - description: Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model.
+                    acknowledgeFlow:
+                      allOf:
+                        - $ref: '#/components/schemas/AcknowledgeFlow'
+                        - description: Specifies whether to get notified for alarm state changes.
   '/detector-models/{detectorModelName}':
     delete:
       operationId: DeleteDetectorModel
@@ -824,7 +1252,7 @@ paths:
   '/analysis/detector-models/{analysisId}':
     get:
       operationId: DescribeDetectorModelAnalysis
-      description: Retrieves execution information about a detector model analysis
+      description: '<p>Retrieves runtime information about a detector model analysis.</p> <note> <p>After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1008,7 +1436,7 @@ paths:
   '/analysis/detector-models/{analysisId}/results':
     get:
       operationId: GetDetectorModelAnalysisResults
-      description: Retrieves one or more analysis results of the detector model.
+      description: '<p>Retrieves one or more analysis results of the detector model.</p> <note> <p>After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1065,6 +1493,79 @@ paths:
           description: The maximum number of results to be returned per request.
           schema:
             type: integer
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/alarm-models/{alarmModelName}/versions':
+    get:
+      operationId: ListAlarmModelVersions
+      description: Lists all the versions of an alarm model. The operation returns only the metadata associated with each alarm model version.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAlarmModelVersionsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: alarmModelName
+          in: path
+          required: true
+          description: The name of the alarm model.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 128
+        - name: nextToken
+          in: query
+          required: false
+          description: The token that you can use to return the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1138,6 +1639,85 @@ paths:
             type: integer
             minimum: 1
             maximum: 250
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /input-routings:
+    post:
+      operationId: ListInputRoutings
+      description: ' Lists one or more input routings. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInputRoutingsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - inputIdentifier
+              properties:
+                inputIdentifier:
+                  description: ' The identifer of the input. '
+                  type: object
+                  properties:
+                    iotEventsInputIdentifier:
+                      allOf:
+                        - $ref: '#/components/schemas/IotEventsInputIdentifier'
+                        - description: ' The identifier of the input routed to AWS IoT Events. '
+                    iotSiteWiseInputIdentifier:
+                      allOf:
+                        - $ref: '#/components/schemas/IotSiteWiseInputIdentifier'
+                        - description: ' The identifer of the input routed from AWS IoT SiteWise. '
+                maxResults:
+                  description: ' The maximum number of results to be returned per request. '
+                  type: integer
+                  minimum: 1
+                  maximum: 250
+                nextToken:
+                  description: ' The token that you can use to return the next set of results. '
+                  type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1276,7 +1856,7 @@ paths:
   /analysis/detector-models/:
     post:
       operationId: StartDetectorModelAnalysis
-      description: 'Performs an analysis of your detector model. For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html">Running detector model analyses</a> in the <i>AWS IoT Events Developer Guide</i>.'
+      description: 'Performs an analysis of your detector model. For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html">Troubleshooting a detector model</a> in the <i>AWS IoT Events Developer Guide</i>.'
       responses:
         '200':
           description: Success
@@ -1462,6 +2042,100 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    CreateAlarmModelResponse:
+      type: object
+      properties:
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the alarm model was created, in the Unix epoch format.'
+        alarmModelArn:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelArn'
+            - description: 'The ARN of the alarm model. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.'
+        alarmModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelVersion'
+            - description: The version of the alarm model.
+        lastUpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the alarm model was last updated, in the Unix epoch format.'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelVersionStatus'
+            - description: '<p>The status of the alarm model. The status can be one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The alarm model is active and it''s ready to evaluate data.</p> </li> <li> <p> <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.</p> </li> <li> <p> <code>INACTIVE</code> - The alarm model is inactive, so it isn''t ready to evaluate data. Check your alarm model information and update the alarm model.</p> </li> <li> <p> <code>FAILED</code> - You couldn''t create or update the alarm model. Check your alarm model information and try again.</p> </li> </ul>'
+    Tag:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The tag's key.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The tag's value.
+      description: Metadata that can be used to manage the resource.
+    SimpleRule:
+      type: object
+      required:
+        - inputProperty
+        - comparisonOperator
+        - threshold
+      properties:
+        inputProperty:
+          allOf:
+            - $ref: '#/components/schemas/InputProperty'
+            - description: The value on the left side of the comparison operator. You can specify an AWS IoT Events input attribute as an input property.
+        comparisonOperator:
+          allOf:
+            - $ref: '#/components/schemas/ComparisonOperator'
+            - description: The comparison operator.
+        threshold:
+          allOf:
+            - $ref: '#/components/schemas/Threshold'
+            - description: The value on the right side of the comparison operator. You can enter a number or specify an AWS IoT Events input attribute.
+      description: A rule that compares an input property value to a threshold value with a comparison operator.
+    NotificationActions:
+      type: array
+      items:
+        $ref: '#/components/schemas/NotificationAction'
+      minItems: 1
+    AlarmActions:
+      type: array
+      items:
+        $ref: '#/components/schemas/AlarmAction'
+    InitializationConfiguration:
+      type: object
+      required:
+        - disabledOnInitialization
+      properties:
+        disabledOnInitialization:
+          allOf:
+            - $ref: '#/components/schemas/DisabledOnInitialization'
+            - description: 'The value must be <code>TRUE</code> or <code>FALSE</code>. If <code>FALSE</code>, all alarm instances created based on the alarm model are activated. The default value is <code>TRUE</code>.'
+      description: Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model.
+    AcknowledgeFlow:
+      type: object
+      required:
+        - enabled
+      properties:
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/AcknowledgeFlowEnabled'
+            - description: 'The value must be <code>TRUE</code> or <code>FALSE</code>. If <code>TRUE</code>, you receive a notification when the alarm state changes. You must choose to acknowledge the notification before the alarm state can return to <code>NORMAL</code>. If <code>FALSE</code>, you won''t receive notifications. The alarm automatically changes to the <code>NORMAL</code> state when the input property value returns to the specified range.'
+      description: Specifies whether to get notified for alarm state changes.
+    InvalidRequestException: {}
+    ResourceInUseException: {}
+    ResourceAlreadyExistsException: {}
+    LimitExceededException: {}
+    ThrottlingException: {}
+    InternalFailureException: {}
+    ServiceUnavailableException: {}
     CreateDetectorModelResponse:
       type: object
       properties:
@@ -1478,28 +2152,6 @@ components:
       type: string
       minLength: 1
       maxLength: 128
-    Tag:
-      type: object
-      required:
-        - key
-        - value
-      properties:
-        key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The tag's key.
-        value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The tag's value.
-      description: Metadata that can be used to manage the resource.
-    InvalidRequestException: {}
-    ResourceInUseException: {}
-    ResourceAlreadyExistsException: {}
-    LimitExceededException: {}
-    ThrottlingException: {}
-    InternalFailureException: {}
-    ServiceUnavailableException: {}
     CreateInputResponse:
       type: object
       properties:
@@ -1513,13 +2165,79 @@ components:
         $ref: '#/components/schemas/Attribute'
       minItems: 1
       maxItems: 200
-    DeleteDetectorModelResponse:
+    DeleteAlarmModelResponse:
       type: object
       properties: {}
     ResourceNotFoundException: {}
+    DeleteDetectorModelResponse:
+      type: object
+      properties: {}
     DeleteInputResponse:
       type: object
       properties: {}
+    DescribeAlarmModelResponse:
+      type: object
+      properties:
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the alarm model was created, in the Unix epoch format.'
+        alarmModelArn:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelArn'
+            - description: 'The ARN of the alarm model. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.'
+        alarmModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelVersion'
+            - description: The version of the alarm model.
+        lastUpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the alarm model was last updated, in the Unix epoch format.'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelVersionStatus'
+            - description: '<p>The status of the alarm model. The status can be one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The alarm model is active and it''s ready to evaluate data.</p> </li> <li> <p> <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.</p> </li> <li> <p> <code>INACTIVE</code> - The alarm model is inactive, so it isn''t ready to evaluate data. Check your alarm model information and update the alarm model.</p> </li> <li> <p> <code>FAILED</code> - You couldn''t create or update the alarm model. Check your alarm model information and try again.</p> </li> </ul>'
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: ' Contains information about the status of the alarm model. '
+        alarmModelName:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelName'
+            - description: The name of the alarm model.
+        alarmModelDescription:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelDescription'
+            - description: The description of the alarm model.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: 'The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.'
+        key:
+          allOf:
+            - $ref: '#/components/schemas/AttributeJsonPath'
+            - description: 'An input attribute used as a key to create an alarm. AWS IoT Events routes <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html">inputs</a> associated with this key to the alarm.'
+        severity:
+          allOf:
+            - $ref: '#/components/schemas/Severity'
+            - description: A non-negative integer that reflects the severity level of the alarm.
+        alarmRule:
+          allOf:
+            - $ref: '#/components/schemas/AlarmRule'
+            - description: Defines when your alarm is invoked.
+        alarmNotification:
+          allOf:
+            - $ref: '#/components/schemas/AlarmNotification'
+            - description: Contains information about one or more notification actions.
+        alarmEventActions:
+          allOf:
+            - $ref: '#/components/schemas/AlarmEventActions'
+            - description: Contains information about one or more alarm actions.
+        alarmCapabilities:
+          allOf:
+            - $ref: '#/components/schemas/AlarmCapabilities'
+            - description: Contains the configuration information of alarm state changes.
     DescribeDetectorModelResponse:
       type: object
       properties:
@@ -1533,7 +2251,7 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/AnalysisStatus'
-            - description: '<p>The status of the analysis activity. The status can be one of the following values:</p> <ul> <li> <p> <code>RUNNING</code> - AWS IoT Events is analyzing your detector model. This process can take several minutes to complete.</p> </li> <li> <p> <code>COMPLETE</code> - AWS IoT Events finished analyzing your detector model .</p> </li> <li> <p> <code>FAILED</code> - AWS IoT Events couldn''t analyze your detector model. Try again later.</p> </li> </ul>'
+            - description: '<p>The status of the analysis activity. The status can be one of the following values:</p> <ul> <li> <p> <code>RUNNING</code> - AWS IoT Events is analyzing your detector model. This process can take several minutes to complete.</p> </li> <li> <p> <code>COMPLETE</code> - AWS IoT Events finished analyzing your detector model.</p> </li> <li> <p> <code>FAILED</code> - AWS IoT Events couldn''t analyze your detector model. Try again later.</p> </li> </ul>'
     DescribeInputResponse:
       type: object
       properties:
@@ -1560,6 +2278,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'The token that you can use to return the next set of results, or <code>null</code> if there are no more results.'
+    ListAlarmModelVersionsResponse:
+      type: object
+      properties:
+        alarmModelVersionSummaries:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelVersionSummaries'
+            - description: A list that summarizes each alarm model version.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token that you can use to return the next set of results, or <code>null</code> if there are no more results.'
+    ListAlarmModelsResponse:
+      type: object
+      properties:
+        alarmModelSummaries:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelSummaries'
+            - description: A list that summarizes each alarm model.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token that you can use to return the next set of results, or <code>null</code> if there are no more results.'
     ListDetectorModelVersionsResponse:
       type: object
       properties:
@@ -1582,6 +2322,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'The token that you can use to return the next set of results, or <code>null</code> if there are no more results.'
+    ListInputRoutingsResponse:
+      type: object
+      properties:
+        routedResources:
+          allOf:
+            - $ref: '#/components/schemas/RoutedResources'
+            - description: ' Summary information about the routed resources. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The token that you can use to return the next set of results, or <code>null</code> if there are no more results. '
+    IotEventsInputIdentifier:
+      type: object
+      required:
+        - inputName
+      properties:
+        inputName:
+          allOf:
+            - $ref: '#/components/schemas/InputName'
+            - description: ' The name of the input routed to AWS IoT Events. '
+      description: ' The identifier of the input routed to AWS IoT Events. '
+    IotSiteWiseInputIdentifier:
+      type: object
+      properties:
+        iotSiteWiseAssetModelPropertyIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/IotSiteWiseAssetModelPropertyIdentifier'
+            - description: ' The identifier of the AWS IoT SiteWise asset model property. '
+      description: ' The identifer of the input routed from AWS IoT SiteWise. '
     ListInputsResponse:
       type: object
       properties:
@@ -1634,6 +2403,29 @@ components:
       type: string
       minLength: 1
       maxLength: 128
+    UpdateAlarmModelResponse:
+      type: object
+      properties:
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the alarm model was created, in the Unix epoch format.'
+        alarmModelArn:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelArn'
+            - description: 'The ARN of the alarm model. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.'
+        alarmModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelVersion'
+            - description: The version of the alarm model.
+        lastUpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the alarm model was last updated, in the Unix epoch format.'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelVersionStatus'
+            - description: '<p>The status of the alarm model. The status can be one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The alarm model is active and it''s ready to evaluate data.</p> </li> <li> <p> <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.</p> </li> <li> <p> <code>INACTIVE</code> - The alarm model is inactive, so it isn''t ready to evaluate data. Check your alarm model information and update the alarm model.</p> </li> <li> <p> <code>FAILED</code> - You couldn''t create or update the alarm model. Check your alarm model information and try again.</p> </li> </ul>'
     UpdateDetectorModelResponse:
       type: object
       properties:
@@ -1648,6 +2440,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/InputConfiguration'
             - description: Information about the configuration of the input.
+    AcknowledgeFlowEnabled:
+      type: boolean
     SetVariableAction:
       type: object
       required:
@@ -1854,8 +2648,6 @@ components:
       description: '<p>Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all the information about the detector model instance and the event that triggered the action. You can customize the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html">payload</a>. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.</p> <p>You must use expressions for all parameters in <code>DynamoDBv2Action</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>tableName</code> parameter can be <code>''GreenhouseTemperatureTable''</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>tableName</code> parameter can be <code>$variable.ddbtableName</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>contentExpression</code> parameter in <code>Payload</code> uses a substitution template. </p> <p> <code>''{\"sensorID\": \"${$input.GreenhouseInput.sensor_id}\", \"temperature\": \"${$input.GreenhouseInput.temperature * 9 / 5 + 32}\"}''</code> </p> </li> <li> <p>For a string concatenation, you must use <code>+</code>. A string concatenation can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>tableName</code> parameter uses a string concatenation. </p> <p> <code>''GreenhouseTemperatureTable '' + $input.GreenhouseInput.date</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>The value for the <code>type</code> parameter in <code>Payload</code> must be <code>JSON</code>.</p>'
     IotSiteWiseAction:
       type: object
-      required:
-        - propertyValue
       properties:
         entryId:
           allOf:
@@ -1938,6 +2730,150 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Action'
+    AlarmAction:
+      type: object
+      properties:
+        sns:
+          $ref: '#/components/schemas/SNSTopicPublishAction'
+        iotTopicPublish:
+          $ref: '#/components/schemas/IotTopicPublishAction'
+        lambda:
+          $ref: '#/components/schemas/LambdaAction'
+        iotEvents:
+          $ref: '#/components/schemas/IotEventsAction'
+        sqs:
+          $ref: '#/components/schemas/SqsAction'
+        firehose:
+          $ref: '#/components/schemas/FirehoseAction'
+        dynamoDB:
+          $ref: '#/components/schemas/DynamoDBAction'
+        dynamoDBv2:
+          $ref: '#/components/schemas/DynamoDBv2Action'
+        iotSiteWise:
+          $ref: '#/components/schemas/IotSiteWiseAction'
+      description: Specifies one of the following actions to receive notifications when the alarm state changes.
+    AlarmCapabilities:
+      type: object
+      properties:
+        initializationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/InitializationConfiguration'
+            - description: Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model.
+        acknowledgeFlow:
+          allOf:
+            - $ref: '#/components/schemas/AcknowledgeFlow'
+            - description: Specifies whether to get notified for alarm state changes.
+      description: Contains the configuration information of alarm state changes.
+    AlarmEventActions:
+      type: object
+      properties:
+        alarmActions:
+          allOf:
+            - $ref: '#/components/schemas/AlarmActions'
+            - description: Specifies one or more supported actions to receive notifications when the alarm state changes.
+      description: Contains information about one or more alarm actions.
+    AlarmModelArn:
+      type: string
+    AlarmModelDescription:
+      type: string
+      maxLength: 128
+    AlarmModelName:
+      type: string
+      pattern: '^[a-zA-Z0-9_-]+$'
+      minLength: 1
+      maxLength: 128
+    AlarmModelSummary:
+      type: object
+      properties:
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the alarm model was created, in the Unix epoch format.'
+        alarmModelDescription:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelDescription'
+            - description: The description of the alarm model.
+        alarmModelName:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelName'
+            - description: The name of the alarm model.
+      description: Contains a summary of an alarm model.
+    AlarmModelSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/AlarmModelSummary'
+    Timestamp:
+      type: string
+      format: date-time
+    AlarmModelVersion:
+      type: string
+      minLength: 1
+      maxLength: 128
+    AlarmModelVersionStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - ACTIVATING
+        - INACTIVE
+        - FAILED
+    AlarmModelVersionSummary:
+      type: object
+      properties:
+        alarmModelName:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelName'
+            - description: The name of the alarm model.
+        alarmModelArn:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelArn'
+            - description: 'The ARN of the alarm model. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.'
+        alarmModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelVersion'
+            - description: The version of the alarm model.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: 'The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.'
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the alarm model was created, in the Unix epoch format.'
+        lastUpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the alarm model was last updated, in the Unix epoch format.'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelVersionStatus'
+            - description: '<p>The status of the alarm model. The status can be one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The alarm model is active and it''s ready to evaluate data.</p> </li> <li> <p> <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.</p> </li> <li> <p> <code>INACTIVE</code> - The alarm model is inactive, so it isn''t ready to evaluate data. Check your alarm model information and update the alarm model.</p> </li> <li> <p> <code>FAILED</code> - You couldn''t create or update the alarm model. Check your alarm model information and try again.</p> </li> </ul>'
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: ' Contains information about the status of the alarm model version. '
+      description: Contains a summary of an alarm model version.
+    AlarmModelVersionSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/AlarmModelVersionSummary'
+    StatusMessage:
+      type: string
+    AlarmNotification:
+      type: object
+      properties:
+        notificationActions:
+          allOf:
+            - $ref: '#/components/schemas/NotificationActions'
+            - description: Contains the notification settings of an alarm model. The settings apply to all alarms that were created based on this alarm model.
+      description: Contains information about one or more notification actions.
+    AlarmRule:
+      type: object
+      properties:
+        simpleRule:
+          allOf:
+            - $ref: '#/components/schemas/SimpleRule'
+            - description: A rule that compares an input property value to a threshold value with a comparison operator.
+      description: Defines when your alarm is invoked.
     AnalysisId:
       type: string
     AnalysisMessage:
@@ -1960,11 +2896,11 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/AnalysisType'
-            - description: '<p>The type of the analysis result. Analyses fall into the following types based on the validators used to generate the analysis result:</p> <ul> <li> <p> <code>supported-actions</code> - You must specify AWS IoT Events supported actions that work with other AWS services in a supported AWS Region.</p> </li> <li> <p> <code>service-limits</code> - Resources or operations can''t exceed service limits. Update your detector model or request a limit adjust.</p> </li> <li> <p> <code>structure</code> - The detector model must follow a structure that AWS IoT Events supports. </p> </li> <li> <p> <code>expression-syntax</code> - Your expression must follow the required syntax.</p> </li> <li> <p> <code>data-type</code> - Data types referenced in the detector model must be compatible.</p> </li> <li> <p> <code>referenced-data</code> - You must define the data referenced in your detector model before you can use the data.</p> </li> <li> <p> <code>referenced-resource</code> - Resources that the detector model uses must be available.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html">Running detector model analyses</a> in the <i>AWS IoT Events Developer Guide</i>.</p>'
+            - description: '<p>The type of the analysis result. Analyses fall into the following types based on the validators used to generate the analysis result:</p> <ul> <li> <p> <code>supported-actions</code> - You must specify AWS IoT Events supported actions that work with other AWS services in a supported AWS Region.</p> </li> <li> <p> <code>service-limits</code> - Resources or API operations can''t exceed service quotas (also known as limits). Update your detector model or request a quota increase.</p> </li> <li> <p> <code>structure</code> - The detector model must follow a structure that AWS IoT Events supports. </p> </li> <li> <p> <code>expression-syntax</code> - Your expression must follow the required syntax.</p> </li> <li> <p> <code>data-type</code> - Data types referenced in the detector model must be compatible.</p> </li> <li> <p> <code>referenced-data</code> - You must define the data referenced in your detector model before you can use the data.</p> </li> <li> <p> <code>referenced-resource</code> - Resources that the detector model uses must be available.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html">Running detector model analyses</a> in the <i>AWS IoT Events Developer Guide</i>.</p>'
         level:
           allOf:
             - $ref: '#/components/schemas/AnalysisResultLevel'
-            - description: '<p>The severity level of the analysis result. Analysis results fall into three general categories based on the severity level:</p> <ul> <li> <p> <code>INFO</code> - An information result informs you about a significant field in your detector model. This type of result usually doesn''t require immediate action.</p> </li> <li> <p> <code>WARNING</code> - A warning result draws special attention to fields that are potentially damaging to your detector model. We recommend that you review warnings and take necessary actions before you use your detetor model in production environments. Otherwise, the detector model may not fully function as expected.</p> </li> <li> <p> <code>ERROR</code> - An error result notifies you about a problem found in your detector model. You must fix all errors before you can publish your detector model.</p> </li> </ul>'
+            - description: '<p>The severity level of the analysis result. Based on the severity level, analysis results fall into three general categories:</p> <ul> <li> <p> <code>INFO</code> - An information result tells you about a significant field in your detector model. This type of result usually doesn''t require immediate action.</p> </li> <li> <p> <code>WARNING</code> - A warning result draws special attention to fields that might cause issues for your detector model. We recommend that you review warnings and take necessary actions before you use your detector model in production environments. Otherwise, the detector model might not work as expected.</p> </li> <li> <p> <code>ERROR</code> - An error result notifies you about a problem found in your detector model. You must fix all errors before you can publish your detector model.</p> </li> </ul>'
         message:
           allOf:
             - $ref: '#/components/schemas/AnalysisMessage'
@@ -1995,6 +2931,8 @@ components:
         - COMPLETE
         - FAILED
     AssetId:
+      type: string
+    AssetModelId:
       type: string
     AssetPropertyAlias:
       type: string
@@ -2052,8 +2990,6 @@ components:
       description: '<p>A structure that contains an asset property value. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html">Variant</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> <p>You must use expressions for all parameters in <code>AssetPropertyVariant</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>integerValue</code> parameter can be <code>''100''</code>.</p> </li> <li> <p>For references, you must specify either variables or parameters. For example, the value for the <code>booleanValue</code> parameter can be <code>$variable.offline</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates. </p> <p>In the following example, the value for the <code>doubleValue</code> parameter uses a substitution template. </p> <p> <code>''${$input.TemperatureInput.sensorData.temperature * 6 / 5 + 32}''</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>You must specify one of the following value types, depending on the <code>dataType</code> of the specified asset property. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetProperty.html">AssetProperty</a> in the <i>AWS IoT SiteWise API Reference</i>.</p>'
     AssetPropertyValue:
       type: object
-      required:
-        - value
       properties:
         value:
           allOf:
@@ -2087,12 +3023,77 @@ components:
       type: string
       minLength: 1
       maxLength: 128
+    ComparisonOperator:
+      type: string
+      enum:
+        - GREATER
+        - GREATER_OR_EQUAL
+        - LESS
+        - LESS_OR_EQUAL
+        - EQUAL
+        - NOT_EQUAL
     Condition:
       type: string
       maxLength: 512
     ContentExpression:
       type: string
       minLength: 1
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    Severity:
+      type: integer
+      minimum: 0
+      maximum: 2147483647
+    CreateAlarmModelRequest:
+      type: object
+      required:
+        - alarmModelName
+        - roleArn
+        - alarmRule
+      title: CreateAlarmModelRequest
+      properties:
+        alarmModelName:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelName'
+            - description: A unique name that helps you identify the alarm model. You can't change this name after you create the alarm model.
+        alarmModelDescription:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelDescription'
+            - description: A description that tells you what the alarm model detects.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: 'The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: '<p>A list of key-value pairs that contain metadata for the alarm model. The tags help you manage the alarm model. For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/tagging-iotevents.html">Tagging your AWS IoT Events resources</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>You can create up to 50 tags for one alarm model.</p>'
+        key:
+          allOf:
+            - $ref: '#/components/schemas/AttributeJsonPath'
+            - description: 'An input attribute used as a key to create an alarm. AWS IoT Events routes <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html">inputs</a> associated with this key to the alarm.'
+        severity:
+          allOf:
+            - $ref: '#/components/schemas/Severity'
+            - description: A non-negative integer that reflects the severity level of the alarm.
+        alarmRule:
+          allOf:
+            - $ref: '#/components/schemas/AlarmRule'
+            - description: Defines when your alarm is invoked.
+        alarmNotification:
+          allOf:
+            - $ref: '#/components/schemas/AlarmNotification'
+            - description: Contains information about one or more notification actions.
+        alarmEventActions:
+          allOf:
+            - $ref: '#/components/schemas/AlarmEventActions'
+            - description: Contains information about one or more alarm actions.
+        alarmCapabilities:
+          allOf:
+            - $ref: '#/components/schemas/AlarmCapabilities'
+            - description: Contains the configuration information of alarm state changes.
     DetectorModelName:
       type: string
       pattern: '^[a-zA-Z0-9_-]+$'
@@ -2116,10 +3117,6 @@ components:
     DetectorModelDescription:
       type: string
       maxLength: 128
-    Tags:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
     EvaluationMethod:
       type: string
       enum:
@@ -2280,6 +3277,10 @@ components:
             - $ref: '#/components/schemas/InputStatus'
             - description: The status of the input.
       description: Information about the configuration of an input.
+    DeleteAlarmModelRequest:
+      type: object
+      title: DeleteAlarmModelRequest
+      properties: {}
     DeleteDetectorModelRequest:
       type: object
       title: DeleteDetectorModelRequest
@@ -2290,6 +3291,10 @@ components:
       properties: {}
     DeliveryStreamName:
       type: string
+    DescribeAlarmModelRequest:
+      type: object
+      title: DescribeAlarmModelRequest
+      properties: {}
     DescribeDetectorModelAnalysisRequest:
       type: object
       title: DescribeDetectorModelAnalysisRequest
@@ -2379,9 +3384,6 @@ components:
       description: The detector model and the specific detectors (instances) for which the logging level is given.
     DetectorModelArn:
       type: string
-    Timestamp:
-      type: string
-      format: date-time
     DetectorModelVersionStatus:
       type: string
       enum:
@@ -2452,6 +3454,8 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DetectorModelVersionSummary'
+    DisabledOnInitialization:
+      type: boolean
     DynamoKeyType:
       type: string
     DynamoKeyField:
@@ -2477,6 +3481,61 @@ components:
             - $ref: '#/components/schemas/PayloadType'
             - description: The value of the payload type can be either <code>STRING</code> or <code>JSON</code>.
       description: '<p>Information needed to configure the payload.</p> <p>By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use <code>contentExpression</code>.</p>'
+    FromEmail:
+      type: string
+    EmailContent:
+      type: object
+      properties:
+        subject:
+          allOf:
+            - $ref: '#/components/schemas/EmailSubject'
+            - description: The subject of the email.
+        additionalMessage:
+          allOf:
+            - $ref: '#/components/schemas/NotificationAdditionalMessage'
+            - description: The message that you want to send. The message can be up to 200 characters.
+      description: Contains the subject and message of an email.
+    EmailRecipients:
+      type: object
+      properties:
+        to:
+          allOf:
+            - $ref: '#/components/schemas/RecipientDetails'
+            - description: Specifies one or more recipients who receive the email.
+      description: '<p>Contains the information of one or more recipients who receive the emails.</p> <important> <p>You must <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html">add the users that receive emails to your AWS SSO store</a>.</p> </important>'
+    EmailConfiguration:
+      type: object
+      required:
+        - from
+        - recipients
+      properties:
+        from:
+          allOf:
+            - $ref: '#/components/schemas/FromEmail'
+            - description: '<p>The email address that sends emails.</p> <important> <p>If you use the AWS IoT Events managed AWS Lambda function to manage your emails, you must <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html">verify the email address that sends emails in Amazon SES</a>.</p> </important>'
+        content:
+          allOf:
+            - $ref: '#/components/schemas/EmailContent'
+            - description: Contains the subject and message of an email.
+        recipients:
+          allOf:
+            - $ref: '#/components/schemas/EmailRecipients'
+            - description: '<p>Contains the information of one or more recipients who receive the emails.</p> <important> <p>You must <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html">add the users that receive emails to your AWS SSO store</a>.</p> </important>'
+      description: Contains the configuration information of email notifications.
+    EmailConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/EmailConfiguration'
+      minItems: 1
+    EmailSubject:
+      type: string
+    NotificationAdditionalMessage:
+      type: string
+    RecipientDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecipientDetail'
+      minItems: 1
     EventName:
       type: string
       maxLength: 128
@@ -2513,6 +3572,8 @@ components:
       type: object
       title: GetDetectorModelAnalysisResultsRequest
       properties: {}
+    IdentityStoreId:
+      type: string
     InputArn:
       type: string
     InputStatus:
@@ -2522,6 +3583,22 @@ components:
         - UPDATING
         - ACTIVE
         - DELETING
+    InputIdentifier:
+      type: object
+      properties:
+        iotEventsInputIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/IotEventsInputIdentifier'
+            - description: ' The identifier of the input routed to AWS IoT Events. '
+        iotSiteWiseInputIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/IotSiteWiseInputIdentifier'
+            - description: ' The identifer of the input routed from AWS IoT SiteWise. '
+      description: ' The identifer of the input. '
+    InputProperty:
+      type: string
+      minLength: 1
+      maxLength: 512
     InputSummary:
       type: object
       properties:
@@ -2554,6 +3631,21 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/InputSummary'
+    IotSiteWiseAssetModelPropertyIdentifier:
+      type: object
+      required:
+        - assetModelId
+        - propertyId
+      properties:
+        assetModelId:
+          allOf:
+            - $ref: '#/components/schemas/AssetModelId'
+            - description: ' The ID of the AWS IoT SiteWise asset model. '
+        propertyId:
+          allOf:
+            - $ref: '#/components/schemas/AssetPropertyId'
+            - description: ' The ID of the AWS IoT SiteWise asset property. '
+      description: ' The asset model property identifer of the input routed from AWS IoT SiteWise. '
     MQTTTopic:
       type: string
       minLength: 1
@@ -2562,6 +3654,14 @@ components:
       type: integer
       minimum: 1
       maximum: 250
+    ListAlarmModelVersionsRequest:
+      type: object
+      title: ListAlarmModelVersionsRequest
+      properties: {}
+    ListAlarmModelsRequest:
+      type: object
+      title: ListAlarmModelsRequest
+      properties: {}
     ListDetectorModelVersionsRequest:
       type: object
       title: ListDetectorModelVersionsRequest
@@ -2570,6 +3670,28 @@ components:
       type: object
       title: ListDetectorModelsRequest
       properties: {}
+    ListInputRoutingsRequest:
+      type: object
+      required:
+        - inputIdentifier
+      title: ListInputRoutingsRequest
+      properties:
+        inputIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/InputIdentifier'
+            - description: ' The identifer of the routed input. '
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: ' The maximum number of results to be returned per request. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The token that you can use to return the next set of results. '
+    RoutedResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/RoutedResource'
     ListInputsRequest:
       type: object
       title: ListInputsRequest
@@ -2578,6 +3700,35 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    NotificationTargetActions:
+      type: object
+      properties:
+        lambdaAction:
+          $ref: '#/components/schemas/LambdaAction'
+      description: 'Specifies an AWS Lambda function to manage alarm notifications. You can create one or use the <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html">AWS Lambda function provided by AWS IoT Events</a>.'
+    SMSConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/SMSConfiguration'
+      minItems: 1
+    NotificationAction:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/NotificationTargetActions'
+            - description: 'Specifies an AWS Lambda function to manage alarm notifications. You can create one or use the <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html">AWS Lambda function provided by AWS IoT Events</a>.'
+        smsConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/SMSConfigurations'
+            - description: Contains the configuration information of SMS notifications.
+        emailConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/EmailConfigurations'
+            - description: Contains the configuration information of email notifications.
+      description: Contains the notification settings of an alarm model. The settings apply to all alarms that were created based on this alarm model.
     OnEnterLifecycle:
       type: object
       properties:
@@ -2627,6 +3778,64 @@ components:
             - description: The new values of the AWS IoT Events logging options.
     QueueUrl:
       type: string
+    SSOIdentity:
+      type: object
+      required:
+        - identityStoreId
+      properties:
+        identityStoreId:
+          allOf:
+            - $ref: '#/components/schemas/IdentityStoreId'
+            - description: The ID of the AWS SSO identity store.
+        userId:
+          allOf:
+            - $ref: '#/components/schemas/SSOReferenceId'
+            - description: The user ID.
+      description: 'Contains information about your identity source in AWS Single Sign-On. For more information, see the <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">AWS Single Sign-On User Guide</a>.'
+    RecipientDetail:
+      type: object
+      properties:
+        ssoIdentity:
+          allOf:
+            - $ref: '#/components/schemas/SSOIdentity'
+            - description: The AWS Single Sign-On (AWS SSO) authentication information.
+      description: The information that identifies the recipient.
+    ResourceName:
+      type: string
+    RoutedResource:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: ' The name of the routed resource. '
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: ' The ARN of the routed resource. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>. '
+      description: ' Contains information about the routed resource. '
+    SMSSenderId:
+      type: string
+    SMSConfiguration:
+      type: object
+      required:
+        - recipients
+      properties:
+        senderId:
+          allOf:
+            - $ref: '#/components/schemas/SMSSenderId'
+            - description: The sender ID.
+        additionalMessage:
+          allOf:
+            - $ref: '#/components/schemas/NotificationAdditionalMessage'
+            - description: The message that you want to send. The message can be up to 200 characters.
+        recipients:
+          allOf:
+            - $ref: '#/components/schemas/RecipientDetails'
+            - description: '<p>Specifies one or more recipients who receive the message.</p> <important> <p>You must <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html">add the users that receive SMS messages to your AWS SSO store</a>.</p> </important>'
+      description: Contains the configuration information of SMS notifications.
+    SSOReferenceId:
+      type: string
     Seconds:
       type: integer
       minimum: 1
@@ -2640,6 +3849,10 @@ components:
       pattern: '^[a-zA-Z][a-zA-Z0-9_]*$'
       minLength: 1
       maxLength: 128
+    Threshold:
+      type: string
+      minLength: 1
+      maxLength: 512
     UseBase64:
       type: boolean
     StartDetectorModelAnalysisRequest:
@@ -2718,6 +3931,41 @@ components:
       type: object
       title: UntagResourceRequest
       properties: {}
+    UpdateAlarmModelRequest:
+      type: object
+      required:
+        - roleArn
+        - alarmRule
+      title: UpdateAlarmModelRequest
+      properties:
+        alarmModelDescription:
+          allOf:
+            - $ref: '#/components/schemas/AlarmModelDescription'
+            - description: The description of the alarm model.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: 'The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.'
+        severity:
+          allOf:
+            - $ref: '#/components/schemas/Severity'
+            - description: A non-negative integer that reflects the severity level of the alarm.
+        alarmRule:
+          allOf:
+            - $ref: '#/components/schemas/AlarmRule'
+            - description: Defines when your alarm is invoked.
+        alarmNotification:
+          allOf:
+            - $ref: '#/components/schemas/AlarmNotification'
+            - description: Contains information about one or more notification actions.
+        alarmEventActions:
+          allOf:
+            - $ref: '#/components/schemas/AlarmEventActions'
+            - description: Contains information about one or more alarm actions.
+        alarmCapabilities:
+          allOf:
+            - $ref: '#/components/schemas/AlarmCapabilities'
+            - description: Contains the configuration information of alarm state changes.
     UpdateDetectorModelRequest:
       type: object
       required:
