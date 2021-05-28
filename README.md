@@ -23,9 +23,9 @@ Our goal is to create the most comprehensive, standards-compliant and up-to-date
 - Anyone can add or change an API, not only API owners.
 - All data can be accessed through a [REST API][apiDoc-link].
 
-If you want to reference this project and you need an icon or even a banner, check our [branding guide](https://github.com/APIs-guru/branding).
+If you want to reference this project and you need an icon or even a banner, check our [branding guide](https://github.com/APIs-guru/branding). If you love our logo, we have a [RedBubble store](https://www.redbubble.com/shop/ap/79074109) where you can buy official stickers, t-shirts, mugs etc.
 
-The project was started by Ivan Goncharov of APIs.guru, it is now maintained by [Mike Ralphson](https://github.com/MikeRalphson) of [Mermade Software](https://github.com/mermade). Check out our other [OpenAPI-related projects](https://github.com/search?q=org%3AMermade+openapi).
+The project was started by [Ivan Goncharov](https://github.com/IvanGoncharov) of APIs.guru, it is now maintained by [Mike Ralphson](https://github.com/MikeRalphson) of [Mermade Software](https://github.com/mermade). Check out our other [OpenAPI-related projects](https://github.com/search?q=org%3AMermade+openapi).
 
 APIs.guru provide services and consultancy around the GraphQL and OpenAPI specifications and APIs in general.
 You can contact us at founders@apis.guru / mike.ralphson@gmail.com
