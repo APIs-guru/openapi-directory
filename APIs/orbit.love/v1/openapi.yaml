@@ -1,0 +1,3186 @@
+openapi: 3.0.0
+servers:
+  - url: https://app.orbit.love/api/v1
+info:
+  description: Please see the complete Orbit API documentation at
+    [https://docs.orbit.love/reference](https://docs.orbit.love/reference).
+  title: Orbit API
+  version: v1
+  x-apisguru-categories:
+    - customer_relation
+  x-logo:
+    url: https://avatars.githubusercontent.com/u/55637052?s=200&v=4
+  x-origin:
+    - format: swagger
+      url: https://app.orbit.love/api-docs/v1/swagger.json
+      version: "2.0"
+  x-providerName: orbit.love
+tags:
+  - name: Activity Types
+  - name: Activities
+  - name: Members
+  - name: Notes
+  - name: Reports
+  - name: Users
+  - name: Workspaces
+paths:
+  /activity_types:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - attributes:
+                          category: discord
+                          key: discord:message:sent
+                          name: Sent a message in Discord
+                          short_name: Discord message
+                          weight: "0.5"
+                        id: "16"
+                        type: activity_type
+                      - attributes:
+                          category: discord
+                          key: discord:message:replied
+                          name: Replied to a message in Discord
+                          short_name: Discord message reply
+                          weight: "0.5"
+                        id: "17"
+                        type: activity_type
+                      - attributes:
+                          category: discord
+                          key: discord:server:joined
+                          name: Joined a server in Discord
+                          short_name: Discord server join
+                          weight: "0.5"
+                        id: "18"
+                        type: activity_type
+                      - attributes:
+                          category: discourse
+                          key: discourse:post:created
+                          name: Created a Discourse post
+                          short_name: Discourse post
+                          weight: "1.0"
+                        id: "11"
+                        type: activity_type
+                      - attributes:
+                          category: discourse
+                          key: discourse:topic:created
+                          name: Created a Discourse topic
+                          short_name: Discourse topic
+                          weight: "1.0"
+                        id: "12"
+                        type: activity_type
+                      - attributes:
+                          category: github
+                          key: star:created
+                          name: Starred a repository
+                          short_name: GitHub star
+                          weight: "0.5"
+                        id: "4"
+                        type: activity_type
+                      - attributes:
+                          category: github
+                          key: issue_comment:created
+                          name: Commented on an issue
+                          short_name: Issue comment
+                          weight: "1.0"
+                        id: "5"
+                        type: activity_type
+                      - attributes:
+                          category: github
+                          key: issues:opened
+                          name: Opened an issue
+                          short_name: Issue opened
+                          weight: "1.0"
+                        id: "1"
+                        type: activity_type
+                      - attributes:
+                          category: github
+                          key: pull_requests:merged
+                          name: Had a pull request merged
+                          short_name: Merged pull request
+                          weight: "2.0"
+                        id: "3"
+                        type: activity_type
+                      - attributes:
+                          category: github
+                          key: pull_requests:opened
+                          name: Opened a pull request
+                          short_name: Opened pull request
+                          weight: "2.0"
+                        id: "2"
+                        type: activity_type
+                      - attributes:
+                          category: orbit
+                          key: post:created
+                          name: Created content
+                          short_name: Content created
+                          weight: "1.0"
+                        id: "7"
+                        type: activity_type
+                      - attributes:
+                          category: slack
+                          key: slack:channel:joined
+                          name: Joined a channel in Slack
+                          short_name: Slack channel join
+                          weight: "0.5"
+                        id: "14"
+                        type: activity_type
+                      - attributes:
+                          category: slack
+                          key: slack:message:sent
+                          name: Sent a message in Slack
+                          short_name: Slack message
+                          weight: "0.5"
+                        id: "13"
+                        type: activity_type
+                      - attributes:
+                          category: slack
+                          key: slack:thread:replied
+                          name: Replied to a thread in Slack
+                          short_name: Slack thread reply
+                          weight: "0.5"
+                        id: "15"
+                        type: activity_type
+                      - attributes:
+                          category: twitter
+                          key: twitter:followed
+                          name: Followed on twitter
+                          short_name: Twitter follow
+                          weight: "0.5"
+                        id: "10"
+                        type: activity_type
+                      - attributes:
+                          category: twitter
+                          key: tweet:sent
+                          name: Tweeted
+                          short_name: Twitter mention
+                          weight: "1.0"
+                        id: "9"
+                        type: activity_type
+          description: success
+      security:
+        - bearer: []
+      summary: Get all activity types
+      tags:
+        - Activity Types
+  /user:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      attributes:
+                        created_at: 2021-05-03T18:33:08.267Z
+                        email: ivana@howeherman.com
+                        name: WallaceNikolaus
+                        updated_at: 2021-05-03T18:33:08.267Z
+                      id: "10"
+                      type: user
+          description: success
+      security:
+        - bearer: []
+      summary: Get info about the current user
+      tags:
+        - Users
+  /workspaces:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: 2021-05-03T18:33:15.619Z
+                          name: Fake Workspace
+                          slug: fake-workspace
+                          updated_at: 2021-05-03T18:33:15.628Z
+                        id: "84"
+                        relationships:
+                          repositories:
+                            data: []
+                        type: workspace
+                    included: []
+          description: success
+      security:
+        - bearer: []
+      summary: Get all workspaces for the current user
+      tags:
+        - Workspaces
+  "/workspaces/{workspace_id}":
+    get:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      attributes:
+                        activities_count: 1
+                        created_at: 2021-05-03T18:33:15.687Z
+                        members_count: 1
+                        name: Fake Workspace
+                        slug: fake-workspace
+                        tags: {}
+                        updated_at: 2021-05-03T18:33:15.769Z
+                      id: "85"
+                      relationships:
+                        last_activity:
+                          data:
+                            id: "24"
+                            type: activity
+                        last_member:
+                          data:
+                            id: "49"
+                            type: member
+                        repositories:
+                          data: []
+                      type: workspace
+                    included:
+                      - attributes:
+                          activities_count: 1
+                          avatar_url: http://github.com/avatar.png
+                          bio:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          birthday:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          company:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          created: false
+                          created_at: 2021-05-03T18:33:15.753Z
+                          deleted_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          devto:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          discourse:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          first_activity_occurred_at: 2021-05-03T18:33:15.744Z
+                          github:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          github_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          id: 49
+                          languages:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          last_activity_occurred_at: 2021-05-03T18:33:15.744Z
+                          linkedin:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          location:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          love: 1.2
+                          merged_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name: DarinJohns
+                          orbit_level: 2
+                          orbit_url: http://localhost:3000/fake-workspace/members/darinjohns
+                          pronouns:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          reach: 0
+                          shipping_address:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          slug: darinjohns
+                          source: installation
+                          tag_list: []
+                          tags: []
+                          teammate: false
+                          topics:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          tshirt:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          updated_at: 2021-05-03T18:33:15.768Z
+                          url:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                        id: "49"
+                        relationships:
+                          identities:
+                            data: []
+                        type: member
+                      - attributes:
+                          action: opened
+                          activity_link: https://github.com/
+                          created_at: 2021-05-03T18:33:15.754Z
+                          key: harry/colleenhodkiewicz#66
+                          occurred_at: 2021-05-03T18:33:15.744Z
+                          orbit_url: http://localhost:3000/fake-workspace/activities/24
+                          tags:
+                            - channel:github
+                            - github_organization:harry
+                            - github_repository:harry/colleenhodkiewicz
+                            - github_pull_request:harry/colleenhodkiewicz/#66
+                          type: PullRequestActivity
+                          updated_at: 2021-05-03T18:33:15.754Z
+                          weight: "2.0"
+                        id: "24"
+                        relationships:
+                          activity_type:
+                            data:
+                              id: "2"
+                              type: activity_type
+                          member:
+                            data:
+                              id: "49"
+                              type: member
+                          repository:
+                            data:
+                              id: "7"
+                              type: repository
+                        type: activity
+          description: success
+      security:
+        - bearer: []
+      summary: Get a workspace
+      tags:
+        - Workspaces
+  "/{workspace_id}/activities":
+    get:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: activity_tags
+          schema:
+            type: string
+        - in: query
+          name: affiliation
+          schema:
+            enum:
+              - member
+              - teammate
+            type: string
+        - in: query
+          name: member_tags
+          schema:
+            type: string
+        - in: query
+          name: orbit_level
+          schema:
+            enum:
+              - "1"
+              - "2"
+              - "3"
+              - "4"
+              - n
+            type: string
+        - in: query
+          name: activity_type
+          schema:
+            enum:
+              - pull_requests:opened
+              - pull_requests:merged
+              - issues:opened
+              - issue_comment:created
+              - note:created
+              - star:created
+              - post:created
+              - custom:happened
+              - tweet:sent
+              - twitter:followed
+              - discord:message:replied
+              - discord:server:joined
+              - discourse:post:created
+              - discourse:topic:created
+              - slack:message:sent
+              - discord:message:sent
+              - slack:channel:joined
+              - slack:thread:replied
+            type: string
+        - in: query
+          name: weight
+          schema:
+            type: string
+        - in: query
+          name: identity
+          schema:
+            enum:
+              - github
+              - twitter
+              - email
+              - discourse
+              - linkedin
+              - devto
+              - slack
+              - discord
+            type: string
+        - in: query
+          name: location
+          schema:
+            type: string
+        - in: query
+          name: company
+          schema:
+            type: string
+        - in: query
+          name: start_date
+          schema:
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            type: string
+        - in: query
+          name: page
+          schema:
+            type: string
+        - in: query
+          name: direction
+          schema:
+            enum:
+              - ASC
+              - DESC
+            type: string
+        - in: query
+          name: items
+          schema:
+            enum:
+              - "10"
+              - "50"
+              - "100"
+            type: string
+        - in: query
+          name: sort
+          schema:
+            enum:
+              - occurred_at
+              - member
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - attributes:
+                          action: spec_action
+                          created_at: 2021-05-03T18:33:08.979Z
+                          key: spec_activity_key#1
+                          occurred_at: 2021-05-03T18:33:08.977Z
+                          orbit_url: http://localhost:3000/delorisherman/activities/6
+                          tags:
+                            - spec-tag-1
+                            - spec-tag-2
+                          type: SpecActivity
+                          updated_at: 2021-05-03T18:33:08.979Z
+                          weight: "1.0"
+                        id: "6"
+                        relationships:
+                          activity_type:
+                            data:
+                              id: "23"
+                              type: activity_type
+                          member:
+                            data:
+                              id: "3"
+                              type: member
+                        type: spec_activity
+                      - attributes:
+                          action: spec_action
+                          created_at: 2021-05-03T18:33:08.947Z
+                          key: clé
+                          occurred_at: 2021-05-03T18:33:08.946Z
+                          orbit_url: http://localhost:3000/delorisherman/activities/5
+                          tags:
+                            - spec-tag-1
+                            - spec-tag-2
+                          type: SpecActivity
+                          updated_at: 2021-05-03T18:33:08.947Z
+                          weight: "1.0"
+                        id: "5"
+                        relationships:
+                          activity_type:
+                            data:
+                              id: "22"
+                              type: activity_type
+                          member:
+                            data:
+                              id: "3"
+                              type: member
+                          repository:
+                            data:
+                              id: "5"
+                              type: repository
+                        type: spec_activity
+                    included:
+                      - attributes:
+                          category: spec_category
+                          key: new:type
+                          name: Did spec activity
+                          short_name: Spec Activity
+                          weight: "1.0"
+                        id: "23"
+                        type: activity_type
+                      - attributes:
+                          activities_count: 2
+                          avatar_url: http://github.com/avatar.png
+                          bio:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          birthday:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          company:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          created: false
+                          created_at: 2021-05-03T18:33:08.913Z
+                          deleted_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          devto:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          discourse:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          first_activity_occurred_at: 2021-05-03T18:33:08.946Z
+                          github:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          github_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          id: 3
+                          languages:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          last_activity_occurred_at: 2021-05-03T18:33:08.977Z
+                          linkedin:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          location:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          love: 1.2
+                          merged_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name: KathrinFarrell
+                          orbit_level: 2
+                          orbit_url: http://localhost:3000/delorisherman/members/kathrinfarrell
+                          pronouns:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          reach: 0
+                          shipping_address:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          slug: kathrinfarrell
+                          source: installation
+                          tag_list:
+                            - ruby
+                          tags:
+                            - ruby
+                          teammate: false
+                          topics:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          tshirt:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          updated_at: 2021-05-03T18:33:08.990Z
+                          url:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                        id: "3"
+                        relationships:
+                          identities:
+                            data: []
+                        type: member
+                      - attributes:
+                          category: spec_category
+                          key: spec_activity_type_key
+                          name: Did spec activity
+                          short_name: Spec Activity
+                          weight: "1.0"
+                        id: "22"
+                        type: activity_type
+                      - attributes:
+                          created_at: 2021-05-03T18:33:08.931Z
+                          full_name: orbit-love/orbit-model
+                          name: randellharber
+                          owner: dante
+                          updated_at: 2021-05-03T18:33:08.931Z
+                        id: "5"
+                        type: repository
+                    links:
+                      first: http://localhost:3000/api/v1/delorisherman/activities?activity_tags=&affiliation=&company=&direction=DESC&end_date=&filters=true&identity=&items=10&location=&member_tags=&page=1&sort=occurred_at&start_date=&type=spec_activity_type_key%2Cnew%3Atype&weight=
+                      next:
+                        $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                          ~1json/links/prev"
+                      prev:
+                        $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                          ~1json/links/prev"
+          description: success
+      security:
+        - bearer: []
+      summary: List activities for a workspace
+      tags:
+        - Activities
+    post:
+      description: Use this method when you know an identity of the member (github,
+        email, twitter, etc.) but not their Orbit ID. Pass fields in the member
+        object to update the member in addition to creating the activity.
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/activity_and_identity"
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      attributes:
+                        action: happened
+                        created_at: 2021-05-03T18:33:10.254Z
+                        custom_description: More info about the thing
+                        custom_link: http://link.com/
+                        custom_link_text: See the thing
+                        custom_title: Did a thing
+                        custom_type: custom-type
+                        key: thing-123
+                        occurred_at: 2021-05-03T18:33:10.251Z
+                        orbit_url: http://localhost:3000/franklynortiz/activities/11
+                        tags:
+                          - product
+                          - enterprise
+                          - channel:custom
+                          - custom_type:custom-type
+                          - custom_title:did-a-thing
+                        type: CustomActivity
+                        updated_at: 2021-05-03T18:33:10.254Z
+                        weight: "0.2"
+                      id: "11"
+                      relationships:
+                        activity_type:
+                          data:
+                            id: "8"
+                            type: activity_type
+                        member:
+                          data:
+                            id: "8"
+                            type: member
+                        user:
+                          data:
+                            id: "38"
+                            type: user
+                      type: custom_activity
+                    included:
+                      - attributes:
+                          category: custom
+                          key: custom:happened
+                          name: Something happened
+                          short_name: Custom
+                          weight: "1.0"
+                        id: "8"
+                        type: activity_type
+                      - attributes:
+                          email: josh@orbit.love
+                          name: josh
+                          source: email
+                          source_host: email.host
+                          uid: josh@orbit.love
+                          username:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                        id: "7"
+                        type: email_identity
+                      - attributes:
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name: Josh Dzielak
+                          source: twitter
+                          source_host: twitter.com
+                          uid: "45297280"
+                          username: dzello
+                        id: "8"
+                        type: twitter_identity
+                      - attributes:
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          source: github
+                          source_host: github.com
+                          uid:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          username: dzello
+                        id: "9"
+                        type: github_identity
+                      - attributes:
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          source: linkedin
+                          source_host: linkedin.com
+                          uid:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          username: dzello
+                        id: "10"
+                        type: linkedin_identity
+                      - attributes:
+                          activities_count: 1
+                          avatar_url: https://d1ts43dypk8bqh.cloudfront.net/v1/avatars/6ea4f872-04b6-4752-8a90-db508525135a
+                          bio: "Co-founder & CTO @OrbitModel - we're hiring! · advocate for dev advocates
+                            🥑 · Rails · JAMstack · DevRel · he/him ·
+                            #BlackLivesMatter"
+                          birthday:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          company: Orbit
+                          created: true
+                          created_at: 2021-05-03T18:33:10.206Z
+                          deleted_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          devto:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          discourse:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          email: josh@orbit.love
+                          first_activity_occurred_at: 2021-05-03T18:33:10.251Z
+                          github: dzello
+                          github_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          id: 8
+                          languages:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          last_activity_occurred_at: 2021-05-03T18:33:10.251Z
+                          linkedin: dzello
+                          location: Paris, Île-de-France, FR
+                          love: 1
+                          merged_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name: Josh Dzielak
+                          orbit_level: 3
+                          orbit_url: http://localhost:3000/franklynortiz/members/dzello
+                          pronouns:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          reach: 8
+                          shipping_address:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          slug: dzello
+                          source: api
+                          tag_list:
+                            - one
+                            - two
+                          tags:
+                            - one
+                            - two
+                          teammate: false
+                          topics:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          tshirt:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter: dzello
+                          twitter_followers: 4598
+                          updated_at: 2021-05-03T18:33:10.266Z
+                          url: https://orbit.love/
+                        id: "8"
+                        relationships:
+                          identities:
+                            data:
+                              - id: "7"
+                                type: email_identity
+                              - id: "8"
+                                type: twitter_identity
+                              - id: "9"
+                                type: github_identity
+                              - id: "10"
+                                type: linkedin_identity
+                        type: member
+                      - attributes:
+                          created_at: 2021-05-03T18:33:10.063Z
+                          name: DrFredaRodriguez
+                          updated_at: 2021-05-03T18:33:10.067Z
+                        id: "38"
+                        type: user
+          description: success
+        "422":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    errors:
+                      base:
+                        - Either identity or member name, email, GitHub, Twitter
+                          or Discourse is required
+                      email:
+                        - is invalid
+                      name:
+                        - is too long (maximum is 250 characters)
+                      workspace:
+                        - has blocked this identity
+          description: unprocessible
+      security:
+        - bearer: []
+      summary: Create an activity for a new or existing member
+      tags:
+        - Activities
+  "/{workspace_id}/activities/{id}":
+    get:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      attributes:
+                        action: spec_action
+                        created_at: 2021-05-03T18:33:09.107Z
+                        key: clé
+                        occurred_at: 2021-05-03T18:33:09.100Z
+                        orbit_url: http://localhost:3000/cordeliabeahan/activities/7
+                        tags:
+                          - spec-tag-1
+                          - spec-tag-2
+                        type: SpecActivity
+                        updated_at: 2021-05-03T18:33:09.107Z
+                        weight: "1.0"
+                      id: "7"
+                      relationships:
+                        activity_type:
+                          data:
+                            id: "24"
+                            type: activity_type
+                        member:
+                          data:
+                            id: "4"
+                            type: member
+                        repository:
+                          data:
+                            id: "6"
+                            type: repository
+                        user:
+                          data:
+                            id: "26"
+                            type: user
+                      type: spec_activity
+                    included:
+                      - attributes:
+                          category: spec_category
+                          key: spec:happened#2
+                          name: Did spec activity
+                          short_name: Spec Activity
+                          weight: "1.0"
+                        id: "24"
+                        type: activity_type
+                      - attributes:
+                          activities_count: 1
+                          avatar_url: http://github.com/avatar.png
+                          bio:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          birthday:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          company:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          created: false
+                          created_at: 2021-05-03T18:33:09.106Z
+                          deleted_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          devto:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          discourse:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          first_activity_occurred_at: 2021-05-03T18:33:09.100Z
+                          github:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          github_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          id: 4
+                          languages:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          last_activity_occurred_at: 2021-05-03T18:33:09.100Z
+                          linkedin:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          location:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          love: 1
+                          merged_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name: MsDrewPollich
+                          orbit_level: 3
+                          orbit_url: http://localhost:3000/cordeliabeahan/members/msdrewpollich
+                          pronouns:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          reach: 0
+                          shipping_address:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          slug: msdrewpollich
+                          source: installation
+                          tag_list: []
+                          tags: []
+                          teammate: false
+                          topics:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          tshirt:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          updated_at: 2021-05-03T18:33:09.119Z
+                          url:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                        id: "4"
+                        relationships:
+                          identities:
+                            data: []
+                        type: member
+                      - attributes:
+                          created_at: 2021-05-03T18:33:09.082Z
+                          full_name: carywolff/paulita
+                          name: paulita
+                          owner: carywolff
+                          updated_at: 2021-05-03T18:33:09.082Z
+                        id: "6"
+                        type: repository
+                      - attributes:
+                          created_at: 2021-05-03T18:33:09.068Z
+                          name: LeathaReichert
+                          updated_at: 2021-05-03T18:33:09.068Z
+                        id: "26"
+                        type: user
+          description: success
+      security:
+        - bearer: []
+      summary: Get an activity in the workspace
+      tags:
+        - Activities
+  "/{workspace_id}/members":
+    get:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: activity_tags
+          schema:
+            type: string
+        - in: query
+          name: affiliation
+          schema:
+            enum:
+              - member
+              - teammate
+            type: string
+        - in: query
+          name: member_tags
+          schema:
+            type: string
+        - in: query
+          name: orbit_level
+          schema:
+            enum:
+              - "1"
+              - "2"
+              - "3"
+              - "4"
+              - n
+            type: string
+        - in: query
+          name: activity_type
+          schema:
+            enum:
+              - pull_requests:opened
+              - pull_requests:merged
+              - issues:opened
+              - issue_comment:created
+              - note:created
+              - star:created
+              - post:created
+              - custom:happened
+              - tweet:sent
+              - twitter:followed
+              - discord:message:replied
+              - discord:server:joined
+              - discourse:post:created
+              - discourse:topic:created
+              - slack:message:sent
+              - discord:message:sent
+              - slack:channel:joined
+              - slack:thread:replied
+            type: string
+        - in: query
+          name: weight
+          schema:
+            type: string
+        - in: query
+          name: identity
+          schema:
+            enum:
+              - github
+              - twitter
+              - email
+              - discourse
+              - linkedin
+              - devto
+              - slack
+              - discord
+            type: string
+        - in: query
+          name: location
+          schema:
+            type: string
+        - in: query
+          name: company
+          schema:
+            type: string
+        - in: query
+          name: start_date
+          schema:
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            type: string
+        - in: query
+          name: query
+          schema:
+            type: string
+        - in: query
+          name: page
+          schema:
+            type: string
+        - in: query
+          name: direction
+          schema:
+            enum:
+              - ASC
+              - DESC
+            type: string
+        - in: query
+          name: items
+          schema:
+            enum:
+              - "10"
+              - "50"
+              - "100"
+            type: string
+        - in: query
+          name: activities_count_min
+          schema:
+            type: string
+        - in: query
+          name: activities_count_max
+          schema:
+            type: string
+        - in: query
+          name: sort
+          schema:
+            enum:
+              - activities_count
+              - company
+              - created_at
+              - first_activity
+              - github_followers
+              - id
+              - last_activity
+              - location
+              - love
+              - name
+              - orbit
+              - reach
+              - title
+              - twitter_followers
+              - updated_at
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - attributes:
+                          activities_count: 1
+                          avatar_url: http://github.com/avatar.png
+                          bio:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          birthday:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          company:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          created: false
+                          created_at: 2021-05-03T18:33:11.772Z
+                          deleted_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          devto:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          discourse:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          first_activity_occurred_at: 2021-05-03T18:33:11.825Z
+                          github:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          github_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          id: 26
+                          languages:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          last_activity_occurred_at: 2021-05-03T18:33:11.825Z
+                          linkedin:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          location:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          love: 1
+                          merged_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name: Sally
+                          orbit_level: 3
+                          orbit_url: http://localhost:3000/misslatoshaschoen/members/sally
+                          pronouns:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          reach: 0
+                          shipping_address:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          slug: sally
+                          source: installation
+                          tag_list:
+                            - ruby
+                          tags:
+                            - ruby
+                          teammate: false
+                          topics:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          tshirt:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          updated_at: 2021-05-03T18:33:11.838Z
+                          url:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                        id: "26"
+                        relationships:
+                          identities:
+                            data:
+                              - id: "16"
+                                type: spec_identity
+                        type: member
+                      - attributes:
+                          activities_count: 1
+                          avatar_url: http://github.com/avatar.png
+                          bio:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          birthday:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          company:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          created: false
+                          created_at: 2021-05-03T18:33:11.754Z
+                          deleted_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          devto:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          discourse:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          first_activity_occurred_at: 2021-05-02T18:33:11.785Z
+                          github:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          github_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          id: 25
+                          languages:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          last_activity_occurred_at: 2021-05-02T18:33:11.785Z
+                          linkedin:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          location:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          love: 1
+                          merged_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name: Josh
+                          orbit_level: 3
+                          orbit_url: http://localhost:3000/misslatoshaschoen/members/josh
+                          pronouns:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          reach: 0
+                          shipping_address:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          slug: josh
+                          source: installation
+                          tag_list:
+                            - ruby
+                          tags:
+                            - ruby
+                          teammate: false
+                          topics:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          tshirt:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          updated_at: 2021-05-03T18:33:11.808Z
+                          url:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                        id: "25"
+                        relationships:
+                          identities:
+                            data:
+                              - id: "15"
+                                type: spec_identity
+                        type: member
+                    included:
+                      - id: "16"
+                        type: spec_identity
+                      - id: "15"
+                        type: spec_identity
+                    links:
+                      first: http://localhost:3000/api/v1/misslatoshaschoen/members?activity_tags=crystal%2C-php%7C-javascript&affiliation=&company=&direction=DESC&end_date=&filters=true&identity=&items=10&location=&member_tags=ruby%7Crails%2C-go&page=1&sort=last_activity&start_date=&type=spec%3Aactivity%2Ctype%3Anew&weight=
+                      next:
+                        $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                          ~1json/links/prev"
+                      prev: null
+          description: success
+          x-examples:
+            application/json:
+              links:
+                prev: {}
+      security:
+        - bearer: []
+      summary: List members in a workspace
+      tags:
+        - Members
+    post:
+      description: This method is useful when you know a member's identity in another
+        system and want to create or update the corresponding Orbit member.
+        Identities can be specified in the identity object or member attributes
+        like member.github. If no member exists, a new member will be created
+        and linked to any provided identities.
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/member_and_identity"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      attributes:
+                        activities_count: 0
+                        avatar_url: http://github.com/avatar.png
+                        bio: Co-founder & CTO @orbit-love · Developer Advocate · formerly @algolia and
+                          @keen
+                        birthday:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        company: "@orbit-love"
+                        created: false
+                        created_at: 2021-05-03T18:33:13.564Z
+                        deleted_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        devto:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        discourse:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        email:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        first_activity_occurred_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        github: dzello
+                        github_followers: 171
+                        id: 36
+                        languages:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        last_activity_occurred_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        linkedin:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        location: Paris
+                        love: 0
+                        merged_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        name: KeithBrown
+                        orbit_level:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        orbit_url: http://localhost:3000/demetriusbarrows/members/keithbrown
+                        pronouns:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        reach: 8
+                        shipping_address:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        slug: keithbrown
+                        source: api
+                        tag_list:
+                          - one
+                          - two
+                        tags:
+                          - one
+                          - two
+                        teammate: false
+                        topics:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        tshirt:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        twitter: dzello
+                        twitter_followers:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        updated_at: 2021-05-03T18:33:13.746Z
+                        url: https://dzello.com/
+                      id: "36"
+                      relationships:
+                        identities:
+                          data:
+                            - id: "24"
+                              type: twitter_identity
+                            - id: "26"
+                              type: github_identity
+                      type: member
+                    included:
+                      - attributes:
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          source: twitter
+                          source_host: twitter.com
+                          uid: uid-10
+                          username: dzello
+                        id: "24"
+                        type: twitter_identity
+                      - attributes:
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name: Josh Dzielak
+                          source: github
+                          source_host: github.com
+                          uid: "174777"
+                          username: dzello
+                        id: "26"
+                        type: github_identity
+          description: success
+        "201":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      attributes:
+                        activities_count: 0
+                        avatar_url: https://avatars2.githubusercontent.com/u/174777?u=79e423dd07c19122115f52a1c97727ca193e6253&v=4
+                        bio: Co-founder & CTO @orbit-love · Developer Advocate · formerly @algolia and
+                          @keen
+                        birthday:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        company: "@orbit-love"
+                        created: true
+                        created_at: 2021-05-03T18:33:15.056Z
+                        deleted_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        devto:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        discourse:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        email: josh@orbit.love
+                        first_activity_occurred_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        github: dzello
+                        github_followers: 171
+                        id: 45
+                        languages:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        last_activity_occurred_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        linkedin:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        location: Paris
+                        love: 0
+                        merged_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        name: Josh Dzielak
+                        orbit_level:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        orbit_url: http://localhost:3000/willianconroy/members/dzello
+                        pronouns:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        reach: 8
+                        shipping_address:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        slug: dzello
+                        source: api
+                        tag_list: []
+                        tags: []
+                        teammate: false
+                        topics:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        tshirt:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        twitter: dzello
+                        twitter_followers:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        updated_at: 2021-05-03T18:33:15.086Z
+                        url: https://dzello.com/
+                      id: "45"
+                      relationships:
+                        identities:
+                          data:
+                            - id: "45"
+                              type: github_identity
+                            - id: "46"
+                              type: twitter_identity
+                            - id: "47"
+                              type: email_identity
+                      type: member
+                    included:
+                      - attributes:
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name: Josh Dzielak
+                          source: github
+                          source_host: github.com
+                          uid: "174777"
+                          username: dzello
+                        id: "45"
+                        type: github_identity
+                      - attributes:
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          source: twitter
+                          source_host: twitter.com
+                          uid:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          username: dzello
+                        id: "46"
+                        type: twitter_identity
+                      - attributes:
+                          email: josh@orbit.love
+                          name: josh
+                          source: email
+                          source_host: email.host
+                          uid: josh@orbit.love
+                          username:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                        id: "47"
+                        type: email_identity
+          description: created
+        "422":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    errors:
+                      base:
+                        - Either identity or member name, email, GitHub, Twitter
+                          or Discourse is required
+                      email:
+                        - is invalid
+                      name:
+                        - can't be blank
+                      workspace:
+                        - has blocked this identity
+          description: unprocessable
+      security:
+        - bearer: []
+      summary: Create or update a member
+      tags:
+        - Members
+  "/{workspace_id}/members/find":
+    get:
+      description: Provide a source and one of username/uid/email params to return a
+        member with that identity, if one exists. Common values for source
+        include github, twitter, and email.
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: source
+          schema:
+            type: string
+        - in: query
+          name: source_host
+          schema:
+            type: string
+        - in: query
+          name: uid
+          schema:
+            type: string
+        - in: query
+          name: username
+          schema:
+            type: string
+        - in: query
+          name: email
+          schema:
+            type: string
+        - description: Deprecated, please use source=github and username=<username> instead
+          in: query
+          name: github
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      attributes:
+                        activities_count: 0
+                        avatar_url: http://github.com/avatar.png
+                        bio:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        birthday:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        company:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        created: false
+                        created_at: 2021-05-03T18:33:15.381Z
+                        deleted_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        devto:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        discourse:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        email:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        first_activity_occurred_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        github: dzello
+                        github_followers:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        id: 47
+                        languages:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        last_activity_occurred_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        linkedin:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        location:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        love: 0
+                        merged_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        name: DrMalissaMcClure
+                        orbit_level:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        orbit_url: http://localhost:3000/mercedesfay/members/drmalissamcclure
+                        pronouns:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        reach: 0
+                        shipping_address:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        slug: drmalissamcclure
+                        source: installation
+                        tag_list: []
+                        tags: []
+                        teammate: false
+                        topics:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        tshirt:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        twitter:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        twitter_followers:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        updated_at: 2021-05-03T18:33:15.381Z
+                        url:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                      id: "47"
+                      relationships:
+                        identities:
+                          data:
+                            - id: "50"
+                              type: github_identity
+                      type: member
+                    included:
+                      - attributes:
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          source: github
+                          source_host: github.com
+                          uid: uid-14
+                          username: dzello
+                        id: "50"
+                        type: github_identity
+          description: success
+        "404":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    errors: No member matching this identity was found
+          description: Not found
+      security:
+        - bearer: []
+      summary: Find a member by an identity
+      tags:
+        - Members
+  "/{workspace_id}/members/{id}":
+    delete:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: member deleted
+      security:
+        - bearer: []
+      summary: Delete a member
+      tags:
+        - Members
+    get:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      attributes:
+                        activities_count: 0
+                        avatar_url: http://github.com/avatar.png
+                        bio:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        birthday:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        company:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        created: false
+                        created_at: 2021-05-03T18:33:11.949Z
+                        deleted_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        devto:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        discourse:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        email:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        first_activity_occurred_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        github:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        github_followers:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        id: 27
+                        languages:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        last_activity_occurred_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        linkedin:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        location:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        love: 0
+                        merged_at:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        name: Josh
+                        orbit_level:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        orbit_url: http://localhost:3000/myrticerunolfsdottir/members/josh
+                        pronouns:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        reach: 0
+                        shipping_address:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        slug: josh
+                        source: installation
+                        tag_list: []
+                        tags: []
+                        teammate: false
+                        topics:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        tshirt:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        twitter:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        twitter_followers:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                        updated_at: 2021-05-03T18:33:11.949Z
+                        url:
+                          $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                            ~1json/links/prev"
+                      id: "27"
+                      relationships:
+                        identities:
+                          data:
+                            - id: "17"
+                              type: spec_identity
+                      type: member
+                    included:
+                      - id: "17"
+                        type: spec_identity
+          description: success
+      security:
+        - bearer: []
+      summary: Get a member
+      tags:
+        - Members
+    put:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/member"
+      responses:
+        "204":
+          description: member updated
+      security:
+        - bearer: []
+      summary: Update a member
+      tags:
+        - Members
+  "/{workspace_id}/members/{member_id}/activities":
+    get:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: member_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: page
+          schema:
+            type: string
+        - in: query
+          name: direction
+          schema:
+            enum:
+              - ASC
+              - DESC
+            type: string
+        - in: query
+          name: items
+          schema:
+            enum:
+              - "10"
+              - "50"
+              - "100"
+            type: string
+        - in: query
+          name: sort
+          schema:
+            enum:
+              - occurred_at
+              - member
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - attributes:
+                          action: spec_action
+                          created_at: 2021-05-03T18:33:10.321Z
+                          key: clé
+                          occurred_at: 2021-05-03T18:33:10.320Z
+                          orbit_url: http://localhost:3000/dexterokon/activities/12
+                          tags:
+                            - spec-tag-1
+                            - spec-tag-2
+                          type: SpecActivity
+                          updated_at: 2021-05-03T18:33:10.321Z
+                          weight: "1.0"
+                        id: "12"
+                        relationships:
+                          activity_type:
+                            data:
+                              id: "25"
+                              type: activity_type
+                          member:
+                            data:
+                              id: "9"
+                              type: member
+                        type: spec_activity
+                    included:
+                      - attributes:
+                          category: spec_category
+                          key: spec:happened#3
+                          name: Did spec activity
+                          short_name: Spec Activity
+                          weight: "1.0"
+                        id: "25"
+                        type: activity_type
+                      - attributes:
+                          activities_count: 1
+                          avatar_url: http://github.com/avatar.png
+                          bio:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          birthday:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          company:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          created: false
+                          created_at: 2021-05-03T18:33:10.301Z
+                          deleted_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          devto:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          discourse:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          first_activity_occurred_at: 2021-05-03T18:33:10.320Z
+                          github:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          github_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          id: 9
+                          languages:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          last_activity_occurred_at: 2021-05-03T18:33:10.320Z
+                          linkedin:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          location:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          love: 1
+                          merged_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name: RomanWyman
+                          orbit_level: 3
+                          orbit_url: http://localhost:3000/dexterokon/members/romanwyman
+                          pronouns:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          reach: 0
+                          shipping_address:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          slug: romanwyman
+                          source: installation
+                          tag_list: []
+                          tags: []
+                          teammate: false
+                          topics:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          tshirt:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          updated_at: 2021-05-03T18:33:10.333Z
+                          url:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                        id: "9"
+                        relationships:
+                          identities:
+                            data: []
+                        type: member
+                    links:
+                      first: /dexterokon/members/romanwyman/activities?page=1&direction=DESC&items=10&sort=occurred_at
+                      last: /dexterokon/members/romanwyman/activities?page=1&direction=DESC&items=10&sort=occurred_at
+                      next:
+                        $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                          ~1json/links/prev"
+                      prev:
+                        $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                          ~1json/links/prev"
+          description: success
+      security:
+        - bearer: []
+      summary: List activities for a member
+      tags:
+        - Activities
+    post:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: member_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/activity"
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      attributes:
+                        action: created
+                        activity_link: https://www.justinweiss.com/
+                        created_at: 2021-05-03T18:33:10.636Z
+                        custom_description: More info about the thing
+                        custom_link: http://link.com/
+                        custom_link_text: See the thing
+                        custom_title: Did a thing
+                        custom_type: custom-type
+                        key: https://www.justinweiss.com/
+                        occurred_at: 2020-05-10T16:34:28.001Z
+                        orbit_url: http://localhost:3000/olafritschv/activities/14
+                        tags: []
+                        type: PostActivity
+                        updated_at: 2021-05-03T18:33:10.663Z
+                        url: https://www.justinweiss.com/
+                        weight: "1.0"
+                      id: "14"
+                      relationships:
+                        activity_type:
+                          data:
+                            id: "7"
+                            type: activity_type
+                        member:
+                          data:
+                            id: "12"
+                            type: member
+                        user:
+                          data:
+                            id: "43"
+                            type: user
+                      type: post_activity
+                    included:
+                      - attributes:
+                          category: orbit
+                          key: post:created
+                          name: Created content
+                          short_name: Content created
+                          weight: "1.0"
+                        id: "7"
+                        type: activity_type
+                      - attributes:
+                          activities_count: 0
+                          avatar_url: http://github.com/avatar.png
+                          bio:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          birthday:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          company:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          created: false
+                          created_at: 2021-05-03T18:33:10.577Z
+                          deleted_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          devto:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          discourse:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          first_activity_occurred_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          github:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          github_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          id: 12
+                          languages:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          last_activity_occurred_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          linkedin:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          location:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          love: 0
+                          merged_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name: WilbertJast
+                          orbit_level:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          orbit_url: http://localhost:3000/olafritschv/members/wilbertjast
+                          pronouns:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          reach: 0
+                          shipping_address:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          slug: wilbertjast
+                          source: installation
+                          tag_list: []
+                          tags: []
+                          teammate: false
+                          topics:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          tshirt:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          updated_at: 2021-05-03T18:33:10.577Z
+                          url:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                        id: "12"
+                        relationships:
+                          identities:
+                            data: []
+                        type: member
+                      - attributes:
+                          created_at: 2021-05-03T18:33:10.569Z
+                          name: DevinPfannerstill
+                          updated_at: 2021-05-03T18:33:10.573Z
+                        id: "43"
+                        type: user
+          description: success
+        "422":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    errors:
+                      custom_title:
+                        - can't be blank
+          description: unprocessable entity
+      security:
+        - bearer: []
+      summary: Create a post activity for a member
+      tags:
+        - Activities
+  "/{workspace_id}/members/{member_id}/activities/{id}":
+    delete:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: member_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: activity deleted
+      security:
+        - bearer: []
+      summary: Delete a post activity
+      tags:
+        - Activities
+    put:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: member_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/activity"
+      responses:
+        "204":
+          description: activity updated
+        "422":
+          description: unprocessable entity
+      security:
+        - bearer: []
+      summary: Update a custom activity for a member
+      tags:
+        - Activities
+  "/{workspace_id}/members/{member_id}/identities":
+    delete:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: member_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/identity"
+      responses:
+        "204":
+          description: success; no content
+        "422":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    errors:
+                      identity:
+                        - is not attached to this member
+          description: identity is invalid or not attached to member
+      security:
+        - bearer: []
+      summary: Remove identity from a member
+      tags:
+        - Members
+    post:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: member_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/identity"
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      attributes:
+                        email: josh@orbit.love
+                        name: Josh
+                        source: twitch
+                        source_host: twitch.tv
+                        uid: "12345"
+                        username: dzello1
+                      id: "12"
+                      type: other_identity
+          description: success
+        "422":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    errors:
+                      identity_id:
+                        - has already been taken
+                      source:
+                        - can't be blank
+                      username_or_email:
+                        - must be present
+          description: identity is invalid
+      security:
+        - bearer: []
+      summary: Add identity to a member
+      tags:
+        - Members
+  "/{workspace_id}/members/{member_id}/notes":
+    get:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: member_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: page
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - attributes:
+                          body: heyo
+                          created_at: 2021-05-03T18:33:11.587Z
+                          updated_at: 2021-05-03T18:33:11.587Z
+                        id: "2"
+                        relationships:
+                          member:
+                            data:
+                              id: "23"
+                              type: member
+                          user:
+                            data:
+                              id: "59"
+                              type: user
+                        type: note
+                    included:
+                      - attributes:
+                          activities_count: 0
+                          avatar_url: http://github.com/avatar.png
+                          bio:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          birthday:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          company:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          created: false
+                          created_at: 2021-05-03T18:33:11.579Z
+                          deleted_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          devto:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          discourse:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          email:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          first_activity_occurred_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          github:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          github_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          id: 23
+                          languages:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          last_activity_occurred_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          linkedin:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          location:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          love: 0
+                          merged_at:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          name: RashadOKeefeDDS
+                          orbit_level:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          orbit_url: http://localhost:3000/consueladickinson/members/rashadokeefedds
+                          pronouns:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          reach: 0
+                          shipping_address:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          slug: rashadokeefedds
+                          source: installation
+                          tag_list: []
+                          tags: []
+                          teammate: false
+                          topics:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          tshirt:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          twitter_followers:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                          updated_at: 2021-05-03T18:33:11.579Z
+                          url:
+                            $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                              ~1json/links/prev"
+                        id: "23"
+                        relationships:
+                          identities:
+                            data: []
+                        type: member
+                      - attributes:
+                          created_at: 2021-05-03T18:33:11.586Z
+                          name: DeshawnBoyle
+                          updated_at: 2021-05-03T18:33:11.586Z
+                        id: "59"
+                        type: user
+                    links:
+                      first: /consueladickinson/members/rashadokeefedds/notes?page=1
+                      last: /consueladickinson/members/rashadokeefedds/notes?page=1
+                      next:
+                        $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                          ~1json/links/prev"
+                      prev:
+                        $ref: "#/paths/~1{workspace_id}~1members/get/responses/200/examples/application\
+                          ~1json/links/prev"
+          description: success
+      security:
+        - bearer: []
+      summary: Get the member's notes
+      tags:
+        - Notes
+    post:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: member_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/note"
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      attributes:
+                        body: heyo
+                        created_at: 2021-05-03T18:33:11.533Z
+                        updated_at: 2021-05-03T18:33:11.533Z
+                      id: "1"
+                      relationships:
+                        member:
+                          data:
+                            id: "22"
+                            type: member
+                        user:
+                          data:
+                            id: "57"
+                            type: user
+                      type: note
+          description: note created
+      security:
+        - bearer: []
+      summary: Create a note
+      tags:
+        - Notes
+  "/{workspace_id}/members/{member_id}/notes/{id}":
+    put:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: member_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/note"
+      responses:
+        "204":
+          description: note updated
+      security:
+        - bearer: []
+      summary: Update a note
+      tags:
+        - Notes
+  "/{workspace_id}/reports":
+    get:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: start_date
+          schema:
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            type: string
+        - in: query
+          name: group
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      attributes:
+                        activities:
+                          custom:happened:
+                            category: custom
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          discord:message:replied:
+                            category: discord
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          discord:message:sent:
+                            category: discord
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          discord:server:joined:
+                            category: discord
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          discourse:post:created:
+                            category: discourse
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          discourse:topic:created:
+                            category: discourse
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          issue_comment:created:
+                            category: github
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          issues:opened:
+                            category: github
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          note:created:
+                            category: orbit
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          post:created:
+                            category: orbit
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          pull_requests:merged:
+                            category: github
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          pull_requests:opened:
+                            category: github
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          slack:channel:joined:
+                            category: slack
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          slack:message:sent:
+                            category: slack
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          slack:thread:replied:
+                            category: slack
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          spec:happened#6:
+                            category: spec_category
+                            count: 1
+                            delta: 1
+                            members:
+                              active_count: 1
+                              active_delta: 1
+                              new_count: 1
+                              new_delta: 1
+                              returning_count: 0
+                              returning_delta: 0
+                          star:created:
+                            category: github
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          total_count: 1
+                          total_delta: 1
+                          tweet:sent:
+                            category: twitter
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                          twitter:followed:
+                            category: twitter
+                            count: 0
+                            delta: 0
+                            members:
+                              active_count: 0
+                              active_delta: 0
+                              new_count: 0
+                              new_delta: 0
+                              returning_count: 0
+                              returning_delta: 0
+                        members:
+                          active_count: 1
+                          active_delta: 1
+                          new_count: 1
+                          new_delta: 1
+                          returning_count: 0
+                          returning_delta: 0
+                        overview:
+                          members_on_orbit_level_1_count: 0
+                          members_on_orbit_level_2_count: 0
+                          members_on_orbit_level_3_count: 1
+                          members_on_orbit_level_4_count: 0
+                          members_on_orbit_level_none_count: 0
+                          total_members_count: 1
+                        timeframe:
+                          end_date: 2021-05-03
+                          end_date_last: 2021-04-03
+                          start_date: 2021-04-03
+                          start_date_last: 2021-03-04
+                        workspace_id: 82
+                      id: "82"
+                      type: statistics
+          description: success
+      security:
+        - bearer: []
+      summary: Get a workspace stats
+      tags:
+        - Reports
+components:
+  requestBodies:
+    activity:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/activity"
+    identity:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/identity"
+    note:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/note"
+  schemas:
+    activity:
+      properties:
+        activity_type:
+          description: The type of activity - what action was done by the member
+          type: string
+        description:
+          description: A description of the activity; displayed in the timeline
+          type: string
+        key:
+          description: Supply a key that must be unique or leave blank to have one
+            generated.
+          type: string
+        link:
+          description: A URL for the activity; displayed in the timeline
+          type: string
+        link_text:
+          description: The text for the timeline link
+          type: string
+        member:
+          $ref: "#/components/schemas/member"
+        occurred_at:
+          description: The date and time the activity occurred; defaults to now
+          type: string
+        tags:
+          description: "[EXPERIMENTAL] Capture facets of the activity to group by later
+            e.g. locations or channels; replaces existing value"
+          items:
+            type: string
+          type: array
+        title:
+          description: A title for the activity; displayed in the timeline
+          type: string
+        type:
+          description: An activity type, now only `custom` and `post` are supported
+          type: string
+        weight:
+          description: A custom weight to be used in filters and reports; defaults to 1.
+          type: string
+      required:
+        - title
+      type: object
+    activity_and_identity:
+      properties:
+        activity:
+          $ref: "#/components/schemas/activity"
+        identity:
+          $ref: "#/components/schemas/identity"
+      type: object
+    identity:
+      description: Represents an email address, a profile on networks like github and
+        twitter, or a record in another system.
+      properties:
+        email:
+          description: The email of the person in the source system
+          type: string
+        name:
+          description: The name of the person in the source system
+          type: string
+        source:
+          description: "The type of source: known values include github, twitter,
+            discourse, email, linkedin, devto. Custom values can also be used"
+          type: string
+        source_host:
+          description: Specifies the location of the source, such as the host of a
+            Discourse instance
+          type: string
+        uid:
+          description: The uid of the person in the source system
+          type: string
+        url:
+          description: For custom identities, an optional link to the profile on the
+            source system
+          type: string
+        username:
+          description: The username of the person in the source system
+          type: string
+      required:
+        - source
+      type: object
+    member:
+      properties:
+        bio:
+          type: string
+        birthday:
+          type: string
+        company:
+          type: string
+        devto:
+          description: The member's dev.to username
+          type: string
+        email:
+          description: The member's email
+          type: string
+        github:
+          description: The member's GitHub username
+          type: string
+        linkedin:
+          description: The member's LinkedIn username, without the in/ or pub/
+          type: string
+        location:
+          type: string
+        name:
+          type: string
+        pronouns:
+          type: string
+        shipping_address:
+          type: string
+        slug:
+          type: string
+        tag_list:
+          description: "Deprecated: Please use the tags attribute instead"
+          type: string
+        tags:
+          description: Replaces all tags for the member; comma-separated string or array
+          type: string
+        tags_to_add:
+          description: Adds tags to member; comma-separated string or array
+          type: string
+        teammate:
+          type: boolean
+        tshirt:
+          type: string
+        twitter:
+          description: The member's Twitter username
+          type: string
+        url:
+          type: string
+      type: object
+    member_and_identity:
+      properties:
+        identity:
+          $ref: "#/components/schemas/identity"
+        member:
+          $ref: "#/components/schemas/member"
+      type: object
+    note:
+      properties:
+        body:
+          type: string
+      required:
+        - body
+      type: object
+  securitySchemes:
+    api_key:
+      description: Provide the API key in a query param called api_key. This is the
+        least secure method, please use only for testing.
+      in: query
+      name: api_key
+      type: apiKey
+    bearer:
+      description: Provide a Authorization header with format 'Bearer <api_key>'. This
+        is the recommended approach. Make sure to include the 'Bearer' part in
+        the text box here.
+      in: header
+      name: Authorization
+      type: apiKey
