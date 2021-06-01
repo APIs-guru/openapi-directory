@@ -81,6 +81,52 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v3beta1/{environment}:runContinuousTest":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Kicks off a continuous test under the specified Environment.
+      operationId: dialogflow.projects.locations.agents.environments.runContinuousTest
+      parameters:
+        - description: "Required. Format: `projects//locations//agents//environments/`."
+          in: path
+          name: environment
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1RunContinuousTestRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
   "/v3beta1/{name}":
     delete:
       description: Deletes the specified SecuritySettings.
@@ -798,6 +844,57 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
+  "/v3beta1/{parent}/continuousTestResults":
+    get:
+      description: Fetches a list of continuous test results for a given environment.
+      operationId: dialogflow.projects.locations.agents.environments.continuousTestResults.list
+      parameters:
+        - description: "Required. The environment to list results for. Format: `projects//locations//agents// environments/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return in a single page. By default 100 and at most 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ListContinuousTestResultsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3beta1/{parent}/entityTypes":
     get:
       description: Returns the list of all session entity types in the specified session.
@@ -2314,6 +2411,29 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestCaseResult"
           type: array
       type: object
+    GoogleCloudDialogflowCxV3ContinuousTestResult:
+      description: Represents a result from running a test case in an agent environment.
+      properties:
+        name:
+          description: "The resource name for the continuous test result. Format: `projects//locations//agents//environments//continuousTestResults/`."
+          type: string
+        result:
+          description: The result of this continuous test run, i.e. whether all the tests in this continuous test run pass or not.
+          enum:
+            - AGGREGATED_TEST_RESULT_UNSPECIFIED
+            - PASSED
+            - FAILED
+          type: string
+        runTime:
+          description: Time when the continuous testing run starts.
+          format: google-datetime
+          type: string
+        testCaseResults:
+          description: A list of individual test case results names in this continuous test run.
+          items:
+            type: string
+          type: array
+      type: object
     GoogleCloudDialogflowCxV3ConversationTurn:
       description: One interaction between a human and virtual agent. The human provides some input and the virtual agent provides a response.
       properties:
@@ -2976,6 +3096,22 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudDialogflowCxV3RunContinuousTestMetadata:
+      description: Metadata returned for the Environments.RunContinuousTest long running operation.
+      properties:
+        errors:
+          description: The test errors.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestError"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3RunContinuousTestResponse:
+      description: The response message for Environments.RunContinuousTest.
+      properties:
+        continuousTestResult:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ContinuousTestResult"
+          description: The result for a continuous test run.
+      type: object
     GoogleCloudDialogflowCxV3RunTestCaseMetadata:
       description: Metadata returned for the TestCases.RunTestCase long running operation.
       properties: {}
@@ -3400,6 +3536,29 @@ components:
         transitionCoverage:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TransitionCoverage"
           description: Transition (excluding transition route groups) coverage.
+      type: object
+    GoogleCloudDialogflowCxV3beta1ContinuousTestResult:
+      description: Represents a result from running a test case in an agent environment.
+      properties:
+        name:
+          description: "The resource name for the continuous test result. Format: `projects//locations//agents//environments//continuousTestResults/`."
+          type: string
+        result:
+          description: The result of this continuous test run, i.e. whether all the tests in this continuous test run pass or not.
+          enum:
+            - AGGREGATED_TEST_RESULT_UNSPECIFIED
+            - PASSED
+            - FAILED
+          type: string
+        runTime:
+          description: Time when the continuous testing run starts.
+          format: google-datetime
+          type: string
+        testCaseResults:
+          description: A list of individual test case results names in this continuous test run.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudDialogflowCxV3beta1ConversationTurn:
       description: One interaction between a human and virtual agent. The human provides some input and the virtual agent provides a response.
@@ -4286,6 +4445,18 @@ components:
           description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
       type: object
+    GoogleCloudDialogflowCxV3beta1ListContinuousTestResultsResponse:
+      description: The response message for Environments.ListTestCaseResults.
+      properties:
+        continuousTestResults:
+          description: The list of continuous test results.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ContinuousTestResult"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
     GoogleCloudDialogflowCxV3beta1ListEntityTypesResponse:
       description: The response message for EntityTypes.ListEntityTypes.
       properties:
@@ -4917,6 +5088,26 @@ components:
             - KEEP
             - FALLBACK
           type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1RunContinuousTestMetadata:
+      description: Metadata returned for the Environments.RunContinuousTest long running operation.
+      properties:
+        errors:
+          description: The test errors.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TestError"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1RunContinuousTestRequest:
+      description: The request message for Environments.RunContinuousTest.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowCxV3beta1RunContinuousTestResponse:
+      description: The response message for Environments.RunContinuousTest.
+      properties:
+        continuousTestResult:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ContinuousTestResult"
+          description: The result for a continuous test run.
       type: object
     GoogleCloudDialogflowCxV3beta1RunTestCaseMetadata:
       description: Metadata returned for the TestCases.RunTestCase long running operation.
@@ -6516,6 +6707,9 @@ components:
         allRequiredParamsPresent:
           description: "This field is set to: - `false` if the matched intent has required parameters and not all of the required parameter values have been collected. - `true` if all required parameter values have been collected, or if the matched intent doesn't contain any required parameters."
           type: boolean
+        cancelsSlotFilling:
+          description: Indicates whether the conversational query triggers a cancellation for slot filling.
+          type: boolean
         diagnosticInfo:
           additionalProperties:
             description: Properties of the object.
@@ -7823,6 +8017,9 @@ components:
           type: string
         allRequiredParamsPresent:
           description: "This field is set to: - `false` if the matched intent has required parameters and not all of the required parameter values have been collected. - `true` if all required parameter values have been collected, or if the matched intent doesn't contain any required parameters."
+          type: boolean
+        cancelsSlotFilling:
+          description: Indicates whether the conversational query triggers a cancellation for slot filling.
           type: boolean
         diagnosticInfo:
           additionalProperties:

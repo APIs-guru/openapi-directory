@@ -115,7 +115,7 @@ paths:
       description: Updates a tag.
       operationId: artifactregistry.projects.locations.repositories.packages.tags.patch
       parameters:
-        - description: 'The name of the tag, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/tags/tag1".'
+        - description: 'The name of the tag, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/tags/tag1". If the package or tag ID parts contain slashes, the slashes are escaped.'
           in: path
           name: name
           required: true
@@ -862,7 +862,7 @@ components:
             $ref: "#/components/schemas/Hash"
           type: array
         name:
-          description: 'The name of the file, for example: "projects/p1/locations/us-central1/repositories/repo1/files/a/b/c.txt".'
+          description: 'The name of the file, for example: "projects/p1/locations/us-central1/repositories/repo1/files/a%2Fb%2Fc.txt". If the file ID part contains slashes, they are escaped.'
           type: string
         owner:
           description: The name of the Package or Version that owns this file, if any.
@@ -1031,7 +1031,7 @@ components:
           description: The display name of the package.
           type: string
         name:
-          description: 'The name of the package, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1".'
+          description: 'The name of the package, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1". If the package ID part contains slashes, the slashes are escaped.'
           type: string
         updateTime:
           description: The time when the package was last updated. This includes publishing a new version of the package.
@@ -1070,6 +1070,10 @@ components:
           enum:
             - FORMAT_UNSPECIFIED
             - DOCKER
+            - MAVEN
+            - NPM
+            - PYPI
+            - PYTHON
           type: string
         kmsKeyName:
           description: "The Cloud KMS resource name of the customer managed encryption key that’s used to encrypt the contents of the Repository. Has the form: `projects/my-project/locations/my-region/keyRings/my-kr/cryptoKeys/my-key`. This value may not be changed after the Repository has been created."
@@ -1116,10 +1120,10 @@ components:
       description: Tags point to a version and represent an alternative name that can be used to access the version.
       properties:
         name:
-          description: 'The name of the tag, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/tags/tag1".'
+          description: 'The name of the tag, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/tags/tag1". If the package or tag ID parts contain slashes, the slashes are escaped.'
           type: string
         version:
-          description: 'The name of the version the tag refers to, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/sha256:5243811"'
+          description: 'The name of the version the tag refers to, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/sha256:5243811" If the package or version ID parts contain slashes, the slashes are escaped.'
           type: string
       type: object
     TestIamPermissionsRequest:
@@ -1157,7 +1161,7 @@ components:
           readOnly: true
           type: object
         name:
-          description: 'The name of the version, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/art1".'
+          description: 'The name of the version, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/art1". If the package or version ID parts contain slashes, the slashes are escaped.'
           type: string
         relatedTags:
           description: Output only. A list of related tags. Will contain up to 100 tags that reference this version.

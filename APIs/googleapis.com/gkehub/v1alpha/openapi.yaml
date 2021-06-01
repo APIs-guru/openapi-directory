@@ -823,6 +823,14 @@ components:
             - INSTALLED
             - ERROR
           type: string
+        gatekeeperMutation:
+          description: Status of the pod serving the mutation webhook.
+          enum:
+            - DEPLOYMENT_STATE_UNSPECIFIED
+            - NOT_INSTALLED
+            - INSTALLED
+            - ERROR
+          type: string
       type: object
     ConfigManagementGitConfig:
       description: Git repo configuration for a single cluster.
@@ -1007,6 +1015,9 @@ components:
           type: array
         logDeniesEnabled:
           description: Logs all denies and dry run failures.
+          type: boolean
+        mutationEnabled:
+          description: Enable users to try out mutation for PolicyController.
           type: boolean
         referentialRulesEnabled:
           description: Enables the ability to use Constraint Templates that reference to objects other than the object currently being evaluated.

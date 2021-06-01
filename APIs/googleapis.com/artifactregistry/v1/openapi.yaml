@@ -381,7 +381,7 @@ components:
       description: "DockerImage represents a docker artifact. The following fields are returned as untyped metadata in the Version resource, using camelcase keys (i.e. metadata.imageSizeBytes): - imageSizeBytes - mediaType - buildTime"
       properties:
         buildTime:
-          description: The time this image was built. This field is returned as the 'metadata.buildTime' field in the Version resource. The build time is returned to the client as an RFC 3339 string, which can be easily used with the JavaScript Date constructor and keeps the Version timestamps returned via OnePlatform consistent, as JSON marshals google.protobuf.Timestamp into an RFC 3339 string. (http://google3/cloud/containers/artifacts/metadata/v1beta2/builder/data.go?l=158-159&rcl=364878183).
+          description: The time this image was built. This field is returned as the 'metadata.buildTime' field in the Version resource. The build time is returned to the client as an RFC 3339 string, which can be easily used with the JavaScript Date constructor and keeps the Version timestamps returned via OnePlatform consistent, as JSON marshals google.protobuf.Timestamp into an RFC 3339 string.
           format: google-datetime
           type: string
         imageSizeBytes:
@@ -485,6 +485,10 @@ components:
           enum:
             - FORMAT_UNSPECIFIED
             - DOCKER
+            - MAVEN
+            - NPM
+            - PYPI
+            - PYTHON
           type: string
         kmsKeyName:
           description: "The Cloud KMS resource name of the customer managed encryption key that’s used to encrypt the contents of the Repository. Has the form: `projects/my-project/locations/my-region/keyRings/my-kr/cryptoKeys/my-key`. This value may not be changed after the Repository has been created."

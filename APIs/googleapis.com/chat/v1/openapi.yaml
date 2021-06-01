@@ -601,13 +601,13 @@ components:
           $ref: "#/components/schemas/FormAction"
           description: The form action data associated with an interactive card that was
             clicked. Only populated for CARD_CLICKED events. See the
-            [Interactive Cards guide](/hangouts/chat/how-tos/cards-onclick) for
-            more information.
+            [Interactive Cards guide](/chat/how-tos/cards-onclick) for more
+            information.
         configCompleteRedirectUrl:
           description: The URL the bot should redirect the user to after they have
             completed an authorization or configuration flow outside of Google
             Chat. See the [Authorizing access to 3p services
-            guide](/hangouts/chat/how-tos/auth-3p) for more information.
+            guide](/chat/how-tos/auth-3p) for more information.
           type: string
         eventTime:
           description: The timestamp indicating when the event was dispatched.

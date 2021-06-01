@@ -6004,6 +6004,64 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendBuckets
+  "/projects/{project}/global/backendBuckets/{backendBucket}/setEdgeSecurityPolicy":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the edge security policy for the specified backend bucket.
+      operationId: compute.backendBuckets.setEdgeSecurityPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the BackendService resource to which the security policy should be set. The name should conform to RFC1035.
+          in: path
+          name: backendBucket
+          required: true
+          schema:
+            type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityPolicyReference"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - backendBuckets
   "/projects/{project}/global/backendBuckets/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -6638,6 +6696,64 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - backendServices
+  "/projects/{project}/global/backendServices/{backendService}/setEdgeSecurityPolicy":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the edge security policy for the specified backend service.
+      operationId: compute.backendServices.setEdgeSecurityPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the BackendService resource to which the edge security policy should be set. The name should conform to RFC1035.
+          in: path
+          name: backendService
+          required: true
+          schema:
+            type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityPolicyReference"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
       tags:
         - backendServices
   "/projects/{project}/global/backendServices/{backendService}/setSecurityPolicy":
@@ -41038,7 +41154,7 @@ components:
             - `DNS_RESOLVER` for a DNS resolver address in a subnetwork 
             - `VPC_PEERING` for addresses that are reserved for VPC peer networks. 
             - `NAT_AUTO` for addresses that are external IP addresses automatically reserved for Cloud NAT. 
-            - `IPSEC_INTERCONNECT` for addresses created from a private IP range that are reserved for a VLAN attachment in an IPsec-encrypted Cloud Interconnect configuration. These addresses are regional resources.
+            - `IPSEC_INTERCONNECT` for addresses created from a private IP range that are reserved for a VLAN attachment in an IPsec-encrypted Cloud Interconnect configuration. These addresses are regional resources. Not currently available publicly.
           enum:
             - DNS_RESOLVER
             - GCE_ENDPOINT
@@ -42213,6 +42329,12 @@ components:
         cdnPolicy:
           $ref: "#/components/schemas/BackendBucketCdnPolicy"
           description: Cloud CDN configuration for this BackendBucket.
+        compressionMode:
+          description: Compress text responses using Brotli or gzip compression, based on the client?s Accept-Encoding header.
+          enum:
+            - AUTOMATIC
+            - DISABLED
+          type: string
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
           type: string
@@ -42223,6 +42345,9 @@ components:
           type: array
         description:
           description: An optional textual description of the resource; provided by the client when the resource is created.
+          type: string
+        edgeSecurityPolicy:
+          description: "[Output Only] The resource URL for the edge security policy associated with this backend bucket."
           type: string
         enableCdn:
           description: If true, enable Cloud CDN for this BackendBucket.
@@ -42444,6 +42569,12 @@ components:
           description: Cloud CDN configuration for this BackendService. Only available for  external HTTP(S) Load Balancing.
         circuitBreakers:
           $ref: "#/components/schemas/CircuitBreakers"
+        compressionMode:
+          description: Compress text responses using Brotli or gzip compression, based on the client?s Accept-Encoding header.
+          enum:
+            - AUTOMATIC
+            - DISABLED
+          type: string
         connectionDraining:
           $ref: "#/components/schemas/ConnectionDraining"
         connectionTrackingPolicy:
@@ -42473,6 +42604,9 @@ components:
           type: array
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
+          type: string
+        edgeSecurityPolicy:
+          description: "[Output Only] The resource URL for the edge security policy associated with this backend service."
           type: string
         enableCDN:
           description: If true, enables Cloud CDN for the backend service. Only applicable if the loadBalancingScheme is EXTERNAL and the protocol is HTTP or HTTPS.
@@ -44776,7 +44910,10 @@ components:
           format: uint64
           type: string
         interfaces:
-          description: List of interfaces for this external VPN gateway.
+          description: |-
+            List of interfaces for this external VPN gateway.
+
+            If your peer-side gateway is an on-premises gateway and non-AWS cloud providers? gateway, at most two interfaces can be provided for an external VPN gateway. If your peer side is an AWS virtual private gateway, four interfaces should be provided for an external VPN gateway.
           items:
             $ref: "#/components/schemas/ExternalVpnGatewayInterface"
           type: array
@@ -44815,7 +44952,11 @@ components:
       description: The interface for the external VPN gateway.
       properties:
         id:
-          description: "The numeric ID of this interface. The allowed input values for this id for different redundancy types of external VPN gateway: SINGLE_IP_INTERNALLY_REDUNDANT - 0 TWO_IPS_REDUNDANCY - 0, 1 FOUR_IPS_REDUNDANCY - 0, 1, 2, 3"
+          description: |-
+            The numeric ID of this interface. The allowed input values for this id for different redundancy types of external VPN gateway: 
+            - SINGLE_IP_INTERNALLY_REDUNDANT - 0 
+            - TWO_IPS_REDUNDANCY - 0, 1 
+            - FOUR_IPS_REDUNDANCY - 0, 1, 2, 3
           format: uint32
           type: integer
         ipAddress:
@@ -45361,7 +45502,7 @@ components:
 
              
             - If the value is fixed, then the calculated value is equal to the fixed value. 
-            - If the value is a percent, then the calculated value is percent/100 * targetSize. For example, the calculated value of a 80% of a managed instance group with 150 instances would be (80/100 * 150) = 120 VM instances. If there is a remainder, the number is rounded up.
+            - If the value is a percent, then the calculated value is percent/100 * targetSize. For example, the calculated value of a 80% of a managed instance group with 150 instances would be (80/100 * 150) = 120 VM instances. If there is a remainder, the number is rounded.
           format: int32
           type: integer
         fixed:
@@ -48445,7 +48586,7 @@ components:
         maxSurge:
           $ref: "#/components/schemas/FixedOrPercent"
           description: |-
-            The maximum number of instances that can be created above the specified targetSize during the update process. This value can be either a fixed number or, if the group has 10 or more instances, a percentage. If you set a percentage, the number of instances is rounded up if necessary. The default value for maxSurge is a fixed value equal to the number of zones in which the managed instance group operates.
+            The maximum number of instances that can be created above the specified targetSize during the update process. This value can be either a fixed number or, if the group has 10 or more instances, a percentage. If you set a percentage, the number of instances is rounded if necessary. The default value for maxSurge is a fixed value equal to the number of zones in which the managed instance group operates.
 
             At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxSurge.
         maxUnavailable:
@@ -48455,7 +48596,7 @@ components:
 
              
             - The instance's status is RUNNING. 
-            - If there is a health check on the instance group, the instance's health check status must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  This value can be either a fixed number or, if the group has 10 or more instances, a percentage. If you set a percentage, the number of instances is rounded up if necessary. The default value for maxUnavailable is a fixed value equal to the number of zones in which the managed instance group operates.
+            - If there is a health check on the instance group, the instance's health check status must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  This value can be either a fixed number or, if the group has 10 or more instances, a percentage. If you set a percentage, the number of instances is rounded if necessary. The default value for maxUnavailable is a fixed value equal to the number of zones in which the managed instance group operates.
 
             At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxUnavailable.
         minReadySec:
@@ -48504,7 +48645,7 @@ components:
           description: |-
             Specifies the intended number of instances to be created from the instanceTemplate. The final number of instances created from the template will be equal to:  
             - If expressed as a fixed number, the minimum of either targetSize.fixed or instanceGroupManager.targetSize is used. 
-            - if expressed as a percent, the targetSize would be (targetSize.percent/100 * InstanceGroupManager.targetSize) If there is a remainder, the number is rounded up.  If unset, this version will update any remaining instances not updated by another version. Read Starting a canary update for more information.
+            - if expressed as a percent, the targetSize would be (targetSize.percent/100 * InstanceGroupManager.targetSize) If there is a remainder, the number is rounded.  If unset, this version will update any remaining instances not updated by another version. Read Starting a canary update for more information.
       type: object
     InstanceGroupManagersAbandonInstancesRequest:
       properties:
@@ -49806,10 +49947,10 @@ components:
           type: string
         encryption:
           description: |-
-            Indicates the user-supplied encryption option of this interconnect attachment: 
-            - NONE is the default value, which means that the attachment carries unencrypted traffic. VMs can send traffic to, or receive traffic from, this type of attachment. 
-            - IPSEC indicates that the attachment carries only traffic encrypted by an IPsec device such as an HA VPN gateway. VMs cannot directly send traffic to, or receive traffic from, such an attachment. To use IPsec-encrypted Cloud Interconnect, create the attachment using this option. 
-            Not currently available in all Interconnect locations.
+            Indicates the user-supplied encryption option of this VLAN attachment (interconnectAttachment). Can only be specified at attachment creation for PARTNER or DEDICATED attachments. Possible values are: 
+            - NONE - This is the default value, which means that the VLAN attachment carries unencrypted traffic. VMs are able to send traffic to, or receive traffic from, such a VLAN attachment. 
+            - IPSEC - The VLAN attachment carries only encrypted traffic that is encrypted by an IPsec device, such as an HA VPN gateway or third-party IPsec VPN. VMs cannot directly send traffic to, or receive traffic from, such a VLAN attachment. To use IPsec-encrypted Cloud Interconnect, the VLAN attachment must be created with this option. 
+            Not currently available publicly.
           enum:
             - IPSEC
             - NONE
@@ -49826,8 +49967,8 @@ components:
           type: string
         ipsecInternalAddresses:
           description: |-
-            URL of addresses that have been reserved for the interconnect attachment, Used only for interconnect attachment that has the encryption option as IPSEC. The addresses must be RFC 1918 IP address ranges. When creating HA VPN gateway over the interconnect attachment, if the attachment is configured to use an RFC 1918 IP address, then the VPN gateway's IP address will be allocated from the IP address range specified here. For example, if the HA VPN gateway's interface 0 is paired to this interconnect attachment, then an RFC 1918 IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this interconnect attachment. If this field is not specified for interconnect attachment that has encryption option as IPSEC, later on when creating HA VPN gateway on this interconnect attachment, the HA VPN gateway's IP address will be allocated from regional external IP address pool.
-            Not currently available in all Interconnect locations.
+            List of URL of addresses that have been reserved for the VLAN attachment. Used only for the VLAN attachment that has the encryption option as IPSEC. The addresses must be regional internal IP address ranges. When creating an HA VPN gateway over the VLAN attachment, if the attachment is configured to use a regional internal IP address, then the VPN gateway's IP address is allocated from the IP address range specified here. For example, if the HA VPN gateway's interface 0 is paired to this VLAN attachment, then a regional internal IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this VLAN attachment. If this field is not specified when creating the VLAN attachment, then later on when creating an HA VPN gateway on this VLAN attachment, the HA VPN gateway's IP address is allocated from the regional external IP address pool.
+            Not currently available publicly.
           items:
             type: string
           type: array
@@ -55028,6 +55169,7 @@ components:
             - COMMITTED_NVIDIA_P4_GPUS
             - COMMITTED_NVIDIA_T4_GPUS
             - COMMITTED_NVIDIA_V100_GPUS
+            - COMMITTED_P2D_CPUS
             - CPUS
             - CPUS_ALL_REGIONS
             - DISKS_TOTAL_GB
@@ -55076,6 +55218,7 @@ components:
             - NVIDIA_T4_GPUS
             - NVIDIA_T4_VWS_GPUS
             - NVIDIA_V100_GPUS
+            - P2D_CPUS
             - PACKET_MIRRORINGS
             - PD_EXTREME_TOTAL_PROVISIONED_IOPS
             - PREEMPTIBLE_CPUS
@@ -56003,7 +56146,7 @@ components:
           description: Corresponds to the label key of a reservation resource. To target a SPECIFIC_RESERVATION by name, specify googleapis.com/reservation-name as the key and specify the name of your reservation as its value.
           type: string
         values:
-          description: Corresponds to the label values of a reservation resource.
+          description: Corresponds to the label values of a reservation resource. This can be either a name to a reservation in the same project or "projects/different-project/reservations/some-reservation-name" to target a shared reservation in the same zone but in a different project.
           items:
             type: string
           type: array
@@ -56904,8 +57047,8 @@ components:
           type: string
         encryptedInterconnectRouter:
           description: |-
-            Field to indicate if a router is dedicated to use with encrypted Interconnect Attachment (IPsec-encrypted Cloud Interconnect feature).
-            Not currently available in all Interconnect locations.
+            Indicates if a router is dedicated for use with encrypted VLAN attachments (interconnectAttachments).
+            Not currently available publicly.
           type: boolean
         id:
           description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
@@ -57054,7 +57197,6 @@ components:
         keepaliveInterval:
           description: |-
             The interval in seconds between BGP keepalive messages that are sent to the peer.
-            Not currently available publicly.
             Hold time is three times the interval at which keepalive messages are sent, and the hold time is the maximum number of seconds allowed to elapse between successive keepalive messages that BGP receives from a peer.
             BGP will use the smaller of either the local hold time value or the peer's hold time value as the hold time for the BGP connection between the two peers.
             If set, this value must be between 20 and 60. The default is 20.
@@ -57096,7 +57238,6 @@ components:
         enable:
           description: |-
             The status of the BGP peer connection.
-            Not currently available publicly.
             If set to FALSE, any active session with the peer is terminated and all associated routing information is removed. If set to TRUE, the peer connection can be established with routing information. The default is TRUE.
           enum:
             - "FALSE"
@@ -57741,6 +57882,10 @@ components:
 
             By default, this is set to true so an instance is automatically restarted if it is terminated by Compute Engine.
           type: boolean
+        hostErrorTimeoutSeconds:
+          description: Specify the time in seconds for host error detection, the value must be within the range of [90, 330] with the increment of 30, if unset, the default behavior of host error recovery will be used.
+          format: int32
+          type: integer
         locationHint:
           description: An opaque location hint used to place the instance close to other resources. This field is for use by internal tools that use the public API.
           type: string
@@ -57820,6 +57965,8 @@ components:
       properties:
         adaptiveProtectionConfig:
           $ref: "#/components/schemas/SecurityPolicyAdaptiveProtectionConfig"
+        advancedOptionsConfig:
+          $ref: "#/components/schemas/SecurityPolicyAdvancedOptionsConfig"
         associations:
           description: A list of associations that belong to this policy.
           items:
@@ -57888,6 +58035,7 @@ components:
           description: The type indicates the intended use of the security policy. CLOUD_ARMOR policies apply to backend services. FIREWALL policies apply to organizations.
           enum:
             - CLOUD_ARMOR
+            - CLOUD_ARMOR_EDGE
             - FIREWALL
           type: string
       type: object
@@ -57909,6 +58057,19 @@ components:
           enum:
             - PREMIUM
             - STANDARD
+          type: string
+      type: object
+    SecurityPolicyAdvancedOptionsConfig:
+      properties:
+        jsonParsing:
+          enum:
+            - DISABLED
+            - STANDARD
+          type: string
+        logLevel:
+          enum:
+            - NORMAL
+            - VERBOSE
           type: string
       type: object
     SecurityPolicyAssociation:
@@ -62216,7 +62377,7 @@ components:
           description: "[Output Only] Type of resource. Always compute#usableSubnetworksAggregatedList for aggregated lists of usable subnetworks."
           type: string
         nextPageToken:
-          description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
+          description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results. In special cases listUsable may return 0 subnetworks and nextPageToken which still should be used to get the next page of results."
           type: string
         selfLink:
           description: "[Output Only] Server-defined URL for this resource."
@@ -62439,7 +62600,7 @@ components:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
         vpnInterfaces:
-          description: A list of interfaces on this VPN gateway.
+          description: The list of VPN interfaces associated with this VPN gateway.
           items:
             $ref: "#/components/schemas/VpnGatewayVpnGatewayInterface"
           type: array
@@ -62653,16 +62814,16 @@ components:
       description: A VPN gateway interface.
       properties:
         id:
-          description: The numeric ID of this VPN gateway interface.
+          description: "[Output Only] Numeric identifier for this VPN interface associated with the VPN gateway."
           format: uint32
           type: integer
         interconnectAttachment:
           description: |-
-            URL of the interconnect attachment resource. When the value of this field is present, the VPN Gateway will be used for IPsec-encrypted Cloud Interconnect; all Egress or Ingress traffic for this VPN Gateway interface will go through the specified interconnect attachment resource.
-            Not currently available in all Interconnect locations.
+            URL of the VLAN attachment (interconnectAttachment) resource for this VPN gateway interface. When the value of this field is present, the VPN gateway is used for IPsec-encrypted Cloud Interconnect; all egress or ingress traffic for this VPN gateway interface goes through the specified VLAN attachment resource.
+            Not currently available publicly.
           type: string
         ipAddress:
-          description: "[Output Only] The external IP address for this VPN gateway interface."
+          description: "[Output Only] IP address for this VPN interface associated with the VPN gateway. The IP address could be either a regional external IP address or a regional internal IP address. The two IP addresses for a VPN gateway must be all regional external or regional internal IP addresses. There cannot be a mix of regional external IP addresses and regional internal IP addresses. For IPsec-encrypted Cloud Interconnect, the IP addresses for both interfaces could either be regional internal IP addresses or regional external IP addresses. For regular (non IPsec-encrypted Cloud Interconnect) HA VPN tunnels, the IP address must be a regional external IP address."
           type: string
       type: object
     VpnGatewaysGetStatusResponse:

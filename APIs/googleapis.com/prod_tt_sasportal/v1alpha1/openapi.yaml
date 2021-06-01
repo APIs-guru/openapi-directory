@@ -1446,6 +1446,10 @@ components:
     SasPortalSetPolicyRequest:
       description: Request message for `SetPolicy` method.
       properties:
+        disableNotification:
+          description: Optional. Set the field as true when we would like to disable the
+            onboarding notification.
+          type: boolean
         policy:
           $ref: "#/components/schemas/SasPortalPolicy"
           description: Required. The policy to be applied to the `resource`.

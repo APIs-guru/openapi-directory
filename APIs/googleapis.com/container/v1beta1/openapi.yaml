@@ -3246,6 +3246,9 @@ components:
           description: "[Output only] The size of the address space on each node for hosting containers. This is provisioned from within the `container_ipv4_cidr` range. This field will only be set when cluster is in route-based network mode."
           format: int32
           type: integer
+        nodePoolDefaults:
+          $ref: "#/components/schemas/NodePoolDefaults"
+          description: Default NodePool settings for the entire cluster. These settings are overridden if specified on the specific NodePool object.
         nodePools:
           description: The node pools associated with this cluster. This field should not be set if "node_config" or "initial_node_count" are specified.
           items:
@@ -3585,6 +3588,22 @@ components:
             - ENCRYPTED
             - DECRYPTED
           type: string
+      type: object
+    Date:
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
+      properties:
+        day:
+          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+          format: int32
+          type: integer
+        month:
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+          format: int32
+          type: integer
+        year:
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+          format: int32
+          type: integer
       type: object
     DefaultSnatStatus:
       description: DefaultSnatStatus contains the desired state of whether default sNAT should be disabled on the cluster.
@@ -4150,6 +4169,10 @@ components:
           $ref: "#/components/schemas/WorkloadMetadataConfig"
           description: The workload metadata configuration for this node.
       type: object
+    NodeConfigDefaults:
+      description: Subset of NodeConfig message that has defaults.
+      properties: {}
+      type: object
     NodeKubeletConfig:
       description: Node kubelet configs.
       properties:
@@ -4283,6 +4306,13 @@ components:
           description: Minimum number of nodes in the NodePool. Must be >= 1 and <= max_node_count.
           format: int32
           type: integer
+      type: object
+    NodePoolDefaults:
+      description: Subset of Nodepool message that has defaults.
+      properties:
+        nodeConfigDefaults:
+          $ref: "#/components/schemas/NodeConfigDefaults"
+          description: Subset of NodeConfig message that has defaults.
       type: object
     NodeTaint:
       description: "Kubernetes taint is comprised of three fields: key, value, and effect. Effect can only be one of three types: NoSchedule, PreferNoSchedule or NoExecute. See [here](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) for more information, including usage and the valid values."
@@ -4628,6 +4658,11 @@ components:
           items:
             type: string
           type: array
+        windowsVersionMaps:
+          additionalProperties:
+            $ref: "#/components/schemas/WindowsVersions"
+          description: Maps of Kubernetes version and supported Windows server versions.
+          type: object
       type: object
     SetAddonsConfigRequest:
       description: SetAddonsRequest sets the addons associated with the cluster.
@@ -4969,6 +5004,7 @@ components:
             - GCE_QUOTA_EXCEEDED
             - SET_BY_OPERATOR
             - CLOUD_KMS_KEY_ERROR
+            - CA_EXPIRING
           type: string
         message:
           description: Human-friendly representation of the condition
@@ -5193,6 +5229,28 @@ components:
         enabled:
           description: Enables vertical pod autoscaling.
           type: boolean
+      type: object
+    WindowsVersion:
+      description: Windows server version.
+      properties:
+        imageType:
+          description: Windows server image type
+          type: string
+        osVersion:
+          description: Windows server build number
+          type: string
+        supportEndDate:
+          $ref: "#/components/schemas/Date"
+          description: Mainstream support end date
+      type: object
+    WindowsVersions:
+      description: Windows server versions.
+      properties:
+        windowsVersions:
+          description: List of Windows server versions.
+          items:
+            $ref: "#/components/schemas/WindowsVersion"
+          type: array
       type: object
     WorkloadCertificates:
       description: Configuration for issuance of mTLS keys and certificates to Kubernetes pods.

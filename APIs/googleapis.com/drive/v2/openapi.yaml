@@ -5484,7 +5484,7 @@ components:
             type: string
           type: array
         owners:
-          description: The owner(s) of this file. Not populated for items in shared drives.
+          description: The owner of this file. Only certain legacy files may have more than one owner. This field isn't populated for items in shared drives.
           items:
             $ref: "#/components/schemas/User"
           type: array

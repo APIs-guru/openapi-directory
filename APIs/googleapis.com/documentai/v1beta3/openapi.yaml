@@ -98,13 +98,28 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: documentai.projects.locations.operations.get
+      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
+      operationId: documentai.projects.locations.operations.list
       parameters:
-        - description: The name of the operation resource.
+        - description: The name of the operation's parent resource.
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
           schema:
             type: string
       responses:
@@ -112,7 +127,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleLongrunningOperation"
+                $ref: "#/components/schemas/GoogleLongrunningListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -3463,7 +3478,7 @@ components:
           description: Description of the entity type.
           type: string
         enumValues:
-          description: For some entity types there are only a few possible values. They can be specified here.
+          description: If specified, lists all the possible values for this entity.
           items:
             type: string
           type: array
@@ -3538,6 +3553,18 @@ components:
         name:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
           type: string
+      type: object
+    GoogleLongrunningListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/GoogleLongrunningOperation"
+          type: array
       type: object
     GoogleLongrunningOperation:
       description: This resource represents a long-running operation that is the result of a network API call.

@@ -2428,6 +2428,29 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestCaseResult"
           type: array
       type: object
+    GoogleCloudDialogflowCxV3ContinuousTestResult:
+      description: Represents a result from running a test case in an agent environment.
+      properties:
+        name:
+          description: "The resource name for the continuous test result. Format: `projects//locations//agents//environments//continuousTestResults/`."
+          type: string
+        result:
+          description: The result of this continuous test run, i.e. whether all the tests in this continuous test run pass or not.
+          enum:
+            - AGGREGATED_TEST_RESULT_UNSPECIFIED
+            - PASSED
+            - FAILED
+          type: string
+        runTime:
+          description: Time when the continuous testing run starts.
+          format: google-datetime
+          type: string
+        testCaseResults:
+          description: A list of individual test case results names in this continuous test run.
+          items:
+            type: string
+          type: array
+      type: object
     GoogleCloudDialogflowCxV3ConversationTurn:
       description: One interaction between a human and virtual agent. The human provides some input and the virtual agent provides a response.
       properties:
@@ -3090,6 +3113,22 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudDialogflowCxV3RunContinuousTestMetadata:
+      description: Metadata returned for the Environments.RunContinuousTest long running operation.
+      properties:
+        errors:
+          description: The test errors.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestError"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3RunContinuousTestResponse:
+      description: The response message for Environments.RunContinuousTest.
+      properties:
+        continuousTestResult:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ContinuousTestResult"
+          description: The result for a continuous test run.
+      type: object
     GoogleCloudDialogflowCxV3RunTestCaseMetadata:
       description: Metadata returned for the TestCases.RunTestCase long running operation.
       properties: {}
@@ -3422,6 +3461,29 @@ components:
           description: The test case results. The detailed conversation turns are empty in this response.
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TestCaseResult"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1ContinuousTestResult:
+      description: Represents a result from running a test case in an agent environment.
+      properties:
+        name:
+          description: "The resource name for the continuous test result. Format: `projects//locations//agents//environments//continuousTestResults/`."
+          type: string
+        result:
+          description: The result of this continuous test run, i.e. whether all the tests in this continuous test run pass or not.
+          enum:
+            - AGGREGATED_TEST_RESULT_UNSPECIFIED
+            - PASSED
+            - FAILED
+          type: string
+        runTime:
+          description: Time when the continuous testing run starts.
+          format: google-datetime
+          type: string
+        testCaseResults:
+          description: A list of individual test case results names in this continuous test run.
+          items:
+            type: string
           type: array
       type: object
     GoogleCloudDialogflowCxV3beta1ConversationTurn:
@@ -4086,6 +4148,22 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudDialogflowCxV3beta1RunContinuousTestMetadata:
+      description: Metadata returned for the Environments.RunContinuousTest long running operation.
+      properties:
+        errors:
+          description: The test errors.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TestError"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1RunContinuousTestResponse:
+      description: The response message for Environments.RunContinuousTest.
+      properties:
+        continuousTestResult:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ContinuousTestResult"
+          description: The result for a continuous test run.
+      type: object
     GoogleCloudDialogflowCxV3beta1RunTestCaseMetadata:
       description: Metadata returned for the TestCases.RunTestCase long running operation.
       properties: {}
@@ -4627,7 +4705,7 @@ components:
       properties:
         detectIntentResponse:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2DetectIntentResponse"
-          description: Required. Response of the Dialogflow Sessions.DetectIntent call.
+          description: Response of the Dialogflow Sessions.DetectIntent call.
       type: object
     GoogleCloudDialogflowV2BatchCreateEntitiesRequest:
       description: The request message for EntityTypes.BatchCreateEntities.
@@ -6436,6 +6514,9 @@ components:
         allRequiredParamsPresent:
           description: "This field is set to: - `false` if the matched intent has required parameters and not all of the required parameter values have been collected. - `true` if all required parameter values have been collected, or if the matched intent doesn't contain any required parameters."
           type: boolean
+        cancelsSlotFilling:
+          description: Indicates whether the conversational query triggers a cancellation for slot filling.
+          type: boolean
         diagnosticInfo:
           additionalProperties:
             description: Properties of the object.
@@ -7977,6 +8058,9 @@ components:
           type: string
         allRequiredParamsPresent:
           description: "This field is set to: - `false` if the matched intent has required parameters and not all of the required parameter values have been collected. - `true` if all required parameter values have been collected, or if the matched intent doesn't contain any required parameters."
+          type: boolean
+        cancelsSlotFilling:
+          description: Indicates whether the conversational query triggers a cancellation for slot filling.
           type: boolean
         diagnosticInfo:
           additionalProperties:

@@ -1129,6 +1129,15 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: The type of jobs. Will use `DlpJobType.INSPECT` if not set.
+          in: query
+          name: type
+          schema:
+            enum:
+              - DLP_JOB_TYPE_UNSPECIFIED
+              - INSPECT_JOB
+              - RISK_ANALYSIS_JOB
+            type: string
       responses:
         "200":
           content:

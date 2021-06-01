@@ -934,6 +934,12 @@ components:
         displayName:
           description: The deployment's display name.
           type: string
+        frns:
+          description: Output only. The FRNs copied from its direct parent.
+          items:
+            type: string
+          readOnly: true
+          type: array
         name:
           description: Output only. Resource name.
           readOnly: true

@@ -529,7 +529,8 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Update the version of a CryptoKey that will be used in Encrypt.
-        Returns an error if called on an asymmetric key.
+        Returns an error if called on a key whose purpose is not
+        ENCRYPT_DECRYPT.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.updatePrimaryVersion
       parameters:
         - description: Required. The resource name of the CryptoKey to update.

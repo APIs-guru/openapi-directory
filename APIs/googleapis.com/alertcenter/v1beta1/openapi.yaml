@@ -49,9 +49,9 @@ paths:
             type: string
         - description: Optional. A query string for filtering alert results. For more
             details, see [Query
-            filters](/admin-sdk/alertcenter/guides/query-filters) and [Supported
-            query filter
-            fields](/admin-sdk/alertcenter/reference/filter-fields#alerts.list).
+            filters](https://developers.google.com/admin-sdk/alertcenter/guides/query-filters)
+            and [Supported query filter
+            fields](https://developers.google.com/admin-sdk/alertcenter/reference/filter-fields#alerts.list).
           in: query
           name: filter
           schema:
@@ -207,9 +207,9 @@ paths:
             type: string
         - description: Optional. A query string for filtering alert feedback results. For
             more details, see [Query
-            filters](/admin-sdk/alertcenter/guides/query-filters) and [Supported
-            query filter
-            fields](/admin-sdk/alertcenter/reference/filter-fields#alerts.feedback.list).
+            filters](https://developers.google.com/admin-sdk/alertcenter/guides/query-filters)
+            and [Supported query filter
+            fields](https://developers.google.com/admin-sdk/alertcenter/reference/filter-fields#alerts.feedback.list).
           in: query
           name: filter
           schema:
@@ -723,7 +723,8 @@ components:
         type:
           description: Required. The type of the alert. This is output only after alert is
             created. For a list of available alert types see [Google Workspace
-            Alert types](/admin-sdk/alertcenter/reference/alert-types).
+            Alert
+            types](https://developers.google.com/admin-sdk/alertcenter/reference/alert-types).
           type: string
         updateTime:
           description: Output only. The time this alert was last updated.
@@ -1176,7 +1177,7 @@ components:
     Notification:
       description: Settings for callback notifications. For more details see [Google
         Workspace Alert
-        Notification](/admin-sdk/alertcenter/guides/notifications).
+        Notification](https://developers.google.com/admin-sdk/alertcenter/guides/notifications).
       properties:
         cloudPubsubTopic:
           $ref: "#/components/schemas/CloudPubsubTopic"

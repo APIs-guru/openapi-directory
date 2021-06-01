@@ -1013,7 +1013,7 @@ components:
           description: "Only present when `model` is present in the request. `model` here is normalized to have project number. For example: If the `model` requested in TranslationTextRequest is `projects/{project-id}/locations/{location-id}/models/general/nmt` then `model` here would be normalized to `projects/{project-number}/locations/{location-id}/models/general/nmt`."
           type: string
         translatedText:
-          description: Text translated into the target language.
+          description: Text translated into the target language. If an error occurs during translation, this field might be excluded from the response.
           type: string
       type: object
     WaitOperationRequest:

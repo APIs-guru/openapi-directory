@@ -245,7 +245,7 @@ paths:
         - projects
   "/v1beta1/{parent}/insights":
     get:
-      description: Lists insights for a Cloud project. Requires the recommender.*.list IAM permission for the specified insight type.
+      description: Lists insights for the specified Cloud Resource. Requires the recommender.*.list IAM permission for the specified insight type.
       operationId: recommender.projects.locations.insightTypes.insights.list
       parameters:
         - description: "Required. The container resource on which to execute the request. Acceptable formats: 1. `projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]` 2. `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]` 3. `folders/[FOLDER_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]` 4. `organizations/[ORGANIZATION_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]` LOCATION here refers to GCP Locations: https://cloud.google.com/about/locations/ INSIGHT_TYPE_ID refers to supported insight types: https://cloud.google.com/recommender/docs/insights/insight-types."
@@ -297,7 +297,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{parent}/recommendations":
     get:
-      description: Lists recommendations for a Cloud project. Requires the recommender.*.list IAM permission for the specified recommender.
+      description: Lists recommendations for the specified Cloud Resource. Requires the recommender.*.list IAM permission for the specified recommender.
       operationId: recommender.projects.locations.recommenders.recommendations.list
       parameters:
         - description: "Required. The container resource on which to execute the request. Acceptable formats: 1. `projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]` 2. `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]` 3. `folders/[FOLDER_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]` 4. `organizations/[ORGANIZATION_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]` LOCATION here refers to GCP Locations: https://cloud.google.com/about/locations/ RECOMMENDER_ID refers to supported recommenders: https://cloud.google.com/recommender/docs/recommenders."
@@ -613,7 +613,7 @@ components:
       description: "Contains an operation for a resource loosely based on the JSON-PATCH format with support for: * Custom filters for describing partial array patch. * Extended path values for describing nested arrays. * Custom fields for describing the resource for which the operation is being described. * Allows extension to custom operations not natively supported by RFC6902. See https://tools.ietf.org/html/rfc6902 for details on the original RFC."
       properties:
         action:
-          description: Type of this operation. Contains one of 'and', 'remove', 'replace', 'move', 'copy', 'test' and 'custom' operations. This field is case-insensitive and always populated.
+          description: Type of this operation. Contains one of 'add', 'remove', 'replace', 'move', 'copy', 'test' and 'custom' operations. This field is case-insensitive and always populated.
           type: string
         path:
           description: Path to the target field being operated on. If the operation is at the resource level, then path should be "/". This field is always populated.
